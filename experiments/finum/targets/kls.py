@@ -1,0 +1,125 @@
+"""Part III (KLS) route-gating — focused & self-contained (NO localization SDE engine).
+
+KLS asserts a universal K with C_P(mu) <= K * lambda_max(Cov_mu) for EVERY isotropic log-concave
+mu (= the A1-bis bridge, research/kls/shared/target.md). The SDE-free, sound signal computable
+here is the **realized K = C_P / lambda_max(Cov)** on isotropic log-concave test geometries, plus
+the rank-one non-refutation. Each 1D factor's C_P is the FEM gap (calibrated on the Gaussian);
+products use tensorization C_P = max_i C_P_i and lambda_max(Cov) = max_i Var_i.
+
+This gates the route-AGNOSTIC facts in shared/lower-bounds.md:
+  * isotropic linear-test refuter: lambda_max(Cov) ~ 1 => any claimed KLS upper bound < 1 is REFUTED;
+  * K = O(1) across geometries incl. single-coordinate inflation => supports the bridge and
+    demonstrates obs:rank-one-refuted at the Poincare (statement) level.
+The localization quantities (q:upgrade Xi_T, q:alignment, weighted Stein) live in the companion
+target `kls-loc` (finum/targets/kls_localization.py) on top of finum.localization — see
+research/kls/gating.md.
+"""
+from __future__ import annotations
+
+import numpy as np
+
+from ..constants import poincare_1d_fem
+from ..verdict import falsify, matches
+
+K_O1_CEILING = 5.0   # "O(1)" ceiling for the realized K on these benign geometries
+
+
+# ---- 1D factors: (C_P via FEM, variance) ---------------------------------------
+
+def gauss_factor(var: float = 1.0):
+    s = np.sqrt(var)
+    cp = poincare_1d_fem(lambda x: x ** 2 / (2 * var), np.linspace(-12 * s, 12 * s, 2001))
+    return float(cp), float(var)
+
+
+def laplace_factor_unit():
+    """Laplace e^{-|x|/b} scaled to unit variance (var=2b^2=1 => b=1/sqrt2); C_P=4b^2=2."""
+    b = 1.0 / np.sqrt(2.0)
+    cp = poincare_1d_fem(lambda x: np.abs(x) / b, np.linspace(-30 * b, 30 * b, 4001))
+    return float(cp), float(2 * b ** 2)
+
+
+def uniform_factor_unit():
+    """Uniform[-h,h] scaled to unit variance (var=h^2/3=1 => h=sqrt3); C_P=4h^2/pi^2."""
+    h = np.sqrt(3.0)
+    cp = poincare_1d_fem(lambda x: np.zeros_like(x), np.linspace(-h, h, 4001))
+    return float(cp), float(h ** 2 / 3.0)
+
+
+def geometry_K(factors):
+    """factors: list of (C_P_i, var_i). Returns (C_P, lambda_max_cov, K) as python floats."""
+    C_P = float(max(c for c, _ in factors))   # tensorization
+    lam = float(max(v for _, v in factors))
+    return C_P, lam, C_P / lam
+
+
+# ---- run + selftest ------------------------------------------------------------
+
+def run_records(seed: int = 0, d: int = 4):
+    records = []
+    cal_ok = True
+
+    # calibration: the Gaussian factor C_P must be 1 (FEM correctness; the K-denominator anchor)
+    cp_g, _ = gauss_factor(1.0)
+    vcal = matches("cal-kls-gauss", "C_P(N(0,1)) == 1 (FEM)", cp_g, 1.0, rel_tol=0.03)
+    cal_ok = cal_ok and vcal.status == "match"
+    records.append({"kind": "calibration", "instance": "cal-kls-gauss",
+                    "C_P": cp_g, "exact": 1.0, "verdict": vcal.dict()})
+
+    # isotropic log-concave test geometries: realized K = C_P / lambda_max(Cov)
+    geoms = {
+        "gauss-iso": [gauss_factor(1.0)] * d,
+        "laplace-iso": [laplace_factor_unit()] * d,
+        "uniform-iso": [uniform_factor_unit()] * d,
+    }
+    Ks = []
+    for name, fac in geoms.items():
+        C_P, lam, K = geometry_K(fac)
+        Ks.append(K)
+        records.append({"kind": "geometry", "instance": name, "C_P": C_P,
+                        "lambda_max_cov": lam, "realized_K": K,
+                        "isotropic": bool(abs(lam - 1.0) < 1e-6)})
+
+    # rank-one inflation: one coordinate variance Lambda, rest unit Gaussian.
+    # C_P = max = Lambda, lambda_max = Lambda => K = 1 for all Lambda (obs:rank-one-refuted).
+    for Lam in (10.0, 100.0, 1000.0):
+        fac = [gauss_factor(Lam)] + [gauss_factor(1.0)] * (d - 1)
+        C_P, lam, K = geometry_K(fac)
+        Ks.append(K)
+        records.append({"kind": "geometry", "instance": "rank-one-inflated", "obstruction": "obs:rank-one-refuted",
+                        "Lambda": Lam, "C_P": C_P, "lambda_max_cov": lam, "realized_K": K,
+                        "note": "single inflated coordinate: K stays 1 => rank-one cannot refute the K-bound."})
+
+    K_max = max(Ks)
+    # verdict 1: realized K is O(1) across all geometries => supports the KLS / A1-bis bridge
+    v_bridge = falsify("realized K <= K_O1_CEILING (bridge holds)", "kls-bridge", K_O1_CEILING, K_max,
+                       note="K=C_P/lambda_max(Cov); SUPPORTS bridge iff NOT refuted (K stays O(1))")
+    # verdict 2: isotropic linear-test refuter — lambda_max(Cov)=1 kills any sub-1 upper claim
+    v_refuter = falsify("KLS upper bound C_P <= 0.5 (too small)", "kls-isotropic", 0.5, 1.0,
+                        note="universal lower bound C_P >= lambda_max(Cov) = 1 for isotropic mu")
+    records.append({"kind": "verdict", "realized_K_max": K_max,
+                    "K_O1_supports_bridge": bool(v_bridge.status != "REFUTED"),
+                    "verdict_bridge": v_bridge.dict(), "verdict_isotropic_refuter": v_refuter.dict(),
+                    "companion": "localization quantities (q:upgrade Xi_T, q:alignment, weighted Stein) "
+                                 "=> target 'kls-loc' on finum.localization; see research/kls/gating.md"})
+    return records, {"d": d, "calibration_passed": cal_ok, "realized_K_max": K_max}
+
+
+def selftest(rng):
+    checks = []
+    cp_g, _ = gauss_factor(1.0)
+    checks.append((f"KLS cal: C_P(N(0,1)) == 1 (FEM) ({cp_g:.4f})", abs(cp_g - 1.0) <= 0.03))
+    # rank-one: K == 1 independent of inflation
+    Ks = []
+    for Lam in (10.0, 1000.0):
+        fac = [gauss_factor(Lam)] + [gauss_factor(1.0)] * 3
+        _, _, K = geometry_K(fac)
+        Ks.append(K)
+    checks.append((f"KLS rank-one: K==1 for Lambda in (10,1000) ({Ks[0]:.3f},{Ks[1]:.3f})",
+                   all(abs(k - 1.0) <= 0.05 for k in Ks)))
+    # all benign isotropic geometries have K = O(1)
+    Kgauss = geometry_K([gauss_factor(1.0)] * 4)[2]
+    Klap = geometry_K([laplace_factor_unit()] * 4)[2]
+    checks.append((f"KLS K=O(1): gauss K={Kgauss:.2f}, laplace K={Klap:.2f} both <= {K_O1_CEILING}",
+                   Kgauss <= K_O1_CEILING and Klap <= K_O1_CEILING))
+    return checks

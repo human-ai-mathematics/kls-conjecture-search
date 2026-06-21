@@ -1,0 +1,352 @@
+% modules/open-targets/A1-data-informed-glm.tex
+% -----------------------------------------------------------------------------
+% Deep-dive companion to the A1 entry of the Part I agenda (modules/08-open-targets)
+% and to Question q:glm-data-informed of the GLM spine (modules/05-tier3-glm):
+% data-informed functional-inequality constants for Gaussian-prior GLM posteriors,
+% via the Brascamp--Lieb / inverse-Hessian route plus a certified posterior-tail
+% correction.
+% Compiles inside main.tex; standalone it shows cross-module \ref as "??".
+% -----------------------------------------------------------------------------
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{A1 --- Data-informed constants for GLM posteriors}
+\label{sec:a1}
+
+This is the deep-dive companion to the A1 paragraph of the agenda (Section~\ref{sec:agenda}) and
+to Question~\ref{q:glm-data-informed} of the GLM spine (Section~\ref{sec:tier3}). It is the
+flagship finite-sample target: replace the data-free certificate
+$\CP\le\CLS\le\lmax(\Sigmaz)$ of Theorem~\ref{thm:glm-fi}, which reads only the prior curvature,
+by a bound that tracks the observed information, of the advertised shape
+\begin{equation}\label{eq:a1-slogan}
+  \CP(\pi)\ \lesssim\ \lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
+  \ +\ \text{tail correction},
+\end{equation}
+interpolating the prior-dominated and likelihood-dominated regimes. The purpose of this section is
+to make A1 precise, to split it into a Poincar\'e half that is essentially within reach of existing
+machinery and a log-Sobolev/transport half that is genuinely harder, to record exactly which
+inequality already supplies \eqref{eq:a1-slogan} and what remains to be done, and to state the
+theorem one should actually aim to prove. In slogan form: for \(\CP\), the functional-inequality
+skeleton already exists, and the work is to make it a certified, computable, GLM-specific theorem.
+
+\subsection{Setup: the observed-information geometry of a GLM posterior}
+\label{subsec:a1-setup}
+
+Fix the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior},
+\[
+  \pi(\dd\theta)\ \propto\ e^{-U(\theta)}\dd\theta,
+  \qquad
+  U(\theta)\ =\ \tfrac12(\theta-m)^\top\Sigmaz^{-1}(\theta-m)\ +\ \sum_{i=1}^n\ell_i(x_i^\top\theta),
+\]
+with each $\ell_i(\cdot)=\ell(y_i,\cdot)$ convex and $C^2$ in the linear predictor and prior mean
+$m$ (the agenda took $m=0$; nothing below depends on it). Writing $X=(x_i^\top)_{i=1}^n$ and the
+diagonal weight matrix $W(\theta)=\diag\big(\ell_i''(x_i^\top\theta)\big)_{i=1}^n\succeq0$, the
+Hessian is the observed-information geometry of the model,
+\begin{equation}\label{eq:a1-hessian}
+  H(\theta)\ :=\ \Hess U(\theta)\ =\ \Sigmaz^{-1}\ +\ X^\top W(\theta)X .
+\end{equation}
+For logistic regression $\ell_i''(t)=\sigma(t)(1-\sigma(t))=\tfrac14\operatorname{sech}^2(t/2)$,
+the variance weight that vanishes as the fitted probability approaches $0$ or $1$; for Poisson
+$\ell_i''(t)=e^{t}$; for the Gaussian/linear model $W\equiv\Id$. The prior-only Bakry--\'Emery
+reading of Theorem~\ref{thm:glm-fi} keeps only $H(\theta)\succeq\Sigmaz^{-1}$ and discards the
+PSD likelihood term, giving the safe but data-blind $\CP\le\lmax(\Sigmaz)$. The statistical
+target is that, in the posterior bulk, the relevant curvature is not $\Sigmaz^{-1}$ but the full
+\begin{equation}\label{eq:a1-target-curv}
+  A_{\bar W}\ :=\ \Sigmaz^{-1}+X^\top\bar W X,
+\end{equation}
+for a deterministic, data-informed $\bar W\succeq0$ --- the nonasymptotic functional-inequality
+analogue of the asymptotic GLM principle ``posterior covariance $\approx$ inverse observed
+information'' that A2 (Section~\ref{sec:a2}, Conjecture~\ref{conj:a2}) makes exact as $n\to\infty$.
+
+\subsection{The key existing result: Brascamp--Lieb gives \texorpdfstring{$\CP$}{CP} for free}
+\label{subsec:a1-bl}
+
+The Poincar\'e half of A1 is not literature-free: for log-concave measures there is a known
+bridge from \emph{local} Hessian information to a \emph{global} Poincar\'e bound, and it is
+exactly the tool \eqref{eq:a1-slogan} wants. Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb})
+gives, for the strictly convex $U$ of \eqref{eq:a1-hessian},
+\begin{equation}\label{eq:a1-bl}
+  \Var_\pi(f)\ \le\ \E_\pi\,\inner{H(\theta)^{-1}\nabla f}{\nabla f}
+  \ \le\ \E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big)\,\norm{\nabla f}^2\big] ,
+\end{equation}
+the second step bounding the local quadratic form pointwise by its largest eigenvalue. This is
+\emph{not} yet a Poincar\'e inequality: the curvature factor $\lmax(H^{-1})$ and the gradient
+$\norm{\nabla f}^2$ remain \emph{coupled} inside a single expectation, and one may not simply
+factor $\E_\pi[\lmax(H^{-1})\norm{\nabla f}^2]$ into
+$\big(\E_\pi\lmax(H^{-1})\big)\,\E_\pi\norm{\nabla f}^2$ --- that would require a negative
+correlation between the two factors that need not hold. The passage to a genuine, unweighted
+Poincar\'e inequality is not a direct decoupling of the weighted Dirichlet form but a two-step
+self-improvement for log-concave measures: Brascamp--Lieb first yields a spread/variance bound
+for $1$-Lipschitz $f$ (the average inverse curvature controls the fluctuations of Lipschitz
+observables), and Milman's equivalence of concentration and spectral gap on log-concave measures
+then upgrades that weak control to a full spectral gap. This is exactly the
+Milman/Veysseire-type route of Cattiaux and Guillin
+\cite{cattiaux2018poincare}, which yields a genuine dimension-free bound of the form
+\begin{equation}\label{eq:a1-cfg}
+  \CP(\pi)\ \lesssim\ \E_\pi\,\lmax\!\big(H(\theta)^{-1}\big)
+  \ =\ \E_\pi\,\lmax\!\Big[\big(\Sigmaz^{-1}+X^\top W(\theta)X\big)^{-1}\Big].
+\end{equation}
+This is the abstract inequality one would want to specialize to GLM posteriors. The crucial point
+is that the operative quantity is $\E_\pi\,\lmax(H^{-1})$, the average \emph{inverse} curvature,
+\emph{not} $\lmax[(\E_\pi H)^{-1}]$: matrix inversion is operator-convex, so by Jensen
+$\E_\pi H^{-1}\succeq(\E_\pi H)^{-1}$, and large average curvature does not by itself imply small
+average inverse curvature. The tail behaviour of $W(\theta)$ is therefore not a technical
+annoyance but structurally part of the problem --- a single posterior direction along which
+$W(\theta)\to0$ can dominate the expectation in \eqref{eq:a1-cfg}.
+
+\subsection{The bulk--tail decomposition}
+\label{subsec:a1-bulktail}
+
+The data-informed bound follows by splitting the posterior into a high-curvature bulk and a
+low-curvature tail. For a deterministic diagonal $\bar W\succeq0$ define the \emph{good
+bulk-curvature event}
+\begin{equation}\label{eq:a1-good}
+  G_{\bar W}\ :=\ \big\{\theta:\ X^\top W(\theta)X\ \succeq\ X^\top\bar W X\big\}.
+\end{equation}
+On $G_{\bar W}$ one has $H(\theta)\succeq A_{\bar W}$, hence $H(\theta)^{-1}\preceq A_{\bar
+W}^{-1}$; off $G_{\bar W}$ the Gaussian prior still gives $H(\theta)\succeq\Sigmaz^{-1}$, hence
+$H(\theta)^{-1}\preceq\Sigmaz$. Splitting the expectation in \eqref{eq:a1-cfg} across $G_{\bar W}$
+and its complement,
+\begin{equation}\label{eq:a1-split}
+  \E_\pi\,\lmax\!\big(H(\theta)^{-1}\big)
+  \ \le\ \lmax\!\big(A_{\bar W}^{-1}\big)
+  \ +\ \E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big);\,G_{\bar W}^c\big]
+  \ \le\ \lmax\!\big(A_{\bar W}^{-1}\big)+\lmax(\Sigmaz)\,\pi(G_{\bar W}^c),
+\end{equation}
+where the last inequality is the crude probabilistic form of the tail correction. Combining with
+\eqref{eq:a1-cfg} gives precisely the A1 shape \eqref{eq:a1-slogan}:
+\begin{equation}\label{eq:a1-main}
+  \CP(\pi)\ \lesssim\
+  \underbrace{\lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]}_{\text{bulk Fisher curvature}}
+  \ +\
+  \underbrace{\lmax(\Sigmaz)\,\pi(G_{\bar W}^c)}_{\text{penalty for low-curvature mass}} .
+\end{equation}
+The sharper and more honest version keeps the integrated inverse-curvature tail rather than
+factoring out $\lmax(\Sigmaz)$,
+\begin{equation}\label{eq:a1-main-sharp}
+  \CP(\pi)\ \lesssim\ \lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
+  \ +\ \E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big);\,G_{\bar W}^c\big],
+\end{equation}
+with \eqref{eq:a1-main} the clean corollary. This already interpolates the two regimes: in the
+likelihood-dominated bulk the first term is at the inverse-observed-information scale
+$\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]\ll\lmax(\Sigmaz)$, and the second term is small exactly
+when the data-informed $\bar W$ certifies the bulk curvature on a high-probability set.
+
+\subsection{Why the tail correction is intrinsic, not a proof artifact}
+\label{subsec:a1-tail}
+
+No honest data-informed theorem can drop the tail term, because no global data-curvature floor
+exists. This is the flat-direction obstruction of Proposition~\ref{prop:flat-prior-nonintegrable}
+read spectrally. For logistic regression with nearly separable data there are directions $v$
+along which many linear predictors $x_i^\top(\theta+tv)\to\pm\infty$ as $t\to\infty$, so
+\[
+  w_i(\theta+tv)\ =\ \sigma\big(x_i^\top(\theta+tv)\big)\big(1-\sigma(x_i^\top(\theta+tv))\big)\ \to\ 0,
+\]
+and $X^\top W(\theta+tv)X$ loses rank in the limit. Hence no bound $X^\top W(\theta)X\succeq
+B\succ0$ can hold for all $\theta$: the prior keeps the posterior proper and supplies tail drift,
+but it cannot convert vanishing likelihood curvature into a global floor. Any data-informed
+constant must therefore have the shape
+\[
+  \text{bulk Fisher curvature}\ +\ \text{penalty for posterior mass where that curvature fails},
+\]
+which is exactly the structure of \eqref{eq:a1-main}. The separable / weakly-identified logistic
+regime is the stress test: a good theorem should expose how the constant degrades with the
+separation geometry and the prior scale $\lmax(\Sigmaz)$, not pretend the degradation away.
+
+\subsection{High-dimensional anisotropy: the matrix bound does the right thing}
+\label{subsec:a1-highdim}
+
+The bulk term $\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ has the correct behaviour when $D>n$ or
+$X^\top\bar W X$ is rank-deficient, which a scalar floor $\rho\Id$ cannot express. In directions
+$v$ invisible to the data, $Xv=0$, so
+$v^\top(\Sigmaz^{-1}+X^\top\bar W X)v=v^\top\Sigmaz^{-1}v$ and the bound reverts to the prior
+scale; in directions the data inform, the curvature improves to the observed-information scale.
+The single matrix expression thus interpolates
+\[
+  \text{data-dominated directions}\ \leadsto\ \text{inverse-Fisher scale},
+  \qquad
+  \text{prior-only directions}\ \leadsto\ \text{prior-covariance scale},
+\]
+which is exactly what a Bayesian GLM constant should do, and is the anisotropic refinement of the
+isotropic floor $\lmax(\Sigmaz)$ of Theorem~\ref{thm:glm-fi}.
+
+\subsection{Choosing \texorpdfstring{$\bar W$}{Wbar}: where the real work is}
+\label{subsec:a1-barw}
+
+The functional-inequality skeleton is the easy part; the technical content of A1 is the
+construction of a good deterministic, data-informed $\bar W$ together with a certified bound on
+$\pi(G_{\bar W}^c)$. There are three natural levels, of increasing sharpness.
+
+\emph{(i) Mode-centred rowwise weights.} For logistic regression $w_i(t)$ is even and decreasing
+in $\abs t$, so on a mode-centred ellipsoid $E_r=\{\theta:\norm{\theta-\hat\theta}_{A_{\bar
+W}}\le r\}$ with $\abs{x_i^\top(\theta-\hat\theta)}\le\delta_i$ one has the explicit floor
+\begin{equation}\label{eq:a1-rowwise}
+  \bar w_i\ =\ \inf_{\abs{t-x_i^\top\hat\theta}\le\delta_i}w_i(t)
+  \ =\ \frac{1}{4\cosh^2\!\big((\abs{x_i^\top\hat\theta}+\delta_i)/2\big)},
+\end{equation}
+and $G_{\bar W}^c\subseteq E_r^c$, reducing the tail to the posterior probability of leaving a
+mode-centred ellipsoid. Rowwise floors are simple but conservative when $n$ is large.
+
+\emph{(ii) Spectral / quantile weights.} The right object is the matrix inequality
+\eqref{eq:a1-good}, not the rowwise $w_i(\theta)\ge\bar w_i$ for every $i$. One should choose
+$\bar W$ to certify $X^\top W(\theta)X\succeq X^\top\bar W X$ with high posterior probability ---
+e.g.\ as a posterior quantile of $\lmin[A_{\bar W}^{-1/2}X^\top W(\theta)X\,A_{\bar W}^{-1/2}]$ ---
+which is far less conservative than requiring every weight to clear its floor.
+
+\emph{(iii) Certifying the tail probability $\pi(G_{\bar W}^c)\le\eps$.} This is the heart of the
+problem, and admits a hierarchy of certificates: prior-only concentration (safe but crude),
+Brascamp--Lieb covariance control \eqref{eq:a1-bl} (data-informed second moments), and
+finite-sample Laplace / posterior-concentration bounds (sharpest, model-specific)
+\cite{KasprzakGiordanoBroderick2025}. An attractive self-improving scheme bootstraps these: the
+prior-only $\CP\le\lmax(\Sigmaz)$ gives a crude bulk probability, which sharpens the constant via
+\eqref{eq:a1-main}, which in turn tightens the bulk probability --- the iterative flavour of the
+variable-curvature literature \cite{cattiaux2018poincare,CattiauxGuillin2022Perturbed}. The
+constrained-Gibbs Poincar\'e inequalities of \cite{ConstrainedGibbs2026}, which already prove
+$O(1/n)$ local constants on a high-probability good set for logistic and Poisson models, are the
+natural starting toolkit, alongside the local log-Polyak--{\L}ojasiewicz bounds of
+\cite{GongHeShen2025LogPL} and the Lyapunov-potential criteria of \cite{ChenSridharan2024Lyapunov}.
+
+\subsection{Poincar\'e is within reach; log-Sobolev and transport are harder}
+\label{subsec:a1-pls}
+
+The three constants are \emph{not} on the same footing, and A1 should not pretend they are.
+
+\emph{Poincar\'e.} The route of Subsections~\ref{subsec:a1-bl}--\ref{subsec:a1-bulktail} is
+essentially complete in outline: Brascamp--Lieb \eqref{eq:a1-bl} plus the log-concave
+self-improvement \cite{cattiaux2018poincare} gives \eqref{eq:a1-cfg}, and the bulk--tail split
+gives \eqref{eq:a1-main}. The remaining work is GLM-specific (a computable $\bar W$, a certified
+tail), not a search for a missing inequality.
+
+\emph{Log-Sobolev.} Here the naive ``replace $\Sigmaz^{-1}$ by $A_{\bar W}$'' is most misleading.
+Bakry--\'Emery gives the prior-only $\CLS\le\lmax(\Sigmaz)$ (Theorem~\ref{thm:glm-fi}), but a Brascamp--Lieb-style
+integrated-inverse-Hessian estimate does \emph{not} imply an LSI: log-Sobolev is sensitive to
+global landscape and tails, not only to local curvature (the low-temperature companion result of
+\cite{ChewiStromme2024Ballistic} identifies the ballistic LSI limit with the global
+Polyak--{\L}ojasiewicz constant, which can be strictly worse than the local curvature; cf.\ A2,
+Subsection on the LSI half). The relevant tools are Lyapunov criteria, defective LSI, and
+super-Poincar\'e inequalities \cite{CattiauxGuillinWangWu2009,BakryCattiauxGuillin2008,CattiauxGuillin2010}.
+A plausible data-informed target is a local LSI on the bulk $G_{\bar W}$ glued to Gaussian-prior
+drift outside, of the shape
+\begin{equation}\label{eq:a1-lsi-target}
+  \CLS(\pi)\ \lesssim\ \lmax\!\big(A_{\bar W}^{-1}\big)\cdot\Phi\big(\pi(G_{\bar W}^c)\big)
+  \ +\ (\text{prior-tail drift term}),
+\end{equation}
+with $\Phi$ possibly logarithmic --- but one should not claim the clean bound \eqref{eq:a1-main}
+for $\CLS$ without additional global hypotheses.
+
+\emph{Transport.} The Talagrand $T_2$ constant inherits the LSI story: whenever a data-informed
+LSI holds, Otto--Villani (Theorem~\ref{thm:otto-villani}) gives $\CTCI\le\CLS$ at the same scale,
+and the linear-test lower bound $\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only})
+keeps it honest. A data-informed $\CTCI$ therefore follows a data-informed $\CLS$, not the
+Poincar\'e bound alone. The variational-inference companion A4 (Section~\ref{sec:a4},
+Conjecture~\ref{conj:a4}) pursues exactly this $\Wtwo$ analogue at posterior scale.
+
+\subsection{The theorem to aim for}
+\label{subsec:a1-theorem}
+
+The honest first milestone is the Poincar\'e statement, with the log-Sobolev/transport version
+flagged as a genuinely harder second stage.
+
+\begin{conjecture}[Data-informed GLM Poincar\'e constant]
+\label{conj:a1}
+For the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior} with Hessian
+\eqref{eq:a1-hessian}, there is a universal constant $C$ such that for every deterministic
+diagonal $\bar W\succeq0$,
+\[
+  \CP(\pi)\ \le\ C\,\Big\{\lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
+  \ +\ \E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big);\,G_{\bar W}^c\big]\Big\}
+  \ \le\ C\,\Big\{\lmax\!\big(A_{\bar W}^{-1}\big)+\lmax(\Sigmaz)\,\pi(G_{\bar W}^c)\Big\},
+\]
+with $G_{\bar W}$ as in \eqref{eq:a1-good}. Optimizing over data-informed $\bar W$ yields a
+certified constant at the inverse-observed-information scale
+$\lmax[(\Sigmaz^{-1}+X^\top W(\hat\theta)X)^{-1}]\ll\lmax(\Sigmaz)$ in the likelihood-dominated
+regime. Under additional global hypotheses (a bulk LSI plus prior-tail drift,
+Subsection~\ref{subsec:a1-pls}) the analogous statement holds for $\CLS$ and, via
+Theorem~\ref{thm:otto-villani}, for $\CTCI$.
+\end{conjecture}
+
+\noindent The proof skeleton is: Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}) supplies a
+spread bound for Lipschitz observables, which the Milman/Veysseire log-concave self-improvement
+\cite{cattiaux2018poincare} promotes to the spectral gap $\CP\lesssim\E_\pi\lmax(H^{-1})$
+\eqref{eq:a1-cfg}; the Loewner bounds $H\succeq A_{\bar W}$ on $G_{\bar W}$ and
+$H\succeq\Sigmaz^{-1}$ off it give the bulk--tail split \eqref{eq:a1-split}; and a GLM-specific
+certificate for $\pi(G_{\bar W}^c)$ closes it. The mathematical weight is entirely in the last step
+--- choosing $\bar W$ and bounding the tail (Subsection~\ref{subsec:a1-barw}) --- not in the
+functional-inequality skeleton, encoded by \eqref{eq:a1-cfg} and \eqref{eq:a1-split}.
+
+\subsection{Sub-targets and what remains open}
+\label{subsec:a1-open}
+
+The flagship question (Question~\ref{q:glm-data-informed}) splits into six research questions of
+increasing difficulty, the first of which is essentially a specialization exercise and the last
+of which is wide open.
+
+\begin{question}[The certified GLM Poincar\'e bound]
+\label{q:a1-poincare}
+Prove Conjecture~\ref{conj:a1} for $\CP$: specialize the Brascamp--Lieb / log-concave
+self-improvement route \cite{cattiaux2018poincare} to the GLM Hessian \eqref{eq:a1-hessian} and
+make the universal constant explicit. This is the entry point and should be provable with current
+tools \cite{cattiaux2018poincare,ConstrainedGibbs2026,ChenSridharan2024Lyapunov}.
+\end{question}
+
+\begin{question}[Computable, data-informed $\bar W$]
+\label{q:a1-barw}
+Construct and compare the mode-centred rowwise weights \eqref{eq:a1-rowwise}, the posterior-quantile
+weights, and the spectral weights of Subsection~\ref{subsec:a1-barw}, with the spectral version
+\(X^\top W(\theta)X\succeq X^\top\bar W X\) (not the rowwise $w_i\ge\bar w_i$) as the less
+conservative object. The deliverable is a $\bar W$ computable from $(X,y,\Sigmaz)$ alone.
+\end{question}
+
+\begin{question}[Certifying the posterior-tail probability]
+\label{q:a1-tail}
+Prove $\pi(G_{\bar W}^c)\le\eps$ with computable, data-dependent constants, via posterior
+concentration, finite-sample Laplace bounds \cite{KasprzakGiordanoBroderick2025}, or the
+self-improving bootstrap of Subsection~\ref{subsec:a1-barw}. This is the heart of the problem ---
+everything else is skeleton.
+\end{question}
+
+\begin{question}[Sharp constants and the $1/n$ scale]
+\label{q:a1-sharp}
+The universal Brascamp--Lieb / Milman constant of \eqref{eq:a1-cfg} need not be sharp. For
+statistical use one wants the correct $1/n$ scaling in the likelihood-dominated regime, matching
+the asymptotic A2 limit \eqref{eq:a2-target} on letting $n\to\infty$ (consistency between the
+finite-sample A1 bound and the asymptotic A2 constant is a useful internal check), validated
+against the linear-test lower bound $\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only})
+and sample-based estimators of the Poincar\'e constant \cite{PillaudVivienEtAl2020}.
+\end{question}
+
+\begin{question}[Log-Sobolev and transport analogues]
+\label{q:a1-lsi}
+Establish the data-informed $\CLS$ bound \eqref{eq:a1-lsi-target} by gluing a local LSI on the
+bulk $G_{\bar W}$ to Gaussian-prior drift outside, using the Lyapunov / super-Poincar\'e toolkit
+\cite{CattiauxGuillinWangWu2009,BakryCattiauxGuillin2008,CattiauxGuillin2010}, and derive $\CTCI$
+via Otto--Villani (Theorem~\ref{thm:otto-villani}). Identify when the LSI limit is Fisher-local
+versus governed by the global landscape (cf.\ A2, Section~\ref{sec:a2}); for multimodal or
+mixture extensions, decomposition methods \cite{MenzSchlichting2014} become relevant. This is the
+genuinely harder second stage.
+\end{question}
+
+\begin{question}[Certified sampling and concentration rates]
+\label{q:a1-sampling}
+Translate the data-informed constants into Langevin / MALA complexity and posterior-concentration
+guarantees, where $\CP,\CLS$ control convergence
+\cite{ChewiEtAl2024LMC,GadatPanloupPellegrini2020}. This converts statistical curvature into
+certified computational Bayesian rates, and is the payoff that motivates the whole program.
+\end{question}
+
+\begin{remark}[Relation to the rest of the agenda]
+\label{rem:a1-relations}
+A1 is the finite-sample flagship; A2 (Section~\ref{sec:a2}) is its $n\to\infty$ shadow, and a
+sharp A1 bound tight in the bulk should reproduce the Fisher-information limit
+\eqref{eq:a2-target}. The transport face of A1 is pursued by A4 (Section~\ref{sec:a4},
+Conjecture~\ref{conj:a4}) as restricted/localized $\Wtwo$ constants at the same
+$\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ bulk scale. The tail correction of \eqref{eq:a1-main}
+is the bulk-side shadow of the heavy-tailed obstruction of A3 (Section~\ref{sec:a3}), where the
+same vanishing-curvature directions survive into the posterior \emph{tail} and force weighted
+constants; and the flat, weakly identified directions that inflate that tail term recur as the
+symmetry- and funnel-induced slow modes that A5 (Section~\ref{sec:a5}) separates and quotients
+away. The general convex-geometry boundary ---
+$\CP\le K\lmax(\Cov_\pi)$ for \emph{every} log-concave measure with $K$ universal --- is the
+Kannan--Lov\'asz--Simonovits conjecture of Part~III; A1 is the structured, finite-sum counterpart
+that the KLS machinery does not exploit, which is precisely what makes it more tractable.
+\end{remark}
+\end{document}

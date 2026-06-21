@@ -1,0 +1,78 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Covariance technology: small-time operator-norm control}
+\label{sec:covariance-tech}
+
+Both routes meter the danger of localization through the same cut-free covariance functional.
+Recall from \eqref{eq:interface-def} the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the
+interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
+\begin{equation}\label{eq:Xi2-def}
+  \Xi^{(2)}_T(\mu)=\int_0^T\E X_t^2\dd t .
+\end{equation}
+The bootstrap of Section~\ref{sec:bootstrap} consumes $\Xi_T$ and the product reduction of
+Section~\ref{sec:product-stress} consumes $\Xi^{(2)}_T$; both rest on the small-time
+operator-norm control imported here. We isolate it as a hypothesis and discharge it against
+the cited covariance technology, so that all downstream uses are unconditional given only
+their stated geometric inputs.
+
+\begin{hypothesis}[Known small-time operator-norm control; matched to
+{\cite{Chen2021,KlartagLehec2022Polylog}}]
+\label{hyp:KI}
+There are universal constants $C_1,C_2$ such that for every isotropic log-concave $\mu$ on
+$\R^n$, $n\ge3$,
+\[
+  \E\,\norm{A_t}_\op\ \le\ C_1
+  \qquad\text{for all }0\le t\le t_1(n):=(\log n)^{-C_2}.
+\]
+\end{hypothesis}
+
+\noindent
+This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's
+lectures: $\E\norm{A_t}_\op\le2$ for $t\le c\,\bar\psi_n^2/\log n$, where $\bar\psi_n$ is the
+currently known KLS lower bound; with $\bar\psi_n=c(\log n)^{-1/2}$ this gives $C_2=2$. The
+required input is now a theorem in the literature, in exactly the strength needed.
+
+\begin{theorem}[{Klartag--Lehec; the sup-over-time form is \cite[Thm.~61]{KLnotes}}]
+\label{thm:KL-window}
+There is a universal constant $C$ such that for every isotropic log-concave $\mu$ on $\R^n$
+and every $t\le\dfrac1{C\log^2n}$,
+\[
+  \Prob\bigl(\exists\,s\le t:\ \norm{A_s}_\op\ge2\bigr)\ \le\ \exp\Bigl(-\frac1{Ct}\Bigr).
+\]
+\end{theorem}
+
+\begin{remark}[Attribution of the cited window and the second moment]
+\label{rem:kl-window-verified}
+The statement above --- \emph{sup over time}, threshold $2$, clean window
+$t\le(C\log^2n)^{-1}$ with no thin-shell constant --- is \cite[Thm.~61]{KLnotes}. It should
+\emph{not} be attributed to \cite[Lemma~5.2]{KlartagLehec2022Polylog}, which is the weaker
+\emph{fixed-time} bound $\Prob(\norm{A_t}_\op\ge2)\le e^{-1/(Ct)}$ on the
+$\kappa_n$-dependent window $t\le(C\kappa_n^2\log n)^{-1}$ ($\kappa_n$ the Klartag--Lehec
+constant). The second moment is moreover published in exactly the strength needed:
+\cite[Cor.~5.4]{KlartagLehec2022Polylog} gives $\E\norm{A_t}_\op^p\le C_p$ for every $p\ge1$
+on the window, so $\E X_t^2\le\E\norm{A_t}_\op^2\le C$ directly. These statement numbers have
+been verified against arXiv:2406.01324v2 (the version matching the published
+Bull.\ Amer.\ Math.\ Soc.\ \textbf{62} (2025), no.~4, article) for \cite{KLnotes}, and against
+arXiv:2203.15551 for \cite{KlartagLehec2022Polylog}.
+\end{remark}
+
+\begin{corollary}[Discharge of Hypothesis~\ref{hyp:KI}]
+\label{cor:KI-discharged}
+Hypothesis~\ref{hyp:KI} holds with $C_2=2$: there is a universal constant $c_0$ such that for
+every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-2}$,
+\[
+  \E\,\norm{A_t}_\op\ \le\ 2+\sup_{u>0}ue^{-u/C}\ =:\ C_1 .
+\]
+Consequently the polylog evaluation of the interface functional
+($\Xi_T\le C(1+\log\log n)$, Corollary~\ref{cor:loglog}), the loglog supply, and the residual
+dichotomy of Section~\ref{sec:bootstrap} hold unconditionally given only their stated
+geometric inputs.
+\end{corollary}
+
+\begin{proof}
+On the event $\{\norm{A_t}_\op<2\}$ the bound is immediate. On the complement, of probability
+at most $e^{-1/(Ct)}$ by Theorem~\ref{thm:KL-window}, the Brascamp--Lieb cap \eqref{eq:BL-cap}
+gives $\norm{A_t}_\op\le t^{-1}$ pathwise. Hence
+$\E\norm{A_t}_\op\le2+t^{-1}e^{-1/(Ct)}\le2+\sup_{u>0}ue^{-u/C}$.
+\end{proof}
+\end{document}

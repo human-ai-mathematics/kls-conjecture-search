@@ -1,0 +1,89 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Tier 3 --- the GLM-posterior spine (flagship)}
+\label{sec:tier3}
+
+The flagship target, and the first \emph{realistic} statistical family: the posterior of a
+generalized linear model under a Gaussian prior. In ML and Bayesian statistics the relevant
+measure is $\pi(\theta)\propto e^{-U(\theta)}$ with $U=\text{loss}+\text{regularizer}$; the
+GLM posterior is the canonical convex instance.
+
+\begin{family}[Gaussian-prior GLM posterior]
+\label{fam:glm-posterior}
+Given data $(x_i,y_i)_{i=1}^n$ with covariates $x_i\in\R^D$, a per-sample loss
+$\ell(y,\cdot)$ \emph{convex} in the linear predictor (logistic, probit, Poisson, softmax,
+\dots), and a Gaussian prior $N(0,\Sigmaz)$, the posterior is
+\[
+  \pi(\theta\mid y)\ \propto\ \exp\!\Big(-\underbrace{\textstyle\sum_{i=1}^n\ell(y_i,x_i^\top\theta)
+  +\tfrac12\theta^\top\Sigmaz^{-1}\theta}_{=:\,U(\theta)}\Big),\qquad\theta\in\R^D .
+\]
+\end{family}
+
+\begin{theorem}[GLM posteriors are functional-inequality-good, data-free]
+\label{thm:glm-fi}
+For the posterior of Family~\ref{fam:glm-posterior},
+\[
+  \CP\ \le\ \CLS\ \le\ \lmax(\Sigmaz),
+  \qquad
+  \CTCI\ \le\ \lmax(\Sigmaz),
+\]
+\emph{independent of the data $X=(x_i)$ and of the dimension $D$}.
+\end{theorem}
+
+\begin{proof}
+The Hessian of the potential splits into prior and likelihood parts:
+\[
+  \Hess U(\theta)\ =\ \Sigmaz^{-1}\ +\ \sum_{i=1}^n \ell''(x_i^\top\theta)\,x_ix_i^\top .
+\]
+Convexity of $\ell(y,\cdot)$ in the linear predictor gives $\ell''\ge0$, so the likelihood
+term is a sum of PSD rank-one matrices and
+$\Hess U(\theta)\succeq\Sigmaz^{-1}\succeq\lmax(\Sigmaz)^{-1}I_D$ for all $\theta$. Thus $U$
+is $m$-strongly convex with floor $m=\lmax(\Sigmaz)^{-1}$. Bakry--\'Emery
+(Theorem~\ref{thm:bakry-emery}) yields $\CP\le\CLS\le1/m=\lmax(\Sigmaz)$, and Otto--Villani
+(Theorem~\ref{thm:otto-villani}) $\CTCI\le\lmax(\Sigmaz)$. The data enter only through the
+discarded PSD term, so the bound is data-free; it involves $\Sigmaz$ but not $D$, so it is
+dimension-free.
+\end{proof}
+
+\noindent The result is elementary once written --- a curvature-floor reading of
+Bakry--\'Emery --- yet it is exactly the kind of explicit, dimension-controlled constant the
+program exists to certify, on a family practitioners actually sample (logistic and Poisson
+regression, multinomial/softmax with $L^2$ regularization, probit under log-concavity). The
+likelihood contributes positive curvature, but the \emph{guaranteed} floor comes from the
+Gaussian prior.
+
+\begin{proposition}[The prior is essential]
+\label{prop:flat-prior-nonintegrable}
+With an improper/flat prior and separable or collinear data, the GLM posterior is
+non-integrable --- the MLE escapes to infinity --- so there is no spectral gap and no
+Poincar\'e constant. Even with a proper Gaussian prior, the per-sample curvature
+$\ell''(x_i^\top\theta)$ vanishes where $\abs{x_i^\top\theta}\to\infty$ (logistic:
+$\ell''=\sigma(1-\sigma)\to0$), so the global Hessian floor $\inf_\theta\lmin(\Hess U)$ is set
+by the prior alone, $\Sigmaz^{-1}$.
+\end{proposition}
+
+\noindent This is the flat-direction obstruction. Its consequence is that the bound
+$\lmax(\Sigmaz)$ of Theorem~\ref{thm:glm-fi} is prior-only \emph{on purpose}, and any attempt
+to sharpen it must be a bulk argument, not a global floor.
+
+\begin{question}[Data-informed sharpening]
+\label{q:glm-data-informed}
+Improve Theorem~\ref{thm:glm-fi} so the certified constant \emph{tracks the data}. The floor
+$\Sigmaz^{-1}$ is attained only where $\ell''(x_i^\top\theta)\to0$, i.e.\ in tail directions;
+in the likelihood-dominated bulk the posterior concentrates far more than $\lmax(\Sigmaz)$
+suggests:
+\[
+  \CP\ \approx\ \lmax\!\Big(\big(\Sigmaz^{-1}+\textstyle\sum_i\ell''(x_i^\top\hat\theta)\,x_ix_i^\top\big)^{-1}\Big)\ \ll\ \lmax(\Sigmaz).
+\]
+Prove an upper bound interpolating the prior-dominated and likelihood-dominated regimes.
+\end{question}
+
+\noindent This is the genuinely open content (developed in Section~\ref{sec:agenda}). By
+Proposition~\ref{prop:flat-prior-nonintegrable} a global Hessian floor cannot close the gap;
+the candidate routes are a Lyapunov / local-curvature argument (strong convexity on a compact
+high-probability region plus a drift estimate outside it; see
+\cite{BakryCattiauxGuillin2008,CattiauxGuillinWangWu2009}) or Brascamp--Lieb
+(Theorem~\ref{thm:brascamp-lieb}) with the spatially varying Hessian. The deliverable is a
+computable sharpness ratio $\lmax(\Sigmaz)/\lmax(\Cov_\pi)$, validated against the linear-test
+lower bound (Remark~\ref{rem:rayleigh-lower-only}) from posterior samples.
+\end{document}

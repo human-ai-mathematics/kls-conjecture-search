@@ -1,0 +1,74 @@
+# obstructions.yaml — machine-readable no-go set for the KLS program
+# =============================================================================
+# Ported from the standalone KLS program's roadmap; `source` paths re-synced to
+# the unified modules/kls/. Prose lives in obstructions.md; this file is the
+# enforced form. ../check_ledger.py uses it to police KLS proofs against the no-go
+# results.
+#
+# Model:
+#   mechanisms   the CLOSED controlled vocabulary of "risky" proof mechanisms an
+#                obstruction can forbid. A ledger node describes how it was proved
+#                with an optional `mechanism: [...]` field drawn from this set; a
+#                node that uses NONE of these risky mechanisms simply omits the
+#                field (the common case for the sound backbone reductions).
+#   obstructions each entry `forbids` a subset of `mechanisms`. Enforcement rule:
+#                a ledger node that declares a forbidden `mechanism` tag MUST list
+#                that obstruction in `bounded_by` AND carry a non-empty `clearance`
+#                note — else the checker FAILS.
+#
+# Parity invariant (checked): obstruction ids here == ids in obstructions.md ==
+# every id used in any KLS-ledger `bounded_by`.
+# =============================================================================
+
+mechanisms:
+  - slice-wise                    # estimate from (μ_t, E)-data at each fixed time t
+  - absolute-scale-excess         # excess term at absolute (not covariance-weighted) scale
+  - projection-only               # uses only projection-test information
+  - radial-only                   # uses only radial / thin-shell information
+  - crude-bootstrap               # uses the crude Ξ_T ≤ log n interface evaluation
+  - relative-scale-all-measures   # a relative-scale claim asserted for EVERY measure
+  - direct-excess                 # direct (unanchored) excess-propagation argument
+  - single-coordinate-counterexample  # counterexample riding one inflated coordinate
+
+obstructions:
+  - id: obs:two-tail
+    title: "no slice-wise absolute-scale Stein estimate; covariance weight is forced"
+    forbids: [slice-wise, absolute-scale-excess]
+    regime: "anisotropic posteriors λmax(A_t)=Λ≫1; cannot occur at t=0 (isotropic)"
+    source: modules/kls/05-obstruction.tex   # prop:two-tail
+    constrains: [ass:weighted-package, q:weighted, q:stein-weighted]
+
+  - id: obs:proj-ceiling
+    title: "projection / radial tests cap at log n"
+    forbids: [projection-only, radial-only]
+    regime: "static, all dimensions"
+    source: modules/kls/05-obstruction.tex
+    constrains: [q:upgrade, prop:qcts-equivalence]
+
+  - id: obs:crude-insufficient
+    title: "Klartag's own bound defeats the naive bootstrap"
+    forbids: [crude-bootstrap]
+    regime: "high dimension"
+    source: modules/kls/12-bootstrap.tex   # lem:crude + rem:insufficiency
+    constrains: [lem:crude]
+
+  - id: obs:relative-ceiling
+    title: "relative scale is KLS-equivalent, not an intermediate target"
+    forbids: [relative-scale-all-measures]
+    regime: "all measures vs near-worst (legitimate only with a near-worstness hypothesis)"
+    source: modules/kls/12-bootstrap.tex   # prop:ceiling
+    constrains: [ass:all-cut-carleson, q:taming]
+
+  - id: obs:circularity
+    title: "direct excess propagation is circular"
+    forbids: [direct-excess]
+    regime: "all; the only non-circular anchor is the external hstar_n via thm:bootstrap (near-worst only)"
+    source: modules/kls/11-excess-propagation.tex    # lem:excess-identity + lem:inf-martingales
+    constrains: [q:weighted]
+
+  - id: obs:rank-one-refuted
+    title: "a counterexample cannot ride a single inflated coordinate"
+    forbids: [single-coordinate-counterexample]
+    regime: "product measures; residue is genuinely high-complexity cuts"
+    source: modules/kls/09-product-stress.tex   # cor:refutation
+    constrains: [q:alignment]

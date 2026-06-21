@@ -1,0 +1,69 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Tier 1 --- Gaussian and strongly log-concave calibration}
+\label{sec:tier1}
+
+The families whose answer is known \emph{exactly}. They are the calibration objects: the
+reference point against which every later deformation is measured, and the exact cases that
+keep any numerical engine honest.
+
+\begin{family}[Gaussian covariance]
+\label{fam:gaussian-covariance}
+For $\Pstar=N(0,\Sigma)$ on $\R^D$ with $\Sigma\succ0$,
+\[
+  \CP=\CLS=\CTCI=\lmax(\Sigma)=\norm{\Sigma}_\op .
+\]
+\end{family}
+
+\begin{proof}
+\emph{Upper bound.} Here $U(x)=\tfrac12 x^\top\Sigma^{-1}x$, so
+$\Hess U=\Sigma^{-1}\succeq\lmax(\Sigma)^{-1}I$, i.e.\ $U$ is $m$-strongly convex with
+$m=\lmax(\Sigma)^{-1}$. Bakry--\'Emery (Theorem~\ref{thm:bakry-emery}) gives
+$\CP\le\CLS\le1/m=\lmax(\Sigma)$, and Otto--Villani (Theorem~\ref{thm:otto-villani})
+$\CTCI\le\lmax(\Sigma)$.
+\emph{Matching lower bound.} Two test objects pin the constants from below. A \emph{linear
+test} $f(x)=\inner{v}{x}$ with $v$ a top eigenvector of $\Sigma$ has $\nabla f\equiv v$, so
+$\E\norm{\nabla f}^2=\norm{v}^2$ while $\Var_{\Pstar}(f)=v^\top\Sigma v=\lmax(\Sigma)\norm{v}^2$;
+the Rayleigh quotient equals $\lmax(\Sigma)$, so $\CP\ge\lmax(\Sigma)$
+(Remark~\ref{rem:rayleigh-lower-only}), and with $\CP\le\CLS$
+(Theorem~\ref{thm:lsi-implies-poincare}) also $\CLS\ge\lmax(\Sigma)$. The transport constant
+needs its own witness, since $\CTCI$ sits \emph{below} $\CLS$ and the linear test bounds only
+$\CP$: take the \emph{translate} $Q=N(tv,\Sigma)$ of $\Pstar=N(0,\Sigma)$ along the same top
+eigenvector. Then $\Wtwo^2(Q,\Pstar)=t^2\norm{v}^2$ while
+$\KL(Q\|\Pstar)=\tfrac12 t^2\,v^\top\Sigma^{-1}v=\tfrac{t^2\norm{v}^2}{2\lmax(\Sigma)}$ (using
+$\Sigma^{-1}v=\lmax(\Sigma)^{-1}v$), so the $T_2$ inequality \eqref{eq:tci} gives
+$t^2\norm{v}^2\le2\,\CTCI\cdot\tfrac{t^2\norm{v}^2}{2\lmax(\Sigma)}$, i.e.\
+$\CTCI\ge\lmax(\Sigma)$. All three bounds coincide.
+\end{proof}
+
+\noindent The worst direction is the direction of largest variance: functional-inequality
+constants are generalized variances. For $N(0,\sigma^2 I_D)$ all three equal $\sigma^2$,
+\emph{independent of $D$}. Products of Gaussians, and more generally $m$-strongly-log-concave
+measures, are handled by the same Bakry--\'Emery floor together with tensorization
+(Theorem~\ref{thm:tensorization}); for independent coordinates $X_i\sim N(0,\sigma_i^2)$ one
+gets $\CP=\CLS=\CTCI=\max_i\sigma_i^2$, not $\sum_i\sigma_i^2$.
+
+\begin{family}[Bayesian linear regression]
+\label{fam:linear-regression}
+For $y=X\theta+\eps$ with $\eps\sim N(0,\sigma^2 I_n)$ and a Gaussian prior
+$\theta\sim N(m_0,\Sigmaz)$, the posterior is Gaussian, $\pi=N(m_n,\Sigma_n)$ with
+\[
+  \Sigma_n=\Big(\tfrac1{\sigma^2}X^\top X+\Sigmaz^{-1}\Big)^{-1},
+  \qquad
+  \CP=\CLS=\CTCI=\lmax(\Sigma_n)=\frac{1}{\lmin\!\big(\tfrac1{\sigma^2}X^\top X+\Sigmaz^{-1}\big)} .
+\]
+\end{family}
+
+\begin{proof}
+The potential $U(\theta)=\tfrac1{2\sigma^2}\norm{y-X\theta}^2+\tfrac12(\theta-m_0)^\top\Sigmaz^{-1}(\theta-m_0)$
+is quadratic with constant Hessian $\Hess U=\tfrac1{\sigma^2}X^\top X+\Sigmaz^{-1}=\Sigma_n^{-1}$,
+so the posterior is the Gaussian $N(m_n,\Sigma_n)$ and Family~\ref{fam:gaussian-covariance}
+applies.
+\end{proof}
+
+\noindent This is the first \emph{exact Bayesian posterior constant}: a proper prior
+($\Sigmaz\succ0$) supplies a curvature floor even when $X^\top X$ is rank deficient. With a
+flat improper prior ($\Sigmaz^{-1}=0$) and rank-deficient $X^\top X$, some directions are
+flat, the posterior is improper, and no functional inequality holds --- the prototype of the
+flat-direction obstruction (Section~\ref{sec:tier3}).
+\end{document}

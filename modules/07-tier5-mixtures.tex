@@ -1,0 +1,65 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Tier 5 --- mixtures, multimodality, and hierarchical geometry}
+\label{sec:tier5}
+
+The hardest structured tier: targets that are mixtures or behave like mixtures (mixture
+models, latent-variable models, label switching, hierarchical models, Bayesian neural
+networks). Here the constants are governed not by curvature inside a mode but by the
+\emph{barriers between modes}, and a finite constant can still be astronomically large.
+
+\begin{theorem}[Separated mixtures have exponentially large constants]
+\label{thm:separated-mixture-lower}
+For a mixture or multi-well potential whose wells are separated by an energy barrier of height
+$B$ --- the potential gap any path between the wells must climb --- the constants grow at least
+exponentially in the barrier, $\CP,\CLS\ge e^{cB}$. The bottleneck is exhibited by a
+mode-indicator test function (smoothly $0$ on one well, $1$ on the other): its Rayleigh
+quotient is large because the gradient energy concentrates on the thin, low-density inter-mode
+region. For Gaussian-type wells the barrier grows quadratically in the \emph{separation
+distance} $\Delta$ between the modes, $B\asymp\Delta^2$, so the growth reads $e^{c\Delta^2}$ in
+the separation; but the intrinsic dependence is linear in the barrier height, and a steeper
+(e.g.\ quartic) landscape makes $B$ grow faster than $\Delta^2$.
+\end{theorem}
+\noindent\cite{BakryGentilLedoux2014,MenzSchlichting2014}. This kills Holley--Stroock here
+(between separated wells $\osc(W)=\infty$, Theorem~\ref{thm:holley-stroock}). The benign
+counterpart is the bounded-$\chi^2$ regime of Corollary~\ref{cor:ccnw-mixture-lsi}:
+multimodality does not automatically kill the inequalities, but separation makes the
+constants enormous.
+
+\begin{family}[One-dimensional double well]
+\label{fam:double-well-1d}
+For $\Pstar\propto\exp\!\big(-(x^2-a^2)^2/4\big)$ on $\R$, the naive ``$1+a^2$'' Poincar\'e
+upper bound is \emph{falsified} by mode-indicator Rayleigh quotients once the wells at $\pm a$
+are well separated; the true constant grows exponentially in the barrier
+(Theorem~\ref{thm:separated-mixture-lower}).
+\end{family}
+\noindent A concrete $1$D witness: the matching upper bound needs the energy-landscape
+decomposition of \cite{MenzSchlichting2014} or the $1$D Hardy evaluator
+(Theorem~\ref{thm:hardy-1d}).
+
+\begin{remark}[Label switching is a symmetry artifact, not physical multimodality]
+\label{rem:label-switching}
+A mixture-model posterior is invariant under the $K!$ relabelings of its components, so it has
+$K!$ symmetric modes and a correspondingly terrible $\CP(\pi)$ on the raw parameter space
+$\Theta$. But this is artificial: on the quotient $\Theta/S_K$ the posterior can be far better
+behaved, $\CP(\pi_{\Theta/S_K})\ll\CP(\pi_\Theta)$. The right question separates \emph{physical}
+multimodality (scientifically distinct explanations) from \emph{symmetry-induced} multimodality
+(mere relabelings); only the former should count against the constant.
+\end{remark}
+
+\begin{remark}[Hierarchical funnels and reparameterization]
+\label{rem:funnel}
+Hierarchical models create ``funnels'': for $\tau\sim p(\tau)$, $\theta_j\mid\tau\sim N(0,\tau^2)$,
+the joint density has regions where $\tau$ is small and the $\theta_j$ are extremely
+concentrated, producing severely anisotropic, position-dependent curvature that no global floor
+captures. A functional-inequality question with direct sampling consequences is how
+$\CP,\CLS,\CTCI$ transform under centered versus non-centered parameterizations
+\cite{BakryCattiauxGuillin2008}; the non-centered form, which removes the funnel, should carry a
+dramatically smaller constant.
+\end{remark}
+
+\noindent For nonconvex losses (Bayesian neural networks) the same dichotomy governs:
+local curvature inside basins helps, barriers between basins hurt, and a Gaussian prior keeps
+the tails (hence the constants) finite but possibly useless if the landscape has high
+barriers.
+\end{document}

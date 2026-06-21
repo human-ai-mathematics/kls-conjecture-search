@@ -1,0 +1,482 @@
+# ledger.yaml — canonical state of the open-target program (Parts I & II)
+# =============================================================================
+# SINGLE SOURCE OF TRUTH for what is open / conjectured / proved / refuted among
+# the Bayesian-posterior open targets (A1-A5), and for the dependency edges and
+# the obstructions that constrain them. The LaTeX in modules/open-targets/ is the
+# prose+statement; this file is the machine-readable graph.
+#
+# Every node `id` is the LaTeX \label of the statement (use it with \ref). When a
+# statement is refined, validated, refuted, or proved, update BOTH the .tex and
+# this file.
+#
+# WORKFLOW (two phases):
+#   Phase 1 (now)   refine the open statement into a sharp, precise theorem and
+#                   stress-test it numerically (finum). Output: status=conjectured
+#                   with evidence=numerical-strong.
+#   Phase 2 (later) prove it (natural language first; Lean deferred).
+#
+# status  (logical state):
+#   open           stated in the manuscript, not yet refined into a sharp claim
+#   conjectured    a precise, sharp statement exists (refinement done)
+#   proved         fully proved here (Phase 2)
+#   imported       taken from the literature with a citation (a calibration anchor)
+#   refuted        the stated form shown false (numerically or by counterexample)
+#
+# evidence (numerical support, ORTHOGONAL to status — "seems valid numerically"):
+#   none                   no numerical test yet
+#   numerical-directional  limited / exploratory tests
+#   numerical-strong       passed the shared stress battery (knowledge/instances.md)
+#   evidence_run:          path to the provenance-stamped finum artifact (when set)
+#
+# kind: theorem|proposition|lemma|corollary|conjecture|question|obstruction|
+#       baseline|example|imported
+#
+# edges:
+#   depends_on   ids used in the proof — MUST stay acyclic
+#   unlocks      ids that become reachable once this is established
+#   bounded_by   obstruction ids (obs:*) that any valid statement/proof must respect
+#   related      cross-target links (non-logical)
+#   refines      the manuscript node this is the working/sharpened version of
+#   numerics     what finum should compute to validate/refute/refine this node
+#
+# INVARIANTS (python3 research/check_ledger.py):
+#   1. every id in depends_on/unlocks/bounded_by/related/refines exists
+#   2. depends_on is acyclic
+#   3. no `proved` node depends_on an `open`/`conjectured`/`refuted` node
+#   4. every bounded_by id is a node with kind: obstruction
+#   5. evidence is one of the allowed values; numerical-strong requires evidence_run
+# =============================================================================
+
+meta:
+  program: ab
+  scope: "Parts I & II — Bayesian-posterior functional-inequality constants (A1-A5)"
+  goal: "Refine the open targets into sharp, numerically-validated theorems for later proof."
+  kls_note: "Part III (KLS) has its own ledger at research/kls/ledger.yaml (program: kls), a proof-phase program with its own no-go machinery. Bridged here via conj:a1-bis."
+
+# ===========================================================================
+# CROSS-CUTTING OBSTRUCTIONS  (the shared no-go knowledge; prose + numerical
+# demonstration live in knowledge/obstructions.md)
+# ===========================================================================
+nodes:
+
+  - id: obs:flat-direction
+    kind: obstruction
+    status: proved
+    file: modules/05-tier3-glm.tex
+    statement: "No global data-curvature floor: GLM likelihood curvature ell'' vanishes where |x^T theta|->inf, so any data-informed bound MUST carry a tail/penalty term."
+    refines: prop:flat-prior-nonintegrable
+    related: [conj:a1, conj:a3, q:a5-reparam]
+    numerics: "Separable logistic: lambda_max(Cov) (=C_P lower bound) blows up while the bulk term stays small => a tail-free bound is FALSIFIED."
+    evidence_run: research/runs/2026-06-20-A1.jsonl  # finum: stress-logit-separable REFUTES the tail-free bound; prior bound stays consistent
+
+  - id: obs:heavy-tail-no-classical
+    kind: obstruction
+    status: imported
+    file: modules/06-tier4-heavy-tails.tex
+    statement: "Polynomial/exponential tails admit no classical LSI, no T2, and (heaviest tails) no classical Poincare; the correct object is a weighted/weak inequality."
+    related: [conj:a3, conj:a4, obs:restricted-not-finite]
+    numerics: "Generalized-Cauchy mu_beta: unweighted Hardy functional ~ x^2 -> inf (C_P=inf); weighted by (1+x^2) -> O(1)."
+    evidence_run: research/runs/2026-06-20-A3.jsonl  # finum A3: cal-cauchy weighted gap == 1/lambda_{beta,d}; Student-t classical diverges, weighted finite
+
+  - id: obs:tv-insufficient
+    kind: obstruction
+    status: proved
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "TV-closeness to the BvM Gaussian does NOT control the constants: a contamination sequence with ||mu_n - N(0,1)||_TV -> 0 can have C_P -> inf."
+    refines: warn:a2-tv-fails
+    related: [conj:a2]
+    numerics: "mu_n=(1-eps_n)N(0,1)+eps_n N(a_n,1), eps_n a_n^2 -> inf: linear test C_P >= Var -> inf while TV -> 0."
+    evidence_run: research/runs/2026-06-20-A2.jsonl  # finum A2: contamination REFUTES "BvM(TV)=>constants"; n*C_P -> lambda_max(I^{-1})
+
+  - id: obs:symmetry-vs-physical
+    kind: obstruction
+    status: proved
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Multimodality blow-up is removable by the symmetry quotient iff the slow eigenfunction is non-invariant (label switching); invariant slow modes (physical multimodality) survive quotienting."
+    refines: prop:a5-ratio
+    related: [q:a2-multimodal, q:a4-multimodal, conj:a5-metastable]
+    numerics: "Folded double well (ex:a5-folding): odd test fn gives C_P >~ e^{a^2/2sigma^2} for raw, O(sigma^2) for quotient."
+    evidence_run: research/runs/2026-06-20-A5.jsonl  # finum A5: folded-well raw C_P >> folded (exp barrier); Neal centered >> non-centered max{s^2,1}
+
+  - id: obs:restricted-not-finite
+    kind: obstruction
+    status: proved
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Family-restricted transport constant C_Q is not automatically finite: for pi ~ e^{-|x|^p}, p<2, even mean-field Gaussian Q gives C_Q = inf; finiteness needs KL-sublevel restriction, bounded Q, or a modified cost."
+    refines: warn:a4-heavytail
+    related: [conj:a4, conj:a3]
+    numerics: "q_m=N(m,sigma^2), pi~e^{-|x|^p}: W2^2/KL ~ |m|^{2-p} -> inf as |m|->inf."
+    evidence_run: research/runs/2026-06-20-A4.jsonl  # finum A4: ep-tails global C_Q REFUTED (>> restricted C_{Q,r}); Gaussian T2 ratio == sigma^2
+
+  # =========================================================================
+  # SHARED TOOLS / BASELINES  (lemmas reused across targets; see knowledge/lemmas.md)
+  # =========================================================================
+
+  - id: lem:linear-test-lower
+    kind: lemma
+    status: proved
+    file: modules/05-tier3-glm.tex
+    statement: "Linear-test lower bound: C_P(pi) >= lambda_max(Cov_pi); any test function f gives Var(f)/E||grad f||^2 <= C_P. The universal sound refuter."
+    refines: rem:rayleigh-lower-only
+    related: [conj:a1, conj:a2, q:a4-mean, q:a5-detect]
+    numerics: "finum.constants.poincare_lower(samples) = lambda_max(empirical cov)."
+
+  - id: thm:glm-fi
+    kind: baseline
+    status: proved
+    file: modules/05-tier3-glm.tex
+    statement: "Data-free GLM bound: C_P <= C_LS <= lambda_max(Sigma0), C_TCI <= lambda_max(Sigma0); dimension-free, data-free. The trivial baseline any A1/A4 bound must beat."
+    related: [conj:a1, conj:a4]
+
+  - id: thm:hardy-1d
+    kind: imported
+    status: imported
+    file: modules/02-results-toolkit.tex
+    statement: "1D weighted Hardy/Muckenhoupt criterion: weighted Poincare holds iff the Hardy quantities B_+,B_- are finite, pinning the optimal constant up to factor 4."
+    related: [conj:a3, prop:a3-horseshoe]
+    numerics: "finum can evaluate the Hardy supremum sup_x mu([x,inf)) int^x dt/(a(t)p(t)) numerically."
+
+  - id: lem:a5-lipschitz
+    kind: lemma
+    status: proved
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Lipschitz transport: T_# nu = mu with T globally L-Lipschitz => C_P(mu) <= L^2 C_P(nu), same for C_LS, C_TCI."
+    related: [q:a5-reparam]
+
+  # =========================================================================
+  # A1 — data-informed GLM Poincare constant
+  # =========================================================================
+
+  - id: conj:a1
+    kind: conjecture
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Data-informed GLM Poincare: C_P(pi) <= C{ lambda_max(A_Wbar^{-1}) + E_pi[lambda_max(H^{-1}); G_Wbar^c] } <= C{ lambda_max(A_Wbar^{-1}) + lambda_max(Sigma0) pi(G_Wbar^c) }."
+    bounded_by: [obs:flat-direction]
+    depends_on: [thm:glm-fi]
+    related: [conj:a2, conj:a4]
+    unlocks: [q:a1-poincare, q:a1-barw, q:a1-tail, q:a1-sharp, q:a1-lsi, q:a1-sampling]
+    numerics: "Check the bound holds vs lem:linear-test-lower across instances; tightness ratio; beats thm:glm-fi baseline; bulk-dominated vs separable regimes."
+    target_doc: research/targets/A1-data-informed-glm.md
+
+  - id: q:a1-poincare
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Prove conj:a1 for C_P: specialize Brascamp-Lieb + log-concave self-improvement (cattiaux2018) to the GLM Hessian; make the universal constant explicit."
+    depends_on: [conj:a1]
+    numerics: "Estimate the realized universal constant C from data; check C is O(1) and stable across instances."
+
+  - id: q:a1-barw
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Construct a computable data-informed Wbar from (X,y,Sigma0): compare rowwise (eq:a1-rowwise), posterior-quantile, and spectral weights; spectral X^T W X >= X^T Wbar X is the less conservative object."
+    depends_on: [conj:a1]
+    numerics: "For each Wbar recipe compute the bound + pi(G_Wbar^c); pick the recipe minimizing the certified bound."
+
+  - id: q:a1-tail
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Certify pi(G_Wbar^c) <= eps with computable data-dependent constants (posterior concentration / finite-sample Laplace / self-improving bootstrap). The heart of A1."
+    depends_on: [conj:a1, q:a1-barw]
+    bounded_by: [obs:flat-direction]
+    numerics: "MCMC estimate of pi(G_Wbar^c); does the claimed eps hold? cross-check by independent sampler."
+
+  - id: q:a1-sharp
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Get the correct 1/n scaling in the likelihood-dominated regime, matching the A2 limit eq:a2-target as n->inf; validate against lem:linear-test-lower and sample-based C_P estimators."
+    depends_on: [q:a1-poincare]
+    related: [thm:a2-target]
+    numerics: "Sweep n; check n * bound -> lambda_max(I^{-1}); A1<->A2 consistency gap."
+
+  - id: q:a1-lsi
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Data-informed C_LS via local LSI on the bulk glued to prior drift (eq:a1-lsi-target), then C_TCI via Otto-Villani. The genuinely harder second stage."
+    depends_on: [conj:a1]
+    bounded_by: [obs:flat-direction]
+    related: [q:a2-lsi]
+    numerics: "Estimate C_LS (entropy-based); does the clean bulk bound hold or is a Phi(pi(G^c)) factor needed?"
+
+  - id: q:a1-sampling
+    kind: question
+    status: open
+    file: modules/open-targets/A1-data-informed-glm.tex
+    statement: "Translate data-informed constants into Langevin/MALA complexity and posterior-concentration rates."
+    depends_on: [q:a1-poincare]
+
+  - id: conj:a1-bis
+    kind: conjecture
+    status: open
+    file: modules/08-open-targets.tex
+    statement: "Structured-posterior KLS: C_P(pi) <= K lambda_max(Cov_pi) for a useful class of GLM posteriors, K universal or mildly geometry-dependent — the finite-sum-structured counterpart of KLS."
+    bounded_by: [obs:flat-direction]
+    depends_on: [conj:a1]
+    related: [conj:a2, conj:a4]
+    bridges: [kls/thm:intro-all-cut]
+    numerics: "Estimate the realized K = C_P_lower / lambda_max(Cov) across GLM instances; test whether K stays O(1) and mildly geometry-dependent (the structured shadow of the KLS universal constant)."
+    note: "Bridge to Part III: the SAME bound for EVERY isotropic log-concave measure with K universal IS the KLS conjecture (research/kls/). A1-bis is the structured, finite-sum case the KLS machinery does not exploit."
+
+  # =========================================================================
+  # A2 — asymptotic constants via Bernstein-von Mises
+  # =========================================================================
+
+  - id: conj:a2
+    kind: conjecture
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Asymptotic FI constants: n C_P(pi_n) -> lambda_max(I(theta_0)^{-1}); under global hypotheses the same for n C_LS, n C_TCI."
+    bounded_by: [obs:tv-insufficient]
+    related: [conj:a1, conj:a4, conj:a5-metastable]
+    unlocks: [thm:a2-target, q:a2-poincare, q:a2-lsi, q:a2-multimodal, q:a2-highdim]
+    numerics: "n-sweep of n*poincare_lower(samples); does it converge to lambda_max(I^{-1})? Must FALSIFY on the obs:tv-insufficient contamination sequence."
+    target_doc: research/targets/A2-bernstein-von-mises.md
+
+  - id: thm:a2-target
+    kind: theorem
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Target shape: under osc(r_n)=o_P(1) (a tail/no-bottleneck hypothesis), C_P(pi_n)=(1+o_P(1)) lambda_max(H_n^{-1}); same for C_LS, C_TCI."
+    depends_on: [conj:a2]
+    bounded_by: [obs:tv-insufficient]
+
+  - id: q:a2-poincare
+    kind: question
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Weakest posterior assumptions for n C_P(pi_n) -> lambda_max(I^{-1}): the random-posterior version of the Chewi-Stromme low-temperature limit eq:a2-cs-poincare, with a clean tail condition."
+    depends_on: [conj:a2]
+    numerics: "Confirm the limit across regular logistic/Poisson over n; estimate the o_P(1) rate."
+
+  - id: q:a2-lsi
+    kind: question
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Characterize when n C_LS(pi_n) -> lambda_max(I^{-1}) (Fisher-local) vs -> 1/mu_PL(ell) (global landscape); exhibit a natural model where they differ."
+    depends_on: [conj:a2]
+    bounded_by: [obs:tv-insufficient]
+    related: [q:a1-lsi]
+    numerics: "Compare n*C_LS estimate to lambda_max(I^{-1}) vs 1/mu_PL on a Fisher-local and a non-Fisher-local model."
+
+  - id: q:a2-multimodal
+    kind: question
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Multimodal/weakly-identified posteriors: when is C_P exponentially large (physical) vs a removable symmetry artifact (A5 quotient)?"
+    depends_on: [conj:a2]
+    bounded_by: [obs:symmetry-vs-physical]
+    related: [conj:a5-metastable]
+
+  - id: q:a2-highdim
+    kind: question
+    status: open
+    file: modules/open-targets/A2-bernstein-von-mises.tex
+    statement: "Extend the sharp constants to growing dimension d=d_n -> inf."
+    depends_on: [conj:a2]
+
+  # =========================================================================
+  # A3 — heavy-tailed posteriors (weighted / weak inequalities)
+  # =========================================================================
+
+  - id: conj:a3
+    kind: conjecture
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Tail-index-dependent weighted Poincare: Var_pi(f) <= C_w sum_j int a_j |d_j f|^2 dpi, a_j ~ tau^2+theta_j^2, with C_w from 1D Hardy and tail scaling C_w ~ max_j alpha_j^{-2}."
+    bounded_by: [obs:heavy-tail-no-classical, obs:flat-direction]
+    depends_on: [thm:hardy-1d, thm:a3-student]
+    related: [conj:a4]
+    unlocks: [q:a3-student, q:a3-horseshoe, q:a3-catalogue, q:a3-weak, q:a3-hierarchical]
+    numerics: "Evaluate the Hardy certificate numerically; check tail scaling C_w ~ alpha^{-2}; verify weighted PI holds where classical fails."
+    target_doc: research/targets/A3-heavy-tailed-posteriors.md
+
+  - id: thm:a3-student
+    kind: imported
+    status: imported
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Sharp weighted Poincare for generalized Cauchy / Student-t (Huguet 2024; Bonnefont-Joulin-Ma 2016): explicit optimal spectral gap lambda_{beta,d}. The A3 calibration theorem."
+    related: [conj:a3, q:a3-student]
+    numerics: "Calibration oracle: numerical weighted spectral gap must match the closed-form lambda_{beta,d}."
+
+  - id: prop:a3-horseshoe
+    kind: proposition
+    status: conjectured
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Hardy-certified weighted Poincare for the horseshoe marginal with weight tau^2+theta^2; B_HS <= C_HS <= 4 B_HS. Finiteness proved; sharp C_HS open (q:a3-horseshoe)."
+    depends_on: [thm:hardy-1d]
+    bounded_by: [obs:heavy-tail-no-classical]
+    numerics: "Numerically evaluate B_HS(tau) and a sample-based weighted spectral gap; locate C_HS within the factor-4 bracket."
+
+  - id: q:a3-student
+    kind: question
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Record the solved Student-t case as the clean citable calibration statement (radial vs tensorized product constant)."
+    depends_on: [thm:a3-student]
+
+  - id: q:a3-horseshoe
+    kind: question
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Close the factor-4 Hardy gap: sharp (or sharp-rate-in-tau) closed-form C_HS(tau) for the horseshoe marginal, handling the log pole at 0. The cleanest open 1D problem."
+    depends_on: [prop:a3-horseshoe]
+    numerics: "High-accuracy weighted spectral gap of the horseshoe marginal vs candidate closed forms."
+
+  - id: q:a3-catalogue
+    kind: question
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Build the scale-mixture catalogue: per robust-Bayes prior record tail index, weighted Hardy constant, Stein-kernel constant (alpha>1)."
+    depends_on: [conj:a3]
+    numerics: "finum table: for each prior compute tail index + Hardy constant (closed form or numeric)."
+
+  - id: q:a3-weak
+    kind: question
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Weak Poincare for unweighted dynamics: beta_WPI(s) ~ s^{-2/alpha} for posterior coordinate marginals; convert to subgeometric Langevin rate."
+    depends_on: [conj:a3]
+    bounded_by: [obs:heavy-tail-no-classical]
+
+  - id: q:a3-hierarchical
+    kind: question
+    status: open
+    file: modules/open-targets/A3-heavy-tailed-posteriors.tex
+    statement: "Propagate coordinate weighted constants through a likelihood and global-local hierarchical dependence (non-product, unbounded conditional scales tau^2 lambda_j^2). The publishable frontier."
+    depends_on: [conj:a3]
+    bounded_by: [obs:flat-direction]
+
+  # =========================================================================
+  # A4 — transport constants for variational inference
+  # =========================================================================
+
+  - id: conj:a4
+    kind: conjecture
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Certified VB error bars at posterior scale: C_{Q,r}(pi) <~ lambda_max(A_Wbar^{-1}) + tail on a KL sublevel; C_mean,Q <= sup_u K(u). Yields W2 and posterior-mean certificates given a KL upper bound."
+    bounded_by: [obs:restricted-not-finite, obs:flat-direction]
+    depends_on: [thm:glm-fi]
+    related: [conj:a1, conj:a2, conj:a3]
+    unlocks: [q:a4-restricted, q:a4-mean, q:a4-modified, q:a4-multimodal, q:a4-elbo]
+    numerics: "Estimate C_Q,r and C_mean,Q for GLM posteriors with mean-field Gaussian Q; check posterior (not prior) scale; lower bound via linear test."
+    target_doc: research/targets/A4-variational-inference.md
+
+  - id: q:a4-restricted
+    kind: question
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Compute/upper-bound the restricted C_Q and localized C_{Q,r} for GLM (and sparse/hierarchical) posteriors at bulk scale lambda_max(A_Wbar^{-1}). The W2 analogue of A1."
+    depends_on: [conj:a4]
+    numerics: "Sup over q in Q of W2^2(q,pi)/(2 KL) on a KL sublevel; compare to thm:glm-fi prior-scale baseline."
+
+  - id: q:a4-mean
+    kind: question
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Bound the first-moment constant C_mean,Q (and per-functional C_f,Q); exhibit cases finite while C_Q=inf; relate sup_u K(u) to lambda_max(Cov_pi)."
+    depends_on: [conj:a4]
+    related: [lem:linear-test-lower]
+    numerics: "Estimate ||E_q theta - E_pi theta||^2/(2 KL); find the worst direction u; compare to lambda_max(Cov)."
+
+  - id: q:a4-modified
+    kind: question
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Classify the strongest modified-transport cost alpha for which T_alpha(q,pi) <= C_alpha KL holds for each robust-Bayes prior (the W2 counterpart of A3)."
+    depends_on: [conj:a4]
+    bounded_by: [obs:restricted-not-finite, obs:heavy-tail-no-classical]
+    related: [conj:a3]
+
+  - id: q:a4-multimodal
+    kind: question
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Family-dependent multimodal lower bounds: global C_TCI ~ e^{c Delta^2} (reweighting witness) vs mean-field C_Q ~ Delta^2 (mode-collapse witness eq:a4-modecollapse); recovery of e^{c Delta^2} for rich families. Pair with the quotient escape."
+    depends_on: [conj:a4]
+    bounded_by: [obs:symmetry-vs-physical]
+    related: [conj:a5-metastable]
+    numerics: "Separated mixture: compute KL and W2 for the reweighting and mode-collapse witnesses; confirm the two barrier scalings."
+
+  - id: q:a4-elbo
+    kind: question
+    status: open
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "Couple C_{Q,r} with a computable upper bound on KL(q*||pi) (lower bound on log Z beyond the ELBO) to produce an end-to-end numerical VB error bar."
+    depends_on: [q:a4-restricted]
+
+  # =========================================================================
+  # A5 — quotient and reparameterization constants
+  # =========================================================================
+
+  - id: thm:a5-monotone
+    kind: theorem
+    status: proved
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Quotient constants are never worse: C_P(pi/G) <= C_P(pi), same for C_LS, C_TCI, under the quotient metric and Dirichlet form."
+    numerics: "Sanity: estimated quotient C_P <= raw C_P on G-invariant posteriors."
+
+  - id: prop:a5-ratio
+    kind: proposition
+    status: proved
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Quotient improvement ratio: C_P(pi)/C_P(pi/G) = lambda_inv / min(lambda_inv, lambda_noninv). Quotient helps iff the slowest mode is non-invariant."
+    depends_on: [thm:a5-monotone]
+    unlocks: [obs:symmetry-vs-physical]
+
+  - id: conj:a5-metastable
+    kind: conjecture
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Raw-vs-quotient metastability: C_P(pi_Theta) ~ e^{n Gamma} poly(n) while C_P(pi_{Theta/S_K}) = (1+o_P(1))/n lambda_max(I(theta_*)^{-1})."
+    bounded_by: [obs:symmetry-vs-physical]
+    depends_on: [prop:a5-ratio]
+    related: [conj:a2, q:a4-multimodal]
+    unlocks: [q:a5-qbvm, q:a5-metastable, q:a5-detect, q:a5-stratified, q:a5-reparam]
+    numerics: "Folded vs raw separated mixture: estimate both constants; raw ~ exp barrier, quotient ~ 1/n Fisher scale."
+    target_doc: research/targets/A5-quotient-and-reparameterization.md
+
+  - id: q:a5-qbvm
+    kind: question
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Prove the quotient line: C_P(pi_{Theta/S_K}) = (1+o_P(1))/n lambda_max(I(theta_*)^{-1}). A2 executed on the orbit space."
+    depends_on: [conj:a5-metastable]
+    related: [conj:a2]
+
+  - id: q:a5-metastable
+    kind: question
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Prove the raw line C_P(pi_Theta) ~ e^{n Gamma} poly(n) with Gamma the minimal posterior energy barrier between label copies (Eyring-Kramers)."
+    depends_on: [conj:a5-metastable]
+
+  - id: q:a5-detect
+    kind: question
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "From posterior samples, test whether the slow mode is invariant (physical) or non-invariant (symmetry), using C_P / hard-direction estimators."
+    depends_on: [prop:a5-ratio]
+    related: [lem:linear-test-lower]
+    numerics: "Estimate the slowest eigenfunction from samples; test its G-invariance."
+
+  - id: q:a5-stratified
+    kind: question
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Develop C_LS and C_TCI theory on stratified/orbifold Bayesian quotient spaces (delicate near collision strata)."
+    depends_on: [conj:a5-metastable]
+
+  - id: q:a5-reparam
+    kind: question
+    status: open
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "Finite-sample centered/non-centered funnel comparison: two-sided C_P^cen vs C_P^ncp constants exposing weak/strong-data regimes; separate tail failure (half-Cauchy p(tau)) from funnel geometry."
+    depends_on: [lem:a5-lipschitz]
+    bounded_by: [obs:flat-direction, obs:heavy-tail-no-classical]
+    numerics: "Neal funnel: estimate C_P in centered vs non-centered coords; half-Cauchy vs log-tau p(tau)."

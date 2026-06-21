@@ -1,0 +1,317 @@
+% modules/open-targets/A2-bernstein-von-mises.tex
+% -----------------------------------------------------------------------------
+% Deep-dive companion to the A2 entry of the Part I agenda (modules/08-open-targets):
+% asymptotic functional-inequality constants via the Bernstein--von Mises theorem.
+% Compiles inside main.tex; standalone it shows cross-module \ref as "??".
+% -----------------------------------------------------------------------------
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{A2 --- Asymptotic constants via Bernstein--von Mises}
+\label{sec:a2}
+
+This is the deep-dive companion to the A2 paragraph of the agenda (Section~\ref{sec:agenda}).
+The target is to convert the oldest structural fact of parametric Bayesian statistics --- the
+asymptotic normality of the posterior --- into sharp asymptotics for the three
+functional-inequality constants. The slogan version,
+\[
+  \pi_n\approx N\!\big(\hat\theta_n,(nI(\theta_0))^{-1}\big)
+  \quad\Longrightarrow\quad
+  \CP(\pi_n)\approx\CLS(\pi_n)\approx\CTCI(\pi_n)\approx\tfrac1n\,\lmax\!\big(I(\theta_0)^{-1}\big),
+\]
+is correct for the Gaussian Laplace approximation itself (Family~\ref{fam:gaussian-covariance})
+but is \emph{not} a corollary of the Bernstein--von Mises (BvM) theorem as usually stated. The
+purpose of this section is to make the target precise, to isolate exactly where the naive
+implication fails, to record that the Poincar\'e half is essentially within reach of existing
+low-temperature spectral-gap theory while the log-Sobolev half is genuinely more delicate, and
+to state the theorem one should actually aim to prove.
+
+\subsection{Setup, scaling, and the precise target}
+\label{subsec:a2-setup}
+
+Fix the dimension $d$ throughout (the growing-dimension regime is deferred to
+Question~\ref{q:a2-highdim}). Let $\theta_0$ be an interior point of the parameter space, the
+data-generating truth, and write the (negative log-)posterior as
+\[
+  \pi_n(\dd\theta)\ \propto\ e^{-V_n(\theta)}\,\dd\theta,
+  \qquad
+  V_n(\theta)\ =\ \sum_{i=1}^n \ell_i(\theta)\ -\ \log\rho(\theta),
+\]
+with $\ell_i$ the per-observation negative log-likelihood and $\rho$ a prior density positive
+and smooth near $\theta_0$. Let $\hat\theta_n=\arg\min_\theta V_n(\theta)$ (the MAP), let
+$H_n=\Hess V_n(\hat\theta_n)$ be the posterior precision at the mode, and let $I(\theta_0)$ be
+the Fisher information, so that under standard regularity $\tfrac1n H_n\to I(\theta_0)$ in
+$\Prob_{\theta_0}$-probability. The classical theorem of Bernstein and von Mises
+\cite{VanDerVaart1998,GhosalVanDerVaart2017} states that, after the local rescaling
+\begin{equation}\label{eq:a2-rescaling}
+  z\ =\ \sqrt n\,(\theta-\hat\theta_n),
+  \qquad
+  \tilde\pi_n\ =\ \mathrm{law\ of}\ z\ \mathrm{under}\ \pi_n,
+\end{equation}
+the rescaled posterior converges to a fixed Gaussian \emph{in total variation},
+\begin{equation}\label{eq:a2-bvm}
+  \big\|\tilde\pi_n-N\!\big(0,I(\theta_0)^{-1}\big)\big\|_{\mathrm{TV}}\ \xrightarrow{\ \Prob_{\theta_0}\ }\ 0 .
+\end{equation}
+
+The three constants scale cleanly under \eqref{eq:a2-rescaling}. If $g(z)=f(\hat\theta_n+z/\sqrt n)$
+then $\Var_{\pi_n}(f)=\Var_{\tilde\pi_n}(g)$ while $\nabla_z g=n^{-1/2}\nabla_\theta f$, so testing
+Definition~\ref{def:poincare} on both sides gives the exact identity
+\begin{equation}\label{eq:a2-scaling}
+  \CP(\pi_n)=\tfrac1n\,\CP(\tilde\pi_n),\qquad
+  \CLS(\pi_n)=\tfrac1n\,\CLS(\tilde\pi_n),\qquad
+  \CTCI(\pi_n)=\tfrac1n\,\CTCI(\tilde\pi_n).
+\end{equation}
+The $1/n$ is therefore not the content; the content is the limit of the \emph{rescaled}
+constants. The target is the following.
+
+\begin{conjecture}[Asymptotic functional-inequality constants]
+\label{conj:a2}
+Under regularity conditions strong enough to control the posterior tails uniformly (made
+explicit in Theorem~\ref{thm:a2-target} below), for a regular parametric model in fixed
+dimension $d$,
+\begin{equation}\label{eq:a2-target}
+  n\,\CP(\pi_n)\ \xrightarrow{\ \Prob_{\theta_0}\ }\ \lmax\!\big(I(\theta_0)^{-1}\big)
+  \ =\ \frac{1}{\lmin\!\big(I(\theta_0)\big)} ,
+\end{equation}
+and, under additional global hypotheses (Subsection~\ref{subsec:a2-lsi}), the same limit holds
+for $n\,\CLS(\pi_n)$ and $n\,\CTCI(\pi_n)$.
+\end{conjecture}
+
+Equivalently, by \eqref{eq:a2-scaling}, the claim is that the rescaled constants converge to
+those of the limiting Gaussian, $\CP(\tilde\pi_n)\to\CP(N(0,I^{-1}))=\lmax(I(\theta_0)^{-1})$,
+and likewise for $\CLS,\CTCI$ --- i.e.\ the BvM Gaussian computes the constants, not merely the
+distribution.
+
+\subsection{Why BvM in total variation is not enough}
+\label{subsec:a2-tv}
+
+The constants are far more sensitive than total-variation distance: they see tails, remote
+mass, gradients, and global geometry, none of which TV controls. Convergence
+\eqref{eq:a2-bvm} does not by itself control even posterior covariances, let alone
+functional-inequality constants \cite{KasprzakGiordanoBroderick2025}.
+
+\begin{warning}[A TV-BvM sequence with diverging constants]
+\label{warn:a2-tv-fails}
+Consider the contamination sequence on $\R$
+\[
+  \mu_n\ =\ (1-\eps_n)\,N(0,1)\ +\ \eps_n\,N(a_n,1),
+  \qquad \eps_n\to0,\quad \eps_n a_n^2\to\infty .
+\]
+Then $\|\mu_n-N(0,1)\|_{\mathrm{TV}}\le\eps_n\to0$, so $\mu_n$ satisfies a BvM-type limit in TV.
+Yet its variance is $\Var_{\mu_n}(x)=1+\eps_n a_n^2-\eps_n^2a_n^2\to\infty$, and the linear test
+$f(x)=x$ gives the lower bound $\CP(\mu_n)\ge\Var_{\mu_n}(x)\to\infty$
+(Remark~\ref{rem:rayleigh-lower-only}). The same remote sliver of mass inflates $\CLS$ and
+$\CTCI$. Hence \eqref{eq:a2-bvm} alone is consistent with all three constants diverging.
+\end{warning}
+
+The lesson is structural: to extract constants one needs a \emph{strong} Laplace/BvM statement
+that adds (i) a uniform local quadratic approximation of $V_n$ near $\hat\theta_n$ and (ii)
+tail / no-bottleneck control ruling out remote mass of the kind in
+Warning~\ref{warn:a2-tv-fails}. The clean device for (ii) is bounded perturbation: if the
+rescaled posterior is a globally $o_P(1)$-oscillation reweighting of its BvM Gaussian, then
+Holley--Stroock (Theorem~\ref{thm:holley-stroock}) transfers the Gaussian constants with a
+multiplicative error $e^{\osc}=1+o_P(1)$, for $\CP$ and $\CLS$ simultaneously. The whole
+difficulty of A2 is to discharge (i)--(ii) under hypotheses weak enough to cover real models
+yet strong enough to defeat Warning~\ref{warn:a2-tv-fails}.
+
+\subsection{The Poincar\'e half is within reach: low-temperature spectral gaps}
+\label{subsec:a2-poincare}
+
+Write the posterior as a low-temperature Gibbs measure. With $t=1/n$ and
+$f_n(\theta)=\tfrac1n V_n(\theta)\to\ell(\theta)$ (the population risk, minimized at $\theta_0$
+with $\Hess\ell(\theta_0)=I(\theta_0)$),
+\[
+  \pi_n(\dd\theta)\ \propto\ \exp\!\big(-f_n(\theta)/t\big)\,\dd\theta,
+  \qquad t=1/n\to0 .
+\]
+This is exactly the object of low-temperature functional-inequality theory. Chewi and Stromme
+\cite{ChewiStromme2024Ballistic} prove that for $\mu_t\propto e^{-f/t}$ with a unique
+nondegenerate minimizer $x_\star$,
+\begin{equation}\label{eq:a2-cs-poincare}
+  \lim_{t\to0}\frac{\CP(\mu_t)}{t}\ =\ \frac{1}{\lmin\!\big(\Hess f(x_\star)\big)} ,
+\end{equation}
+the inverse smallest Hessian eigenvalue at the minimizer --- a purely \emph{local} quantity.
+Substituting $f=\ell$, $x_\star=\theta_0$, $t=1/n$ reproduces the right-hand side of
+\eqref{eq:a2-target} term for term. Thus the Poincar\'e statement is not a fantasy: it is the
+statistical shadow of \eqref{eq:a2-cs-poincare}.
+
+\begin{remark}[What transfer to the random posterior still requires]
+\label{rem:a2-transfer}
+Equation~\eqref{eq:a2-cs-poincare} is a deterministic statement about a fixed potential $f$.
+The posterior potential $f_n=\tfrac1nV_n$ is \emph{random} (empirical-likelihood fluctuations),
+its minimizer $\hat\theta_n$ is random and only converges to $\theta_0$, and the prior
+contributes an $O(1/n)$ perturbation. Turning \eqref{eq:a2-cs-poincare} into
+\eqref{eq:a2-target} therefore needs the low-temperature theorem in a form uniform over a
+shrinking neighbourhood of potentials around $\ell$, plus a global tail bound excluding remote
+posterior mass (the Warning~\ref{warn:a2-tv-fails} pathology). Related low-temperature toolkits
+that could supply the global control are Lyapunov-potential criteria
+\cite{ChenSridharan2024Lyapunov}, local log-Polyak--{\L}ojasiewicz Poincar\'e bounds
+\cite{GongHeShen2025LogPL}, and the constrained-Gibbs posterior Poincar\'e inequalities of
+\cite{ConstrainedGibbs2026}, which already prove $O(1/n)$ local Poincar\'e constants on a
+high-probability good set for logistic regression, Poisson linear models, and Gaussian mixtures.
+\end{remark}
+
+\subsection{The log-Sobolev half is genuinely more delicate}
+\label{subsec:a2-lsi}
+
+This is where the naive paragraph is most misleading. For a Gaussian $\CLS=\CP$
+(Family~\ref{fam:gaussian-covariance}), so the local-Hessian answer is correct in the
+Gaussian-perturbative regime. But for a non-Gaussian low-temperature Gibbs measure the
+log-Sobolev constant depends on the \emph{global} landscape, not only on the curvature at the
+minimizer. The companion theorem of \cite{ChewiStromme2024Ballistic} identifies the ballistic
+limit of the log-Sobolev constant with the \emph{Polyak--{\L}ojasiewicz} (PL) constant of $f$:
+\begin{equation}\label{eq:a2-cs-lsi}
+  \lim_{t\to0}\frac{\CLS(\mu_t)}{t}\ =\ \frac{1}{\mu_{\mathrm{PL}}(f)},
+  \qquad
+  \tfrac12\norm{\nabla f(x)}^2\ \ge\ \mu_{\mathrm{PL}}(f)\,\big(f(x)-\min f\big)\ \ \forall x,
+\end{equation}
+where $\mu_{\mathrm{PL}}(f)$ is the largest valid PL constant. Since
+$\mu_{\mathrm{PL}}(f)\le\lmin(\Hess f(x_\star))$ in general, with equality only when the global
+landscape is as favourable as the local curvature, one has
+\[
+  \lim_{t\to0}\frac{\CLS(\mu_t)}{t}\ \ge\ \lim_{t\to0}\frac{\CP(\mu_t)}{t},
+\]
+consistent with $\CP\le\CLS$ (Theorem~\ref{thm:lsi-implies-poincare}), and the inequality is
+\emph{strict} whenever the landscape away from $\theta_0$ is shallow relative to $I(\theta_0)$.
+
+\begin{warning}[The LSI limit need not be Fisher-local]
+\label{warn:a2-lsi}
+Consequently the clean statement
+\(
+  n\,\CLS(\pi_n)\to\lmax(I(\theta_0)^{-1})
+\)
+is valid only in special regimes --- when the posterior is a global $o_P(1)$-oscillation
+perturbation of its BvM Gaussian (Holley--Stroock with vanishing oscillation), or when the
+negative log-likelihood is globally strongly convex / PL with constant matching $I(\theta_0)$.
+In general the correct asymptotic is
+\(
+  n\,\CLS(\pi_n)\to 1/\mu_{\mathrm{PL}}(\ell),
+\)
+and $1/\mu_{\mathrm{PL}}(\ell)$ need not equal $\lmax(I(\theta_0)^{-1})$. Multiple or shallow
+remote near-minimizers change the LSI behaviour even when the BvM Gaussian is unchanged
+\cite{BenNejma2026Lojasiewicz}.
+\end{warning}
+
+\subsection{Transport follows from a sharp LSI, not from BvM}
+\label{subsec:a2-transport}
+
+The Talagrand $T_2$ constant inherits both the good and the bad news. Whenever the
+log-Sobolev comparison is sharp, $n\,\CLS(\pi_n)\to\lmax(I^{-1})$, Otto--Villani
+(Theorem~\ref{thm:otto-villani}) gives the matching upper bound
+$n\,\CTCI(\pi_n)\le\lmax(I^{-1})(1+o_P(1))$, while the linear-test / covariance lower bound
+(Remark~\ref{rem:rayleigh-lower-only}) supplies the reverse inequality under enough moment
+control, so $n\,\CTCI(\pi_n)\to\lmax(I(\theta_0)^{-1})$. Outside the Gaussian-perturbative
+regime the $T_2$ asymptotic degrades exactly as the LSI one does (Warning~\ref{warn:a2-lsi}).
+In all cases this is a consequence of a \emph{strong} LSI comparison, never of TV-BvM alone.
+
+\subsection{The theorem to aim for}
+\label{subsec:a2-theorem}
+
+The honest statement is not ``BvM implies the constants'' but a strong-Laplace statement that
+adds the missing tail and perturbation control.
+
+\begin{theorem}[Target shape]
+\label{thm:a2-target}
+Let $d$ be fixed, $\theta_0$ interior, the prior density positive and smooth near $\theta_0$,
+and the model regular with $\tfrac1n H_n\to I(\theta_0)\succ0$ in $\Prob_{\theta_0}$-probability.
+Suppose that after the whitening $z=H_n^{1/2}(\theta-\hat\theta_n)$ the rescaled posterior
+$\tilde\pi_n$ admits the representation
+\[
+  \frac{\dd\tilde\pi_n}{\dd\gamma}(z)\ =\ \frac{e^{-r_n(z)}}{\int e^{-r_n}\dd\gamma},
+  \qquad \gamma=N(0,\Id_d),
+\]
+with a global oscillation bound $\osc(r_n)=o_P(1)$ (equivalently, any tail/no-bottleneck
+condition strong enough to defeat Warning~\ref{warn:a2-tv-fails} and supply
+\eqref{eq:a2-cs-poincare} uniformly). Then
+\[
+  \CP(\pi_n)\ =\ (1+o_P(1))\,\lmax(H_n^{-1})\ =\ \frac{1+o_P(1)}{n}\,\lmax\!\big(I(\theta_0)^{-1}\big),
+\]
+and, under the same hypothesis (which makes the perturbation Gaussian-comparable for LSI too),
+\[
+  \CLS(\pi_n),\ \CTCI(\pi_n)\ =\ \frac{1+o_P(1)}{n}\,\lmax\!\big(I(\theta_0)^{-1}\big).
+\]
+\end{theorem}
+
+\noindent The proof skeleton is: whitening reduces the BvM Gaussian to the standard $\gamma$,
+whose constants are $1$; Holley--Stroock (Theorem~\ref{thm:holley-stroock}) transfers them to
+$\tilde\pi_n$ with factor $e^{\osc(r_n)}=1+o_P(1)$ for $\CP$ and $\CLS$; Otto--Villani
+(Theorem~\ref{thm:otto-villani}) and the covariance lower bound
+(Remark~\ref{rem:rayleigh-lower-only}) pin $\CTCI$; the scaling identity \eqref{eq:a2-scaling}
+and $\tfrac1nH_n\to I(\theta_0)$ restore the $1/n$ and the Fisher information. The mathematical
+weight is entirely in verifying the oscillation/tail hypothesis for concrete model classes ---
+which is where the perturbative ``$\osc=o_P(1)$'' assumption is too strong for the Poincar\'e
+conclusion (there \eqref{eq:a2-cs-poincare} only needs \emph{local} uniformity plus a tail
+bound) and is genuinely needed for the log-Sobolev conclusion.
+
+\subsection{Sub-targets and what remains open}
+\label{subsec:a2-open}
+
+The single conjecture splits into four research questions of increasing difficulty, the first
+of which is essentially a transfer exercise and the last of which is wide open.
+
+\begin{question}[The weakest hypothesis for the Poincar\'e limit]
+\label{q:a2-poincare}
+Identify the weakest posterior assumptions under which $n\,\CP(\pi_n)\to\lmax(I(\theta_0)^{-1})$.
+The deterministic low-temperature analogue \eqref{eq:a2-cs-poincare} is settled
+\cite{ChewiStromme2024Ballistic}; what is missing is the random-posterior theorem with
+empirical-likelihood fluctuations, a prior, and the common statistical models, with a clean
+tail condition replacing the strong $\osc=o_P(1)$ assumption of Theorem~\ref{thm:a2-target}.
+This is the entry point and should be provable with current tools
+\cite{ConstrainedGibbs2026,GongHeShen2025LogPL,ChenSridharan2024Lyapunov}.
+\end{question}
+
+\begin{question}[When is the LSI limit Fisher-local?]
+\label{q:a2-lsi}
+Characterize the models for which $n\,\CLS(\pi_n)\to\lmax(I(\theta_0)^{-1})$ (Fisher-local)
+versus those for which the limit is the global-landscape quantity
+$1/\mu_{\mathrm{PL}}(\ell)$ (Warning~\ref{warn:a2-lsi}). Give checkable sufficient conditions
+--- e.g.\ global log-concavity of the population risk, or a quantitative
+single-well/PL hypothesis --- under which the two coincide, and exhibit a natural statistical
+model where they provably differ \cite{BenNejma2026Lojasiewicz}.
+\end{question}
+
+\begin{question}[Multimodal and weakly identified posteriors]
+\label{q:a2-multimodal}
+For mixtures, label switching, weak identification, and phase transitions the posterior is
+multimodal and $\CP(\pi_n)$ can be \emph{exponentially} large in $n$ despite local Gaussianity
+around each mode --- Eyring--Kramers / metastability behaviour rather than \eqref{eq:a2-target}.
+Determine when the blow-up is physical and when it is a symmetry artifact removable by passing
+to the quotient (the symmetry-quotient escape of Remark~\ref{rem:label-switching}, the
+$e^{c\Delta^2}$ barrier of Theorem~\ref{thm:separated-mixture-lower}). This connects A2 to A5
+(Section~\ref{sec:a5}, Conjecture~\ref{conj:a5-metastable}), where the same blow-up is shown to
+dissolve on the symmetry quotient.
+\end{question}
+
+\begin{question}[Growing dimension $d=d_n$]
+\label{q:a2-highdim}
+Extend the sharp constants to the regime $d=d_n\to\infty$. MCMC mixing analyses already track
+the joint $(d,n,\kappa)$ dependence using large-sample posterior Gaussianity
+\cite{TangYang2024MALA}, and polynomial-time Langevin guarantees for high-dimensional
+posteriors are known but deliberately avoid full asymptotic Gaussian approximation, relying
+instead on local curvature and global log-concave comparison \cite{NicklWang2024Langevin};
+exact Fisher-information asymptotics for $\CP,\CLS,\CTCI$ in growing dimension are far less
+settled. Log-concave BvM theory \cite{Brunel2026LogConcaveBvM} and the finite-sample Laplace
+bounds of \cite{KasprzakGiordanoBroderick2025} are the natural starting points.
+\end{question}
+
+\begin{remark}[Relation to the rest of the agenda and to numerics]
+\label{rem:a2-relations}
+A2 is the asymptotic counterpart of the finite-sample flagship A1
+(Section~\ref{sec:a1}, Question~\ref{q:glm-data-informed}, Conjecture~\ref{conj:a1}): A1 seeks a
+data-informed bound at fixed $n$ via Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}) and
+posterior concentration, while A2 seeks the exact $n\to\infty$ limit; a sharp A1 bound that is
+tight in the bulk should reproduce \eqref{eq:a2-target} on letting $n\to\infty$, and consistency
+between the two is a useful internal check. The three remaining siblings are the regimes in which
+the clean limit \eqref{eq:a2-target} is qualified: the BvM Gaussian comparison presupposes light
+posterior tails and breaks for the heavy-tailed posteriors of A3 (Section~\ref{sec:a3},
+Warning~\ref{warn:a3-likelihood}), where weighted rather than classical constants govern the
+limit; the asymptotic scale $\tfrac1n\lmax(I(\theta_0)^{-1})$ is exactly the posterior-scale
+target consumed by the variational-inference certificates of A4 (Section~\ref{sec:a4},
+Conjecture~\ref{conj:a4}); and the multimodal blow-up of Question~\ref{q:a2-multimodal} is
+resolved on the symmetry quotient of A5 (Section~\ref{sec:a5}, Conjecture~\ref{conj:a5-metastable}),
+where the BvM asymptotic re-emerges. Empirically, the lower bound $\CP(\pi_n)\ge\lmax(\Cov_{\pi_n})$
+(Remark~\ref{rem:rayleigh-lower-only}) and statistical estimators of the Poincar\'e constant
+from samples \cite{PillaudVivienEtAl2020} give a numerical handle on the conjectured limit,
+with the ratio of a curvature/perturbation upper bound to $\lmax(\Cov_{\pi_n})$ serving as the
+sharpness diagnostic.
+\end{remark}
+\end{document}

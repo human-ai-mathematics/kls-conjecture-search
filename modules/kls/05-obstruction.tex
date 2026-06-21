@@ -1,0 +1,201 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{The static obstruction: quadratic chaos and the two-tail configuration}
+\label{sec:qcts}
+
+The time-zero version of two-color covariance control is already a strong statement. It clarifies
+why the solved thin-shell theorem is not by itself enough for KLS through this route, and the
+quantified two-tail configuration at the end of the section is the static obstruction that both
+routes must respect: it fixes the covariance weight of Route~B and marks the boundary of what
+model verification can establish for Route~A.
+
+Let $X\sim\nu$ be isotropic and log-concave, and put
+\[
+  Z=XX^T-I.
+\]
+For a color
+\[
+  g=\frac{\one_E-p}{\sqrt{pq}},
+  \qquad p=\nu(E),\quad q=1-p,
+\]
+one computes
+\begin{equation}\label{eq:color-tensor}
+  \E[gZ]=\sqrt{pq}\left(\Sigma_E-\Sigma_F+(q-p)\delta\delta^T\right).
+\end{equation}
+At exact balance, $p=q=1/2$, this is $\frac12(\Sigma_E-\Sigma_F)$.
+
+\begin{definition}[Quadratic-chaos thin shell]
+\label{def:qcts}
+For isotropic log-concave $\nu$, define
+\[
+  \calQ(\nu)=\sup_{\norm M_{\HS}=1}\Var_\nu(X^TMX).
+\]
+The quadratic-chaos thin-shell assertion is
+\begin{equation}\label{eq:QCTS}
+  \calQ(\nu)\le C
+\end{equation}
+with a universal constant $C$.
+\end{definition}
+
+\begin{proposition}[Time-zero equivalence, modulo standard regularization]
+\label{prop:qcts-equivalence}
+Up to universal constants, \eqref{eq:QCTS} is equivalent to the balanced two-color estimate
+\begin{equation}\label{eq:balanced-two-color-static}
+  pq\norm{\Sigma_E-\Sigma_F}_{\HS}^2\le C
+\end{equation}
+for all balanced cuts $E$.
+\end{proposition}
+
+\begin{proof}
+Assume \eqref{eq:QCTS}. For $\norm M_{\HS}=1$,
+\[
+  \inner{\E[gZ]}{M}
+  =\E\left[g\left(X^TMX-\Tr M\right)\right]
+  \le \sqrt{\Var(X^TMX)}\le\sqrt C .
+\]
+Taking the supremum over $M$ and using \eqref{eq:color-tensor} gives the two-color bound at balance;
+the slightly unbalanced case is handled by the explicit $(q-p)\delta\delta^T$ term and
+$B\preceq A$.
+
+Conversely, fix $M$ with $\norm M_{\HS}=1$ and set $Y=X^TMX-\Tr M$. In the atomless case choose a
+median $m$ of $Y$ and let $E=\{Y\ge m\}$; in the general case use the standard randomized threshold
+on the level set $\{Y=m\}$ to obtain exact mass $1/2$. The balanced two-color estimate bounds
+$\abs{\E[gY]}$ universally. Since $g$ is the sign of $Y-m$ after randomization, this controls
+$\E\abs{Y-m}$ up to a universal factor. Reverse Holder inequalities for bounded-degree polynomials
+under log-concave measures, due to Carbery--Wright \cite{CarberyWright2001}, give
+$\norm{Y-\E Y}_{L^2}\lesssim\norm{Y-\E Y}_{L^1}$, and hence $\Var(Y)\lesssim C$.
+\end{proof}
+
+\subsection{What ordinary thin shell gives}
+
+The thin-shell theorem controls the radial quadratic form:
+\[
+  \Var(\abs X^2)\le Cn,
+\]
+which is \eqref{eq:QCTS} only for $M=I/\sqrt n$. Applying thin shell to every projection $P$ gives
+\[
+  \Var(X^TPX)\le C\operatorname{rank}(P).
+\]
+For a positive semidefinite matrix $M=\int_0^\infty P_s\dd s$, where
+$P_s=\one_{\{M\ge s\}}$, Minkowski yields
+\[
+  \norm{X^TMX-\Tr M}_{L^2}
+  \le C\int_0^\infty\sqrt{\operatorname{rank}(P_s)}\dd s.
+\]
+The right-hand side is the Lorentz $\ell_{2,1}$ norm of the eigenvalue sequence of $M$, bounded by
+$C\sqrt{\log n}\norm M_{\HS}$. Thus projection thin-shell estimates naturally give
+\begin{equation}\label{eq:qcts-log}
+  \Var(X^TMX)\lesssim \log n\,\norm M_{\HS}^2,
+\end{equation}
+which matches the logarithmic scale rather than KLS.
+
+\subsection{Projection tests cannot remove the logarithm}
+
+The logarithm is not merely an artifact of the integration. There is an abstract positive operator
+$T$ on symmetric matrices such that
+\[
+  \inner{P}{TP}\le C\operatorname{rank}(P)
+\]
+for every orthogonal projection $P$, while $\norm T_{\op}\simeq\log n$.
+
+Let
+\[
+  H_n=\sum_{i=1}^n\frac1i,
+  \qquad
+  N=\diag\left(\frac1{\sqrt{H_n}},\frac1{\sqrt{2H_n}},\ldots,\frac1{\sqrt{nH_n}}\right),
+\]
+so that $\norm N_{\HS}=1$, and define
+\[
+  T(M)=H_n\inner{M}{N}N.
+\]
+Ky Fan's principle gives, for every rank-$r$ projection $P$,
+\[
+  \inner{P}{N}\le\sum_{i=1}^r\frac1{\sqrt{iH_n}}\le2\sqrt{\frac r{H_n}}.
+\]
+Therefore $\inner{P}{TP}\le4r$, whereas $\norm T_{\op}=H_n\simeq\log n$. This is not a log-concave
+counterexample. It shows that projection tests alone cannot imply quadratic-chaos thin shell.
+
+\subsection{Static lesson}
+
+A proof of KLS through this route cannot rely only on radial information or on projection tests. It
+must either prove the full quadratic-chaos estimate in a way that also controls alignment with
+$A_t$, or exploit additional dynamic/geometric information attached to the cut $E$.
+
+\subsection{The quantified two-tail obstruction and the weight calibration}
+
+The following sharpens the qualitative two-tail warning above by tracking the excess of the
+configuration, not only its covariance contrast. It is the static obstruction consumed in
+covariance-weighted form by Route~B (Section~\ref{sec:stein}) and the configuration whose
+dynamical occupation Route~A must control (Section~\ref{sec:carleson}).
+
+\begin{proposition}[Quantified two-tail configuration]
+\label{prop:two-tail}
+Let $\Lambda\ge1$, $\nu_\Lambda=N(0,\diag(\Lambda,1,\dots,1))$ on $\R^n$, and
+\[
+  E_\Lambda=\bigl\{x:\abs{x_1}\ge a\sqrt\Lambda\bigr\},
+  \qquad a=\Phi^{-1}(3/4)\approx0.6745,
+\]
+so that $\nu_\Lambda(E_\Lambda)=\tfrac12$. Write $\varphi$ for the standard Gaussian density.
+Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+\item $\delta=0$, hence $r=D=0$ and $K=G$;
+\item $G=8a\varphi(a)\,\Lambda\,e_1e_1^T$, hence
+$\calS_{\nu_\Lambda}(E_\Lambda)/s=16a^2\varphi(a)^2\Lambda^2\approx0.735\,\Lambda^2$;
+\item $\nu_\Lambda^+(E_\Lambda)=2\varphi(a)\Lambda^{-1/2}$ and
+$e_0(E_\Lambda)\le2\varphi(a)\Lambda^{-1/2}\approx0.636\,\Lambda^{-1/2}\to0$;
+\item the relative excess is bounded below uniformly in $\Lambda$ and $n$:
+\[
+  \frac{e_0(E_\Lambda)}{I_{\nu_\Lambda}(1/2)}\ \ge\ \frac{2\varphi(a)}{\varphi(0)}-1
+  \ \approx\ 0.593 .
+\]
+\end{enumerate}
+Consequently, no inequality of the slice-wise form
+$\calS_\nu(E)/s\le C_0+C_1r+\beta D+C_2\,e(E)$, with constants independent of the measure, can
+hold for all log-concave $\nu$ and all sets of mass $\tfrac12$.
+\end{proposition}
+
+\begin{proof}
+(i) is symmetry. (ii): conditioning on $\{\abs Z\ge a\}$ for $Z=X_1/\sqrt\Lambda\sim N(0,1)$
+affects only the first coordinate, and the Gaussian integrations
+$\int_a^\infty z^2\varphi=a\varphi(a)+1-\Phi(a)$, $1-\Phi(a)=\tfrac14$, give
+$\E[Z^2\mid\abs Z\ge a]=1+4a\varphi(a)$ and $\E[Z^2\mid\abs Z<a]=1-4a\varphi(a)$, hence
+$G_{11}=8a\varphi(a)\Lambda$ with all other entries zero; then
+$\calS/s=s\norm G_\HS^2=\tfrac14\cdot64a^2\varphi(a)^2\Lambda^2$. (iii): the boundary consists
+of the two hyperplanes $\{x_1=\pm a\sqrt\Lambda\}$, each of boundary density
+$\varphi(a)\Lambda^{-1/2}$; and $e_0\le\nu^+$ since $I\ge0$. (iv):
+$I_{\nu_\Lambda}(\tfrac12)\le\varphi(0)\Lambda^{-1/2}$ by the halfspace $\{x_1\le0\}$, so
+$e_0/I(\tfrac12)=\nu^+/I(\tfrac12)-1\ge2\varphi(a)/\varphi(0)-1$. The final claim follows by
+letting $\Lambda\to\infty$: the left side grows like $\Lambda^2$, the right side is
+$C_0+C_2O(\Lambda^{-1/2})$.
+\end{proof}
+
+\begin{remark}[Weight calibration and the rate $T^{1+\gamma}$]
+\label{rem:weight-explains-rate}
+Three consequences.
+
+\emph{(a) No slice-wise proof.} At $t=0$ the initial measure is isotropic and the configuration
+of Proposition~\ref{prop:two-tail} cannot occur; but anisotropic posteriors
+$\mu_t$ with $\lmax(A_t)=\Lambda\gg1$ are exactly the states the dynamics may visit, and there
+the slice-wise inequality fails. Any proof of the Stein-trace estimate must therefore show that
+such configurations carry negligible expected occupation --- a covariance-occupation statement
+of the same nature as the Carleson problem itself. This is the precise sense in which the
+excess-propagation question and the operator-to-trace upgrade are two faces of one obstruction.
+
+\emph{(b) The weight $(1+\norm A_\op)^{5/2}$ is calibrated, not chosen.} Matching powers of
+$\Lambda$ ($\calS/s\asymp\Lambda^2$ against $e\asymp\Lambda^{-1/2}$) identifies
+$(1+\norm{A}_\op)^{5/2}$ as the minimal covariance weight rendering the excess term statically
+consistent: indeed $e_0\cdot\Lambda^{5/2}=2\varphi(a)\Lambda^2$ matches
+$\calS/s\approx0.735\Lambda^2$ up to the universal factor $8a^2\varphi(a)\approx1.16$. The
+uniform lower bound (iv) on the \emph{relative} excess is consistent evidence: two-tail sets
+are never relatively near-minimal in the Gaussian model, so a stability theory normalized at
+the Cheeger scale of the posterior is not contradicted by the example.
+
+\emph{(c) Why $T^{1+\gamma}$.} By the Brascamp--Lieb cap \eqref{eq:BL-cap} the weight is at most
+$(1+t^{-1})^{5/2}$ pathwise. A weighted excess bound of Carleson type can therefore hold near
+$t=0$ only if $\E e_t$ decays at a definite rate as $t\downarrow0$ in the dangerous regimes
+(heuristically $\E e_t\lesssim t^{3/2}$ where the cap saturates), or if large $\norm{A_t}_\op$
+at small times is correspondingly rare. The exponent $T^{1+\gamma}$ in
+\eqref{eq:intro-weighted-excess} is the shadow of this weight: it was postulated in the
+original formulation without the weight, and the present calibration explains its necessity.
+\end{remark}
+\end{document}

@@ -1,0 +1,511 @@
+# ledger.yaml — canonical logical state of the KLS conditional proof program (Part III)
+# =============================================================================
+# SINGLE SOURCE OF TRUTH for what is proved / conditional / open / refuted in the
+# KLS program, and for the dependency edges. The LaTeX in modules/kls/ is the
+# prose+proof; this file is the machine-readable graph.
+#
+# This is Part III's control plane, ported from the standalone KLS program's roadmap ledger and
+# RE-SYNCED to the unified modules/kls/ (the module numbering was reorganized when
+# Part III was merged into the unified document — node `file:` paths updated; the
+# \label ids are unchanged).
+#
+# DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../ledger.yaml, program: ab)
+# is in the REFINEMENT phase (sharpen statements; numerics validate/refute via finum).
+# KLS is already a PROOF program: the statements are crisp, the work is discharging
+# assumptions and proving conditional implications. Hence the richer status/obstruction
+# vocabulary below, and the machine-enforced no-go set (obstructions.yaml). Numerics
+# (finum.localization) only REFUTE or give direction here — they never make a node "proved".
+#
+# status:  proved | conditional | open | heuristic | refuted | imported
+# kind:    theorem|lemma|proposition|corollary|definition|assumption|hypothesis|
+#          question|program|remark|heuristic
+# edges:   depends_on (acyclic; may include external free-text or \label refs),
+#          assuming (the open node a conditional rests on), unlocks, bounded_by
+#          (obs:* in obstructions.yaml), discharged_by, entry_point, mechanism +
+#          clearance (no-go discipline), bridges (cross-program links: program/id).
+#
+# Checked by ../check_ledger.py (program-aware): acyclicity, no proved-on-open/refuted,
+# obstruction parity (yaml<->md<->bounded_by), mechanism vocabulary, no-go clearance,
+# and cross-program bridge resolution.
+# =============================================================================
+
+meta:
+  program: kls
+  conjecture: "KLS: inf_n hstar_n > 0  (dimension-free Cheeger lower bound for isotropic log-concave measures)"
+  best_known: "hstar_n >= c (log n)^{-1/2}  (Klartag 2023; after Chen 2021, Klartag-Lehec 2022)"
+  routes:
+    A: "All-cut absorptive two-color Carleson estimate => KLS directly. Headline: ass:all-cut-carleson."
+    B: "Near-Cheeger geometric route (weighted form): weighted excess propagation + weighted stable Stein trace => KLS. Headline: ass:weighted-package."
+  proof_strategy: "By contradiction against a near-worst measure (h_mu <= (1+eps) hstar_n). This is what legitimizes the bootstrap anchor."
+  bridge: "A1-bis (ab/conj:a1-bis) is the structured-posterior counterpart: C_P <= K lambda_max(Cov) for GLM posteriors. The SAME bound for EVERY isotropic log-concave measure, K universal, IS this conjecture — Part I's 'Tier-infinity' boundary."
+  numerics: "finum.localization (finum run --target kls-loc): stochastic-localization engine. DIRECTIONAL/refutation only."
+
+# ---------------------------------------------------------------------------
+# CORE STOCHASTIC LAYER  (unconditional reductions — the proved backbone)
+# ---------------------------------------------------------------------------
+nodes:
+
+  - id: ass:stopped-centroid
+    kind: assumption
+    status: open
+    file: modules/kls/02-mass-martingale-centroid.tex
+    statement: "Stopped centroid estimate: E ∫_0^{T∧τ} |δ_t|^2 dt ≤ CT for balanced cuts."
+    unlocks: [thm:centroid-implies-kls]
+
+  - id: thm:centroid-implies-kls
+    kind: theorem
+    status: conditional
+    file: modules/kls/02-mass-martingale-centroid.tex
+    statement: "Stopped centroid estimate implies a dimension-free Cheeger lower bound (KLS)."
+    depends_on: [eq:qv-p, ass:stopped-centroid, "Bakry-Emery/Lichnerowicz", "perimeter supermartingale"]
+    assuming: [ass:stopped-centroid]
+
+  - id: lem:matrix-riccati
+    kind: lemma
+    status: proved
+    file: modules/kls/03-riccati-identities.tex
+    statement: "Matrix two-color Riccati identity: dB_t = dN_t + (s G^2 - AB - BA + rB) dt; hence dR = dÑ - (R^2 + s G^2) dt."
+    depends_on: ["covariance SDE eq:cov-sde", "identity C^E - pA = sK"]
+
+  - id: thm:scalar-riccati
+    kind: theorem
+    status: proved
+    file: modules/kls/03-riccati-identities.tex
+    statement: "Scalar Riccati: dr_t = dM_t + (S_t - D_t) dt with S=s||G||^2 the only positive source, D≥r^2 coercive."
+    depends_on: [lem:matrix-riccati]
+
+  - id: cor:per-direction
+    kind: corollary
+    status: proved
+    file: modules/kls/03-riccati-identities.tex
+    statement: "Unconditional per-direction Carleson: E ∫_0^∞ s|Gθ|^2 ≤ θ^T R_0 θ ≤ 1; i.e. E ∫ s G^2 ⪯ R_0 ⪯ I."
+    depends_on: [lem:matrix-riccati]
+    unlocks: [thm:budget]
+    note: "Dimension-free at the quadratic-form level only; the trace upgrade is the missing step (q:upgrade)."
+
+  - id: ass:all-cut-carleson
+    kind: assumption
+    status: open
+    file: modules/kls/00-introduction.tex
+    statement: "All-cut absorptive two-color Carleson: E ∫_I S_t ≤ C_0|I| + C_1 E ∫_I r_t + α E ∫_I D_t, α<1, every balanced cut."
+    unlocks: [thm:intro-all-cut, thm:carleson-implies-centroid]
+    bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
+
+  - id: thm:carleson-implies-centroid
+    kind: theorem
+    status: conditional
+    file: modules/kls/08-carleson-consumption.tex
+    statement: "All-cut Carleson implies the stopped centroid estimate (via Gronwall on E r_{t∧τ}), hence KLS."
+    depends_on: [ass:all-cut-carleson, thm:scalar-riccati, thm:centroid-implies-kls]
+    assuming: [ass:all-cut-carleson]
+
+  - id: thm:intro-all-cut
+    kind: theorem
+    status: conditional
+    file: modules/kls/00-introduction.tex
+    statement: "Assumption all-cut-carleson implies KLS (headline of Route A)."
+    depends_on: [thm:carleson-implies-centroid]
+    assuming: [ass:all-cut-carleson]
+    bridges: [ab/conj:a1-bis]
+    note: "Bridge: the universal C_P <= K lambda_max(Cov) (every isotropic log-concave measure) IS KLS; ab/conj:a1-bis is its structured GLM counterpart."
+
+  - id: lem:pathwise-BL
+    kind: lemma
+    status: proved
+    file: modules/kls/08-carleson-consumption.tex
+    statement: "Pathwise Brascamp–Lieb source bound: s||K||^2 ≤ 4 λmax(A)/t ≤ 4/t^2."
+    depends_on: [eq:BL-cap]
+
+  - id: cor:away-from-zero
+    kind: corollary
+    status: proved
+    file: modules/kls/08-carleson-consumption.tex
+    statement: "Source is pathwise controlled away from t=0: S_t ≤ 8/t^2 + D_t/2 on the tight window."
+    depends_on: [lem:pathwise-BL]
+    note: "Shows the Carleson difficulty is purely small-time and probabilistic."
+
+  # ---------------------------------------------------------------------------
+  # STATIC OBSTRUCTION LAYER (quadratic chaos / thin shell)
+  # ---------------------------------------------------------------------------
+  - id: def:qcts
+    kind: definition
+    status: proved
+    file: modules/kls/05-obstruction.tex
+    statement: "Quadratic-chaos thin shell Q(ν)=sup_{||M||=1} Var(X^T M X)."
+
+  - id: prop:qcts-equivalence
+    kind: proposition
+    status: proved
+    file: modules/kls/05-obstruction.tex
+    statement: "Time-zero: QCTS ⇔ balanced two-color bound pq||Σ_E-Σ_F||^2 ≤ C (Carbery–Wright)."
+    depends_on: [def:qcts]
+    bounded_by: [obs:proj-ceiling]
+
+  # ---------------------------------------------------------------------------
+  # STEIN-TRACE LAYER (Route B currency)
+  # ---------------------------------------------------------------------------
+  - id: prop:stein-rep
+    kind: proposition
+    status: proved
+    file: modules/kls/04-stein-dictionary.tex
+    statement: "Two-color Stein representation: ∫_E f_M dν = s⟨K,M⟩; Stein norm S_ν(E)=s^2||K||^2 = same object as Riccati source."
+    unlocks: [thm:covariance-bound]
+
+  - id: lem:stein-vs-source
+    kind: lemma
+    status: proved
+    file: modules/kls/04-stein-dictionary.tex
+    statement: "On the tight window, S_t and S_{μt}(E)/s_t are equivalent up to 64η^2 D_t (lossless conversion)."
+    depends_on: [prop:stein-rep, thm:scalar-riccati]
+
+  - id: lem:boundary-rep
+    kind: lemma
+    status: proved
+    file: modules/kls/10-stein-route.tex
+    statement: "Boundary representation: Cov(1_E,f) = -∫_Σ ∂_n u_f dσ; trace Cauchy–Schwarz bound on |ℓ(M)|^2."
+
+  - id: ass:weighted-package
+    kind: assumption
+    status: open
+    file: modules/kls/00-introduction.tex
+    statement: "Weighted near-Cheeger package: (i-w) weighted excess propagation + (ii-w) weighted stable Stein-trace estimate."
+    unlocks: [thm:intro-weighted]
+    bounded_by: [obs:two-tail]
+
+  - id: thm:intro-weighted
+    kind: theorem
+    status: conditional
+    file: modules/kls/00-introduction.tex
+    statement: "Weighted geometric package implies KLS (headline of Route B)."
+    depends_on: [ass:weighted-package, lem:stein-vs-source, thm:carleson-implies-centroid]
+    assuming: [ass:weighted-package]
+    bridges: [ab/conj:a1-bis]
+
+  - id: prop:intro-audit
+    kind: proposition
+    status: proved
+    file: modules/kls/00-introduction.tex
+    statement: "Consumption audit: unweighted excess term is inert; unweighted Stein-trace estimate alone would imply KLS but admits no slice-wise proof."
+    depends_on: [prop:trivial-excess, prop:two-tail]
+
+  # ---------------------------------------------------------------------------
+  # EXCESS PROPAGATION (audit, obstruction, circularity)
+  # ---------------------------------------------------------------------------
+  - id: prop:trivial-excess
+    kind: proposition
+    status: proved
+    file: modules/kls/11-excess-propagation.tex
+    statement: "Unconditional integrated excess bound: E ∫_0^{T∧τ} e_t ≤ (1+e_0) T."
+    depends_on: ["perimeter supermartingale", "I_μ(1/2) ≤ 1"]
+
+  - id: prop:two-tail
+    kind: proposition
+    status: proved
+    file: modules/kls/05-obstruction.tex
+    statement: "Quantified anisotropic two-tail config: S/s ≍ Λ^2 while e ≍ Λ^{-1/2}, r=D=0. Kills any slice-wise absolute-scale Stein estimate; calibrates weight (1+||A||)^{5/2}."
+    unlocks: [obs:two-tail]
+
+  - id: lem:perimeter-martingale
+    kind: lemma
+    status: proved
+    file: modules/kls/11-excess-propagation.tex
+    statement: "Perimeter of a fixed cut is a martingale under localization (driftless); supermartingale without compact support."
+    unlocks: [lem:excess-identity, lem:inf-martingales, thm:bootstrap]
+
+  - id: lem:excess-identity
+    kind: lemma
+    status: proved
+    file: modules/kls/11-excess-propagation.tex
+    statement: "Exact excess identity: E e_t = e_0 + [I_μ(p_0) - E I_{μt}(p_t)]. Excess propagation = drop of the localized profile."
+    depends_on: [lem:perimeter-martingale]
+
+  - id: lem:inf-martingales
+    kind: lemma
+    status: proved
+    file: modules/kls/11-excess-propagation.tex
+    statement: "The localized profile is an infimum of perimeter martingales, hence a supermartingale; lower-bounding it is a localized KLS statement."
+    depends_on: [lem:perimeter-martingale]
+    unlocks: [obs:circularity]
+
+  # ---------------------------------------------------------------------------
+  # BOOTSTRAP COMPARISON + INTERFACE FUNCTIONAL
+  # ---------------------------------------------------------------------------
+  - id: lem:half
+    kind: lemma
+    status: proved
+    file: modules/kls/12-bootstrap.tex
+    statement: "Balance pins the Cheeger ratio: h_ν = 2 I_ν(1/2); at p=1/2 Cheeger excess = profile excess."
+
+  - id: lem:whitening
+    kind: lemma
+    status: proved
+    file: modules/kls/12-bootstrap.tex
+    statement: "Whitening comparison: h_ν ≥ hstar_n / λmax(A_ν)^{1/2}; hstar_n nonincreasing in n."
+
+  - id: thm:bootstrap
+    kind: theorem
+    status: proved
+    file: modules/kls/12-bootstrap.tex
+    statement: "Bootstrap comparison: for near-worst μ and ANY balanced cut, E[ē_t 1_{t<τη}] ≤ e_0 + h_μ(ε/2+η+P(τ≤t)/2+E X_t/4); compresses propagation into h_μ Ξ_T."
+    depends_on: [lem:half, lem:whitening, lem:perimeter-martingale, eq:qv-p]
+    unlocks: [cor:loglog, cor:dichotomy, q:taming]
+    mechanism: [direct-excess]
+    bounded_by: [obs:circularity]
+    clearance: "Excess propagation is anchored at the EXTERNAL worst-case floor hstar_n (proof by contradiction against a near-worst μ), not lower-bounded from the localized profile itself — this is the only non-circular anchor obs:circularity permits, and it is valid for near-worst measures only."
+    note: "Anchors the profile floor at hstar_n (external), breaking the circularity of obs:circularity for near-worst measures only."
+
+  - id: lem:crude
+    kind: lemma
+    status: proved
+    file: modules/kls/12-bootstrap.tex
+    statement: "Crude evaluation: Ξ_T(μ) ≤ 1 + log(nT)."
+    depends_on: [eq:BL-cap, "Tr A_t supermartingale"]
+    mechanism: [crude-bootstrap]
+    bounded_by: [obs:crude-insufficient]
+    clearance: "States the crude bound precisely in order to DEMONSTRATE its insufficiency (rem:insufficiency): it is never used as a KLS route, only as the lower fence the interface evaluation must beat (cor:loglog gives loglog n)."
+
+  - id: hyp:KI
+    kind: hypothesis
+    status: imported
+    file: modules/kls/06-covariance-technology.tex
+    statement: "Known small-time operator-norm control: E||A_t||_op ≤ C_1 for t ≤ (log n)^{-C_2}. (Chen / Klartag–Lehec.)"
+    discharged_by: [cor:KI-discharged]
+    note: "Discharged in module 06 via thm:KL-window; tail form VERIFIED (2026-06-14 sweep) = KLnotes Thm 61, moments = KlartagLehec2022Polylog Cor 5.4. Verification flag removed."
+
+  - id: cor:loglog
+    kind: corollary
+    status: conditional
+    file: modules/kls/12-bootstrap.tex
+    statement: "Polylog evaluation: under hyp:KI, Ξ_T ≤ C(1+loglog n); gives absolute-scale excess supply T e_0 + C h_μ(T^{4/3}+1+loglog n)."
+    depends_on: [thm:bootstrap, hyp:KI]
+    assuming: [hyp:KI]
+
+  - id: prop:ceiling
+    kind: proposition
+    status: proved
+    file: modules/kls/12-bootstrap.tex
+    statement: "Relative-scale ceiling: Ξ_T ≤ κT for ALL μ would imply KLS directly; so relative-scale propagation is not a legitimate intermediate target."
+    depends_on: [eq:qv-p, thm:centroid-implies-kls]
+    unlocks: [obs:relative-ceiling]
+
+  # ---------------------------------------------------------------------------
+  # GEOMETRY: second variation, Reilly, splitting (model statements; quant. open)
+  # ---------------------------------------------------------------------------
+  - id: prop:second-variation
+    kind: proposition
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Second variation / stability of near-minimizers; constant mode is always destabilizing (carried by the volume constraint)."
+
+  - id: lem:profile-bound
+    kind: lemma
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Profile bound: 𝔎_{Σp} ≤ -I''(p) I(p)^2."
+
+  - id: cor:generic-degeneracy
+    kind: corollary
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Constant-mode degeneracy: if h_ν ≤ 1 then ∫_{1/3}^{2/3} 𝔎_{Σp} dp ≤ C h_ν^3. Splitting branch is generic in a small-Cheeger counterexample."
+    depends_on: [lem:profile-bound]
+    note: "Assumes existence/regularity of volume-constrained minimizers at a.e. balanced volume."
+
+  - id: prop:reilly
+    kind: proposition
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Generalized weighted Reilly identity; converts boundary trace data into interior Dirichlet energy up to curvature boundary terms."
+
+  - id: prop:exact-splitting
+    kind: proposition
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Exact splitting along a flat, potential-flat direction: 𝔎_Σ = 0 ⇔ product with a log-affine factor (model/equality case)."
+
+  - id: prop:persistent-splitting
+    kind: proposition
+    status: proved
+    file: modules/kls/13-jacobi-splitting.tex
+    statement: "Splitting persists under localization: split direction preserved pathwise; A_t block-diagonal; halfspace cuts have rank-one K_t."
+
+  # ---------------------------------------------------------------------------
+  # MODEL GEOMETRIES
+  # ---------------------------------------------------------------------------
+  - id: prop:gaussian-model
+    kind: proposition
+    status: proved
+    file: modules/kls/07-model-geometries.tex
+    statement: "Gaussian model: A_t=(1+t)^{-1}I deterministic; centroid mechanism closes unconditionally; halfspace excess ≡ 0; damping strictly active."
+
+  - id: prop:products
+    kind: proposition
+    status: proved
+    file: modules/kls/07-model-geometries.tex
+    statement: "Products: μ_t product pathwise; A_t diagonal; h_{μt} ≳ λmax(A_t)^{-1/2}; KLS holds for products (no bootstrap needed)."
+
+  - id: prog:product-test
+    kind: program
+    status: open
+    file: modules/kls/07-model-geometries.tex
+    statement: "Product stress test of the all-cut estimate (executed in module 09)."
+    unlocks: [q:alignment]
+
+  # ---------------------------------------------------------------------------
+  # PRODUCT STRESS TEST (module 09)
+  # ---------------------------------------------------------------------------
+  - id: lem:block
+    kind: lemma
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Block support: for product ν and J-measurable E, δ_i=0 off J and G,K supported on J×J."
+
+  - id: thm:budget
+    kind: theorem
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Coordinate-budget theorem: k-coordinate cut of a product has E ∫_0^∞ S_t ≤ k and μ^+(E) ≥ c min(p,q)/√(1+k)."
+    depends_on: [cor:per-direction, thm:scalar-riccati, prop:products]
+
+  - id: cor:refutation
+    kind: corollary
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Single-coordinate (rank-one dynamic two-tail) counterexample candidate is REFUTED: total budget ≤1, source spikes self-extinguish (~Λ^{-2})."
+    depends_on: [thm:budget]
+    unlocks: [obs:rank-one-refuted]
+    evidence_run: research/runs/2026-06-20-kls.jsonl  # finum kls: realized K=C_P/lambda_max(Cov) stays 1 under single-coordinate inflation (Poincare-level rank-one non-refutation); K=O(1) across isotropic geometries (A1-bis bridge)
+
+  - id: lem:product-qcts
+    kind: lemma
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Quadratic chaos for non-isotropic products: Var(Y^T M Y) ≤ C* ||A^{1/2} M A^{1/2}||^2 (pathwise at every time)."
+
+  - id: thm:covariance-bound
+    kind: theorem
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Pathwise covariance bound on the source for products: S_t ≤ C(1+X_t^2) on the balanced window."
+    depends_on: [prop:stein-rep, lem:product-qcts]
+
+  - id: cor:V2-implies
+    kind: corollary
+    status: proved
+    file: modules/kls/09-product-stress.tex
+    statement: "Covariance reduction: (V2) ∫_I E X_t^2 ≤ K|I| implies the all-cut estimate for products (cut-free, C_1=0, α=0)."
+    depends_on: [thm:covariance-bound]
+
+  - id: thm:KL-window
+    kind: theorem
+    status: imported
+    file: modules/kls/06-covariance-technology.tex
+    statement: "Klartag–Lehec covariance window: P(∃ s≤t: ||A_s||≥2) ≤ exp(-1/(Ct)) for t ≤ 1/(C log^2 n)."
+    unlocks: [rem:kl-window-verified]
+    note: "VERIFIED (2026-06-14 sweep, against arXiv PDFs): the sup-over-time / clean (log^2 n)^{-1}-window form stated here is KLnotes Thm 61, NOT polylog Lemma 5.2 (which is the weaker fixed-time, κ_n-window version). The second moment thm:V2-window needs is published as KlartagLehec2022Polylog Cor 5.4, so no 2nd-moment import debt remains. Caveat: exact statement numbering is version-dependent."
+
+  - id: rem:kl-window-verified
+    kind: remark
+    status: proved
+    file: modules/kls/06-covariance-technology.tex
+    statement: "Verified attribution of thm:KL-window (sup-over-time form = KLnotes Thm 61) and the second moment (KlartagLehec2022Polylog Cor 5.4); discharges the hyp:KI verification flag."
+    depends_on: [thm:KL-window]
+
+  - id: thm:V2-window
+    kind: theorem
+    status: conditional
+    file: modules/kls/09-product-stress.tex
+    statement: "(V2) holds on [0, c(log n)^{-2}] with E X_t^2 ≤ K_0; hence all-cut estimate for products on the polylog window, unconditionally."
+    depends_on: [thm:KL-window, cor:V2-implies, eq:BL-cap]
+    assuming: [thm:KL-window]
+
+  - id: cor:KI-discharged
+    kind: corollary
+    status: conditional
+    file: modules/kls/06-covariance-technology.tex
+    statement: "Discharge of hyp:KI with C_2=2 via the tail-plus-cap argument; precise citation KLnotes Thm 61 (tail) + KlartagLehec2022Polylog Cor 5.4 (moments)."
+    depends_on: [thm:KL-window]
+    assuming: [thm:KL-window]
+
+  - id: heur:V2-fails
+    kind: heuristic
+    status: heuristic
+    file: modules/kls/09-product-stress.tex
+    statement: "Expected failure of (V2) on universal windows for exponential products: ∫ E X_t^2 ≳ log n. Covariance-only route expected to fail; any proof must be cut-aware."
+
+  # ---------------------------------------------------------------------------
+  # OPEN TARGETS (frontier — see open-problems.md for full briefs P1-P7)
+  # ---------------------------------------------------------------------------
+  - id: q:upgrade
+    kind: question
+    status: open
+    file: modules/kls/14-open-targets.tex
+    statement: "Operator-to-trace upgrade: prove ass:all-cut-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over balanced cuts."
+    unlocks: [ass:all-cut-carleson]
+    bounded_by: [obs:proj-ceiling, obs:two-tail]
+    entry_point: prog:product-test
+    note: "Same problem as q:stein-weighted (high-rank part) and q:alignment in three coordinate systems — see rem:trace-upgrade-unification. The gap is Tr(M), M=E∫ s G^2 ⪯ R_0 ⪯ I; the target is an OCCUPATION-DENSITY bound (O(1) directions active at once), NOT a static effective-rank bound (Tr can be n)."
+
+  - id: q:weighted
+    kind: question
+    status: open
+    file: modules/kls/14-open-targets.tex
+    statement: "Weighted excess propagation with rate: E ∫ e_t (1+||A_t||)^{5/2} ≤ C(T e_0 + T^{1+γ}) for near-Cheeger cuts."
+    unlocks: [ass:weighted-package]
+    bounded_by: [obs:two-tail]
+    note: "Bootstrap (thm:bootstrap) resolves the UNWEIGHTED analogue; weighted needs 2nd-moment perimeter-martingale control vs the covariance weight."
+
+  - id: q:stein-weighted
+    kind: question
+    status: open
+    file: modules/kls/14-open-targets.tex
+    statement: "Weighted stable Stein trace (ii-w): via Reilly + stability of mean-zero modes + constant mode (Schur energy / splitting)."
+    unlocks: [ass:weighted-package]
+    bounded_by: [obs:two-tail]
+    note: "Its high-rank mean-zero part is q:upgrade; its constant mode is q:splitting — see rem:trace-upgrade-unification."
+
+  - id: q:taming
+    kind: question
+    status: open
+    file: modules/kls/14-open-targets.tex
+    statement: "Extremality tames the covariance process: for near-worst μ, does h_μ Ξ_{T0} ≤ κ T0? (Affirmative ⇒ relative-scale propagation for near-worst measures.)"
+    depends_on: [thm:bootstrap]
+    bounded_by: [obs:relative-ceiling]
+    note: "The naive splitting↔covariance-SDE coupling faces a type mismatch (Ξ_T cut-free vs splitting cut-indexed; the split direction IS the inflating one) — see rem:taming-type-mismatch. Residual non-circular content: a near-worst-specific KL-window improvement in the regime hstar_n >> 1/loglog n."
+
+  - id: q:splitting
+    kind: question
+    status: open
+    file: modules/kls/14-open-targets.tex
+    statement: "Quantitative splitting / boundary Obata: small constant-mode curvature ⇒ quantitative proximity to a split structure, uniform under localization."
+    unlocks: [q:stein-weighted]
+
+  - id: q:alignment
+    kind: question
+    status: open
+    file: modules/kls/09-product-stress.tex
+    statement: "Adapted alignment problem for products: can a fixed high-complexity cut spend Ω(1)-fractions of many per-coordinate budgets inside a common short window while balanced and underdamped?"
+    note: "The decisive residue of the product stress test; designated family = permutation-symmetric thin-shell sets (rem:test-family). Same trace-upgrade problem as q:upgrade (rem:trace-upgrade-unification). 2026-06-14: the energy-shell cut {Σ x_i^2 ≥ θ} was computed and adversarially reviewed (see the 2026-06-14 energy-shell-occupation exploration). Result: the energy shell is W-measurable, hence covariance-controlled, so its occupation integral is just thm:V2-window on the polylog window — UNINFORMATIVE for q:alignment, whose danger lives past t_1(n). The pointwise source is Θ(1) at k=1; independent MC found the source GROWS with the number of inflating coordinates, weakly tilting the test family toward the danger side. Live target: past the polylog window t>t_1(n) and/or non-radial coordinate-selective cuts, with TRUE tilted-exponential covariances (not the Gaussian regression surrogate) and the α<1 damping margin actually computed (degenerate for even cuts, δ=0)."
+    bounded_by: [obs:rank-one-refuted]
+
+  - id: cor:dichotomy
+    kind: corollary
+    status: conditional
+    file: modules/kls/14-open-targets.tex
+    statement: "Residual dichotomy: completing Route B at absolute scale with small constant would already give hstar_n ≥ c/loglog n, with full KLS from q:taming in the remaining regime."
+    depends_on: [thm:bootstrap, cor:loglog]
+    assuming: [hyp:KI, ass:weighted-package]
+
+  - id: rem:trace-upgrade-unification
+    kind: remark
+    status: proved
+    file: modules/kls/14-open-targets.tex
+    statement: "q:upgrade, the high-rank mean-zero part of q:stein-weighted, and q:alignment are the same operator-to-trace problem in three coordinate systems (Tr of the occupation operator M ⪯ R_0 ⪯ I). The correct target is an occupation-density bound (O(1) directions active at once), not a static effective-rank bound."
+    depends_on: [cor:per-direction, thm:budget, thm:V2-window]
+
+  - id: rem:taming-type-mismatch
+    kind: remark
+    status: proved
+    file: modules/kls/14-open-targets.tex
+    statement: "The naive splitting↔covariance-SDE coupling for q:taming faces a type mismatch: Ξ_T is cut-free, splitting is cut-indexed, and the split direction is the inflating one. Splitting controls the cut-aware Stein source (q:stein-weighted/q:splitting), not the cut-free Ξ_T."
+    depends_on: [prop:exact-splitting, prop:ceiling]

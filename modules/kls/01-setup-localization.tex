@@ -1,0 +1,189 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Notation and stochastic localization setup}
+\label{sec:notation}
+
+\subsection{Global conventions}
+
+All measures are Borel probability measures on $\R^n$ unless otherwise stated. A log-concave
+measure has density $e^{-V}$ on its convex support, with $V$ convex. For a measure $\nu$, write
+\[
+  a_\nu=\E_\nu X,
+  \qquad A_\nu=\Cov_\nu(X).
+\]
+The Hilbert--Schmidt inner product on symmetric matrices is
+\[
+  \inner{M}{N}=\Tr(MN),\qquad \norm{M}_{\HS}^2=\Tr(M^2).
+\]
+For positive semidefinite matrices, $B\preceq A$ denotes the Loewner order.
+
+For log-concave $\nu$, the isoperimetric profile $I_\nu$ is concave in the usual generalized sense;
+this is part of the Bobkov theory of log-concave isoperimetry \cite{Bobkov1999LogConcave}, and is also
+closely related to the convexity principles emphasized in \cite{Milman2009Isoperimetric}. This
+concavity allows the Cheeger problem to be tested on balanced volumes up to universal constants;
+Lemma~\ref{lem:half} below sharpens this to the exact identity $h_\nu=2I_\nu(1/2)$.
+
+\subsection{Stochastic localization}
+
+Starting from an isotropic log-concave measure $\mu$, Eldan stochastic localization produces random
+measures
+\begin{equation}\label{eq:loc-density}
+  \dd\mu_t(x)=Z_t^{-1}\exp\left(\inner{c_t}{x}-\frac t2\abs{x}^2\right)\dd\mu(x),
+\end{equation}
+where $(c_t)$ is adapted to a Brownian motion $(W_t)$ in $\R^n$. The posterior $\mu_t$ is
+$t$-uniformly log-concave because of the Gaussian factor. Put
+\[
+  a_t=\int x\dd\mu_t(x),\qquad A_t=\Cov(\mu_t).
+\]
+The basic martingale identity is
+\begin{equation}\label{eq:loc-martingale}
+  \dd\int\varphi\dd\mu_t
+  =\Cov_{\mu_t}(\varphi,X)\cdot\dd W_t
+\end{equation}
+for every bounded measurable $\varphi$. In particular,
+\begin{equation}\label{eq:mean-sde}
+  \dd a_t=A_t\dd W_t .
+\end{equation}
+The covariance process satisfies
+\begin{equation}\label{eq:cov-sde}
+  \dd A_t=\Theta_t\dd W_t-A_t^2\dd t,
+\end{equation}
+where
+\[
+  \Theta_t\dd W_t
+  =\int (x-a_t)(x-a_t)^T((x-a_t)\cdot\dd W_t)\dd\mu_t(x).
+\]
+This is the standard covariance SDE in stochastic localization \cite{Eldan2013ThinShell,LeeVempala2024}.
+The pointwise density process $F_t(x)=\dd\mu_t/\dd\mu(x)$ is a nonnegative local martingale
+satisfying
+\begin{equation}\label{eq:density-sde}
+  \dd F_t(x)=F_t(x)\,(x-a_t)\cdot\dd W_t ,
+\end{equation}
+a true martingale on bounded intervals under compact support; this fact drives the perimeter
+martingale of Lemma~\ref{lem:perimeter-martingale}.
+
+Two consequences of $t$-uniform log-concavity are used repeatedly. The Brascamp--Lieb inequality
+applied to linear functions gives the pathwise cap
+\begin{equation}\label{eq:BL-cap}
+  A_t\preceq t^{-1}I_n,
+  \qquad\text{hence}\qquad
+  X_t=(\lmax(A_t)-1)_+\le(t^{-1}-1)_+\quad\text{pathwise},
+\end{equation}
+and the Bakry--Emery mechanism gives the dimension-free Cheeger bound at scale $\sqrt t$ used in
+Theorem~\ref{thm:centroid-implies-kls} \cite{BrascampLieb1976,BakryGentilLedoux2014}.
+
+\subsection{Two-color notation}
+
+Fix a measurable set $E$ and write $F=E^c$. Define
+\[
+  p_t=\mu_t(E),\qquad q_t=\mu_t(F),\qquad s_t=p_tq_t.
+\]
+The conditional means and covariances are
+\[
+  m_t^E=\frac1{p_t}\int_E x\dd\mu_t(x),
+  \qquad
+  m_t^F=\frac1{q_t}\int_F x\dd\mu_t(x),
+\]
+\[
+  \Sigma_t^E=\Cov_{\mu_t}(X\mid E),
+  \qquad
+  \Sigma_t^F=\Cov_{\mu_t}(X\mid F).
+\]
+Set
+\begin{equation}\label{eq:two-color-core}
+  \delta_t=m_t^E-m_t^F,
+  \qquad
+  G_t=\Sigma_t^E-\Sigma_t^F,
+\end{equation}
+\begin{equation}\label{eq:two-color-r-S-D}
+  B_t=s_t\delta_t\delta_t^T,
+  \qquad
+  r_t=\Tr B_t=s_t\abs{\delta_t}^2,
+\end{equation}
+\begin{equation}\label{eq:source-damping}
+  S_t=s_t\norm{G_t}_{\HS}^2,
+  \qquad
+  D_t=2s_t\delta_t^TA_t\delta_t-r_t^2 .
+\end{equation}
+The whitened color Hessian is denoted
+\begin{equation}\label{eq:whitened-H}
+  \WH_t=A_t^{-1/2}G_tA_t^{-1/2},
+\end{equation}
+using the inverse on the support of $\mu_t$ if $A_t$ is singular. This notation deliberately differs
+from the weighted mean curvature $H_\nu$ used later.
+
+The coarse balanced stopping time is
+\begin{equation}\label{eq:tau-coarse}
+  \tau=\inf\{t:p_t\notin[1/3,2/3]\}.
+\end{equation}
+For the boundary route, it is useful to work with a tighter window. For $0<\eta<1/2$ set
+\begin{equation}\label{eq:tau-tight}
+  \tau_\eta=\inf\{t:\abs{p_t-1/2}>\eta\}.
+\end{equation}
+All stopped statements are understood with nested windows: for the coarse window start with
+$p_0\in[2/5,3/5]$, and for the tight window start with $p_0=1/2$ or $\abs{p_0-1/2}\le\eta/2$.
+This avoids the irrelevant degeneracy $\tau=0$ at the boundary of a stopping interval.
+
+The excess processes attached to $E$ are
+\begin{equation}\label{eq:excess-def}
+  e_t(E)=\mu_t^+(E)-I_{\mu_t}(p_t)\ \ge\ 0,
+  \qquad
+  \bar e_t(E)=\mu_t^+(E)-h_{\mu_t}\min(p_t,q_t)\ \ge\ e_t(E),
+\end{equation}
+the second being the \emph{Cheeger excess} of Definition~\ref{def:cheeger-excess}; at $p_0=1/2$
+the two coincide at time zero (Lemma~\ref{lem:half}).
+
+\subsection{Boundary notation}
+
+When $\nu=e^{-V}dx$ is smooth and log-concave on a convex support $K$, its generator is
+\[
+  L=\Delta-\nabla V\cdot\nabla.
+\]
+For a smooth finite-perimeter set $E$, write
+\[
+  \Sigma=\partial^*E,
+  \qquad
+  \dd\sigma_\nu=e^{-V}\dd\operatorname{vol}_\Sigma.
+\]
+The weighted mean curvature is
+\[
+  H_\nu=H-\partial_nV,
+\]
+where $n$ is a chosen unit normal. The weighted Jacobi potential is
+\[
+  \qJac_\Sigma=\abs{II_\Sigma}^2+\nabla^2V(n,n).
+\]
+The second variation form is
+\begin{equation}\label{eq:jacobi-form}
+  \calI_\Sigma(u,u)
+  =\int_\Sigma\left(\abs{\nabla_\Sigma u}^2-\qJac_\Sigma u^2\right)\dd\sigma_\nu
+  +\calB_{\partial K}(u,u),
+\end{equation}
+where $\calB_{\partial K}$ denotes the support or free-boundary contribution. The full
+constant-mode curvature is
+\begin{equation}\label{eq:constant-mode-K}
+  \mathfrak K_\Sigma=-\calI_\Sigma(1,1).
+\end{equation}
+For full smooth support, $\mathfrak K_\Sigma=\int_\Sigma\qJac_\Sigma\dd\sigma_\nu$.
+
+\subsection{Regularity convention}
+
+The stochastic identities are first proved for compactly supported, smooth log-concave measures and
+for smooth approximations of finite-perimeter sets. The general case is recovered by the standard
+approximation procedure: restrict to $B(0,R)$, smooth the density and boundary, place the resulting
+measure in isotropic position, prove estimates with constants independent of the approximation,
+and then pass to the limit in perimeter, mass, covariance, and stopped stochastic integrals. This is
+the usual regularization layer in stochastic localization and geometric measure arguments. The
+report does not attempt to optimize these approximation details; all substantive estimates are
+stated with constants stable under this passage.
+
+Under compact support, all local martingales below are true martingales on bounded time intervals,
+and the density process $\dd\mu_t/\dd\mu$ is a nonnegative martingale. Without compact support, the
+supermartingale direction still suffices for the perimeter averaging step:
+\begin{equation}\label{eq:perimeter-supermartingale}
+  \E\,\mu_T^+(E)\le\mu^+(E).
+\end{equation}
+Indeed, the pointwise density is a nonnegative local martingale and hence a supermartingale, and
+Tonelli may be applied on $\partial^*E$. Under compact support, \eqref{eq:density-sde} upgrades
+this to an equality (Lemma~\ref{lem:perimeter-martingale}).
+\end{document}

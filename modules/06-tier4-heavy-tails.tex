@@ -1,0 +1,52 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Tier 4 --- heavy tails and the LSI/\texorpdfstring{$T_2$}{T2} obstruction}
+\label{sec:tier4}
+
+Heavy-tailed priors --- Laplace, Student-$t$, Cauchy, horseshoe, scale mixtures of
+Gaussians --- are statistically attractive (robust, sparsity-promoting) but analytically
+hard. The single mechanism behind every difficulty in this tier is that a log-Sobolev
+inequality forces sub-Gaussian concentration.
+
+\begin{theorem}[Heavy tails forbid LSI]
+\label{thm:heavy-tail-no-lsi}
+If $\Pstar$ satisfies LSI with constant $\CLS$, then every $1$-Lipschitz $f$ is sub-Gaussian:
+$\Pstar(f-\E f\ge r)\le\exp(-r^2/2\CLS)$. Consequently a target with merely exponential or
+polynomial tails satisfies \emph{no} classical LSI, and (being tied to Gaussian
+concentration) no $T_2$ either.
+\end{theorem}
+\noindent\cite{BobkovGotze1999,OttoVillani2000}. The escape is to state results at the
+weak-/weighted-Poincar\'e level, or to reparameterize to sub-Gaussian coordinates before
+certifying.
+
+\begin{family}[Classification of heavy-tailed priors by the strongest inequality they satisfy]
+\label{fam:heavy-tail-classification}
+Under the Euclidean gradient form,
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} c c c Y@{}}
+\toprule
+Prior / target & Poincar\'e & LSI & $T_2$ & Reason\\
+\midrule
+Gaussian                 & yes & yes & yes & sub-Gaussian tails\\
+Laplace $\propto e^{-\abs{x}/b}$ & $\CP\sim b^2$ & \textbf{no} & \textbf{no} & exponential tails\\
+Gamma                    & usually & \textbf{no} & \textbf{no} & exponential tail\\
+Student-$t_\nu$          & \textbf{no} / weighted & \textbf{no} & \textbf{no} & polynomial tail\\
+Cauchy                   & no / weak & \textbf{no} & \textbf{no} & too heavy-tailed\\
+horseshoe                & delicate & \textbf{no} & \textbf{no} & scale-mixture tail\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{family}
+
+\noindent The Laplace law $\Pstar(\dd x)=\tfrac1{2b}e^{-\abs{x}/b}\dd x$ has a finite
+Poincar\'e constant $\CP\sim b^2$ (Hardy criterion, Theorem~\ref{thm:hardy-1d}) but only
+exponential concentration, so no LSI. For Student-$t_\nu$ the tails are polynomial: LSI and
+$T_2$ fail, and the \emph{classical} Poincar\'e inequality fails as well for \emph{every}
+$\nu$, not only small $\nu$, because a polynomial tail makes the $1$D Hardy functional diverge.
+The correct object is a \emph{weighted} Poincar\'e inequality, finite for all $\nu$ but with a
+constant that worsens as the tail heavies; Cauchy ($\nu=1$) is the heaviest case
+(Section~\ref{sec:a3} develops the quantitative weighted theory). The right replacement tools
+are the modified / weighted log-Sobolev inequalities and the $1$D Hardy theory; making this
+classification quantitative for hierarchical robust-Bayes posteriors is part of the agenda
+(Section~\ref{sec:agenda}).
+\end{document}

@@ -1,0 +1,323 @@
+% modules/open-targets/A5-quotient-and-reparameterization.tex
+% -----------------------------------------------------------------------------
+% Deep-dive companion to the A5 entry of the Part I agenda (modules/08-open-targets):
+% quotient constants for label-switching symmetry and reparameterization constants
+% for hierarchical funnels.
+% Compiles inside main.tex; standalone it shows cross-module \ref as "??".
+% -----------------------------------------------------------------------------
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{A5 --- Quotient constants and reparameterization constants}
+\label{sec:a5}
+
+This is the deep-dive companion to the A5 paragraph of the agenda (Section~\ref{sec:agenda})
+and the formalization of Remarks~\ref{rem:label-switching} and \ref{rem:funnel}. The agenda
+slogan, $\CP(\pi_{\Theta/S_K})\ll\CP(\pi_\Theta)$, is the right intuition but the wrong
+universal statement. What is \emph{always} true is monotonicity,
+\[
+  \CP(\pi_{\Theta/G})\le\CP(\pi_\Theta),\qquad
+  \CLS(\pi_{\Theta/G})\le\CLS(\pi_\Theta),\qquad
+  \CTCI(\pi_{\Theta/G})\le\CTCI(\pi_\Theta),
+\]
+when the quotient carries the natural quotient metric and Dirichlet form. The
+\emph{dramatic} improvement holds exactly when the slow mode is a non-invariant
+label-switching mode; if the slow mode is a genuine permutation-invariant scientific
+alternative, the quotient does nothing. Making that dichotomy precise --- and quantitative ---
+is the content of A5. The parallel reparameterization question for hierarchical funnels turns
+out to be a statement about which \emph{metric} the sampler sees, not about the abstract
+posterior law.
+
+\subsection{Setup: the symmetry quotient}
+\label{subsec:a5-setup}
+
+Let a finite group $G$ (for a $K$-component mixture, $G=S_K$ acting by permuting the component
+blocks) act on the parameter space $\Theta$ by isometries, and let the posterior
+$\pi(\dd\theta)\propto e^{-V(\theta)}\dd\theta$ be $G$-invariant ($V\circ g=V$ for all
+$g\in G$), as it is for any exchangeable prior \cite{Celeux1998,JasraHolmesStephens2005}. Write
+\[
+  q:\Theta\to\bar\Theta:=\Theta/G,\qquad \bar\pi:=q_\#\pi,
+\]
+and equip the orbit space with the quotient distance and the quotient Dirichlet form obtained
+by lifting,
+\begin{equation}\label{eq:a5-quotient-form}
+  d_{\bar\Theta}([x],[y])=\min_{g\in G}d_\Theta(x,gy),
+  \qquad
+  \mathcal E_{\bar\pi}(\varphi):=\int_{\bar\Theta}\norm{\nabla_{\bar\Theta}\varphi}^2\dd\bar\pi
+  =\int_{\Theta}\norm{\nabla(\varphi\circ q)}^2\dd\pi .
+\end{equation}
+Away from the collision strata $\{\theta_i=\theta_j\}$ this is the ordinary Riemannian quotient
+energy; on the strata one uses weak/upper gradients or orbifold language
+(Subsection~\ref{subsec:a5-singular}).
+
+\subsection{The monotonicity theorem (the easy part)}
+\label{subsec:a5-monotone}
+
+\begin{theorem}[Quotient constants are never worse]
+\label{thm:a5-monotone}
+With the quotient structure \eqref{eq:a5-quotient-form} and $\pi$ $G$-invariant,
+\[
+  \CP(\bar\pi)\le\CP(\pi),\qquad
+  \CLS(\bar\pi)\le\CLS(\pi),\qquad
+  \CTCI(\bar\pi)\le\CTCI(\pi).
+\]
+\end{theorem}
+
+\begin{proof}
+\emph{Poincar\'e and LSI by lifting test functions.} The pullback $\varphi\mapsto\varphi\circ q$
+is an isometry of $L^2(\bar\pi)$ onto the $G$-invariant subspace $L^2(\pi)^G$, and by
+\eqref{eq:a5-quotient-form} it preserves the Dirichlet energy; it also preserves variance and
+entropy, $\Var_{\bar\pi}(\varphi)=\Var_\pi(\varphi\circ q)$ and
+$\Ent_{\bar\pi}(\varphi^2)=\Ent_\pi((\varphi\circ q)^2)$. Hence
+\[
+  \CP(\bar\pi)=\sup_{\varphi}\frac{\Var_{\bar\pi}(\varphi)}{\mathcal E_{\bar\pi}(\varphi)}
+  =\sup_{f\in H^1(\pi)^G}\frac{\Var_\pi(f)}{\mathcal E_\pi(f)}
+  \le\sup_{f\in H^1(\pi)}\frac{\Var_\pi(f)}{\mathcal E_\pi(f)}=\CP(\pi),
+\]
+the inequality being a restriction of the supremum to the invariant subspace; the LSI case is
+identical with $\Ent$ in place of $\Var$.
+\emph{Transport by lifting measures.} Given $\bar\nu\ll\bar\pi$, lift it via
+$\dd\nu/\dd\pi=(\dd\bar\nu/\dd\bar\pi)\circ q$; then $\KL(\nu\|\pi)=\KL(\bar\nu\|\bar\pi)$,
+while $q$ is $1$-Lipschitz so $W_{2,\bar\Theta}(\bar\nu,\bar\pi)\le W_{2,\Theta}(\nu,\pi)$.
+Thus a $T_2$ inequality for $\pi$ (Definition~\ref{def:tci}) descends to $\bar\pi$ with no
+worse constant \cite{GozlanRobertoSamson2013}.
+\end{proof}
+
+\noindent The theorem is elementary; the research content is \emph{when the inequality is
+strict, and by how much}.
+
+\subsection{The exact dichotomy: invariant versus non-invariant slow modes}
+\label{subsec:a5-spectral}
+
+For Poincar\'e the gap is fully transparent spectrally. The generator
+$L=\Delta-\nabla V\cdot\nabla$ commutes with the $G$-action because $V$ is invariant, so the
+mean-zero space splits orthogonally into the invariant part and its complement,
+\[
+  L^2_0(\pi)=L^2_0(\pi)^G\ \oplus\ \big(L^2_0(\pi)^G\big)^\perp .
+\]
+Define the two restricted spectral gaps
+\[
+  \lambda_{\mathrm{inv}}=\inf_{\substack{f\in H^1(\pi)^G\\\Var_\pi(f)>0}}\frac{\mathcal E_\pi(f)}{\Var_\pi(f)},
+  \qquad
+  \lambda_{\mathrm{noninv}}=\inf_{\substack{f\perp H^1(\pi)^G\\\Var_\pi(f)>0}}\frac{\mathcal E_\pi(f)}{\Var_\pi(f)} .
+\]
+
+\begin{proposition}[Quotient improvement ratio]
+\label{prop:a5-ratio}
+With the notation above,
+\[
+  \CP(\bar\pi)=\lambda_{\mathrm{inv}}^{-1},
+  \qquad
+  \CP(\pi)=\big(\min\{\lambda_{\mathrm{inv}},\lambda_{\mathrm{noninv}}\}\big)^{-1},
+  \qquad
+  \frac{\CP(\pi)}{\CP(\bar\pi)}=\frac{\lambda_{\mathrm{inv}}}{\min\{\lambda_{\mathrm{inv}},\lambda_{\mathrm{noninv}}\}} .
+\]
+\end{proposition}
+
+\noindent This identity \emph{is} the A5 dichotomy. If the slowest mode is label switching its
+eigenfunction is non-invariant (it distinguishes one labeling from another), so
+$\lambda_{\mathrm{noninv}}\ll\lambda_{\mathrm{inv}}$ and the quotient improves $\CP$
+dramatically. If the slowest mode is physical multimodality its eigenfunction is invariant (it
+distinguishes two genuinely different explanations \emph{after} relabeling), so
+$\lambda_{\mathrm{inv}}$ is already small and quotienting does essentially nothing. This is the
+precise form of ``symmetry-induced multimodality should not count against the constant;
+physical multimodality should.''
+
+\begin{example}[Folding a separated double well]
+\label{ex:a5-folding}
+Let $\mu_a=\tfrac12N(-a,\sigma^2)+\tfrac12N(a,\sigma^2)$ on $\R$, invariant under
+$x\mapsto-x$, with quotient map $q(x)=\abs{x}$ and folded measure $\bar\mu_a=q_\#\mu_a$ on
+$[0,\infty)$. For $a\gg\sigma$ the odd test function approximating $\operatorname{sign}(x)$ is
+non-invariant, has variance $\asymp1$ and Dirichlet energy
+$\asymp e^{-a^2/(2\sigma^2)}$, so $\CP(\mu_a)\gtrsim e^{a^2/(2\sigma^2)}$
+(Theorem~\ref{thm:separated-mixture-lower}, Family~\ref{fam:double-well-1d}). The quotient
+collapses the two wells into one folded well and $\CP(\bar\mu_a)=O(\sigma^2)$, so the ratio is
+exponentially large --- the finite-dimensional caricature of label switching.
+\end{example}
+
+\subsection{Quotient Bernstein--von Mises: the metastable asymptotic}
+\label{subsec:a5-metastable}
+
+For a well-identified $K$-component mixture with exchangeable prior, the posterior has $K!$
+Laplace wells centred at $\{g\theta_\star:g\in S_K\}$, each with local covariance of order
+$n^{-1}I(\theta_\star)^{-1}$. Moving between labelings in the raw space requires crossing a
+collision / badly-fitted region whose posterior density is suppressed by $e^{-n\Gamma}$ for a
+barrier $\Gamma>0$. Eyring--Kramers / energy-landscape theory \cite{MenzSchlichting2014} then
+predicts $\lambda_{\mathrm{noninv}}\asymp e^{-n\Gamma}\,\mathrm{poly}(n)$, while on the quotient
+one recovers the ordinary local Laplace / Bernstein--von Mises scale of A2 (Section~\ref{sec:a2}).
+
+\begin{conjecture}[Raw-versus-quotient metastability]
+\label{conj:a5-metastable}
+For an identifiable finite mixture in the separated-well regime, with a single physical
+explanation modulo $S_K$ and posterior mass bounded away from the collision strata,
+\[
+  \CP(\pi_\Theta)\ \asymp\ e^{n\Gamma}\,\mathrm{poly}(n),
+  \qquad
+  \CP(\pi_{\Theta/S_K})\ =\ \frac{1+o_P(1)}{n}\,\lmax\!\big(I(\theta_\star)^{-1}\big),
+\]
+where $\Gamma$ is the minimal posterior energy barrier between label copies. Where the
+landscape decomposition extends, the same holds for $\CLS$ and (via
+Theorem~\ref{thm:otto-villani}) $\CTCI$.
+\end{conjecture}
+
+\noindent The quotient line is exactly the A2 target \eqref{eq:a2-target}: A5 says that
+\emph{once the symmetry artifact is removed}, the BvM asymptotic of A2 (Conjecture~\ref{conj:a2})
+is what survives. The driver of the raw blow-up is the barrier $\Gamma$ and the representation
+type of the slow mode, \emph{not} the count $K!$ --- $K!$ creates redundant wells, but the bad
+constant comes from the exponentially suppressed transitions between them. The benign regime
+where even the raw mixture keeps a good constant is the bounded-overlap $\chi^2$ case of
+Corollary~\ref{cor:ccnw-mixture-lsi}.
+
+\subsection{The quotient can be singular}
+\label{subsec:a5-singular}
+
+$\Theta/S_K$ is in general an orbifold / stratified space, not a smooth manifold; the singular
+strata are the collisions $\theta_i=\theta_j$. If the posterior puts negligible mass near them,
+the quotient behaves like a fundamental chamber with reflecting walls and the analysis of
+Subsections~\ref{subsec:a5-monotone}--\ref{subsec:a5-metastable} applies. If it puts
+substantial mass near collisions --- weak data, overfitting, empty or merging components ---
+the quotient geometry is genuinely singular and $\CP,\CLS,\CTCI$ may remain bad even after
+quotienting. This is also why a hard ordering constraint $\mu_1<\cdots<\mu_K$ is not
+automatically benign: it selects a fundamental domain but may cut through high-posterior regions
+or create awkward boundary behaviour \cite{Stephens2000,JasraHolmesStephens2005}. The clean
+object is the quotient metric space, not an arbitrary ordering rule; recent computational work
+realizes quotient inference directly via optimal transport on the orbit space
+\cite{MonteillerEtAl2019} and via fundamental-domain / symmetrized flows
+\cite{FoldedTransport2026}, and symmetry-aware mixing analyses obtain polynomial-time guarantees
+where local chains would tunnel exponentially \cite{MouEtAl2019}.
+
+\subsection{Funnels: reparameterization is a statement about the metric}
+\label{subsec:a5-funnel}
+
+The constants $\CP,\CLS,\CTCI$ are \emph{not} coordinate-invariant unless the metric is
+transported with the coordinates. Centered and non-centered parameterizations describe the same
+abstract law but a different Euclidean Dirichlet form,
+\[
+  \int\norm{\nabla_{\theta,\tau}f}^2\dd\pi
+  \quad\text{versus}\quad
+  \int\norm{\nabla_{z,\tau}f}^2\dd\pi_{\mathrm{ncp}},
+\]
+so ``non-centering improves the constant'' means: it improves the constant for the Euclidean
+geometry that standard Langevin/HMC actually sees. With the exact pullback metric the constants
+would be invariant. The quantitative tool is the Lipschitz transport rule.
+
+\begin{lemma}[Lipschitz transport of all three constants]
+\label{lem:a5-lipschitz}
+If $T_\#\nu=\mu$ with $T$ globally $L$-Lipschitz, then
+$\CP(\mu)\le L^2\CP(\nu)$, $\CLS(\mu)\le L^2\CLS(\nu)$, and $\CTCI(\mu)\le L^2\CTCI(\nu)$.
+\end{lemma}
+
+\begin{proof}
+Test with $f\mapsto f\circ T$ and use $\norm{\nabla(f\circ T)}\le L\,(\norm{\nabla f}\circ T)$
+together with $\Var_\nu(f\circ T)=\Var_\mu(f)$ (resp.\ $\Ent$); for $T_2$, push couplings
+forward through $T$ and use that $T$ contracts $\Wtwo$ by $L$ while preserving KL.
+\end{proof}
+
+\noindent A funnel is exactly where the centered$\leftrightarrow$non-centered map fails to be
+globally bi-Lipschitz, so the lemma cannot be applied in both directions --- and the constants
+genuinely differ.
+
+\begin{example}[Neal's funnel: $\infty$ versus Gaussian scale]
+\label{ex:a5-neal}
+For $u\sim N(0,s^2)$, $z_j\sim N(0,1)$ independent, and $\theta_j=e^u z_j$
+\cite{Neal2003Slice}, the non-centered coordinates $(u,z)$ have product-Gaussian law, so by
+tensorization (Theorem~\ref{thm:tensorization}) and Family~\ref{fam:gaussian-covariance}
+\[
+  \CP^{\mathrm{ncp}}=\CLS^{\mathrm{ncp}}=\CTCI^{\mathrm{ncp}}=\max\{s^2,1\}.
+\]
+In centered coordinates $(u,\theta)$ the map $T(u,z)=(u,e^uz)$ has unbounded derivative, and the
+marginal $\theta_j=e^uz_j$ has lognormal-type tails with $\E\,e^{a\abs{\theta_j}}=\infty$ for
+every $a>0$. A Poincar\'e inequality forces exponential integrability of Lipschitz functions, so
+the centered funnel satisfies \emph{no} finite Euclidean Poincar\'e inequality, hence no
+Euclidean LSI or $T_2$:
+\[
+  \CP^{\mathrm{cen}}=\infty,
+  \qquad
+  \CP^{\mathrm{ncp}}=\max\{s^2,1\}.
+\]
+This is the rigorous version of the empirical fact that non-centering removes the funnel in the
+weak-data regime \cite{BetancourtGirolami2015}.
+\end{example}
+
+\begin{warning}[Non-centered is not always better]
+\label{warn:a5-ncp}
+With strong likelihood information the centered parameterization can win, because the data
+identify $\theta_j$ directly while the non-centered likelihood $L(e^uz)$ couples $u$ and $z$.
+This is the classical centered/non-centered trade-off
+\cite{PapaspiliopoulosRobertsSkold2007}; the practical resolution is often \emph{partial}
+non-centering or the ancillarity--sufficiency interweaving strategy \cite{YuMeng2011}, neither
+``centered'' nor ``non-centered'' alone.
+\end{warning}
+
+\subsection{What is genuinely open}
+\label{subsec:a5-open}
+
+Theorem~\ref{thm:a5-monotone} is easy; the following are the research targets, in increasing
+difficulty.
+
+\begin{question}[Quotient Bernstein--von Mises constants]
+\label{q:a5-qbvm}
+Prove the quotient line of Conjecture~\ref{conj:a5-metastable}: under identifiability modulo
+$S_K$, separation from collision strata, and no physical multimodality,
+$\CP(\pi_{\Theta/S_K})=\tfrac{1+o_P(1)}{n}\lmax(I(\theta_\star)^{-1})$. This is the A2 program
+(Section~\ref{sec:a2}) executed on the orbit space, and is the cleanest bridge between A2 and A5.
+\end{question}
+
+\begin{question}[Raw-versus-quotient metastability with explicit barrier]
+\label{q:a5-metastable}
+Prove the raw line $\CP(\pi_\Theta)\asymp e^{n\Gamma}\mathrm{poly}(n)$ with $\Gamma$ the minimal
+posterior energy barrier between label copies, via Eyring--Kramers / capacity methods
+\cite{MenzSchlichting2014} adapted to posterior likelihood landscapes and quotient spaces.
+Together with Question~\ref{q:a5-qbvm} this makes Proposition~\ref{prop:a5-ratio} quantitative.
+\end{question}
+
+\begin{question}[Detecting the representation type of the slow mode]
+\label{q:a5-detect}
+Proposition~\ref{prop:a5-ratio} says quotienting helps iff the first nonzero eigenfunction is
+non-invariant. Give a test --- ideally from posterior samples, using Poincar\'e-constant /
+hard-direction estimators \cite{PillaudVivienEtAl2020} --- that decides whether the slow mode is
+invariant (physical, survives the quotient) or non-invariant (symmetry, removed).
+\end{question}
+
+\begin{question}[Quotient LSI and $T_2$ on stratified spaces]
+\label{q:a5-stratified}
+Develop $\CLS$ and $\CTCI$ theory on stratified Bayesian quotient spaces. Poincar\'e is
+spectral and clean (Proposition~\ref{prop:a5-ratio}); LSI and $T_2$ are more delicate near
+collision strata and for overfitted mixtures, where the relevant mixture FI tools
+\cite{ChafaiMalrieu2010,Schlichting2019,ChenChewiNilesWeed2021} must be adapted to the orbifold
+geometry of Subsection~\ref{subsec:a5-singular}.
+\end{question}
+
+\begin{question}[Finite-sample centered/non-centered comparison]
+\label{q:a5-reparam}
+For hierarchical funnels prove two-sided constants
+\[
+  \CP^{\mathrm{cen}}\le A(n,\text{data},p(\tau))\,\CP^{\mathrm{ncp}},
+  \qquad
+  \CP^{\mathrm{ncp}}\le B(n,\text{data},p(\tau))\,\CP^{\mathrm{cen}},
+\]
+with $A,B$ exposing the weak-data and strong-data regimes (Warning~\ref{warn:a5-ncp}), going
+beyond the algorithmic/qualitative theory of \cite{PapaspiliopoulosRobertsSkold2007,YuMeng2011}.
+Separately, \emph{separate tail failure from funnel geometry}: a half-Cauchy $p(\tau)$ can
+defeat Poincar\'e even non-centered (a Tier-4 heavy-tail obstruction, Section~\ref{sec:tier4}),
+whereas a $\log\tau$ with Gaussian tails makes non-centering fix the canonical funnel
+(Example~\ref{ex:a5-neal}); Lyapunov-function criteria
+\cite{BakryCattiauxGuillin2008,CattiauxGuillinWangWu2009} are the tool for existence beyond
+uniform convexity.
+\end{question}
+
+\begin{remark}[Relation to the rest of the agenda]
+\label{rem:a5-relations}
+A5 is the symmetry/geometry face of the agenda, and it supplies the escape hatch the other targets
+invoke. Its monotonicity-and-metastability dichotomy (Theorem~\ref{thm:a5-monotone},
+Proposition~\ref{prop:a5-ratio}) is what lets A2 (Section~\ref{sec:a2},
+Question~\ref{q:a2-multimodal}) distinguish a genuine $e^{n\Gamma}$ blow-up from a removable
+symmetry artifact, and on the quotient the A2 Bernstein--von Mises asymptotic \eqref{eq:a2-target}
+is exactly what survives (Conjecture~\ref{conj:a5-metastable}); the family-dependent multimodal
+lower bounds and quotient certificate of A4 (Section~\ref{sec:a4}, Remark~\ref{rem:a4-quotient})
+are the variational consumers of the same dichotomy. The funnel half is the reparameterization
+counterpart of the flat-direction obstruction of the flagship A1 (Section~\ref{sec:a1},
+Proposition~\ref{prop:flat-prior-nonintegrable}); and the half-Cauchy tail that defeats Poincar\'e
+even after non-centering (Question~\ref{q:a5-reparam}) is a heavy-tailed A3 obstruction
+(Section~\ref{sec:a3}, Warning~\ref{warn:a3-likelihood}), distinct from the funnel geometry itself.
+\end{remark}
+\end{document}

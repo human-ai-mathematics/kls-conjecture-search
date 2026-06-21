@@ -1,0 +1,120 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Excess propagation: audit and circularity}
+\label{sec:excess}
+
+This section proves Proposition~\ref{prop:intro-audit} --- the consumption audit showing the
+unweighted excess term is inert --- and demonstrates that direct propagation is circular,
+motivating the bootstrap mechanism of Section~\ref{sec:bootstrap}. The static obstruction that
+forces the covariance weight (Proposition~\ref{prop:two-tail}) is established in
+Section~\ref{sec:qcts}.
+
+\subsection{The consumption audit}
+
+\begin{proposition}[Unconditional integrated excess bound]
+\label{prop:trivial-excess}
+Let $\mu$ be isotropic log-concave on $\R^n$, $E$ measurable with $\mu(E)=\tfrac12$ and excess
+$e_0=e_0(E)$. Then for every $T>0$ and every stopping time $\tau$,
+\begin{equation}\label{eq:trivial-excess}
+  \E\int_0^{T\wedge\tau}e_t(E)\dd t\ \le\ (1+e_0)\,T .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Since $I_{\mu_t}\ge0$, $e_t\le\mu_t^+(E)$ pathwise. By the perimeter supermartingale property
+\eqref{eq:perimeter-supermartingale} and Tonelli,
+$\E\int_0^{T\wedge\tau}e_t\le\int_0^T\E\mu_t^+(E)\dd t\le T\mu^+(E)=T(I_\mu(\tfrac12)+e_0)$.
+Finally $I_\mu(\tfrac12)\le1$: a coordinate halfspace through the median of the first marginal
+has perimeter at most $\norm{f_1}_\infty\le1$, the supremum bound for unit-variance log-concave
+densities on $\R$ \cite{Bobkov1999LogConcave}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:intro-audit}]
+(a) is Proposition~\ref{prop:trivial-excess}. (b): run the proof of
+Theorem~\ref{thm:intro-weighted} in Section~\ref{subsec:consumption} with the weight replaced
+by $1$ and the weighted excess propagation input replaced by \eqref{eq:trivial-excess}; every
+step goes through with the universal constant $C_0'=2C_0+2C_2(1+e_0)\le2C_0+4C_2$ for
+$e_0\le1$, and KLS follows. (c) is Proposition~\ref{prop:two-tail} of Section~\ref{sec:qcts}.
+\end{proof}
+
+\begin{remark}[Interpretation of the audit]
+\label{rem:audit-interpretation}
+Item (b) is not good news about excess propagation; it is a diagnosis of the previously stated
+package. An additive excess term whose integral is a priori $O(T)$ is inert next to the $C_0T$
+term: it can be deleted without changing the strength of the assumption, so the unweighted
+Stein-trace estimate silently carried the entire logical weight of the route. Item (c) shows
+this weight cannot be discharged slice-wise. The weighted restatement
+(Assumption~\ref{ass:weighted-package}) is the repair: the weighted excess term is no longer
+inert, the static obstruction is consistent with it, and the burden is honestly distributed
+between a stability estimate (Stein trace) and a propagation estimate (weighted excess), each
+now genuinely necessary.
+\end{remark}
+
+\subsection{Why direct propagation is circular}
+\label{subsec:circularity}
+
+\begin{lemma}[Perimeter martingale]
+\label{lem:perimeter-martingale}
+Within the regularity convention (compact support, smooth data), for a fixed finite-perimeter
+set $E$ the process $t\mapsto\mu_t^+(E)$ is a nonnegative martingale, with
+\begin{equation}\label{eq:perimeter-sde}
+  \dd\,\mu_t^+(E)=\Bigl(\int_{\partial^*E}(x-a_t)\dd\sigma_t(x)\Bigr)\cdot\dd W_t ,
+\end{equation}
+$\sigma_t$ being the weighted surface measure of $\mu_t$ on $\partial^*E$. The drift of the
+perimeter vanishes identically.
+\end{lemma}
+
+\begin{proof}
+$\mu_t^+(E)=\int_{\partial^*E}F_t(x)\dd\sigma_0(x)$ with $F_t$ the pointwise density process of
+\eqref{eq:density-sde}; stochastic Fubini on the compact boundary transfers the driftless SDE
+of $F_t$ to the integral.
+\end{proof}
+
+\begin{lemma}[Exact excess identity]
+\label{lem:excess-identity}
+Under compact support, for every $t\ge0$,
+\begin{equation}\label{eq:excess-identity}
+  \E\,e_t(E)\ =\ e_0(E)+\Bigl[\,I_\mu(p_0)-\E\,I_{\mu_t}(p_t)\,\Bigr].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Take expectations in $e_t=\mu_t^+(E)-I_{\mu_t}(p_t)$ and use
+$\E\mu_t^+(E)=\mu^+(E)=I_\mu(p_0)+e_0$ from Lemma~\ref{lem:perimeter-martingale}.
+\end{proof}
+
+Identity \eqref{eq:excess-identity} is conceptually decisive: excess propagation is not about
+the set $E$ at all, except through the random volume $p_t$. It is exactly the question of
+lower-bounding the expected isoperimetric profile of the random posterior at the current mass;
+the set enters only through the driftless perimeter martingale.
+
+\begin{lemma}[Infima of perimeter martingales]
+\label{lem:inf-martingales}
+Let $\mathfrak S$ be any family of finite-perimeter sets (countable, or rendered measurable by
+the usual selection conventions), and define $J_t=\inf\{\mu_t^+(S):S\in\mathfrak S\}$. Then
+$J$ is a supermartingale. Moreover, on $\{t<\tau_\eta\}$,
+$I_{\mu_t}(p_t)\ge J_t(\eta)$, where $J_t(\eta)$ is the infimum of $\mu_t^+(S)$ over sets with
+$\mu_t(S)\in[\tfrac12-\eta,\tfrac12+\eta]$.
+\end{lemma}
+
+\begin{proof}
+For each fixed $S$, $\mu_t^+(S)$ is a martingale by Lemma~\ref{lem:perimeter-martingale}, so
+$\E[J_t\mid\mathcal F_s]\le\mu_s^+(S)$ for every $S$; take the infimum over $S$. The second
+claim holds because the constrained family at exact mass $p_t$ is contained in the windowed
+family when $p_t$ is in the window.
+\end{proof}
+
+\begin{remark}[The circularity, formalized]
+\label{rem:circularity}
+By Lemma~\ref{lem:excess-identity}, excess propagation is equivalent to a lower bound on
+$\E I_{\mu_t}(p_t)$, hence on the expectation of an infimum of perimeter martingales over
+balanced-window competitors. Two structural facts follow. There is no free monotonicity: an
+infimum of martingales is a supermartingale, so its expectation can only decrease, and the
+question is precisely the rate. And any quantitative lower bound on $\E J_t(\eta)$ is, by
+definition, a Cheeger-type lower bound for the random measure $\mu_t$ --- a localized KLS
+statement. A direct attack on excess propagation therefore presupposes the kind of estimate the
+program is trying to produce. The only non-circular anchor available is an external one: the
+worst-case constant $\hstar_n$ of \eqref{eq:hstar-def}, a legitimate input in a proof by
+contradiction. This is the bootstrap of the next section.
+\end{remark}
+\end{document}

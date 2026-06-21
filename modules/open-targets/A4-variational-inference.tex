@@ -1,0 +1,354 @@
+% modules/open-targets/A4-variational-inference.tex
+% -----------------------------------------------------------------------------
+% Deep-dive companion to the A4 entry of the Part I agenda (modules/08-open-targets):
+% transport constants for variational inference -- turning reverse-KL/ELBO
+% optimization into certified geometric (W_2) and posterior-mean error bars.
+% Compiles inside main.tex; standalone it shows cross-module \ref as "??".
+% -----------------------------------------------------------------------------
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{A4 --- Transport constants for variational inference}
+\label{sec:a4}
+
+This is the deep-dive companion to the A4 paragraph of the agenda (Section~\ref{sec:agenda}).
+Variational Bayes (VB) reports the minimizer of a \emph{reverse} Kullback--Leibler divergence,
+$q^\star\in\arg\min_{q\in\mathcal Q}\KL(q\,\|\,\pi)$, but the user cares about a geometric error
+--- the displacement $\Wtwo(q^\star,\pi)$, or the posterior-mean error
+$\norm{\E_{q^\star}\theta-\E_\pi\theta}$. The orientation is exactly right: reverse KL is the
+quantity a Talagrand $T_2$ inequality (Definition~\ref{def:tci}) converts into transport,
+\begin{equation}\label{eq:a4-bridge}
+  \pi\ \text{satisfies}\ T_2(\CTCI)
+  \quad\Longrightarrow\quad
+  \Wtwo^2(q,\pi)\ \le\ 2\,\CTCI\,\KL(q\,\|\,\pi)
+  \qquad\text{for all } q\ll\pi,
+\end{equation}
+so a transport constant is the natural ``conversion rate'' from an ELBO/KL error into a certified
+posterior error. The A4 slogan --- \emph{small reverse KL} $+$ \emph{good transport constant}
+$\Rightarrow$ \emph{small geometric error} --- is therefore correct. The whole content is hidden
+in the word ``good'': the constant must be of \emph{posterior} scale, not prior scale, and a
+global $T_2$ constant is a sufficient but often far too crude certificate. The purpose of this
+section is to make precise the three increasingly relevant constants A4 proposes (global,
+family-restricted, first-moment), to record where the naive $T_2$ route is wasteful or simply
+infinite, and to state the certification theorem one should aim for.
+
+\subsection{Setup: the variational objective and the transport bridge}
+\label{subsec:a4-setup}
+
+Let $\pi(\dd\theta)\propto e^{-U(\theta)}\dd\theta$ be the posterior and $\mathcal Q$ a tractable
+variational family (mean-field, Gaussian, low-rank Gaussian, structured mean-field, a
+normalizing-flow family). VB solves
+\[
+  q^\star\in\arg\min_{q\in\mathcal Q}\KL(q\,\|\,\pi),
+  \qquad
+  \mathrm{ELBO}(q)\ =\ \log Z-\KL(q\,\|\,\pi),\quad Z=\int e^{-U},
+\]
+optimizing the ELBO in place of the intractable $\KL$ \cite{BleiKucukelbirMcAuliffe2017}. The
+existing statistical theory of VB is rich but answers a \emph{different} question: it certifies
+risk bounds, posterior-contraction rates, consistency, and asymptotic normality of variational
+posteriors \cite{WangBlei2019,ZhangGao2020,YangPatiBhattacharya2020,RaySzabo2020}, not a
+computable inequality of the form $\Wtwo(q,\pi)\le(\text{number})$ or
+$\norm{\E_q\theta-\E_\pi\theta}\le(\text{number})$. The adjacent optimal-transport VI literature
+also answers a different question --- how a VI \emph{algorithm} behaves in Wasserstein geometry,
+or what happens when one minimizes a Wasserstein objective \emph{instead} of KL
+\cite{AmbrogioniEtAl2018,YiLiu2023,LambertEtAl2022,ArneseLacker2024,JiangChewiPooladian2023}.
+A4 asks the post-hoc certification question: \emph{given} the ordinary KL-based objective, when
+does small KL certify small $\Wtwo$ or small mean error?
+
+The figure of merit is a hierarchy of worst-case conversion factors. The global $T_2$ constant
+(Definition~\ref{def:tci}) is the unrestricted one,
+\begin{equation}\label{eq:a4-ctci}
+  \CTCI(\pi)\ =\ \sup_{\substack{q\ll\pi\\ \KL(q\|\pi)>0}}\frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)} .
+\end{equation}
+Because VB never ranges over all $q\ll\pi$, the operative quantity is the
+\emph{family-restricted} constant
+\begin{equation}\label{eq:a4-cq}
+  C_{\mathcal Q}(\pi)\ :=\ \sup_{\substack{q\in\mathcal Q\\ \KL(q\|\pi)>0}}
+  \frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)}
+  \ \le\ \CTCI(\pi),
+\end{equation}
+the inequality being a restriction of the supremum to $\mathcal Q$. Since actual VB solutions
+live near the posterior mass, the sharpest object is the \emph{localized} restricted constant
+\begin{equation}\label{eq:a4-cqr}
+  C_{\mathcal Q,r}(\pi)\ :=\ \sup_{\substack{q\in\mathcal Q\\ 0<\KL(q\|\pi)\le r}}
+  \frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)} ,
+\end{equation}
+which only sees perturbations within ELBO reach of the optimum. The certificate these constants
+deliver is
+\begin{equation}\label{eq:a4-cert}
+  \Wtwo^2(q^\star,\pi)\ \le\ 2\,C_{\mathcal Q,\,\KL(q^\star\|\pi)}(\pi)\,\KL(q^\star\,\|\,\pi).
+\end{equation}
+
+\begin{remark}[A constant alone is not an error bar]
+\label{rem:a4-elbo}
+Equation~\eqref{eq:a4-cert} is computable only with a numerical upper bound on
+$\KL(q^\star\,\|\,\pi)$, and the ELBO supplies $\KL=\log Z-\mathrm{ELBO}$, which requires
+$\log Z$. A complete VB error-bar theory therefore needs \emph{two} ingredients --- a transport
+constant \emph{and} a computable KL certificate (an upper bound on $\log Z$, e.g.\ from an
+importance-weighted or nested bound). The A4 constants are the first ingredient; the second is
+orthogonal and should be stated as a separate hypothesis, not folded into $C_{\mathcal Q}$.
+\end{remark}
+
+\subsection{Front 1: the family-restricted constant for log-concave and GLM posteriors}
+\label{subsec:a4-restricted}
+
+For a strongly log-concave posterior the global constant is already of posterior scale: if
+$\Hess U\succeq mI$ then Bakry--\'Emery and Otto--Villani
+(Theorems~\ref{thm:bakry-emery}, \ref{thm:otto-villani}) give $\CTCI(\pi)\le1/m$, and for a
+Gaussian $N(\mu,\Sigma)$ this is sharp, $\CTCI=\lmax(\Sigma)$
+(Family~\ref{fam:gaussian-covariance}). For a regular parametric posterior with
+$\Sigma\approx(nI(\theta_0))^{-1}$ this is the right scale,
+$\CTCI\asymp\tfrac1n\lmax(I(\theta_0)^{-1})$ --- exactly the scale VB error bars want, and the
+$n\to\infty$ statement of A2 (Conjecture~\ref{conj:a2}, Equation~\eqref{eq:a2-target}).
+
+The Gaussian-prior GLM posterior of Section~\ref{sec:tier3} is where the global constant becomes
+crude. Theorem~\ref{thm:glm-fi} certifies $\CTCI\le\lmax(\Sigmaz)$, but the floor
+$m=\lmax(\Sigmaz)^{-1}$ is the \emph{prior} curvature: the likelihood Hessian
+$\sum_i\ell''(x_i^\top\theta)\,x_ix_i^\top$ degenerates in the tails
+(Proposition~\ref{prop:flat-prior-nonintegrable}), so the global $T_2$ certificate is
+prior-scale even though the posterior concentrates at the likelihood scale
+$(\Sigmaz^{-1}+X^\top\bar W X)^{-1}$. This is precisely the gap that makes the restricted and
+localized constants the useful objects: a mean-field Gaussian $q$ near the VB optimizer lives in
+the high-curvature bulk, so $C_{\mathcal Q,r}(\pi)$ can be of posterior scale even when
+$\CTCI(\pi)$ is prior-scale. The A4 target is therefore the $\Wtwo$-analogue of the data-informed
+A1 question (Question~\ref{q:glm-data-informed}): a sharp restricted/localized $C$ for the GLM
+posteriors of Section~\ref{sec:tier3}, of order
+$\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ in the bulk.
+
+\begin{warning}[Restricted constants are not automatically finite --- heavy tails]
+\label{warn:a4-heavytail}
+A4 is right that $C_{\mathcal Q}$ can be far smaller than $\CTCI$, but it is \emph{not}
+automatically finite, even for a Gaussian location family. Take the one-dimensional target
+$\pi(\dd x)\propto e^{-\abs{x}^p}\dd x$ with $1\le p<2$ (so $\pi$ has lighter-than-exponential
+but heavier-than-Gaussian tails for $p$ near $1$, and exactly exponential at $p=1$), and the
+Gaussian location family $q_m=N(m,\sigma^2)\in\mathcal Q$. As $\abs m\to\infty$,
+\[
+  \Wtwo^2(q_m,\pi)\ \asymp\ m^2,
+  \qquad
+  \KL(q_m\,\|\,\pi)\ =\ \E_{q_m}\abs{x}^p+O(1)\ \asymp\ \abs m^{p},
+  \qquad\text{so}\qquad
+  \frac{\Wtwo^2(q_m,\pi)}{\KL(q_m\,\|\,\pi)}\ \asymp\ \abs m^{2-p}\ \to\ \infty .
+\]
+Hence $C_{\mathcal Q}(\pi)=\infty$ for $p<2$ already at the mean-field Gaussian level (for
+polynomial-tailed $\pi$ the failure is stronger, $\KL$ growing only logarithmically in the
+location while $\Wtwo^2$ grows quadratically). A finite restricted constant thus requires
+\emph{at least one} of: $\mathcal Q$ bounded in location/scale; restriction to a KL sublevel set
+$C_{\mathcal Q,r}$ \eqref{eq:a4-cqr}; Gaussian-like tails of $\pi$ along the directions
+$\mathcal Q$ explores; or a weaker/modified transport cost (Subsection~\ref{subsec:a4-modified}).
+This is the $\Wtwo$ shadow of the LSI/$T_2$ obstruction of Tier~4
+(Theorem~\ref{thm:heavy-tail-no-lsi}, Family~\ref{fam:heavy-tail-classification}).
+\end{warning}
+
+\subsection{Front 2: the first-moment \texorpdfstring{($T_1$)}{(T1)} constant is the right primary object}
+\label{subsec:a4-mean}
+
+VB users report $\E_q\theta$, not $q$ itself, so the operative error is
+$\norm{\E_q\theta-\E_\pi\theta}$. The $T_2$ route bounds it,
+\begin{equation}\label{eq:a4-t2-to-mean}
+  \norm{\E_q\theta-\E_\pi\theta}\ \le\ W_1(q,\pi)\ \le\ \Wtwo(q,\pi)\ \le\ \sqrt{2\,\CTCI\,\KL(q\,\|\,\pi)},
+\end{equation}
+but wastefully: $\Wtwo$ penalizes variance, tail, and covariance mismatch, whereas a mean error
+only tests \emph{linear} observables. The matching constant is
+\begin{equation}\label{eq:a4-cmean}
+  C_{\mathrm{mean},\mathcal Q}(\pi)\ :=\ \sup_{\substack{q\in\mathcal Q\\ \KL(q\|\pi)>0}}
+  \frac{\norm{\E_q\theta-\E_\pi\theta}^2}{2\,\KL(q\,\|\,\pi)}
+  \ =\ \sup_{\norm u=1}\ \sup_{q\in\mathcal Q}
+  \frac{\big(u^\top(\E_q\theta-\E_\pi\theta)\big)^2}{2\,\KL(q\,\|\,\pi)} .
+\end{equation}
+For unrestricted $q$ this is a $T_1$ / sub-Gaussian quantity governed by the linear functionals
+of $\pi$, via the Donsker--Varadhan / Gibbs variational principle: for any $g$,
+$\E_q g\le\KL(q\,\|\,\pi)+\log\E_\pi e^{g}$. Taking $g=t\,u^\top(\theta-\E_\pi\theta)$ and
+assuming the sub-Gaussian Laplace bound
+$\log\E_\pi\exp\!\big(t\,u^\top(\theta-\E_\pi\theta)\big)\le\tfrac12K(u)\,t^2$ for all $t\in\R$,
+\[
+  t\,u^\top(\E_q\theta-\E_\pi\theta)-\tfrac12K(u)t^2\ \le\ \KL(q\,\|\,\pi)\quad\forall t
+  \quad\Longrightarrow\quad
+  \abs{u^\top(\E_q\theta-\E_\pi\theta)}\ \le\ \sqrt{2\,K(u)\,\KL(q\,\|\,\pi)} ,
+\]
+optimizing the left side over $t$. Thus $C_{\mathrm{mean},\mathcal Q}\le\sup_{\norm u=1}K(u)$,
+the variance proxy of the worst linear functional --- \emph{not} the full $T_2$ constant. This is
+the $T_1$ viewpoint \cite{BolleyVillani2005}, strictly weaker than $T_2$ and tied to
+square-exponential moments rather than to Gaussian concentration of all Lipschitz observables.
+
+The clean hierarchy is
+\begin{equation}\label{eq:a4-hierarchy}
+  C_{\mathrm{mean},\mathcal Q}(\pi)\ \le\ C_{T_1,\mathcal Q}(\pi)\ \le\ C_{\mathcal Q}(\pi)\ \le\ \CTCI(\pi),
+\end{equation}
+and the inequalities can be very loose. A posterior can fail global $T_2$ (and have
+$C_{\mathcal Q}=\infty$, Warning~\ref{warn:a4-heavytail}) yet have a finite, small mean constant
+for the specific linear functionals the statistician reports. For many VB diagnostics
+$C_{\mathrm{mean},\mathcal Q}$ is therefore the \emph{right primary object}, with the $\Wtwo$
+constant a stronger but frequently unattainable companion; the same construction gives a
+per-functional constant $C_{f,\mathcal Q}$ for any scalar observable $f(\theta)$.
+
+\subsection{Front 3a: heavy tails need modified transport, not ordinary \texorpdfstring{$T_2$}{T2}}
+\label{subsec:a4-modified}
+
+Ordinary $T_2$ is Gaussian-tail technology: by Theorem~\ref{thm:heavy-tail-no-lsi} a target with
+merely exponential, sub-exponential, or polynomial tails satisfies no LSI and no $T_2$, so
+$\Wtwo^2\lesssim\KL$ \emph{cannot} hold uniformly --- this is structural, not technical, and is
+the global reason Warning~\ref{warn:a4-heavytail} happens. The right replacement, the $\Wtwo$
+analogue of A3, is a \emph{modified} transport inequality with a cost $\alpha$ that is quadratic
+near $0$ but grows more slowly at infinity:
+\begin{equation}\label{eq:a4-modified}
+  \mathcal T_\alpha(q,\pi)\ \le\ C_\alpha\,\KL(q\,\|\,\pi)
+  \qquad\text{on}\ \mathcal Q\ \text{or on KL sublevels},
+\end{equation}
+where for $\pi\propto e^{-\abs x^p}$ ($1<p<2$) one expects $\alpha(r)\sim r^2$ near $0$ and
+$\alpha(r)\sim r^{p}$ at infinity, sliding to linear cost for exponential tails and to weighted
+$W_1$-type controls for polynomial tails where even $T_1$ fails globally. The modified-transport
+and modified-log-Sobolev toolbox is exactly the one developed for these tail classes
+\cite{BobkovLedoux1997,GentilGuillinMiclo2005,GozlanLeonard2007}, together with the weighted
+Csisz\'ar--Kullback--Pinsker inequalities that tie tail integrability of $\pi$ to weighted
+total-variation and Wasserstein bounds \cite{BolleyVillani2005}. The A4 deliverable is to turn
+the Tier-4 negative verdict (Family~\ref{fam:heavy-tail-classification}) into a positive,
+posterior-specific \emph{classification}: for each robust-Bayes prior (Laplace, Student-$t$,
+horseshoe, scale mixtures) identify the strongest cost $\alpha$ for which \eqref{eq:a4-modified}
+holds, on $\mathcal Q$ or on KL sublevels.
+
+\subsection{Front 3b: multimodality --- the lower bound is family-dependent}
+\label{subsec:a4-multimodal}
+
+The Tier-5 intuition is correct --- multimodality makes functional-inequality constants enormous
+(Theorem~\ref{thm:separated-mixture-lower}) --- but the A4 lower bound must be stated relative to
+$\mathcal Q$, because the mechanism that produces the global $e^{c\Delta^2}$ barrier may be
+\emph{absent} from the variational family. Consider the symmetric two-component mixture
+$\pi=\tfrac12\pi_1+\tfrac12\pi_2$ with modes separated by $\Delta$ (Family~\ref{fam:double-well-1d}).
+
+\emph{Global constant.} The worst perturbation is a tiny reweighting
+$q_\eps=(\tfrac12+\eps)\pi_1+(\tfrac12-\eps)\pi_2$: it has $\KL(q_\eps\|\pi)\asymp\eps^2$ but
+$\Wtwo^2(q_\eps,\pi)\asymp\eps\Delta^2$ for $\eps$ above the inter-mode density floor
+$\eps\gtrsim e^{-c\Delta^2}$, so the ratio $\Wtwo^2/(2\KL)\asymp\Delta^2/\eps$ is maximized at
+$\eps\asymp e^{-c\Delta^2}$, giving $\CTCI(\pi)\asymp e^{c\Delta^2}$ --- the metastability scale
+of Theorem~\ref{thm:separated-mixture-lower}, driven by an exponentially small mode-reweighting.
+
+\emph{Mean-field Gaussian family.} A single Gaussian \emph{cannot} represent that reweighting; the
+reverse-KL pathology is instead mode collapse, $q\approx\pi_1$. Then
+$\KL(q\,\|\,\pi)\approx\log2$ (the missing half-mass) while $\Wtwo^2(q,\pi)\approx\tfrac12\Delta^2$
+(half of $q$ must travel to the other well), so
+\begin{equation}\label{eq:a4-modecollapse}
+  C_{\mathcal Q}(\pi)\ \gtrsim\ \frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)}\ \asymp\ \frac{\Delta^2}{4\log2},
+\end{equation}
+\emph{polynomial} in $\Delta$, not exponential. The $e^{c\Delta^2}$ barrier reappears only for
+families rich enough to express near-target mixtures with slightly wrong weights (mixture
+variational families, flexible flows). So the A4 multimodal lower bound must distinguish three
+constants --- $\CTCI(\pi)$, $C_{\mathcal Q}(\pi)$, and the localized $C_{\mathcal Q,r}(\pi)$ near
+the VB optimizer --- whose barrier scales genuinely differ; importing the global metastability
+bound without checking that $\mathcal Q$ contains the bad perturbation is the error to avoid.
+
+\begin{remark}[Symmetry quotienting is not optional]
+\label{rem:a4-quotient}
+When the modes are $K!$ relabelings (mixture label switching), a raw $\Wtwo$ between parameter
+vectors measures coordinate non-identifiability, not inferential error: $q$ and $\pi$ can differ
+only by a permutation yet be reported as far apart. The correct transport problem is then on the
+quotient $\Theta/S_K$, $W_{2,\Theta/S_K}^2(q,\pi)\le2C_{\mathrm{quot}}\KL(q\,\|\,\pi)$, or on
+permutation-invariant observables (the induced mixture density). This is exactly the
+symmetry-quotient escape of Remark~\ref{rem:label-switching}, made quantitative by A5
+(Section~\ref{sec:a5}, Theorem~\ref{thm:a5-monotone}): A4 should separate \emph{physical}
+multimodality (genuine $C_{\mathcal Q}$ blow-up that survives the quotient) from
+\emph{symmetry-induced} multimodality (removed by it).
+\end{remark}
+
+\subsection{The theorem to aim for}
+\label{subsec:a4-theorem}
+
+The honest target is not ``$T_2$ certifies VB'' --- that is immediate from \eqref{eq:a4-bridge}
+--- but a \emph{restricted, localized, observable-aware} certificate at posterior scale.
+
+\begin{conjecture}[Certified VB error bars at posterior scale]
+\label{conj:a4}
+For the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior} and a mean-field or
+Gaussian family $\mathcal Q$, there are constants of \emph{posterior} (not prior) scale,
+\[
+  C_{\mathcal Q,r}(\pi)\ \lesssim\ \lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
+  \ +\ (\text{tail correction}),
+  \qquad
+  C_{\mathrm{mean},\mathcal Q}(\pi)\ \le\ \sup_{\norm u=1}K(u),
+\]
+on a KL sublevel $\{q\in\mathcal Q:\KL(q\,\|\,\pi)\le r\}$ covering the VB optimizer, yielding the
+certificates $\Wtwo^2(q^\star,\pi)\le2C_{\mathcal Q,r}\,\KL(q^\star\,\|\,\pi)$ and
+$\norm{\E_{q^\star}\theta-\E_\pi\theta}^2\le2C_{\mathrm{mean},\mathcal Q}\,\KL(q^\star\,\|\,\pi)$,
+provided a separate computable upper bound on $\KL(q^\star\,\|\,\pi)$ is supplied
+(Remark~\ref{rem:a4-elbo}).
+\end{conjecture}
+
+\noindent The proof route mirrors A1/A2: Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}) or a
+Lyapunov/local-curvature argument supplies the bulk curvature
+$\Sigmaz^{-1}+X^\top\bar W X$ that the global floor of Theorem~\ref{thm:glm-fi} discards;
+restricting to $\mathcal Q$ and to a KL sublevel removes the tail directions that defeat the
+global $T_2$ (Warning~\ref{warn:a4-heavytail}); the mean constant comes from the Donsker--Varadhan
+bound of Subsection~\ref{subsec:a4-mean}. The linear-test lower bound
+$C_{\mathrm{mean},\mathcal Q}\ge\lmax(\Cov_\pi)/(\dots)$ in the direction of the slowest mode
+(Remark~\ref{rem:rayleigh-lower-only}) keeps the upper bound honest.
+
+\subsection{Sub-targets and what remains open}
+\label{subsec:a4-open}
+
+The program splits into five research questions, ordered by difficulty.
+
+\begin{question}[Restricted and localized GLM transport constants]
+\label{q:a4-restricted}
+Compute or sharply upper-bound $C_{\mathcal Q}(\pi)$ and $C_{\mathcal Q,r}(\pi)$ for the GLM
+posteriors of Section~\ref{sec:tier3} (and for sparse-regression and hierarchical posteriors),
+proving posterior-scale constants $\asymp\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ in the bulk
+where the global $\CTCI\le\lmax(\Sigmaz)$ is only prior-scale. The exact restricted supremum
+\eqref{eq:a4-cq} is not a standard output of either transport theory or VI theory; this is the
+$\Wtwo$ analogue of the flagship A1 (Question~\ref{q:glm-data-informed}) and the entry point.
+\end{question}
+
+\begin{question}[First-moment constants]
+\label{q:a4-mean}
+Bound $C_{\mathrm{mean},\mathcal Q}(\pi)$ (and per-functional $C_{f,\mathcal Q}$) for posterior
+classes, exhibiting cases where it is finite and small while $C_{\mathcal Q}=\infty$
+(Warning~\ref{warn:a4-heavytail}). Identify the worst linear functional $\sup_{\norm u=1}K(u)$
+and relate it to $\lmax(\Cov_\pi)$, so the number a VB user actually reports carries a certified
+error bar even when no $\Wtwo$ bound exists \cite{BolleyVillani2005}.
+\end{question}
+
+\begin{question}[Modified transport for heavy-tailed posteriors]
+\label{q:a4-modified}
+Classify, for each robust-Bayes prior, the strongest cost $\alpha$ for which the modified
+transport inequality \eqref{eq:a4-modified} holds on $\mathcal Q$ or on KL sublevels, turning
+the Tier-4 obstruction (Family~\ref{fam:heavy-tail-classification}) into a computable
+diagnostic. The modified-LSI / weighted-transport theory
+\cite{BobkovLedoux1997,GentilGuillinMiclo2005,GozlanLeonard2007,BolleyVillani2005} supplies the
+language; posterior-specific constants are undeveloped. This is the $\Wtwo$ counterpart of A3.
+\end{question}
+
+\begin{question}[Family-aware multimodal lower bounds]
+\label{q:a4-multimodal}
+Prove the family-dependent lower bounds of Subsection~\ref{subsec:a4-multimodal}: the global
+$\CTCI\asymp e^{c\Delta^2}$ via the reweighting witness, the mean-field Gaussian
+$C_{\mathcal Q}\asymp\Delta^2$ via the mode-collapse witness \eqref{eq:a4-modecollapse}, and the
+recovery of $e^{c\Delta^2}$ for mixture/flow families that can represent near-target
+reweightings. Pair each with the quotient escape of Remark~\ref{rem:a4-quotient}, separating
+physical from symmetry-induced multimodality (A5, Section~\ref{sec:a5}).
+\end{question}
+
+\begin{question}[Coupling the constant to a computable KL certificate]
+\label{q:a4-elbo}
+Combine $C_{\mathcal Q,r}$ with a computable upper bound on $\KL(q^\star\,\|\,\pi)$
+(equivalently a lower bound on $\log Z$ beyond the ELBO) to produce a genuinely numerical,
+end-to-end VB error bar (Remark~\ref{rem:a4-elbo}). This is what turns
+Conjecture~\ref{conj:a4} from an inequality between constants into a deliverable a practitioner
+can report, and is the bridge from the functional-inequality theory of this Part to the
+algorithmic VI literature \cite{LambertEtAl2022,ArneseLacker2024,JiangChewiPooladian2023}.
+\end{question}
+
+\begin{remark}[Relation to the rest of the agenda]
+\label{rem:a4-relations}
+A4 is the transport/variational face of the agenda, and it \emph{consumes} the other targets more
+than it competes with them. Its bulk constant is the $\Wtwo$ analogue of the finite-sample flagship
+A1 (Section~\ref{sec:a1}, Conjecture~\ref{conj:a1}), at the same inverse-observed-information scale
+$\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$; in the large-sample limit that scale is the
+Fisher-information constant of A2 (Section~\ref{sec:a2}, Conjecture~\ref{conj:a2},
+Equation~\eqref{eq:a2-target}), so a sharp localized $C_{\mathcal Q,r}$ should reproduce
+$\tfrac1n\lmax(I(\theta_0)^{-1})$. The heavy-tailed obstruction that makes $C_{\mathcal Q}=\infty$
+(Warning~\ref{warn:a4-heavytail}) is the transport shadow of A3 (Section~\ref{sec:a3}), and the
+modified cost of Question~\ref{q:a4-modified} (Equation~\eqref{eq:a4-modified}) is the $\Wtwo$
+counterpart of A3's weighted Poincar\'e inequality. Finally, the family-dependent multimodal lower
+bounds of Subsection~\ref{subsec:a4-multimodal} and the quotient escape of
+Remark~\ref{rem:a4-quotient} are the variational reading of A5 (Section~\ref{sec:a5},
+Theorem~\ref{thm:a5-monotone}), separating physical multimodality from the symmetry-induced
+multimodality that A5 quotients away.
+\end{remark}
+\end{document}

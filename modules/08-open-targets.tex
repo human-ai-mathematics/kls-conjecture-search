@@ -1,0 +1,87 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Open targets and research agenda}
+\label{sec:agenda}
+
+The live frontier of Part I. The general functional-inequality theory is mature, but sharp
+\emph{Bayesian-posterior} constants are mostly not worked out: there are many tools and few
+theorems that say, for a posterior $\pi(\theta\mid y)\propto e^{-U_n(\theta)}$, what
+$\CP,\CLS,\CTCI$ \emph{exactly} or \emph{sharply} are. The agenda below is ordered by the
+priority of closing that gap.
+
+\paragraph{A1 --- data-informed GLM constants (Question~\ref{q:glm-data-informed}).}
+The flagship open problem. The certified bound $\CLS\le\lmax(\Sigmaz)$ ignores the data;
+near the posterior bulk $\Hess U\approx\Sigmaz^{-1}+X^\top W(\hat\theta)X$ is far larger.
+The target is a bound of the shape
+\[
+  \CP(\pi)\ \lesssim\ \lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
+  \ +\ \text{tail correction},
+\]
+interpolating prior- and likelihood-dominated regimes. The tension is intrinsic: likelihood
+curvature is strong in the bulk but vanishes in the tails (separable data,
+Proposition~\ref{prop:flat-prior-nonintegrable}), so no global data-curvature floor exists.
+Candidate tools: Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}), Lyapunov drift,
+localization, and posterior-concentration control
+\cite{BakryCattiauxGuillin2008,CattiauxGuillinWangWu2009,cattiaux2018poincare}.
+
+\paragraph{A2 --- asymptotic constants via Bernstein--von Mises.}
+For regular parametric models the posterior is asymptotically Gaussian,
+$\pi_n\approx N(\hat\theta_n,(nI(\theta_0))^{-1})$, suggesting
+\[
+  \CP(\pi_n)\ =\ \tfrac{1+o(1)}{n}\,\lmax\!\big(I(\theta_0)^{-1}\big),
+\]
+and similarly for $\CLS,\CTCI$. A sharp theorem of this form would turn classical asymptotic
+normality into asymptotic sampling/concentration constants --- a bridge from statistics to
+functional inequalities not yet standard output of Bernstein--von Mises theory.
+
+\paragraph{A3 --- heavy-tailed posteriors beyond classical LSI (Section~\ref{sec:tier4}).}
+Make Family~\ref{fam:heavy-tail-classification} quantitative: replace the failed LSI/$T_2$ by
+modified or weighted inequalities, with tail-index-dependent Poincar\'e constants for
+Student-$t$, horseshoe, and scale-mixture hierarchical priors, certified by the $1$D Hardy
+theory (Theorem~\ref{thm:hardy-1d}) and tensorization.
+
+\paragraph{A4 --- transport constants for variational inference.}
+Variational Bayes minimizes $\KL(q\|\pi)$ over a family $\mathcal Q$, yet the quantity of interest
+is geometric: $\Wtwo(q,\pi)$, or the posterior-mean error $\norm{\E_q\theta-\E_\pi\theta}$. Since
+$\Wtwo^2(q,\pi)\le2\CTCI\,\KL(q\|\pi)$ by $T_2$ (Definition~\ref{def:tci}), $\CTCI$ certifies
+exactly when KL is a reliable proxy for geometric closeness --- small for Gaussian-prior log-concave
+posteriors (Section~\ref{sec:tier3}), absent for heavy tails (Section~\ref{sec:tier4}), enormous for
+multimodal targets (Section~\ref{sec:tier5}). Turning this into certified VB error bars has three
+fronts: (i) the \emph{family-restricted} constant, the smallest $C$ with
+$\Wtwo^2(q,\pi)\le2C\,\KL(q\|\pi)$ for all $q\in\mathcal Q$, which can be finite and far below the
+global $\CTCI$ even for mean-field Gaussian $\mathcal Q$ and non-$T_2$ $\pi$ (target: a sharp $C$
+for the Section~\ref{sec:tier3} GLM posteriors); (ii) the first-moment ($T_1$) constant bounding
+$\norm{\E_q\theta-\E_\pi\theta}$ directly --- the number a VB user reports, weaker than and not
+implied at scale by the $\Wtwo$ bound; (iii) quantitative Tier-4/5 verdicts --- a weighted transport
+inequality replacing the failed $T_2$ for heavy tails (the $\Wtwo$ analogue of A3), and a matching
+\emph{lower} bound exhibiting $q\in\mathcal Q$ with small $\KL$ yet $\Wtwo$-error at the
+$e^{cB}$ barrier of Theorem~\ref{thm:separated-mixture-lower} (Gaussian-type wells:
+$B\asymp\Delta^2$ in the separation distance), escaped via the symmetry
+quotient of Remark~\ref{rem:label-switching}.
+
+\paragraph{A5 --- mixture and quotient constants.}
+Formalize Remark~\ref{rem:label-switching}: prove $\CP(\pi_{\Theta/S_K})\ll\CP(\pi_\Theta)$
+for mixture posteriors, separating symmetry-induced from physical multimodality, and quantify
+the funnel improvement under non-centered parameterization (Remark~\ref{rem:funnel}).
+
+\paragraph{A1-bis --- the most promising single theorem: structured-posterior KLS.}
+The sharpest form of A1: a Bayesian-statistical analogue of KLS for \emph{structured} posteriors. For a GLM posterior
+with $\ell$ convex and local Hessian $H(\theta)=\Sigmaz^{-1}+\sum_i\ell''(y_i,x_i^\top\theta)x_ix_i^\top$,
+aim for
+\[
+  \CP(\pi)\ \le\ A\,\E_\pi\,\lmax\!\big(H(\theta)^{-1}\big)+B\cdot(\text{tail correction}),
+  \qquad\text{or even}\qquad
+  \CP(\pi)\ \le\ K\,\lmax(\Cov_\pi)
+\]
+for a useful class of GLM posteriors, with $K$ universal or mildly geometry-dependent. The
+finite-sum structure $U_n(\theta)=\sum_i\ell_i(x_i^\top\theta)+r(\theta)$ is exactly the extra
+structure that the general convex-geometry literature does not exploit --- and exploiting it
+is what makes the structured problem more tractable than the general one.
+
+\medskip
+\noindent\textbf{Bridge to Part III.} The bound $\CP\le K\,\lmax(\Cov_\pi)$ for \emph{every}
+isotropic log-concave measure, with $K$ universal and dimension-free, is no longer a Bayesian
+question --- it is the Kannan--Lov\'asz--Simonovits conjecture. That Tier-$\infty$ boundary,
+and a conditional program attacking it via stochastic localization, is the subject of
+Part~III.
+\end{document}
