@@ -31,7 +31,7 @@ to the other modules appear as `??`, which is expected).
 
 ```
 main.tex            unified master (subfiles); Part I + Part II + Part III
-fi_references.bib   single shared bibliography (deduped, reconciled keys)
+fi_references.bib   single shared bibliography
 shared/
   preamble.tex      packages, theorem environments, macros
   notation.md       symbol glossary (reference only, not compiled)
