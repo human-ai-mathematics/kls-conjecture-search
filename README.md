@@ -12,9 +12,9 @@ with a difficulty gradation.
 - **Part II** (`modules/open-targets/`) — open-target deep dives: one section per flagship
   problem from the agenda (data-informed GLM constants, Bernstein–von Mises, heavy-tailed
   posteriors, variational inference, quotient/reparameterization).
-- **Part III** (`modules/kls/`) — a self-contained conditional proof program for the
-  Kannan–Lovász–Simonovits conjecture (the "Tier-∞" boundary of Part I) via Eldan stochastic
-  localization.
+- **Part III** (`modules/kls/`) — a self-contained exploratory proof program for the
+  Kannan–Lovász–Simonovits conjecture (the "Tier-∞" boundary of Part I), with an Eldan
+  cut-localization route and a moment-map/fixed-eigenfunction route.
 
 ## Build
 
@@ -37,7 +37,7 @@ shared/
   notation.md       symbol glossary (reference only, not compiled)
 modules/            Part I: 00-overview … 08-open-targets
 modules/open-targets/  Part II: A1 … A5 deep dives
-modules/kls/        Part III: 00-introduction … 12-open-targets
+modules/kls/        Part III: 00-introduction … 14-open-targets
 research/           the control plane: ledger.yaml, knowledge/, targets/, kls/, runs/
                     (numerical evidence artifacts), check_ledger.py
 experiments/        the `finum` numerical channel (uv project) that produces the

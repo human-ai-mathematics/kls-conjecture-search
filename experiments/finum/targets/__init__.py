@@ -2,14 +2,16 @@
   run_records(seed, **cfg) -> (records: list[dict], extra_header: dict)
   selftest(rng)           -> list[(name: str, ok: bool)]
 
-A1-A5 are the Part II statement targets. KLS (Part III route-gating) has two channels:
+A1-A5 are the Part II statement targets. KLS (Part III route-gating) has three channels:
   "kls"     SDE-free, sound bridge/Poincare-level signals (targets/kls.py)
-  "kls-loc" the localization SDE engine: directional occupation/alignment signals, gated
-            (targets/kls_localization.py, on top of finum.localization)
+  "kls-loc" localization SDE engine diagnostics; always no-verdict until the open-node
+            observables are implemented (targets/kls_localization.py)
+  "kls-align" the product tail-union q:alignment stress test; model-diagnostic only
+              (targets/kls_alignment.py)
 """
 from __future__ import annotations
 
-from . import a1, a2, a3, a4, a5, kls, kls_localization
+from . import a1, a2, a3, a4, a5, kls, kls_alignment, kls_localization
 
 REGISTRY = {
     "A1": a1,
@@ -19,4 +21,5 @@ REGISTRY = {
     "A5": a5,
     "kls": kls,
     "kls-loc": kls_localization,
+    "kls-align": kls_alignment,
 }

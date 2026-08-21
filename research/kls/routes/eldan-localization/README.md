@@ -9,7 +9,9 @@ route-agnostic facts it must respect live in [`../../shared/`](../../shared/).
   cut **cannot be identified too fast** by the early Gaussian observation. Proof posture
   throughout: **by contradiction against a near-worst measure** $h_\mu\le(1+\varepsilon)\,h^\star_n$.
 - **Status.** Live. Proved backbone in place; two conditional headline implications
-  (`thm:intro-all-cut`, `thm:intro-weighted`) with open inputs.
+  (`thm:intro-all-cut`, `thm:intro-weighted`) with open inputs. Letwin's July 2026 version-1
+  preprint closes the intrinsic QCTS input and extends the fixed-time covariance-moment window
+  to $c/\log n$, but leaves the universal-time alignment problem open.
 
 ## Files
 
@@ -33,15 +35,19 @@ sibling `obstructions.{yaml,md}`. This is the **only** `kls` ledger today — se
   trace scale). Bounded by `obs:proj-ceiling`, `obs:two-tail`.
 - **Route B — near-Cheeger geometric (weighted).** Prove `ass:weighted-package` ⇒ KLS via
   `thm:intro-weighted`. Two open inputs: weighted excess propagation `q:weighted` and weighted
-  stable Stein trace `q:stein-weighted`. The weight $(1+\lVert A\rVert)^{5/2}$ is *forced*
-  (`obs:two-tail`), not chosen.
+  stable Stein trace `q:stein-weighted`. The two-tail model calibrates exponent $5/2$ as the
+  minimum pure covariance power for an absolute-excess term in this slice-wise package; this is
+  not a route-agnostic necessity. The Jacobi/Reilly proposal additionally lacks the foundational
+  almost-stability trace bridge recorded in `rem:almost-stability-gap`.
 
 See `roadmap.md` for the full dependency graph and `open-problems.md` for the dispatchable
 briefs.
 
 ## Numerics
 
-`finum.localization` (`finum run --target kls-loc`) — the stochastic-localization engine
-(`experiments/finum/localization/`). Refutes / gives
-direction on a proof input behind passing gates; never promotes a node — the same role `finum`
-plays for the A-series.
+`finum.localization` (`finum run --target kls-loc`) is currently a diagnostic engine only. It
+does not compute `q:taming`, the incident-high `q:alignment` source, weighted excess, or the Stein
+trace, so it emits `no-verdict` even when its calibration gates pass. The separate
+`finum run --target kls-align` target does compute the full alignment margin for the designated
+Laplace-product tail union. Its held-out run through $n=1024$ is non-refuting but remains a
+dirty, finite-family diagnostic with `no-proof/no-route-verdict`. Neither target promotes a node.

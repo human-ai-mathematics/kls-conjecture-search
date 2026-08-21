@@ -51,7 +51,9 @@ per-direction (quadratic-form) to trace scale, uniformly over cuts. Bounded by
 the **product stress test** (`prog:product-test`, executed in
 `modules/kls/09-product-stress.tex`), which has refuted the rank-one counterexample
 (`obs:rank-one-refuted`) and reduced the remaining danger to the **adapted alignment problem**
-`q:alignment`.
+`q:alignment`. The designated Laplace tail-union computation has now been executed through
+$n=1024$: it detects a finite-dimensional alignment pulse but no divergence, so the mathematical
+node remains open and the artifact carries no route verdict.
 
 **Route B — near-Cheeger geometric (weighted).** Work only with near-minimizers. Needs two
 weighted inputs (`ass:weighted-package`):
@@ -64,20 +66,22 @@ By `thm:intro-weighted` these imply KLS. The consolidation's main clarification 
 carried the whole route — and by `obs:two-tail` it has **no slice-wise proof**. The weight
 `(1+‖A‖)^{5/2}` is *forced*, not chosen.
 
-## How the excess-propagation question was resolved
+## How the excess-propagation question was audited
 
 1. **Audit** (`prop:intro-audit`): unweighted excess is inert.
 2. **Obstruction** (`obs:two-tail`): no slice-wise absolute-scale proof; weight forced.
-3. **Circularity** (`obs:circularity`): direct propagation = a localized KLS statement; needs
-   an external anchor.
-4. **Bootstrap** (`thm:bootstrap`): anchoring at `hstar_n` breaks the circularity for
-   near-worst measures and compresses everything into the scalar interface `h_μ Ξ_T`,
+3. **Circularity warning** (`obs:circularity`): directly inserting a lower bound for the random
+   localized profile may restate KLS. The moving balanced competitor family is not covered by
+   the fixed-family supermartingale lemma, so this is not a formal no-go.
+4. **Bootstrap** (`thm:bootstrap`): anchoring at `hstar_n` supplies a non-circular comparison
+   for near-worst measures and compresses everything into the scalar interface `h_μ Ξ_T`,
    `Ξ_T = ∫_0^T E (λmax(A_t) − 1)_+ dt`.
 
 Interface evaluation: crude `Ξ_T ≲ log n` is **provably insufficient**
 (`obs:crude-insufficient`); polylog technology gives `Ξ_T ≲ loglog n` (`cor:loglog`, via
-`hyp:KI`, now discharged by `thm:KL-window`); demanding `Ξ_T ≤ κT` for *all* measures is
-**KLS-equivalent** (`obs:relative-ceiling`). The residual is `q:taming`: does *extremality
+`hyp:KI`, discharged on the published `c/log² n` window and, conditional on Letwin v1, on the
+larger `c/log n` fixed-time moment window); demanding `Ξ_T ≤ κT` for *all* measures at a
+sufficiently small universal time is already **KLS-sufficient** (`obs:relative-ceiling`). The residual is `q:taming`: does *extremality
 itself* tame the covariance process?
 
 ## Dependency graph (headline nodes)
@@ -120,7 +124,7 @@ graph TD
   pkg --> twt --> KLS
   ricc --> perdir
   ricc --> cent
-  boot --> qtame --> KLS
+  boot --> qtame
   stein --> qst
 
   classDef proved fill:#d7f7d7,stroke:#2a7;
@@ -135,14 +139,15 @@ unlocks. (Obstruction edges omitted; see `ledger.yaml` `bounded_by` and `obstruc
 
 | Component | Route | Status | Node |
 |---|---|---|---|
-| Mass martingale + centroid reduction | both | proved | `thm:centroid-implies-kls` (cond. on `ass:stopped-centroid`) |
+| Mass martingale + centroid reduction | both | proved survival lemma; conditional centroid implication | `lem:survival-implies-kls`, `thm:centroid-implies-kls` |
 | Two-color Riccati identities | both | proved | `thm:scalar-riccati`, `lem:matrix-riccati` |
 | Per-direction Carleson | A | proved | `cor:per-direction` |
+| Intrinsic quadratic-chaos bound | both | imported (Letwin v1) | `thm:letwin-qcts` |
 | Operator-to-trace upgrade | A | **open** | `q:upgrade` |
 | Product coordinate budgets; rank-one refuted | A | proved | `thm:budget`, `cor:refutation` |
-| Adapted alignment problem | A | **open** | `q:alignment` |
+| Adapted alignment problem | A | **open**; designated tail-union diagnostic non-refuting | `q:alignment` |
 | Consumption audit; two-tail obstruction | B | proved | `prop:intro-audit`, `prop:two-tail` |
-| Bootstrap comparison + interface | B | proved | `thm:bootstrap`, `cor:loglog` |
+| Bootstrap comparison + published interface evaluation | B | proved | `thm:bootstrap`, `cor:loglog`, `cor:KI-discharged` |
 | Weighted excess propagation | B | **open** | `q:weighted` |
 | Weighted stable Stein trace | B | **open** | `q:stein-weighted` |
 | Quantitative splitting / Obata | B | **open** | `q:splitting` |
@@ -152,7 +157,7 @@ unlocks. (Obstruction edges omitted; see `ledger.yaml` `bounded_by` and `obstruc
 
 - **Route A done** = `q:upgrade` proved ⇒ `ass:all-cut-carleson` ⇒ KLS.
 - **Route B done** = `q:weighted` + `q:stein-weighted` proved ⇒ `ass:weighted-package` ⇒ KLS.
-- **Intermediate prize** (`cor:dichotomy`): completing Route B at absolute scale with small
-  constant already yields `hstar_n ≥ c/loglog n` — an exponential improvement on the best
-  known bound — with full KLS following from `q:taming`.
-```
+- **Intermediate prize** (`cor:dichotomy`): under the separate
+  `hyp:absolute-geometric-completion`, an absolute-scale completion with small constant yields
+  `hstar_n ≥ c/loglog n`, improving even the Letwin-v1 `log^{-1/4} n` scale, with full KLS
+  requiring `q:taming` at the completion's time (or a completion uniform in that supplied time).

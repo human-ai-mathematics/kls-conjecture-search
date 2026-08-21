@@ -74,7 +74,8 @@ Consequently, with $\Xi_T=\int_0^T\E X_t\dd t$,
   T e_0+h_\mu\Bigl[\Bigl(\frac\eps2+\eta\Bigr)T
   +\frac{T^2}{16\eta^2}+\frac{T\,\Xi_T}{8\eta^2}+\frac{\Xi_T}{4}\Bigr],
 \end{equation}
-and the choice $\eta=T^{1/3}$, $\eps\le T^{1/3}$ gives the clean form
+and, for $0<T<1/8$, the admissible choice $\eta=T^{1/3}<1/2$ together with
+$\eps\le T^{1/3}$ gives the clean form
 \begin{equation}\label{eq:clean-form}
   \int_0^T\E\bigl[\bar e_t\,\one_{\{t<\tau_\eta\}}\bigr]\dd t
   \ \le\ Te_0+C\,h_\mu\bigl(T^{4/3}+\Xi_T\bigr).
@@ -149,23 +150,27 @@ splitting at $t=1/n$.
 \begin{remark}[The crude evaluation is provably insufficient --- by Klartag's theorem]
 \label{rem:insufficiency}
 For \eqref{eq:clean-form} to certify even an $O(T)$ excess bound with a small constant one
-needs $h_\mu\Xi_T\le CT$, which under Lemma~\ref{lem:crude} requires $h_\mu\le CT/\log n$. But
-$h_\mu\ge\hstar_n\ge c(\log n)^{-1/2}$ \cite{Klartag2023Logarithmic}, which exceeds $CT/\log n$ for all
-large $n$. The crude certificate therefore never applies in high dimension: the best known
-lower bound for KLS is itself an obstruction to the naive bootstrap. Any useful evaluation of
-$\Xi_T$ must beat $\log n$.
+needs $h_\mu\Xi_T\le CT$, which under Lemma~\ref{lem:crude} requires $h_\mu\le CT/\log n$. But,
+conditional on the July 2026 version-1 preprint of Letwin,
+$h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ \cite{Letwin2026QuadraticKLS}; even the earlier published
+bound $c(\log n)^{-1/2}$ \cite{Klartag2023Logarithmic} exceeds $CT/\log n$ for all large $n$.
+The crude certificate therefore never applies in high dimension: known lower bounds for KLS are
+themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat
+$\log n$.
 \end{remark}
 
 The polylogarithmic covariance technology does beat it. The required input is the small-time
 operator-norm control imported in Section~\ref{sec:covariance-tech}
-(Hypothesis~\ref{hyp:KI}), discharged there unconditionally
-(Corollary~\ref{cor:KI-discharged}).
+(Hypothesis~\ref{hyp:KI}), discharged there on the published $c/\log^2 n$ window and, conditional
+on the version-1 input of Theorem~\ref{thm:letwin-qcts}, on the larger $c/\log n$ window
+(Corollaries~\ref{cor:KI-discharged} and \ref{cor:KI-letwin}).
 
 \begin{corollary}[Polylog evaluation]
 \label{cor:loglog}
 Under Hypothesis~\ref{hyp:KI}, for $t_1(n)\le T\le1$,
-$\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$, and hence for every near-worst
-$\mu$ and every balanced cut $E$, by \eqref{eq:clean-form},
+$\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$. Hence, when additionally
+$T<1/8$ and the near-worst parameter satisfies $\eps\le T^{1/3}$, every such $\mu$ and every
+balanced cut $E$ satisfy, by \eqref{eq:clean-form},
 \begin{equation}\label{eq:loglog-supply}
   \int_0^T\E\bigl[\bar e_t\,\one_{\{t<\tau_\eta\}}\bigr]\dd t
   \ \le\ Te_0+C\,h_\mu\bigl(T^{4/3}+1+\log\log n\bigr).
@@ -178,19 +183,31 @@ On $[0,t_1]$, $\E X_t\le\E\norm{A_t}_\op\le C_1$; on $[t_1,T]$, $X_t\le t^{-1}$ 
 
 \begin{proposition}[The relative-scale ceiling]
 \label{prop:ceiling}
-Fix any $\kappa\in(0,1]$ and $T_0\in(0,1]$. If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every
-isotropic log-concave $\mu$, the KLS conjecture would follow directly, with no geometric input.
+Fix $\kappa\in(0,1]$ and a universal $T_0>0$ satisfying
+\begin{equation}\label{eq:ceiling-smallness}
+  9(1+\kappa)T_0\le\frac12.
+\end{equation}
+If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every isotropic log-concave $\mu$, the KLS conjecture
+would follow directly, with no geometric input.
 Consequently, a propagation estimate at relative scale ---
 $\int_0^T\E\bar e_t\dd t\le\kappa h_\mu T$ with $\kappa$ small --- cannot be expected from
-Theorem~\ref{thm:bootstrap} alone: by \eqref{eq:clean-form} it would require
-$\Xi_T\le c\kappa T$, an input already implying the conclusion of the whole program.
+Theorem~\ref{thm:bootstrap} alone: certifying it through \eqref{eq:clean-form} would require
+$\Xi_T\le c\kappa T$ at a sufficiently small universal time, an input already sufficient for
+the conclusion of the whole program.
 \end{proposition}
 
 \begin{proof}
 $\Xi_{T_0}\le\kappa T_0$ gives $\int_0^{T_0}\E\lmax(A_t)\dd t\le(1+\kappa)T_0$. By
 \eqref{eq:qv-p} and \eqref{eq:trivial-lambda}, $\dd[p]_t\le\tfrac14\lmax(A_t)\dd t$, so for any
-balanced cut $\Prob(\tau\le T)\le36\,\E[p]_{T\wedge\tau}\le9(1+\kappa)T\le\tfrac12$ for
-$T\le\min(T_0,\tfrac1{36})$, and Theorem~\ref{thm:centroid-implies-kls} applies.
+balanced cut
+\[
+  \Prob(\tau\le T_0)
+  \le36\,\E[p]_{T_0\wedge\tau}
+  \le9\int_0^{T_0}\E\lmax(A_t)\dd t
+  \le9(1+\kappa)T_0\le\frac12.
+\]
+Lemma~\ref{lem:survival-implies-kls} applies at the universal time $T_0$ with survival
+probability at least $1/2$.
 \end{proof}
 
 \begin{remark}[The supply curve and the corridor]
@@ -207,11 +224,12 @@ Prop.~\ref{prop:trivial-excess}. \\
 \addlinespace
 Absolute with small constant, $\le Te_0+\kappa T$ & Holds for near-worst $\mu$ whenever
 $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Hyp.~\ref{hyp:KI} &
-Cor.~\ref{cor:loglog}. \\
+Cor.~\ref{cor:loglog}; the universal-time near-worst extension is Question~\ref{q:taming}. \\
 \addlinespace
-Relative, $\le\kappa\,h_\mu T$ & Equivalent, as bootstrap input, to $\Xi_T\le c\kappa T$,
-which for all $\mu$ is KLS-strength; open whether near-extremality suffices &
-Prop.~\ref{prop:ceiling}, Question~\ref{q:taming}. \\
+Relative, $\le\kappa\,h_\mu T$ & Requires, as bootstrap input, $\Xi_T\le c\kappa T$,
+which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; open
+whether near-extremality suffices for this stronger, unweighted covariance target &
+Prop.~\ref{prop:ceiling}. \\
 \bottomrule
 \end{tabularx}
 \end{center}

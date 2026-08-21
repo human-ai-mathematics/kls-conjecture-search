@@ -3,14 +3,15 @@
 KLS asserts a universal K with C_P(mu) <= K * lambda_max(Cov_mu) for EVERY isotropic log-concave
 mu (= the A1-bis bridge, research/kls/shared/target.md). The SDE-free, sound signal computable
 here is the **realized K = C_P / lambda_max(Cov)** on isotropic log-concave test geometries, plus
-the rank-one non-refutation. Each 1D factor's C_P is the FEM gap (calibrated on the Gaussian);
+a rank-one bridge sanity check. Each 1D factor's C_P is the FEM gap (calibrated on the Gaussian);
 products use tensorization C_P = max_i C_P_i and lambda_max(Cov) = max_i Var_i.
 
 This gates the route-AGNOSTIC facts in shared/lower-bounds.md:
   * isotropic linear-test refuter: lambda_max(Cov) ~ 1 => any claimed KLS upper bound < 1 is REFUTED;
-  * K = O(1) across geometries incl. single-coordinate inflation => supports the bridge and
-    demonstrates obs:rank-one-refuted at the Poincare (statement) level.
-The localization quantities (q:upgrade Xi_T, q:alignment, weighted Stein) live in the companion
+  * K = O(1) across this small battery, including single-coordinate Gaussian inflation, is
+    directional non-refutation of the bridge. It does not test the cut-specific dynamic
+    obstruction ``obs:rank-one-refuted``.
+The localization quantities (source occupation for q:upgrade, q:alignment, weighted Stein) live in the companion
 target `kls-loc` (finum/targets/kls_localization.py) on top of finum.localization — see
 research/kls/gating.md.
 """
@@ -80,27 +81,27 @@ def run_records(seed: int = 0, d: int = 4):
                         "lambda_max_cov": lam, "realized_K": K,
                         "isotropic": bool(abs(lam - 1.0) < 1e-6)})
 
-    # rank-one inflation: one coordinate variance Lambda, rest unit Gaussian.
-    # C_P = max = Lambda, lambda_max = Lambda => K = 1 for all Lambda (obs:rank-one-refuted).
+    # Rank-one bridge sanity: one Gaussian coordinate has variance Lambda.
+    # C_P = max = Lambda, lambda_max = Lambda => K = 1. This is not a cut/source-budget test.
     for Lam in (10.0, 100.0, 1000.0):
         fac = [gauss_factor(Lam)] + [gauss_factor(1.0)] * (d - 1)
         C_P, lam, K = geometry_K(fac)
         Ks.append(K)
-        records.append({"kind": "geometry", "instance": "rank-one-inflated", "obstruction": "obs:rank-one-refuted",
+        records.append({"kind": "geometry", "instance": "rank-one-bridge-sanity",
                         "Lambda": Lam, "C_P": C_P, "lambda_max_cov": lam, "realized_K": K,
-                        "note": "single inflated coordinate: K stays 1 => rank-one cannot refute the K-bound."})
+                        "note": "Gaussian tensorization sanity only; no cut or dynamic source is tested."})
 
     K_max = max(Ks)
-    # verdict 1: realized K is O(1) across all geometries => supports the KLS / A1-bis bridge
+    # Directional signal only: this finite benign battery does not refute the KLS / A1-bis bridge.
     v_bridge = falsify("realized K <= K_O1_CEILING (bridge holds)", "kls-bridge", K_O1_CEILING, K_max,
-                       note="K=C_P/lambda_max(Cov); SUPPORTS bridge iff NOT refuted (K stays O(1))")
+                       note="K=C_P/lambda_max(Cov); finite-battery consistency is non-refutation only")
     # verdict 2: isotropic linear-test refuter — lambda_max(Cov)=1 kills any sub-1 upper claim
     v_refuter = falsify("KLS upper bound C_P <= 0.5 (too small)", "kls-isotropic", 0.5, 1.0,
                         note="universal lower bound C_P >= lambda_max(Cov) = 1 for isotropic mu")
     records.append({"kind": "verdict", "realized_K_max": K_max,
-                    "K_O1_supports_bridge": bool(v_bridge.status != "REFUTED"),
+                    "bridge_not_refuted_on_battery": bool(v_bridge.status != "REFUTED"),
                     "verdict_bridge": v_bridge.dict(), "verdict_isotropic_refuter": v_refuter.dict(),
-                    "companion": "localization quantities (q:upgrade Xi_T, q:alignment, weighted Stein) "
+                    "companion": "localization quantities (q:upgrade source, q:alignment, weighted Stein) "
                                  "=> target 'kls-loc' on finum.localization; see research/kls/gating.md"})
     return records, {"d": d, "calibration_passed": cal_ok, "realized_K_max": K_max}
 
@@ -115,7 +116,7 @@ def selftest(rng):
         fac = [gauss_factor(Lam)] + [gauss_factor(1.0)] * 3
         _, _, K = geometry_K(fac)
         Ks.append(K)
-    checks.append((f"KLS rank-one: K==1 for Lambda in (10,1000) ({Ks[0]:.3f},{Ks[1]:.3f})",
+    checks.append((f"KLS rank-one bridge sanity: K==1 for Lambda in (10,1000) ({Ks[0]:.3f},{Ks[1]:.3f})",
                    all(abs(k - 1.0) <= 0.05 for k in Ks)))
     # all benign isotropic geometries have K = O(1)
     Kgauss = geometry_K([gauss_factor(1.0)] * 4)[2]

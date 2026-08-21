@@ -13,12 +13,15 @@ $h^\star_n=\inf\{h_\mu:\mu\text{ isotropic log-concave on }\mathbb R^n\}$
 (`eq:hstar-def`), the claim is
 $$\inf_n h^\star_n > 0.$$
 
-- **Best known.** $h^\star_n\ge c\,(\log n)^{-1/2}$ (Klartag 2023; after Chen 2021,
-  Klartag–Lehec 2022). A route "wins" only by removing the last $\mathrm{polylog}$.
-- **Proof posture (shared).** All current work is *by contradiction against a near-worst
-  measure* $h_\mu\le(1+\varepsilon)\,h^\star_n$. A route that needs a bound for **every**
-  measure (not just near-worst) is doing something KLS-equivalent — see
-  [`lower-bounds.md`](lower-bounds.md) and `obs:relative-ceiling`.
+- **Best known.** Published: $h^\star_n\ge c\,(\log n)^{-1/2}$ (Klartag 2023). Conditional on
+  Letwin's July 2026 version-1 preprint (arXiv:2607.24164), the claimed bound is
+  $h^\star_n\ge c\,(\log n)^{-1/4}$. A route "wins" only by removing the last
+  $\mathrm{polylog}$.
+- **Fixed-cut localization posture.** The Eldan route works *by contradiction against a
+  near-worst measure* $h_\mu\le(1+\varepsilon)\,h^\star_n$. Within that mechanism, a proposed
+  universal-time covariance bound for **every** measure may already be KLS-sufficient; see
+  [`lower-bounds.md`](lower-bounds.md) and `obs:relative-ceiling`. This warning does not constrain
+  the separate moment-map/spectral route, which targets the spectral gap directly.
 
 ## The bridge to Part II (`ab/conj:a1-bis`)
 

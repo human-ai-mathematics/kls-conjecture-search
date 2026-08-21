@@ -7,7 +7,7 @@ and verdict logic in `run_records`.
 """
 from __future__ import annotations
 
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .provenance import provenance, runs_dir, write_jsonl
@@ -21,5 +21,6 @@ def run(target: str, seed: int = 0, out: str | Path | None = None, **cfg) -> Pat
     records, extra = REGISTRY[target].run_records(seed, **cfg)
     header = provenance(target=target, seed=seed, **extra)
     if out is None:
-        out = runs_dir() / f"{date.today().isoformat()}-{target}.jsonl"
+        stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%M%S.%fZ")
+        out = runs_dir() / f"{stamp}-{target}.jsonl"
     return write_jsonl(out, header, records)

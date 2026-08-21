@@ -11,8 +11,9 @@ state them in decreasing order of strength.
 Prove Assumption~\ref{ass:all-cut-carleson}: upgrade the unconditional per-direction Carleson
 estimate (Corollary~\ref{cor:per-direction}) to the trace scale, uniformly over balanced cuts,
 with damping coefficient $\alpha<1$. By Theorem~\ref{thm:intro-all-cut} this alone implies KLS.
-The projection-test ceiling of Section~\ref{sec:qcts} shows that radial and projection
-information caps at $\log n$; the upgrade must use the cut-specific structure. The first
+The projection-test ceiling of Section~\ref{sec:qcts} remains a no-go for that proof method,
+although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. The
+dynamic upgrade must use cut-specific structure and covariance occupation. The first
 decision point is Program~\ref{prog:product-test}.
 \end{question}
 
@@ -23,9 +24,10 @@ Prove \eqref{eq:intro-weighted-excess}: for balanced near-Cheeger cuts,
   \E\int_0^{T\wedge\tau_\eta}e_t(E)\,\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t
   \ \le\ C\bigl(Te_0(E)+T^{1+\gamma}\bigr),\qquad T\le T_0 .
 \]
-By Remark~\ref{rem:weight-explains-rate} this is the weakest excess statement statically
-consistent with the two-tail mode, with exponent calibrated on
-Proposition~\ref{prop:two-tail}; the bootstrap of Theorem~\ref{thm:bootstrap} resolves the
+Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package,
+$5/2$ is the weakest exponent statically consistent with the two-tail mode
+(Proposition~\ref{prop:two-tail}); the time exponent is a deliberately stronger open demand,
+not fixed by that static example. The bootstrap of Theorem~\ref{thm:bootstrap} resolves the
 unweighted analogue but the weighted version requires, in addition, second-moment control of
 the perimeter martingale against the covariance weight, which is open.
 \end{question}
@@ -33,42 +35,46 @@ the perimeter martingale against the covariance weight, which is open.
 \begin{question}[Weighted stable Stein trace]
 \label{q:stein-weighted}
 Prove \eqref{eq:intro-weighted-stein} for balanced near-Cheeger cuts, with damping coefficient
-$\beta<\tfrac12$, by the mechanism of Section~\ref{sec:jacobi}: quadratic-chaos control of the
-interior Dirichlet quantity, stability control of mean-zero boundary modes via \eqref{eq:stability},
-and the constant mode via the Schur energy \eqref{eq:Jsharp-def} and splitting. The chaining must be
-uniform along the localization and at the covariance-weighted scale; by
+$\beta<\tfrac12$. The intrinsic quadratic-chaos input is now available from
+Theorem~\ref{thm:letwin-qcts}, conditional on the version-1 preprint. The proposed mechanism of
+Section~\ref{sec:jacobi} still lacks a quantitative almost-stability trace theorem for the
+localized fixed cut, modulo tangential Jacobi zero modes and with the Reilly boundary terms
+controlled. Any chaining must be uniform along localization and at the covariance-weighted scale; by
 Proposition~\ref{prop:two-tail} no slice-wise shortcut exists.
 \end{question}
 
-\begin{remark}[The three open trace-upgrade targets are one problem]
+\begin{remark}[A shared dynamic occupation problem, and a missing geometric bridge]
 \label{rem:trace-upgrade-unification}
 Questions~\ref{q:upgrade} and \ref{q:stein-weighted} (its high-rank, mean-zero part) and the
-adapted alignment problem~\ref{q:alignment} are the \emph{same} operator-to-trace difficulty
-in three coordinate systems. Analytically, the gap is exactly the trace of the occupation
+adapted alignment problem~\ref{q:alignment} all confront a high-rank occupation difficulty, but
+their equivalence has not been proved. Analytically, the Route~A gap is exactly the trace of the occupation
 operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: Corollary~\ref{cor:per-direction} is the
 statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is
 $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically,
-the high-rank mean-zero residue of Question~\ref{q:stein-weighted} is the same sum, and its
-constant mode is Question~\ref{q:splitting}. Combinatorially, summing the per-coordinate
-budgets of Theorem~\ref{thm:budget} over a product cut is again $\Tr R_0\le n$, i.e.\
-Question~\ref{q:alignment}. The correct target is therefore \emph{not} a static
-effective-rank bound --- on products $\Tr(M)$ genuinely can be of order $n$, yet the all-cut
-estimate still holds on the polylog window (Theorem~\ref{thm:V2-window}) because the $n$
-coordinate budgets are spent at \emph{temporally disjoint} times --- but an
-\emph{occupation-density} bound: the source-occupation measure on time$\,\times\,$direction
-should be absolutely continuous with bounded density on the early balanced window, so that
-only $O(1)$ directions are simultaneously active. This is the form in which
+the proposed Reilly/Jacobi route aims to control analogous high-rank boundary modes, but
+Remark~\ref{rem:almost-stability-gap} records the missing trace bridge; its proposed
+constant-mode branch is Question~\ref{q:splitting}. Combinatorially, summing the per-coordinate
+budgets of Theorem~\ref{thm:budget} over a product cut is again $\Tr R_0\le n$; this motivates
+the incident-high residue in Question~\ref{q:alignment} but does not identify it with the full
+trace problem. The product budget argument supplies only the naive trace bound of
+order $n$, while the dimension-dependent early-window estimate follows separately from
+covariance moments (Theorem~\ref{thm:V2-window}, conditional on the cited preprint at the
+$c/\log n$ scale). This motivates --- but does not prove --- an \emph{occupation-density}
+bound: the source-occupation measure on time$\,\times\,$direction should have bounded density
+on the early balanced window, so that only $O(1)$ directions are simultaneously active. This is the form in which
 Question~\ref{q:alignment} should be integrated against time.
 \end{remark}
 
 \begin{question}[Extremality tames the covariance process]
 \label{q:taming}
-For every $\kappa>0$, do there exist $\eps,T_0>0$ such that every isotropic log-concave $\mu$
+For every $\kappa\in(0,1]$, do there exist $\eps>0$ and $T_0\in(0,1/8)$ such that every
+isotropic log-concave $\mu$
 on $\R^n$ with $h_\mu\le(1+\eps)\hstar_n$ satisfies
-$h_\mu\,\Xi_{T_0}(\mu)\le\kappa\,T_0$? By Theorem~\ref{thm:bootstrap} an affirmative answer
-gives relative-scale excess propagation for near-worst measures, while by
-Proposition~\ref{prop:ceiling} the corresponding statement without the near-worstness
-hypothesis is KLS-equivalent and hence not a legitimate target. Heuristically, covariance
+$h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)\le\kappa\,T_0$? By
+Theorem~\ref{thm:bootstrap} an affirmative answer gives the absolute-scale supply
+$T_0e_0+C\kappa T_0$ for near-worst measures. At a sufficiently small universal time, the
+stronger, unweighted condition $\Xi_{T_0}\le\kappa T_0$ for every measure is already KLS-sufficient by
+Proposition~\ref{prop:ceiling}; it is not the statement asked here. Heuristically, covariance
 inflation under localization is driven by third-moment anisotropy, while the splitting
 philosophy of Section~\ref{sec:jacobi} predicts that near-worst measures are approximately
 split along their dangerous directions, where the variance processes are one-dimensional and
@@ -92,19 +98,35 @@ Corollary~\ref{cor:loglog} leaves open.
 
 \begin{question}[Quantitative splitting / boundary Obata]
 \label{q:splitting}
-Prove a quantitative version of the rigidity principle of Remark~\ref{rem:obata}: for a
+First prove a rigidity theorem, and then a quantitative version, for the conjectural principle
+of Remark~\ref{rem:obata}: for a
 near-worst measure and a near-minimal balanced cut, small constant-mode curvature
 $\mathfrak K_\Sigma$ forces quantitative proximity, along the normal direction, to the split
 structure of Proposition~\ref{prop:exact-splitting}, with constants stable under the
-localization tilt (Proposition~\ref{prop:persistent-splitting}).
+localization tilt (Proposition~\ref{prop:persistent-splitting}). Proposition~\ref{prop:exact-splitting}
+proves only a sufficient globally split model and its flat halfspace; it does not prove the
+zero-curvature-to-splitting direction.
 \end{question}
+
+\begin{hypothesis}[Absolute-scale geometric completion]
+\label{hyp:absolute-geometric-completion}
+There exist universal $T_0\in(0,1/8)$ and $\kappa,c_g,\eps_g>0$ such that the following interface implication
+holds. For any isotropic log-concave measure satisfying
+$h_\mu\le(1+\eps_g)\hstar_n$ and any balanced near-Cheeger cut $E$, if
+\[
+  \int_0^{T_0}\E\bigl[\bar e_t\one_{\{t<\tau_\eta\}}\bigr]\dd t
+  \le T_0e_0+\kappa T_0,
+\]
+then the remaining geometric trace and stochastic consumption steps yield
+$\mu^+(E)\ge c_g$. This is an explicit placeholder for an absolute-scale completion, weaker
+and logically distinct from Assumption~\ref{ass:weighted-package}; no such implication is proved
+in this report.
+\end{hypothesis}
 
 \begin{corollary}[Residual dichotomy of the bootstrap route]
 \label{cor:dichotomy}
-Assume Hypothesis~\ref{hyp:KI}. Suppose the geometric route is completed with an excess demand
-at absolute scale with sufficiently small constant $\kappa$ --- that is, suppose the weighted
-Stein-trace mechanism can run on the supply
-$\int_0^T\E[\bar e_t\one_{t<\tau_\eta}]\dd t\le Te_0+\kappa T$. Then, by
+Assume Hypothesis~\ref{hyp:absolute-geometric-completion}. The published
+Corollary~\ref{cor:KI-discharged} discharges Hypothesis~\ref{hyp:KI}, so by
 Corollary~\textup{\ref{cor:loglog}}, this supply is available for near-worst measures in every
 dimension with $\hstar_n\le c\kappa T_0/(1+\log\log n)$, and the resulting contradiction
 confines any failure of KLS to dimensions with $\hstar_n\ge c'/\log\log n$. Such a completion
@@ -113,22 +135,25 @@ would therefore already yield
   \hstar_n\ \ge\ \frac{c'(\kappa)}{\log\log n}
   \qquad\text{for all large }n,
 \]
-an exponential improvement of the best known bound $\hstar_n\ge c(\log n)^{-1/2}$
-\cite{Klartag2023Logarithmic}, with full KLS following from an affirmative answer to
-Question~\textup{\ref{q:taming}} in the remaining regime.
+an asymptotic improvement over the version-1 preprint bound
+$\hstar_n\ge c(\log n)^{-1/4}$ \cite{Letwin2026QuadraticKLS}. Full KLS would additionally
+follow if Question~\textup{\ref{q:taming}} supplied its estimate at the same universal time
+consumed by Hypothesis~\textup{\ref{hyp:absolute-geometric-completion}} (or if that completion
+were uniform over the time supplied); the two existential times are not automatically equal.
 \end{corollary}
 
 \begin{proof}
 Choose the numerical constant $c$ in the hypothesis small enough, depending only on the constants
 in Corollary~\ref{cor:loglog} and on the completed route. If
-$\hstar_n\le c\kappa T_0/(1+\log\log n)$, pick an isotropic log-concave $\mu$ in dimension $n$ with
-$h_\mu\le2\hstar_n$ and a balanced near-minimizer $E$ satisfying
+$\hstar_n\le c\kappa T_0/(1+\log\log n)$, choose
+$0<\eps\le\min\{\eps_g,T_0^{1/3}\}$ and an isotropic log-concave $\mu$ in dimension $n$ with
+$h_\mu\le(1+\eps)\hstar_n$ and a balanced near-minimizer $E$ satisfying
 $\mu^+(E)\le I_\mu(\tfrac12)+o(1)=\tfrac12h_\mu+o(1)$, where the $o(1)$ is along the
 near-minimizing sequence. Corollary~\ref{cor:loglog} gives the supply
 $\int_0^{T_0}\E[\bar e_t\one_{t<\tau_\eta}]\dd t\le T_0e_0+\kappa T_0$ after reducing $c$.
 Running the completed route on this near-minimizing sequence yields a universal lower bound
 $\mu^+(E)\ge c''>0$. Letting the near-minimizer error tend to zero gives $h_\mu\ge2c''$, which
-contradicts $h_\mu\le2\hstar_n$ once $n$ is in the asserted small-$\hstar_n$ regime. Hence any
+contradicts $h_\mu\le(1+\eps_g)\hstar_n$ once $n$ is in the asserted small-$\hstar_n$ regime. Hence any
 failure of KLS must lie in the complementary regime $\hstar_n\gtrsim1/\log\log n$.
 \end{proof}
 
@@ -146,31 +171,34 @@ Question~\ref{q:weighted} & Perimeter martingale moments against the covariance 
 bootstrap technology of Section~\ref{sec:bootstrap} & Propagation half of the weighted
 package. \\
 \addlinespace
-Question~\ref{q:stein-weighted} & Reilly identity, stability inequality, quadratic chaos;
-constant mode via Question~\ref{q:splitting} & Stability half of the weighted package; with
+Question~\ref{q:stein-weighted} & Letwin quadratic chaos; a new almost-stability trace lemma;
+Reilly boundary terms and zero modes; constant mode via Question~\ref{q:splitting} & Stability half of the weighted package; with
 Question~\ref{q:weighted}, KLS by Theorem~\ref{thm:intro-weighted}. \\
 \addlinespace
-Question~\ref{q:taming} & Coupling of splitting structure to the covariance SDE & Relative
-propagation for near-worst measures; with Corollary~\ref{cor:dichotomy}, intermediate
-unconditional bounds at the $\log\log n$ scale. \\
+Question~\ref{q:taming} & Coupling of splitting structure to the covariance SDE & Absolute-scale
+bootstrap supply for near-worst measures; with the separate geometric completion in
+Corollary~\ref{cor:dichotomy}, a route to full KLS at the matched time. \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
 \subsection{Conclusion}
 
-This report proves no bound on $\hstar_n$. Its unconditional content is: the exact stochastic
+This report derives no new bound on $\hstar_n$; it imports Letwin's version-1 bound and marks all
+uses conditional on that preprint. Its unconditional content is: the exact stochastic
 layer (Sections~\ref{sec:mass-martingale}--\ref{sec:carleson}); the two-color Stein dictionary
-and the operator-to-trace gap (Section~\ref{sec:stein-dictionary}); the static obstruction ---
-quadratic chaos and the quantified two-tail configuration with its weight calibration
-(Section~\ref{sec:qcts}); the covariance technology and its discharge
+and the operator-to-trace gap (Section~\ref{sec:stein-dictionary}); the quadratic-chaos
+dictionary, the projection-method no-go, and the quantified two-tail configuration
+(Section~\ref{sec:qcts}); the published covariance technology
 (Section~\ref{sec:covariance-tech}); the consumption audit, the perimeter-martingale and
-excess identities, and the circularity analysis (Section~\ref{sec:excess}); the bootstrap
+excess identities, and the circularity warning (Section~\ref{sec:excess}); the bootstrap
 comparison theorem with its interface evaluation and ceiling (Section~\ref{sec:bootstrap}); the
-exact model statements of the splitting mechanism (Section~\ref{sec:jacobi}); and the model
-geometries (Section~\ref{sec:models}). The conditional content is concentrated in the weighted
-package (Assumption~\ref{ass:weighted-package}) and the all-cut estimate
-(Assumption~\ref{ass:all-cut-carleson}), with the open targets posed in
+explicit sufficient model statements for splitting (Section~\ref{sec:jacobi}); and the model
+geometries (Section~\ref{sec:models}). The preprint-conditional content includes dimension-free
+quadratic chaos and the $c/\log n$ covariance-moment window. The remaining conditional content is concentrated in the weighted
+package (Assumption~\ref{ass:weighted-package}), the all-cut estimate
+(Assumption~\ref{ass:all-cut-carleson}), and the explicitly hypothetical absolute-scale
+completion (Hypothesis~\ref{hyp:absolute-geometric-completion}), with the open targets posed in
 Questions~\ref{q:upgrade}--\ref{q:splitting}. The architecture rests on three structural
 points: the previously postulated excess-propagation assumption is retired (unconditionally
 true as consumed, hence inert); the Stein-trace estimate is stated in the covariance-weighted

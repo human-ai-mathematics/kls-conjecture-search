@@ -16,10 +16,17 @@ The name ``Stein trace'' refers to the second exact form of $\ell_{\nu,E}$, as a
 
 \begin{lemma}[Boundary representation]
 \label{lem:boundary-rep}
-Let $\nu=e^{-V}dx$ be smooth, log-concave, compactly supported within the regularity convention
-of Section~\ref{sec:notation}, let $E$ be a smooth finite-perimeter set with $\Sigma=\partial^*E$
-and inner unit normal $n$, and let $f$ be smooth with $\nu$-mean $\bar f$. Let $u_f$ solve the
-Poisson equation $Lu_f=f-\bar f$, $L=\Delta-\nabla V\cdot\nabla$. Then
+Let $K$ be a smooth bounded convex domain and
+$\nu=Z^{-1}e^{-V}\one_Kdx$, with $V$ smooth and convex on $\overline K$. Let $E$ be smooth
+relative to $K$, put $\Sigma=\partial^*E\cap\operatorname{int}K$, and let $n$ be its inner unit
+normal. For smooth $f$ with $\nu$-mean $\bar f$, let $u_f$ be the mean-zero weak solution of the
+Neumann Poisson problem
+\[
+ Lu_f=f-\bar f\quad\text{in }K,
+ \qquad \partial_{n_K}u_f=0\quad\text{on }\partial K,
+ \qquad L=\Delta-\nabla V\cdot\nabla .
+\]
+Then
 \begin{equation}\label{eq:boundary-rep}
   \Cov_\nu(\one_E,f)
   =\int_E(f-\bar f)\dd\nu
@@ -36,8 +43,11 @@ Proposition~\ref{prop:stein-rep}.
 \end{lemma}
 
 \begin{proof}
-$\int_E(f-\bar f)\dd\nu=\int_E Lu_f\,e^{-V}dx=\int_E\operatorname{div}\bigl(e^{-V}\nabla
-u_f\bigr)dx$, and the divergence theorem on $E$ gives the boundary flux with the inner normal.
+$\int_E(f-\bar f)\dd\nu=Z^{-1}\int_E\operatorname{div}(e^{-V}\nabla u_f)dx$.
+The divergence theorem on $E\cap K$ gives the displayed flux on $\Sigma$ with the inner normal;
+the contribution on $\partial K\cap E$ vanishes by the Neumann condition. Existence and
+uniqueness up to constants are the standard centered Neumann problem on the smooth bounded
+weighted domain; the mean-zero normalization fixes the constant.
 \end{proof}
 
 \begin{remark}[What the stable Stein-trace estimate is]
@@ -61,12 +71,15 @@ target.
 \label{subsec:consumption}
 
 \begin{proof}[Proof of Theorem~\ref{thm:intro-weighted}]
-Assume the weighted package (Assumption~\ref{ass:weighted-package}). Thus its constants satisfy
-$\beta<\tfrac12$. Suppose, for contradiction, that KLS fails, and let $(\mu_k,E_k)$ be a sequence
+Assume the weighted package (Assumption~\ref{ass:weighted-package}). Thus its fixed tight-window
+parameter satisfies $2\beta+64\eta^2<1$. Suppose, for contradiction, that KLS fails, and let
+$(\mu_k,E_k)$ be a sequence
 of isotropic log-concave measures and balanced near-Cheeger cuts with $\mu_k^+(E_k)\to0$ and
 $e_0(E_k)\le1$; this is the near-minimizer reduction in the remark following
-Theorem~\ref{thm:centroid-implies-kls}. Fix $\eta>0$ so small that $2\beta+64\eta^2<\alpha<1$;
-since $\beta<\tfrac12$ this forces $\eta<\tfrac18<\tfrac16$.
+Theorem~\ref{thm:centroid-implies-kls}. Choose once and for all
+$\alpha\in(2\beta+64\eta^2,1)$.  In particular, the assumed value of $\eta$ is small enough for
+the tight-window conversion below; no stopping window is chosen after the two package estimates
+have been supplied.
 
 By Lemma~\ref{lem:stein-vs-source} and the weighted Stein-trace estimate
 \eqref{eq:intro-weighted-stein},

@@ -145,12 +145,13 @@ cut-specific territory; Theorem~\ref{thm:budget} localizes the entire remaining 
 product model in cuts of unbounded coordinate complexity.
 \end{remark}
 
-\subsection{Theorem C: the covariance reduction for arbitrary cuts of products}
+\subsection{Theorem C: the covariance reduction and its general quadratic-chaos input}
 \label{sec:covariance-reduction}
 
-For cuts of unbounded complexity the block structure is unavailable, but the product structure
-yields a pathwise quadratic-chaos bound at every time --- not only at $t=0$ --- which converts
-the all-cut estimate into a cut-free covariance statement.
+For cuts of unbounded complexity the block structure is unavailable. Product structure gives an
+elementary pathwise quadratic-chaos bound at every time. Theorem~\ref{thm:letwin-qcts} now gives
+the same intrinsic input for every log-concave posterior, conditional on its version-1 preprint
+status; the unwhitening loss remains exactly the cut-free covariance factor.
 
 \begin{lemma}[Quadratic chaos for non-isotropic products]
 \label{lem:product-qcts}
@@ -180,41 +181,32 @@ $C_*\sum_{ij}M_{ij}^2\sigma_i^2\sigma_j^2=C_*\norm{A^{1/2}MA^{1/2}}_\HS^2$ with
 $C_*=\max(C_4-1,2)$.
 \end{proof}
 
+Lemma~\ref{lem:product-qcts} remains a preprint-independent proof of the input on product paths.
+For general log-concave posteriors it is replaced by Corollary~\ref{cor:qcts-source}.
+
 \begin{theorem}[Pathwise covariance bound on the source]
 \label{thm:covariance-bound}
-Let $\mu$ be a product as in Theorem~\textup{\ref{thm:budget}} and $E$ \emph{any} measurable
-set. Then pathwise, on the coarse balanced window $\{p_t\in[1/3,2/3]\}$,
+Conditional on Theorem~\ref{thm:letwin-qcts}, let $\mu$ be any isotropic log-concave initial
+measure and $E$ any measurable set. Then pathwise, on the coarse balanced window
+$\{p_t\in[1/3,2/3]\}$,
 \begin{equation}\label{eq:S-le-X2}
   S_t\ \le\ C\bigl(1+X_t^2\bigr),
 \end{equation}
-with $C$ universal.
+with $C$ universal. The same conclusion holds unconditionally when $\mu$ is a product as in
+Theorem~\textup{\ref{thm:budget}}.
 \end{theorem}
 
 \begin{proof}
-Fix $t$ and write $\nu=\mu_t$, centered at $a_t$, with diagonal covariance $A=A_t$; $\nu$ is a
-product by Proposition~\ref{prop:products}. By the Stein representation
-Proposition~\ref{prop:stein-rep}, $\Cov_\nu(\one_E,Y^TMY)=s\inner KM$ for $Y=x-a_t$. Cauchy--Schwarz
-and Lemma~\ref{lem:product-qcts} give
-\[
-  s^2\inner KM^2\le\Var(\one_E)\,\Var(Y^TMY)\le s\,C_*\norm{A^{1/2}MA^{1/2}}_\HS^2 .
-\]
-Substituting $M=A^{-1/2}NA^{-1/2}$ and taking the supremum over $\norm N_\HS\le1$ yields the
-whitened bound
-\begin{equation}\label{eq:whitened}
-  s\,\norm{A^{-1/2}KA^{-1/2}}_\HS^2\ \le\ C_* .
-\end{equation}
-Un-whitening, $\norm K_\HS\le\lmax(A)\,\norm{A^{-1/2}KA^{-1/2}}_\HS$, so
-$s\norm K_\HS^2\le C_*\lmax^2$. Finally $G=K-(q-p)\delta\delta^T$ and, on the coarse window
-($s\ge2/9$, $\abs{q-p}\le1$),
-\[
-  S=s\norm G_\HS^2\le2s\norm K_\HS^2+2s\abs\delta^4
-  \le2C_*\lmax^2+\frac{2r^2}{s}\le2C_*\lmax^2+9\lmax^2 ,
-\]
-using $r\le\lmax$ (rank-one $B\preceq A$). Since $\lmax\le1+X$ and $(1+X)^2\le2(1+X^2)$, the
-claim follows.
+Fix $t$ and write $\nu=\mu_t$, centered at $a_t$, with covariance $A=A_t$. Under the preprint
+input, Corollary~\ref{cor:qcts-source} gives $S_t\le17\lmax(A_t)^2$ on the coarse window. Since
+$\lmax(A_t)\le1+X_t$ and $(1+X_t)^2\le2(1+X_t^2)$, this proves the first assertion.
+
+For a product path, the proof of Corollary~\ref{cor:qcts-source} goes through with
+Lemma~\ref{lem:product-qcts} in place of Theorem~\ref{thm:letwin-qcts}, yielding the same
+conclusion with a different universal constant and without the preprint input.
 \end{proof}
 
-\begin{corollary}[Covariance reduction of the all-cut estimate for products]
+\begin{corollary}[Covariance reduction of the all-cut estimate]
 \label{cor:V2-implies}
 Define the \emph{second-moment interface condition} on a window $[0,T_0]$:
 \begin{equation}\label{eq:V2}
@@ -222,11 +214,12 @@ Define the \emph{second-moment interface condition} on a window $[0,T_0]$:
   \int_I\E X_t^2\dd t\ \le\ K\,\abs I
   \qquad\text{for every interval }I\subset[0,T_0].
 \end{equation}
-If \textup{(V2)} holds for the localization of a product measure $\mu$, then
-Assumption~\ref{ass:all-cut-carleson} holds for $\mu$ on $[0,T_0]$ with $C_0=C(1+K)$, $C_1=0$ and
-damping coefficient $\alpha=0$. In particular the entire all-cut estimate for products reduces
-to a statement about $n$ independent one-dimensional variance processes, with no reference to
-cuts.
+Conditional on Theorem~\ref{thm:letwin-qcts}, if \textup{(V2)} holds for the localization of an
+isotropic log-concave measure $\mu$, then the all-cut estimate
+\eqref{eq:all-cut-carleson} holds for $\mu$ on $[0,T_0]$ with $C_0=C(1+K)$, $C_1=0$, and damping
+coefficient $\alpha=0$. For product measures the implication is unconditional. In that case it
+reduces the estimate to a statement about $n$ independent one-dimensional variance processes,
+with no reference to cuts.
 \end{corollary}
 
 \begin{proof}
@@ -241,56 +234,67 @@ warning of \eqref{eq:trivial-lambda}: (V2) concerns the \emph{excess} $X=(\lmax-
 not $\E\int\lmax\le CT$ for all measures (which would already imply KLS and is not available);
 for products, (V2) is not circular --- KLS for products is known independently --- it is a
 concrete, decidable question about explicit one-dimensional SDEs. The next section decides it
-on the polylog window and assesses it beyond.
+on the dimension-dependent early window and assesses it beyond.
 \end{remark}
 
 \subsection{Theorem D: the second-moment window and the sharpness regime}
 \label{sec:window}
 
-\subsubsection{The second-moment bound on the polylog window}
+\subsubsection{The second-moment bound through the $1/\log n$ window}
 
-The required covariance input is the small-time operator-norm control of
-Section~\ref{sec:covariance-tech}: the sup-over-time window of Theorem~\ref{thm:KL-window} and
-its discharge (Corollary~\ref{cor:KI-discharged}). It yields the second-moment interface bound
-that \textup{(V2)} requires.
+The required covariance input is the fixed-time operator-norm moment control of
+Section~\ref{sec:covariance-tech}. The published sup-over-time estimate
+Theorem~\ref{thm:KL-window} supplies a preprint-independent $c/\log^2n$ fallback. Letwin's
+quadratic-chaos input and the Klartag--Lehec moment theorem together extend the fixed-time
+second-moment window to $c/\log n$.
 
-\begin{theorem}[Second-moment interface bound on the polylog window]
+\begin{theorem}[Letwin-enhanced second-moment interface window]
 \label{thm:V2-window}
-There are universal constants $c_0,K_0$ such that for every isotropic log-concave $\mu$ on
-$\R^n$ (in particular every product) and every $t\le t_1(n):=c_0(\log n)^{-2}$,
+Conditional on Theorem~\ref{thm:letwin-qcts}, there are universal constants $c_0,K_0$ such that
+for every isotropic log-concave $\mu$ on $\R^n$ and every
+$t\le t_1(n):=c_0(\log n)^{-1}$,
 \[
   \E\,X_t^2\ \le\ K_0 ,
   \qquad\text{hence \textup{(V2)} holds on }[0,t_1(n)]\text{ with }K=K_0 .
 \]
-Consequently, by Corollary~\textup{\ref{cor:V2-implies}}, Assumption~\ref{ass:all-cut-carleson} holds for product
-measures on the window $[0,c_0(\log n)^{-2}]$, unconditionally.
+Consequently, conditional on the preprint, Corollary~\textup{\ref{cor:V2-implies}} gives the
+inequality \eqref{eq:all-cut-carleson}, measure by measure, for every initial log-concave $\mu$
+(including products) on this dimension-dependent window. For products the implication
+\textup{(V2)}$\Rightarrow$\eqref{eq:all-cut-carleson} is preprint-independent, but the present
+$c/\log n$ verification of \textup{(V2)} still uses the preprint. None of this establishes
+Assumption~\ref{ass:all-cut-carleson}, whose time window must be universal in $n$. Without the
+preprint, Theorem~\ref{thm:KL-window} verifies \textup{(V2)} for every measure on
+$[0,c_0(\log n)^{-2}]$; the all-cut conclusion then follows preprint-independently for products
+via the product case of Corollary~\ref{cor:V2-implies}. For non-product measures that implication
+still uses Theorem~\ref{thm:letwin-qcts}.
 \end{theorem}
 
 \begin{proof}
-On the event $\{\norm{A_t}_\op<2\}$, $X_t\le1$. On the complement, of probability at most
-$e^{-1/(Ct)}$ by Theorem~\ref{thm:KL-window}, the Brascamp--Lieb cap
-\eqref{eq:BL-cap} gives $X_t\le t^{-1}$ pathwise. Hence
+On $t\le c_0/\log n$, Corollary~\ref{cor:letwin-window} with $p=2$ gives
+$\E\norm{A_t}_\op^2\le C_2$, hence $\E X_t^2\le C_2$. This pointwise estimate integrates over
+every subinterval and proves \textup{(V2)}. The consequences follow from
+Corollary~\ref{cor:V2-implies}.
+
+For the preprint-independent fallback, on the event $\{\norm{A_t}_\op<2\}$ one has $X_t\le1$.
+On the complement, of probability at most $e^{-1/(Ct)}$ by
+Theorem~\ref{thm:KL-window}, the Brascamp--Lieb cap \eqref{eq:BL-cap} gives $X_t\le t^{-1}$,
+and therefore
 \[
   \E X_t^2\le1+t^{-2}e^{-1/(Ct)}\le1+\sup_{u>0}u^2e^{-u/C}=1+(2C/e)^2=:K_0 .
 \]
 \end{proof}
 
-\subsubsection{Sharpness, and the open window of the literature}
+\subsubsection{The natural endpoint and the remaining universal-time gap}
 
-Two cited facts delimit what can be expected beyond $t_1(n)$. First, the window of
-Theorem~\ref{thm:KL-window} is essentially sharp: this is asserted in
-\cite[Remark~62]{KLnotes} and realized by the explicit example of \cite[Remark~64 and
-Proposition~65]{KLnotes}: the product of two-sided exponentials, for
-which, in Klartag's formulation, one of the eigenvalues ``can reach $\log n$ in a short
-time'', so that the operator norm is at least of order $\log n$ at times of order
-$1/\log n$ \cite{KlartagChenNotes}. Second --- and this is worth highlighting --- extending
-the covariance bound to the intermediate window is explicitly open and explicitly valuable:
-it is recorded in the literature around \cite{Guan2025Tail,KLnotes} that the validity of the
-covariance bound for $t\in[(\log n)^{-2},(\log n)^{-1}]$ would already improve the best known
-isoperimetric bound of \cite{Klartag2023Logarithmic}. The interface functionals
-$\Xi_T$ and $\Xi^{(2)}_T$ of \eqref{eq:Xi2-def} therefore sit exactly at the recognized
-frontier of the covariance technology, which is evidence that the difficulty has been
-parametrized correctly rather than relocated.
+The formerly open fixed-time moment window between $c/\log^2n$ and $c/\log n$ is closed by the
+combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen
+the distinct published \emph{sup-over-time} statement of Theorem~\ref{thm:KL-window}. The scale
+$1/\log n$ is also the natural endpoint for covariance-only control: the explicit product of
+two-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order
+$1/\log n$ \cite[Remarks~62, 64 and Prop.~65]{KLnotes}. Thus the live gap for
+$\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the
+sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal
+alignment must replace covariance-only control.
 
 \begin{heuristic}[Expected failure of (V2) on universal windows for exponential products]
 \label{heur:V2-fails}
@@ -304,8 +308,8 @@ window $\E X_t^2\gtrsim t^{-2}$, and
 \]
 Hence on any \emph{universal} window $[0,T_0]$, the condition \textup{(V2)} is expected to
 fail for exponential products, with $\int_0^{T_0}\E X_t^2\dd t\gtrsim\log n$. We mark this as
-a heuristic: the cited statements establish that the threshold $2$ is crossed after the
-polylog window and that the bound is ``pretty much sharp''; the quantitative strength
+a heuristic: the cited statements establish inflation near the $1/\log n$ scale and describe
+the covariance estimate as ``pretty much sharp''; the quantitative strength
 $\lmax\asymp1/t$ with non-negligible probability requires the sharpness example to be carried
 out in detail, which we have not done line by line.
 \end{heuristic}
@@ -347,35 +351,52 @@ is whether (b)--(d) are simultaneously achievable.
 \label{q:alignment}
 Let $\mu$ be a product of $n$ isotropic two-sided exponentials. Does there exist a universal
 $T_0$ and constants $C_0,C_1,\alpha<1$ such that for every $n$ and every balanced cut $E$,
+writing $P_t^H$ for the coordinate projection onto
+$H_t=\{i:A_t^{(i)}\ge2\}$ and $P_t^L=I-P_t^H$,
 \[
-  \E\int_{I\cap[0,\tau]}\ \sum_{i:\,A_t^{(i)}\ge2}s_t\abs{G_te_i}^2\dd t
+  \E\int_{I\cap[0,\tau]} S_t^H\dd t
   \ \le\ C_0\abs I+C_1\E\int_{I\cap[0,\tau]}r_t\dd t
   +\alpha\,\E\int_{I\cap[0,\tau]}D_t\dd t ,
   \qquad I\subset[0,T_0]\ ?
 \]
-Equivalently, up to the covariance-controlled part: can a fixed cut spend
+Here
+\[
+ S_t^H:=s_t\bigl(\norm{P_t^HG_tP_t^H}_\HS^2
+       +2\norm{P_t^LG_tP_t^H}_\HS^2\bigr)
+ =S_t-s_t\norm{P_t^LG_tP_t^L}_\HS^2
+\]
+counts every matrix entry incident to an inflated coordinate. This definition avoids an
+absorption loss: the simpler column mask counts each high--low entry only once, whereas the full
+source counts it twice. It also satisfies
+$S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$.
+The obstruction-side negation asks whether a fixed cut can spend
 $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation
 excursions of those coordinates, within a common universal window, while staying balanced and
 underdamped? An affirmative answer to the displayed estimate, combined with
-Theorem~\textup{\ref{thm:V2-window}} for the polylog window and a matching treatment of the
+Theorem~\textup{\ref{thm:V2-window}} for the early $c/\log n$ window (conditional on the cited
+preprint) and a matching treatment of the
 non-inflated part at moderate times, would settle Program~\ref{prog:product-test} positively. A negative answer
 --- an explicit high-complexity cut achieving the alignment --- would refute Assumption~\ref{ass:all-cut-carleson}
-and force Route~B unconditionally.
+and eliminate Route~A's all-cut hypothesis, leaving Route~B as the surviving localization
+sub-route rather than constraining unrelated approaches.
 \end{question}
 
 \begin{remark}[Designated test family]
 \label{rem:test-family}
-The natural candidate cuts for the negative direction are permutation-symmetric
-thin-shell-type sets $E=\{x:\sum_i\psi(x_i)\ge\theta\}$ with $\psi$ even, which have unbounded
-coordinate complexity and, at $t=0$, bounded source by Lemma~\ref{lem:product-qcts}. The
-question is whether localization can dynamically correlate their per-coordinate expenditures
-with the inflation excursions. Symmetry is a double-edged constraint: it spreads the budget
-uniformly ($\E\int_0^Ts\abs{Ge_i}^2$ independent of $i$), but the inflating index is
-exchangeable too, so symmetric cuts are precisely the ones whose budget allocation a random
-inflating coordinate ``finds'' automatically. A careful computation of
-$\E\int_0^{T}S_t\dd t$ for this family --- one-dimensional log-concave estimates,
-independence, and the explicit variance dynamics are all available --- is, in our assessment,
-the single most informative computation now open on Route~A, and it is finite-dimensional in
-difficulty in a way that the open targets of Section~\ref{sec:open} are not.
+The first energy-shell candidate $\{\sum_i x_i^2\ge\theta\}$ is too radial: its source is already
+covered on the early covariance window and does not interrogate the dangerous adapted alignment.
+A sharper refutation-seeking family is the balanced tail union
+\[
+  E_n=\{\max_i\abs{x_i}\ge a_n\}
+     =\Bigl\{\sum_i\one_{\{\abs{x_i}\ge a_n\}}\ge1\Bigr\},
+  \qquad \mu(E_n)=\frac12.
+\]
+It is permutation-symmetric but coordinate-selective, depends on all coordinates, and its
+complement is a product of one-dimensional truncated factors. Symmetry spreads the budget
+uniformly, while exchangeability lets a random inflating coordinate find the cut. A useful
+computation must measure the incident high-variance source $S_t^H$ in
+Question~\ref{q:alignment}, together with $r_t$, $D_t$, balance survival, and interval sweeps
+past $c/\log n$. Such a computation is refutation-seeking model evidence only, not a proof of
+the all-cut estimate.
 \end{remark}
 \end{document}

@@ -28,11 +28,15 @@ Cheeger constant or its reciprocal. We also write
   \hstar_n=\inf\bigl\{h_\nu:\ \nu\ \text{isotropic log-concave on }\R^n\bigr\},
 \end{equation}
 the worst-case Cheeger constant of the dimension; the KLS conjecture is the assertion
-$\inf_n\hstar_n>0$, and the best known bound is $\hstar_n\ge c(\log n)^{-1/2}$
-\cite{Klartag2023Logarithmic}, following the breakthrough of Chen \cite{Chen2021} and the polylogarithmic
-bound of Klartag--Lehec \cite{KlartagLehec2022Polylog}.
+$\inf_n\hstar_n>0$. The published benchmark is $\hstar_n\ge c(\log n)^{-1/2}$
+\cite{Klartag2023Logarithmic}. A July 2026 version-1 preprint of Letwin improves the claimed
+bound to $\hstar_n\ge c(\log n)^{-1/4}$ \cite{Letwin2026QuadraticKLS}; throughout this report,
+uses of that improvement are explicitly conditional on the preprint input.
 
-The surrounding landscape has changed substantially. Eldan's stochastic localization reduced
+The surrounding landscape has changed substantially. Letwin's moment-map/Stein-kernel argument
+proves a dimension-free quadratic Poincar\'e inequality for quadratic forms and then combines it
+with the log-concave Lichnerowicz comparison to obtain the preceding $\log^{1/4}n$ inverse-Cheeger
+bound \cite{Letwin2026QuadraticKLS}. Eldan's stochastic localization reduced
 thin-shell information to spectral-gap information up to logarithmic factors \cite{Eldan2013ThinShell}, and
 Lee--Vempala developed this into powerful isoperimetric, concentration, and mixing estimates
 \cite{LeeVempala2024}, in a tradition that also includes Paouris-type concentration bounds
@@ -134,8 +138,13 @@ For the geometric route, the central package is now stated in weighted form.
 
 \begin{assumption}[Weighted near-Cheeger geometric package]
 \label{ass:weighted-package}
-There are universal constants $T_0,C_0,C_1,C_2$, $\beta<\tfrac12$, $\gamma>0$, and a fixed tight
-stopping window $\tau_\eta$ such that the following two estimates hold for every initial
+There are universal constants $T_0,C_0,C_1,C_2$, $0\le\beta<\tfrac12$, $\gamma>0$, and
+$\eta\in(0,\tfrac14]$ satisfying
+\begin{equation}\label{eq:weighted-absorption-margin}
+  2\beta+64\eta^2<1,
+\end{equation}
+such that, for the corresponding fixed tight stopping window $\tau_\eta$, the following two
+estimates hold for every initial
 near-Cheeger set $E$ with $p_0=1/2$ (or $\abs{p_0-1/2}\le\eta/2$).
 
 \begin{enumerate}[label=(\roman*-w),leftmargin=3.2em]
@@ -168,10 +177,11 @@ Assumption~\ref{ass:weighted-package} implies the KLS conjecture.
 \end{theorem}
 
 The proof is given in Section~\ref{sec:stein}, using the audit and propagation analysis of
-Section~\ref{sec:excess}. The weight $(1+\norm{A_t}_\op)^{5/2}$ is not a choice of convenience; it
-is calibrated exactly on the anisotropic two-tail configuration (Proposition~\ref{prop:two-tail}),
-and it is the minimal covariance weight under which the excess term is statically consistent. The
-following audit explains why the weight is necessary.
+Section~\ref{sec:excess}. The weight $(1+\norm{A_t}_\op)^{5/2}$ is calibrated on the anisotropic
+two-tail configuration (Proposition~\ref{prop:two-tail}): among pure powers of $\lmax(A_t)$
+multiplying absolute excess in this slice-wise package, $5/2$ is the smallest statically
+consistent exponent. This does not assert that every possible proof of KLS needs this weight.
+The following audit explains the constraint on the present formulation.
 
 \begin{proposition}[Consumption audit; deceptive strength of the unweighted estimate]
 \label{prop:intro-audit}
@@ -220,25 +230,25 @@ Per-direction Carleson estimate & Shows that $s_tG_t^2$ has dimension-free occup
 \addlinespace
 Operator-to-trace upgrade & The true stochastic missing estimate & Open. \\
 \addlinespace
-Quadratic-chaos thin shell & Static time-zero form of two-color covariance control & Formulated; not sufficient by itself through whitening. \\
+Quadratic-chaos thin shell & Static time-zero form of two-color covariance control & Imported with constant $8$ from a July 2026 version-1 preprint; whitening still leaves dynamic covariance alignment. \\
 \addlinespace
 Consumption audit of the excess term & Shows the unweighted excess term is inert and the unweighted Stein-trace estimate alone implies KLS & Proved (Section~\ref{sec:excess}). \\
 \addlinespace
-Quantified two-tail obstruction and weight calibration & Forces the covariance weight $(1+\norm{A_t}_\op)^{5/2}$ on the excess term; explains the rate $T^{1+\gamma}$ & Proved (Section~\ref{sec:qcts}). \\
+Quantified two-tail obstruction and weight calibration & Forces the covariance weight $(1+\norm{A_t}_\op)^{5/2}$ on any slice-wise excess term; the $T^{1+\gamma}$ rate remains a strong open target & Proved (Section~\ref{sec:qcts}). \\
 \addlinespace
-Perimeter martingale and exact excess identity & Reduces propagation to the localized profile floor; shows direct propagation is circular & Proved (Section~\ref{sec:excess}). \\
+Perimeter martingale and exact excess identity & Reduces propagation to the localized profile floor; exposes a circularity risk without proving a no-go theorem & Proved (Section~\ref{sec:excess}). \\
 \addlinespace
 Bootstrap comparison theorem & Reduces near-worst excess propagation to the interface $h_\mu\,\Xi_T$ & Proved (Section~\ref{sec:bootstrap}). \\
 \addlinespace
-Interface evaluation & $\log\log n$ loss from known covariance technology; crude evaluation provably insufficient; relative scale is a KLS-equivalent ceiling & Proved, given the imported covariance input of Hypothesis~\ref{hyp:KI}. \\
+Interface evaluation & $\log\log n$ loss from known covariance technology; crude evaluation provably insufficient; a relative bound for all measures at a sufficiently small universal time is KLS-sufficient & Proved, given the imported covariance input of Hypothesis~\ref{hyp:KI}. \\
 \addlinespace
 Weighted excess propagation & Keeps a near-Cheeger cut near-minimal at the weighted scale & Open and central. \\
 \addlinespace
 Extremality tames the covariance process & Residual target of the bootstrap route & Open; proposed coupling of the splitting analysis to the covariance SDE. \\
 \addlinespace
-Weighted stable Stein trace & Boundary route to the two-color source estimate & Open; reduced to Jacobi/Reilly/splitting mechanisms. \\
+Weighted stable Stein trace & Boundary route to the two-color source estimate & Open; Reilly/Jacobi gives a proposed mechanism, but a uniform almost-stability trace lemma is still missing. \\
 \addlinespace
-Jacobi constant-mode splitting & Handles the mode invisible to volume-preserving stability & Exact model statements proved; quantitative version open. \\
+Jacobi constant-mode splitting & Proposed treatment of modes invisible to volume-preserving stability & One sufficient split model is proved; converse rigidity, coercivity modulo zero modes, and quantitative stability are open. \\
 \bottomrule
 \end{tabularx}
 \end{center}

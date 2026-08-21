@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import scipy
 
 
 def repo_root() -> Path:
@@ -51,13 +52,18 @@ def _git(*args: str) -> str | None:
 
 def provenance(**params: Any) -> dict[str, Any]:
     """A JSON-serializable provenance header; pass run params (seed, n, d, ...) as keywords."""
+    commit = _git("rev-parse", "HEAD")
+    status = _git("status", "--porcelain")
+    dirty = None if status is None else bool(status.strip())
     return {
         "date": date.today().isoformat(),
-        "git_commit": _git("rev-parse", "HEAD"),
-        "git_dirty": (lambda s: None if s is None else bool(s.strip()))(_git("status", "--porcelain")),
+        "git_commit": commit,
+        "git_dirty": dirty,
+        "evidence_eligible": commit is not None and dirty is False,
         "python": sys.version.split()[0],
         "platform": platform.platform(),
         "numpy": np.__version__,
+        "scipy": scipy.__version__,
         "params": params,
     }
 
@@ -71,7 +77,7 @@ def write_jsonl(path: str | Path, header: dict, records: list[dict]) -> Path:
     if path.suffix == ".log":
         raise ValueError("use .jsonl for artifacts; the repo .gitignore eats *.log")
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w") as fh:
+    with path.open("x") as fh:
         fh.write(json.dumps({"_provenance": header}) + "\n")
         for rec in records:
             fh.write(json.dumps(rec) + "\n")

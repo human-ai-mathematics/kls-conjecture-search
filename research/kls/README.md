@@ -12,15 +12,17 @@ edit the existing one's DAG.
 routes.md      the route REGISTRY (one row per attack; how to open a new one)
 shared/        route-AGNOSTIC truth — binds every route
   target.md      the KLS statement, h* definition, and the bridge to Part II (ab/conj:a1-bis)
-  lower-bounds.md  the universal sound lower bound + refuted forms any route must respect
+  lower-bounds.md  the universal sound lower bound + clearly route-scoped refuted forms
 routes/
-  eldan-localization/   the current attack (Eldan stochastic localization; sub-routes A/B)
+  eldan-localization/   Eldan stochastic localization (sub-routes A/B; owns current ledger)
     ledger.yaml obstructions.yaml obstructions.md open-problems.md roadmap.md README.md
+  moment-map-spectral/  prose-only moment-map / fixed-eigenfunction localization route
 ```
 
-Start at [`routes.md`](routes.md) for the map; read [`shared/`](shared/) for what any proof
-must respect; read [`routes/eldan-localization/`](routes/eldan-localization/) for the active
-program.
+Start at [`routes.md`](routes.md) for the map; read [`shared/`](shared/) for the target and the
+scope of each constraint; then choose the cut-localization or moment-map/fixed-eigenfunction
+route. The current cross-route decision and completed first research cycle are summarized in
+[`2026-08-20-kls-program-cycle-1.md`](../explorations/2026-08-20-kls-program-cycle-1.md).
 
 ## Why this is separate from the A-series
 
@@ -49,9 +51,10 @@ Details in [`shared/target.md`](shared/target.md).
 
 ## One `kls` ledger for now (deferred limitation)
 
-`check_ledger.py` keys ledgers by `meta.program`, so only one route carries a `ledger.yaml`
-today (`eldan-localization`); new routes stay prose-only until the checker is extended to merge
-multiple same-program ledgers. See [`routes.md`](routes.md#limitation-one-kls-ledger-for-now-deferred).
+Only one route carries a `ledger.yaml` today (`eldan-localization`). `check_ledger.py` now rejects
+a duplicate `meta.program: kls` ledger explicitly; new routes stay prose-only until the checker
+is extended with deliberate merge and obstruction-union semantics. See
+[`routes.md`](routes.md#limitation-one-kls-ledger-for-now-deferred).
 
 ## Verify
 

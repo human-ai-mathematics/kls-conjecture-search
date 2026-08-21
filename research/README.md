@@ -30,8 +30,9 @@ Two programs, federated under one control plane, one shared checker, cross-linke
 research/
   ledger.yaml      A-series (Parts I/II, program: ab) — single source of truth for A1-A5:
                    every statement + obstruction, status, evidence, dependency edges.
-  check_ledger.py  program-aware checker for BOTH ledgers (ids resolve, acyclic, file paths
-                   exist, no proved-on-unproved, KLS no-go set, cross-program bridges).
+  check_ledger.py  program-aware checker for BOTH ledgers (unique ids/programs, resolved edges,
+                   recursive assumption/status safety, evidence provenance, KLS obstruction
+                   reverse parity, cross-program bridges).
   targets/         one working notebook per A-series target (A1-A5).
   knowledge/       the COMMON cross-cutting database (math in LaTeX $…$):
                      obstructions.md  no-go forms / barriers (with numerical demos)
@@ -43,7 +44,12 @@ research/
                      shared/              route-agnostic truth (target.md, lower-bounds.md)
                      routes/eldan-localization/   the active attack — carries the kls ledger:
                        ledger.yaml obstructions.yaml obstructions.md open-problems.md roadmap.md
+                     routes/moment-map-spectral/ prose-only fixed-eigenfunction dynamic route
 ```
+
+The current KLS route decision, including the completed product-alignment diagnostic and the
+audited $H^{-1}$ endpoint, is in
+[`explorations/2026-08-20-kls-program-cycle-1.md`](explorations/2026-08-20-kls-program-cycle-1.md).
 
 The Phase-2 output plane is a **repo-root sibling**, `../solutions/`: standalone,
 human-checkable `.tex` proofs that a `proved` ledger node points to (via a `solution:` field) —
@@ -59,27 +65,35 @@ See `kls/README.md`.
 
 ## Status & evidence vocabulary
 
-- **status** (logical state): `open` → `conjectured` → `proved`; plus `imported`
-  (literature anchor) and `refuted` (the form was shown false).
+- **A-series status**: `open` → `conjectured` → `proved`, plus `imported` and `refuted`.
+- **KLS status**: `proved`, `conditional`, `open`, `heuristic`, `refuted`, or `imported`.
 - **evidence** (numerical support, orthogonal): `none` → `numerical-directional` →
   `numerical-strong` (passed the shared `knowledge/instances.md` battery, with
   `evidence_run:` pointing at the provenance-stamped `finum` artifact).
 
 ## How `finum` plugs in
 
-The numerical package (`finum`, to be built) produces the `evidence` field. A run's
+The numerical package (`finum`, implemented under `experiments/`) produces the `evidence` field. A run's
 output is a provenance-stamped JSONL referenced by `evidence_run` in the ledger node.
 There is no separate "reward subsystem": the ledger is where the signal lands, and the
 signal is *"this refined statement survived the shared stress battery, tightness X."*
 
 ## Rules that keep "validated" honest
 
-1. A `proved` node may not depend on an `open`/`conjectured`/`refuted` node (enforced).
-2. `numerical-strong` requires passing the **shared** stress instances in
-   `knowledge/instances.md` — not an agent's own happy-path cases (prevents a soft
-   statement being "validated" against a soft battery).
-3. Every conjecture lists the obstructions it must respect (`bounded_by`); a statement
-   that violates a known obstruction is wrong by construction.
+1. A `proved` node may not inherit an unresolved dependency or `assuming` edge. For KLS this
+   explicitly includes `conditional`, `heuristic`, and imported nodes marked
+   `import_class: preprint-unreviewed`; conditional nodes must declare and recursively propagate
+   a non-empty `assuming` contract. Imported nodes default to `import_class: published`.
+2. Evidence-eligible numerics require an existing, valid provenance-stamped JSONL from a clean
+   commit and an explicit matching `evidence_target`. A dirty artifact may remain attached only
+   as historical diagnostics with `evidence: none`; `evidence_eligible: false` does not override
+   a non-`none` evidence claim. `numerical-strong` additionally requires successful calibration,
+   an explicit shared-battery pass, and a verdict record.
+3. Every conjecture lists the obstructions it must respect (`bounded_by`); for KLS the checker
+   enforces exact reverse parity with `obstructions.yaml.constrains` and requires clearance for
+   both forbidden and methodological-warning mechanisms.
+4. A program has exactly one ledger until explicit merge semantics are implemented; duplicate
+   program ledgers and duplicate node ids fail rather than overwrite.
 
 ## Definition of done for a Phase-1 contribution
 
@@ -88,3 +102,6 @@ signal is *"this refined statement survived the shared stress battery, tightness
 3. `python3 research/check_ledger.py` returns 0 errors.
 4. The attempt (incl. dead ends) is logged in `explorations/YYYY-MM-DD-slug.md`;
    cross-cutting findings promoted to `knowledge/`.
+
+Focused checker regressions run with
+`python3 -m unittest discover -s research/tests -p 'test_*.py'`.

@@ -1,5 +1,5 @@
 """finum CLI:  python -m finum selftest
-              python -m finum run --target {A1,A2,A3,A4,A5,kls} [--seed N] [--out PATH]"""
+              python -m finum run --target TARGET [--seed N] [--out PATH] [--heavy]"""
 from __future__ import annotations
 
 import argparse
@@ -19,7 +19,9 @@ def main(argv: list[str] | None = None) -> int:
                     help="Part II target (A1-A5) or Part III route-gating (kls)")
     pr.add_argument("--seed", type=int, default=0)
     pr.add_argument("--out", default=None,
-                    help="artifact path (default research/runs/<date>-<target>.jsonl)")
+                    help="artifact path (default research/runs/<timestamp>-<target>.jsonl)")
+    pr.add_argument("--heavy", action="store_true",
+                    help="run expensive independent gates (currently kls-loc only)")
 
     args = p.parse_args(argv)
 
@@ -29,7 +31,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "run":
         from .run import run
-        path = run(args.target, seed=args.seed, out=args.out)
+        if args.heavy and args.target != "kls-loc":
+            p.error("--heavy is currently supported only for --target kls-loc")
+        cfg = {"heavy": True} if args.heavy else {}
+        path = run(args.target, seed=args.seed, out=args.out, **cfg)
         print(f"wrote {path}")
         return 0
 

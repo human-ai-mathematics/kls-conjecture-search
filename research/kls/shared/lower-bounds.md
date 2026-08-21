@@ -1,13 +1,13 @@
-# Universal lower bounds & refuted forms — route-agnostic
+# Universal lower bounds and route-scoped refuted forms
 
-Facts that bind **every** route to KLS, independent of the proof strategy. A new route in
-[`../routes.md`](../routes.md) must respect these; a route whose central hypothesis collides
-with one is dead on arrival (mark it `refuted`). Distinguished from the *mechanism* no-gos in
-`routes/eldan-localization/obstructions.md`, which forbid specific localization proof moves —
-those are route-internal. The items here are true of any attack. Math in LaTeX (`$…$`).
+The linear-test lower bound binds every route. The later refuted forms were discovered within
+the Eldan fixed-cut program and are scoped to that mechanism; they are summarized here for
+cross-route visibility, not promoted to universal no-go theorems. Canonical mechanism fences
+remain in `routes/eldan-localization/obstructions.md`. Math in LaTeX (`$…$`).
 
-These facts are numerically gated by `finum` (SDE-free); see [`../gating.md`](../gating.md) for
-the node → quantity → verdict map and the artifact `research/runs/<date>-kls.jsonl`.
+`finum` contains an SDE-free finite-battery sanity check for the linear-test bridge. It does not
+test the route-scoped fixed-cut refutations below, and the currently stored run artifacts are
+historical diagnostics rather than evidence-eligible records; see [`../gating.md`](../gating.md).
 
 ## The sound lower bound (the universal refuter)
 
@@ -19,23 +19,23 @@ this says $C_P\ge 1$ — KLS is the matching *upper* bound $C_P\le 1/c^2$. Conse
 routes: any claimed dimension-free upper bound must survive this lower bound on every test
 instance; `finum` uses it as the go/no-go gate when numerically vetting a route.
 
-## Refuted forms (any route must avoid)
+## Route-scoped refuted forms
 
-- **Single-coordinate counterexample — refuted** (`obs:rank-one-refuted`,
+- **Single-coordinate product-localization counterexample — refuted** (`obs:rank-one-refuted`,
   `cor:refutation`). The natural "one inflated coordinate breaks the product budget" attempt
   does **not** refute the program: the product coordinate-budget theorem (`thm:budget`)
-  absorbs a rank-one inflation. A route built on engineering a single bad coordinate is dead;
-  the surviving danger is the *adapted alignment* problem (`q:alignment`), which is subtler.
-- **Relative-scale-for-all-measures is KLS-equivalent, not intermediate**
+  absorbs a rank-one inflation. This kills that counterexample mechanism inside the fixed-cut
+  Eldan route; it does not constrain a moment-map, spectral, transport, or needle proof.
+- **Relative-scale-for-all-measures is already KLS-sufficient, not intermediate**
   (`obs:relative-ceiling`). Demanding the covariance-excess bound $\Xi_T\le\kappa T$ for
-  *every* measure is logically equivalent to KLS itself — so a route that "reduces" KLS to it
-  has reduced KLS to KLS. Real progress must use *extremality* (near-worst structure), e.g.
-  `q:taming`.
+  *every* measure at a sufficiently small universal time directly implies KLS by the fixed-cut
+  consumption argument. Only sufficiency is proved, not the converse. This is a ceiling for
+  that localization mechanism; the distinct $h_\mu$-weighted, near-worst target `q:taming`
+  remains legitimate.
 
 ## Why these live here, not in a route
 
-These are statements about the **target and its counterexamples**, not about how localization
-estimates behave. They were discovered inside the Eldan route but are facts about KLS itself,
-so a future non-localization route inherits them unchanged. When a new refuted form is found
-that is route-agnostic, add it here; when it forbids a specific *proof mechanism*, it belongs
-in that route's `obstructions.{yaml,md}`.
+The linear-test lower bound is genuinely route-agnostic. The two items immediately above are
+retained here for discoverability but are explicitly scoped to the Eldan/fixed-cut mechanism;
+a future non-localization route does not inherit them as no-go theorems. Mechanism-specific
+constraints belong canonically in the active route's `obstructions.{yaml,md}`.

@@ -1,23 +1,30 @@
 """finum.localization — the Eldan stochastic-localization engine.
 
-This is the **localization** regime of the KLS route-gating (research/kls/gating.md): the
-per-route stochastic-localization quantities (occupation budget Xi_S, per-direction alignment,
-weighted Stein source/damping) that the SDE-free `finum/targets/kls.py` defers to. It produces
-**directional** evidence only — it never certifies (see research/kls/shared/target.md and the
-finum soundness contract).
+This is the numerical engine beneath the **localization diagnostic** channels. The legacy
+``kls-loc`` target provides source occupation and two-color engine checks but does not assemble
+the open-node observables. The separate ``kls-align`` target now assembles ``S_high,r,D`` for the
+specific product-Laplace tail-union stress model. Both remain diagnostics, not proof evidence.
 
 Numerics discipline: exact deterministic quadrature for the 1D
 tilted marginals (never a Gaussian surrogate — that surrogate produced the retracted
 energy-shell result), a seeded Euler-Maruyama tilt SDE, surrogate-free two-color conditional
 moments (incl. the off-diagonal block), and the pathwise Brascamp-Lieb cap asserted every step.
 
-A DIRECTIONAL number is read only after the gates pass: `gates.n_bins_convergence` (the gridded
-k>=2 background has converged) and `gates.fft_vs_mc` (the FFT background agrees with independent
-Monte-Carlo). A verdict behind a red gate is discarded, not scored.
+A thin-shell occupation number is inspectable only behind the target's full gate set: Gaussian
+calibration, `gates.n_bins_convergence`, `gates.fft_vs_mc`, and time-step refinement. Missing or
+red gates are `no-verdict`; all-green output remains diagnostic until a route observable is
+implemented.
 """
 from __future__ import annotations
 
-from . import cuts, gates, observables
+from . import alignment, cuts, gates, observables, tail_union
+from .alignment import (
+    AlignmentPathIntegrals,
+    FilteringTrajectory,
+    filtering_trajectory,
+    grid_intervals,
+    integrate_alignment_path,
+)
 from .cuts import (
     CutSpec,
     Psi,
@@ -41,6 +48,13 @@ from .observables import (
 )
 from .sde import localization_path, make_rng, spawn_rngs
 from .state import ProductState
+from .tail_union import (
+    SymmetricTruncationMoments,
+    TailUnionObservables,
+    balanced_tail_radius,
+    observe_tail_union,
+    tilted_laplace_symmetric_truncation,
+)
 from .tilt1d import GAUSSIAN, LAPLACE, Base1D, Tilted1D, tilted, tilted_variance
 
 __all__ = [
@@ -55,6 +69,11 @@ __all__ = [
     "Observables", "PathIntegrals", "observe", "integrate_path", "ensemble_mean", "R0_diag",
     # gates
     "n_bins_convergence", "fft_vs_mc",
+    # product tail-union q:alignment diagnostic
+    "SymmetricTruncationMoments", "TailUnionObservables", "balanced_tail_radius",
+    "tilted_laplace_symmetric_truncation", "observe_tail_union",
+    "FilteringTrajectory", "AlignmentPathIntegrals", "filtering_trajectory",
+    "integrate_alignment_path", "grid_intervals",
     # submodules
-    "cuts", "gates", "observables",
+    "alignment", "cuts", "gates", "observables", "tail_union",
 ]

@@ -1,11 +1,12 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Excess propagation: audit and circularity}
+\section{Excess propagation: audit and a circularity warning}
 \label{sec:excess}
 
 This section proves Proposition~\ref{prop:intro-audit} --- the consumption audit showing the
-unweighted excess term is inert --- and demonstrates that direct propagation is circular,
-motivating the bootstrap mechanism of Section~\ref{sec:bootstrap}. The static obstruction that
+unweighted excess term is inert --- and explains why a direct propagation argument can merely
+restate a localized isoperimetric lower bound, motivating the bootstrap mechanism of
+Section~\ref{sec:bootstrap}. This is a methodological warning, not a no-go theorem. The static obstruction that
 forces the covariance weight (Proposition~\ref{prop:two-tail}) is established in
 Section~\ref{sec:qcts}.
 
@@ -47,10 +48,11 @@ this weight cannot be discharged slice-wise. The weighted restatement
 (Assumption~\ref{ass:weighted-package}) is the repair: the weighted excess term is no longer
 inert, the static obstruction is consistent with it, and the burden is honestly distributed
 between a stability estimate (Stein trace) and a propagation estimate (weighted excess), each
-now genuinely necessary.
+now a non-inert stated input of this repaired package. Other proof architectures need not use
+this decomposition.
 \end{remark}
 
-\subsection{Why direct propagation is circular}
+\subsection{Why direct propagation risks circularity}
 \label{subsec:circularity}
 
 \begin{lemma}[Perimeter martingale]
@@ -88,33 +90,41 @@ the set $E$ at all, except through the random volume $p_t$. It is exactly the qu
 lower-bounding the expected isoperimetric profile of the random posterior at the current mass;
 the set enters only through the driftless perimeter martingale.
 
-\begin{lemma}[Infima of perimeter martingales]
+\begin{lemma}[Infima over a fixed competitor family]
 \label{lem:inf-martingales}
-Let $\mathfrak S$ be any family of finite-perimeter sets (countable, or rendered measurable by
-the usual selection conventions), and define $J_t=\inf\{\mu_t^+(S):S\in\mathfrak S\}$. Then
-$J$ is a supermartingale. Moreover, on $\{t<\tau_\eta\}$,
-$I_{\mu_t}(p_t)\ge J_t(\eta)$, where $J_t(\eta)$ is the infimum of $\mu_t^+(S)$ over sets with
-$\mu_t(S)\in[\tfrac12-\eta,\tfrac12+\eta]$.
+Let $\mathfrak S$ be any \emph{fixed} family of finite-perimeter sets (countable, or rendered
+measurable by the usual selection conventions), and define
+$J_t=\inf\{\mu_t^+(S):S\in\mathfrak S\}$. Then $J$ is a supermartingale. Pointwise, on
+$\{t<\tau_\eta\}$,
+\[
+  I_{\mu_t}(p_t)\ge J_t(\eta),
+  \qquad
+  J_t(\eta):=\inf\bigl\{\mu_t^+(S):
+    \mu_t(S)\in[\tfrac12-\eta,\tfrac12+\eta]\bigr\}.
+\]
+The competitor family defining $J_t(\eta)$ is random and time-dependent, so the first assertion
+does \emph{not} imply that $J(\eta)$ or $I_{\mu_t}(p_t)$ is a supermartingale.
 \end{lemma}
 
 \begin{proof}
 For each fixed $S$, $\mu_t^+(S)$ is a martingale by Lemma~\ref{lem:perimeter-martingale}, so
 $\E[J_t\mid\mathcal F_s]\le\mu_s^+(S)$ for every $S$; take the infimum over $S$. The second
-claim holds because the constrained family at exact mass $p_t$ is contained in the windowed
-family when $p_t$ is in the window.
+pointwise comparison holds because the constrained family at exact mass $p_t$ is contained in
+the windowed family when $p_t$ is in the window. No conditional-expectation comparison is
+available from this inclusion because the eligible family changes with $t$.
 \end{proof}
 
 \begin{remark}[The circularity, formalized]
 \label{rem:circularity}
 By Lemma~\ref{lem:excess-identity}, excess propagation is equivalent to a lower bound on
-$\E I_{\mu_t}(p_t)$, hence on the expectation of an infimum of perimeter martingales over
-balanced-window competitors. Two structural facts follow. There is no free monotonicity: an
-infimum of martingales is a supermartingale, so its expectation can only decrease, and the
-question is precisely the rate. And any quantitative lower bound on $\E J_t(\eta)$ is, by
-definition, a Cheeger-type lower bound for the random measure $\mu_t$ --- a localized KLS
-statement. A direct attack on excess propagation therefore presupposes the kind of estimate the
-program is trying to produce. The only non-circular anchor available is an external one: the
-worst-case constant $\hstar_n$ of \eqref{eq:hstar-def}, a legitimate input in a proof by
-contradiction. This is the bootstrap of the next section.
+$\E I_{\mu_t}(p_t)$. Such a lower bound is itself a Cheeger-type statement for the random
+posterior, so an argument that simply inserts a lower bound for the localized profile risks
+assuming the phenomenon the program is meant to prove. Lemma~\ref{lem:inf-martingales} supplies
+no monotonicity for that profile, because the mass-constrained competitor family changes with
+time. Thus ``direct propagation is circular'' should be read as a proof-design warning, not a
+formal impossibility result: additional structure could conceivably control the moving
+infimum. The external worst-case constant $\hstar_n$ of \eqref{eq:hstar-def} provides one
+demonstrably non-circular anchor in a contradiction argument; the next section develops that
+bootstrap without claiming it is the only possible anchor.
 \end{remark}
 \end{document}

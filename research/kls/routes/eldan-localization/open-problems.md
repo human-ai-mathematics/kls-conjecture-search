@@ -29,8 +29,9 @@ directions for a non-negligible set of early balanced times (noncommutative Carl
 
 **Unlocks.** `ass:all-cut-carleson` ⇒ `thm:intro-all-cut` ⇒ **KLS directly**.
 
-**Bounded by.** `obs:proj-ceiling` (projection/radial info caps at $\log n$ — the upgrade
-*must* use cut-specific structure $G_t, K_t, D_t$, not spectral control of $A_t$);
+**Bounded by.** `obs:proj-ceiling` (projection/radial info alone caps at $\log n$; Letwin's
+moment-map proof bypasses this for intrinsic QCTS, but the dynamic upgrade still needs
+cut-specific structure $G_t, K_t, D_t$ and covariance occupation);
 `obs:two-tail` (the inflated-posterior configuration must be shown rare, not controlled
 pointwise).
 
@@ -41,7 +42,8 @@ windows of $A_t$ (the Euclidean source is $S_t = s_t\operatorname{Tr}(A_t H_t A_
 
 **Prior work / entry point.** Start with `prog:product-test` (P7): on products the
 per-direction estimate becomes a per-coordinate **budget** (`thm:budget`) and the whole
-question reduces to `q:alignment` (P6). Settle the model first. **Numerics:** `finum run --target kls-loc` (finum.localization).
+question reduces to `q:alignment` (P6). The designated tail-union model is now implemented by
+`finum run --target kls-align`; the generic `kls-loc` target remains an engine diagnostic.
 
 ---
 
@@ -53,18 +55,19 @@ $E\int_0^{T\wedge\tau_\eta} e_t(E)\,(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt \le C(T 
 
 **Unlocks.** Half of `ass:weighted-package`.
 
-**Bounded by.** `obs:two-tail` — the weight $(1+\|A\|)^{5/2}$ and rate $T^{1+\gamma}$ are
-*calibrated* on the two-tail example (`prop:two-tail`); a weaker absolute-scale form is inert
-(`prop:intro-audit`) and unprovable slice-wise. `obs:circularity` — do **not** attack
-directly; route through the bootstrap.
+**Bounded by.** `obs:two-tail` calibrates the covariance power $(1+\|A\|)^{5/2}$, but not the
+time rate $T^{1+\gamma}$; a weaker absolute-scale form is inert (`prop:intro-audit`) and
+unprovable slice-wise. `obs:circularity` is a warning that inserting a localized profile lower
+bound may restate KLS, not a theorem forbidding every direct approach.
 
 **Attack.** The **unweighted** analogue is already resolved by the bootstrap
 (`thm:bootstrap`, near-worst measures, all balanced cuts). The weighted version additionally
 needs **second-moment control of the perimeter martingale against the covariance weight** —
 control of $E\int e_t (1+\|A_t\|)^{5/2}$ rather than $E\int e_t$. The perimeter is a
-martingale (`lem:perimeter-martingale`); the missing piece is its interaction with rare
-covariance-inflation excursions (heuristic $E e_t \lesssim t^{3/2}$ where the BL cap
-saturates, `rem:weight-explains-rate`).
+martingale (`lem:perimeter-martingale`); the missing piece is its joint interaction with rare
+covariance-inflation excursions. If the BL cap saturated deterministically, a pointwise
+$E e_t\lesssim t^{5/2+\gamma}$ would be sufficient; the former $t^{3/2}$ heuristic was
+dimensionally incorrect (`rem:weight-explains-rate`).
 
 **Prior work / entry point.** `thm:bootstrap` + interface evaluation (`cor:loglog`). Connects
 to `q:taming` (P4).
@@ -81,29 +84,36 @@ term in the $(1+\|A_t\|)^{5/2}$-weighted form.
 
 **Bounded by.** `obs:two-tail` (no slice-wise shortcut).
 
-**Attack.** Mechanism in `modules/kls/13-jacobi-splitting.tex` (`rem:dirichlet-trace`): via the
-boundary representation (`lem:boundary-rep`) and the weighted Reilly identity (`prop:reilly`),
-reduce to (a) quadratic-chaos control of the interior Dirichlet quantity (available up to the
-log ceiling, `obs:proj-ceiling`); (b) stability control of mean-zero boundary modes
-(`prop:second-variation`); (c) the **constant mode** via the Schur energy $J^\sharp$ or
-splitting. (c) is the residual — the same constant-mode obstruction as `q:upgrade` in geometric
-coordinates.
+**Attack.** The intrinsic quadratic-chaos input is now dimension-free, conditional on Letwin
+v1 (`thm:letwin-qcts`). Before Reilly/Jacobi can use it, prove the foundational
+`rem:almost-stability-gap`: the localized fixed near-Cheeger cut is not automatically a stable
+critical minimizer; the index form has tangential Jacobi zero modes; and the global Poisson
+solution leaves mixed Reilly boundary terms. A quantitative trace/almost-stability theorem,
+uniform under tilt and modulo this kernel, is the next lemma. Constant-mode splitting is
+downstream of that bridge, not yet the sole residual.
 
-**Prior work / entry point.** Constant mode needs `q:splitting` (P5). The Stein-norm ↔ Riccati
-source conversion is lossless on the tight window (`lem:stein-vs-source`).
+**Prior work / entry point.** The Stein-norm ↔ Riccati source conversion is lossless on the
+fixed tight window (`lem:stein-vs-source`), provided the package includes
+$2\beta+64\eta^2<1$. Then address `rem:almost-stability-gap`, followed by `q:splitting` (P5).
 
 ---
 
 ## P4 · `q:taming` — extremality tames the covariance process
 
-**Statement** (`q:taming`). For every $\kappa>0$, do there exist $\varepsilon,T_0>0$ such that
+**Statement** (`q:taming`). For every $\kappa\in(0,1]$, do there exist $\varepsilon>0$ and
+$T_0\in(0,1/8)$ such that
 every isotropic log-concave $\mu$ with $h_\mu \le (1+\varepsilon)h^*_n$ satisfies
-$h_\mu\,\Xi_{T_0}(\mu) \le \kappa T_0$? Here $\Xi_T = \int_0^T E(\lambda_{\max}(A_t)-1)_+\,dt$.
+$h_\mu(T_0^{4/3}+\Xi_{T_0}(\mu)) \le \kappa T_0$? Here
+$\Xi_T = \int_0^T E(\lambda_{\max}(A_t)-1)_+\,dt$.
 
-**Unlocks.** Relative-scale excess propagation for near-worst measures (via `thm:bootstrap`).
+**Unlocks.** Absolute-scale supply $T_0e_0+C\kappa T_0$ for near-worst measures (via
+`thm:bootstrap`), and
+therefore the matched-time completion described in `cor:dichotomy`.
 
-**Bounded by.** `obs:relative-ceiling` — the same statement **without** near-worstness is
-KLS-equivalent, so the near-worstness hypothesis is essential and legitimate.
+**Bounded by.** `obs:relative-ceiling` — the stronger, unweighted all-measure condition
+$\Xi_{T_0}\le\kappa T_0$ at a sufficiently small universal time is already sufficient for KLS.
+The $h_\mu$-weighted near-worst statement above is distinct and genuinely weaker. No converse
+equivalence is proved.
 
 **Attack.** Couple the **splitting analysis** (`modules/kls/13-jacobi-splitting.tex`) to the
 **covariance SDE** (`eq:cov-sde`): covariance inflation is driven by third-moment anisotropy,
@@ -111,9 +121,11 @@ while near-worst measures are conjecturally approximately split along their dang
 directions (where variance processes are one-dimensional and tame, `prop:products`(ii)). This
 coupling has **not been attempted**; note the type mismatch in `rem:taming-type-mismatch`.
 
-**Prior work / entry point.** Already settled affirmatively (under `hyp:KI`, discharged by
-`thm:KL-window`) whenever $h^*_n \le c\kappa T_0/\log\log n$ (`cor:loglog`); the only obstructed
-regime is $h^*_n$ decaying slower than $1/\log\log n$. See `cor:dichotomy`.
+**Prior work / entry point.** The required inequality follows in the small-$h_n^*$ dimension
+regime whenever $h^*_n \le c\kappa T_0/(1+\log\log n)$ (`cor:loglog`, with `hyp:KI`
+discharged by the published `cor:KI-discharged`); the
+unresolved regime has $h^*_n$ larger than this scale. Converting that dichotomy into a theorem
+also needs the separate `hyp:absolute-geometric-completion`; see `cor:dichotomy`.
 
 ---
 
@@ -126,10 +138,14 @@ localization tilt (`prop:persistent-splitting`).
 
 **Unlocks.** The constant-mode part of `q:stein-weighted` (P3).
 
-**Attack.** The equality case is proved (`prop:exact-splitting`: $\mathfrak K_\Sigma = 0$ ⇔
-product with a log-affine factor). Need the *stability* (Obata-type rigidity) version. Note
-`cor:generic-degeneracy`: in a small-Cheeger counterexample the splitting branch is **generic**,
-not exceptional — so this is central.
+**Attack.** Only a sufficient flat model is proved: a global cylinder with a globally
+Hessian-flat direction splits, and an already split log-affine factor has a flat orthogonal
+halfspace (`prop:exact-splitting`). The converse $\mathfrak K_\Sigma=0\Rightarrow$ global
+splitting is unproved and false without additional hypotheses (boundary-local flatness alone is
+insufficient). First formulate and prove a valid rigidity theorem, then its stability version.
+`cor:generic-degeneracy` gives small curvature at many balanced volumes under a smooth-minimizer
+grant, but does not transfer that fact to the selected cut followed under localization; that
+transfer is an additional open step.
 
 ---
 
@@ -138,9 +154,15 @@ not exceptional — so this is central.
 **Statement** (`q:alignment`, `modules/kls/09-product-stress.tex`). For $\mu$ a product of $n$
 isotropic two-sided exponentials: does there exist universal $T_0,C_0,C_1,\alpha<1$ such that
 for every $n$ and every balanced cut $E$,
-$E\int_{I\cap[0,\tau]} \sum_{i:\,A_t^{(i)}\ge2} s_t|G_t e_i|^2\,dt \le C_0|I| + C_1 E\int r_t + \alpha E\int D_t$?
-Equivalently: can a **fixed** cut spend $\Omega(1)$-fractions of unboundedly many per-coordinate
-budgets inside a common short window, while staying balanced and underdamped?
+$$
+E\int_{I\cap[0,\tau]} S_t^H\,dt
+\le C_0|I| + C_1 E\int r_t + \alpha E\int D_t,
+$$
+where, for the high-variance coordinate projection $P_t^H$ and $P_t^L=I-P_t^H$,
+$S_t^H=s_t(\|P_t^HG_tP_t^H\|_{HS}^2+2\|P_t^LG_tP_t^H\|_{HS}^2)$ counts every matrix entry
+incident to a high coordinate. The obstruction-side negation asks whether a **fixed** cut can
+spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside a common short
+window, while staying balanced and underdamped.
 
 **Unlocks.** `prog:product-test` decided positively ⇒ strong evidence for / a model of
 `q:upgrade`. A negative answer (an explicit aligning cut) **refutes** `ass:all-cut-carleson`
@@ -149,12 +171,23 @@ and forces Route B.
 **Bounded by.** `obs:rank-one-refuted` — single-coordinate cuts cannot do it (budget $\le1$,
 spikes self-extinguish); the residue is genuinely high-complexity cuts.
 
-**Attack.** **Designated test family** (`rem:test-family`): permutation-symmetric thin-shell
-sets $E = \{x : \sum_i \psi(x_i) \ge \theta\}$, $\psi$ even. Compute $E\int_0^T S_t\,dt$ using
-1D log-concave estimates, independence, and the explicit variance dynamics (`prop:products`).
-**Finite-dimensional in difficulty** and the single most informative computation now open on
-Route A. **Numerics:** `finum run --target kls-loc` thin-shell run; the live danger is past $t_1(n)=c/(\log n)^2$ and
-non-radial coordinate-selective cuts — see the 2026-06-18 thin-shell-alignment exploration.
+**Attack.** **Designated test family** (`rem:test-family`): the balanced tail union
+$E_n=\{\max_i|x_i|\ge a_n\}$. It is permutation-symmetric, high-complexity, and
+coordinate-selective; its complement is a product of truncated one-dimensional factors. Measure
+the incident-high source $S_t^H$, together with $r,D$, balance survival, uncertainty, and
+interval sweeps past the conditional $c/\log n$ window. The existing energy
+shell is radial and uninformative.
+
+**Executed diagnostic.** `finum run --target kls-align` now computes these observables with exact
+tilted-Laplace moments, a filtering-path simulation, paired-grid gates, and discovery/held-out
+interval scans. The 2026-08-20 run through $n=1024$ found a visible simultaneous-alignment pulse
+but no sampled divergence of the required constant. This is a one-family, 16-held-out-path,
+dirty-worktree diagnostic with node-only stopping, so it neither supports nor refutes the
+universal node. The finite-dimensional identities and the local fixed-time boundary-Poisson
+limit are proved; boundedness of the full stopped observable is conjectural. See the
+[`cycle-1 synthesis`](../../../explorations/2026-08-20-kls-program-cycle-1.md),
+[`asymptotic analysis`](../../../explorations/2026-08-20-kls-tail-union-asymptotics.md), and
+[`final diagnostic`](../../../runs/2026-08-20-kls-align-high-n-final.jsonl).
 
 ---
 
@@ -162,22 +195,29 @@ non-radial coordinate-selective cuts — see the 2026-06-18 thin-shell-alignment
 
 **Status.** Largely **executed** in `modules/kls/09-product-stress.tex`: coordinate budgets
 (`thm:budget`), rank-one refutation (`cor:refutation`), covariance reduction (`cor:V2-implies`),
-polylog-window discharge (`thm:V2-window`, `cor:KI-discharged`). The remaining open part is
+dimension-dependent covariance-window discharge (`thm:V2-window`, `cor:KI-discharged`). The
+published fallback reaches $c/\log^2n$; conditional on Letwin v1 the fixed-time moment window
+reaches $c/\log n$. The remaining open part is
 exactly `q:alignment` (P6). The covariance-only route is heuristically expected to fail on
 universal windows (`heur:V2-fails`) — so any proof must be cut-aware.
 
-**Highest-value next step.** The thin-shell-family computation of P6.
+**Highest-value next step.** Prove, or refute, a stopped uniform envelope for the tail union,
+
+$$
+\sup_{n\ge1,\ 0<t<1/2}\mathbb E[1_{\{t<\tau\}}S_t^H]<\infty.
+$$
+
+If further computation is used, first test the predicted fixed-time Poisson limit at much larger
+$n$, then tighten full paths and stopping; another modest-dimensional path sweep is lower value.
 
 ---
 
 ## Cross-cutting verification debt
 
-- **`thm:KL-window` / `hyp:KI` citation — DISCHARGED (2026-06-14 sweep).** The
-  "unconditional on the polylog window" claims (`thm:V2-window`, `cor:KI-discharged`, hence
-  `cor:loglog`, `cor:dichotomy`) rest on the Klartag–Lehec covariance bound in its
-  **exponential-tail** form. Resolved: the sup-over-time / clean $(\log^2 n)^{-1}$-window form is
-  `KLnotes` Thm 61 (*not* `KlartagLehec2022Polylog` Lemma 5.2); the second moment $E X_t^2$ is
-  `KlartagLehec2022Polylog` Cor 5.4. See `rem:kl-window-verified`. Residual: confirm statement
-  numbering against local arXiv copies (version-dependent).
+- **Covariance-window status.** The published sup-over-time / clean $(\log^2 n)^{-1}$ form is
+  `KLnotes` Thm 61 (*not* `KlartagLehec2022Polylog` Lemma 5.2). Klartag–Lehec Corollary 5.4
+  gives fixed-time moments on $(C\kappa_n^2\log n)^{-1}$; Letwin v1 makes $\kappa_n$ universal
+  and hence extends that moment window to $c/\log n$. Keep the latter explicitly
+  preprint-conditional and do not silently upgrade the separate sup-time theorem.
 - Geometric module (`13-jacobi-splitting.tex`) results are **model statements**; the
   quantitative, uniform-in-localization versions are open (`q:splitting`).

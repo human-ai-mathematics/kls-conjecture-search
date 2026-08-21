@@ -63,12 +63,39 @@ A useful warning follows from \eqref{eq:B-le-A}: since $B_t$ has rank one and ei
 Hence a constant-time estimate of $\E\int_0^T\lmax(A_t)\dd t$ would already imply KLS by
 Doob's inequality. Any noncircular proof of the two-color Carleson estimate must exploit the
 cut-specific quantities $G_t,B_t,r_t,D_t$, not first assume constant-time spectral control of
-$A_t$. Proposition~\ref{prop:ceiling} sharpens this warning into an exact ceiling: the estimate
-$\E\int_0^T\lmax(A_t)\dd t\le(1+\kappa)T$ is not merely sufficient for KLS, it is precisely what a
-relative-scale excess propagation estimate would require as input, so the relative scale cannot be
-a legitimate intermediate target.
+$A_t$. Proposition~\ref{prop:ceiling} sharpens this warning for the scalar-bootstrap mechanism:
+the estimate $\E\int_0^T\lmax(A_t)\dd t\le(1+\kappa)T$ is already sufficient for KLS, while
+certifying relative-scale excess through the bound in Section~\ref{sec:bootstrap} would demand
+the same scale of covariance input. Thus it is not an independent intermediate target for that
+particular certificate; no claim about every possible propagation argument is made.
 
 \subsection{Stopped centroid estimate}
+
+\begin{lemma}[A balanced posterior event gives boundary; uniformly, KLS]
+\label{lem:survival-implies-kls}
+Let $\mu$ be isotropic log-concave and $E$ measurable. If, for some $T_0,c_0,b_0>0$,
+\[
+  \Prob\bigl(\min(p_{T_0},q_{T_0})\ge b_0\bigr)\ge c_0,
+\]
+then $\mu^+(E)\ge c\,c_0b_0\sqrt{T_0}$. Consequently, if $T_0,c_0,b_0$ are universal and the
+event holds for every balanced cut of every isotropic log-concave measure, KLS follows.
+\end{lemma}
+
+\begin{proof}
+The posterior $\mu_{T_0}$ is $T_0$-uniformly log-concave, so
+Bakry--Emery/Lichnerowicz and Gaussian isoperimetric comparison
+give \cite{BakryGentilLedoux2014,Bobkov1999LogConcave,Milman2009Isoperimetric}
+\[
+  \mu_{T_0}^+(E)\ge c\sqrt{T_0}\min(p_{T_0},q_{T_0}).
+\]
+The perimeter supermartingale inequality therefore yields
+\[
+  \mu^+(E)\ge\E\mu_{T_0}^+(E)
+  \ge c c_0b_0\sqrt{T_0}.
+\]
+Concavity of the isoperimetric profile converts the universal balanced-cut bound into a
+dimension-free Cheeger lower bound.
+\end{proof}
 
 \begin{assumption}[Stopped centroid estimate]
 \label{ass:stopped-centroid}
@@ -99,24 +126,8 @@ If $\tau\le T$, then $\sup_{t\le T\wedge\tau}\abs{p_t-p_0}\ge1/6$. Doob's $L^2$ 
   \le36CT .
 \]
 Choose a universal $T\le T_0$ so small that $36CT\le1/2$. Then $\Prob(\tau>T)\ge1/2$, and on this
-event $\min(p_T,q_T)\ge1/3$.
-
-The posterior $\mu_T$ is $T$-uniformly log-concave. The Bakry--Emery/Lichnerowicz mechanism and the
-standard Gaussian isoperimetric comparison for uniformly log-concave measures give
-\[
-  \mu_T^+(E)\ge c\sqrt T\min(p_T,q_T),
-\]
-with universal $c>0$; see \cite{BakryGentilLedoux2014} and the convex-measure comparison framework
-of \cite{Bobkov1999LogConcave,Milman2009Isoperimetric}. Averaging and using the supermartingale inequality
-\eqref{eq:perimeter-supermartingale},
-\[
-  \mu^+(E)
-  \ge \E\mu_T^+(E)
-  \ge c\sqrt T\,\E\min(p_T,q_T)
-  \ge c'>0 .
-\]
-Thus every balanced cut has universal boundary measure. By concavity of the isoperimetric profile,
-this is equivalent to a dimension-free Cheeger lower bound.
+event $\min(p_T,q_T)\ge1/3$. Lemma~\ref{lem:survival-implies-kls} applies with this universal
+time and survival probability $1/2$.
 \end{proof}
 
 The same proof shows that it is enough to establish \eqref{eq:stopped-centroid} for a sequence of

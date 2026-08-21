@@ -6,7 +6,8 @@
 Both proof routes of this report consume the same covariance contrast of a cut, in two
 normalizations. This short core section records the exact algebraic dictionary relating that
 contrast to the Riccati source of Section~\ref{sec:riccati}, and isolates --- once --- the
-single analytic gap that the remainder of the report attacks from two sides.
+exact Route~A gap and the covariance contrast that the proposed geometric route also seeks to
+control. The bridge from Jacobi/Reilly boundary modes to this trace is not yet proved.
 
 \subsection{The operator-to-trace gap}
 \label{subsec:one-gap}
@@ -17,19 +18,21 @@ budget on the two-color source: with the occupation operator
   \calM:=\E\int_0^\infty s_tG_t^2\dd t,
 \]
 estimate \eqref{eq:loewner-carleson} reads $\calM\preceq R_0\preceq I_n$, a dimension-free
-bound at the level of quadratic forms. The KLS-strength statement is the \emph{trace}
+bound at the level of quadratic forms. The Route~A KLS-strength statement is the \emph{trace}
 $\Tr(\calM)$, whose only a priori bound is $\Tr R_0\le n$. The entire difficulty of the
-program is this single operator-to-trace upgrade, and it recurs in three coordinate systems:
-as the all-cut Carleson estimate of Route~A (Section~\ref{sec:carleson},
-Question~\ref{q:upgrade}); as the high-rank, mean-zero part of the weighted Stein-trace
-estimate of Route~B (Section~\ref{sec:stein}, Question~\ref{q:stein-weighted}); and as the
-adapted alignment problem on products (Question~\ref{q:alignment}). The correct target is not
-a static effective-rank bound --- on products $\Tr(\calM)$ genuinely reaches order $n$, yet
-the all-cut estimate still holds on the polylog window because the $n$ coordinate budgets are
-spent at temporally disjoint times --- but an occupation-density bound forcing only $O(1)$
-directions to be simultaneously active on the early balanced window; this is the content of
+all-cut route is this operator-to-trace upgrade. In the product model,
+Question~\ref{q:alignment} isolates its incident-high residue; it is not an equivalent
+reformulation of the full trace target. The weighted Stein-trace estimate of Route~B
+(Question~\ref{q:stein-weighted}) faces analogous high-rank boundary modes, but the claimed
+identification with this occupation operator awaits the almost-stability trace bridge of
+Remark~\ref{rem:almost-stability-gap}. The available product argument does not prove a static
+effective-rank bound: summing its coordinate budgets loses a factor $n$, whereas the
+dimension-dependent early-window estimate follows independently from covariance moments.
+This motivates an occupation-density bound forcing only $O(1)$ directions to be simultaneously
+active on the early balanced window; it does not yet prove such temporal sparsity. This is the content of
 Remark~\ref{rem:trace-upgrade-unification}. The dictionary below is the change of variables
-tying the three coordinate systems together.
+tying the exact Riccati and Stein formulations together and supplying the common covariance currency
+for the proposed geometric route.
 
 \subsection{The two-color Stein representation}
 

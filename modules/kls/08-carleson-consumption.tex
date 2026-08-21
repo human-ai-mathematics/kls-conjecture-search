@@ -39,7 +39,9 @@ On $\{t<\tau\}$, $s_t\ge2/9$, hence
   \le\frac92\int_0^T\widetilde u(t)\dd t
   \le\frac92C_*T .
 \]
-This is the stopped centroid estimate. Theorem~\ref{thm:centroid-implies-kls} concludes.
+This is the stopped centroid estimate. Combining it with \eqref{eq:qv-p} and Doob's inequality
+gives a universal time with balanced survival probability at least $1/2$, so
+Lemma~\ref{lem:survival-implies-kls} concludes.
 \end{proof}
 
 The same Gronwall mechanism will be reused in Section~\ref{subsec:consumption} in a slightly
@@ -49,8 +51,8 @@ functional $\mathfrak E(T)\le C_3T$ feeds into the same consumption chain.
 
 The boundary route consumes its Carleson estimate on the tight window $\tau_\eta$ rather than the
 coarse window $\tau$. The following records, once, that the consumption of
-Theorem~\ref{thm:carleson-implies-centroid} and the survival step of
-Theorem~\ref{thm:centroid-implies-kls} go through verbatim on $\tau_\eta$, with constants
+Theorem~\ref{thm:carleson-implies-centroid} and
+Lemma~\ref{lem:survival-implies-kls} go through verbatim on $\tau_\eta$, with constants
 depending only on the fixed (universal) $\eta$.
 
 \begin{corollary}[Tight-window consumption]
@@ -64,8 +66,8 @@ $T\le T_0$,
   \le C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
   +\alpha\E\int_0^{T\wedge\tau_\eta}D_t\dd t .
 \end{equation}
-Then the conclusion of Theorem~\ref{thm:centroid-implies-kls} holds for $(\mu,E)$, with the
-universal boundary constant depending only on $C_0,C_1,\alpha$ and the fixed $\eta$.
+Then the conclusion of Lemma~\ref{lem:survival-implies-kls} holds for $(\mu,E)$, with the
+universal boundary constant depending only on $T_0,C_0,C_1,\alpha$ and the fixed $\eta$.
 \end{corollary}
 
 \begin{proof}
@@ -91,9 +93,8 @@ the exit identity and $s_t\le\tfrac14$,
 \]
 Choose a universal $T\le T_0$, depending only on the fixed $\eta$, so small that this is
 $\le\tfrac12$; then $\Prob(\tau_\eta>T)\ge\tfrac12$ and on this event
-$\min(p_T,q_T)\ge\tfrac12-\eta\ge\tfrac13$. The remainder of the proof of
-Theorem~\ref{thm:centroid-implies-kls} --- the $T$-uniform log-concavity of $\mu_T$ and the
-perimeter supermartingale --- is unchanged and yields a universal boundary lower bound.
+$\min(p_T,q_T)\ge\tfrac12-\eta\ge\tfrac13$. Lemma~\ref{lem:survival-implies-kls} now yields a
+universal boundary lower bound.
 \end{proof}
 
 \subsection{Unconditional control away from zero}
@@ -201,11 +202,12 @@ therefore integrates to the Carleson estimate near zero. This is a sharp stochas
 the non-alignment problem.
 
 \begin{remark}[Relation with logarithmic-scale results]
-The projection/thin-shell technology and covariance-tail estimates of Guan type explain why the
-current best bounds are logarithmic in scale \cite{Klartag2023Logarithmic,Guan2025Tail}. In the present
-language, those estimates give enough averaged spectral control to integrate the source with a
-logarithmic loss. The KLS-strength improvement would be precisely the replacement of such spectral
-losses by the non-alignment estimate \eqref{eq:interpolated-source} or by the geometric Stein-trace
+The projection/thin-shell technology and covariance-tail estimates of Guan type explain the
+earlier logarithmic losses \cite{Klartag2023Logarithmic,Guan2025Tail}. Letwin's version-1
+preprint now removes the intrinsic quadratic-chaos loss and gives the whitened source bound of
+Corollary~\ref{cor:qcts-source}, but unwhitening still weights the source by
+$\lmax(A_t)^2$. The KLS-strength improvement would be precisely the replacement of that dynamic
+spectral-alignment loss by \eqref{eq:interpolated-source} or by the geometric Stein-trace
 package of Sections~\ref{sec:stein}--\ref{sec:excess}. This paragraph is orientation only; the
 conditional proof of Theorem~\ref{thm:carleson-implies-centroid} uses
 Assumption~\ref{ass:all-cut-carleson} directly.
