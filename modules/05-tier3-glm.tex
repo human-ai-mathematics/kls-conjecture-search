@@ -52,38 +52,43 @@ regression, multinomial/softmax with $L^2$ regularization, probit under log-conc
 likelihood contributes positive curvature, but the \emph{guaranteed} floor comes from the
 Gaussian prior.
 
-\begin{proposition}[The prior is essential]
+\begin{proposition}[The prior and unidentified directions]
 \label{prop:flat-prior-nonintegrable}
-With an improper/flat prior and separable or collinear data, the GLM posterior is
-non-integrable --- the MLE escapes to infinity --- so there is no spectral gap and no
-Poincar\'e constant. Even with a proper Gaussian prior, the per-sample curvature
-$\ell''(x_i^\top\theta)$ vanishes where $\abs{x_i^\top\theta}\to\infty$ (logistic:
-$\ell''=\sigma(1-\sigma)\to0$), so the global Hessian floor $\inf_\theta\lmin(\Hess U)$ is set
-by the prior alone, $\Sigmaz^{-1}$.
+For binary logistic regression with separable data, or for a flat-prior GLM with a likelihood-flat
+unidentified direction, the posterior is non-integrable: mass can escape to infinity, so there is
+no probability law and hence no Poincar\'e constant. With a proper Gaussian prior and a saturating
+link such as logistic, the per-sample curvature $\ell''(x_i^\top\theta)$ vanishes along remote
+predictor directions. The global likelihood-curvature floor is then zero and the guaranteed
+Hessian floor is the prior precision $\Sigmaz^{-1}$. Uniformly curved likelihoods such as Gaussian
+linear regression are exceptions.
 \end{proposition}
 
 \noindent This is the flat-direction obstruction. Its consequence is that the bound
 $\lmax(\Sigmaz)$ of Theorem~\ref{thm:glm-fi} is prior-only \emph{on purpose}, and any attempt
 to sharpen it must be a bulk argument, not a global floor.
 
-\begin{question}[Data-informed sharpening]
+\begin{question}[Residual data-informed sharpening]
 \label{q:glm-data-informed}
 Improve Theorem~\ref{thm:glm-fi} so the certified constant \emph{tracks the data}. The floor
 $\Sigmaz^{-1}$ is attained only where $\ell''(x_i^\top\theta)\to0$, i.e.\ in tail directions;
-in the likelihood-dominated bulk the posterior concentrates far more than $\lmax(\Sigmaz)$
-suggests:
+in a likelihood-dominated bulk the relevant candidate scale is
 \[
-  \CP\ \approx\ \lmax\!\Big(\big(\Sigmaz^{-1}+\textstyle\sum_i\ell''(x_i^\top\hat\theta)\,x_ix_i^\top\big)^{-1}\Big)\ \ll\ \lmax(\Sigmaz).
+  \lmax\!\Big(\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big),
 \]
-Prove an upper bound interpolating the prior-dominated and likelihood-dominated regimes.
+with an explicit correction for the posterior mass where that curvature fails. The Hessian at the
+mode alone cannot give a universal upper bound. Prove a computable certificate that improves on the
+prior baseline under checkable data-informativeness conditions and extends the reviewed
+bounded-Hessian results of Propositions~\ref{prop:a1-euclidean-harmonic}
+and~\ref{prop:a1-mode-leverage}.
 \end{question}
 
-\noindent This is the genuinely open content (developed in Section~\ref{sec:agenda}). By
-Proposition~\ref{prop:flat-prior-nonintegrable} a global Hessian floor cannot close the gap;
-the candidate routes are a Lyapunov / local-curvature argument (strong convexity on a compact
-high-probability region plus a drift estimate outside it; see
-\cite{BakryCattiauxGuillin2008,CattiauxGuillinWangWu2009}) or Brascamp--Lieb
-(Theorem~\ref{thm:brascamp-lieb}) with the spatially varying Hessian. The deliverable is a
-computable sharpness ratio $\lmax(\Sigmaz)/\lmax(\Cov_\pi)$, validated against the linear-test
-lower bound (Remark~\ref{rem:rayleigh-lower-only}) from posterior samples.
+\noindent A1 proves the factor-one inverse-minimum-curvature bound for globally bounded Hessians,
+an explicit mode-leverage/tail certificate, and the exact fixed-dimensional coefficient under
+vanishing leverage. The residual problem is to certify a strict finite-sample improvement, replace
+maximal row leverage when it is conservative, and handle unbounded-Hessian or nonsmooth models.
+The candidate routes remain Lyapunov/local-curvature methods
+\cite{BakryCattiauxGuillin2008,CattiauxGuillinWangWu2009} and Brascamp--Lieb
+(Theorem~\ref{thm:brascamp-lieb}) with the spatially varying Hessian. Every proposed upper bound
+should be compared with the linear-test lower bound
+$\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only}).
 \end{document}

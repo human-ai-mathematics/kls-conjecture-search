@@ -1,0 +1,142 @@
+% solutions/a2-subquadratic-tail-rigidity.tex
+% Standalone consolidated proof for the audited A2 nodes.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+%   ledger-nodes: prop:a2-subquadratic-global; prop:a2-logistic-global;
+%                 obs:gaussian-tail-rigidity
+%   refines     : prop:a2-subquadratic-global; prop:a2-logistic-global
+%   derived     : obs:gaussian-tail-rigidity
+%   bounded_by  : none
+%   related     : obs:tv-insufficient
+%   evidence_run: none
+%   checked_by  : agent
+%   base reviewer   : /root/cross_review
+%   base review     : research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
+%   derived reviewer: /root/audit_metadata
+%   derived review  : research/reviews/2026-08-22-derived-obstructions-audit.md
+%   derived date    : 2026-08-22
+%   audit_basis : user-authorized independent-agent certification
+%   author      : /root/a1_a2
+%   date        : 2026-08-21
+% ============================================================================
+
+\section*{Solution: subquadratic Gaussian-tail rigidity}
+\label{sec:sol-a2-subquadratic-tail}
+
+\begin{theorem}[Directional subquadratic Gaussian-tail rigidity]
+\label{thm:sol-a2-subquadratic}
+Let $\Sigma\succ0$, $m\in\R^d$, and let $L:\R^d\to\R$ be finite, convex, and $C^2$.  Define
+\[
+ \pi(d\theta)=Z^{-1}\exp\!\left(
+  -\frac12(\theta-m)^T\Sigma^{-1}(\theta-m)-L(\theta)
+ \right)d\theta.
+\]
+Let $u$ be a unit top eigenvector of $\Sigma$, and for $t>0$ let
+$Y_t\sim N(m+t\Sigma u,\Sigma)$.  If
+\[
+ \mathbb E L(Y_t)=o(t^2)\qquad(t\to+\infty),
+\]
+then, in the manuscript normalization,
+\[
+ \CLS(\pi)=\CTCI(\pi)=\lambda_{\max}(\Sigma).
+\]
+It is sufficient that $L(x)\le a+b|x|^p$ for some $a\in\R$, $b\ge0$, and $0\le p<2$, or that
+$L(x)=o(|x|^2)$ uniformly as $|x|\to\infty$.
+\end{theorem}
+
+\begin{proof}
+A finite convex function has a global affine lower support: for some $a_0\in\R$ and
+$b_0\in\R^d$, $L(y)\ge a_0+b_0^Ty$.  This support gives Gaussian domination of the posterior and
+in particular all of its linear moments and exponential moments.
+
+Completing the Gaussian square gives the exact identity
+\begin{equation}\label{eq:sol-a2-mgf}
+ \log\mathbb E_\pi e^{tu^T\theta}
+ =tu^Tm+\frac{t^2}{2}u^T\Sigma u
+  +\log\mathbb E e^{-L(Y_t)}-\log\mathbb E e^{-L(Y_0)}.
+\end{equation}
+The affine support implies
+\[
+ \log\mathbb E e^{-L(Y_t)}
+ \le -a_0-b_0^T(m+t\Sigma u)+\frac12b_0^T\Sigma b_0=O(1+t).
+\]
+Jensen's inequality and the assumed Gaussian-tube condition give the reverse estimate
+\[
+ \log\mathbb E e^{-L(Y_t)}\ge-\mathbb E L(Y_t)=o(t^2).
+\]
+Thus this correction is $o(t^2)$.  Centering \eqref{eq:sol-a2-mgf} subtracts only the linear term
+$tu^T\mathbb E_\pi\theta$, and therefore
+\begin{equation}\label{eq:sol-a2-quadratic-rate}
+ \lim_{t\to\infty}\frac2{t^2}
+ \log\mathbb E_\pi e^{tu^T(\theta-\mathbb E_\pi\theta)}
+ =u^T\Sigma u=\lambda_{\max}(\Sigma).
+\end{equation}
+
+The transport inequality $T_2(C)$ implies $T_1(C)$ because $W_1\le W_2$, and the exact dual
+form of $T_1(C)$ gives
+\[
+ \log\mathbb E_\pi e^{tf(\theta)}\le\frac12Ct^2
+\]
+for every centered $1$-Lipschitz $f$.  Taking
+$f(\theta)=u^T(\theta-\mathbb E_\pi\theta)$ and comparing with
+\eqref{eq:sol-a2-quadratic-rate} yields
+$\CTCI(\pi)\ge\lambda_{\max}(\Sigma)$.  Conversely,
+\[
+ \nabla^2\!\left(\tfrac12(\theta-m)^T\Sigma^{-1}(\theta-m)+L(\theta)\right)
+ \succeq\Sigma^{-1}.
+\]
+Bakry--\'Emery and Otto--Villani therefore give
+\[
+ \CTCI(\pi)\le\CLS(\pi)\le\lambda_{\max}(\Sigma),
+\]
+which proves equality.
+
+For the first sufficient condition, the affine lower support and the displayed upper growth bound
+squeeze $\mathbb E L(Y_t)/t^2$ to zero using Gaussian moments.  For uniform subquadratic growth,
+for every $\delta>0$ one has
+$L(x)\le\delta|x|^2+C_\delta$, while the affine support supplies a lower bound of order
+$-(1+|x|)$; take Gaussian expectations, divide by $t^2$, and then let $\delta\downarrow0$.
+\end{proof}
+
+\begin{corollary}[Finite-logistic prior-tail rigidity]
+\label{cor:sol-a2-logistic}
+For any finite binary-logistic data set with finite covariates, prior mean $m\in\R^d$, and
+Gaussian prior covariance $\Sigma_0\succ0$, the posterior satisfies
+\[
+ \CLS(\pi)=\CTCI(\pi)=\lambda_{\max}(\Sigma_0).
+\]
+\end{corollary}
+
+\begin{proof}
+The binary-logistic negative log-likelihood is finite, smooth, and convex.  For constants
+$a\in\R$ and $b\ge0$ determined by the finite design,
+$0\le L(\theta)\le a+b|\theta|$.  Theorem~\ref{thm:sol-a2-subquadratic} applies with $p=1$.
+\end{proof}
+
+\paragraph{Shrinking-prior consequence.}
+For finite logistic likelihoods with prior covariance $\Sigma_{0,n}$, the corollary holds at each
+$n$.  Hence
+\[
+ \frac{\|\Sigma_{0,n}^{-1}\|_{\mathrm{op}}}{n}\to0
+ \quad\Longrightarrow\quad
+ n\CLS(\pi_n)=n\CTCI(\pi_n)
+ \ge\frac{n}{\|\Sigma_{0,n}^{-1}\|_{\mathrm{op}}}\to\infty.
+\]
+Conversely, $n\lambda_{\max}(\Sigma_{0,n})\le C$ implies
+$n^{-1}\Sigma_{0,n}^{-1}\succeq C^{-1}I$, so the prior changes the local curvature at order
+$n$.  If prior means move, local prior negligibility also needs the corresponding score condition;
+the curvature incompatibility itself is unchanged.
+
+\paragraph{Scope boundary.}
+Only a one-directional centered log-MGF limsup is needed for the transport lower bound; the
+Gaussian-tube hypothesis above is a convenient sufficient condition giving a full limit.  A
+pointwise estimate on the deterministic ray alone is insufficient.  Genuine quadratic likelihood
+tails may change the coefficient, and nonconvex perturbations lose the Bakry--\'Emery upper bound.
+The prior-scale conclusion realizes the related obstruction
+\texttt{obs:gaussian-tail-rigidity}.  This dossier does not certify the general strong-Laplace
+transfer \texttt{thm:a2-target}; the related warning \texttt{obs:tv-insufficient} remains part of
+that broader transfer problem.
+
+\end{document}

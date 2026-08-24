@@ -31,6 +31,12 @@ section is to make precise the three increasingly relevant constants A4 proposes
 family-restricted, first-moment), to record where the naive $T_2$ route is wasteful or simply
 infinite, and to state the certification theorem one should aim for.
 
+\noindent\textbf{Reviewed status.}
+The unrestricted mean dual, its localized refinement, the three distinct local-VI expansions,
+the exact Gaussian calibration, and the symmetrization lemma have passed independent review.
+The global logistic-family rigidity statement and the multimodal lower-witness calculations remain
+explicit analytic proof drafts. The final posterior-scale GLM certificate remains an open question.
+
 \subsection{Setup: the variational objective and the transport bridge}
 \label{subsec:a4-setup}
 
@@ -72,7 +78,12 @@ live near the posterior mass, the sharpest object is the \emph{localized} restri
   C_{\mathcal Q,r}(\pi)\ :=\ \sup_{\substack{q\in\mathcal Q\\ 0<\KL(q\|\pi)\le r}}
   \frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)} ,
 \end{equation}
-which only sees perturbations within ELBO reach of the optimum. The certificate these constants
+which only sees perturbations within ELBO reach of the optimum. Write
+\begin{equation}\label{eq:a4-gap}
+  \delta_{\mathcal Q}:=\inf_{q\in\mathcal Q}\KL(q\,\|\,\pi).
+\end{equation}
+The sublevel is empty for $r<\delta_{\mathcal Q}$, so local asymptotics should be parameterized by
+$r=\delta_{\mathcal Q}+\rho$, not by an unqualified ``small $r$.'' The certificate these constants
 deliver is
 \begin{equation}\label{eq:a4-cert}
   \Wtwo^2(q^\star,\pi)\ \le\ 2\,C_{\mathcal Q,\,\KL(q^\star\|\pi)}(\pi)\,\KL(q^\star\,\|\,\pi).
@@ -83,8 +94,8 @@ deliver is
 Equation~\eqref{eq:a4-cert} is computable only with a numerical upper bound on
 $\KL(q^\star\,\|\,\pi)$, and the ELBO supplies $\KL=\log Z-\mathrm{ELBO}$, which requires
 $\log Z$. A complete VB error-bar theory therefore needs \emph{two} ingredients --- a transport
-constant \emph{and} a computable KL certificate (an upper bound on $\log Z$, e.g.\ from an
-importance-weighted or nested bound). The A4 constants are the first ingredient; the second is
+constant \emph{and} a computable KL certificate (a rigorous upper bound on $\log Z$, obtained by
+a separately justified model-specific method). The A4 constants are the first ingredient; the second is
 orthogonal and should be stated as a separate hypothesis, not folded into $C_{\mathcal Q}$.
 \end{remark}
 
@@ -100,16 +111,17 @@ $\Sigma\approx(nI(\theta_0))^{-1}$ this is the right scale,
 $\CTCI\asymp\tfrac1n\lmax(I(\theta_0)^{-1})$ --- exactly the scale VB error bars want, and the
 $n\to\infty$ statement of A2 (Conjecture~\ref{conj:a2}, Equation~\eqref{eq:a2-target}).
 
-The Gaussian-prior GLM posterior of Section~\ref{sec:tier3} is where the global constant becomes
-crude. Theorem~\ref{thm:glm-fi} certifies $\CTCI\le\lmax(\Sigmaz)$, but the floor
+The Gaussian-prior GLM posterior of Section~\ref{sec:tier3} is where the global constant remains
+at the wrong scale. Theorem~\ref{thm:glm-fi} certifies $\CTCI\le\lmax(\Sigmaz)$, but the floor
 $m=\lmax(\Sigmaz)^{-1}$ is the \emph{prior} curvature: the likelihood Hessian
 $\sum_i\ell''(x_i^\top\theta)\,x_ix_i^\top$ degenerates in the tails
-(Proposition~\ref{prop:flat-prior-nonintegrable}), so the global $T_2$ certificate is
-prior-scale even though the posterior concentrates at the likelihood scale
-$(\Sigmaz^{-1}+X^\top\bar W X)^{-1}$. This is precisely the gap that makes the restricted and
-localized constants the useful objects: a mean-field Gaussian $q$ near the VB optimizer lives in
-the high-curvature bulk, so $C_{\mathcal Q,r}(\pi)$ can be of posterior scale even when
-$\CTCI(\pi)$ is prior-scale. The A4 target is therefore the $\Wtwo$-analogue of the data-informed
+(Proposition~\ref{prop:flat-prior-nonintegrable}), so the global $T_2$ constant is exactly
+prior-scale for binary logistic regression (Proposition~\ref{prop:a4-logistic-global}), even
+though the posterior concentrates at the likelihood scale
+$(\Sigmaz^{-1}+X^\top\bar W X)^{-1}$. This is precisely the gap that makes the \emph{localized}
+constant the useful object: a mean-field Gaussian $q$ near the VB optimizer lives in the
+high-curvature bulk, so $C_{\mathcal Q,\delta_{\mathcal Q}+\rho}(\pi)$ can be of posterior scale
+even when both $C_{\mathcal Q}$ and $\CTCI$ are prior-scale. The A4 target is therefore the $\Wtwo$-analogue of the data-informed
 A1 question (Question~\ref{q:glm-data-informed}): a sharp restricted/localized $C$ for the GLM
 posteriors of Section~\ref{sec:tier3}, of order
 $\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ in the bulk.
@@ -122,27 +134,32 @@ $\pi(\dd x)\propto e^{-\abs{x}^p}\dd x$ with $1\le p<2$ (so $\pi$ has lighter-th
 but heavier-than-Gaussian tails for $p$ near $1$, and exactly exponential at $p=1$), and the
 Gaussian location family $q_m=N(m,\sigma^2)\in\mathcal Q$. As $\abs m\to\infty$,
 \[
-  \Wtwo^2(q_m,\pi)\ \asymp\ m^2,
-  \qquad
-  \KL(q_m\,\|\,\pi)\ =\ \E_{q_m}\abs{x}^p+O(1)\ \asymp\ \abs m^{p},
-  \qquad\text{so}\qquad
-  \frac{\Wtwo^2(q_m,\pi)}{\KL(q_m\,\|\,\pi)}\ \asymp\ \abs m^{2-p}\ \to\ \infty .
+  \begin{aligned}
+    \Wtwo^2(q_m,\pi)&\asymp m^2,
+    &\KL(q_m\,\|\,\pi)&=\E_{q_m}\abs{x}^p+O(1)\asymp\abs m^p,\\
+    \text{so}\qquad
+    \frac{\Wtwo^2(q_m,\pi)}{\KL(q_m\,\|\,\pi)}&\asymp\abs m^{2-p}\longrightarrow\infty.
+  \end{aligned}
 \]
 Hence $C_{\mathcal Q}(\pi)=\infty$ for $p<2$ already at the mean-field Gaussian level (for
 polynomial-tailed $\pi$ the failure is stronger, $\KL$ growing only logarithmically in the
-location while $\Wtwo^2$ grows quadratically). A finite restricted constant thus requires
-\emph{at least one} of: $\mathcal Q$ bounded in location/scale; restriction to a KL sublevel set
-$C_{\mathcal Q,r}$ \eqref{eq:a4-cqr}; Gaussian-like tails of $\pi$ along the directions
-$\mathcal Q$ explores; or a weaker/modified transport cost (Subsection~\ref{subsec:a4-modified}).
+location while $\Wtwo^2$ grows quadratically). A finite localized constant thus needs a coercive
+family on the KL sublevel, quadratic-exponential tail control of $\pi$, or a weaker/modified
+transport cost (Subsection~\ref{subsec:a4-modified}). A KL cutoff alone is not sufficient over a
+rich family: putting mass $\eps_R\asymp r/R^p$ on $[R,R+1]$ keeps KL below $r$ while making the
+second moment of order $rR^{2-p}\to\infty$. Thus even an unrestricted entropy ball can have
+infinite $W_2$ radius.
 This is the $\Wtwo$ shadow of the LSI/$T_2$ obstruction of Tier~4
 (Theorem~\ref{thm:heavy-tail-no-lsi}, Family~\ref{fam:heavy-tail-classification}).
 \end{warning}
 
-\subsection{Front 2: the first-moment \texorpdfstring{($T_1$)}{(T1)} constant is the right primary object}
+\subsection{Front 2: the linear-mean entropy constant is the right primary object}
 \label{subsec:a4-mean}
 
 VB users report $\E_q\theta$, not $q$ itself, so the operative error is
-$\norm{\E_q\theta-\E_\pi\theta}$. The $T_2$ route bounds it,
+$\norm{\E_q\theta-\E_\pi\theta}$. Throughout this subsection take
+$\mathcal Q\subset\mathcal P_1(\R^d)$ and restrict to finite-entropy competitors. The $T_2$ route
+bounds the error,
 \begin{equation}\label{eq:a4-t2-to-mean}
   \norm{\E_q\theta-\E_\pi\theta}\ \le\ W_1(q,\pi)\ \le\ \Wtwo(q,\pi)\ \le\ \sqrt{2\,\CTCI\,\KL(q\,\|\,\pi)},
 \end{equation}
@@ -151,27 +168,117 @@ only tests \emph{linear} observables. The matching constant is
 \begin{equation}\label{eq:a4-cmean}
   C_{\mathrm{mean},\mathcal Q}(\pi)\ :=\ \sup_{\substack{q\in\mathcal Q\\ \KL(q\|\pi)>0}}
   \frac{\norm{\E_q\theta-\E_\pi\theta}^2}{2\,\KL(q\,\|\,\pi)}
-  \ =\ \sup_{\norm u=1}\ \sup_{q\in\mathcal Q}
+  \ =\ \sup_{\norm u=1}\ \sup_{\substack{q\in\mathcal Q\\ \KL(q\|\pi)>0}}
   \frac{\big(u^\top(\E_q\theta-\E_\pi\theta)\big)^2}{2\,\KL(q\,\|\,\pi)} .
 \end{equation}
-For unrestricted $q$ this is a $T_1$ / sub-Gaussian quantity governed by the linear functionals
-of $\pi$, via the Donsker--Varadhan / Gibbs variational principle: for any $g$,
-$\E_q g\le\KL(q\,\|\,\pi)+\log\E_\pi e^{g}$. Taking $g=t\,u^\top(\theta-\E_\pi\theta)$ and
-assuming the sub-Gaussian Laplace bound
-$\log\E_\pi\exp\!\big(t\,u^\top(\theta-\E_\pi\theta)\big)\le\tfrac12K(u)\,t^2$ for all $t\in\R$,
+Its localized version $C_{\mathrm{mean},\mathcal Q,r}$ restricts the same supremum to
+$0<\KL(q\|\pi)\le r$.
+
+\begin{theorem}[Exact unrestricted posterior-mean dual]
+\label{thm:a4-mean-dual}
+Assume that $\pi$ has a finite first moment. With extended values allowed,
+\begin{equation}\label{eq:a4-mean-dual}
+ C_{\mathrm{mean},\mathrm{all}}(\pi)
+ =\sup_{\norm u=1}\sup_{t\ne0}
+ \frac{2}{t^2}\log\E_\pi e^{t u^\top(\theta-\E_\pi\theta)},
+\end{equation}
+where $\log(+\infty)=+\infty$.
+\end{theorem}
+
+\begin{proof}
+For unrestricted $q$, the mean constant is governed by the linear functionals of $\pi$ through
+the Donsker--Varadhan / Gibbs variational principle:
+$\E_q g\le\KL(q\,\|\,\pi)+\log\E_\pi e^g$. Taking
+$g=t\,u^\top(\theta-\E_\pi\theta)$ and assuming the directional Laplace bound
+$\log\E_\pi\exp(tu^\top(\theta-\E_\pi\theta))\le K(u)t^2/2$ gives
 \[
-  t\,u^\top(\E_q\theta-\E_\pi\theta)-\tfrac12K(u)t^2\ \le\ \KL(q\,\|\,\pi)\quad\forall t
-  \quad\Longrightarrow\quad
-  \abs{u^\top(\E_q\theta-\E_\pi\theta)}\ \le\ \sqrt{2\,K(u)\,\KL(q\,\|\,\pi)} ,
+  t\,u^\top(\E_q\theta-\E_\pi\theta)-\tfrac12K(u)t^2\ \le\ \KL(q\,\|\,\pi)\quad\forall t,
 \]
-optimizing the left side over $t$. Thus $C_{\mathrm{mean},\mathcal Q}\le\sup_{\norm u=1}K(u)$,
-the variance proxy of the worst linear functional --- \emph{not} the full $T_2$ constant. This is
-the $T_1$ viewpoint \cite{BolleyVillani2005}, strictly weaker than $T_2$ and tied to
-square-exponential moments rather than to Gaussian concentration of all Lipschitz observables.
+and optimization over $t$ yields the mean inequality with constant $K(u)$. Conversely, inserting
+the unrestricted mean inequality with constant $C$ into the Gibbs variational formula and
+optimizing over the entropy gives the same Laplace bound with $K(u)=C$. Taking the two suprema
+proves \eqref{eq:a4-mean-dual}, including the extended-valued case.
+\end{proof}
+
+This theorem is independently agent-certified in
+\path{solutions/eq-a4-mean-dual.tex}.
+For a restricted family only
+$C_{\mathrm{mean},\mathcal Q}\le C_{\mathrm{mean},\mathrm{all}}$ is automatic. This
+linear-observable inequality is weaker than a genuine $T_1$ inequality, which controls all
+Lipschitz observables, and much weaker than $T_2$; it is tied only to the sub-Gaussian Laplace
+bounds of the reported linear functionals \cite{BolleyVillani2005}.
+
+The same entropy projection gives an exact localized formula, rather than merely the global
+sub-Gaussian envelope. For $\norm u=1$ put
+\[
+ X_u=u^\top(\theta-\E_\pi\theta),\qquad
+ \psi_u(t)=\log\E_\pi e^{tX_u},\qquad
+ r_u(t)=t\psi_u'(t)-\psi_u(t).
+\]
+
+\begin{proposition}[Localized unrestricted mean tilts]
+\label{prop:a4-mean-local}
+Assume that, for every unit $u$ for which $X_u$ is nonconstant, $\psi_u$ is a Legendre function
+on the interior $I_u$ of its effective domain: $0\in I_u$, $\psi_u$ is differentiable and
+strictly convex there, and boundary means in the effective domain of $\psi_u^*$ are limits of
+the derivatives $\psi_u'(t)$. Then, for every $r>0$,
+\begin{equation}\label{eq:a4-mean-local-dual}
+ C_{\mathrm{mean},\mathrm{all},r}(\pi)
+ =\sup_{\norm u=1}\ \sup_{\substack{t\in I_u\setminus\{0\}\\0<r_u(t)\le r}}
+ \frac{\psi_u'(t)^2}{2r_u(t)},
+\end{equation}
+where a constant direction contributes zero and endpoint values are understood by closure.
+If, in addition, $\E_\pi e^{\tau\norm{\theta}}<\infty$ for some $\tau>0$ and
+$\operatorname{Cov}_\pi(\theta)\succ0$, then
+\begin{equation}\label{eq:a4-mean-local-cov}
+ C_{\mathrm{mean},\mathrm{all},r}(\pi)
+ =\lmax\!\big(\operatorname{Cov}_\pi(\theta)\big)+O(\sqrt r)
+ \qquad(r\downarrow0).
+\end{equation}
+For $\pi=N(\mu,\Sigma)$ the equality is exact for every $r>0$:
+$C_{\mathrm{mean},\mathrm{all},r}=\lmax(\Sigma)$.
+\end{proposition}
+
+\begin{proof}
+Fix $u$ and write $I_u(y)=\psi_u^*(y)$. The Gibbs variational principle gives
+$\KL(q\|\pi)\ge I_u(\E_qX_u)$. Conversely, the exponential tilt
+\[
+ \frac{\dd q_{u,t}}{\dd\pi}=e^{tX_u-\psi_u(t)}
+\]
+has mean $\E_{q_{u,t}}X_u=\psi_u'(t)$ and entropy
+$\KL(q_{u,t}\|\pi)=r_u(t)=I_u(\psi_u'(t))$. The Legendre hypothesis and endpoint
+approximation therefore identify the entropy infimum for every accessible projected mean. If a
+tilt is not itself in $\mathcal P_1(\R^d)$, condition it on increasing Euclidean balls. Since
+$t$ is interior, the projected means and entropies of these $\mathcal P_1$ laws converge to
+those of the tilt; first use strict entropy slack and then take closure at the boundary.
+Taking first the supremum over projected means with entropy at most $r$, and then over $u$, proves
+\eqref{eq:a4-mean-local-dual}.
+
+Under the exponential-moment hypothesis, the directional cumulants are uniform for $\norm u=1$
+and $t$ in a common neighbourhood of zero. Uniformly in $u$,
+\[
+ \psi_u(t)=\tfrac12v_ut^2+O(\abs t^3),\quad
+ \psi_u'(t)=v_ut+O(t^2),\quad
+ r_u(t)=\tfrac12v_ut^2+O(\abs t^3),
+ \qquad v_u=u^\top\operatorname{Cov}_\pi(\theta)u.
+\]
+Positive definiteness and monotonicity of $r_u$ away from zero force
+$\abs t=O(\sqrt r)$ on a sufficiently small entropy sublevel. Hence the ratio in
+\eqref{eq:a4-mean-local-dual} is $v_u+O(\sqrt r)$ uniformly; maximizing over $u$ proves
+\eqref{eq:a4-mean-local-cov}. For a Gaussian,
+$\psi_u(t)=\tfrac12t^2u^\top\Sigma u$ and $r_u(t)=\tfrac12t^2u^\top\Sigma u$, so the ratio is
+$u^\top\Sigma u$ for every admissible nonzero $t$.
+\end{proof}
+
+This proposition is independently agent-certified in
+\path{solutions/prop-a4-mean-local.tex}. In particular, the local formula does not contradict
+the prior-scale global logistic result below:
+small entropy forces $t$ to zero and sees posterior covariance, whereas the unrestricted global
+supremum may be attained only along remote tilts.
 
 The clean hierarchy is
 \begin{equation}\label{eq:a4-hierarchy}
-  C_{\mathrm{mean},\mathcal Q}(\pi)\ \le\ C_{T_1,\mathcal Q}(\pi)\ \le\ C_{\mathcal Q}(\pi)\ \le\ \CTCI(\pi),
+  C_{\mathrm{mean},\mathcal Q}(\pi)\ \le\ C_{\mathcal Q}(\pi)\ \le\ \CTCI(\pi),
 \end{equation}
 and the inequalities can be very loose. A posterior can fail global $T_2$ (and have
 $C_{\mathcal Q}=\infty$, Warning~\ref{warn:a4-heavytail}) yet have a finite, small mean constant
@@ -179,6 +286,219 @@ for the specific linear functionals the statistician reports. For many VB diagno
 $C_{\mathrm{mean},\mathcal Q}$ is therefore the \emph{right primary object}, with the $\Wtwo$
 constant a stronger but frequently unattainable companion; the same construction gives a
 per-functional constant $C_{f,\mathcal Q}$ for any scalar observable $f(\theta)$.
+
+\begin{proposition}[Global prior-scale rigidity for Gaussian variational families (analytic proof draft)]
+\label{prop:a4-logistic-global}
+Let $\pi$ be the Gaussian-prior binary-logistic posterior of
+Proposition~\ref{prop:a2-logistic-global}. If $\mathcal Q$ contains all translates
+$N(m,S)$ of one fixed $S\succ0$, then
+\[
+ C_{\mathrm{mean},\mathcal Q}=C_{\mathcal Q}
+ =C_{\mathrm{mean},\mathrm{all}}=\CTCI=\lmax(\Sigmaz).
+\]
+\end{proposition}
+
+\begin{proof}
+The upper bounds follow from $C_{\mathrm{mean},\mathcal Q}\le C_{\mathcal Q}\le\CTCI$ and
+Proposition~\ref{prop:a2-logistic-global}. For $q_{tv}=N(tv,S)$, the quadratic prior and the
+at-most-linear likelihood give
+\[
+ 2\KL(q_{tv}\|\pi)=t^2v^\top\Sigmaz^{-1}v+O(\abs t),
+\]
+whereas both $W_2^2(q_{tv},\pi)$ and the squared mean displacement are at least
+$t^2\norm v^2+O(\abs t)$. Optimizing over $v$ supplies the reverse bound
+$\lmax(\Sigmaz)$.
+\end{proof}
+
+The mean/transport gap can also be strict: for the centred scale family
+$\mathcal Q=\{N(0,s^2):s>0\}$ and symmetric target $\pi\propto e^{-\abs x^p}$, $1\le p<2$,
+$C_{\mathrm{mean},\mathcal Q}=0$ while $C_{\mathcal Q}=\infty$.
+
+\subsection{Three local VI constants: fit, misspecification, and optimization error}
+\label{subsec:a4-local-three}
+
+The phrase ``local VI constant'' hides three different ratios. The next three propositions make
+their hypotheses and baselines explicit. Let $q_\eta$, $\eta\in\R^p$, be an identifiable
+$\mathcal P_2$ family, put $K(\eta)=\KL(q_\eta\|\pi)$,
+$D(\eta)=W_2^2(q_\eta,\pi)$, and
+$M(\eta)=\norm{\E_{q_\eta}\theta-\E_\pi\theta}^2$. A ``locally isolated sublevel'' means that
+for some $\rho_0>0$ the entire family sublevel under discussion is contained in one compact
+parameter chart on which $K$ is continuous, the stated optimizer is unique, and equivalently
+every neighborhood $V$ of that optimizer satisfies
+$\inf_{\eta\notin V,\ K(\eta)\le\delta_{\mathcal Q}+\rho_0}K(\eta)>\delta_{\mathcal Q}$.
+This is the finite-dimensional coercivity/separation clause that rules out a second remote
+competitor with asymptotically the same KL value.
+
+\begin{proposition}[Well-specified local constant]
+\label{prop:a4-local-wellspecified}
+Suppose $q_0=\pi$, the sublevel $\{K\le\rho_0\}$ is locally isolated at $0$, and the following
+expansions hold uniformly as $h\to0$:
+\[
+ 2K(h)=h^\top Fh+O(\norm h^3),\quad
+ D(h)=h^\top Gh+O(\norm h^3),\quad
+ \E_{q_h}\theta-\E_\pi\theta=Bh+O(\norm h^2),                 \tag{A4.1}
+\]
+with $F\succ0$. Then
+\[
+ C_{\mathcal Q,\rho}(\pi)
+ =\lmax(F^{-1/2}GF^{-1/2})+O(\sqrt\rho),
+\]
+\[
+ C_{\mathrm{mean},\mathcal Q,\rho}(\pi)
+ =\lmax(F^{-1/2}B^\top BF^{-1/2})+O(\sqrt\rho)
+ \qquad(\rho\downarrow0).
+\]
+\end{proposition}
+
+\begin{proof}
+Positive definiteness of $F$, the first expansion, and sublevel isolation imply
+$\norm h=O(\sqrt\rho)$ whenever $K(h)\le\rho$. Dividing the quadratic numerator expansions by
+$h^\top Fh+O(\norm h^3)$ gives the corresponding generalized Rayleigh quotient with a uniform
+$O(\sqrt\rho)$ error. The upper bounds follow by maximizing on the sublevel; the lower bounds
+follow by taking arbitrarily small multiples of a top generalized eigenvector. The mean statement
+uses $M(h)=h^\top B^\top Bh+O(\norm h^3)$.
+\end{proof}
+
+\begin{remark}[A sufficient Wasserstein tangent construction --- unreviewed addition]
+\label{rem:a4-poisson-tangent}
+One standard route to the quadratic coefficient $G$, beyond the independently reviewed
+proposition, is to assume that the scores
+$s_i=\partial_{\eta_i}\log q_\eta|_0$ are centred elements of
+$L^2(\pi)\cap H^{-1}(\pi)$, that the weak Poisson equations
+$-\nabla\!\cdot(\pi\nabla\phi_i)=s_i\pi$ admit finite-energy solutions, and that the required
+Wasserstein differentiability and uniform remainder estimates hold. Then
+$F_{ij}=\int s_is_j\,\dd\pi$ and
+$G_{ij}=\int\langle\nabla\phi_i,\nabla\phi_j\rangle\,\dd\pi$ are the Fisher and Wasserstein
+tangent Gram matrices. This identification is useful, but it requires its own regularity proof and
+is not part of the reviewed statement of Proposition~\ref{prop:a4-local-wellspecified}.
+\end{remark}
+
+\begin{proposition}[Misspecified raw sublevel]
+\label{prop:a4-local-misspecified}
+Suppose $K$ has a unique interior minimizer $\eta_\star$, let
+$\delta=K(\eta_\star)>0$, and assume the sublevel $\{K\le\delta+\rho_0\}$ is locally isolated.
+For $h=\eta-\eta_\star$, suppose uniformly
+\[
+ 2K(\eta_\star+h)=2\delta+h^\top F_\star h+O(\norm h^3),
+ \quad F_\star\succ0,
+\]
+\[
+ D(\eta_\star+h)=D_\star+b_D^\top h+O(\norm h^2),\qquad
+ M(\eta_\star+h)=M_\star+b_M^\top h+O(\norm h^2).
+\]
+Then
+\begin{align}
+ C_{\mathcal Q,\delta+\rho}(\pi)
+ &=\frac{D_\star}{2\delta}
+   +\frac{\sqrt{2\rho}}{2\delta}\norm{F_\star^{-1/2}b_D}+O(\rho),\label{eq:a4-misspec-W2}\\
+ C_{\mathrm{mean},\mathcal Q,\delta+\rho}(\pi)
+ &=\frac{M_\star}{2\delta}
+   +\frac{\sqrt{2\rho}}{2\delta}\norm{F_\star^{-1/2}b_M}+O(\rho).
+   \label{eq:a4-misspec-mean}
+\end{align}
+If the relevant linear term vanishes, the correction is only $O(\rho)$. A boundary optimizer or
+multiple KL minimizers requires a different tangent cone or a maximum over optimizer charts and
+is not covered by this statement.
+\end{proposition}
+
+\begin{proof}
+The KL sublevel is, up to an $O(\rho)$ radial perturbation, the ellipsoid
+$h^\top F_\star h\le2\rho$. Expanding the denominator about $2\delta$ shows that its first
+variation is quadratic, whereas the numerator has the displayed linear variation. Maximizing
+$b^\top h$ on that ellipsoid gives
+$\sqrt{2\rho}\norm{F_\star^{-1/2}b}$; all numerator quadratic terms, denominator variation, and
+the boundary perturbation contribute $O(\rho)$. The optimizer itself supplies the baseline.
+\end{proof}
+
+The tangent constant becomes meaningful again if numerator and denominator are both centred at
+the variational optimizer. Define, for the unique optimizer $q_\star=q_{\eta_\star}$,
+\begin{align*}
+ C^{\mathrm{ex}}_{\mathcal Q,\rho}(q_\star)
+ &:=\sup_{0<K(\eta)-\delta\le\rho}
+ \frac{W_2^2(q_\eta,q_\star)}{2\{K(\eta)-\delta\}},\\
+ C^{\mathrm{ex}}_{\mathrm{mean},\mathcal Q,\rho}(q_\star)
+ &:=\sup_{0<K(\eta)-\delta\le\rho}
+ \frac{\norm{\E_{q_\eta}\theta-\E_{q_\star}\theta}^2}
+ {2\{K(\eta)-\delta\}}.
+\end{align*}
+
+\begin{proposition}[Optimizer-centred excess-KL constant]
+\label{prop:a4-local-excess}
+Under the locally isolated interior-minimizer and KL hypotheses of
+Proposition~\ref{prop:a4-local-misspecified}, suppose additionally
+\[
+ W_2^2(q_{\eta_\star+h},q_\star)=h^\top G_\star h+O(\norm h^3),\qquad
+ \E_{q_{\eta_\star+h}}\theta-\E_{q_\star}\theta=B_\star h+O(\norm h^2).
+\]
+Then
+\[
+ C^{\mathrm{ex}}_{\mathcal Q,\rho}(q_\star)
+ =\lmax(F_\star^{-1/2}G_\star F_\star^{-1/2})+O(\sqrt\rho),
+\]
+\[
+ C^{\mathrm{ex}}_{\mathrm{mean},\mathcal Q,\rho}(q_\star)
+ =\lmax(F_\star^{-1/2}B_\star^\top B_\star F_\star^{-1/2})+O(\sqrt\rho).
+\]
+These are optimization-error constants around $q_\star$, not approximation-error certificates
+for $q_\star$ versus $\pi$; the two contributions can only be combined, for example, through
+$W_2(q_\eta,\pi)\le W_2(q_\eta,q_\star)+W_2(q_\star,\pi)$.
+\end{proposition}
+
+\begin{proof}
+Subtracting the optimizer value removes the entropy baseline:
+$2\{K(\eta_\star+h)-\delta\}=h^\top F_\star h+O(\norm h^3)$. The same generalized-Rayleigh
+argument as in Proposition~\ref{prop:a4-local-wellspecified} applies.
+\end{proof}
+
+\begin{example}[Exact Gaussian calibration of all three regimes]
+\label{ex:a4-gaussian-local}
+Let $\pi=N(\mu,\Sigma)$, $\Sigma\succ0$, and
+$\mathcal Q_S=\{q_m=N(\mu+m,S):m\in\R^d\}$ for fixed $S\succ0$. Put
+\[
+ \delta_S=\frac12\!\left\{\operatorname{tr}(\Sigma^{-1}S)-d
+       +\log\frac{\det\Sigma}{\det S}\right\},
+\quad
+ D_S=\operatorname{tr}\!\left[S+\Sigma
+       -2(\Sigma^{1/2}S\Sigma^{1/2})^{1/2}\right],
+\quad \lambda=\lmax(\Sigma).
+\]
+Then
+\[
+ 2\KL(q_m\|\pi)=2\delta_S+m^\top\Sigma^{-1}m,\qquad
+ W_2^2(q_m,\pi)=D_S+\norm m^2.
+\]
+If $S\ne\Sigma$, then for every $\rho\ge0$,
+\begin{equation}\label{eq:a4-gaussian-misspec}
+ C_{\mathcal Q_S,\delta_S+\rho}
+ =\max\!\left\{\frac{D_S}{2\delta_S},
+ \frac{D_S+2\rho\lambda}{2(\delta_S+\rho)}\right\},
+ \qquad
+ C_{\mathrm{mean},\mathcal Q_S,\delta_S+\rho}
+ =\lambda\frac{\rho}{\delta_S+\rho}.
+\end{equation}
+For every $\rho>0$ the optimizer-centred transport and mean excess constants are both exactly
+$\lambda$. If $S=\Sigma$, the family is well specified and both ordinary localized constants
+are exactly $\lambda$ for every $\rho>0$.
+\end{example}
+
+\begin{proof}
+Write $s=m^\top\Sigma^{-1}m$. At fixed $s$, the largest possible $\norm m^2$ is $\lambda s$,
+and the KL sublevel is $0\le s\le2\rho$. The raw transport ratio is therefore the maximum of
+$(D_S+\lambda s)/(2\delta_S+s)$ on an interval; its derivative has constant sign, so a maximum
+occurs at an endpoint. The mean ratio $\lambda s/(2\delta_S+s)$ is increasing. Centring at
+$q_0=N(\mu,S)$ removes $D_S$ and $\delta_S$, leaving
+$\norm m^2/(m^\top\Sigma^{-1}m)$, whose supremum is $\lambda$.
+\end{proof}
+
+The three propositions and Example~\ref{ex:a4-gaussian-local} are independently agent-certified
+in four standalone dossiers:
+\begin{center}\small
+\path{solutions/prop-a4-local-wellspecified.tex}\qquad
+\path{solutions/prop-a4-local-misspecified.tex}\\
+\path{solutions/prop-a4-local-excess.tex}\qquad
+\path{solutions/ex-a4-gaussian-local.tex}.
+\end{center}
+They replace the ambiguous use of one tangent formula for three inequivalent questions.
 
 \subsection{Front 3a: heavy tails need modified transport, not ordinary \texorpdfstring{$T_2$}{T2}}
 \label{subsec:a4-modified}
@@ -208,32 +528,44 @@ holds, on $\mathcal Q$ or on KL sublevels.
 \subsection{Front 3b: multimodality --- the lower bound is family-dependent}
 \label{subsec:a4-multimodal}
 
-The Tier-5 intuition is correct --- multimodality makes functional-inequality constants enormous
-(Theorem~\ref{thm:separated-mixture-lower}) --- but the A4 lower bound must be stated relative to
-$\mathcal Q$, because the mechanism that produces the global $e^{c\Delta^2}$ barrier may be
-\emph{absent} from the variational family. Consider the symmetric two-component mixture
-$\pi=\tfrac12\pi_1+\tfrac12\pi_2$ with modes separated by $\Delta$ (Family~\ref{fam:double-well-1d}).
+The Tier-5 intuition is correct --- multimodality can make functional-inequality constants enormous
+(Theorem~\ref{thm:separated-mixture-lower}) --- but every A4 lower bound must be stated relative to
+$\mathcal Q$. To keep the geometry and the numerical target identical, let
+\[
+ \pi_a=\tfrac12N(-a,\sigma^2)+\tfrac12N(a,\sigma^2),
+ \qquad D:=2a
+\]
+have centres $\pm a$ and separation $D$.
 
-\emph{Global constant.} The worst perturbation is a tiny reweighting
-$q_\eps=(\tfrac12+\eps)\pi_1+(\tfrac12-\eps)\pi_2$: it has $\KL(q_\eps\|\pi)\asymp\eps^2$ but
-$\Wtwo^2(q_\eps,\pi)\asymp\eps\Delta^2$ for $\eps$ above the inter-mode density floor
-$\eps\gtrsim e^{-c\Delta^2}$, so the ratio $\Wtwo^2/(2\KL)\asymp\Delta^2/\eps$ is maximized at
-$\eps\asymp e^{-c\Delta^2}$, giving $\CTCI(\pi)\asymp e^{c\Delta^2}$ --- the metastability scale
-of Theorem~\ref{thm:separated-mixture-lower}, driven by an exponentially small mode-reweighting.
+\emph{Component-reweighting candidate.} The law
+$q_\eps=(\tfrac12+\eps)N(-a,\sigma^2)+(\tfrac12-\eps)N(a,\sigma^2)$ is an admissible lower witness
+only for a family that contains such mixtures. Data processing from the latent component label
+gives
+\[
+ \KL(q_\eps\|\pi_a)\le
+ \KL\big((\tfrac12+\eps,\tfrac12-\eps)\|(\tfrac12,\tfrac12)\big)
+ =2\eps^2+O(\eps^4).
+\]
+At fixed $a/\sigma$, $W_2^2(q_\eps,\pi_a)$ is quadratic as $\eps\to0$; a roughly
+$\eps D^2$ mass-transfer regime is expected only beyond an overlap-dependent crossover. If that
+crossover is exponentially small in $a^2/\sigma^2$, the resulting ratios provide the familiar
+exponential candidate mechanism. This paragraph is a heuristic and a proposed lower-witness
+calculation, not a proof that the witness is worst or that $\CTCI$ has a specified prefactor.
 
-\emph{Mean-field Gaussian family.} A single Gaussian \emph{cannot} represent that reweighting; the
-reverse-KL pathology is instead mode collapse, $q\approx\pi_1$. Then
-$\KL(q\,\|\,\pi)\approx\log2$ (the missing half-mass) while $\Wtwo^2(q,\pi)\approx\tfrac12\Delta^2$
-(half of $q$ must travel to the other well), so
+\emph{Gaussian mode-collapse lower witness (analytic draft).} A single Gaussian cannot represent the preceding
+reweighting. Take instead $q_a=N(a,\sigma^2)$. Then
+$\KL(q_a\|\pi_a)\to\log2$, and a one-dimensional quantile calculation gives
+$W_2^2(q_a,\pi_a)=D^2/2+O(D\sigma+\sigma^2)$ as $a/\sigma\to\infty$. Consequently any Gaussian
+family containing $q_a$ obeys the one-sided lower bound
 \begin{equation}\label{eq:a4-modecollapse}
-  C_{\mathcal Q}(\pi)\ \gtrsim\ \frac{\Wtwo^2(q,\pi)}{2\,\KL(q\,\|\,\pi)}\ \asymp\ \frac{\Delta^2}{4\log2},
+  C_{\mathcal Q}(\pi_a)\ \ge\ \frac{D^2}{4\log2}\,(1+o(1)).
 \end{equation}
-\emph{polynomial} in $\Delta$, not exponential. The $e^{c\Delta^2}$ barrier reappears only for
-families rich enough to express near-target mixtures with slightly wrong weights (mixture
-variational families, flexible flows). So the A4 multimodal lower bound must distinguish three
-constants --- $\CTCI(\pi)$, $C_{\mathcal Q}(\pi)$, and the localized $C_{\mathcal Q,r}(\pi)$ near
-the VB optimizer --- whose barrier scales genuinely differ; importing the global metastability
-bound without checking that $\mathcal Q$ contains the bad perturbation is the error to avoid.
+This proves only quadratic growth of a lower witness. It gives no matching upper bound on
+$C_{\mathcal Q}$ and therefore does not show that the restricted constant is merely polynomial.
+Likewise, a richer family containing $q_\eps$ inherits its computed lower ratios, but their sharp
+separation asymptotic remains open. The three constants $\CTCI(\pi_a)$,
+$C_{\mathcal Q}(\pi_a)$, and the localized $C_{\mathcal Q,r}(\pi_a)$ must therefore be audited
+separately rather than assigned barrier scales by analogy.
 
 \begin{remark}[Symmetry quotienting is not optional]
 \label{rem:a4-quotient}
@@ -248,37 +580,77 @@ multimodality (genuine $C_{\mathcal Q}$ blow-up that survives the quotient) from
 \emph{symmetry-induced} multimodality (removed by it).
 \end{remark}
 
-\subsection{The theorem to aim for}
+\begin{lemma}[Symmetrizing a variational law]
+\label{lem:a4-symmetrization}
+Let a finite group $G$ act isometrically on $\Theta$, let $\pi$ be $G$-invariant, and for
+$q\ll\pi$ in $\mathcal P_2(\Theta)$ put
+$\bar q=|G|^{-1}\sum_{g\in G}g_\#q$. Then every integrable $G$-invariant observable $f$ obeys
+\[
+ \E_{\bar q}f=\E_qf,
+\]
+while
+\begin{equation}\label{eq:a4-symmetrization}
+ \KL(\bar q\|\pi)\le\KL(q\|\pi),
+ \qquad W_2^2(\bar q,\pi)\le W_2^2(q,\pi).
+\end{equation}
+The conclusion applies inside a variational optimization only when $\mathcal Q$ is closed under
+this averaging (or when the symmetrized family is admitted); it does not by itself order the
+ratio of the two decreasing quantities in \eqref{eq:a4-symmetrization}.
+\end{lemma}
+
+\begin{proof}
+Invariant observables are unchanged by every pushforward $g_\#q$. Convexity of relative entropy
+in its first argument and invariance of $\pi$ give
+$\KL(\bar q\|\pi)\le |G|^{-1}\sum_g\KL(g_\#q\|\pi)=\KL(q\|\pi)$. For each $g$, push an optimal
+coupling between $q$ and $\pi$ through the isometry $(g,g)$; it couples $g_\#q$ to $\pi$ with the
+same cost. Averaging these couplings couples $\bar q$ to $\pi$, proving the Wasserstein bound.
+\end{proof}
+
+\noindent This lemma is independently agent-certified in
+\path{solutions/lem-a4-symmetrization.tex}.
+
+\subsection{The posterior-scale certificate still to prove}
 \label{subsec:a4-theorem}
 
 The honest target is not ``$T_2$ certifies VB'' --- that is immediate from \eqref{eq:a4-bridge}
 --- but a \emph{restricted, localized, observable-aware} certificate at posterior scale.
 
-\begin{conjecture}[Certified VB error bars at posterior scale]
-\label{conj:a4}
-For the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior} and a mean-field or
-Gaussian family $\mathcal Q$, there are constants of \emph{posterior} (not prior) scale,
+\begin{question}[When do posterior-scale VB error bars hold?]
+\label{q:a4-certificate}
+For the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior} and a specified
+mean-field or Gaussian family $\mathcal Q$, put
+$A_{\bar W}:=\Sigmaz^{-1}+X^\top\bar W X$ and suppose the KL minimizer $q^\star$ exists. Find
+explicit, verifiable conditions under which there are $\rho_0>0$ and $K<\infty$ such that, for
+every $0<\rho\le\rho_0$,
 \[
-  C_{\mathcal Q,r}(\pi)\ \lesssim\ \lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
-  \ +\ (\text{tail correction}),
+  C_{\mathcal Q,\delta_{\mathcal Q}+\rho}(\pi)
+  \ \le\ K\lmax(A_{\bar W}^{-1})+R_2(\rho),
   \qquad
-  C_{\mathrm{mean},\mathcal Q}(\pi)\ \le\ \sup_{\norm u=1}K(u),
+  C_{\mathrm{mean},\mathcal Q,\delta_{\mathcal Q}+\rho}(\pi)
+  \ \le\ K\lmax(A_{\bar W}^{-1})+R_{\rm mean}(\rho).
 \]
-on a KL sublevel $\{q\in\mathcal Q:\KL(q\,\|\,\pi)\le r\}$ covering the VB optimizer, yielding the
+At minimum, state and verify a coercivity--tail contract: compactness of the relevant family
+sublevel, uniform integrability in $\mathcal P_2$, bulk Hessian control at the scale
+$A_{\bar W}$, and quantitative coupling and mean-tail bounds that define the finite remainders
+$R_2$ and $R_{\rm mean}$. The remainders must include the misspecification baselines and possible linear terms of
+Proposition~\ref{prop:a4-local-misspecified}; they vanish at the appropriate rate only under an additional
+well-specified/local-centering hypothesis. These bounds yield the
 certificates $\Wtwo^2(q^\star,\pi)\le2C_{\mathcal Q,r}\,\KL(q^\star\,\|\,\pi)$ and
-$\norm{\E_{q^\star}\theta-\E_\pi\theta}^2\le2C_{\mathrm{mean},\mathcal Q}\,\KL(q^\star\,\|\,\pi)$,
+$\norm{\E_{q^\star}\theta-\E_\pi\theta}^2\le2C_{\mathrm{mean},\mathcal Q,r}\,\KL(q^\star\,\|\,\pi)$,
 provided a separate computable upper bound on $\KL(q^\star\,\|\,\pi)$ is supplied
 (Remark~\ref{rem:a4-elbo}).
-\end{conjecture}
+The global constants are not part of this claim: under the location-rich hypothesis of
+Proposition~\ref{prop:a4-logistic-global}, both are exactly $\lmax(\Sigmaz)$.
+\end{question}
 
 \noindent The proof route mirrors A1/A2: Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}) or a
 Lyapunov/local-curvature argument supplies the bulk curvature
 $\Sigmaz^{-1}+X^\top\bar W X$ that the global floor of Theorem~\ref{thm:glm-fi} discards;
-restricting to $\mathcal Q$ and to a KL sublevel removes the tail directions that defeat the
-global $T_2$ (Warning~\ref{warn:a4-heavytail}); the mean constant comes from the Donsker--Varadhan
-bound of Subsection~\ref{subsec:a4-mean}. The linear-test lower bound
-$C_{\mathrm{mean},\mathcal Q}\ge\lmax(\Cov_\pi)/(\dots)$ in the direction of the slowest mode
-(Remark~\ref{rem:rayleigh-lower-only}) keeps the upper bound honest.
+the stated compactness and uniform-$\mathcal P_2$ clauses prevent escape inside the family, while
+the tail remainder records rather than suppresses the part outside the bulk
+(Warning~\ref{warn:a4-heavytail}); and the mean constant is calibrated by the exact
+Donsker--Varadhan dual of Subsection~\ref{subsec:a4-mean}. Lower witnesses must belong to the
+chosen family; covariance alone is not a lower bound for a restricted mean constant.
 
 \subsection{Sub-targets and what remains open}
 \label{subsec:a4-open}
@@ -287,21 +659,27 @@ The program splits into five research questions, ordered by difficulty.
 
 \begin{question}[Restricted and localized GLM transport constants]
 \label{q:a4-restricted}
-Compute or sharply upper-bound $C_{\mathcal Q}(\pi)$ and $C_{\mathcal Q,r}(\pi)$ for the GLM
+Compute or sharply upper-bound $C_{\mathcal Q,\delta_{\mathcal Q}+\rho}(\pi)$ for the GLM
 posteriors of Section~\ref{sec:tier3} (and for sparse-regression and hierarchical posteriors),
 proving posterior-scale constants $\asymp\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ in the bulk
-where the global $\CTCI\le\lmax(\Sigmaz)$ is only prior-scale. The exact restricted supremum
-\eqref{eq:a4-cq} is not a standard output of either transport theory or VI theory; this is the
+where the global $C_{\mathcal Q}=\CTCI=\lmax(\Sigmaz)$ is prior-scale for location-rich Gaussian
+families. Use the tangent generalized eigenvalue of
+Proposition~\ref{prop:a4-local-wellspecified} as the
+well-specified small-$\rho$ calibration and state the coercivity/tail assumption that makes the
+sublevel finite. The exact localized supremum
+\eqref{eq:a4-cqr} is not a standard output of either transport theory or VI theory; this is the
 $\Wtwo$ analogue of the flagship A1 (Question~\ref{q:glm-data-informed}) and the entry point.
 \end{question}
 
 \begin{question}[First-moment constants]
 \label{q:a4-mean}
-Bound $C_{\mathrm{mean},\mathcal Q}(\pi)$ (and per-functional $C_{f,\mathcal Q}$) for posterior
-classes, exhibiting cases where it is finite and small while $C_{\mathcal Q}=\infty$
-(Warning~\ref{warn:a4-heavytail}). Identify the worst linear functional $\sup_{\norm u=1}K(u)$
-and relate it to $\lmax(\Cov_\pi)$, so the number a VB user actually reports carries a certified
-error bar even when no $\Wtwo$ bound exists \cite{BolleyVillani2005}.
+Use the exact global and localized cumulant duals \eqref{eq:a4-mean-dual} and
+\eqref{eq:a4-mean-local-dual} for unrestricted means and compute localized
+or per-functional constants for variational families. Explain when the family can realize the
+worst entropy tilt, and classify gaps such as the centred scale-family example where
+$C_{\mathrm{mean},\mathcal Q}=0$ but $C_{\mathcal Q}=\infty$. For logistic regression the global
+location-rich constant is already fixed by Proposition~\ref{prop:a4-logistic-global}, so the
+posterior-scale question must be localized.
 \end{question}
 
 \begin{question}[Modified transport for heavy-tailed posteriors]
@@ -316,20 +694,20 @@ language; posterior-specific constants are undeveloped. This is the $\Wtwo$ coun
 
 \begin{question}[Family-aware multimodal lower bounds]
 \label{q:a4-multimodal}
-Prove the family-dependent lower bounds of Subsection~\ref{subsec:a4-multimodal}: the global
-$\CTCI\asymp e^{c\Delta^2}$ via the reweighting witness, the mean-field Gaussian
-$C_{\mathcal Q}\asymp\Delta^2$ via the mode-collapse witness \eqref{eq:a4-modecollapse}, and the
-recovery of $e^{c\Delta^2}$ for mixture/flow families that can represent near-target
-reweightings. Pair each with the quotient escape of Remark~\ref{rem:a4-quotient}, separating
-physical from symmetry-induced multimodality (A5, Section~\ref{sec:a5}).
+For the Gaussian mixture with centres $\pm a$ and separation $D=2a$, certify the component-
+reweighting and mode-collapse lower witnesses of Subsection~\ref{subsec:a4-multimodal}. Determine,
+rather than assume, their crossover and sharp separation dependence; in particular, seek matching
+upper bounds before asserting an asymptotic for $C_{\mathcal Q}$. Pair symmetry-induced cases with
+the quotient escape of Remark~\ref{rem:a4-quotient}, separating them from physical multimodality
+(A5, Section~\ref{sec:a5}).
 \end{question}
 
 \begin{question}[Coupling the constant to a computable KL certificate]
 \label{q:a4-elbo}
 Combine $C_{\mathcal Q,r}$ with a computable upper bound on $\KL(q^\star\,\|\,\pi)$
-(equivalently a lower bound on $\log Z$ beyond the ELBO) to produce a genuinely numerical,
+(equivalently an \emph{upper} bound on $\log Z$ combined with the ELBO) to produce a genuinely numerical,
 end-to-end VB error bar (Remark~\ref{rem:a4-elbo}). This is what turns
-Conjecture~\ref{conj:a4} from an inequality between constants into a deliverable a practitioner
+Question~\ref{q:a4-certificate} from an inequality between constants into a deliverable a practitioner
 can report, and is the bridge from the functional-inequality theory of this Part to the
 algorithmic VI literature \cite{LambertEtAl2022,ArneseLacker2024,JiangChewiPooladian2023}.
 \end{question}

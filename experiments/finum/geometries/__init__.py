@@ -1,8 +1,8 @@
 """finum.geometries — the measure zoo + named test functions for the A1-A5 batteries.
 
 ONE place to add a test measure. A target battery (``finum/targets/``) builds an ``Instance``
-around a distribution here and points the sound refuters at it; the analytic reference bounds in
-``references`` are the upper-bound claims those runs try to refute (never proofs).
+around a distribution here and evaluates directional numerical diagnostics; ``references``
+contains analytic upper-bound oracles for calibration or assumption checks.
 
   distributions   GaussianDistribution, DoubleWell1D, PerturbedGaussian1D
   test_functions  LinearFunction, Polynomial1D, SmoothModeIndicator1D

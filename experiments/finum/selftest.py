@@ -1,6 +1,8 @@
-"""Self-test: every target's calibration must reproduce its closed-form ground truth, and the
-sound refuters must fire. `python -m finum selftest` exits 0 iff all checks pass — finum's own
-"definition of done": if calibration cannot be reproduced, no run may emit a verdict.
+"""Calibration and regression self-tests for every registered target.
+
+``python -m finum selftest`` exits zero iff all checks pass.  Passing verifies the
+implementation against its closed-form anchors; it is not proof of a mathematical
+claim or certification of a sampled diagnostic.
 """
 from __future__ import annotations
 

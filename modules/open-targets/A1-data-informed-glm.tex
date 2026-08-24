@@ -26,7 +26,15 @@ to make A1 precise, to split it into a Poincar\'e half that is essentially withi
 machinery and a log-Sobolev/transport half that is genuinely harder, to record exactly which
 inequality already supplies \eqref{eq:a1-slogan} and what remains to be done, and to state the
 theorem one should actually aim to prove. In slogan form: for \(\CP\), the functional-inequality
-skeleton already exists, and the work is to make it a certified, computable, GLM-specific theorem.
+skeleton and a certified bounded-curvature implementation now exist; the remaining work is to
+prove a checkable finite-sample improvement over the prior and to generalize beyond that class.
+
+\paragraph{Reviewed status.}
+Proposition~\ref{prop:a1-euclidean-harmonic}, Proposition~\ref{prop:a1-mode-leverage}, and
+Corollary~\ref{cor:a1-leverage-asymptotic} have passed independent review and are proved under
+their displayed bounded-curvature hypotheses. Proposition~\ref{prop:a1-bulk-tail} and the
+inverse-mode-Hessian no-go calculation below remain useful analytic drafts pending separate
+review; neither is promoted by the reviewed bounded-curvature dossier.
 
 \subsection{Setup: the observed-information geometry of a GLM posterior}
 \label{subsec:a1-setup}
@@ -79,7 +87,7 @@ self-improvement for log-concave measures: Brascamp--Lieb first yields a spread/
 for $1$-Lipschitz $f$ (the average inverse curvature controls the fluctuations of Lipschitz
 observables), and Milman's equivalence of concentration and spectral gap on log-concave measures
 then upgrades that weak control to a full spectral gap. This is exactly the
-Milman/Veysseire-type route of Cattiaux and Guillin
+Milman spread-to-gap route of Cattiaux and Guillin
 \cite{cattiaux2018poincare}, which yields a genuine dimension-free bound of the form
 \begin{equation}\label{eq:a1-cfg}
   \CP(\pi)\ \lesssim\ \E_\pi\,\lmax\!\big(H(\theta)^{-1}\big)
@@ -97,7 +105,10 @@ $W(\theta)\to0$ can dominate the expectation in \eqref{eq:a1-cfg}.
 \label{subsec:a1-bulktail}
 
 The data-informed bound follows by splitting the posterior into a high-curvature bulk and a
-low-curvature tail. For a deterministic diagonal $\bar W\succeq0$ define the \emph{good
+low-curvature tail. The universal Milman comparison culminating in
+Proposition~\ref{prop:a1-bulk-tail} is an analytic proof draft and remains outside the reviewed set.
+The open GLM content begins when one asks for a useful, computable choice of $\bar W$.
+For a deterministic diagonal $\bar W\succeq0$ define the \emph{good
 bulk-curvature event}
 \begin{equation}\label{eq:a1-good}
   G_{\bar W}\ :=\ \big\{\theta:\ X^\top W(\theta)X\ \succeq\ X^\top\bar W X\big\}.
@@ -131,26 +142,123 @@ likelihood-dominated bulk the first term is at the inverse-observed-information 
 $\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]\ll\lmax(\Sigmaz)$, and the second term is small exactly
 when the data-informed $\bar W$ certifies the bulk curvature on a high-probability set.
 
-\subsection{Why the tail correction is intrinsic, not a proof artifact}
+\begin{proposition}[Universal inverse-Hessian bulk--tail certificate]
+\label{prop:a1-bulk-tail}
+There is a universal $C_M<\infty$ such that every posterior in
+Subsection~\ref{subsec:a1-setup} and every deterministic diagonal $\bar W\succeq0$ satisfy
+\eqref{eq:a1-main-sharp} and \eqref{eq:a1-main}, with the implicit constant equal to $C_M$.
+\end{proposition}
+
+\begin{proof}
+For every $1$-Lipschitz $f$, Brascamp--Lieb gives
+$\Var_\pi(f)\le\E_\pi\lmax(H^{-1})$. Milman's log-concave spread-to-gap comparison, in the
+form recorded by \cite{cattiaux2018poincare}, therefore yields
+$\CP(\pi)\le C_M\E_\pi\lmax(H^{-1})$. The two Loewner bounds used in
+\eqref{eq:a1-split} finish the proof.
+\end{proof}
+
+\begin{proposition}[Factor-one Euclidean harmonic-mean bound]
+\label{prop:a1-euclidean-harmonic}
+Let $U\in C^\infty(\R^d)$ and suppose that, for finite $0<m\le M$,
+\[
+  mI\preceq\Hess U(\theta)\preceq MI\qquad(\theta\in\R^d).
+\]
+Writing $\rho(\theta)=\lmin(\Hess U(\theta))$, one has
+\begin{equation}\label{eq:a1-harmonic-one}
+  \CP(\pi)\ \le\ \E_\pi\frac1{\rho(\theta)}
+  \ =\ \E_\pi\lmax\!\big((\Hess U(\theta))^{-1}\big).
+\end{equation}
+In particular, \eqref{eq:a1-main-sharp} and \eqref{eq:a1-main} hold with factor one for every
+finite Gaussian-prior binary-logistic posterior.
+\end{proposition}
+
+\begin{proof}
+Let $A=-\Delta+\nabla U\cdot\nabla$ be the nonnegative self-adjoint generator on $L^2(\pi)$ and
+$\lambda_1=1/\CP(\pi)$. For $\varepsilon>0$, choose a nonzero $f$ in the spectral subspace of
+$A$ over $[\lambda_1,\lambda_1+\varepsilon]$, and put $g=\norm{\nabla f}$. Spectral calculus,
+the integrated weighted Bochner identity, and the weak Kato inequality give
+\[
+ (\lambda_1+\varepsilon)\E_\pi g^2
+ \ \ge\ \E_\pi\norm{\nabla g}^2+\E_\pi[\rho g^2].
+\]
+Applying the Poincar\'e inequality with gap $\lambda_1$ to $g$ yields
+\[
+ \E_\pi[\rho g^2]\le
+ \lambda_1(\E_\pi g)^2+\varepsilon\E_\pi g^2.
+\]
+Cauchy--Schwarz gives
+$(\E_\pi g)^2\le\E_\pi[\rho g^2]\E_\pi[1/\rho]$, while
+$\E_\pi g^2\le m^{-1}\E_\pi[\rho g^2]$. Dividing and sending
+$\varepsilon\downarrow0$ proves \eqref{eq:a1-harmonic-one}.
+
+For completeness, the noncompact domain step follows from the two-sided Hessian hypothesis, not
+from the compact source theorem. Conjugating $A$ by $e^{-U/2}$ gives the Schr\"odinger operator
+$-\Delta+\frac14\norm{\nabla U}^2-\frac12\Delta U$. Its potential is bounded below and tends
+quadratically to infinity because $\norm{\nabla U(\theta)}\ge m\norm\theta-O(1)$ and
+$\Delta U\le dM$. Thus $C_c^\infty$ is an operator core. The compact-support Bochner identity
+extends in the graph norm; positivity of $\Hess U$ controls the Hessian term, and the regularization
+$(\norm{\nabla f}^2+\delta^2)^{1/2}$ closes the Kato step. For logistic regression,
+$\Sigmaz^{-1}\preceq H(\theta)\preceq\Sigmaz^{-1}+\frac14X^\top X$, so the hypotheses hold.
+\end{proof}
+
+\begin{remark}[What factor one does not yet cover]
+The compact theorem of \cite{Veysseire2011SpectralGap} motivates
+\eqref{eq:a1-harmonic-one}, but the proof above supplies a separate noncompact Euclidean domain
+argument. It does not establish the result for arbitrary strongly log-concave potentials with
+unbounded Hessian, including the Poisson GLM, nor for nonsmooth or merely weakly convex losses.
+Closing the Bochner identity on the spectral domain in those classes, or proving the necessary
+Mosco and uniform-integrability limits under approximation, remains open. The universal Milman
+factor $C_M$ in Proposition~\ref{prop:a1-bulk-tail} remains the available general draft route.
+\end{remark}
+
+\subsection{What the saturating-likelihood tail obstruction actually rules out}
 \label{subsec:a1-tail}
 
-No honest data-informed theorem can drop the tail term, because no global data-curvature floor
-exists. This is the flat-direction obstruction of Proposition~\ref{prop:flat-prior-nonintegrable}
-read spectrally. For logistic regression with nearly separable data there are directions $v$
+For saturating likelihoods such as logistic regression, a positive mode or bulk likelihood
+curvature cannot be promoted to a global curvature floor without controlling where that curvature
+decays. This is the narrow flat-direction obstruction of
+Proposition~\ref{prop:flat-prior-nonintegrable} read spectrally. For nearly separable logistic data
+there are directions $v$
 along which many linear predictors $x_i^\top(\theta+tv)\to\pm\infty$ as $t\to\infty$, so
 \[
   w_i(\theta+tv)\ =\ \sigma\big(x_i^\top(\theta+tv)\big)\big(1-\sigma(x_i^\top(\theta+tv))\big)\ \to\ 0,
 \]
 and $X^\top W(\theta+tv)X$ loses rank in the limit. Hence no bound $X^\top W(\theta)X\succeq
 B\succ0$ can hold for all $\theta$: the prior keeps the posterior proper and supplies tail drift,
-but it cannot convert vanishing likelihood curvature into a global floor. Any data-informed
-constant must therefore have the shape
+but it cannot convert vanishing logistic curvature into a global likelihood floor.
+
+There is also an analytic no-go family for replacing the whole posterior geometry by the Hessian
+at the mode. In one dimension let
+\[
+  \pi_a(\dd\theta)\ \propto\
+  e^{-\theta^2/(2\sigma^2)}\,\operatorname{sigmoid}(a\theta)\,\dd\theta,
+  \qquad a\to\infty.
+\]
+The density relative to $N(0,\sigma^2)$ is $2\operatorname{sigmoid}(a\theta)$, so dominated
+convergence gives a half-Gaussian limit and
+$\Var_{\pi_a}(\theta)\to\sigma^2(1-2/\pi)>0$. If
+$s_a=a\hat\theta_a$ at the mode, the score equation is
+$s_a(1+e^{s_a})=a^2\sigma^2$, and hence
+\[
+ \big(\sigma^{-2}+a^2\operatorname{sigmoid}(s_a)
+       (1-\operatorname{sigmoid}(s_a))\big)^{-1}
+ =\frac{\sigma^2}{1+s_a\operatorname{sigmoid}(s_a)}\longrightarrow0.
+\]
+The linear test therefore makes the ratio of $\CP(\pi_a)$ to this inverse mode Hessian diverge.
+This is an analytic proof draft of a precise no-go statement: no universal constant-times
+inverse-mode-Hessian bound holds for this logistic family.
+
+For a bulk certificate based on nonzero data curvature $\bar W$, the honest correction
+consequently has the shape
 \[
   \text{bulk Fisher curvature}\ +\ \text{penalty for posterior mass where that curvature fails},
 \]
 which is exactly the structure of \eqref{eq:a1-main}. The separable / weakly-identified logistic
 regime is the stress test: a good theorem should expose how the constant degrades with the
 separation geometry and the prior scale $\lmax(\Sigmaz)$, not pretend the degradation away.
+This conclusion is deliberately narrower than ``every data-informed bound needs an explicit tail
+term'': Gaussian linear models have $W\equiv\Id$, the prior-only bound is tail-free, and
+covariance- or full-distribution-based bounds are not ruled out.
 
 \subsection{High-dimensional anisotropy: the matrix bound does the right thing}
 \label{subsec:a1-highdim}
@@ -162,9 +270,10 @@ $v^\top(\Sigmaz^{-1}+X^\top\bar W X)v=v^\top\Sigmaz^{-1}v$ and the bound reverts
 scale; in directions the data inform, the curvature improves to the observed-information scale.
 The single matrix expression thus interpolates
 \[
-  \text{data-dominated directions}\ \leadsto\ \text{inverse-Fisher scale},
-  \qquad
-  \text{prior-only directions}\ \leadsto\ \text{prior-covariance scale},
+  \begin{aligned}
+    \text{data-dominated directions}&\ \leadsto\ \text{inverse-Fisher scale},\\
+    \text{prior-only directions}&\ \leadsto\ \text{prior-covariance scale}.
+  \end{aligned}
 \]
 which is exactly what a Bayesian GLM constant should do, and is the anisotropic refinement of the
 isotropic floor $\lmax(\Sigmaz)$ of Theorem~\ref{thm:glm-fi}.
@@ -205,7 +314,125 @@ $O(1/n)$ local constants on a high-probability good set for logistic and Poisson
 natural starting toolkit, alongside the local log-Polyak--{\L}ojasiewicz bounds of
 \cite{GongHeShen2025LogPL} and the Lyapunov-potential criteria of \cite{ChenSridharan2024Lyapunov}.
 
-\subsection{Poincar\'e is within reach; log-Sobolev and transport are harder}
+\subsection{An explicit mode-leverage certificate}
+\label{subsec:a1-mode-leverage}
+
+For an important GLM class the rowwise construction and its posterior tail can in fact be made
+fully deterministic. Assume
+\begin{equation}\label{eq:a1-loghess-lipschitz}
+  \ell_i''(s)>0,
+  \qquad
+  \abs{\log\ell_i''(s)-\log\ell_i''(t)}\le L_i\abs{s-t}.
+\end{equation}
+Logistic and Poisson regression satisfy \eqref{eq:a1-loghess-lipschitz} with $L_i=1$, while the
+Gaussian linear model has $L_i=0$. Let $\hat\theta$ be the posterior mode, put
+\begin{equation}\label{eq:a1-leverage}
+ \widehat H=H(\hat\theta),\qquad
+ \alpha_i=L_i\sqrt{x_i^\top\widehat H^{-1}x_i},\qquad
+ \eta=\max_i\alpha_i,
+\end{equation}
+and write $z=\widehat H^{1/2}(\theta-\hat\theta)$ and $r=\norm z$.
+
+Define, with their continuous values $g_\pm(r;0)=r^2/2$,
+\begin{equation}\label{eq:a1-gpm}
+ g_-(r;\eta)=\frac{e^{-\eta r}+\eta r-1}{\eta^2},
+ \qquad
+ g_+(r;\eta)=\frac{e^{\eta r}-\eta r-1}{\eta^2}.
+\end{equation}
+\begin{proposition}[Deterministic mode-leverage certificate]
+\label{prop:a1-mode-leverage}
+Under \eqref{eq:a1-loghess-lipschitz},
+\begin{equation}\label{eq:a1-hessian-sandwich}
+ e^{-\eta r}I\preceq
+ \widehat H^{-1/2}H(\theta)\widehat H^{-1/2}
+ \preceq e^{\eta r}I
+\end{equation}
+and
+\begin{equation}\label{eq:a1-potential-sandwich}
+ g_-(r;\eta)\le U(\theta)-U(\hat\theta)\le g_+(r;\eta).
+\end{equation}
+For $R>0$, choose
+\begin{equation}\label{eq:a1-leverage-wbar}
+ \bar w_i(R)=e^{-\alpha_iR}\ell_i''(x_i^\top\hat\theta),
+ \qquad E_R=\{\theta:\norm{\widehat H^{1/2}(\theta-\hat\theta)}\le R\}.
+\end{equation}
+Then $E_R\subseteq G_{\bar W(R)}$ and
+\begin{equation}\label{eq:a1-leverage-tail}
+ \pi(G_{\bar W(R)}^c)\le\pi(E_R^c)\le
+ \varepsilon_d(R,\eta):=\min\!\left\{1,
+ \frac{\displaystyle\int_R^\infty r^{d-1}e^{-g_-(r;\eta)}\,dr}
+      {\displaystyle\int_0^\infty r^{d-1}e^{-g_+(r;\eta)}\,dr}\right\}.
+\end{equation}
+Thus, conditional on the separately unreviewed universal comparison in
+Proposition~\ref{prop:a1-bulk-tail}, equations~\eqref{eq:a1-leverage-wbar}--
+\eqref{eq:a1-leverage-tail} give a certificate computable from $(X,y,\Sigmaz)$ and
+one-dimensional quadrature. The direct bounded-Hessian conclusion below does not use that
+universal comparison.
+
+If, in addition, Proposition~\ref{prop:a1-euclidean-harmonic} applies and $0\le\eta<1$, then
+\begin{equation}\label{eq:a1-leverage-direct}
+ \CP(\pi)\le K_d(\eta)\lmax(\widehat H^{-1}),
+ \qquad
+ K_d(\eta):=
+ \frac{\displaystyle\int_0^\infty r^{d-1}e^{\eta r-g_-(r;\eta)}\,dr}
+      {\displaystyle\int_0^\infty r^{d-1}e^{-g_+(r;\eta)}\,dr}.
+\end{equation}
+For fixed $d$, $K_d(\eta)\to1$ as $\eta\downarrow0$.
+\end{proposition}
+
+\begin{proof}
+From \eqref{eq:a1-loghess-lipschitz},
+$e^{-L_i\abs{x_i^\top(\theta-\hat\theta)}}\ell_i''(x_i^\top\hat\theta)
+\le\ell_i''(x_i^\top\theta)\le
+e^{L_i\abs{x_i^\top(\theta-\hat\theta)}}\ell_i''(x_i^\top\hat\theta)$.
+Cauchy--Schwarz in the $\widehat H$ geometry bounds the exponent by $\alpha_i r\le\eta r$.
+The fixed prior Hessian lies between its own $e^{-\eta r}$ and $e^{\eta r}$ multiples, so summing
+the likelihood and prior terms proves \eqref{eq:a1-hessian-sandwich}. Integrating that comparison
+twice along the segment from the mode proves \eqref{eq:a1-potential-sandwich}.
+
+On $E_R$, the individual curvature floors in \eqref{eq:a1-leverage-wbar} hold, proving
+$E_R\subseteq G_{\bar W(R)}$. In $z$ coordinates, the numerator of $\pi(E_R^c)$ is at most the
+radial integral involving $g_-$, while its normalizing denominator is at least the radial integral
+involving $g_+$; the sphere area and whitening Jacobian cancel. This proves
+\eqref{eq:a1-leverage-tail}. Finally, \eqref{eq:a1-hessian-sandwich} gives
+$\lmax(H(\theta)^{-1})\le e^{\eta r}\lmax(\widehat H^{-1})$.
+Equation~\eqref{eq:a1-harmonic-one} and the same radial comparison prove
+\eqref{eq:a1-leverage-direct}. Its numerator is finite for $\eta<1$, and dominated convergence
+gives $K_d(\eta)\to1$.
+\end{proof}
+
+\begin{corollary}[Vanishing-leverage Poincar\'e limit]
+\label{cor:a1-leverage-asymptotic}
+Fix $d$. For a sequence of bounded-Hessian posteriors satisfying
+\eqref{eq:a1-loghess-lipschitz}, if $\eta_n\to0$, then
+\begin{equation}\label{eq:a1-leverage-asymptotic}
+ \CP(\pi_n)=(1+o(1))\lmax(\widehat H_n^{-1}).
+\end{equation}
+If the inputs are random, $\eta_n\to0$ and $\widehat H_n/n\to I(\theta_0)\succ0$ in probability,
+then $n\CP(\pi_n)\to\lmax(I(\theta_0)^{-1})$ in probability.
+\end{corollary}
+
+\begin{proof}
+The potential sandwich and dominated convergence show that the $\widehat H_n$-whitened posterior
+converges to $N(0,I_d)$ in total variation and second moments. Explicitly, fix
+$0<\eta_0<1$. For all sufficiently large $n$ the unnormalized density is bounded by
+$e^{-g_-(r;\eta_0)}$; this has an exponential tail, so its product with $1+r^2$ is integrable.
+Meanwhile the two radial normalizing integrals squeeze the normalization to the Gaussian one.
+This supplies the required uniform integrability. Hence the whitened covariance is $I_d+o(1)$,
+and the linear test supplies
+$\CP(\pi_n)\ge(1-o(1))\lmax(\widehat H_n^{-1})$. The matching upper bound is
+\eqref{eq:a1-leverage-direct} with $K_d(\eta_n)\to1$.
+\end{proof}
+
+The condition $\eta<1$ is a genuine certificate gate, not a claim that the posterior lacks a
+Poincar\'e inequality when it fails. In the one-observation family of
+Subsection~\ref{subsec:a1-tail}, $\eta_a^2=a^2/H(\hat\theta_a)\to\infty$, so the direct certificate
+correctly refuses the false inverse-mode-Hessian conclusion. Formula~\eqref{eq:a1-leverage-tail}
+and the prior bound remain available. The exact corollary currently covers finite logistic
+posteriors; Poisson satisfies the radial hypothesis but has unbounded Hessian, so factor one and
+the exact coefficient require the unresolved domain extension noted above.
+
+\subsection{Poincar\'e has a bounded-curvature theorem; log-Sobolev and transport are harder}
 \label{subsec:a1-pls}
 
 The three constants are \emph{not} on the same footing, and A1 should not pretend they are.
@@ -213,8 +440,10 @@ The three constants are \emph{not} on the same footing, and A1 should not preten
 \emph{Poincar\'e.} The route of Subsections~\ref{subsec:a1-bl}--\ref{subsec:a1-bulktail} is
 essentially complete in outline: Brascamp--Lieb \eqref{eq:a1-bl} plus the log-concave
 self-improvement \cite{cattiaux2018poincare} gives \eqref{eq:a1-cfg}, and the bulk--tail split
-gives \eqref{eq:a1-main}. The remaining work is GLM-specific (a computable $\bar W$, a certified
-tail), not a search for a missing inequality.
+gives \eqref{eq:a1-main}. Proposition~\ref{prop:a1-mode-leverage} supplies a computable $\bar W$
+and a certified radial tail for the log-Hessian-Lipschitz class. The remaining work is quantitative
+comparison with the prior baseline and less conservative spectral constructions for high-leverage
+or unbounded-Hessian instances.
 
 \emph{Log-Sobolev.} Here the naive ``replace $\Sigmaz^{-1}$ by $A_{\bar W}$'' is most misleading.
 Bakry--\'Emery gives the prior-only $\CLS\le\lmax(\Sigmaz)$ (Theorem~\ref{thm:glm-fi}), but a Brascamp--Lieb-style
@@ -233,96 +462,121 @@ drift outside, of the shape
 with $\Phi$ possibly logarithmic --- but one should not claim the clean bound \eqref{eq:a1-main}
 for $\CLS$ without additional global hypotheses.
 
+For binary logistic likelihoods there is a stronger obstruction. Because the likelihood is
+nonnegative, convex, and grows at most linearly, its Gaussian-prior posterior satisfies the exact
+global identity
+\begin{equation}\label{eq:a1-logistic-rigidity}
+  \CLS(\pi)=\CTCI(\pi)=\lmax(\Sigmaz)
+\end{equation}
+for every finite data set; see Proposition~\ref{prop:a2-logistic-global}. Thus no global
+bulk-improved LSI or $T_2$ theorem is possible for the flagship logistic model. The meaningful
+second stage is explicitly local, restricted, warm-start, or uses a modified metric.
+
 \emph{Transport.} The Talagrand $T_2$ constant inherits the LSI story: whenever a data-informed
 LSI holds, Otto--Villani (Theorem~\ref{thm:otto-villani}) gives $\CTCI\le\CLS$ at the same scale,
-and the linear-test lower bound $\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only})
-keeps it honest. A data-informed $\CTCI$ therefore follows a data-informed $\CLS$, not the
+while $T_2(C)$ itself implies $\Cov_\pi\preceq C I$ through its linear sub-Gaussian consequence.
+A data-informed $\CTCI$ therefore follows a data-informed $\CLS$, not the
 Poincar\'e bound alone. The variational-inference companion A4 (Section~\ref{sec:a4},
-Conjecture~\ref{conj:a4}) pursues exactly this $\Wtwo$ analogue at posterior scale.
+Question~\ref{q:a4-certificate}) pursues exactly this $\Wtwo$ analogue at posterior scale.
 
-\subsection{The theorem to aim for}
+\subsection{The certified bounded-curvature result and the residual target}
 \label{subsec:a1-theorem}
 
-The honest first milestone is the Poincar\'e statement, with the log-Sobolev/transport version
-flagged as a genuinely harder second stage.
+The abstract Poincar\'e calculation is Proposition~\ref{prop:a1-bulk-tail}, while
+Proposition~\ref{prop:a1-mode-leverage} supplies a concrete selection theorem for a nontrivial
+model class. The latter and its factor-one input are independently audited; the former universal
+Milman comparison remains an analytic draft pending separate review. The honest positive target
+is now to quantify the certified construction, prove that it beats the prior on a checkable
+finite-sample regime, and improve it when maximal row leverage is too conservative.
 
-\begin{conjecture}[Data-informed GLM Poincar\'e constant]
+\begin{conjecture}[Strict improvement on data-informative GLM subclasses]
 \label{conj:a1}
-For the Gaussian-prior convex GLM posterior of Family~\ref{fam:glm-posterior} with Hessian
-\eqref{eq:a1-hessian}, there is a universal constant $C$ such that for every deterministic
-diagonal $\bar W\succeq0$,
+Fix $d$ and a desired improvement margin $0<\delta<1$. There should be explicit, checkable
+data-informativeness conditions on $(X,y,\Sigmaz)$ --- excluding, in particular, $X=0$ and
+likelihood-flat prior-dominated instances --- under which the bounded-Hessian construction of
+Proposition~\ref{prop:a1-mode-leverage} selects a nonempty range of $R$ for which
 \[
-  \CP(\pi)\ \le\ C\,\Big\{\lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W X\big)^{-1}\Big]
-  \ +\ \E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big);\,G_{\bar W}^c\big]\Big\}
-  \ \le\ C\,\Big\{\lmax\!\big(A_{\bar W}^{-1}\big)+\lmax(\Sigmaz)\,\pi(G_{\bar W}^c)\Big\},
+  \begin{aligned}
+    B_{\rm cert}(R)
+    &:=\Big\{\lmax\!\Big[\big(\Sigmaz^{-1}+X^\top\bar W(R)X\big)^{-1}\Big]
+      +\E_\pi\!\big[\lmax\!\big(H(\theta)^{-1}\big);\,G_{\bar W(R)}^c\big]\Big\}\\
+    &\le\Big\{\lmax\!\big(A_{\bar W(R)}^{-1}\big)
+      +\lmax(\Sigmaz)\,\varepsilon_d(R,\eta)\Big\}
+  \end{aligned}
 \]
-with $G_{\bar W}$ as in \eqref{eq:a1-good}. Optimizing over data-informed $\bar W$ yields a
-certified constant at the inverse-observed-information scale
-$\lmax[(\Sigmaz^{-1}+X^\top W(\hat\theta)X)^{-1}]\ll\lmax(\Sigmaz)$ in the likelihood-dominated
-regime. Under additional global hypotheses (a bulk LSI plus prior-tail drift,
-Subsection~\ref{subsec:a1-pls}) the analogous statement holds for $\CLS$ and, via
-Theorem~\ref{thm:otto-villani}, for $\CTCI$.
+satisfies
+$\CP(\pi)\le B_{\rm cert}(R)\le(1-\delta)\lmax(\Sigmaz)$. The conditions must be expressed in
+computable mode curvature, leverage, and radial-tail quantities, not in posterior-oracle
+quantiles. For $\eta<1$, the already proved direct certificate gives the immediate sufficient
+check
+$K_d(\eta)\lmax(\widehat H^{-1})<\lmax(\Sigmaz)$; the residual content is to obtain useful split
+or spectral certificates when that conservative check fails. Along regular fixed-dimensional
+logistic sequences, Corollary~\ref{cor:a1-leverage-asymptotic} already gives the exact A2
+coefficient.
+For unbounded-Hessian GLMs, the separate analytic Milman route retains an explicit universal
+factor and the exact coefficient remains open. The global $\CLS$/$\CTCI$ analogue is excluded for finite
+Gaussian-prior logistic regression by \eqref{eq:a1-logistic-rigidity}; local or restricted
+analogues remain open.
 \end{conjecture}
 
-\noindent The proof skeleton is: Brascamp--Lieb (Theorem~\ref{thm:brascamp-lieb}) supplies a
-spread bound for Lipschitz observables, which the Milman/Veysseire log-concave self-improvement
-\cite{cattiaux2018poincare} promotes to the spectral gap $\CP\lesssim\E_\pi\lmax(H^{-1})$
-\eqref{eq:a1-cfg}; the Loewner bounds $H\succeq A_{\bar W}$ on $G_{\bar W}$ and
-$H\succeq\Sigmaz^{-1}$ off it give the bulk--tail split \eqref{eq:a1-split}; and a GLM-specific
-certificate for $\pi(G_{\bar W}^c)$ closes it. The mathematical weight is entirely in the last step
---- choosing $\bar W$ and bounding the tail (Subsection~\ref{subsec:a1-barw}) --- not in the
-functional-inequality skeleton, encoded by \eqref{eq:a1-cfg} and \eqref{eq:a1-split}.
+\noindent Propositions~\ref{prop:a1-euclidean-harmonic} and~\ref{prop:a1-mode-leverage} now supply
+the independently audited bounded-Hessian functional-inequality and selection skeletons. The
+remaining program is to quantify when the explicit expression improves on the prior and extend or
+replace maximal row leverage in the regimes where it fails. The universal Milman route remains
+separate and pending review: its fixed comparison loss cannot by itself recover an exact
+asymptotic coefficient.
 
 \subsection{Sub-targets and what remains open}
 \label{subsec:a1-open}
 
-The flagship question (Question~\ref{q:glm-data-informed}) splits into six research questions of
-increasing difficulty, the first of which is essentially a specialization exercise and the last
-of which is wide open.
+The flagship question (Question~\ref{q:glm-data-informed}) now splits into one prerequisite
+constant/source-applicability task and five open selection, tail, sharpness, entropy, and
+application tasks.
 
-\begin{question}[The certified GLM Poincar\'e bound]
+\begin{question}[Beyond bounded Euclidean curvature]
 \label{q:a1-poincare}
-Prove Conjecture~\ref{conj:a1} for $\CP$: specialize the Brascamp--Lieb / log-concave
-self-improvement route \cite{cattiaux2018poincare} to the GLM Hessian \eqref{eq:a1-hessian} and
-make the universal constant explicit. This is the entry point and should be provable with current
-tools \cite{cattiaux2018poincare,ConstrainedGibbs2026,ChenSridharan2024Lyapunov}.
+Determine whether the spectral-domain argument of
+Proposition~\ref{prop:a1-euclidean-harmonic} extends beyond globally bounded Hessian to
+unbounded-Hessian posteriors such as Poisson, and to nonsmooth or only weakly convex GLMs. For the
+general fallback, independently audit and make explicit the universal constant in
+Proposition~\ref{prop:a1-bulk-tail}. The compact source theorem
+\cite{Veysseire2011SpectralGap} alone does not discharge these noncompact domain questions.
 \end{question}
 
 \begin{question}[Computable, data-informed $\bar W$]
 \label{q:a1-barw}
-Construct and compare the mode-centred rowwise weights \eqref{eq:a1-rowwise}, the posterior-quantile
-weights, and the spectral weights of Subsection~\ref{subsec:a1-barw}, with the spectral version
-\(X^\top W(\theta)X\succeq X^\top\bar W X\) (not the rowwise $w_i\ge\bar w_i$) as the less
-conservative object. The deliverable is a $\bar W$ computable from $(X,y,\Sigmaz)$ alone.
+Use the explicit mode-leverage weights \eqref{eq:a1-leverage-wbar} as the deterministic baseline,
+and compare them with matrix-spectral alternatives that do not let a single high-leverage row
+control every direction. Any replacement must still be computable from $(X,y,\Sigmaz)$ alone and
+must certify $X^\top W(\theta)X\succeq X^\top\bar W X$ without posterior-oracle quantiles.
 \end{question}
 
-\begin{question}[Certifying the posterior-tail probability]
+\begin{question}[Sharpening the posterior-tail probability]
 \label{q:a1-tail}
-Prove $\pi(G_{\bar W}^c)\le\eps$ with computable, data-dependent constants, via posterior
-concentration, finite-sample Laplace bounds \cite{KasprzakGiordanoBroderick2025}, or the
-self-improving bootstrap of Subsection~\ref{subsec:a1-barw}. This is the heart of the problem ---
-everything else is skeleton.
+Quantify and optimize the finite-sample loss in the certified radial bound
+\eqref{eq:a1-leverage-tail}, and find sharper matrix-tail bounds when maximal leverage is
+conservative.
+For GLMs outside \eqref{eq:a1-loghess-lipschitz}, prove an alternative computable tail certificate
+via finite-sample Laplace bounds \cite{KasprzakGiordanoBroderick2025} or a self-improving bootstrap.
 \end{question}
 
 \begin{question}[Sharp constants and the $1/n$ scale]
 \label{q:a1-sharp}
-The universal Brascamp--Lieb / Milman constant of \eqref{eq:a1-cfg} need not be sharp. For
-statistical use one wants the correct $1/n$ scaling in the likelihood-dominated regime, matching
-the asymptotic A2 limit \eqref{eq:a2-target} on letting $n\to\infty$ (consistency between the
-finite-sample A1 bound and the asymptotic A2 constant is a useful internal check), validated
-against the linear-test lower bound $\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only})
-and sample-based estimators of the Poincar\'e constant \cite{PillaudVivienEtAl2020}.
+Verify the hypotheses of Corollary~\ref{cor:a1-leverage-asymptotic} for regular random-design
+logistic sequences. For unbounded-Hessian models or sequences without vanishing maximal leverage,
+find the correct replacement spectral-stability condition. Every claim must match the A2 limit
+\eqref{eq:a2-target} and the lower bound
+$\CP\ge\lmax(\Cov_\pi)$ (Remark~\ref{rem:rayleigh-lower-only}).
 \end{question}
 
 \begin{question}[Log-Sobolev and transport analogues]
 \label{q:a1-lsi}
-Establish the data-informed $\CLS$ bound \eqref{eq:a1-lsi-target} by gluing a local LSI on the
-bulk $G_{\bar W}$ to Gaussian-prior drift outside, using the Lyapunov / super-Poincar\'e toolkit
-\cite{CattiauxGuillinWangWu2009,BakryCattiauxGuillin2008,CattiauxGuillin2010}, and derive $\CTCI$
-via Otto--Villani (Theorem~\ref{thm:otto-villani}). Identify when the LSI limit is Fisher-local
-versus governed by the global landscape (cf.\ A2, Section~\ref{sec:a2}); for multimodal or
-mixture extensions, decomposition methods \cite{MenzSchlichting2014} become relevant. This is the
-genuinely harder second stage.
+In view of \eqref{eq:a1-logistic-rigidity}, formulate and prove a \emph{localized or restricted}
+data-informed LSI/transport inequality on the bulk $G_{\bar W}$, with an explicit admissible class
+of initial laws or test functions and a tail/warm-start penalty. Determine which stronger-tail
+GLMs admit a genuine global version. Lyapunov, super-Poincar\'e, and decomposition methods
+\cite{CattiauxGuillinWangWu2009,BakryCattiauxGuillin2008,CattiauxGuillin2010,MenzSchlichting2014}
+are the relevant tools; a global posterior-scale claim for ordinary logistic regression is not.
 \end{question}
 
 \begin{question}[Certified sampling and concentration rates]
@@ -338,7 +592,7 @@ certified computational Bayesian rates, and is the payoff that motivates the who
 A1 is the finite-sample flagship; A2 (Section~\ref{sec:a2}) is its $n\to\infty$ shadow, and a
 sharp A1 bound tight in the bulk should reproduce the Fisher-information limit
 \eqref{eq:a2-target}. The transport face of A1 is pursued by A4 (Section~\ref{sec:a4},
-Conjecture~\ref{conj:a4}) as restricted/localized $\Wtwo$ constants at the same
+Question~\ref{q:a4-certificate}) as restricted/localized $\Wtwo$ constants at the same
 $\lmax[(\Sigmaz^{-1}+X^\top\bar W X)^{-1}]$ bulk scale. The tail correction of \eqref{eq:a1-main}
 is the bulk-side shadow of the heavy-tailed obstruction of A3 (Section~\ref{sec:a3}), where the
 same vanishing-curvature directions survive into the posterior \emph{tail} and force weighted

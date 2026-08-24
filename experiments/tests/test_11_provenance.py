@@ -1,4 +1,4 @@
-"""Artifact writes are immutable and dirty provenance is evidence-ineligible."""
+"""Artifact writes are immutable; provenance records seed, params, and versions."""
 
 from __future__ import annotations
 
@@ -20,12 +20,11 @@ def test_write_jsonl_uses_exclusive_creation(tmp_path):
     assert json.loads(lines[1])["kind"] == "diagnostic"
 
 
-def test_dirty_run_is_marked_evidence_ineligible(monkeypatch):
-    answers = {
-        ("rev-parse", "HEAD"): "abc123",
-        ("status", "--porcelain"): " M tracked.py",
-    }
+def test_provenance_does_not_gate_on_worktree_state(monkeypatch):
+    answers = {("rev-parse", "HEAD"): "abc123"}
     monkeypatch.setattr(provenance_module, "_git", lambda *args: answers.get(args))
     header = provenance_module.provenance(target="test", seed=0)
-    assert header["git_dirty"] is True
-    assert header["evidence_eligible"] is False
+    assert header["git_commit"] == "abc123"
+    assert header["params"] == {"target": "test", "seed": 0}
+    assert "git_dirty" not in header
+    assert "evidence_eligible" not in header

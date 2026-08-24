@@ -1,0 +1,58 @@
+% Standalone solution dossier for prop:a5-block-stability.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: prop:a5-block-stability
+% refines: prop:a5-block-stability
+% bounded_by: obs:symmetry-vs-physical
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: density-ratio stability of symmetry blocks}
+
+\begin{proposition}
+Let $\pi$ and $\widetilde\pi$ be invariant under the same finite isometry group and have the
+same pointwise carr\'e du champ. If
+\[
+ \operatorname*{osc}\log\frac{\dd\widetilde\pi}{\dd\pi}\le\varepsilon,
+\]
+then, for $b\in\{\mathrm{inv},\mathrm{noninv}\}$,
+\[
+ e^{-\varepsilon}\lambda_b(\pi)
+ \le\lambda_b(\widetilde\pi)
+ \le e^{\varepsilon}\lambda_b(\pi).
+\]
+Consequently an ordering with logarithmic margin greater than $2\varepsilon$ is preserved.
+\end{proposition}
+
+\begin{proof}
+Set $h=\dd\widetilde\pi/\dd\pi$, $m=\operatorname*{ess\,inf}h$, and
+$M=\operatorname*{ess\,sup}h$. Finite log-oscillation gives $M/m\le e^\varepsilon$ and also
+makes the two Sobolev domains identical. For every $f$,
+\[
+ m\Var_\pi(f)\le\Var_{\widetilde\pi}(f)\le M\Var_\pi(f),
+ \qquad
+ m\mathcal E_\pi(f)\le\mathcal E_{\widetilde\pi}(f)\le M\mathcal E_\pi(f),
+\]
+where the variance comparison follows from
+$\Var_\mu(f)=\inf_c\int(f-c)^2\dd\mu$. Because both measures are invariant, the pointwise
+average $P_G$ has the same invariant range and the same kernel for both. Comparing Rayleigh
+quotients on either fixed block yields
+$(m/M)\lambda_b(\pi)\le\lambda_b(\widetilde\pi)\le(M/m)\lambda_b(\pi)$, proving the claim.
+Finally,
+$\lambda_{\mathrm{noninv}}(\pi)<e^{-2\varepsilon}\lambda_{\mathrm{inv}}(\pi)$ implies
+$\lambda_{\mathrm{noninv}}(\widetilde\pi)<\lambda_{\mathrm{inv}}(\widetilde\pi)$ by applying
+opposite sides of the two comparisons.
+\end{proof}
+
+\paragraph{Scope.}
+This compares block gaps, not individual eigenvectors or spectral projectors.
+
+\end{document}

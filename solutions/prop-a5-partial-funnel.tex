@@ -1,0 +1,70 @@
+% Standalone solution dossier for prop:a5-partial-funnel.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: prop:a5-partial-funnel
+% refines: prop:a5-partial-funnel
+% depends_on: lem:a5-pi-exp-tail
+% bounded_by: obs:heavy-tail-no-classical
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% proof_completion: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% reviewer: /root/cross_review
+% review: research/reviews/2026-08-21-a5-funnel-second-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: the partial Neal-funnel phase}
+
+\begin{lemma}
+If a law satisfies Poincar\'e with finite constant $C$, every real $1$-Lipschitz $f\in L^2$
+has a finite exponential moment about a median for all sufficiently small positive exponents.
+\end{lemma}
+
+\begin{proof}
+Let $m$ be a median and $a=2\sqrt C$. For $t\ge0$, apply Poincar\'e to
+$g=\min\{(f-m-t)_+,a\}$. The independent-copy variance identity and
+$\P(f\le m+t)\ge1/2$ give
+\[
+ \tfrac12a^2\P(f\ge m+t+a)\le\Var(g)
+ \le C\P(m+t<f<m+t+a)\le C\P(f>m+t).
+\]
+Thus each increase by $a$ halves the upper tail. Applying the same argument to $-f$ yields a
+two-sided exponential tail and hence a finite exponential moment for
+$c<(\log2)/a$.
+\end{proof}
+
+\begin{proposition}
+For $s>0$, let $u\sim N(0,s^2)$ and $z\sim N(0,1)$ be independent, let $\theta=e^uz$, and define
+$z_\alpha=e^{-\alpha u}\theta=e^{(1-\alpha)u}z$ for $0\le\alpha\le1$. In the Euclidean
+coordinates $(u,z_\alpha)$,
+\[
+ C_P=+\infty\quad(0\le\alpha<1),\qquad
+ C_P=\max\{s^2,1\}\quad(\alpha=1).
+\]
+\end{proposition}
+
+\begin{proof}
+Fix $\alpha<1$ and put $\beta=1-\alpha>0$. The coordinate $z_\alpha$ is one-Lipschitz in the
+Euclidean $(u,z_\alpha)$ space and lies in $L^2$, since
+$\E z_\alpha^2=e^{2\beta^2s^2}$. For every $c>0$,
+\[
+\E e^{c|z_\alpha|}
+ \ge\P(|z|\ge1)\E[e^{ce^{\beta u}}\mathbf1_{\{u>0\}}]=\infty.
+\]
+The last integral diverges because
+$ce^{\beta u}-u^2/(2s^2)\to+\infty$. An exponential moment about a median would imply an
+uncentred one by the triangle inequality, so the lemma contradicts any finite Poincar\'e constant.
+At $\alpha=1$, $z_\alpha=z$ and the law is
+the product $N(0,s^2)\otimes N(0,1)$, whose Poincar\'e constant is
+$\max\{s^2,1\}$ by tensorization.
+\end{proof}
+
+\paragraph{Audit state.}
+The completed concentration and funnel proof received a second independent agent audit after the
+$s>0$ hypothesis and all integrability steps were made explicit.
+
+\end{document}

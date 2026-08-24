@@ -1,0 +1,45 @@
+% Standalone solution dossier for ex:a5-gaussian-crossover.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: ex:a5-gaussian-crossover
+% refines: ex:a5-gaussian-crossover
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: exact Gaussian centred/non-centred crossover}
+
+\begin{proposition}
+Let $u,z\sim N(0,1)$ independently, $\theta=u+z$, and weight the law by the Gaussian likelihood
+$\exp[-r(\theta-y)^2/2]$, $r\ge0$. In coordinates $(u,\theta)$ and $(u,z)$ the precision
+matrices are
+\[
+ H_{\rm c}=\begin{pmatrix}2&-1\\-1&1+r\end{pmatrix},\qquad
+ H_{\rm nc}=\begin{pmatrix}1+r&r\\r&1+r\end{pmatrix}.
+\]
+Both $C_P$ and the precision condition number favor non-centring for $0\le r<1$, tie at $r=1$,
+and favor centring for $r>1$.
+\end{proposition}
+
+\begin{proof}
+Expanding $u^2+(\theta-u)^2+r(\theta-y)^2$ and substituting $\theta=u+z$ gives the two matrices;
+$y$ affects only the mean. Their determinants coincide and equal $1+2r$, while
+\[
+ \operatorname{tr}H_{\rm c}=3+r,\qquad
+ \operatorname{tr}H_{\rm nc}=2+2r.
+\]
+For positive $2\times2$ matrices of fixed determinant, the smaller eigenvalue decreases and the
+condition number increases with the trace. The trace difference is $1-r$, proving all three
+regimes. Since a Gaussian with precision $H$ has $C_P=1/\lambda_{\min}(H)$, the same comparison
+applies to $C_P$.
+\end{proof}
+
+\end{document}

@@ -1,9 +1,8 @@
-"""Verdicts and gates — the soundness layer.
+"""Analytic verdicts, directional comparisons, and numerical gates.
 
-The only sound verdict is REFUTED: a claimed upper bound C_P <= B is false if a certified
-lower bound exceeds it (beyond numerical error). Everything else is direction, capped below a
-proof. Gates: calibration must reproduce ground truth, and two independent estimates must agree
-(convergence) — a verdict computed behind a red gate is discarded, not scored.
+``falsify`` is reserved for rigorous analytic lower bounds.  Finite-sample and
+finite-grid estimates use ``compare_directional``: agreement across seeds is a
+useful diagnostic but is not a proof of mixing or a confidence certificate.
 """
 from __future__ import annotations
 
@@ -19,8 +18,8 @@ class Verdict:
     instance: str
     claim: str                # what upper bound was tested, e.g. "C_P <= bulk_bound"
     bound: float              # B
-    lower: float              # certified C_P lower estimate
-    status: str               # "REFUTED" | "consistent" | "no-verdict"
+    lower: float              # rigorous lower bound or explicitly directional estimate
+    status: str               # analytic or directional status; see constructors below
     tightness: float | None   # lower / B  (how close the LB is to the claim)
     note: str = ""
 
@@ -30,7 +29,11 @@ class Verdict:
 
 def falsify(claim: str, instance: str, bound: float, lower: float, rel_tol: float = 0.10,
             note: str = "") -> Verdict:
-    """REFUTED iff lower > bound*(1+rel_tol). Sound: a certified LB above the claim kills it."""
+    """Return ``REFUTED`` only for a caller-supplied rigorous lower bound.
+
+    This function does not certify ``lower``.  Do not pass a raw Monte Carlo, MCMC,
+    FEM, or grid estimate; use :func:`compare_directional` for those quantities.
+    """
     if bound is None or not np.isfinite(bound):
         status = "no-verdict"
         tight = None
@@ -42,6 +45,22 @@ def falsify(claim: str, instance: str, bound: float, lower: float, rel_tol: floa
         tight = float(lower / bound)
     return Verdict(instance, claim, float(bound) if bound is not None else float("nan"),
                    float(lower), status, tight, note)
+
+
+def compare_directional(claim: str, instance: str, bound: float, estimate: float,
+                        rel_tol: float = 0.10, note: str = "") -> Verdict:
+    """Compare a numerical estimate with a proposal without issuing a verdict."""
+    if bound is None or not np.isfinite(bound):
+        status = "no-comparison"
+        tight = None
+    elif estimate > bound * (1 + rel_tol):
+        status = "directional-exceeds"
+        tight = float(estimate / bound)
+    else:
+        status = "directional-consistent"
+        tight = float(estimate / bound)
+    return Verdict(instance, claim, float(bound) if bound is not None else float("nan"),
+                   float(estimate), status, tight, note)
 
 
 def calibration_ok(estimate: float, exact: float, rel_tol: float = 0.05) -> bool:
@@ -66,7 +85,7 @@ def convergence_ok(a: float, b: float, rel_tol: float = 0.15) -> bool:
 
 
 def two_seed_lower(instance, n: int, seed_a: int, seed_b: int):
-    """Estimate the linear-test lower bound on two independent draws; return (mean, ok)."""
+    """Estimate the linear-test quantity twice; agreement is a directional gate only."""
     la = poincare_lower(instance.sample(n, np.random.default_rng(seed_a)))
     lb = poincare_lower(instance.sample(n, np.random.default_rng(seed_b)))
     return 0.5 * (la + lb), convergence_ok(la, lb), (la, lb)

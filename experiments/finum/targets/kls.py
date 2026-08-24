@@ -1,13 +1,13 @@
 """Part III (KLS) route-gating — focused & self-contained (NO localization SDE engine).
 
 KLS asserts a universal K with C_P(mu) <= K * lambda_max(Cov_mu) for EVERY isotropic log-concave
-mu (= the A1-bis bridge, research/kls/shared/target.md). The SDE-free, sound signal computable
-here is the **realized K = C_P / lambda_max(Cov)** on isotropic log-concave test geometries, plus
-a rank-one bridge sanity check. Each 1D factor's C_P is the FEM gap (calibrated on the Gaussian);
-products use tensorization C_P = max_i C_P_i and lambda_max(Cov) = max_i Var_i.
+mu (= the A1-bis bridge, research/kls/shared/target.md). The SDE-free numerical signal here is a
+finite-domain FEM estimate of **K = C_P / lambda_max(Cov)** on isotropic log-concave test
+geometries, plus a rank-one bridge sanity check. Each 1D factor's C_P is approximated by FEM
+(calibrated on the Gaussian); products use tensorization at the discretized-factor level.
 
 This gates the route-AGNOSTIC facts in shared/lower-bounds.md:
-  * isotropic linear-test refuter: lambda_max(Cov) ~ 1 => any claimed KLS upper bound < 1 is REFUTED;
+  * exact isotropic linear test: lambda_max(Cov) = 1 implies every universal KLS bound has K>=1;
   * K = O(1) across this small battery, including single-coordinate Gaussian inflation, is
     directional non-refutation of the bridge. It does not test the cut-specific dynamic
     obstruction ``obs:rank-one-refuted``.
@@ -20,7 +20,7 @@ from __future__ import annotations
 import numpy as np
 
 from ..constants import poincare_1d_fem
-from ..verdict import falsify, matches
+from ..verdict import compare_directional, falsify, matches
 
 K_O1_CEILING = 5.0   # "O(1)" ceiling for the realized K on these benign geometries
 
@@ -93,13 +93,17 @@ def run_records(seed: int = 0, d: int = 4):
 
     K_max = max(Ks)
     # Directional signal only: this finite benign battery does not refute the KLS / A1-bis bridge.
-    v_bridge = falsify("realized K <= K_O1_CEILING (bridge holds)", "kls-bridge", K_O1_CEILING, K_max,
-                       note="K=C_P/lambda_max(Cov); finite-battery consistency is non-refutation only")
+    v_bridge = compare_directional(
+        "FEM K estimate <= K_O1_CEILING", "kls-bridge", K_O1_CEILING, K_max,
+        note="finite-domain FEM battery; directional comparison only",
+    )
     # verdict 2: isotropic linear-test refuter — lambda_max(Cov)=1 kills any sub-1 upper claim
     v_refuter = falsify("KLS upper bound C_P <= 0.5 (too small)", "kls-isotropic", 0.5, 1.0,
                         note="universal lower bound C_P >= lambda_max(Cov) = 1 for isotropic mu")
-    records.append({"kind": "verdict", "realized_K_max": K_max,
-                    "bridge_not_refuted_on_battery": bool(v_bridge.status != "REFUTED"),
+    records.append({"kind": "analytic-verdict-and-directional-diagnostic",
+                    "estimated_K_max_fem": K_max,
+                    "bridge_directionally_within_ceiling":
+                        bool(v_bridge.status == "directional-consistent"),
                     "verdict_bridge": v_bridge.dict(), "verdict_isotropic_refuter": v_refuter.dict(),
                     "companion": "localization quantities (q:upgrade source, q:alignment, weighted Stein) "
                                  "=> target 'kls-loc' on finum.localization; see research/kls/gating.md"})

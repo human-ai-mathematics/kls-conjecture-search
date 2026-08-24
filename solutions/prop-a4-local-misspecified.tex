@@ -1,0 +1,67 @@
+% Standalone solution dossier for prop:a4-local-misspecified.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: prop:a4-local-misspecified
+% refines: prop:a4-local-misspecified
+% bounded_by: obs:restricted-not-finite
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: misspecified raw local variational constants}
+
+\begin{theorem}
+Let $\pi\in\mathcal P_2(\R^d)$ and let $q_\eta\in\mathcal P_2(\R^d)$, $\eta\in\R^p$, be an
+identifiable family, so all displayed means are finite. Let
+$K(\eta)=\KL(q_\eta\|\pi)$ have a unique interior minimizer $\eta_\star$ with
+$\delta=K(\eta_\star)>0$. Assume the complete sublevel
+$\{K\le\delta+\rho_0\}$ lies in a compact chart on which $K$ is continuous, and put
+$h=\eta-\eta_\star$. Suppose, uniformly as $h\to0$,
+\[
+ 2K(\eta_\star+h)=2\delta+h^\top F_\star h+O(\norm h^3),\qquad F_\star\succ0,
+\]
+\[
+ D(\eta_\star+h)=D_\star+b_D^\top h+O(\norm h^2),\qquad
+ M(\eta_\star+h)=M_\star+b_M^\top h+O(\norm h^2),
+\]
+where $D=W_2^2(q_\eta,\pi)$ and
+$M=\norm{\E_{q_\eta}\theta-\E_\pi\theta}^2$. Then
+\[
+ C_{\mathcal Q,\delta+\rho}(\pi)
+ =\frac{D_\star}{2\delta}
+ +\frac{\sqrt{2\rho}}{2\delta}\norm{F_\star^{-1/2}b_D}+O(\rho),
+\]
+\[
+ C_{\mathrm{mean},\mathcal Q,\delta+\rho}(\pi)
+ =\frac{M_\star}{2\delta}
+ +\frac{\sqrt{2\rho}}{2\delta}\norm{F_\star^{-1/2}b_M}+O(\rho).
+\]
+If a displayed linear coefficient vanishes, its correction is $O(\rho)$.
+\end{theorem}
+
+\begin{proof}
+Compactness, continuity, and uniqueness first force shrinking sublevels. The KL expansion then
+shows that the boundary is, uniformly in direction, an $O(\rho)$ radial perturbation of
+$h^\top F_\star h=2\rho$. The denominator $2K$ has no linear term, whereas the numerator does.
+On the leading ellipsoid,
+\[
+ \max b^\top h=\sqrt{2\rho}\norm{F_\star^{-1/2}b}.
+\]
+Dividing the numerator expansion by
+$2\delta+h^\top F_\star h+O(\norm h^3)$ shows that numerator quadratic terms, denominator
+variation, and the radial perturbation contribute only $O(\rho)$. The optimizer itself supplies
+the baseline. Applying this calculation to $D$ and $M$ gives the two formulas.
+\end{proof}
+
+\paragraph{Obstruction respected.}
+The theorem assumes an isolated compact parametric sublevel; it makes no claim for rich entropy
+balls whose $W_2$ radius can be infinite.
+
+\end{document}

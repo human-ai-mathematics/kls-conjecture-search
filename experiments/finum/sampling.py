@@ -3,8 +3,9 @@
 Plain MALA mixes badly on anisotropic / near-flat posteriors (exactly the obs:flat-direction
 stress cases), so we provide *preconditioned* MALA and an adaptive wrapper: a pilot run under a
 curvature preconditioner estimates the covariance, then the main run is preconditioned by that
-estimate — which captures the flat directions a fixed-metric chain misses. The two-chain
-convergence gate in finum.verdict is the backstop: if mixing still fails, no verdict is emitted.
+estimate — which can capture flat directions a fixed-metric chain misses. The two-seed agreement
+check in ``finum.verdict`` is a diagnostic gate, not a mixing proof or confidence certificate;
+if it fails, no downstream sampled diagnostic is emitted.
 """
 from __future__ import annotations
 

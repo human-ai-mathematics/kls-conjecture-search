@@ -32,7 +32,7 @@ Laplace $\propto e^{-\abs{x}/b}$ & $\CP\sim b^2$ & \textbf{no} & \textbf{no} & e
 Gamma                    & usually & \textbf{no} & \textbf{no} & exponential tail\\
 Student-$t_\nu$          & \textbf{no} / weighted & \textbf{no} & \textbf{no} & polynomial tail\\
 Cauchy                   & no / weak & \textbf{no} & \textbf{no} & too heavy-tailed\\
-horseshoe                & delicate & \textbf{no} & \textbf{no} & scale-mixture tail\\
+horseshoe                & \textbf{no} / weighted & \textbf{no} & \textbf{no} & sharp $1$D weighted constant\\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -43,9 +43,10 @@ Poincar\'e constant $\CP\sim b^2$ (Hardy criterion, Theorem~\ref{thm:hardy-1d}) 
 exponential concentration, so no LSI. For Student-$t_\nu$ the tails are polynomial: LSI and
 $T_2$ fail, and the \emph{classical} Poincar\'e inequality fails as well for \emph{every}
 $\nu$, not only small $\nu$, because a polynomial tail makes the $1$D Hardy functional diverge.
-The correct object is a \emph{weighted} Poincar\'e inequality, finite for all $\nu$ but with a
-constant that worsens as the tail heavies; Cauchy ($\nu=1$) is the heaviest case
-(Section~\ref{sec:a3} develops the quantitative weighted theory). The right replacement tools
+The correct object is a \emph{weighted} Poincar\'e inequality, finite for all $\nu>0$ but with a
+constant that worsens as $\nu\downarrow0$; Cauchy ($\nu=1$) is the canonical boundary calibration,
+not the heaviest Student law. Section~\ref{sec:a3} records the sharp generalized-Cauchy constants
+and the reviewed sharp horseshoe value. The right replacement tools
 are the modified / weighted log-Sobolev inequalities and the $1$D Hardy theory; making this
 classification quantitative for hierarchical robust-Bayes posteriors is part of the agenda
 (Section~\ref{sec:agenda}).

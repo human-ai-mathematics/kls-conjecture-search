@@ -16,8 +16,15 @@ no verdict) and **stress** (the adversarial cases each obstruction names).
 |----|----------|--------------|--------|
 | `cal-gauss` | $N(0,\Sigma)$, anisotropic $\Sigma$ | $C_P = C_{\mathrm{LS}} = \lambda_{\max}(\Sigma)$ | linear test $= \lambda_{\max}(\Sigma)$; a claim $C_P \le 0.9\,\lambda_{\max}(\Sigma)$ must be FALSIFIED |
 | `cal-glm-linear` | Gaussian-linear GLM ($W \equiv I$) | Gaussian posterior, $\mathrm{Cov} = (\Sigma_0^{-1}+X^\top X)^{-1}$ | A1 bound $\lambda_{\max}((\Sigma_0^{-1}+X^\top X)^{-1})$ is exact $\Rightarrow$ tightness $\approx 1$ |
-| `cal-1d-eigen` | 1D/2D posteriors | $C_P$ from finite-difference eigensolve of $-L$ | two-sided ground truth for falsification calibration |
+| `cal-1d-eigen` | 1D Gaussian | exact $C_P=\sigma^2$ | calibrated finite-domain FEM must approximate $\sigma^2$; it is not a certified two-sided solver without truncation/discretization error bounds |
 | `cal-cauchy` | generalized Cauchy $\mu_\beta$ | closed-form weighted gap $\lambda_{\beta,d}$ (`thm:a3-student`) | numerical weighted gap matches |
+| `cal-logit-global` | any finite Gaussian-prior binary-logistic posterior | $C_{\mathrm{LS}}=C_{\mathrm{TCI}}=\lambda_{\max}(\Sigma_0)$ | global entropy/transport estimates may not claim a smaller Fisher-scale value |
+| `cal-mode-leverage` | finite logistic GLM with mode Hessian $\widehat H$ | radial $g_-\le U-U(\hat\theta)\le g_+$; $K_d(0)=1$ and $K_d(\eta)\to1$ | rowwise curvature floors hold throughout the mode ellipsoid; $\eta\ge1$ triggers the explicit failure gate |
+| `cal-horseshoe-scale` | exact horseshoe marginal $h_\tau\propto\tau^{-1}e^aE_1(a)$, weight $\tau^2+x^2$ | $C_{\mathrm{HS}}(\tau)=4$ for every $\tau$ (`prop:a3-horseshoe`) | standardized grids reproduce scale covariance and the positive E1/Barta residual; finite-domain FEM is directional only |
+| `cal-vi-gaussian-local` | $\pi=N(\mu,\Sigma)$, $\mathcal Q_S=\{N(\mu+m,S)\}$ | exact raw misspecified, localized-mean, and optimizer-centred excess constants | excess constants equal $\lambda_{\max}(\Sigma)$; raw constant retains $D_S/(2\delta_S)$ |
+| `cal-gaussian-hierarchy` | unit Gaussian hierarchy, normalized data precision $r$ | centered/non-centered $C_P$ and $\kappa_P$ cross exactly at $r=1$ | any reparameterization diagnostic must reproduce the phase diagram |
+| `cal-partial-noncentering` | scalar Gaussian hierarchy with variances $A,B$ and data precision $r$ | $\alpha_*=1/(1+rB)$ minimizes both $C_P$ and $\kappa_P$ | grid optimization must recover $\alpha_*$ and the determinant must remain invariant |
+| `cal-orbit-connectivity` | finite symmetric matrix of pair communication heights | $\Gamma_{\rm conn}=\max_A\min_{i\in A,j\notin A}H_{ij}$ | distinguish the easiest pair from the threshold at which the full orbit graph connects |
 
 ---
 
@@ -25,8 +32,11 @@ no verdict) and **stress** (the adversarial cases each obstruction names).
 
 ### A1 / `obs:flat-direction`
 - `stress-logit-separable` — near-separable logistic (vary separation margin). The bulk term
-  stays small while $\lambda_{\max}(\mathrm{Cov})$ inflates $\Rightarrow$ a tail-free bound is
-  FALSIFIED; a correct A1 bound degrades gracefully with the separation geometry and $\lambda_{\max}(\Sigma_0)$.
+  can stay below the covariance lower bound. This falsifies a *specified* local/mode-curvature
+  upper bound when its right-hand side is smaller than an exactly evaluated or rigorously
+  controlled $\lambda_{\max}(\mathrm{Cov})$; raw sampled covariance is directional only. It does
+  not falsify all tail-free data-informed formulas. A correct A1 certificate must survive the
+  analytic one-observation logistic family and revert gracefully toward the prior scale.
 - `stress-anisotropic-prior` — strongly anisotropic $\Sigma_0$ (matrix bound vs scalar floor).
 - `stress-wide` — $D > n$, rank-deficient $X^\top \bar W X$ (bound must revert to prior scale on
   data-blind directions, improve on data-informed ones).
@@ -38,27 +48,42 @@ no verdict) and **stress** (the adversarial cases each obstruction names).
   A "BvM $\Rightarrow$ constants" claim must be FALSIFIED here.
 - `stress-bvm-sweep` — regular logistic/Poisson, $n$-sweep, fixed $d$, repeated over data draws
   (limit is in $\mathbb P_{\theta_0}$-probability).
-- `stress-non-fisher-local` — model with a shallow remote near-minimizer, so
-  $n\,C_{\mathrm{LS}} \to 1/\mu_{\mathrm{PL}} \neq \lambda_{\max}(I^{-1})$ (exercises `q:a2-lsi`).
+- `stress-non-fisher-local` — deterministic low-temperature potentials satisfying the published
+  global PL/growth hypotheses, with a shallow remote near-minimizer. This calibrates the
+  $1/\mu_{\mathrm{PL}}$ alternative; transferring it to random posterior potentials is itself part
+  of `q:a2-lsi`.
 
 ### A3 / `obs:heavy-tail-no-classical`
 - `stress-student` — Student-$t_\nu$ over $\nu$ (tail index); classical $C_P=\infty$, weighted
   finite, matches $\lambda_{\beta,d}$.
-- `stress-horseshoe` — horseshoe marginal (log pole at 0, Cauchy tail); locate $C_{\mathrm{HS}}(\tau)$
-  in the factor-4 Hardy bracket.
+- `stress-horseshoe` — the **exact** exponential-integral horseshoe marginal (not the historical
+  logarithmic proxy); test scale covariance and the proved value $C_{\mathrm{HS}}=4$ in
+  intrinsic `asinh` coordinates. Numerics guard the implementation of the closed residual; proof
+  status comes from the standalone independently reviewed argument.
+- `stress-fixed-marginal-copula` — hold every heavy-tailed marginal fixed while the copula
+  bottleneck tends to zero. Any marginal-only joint constant must be FALSIFIED.
 
 ### A4 / `obs:restricted-not-finite`
 - `stress-ep-tails` — $\pi \propto e^{-|x|^p}$, $1 \le p < 2$, Gaussian location family:
   $C_{\mathcal Q}=\infty$ (a global $C_{\mathcal Q}$ claim must be FALSIFIED); $C_{\mathcal Q,r}$
-  on a KL sublevel must be finite.
-- `stress-sep-mixture` — separated mixture: reweighting witness ($C_{\mathrm{TCI}} \asymp e^{c\Delta^2}$)
-  vs mode-collapse witness ($C_{\mathcal Q} \asymp \Delta^2$).
+  on a KL sublevel is finite only because this parameter family is coercive. An unrestricted
+  tail-reweighting entropy ball remains infinite.
+- `stress-sep-mixture` — the Gaussian mixture with centers $\pm a$ (separation $2a$): compare an
+  actual component-reweighting lower witness with a mode-collapse lower witness. These are
+  directional growth diagnostics, not two-sided estimates of $C_{\mathrm{TCI}}$ or
+  $C_{\mathcal Q}$; require $a/\sigma$, reweighting, and resolution sweeps.
 
 ### A5 / `obs:symmetry-vs-physical`
-- `stress-folded-well` — $\tfrac12 N(-a,\sigma^2)+\tfrac12 N(a,\sigma^2)$: raw $C_P \gtrsim e^{a^2/2\sigma^2}$,
-  folded $O(\sigma^2)$.
+- `stress-folded-well` — $\tfrac12 N(-a,\sigma^2)+\tfrac12 N(a,\sigma^2)$:
+  $\log(C_P/\sigma^2)=a^2/(2\sigma^2)+O(\log(a/\sigma))$ as $a/\sigma\to\infty$; folding gives
+  $C_P\le\sigma^2$ and the folded constant tends to $\sigma^2$.
+
+### A5 / `obs:heavy-tail-no-classical`
 - `stress-neal-funnel` — Neal's funnel, centered ($C_P=\infty$) vs non-centered ($\max\{s^2,1\}$);
   half-Cauchy $p(\tau)$ (defeats Poincaré even non-centered) vs $\log\tau$ + Gaussian tails.
+  Finite variance witnesses do not numerically establish infinity; that conclusion is analytic.
+  The prior-only partial coordinates remain infinite for every $\alpha<1$, so tests must not
+  invent a smooth global partial-noncentring crossover without a likelihood tail calculation.
 
 ---
 

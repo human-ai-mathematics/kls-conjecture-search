@@ -1,0 +1,243 @@
+% solutions/a1-harmonic-mode-leverage.tex
+% Standalone consolidated proof for the audited A1 nodes.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+%   ledger-nodes: prop:a1-euclidean-harmonic; prop:a1-mode-leverage;
+%                 cor:a1-leverage-asymptotic
+%   refines     : prop:a1-euclidean-harmonic; prop:a1-mode-leverage;
+%                 cor:a1-leverage-asymptotic
+%   bounded_by  : obs:flat-direction (prop:a1-mode-leverage only)
+%   evidence_run: none
+%   checked_by  : agent
+%   reviewer    : /root/cross_review
+%   review      : research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
+%   audit_basis : user-authorized independent-agent certification
+%   author      : /root/a1_a2
+%   date        : 2026-08-21
+% ============================================================================
+
+\section*{Solution: bounded-curvature harmonic mean and mode leverage}
+\label{sec:sol-a1-harmonic-mode-leverage}
+
+This dossier consolidates exactly the three independently audited A1 nodes.  It does not certify
+the separate universal Milman comparison \texttt{prop:a1-bulk-tail}.
+
+\begin{theorem}[Factor-one Euclidean harmonic-mean bound]
+\label{thm:sol-a1-harmonic}
+Let
+\[
+  \mu(dx)=Z^{-1}e^{-U(x)}\,dx
+\]
+on $\R^d$, where $U\in C^\infty(\R^d)$ and, for finite $0<m\le M$,
+\[
+  mI\preceq\nabla^2U(x)\preceq MI\qquad(x\in\R^d).
+\]
+If $\rho(x)=\lambda_{\min}(\nabla^2U(x))$, then
+\[
+  \CP(\mu)\le \int\rho(x)^{-1}\,d\mu(x)
+  =\int\lambda_{\max}\!\big((\nabla^2U(x))^{-1}\big)\,d\mu(x).
+\]
+In particular, the bound applies to every finite binary-logistic posterior with a
+positive-definite Gaussian prior.
+\end{theorem}
+
+\begin{proof}
+Let $A=-\Delta+\nabla U\cdot\nabla$ be the nonnegative self-adjoint operator associated with the
+Dirichlet form $\int|\nabla f|^2d\mu$, and put
+$\lambda_1=1/\CP(\mu)$.  Strong convexity gives $\lambda_1\ge m>0$.
+
+We first record the noncompact domain step.  The unitary ground-state transform conjugates $A$ to
+the Friedrichs realization of
+\[
+ -\Delta+V_U,\qquad
+ V_U=\frac14|\nabla U|^2-\frac12\Delta U.
+\]
+Strong convexity gives $|\nabla U(x)|\ge m|x|-|\nabla U(0)|$, while the upper Hessian bound gives
+$\Delta U\le dM$.  Thus $V_U$ is smooth, bounded below, and coercive.  The standard
+essential-self-adjointness theorem for such Schr\"odinger operators makes $C_c^\infty(\R^d)$ an
+operator core.  On that core, integration by parts gives the weighted Bochner identity
+\begin{equation}\label{eq:sol-a1-bochner}
+ \|Af\|_2^2
+ =\int\|\nabla^2f\|_{\mathrm{HS}}^2d\mu
+  +\int\langle\nabla^2U\nabla f,\nabla f\rangle d\mu.
+\end{equation}
+If $f_k$ is graph-norm Cauchy in the core, applying \eqref{eq:sol-a1-bochner} to
+$f_k-f_l$ shows that both $\nabla f_k$ and $\nabla^2f_k$ are Cauchy in $L^2(\mu)$; hence the
+identity extends to $\operatorname{Dom}(A)$.  The Sobolev chain rule, first applied to
+$(|\nabla f|^2+\delta^2)^{1/2}$ and then with $\delta\downarrow0$, also gives the weak Kato bound
+\[
+  |\nabla|\nabla f||^2\le\|\nabla^2f\|_{\mathrm{HS}}^2
+\]
+for every $f$ in a bounded spectral subspace of $A$.
+
+Fix $\varepsilon>0$.  The spectral projection of $A$ onto
+$[\lambda_1,\lambda_1+\varepsilon]$ is nonzero; choose a nonzero $f$ in its range and set
+$g=|\nabla f|$.  Spectral calculus gives
+\[
+ \|Af\|_2^2\le(\lambda_1+\varepsilon)\langle f,Af\rangle
+ = (\lambda_1+\varepsilon)\int g^2d\mu.
+\]
+Combining this with \eqref{eq:sol-a1-bochner} and Kato yields
+\[
+ (\lambda_1+\varepsilon)\int g^2d\mu
+ \ge\int|\nabla g|^2d\mu+\int\rho g^2d\mu.
+\]
+The Poincar\'e inequality applied to $g$ therefore implies
+\[
+ \int\rho g^2d\mu
+ \le\lambda_1\left(\int g\,d\mu\right)^2
+   +\varepsilon\int g^2d\mu.
+\]
+Weighted Cauchy--Schwarz and $\rho\ge m$ give
+\[
+ \left(\int g\,d\mu\right)^2
+ \le\left(\int\rho g^2d\mu\right)\left(\int\rho^{-1}d\mu\right),
+ \qquad
+ \int g^2d\mu\le m^{-1}\int\rho g^2d\mu.
+\]
+The last curvature integral is positive because $f$ is nonconstant.  After division,
+$1\le\lambda_1\int\rho^{-1}d\mu+\varepsilon/m$; letting $\varepsilon\downarrow0$ proves the
+claim.  For logistic regression,
+$\Sigma_0^{-1}\preceq\nabla^2U(\theta)
+\preceq\Sigma_0^{-1}+\frac14X^TX$, which verifies the hypotheses.
+\end{proof}
+
+\begin{theorem}[Deterministic mode-leverage certificate]
+\label{thm:sol-a1-mode-leverage}
+Let
+\[
+ U(\theta)=\frac12(\theta-m)^T\Sigma_0^{-1}(\theta-m)
+             +\sum_{i=1}^n\ell_i(x_i^T\theta),
+ \qquad \Sigma_0\succ0,
+\]
+where $\ell_i''>0$ and
+\[
+ |\log\ell_i''(s)-\log\ell_i''(t)|\le L_i|s-t|.
+\]
+Let $\hat\theta$ be the mode, $\widehat H=\nabla^2U(\hat\theta)$, and define
+\[
+ z=\widehat H^{1/2}(\theta-\hat\theta),\quad r=|z|,\quad
+ \alpha_i=L_i\sqrt{x_i^T\widehat H^{-1}x_i},\quad \eta=\max_i\alpha_i.
+\]
+With continuous values $g_\pm(r;0)=r^2/2$, put
+\[
+ g_-(r;\eta)=\frac{e^{-\eta r}+\eta r-1}{\eta^2},\qquad
+ g_+(r;\eta)=\frac{e^{\eta r}-\eta r-1}{\eta^2}.
+\]
+Then
+\[
+ e^{-\eta r}I\preceq
+ \widehat H^{-1/2}\nabla^2U(\theta)\widehat H^{-1/2}
+ \preceq e^{\eta r}I,
+ \qquad
+ g_-(r;\eta)\le U(\theta)-U(\hat\theta)\le g_+(r;\eta).
+\]
+For $R>0$, set
+\[
+ \bar w_i(R)=e^{-\alpha_iR}\ell_i''(x_i^T\hat\theta),\qquad
+ W(\theta)=\operatorname{diag}\big(\ell_i''(x_i^T\theta)\big),\qquad
+ \bar W=\operatorname{diag}(\bar w_i(R)),
+\]
+and
+\[
+ G_{\bar W}=\{\theta:X^TW(\theta)X\succeq X^T\bar W X\}.
+\]
+Then
+\begin{equation}\label{eq:sol-a1-tail}
+ \pi(G_{\bar W}^c)\le
+ \min\left\{1,
+ \frac{\int_R^\infty r^{d-1}e^{-g_-(r;\eta)}dr}
+      {\int_0^\infty r^{d-1}e^{-g_+(r;\eta)}dr}\right\}.
+\end{equation}
+If Theorem~\ref{thm:sol-a1-harmonic} applies and $0\le\eta<1$, then
+\begin{equation}\label{eq:sol-a1-direct}
+ \CP(\pi)\le K_d(\eta)\lambda_{\max}(\widehat H^{-1}),\qquad
+ K_d(\eta)=
+ \frac{\int_0^\infty r^{d-1}e^{\eta r-g_-(r;\eta)}dr}
+      {\int_0^\infty r^{d-1}e^{-g_+(r;\eta)}dr},
+\end{equation}
+and $K_d(\eta)\to1$ as $\eta\downarrow0$ for fixed $d$.
+\end{theorem}
+
+\begin{proof}
+Log-Lipschitz curvature and Cauchy--Schwarz in the $\widehat H$ geometry give
+\[
+ e^{-\alpha_i r}\ell_i''(x_i^T\hat\theta)
+ \le\ell_i''(x_i^T\theta)
+ \le e^{\alpha_i r}\ell_i''(x_i^T\hat\theta).
+\]
+The fixed prior Hessian lies between its own $e^{-\eta r}$ and $e^{\eta r}$ multiples.  Summing
+the prior and rank-one likelihood Hessians proves the Hessian sandwich.  Integrating it twice on
+the segment from $\hat\theta$ to $\theta$ gives
+\[
+ r^2\int_0^1(1-s)e^{-\eta sr}ds=g_-(r;\eta),\qquad
+ r^2\int_0^1(1-s)e^{\eta sr}ds=g_+(r;\eta),
+\]
+and hence the potential sandwich.
+
+On $\{|z|\le R\}$ every likelihood weight exceeds $\bar w_i(R)$, so this ball is contained in
+$G_{\bar W}$.  In $z$ coordinates the potential sandwich bounds the tail numerator by the radial
+integral involving $g_-$ and the normalizer from below by the integral involving $g_+$; their
+common sphere area and Jacobian cancel, proving \eqref{eq:sol-a1-tail}.
+
+The Hessian sandwich also gives
+$\lambda_{\max}((\nabla^2U)^{-1})
+\le e^{\eta r}\lambda_{\max}(\widehat H^{-1})$.  Apply
+Theorem~\ref{thm:sol-a1-harmonic} and the same numerator/denominator comparison to obtain
+\eqref{eq:sol-a1-direct}.  Since
+$g_-(r;\eta)=r/\eta+O(1)$ as $r\to\infty$, its numerator is finite exactly for this majorant when
+$\eta<1$.  If $\eta\le\eta_0<1$, then
+$\eta r-g_-(r;\eta)\le\eta_0r-g_-(r;\eta_0)$; the latter has a negative linear tail.
+Dominated convergence therefore gives $K_d(\eta)\to1$.
+\end{proof}
+
+\begin{corollary}[Fixed-dimensional vanishing-leverage limit]
+\label{cor:sol-a1-leverage-asymptotic}
+Fix $d$.  For a sequence satisfying Theorem~\ref{thm:sol-a1-mode-leverage} and the bounded-curvature
+hypotheses of Theorem~\ref{thm:sol-a1-harmonic}, if $\eta_n\to0$, then
+\[
+ \CP(\pi_n)=(1+o(1))\lambda_{\max}(\widehat H_n^{-1}).
+\]
+If the inputs are random and, in probability, $\eta_n\to0$ and
+$\widehat H_n/n\to I(\theta_0)\succ0$, then
+\[
+ n\CP(\pi_n)\longrightarrow\lambda_{\max}(I(\theta_0)^{-1})
+\]
+in probability.
+\end{corollary}
+
+\begin{proof}
+Write the mode-whitened density as $Z_n^{-1}e^{-F_n(z)}$.  The potential sandwich gives
+$g_-(|z|;\eta_n)\le F_n(z)\le g_+(|z|;\eta_n)$, hence pointwise
+$F_n(z)\to|z|^2/2$.  Fix $0<\eta_0<1$.  For all large $n$,
+\[
+ e^{-F_n(z)}\le e^{-g_-(|z|;\eta_0)},
+\]
+and the right side remains integrable after multiplication by $1+|z|^2$.  The two radial bounds
+also squeeze $Z_n$ to the Gaussian normalizer.  Dominated convergence therefore gives total
+variation convergence to $N(0,I_d)$ and convergence of first and second moments; in particular,
+$\operatorname{Cov}(z)=I_d+o(1)$.
+
+Testing the Poincar\'e inequality on linear functions now gives
+\[
+ \CP(\pi_n)\ge
+ \lambda_{\max}\!\left(
+  \widehat H_n^{-1/2}\operatorname{Cov}(z)\widehat H_n^{-1/2}
+ \right)
+ =(1-o(1))\lambda_{\max}(\widehat H_n^{-1}).
+\]
+The matching upper bound is \eqref{eq:sol-a1-direct} with $K_d(\eta_n)\to1$.  The random
+conclusion follows by applying the deterministic implication on events where its hypotheses hold
+and using continuity of matrix inversion and eigenvalues.
+\end{proof}
+
+\paragraph{Scope boundary.}
+The direct factor-one statement requires a globally bounded Hessian.  Poisson curvature is
+unbounded, and nonsmooth or weakly convex extensions require a new domain/approximation theorem.
+The condition $\eta<1$ is a gate for the displayed radial majorant, not a claim that the posterior
+lacks a Poincar\'e inequality when the gate fails.  These restrictions respect the saturating-tail
+and inverse-mode-Hessian obstruction recorded under \texttt{obs:flat-direction}.
+
+\end{document}

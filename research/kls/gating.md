@@ -21,7 +21,7 @@ All numerics **refute or give direction; they never prove** (see `shared/target.
 
 | fact / node | computable quantity | REFUTES / SUPPORTS |
 |---|---|---|
-| isotropic linear-test refuter (`shared/lower-bounds.md`) | `lambda_max(Cov) = 1` for isotropic mu (`finum.constants.poincare_lower`) | any claimed KLS upper bound `C_P < 1` is **REFUTED** |
+| isotropic linear-test refuter (`shared/lower-bounds.md`) | analytically, `lambda_max(Cov) = 1` for isotropic $\mu$; `finum.constants.poincare_lower` is only an empirical calibration | any claimed KLS upper bound `C_P < 1` is **REFUTED** by the exact identity |
 | the bridge `C_P <= K lambda_max(Cov)` (`ab/conj:a1-bis`) | realized `K = C_P / lambda_max(Cov)` across Gaussian, Laplace, and uniform products | `K = O(1)` on this finite benign battery is directional **non-refutation**, not support for the universal theorem |
 | rank-one bridge sanity (no obstruction node) | realized `K` under single-coordinate Gaussian variance inflation `Lambda -> inf` | `K=1` checks tensorization/normalization only; it does not test a cut, source budget, `cor:refutation`, or `obs:rank-one-refuted` |
 
@@ -76,5 +76,5 @@ The paired-grid gate is empirical convergence evidence, not a crossing theorem: 
 re-entries between fine grid nodes are not detected. The final 2026-08-20 run used 16 discovery
 and 16 held-out paths, so its uncertainty is also too large for a universal trend claim. The
 artifact [`2026-08-20-kls-align-high-n-final.jsonl`](../runs/2026-08-20-kls-align-high-n-final.jsonl)
-is dirty, `evidence_eligible: false`, and records `no-proof/no-route-verdict`. It therefore does
+records `no-proof/no-route-verdict` and is a diagnostic only. It therefore does
 not change the ledger status of `q:alignment`.

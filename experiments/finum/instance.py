@@ -1,8 +1,8 @@
 """The shared, sample-based Instance type used by the per-target batteries.
 
 A target module under finum/targets/ exposes CALIBRATION / STRESS generators returning
-Instance objects (for sample-based targets: A1, A2, A5, KLS) and/or its own analytic
-representation (A3 weighted-gap/Hardy on a grid, A4 transport ratios). The common contract a
+Instance objects (currently A1) and/or its own analytic or numerical representation (A2–A5 and
+KLS). The common contract a
 target module satisfies is `run_records(seed) -> (records, extra_header)` and
 `selftest(rng) -> [(name, ok), ...]`; see finum/run.py and finum/selftest.py.
 """

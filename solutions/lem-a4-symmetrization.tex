@@ -1,0 +1,48 @@
+% Standalone solution dossier for lem:a4-symmetrization.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: lem:a4-symmetrization
+% refines: lem:a4-symmetrization
+% bounded_by: obs:symmetry-vs-physical
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: symmetrizing a variational law}
+
+\begin{lemma}
+Let a finite group $G$ act isometrically on $\Theta$, let $\pi$ be $G$-invariant, and put
+$\bar q=|G|^{-1}\sum_{g\in G}g_\#q$ for $q\ll\pi$ in $\mathcal P_2(\Theta)$. Then every
+integrable invariant observable $f$ satisfies $\E_{\bar q}f=\E_qf$, and
+\[
+ \KL(\bar q\|\pi)\le\KL(q\|\pi),\qquad
+ W_2^2(\bar q,\pi)\le W_2^2(q,\pi).
+\]
+\end{lemma}
+
+\begin{proof}
+For invariant $f$, each pushforward obeys $\E_{g_\#q}f=\E_q(f\circ g)=\E_qf$, and averaging
+proves the first assertion. Convexity of relative entropy in its first argument and invariance of
+$\pi$ give
+\[
+ \KL(\bar q\|\pi)
+ \le |G|^{-1}\sum_g\KL(g_\#q\|\pi)=\KL(q\|\pi).
+\]
+For each $g$, push an optimal (or arbitrarily near-optimal) coupling of $q$ and $\pi$ through
+$(g,g)$. It couples $g_\#q$ and $g_\#\pi=\pi$ with unchanged cost. Averaging these couplings
+has marginals $\bar q$ and $\pi$ and the same average cost, proving the Wasserstein inequality.
+\end{proof}
+
+\paragraph{Obstruction respected.}
+This statement preserves invariant observables only. It neither removes physical multimodality
+nor orders the ratio of the two quantities that decrease, and it applies within a variational
+optimization only if the family admits the group average.
+
+\end{document}

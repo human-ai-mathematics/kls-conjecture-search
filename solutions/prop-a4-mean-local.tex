@@ -1,0 +1,88 @@
+% Standalone solution dossier for prop:a4-mean-local.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: prop:a4-mean-local
+% refines: prop:a4-mean-local, eq:a4-mean-local-dual
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: localized unrestricted posterior-mean tilts}
+
+\begin{theorem}
+Let $\pi\in\mathcal P_1(\R^d)$, let
+$X_u=u^\top(\theta-\E_\pi\theta)$ for $\norm u=1$, and put
+\[
+ \psi_u(t)=\log\E_\pi e^{tX_u},\qquad
+ r_u(t)=t\psi_u'(t)-\psi_u(t).
+\]
+Suppose every nonconstant $\psi_u$ is a Legendre function on the interior $I_u$ of its
+effective domain: $0\in I_u$, $\psi_u$ is differentiable and strictly convex there, and
+boundary means in the effective domain of $\psi_u^*$ are limits of $\psi_u'(t)$. Then, for
+every $r>0$,
+\[
+ \sup_{\substack{q\in\mathcal P_1(\R^d),\ q\ll\pi\\0<\KL(q\|\pi)\le r}}
+ \frac{\norm{\E_q\theta-\E_\pi\theta}^2}{2\KL(q\|\pi)}
+ =\sup_{\norm u=1}\sup_{\substack{t\in I_u\setminus\{0\}\\0<r_u(t)\le r}}
+ \frac{\psi_u'(t)^2}{2r_u(t)},
+\]
+with endpoint values taken by closure. If
+$\E_\pi e^{\tau\norm\theta}<\infty$ for some $\tau>0$ and
+$\operatorname{Cov}_\pi(\theta)\succ0$, the common value is
+\[
+ \lambda_{\max}(\operatorname{Cov}_\pi\theta)+O(\sqrt r)
+ \quad(r\downarrow0).
+\]
+For $\pi=N(\mu,\Sigma)$ it equals $\lambda_{\max}(\Sigma)$ for every $r>0$.
+\end{theorem}
+
+\begin{proof}
+For a fixed $u$, the entropy inequality
+\[
+ \KL(q\|\pi)\ge t\E_qX_u-\psi_u(t)\qquad(t\in I_u)
+\]
+gives $\KL(q\|\pi)\ge\psi_u^*(\E_qX_u)$. Conversely, the exponential tilt
+\[
+ \frac{\dd q_{u,t}}{\dd\pi}=e^{tX_u-\psi_u(t)}
+\]
+has projected mean $\psi_u'(t)$ and entropy
+$r_u(t)=\psi_u^*(\psi_u'(t))$. If this tilt does not itself lie in $\mathcal P_1(\R^d)$,
+condition it on increasing Euclidean balls. The conditioned laws lie in $\mathcal P_1$, and,
+because $t$ is interior, their projected means and entropies converge to those of the tilt.
+First taking $r_u(t)<r$ and then using closure treats the entropy boundary. Thus the hypotheses
+and endpoint approximation identify the infimum entropy over finite-first-moment competitors at
+every accessible projected mean. Since
+\[
+ \norm m^2=\sup_{\norm u=1}(u^\top m)^2,
+\]
+the suprema over $q$ and $u$ may be interchanged, and the preceding scalar entropy projection
+gives the displayed identity. Constant directions contribute zero.
+
+For the local expansion, write
+$v_u=u^\top\operatorname{Cov}_\pi(\theta)u$. The common exponential moment makes the first
+three directional cumulants uniformly bounded for $\norm u=1$ and $t$ in a fixed neighbourhood
+of zero. Thus, uniformly in $u$,
+\[
+ \psi_u(t)=\tfrac12v_ut^2+O(|t|^3),\quad
+ \psi_u'(t)=v_ut+O(t^2),\quad
+ r_u(t)=\tfrac12v_ut^2+O(|t|^3).
+\]
+Positive definiteness gives $\inf_u v_u>0$. Moreover
+$r_u'(t)=t\psi_u''(t)$, so $r_u$ is monotone away from zero on either side. The uniform local
+expansion then shows that $r_u(t)\le r$ forces $|t|=O(\sqrt r)$ for small $r$. Consequently
+\[
+ \frac{\psi_u'(t)^2}{2r_u(t)}=v_u+O(\sqrt r)
+\]
+uniformly, and maximization in $u$ proves the covariance formula. For a Gaussian,
+$\psi_u(t)=v_ut^2/2$ and $r_u(t)=v_ut^2/2$, so the ratio is exactly $v_u$.
+\end{proof}
+
+\end{document}

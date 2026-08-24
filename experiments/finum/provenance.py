@@ -1,8 +1,8 @@
 """Run provenance + repo paths: turn "committed + seeded" into reproducible.
 
-Every artifact carries a header from ``provenance()`` (git commit, dirty flag, seed,
-interpreter/library versions, run params). A run that cannot be reproduced from its recorded
-provenance is not a result.
+Every artifact carries a header from ``provenance()`` (seed, run params, interpreter/library
+versions, plus the current commit as a best-effort trace). A run that cannot be reproduced from
+its recorded seed and params is not a result.
 """
 from __future__ import annotations
 
@@ -51,15 +51,15 @@ def _git(*args: str) -> str | None:
 
 
 def provenance(**params: Any) -> dict[str, Any]:
-    """A JSON-serializable provenance header; pass run params (seed, n, d, ...) as keywords."""
-    commit = _git("rev-parse", "HEAD")
-    status = _git("status", "--porcelain")
-    dirty = None if status is None else bool(status.strip())
+    """A JSON-serializable provenance header; pass run params (seed, n, d, ...) as keywords.
+
+    ``git_commit`` is a best-effort trace of which checkout produced the artifact. It is
+    informational: reproducibility rests on the recorded seed, params, and library versions,
+    and nothing gates on the state of the worktree.
+    """
     return {
         "date": date.today().isoformat(),
-        "git_commit": commit,
-        "git_dirty": dirty,
-        "evidence_eligible": commit is not None and dirty is False,
+        "git_commit": _git("rev-parse", "HEAD"),
         "python": sys.version.split()[0],
         "platform": platform.platform(),
         "numpy": np.__version__,

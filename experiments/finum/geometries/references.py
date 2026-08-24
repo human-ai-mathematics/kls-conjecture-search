@@ -1,14 +1,11 @@
-"""Analytic reference (upper) bounds — as cross-checks and refutable claims, NOT proofs.
+"""Analytic reference (upper) bounds for cross-checks and assumption audits.
 
-These are the classical *upper* bounds on the Poincare constant. finum's soundness contract says
-numerics certify only LOWER bounds (refutation); an analytic upper bound is therefore used here
-in exactly two sound ways:
+These are classical *upper* bounds on the Poincare constant. They are used in two ways:
 
-  1. **as the claim a run tries to refute** — feed the value as ``B`` to ``finum.verdict.falsify``
-     against the certified lower bound; if ``poincare_lower > B`` the bound (as stated/applied)
-     is REFUTED;
-  2. **as a corroboration cross-check** — a lower bound that sits just under a known-correct upper
-     bound (e.g. Gaussian: both equal ``lambda_max(Sigma)``) calibrates the estimator.
+  1. **as a rigorous claim in an analytic assumption check** — ``finum.verdict.falsify`` may be
+     used only when the competing lower bound is itself rigorous;
+  2. **as a calibration cross-check** — a directional estimate near a known exact value (e.g.
+     Gaussian ``lambda_max(Sigma)``) tests the numerical pipeline but proves nothing.
 
 They are NOT certificates: returning a number here never promotes a node to proved.
 """
@@ -33,7 +30,6 @@ def holley_stroock_cp(reference_cp: float, osc_W: float) -> float:
     """Holley-Stroock bounded-perturbation transfer: ``C_P(pi) <= C_P(nu) * exp(osc(W))``.
 
     For ``pi propto exp(-W) nu`` with oscillation ``osc(W)``. The ``exp(osc)`` factor is famously
-    loose, so this upper bound is a prime *refutation target*: a certified lower bound rarely
-    approaches it, and where the transfer is misapplied the lower bound can exceed it.
+    loose. It is an analytic comparison oracle; a raw sampled or grid estimate cannot refute it.
     """
     return float(reference_cp) * math.exp(float(osc_W))

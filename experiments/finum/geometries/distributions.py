@@ -1,14 +1,14 @@
 """The measure zoo — concrete test geometries for the A1-A5 batteries.
 
 A geometry exposes a log-density (``potential`` = ``-log`` density up to a constant) and a
-``sample(n, rng)`` draw, so the sound refuters (``finum.constants.poincare_lower`` /
+``sample(n, rng)`` draw, so the directional estimators (``finum.constants.poincare_lower`` /
 ``poincare_lower_basis``) can be pointed at it directly, and the 1D ones expose the analytic
 hooks (Hessian floor, perturbation oscillation) the ``geometries.references`` oracle bounds need.
 
 The metastable ``DoubleWell1D`` and the bounded-perturbation ``PerturbedGaussian1D`` are the
 canonical non-trivial Poincare test cases (a two-mode target where a tail-blind bound fails, and
 a Holley-Stroock reference-transfer target). These geometries carry no certification machinery:
-finum's refuter + verdict layer is the only sound path — numerics never prove.
+the analytic theorems supply the certificates; numerical outputs remain directional.
 """
 from __future__ import annotations
 

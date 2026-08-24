@@ -1,8 +1,9 @@
 """Explicit test functions for variational (Rayleigh) lower bounds.
 
-Every test function ``f`` gives a *certified* lower bound ``Var(f)/E||grad f||^2 <= C_P`` — the
-only direction numerics can certify (finum soundness contract). These are the named witnesses a
-sample- or grid-Rayleigh quotient evaluates; the linear one reproduces ``finum.constants
+Every test function ``f`` gives the rigorous relation
+``Var(f)/E||grad f||^2 <= C_P`` when its expectations are exact. These are the named witnesses a
+sample- or grid-Rayleigh quotient estimates; a numerical value is directional without error
+bounds. The linear one reproduces ``finum.constants
 .poincare_lower``, the polynomial/mode-indicator ones extend the witness family for metastable
 targets (the smooth ``tanh`` mode indicator is the natural near-eigenfunction of a two-well
 density, where it gives a much larger — i.e. tighter — lower bound than any linear test).

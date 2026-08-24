@@ -1,0 +1,64 @@
+% Standalone solution dossier for prop:a4-local-wellspecified.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: prop:a4-local-wellspecified
+% refines: prop:a4-local-wellspecified
+% bounded_by: obs:restricted-not-finite
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% reviewer: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: well-specified local variational constants}
+
+\begin{theorem}
+Let $q_h\in\mathcal P_2(\R^d)$, $h\in\R^p$, be an identifiable family with $q_0=\pi$, so all
+displayed means are finite. Assume that, for some $\rho_0>0$, the complete sublevel
+$\{h:\KL(q_h\|\pi)\le\rho_0\}$ lies in a compact chart,
+$h\mapsto\KL(q_h\|\pi)$ is continuous there, and $0$ is its unique zero. Suppose, uniformly
+as $h\to0$,
+\[
+ 2K(h)=h^\top Fh+O(\norm h^3),\quad
+ D(h)=h^\top Gh+O(\norm h^3),\quad
+ \E_{q_h}\theta-\E_\pi\theta=Bh+O(\norm h^2),
+\]
+where $K=\KL(q_h\|\pi)$, $D=W_2^2(q_h,\pi)$, and $F\succ0$. Then
+\[
+ C_{\mathcal Q,\rho}(\pi)
+ =\lambda_{\max}(F^{-1/2}GF^{-1/2})+O(\sqrt\rho),
+\]
+and
+\[
+ C_{\mathrm{mean},\mathcal Q,\rho}(\pi)
+ =\lambda_{\max}(F^{-1/2}B^\top BF^{-1/2})+O(\sqrt\rho).
+\]
+\end{theorem}
+
+\begin{proof}
+Continuity, compactness, and uniqueness imply that every sufficiently small KL sublevel lies in
+an arbitrarily small neighbourhood of zero. In that neighbourhood, positive definiteness of
+$F$ and the KL expansion give $K(h)\ge c\norm h^2$; hence $K(h)\le\rho$ implies
+$\norm h=O(\sqrt\rho)$. On the punctured sublevel,
+\[
+ \frac{D(h)}{2K(h)}
+ =\frac{h^\top Gh}{h^\top Fh}+O(\norm h)
+ =\frac{h^\top Gh}{h^\top Fh}+O(\sqrt\rho)
+\]
+uniformly. Maximizing gives the upper bound. Arbitrarily small multiples of a top generalized
+eigenvector belong to every positive sublevel and give the matching lower bound. Squaring the
+mean expansion yields
+$\norm{\E_{q_h}\theta-\E_\pi\theta}^2=h^\top B^\top Bh+O(\norm h^3)$, and the same argument
+proves the mean statement.
+\end{proof}
+
+\paragraph{Obstruction respected.}
+The compact, continuous, uniquely minimized sublevel assumption is explicit; a bare KL cutoff
+over an unrestricted family is not used.
+
+\end{document}

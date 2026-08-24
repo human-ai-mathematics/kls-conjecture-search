@@ -1,14 +1,14 @@
-"""Estimators for the Poincare constant.
+"""Directional estimators for Poincare Rayleigh quotients.
 
-The variational characterization  C_P = sup_f Var(f) / E||grad f||^2  means EVERY test
-function f gives a certified lower bound  R[f] <= C_P. Restricting f to a finite basis and
-solving the Rayleigh quotient gives a *sound* lower bound (it can only under-estimate C_P).
-This is the only direction numerics can certify (see finum.__init__ soundness contract).
+For exact expectations, every test function gives the rigorous lower bound
+``R[f] <= C_P``.  The routines below replace those expectations by finite-sample
+averages.  Their outputs are therefore Monte Carlo estimates of lower-bound
+quantities, not certified lower bounds themselves: sampling error and, for MCMC,
+mixing bias can move an estimate in either direction.
 
-  poincare_lower(samples)        -> linear test: lambda_max(empirical Cov)  [lem:linear-test-lower]
-  poincare_lower_basis(samples)  -> linear + centered-quadratic basis: a tighter lower bound
-
-Both take `samples` of shape (N, d) drawn from the target measure.
+``poincare_lower(samples)`` estimates the linear-test quantity
+``lambda_max(Cov_pi)``; ``poincare_lower_basis(samples)`` estimates a richer
+finite-basis Rayleigh quotient.  Both take samples of shape ``(N, d)``.
 """
 from __future__ import annotations
 
@@ -16,10 +16,10 @@ import numpy as np
 
 
 def poincare_lower(samples: np.ndarray) -> float:
-    """The sound refuter: C_P >= lambda_max(Cov_pi), via the linear test f = <v, theta>.
+    """Estimate ``lambda_max(Cov_pi)``, an exact analytic lower bound on ``C_P``.
 
-    If a claimed bound C_P <= B has poincare_lower(samples) > B (beyond numerical error),
-    the claim is FALSE. (rem:rayleigh-lower-only)
+    The returned empirical-covariance eigenvalue is directional unless accompanied
+    by a rigorous sampling-error and, when relevant, mixing-error bound.
     """
     x = np.asarray(samples, dtype=float)
     if x.ndim != 2:
@@ -51,12 +51,14 @@ def _quadratic_features(x: np.ndarray):
 
 
 def poincare_lower_basis(samples: np.ndarray, ridge: float = 1e-9) -> float:
-    """A tighter sound lower bound using linear + centered-quadratic test functions.
+    """Estimate a richer linear-plus-quadratic Rayleigh lower-bound quantity.
 
     Solves the generalized eigenproblem  V c = lambda G c  where
       V = Cov of the (centered) features      [Var of f]
       G = mean of <grad phi_a, grad phi_b>    [E||grad f||^2]
-    The largest generalized eigenvalue is sup over the basis span, still <= C_P.
+    With exact expectations the largest generalized eigenvalue is at most ``C_P``.
+    Its empirical counterpart is directional, for the same reason as
+    :func:`poincare_lower`.
     Falls back to poincare_lower() if the (quadratic) Gram is too ill-conditioned.
     """
     x = np.asarray(samples, dtype=float)
@@ -89,12 +91,14 @@ def poincare_lower_basis(samples: np.ndarray, ridge: float = 1e-9) -> float:
 
 
 def poincare_1d_fem(U, xs: np.ndarray, a=None) -> float:
-    """Two-sided ground truth in 1D: the (weighted) Poincare constant of d(mu) ∝ e^{-U(x)} dx.
+    """Finite-domain FEM approximation to a one-dimensional Poincare constant.
 
     P1 finite elements: solve the generalized eigenproblem K v = lambda M v with
     M_ij = ∫ phi_i phi_j dmu   (mass, weight e^{-U})
     K_ij = ∫ a phi_i' phi_j' dmu   (stiffness, weight a(x) e^{-U}).
-    The smallest eigenvalue is 0 (constant mode); the (weighted) C_P = 1 / lambda_1.
+    The smallest eigenvalue is 0 (constant mode); the discretized constant is
+    ``1 / lambda_1``.  Without truncation and discretization error bounds this is a
+    directional approximation, not a certified two-sided value.
 
     a=None gives the unweighted Poincare (U = x^2/(2 s^2) reproduces C_P = s^2). For the
     heavy-tail / A3 weighted inequality Var(f) <= C int a |f'|^2 dmu pass a(x) (e.g. 1+x^2):

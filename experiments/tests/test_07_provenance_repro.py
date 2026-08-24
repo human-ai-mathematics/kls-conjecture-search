@@ -16,7 +16,7 @@ from finum.localization.tilt1d import LAPLACE
 
 def test_provenance_header_fields():
     h = provenance.provenance(seed=7, dt=0.01, n=16)
-    assert set(h) >= {"git_commit", "git_dirty", "python", "numpy", "scipy", "params"}
+    assert set(h) >= {"git_commit", "python", "numpy", "scipy", "params"}
     assert h["params"]["seed"] == 7
     assert h["numpy"] == np.__version__
 

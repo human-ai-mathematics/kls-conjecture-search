@@ -13,8 +13,3 @@ Record:
 
 Promote successes into `../targets/*.md` + the `.tex` statement + a `ledger.yaml` update.
 Promote cross-cutting findings into `../knowledge/`.
-
-> Convention inherited from the KLS program's exploration log: a retraction is a
-> first-class result. The reason this directory exists at all is that two earlier agents ran
-> private Monte Carlo, disagreed, and a non-reproducible claim had to be retracted. Committed,
-> seeded, logged evidence prevents the repeat.

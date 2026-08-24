@@ -1,12 +1,11 @@
 """Geometry zoo + reference-bound cross-checks.
 
-These pin the geometry kernels against closed forms and against finum's own sound refuter:
-  * Gaussian: the linear-test lower bound (finum.constants.poincare_lower) reproduces the exact
+These pin the geometry kernels against closed forms and analytic reference bounds:
+  * Gaussian: the empirical linear-test estimate (finum.constants.poincare_lower) reproduces the exact
     C_P = ||Sigma||_op, and the Bakry-Emery reference upper bound equals it (exact cross-check);
   * a metastable double well: the smooth mode indicator is a far tighter Rayleigh witness than a
     linear test (its lower bound is much larger) -- the whole point of carrying that witness;
-  * Holley-Stroock is an UPPER bound that sits above the certified lower bound (sanity of its
-    repurposing as a refutation target, never a proof).
+  * Holley-Stroock is an analytic UPPER bound that sits above the directional grid estimate.
 """
 
 import numpy as np
@@ -29,7 +28,7 @@ def test_gaussian_linear_lower_bound_matches_operator_norm():
     g = GaussianDistribution(cov)
     rng = np.random.default_rng(0)
     lb = poincare_lower(g.sample(200_000, rng))
-    assert abs(lb - g.covariance_operator_norm) < 0.05  # certified LB approaches the exact C_P
+    assert abs(lb - g.covariance_operator_norm) < 0.05  # empirical estimate approaches exact C_P
 
 
 def test_bakry_emery_exact_for_gaussian():
@@ -50,5 +49,5 @@ def test_holley_stroock_is_an_upper_bound_above_the_lower_bound():
     pg = PerturbedGaussian1D(sigma=1.0, eps=0.2, freq=1.0)
     ub = holley_stroock_cp(pg.sigma**2, pg.perturbation_oscillation_bound)
     lb = rayleigh_grid_1d(pg, LinearFunction(np.array([1.0])), radius=8.0)
-    assert ub >= lb              # the (loose) analytic upper bound sits above the certified LB
+    assert ub >= lb              # analytic upper bound sits above this directional grid estimate
     assert ub > pg.sigma**2      # the exp(osc) loss is genuinely > 1

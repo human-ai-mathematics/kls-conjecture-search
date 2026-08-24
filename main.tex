@@ -3,7 +3,7 @@
 % Unified master document for the functional-inequalities program. Assembles the
 % modules via the subfiles package:
 %   Part I   (modules/)              structured statistical/ML families, by difficulty
-%   Part II  (modules/open-targets/) open-target deep dives (the A-series problems)
+%   Part II  (modules/open-targets/) A-series results and open-target deep dives
 %   Part III (modules/kls/)          the Kannan--Lovasz--Simonovits frontier
 %
 %   latexmk -pdf -outdir=build main.tex
@@ -37,11 +37,14 @@ to the Kannan--Lov\'asz--Simonovits frontier}
   generalized-linear-model posterior bound $C_{\mathrm P}\le\lambda_{\max}(\Sigma_0)$ (data-free,
   dimension-free), the heavy-tailed obstruction to LSI/$T_2$, and multimodal / hierarchical
   posteriors; it closes with the open research agenda for sharp Bayesian-posterior constants.
-  \textbf{Part~II} develops that agenda as open-target deep dives, one section per flagship problem
+  \textbf{Part~II} develops that agenda as A-series results and open-target deep dives, one section
+  per flagship problem
   --- data-informed GLM-posterior constants, the Bernstein--von Mises limit, heavy-tailed posteriors
   beyond classical LSI, variational-inference transport constants, and the
-  quotient/reparameterization of symmetry- and funnel-induced slow modes --- each isolating the
-  precise obstruction and stating the theorem to aim for. \textbf{Part~III} is a self-contained
+  quotient/reparameterization of symmetry- and funnel-induced slow modes. It promotes the
+  twenty-one independently reviewed results and sharp model calibrations already obtained, records useful
+  obstructions, and separates them from proof drafts and the remaining open targets.
+  \textbf{Part~III} is a self-contained
   conditional proof program for the Kannan--Lov\'asz--Simonovits conjecture --- the dimension-free
   Poincar\'e bound for arbitrary isotropic log-concave measures, the ``Tier-$\infty$'' boundary of
   Part~I --- via Eldan stochastic localization.
@@ -61,7 +64,7 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 \subfile{modules/07-tier5-mixtures}
 \subfile{modules/08-open-targets}
 
-\part{Open-target deep dives}
+\part{A-series results and open-target deep dives}
 
 \subfile{modules/open-targets/A1-data-informed-glm}
 \subfile{modules/open-targets/A2-bernstein-von-mises}
@@ -92,6 +95,9 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 % Open targets
 \subfile{modules/kls/14-open-targets}
 
+\begingroup
+\sloppy
 \printbibliography
+\endgroup
 
 \end{document}

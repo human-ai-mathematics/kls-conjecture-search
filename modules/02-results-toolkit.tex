@@ -78,10 +78,15 @@ this is how every LSI bound upgrades, for free, to a $W_2$ guarantee.
 \begin{theorem}[One-dimensional Hardy/Muckenhoupt criterion]
 \label{thm:hardy-1d}
 For a measure on $\R$ (and for $1$D reductions: radial, projected, or conditional slices)
-with density $\rho=e^{-U}$ and median $m$, the Poincar\'e constant satisfies
-$\CP\asymp\max(B_+,B_-)$ up to universal factors, where
-$B_+=\sup_{x>m}\Pstar([x,\infty))\int_m^x\rho(t)^{-1}\dd t$ and symmetrically for $B_-$. The
-log-Sobolev criterion is the same with an extra logarithmic tail factor.
+with density $\rho=e^{-U}$ and median $m$, the Poincar\'e constant satisfies, up to universal
+factors,
+\[
+  \CP\asymp\max(B_+,B_-),
+  \qquad
+  B_+=\sup_{x>m}\Pstar([x,\infty))\int_m^x\rho(t)^{-1}\dd t,
+\]
+with the symmetric definition for $B_-$. The log-Sobolev criterion is the same with an extra
+logarithmic tail factor.
 \end{theorem}
 \noindent\cite{Muckenhoupt1972,BobkovGotze1999}. The sharp two-sided tool in one dimension;
 it makes $1$D posteriors (Gaussian, Laplace, Gamma, Student, mixtures) an exact laboratory.
@@ -107,7 +112,8 @@ $\CP\ge\Var_{\Pstar}(f)/\E_{\Pstar}\norm{\nabla f}^2$. Linear tests $f(x)=\inner
 $\CP\ge\lmax(\Cov_{\Pstar})$ for every measure (exact for Gaussians,
 Section~\ref{sec:tier1}); mode-indicator tests expose bottlenecks (Section~\ref{sec:tier5}).
 A test-function search can therefore \emph{falsify} a claimed upper bound but never
-\emph{certify} one --- upper bounds come only from a template above or a validated numeric.
+\emph{certify} one --- upper bounds require an analytic theorem or a separately justified rigorous
+certificate; numerical agreement alone is not a proof.
 \end{remark}
 
 \subsection{The known landscape}
@@ -129,7 +135,7 @@ Uniform on compact domain           & yes & usually & usually & bounded support\
 Exponential / Laplace               & yes & \textbf{no} & \textbf{no} & exponential tails\\
 Gamma                               & usually & \textbf{no} & \textbf{no} & exponential tail\\
 Student-$t$                         & \textbf{no} / weighted & \textbf{no} & \textbf{no} & polynomial tail\\
-Cauchy                              & \textbf{no} & \textbf{no} & \textbf{no} & too heavy-tailed\\
+Cauchy                              & \textbf{no} / weighted & \textbf{no} & \textbf{no} & polynomial tail\\
 Separated Gaussian mixture          & finite, huge & finite, huge & finite, huge & bottleneck\\
 General log-concave                 & finite & not nec. & not nec. & may lack curvature\\
 \bottomrule
@@ -137,8 +143,10 @@ General log-concave                 & finite & not nec. & not nec. & may lack cu
 \end{center}
 
 For Bayesian targets specifically, the state of knowledge is uneven: Gaussian and
-linear-regression posteriors are solved exactly (Section~\ref{sec:tier1}); Gaussian-prior
-convex GLMs admit a crude but certified prior-only bound (Section~\ref{sec:tier3}); and sharp
-data-dependent constants, heavy-tailed hierarchical posteriors, and multimodal / quotient
-constants are largely open (Section~\ref{sec:agenda}).
+linear-regression posteriors are solved exactly (Section~\ref{sec:tier1}); Gaussian-prior convex
+GLMs have both the prior-only baseline and reviewed bounded-curvature refinements
+(Sections~\ref{sec:tier3} and~\ref{sec:a1}); A3--A5 contain sharp one-dimensional, local,
+block-spectral, and reparameterization calibrations. The remaining frontier is the
+posterior-specific extension of those results to unbounded curvature, hierarchical dependence,
+restricted transport, and genuine multimodal asymptotics (Section~\ref{sec:agenda}).
 \end{document}

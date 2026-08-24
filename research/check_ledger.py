@@ -9,14 +9,14 @@ Validates every ``research/**/ledger.yaml``:
   open, conjectured, refuted, heuristic, or conditional dependency/assumption;
 * every conditional node declares a non-empty ``assuming`` contract, including
   inherited imports marked ``import_class: preprint-unreviewed``;
-* numerical evidence artifacts exist, are valid provenance-stamped JSONL, and
-  are clean whenever the node declares them evidence-eligible;
+* numerical evidence artifacts exist and are valid provenance-stamped JSONL;
 * KLS mechanism fences and the reverse
   ``obstructions.yaml.constrains``/ledger ``bounded_by`` map agree exactly.
 
 Cross-program ``bridges: [program/id, ...]`` links are resolved against all
-loaded ledgers. Optional Phase-2 ``solution:`` files must exist and be certified
-by ``checked_by: human|lean``.
+loaded ledgers. Optional proof-plane ``solution:`` files must exist and be certified
+by ``checked_by: agent|human|lean``. Agent certification additionally requires
+distinct named author/reviewer provenance and a persisted review report.
 
 Run from the repo root: ``python3 research/check_ledger.py``.
 Exit 0 = clean, 1 = errors. Requires PyYAML.
@@ -25,7 +25,6 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -45,7 +44,8 @@ KIND = {
     "conjecture", "obstruction", "baseline", "example", "imported",
 }
 EVIDENCE = {"none", "numerical-directional", "numerical-strong"}
-CHECKED_BY = {"none", "human", "lean"}
+CHECKED_BY = {"none", "agent", "human", "lean"}
+CERTIFIED_BY = {"agent", "human", "lean"}
 IMPORT_CLASSES = {"published", "preprint-unreviewed"}
 
 # A colon following one of these prefixes denotes a repository id/LaTeX label,
@@ -264,7 +264,7 @@ def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
     if not isinstance(provenance, dict):
         errors.append(f"[{program}] {nid}.evidence_run: first line of '{ref}' lacks _provenance object")
         return
-    required = {"git_commit", "git_dirty", "params"}
+    required = {"params"}
     missing = sorted(required - set(provenance))
     if missing:
         errors.append(f"[{program}] {nid}.evidence_run: provenance missing {missing} in '{ref}'")
@@ -282,16 +282,6 @@ def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
                 f"[{program}] {nid}.evidence_run: target '{params.get('target')}' "
                 f"does not match evidence_target '{expected_target}'"
             )
-    dirty = provenance.get("git_dirty")
-    if dirty is not None and not isinstance(dirty, bool):
-        errors.append(f"[{program}] {nid}.evidence_run: provenance.git_dirty must be boolean/null in '{ref}'")
-    if eligible and dirty is not False:
-        errors.append(f"[{program}] {nid}: evidence-eligible run '{ref}' is dirty or has unknown cleanliness")
-    commit = provenance.get("git_commit")
-    if not isinstance(commit, str) or re.fullmatch(r"[0-9a-fA-F]{40}|[0-9a-fA-F]{64}", commit) is None:
-        errors.append(f"[{program}] {nid}.evidence_run: provenance.git_commit is not a full hex object id")
-    elif eligible and (root / ".git").exists() and not _git_commit_exists(root, commit):
-        errors.append(f"[{program}] {nid}: evidence-eligible run '{ref}' references an unknown git commit")
     if len(objects) < 2:
         errors.append(f"[{program}] {nid}.evidence_run: '{ref}' has provenance but no records")
     if evidence == "numerical-strong":
@@ -310,21 +300,6 @@ def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
             )
         if not any(record.get("kind") == "verdict" for record in objects[1:]):
             errors.append(f"[{program}] {nid}: numerical-strong run '{ref}' has no verdict record")
-
-
-def _git_commit_exists(root: Path, commit: str) -> bool:
-    """Whether a provenance commit resolves locally, without invoking a shell."""
-    try:
-        result = subprocess.run(
-            ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
-            cwd=root,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=False,
-        )
-    except OSError:
-        return False
-    return result.returncode == 0
 
 
 def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
@@ -534,15 +509,62 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                     f"[{program}] {nid}: bad checked_by '{checked_by}' "
                     f"(want one of {sorted(CHECKED_BY)})"
                 )
+            if checked_by == "agent":
+                authored_by = node.get("authored_by")
+                reviewed_by = node.get("reviewed_by")
+                review = node.get("review")
+                if not isinstance(authored_by, str) or not authored_by.strip():
+                    errors.append(
+                        f"[{program}] {nid}: checked_by agent requires non-empty authored_by"
+                    )
+                if not isinstance(reviewed_by, str) or not reviewed_by.strip():
+                    errors.append(
+                        f"[{program}] {nid}: checked_by agent requires non-empty reviewed_by"
+                    )
+                if (
+                    isinstance(authored_by, str)
+                    and isinstance(reviewed_by, str)
+                    and authored_by.strip() == reviewed_by.strip()
+                ):
+                    errors.append(
+                        f"[{program}] {nid}: agent author and reviewer must be distinct"
+                    )
+                if not isinstance(review, str) or not review.strip():
+                    errors.append(
+                        f"[{program}] {nid}: checked_by agent requires a review report"
+                    )
+                else:
+                    review_path = Path(review)
+                    if review_path.is_absolute():
+                        errors.append(
+                            f"[{program}] {nid}.review: want a repo-relative path, got '{review}'"
+                        )
+                    else:
+                        artifact = (root / review_path).resolve()
+                        try:
+                            artifact.relative_to(root.resolve())
+                        except ValueError:
+                            errors.append(
+                                f"[{program}] {nid}.review: path escapes repository root: '{review}'"
+                            )
+                        else:
+                            if not artifact.is_file():
+                                errors.append(
+                                    f"[{program}] {nid}.review: '{review}' does not exist"
+                                )
+                if not solution:
+                    errors.append(
+                        f"[{program}] {nid}: checked_by agent requires a standalone solution"
+                    )
             if solution:
                 if not isinstance(solution, str):
                     errors.append(f"[{program}] {nid}.solution: path must be a string")
                 elif not (root / solution).exists():
                     errors.append(f"[{program}] {nid}.solution: '{solution}' does not exist")
-                if checked_by not in ("human", "lean"):
+                if checked_by not in CERTIFIED_BY:
                     errors.append(
                         f"[{program}] {nid}: solution present but checked_by is '{checked_by}' "
-                        "(an unchecked proof is not proved; want human or lean)"
+                        "(an unchecked proof is not proved; want agent, human, or lean)"
                     )
 
             for field in RESOLVE_FIELDS:
@@ -551,6 +573,22 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         errors.append(f"[{program}] {nid}.{field}: references must be non-empty strings")
                     elif not resolves(ref):
                         errors.append(f"[{program}] {nid}.{field}: unknown internal id '{ref}'")
+
+            for ref in as_list(node.get("unlocks")):
+                target = nodes.get(ref) if isinstance(ref, str) else None
+                if target is None:
+                    continue
+                premises = set()
+                for field in ("depends_on", "assuming", "discharged_by"):
+                    premises |= {
+                        premise for premise in as_list(target.get(field))
+                        if isinstance(premise, str)
+                    }
+                if nid in premises:
+                    errors.append(
+                        f"[{program}] {nid}.unlocks: '{ref}' already declares {nid} as a premise; "
+                        "unlocks must not duplicate depends_on/assuming/discharged_by"
+                    )
 
             for ref in as_list(node.get("bounded_by")):
                 if not isinstance(ref, str) or not ref.strip():

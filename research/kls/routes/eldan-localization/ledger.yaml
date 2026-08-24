@@ -22,7 +22,8 @@
 # kind:    theorem|lemma|proposition|corollary|definition|assumption|hypothesis|
 #          question|program|remark|heuristic
 # edges:   depends_on (acyclic; may include external free-text or \label refs),
-#          assuming (the open node a conditional rests on), unlocks, bounded_by
+#          assuming (the open node a conditional rests on), unlocks (forward pointers
+#          only; never a duplicate of the target's depends_on/assuming), bounded_by
 #          (obs:* in obstructions.yaml), discharged_by, entry_point, mechanism +
 #          clearance (no-go discipline), bridges (cross-program links: program/id).
 #
@@ -59,7 +60,6 @@ nodes:
     status: open
     file: modules/kls/02-mass-martingale-centroid.tex
     statement: "Stopped centroid estimate: E ∫_0^{T∧τ} |δ_t|^2 dt ≤ CT for balanced cuts."
-    unlocks: [thm:centroid-implies-kls]
 
   - id: thm:centroid-implies-kls
     kind: theorem
@@ -89,7 +89,6 @@ nodes:
     file: modules/kls/03-riccati-identities.tex
     statement: "Unconditional per-direction Carleson: E ∫_0^∞ s|Gθ|^2 ≤ θ^T R_0 θ ≤ 1; i.e. E ∫ s G^2 ⪯ R_0 ⪯ I."
     depends_on: [lem:matrix-riccati]
-    unlocks: [thm:budget]
     note: "Dimension-free at the quadratic-form level only; the trace upgrade is the missing step (q:upgrade)."
 
   - id: ass:all-cut-carleson
@@ -97,7 +96,6 @@ nodes:
     status: open
     file: modules/kls/00-introduction.tex
     statement: "All-cut absorptive two-color Carleson: E ∫_I S_t ≤ C_0|I| + C_1 E ∫_I r_t + α E ∫_I D_t, α<1, every balanced cut."
-    unlocks: [thm:intro-all-cut, thm:carleson-implies-centroid]
     bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
 
   - id: thm:carleson-implies-centroid
@@ -201,7 +199,6 @@ nodes:
     status: open
     file: modules/kls/00-introduction.tex
     statement: "Weighted near-Cheeger package: (i-w) weighted excess propagation + (ii-w) weighted stable Stein-trace estimate on one fixed tight window eta, with 0<=beta<1/2 and the explicit absorption margin 2 beta + 64 eta^2 < 1."
-    unlocks: [thm:intro-weighted]
     bounded_by: [obs:two-tail]
 
   - id: thm:intro-weighted
@@ -242,7 +239,6 @@ nodes:
     status: proved
     file: modules/kls/11-excess-propagation.tex
     statement: "Perimeter of a fixed cut is a martingale under localization (driftless); supermartingale without compact support."
-    unlocks: [lem:excess-identity, lem:inf-martingales, thm:bootstrap]
 
   - id: lem:excess-identity
     kind: lemma
@@ -279,7 +275,6 @@ nodes:
     file: modules/kls/12-bootstrap.tex
     statement: "Bootstrap comparison: for near-worst μ and ANY balanced cut, E[ē_t 1_{t<τη}] ≤ e_0 + h_μ(ε/2+η+P(τ≤t)/2+E X_t/4); compresses propagation into h_μ Ξ_T."
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale, eq:qv-p]
-    unlocks: [cor:loglog, cor:dichotomy, q:taming]
     mechanism: [direct-excess]
     bounded_by: [obs:circularity]
     clearance: "Excess propagation is anchored at the external worst-case floor hstar_n (proof by contradiction against a near-worst measure), rather than assuming a lower bound for the random localized profile."
@@ -439,7 +434,6 @@ nodes:
     status: imported
     file: modules/kls/06-covariance-technology.tex
     statement: "Klartag–Lehec covariance window: P(∃ s≤t: ||A_s||≥2) ≤ exp(-1/(Ct)) for t ≤ 1/(C log^2 n)."
-    unlocks: [rem:kl-window-verified]
     note: "VERIFIED (2026-06-14 sweep, against arXiv PDFs): the sup-over-time / clean (log^2 n)^{-1}-window form stated here is KLnotes Thm 61, NOT polylog Lemma 5.2 (which is the weaker fixed-time, κ_n-window version). The second moment thm:V2-window needs is published as KlartagLehec2022Polylog Cor 5.4, so no 2nd-moment import debt remains. Caveat: exact statement numbering is version-dependent."
 
   - id: rem:kl-window-verified
@@ -554,7 +548,6 @@ nodes:
     status: open
     file: modules/kls/14-open-targets.tex
     statement: "Absolute-scale interface placeholder at one fixed T0<1/8: for h_mu<=(1+eps_g)hstar_n, the supply T0 e0+κT0 for balanced near-Cheeger cuts suffices to complete the remaining geometric trace/consumption chain. Distinct from the stronger weighted package."
-    unlocks: [cor:dichotomy]
 
   - id: cor:dichotomy
     kind: corollary

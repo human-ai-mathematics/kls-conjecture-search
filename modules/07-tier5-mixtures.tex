@@ -39,12 +39,13 @@ decomposition of \cite{MenzSchlichting2014} or the $1$D Hardy evaluator
 
 \begin{remark}[Label switching is a symmetry artifact, not physical multimodality]
 \label{rem:label-switching}
-A mixture-model posterior is invariant under the $K!$ relabelings of its components, so it has
-$K!$ symmetric modes and a correspondingly terrible $\CP(\pi)$ on the raw parameter space
-$\Theta$. But this is artificial: on the quotient $\Theta/S_K$ the posterior can be far better
-behaved, $\CP(\pi_{\Theta/S_K})\ll\CP(\pi_\Theta)$. The right question separates \emph{physical}
-multimodality (scientifically distinct explanations) from \emph{symmetry-induced} multimodality
-(mere relabelings); only the former should count against the constant.
+An exchangeable $K$-component mixture posterior is invariant under component relabeling. A free
+orbit of a non-collision mode has $K!$ representatives, but symmetry alone neither guarantees
+$K!$ distinct modes nor forces the raw Poincar\'e constant to be terrible. Passing to
+$\Theta/S_K$ never worsens the constants (Theorem~\ref{thm:a5-monotone}); it improves $\CP$
+strictly exactly when the non-invariant spectral block is slower than the invariant block
+(Proposition~\ref{prop:a5-ratio}). Thus quotienting removes symmetry-induced bottlenecks but not
+permutation-invariant physical multimodality.
 \end{remark}
 
 \begin{remark}[Hierarchical funnels and reparameterization]
@@ -53,13 +54,15 @@ Hierarchical models create ``funnels'': for $\tau\sim p(\tau)$, $\theta_j\mid\ta
 the joint density has regions where $\tau$ is small and the $\theta_j$ are extremely
 concentrated, producing severely anisotropic, position-dependent curvature that no global floor
 captures. A functional-inequality question with direct sampling consequences is how
-$\CP,\CLS,\CTCI$ transform under centered versus non-centered parameterizations
-\cite{BakryCattiauxGuillin2008}; the non-centered form, which removes the funnel, should carry a
-dramatically smaller constant.
+$\CP,\CLS,\CTCI$ transform under centered, non-centered, and partially non-centered coordinates
+after fixing a common normalization. Full non-centring removes the prior-only Neal funnel, but it
+is not uniformly better: the reviewed Gaussian calibration has a data-strength crossover, and
+centering wins in the strong-data regime (Section~\ref{sec:a5}).
 \end{remark}
 
 \noindent For nonconvex losses (Bayesian neural networks) the same dichotomy governs:
-local curvature inside basins helps, barriers between basins hurt, and a Gaussian prior keeps
-the tails (hence the constants) finite but possibly useless if the landscape has high
-barriers.
+local curvature inside basins helps and barriers between basins hurt. A Gaussian prior controls
+the tails, while finiteness and usefulness of the constants still require the appropriate
+regularity and no-bottleneck hypotheses; high barriers can make finite constants exponentially
+large.
 \end{document}

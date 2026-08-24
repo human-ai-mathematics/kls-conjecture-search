@@ -62,7 +62,7 @@ class CheckerFixture(unittest.TestCase):
             path.with_name("obstructions.md").write_text(obstruction_md)
         return path
 
-    def add_artifact(self, name: str, *, dirty: bool, valid: bool = True,
+    def add_artifact(self, name: str, *, valid: bool = True,
                      strong: bool = False) -> str:
         relative = f"research/runs/{name}.jsonl"
         path = self.root / relative
@@ -75,17 +75,25 @@ class CheckerFixture(unittest.TestCase):
                     "shared_battery_passed": True,
                     "shared_battery": "research/knowledge/instances.md",
                 })
-            header = {
-                "_provenance": {
-                    "git_commit": "a" * 40,
-                    "git_dirty": dirty,
-                    "params": params,
-                }
-            }
+            header = {"_provenance": {"params": params}}
             record = {"kind": "verdict" if strong else "diagnostic"}
             path.write_text(json.dumps(header) + "\n" + json.dumps(record) + "\n")
         else:
             path.write_text("{not-json}\n")
+        return relative
+
+    def add_solution(self, name: str) -> str:
+        relative = f"solutions/{name}.tex"
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("standalone proof fixture\n")
+        return relative
+
+    def add_review(self, name: str) -> str:
+        relative = f"research/reviews/{name}.md"
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("independent audit fixture\n")
         return relative
 
     def check(self):
@@ -114,6 +122,22 @@ class CheckerHardeningTests(CheckerFixture):
 
         self.assertIn("unknown internal id 'thm:missing_slug'", errors)
         self.assertNotIn("external theorem in prose", errors)
+
+    def test_unlocks_must_not_duplicate_a_declared_premise(self):
+        nodes = [
+            node("lem:base", unlocks=["thm:uses", "q:forward"]),
+            node("ass:open", status="open", kind="assumption", unlocks=["thm:rests"]),
+            node("thm:uses", depends_on=["lem:base"]),
+            node("thm:rests", status="conditional", assuming=["ass:open"]),
+            node("q:forward", status="open", kind="question"),
+        ]
+        self.add_ledger("main", "kls", nodes)
+
+        errors = "\n".join(self.check()["errors"])
+
+        self.assertIn("lem:base.unlocks: 'thm:uses' already declares lem:base", errors)
+        self.assertIn("ass:open.unlocks: 'thm:rests' already declares ass:open", errors)
+        self.assertNotIn("'q:forward' already declares", errors)
 
     def test_conditional_contract_and_recursive_proved_risks(self):
         nodes = [
@@ -177,38 +201,27 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertNotIn("thm:conditional (conditional) does not propagate", errors)
         self.assertNotIn("thm:published-use (proved) inherits", errors)
 
-    def test_dirty_historical_artifact_is_validated_but_not_evidence_eligible(self):
-        dirty = self.add_artifact("dirty", dirty=True)
-        clean = self.add_artifact("clean", dirty=False)
+    def test_artifacts_are_validated_without_git_metadata(self):
+        artifact = self.add_artifact("run")
         nodes = [
-            node("obs:history", kind="obstruction", evidence_run=dirty),
+            node("obs:history", kind="obstruction", evidence_run=artifact),
             node(
-                "conj:dirty",
+                "conj:directional",
                 status="conjectured",
                 kind="conjecture",
                 evidence="numerical-directional",
-                evidence_run=dirty,
-                evidence_target="fixture",
-            ),
-            node(
-                "conj:clean",
-                status="conjectured",
-                kind="conjecture",
-                evidence="numerical-directional",
-                evidence_run=clean,
+                evidence_run=artifact,
                 evidence_target="fixture",
             ),
         ]
         self.add_ledger("main", "ab", nodes)
 
-        errors = self.check()["errors"]
-        dirty_errors = [error for error in errors if "evidence-eligible run" in error]
+        errors = "\n".join(self.check()["errors"])
 
-        self.assertEqual(len(dirty_errors), 1)
-        self.assertIn("conj:dirty", dirty_errors[0])
+        self.assertNotIn("evidence", errors)
 
     def test_evidence_run_must_exist_and_be_valid_jsonl(self):
-        malformed = self.add_artifact("malformed", dirty=False, valid=False)
+        malformed = self.add_artifact("malformed", valid=False)
         nodes = [
             node("obs:missing", kind="obstruction", evidence_run="research/runs/missing.jsonl"),
             node("obs:malformed", kind="obstruction", evidence_run=malformed),
@@ -220,21 +233,9 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertIn("research/runs/missing.jsonl' does not exist", errors)
         self.assertIn("invalid JSON on line 1", errors)
 
-    def test_local_git_commit_validation(self):
-        head = subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            cwd=REPO,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.strip()
-
-        self.assertTrue(CHECKER._git_commit_exists(REPO, head))
-        self.assertFalse(CHECKER._git_commit_exists(REPO, "f" * 40))
-
     def test_numerical_strong_requires_calibration_battery_and_verdict(self):
-        weak_artifact = self.add_artifact("weak", dirty=False)
-        strong_artifact = self.add_artifact("strong", dirty=False, strong=True)
+        weak_artifact = self.add_artifact("weak")
+        strong_artifact = self.add_artifact("strong", strong=True)
         nodes = [
             node(
                 "conj:weak",
@@ -286,8 +287,45 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertIn("obs:warning.constrains reverse parity mismatch", errors)
         self.assertIn("warned about by obs:warning lacks a clearance note", errors)
 
+    def test_independent_agent_certification_requires_provenance(self):
+        solution = self.add_solution("agent-proof")
+        review = self.add_review("agent-proof-audit")
+        nodes = [
+            node(
+                "thm:agent-pass",
+                solution=solution,
+                checked_by="agent",
+                authored_by="/root/prover",
+                reviewed_by="/root/reviewer",
+                review=review,
+            ),
+            node(
+                "thm:agent-self-review",
+                solution=solution,
+                checked_by="agent",
+                authored_by="/root/same",
+                reviewed_by="/root/same",
+                review=review,
+            ),
+            node(
+                "thm:agent-missing-review",
+                solution=solution,
+                checked_by="agent",
+                authored_by="/root/prover",
+                reviewed_by="/root/reviewer",
+                review="research/reviews/missing.md",
+            ),
+        ]
+        self.add_ledger("main", "ab", nodes)
+
+        errors = "\n".join(self.check()["errors"])
+
+        self.assertNotIn("thm:agent-pass", errors)
+        self.assertIn("thm:agent-self-review: agent author and reviewer must be distinct", errors)
+        self.assertIn("thm:agent-missing-review.review", errors)
+
     def test_clean_conditional_evidence_and_warning_contract_passes(self):
-        clean = self.add_artifact("clean", dirty=False)
+        clean = self.add_artifact("clean")
         obstructions = {
             "mechanisms": ["direct-excess"],
             "obstructions": [{

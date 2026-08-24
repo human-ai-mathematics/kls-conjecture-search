@@ -1,0 +1,67 @@
+% Standalone solution dossier for ex:a5-neal.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-nodes: lem:a5-pi-exp-tail; ex:a5-neal
+% refines: lem:a5-pi-exp-tail, ex:a5-neal
+% bounded_by: obs:heavy-tail-no-classical
+% evidence_run: none
+% checked_by: agent
+% author: /root/a4_a5
+% proof_completion: /root/review_a4_a5
+% dossier_editor: /root/review_a4_a5
+% reviewer: /root/cross_review
+% review: research/reviews/2026-08-21-a5-funnel-second-agent-audit.md
+% date: 2026-08-21
+% ============================================================================
+
+\section*{Solution: Neal's Gaussian-log-scale funnel}
+
+\begin{lemma}[Poincar\'e implies an exponential moment]
+If a probability law satisfies a Poincar\'e inequality with finite constant $C$, every real
+$1$-Lipschitz $f\in L^2$ has
+$\E e^{c|f-\operatorname{med}f|}<\infty$ for every
+$0<c<(\log2)/(2\sqrt C)$.
+\end{lemma}
+
+\begin{proof}
+Let $m$ be a median, $a=2\sqrt C$, and, for $t\ge0$, set
+$g=\min\{(f-m-t)_+,a\}$. If $p_t=\P(f>m+t)$, the independent-copy formula for variance gives
+\[
+ \Var(g)\ge a^2\P(f\ge m+t+a)\P(f\le m+t)
+ \ge\tfrac12a^2p_{t+a}.
+\]
+Since $|\nabla g|\le\mathbf1_{\{m+t<f<m+t+a\}}$, Poincar\'e gives
+$p_{t+a}\le(2C/a^2)p_t=\tfrac12p_t$. Iteration gives a geometric upper tail on intervals of
+length $a$. Applying the same argument to $-f$ gives the lower tail. Integrating these two tails
+proves the claimed exponential moment.
+\end{proof}
+
+\begin{proposition}
+For $s>0$, let $u\sim N(0,s^2)$ and $z\sim N(0,1)$ be independent, and put $\theta=e^uz$.
+In Euclidean
+coordinates $(u,\theta)$ the Poincar\'e constant is infinite, while in coordinates $(u,z)$ it is
+$\max\{s^2,1\}$. Neither coordinate map is globally Lipschitz.
+\end{proposition}
+
+\begin{proof}
+The coordinate $\theta$ is one-Lipschitz on the Euclidean $(u,\theta)$ space and belongs to
+$L^2$, since $\E\theta^2=e^{2s^2}$. Yet, for every $c>0$, independence and the event
+$\{|z|\ge1,u>0\}$ give
+\[
+\E e^{c|\theta|}\ge\P(|z|\ge1)\E[e^{ce^u}\mathbf1_{\{u>0\}}]=\infty.
+\]
+The last Gaussian integral diverges because
+$ce^u-u^2/(2s^2)\to+\infty$. If an exponential moment about the median $m$ were finite, then
+$e^{c|\theta|}\le e^{c|m|}e^{c|\theta-m|}$ would make the uncentred moment finite. The lemma
+therefore rules out a finite centered Poincar\'e constant. The non-centred law is a
+product Gaussian, whose constant is $\max\{s^2,1\}$ by tensorization. The Jacobians of
+$(u,z)\mapsto(u,e^uz)$ and $(u,\theta)\mapsto(u,e^{-u}\theta)$ are both unbounded.
+\end{proof}
+
+\paragraph{Audit state.}
+The truncation lemma and funnel argument received a second independent agent audit after the
+$s>0$ hypothesis and all integrability steps were made explicit.
+
+\end{document}
