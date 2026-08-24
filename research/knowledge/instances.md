@@ -87,6 +87,31 @@ no verdict) and **stress** (the adversarial cases each obstruction names).
 
 ---
 
+## KLS / deterministic moment-map CMH route — registered battery
+
+These instances are the fixed battery for `research/kls/routes/moment-map-cmh/`. Registration
+freezes the models; it does **not** claim that a `finum` backend or an eligible R1 artifact exists.
+Exact algebra belongs in a persisted dossier. Any sampled, FEM, or grid calculation must first be
+implemented in `finum` with the repository gates.
+
+| id | instance | required role | present evidence status |
+|---|---|---|---|
+| `cal-kls-gauss-moment-map` | isotropic Gaussian, $\phi(y)=|y|^2/2$ and $H=I$ | calibrate adjoints, square roots, Haar normalization, and zero commutators | exact calibration |
+| `cal-kls-centered-exp` | product of centered standard **one-sided** exponentials $Y_i-1$ | reproduce $C_P=4$ and equality in $\operatorname{Var}(|X|^2)\le8n$; keep distinct from the two-sided Laplace product used by P6 | exact one-dimensional/product facts |
+| `stress-cmh-aligned-product` | product moment maps with coordinate-aligned multipliers | test tensorization and the commuting reduction | analytic calibration; does not activate eigenframe rotation |
+| `stress-cmh-rotated-exp` | an orthogonal rotation of a centered one-sided-exponential product | detect illegal nodewise sibling positivity | originating exploration reports negative nodes; dossier pending |
+| `stress-cmh-laguerre` | Gamma/Laguerre near-extremizing modes | detect fixed fractional spending of descendant or leaf slack | originating exploration reports near-exhaustion; dossier pending |
+| `stress-cmh-high-frequency-exp` | localized high-frequency tests in the product-exponential moment map | detect separation of the conformal reservoir from traceless/corrector terms | originating exploration reports a negative leading term for the separated form; dossier pending |
+| `stress-cmh-45deg-child` | $45^\circ$ projection of two exponentials with a one-dimensional child | isolate the conditional/scalar residual; scalar Stein uniqueness with boundary decay forces $S=K$ | structural calibration; cannot test Airy mismatch |
+| `stress-cmh-gamma-gaussian` | rotated independent Gamma--Gaussian factors | detect the withdrawn local vector-conservation law | originating exploration reports an analytic violation; dossier pending |
+| `stress-cmh-three-exp` | $\xi_1=Y_1-Y_3$, $\xi_2=Y_2-Y_3$ for independent standard exponentials | activate the canonical-versus-inherited Stein-kernel mismatch | density and inherited kernel checked algebraically; canonical $K$ reconstruction open |
+
+The existing `kls-align` model instead uses an isotropic **two-sided Laplace** product and a fixed
+tail-union cut. It belongs to the Eldan-A alignment gate and must not be used as a substitute for
+the one-sided-exponential CMH models above.
+
+---
+
 ### Provenance
 Every instance carries a seed, git hash, and library versions (as `finum.provenance` does).
 A reward verdict is read only after the convergence + independent-estimator gates pass; a verdict

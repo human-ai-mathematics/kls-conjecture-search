@@ -37,17 +37,22 @@ research/
                      instances.md     the shared, curated stress battery
   explorations/    dated attempt log, INCLUDING dead ends (so no one re-runs them)
   reviews/         persisted scope/verdict reports for independent-agent proof certification
-  kls/             Part III (program: kls) — EXPLORATORY: organized by route, not one DAG.
+  kls/             Part III (program: kls) — EXPLORATORY: one graph, organized by route.
+                     ledger.yaml         one route-spanning claim graph (single writer)
+                     strategy-map.md     current frontier and comparison of proof strategies
+                     obstructions.*      machine fences, currently Eldan-route scoped
                      routes.md            registry of attacks + how to open a new route
                      shared/              route-agnostic truth (target.md, lower-bounds.md)
-                     routes/eldan-localization/   the active attack — carries the kls ledger:
-                       ledger.yaml obstructions.yaml obstructions.md open-problems.md roadmap.md
-                     routes/moment-map-spectral/ prose-only fixed-eigenfunction dynamic route
+                     routes/eldan-localization/   fixed-cut subroutes + roadmap/open problems
+                     routes/moment-map-spectral/ fixed-eigenfunction dynamic route
+                     routes/moment-map-cmh/      deterministic Haar/Schur--Piola route
 ```
 
-The current KLS route decision, including the completed product-alignment diagnostic and the
-audited $H^{-1}$ endpoint, is in
+The August 20 fixed-eigenfunction cycle, including the completed product-alignment diagnostic and
+the audited $H^{-1}$ endpoint, remains in
 [`explorations/2026-08-20-kls-program-cycle-1.md`](explorations/2026-08-20-kls-program-cycle-1.md).
+The current cross-route synthesis is
+[`explorations/2026-08-24-kls-moment-map-cmh-consolidation.md`](explorations/2026-08-24-kls-moment-map-cmh-consolidation.md).
 For A1--A5, the current certified-probe summary records 21 independently reviewed positive
 intermediate nodes and the remaining live frontiers:
 [`explorations/2026-08-21-a-series-proof-probes.md`](explorations/2026-08-21-a-series-proof-probes.md).
@@ -64,8 +69,9 @@ and Lipschitz anchors---retain narrow, explicitly documented `proof_provenance` 
 KLS is organized as a route-based proof program (crisp statements; discharge assumptions;
 numerics only refute/direct). They use the same status/edge grammar and one
 checker, but KLS keeps the heavier machine-enforced no-go set it needs. The **bridge** is
-`conj:a1-bis` (structured-posterior `C_P ≤ K·λmax(Cov)`) → `kls/thm:intro-all-cut`: the same
-bound for *every* isotropic log-concave measure **is** KLS (Part I's "Tier-∞" boundary).
+`conj:a1-bis` (structured-posterior `C_P ≤ K·λmax(Cov)`) → the route-neutral
+`kls/conj:kls`: the same bound for *every* isotropic log-concave measure **is** KLS (Part I's
+"Tier-∞" boundary).
 See `kls/README.md`.
 
 ## Status & evidence vocabulary

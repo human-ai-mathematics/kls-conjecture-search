@@ -1,23 +1,25 @@
-# Open problems — the live KLS frontier (P1–P7)
+# Eldan fixed-cut route — open problems (P1–P7)
 
-The KLS analogue of `../targets/*.md`. KLS is **one interlinked proof program**, not seven
-independent targets, so its open problems are kept together here (with the cross-references
-that bind them) rather than split into one file each. Ported from the
+Within this route, the seven targets form **one interlinked fixed-cut program**, so they are kept
+together here (with the cross-references that bind them) rather than split into one file each.
+They are one route within the broader KLS strategy map. Ported from the
 standalone KLS program's roadmap; references re-synced to the unified `modules/kls/`.
 
 Each entry is a **self-contained brief**:
 - **Statement** — the precise target (`\ref` label + ledger id).
-- **Unlocks** — what it implies (from `ledger.yaml`).
-- **Bounded by** — obstructions any proof must respect (`obstructions.md`).
+- **Unlocks** — what it implies (from [`../../ledger.yaml`](../../ledger.yaml)).
+- **Bounded by** — obstructions any proof must respect
+  ([`../../obstructions.md`](../../obstructions.md)).
 - **Attack** — the suggested mechanism / available tools.
 - **Prior work** — what has been tried; entry point.
 
-Cross-check every claimed result against `obstructions.md`, update `ledger.yaml`, and run
+Cross-check every claimed result against `research/kls/obstructions.md`, update the central
+`research/kls/ledger.yaml` through the orchestrator, and run
 `python3 research/check_ledger.py`.
 
 ---
 
-## P1 · `q:upgrade` — operator-to-trace upgrade (Route A headline)
+## P1 · `q:upgrade` — operator-to-trace upgrade (Eldan-A headline)
 
 **Statement** (`q:upgrade`, `modules/kls/14-open-targets.tex`; target `ass:all-cut-carleson`).
 Upgrade the unconditional per-direction Carleson estimate `cor:per-direction`
@@ -47,7 +49,7 @@ question reduces to `q:alignment` (P6). The designated tail-union model is now i
 
 ---
 
-## P2 · `q:weighted` — weighted excess propagation with rate (Route B input i-w)
+## P2 · `q:weighted` — weighted excess propagation with rate (Eldan-B input i-w)
 
 **Statement** (`q:weighted`; target `ass:weighted-package`). For balanced near-Cheeger $E$
 ($e_0(E)\le1$) and $T\le T_0$:
@@ -74,7 +76,7 @@ to `q:taming` (P4).
 
 ---
 
-## P3 · `q:stein-weighted` — weighted stable Stein trace (Route B input ii-w)
+## P3 · `q:stein-weighted` — weighted stable Stein trace (Eldan-B input ii-w)
 
 **Statement** (`q:stein-weighted`; target `ass:weighted-package`). Prove the weighted stable
 Stein-trace estimate for balanced near-Cheeger cuts, damping $\beta<\tfrac12$, with the excess
@@ -149,7 +151,7 @@ transfer is an additional open step.
 
 ---
 
-## P6 · `q:alignment` — adapted alignment problem for products (Route A residue)
+## P6 · `q:alignment` — adapted alignment problem for products (Eldan-A residue)
 
 **Statement** (`q:alignment`, `modules/kls/09-product-stress.tex`). For $\mu$ a product of $n$
 isotropic two-sided exponentials: does there exist universal $T_0,C_0,C_1,\alpha<1$ such that
@@ -166,7 +168,7 @@ window, while staying balanced and underdamped.
 
 **Unlocks.** `prog:product-test` decided positively ⇒ strong evidence for / a model of
 `q:upgrade`. A negative answer (an explicit aligning cut) **refutes** `ass:all-cut-carleson`
-and forces Route B.
+and redirects attention to Eldan-B.
 
 **Bounded by.** `obs:rank-one-refuted` — single-coordinate cuts cannot do it (budget $\le1$,
 spikes self-extinguish); the residue is genuinely high-complexity cuts.

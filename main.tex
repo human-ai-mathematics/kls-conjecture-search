@@ -44,10 +44,11 @@ to the Kannan--Lov\'asz--Simonovits frontier}
   quotient/reparameterization of symmetry- and funnel-induced slow modes. It promotes the
   twenty-one independently reviewed results and sharp model calibrations already obtained, records useful
   obstructions, and separates them from proof drafts and the remaining open targets.
-  \textbf{Part~III} is a self-contained
-  conditional proof program for the Kannan--Lov\'asz--Simonovits conjecture --- the dimension-free
+  \textbf{Part~III} maps the Kannan--Lov\'asz--Simonovits frontier --- the dimension-free
   Poincar\'e bound for arbitrary isotropic log-concave measures, the ``Tier-$\infty$'' boundary of
-  Part~I --- via Eldan stochastic localization.
+  Part~I. It distinguishes the sharp July 2026 radial and homogeneous-quadratic results from full KLS,
+  develops the conditional fixed-cut Eldan program in detail, and records the separate
+  fixed-eigenfunction and deterministic moment-map/Haar routes with their exact open bottlenecks.
 \end{abstract}
 
 \tableofcontents
@@ -74,7 +75,9 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 
 \part{The Kannan--Lov\'asz--Simonovits frontier}
 
-% Foundations
+% Route-neutral target, literature frontier, and strategy map
+\subfile{modules/kls/00-strategy-map}
+% Detailed Eldan fixed-cut program: foundations and two subroutes
 \subfile{modules/kls/00-introduction}
 \subfile{modules/kls/01-setup-localization}
 % Common core: reduction, identities, shared dictionary, obstruction, covariance technology, models
@@ -84,16 +87,18 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 \subfile{modules/kls/05-obstruction}
 \subfile{modules/kls/06-covariance-technology}
 \subfile{modules/kls/07-model-geometries}
-% Route A: all-cut Carleson
+% Eldan-A: all-cut Carleson
 \subfile{modules/kls/08-carleson-consumption}
 \subfile{modules/kls/09-product-stress}
-% Route B: weighted geometric package
+% Eldan-B: weighted geometric package
 \subfile{modules/kls/10-stein-route}
 \subfile{modules/kls/11-excess-propagation}
 \subfile{modules/kls/12-bootstrap}
 \subfile{modules/kls/13-jacobi-splitting}
-% Open targets
+% Eldan fixed-cut open targets
 \subfile{modules/kls/14-open-targets}
+% Separate deterministic moment-map/Haar route
+\subfile{modules/kls/15-moment-map-cmh}
 
 \begingroup
 \sloppy

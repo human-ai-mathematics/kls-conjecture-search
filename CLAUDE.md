@@ -18,7 +18,7 @@ and an exploratory KLS proof program.
 
 | plane | where | what it holds |
 |---|---|---|
-| claims | `research/ledger.yaml`, `research/kls/routes/eldan-localization/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
+| claims | `research/ledger.yaml`, `research/kls/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
 | prose | `modules/**/*.tex` | the manuscript; the `\label`s that node ids bind to |
 | proofs | `solutions/*.tex` | standalone dossiers a reviewer or Lean can check |
 | evidence | `research/runs/*.jsonl` | provenance-stamped `finum` artifacts |
@@ -94,9 +94,10 @@ Specific to this repo; a naive agent swarm hits every one of these.
 5. **Respect `bounded_by`.** A refined statement that violates a known obstruction is wrong by
    construction — e.g. any A1 bound without a tail term violates `obs:flat-direction`. Check
    this *before* spending a numerical run.
-6. **Don't fan out across the trace-upgrade unification.** `q:upgrade`, the high-rank part of
-   `q:stein-weighted`, and `q:alignment` are the same operator-to-trace problem in three
-   coordinate systems (`rem:trace-upgrade-unification`). One team owns it, then propagates.
+6. **Don't fan out across the trace-upgrade cluster.** `q:upgrade`, the high-rank part of
+   `q:stein-weighted`, and `q:alignment` are three manifestations of the same high-rank
+   occupation difficulty (`rem:trace-upgrade-unification`); their formal equivalence is not
+   proved. One team owns the comparison, then propagates only what has actually been shown.
 7. **`conditional` KLS nodes are Lean-certifiable only as conditional implications.** The
    assumption becomes a hypothesis; the node reaches unconditional `proved` only when the
    assumption is discharged.

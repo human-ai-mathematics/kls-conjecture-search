@@ -1,9 +1,10 @@
 # Obstructions — the KLS search-space fence
 
-Hard-won negative results that bound what any proof of KLS through this program can look
-like. Before proposing an approach, check it here; after producing a result, check it does
-not contradict one. Each obstruction has a stable `obs:` id used by `ledger.yaml`
-(`bounded_by:` edges).
+Hard-won negative results that bound what a proof through the Eldan fixed-cut program can
+look like. They are colocated with the route-spanning KLS ledger for machine enforcement;
+they do not automatically constrain the moment-map/spectral or deterministic CMH routes.
+Before proposing an Eldan-route approach, check it here. Each obstruction has a stable
+`obs:` id used by `ledger.yaml` (`bounded_by:` edges).
 
 Ported from the standalone KLS program's roadmap; `\label`/module references re-synced to
 the unified `modules/kls/`.
@@ -85,7 +86,7 @@ in `obstructions.yaml`.
 and any balanced cut depending on a **single** coordinate, the total source budget is
 $E\int_0^\infty S_t \le 1$, so a source spike of height $\Lambda^2$ has expected occupation
 $\lesssim \Lambda^{-2}$ — it is **self-extinguishing**. $\mu^+(E) \ge c\cdot\min(p,q)$.
-**Kills.** The originally-proposed counterexample to Route A ("a cut adapted to the
+**Kills.** The originally-proposed counterexample to Eldan-A ("a cut adapted to the
 dynamically large coordinate"). A counterexample, like a proof, must be genuinely
 high-dimensional and cut-aware.
 **Regime.** Product measures. Constrains: `q:alignment` (the residue is high-complexity cuts,
@@ -95,7 +96,7 @@ not single-coordinate ones).
 
 ## How obstructions interlock
 
-Route A's operator-to-trace upgrade is the full occupation trace; the product alignment problem
+Eldan-A's operator-to-trace upgrade is the full occupation trace; the product alignment problem
 isolates its incident-high masked residue and is a model reduction, not an equivalent theorem.
 Weighted excess and the proposed Jacobi/Reilly route face related
 high-covariance/high-rank phenomena, but no equivalence with the boundary constant mode is

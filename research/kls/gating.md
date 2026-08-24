@@ -1,6 +1,6 @@
 # KLS route-gating — node → computable quantity → verdict
 
-Implementation status of the numerical channel for KLS. Three regimes:
+Implementation status of the numerical channel for KLS. Four regimes:
 
 - **SDE-free (built, sound).** The route-agnostic, Poincaré/bridge-level facts in
   [`shared/lower-bounds.md`](shared/lower-bounds.md), computable from `finum` without the
@@ -14,8 +14,27 @@ Implementation status of the numerical channel for KLS. Three regimes:
   computes the complete P6 margin for the balanced tail union in an isotropic Laplace product.
   This tests one explicit cut family only; it neither implements the universal quantifier in
   `q:alignment` nor yields a route or proof verdict.
+- **Deterministic moment-map/CMH battery (registered, not built).** The fixed Gaussian,
+  product, Schur--Hodge, and commutator models are specified in
+  [`routes/moment-map-cmh/models.md`](routes/moment-map-cmh/models.md) and the shared instance
+  registry. No CMH `finum` target or R1 artifact exists, so reported model behavior is not an
+  eligible numerical verdict.
 
 All numerics **refute or give direction; they never prove** (see `shared/target.md`).
+
+## Deterministic CMH implementation status
+
+The CMH route currently uses exact or symbolic calculations plus reported exploratory witnesses.
+It has no sanctioned private Monte Carlo channel. Before a sampled, FEM, or finite-grid claim can
+count as R1, a `finum` target must implement the registered battery with fixed parameters,
+calibration failures, convergence gates, and provenance-stamped JSONL output. In particular:
+
+- Gaussian and aligned products are calibration cases because their commutators vanish;
+- a negative individual Haar node is not a verdict on the complete-tree inequality;
+- the rotated exponential, Laguerre, high-frequency, and Gamma--Gaussian behaviors remain
+  reported until their analytic dossiers or eligible artifacts are persisted;
+- the exact three-exponential density and inherited Stein kernel activate the intended mismatch,
+  but reconstruction of the canonical kernel is an open analytic problem, not a numerical gate.
 
 ## SDE-free signals (finum kls, built)
 

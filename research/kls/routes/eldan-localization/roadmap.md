@@ -1,7 +1,8 @@
-# Roadmap — KLS conditional proof program
+# Roadmap — Eldan fixed-cut conditional program
 
 The narrative map of the program. For the machine-readable logical state see
-[`ledger.yaml`](ledger.yaml); for the no-go results see [`obstructions.md`](obstructions.md);
+[`../../ledger.yaml`](../../ledger.yaml); for the no-go results see
+[`../../obstructions.md`](../../obstructions.md);
 for dispatchable work items see [`open-problems.md`](open-problems.md). Ported from the
 standalone KLS program's roadmap (references by stable `\label`/node id, which survive the
 unified-module renumbering).
@@ -15,7 +16,11 @@ keeping `p_t` in a balanced window for a universal time. Proof posture throughou
 contradiction against a near-worst measure** `h_μ ≤ (1+ε) hstar_n` — this is what makes the
 bootstrap anchor (`thm:bootstrap`) legitimate.
 
-## The proved backbone (unconditional)
+## The legacy proved backbone (unconditional statements; R2 debt recorded)
+
+The inline arguments below predate the current standalone-dossier and independent-review
+contract. Their ledger statuses are preserved, but the August 24 audit records the certification
+debt; this heading is not a fresh R2 review.
 
 ```
 mass martingale  d[p]_t = s_t r_t dt           (eq:qv-p)
@@ -32,7 +37,7 @@ two-color Riccati:  dr = dM + (S − D)dt         (thm:scalar-riccati)
 per-direction Carleson  E ∫ s|Gθ|² ≤ 1          (cor:per-direction)   ← dimension-free, quadratic-form level
         │
         ▼
-   MISSING: operator-to-trace upgrade           (q:upgrade)           ← the essential gap of Route A
+   MISSING: operator-to-trace upgrade           (q:upgrade)           ← the essential gap of Eldan-A
 ```
 
 The Riccati identities, the per-direction estimate, the Stein representation
@@ -41,9 +46,9 @@ martingale and excess identity, and the product coordinate-budget theorem (`thm:
 all **proved**. The conjecture sits behind two **conditional** headline implications and
 their open inputs.
 
-## The two routes
+## The two Eldan subroutes
 
-**Route A — all-cut stochastic.** Prove `ass:all-cut-carleson` (the absorptive two-color
+**Eldan-A — all-cut stochastic.** Prove `ass:all-cut-carleson` (the absorptive two-color
 Carleson estimate for every balanced cut). By `thm:intro-all-cut` this alone implies KLS. The
 gap is the **operator-to-trace upgrade** `q:upgrade`: lift `cor:per-direction` from
 per-direction (quadratic-form) to trace scale, uniformly over cuts. Bounded by
@@ -55,7 +60,7 @@ the **product stress test** (`prog:product-test`, executed in
 $n=1024$: it detects a finite-dimensional alignment pulse but no divergence, so the mathematical
 node remains open and the artifact carries no route verdict.
 
-**Route B — near-Cheeger geometric (weighted).** Work only with near-minimizers. Needs two
+**Eldan-B — near-Cheeger geometric (weighted).** Work only with near-minimizers. Needs two
 weighted inputs (`ass:weighted-package`):
 - (i-w) **weighted excess propagation** `q:weighted`, and
 - (ii-w) **weighted stable Stein trace** `q:stein-weighted`.
@@ -63,13 +68,16 @@ weighted inputs (`ass:weighted-package`):
 By `thm:intro-weighted` these imply KLS. The consolidation's main clarification (the
 **consumption audit** `prop:intro-audit`): the *unweighted* excess term is **inert**
 (unconditionally `O(T)` by `prop:trivial-excess`), so the unweighted Stein estimate silently
-carried the whole route — and by `obs:two-tail` it has **no slice-wise proof**. The weight
-`(1+‖A‖)^{5/2}` is *forced*, not chosen.
+carried the whole route — and by `obs:two-tail` it has **no slice-wise proof**. Within this
+particular slice-wise package with a pure covariance power multiplying absolute excess,
+`(1+‖A‖)^{5/2}` is the least statically compatible exponent. This is not a route-agnostic
+necessity.
 
 ## How the excess-propagation question was audited
 
 1. **Audit** (`prop:intro-audit`): unweighted excess is inert.
-2. **Obstruction** (`obs:two-tail`): no slice-wise absolute-scale proof; weight forced.
+2. **Obstruction** (`obs:two-tail`): no unweighted slice-wise absolute-scale proof; exponent
+   $5/2$ is calibrated for this package.
 3. **Circularity warning** (`obs:circularity`): directly inserting a lower bound for the random
    localized profile may restate KLS. The moving balanced competitor family is not covered by
    the fixed-family supermartingale lemma, so this is not a formal no-go.
@@ -90,7 +98,7 @@ itself* tame the covariance process?
 graph TD
   KLS["KLS: inf_n hstar_n > 0"]
 
-  subgraph RouteA["Route A — all-cut"]
+  subgraph RouteA["Eldan-A — all-cut"]
     qupg[q:upgrade<br/>operator→trace]:::open
     allcut[ass:all-cut-carleson]:::open
     tall[thm:intro-all-cut]:::cond
@@ -98,7 +106,7 @@ graph TD
     ptest[prog:product-test]:::open
   end
 
-  subgraph RouteB["Route B — weighted geometric"]
+  subgraph RouteB["Eldan-B — weighted geometric"]
     qw[q:weighted<br/>weighted excess]:::open
     qst[q:stein-weighted<br/>weighted Stein]:::open
     qsp[q:splitting<br/>quant. Obata]:::open
@@ -117,10 +125,11 @@ graph TD
   qtame[q:taming<br/>extremality tames cov]:::open
 
   perdir --> qupg --> allcut --> tall --> KLS
-  ptest --> qalign --> qupg
+  ptest --> qalign
+  qalign -. product-model evidence .-> qupg
   qw --> pkg
   qst --> pkg
-  qsp --> qst
+  qsp -. constant-mode branch only .-> qst
   pkg --> twt --> KLS
   ricc --> perdir
   ricc --> cent
@@ -132,8 +141,10 @@ graph TD
   classDef open fill:#fde2e2,stroke:#d66;
 ```
 
-Legend: green = proved, yellow = conditional, red = open. Edges point from input to what it
-unlocks. (Obstruction edges omitted; see `ledger.yaml` `bounded_by` and `obstructions.md`.)
+Legend: green = proved, yellow = conditional, red = open. Solid arrows are logical/dispatch
+edges; dashed arrows are heuristic or partial contributions, not theorem implications.
+(Obstruction edges omitted; see [`../../ledger.yaml`](../../ledger.yaml) `bounded_by` and
+[`../../obstructions.md`](../../obstructions.md).)
 
 ## Status snapshot
 
@@ -155,8 +166,8 @@ unlocks. (Obstruction edges omitted; see `ledger.yaml` `bounded_by` and `obstruc
 
 ## What "done" looks like
 
-- **Route A done** = `q:upgrade` proved ⇒ `ass:all-cut-carleson` ⇒ KLS.
-- **Route B done** = `q:weighted` + `q:stein-weighted` proved ⇒ `ass:weighted-package` ⇒ KLS.
+- **Eldan-A done** = `q:upgrade` proved ⇒ `ass:all-cut-carleson` ⇒ KLS.
+- **Eldan-B done** = `q:weighted` + `q:stein-weighted` proved ⇒ `ass:weighted-package` ⇒ KLS.
 - **Intermediate prize** (`cor:dichotomy`): under the separate
   `hyp:absolute-geometric-completion`, an absolute-scale completion with small constant yields
   `hstar_n ≥ c/loglog n`, improving even the Letwin-v1 `log^{-1/4} n` scale, with full KLS

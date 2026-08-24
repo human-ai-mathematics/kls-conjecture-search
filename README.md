@@ -13,9 +13,10 @@ with a difficulty gradation.
   one section per flagship problem from the agenda (data-informed GLM constants,
   Bernstein–von Mises, heavy-tailed posteriors, variational inference,
   quotient/reparameterization).
-- **Part III** (`modules/kls/`) — a self-contained exploratory proof program for the
-  Kannan–Lovász–Simonovits conjecture (the "Tier-∞" boundary of Part I), with an Eldan
-  cut-localization route and a moment-map/fixed-eigenfunction route.
+- **Part III** (`modules/kls/`) — an exploratory proof program for the
+  Kannan–Lovász–Simonovits conjecture (the "Tier-∞" boundary of Part I): a route-neutral
+  literature/strategy map, a detailed Eldan fixed-cut program, the fixed-eigenfunction
+  localization route, and a deterministic moment-map/Haar/Schur--Piola route.
 
 The A1--A5 control plane currently records 21 independently reviewed positive intermediate
 results. The main A1, A2, A4, and A5 selection targets remain open; the original marginal-only
@@ -44,7 +45,7 @@ shared/
   notation.md       symbol glossary (reference only, not compiled)
 modules/            Part I: 00-overview … 08-open-targets
 modules/open-targets/  Part II: A1 … A5 deep dives
-modules/kls/        Part III: 00-introduction … 14-open-targets
+modules/kls/        Part III: three-route strategy map, Eldan dossier, and deterministic CMH route
 research/           the control plane: ledger.yaml, knowledge/, targets/, reviews/, kls/,
                     runs/ (eligible numerical evidence artifacts), check_ledger.py
 experiments/        the `finum` numerical channel (uv project) that produces the

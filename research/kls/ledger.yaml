@@ -1,13 +1,13 @@
-# ledger.yaml — canonical logical state of the KLS conditional proof program (Part III)
+# ledger.yaml — canonical logical state of the KLS proof program (Part III)
 # =============================================================================
 # SINGLE SOURCE OF TRUTH for what is proved / conditional / open / refuted in the
 # KLS program, and for the dependency edges. The LaTeX in modules/kls/ is the
 # prose+proof; this file is the machine-readable graph.
 #
-# This is Part III's control plane, ported from the standalone KLS program's roadmap ledger and
-# RE-SYNCED to the unified modules/kls/ (the module numbering was reorganized when
-# Part III was merged into the unified document — node `file:` paths updated; the
-# \label ids are unchanged).
+# This is Part III's route-spanning control plane. It began as the Eldan-localization
+# roadmap ledger and was moved to research/kls/ when the deterministic moment-map/CMH
+# route became substantial enough to track. Nodes may carry a route field; all edits still
+# pass through one orchestrator because this remains a single-file contention point.
 #
 # DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../ledger.yaml, program: ab)
 # is in the REFINEMENT phase (sharpen statements; numerics validate/refute via finum).
@@ -35,25 +35,37 @@
 meta:
   program: kls
   conjecture: "KLS: inf_n hstar_n > 0  (dimension-free Cheeger lower bound for isotropic log-concave measures)"
-  best_known: "Published: hstar_n >= c (log n)^(-1/2) (Klartag 2023). Conditional on Letwin arXiv:2607.24164v1: hstar_n >= c (log n)^(-1/4)."
+  best_known: "Published: hstar_n >= c (log n)^(-1/2) (Klartag 2023). Conditional on Letwin arXiv:2607.24164v1: hstar_n >= c (log n)^(-1/4), equivalently CP <= C sqrt(log n). Chen-Klartag arXiv:2607.23307v1 proves sharp thin shell but does not itself announce this general KLS improvement."
   routes:
-    A: "All-cut absorptive two-color Carleson estimate => KLS directly. Headline: ass:all-cut-carleson."
-    B: "Near-Cheeger geometric route (weighted form): weighted excess propagation + weighted stable Stein trace => KLS. Headline: ass:weighted-package."
-  proof_strategy: "By contradiction against a near-worst measure (h_mu <= (1+eps) hstar_n). This is what legitimizes the bootstrap anchor."
+    eldan-localization: "Fixed-cut stochastic localization with Eldan-A (all-cut Carleson) and Eldan-B (weighted excess plus stable Stein trace)."
+    moment-map-spectral: "Fixed-eigenfunction stochastic localization; open universal-time tensor/covariance alignment estimate."
+    moment-map-cmh: "Deterministic Haar/Schur-Piola program; endpoint normalization, invariant lift, all-split reduction, and global square-root commutator remain open."
+  legacy_route_default: "Nodes without an explicit route field belong to route eldan-localization; new shared and non-Eldan nodes must carry route metadata."
+  proof_strategy: "The Eldan-B bootstrap argues by contradiction against a near-worst measure (h_mu <= (1+eps) hstar_n). This is route-specific, not the posture of every KLS route."
   bridge: "A1-bis (ab/conj:a1-bis) is the structured-posterior counterpart: C_P <= K lambda_max(Cov) for GLM posteriors. The SAME bound for EVERY isotropic log-concave measure, K universal, IS this conjecture — Part I's 'Tier-infinity' boundary."
-  numerics: "finum.localization (finum run --target kls-loc): diagnostic engine only. P2 weighted excess, P3 weighted Stein, P4 cut-free taming, P6 incident-high alignment, and tilted-state dynamic quadrature gates are not implemented; no route verdict is available."
+  numerics: "finum.localization (finum run --target kls-loc) remains a diagnostic engine. The separate kls-align target implements P6 for one designated isotropic Laplace-product tail union and is non-refuting/directional only; P2 weighted excess, P3 weighted Stein, P4 cut-free taming, universal P6, tilted-state dynamic gates, and all CMH observables remain unimplemented. No route verdict is available."
+  certification_debt: "Legacy Eldan nodes predate the current R2 dossier contract: 41 nodes marked proved have inline manuscript arguments but no solution/checked_by metadata. This consolidation does not recertify or promote them; the debt is recorded in the 2026-08-24 independent audit."
 
 # ---------------------------------------------------------------------------
-# CORE STOCHASTIC LAYER  (unconditional reductions — the proved backbone)
+# CORE STOCHASTIC LAYER  (legacy proved backbone; current R2 debt recorded above)
 # ---------------------------------------------------------------------------
 nodes:
+
+  - id: conj:kls
+    kind: conjecture
+    status: open
+    route: shared
+    file: modules/kls/00-strategy-map.tex
+    statement: "There is a universal C such that Var_mu(f) <= C int |grad f|^2 dmu for every isotropic log-concave mu in every dimension; equivalently up to universal constants, inf_n hstar_n > 0."
+    entry_point: [thm:intro-all-cut, thm:intro-weighted, q:mm-spectral-occupation, prog:cmh-route]
+    bridges: [ab/conj:a1-bis]
 
   - id: lem:survival-implies-kls
     kind: lemma
     status: proved
     file: modules/kls/02-mass-martingale-centroid.tex
     statement: "A positive-probability balanced posterior event at one time gives a quantitative boundary lower bound for the cut; if uniform over balanced cuts at universal constants, it implies KLS."
-    depends_on: ["Bakry-Emery/Lichnerowicz", "perimeter supermartingale"]
+    depends_on: ["Bakry-Emery/Lichnerowicz", eq:perimeter-supermartingale]
 
   - id: ass:stopped-centroid
     kind: assumption
@@ -74,7 +86,7 @@ nodes:
     status: proved
     file: modules/kls/03-riccati-identities.tex
     statement: "Matrix two-color Riccati identity: dB_t = dN_t + (s G^2 - AB - BA + rB) dt; hence dR = dÑ - (R^2 + s G^2) dt."
-    depends_on: ["covariance SDE eq:cov-sde", "identity C^E - pA = sK"]
+    depends_on: [eq:cov-sde, eq:CE-minus-pA]
 
   - id: thm:scalar-riccati
     kind: theorem
@@ -117,10 +129,9 @@ nodes:
     kind: theorem
     status: conditional
     file: modules/kls/00-introduction.tex
-    statement: "Assumption all-cut-carleson implies KLS (headline of Route A)."
+    statement: "Assumption all-cut-carleson implies KLS (headline of Eldan-A)."
     depends_on: [thm:carleson-implies-centroid]
     assuming: [ass:all-cut-carleson]
-    bridges: [ab/conj:a1-bis]
     note: "Bridge: the universal C_P <= K lambda_max(Cov) (every isotropic log-concave measure) IS KLS; ab/conj:a1-bis is its structured GLM counterpart."
 
   - id: lem:pathwise-BL
@@ -139,6 +150,47 @@ nodes:
     note: "Shows the Carleson difficulty is purely small-time and probabilistic."
 
   # ---------------------------------------------------------------------------
+  # ROUTE-AGNOSTIC JULY 2026 MOMENT-MAP INPUTS
+  # ---------------------------------------------------------------------------
+  - id: thm:chen-klartag-moment-hessian
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    route: shared
+    file: modules/kls/00-strategy-map.tex
+    statement: "Chen-Klartag moment-Hessian estimate: for the regular moment map of an isotropic log-concave measure, E_nu ||D^2 phi||_HS^2 <= 2n."
+    note: "Imported from arXiv:2607.23307v1, Theorem 1.5 (25 July 2026); approximation yields the stated general consequences in that paper."
+
+  - id: thm:chen-klartag-thin-shell
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    route: shared
+    file: modules/kls/00-strategy-map.tex
+    statement: "Chen-Klartag sharp thin shell: Var(|X|^2) <= 8n for isotropic log-concave X, with equality for products of standard centered one-sided exponentials."
+    depends_on: [thm:chen-klartag-moment-hessian]
+    note: "Imported from arXiv:2607.23307v1, Theorem 1.1. This radial result does not by itself prove full KLS."
+
+  - id: thm:chen-klartag-third-moment
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    route: shared
+    file: modules/kls/00-strategy-map.tex
+    statement: "Chen-Klartag sharp full third-moment tensor: ||T_3(X)||_HS^2 <= 4n for isotropic log-concave X."
+    depends_on: [thm:chen-klartag-moment-hessian]
+    note: "Imported from arXiv:2607.23307v1, Theorem 1.2. Letwin's quadratic Poincare theorem alone gives only a weaker full-tensor consequence; the sharp 4n uses further Chen-Klartag identities."
+
+  - id: thm:letwin-moment-map
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    route: shared
+    file: modules/kls/00-strategy-map.tex
+    statement: "Under Letwin's regular moment-map assumptions, for every constant symmetric B, E_nu tr(B H B H) <= 2 tr(B^2)."
+    note: "Imported from arXiv:2607.24164v1, Theorem 2.5 (27 July 2026). Taking B=I contains the shared Chen-Klartag moment-Hessian direction but not their full sharp result set."
+
+  # ---------------------------------------------------------------------------
   # STATIC OBSTRUCTION LAYER (quadratic chaos / thin shell)
   # ---------------------------------------------------------------------------
   - id: def:qcts
@@ -153,7 +205,7 @@ nodes:
     import_class: preprint-unreviewed
     file: modules/kls/05-obstruction.tex
     statement: "Letwin quadratic Poincare inequality: for isotropic log-concave X and symmetric M, Var(X^T M X) <= 8 ||M||_HS^2."
-    note: "Imported from arXiv:2607.24164v1, Theorem 1.2 (27 July 2026). Version-1 preprint, not peer reviewed; downstream improvements retain this caveat."
+    note: "Imported as a black-box theorem from arXiv:2607.24164v1, Theorem 1.2 (27 July 2026). Its proof uses the matrix moment-map estimate recorded separately as thm:letwin-moment-map; that internal paper dependency is not a second repository assumption. Version-1 preprint, not peer reviewed; downstream improvements retain this caveat."
 
   - id: cor:qcts-source
     kind: corollary
@@ -172,7 +224,7 @@ nodes:
     bounded_by: [obs:proj-ceiling]
 
   # ---------------------------------------------------------------------------
-  # STEIN-TRACE LAYER (Route B currency)
+  # STEIN-TRACE LAYER (Eldan-B currency)
   # ---------------------------------------------------------------------------
   - id: prop:stein-rep
     kind: proposition
@@ -205,10 +257,9 @@ nodes:
     kind: theorem
     status: conditional
     file: modules/kls/00-introduction.tex
-    statement: "Weighted geometric package implies KLS (headline of Route B)."
+    statement: "Weighted geometric package implies KLS (headline of Eldan-B)."
     depends_on: [ass:weighted-package, lem:stein-vs-source, cor:tight-window-consumption]
     assuming: [ass:weighted-package]
-    bridges: [ab/conj:a1-bis]
 
   - id: prop:intro-audit
     kind: proposition
@@ -225,7 +276,7 @@ nodes:
     status: proved
     file: modules/kls/11-excess-propagation.tex
     statement: "Unconditional integrated excess bound: E ∫_0^{T∧τ} e_t ≤ (1+e_0) T."
-    depends_on: ["perimeter supermartingale", "I_μ(1/2) ≤ 1"]
+    depends_on: [eq:perimeter-supermartingale, "isotropic halfspace perimeter upper bound"]
 
   - id: prop:two-tail
     kind: proposition
@@ -284,8 +335,8 @@ nodes:
     kind: lemma
     status: proved
     file: modules/kls/12-bootstrap.tex
-    statement: "Crude evaluation: Ξ_T(μ) ≤ 1 + log(nT)."
-    depends_on: [eq:BL-cap, "Tr A_t supermartingale"]
+    statement: "For every isotropic log-concave mu and 1/n <= T <= 1, the crude evaluation gives Xi_T(mu) <= 1 + log(nT)."
+    depends_on: [eq:BL-cap, eq:cov-sde]
     mechanism: [crude-bootstrap]
     bounded_by: [obs:crude-insufficient]
     clearance: "States the crude bound precisely in order to DEMONSTRATE its insufficiency (rem:insufficiency): it is never used as a KLS route, only as the lower fence the interface evaluation must beat (cor:loglog gives loglog n)."
@@ -302,7 +353,7 @@ nodes:
     kind: corollary
     status: proved
     file: modules/kls/12-bootstrap.tex
-    statement: "Polylog evaluation: under hyp:KI, Ξ_T ≤ C(1+loglog n); for T<1/8 and near-worstness error eps<=T^(1/3), gives absolute-scale excess supply T e_0 + C h_μ(T^{4/3}+1+loglog n)."
+    statement: "Under hyp:KI and t_1(n) <= T <= 1, Xi_T <= C_1 t_1(n) + log(T/t_1(n)) <= C(1+loglog n); if also T<1/8 and eps<=T^(1/3), this gives supply T e_0 + C h_mu(T^(4/3)+1+loglog n)."
     depends_on: [thm:bootstrap, hyp:KI, cor:KI-discharged]
 
   - id: prop:ceiling
@@ -326,13 +377,13 @@ nodes:
     kind: lemma
     status: proved
     file: modules/kls/13-jacobi-splitting.tex
-    statement: "Profile bound: 𝔎_{Σp} ≤ -I''(p) I(p)^2."
+    statement: "If volume p admits a smooth volume-constrained minimizer Sigma_p and I is twice differentiable at p, then the profile bound is K_{Sigma_p} <= -I''(p) I(p)^2."
 
   - id: cor:generic-degeneracy
     kind: corollary
     status: proved
     file: modules/kls/13-jacobi-splitting.tex
-    statement: "Constant-mode degeneracy: if h_ν ≤ 1 then ∫_{1/3}^{2/3} 𝔎_{Σp} dp ≤ C h_ν^3. Splitting branch is generic in a small-Cheeger counterexample."
+    statement: "Grant smooth minimizers at almost every balanced volume. If h_nu <= 1, then int_{1/3}^{2/3} K_{Sigma_p} dp <= C h_nu^3; this is an averaged branch statement, not control of the tracked cut."
     depends_on: [lem:profile-bound]
     note: "Assumes existence/regularity of volume-constrained minimizers at a.e. balanced volume."
 
@@ -499,7 +550,7 @@ nodes:
     unlocks: [ass:all-cut-carleson]
     bounded_by: [obs:proj-ceiling, obs:two-tail]
     entry_point: prog:product-test
-    note: "For Route A the exact gap is Tr(M), M=E∫sG^2⪯R_0⪯I; the target is dynamic occupation density, not static effective rank. The proposed geometric relationship to q:stein-weighted is heuristic until rem:almost-stability-gap is closed."
+    note: "For Eldan-A the exact gap is Tr(M), M=E∫sG^2⪯R_0⪯I; the target is dynamic occupation density, not static effective rank. The proposed geometric relationship to q:stein-weighted is heuristic until rem:almost-stability-gap is closed."
 
   - id: q:weighted
     kind: question
@@ -539,9 +590,62 @@ nodes:
     kind: question
     status: open
     file: modules/kls/09-product-stress.tex
-    statement: "Adapted alignment target for products: bound the incident-high source S_H (all G entries touching coordinates with A_i>=2) absorptively on every early interval for every fixed balanced cut."
-    note: "Its obstruction-side negation is a high-complexity cut that spends many coordinate budgets in a common short window while balanced and underdamped. The energy-shell computation is uninformative and its dirty-provenance artifact supplies no verdict. New refutation-seeking family: balanced tail union {max_i |x_i| >= a_n}. Measure S_H with r, D, balance, uncertainty, and dynamic convergence gates. The present kls-loc target is diagnostic only."
+    statement: "For products of n isotropic two-sided exponentials, bound the incident-high source S_H (all G entries touching coordinates with A_i>=2) on every I subset [0,T0] by C0|I| + C1 int r + alpha int D with alpha<1, uniformly over fixed balanced cuts."
+    note: "Its obstruction-side negation is a high-complexity cut that spends many coordinate budgets in a common short window while balanced and underdamped. The separate kls-align target now implements the complete margin for the designated balanced tail union {max_i |x_i| >= a_n}; the held-out run through n=1024 is non-refuting but finite-family, low-sample, and directional only, with no universal route verdict."
     bounded_by: [obs:rank-one-refuted]
+
+  # ---------------------------------------------------------------------------
+  # FIXED-EIGENFUNCTION MOMENT-MAP / SPECTRAL ROUTE
+  # ---------------------------------------------------------------------------
+  - id: q:mm-spectral-occupation
+    kind: question
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/00-strategy-map.tex
+    statement: "For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time absorptive bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 + alpha int 2 g_t^T A_t g_t, with alpha<1, uniformly through approximation."
+    related: [thm:letwin-qcts, q:alignment, conj:kls]
+    note: "The fixed-function SDE and terminal Brascamp-Lieb estimate make this sufficient for KLS; the absorptive estimate itself is open. This stochastic route is distinct from deterministic CMH."
+
+  # ---------------------------------------------------------------------------
+  # DETERMINISTIC MOMENT-MAP / CMH ROUTE
+  # ---------------------------------------------------------------------------
+  - id: prog:cmh-route
+    kind: program
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/15-moment-map-cmh.tex
+    statement: "Deterministic CMH route: make the endpoint and KLS reduction precise, derive the invariant multiplier lift and all-split reduction, control the square-root commutators with retained positive squares, and sum the complete Haar tree."
+    depends_on: [thm:chen-klartag-moment-hessian, thm:letwin-moment-map]
+    entry_point: [q:cmh-normalization, q:mm-invariant-lift, q:mm-square-root-commutator]
+    note: "No internal node of this route is proved. The commutator is the best identified bottleneck, not yet the sole formal gap."
+
+  - id: q:cmh-normalization
+    kind: question
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/15-moment-map-cmh.tex
+    statement: "Define Sigma, L, the L2 measure, admissible g, domains, inverses, and approximation class in CMH(4), then prove that the fully defined estimate implies CP(mu) <= 4 for every isotropic log-concave mu."
+    related: [conj:kls]
+    note: "The originating summary reports the implication but omits enough definitions that it is not yet a certified conditional reduction. The constant 4 is sharp for the standard centered one-sided exponential."
+
+  - id: q:mm-invariant-lift
+    kind: question
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/15-moment-map-cmh.tex
+    statement: "Derive the target-flat Schur-Piola multiplier lift invariantly, audit its transport coefficient, and reduce arbitrary split dimensions to controlled Codazzi shape components matched with retained positive squares."
+    related: [q:mm-square-root-commutator]
+    note: "The displayed fixed-target 1+2 completion of squares has been independently expanded, but the alpha-family, inverse-metric lift, and dimension-free all-split reduction are not certified from the consolidated summary."
+
+  - id: q:mm-square-root-commutator
+    kind: question
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/15-moment-map-cmh.tex
+    statement: "After defining the retained Letwin/Codazzi/Monge-Ampere/corrector/descendant remainder, control the full Haar sum of [N^(1/2),K_M] errors dimension-freely via the resolvent formula and complete the full-tree analytic estimate."
+    depends_on: [q:mm-invariant-lift]
+    related: [q:upgrade, q:stein-weighted, q:alignment, q:cmh-normalization]
+    note: "Related to the Eldan operator-to-trace cluster because all preserve matrix orientation, but no equivalence is asserted. Operator domains, Hodge boundary conditions, one-edge flux identity, and higher-dimensional reduction remain part of the task."
 
   - id: hyp:absolute-geometric-completion
     kind: hypothesis
@@ -553,7 +657,7 @@ nodes:
     kind: corollary
     status: conditional
     file: modules/kls/14-open-targets.tex
-    statement: "Residual dichotomy: completing Route B at absolute scale with small constant would already give hstar_n ≥ c/loglog n. Full KLS additionally needs q:taming at the completion's time, or a completion uniform over the supplied time."
+    statement: "Residual dichotomy: completing Eldan-B at absolute scale with small constant would already give hstar_n ≥ c/loglog n. Full KLS additionally needs q:taming at the completion's time, or a completion uniform over the supplied time."
     depends_on: [thm:bootstrap, cor:loglog, hyp:absolute-geometric-completion]
     assuming: [hyp:absolute-geometric-completion]
 
@@ -561,7 +665,7 @@ nodes:
     kind: remark
     status: proved
     file: modules/kls/14-open-targets.tex
-    statement: "q:upgrade is the full Route-A occupation trace; q:alignment is its incident-high product-model residue. q:stein-weighted confronts analogous high-rank boundary modes, but equivalence is not proved."
+    statement: "q:upgrade is the full Eldan-A occupation trace; q:alignment is its incident-high product-model residue. q:stein-weighted confronts analogous high-rank boundary modes, but equivalence is not proved."
     depends_on: [cor:per-direction, thm:budget]
 
   - id: rem:taming-type-mismatch

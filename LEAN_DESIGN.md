@@ -37,18 +37,20 @@ Phase 2's output plane is `solutions/`, gated by the `checked_by` ladder
 | `checked_by` | meaning | promotes node to `proved`? |
 |---|---|---|
 | `none` | drafted, unreviewed | **no** |
+| `agent` | a distinct agent reviews the dossier and persists a report | yes (agent-certified) |
 | `human` | a human accepts the natural-language argument | yes (NL-certified) |
 | `lean` | a compiling `<id>.lean` sits beside `<id>.tex` | **yes (machine-certified)** |
 
 `research/check_ledger.py` enforces that a node flips to `proved` only with
-`checked_by ∈ {human, lean}` and an existing `solution:` file. **Numerics never appear on this
+`checked_by ∈ {agent, human, lean}` and the matching solution/review metadata required by that
+level. **Numerics never appear on this
 ladder** — the soundness contract (`finum`'s only sound verdict is REFUTED) means the Lean
 channel, not `finum`, is the upper end of the evidence hierarchy: any numerical corroboration
 reward is capped strictly below what a checked Lean proof (the **L2 reward**) grants.
 
 So this document is the substrate-gap half of the Lean channel: the deliverable is not just
 "contribute to Mathlib," it is "close enough of the gap that the *proved* nodes of
-`research/ledger.yaml` and `research/kls/.../ledger.yaml` can each acquire a `solutions/*.lean`
+`research/ledger.yaml` and `research/kls/ledger.yaml` can each acquire a `solutions/*.lean`
 with `checked_by: lean`." §5 names those first targets explicitly.
 
 ---
@@ -229,10 +231,12 @@ upstream-contribution target; the deferred list is where the Lean-agent track sh
 
 ## 6. KLS-backbone primitives (Part III)
 
-Part III (`modules/kls/`, ledger `research/kls/routes/eldan-localization/ledger.yaml`,
-`program: kls`) is a **conditional proof program** via Eldan stochastic localization, already in
-the proof phase (38 of 59 nodes `proved`). Its Lean certification is a *separate, heavier*
-front: beyond the FI spine above it needs stochastic calculus, geometric measure theory, and
+Part III (`modules/kls/`, ledger `research/kls/ledger.yaml`,
+`program: kls`) is a route-spanning **proof program**. Its Eldan stochastic-localization
+backbone is in the proof phase, while the deterministic CMH route has only open internal nodes.
+The 41 legacy nodes marked `proved` predate the current standalone-dossier metadata contract and
+carry an explicit certification debt. Lean certification is a *separate, heavier* front: beyond
+the FI spine above it needs stochastic calculus, geometric measure theory, and
 Brascamp–Lieb. Below, the primitives are derived from the **actual proved/imported ledger nodes**
 (not an external blueprint), with the Mathlib status of each.
 
@@ -255,7 +259,7 @@ calculus (the Riccati SDE), GMT (the Reilly/boundary machinery), and Brascamp–
 most reusable cross-cutting contribution is therefore the **FI vocabulary itself**
 (`HasPoincaré`, `HasLSI`, the entropy and Dirichlet functionals) — it underpins both fronts, and
 it is the same vocabulary that backs the Part II ↔ Part III bridge `ab/conj:a1-bis →
-kls/thm:intro-all-cut` (the `C_P ≤ K·λmax(Cov)` shadow of KLS; `research/kls/shared/target.md`).
+kls/conj:kls` (the `C_P ≤ K·λmax(Cov)` shadow of KLS; `research/kls/shared/target.md`).
 
 Note the epistemic asymmetry: many headline KLS nodes are `conditional` (e.g.
 `thm:intro-all-cut`, `thm:centroid-implies-kls`), resting on `open` assumptions

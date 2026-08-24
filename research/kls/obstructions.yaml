@@ -1,9 +1,9 @@
 # obstructions.yaml — machine-readable no-go set for the KLS program
 # =============================================================================
-# Ported from the standalone KLS program's roadmap; `source` paths re-synced to
-# the unified modules/kls/. Prose lives in obstructions.md; this file is the
-# enforced form. ../check_ledger.py uses it to police KLS proofs against the no-go
-# results.
+# Ported from the Eldan-localization roadmap and colocated with the route-spanning
+# KLS ledger. The present mechanisms are Eldan-route constraints unless a rule
+# explicitly says otherwise. Prose lives in obstructions.md; this file is the
+# enforced form. check_ledger.py uses it to police declarations against the no-go results.
 #
 # Model:
 #   mechanisms   the CLOSED controlled vocabulary of "risky" proof mechanisms an

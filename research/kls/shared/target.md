@@ -2,13 +2,17 @@
 
 What every route is trying to prove, and the bridge that ties it to Parts I/II. This file
 restates nothing formally: the canonical statements live in `modules/kls/*.tex` (linked by
-`\label`) and the logical state lives in the route ledgers. Math in LaTeX (`$…$`).
+`\label`) and the logical state lives in the central [`../ledger.yaml`](../ledger.yaml). Math in
+LaTeX (`$…$`).
 
 ## The conjecture
 
 Kannan–Lovász–Simonovits: there is a universal constant $c>0$ such that **every** isotropic
 log-concave probability measure $\mu$ on $\mathbb R^n$ has Cheeger constant $h_\mu\ge c$,
-equivalently a dimension-free Poincaré bound $C_P(\mu)\le 1/c^2$. Writing
+equivalently up to universal constants a dimension-free Poincaré bound. With the Cheeger
+normalization used in the manuscript, the direct implication is
+$C_P(\mu)\le4h_\mu^{-2}$; the reverse comparison for log-concave measures also carries a
+universal factor. Writing
 $h^\star_n=\inf\{h_\mu:\mu\text{ isotropic log-concave on }\mathbb R^n\}$
 (`eq:hstar-def`), the claim is
 $$\inf_n h^\star_n > 0.$$
@@ -21,7 +25,8 @@ $$\inf_n h^\star_n > 0.$$
   near-worst measure* $h_\mu\le(1+\varepsilon)\,h^\star_n$. Within that mechanism, a proposed
   universal-time covariance bound for **every** measure may already be KLS-sufficient; see
   [`lower-bounds.md`](lower-bounds.md) and `obs:relative-ceiling`. This warning does not constrain
-  the separate moment-map/spectral route, which targets the spectral gap directly.
+  the separate moment-map/spectral and deterministic CMH routes, which target the spectral gap
+  through different objects.
 
 ## The bridge to Part II (`ab/conj:a1-bis`)
 
@@ -34,9 +39,9 @@ $\lambda_{\max}(\mathrm{Cov})=1$). So:
 
 - A1-bis is a finite-sum-structured, *checkable* shadow of KLS — numerics can estimate the
   realized $K=C_P^{\text{lower}}/\lambda_{\max}(\mathrm{Cov})$ across GLM instances (the
-  `finum` linear-test lower bound, `lem:linear-test-lower`).
-- The headline KLS implications `thm:intro-all-cut` and `thm:intro-weighted` carry
-  `bridges: [ab/conj:a1-bis]` in the ledger; that single edge is the spine from Parts I/II to
-  Part III.
+  `finum` linear-test lower bound, cross-program node `ab/lem:linear-test-lower`).
+- The route-neutral terminal `conj:kls` carries `bridges: [ab/conj:a1-bis]` in the ledger;
+  the conditional headline theorems are route-specific entry points toward that terminal rather
+  than bridge endpoints or unconditional discharges.
 
 This bridge is route-agnostic: it holds whatever proof route eventually establishes the bound.

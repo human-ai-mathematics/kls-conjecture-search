@@ -56,7 +56,7 @@ meta:
   program: ab
   scope: "Parts I & II — Bayesian-posterior functional-inequality constants (A1-A5)"
   goal: "Maintain the certified intermediate results and refine the remaining open targets into sharp theorems."
-  kls_note: "Part III (KLS) has its own ledger at research/kls/routes/eldan-localization/ledger.yaml (program: kls), a route-based proof program with its own no-go machinery. Bridged here via conj:a1-bis."
+  kls_note: "Part III (KLS) has one route-spanning ledger at research/kls/ledger.yaml (program: kls), with currently Eldan-scoped no-go machinery. Bridged here via conj:a1-bis to kls/conj:kls."
 
 # ===========================================================================
 # CROSS-CUTTING OBSTRUCTIONS  (the shared no-go knowledge; prose + numerical
@@ -305,7 +305,7 @@ nodes:
     bounded_by: [obs:flat-direction]
     depends_on: [conj:a1]
     related: [conj:a2, q:a4-certificate]
-    bridges: [kls/thm:intro-all-cut]
+    bridges: [kls/conj:kls]
     numerics: "Estimate the realized K = C_P_lower / lambda_max(Cov) across GLM instances; test whether K stays O(1) and mildly geometry-dependent (the structured shadow of the KLS universal constant)."
     note: "Bridge to Part III: the SAME bound for EVERY isotropic log-concave measure with K universal IS the KLS conjecture (research/kls/). A1-bis is the structured, finite-sum case the KLS machinery does not exploit."
 

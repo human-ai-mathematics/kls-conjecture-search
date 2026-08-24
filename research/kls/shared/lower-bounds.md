@@ -3,7 +3,7 @@
 The linear-test lower bound binds every route. The later refuted forms were discovered within
 the Eldan fixed-cut program and are scoped to that mechanism; they are summarized here for
 cross-route visibility, not promoted to universal no-go theorems. Canonical mechanism fences
-remain in `routes/eldan-localization/obstructions.md`. Math in LaTeX (`$…$`).
+remain in [`../obstructions.md`](../obstructions.md). Math in LaTeX (`$…$`).
 
 `finum` contains an SDE-free finite-battery sanity check for the linear-test bridge. It does not
 test the route-scoped fixed-cut refutations below, and the currently stored run artifacts are
@@ -13,9 +13,10 @@ historical diagnostics rather than evidence-eligible records; see [`../gating.md
 
 For any measure, every test function gives a certified Poincaré lower bound
 $C_P\ge \mathrm{Var}(f)/\mathbb E\lVert\nabla f\rVert^2$; the linear test
-$f=\langle v,\theta\rangle$ gives $C_P\ge\lambda_{\max}(\mathrm{Cov})$ (`lem:linear-test-lower`
+$f=\langle v,\theta\rangle$ gives $C_P\ge\lambda_{\max}(\mathrm{Cov})$ (`ab/lem:linear-test-lower`
 in `../../knowledge/lemmas.md`). For isotropic measures $\lambda_{\max}(\mathrm{Cov})=1$, so
-this says $C_P\ge 1$ — KLS is the matching *upper* bound $C_P\le 1/c^2$. Consequence for
+this says $C_P\ge 1$ — KLS asks for a matching universal *upper* bound (equivalently, up to
+universal Cheeger--Poincaré constants, $h_\mu\ge c$). Consequence for
 routes: any claimed dimension-free upper bound must survive this lower bound on every test
 instance; `finum` uses it as the go/no-go gate when numerically vetting a route.
 
@@ -38,4 +39,5 @@ instance; `finum` uses it as the go/no-go gate when numerically vetting a route.
 The linear-test lower bound is genuinely route-agnostic. The two items immediately above are
 retained here for discoverability but are explicitly scoped to the Eldan/fixed-cut mechanism;
 a future non-localization route does not inherit them as no-go theorems. Mechanism-specific
-constraints belong canonically in the active route's `obstructions.{yaml,md}`.
+constraints are centralized in [`../obstructions.md`](../obstructions.md) with their route scope
+stated explicitly.
