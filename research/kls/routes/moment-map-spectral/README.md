@@ -1,9 +1,15 @@
 # Route: moment map, Stein kernel, and the first eigenfunction
 
 Status: **live, secondary**. This route remains distinct from the deterministic
-[`moment-map-cmh`](../moment-map-cmh/) route. Its historical derivations are prose-only; any new
-sharpened target is added to the central [`../../ledger.yaml`](../../ledger.yaml) with
-`route: moment-map-spectral`.
+[`moment-map-cmh`](../moment-map-cmh/) route. Any new sharpened target is added to the central
+[`../../ledger.yaml`](../../ledger.yaml) with `route: moment-map-spectral`.
+
+**Promoted to the manuscript on 24 August 2026.** The route now has a section of its own,
+`modules/kls/30-spectral-route.tex` (`\label{sec:spectral-route}`, Part III Group 4), which
+carries the fixed-function SDE, the whitened tensor estimate, the headline question
+`q:mm-spectral-occupation`, the audited $H^{-1}$ endpoint, and the fence comparison. That section
+is the exposition of record; this brief remains the control-plane status page and keeps the
+cycle-1 decision history and the promotion gate below.
 
 ## Thesis
 
@@ -104,10 +110,12 @@ $$
 +\alpha\mathbb E\int_0^t2g_s^TA_sg_s\,ds.
 $$
 
-The fixed-function SDE, Gronwall, posterior Brascamp--Lieb, and the fixed-gradient density
-martingale prove that this estimate implies a universal spectral gap. The estimate itself is
-open, and it must hold uniformly through regularization or be formulated for approximate
-Rayleigh minimizers.
+The intended sufficiency argument combines the fixed-function SDE, Gronwall, posterior
+Brascamp--Lieb, and the fixed-gradient density martingale. Its constants, terminal variance
+control, and regularization passage have not yet been written as an R2 proof, so the bridge is the
+separate open node `prop:spectral-sufficiency`, not a proved implication. The occupation estimate
+itself is also open and must hold uniformly through regularization or be formulated for
+approximate Rayleigh minimizers.
 
 ### The audited $H^{-1}$ endpoint
 

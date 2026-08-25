@@ -3,15 +3,42 @@
 The tasks are ordered. A later task may use an earlier one only after its exact conventions are
 persisted; model success never skips a proof gate.
 
-## M0 — freeze CMH and prove the endpoint reduction
+Tasks M1--M8 belong to the **construction layer**; M9--M11 to the **falsification layer** opened
+by the normalization results. The two are independent: M9 or M10 could close the route before any
+of M1--M8 is attempted.
 
-Specify $\Sigma$, $L$, the $L^2$ measure, centering conditions, operator domains, and the
-regularization class in CMH(4). Prove the claimed divergence-duality implication
-CMH(4) $\Rightarrow C_P(\mu)\le4$, including passage from regular moment measures to arbitrary
-isotropic log-concave measures.
+## M0 — freeze CMH and prove the regular-class endpoint reduction — **DISCHARGED 2026-08-25**
 
-**Acceptance gate:** standalone dossier plus independent review. Until this is done, the route's
-headline is a schema, not a theorem.
+*Was:* specify $\Sigma$, $L$, the $L^2$ measure, centering conditions, and operator domains in
+CMH(4), then prove CMH(4) $\Rightarrow C_P^{\mathrm{aff}}(\mu)\le4$ on the regular moment-map
+class.
+
+*Outcome:* `def:cmh` fixes the data and `thm:cmh-implies-affine-poincare` proves
+$C_P^{\mathrm{aff}}\le C_{\mathrm{CMH}}$ — by a dual pairing plus spectral truncation, with no
+spectral gap assumed. Dossier `solutions/thm-cmh-normalization.tex`; the original partial review
+is retained at `research/reviews/2026-08-25-kls-cmh-normalization-audit.md`, and the repaired
+proofs are certified by the unqualified
+`research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`.
+
+*Residue.* Two items are **not** closed and are not to be treated as closed:
+
+1. **Uniformity through approximation (`q:cmh-approximation`).** The reduction is proved on the
+   regular moment-map class. A universal bound on $C_{\mathrm{CMH}}$ must be uniform along an
+   approximating sequence, and the affine Poincar\'e inequality must then be passed to the limit,
+   including affine-support degeneration. Any future proof of the headline owes this.
+2. **No strict-separation theorem.** `prop:cmh-hodge` proves a decomposition into affine
+   Poincar\'e and nonnegative solenoidal channels. It does not exhibit a measure with
+   $C_P^{\mathrm{aff}}\le4<C_{\mathrm{CMH}}$ or prove non-implication. M9 is the open test.
+
+## M0b — approximation closure — **OPEN**
+
+Discharge `q:cmh-approximation`: formulate regular moment-map approximants with uniform affine
+normalization, prove the needed lower-semicontinuity/closure statement, and handle limits whose
+support lies in a proper affine subspace. This task is logically separate from proving a
+universal CMH bound on the approximants.
+
+**Acceptance gate:** a standalone argument with explicit topology, core approximation, and
+constant preservation; numerical convergence is not a substitute.
 
 ## M1 — invariant tensorial lift
 
@@ -92,8 +119,75 @@ false local conservation law; the three-exponential projection activates the Air
 
 ## M8 — close CMH
 
-Combine M0 and M6 to prove the fully defined CMH estimate and then KLS.
+Combine M0, the approximation/closure task M0b, and M6 to prove the fully defined CMH estimate
+on arbitrary log-concave laws and then KLS.
 
 **Acceptance gate:** separate author and critic, standalone solution dossiers, ledger promotions,
 and full-document compilation. This task is terminal; it cannot be inferred from finite-dimensional
 checks or a successful regression battery.
+
+---
+
+# Falsification layer (opened 2026-08-25)
+
+## M9 — second-order solenoidal excess at the product endpoint
+
+**The route's sharpest probe.** By `thm:cmh-product`, a product of one-sided exponentials has
+$C_{\mathrm{CMH}}=4$ **exactly** — zero slack. By `prop:cmh-hodge`, the CMH numerator is an
+affine Poincaré part plus a solenoidal excess $\mathbb E\langle w,\Sigma^{-1}w\rangle$.
+
+Take $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential and
+perturb by $\psi_\varepsilon=\psi_0+\varepsilon a(s)b(t)$ inside the smooth strictly convex
+class. Compute the second variation of $C_{\mathrm{CMH}}$ at $\varepsilon=0$, split through the
+Hodge decomposition. Either
+
+- exhibit an admissible perturbation with strictly positive second variation — which **refutes
+  $\mathrm{CMH}(4)$**, forcing the route to a larger constant or to abandonment, without saying
+  anything about KLS; or
+- identify the structural reason the solenoidal part vanishes to second order at a saturating
+  product, which would be the first real evidence *for* the headline.
+
+**Acceptance gate:** an exact second-variation computation with the perturbation's log-concavity
+and isotropy certified, not merely asserted. Isotropy to second order is the delicate part: the
+first covariance variation must be shown to vanish, so that whitening is $I+O(\varepsilon^2)$ and
+does not move the quadratic coefficients. A numerical second variation is directional only and
+must go through `finum`.
+
+**Why this is cheap:** both ingredients are already exact theorems. Unlike M1--M8 it needs no
+Haar tree, no invariant lift, and no operator domains beyond those already fixed by `def:cmh`.
+
+## M10 — decide gate zero on genuine moment maps
+
+Decide $\mathbb E[H\Sigma^{-1}H]\preceq4\Sigma$ (`conj:gate-zero`, `q:gate-zero`).
+
+*Directional counterexample search (dispatchable now).* Compute
+$\lambda_{\max}(\Sigma^{-1/2}\mathbb E[H\Sigma^{-1}H]\Sigma^{-1/2})$ on moment maps outside the
+proved classes: log-concave laws whose moment potential is known or numerically solvable —
+skew polygons, entropic barriers, asymmetric log-sum-exp models, non-simplex polytopes. A value
+above $4$ is a directional candidate counterexample. Only an independently checked exact or
+analytic witness refutes $\mathrm{CMH}(4)$, **without** refuting KLS. Channel: the
+`cmh-gate-zero` finum target, extended beyond its current exact classes. Anything requiring a
+numerically solved Monge--Ampère equation remains research guidance only.
+
+*Proof side (NOT dispatchable as an independent effort).* By `prop:letwin-not-gate-zero` and
+the static commutator identity, proving gate zero means bounding
+$\mathbb E\lVert[B,H]\rVert_{\mathrm{HS}}^2$ using differentiated Monge--Ampère structure. In
+isotropic position gate zero is $\lambda_{\max}(\mathbb EH^2)\le4$ against Chen--Klartag's
+$\operatorname{tr}(\mathbb EH^2)\le2n$ — an operator-to-trace upgrade with a factor-2 budget,
+hence inside the ownership cluster of `rem:trace-upgrade-unification`. **Hard constraint 6 of
+`CLAUDE.md` applies: do not open a parallel effort.** Route it to that cluster's owner.
+
+**Acceptance gate (falsification):** a persisted witness — an exact moment map, or a `finum`
+artifact whose numerical Monge--Ampère solve is convergence-gated and reported as directional.
+Do not report a directional exceedance as a refutation.
+
+## M11 — literature reconciliation for the exact classes
+
+`thm:cmh-dirichlet` and `cor:cmh-dirichlet-poincare` assert an affine Poincaré constant $4$ for
+every log-concave Dirichlet law. The Wright--Fisher spectral gap is classical and KLS is known for
+several structured families. Before any external write-up, establish exactly which parts are new:
+the affine (covariance-normalized) constant for Dirichlet laws, the Riesz-transform formulation
+for the moment-map Stein generator, and KLS for simplices by other routes.
+
+**Acceptance gate:** a citation-level reconciliation recorded in the audit report. A novelty claim
+made on top of existing literature is a defect, not a shortfall.

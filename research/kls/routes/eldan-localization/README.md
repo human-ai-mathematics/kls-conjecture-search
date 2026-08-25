@@ -18,7 +18,7 @@ route-agnostic facts it must respect live in [`../../shared/`](../../shared/).
 
 ```
 open-problems.md   the P1–P7 dispatchable briefs
-roadmap.md         the narrative map (Eldan-A/B, legacy backbone, the dichotomy prize)
+roadmap.md         the narrative map (Eldan-A/B, R2-certified backbone, the dichotomy prize)
 ```
 
 The route-spanning checker state is now centralized at [`../../ledger.yaml`](../../ledger.yaml),

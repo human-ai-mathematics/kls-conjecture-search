@@ -10,7 +10,7 @@
 
 ## Goal (current best statements)
 
-**Proved legacy anchor:** monotonicity `C_P(π/G) ≤ C_P(π)` (`thm:a5-monotone`).
+**R2-certified anchor:** monotonicity `C_P(π/G) ≤ C_P(π)` (`thm:a5-monotone`).
 
 **Independently agent-certified:** with extended reciprocals,
 `C_P(π/G)=1/λ_inv` and
@@ -194,22 +194,25 @@ polynomial/Eyring–Kramers prefactors are a later target.
    estimate against the analytic `≤σ²` bound. Do not compare to a pure exponential prefactor.
 2. `q:a5-detect`: estimate the invariant and non-invariant restricted gaps separately by applying
    the group projection to a symmetry-closed test basis. Include residual/two-sided control before
-   declaring which block is slower; a single eigenfunction is insufficient under degeneracy.
+   treating either block as the slower working hypothesis; a single eigenfunction is insufficient
+   under degeneracy.
 3. `stress-neal-funnel`: report `exp(2s²)` only as the finite linear-test lower witness for the
    centered law, and `max{s²,1}` as the exact non-centered calibration. The centered `C_P=∞`
    conclusion is analytic, not a numerical variance estimate. Separate a half-Cauchy heavy-tail
    obstruction from the canonical Gaussian-log-scale funnel geometry.
 4. Reparameterization calibration: reproduce the exact Gaussian-hierarchy crossover at normalized
-   data precision `r=1`, then verify $\alpha_*=1/(1+rB)$ for unequal scales before moving to
-   nonlinear funnels. Report both `C_P` and `κ_P=L_V C_P`.
+   data precision `r=1`, then check $\alpha_*=1/(1+rB)$ numerically for unequal scales before
+   moving to nonlinear funnels. Report both `C_P` and `κ_P=L_V C_P`.
 5. Sanity/calibration: estimated quotient `C_P ≤ raw C_P`; folded-well estimates must also obey
    the analytic proof-draft upper bound `C_P ≤ σ²`.
 
-**Promotion to `numerical-strong`:** requires separation and resolution sweeps consistent with
-the logarithmic rate including polynomial corrections, two-block spectral diagnostics with error
-control, and a clean `evidence_run`; finite lower witnesses alone do not qualify.
+**Research use only:** separation and resolution sweeps, polynomial-correction checks, and
+two-block spectral diagnostics are directional tools for refining the conjectured logarithmic rate
+and finding possible failure modes. They do not validate or certify the rate or any proof, even
+when error-controlled; finite lower witnesses remain research diagnostics. Rigorous refutation
+still requires an analytic argument or exact lower bound.
 
-## Evidence log
+## Numerical research log
 
 _(none yet)_
 

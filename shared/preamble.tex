@@ -30,6 +30,8 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
 \usepackage{hyperref}
 \usepackage[backend=biber,style=alphabetic,maxbibnames=8]{biblatex}
 \addbibresource{\subfix{fi_references.bib}}
@@ -62,6 +64,39 @@
 \newtheorem{heuristic}[theorem]{Heuristic}
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% --- Part III group dividers -------------------------------------------------
+% Part III (KLS) is long and multi-route. \klsgroup{<heading>}{<subtitle>} emits a
+% visible divider plus a table-of-contents entry ABOVE \section level, so that the
+% grouping of sections into orientation / survey / shared machinery / one block per
+% route is legible both in the TOC and on the page. It introduces no numbering of
+% its own: section numbers, theorem numbers, and every \label are untouched, which
+% matters because a KLS \label IS a ledger node id (see CLAUDE.md).
+\makeatletter
+\newcommand{\l@klsgroup}[2]{%
+  \ifnum \c@tocdepth >-2\relax
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      {\leavevmode\bfseries #1}\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \nobreak
+    \endgroup
+  \fi}
+\makeatother
+\newcommand{\klsgroup}[2]{%
+  \par\addvspace{2.0\baselineskip}%
+  \phantomsection
+  \noindent\textcolor{blue!55!black}{\rule{\textwidth}{1.1pt}}\par\vspace{0.30em}%
+  {\noindent\large\bfseries #1\par}%
+  \vspace{0.15em}%
+  {\noindent\itshape #2\par}%
+  \vspace{0.30em}%
+  \noindent\textcolor{blue!55!black}{\rule{\textwidth}{0.4pt}}\par
+  \addcontentsline{toc}{klsgroup}{#1}%
+  \addvspace{1.0\baselineskip}%
+}
 
 % --- common macros -----------------------------------------------------------
 \newcommand{\R}{\mathbb{R}}
@@ -102,6 +137,9 @@
 \newcommand{\PsiKLS}{\Psi}
 \newcommand{\hstar}{h^{\star}}
 \newcommand{\calS}{\mathcal S}
+\newcommand{\calT}{\mathcal T}
+\newcommand{\calD}{\mathcal D}
+\newcommand{\calL}{\mathcal L}
 \newcommand{\calI}{\mathcal I}
 \newcommand{\calR}{\mathcal R}
 \newcommand{\calB}{\mathcal B}
@@ -113,6 +151,17 @@
 \newcommand{\WH}{\mathsf H}
 \newcommand{\qJac}{\mathsf q}
 \newcommand{\Jsharp}{\calJ^{\sharp}}
+
+% Route C normalization layer (modules/kls/41-*, 42-*): the canonical
+% moment-Hessian (CMH) estimate, the affine Poincare constant it dominates,
+% and the Stein generator / Dirichlet objects its exact cases use.
+\newcommand{\CMH}{C_{\mathrm{CMH}}}       % canonical moment-Hessian constant
+\newcommand{\CPaff}{C_{\mathrm P}^{\mathrm{aff}}}  % affine Poincare constant
+\newcommand{\Aop}{\mathsf A}              % A = -L_mu, the nonnegative Stein generator
+\newcommand{\Div}{\operatorname{div}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Dir}{\operatorname{Dir}}
+\newcommand{\GammaLaw}{\operatorname{Gamma}}
 
 % --- delimiters --------------------------------------------------------------
 \newcommand{\norm}[1]{\left\lVert #1\right\rVert}

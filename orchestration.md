@@ -40,10 +40,15 @@ A1  A2  A3  A4  A5        KLS
 
 ### Axis B — the role pipeline within a node
 
-`analysis → {numerical stress and/or NL proof} → criticism → Lean`. Different agent types can be
-pipelined across nodes; numerical stress is optional when a complete analytic argument is ready.
+Numerical stress is an optional research loop around refinement. The certification pipeline is
+`analysis → NL proof → criticism → Lean`; numerical outcomes are not inputs to its validity.
+Different agent types can be pipelined across nodes.
 
 ### Axis C — the per-target DAG (respect the edges)
+
+`depends_on` is the ledger's canonical dependency relation. The forward arrows below are a
+roadmap view obtained by reversing those dependencies where applicable; they are not stored as a
+second forward-edge relation.
 
 ```
 prop:a1-bulk-tail + prop:a1-mode-leverage ─► q:a1-barw ─► q:a1-tail
@@ -71,10 +76,13 @@ CMH:  endpoint audit + invariant lift/all-split reduction
 ```
 
 The Eldan conditional headline theorems already hold in the inline manuscript, subject to the
-legacy R2 certification debt recorded in the current KLS audit. Its open assumptions are
-`ass:all-cut-carleson` / `ass:weighted-package` (and `ass:stopped-centroid`). The spectral and
-CMH routes have no proved internal headline. Numerics are **directional/refutation only**:
-`kls-align` implements one designated P6 family, while no CMH numerical target exists.
+agent-reviewed R2 dossiers for the former inline KLS backbone. Its open assumptions are
+`ass:all-cut-carleson` / `ass:weighted-package` (and `ass:stopped-centroid`). The spectral
+sufficiency bridge and the CMH universal headline remain open, although the CMH regular-class
+normalization and exact model classes have proved internal nodes. Numerics are
+**directional research only**: `kls-align` implements one designated P6 family, while
+`cmh-gate-zero` implements calibration observables on already-proved model classes and no
+construction-layer CMH observable.
 
 ### The three merge barriers (do NOT fan out across these — converge)
 
@@ -98,9 +106,9 @@ CMH routes have no proved internal headline. Numerics are **directional/refutati
 |---|---|---|---|---|
 | **Orchestrator / ledger-keeper** | both ledgers, `check_ledger.py` | node assignments; **the only writer of `ledger.yaml`** | keeps R0 green | singleton |
 | **Analyst / refiner** | `targets/*.md`, `modules/**/*.tex`, `obstructions.md` | sharpened statement and optional `numerics:` spec | statement respects every `bounded_by` | 1 / target |
-| **Numerical** (finum) | the refined spec, `instances.md` | provenance-stamped `runs/*.jsonl` | R1 (REFUTE / direction) | 1 / target |
-| **Prover** (NL) | a precise open/conjectured node; numerical evidence if available | `solutions/<id>.tex`, `checked_by: none` | unlocks R2 | per ready node |
-| **Critic / adversary** | a conjecture *or* a draft proof | a refuting instance, a proof-gap report, or an independent `checked_by: agent|human` audit | gates proof certification | N / claim |
+| **Numerical** (finum) | the refined spec, `instances.md` | provenance-stamped `runs/*.jsonl` | research direction / candidate refutation | 1 / target |
+| **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex`, `checked_by: none` | supplies a dossier for R2 review | per ready node |
+| **Critic / adversary** | a conjecture *or* a draft proof | a candidate refuting instance, a proof-gap report, or an independent `checked_by: agent|human` audit | gates proof certification | N / claim |
 | **Lean** (deferred) | `proved` nodes + `LEAN_DESIGN.md` spine | `solutions/<id>.lean`, `checked_by: lean` | R2 (machine) | foundation track |
 | **Librarian** | `explorations/`, `knowledge/` | dedup, promote findings, kill dead-end reruns | keeps memory honest | singleton |
 
@@ -109,12 +117,12 @@ CMH routes have no proved internal headline. Numerics are **directional/refutati
 - *Numerical/refinement channel* → **refutation-seeker.** Find the battery instance — or a new one worth
   curating — that breaks the proposed sharp form. Use the diverse-lens pattern: one skeptic per
   failure mode (tail / anisotropy / heavy-tail / multimodality / funnel), each blind to the
-  others. A conjecture is only `numerical-strong` after surviving the *shared* battery, not the
-  refiner's happy path.
+  others. Record surviving and failing cases as directional research diagnostics. Survival of
+  the shared battery does not validate the conjecture or any proof.
 - *Proof channel* → **checker.** A human may set `checked_by: human`; a distinct critic agent may
   set `checked_by: agent` only with a persisted scope report. This is what caught the
-  Klartag–Lehec window citation debt (`rem:kl-window-verified`). Never let a prover grade its
-  own proof.
+  Klartag–Lehec window citation debt (`rem:kl-window-verified`). The checker audits the analytic
+  argument independently of numerical outcomes. Never let a prover grade its own proof.
 
 ---
 

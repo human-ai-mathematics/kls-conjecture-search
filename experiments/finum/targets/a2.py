@@ -2,7 +2,7 @@
 
 Sharp target (conj:a2): n*C_P(pi_n) -> lambda_max(I(theta0)^{-1}) = 1/lambda_min(I(theta0)).
   * cal-bvm-gausslinear : Gaussian-linear model where n*C_P = 1/lambda_min(Sigma_x) EXACTLY
-                          (validates the n-scaling bookkeeping).
+                          (checks the n-scaling bookkeeping).
   * stress-contamination: an exact variance lower bound proves that TV-BvM alone does not
                           control C_P.
   * stress-bvm-sweep    : a single-draw regular-logistic sweep, reported as directional only.

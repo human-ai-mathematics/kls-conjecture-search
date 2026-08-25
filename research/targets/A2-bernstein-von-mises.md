@@ -80,23 +80,24 @@ and
    sampling. Treat `ηₙ≥1` as certificate failure, not posterior failure.
 2. `sweep(make_post, n=[…], reps)` over regular logistic (`stress-bvm-sweep`). Record
    `n*λmax(empirical Cov)` as a directional scale estimate and pair it with the radial upper
-   bound. It becomes a refuter only with explicit sampling and mixing error control; use a
-   rigorously error-controlled spectral estimate when claiming a two-sided result in one
-   dimension. Poisson remains directional until the unbounded-Hessian factor-one domain step is
+   bound. Even with explicit sampling and mixing error control, use it as a refutation aid rather
+   than a verdict; an error-controlled one-dimensional spectral estimate remains a research
+   diagnostic. Poisson remains directional until the unbounded-Hessian factor-one domain step is
    closed.
-3. **Falsification gate:** on `stress-contamination`, a "BvM ⇒ limit" claim must come back
-   FALSIFIED (linear test diverges).
+3. **Refutation diagnostic:** on `stress-contamination`, the computation should expose the
+   divergent linear test behind the analytic obstruction to a bare “BvM ⇒ limit” claim.
 4. `C_LS` discriminator (`q:a2-lsi`): use the analytic subquadratic identity and the
    `Σ₀,n=n^{-α}I` prior phase diagram; compare Fisher-local models only after changing the global
    tail contract.
 5. **A1↔A2 consistency:** report `|n·(A1 bulk bound) − λmax(I⁻¹)|` as `n→∞`.
 
-**Promotion to `numerical-strong`:** a two-sided estimate or certified upper/lower sandwich
-reproduces the limit across data draws and the `n`-sweep, the contamination trap is correctly
-falsified, and `evidence_run` is set. Convergence of the covariance lower bound alone is
-directional and cannot earn this promotion.
+**Research use only:** use data-draw and `n`-sweeps, spectral diagnostics when available, and the
+contamination trap to study the proposed limit and locate possible failure modes. Convergence of a
+covariance lower estimate, or agreement with an independently proved sandwich, remains a
+directional research diagnostic: it does not validate or certify the theorem or its proof. Rigorous refutation
+still requires an analytic argument or exact lower bound.
 
-## Evidence log
+## Numerical research log
 
 _(none yet — the 2026-08-21 contribution is analytic; the prior-scaling test is deterministic
 algebra, not evidence. The retired one-chain logistic diagnostic, its obsolete trend flag, and the

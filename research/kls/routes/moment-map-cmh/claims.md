@@ -82,26 +82,58 @@ C_P(\mu)\lesssim\sqrt{\log n},
 h_n^\star\gtrsim(\log n)^{-1/4}.
 $$
 
-## 2. Headline CMH target and normalization debt
+## 2. Headline CMH target: regular-class normalization discharged, closure and headline open
 
-The originating exploration proposes
+The originating exploration proposed
 
 $$
 \lVert\Sigma^{-1/2}H\nabla g\rVert_2^2
-\le4\lVert-Lg\rVert_2^2.
+\le4\lVert-Lg\rVert_2^2
 \tag{CMH(4)}
 $$
 
-and reports that a divergence-duality reduction would yield $C_P(\mu)\le4$.
-The constant is the sharp plausible endpoint, since the centered standard exponential has
-Poincaré constant $4$ (spectral bottom $1/4$).
-This implication is **open in the repository** for a basic reason: the consolidated source does
-not define $\Sigma$, the measure behind $\lVert\cdot\rVert_2$, the domain of $L$, or the closure
-and approximation class used in the duality step. `q:cmh-normalization` requires these data and a
-complete proof of the implication before CMH(4) is treated as a theorem-level endpoint.
+and reported that a divergence-duality reduction would yield $C_P(\mu)\le4$. Until 25 August 2026
+this was **open in the repository** because the source defined neither $\Sigma$, nor the measure
+behind $\lVert\cdot\rVert_2$, nor the domain of $L$, nor the closure used in the duality step.
 
-This is not evidence against the idea. It prevents a schematic inequality from masquerading as
-a proved reduction.
+**The regular-class part of that debt is paid** (`thm:cmh-implies-affine-poincare`, dossier
+`solutions/thm-cmh-normalization.tex`). The original audit at
+`research/reviews/2026-08-25-kls-cmh-normalization-audit.md` was partial and is retained as
+history. The corrected proofs now carry the unqualified certificate
+`research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`; the exact-case dossier is
+separately certified by
+`research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md`. The data are:
+
+$$
+L_\mu g=\operatorname{div}_\mu(H\nabla g)=\operatorname{tr}(HD^2g)-p\cdot\nabla g,
+\qquad
+\mathsf A=-L_\mu\ge0,
+\qquad
+\operatorname{div}_\mu u=\rho^{-1}\operatorname{div}(\rho u),
+$$
+
+$$
+C_{\mathrm{CMH}}(\mu)
+=\sup_{g\in\operatorname{Dom}(\mathsf A)\setminus\ker\mathsf A}
+\frac{\mathbb E_\mu\langle H\nabla g,\Sigma^{-1}H\nabla g\rangle}
+      {\mathbb E_\mu(L_\mu g)^2},
+$$
+
+with $L^2=L^2(\mu)$, every inverse the pseudoinverse on $(\ker\mathsf A)^\perp$, and
+$\Sigma^{-1}$ the Moore--Penrose inverse on the affine tangent space for measures on a proper
+affine subspace. The symmetry of $L_\mu$ *for $\mu$ itself* is exactly the Stein identity
+$\operatorname{div}_\mu H=-p$; this is what makes the definition canonical rather than a choice
+of reference measure.
+
+**Status ladder for the headline.** The reduction $C_P^{\mathrm{aff}}\le C_{\mathrm{CMH}}$ is
+proved on the regular moment-map class. The passage through approximation
+(`q:cmh-approximation`) and universal $\mathrm{CMH}(4)$ are open. The Hodge identity in §12
+exhibits an additional nonnegative channel, but does not prove strict non-implication from KLS;
+§13 shows that the cheapest necessary consequence is not available from the external inputs by
+matrix algebra alone. Do not paraphrase the reduction as an equivalence.
+
+The constant $4$ is the sharp plausible endpoint: the centered one-sided exponential has
+$C_P=4$ with unit variance, and by `thm:cmh-1d` its CMH constant is exactly $4$.
 
 ## 3. Operator and Haar layer
 
@@ -473,3 +505,144 @@ all higher-dimensional splits (or a genuinely higher-dimensional stress-potentia
 
 Retractions are kept to prevent dead-end reruns. They do not become uppercase `REFUTED` ledger
 claims unless their analytic witness or an eligible `finum` artifact is persisted.
+
+---
+
+# Part B — the normalization layer (added 25 August 2026)
+
+Sections 1--11 above are the **construction layer**: Haar compression, Schur--Piola geometry, and
+the square-root commutator. Sections 12--15 are the **normalization layer**, which shares the
+target $\mathrm{CMH}(4)$ and almost none of the machinery. Manuscript:
+`modules/kls/41-cmh-normalization.tex` and `modules/kls/42-cmh-exact-cases.tex`.
+
+Epistemic tags in this part differ from Part A: **proved** here means the repository's full R2
+contract (dossier + independent reviewer + persisted report + green checker), not "formal".
+
+## 12. Hodge content: an extra solenoidal channel — **proved; strict separation open**
+
+Set $u=H\nabla g$, $h=-\operatorname{div}_\mu u$, let $\psi$ solve
+$-\operatorname{div}_\mu(\Sigma\nabla\psi)=h$ on the centered subspace, and $w=u-\Sigma\nabla\psi$.
+Then $\operatorname{div}_\mu w=0$, the two fields are orthogonal in $L^2(\mu;\Sigma^{-1})$, and
+
+$$
+\mathbb E_\mu\langle u,\Sigma^{-1}u\rangle
+=\mathbb E_\mu\langle\Sigma\nabla\psi,\nabla\psi\rangle
++\mathbb E_\mu\langle w,\Sigma^{-1}w\rangle .
+$$
+
+The operator norm of $h\mapsto\mathbb E_\mu\langle\Sigma\nabla\psi,\nabla\psi\rangle$ on the
+centered subspace is **exactly** $C_P^{\mathrm{aff}}(\mu)$. Hence CMH = affine Poincaré **plus**
+control of the solenoidal excess $w$.
+
+In dimension one the no-flux convention forces $w=0$, which is why `thm:cmh-1d` is an identity.
+In higher dimension the divergence-free subspace need not be trivial, but this decomposition does
+not show that the solenoidal term is positive at a CMH extremizer, nor does it exhibit a measure
+with $C_P^{\mathrm{aff}}\le4<C_{\mathrm{CMH}}$.
+
+Thus the certified conclusion is $C_{\mathrm{CMH}}\ge C_P^{\mathrm{aff}}$ together with an exact
+description of the extra channel. Equivalence and strict non-implication at a fixed constant are
+open. A future CMH counterexample would close this sufficient-condition route but, by itself,
+would not refute KLS.
+
+## 13. Gate zero and the algebraic countermodel — **proved**
+
+Testing the definition on $g(p)=a\cdot p$ (so $D^2g=0$, $L_\mu g=-a\cdot p$) gives the necessary
+condition
+
+$$
+\mathbb E[H\Sigma^{-1}H]\preceq4\Sigma
+\qquad\text{(gate zero, `conj:gate-zero`)},
+$$
+
+equivalently $\mathbb EH^2\preceq4I$ in isotropic position. This is **necessary** for universal
+$\mathrm{CMH}(4)$ and is **not** a known consequence of KLS.
+
+The gap between gate zero and Letwin's theorem is exactly one commutator:
+
+$$
+\operatorname{tr}(B^2H^2)=\operatorname{tr}(BHBH)
++\tfrac12\lVert[B,H]\rVert_{\mathrm{HS}}^2 ,
+$$
+
+valid for symmetric $B,H$ because $[B,H]$ is antisymmetric. Letwin controls the first term with
+constant $2$; the second is the **static transverse commutator**, and it is unconstrained by
+matrix moments:
+
+> **Countermodel (exact).** For $m\ge18$, let $z$ be uniform on $S^{m-1}$,
+> $d=m/\sqrt{2m-1}$, $c=1-d/m$, and
+> $H(z)=\begin{pmatrix}1&\sqrt d\,z^\top\\ \sqrt d\,z&cI_m+dzz^\top\end{pmatrix}$.
+> Then $H\succeq0$, $\mathbb EH=I$, and
+> $\mathbb E\operatorname{tr}(BHBH)\le2\operatorname{tr}(B^2)$ for **every** symmetric $B$
+> (the three $O(m)$ sectors decouple; the scalar-sector deficit is exactly $(a-dt)^2$, a perfect
+> square, because $d^2=m^2/(2m-1)$). Yet $e_1^\top\mathbb EH^2e_1=1+d>4$ iff $m^2-18m+9>0$,
+> i.e. iff $m\ge18$.
+
+**Scope discipline.** These matrices are *not* claimed to be moment-map Hessians; no
+Monge--Ampère or Codazzi compatibility is imposed. The proposition does **not** refute gate zero.
+What it proves is that any proof of gate zero must consume differential moment-map structure —
+equivalently, must bound $\mathbb E\lVert[B,H]\rVert_{\mathrm{HS}}^2$. It is the elementary,
+static, finite-dimensional shadow of `q:mm-square-root-commutator`, and it places a floor under
+that task's difficulty: the commutator may not be treated as a lower-order correction.
+
+**Placement warning.** In isotropic position gate zero asks $\lambda_{\max}(\mathbb EH^2)\le4$
+while Chen--Klartag already give $\operatorname{tr}(\mathbb EH^2)\le2n$. It is therefore an
+operator-to-trace upgrade with a factor-2 budget and belongs to the ownership cluster of
+`rem:trace-upgrade-unification`. Hard constraint 6 of `CLAUDE.md` applies.
+
+## 14. Exact classes — **proved**
+
+| class | result | note |
+|---|---|---|
+| line | $C_{\mathrm{CMH}}(\mu)=C_P(\mu)/\operatorname{Var}(\mu)$ | an **identity**; $\le4$ for log-concave, sharp at the one-sided exponential |
+| products | $C_{\mathrm{CMH}}=\max_i C_P(\mu_i)/\operatorname{Var}(\mu_i)$ | cross terms $\mathbb E[(L_ig)(L_jg)]=\mathbb E[\tau_i\tau_j(\partial_{ij}g)^2]\ge0$ |
+| log-concave Dirichlet | $A(A+1)\,d_\alpha(g)\le4\,n_\alpha(g)$ for all $\alpha_i\ge1$ | the route's **first nonproduct theorem** |
+
+The Dirichlet proof lifts $g$ homogeneously to independent
+$Y_i\sim\Gamma(\alpha_i,1)$ with $S=\sum_iY_i$, $P=Y/S$, $S\perp P$; uses the exact Gamma row
+completion
+
+$$
+N_\Gamma(G)-\tfrac14D_\Gamma(G)=\sum_i\mathbb ER_i+\sum_i\delta_iD_i(G),
+\qquad
+\delta_i=\frac{\alpha_i^2}{(\alpha_i+1)^2}-\frac14 ;
+$$
+
+minimizes each Hessian row under the differentiated Euler constraint
+$\sum_jY_jG_{ij}=-G_i$ (reciprocal weights sum to $S/Y_i$); and closes with a two-branch scalar
+minimization giving the surplus form
+
+$$
+n_\alpha(g)\ \ge\ \Bigl(\frac{A(A+1)}4+s_A\Bigr)d_\alpha(g),
+\qquad
+s_A=\begin{cases}(z_A-2)/4,&z_A\le4\\ \sqrt{z_A}-3/2,&z_A\ge4\end{cases},
+\quad z_A=(A-1)(A-2).
+$$
+
+**Log-concavity is consumed twice.** For the product-Gamma consequence,
+$\delta_i\ge0\iff\alpha_i\ge1$ is the required sign. In the Dirichlet proof, however,
+$\delta_i$ is retained exactly inside the angular coefficient, and the separate hypothesis
+$a=\alpha_i\ge1$ is load-bearing in its two-branch minimization. The differential identities
+remain algebraic beyond that range where their moments exist, but the Dirichlet bound does not.
+
+Two readings matter and are easy to get backwards:
+
+- $s_A>0$ for $A>3$ means the Dirichlet family sits **strictly inside** the bound
+  (`cor:cmh-dirichlet-surplus`). It is a family theorem, **not** evidence for universal
+  $\mathrm{CMH}(4)$.
+- The saturating cases are elsewhere. By the product formula, products of one-sided exponentials
+  hit $C_{\mathrm{CMH}}=4$ **exactly**, with zero slack. Sharpness on the simplex is inherited
+  from the same one-dimensional exponential mechanism through the face law
+  $\mathrm{Beta}(1,b)$, whose CMH constant is
+  $(b+1)^2(b+2)/(b\,j_{b/2,1}^2)\to4$.
+
+## 15. The exposed endpoint — **open, and the sharpest available probe**
+
+Combining §12 and §14: a product of centered one-sided exponentials saturates
+$\mathrm{CMH}(4)$ with zero slack, and the CMH numerator splits into a gradient part plus a
+solenoidal excess. This motivates a perturbative test, but increasing the solenoidal component
+alone does not control the Poincar\'e component, the denominator, or the optimizing direction.
+
+The open node `q:cmh-solenoidal-perturbation` therefore asks for the second variation of the
+*full CMH Rayleigh quotient*. A certified perturbation for which that quotient exceeds $4$ would
+refute universal CMH(4) without refuting KLS. See task **M9** in
+[`open-problems.md`](open-problems.md).

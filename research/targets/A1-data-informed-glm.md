@@ -90,9 +90,9 @@ and
    expression as a certificate. Report failure rather than a number when `η≥1` for the direct
    radial factor.
 3. Build `GLMPosterior(X, y, Σ₀, link)`; sample only with an `R̂`/ESS gate. Record
-   `λmax(empirical Cov)` as a directional scale estimate. It becomes a refuter only with explicit
-   sampling and mixing error control; compare it separately with the proved direct radial bound
-   and the unproved split candidate.
+   `λmax(empirical Cov)` as a directional scale estimate. Even with explicit sampling and mixing
+   error control, use it as a refutation aid rather than a verdict; compare it separately with the
+   proved direct radial bound and the unproved split candidate.
 4. In one dimension, use a converged Sturm--Liouville/FEM solve as a calibrated approximation;
    call it two-sided only after supplying truncation and discretization error bounds.
 5. Sweep instances from `../knowledge/instances.md`: `cal-glm-linear` (must be tight),
@@ -102,11 +102,13 @@ and
 6. Refinement readout: best `R`, `η`, radial tail loss, and the sharpness ratio of the certified
    upper bound to `λmax(Cov_π)`.
 
-**Promotion to `numerical-strong`:** only after the comparison factor is explicit, the full
-tail-corrected bound holds across the whole A1 stress tier (not just happy cases), tightness is
-bounded below, and it beats baseline on the bulk-dominated instances, with `evidence_run` set.
+**Research use only:** run the full A1 stress tier, not just favorable cases, to diagnose the
+comparison factor, tail correction, tightness, and possible improvement over baseline on
+bulk-dominated instances. These numerical results are directional research diagnostics and may expose
+candidate counterexamples; they never validate or certify the bound or any proof. Rigorous
+refutation still requires an analytic argument or exact lower bound.
 
-## Evidence log
+## Numerical research log
 
 _(none yet — the 2026-08-21 contribution is analytic. Focused deterministic regression tests check
 the radial formulas and weight floors but are not evidence. The retired tail-free diagnostic and

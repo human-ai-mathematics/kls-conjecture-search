@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Eldan fixed-cut open targets and roadmap}
+\section{Route E: open targets and roadmap}
 \label{sec:open}
 
 The consolidation leaves a sharper, smaller set of open targets than the original program. We
@@ -86,9 +86,9 @@ analysis to the covariance SDE.
 \label{rem:taming-type-mismatch}
 The coupling suggested above runs into a
 structural obstruction: $\Xi_T$ is a \emph{cut-free} functional of the covariance process,
-whereas the splitting structure is \emph{cut-indexed}, and the split direction of
-Proposition~\ref{prop:exact-splitting} is precisely the inflating (log-affine, exponential)
-direction along which $\lmax(A_t)$ grows --- so the splitting philosophy controls the
+whereas the splitting structure is \emph{cut-indexed}. Product/splitting alone does not suppress
+coordinatewise covariance excursions; in the one-sided-exponential product stress test, a split
+coordinate can also contribute to $\lmax(A_t)$. Thus the splitting philosophy controls the
 \emph{source} of the cut-aware Stein estimate (Questions~\ref{q:stein-weighted},
 \ref{q:splitting}), not the cut-free $\Xi_T$. The residual non-circular content of
 Question~\ref{q:taming} is therefore a \emph{near-worst-specific} improvement of the

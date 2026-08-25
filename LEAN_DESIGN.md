@@ -1,9 +1,10 @@
 # Lean (L2) channel — design and Mathlib gap
 
 This is the **Lean channel's design document**, the machine-certified counterpart of the
-numerical channel (`finum`, `experiments/`). Where `finum` *refines and refutes* statements (and
-never promotes a node to proved), the Lean channel is one of the two ways a ledger node may
-legitimately reach `status: proved` — the **machine-checked** one.
+numerical research channel (`finum`, `experiments/`). Where `finum` guides refinement, stresses
+statements, and searches for counterexamples without changing logical status, the Lean channel is
+one of the ways a ledger node may legitimately reach `status: proved` — the **machine-checked**
+one.
 
 It answers a single, architecture-shaped question:
 
@@ -24,11 +25,12 @@ checked against the mathlib4 docs, not recalled.
 
 ## 0. Where the Lean channel sits in the architecture
 
-The repo runs a two-phase, soundness-first pipeline (`research/README.md`):
+The repo keeps numerical exploration and proof certification separate (`research/README.md`):
 
 ```
-open .tex statement → Phase 1 (refine + finum stress-test) → conjectured / evidence: numerical-strong
-                    → Phase 2 (prove) → proved
+open = unresolved .tex statement
+  ├─ refine, optionally informed by finum → sharper open statement + research direction
+  └─ once precise: independent analytic/Lean proof + review → proved
 ```
 
 Phase 2's output plane is `solutions/`, gated by the `checked_by` ladder
@@ -43,10 +45,9 @@ Phase 2's output plane is `solutions/`, gated by the `checked_by` ladder
 
 `research/check_ledger.py` enforces that a node flips to `proved` only with
 `checked_by ∈ {agent, human, lean}` and the matching solution/review metadata required by that
-level. **Numerics never appear on this
-ladder** — the soundness contract (`finum`'s only sound verdict is REFUTED) means the Lean
-channel, not `finum`, is the upper end of the evidence hierarchy: any numerical corroboration
-reward is capped strictly below what a checked Lean proof (the **L2 reward**) grants.
+level. **Numerics never appear on this ladder and do not validate any proof step.** They are
+research diagnostics only. An exact candidate counterexample must be restated as an independently
+checkable analytic or exact certificate before it can change logical status.
 
 So this document is the substrate-gap half of the Lean channel: the deliverable is not just
 "contribute to Mathlib," it is "close enough of the gap that the *proved* nodes of
@@ -108,7 +109,8 @@ sharp (linear `f`).
 - The **Dirichlet energy** `∫‖∇f‖² dμ` as a named quantity (assemble from `gradient`+`∫`).
 - The **Poincaré inequality statement** itself (a `Prop` `HasPoincaré μ C`), plus the
   Gaussian **instance** and its sharpness witness (the manuscript's `rem:rayleigh-lower-only`,
-  numerically the `finum` linear-test refuter `lem:linear-test-lower`).
+  mirrored diagnostically by the `finum` linear-test computation for
+  `lem:linear-test-lower`).
 - Cleanest route to the proof — the **Ornstein–Uhlenbeck semigroup** + spectral
   gap, or **Hermite** expansion — neither is in Mathlib.
 
@@ -208,8 +210,8 @@ Recommended **upstreaming order** (each builds on the previous), independent of 
 certifies:
 
 1. **FI vocabulary** — `HasPoincaré μ C`, `HasLSI μ C`, the entropy functional `Ent_μ`, the
-   Dirichlet energy. Small, foundational, reusable. *(prereq for everything; unblocks
-   `lem:linear-test-lower`, `lem:a5-lipschitz`)*
+   Dirichlet energy. Small, foundational, reusable. *(prereq for everything; provides the
+   definitions needed by `lem:linear-test-lower` and `lem:a5-lipschitz`)*
 2. **1D Gaussian Poincaré** (and LSI), with the sharp constant. *(needs 1; OU or direct)*
 3. **Tensorization** of `C_P` / `C_LS` over products. *(needs 1–2 + conditional decomposition;
    certifies `thm:tensorization`)*
@@ -234,8 +236,8 @@ upstream-contribution target; the deferred list is where the Lean-agent track sh
 Part III (`modules/kls/`, ledger `research/kls/ledger.yaml`,
 `program: kls`) is a route-spanning **proof program**. Its Eldan stochastic-localization
 backbone is in the proof phase, while the deterministic CMH route has only open internal nodes.
-The 41 legacy nodes marked `proved` predate the current standalone-dossier metadata contract and
-carry an explicit certification debt. Lean certification is a *separate, heavier* front: beyond
+The 34 formerly inline proof-bearing nodes now have standalone, independently agent-reviewed R2
+dossiers. Lean certification is a *separate, heavier* front: beyond
 the FI spine above it needs stochastic calculus, geometric measure theory, and
 Brascamp–Lieb. Below, the primitives are derived from the **actual proved/imported ledger nodes**
 (not an external blueprint), with the Mathlib status of each.

@@ -1,4 +1,4 @@
-# KLS route-gating — node → computable quantity → verdict
+# KLS route-gating — node → computable quantity → research readout
 
 Implementation status of the numerical channel for KLS. Four regimes:
 
@@ -14,33 +14,72 @@ Implementation status of the numerical channel for KLS. Four regimes:
   computes the complete P6 margin for the balanced tail union in an isotropic Laplace product.
   This tests one explicit cut family only; it neither implements the universal quantifier in
   `q:alignment` nor yields a route or proof verdict.
-- **Deterministic moment-map/CMH battery (registered, not built).** The fixed Gaussian,
-  product, Schur--Hodge, and commutator models are specified in
-  [`routes/moment-map-cmh/models.md`](routes/moment-map-cmh/models.md) and the shared instance
-  registry. No CMH `finum` target or R1 artifact exists, so reported model behavior is not an
-  eligible numerical verdict.
+- **Deterministic moment-map/CMH battery (normalization layer built; construction layer not).**
+  `finum run --target cmh-gate-zero` computes the gate-zero ratio
+  $\lambda_{\max}(\Sigma^{-1/2}\mathbb E[H\Sigma^{-1}H]\Sigma^{-1/2})$ in closed form on
+  one-dimensional laws and from exact moment matrices on the Dirichlet family, verifies the
+  algebraic countermodel's sector identities, and regression-tests the Dirichlet surplus by
+  Galerkin. There is **no Monte Carlo**, but deterministic does not mean rigorous: FEM, floating
+  generalized eigenvalues, and Galerkin output are directional. Only a closed-form rational value
+  or an exact rational Rayleigh witness evaluated against the exact Dirichlet matrices can supply
+  a candidate analytic certificate for independent review. The construction-layer models (Haar,
+  Schur--Hodge, commutator) in
+  [`routes/moment-map-cmh/models.md`](routes/moment-map-cmh/models.md) remain unbuilt, so reported
+  behavior for those is still only an informal research report.
 
-All numerics **refute or give direction; they never prove** (see `shared/target.md`).
+All numerical output **gives research direction; it never validates, proves, or formally refutes
+a node** (see `shared/target.md`). An exact witness emitted by the code can become part of an
+analytic refutation only after it is persisted and independently checked in the proof workflow.
 
 ## Deterministic CMH implementation status
 
-The CMH route currently uses exact or symbolic calculations plus reported exploratory witnesses.
-It has no sanctioned private Monte Carlo channel. Before a sampled, FEM, or finite-grid claim can
-count as R1, a `finum` target must implement the registered battery with fixed parameters,
-calibration failures, convergence gates, and provenance-stamped JSONL output. In particular:
+### Normalization layer (built, `cmh-gate-zero`)
+
+| node / claim | computable quantity | research readout |
+|---|---|---|
+| `conj:gate-zero` | exact rational $R_1$ in 1D; on Dirichlet, a floating top eigenvalue plus an exact rational Rayleigh lower-bound certificate | an exact lower-bound witness $>4$ on a genuine moment map identifies a candidate refutation of `conj:gate-zero` and universal $\mathrm{CMH}(4)$ — but **not** `conj:kls`; logical status changes only after independent certificate review, and a floating eigenvalue above $4$ is directional only |
+| `thm:cmh-dirichlet` | $A(A+1)d_\alpha/n_\alpha$ using exact scalar Dirichlet moments but floating polynomial coefficients, matrix assembly, whitening, and eigensolve | exceeding the surplus ceiling $4/(1+4s_A/(A(A+1)))$ is **directional only** until an exact rational test-function/Rayleigh certificate is supplied; staying under it is a regression pass, not support for universal CMH |
+| `thm:cmh-1d` | $C_{\mathrm{CMH}}=C_P/\operatorname{Var}$ against closed-form Stein kernels | the FEM $C_P$ is uncertified, so this comparison is **directional only** |
+| `prop:letwin-not-gate-zero` | the three $O(m)$ sector coefficients and the perfect-square scalar deficit | exact identities; a mismatch means an implementation error, since the proposition is proved |
+
+**Calibration anchors:** the Gaussian one-dimensional ratio is exactly $1$; the uniform simplex
+$\mathrm{Dir}(1,\dots,1)$ on $\Delta_{m-1}$ gives exactly $2(m+1)/(m+3)$; and at $m=2$ that equals
+$1.2$, which must agree with the uniform-interval channel. The provenance header records
+`calibration_passed`; consumers must discard directional comparisons when it is false. Exact
+rational certificates remain separately checkable from the matrices and witnesses they persist.
+
+**Stored-artifact status.** The existing
+`research/runs/2026-08-25T070915.854321Z-cmh-gate-zero.jsonl` predates the certificate hardening,
+and its recorded commit does not contain the target source. It is retained unchanged as
+calibration history and is not linked from the ledger. A future provenance-stamped run from
+recorded source may be linked only as a directional research diagnostic.
+
+**Scope discipline.** Every model currently in the target lies **inside** a proved class
+(`thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`) or is the countermodel. Such a model can
+detect an implementation error; it cannot validate the headline. Testing moment maps outside
+those classes — task M10 — requires a numerically solved Monge--Ampère equation and therefore
+remains **directional research only** regardless of outcome.
+
+### Construction layer (not built)
+
+The construction layer currently uses exact or symbolic calculations plus reported exploratory
+witnesses. It has no sanctioned private Monte Carlo channel. Before a sampled, FEM, or finite-grid
+observation can be cited as research direction, a `finum` target must implement the registered
+battery with fixed parameters, calibration failures, convergence gates, and provenance-stamped
+JSONL output. In particular:
 
 - Gaussian and aligned products are calibration cases because their commutators vanish;
 - a negative individual Haar node is not a verdict on the complete-tree inequality;
 - the rotated exponential, Laguerre, high-frequency, and Gamma--Gaussian behaviors remain
-  reported until their analytic dossiers or eligible artifacts are persisted;
+  informal until directional artifacts are persisted or analytic dossiers are independently checked;
 - the exact three-exponential density and inherited Stein kernel activate the intended mismatch,
   but reconstruction of the canonical kernel is an open analytic problem, not a numerical gate.
 
 ## SDE-free signals (finum kls, built)
 
-| fact / node | computable quantity | REFUTES / SUPPORTS |
+| fact / node | computable quantity | research readout |
 |---|---|---|
-| isotropic linear-test refuter (`shared/lower-bounds.md`) | analytically, `lambda_max(Cov) = 1` for isotropic $\mu$; `finum.constants.poincare_lower` is only an empirical calibration | any claimed KLS upper bound `C_P < 1` is **REFUTED** by the exact identity |
+| isotropic linear-test refuter (`shared/lower-bounds.md`) | analytically, `lambda_max(Cov) = 1` for isotropic $\mu$; `finum.constants.poincare_lower` is only an empirical calibration | the exact analytic identity, not the numerical calibration, refutes any claimed KLS upper bound `C_P < 1` |
 | the bridge `C_P <= K lambda_max(Cov)` (`ab/conj:a1-bis`) | realized `K = C_P / lambda_max(Cov)` across Gaussian, Laplace, and uniform products | `K = O(1)` on this finite benign battery is directional **non-refutation**, not support for the universal theorem |
 | rank-one bridge sanity (no obstruction node) | realized `K` under single-coordinate Gaussian variance inflation `Lambda -> inf` | `K=1` checks tensorization/normalization only; it does not test a cut, source budget, `cor:refutation`, or `obs:rank-one-refuted` |
 
@@ -91,7 +130,7 @@ representation $c_t=tX+B_t$. A diagnostic is inspectable only if all of the foll
    $S^H-C_1r-\alpha D$ margin, and the stopping time;
 6. discovery/held-out separation for interval selection and evaluation.
 
-The paired-grid gate is empirical convergence evidence, not a crossing theorem: exits and
+The paired-grid gate is an empirical convergence diagnostic, not a crossing theorem: exits and
 re-entries between fine grid nodes are not detected. The final 2026-08-20 run used 16 discovery
 and 16 held-out paths, so its uncertainty is also too large for a universal trend claim. The
 artifact [`2026-08-20-kls-align-high-n-final.jsonl`](../runs/2026-08-20-kls-align-high-n-final.jsonl)

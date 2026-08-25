@@ -1,0 +1,70 @@
+% Standalone R2 dossier for the total-variation obstruction in A2.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node: obs:tv-insufficient
+% refines: warn:a2-tv-fails
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% author: /root/ab_legacy_author
+% reviewer: /root/kls_core_author
+% review: research/reviews/2026-08-25-ab-inline-r2-audit.md
+% date: 2026-08-25
+% ============================================================================
+
+\section*{Solution: total variation does not control the Poincar\'e constant}
+\label{sec:sol-obs-tv-insufficient}
+
+\begin{proposition}[Ledger node \texttt{obs:tv-insufficient}]
+\label{prop:sol-tv-insufficient}
+There is a sequence of probability measures \(\mu_n\) on \(\R\) such that
+\[
+ \norm{\mu_n-N(0,1)}_{\mathrm{TV}}\longrightarrow0
+ \qquad\text{but}\qquad
+ \CP(\mu_n)\longrightarrow+\infty.
+\]
+More generally, for \(0<\eps_n<1\), \(\eps_n\to0\), and
+\(\eps_na_n^2\to+\infty\), the contamination sequence from
+Warning~\ref{warn:a2-tv-fails},
+\[
+ \mu_n=(1-\eps_n)N(0,1)+\eps_nN(a_n,1),
+\]
+has these two properties.
+\end{proposition}
+
+\begin{proof}
+Write \(\gamma=N(0,1)\) and \(\gamma_{a_n}=N(a_n,1)\).  For every Borel set \(A\),
+\[
+ \abs{\mu_n(A)-\gamma(A)}
+ =\eps_n\abs{\gamma_{a_n}(A)-\gamma(A)}\le\eps_n.
+\]
+Thus, with the supremum-over-events convention,
+\(\norm{\mu_n-\gamma}_{\mathrm{TV}}\le\eps_n\to0\).  (With the unhalved
+\(L^1\) convention the bound is \(2\eps_n\), which has the same limit.)
+
+If \(X_n\sim\mu_n\), the within-component variance is one, while the component means are zero
+and \(a_n\).  Hence
+\[
+ \E X_n=\eps_na_n,
+ \qquad
+ \Var(X_n)=1+\eps_n(1-\eps_n)a_n^2.
+\]
+The linear test \(f(x)=x\) has \(f'(x)=1\), so the Poincar\'e inequality would require
+\[
+ 1+\eps_n(1-\eps_n)a_n^2=\Var_{\mu_n}(f)
+ \le \CP(\mu_n)\int\abs{f'}^2\dd\mu_n=\CP(\mu_n).
+\]
+Since \(\eps_n\to0\) and \(\eps_na_n^2\to+\infty\), the right-hand lower bound diverges.
+For an explicit instance one may take \(\eps_n=n^{-1}\) and \(a_n=n\).
+\end{proof}
+
+\paragraph{Exact scope.}
+This dossier certifies the ledger statement: total-variation convergence alone does not control
+the Poincar\'e constants.  It does not certify the additional informal sentence in
+Warning~\ref{warn:a2-tv-fails} about divergence of the optimal log-Sobolev or \(T_2\) constants;
+those stronger conclusions require their own witnesses or comparison arguments and are not used
+here.
+
+\end{document}

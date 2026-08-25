@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Deterministic moment-map/Haar route: audited frontier}
+\section{Route C: the deterministic moment-map/Haar program, audited frontier}
 \label{sec:moment-map-cmh}
 
 This section records a second, deterministic use of the moment map. Its aim is to extend
@@ -8,6 +8,15 @@ Theorem~\ref{thm:letwin-moment-map} from constant matrices to multiplier fields 
 arbitrary test function. The route is live but unproved. Displayed formal identities below are
 not assigned R2 status; complete conventions, proofs, retractions, and regression models are kept
 in \texttt{research/kls/routes/moment-map-cmh/}.
+
+Route C is organized in two layers. This section is the \emph{construction} layer: Haar
+compression, Schur--Piola transport, and the square-root commutator that the programme must
+control. Sections~\ref{sec:cmh-normalization} and \ref{sec:cmh-exact-cases} are the
+\emph{normalization} layer, added later and logically prior: they fix the endpoint's operator
+data, prove that it implies the affine Poincar\'e inequality, compute it exactly on the line, on
+products, and on every log-concave Dirichlet law, and isolate the two falsification tests the
+route now admits. The two layers share the target $\mathrm{CMH}(4)$ and almost no machinery; a
+reader starting Route C should read \S\ref{sec:cmh-normalization} first.
 
 To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all
 objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric,
@@ -35,13 +44,49 @@ constant because a standard centered one-sided exponential has Poincar\'e consta
 \begin{question}[CMH normalization and endpoint reduction]
 \label{q:cmh-normalization}
 Define $\Sigma$, $L$, the underlying $L^2$ space, the admissible class of $g$, and every inverse
-and closure in \eqref{eq:cmh4-schema}. Then prove, uniformly through regular moment-map
-approximation, that the resulting statement implies $\CP(\mu)\le4$ for every isotropic
-log-concave $\mu$.
+in \eqref{eq:cmh4-schema} for the regular moment-map class. Then prove that the resulting
+estimate $\CMH(\mu)\le C$ implies $\CPaff(\mu)\le C$ on that class.
 \end{question}
 
-This question is logically prior to the commutator calculation. Until it is answered,
-CMH(4) is a route schema rather than a certified conditional theorem.
+This regular-class question is logically prior to the commutator calculation, and it is now
+answered.
+Definition~\ref{def:cmh} fixes $\Sigma$ as the covariance, $L$ as the Stein generator
+$\Div_\mu(H\nabla\,\cdot\,)$, the $L^2$ space as $L^2(\mu)$, the admissible class as
+$\Dom(\Aop)$, and every inverse as the pseudoinverse on $(\ker\Aop)^\perp$;
+Theorem~\ref{thm:cmh-implies-affine-poincare} then proves
+$\CPaff(\mu)\le\CMH(\mu)$ by a single Cauchy--Schwarz step, with a spectral truncation in place
+of an assumed gap.
+
+\begin{question}[Approximation closure for CMH]
+\label{q:cmh-approximation}
+Suppose a universal estimate $\CMH(\mu_k)\le C$ holds along regular moment-map approximants
+$\mu_k$ of an arbitrary centered log-concave law $\mu$.  Establish hypotheses and a closure
+argument under which the affine Poincar\'e inequalities pass to $\mu$, uniformly under
+isotropic normalization and affine-support degeneration.
+\end{question}
+
+This approximation question remains open; in particular, the regular-class reduction by itself
+does not claim a theorem for every nonsmooth log-concave law. Two consequences of the
+now-explicit normalization bear directly on the rest of this section.
+
+First, the reduction is not known to be an equivalence. Proposition~\ref{prop:cmh-hodge} splits
+the CMH numerator into an affine Poincar\'e part and a nonnegative solenoidal excess, which
+vanishes identically in dimension one under the no-flux convention.  Thus CMH contains an
+additional channel that KLS does not directly control; no separating log-concave measure is
+currently known, so strict non-implication is not asserted
+(Remark~\ref{rem:cmh-stronger-than-kls}). The programme below should be read as pursuing a
+sufficient condition of unknown truth value, not as a proved reformulation of the conjecture.
+
+Second, the endpoint now has a cheap necessary condition. Testing $\mathrm{CMH}(4)$ on linear
+functions gives gate zero, $\E[H\Sigma^{-1}H]\preceq4\Sigma$
+(Conjecture~\ref{conj:gate-zero}), and Proposition~\ref{prop:letwin-not-gate-zero} shows by an
+exact countermodel that Theorem~\ref{thm:letwin-moment-map} does not imply it through matrix
+algebra alone. The obstruction there is the \emph{static} commutator
+\eqref{eq:static-commutator}, $\Tr(B^2H^2)=\Tr(BHBH)+\tfrac12\norm{[B,H]}_{\HS}^2$ --- the
+finite-dimensional shadow of the square-root commutator of
+Question~\ref{q:mm-square-root-commutator}. A programme that controls
+$[N^{1/2},K_M]$ must in particular control $\E\norm{[B,H]}_{\HS}^2$; conversely, refuting gate
+zero would close this route without any Haar-tree analysis at all.
 
 \subsection{Haar compression and the commutator error}
 
@@ -191,8 +236,13 @@ Question~\ref{q:cmh-normalization}.
 \end{question}
 
 This is the best identified bottleneck, not yet the sole formal gap. The invariant lift, all-split
-reduction, Hodge boundary conditions, one-edge flux identity, and endpoint duality must be closed
-alongside it. The originating regression analysis indicates that no scalar, conformal-only, or
+reduction, Hodge boundary conditions, and one-edge flux identity must be closed alongside it; the
+endpoint duality is no longer among them, having been discharged by
+Theorem~\ref{thm:cmh-implies-affine-poincare}. Note also that
+Proposition~\ref{prop:letwin-not-gate-zero} places a floor under the difficulty: even the
+constant-multiplier, static specialization of the estimate below is not available from
+\eqref{eq:letwin-matrix} by algebra, so no argument here may treat the commutator as a
+lower-order correction. The originating regression analysis indicates that no scalar, conformal-only, or
 nodewise shortcut survives its current models. Persisting those witnesses is still required, but
 the resulting proof design is necessarily global and matrix-coupled.
 \end{document}

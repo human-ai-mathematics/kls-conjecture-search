@@ -32,7 +32,7 @@ def repo_root() -> Path:
 
 
 def runs_dir() -> Path:
-    """research/runs/ (created on demand) — where evidence_run artifacts land."""
+    """``research/runs/`` (created on demand), for directional research artifacts."""
     d = repo_root() / "research" / "runs"
     d.mkdir(parents=True, exist_ok=True)
     return d

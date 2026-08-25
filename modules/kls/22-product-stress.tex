@@ -98,9 +98,9 @@ $\mu^+(E)\ge\E\mu_{T_k}^+(E)\ge c\sqrt{T_k}\cdot\tfrac13\cdot\tfrac12\ge c'/\sqr
 
 \begin{corollary}[Refutation of the rank-one dynamic two-tail candidate]
 \label{cor:refutation}
-Let $\mu$ be a product as above and let $E$ be \emph{any} balanced cut depending on a single
-coordinate $i$ --- in particular, any two-tail cut adapted to the coordinate whose variance
-inflates under localization. Then
+Let $\mu$ be a product as above and let $E$ be \emph{any fixed} balanced cut depending on one
+fixed coordinate $i$, chosen before localization. This includes a fixed two-tail cut in a
+coordinate whose variance subsequently inflates, but not a pathwise choice of $E$ or $i$. Then
 \[
   \E\int_0^\infty S_t\dd t\ \le\ 1
   \qquad\text{and}\qquad
@@ -135,9 +135,10 @@ source bound} --- which is what the Riccati--Gronwall consumption of Theorem~\re
 actually uses --- not the literal interval form of Assumption~\ref{ass:all-cut-carleson}; the distinction is
 immaterial for the program, since the consumption needs only
 $\E r_{t\wedge\tau}$ bounded, which (ii) provides directly. The corollary closes the specific
-attack proposed in the original formulation of the test (``a cut adapted to the dynamically
-large coordinate''): the per-direction estimate, which entered the program after that
-proposal, is exactly the tool that kills it. The original ``teeth'' of the test --- a proof of
+attack proposed in the original formulation of the test when the cut and coordinate are fixed
+before localization. It does not justify selecting the coordinate or cut after observing the
+path. The per-direction estimate, which entered the program after that proposal, is exactly the
+tool that kills the fixed-coordinate version. The original ``teeth'' of the test --- a proof of
 Assumption~\ref{ass:all-cut-carleson} cannot route through $\lmax(A_t)$ --- is hereby complemented on the
 counterexample side: \emph{a counterexample cannot route through a single inflated coordinate
 either}. Both the proof and the refutation are forced into genuinely high-dimensional,

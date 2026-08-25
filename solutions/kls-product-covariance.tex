@@ -1,0 +1,273 @@
+% Standalone solution dossier for the proved product/covariance backbone in Part III.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-nodes: lem:block; thm:budget; cor:refutation;
+%               lem:product-qcts; cor:KI-discharged
+% refines: lem:block; thm:budget; cor:refutation;
+%          lem:product-qcts; cor:KI-discharged
+% manuscript: modules/kls/22-product-stress.tex;
+%             modules/kls/15-covariance-technology.tex
+% depends: thm:budget -> lem:block, cor:per-direction,
+%          thm:scalar-riccati, prop:products;
+%          cor:refutation -> thm:budget;
+%          cor:KI-discharged -> thm:KL-window, eq:BL-cap
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% authored_by: /root/kls_proof_audit
+% reviewed_by: /root/kls_bootstrap_author
+% review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+% date: 2026-08-25
+% ============================================================================
+
+\section*{Solution: product coordinate budgets, quadratic chaos,
+and the published covariance window}
+\label{sec:sol-kls-product-covariance}
+
+\paragraph{Scope.}
+This dossier proves exactly the five statements listed in the header.  The coordinate-budget
+argument uses the unconditional per-direction estimate
+Corollary~\ref{cor:per-direction}, the scalar Riccati identity
+Theorem~\ref{thm:scalar-riccati}, and product persistence from
+Proposition~\ref{prop:products}.  The final covariance-window corollary uses only the published
+sup-over-time Klartag--Lehec window and the Brascamp--Lieb cap; it does not use the conditional
+Letwin input.
+
+For a pair $(\nu,E)$, write $p=\nu(E)$, $q=1-p$, $s=pq$,
+$\delta=m^E-m^F$, $G=\Sigma^E-\Sigma^F$, and
+$K=G+(q-p)\delta\delta^T$.  Along localization use the same symbols with subscript $t$, and set
+\[
+  B_t=s_t\delta_t\delta_t^T,
+  \quad R_t=A_t-B_t,
+  \quad r_t=\Tr B_t=s_t\abs{\delta_t}^2,
+  \quad S_t=s_t\norm{G_t}_{\HS}^2.
+\]
+
+\subsection*{1. Coordinate support}
+
+\begin{lemma}[= Lemma~\ref{lem:block}]
+\label{lem:sol-block}
+Let $\nu=\bigotimes_{i=1}^n\nu_i$ be a product probability measure and let $E$ be measurable
+with respect to the coordinates in $J\subset\{1,\dots,n\}$.  Then $\delta_i=0$ for
+$i\notin J$, and $G_{ij}=K_{ij}=0$ unless $i,j\in J$.
+\end{lemma}
+
+\begin{proof}
+If $i\notin J$, then $X_i$ is independent of the indicator $\one_E$, so
+$\E[X_i\mid E]=\E X_i=\E[X_i\mid E^c]$ and $\delta_i=0$.  More generally, conditional on either
+color, all coordinates outside $J$ retain their original joint product law and remain
+independent of the coordinates in $J$.  Thus for $i\notin J$,
+\[
+  \Cov(X_i,X_j\mid E)=\Cov(X_i,X_j\mid E^c)=\Cov(X_i,X_j)
+\]
+when $j\notin J$, while both conditional cross-covariances are zero when $j\in J$.  Therefore
+$G$ is supported on $J\times J$.  Since $\delta\delta^T$ has the same support, so does $K$.
+The proof uses only conditional independence and applies to arbitrary measurable $E$ of
+nontrivial mass.
+\end{proof}
+
+\subsection*{2. The coordinate budget}
+
+\begin{theorem}[= Theorem~\ref{thm:budget}]
+\label{thm:sol-budget}
+Let $\mu=\bigotimes_i\mu^{(i)}$ be a product of isotropic one-dimensional log-concave measures,
+and let $E$ be measurable with respect to $k$ coordinates $J$, with
+$p_0\in[2/5,3/5]$.  Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+  \item $\displaystyle\E\int_0^\infty S_t\,dt
+        \le\sum_{i\in J}(R_0)_{ii}\le k$;
+  \item $\E r_{t\wedge\tau}\le1+k$ for every $t\ge0$;
+  \item for a universal $c>0$,
+        \[
+          \mu^+(E)\ge\frac{c}{\sqrt{1+k}}\min(p_0,q_0).
+        \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Product structure is preserved pathwise by localization.  The fixed event $E$ remains
+$J$-measurable, so Lemma~\ref{lem:sol-block} applied to $(\mu_t,E)$ gives
+\[
+  S_t=s_t\norm{G_t}_{\HS}^2
+     =\sum_{i\in J}s_t\abs{G_te_i}^2.
+\]
+For each fixed coordinate, Corollary~\ref{cor:per-direction} gives
+\[
+  \E\int_0^T s_t\abs{G_te_i}^2\,dt
+  \le e_i^TR_0e_i=(R_0)_{ii}.
+\]
+Here $R_0=A_0-B_0\preceq A_0=I$, so $(R_0)_{ii}\le1$.  Summing over $J$ and using monotone
+convergence as $T\to\infty$ proves (i).
+
+The scalar Riccati identity is
+\[
+  dr_t=dM_t+(S_t-D_t)dt,
+  \qquad D_t\ge0.
+\]
+Stop first at $t\wedge\tau$ and at a localizing sequence that makes $M$ a true martingale.
+Taking expectations, discarding $D$, and then applying Fatou while using (i) yields
+\[
+  \E r_{t\wedge\tau}
+  \le r_0+\E\int_0^{t\wedge\tau}S_u\,du
+  \le r_0+k.
+\]
+Covariance decomposition gives $B_0\preceq A_0=I$.  Since $B_0$ has rank at most one, its trace
+$r_0$ is its only nonzero eigenvalue and is at most $1$.  This proves (ii).
+
+The stopped mass martingale has quadratic variation
+\[
+  [p]_{T\wedge\tau}=\int_0^{T\wedge\tau}s_tr_t\,dt.
+\]
+Because $s_t\le1/4$ and $r_{t\wedge\tau}\ge
+\one_{\{t<\tau\}}r_t$,
+\[
+  \E[p]_{T\wedge\tau}
+  \le\frac14\int_0^T\E r_{t\wedge\tau}\,dt
+  \le\frac{(1+k)T}{4}.
+\]
+The initial interval $[2/5,3/5]$ lies at distance at least $1/15$ from the complement of the
+coarse window $[1/3,2/3]$.  Continuity and Doob's $L^2$ inequality therefore give
+\[
+  \Prob(\tau\le T)\le C_0(1+k)T
+\]
+with a universal $C_0$.  Choose $T_k=[2C_0(1+k)]^{-1}$.  Then
+$\Prob(\tau>T_k)\ge1/2$, and on this event
+$\min(p_{T_k},q_{T_k})\ge1/3$.
+
+The posterior $\mu_{T_k}$ is $T_k$-uniformly log-concave, hence its boundary profile satisfies
+\[
+  \mu_{T_k}^+(E)\ge c\sqrt{T_k}\min(p_{T_k},q_{T_k}).
+\]
+The perimeter supermartingale inequality and the survival event give
+\[
+  \mu^+(E)
+  \ge\E\mu_{T_k}^+(E)
+  \ge c\sqrt{T_k}\cdot\frac13\cdot\frac12
+  \ge\frac{c'}{\sqrt{1+k}}.
+\]
+Since $\min(p_0,q_0)\le1$, this implies (iii), after renaming the universal constant.
+
+All stochastic expectation steps above are first performed under the usual bounded
+localization.  For general one-dimensional log-concave factors, coordinatewise truncation and
+smoothing preserve the product and $J$-measurable structures; the bounds are uniform, and the
+standard lower-semicontinuity passage for Minkowski perimeter gives the displayed conclusion.
+If $\mu^+(E)=\infty$, the boundary assertion is immediate.
+\end{proof}
+
+\begin{corollary}[= Corollary~\ref{cor:refutation}]
+\label{cor:sol-refutation}
+Let $\mu$ be a product as in Theorem~\ref{thm:sol-budget}, and let $E$ be a fixed balanced cut
+depending on a single coordinate.  Then
+\[
+  \E\int_0^\infty S_t\,dt\le1,
+  \qquad
+  \mu^+(E)\ge c\min(p_0,q_0).
+\]
+Moreover, for every deterministic $L>0$,
+\[
+  \E\bigl|\{t\ge0:S_t\ge L^2/2\}\bigr|\le\frac2{L^2}.
+\]
+Thus a rank-one source spike of height comparable to $\Lambda^2$ has expected occupation time
+$O(\Lambda^{-2})$; the proposed single-coordinate dynamic two-tail counterexample is refuted.
+\end{corollary}
+
+\begin{proof}
+The first two conclusions are Theorem~\ref{thm:sol-budget} with $k=1$.  Tonelli and the
+deterministic pointwise inequality
+$\one_{\{S_t\ge L^2/2\}}\le2S_t/L^2$ give
+\[
+  \E\int_0^\infty\one_{\{S_t\ge L^2/2\}}dt
+  \le\frac2{L^2}\E\int_0^\infty S_tdt\le\frac2{L^2}.
+\]
+The assertion concerns a fixed cut and a deterministic level.  It supplies the total source
+budget used by the Riccati consumption argument; it does not prove the literal interval-by-
+interval form of Assumption~\ref{ass:all-cut-carleson}.
+\end{proof}
+
+\subsection*{3. Quadratic chaos on a non-isotropic product}
+
+\begin{lemma}[= Lemma~\ref{lem:product-qcts}]
+\label{lem:sol-product-qcts}
+Let $\nu=\bigotimes_i\nu^{(i)}$ be a product of centered one-dimensional log-concave measures,
+let $\Var(Y_i)=\sigma_i^2$, $A=\operatorname{diag}(\sigma_i^2)$, and $Y\sim\nu$.  For every
+symmetric matrix $M$,
+\[
+  \Var(Y^TMY)\le C_*\norm{A^{1/2}MA^{1/2}}_{\HS}^2
+\]
+with a universal $C_*$.
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+  Y^TMY=\sum_iM_{ii}Y_i^2+2\sum_{i<j}M_{ij}Y_iY_j.
+\]
+All cross-covariances between distinct displayed summands vanish.  Diagonal terms with
+different indices are independent; a diagonal term and an off-diagonal term leave at least one
+centered singleton; two distinct off-diagonal pairs are either independent or again leave a
+centered singleton.  Therefore
+\[
+  \Var(Y^TMY)
+  =\sum_iM_{ii}^2\Var(Y_i^2)
+   +4\sum_{i<j}M_{ij}^2\sigma_i^2\sigma_j^2.
+\]
+The one-dimensional log-concave reverse H\"older estimate
+\cite[Cor.~5]{KLnotes} gives a universal $C_4$ such that
+$\E Y_i^4\le C_4\sigma_i^4$, and hence
+$\Var(Y_i^2)\le(C_4-1)\sigma_i^4$.  It follows that
+\begin{align*}
+  \Var(Y^TMY)
+  &\le\max(C_4-1,2)
+       \sum_{i,j}M_{ij}^2\sigma_i^2\sigma_j^2\\
+  &=C_*\norm{A^{1/2}MA^{1/2}}_{\HS}^2.
+\end{align*}
+This proof is affine in each coordinate and therefore applies pathwise to every centered product
+posterior $Y=X-a_t$.
+\end{proof}
+
+\subsection*{4. Published discharge of the early covariance window}
+
+\begin{corollary}[= Corollary~\ref{cor:KI-discharged}]
+\label{cor:sol-KI-discharged}
+The published sup-over-time estimate of Theorem~\ref{thm:KL-window}, together with the
+Brascamp--Lieb cap \eqref{eq:BL-cap}, discharges Hypothesis~\ref{hyp:KI} with exponent $C_2=2$.
+\end{corollary}
+
+\begin{proof}
+The imported Klartag--Lehec window \cite[Thm.~61]{KLnotes} used here is exactly the following:
+for a universal $C$, an
+isotropic log-concave initial law, and
+$t\le(C\log^2n)^{-1}$,
+\[
+  \Prob\left(\sup_{0\le s\le t}\norm{A_s}_\op\ge2\right)
+  \le e^{-1/(Ct)}.
+\]
+This is the sup-over-time statement in Theorem~\ref{thm:KL-window}, not a fixed-time substitute.
+For $t>0$, $t$-uniform log-concavity gives the pathwise Brascamp--Lieb cap
+$\norm{A_t}_\op\le t^{-1}$.  Splitting according to the preceding event therefore gives
+\[
+  \E\norm{A_t}_\op
+  \le2+t^{-1}e^{-1/(Ct)}.
+\]
+The second term is uniformly bounded: with $u=(Ct)^{-1}$ it is
+$Cu e^{-u}\le C/e$.  At $t=0$, $A_0=I$.  Choosing a universal
+$c_0\le C^{-1}$ thus gives
+\[
+  \E\norm{A_t}_\op\le C_1
+  \qquad\text{for }0\le t\le c_0(\log n)^{-2},
+\]
+which is Hypothesis~\ref{hyp:KI} with $C_2=2$ (with harmless adjustment for bounded dimensions).
+No quadratic-chaos preprint input is used.
+\end{proof}
+
+\paragraph{Dependency and regularity audit.}
+The dependency uses above match the ledger edges in the header.  In particular, the coordinate
+budget consumes the per-direction estimate before summing only the $k$ supported columns; it
+does not replace that sum by an operator-norm estimate.  The refutation is restricted to fixed
+single-coordinate cuts.  Lemma~\ref{lem:sol-product-qcts} is an unconditional product argument.
+Corollary~\ref{cor:sol-KI-discharged} consumes the published $1/\log^2n$ sup-time window and the
+Brascamp--Lieb cap only; the conditional $1/\log n$ Letwin window is outside its scope.
+
+\end{document}

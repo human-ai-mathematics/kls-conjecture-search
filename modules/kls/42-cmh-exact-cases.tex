@@ -1,0 +1,455 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Route C, exact cases: one dimension, products, and the log-concave Dirichlet family}
+\label{sec:cmh-exact-cases}
+
+Section~\ref{sec:cmh-normalization} fixed the CMH estimate and proved that it dominates the
+affine Poincar\'e constant. This section computes it exactly in the three classes where it is
+tractable. Two of them --- the line and products --- are the expected calibrations, and they
+already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is
+possible. The third is the first genuinely nonproduct family for which the route has a theorem
+at all: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$
+(Theorem~\ref{thm:cmh-dirichlet}). Its proof is a homogeneous lift to independent Gamma
+variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the
+log-concavity hypothesis is consumed in the final scalar angular minimization.
+
+The section closes at the exact product endpoint: centered one-sided exponentials saturate
+$\mathrm{CMH}(4)$ with \emph{zero} slack. Whether a log-concave perturbation raises the full CMH
+Rayleigh quotient is a separate, open second-variation problem; changing its solenoidal term
+alone is not decisive (Remark~\ref{rem:cmh-saturation-risk},
+Question~\ref{q:cmh-solenoidal-perturbation}).
+
+\subsection{The line}
+\label{subsec:cmh-1d}
+
+Let $\mu(\dd x)=\rho(x)\dd x$ be centered on an interval $(\ell,r)$ with variance $\sigma^2$.
+Its canonical Stein kernel is the unique zero-flux solution of $(\tau\rho)'=-x\rho$,
+\begin{equation}
+  \tau(x)=-\frac1{\rho(x)}\int_\ell^xt\rho(t)\dd t,
+  \label{eq:cmh-1d-stein}
+\end{equation}
+and it coincides with the moment-map Hessian in target coordinates. The Stein generator is
+$L_\mu f=\tau f''-xf'=\rho^{-1}(\tau\rho f')'$, so that $h=-L_\mu f$ has
+\begin{equation}
+  \tau(x)f'(x)=-\frac1{\rho(x)}\int_\ell^xh(t)\rho(t)\dd t.
+  \label{eq:cmh-1d-flux}
+\end{equation}
+
+\begin{theorem}[Exact one-dimensional CMH constant]
+\label{thm:cmh-1d}
+For every centered one-dimensional law for which the operators above are defined,
+\begin{equation}
+  \CMH(\mu)=\frac{\CP(\mu)}{\Var(\mu)}.
+  \label{eq:cmh-1d-exact}
+\end{equation}
+In particular every one-dimensional log-concave law satisfies $\mathrm{CMH}(4)$, and the
+constant $4$ cannot be lowered.
+\end{theorem}
+
+\begin{proof}
+On the centered subspace let $D=\dd/\dd x$ and let $D_\mu^*u=-\rho^{-1}(\rho u)'$ be its
+weighted adjoint, so that the inverse norm of the nonnegative Langevin operator $D_\mu^*D$ is
+$\CP(\mu)$. If $v=(D_\mu^*D)^{-1}h$, then $Dv$ is the zero-boundary-flux solution of
+$D_\mu^*u=h$; by \eqref{eq:cmh-1d-flux} it is the field $u=\tau f'$. Therefore
+\[
+  \norm u_2^2=\norm{Dv}_2^2
+  =\inner{v}{D_\mu^*Dv}
+  =\inner{h}{(D_\mu^*D)^{-1}h},
+  \qquad
+  \sup_{h\perp1}\frac{\norm u_2^2}{\norm h_2^2}=\CP(\mu).
+\]
+The CMH numerator is $\norm u_2^2/\sigma^2$ and its denominator is $\norm h_2^2$, which gives
+\eqref{eq:cmh-1d-exact}. The one-dimensional specialization of the
+Kannan--Lov\'asz--Simonovits bound \cite{KannanLovaszSimonovits1995}, recorded for example in
+\cite[Eq.~(2.25)]{cattiaux2018poincare} with that attribution, is
+$\CP(\mu)\le4\Var(\mu)$ and hence gives $\mathrm{CMH}(4)$.
+
+For sharpness, let $X=Y-1$ with $Y\sim\mathrm{Exp}(1)$, so that $X$ is centered, has density
+$e^{-(x+1)}\one_{x\ge-1}\dd x$, and has variance $1$. For $0<a<\tfrac12$, the test function
+$f_a(x)=e^{a(x+1)}$ satisfies
+\[
+  \frac{\Var(f_a(X))}{\E\abs{f_a'(X)}^2}
+  =\frac{(1-2a)^{-1}-(1-a)^{-2}}{a^2(1-2a)^{-1}}
+  =\frac1{(1-a)^2}\longrightarrow4.
+\]
+Thus $\CP(X)=4$ by the preceding upper bound, and \eqref{eq:cmh-1d-exact} gives $\CMH(X)=4$.
+\end{proof}
+
+Theorem~\ref{thm:cmh-1d} is an \emph{identity}, not an inequality: on the line CMH carries
+exactly the information of the affine Poincar\'e inequality and nothing more. This is
+Remark~\ref{rem:cmh-stronger-than-kls} seen from the other side --- the solenoidal channel is
+empty in dimension one.
+
+\subsection{Products}
+\label{subsec:cmh-product}
+
+Let $\mu=\bigotimes_{i=1}^m\mu_i$ be a product of centered factors for which the canonical CMH
+data are defined. Then $\Sigma=\diag(\Sigma_1,\dots,\Sigma_m)$,
+$H=\diag(H_1,\dots,H_m)$, and $L_\mu=\sum_iL_i$, where the $L_i$ are commuting nonpositive
+generators acting in their respective blocks.
+
+\begin{theorem}[Product formula]
+\label{thm:cmh-product}
+For a product of centered CMH factors,
+\begin{equation}
+  \CMH\Bigl(\bigotimes_i\mu_i\Bigr)=\max_i\CMH(\mu_i).
+  \label{eq:cmh-product}
+\end{equation}
+In particular, for centered one-dimensional factors this is
+$\max_i\CP(\mu_i)/\Var(\mu_i)$. Consequently $\mathrm{CMH}(4)$ holds for every product of
+one-dimensional log-concave laws, for block products of $\mathrm{CMH}(4)$ factors, and for their
+invertible affine images.
+\end{theorem}
+
+\begin{proof}
+Write $\nabla_i$ for the gradient in the $i$th block. Conditioning on all other blocks and
+using the definition of $\CMH(\mu_i)$ gives
+\[
+  \E\inner{H_i\nabla_i g}{\Sigma_i^{-1}H_i\nabla_i g}
+  \le \CMH(\mu_i)\,\E(L_i g)^2.
+\]
+For $i\ne j$, two integrations by parts give the block cross-term identity
+\begin{equation}
+  \E[(L_ig)(L_jg)]
+  =\E\Tr\!\left(H_iD^2_{ij}g\,H_jD^2_{ji}g\right)
+  =\E\norm{H_i^{1/2}D^2_{ij}g\,H_j^{1/2}}_{\HS}^2\ge0,
+  \label{eq:cmh-product-cross}
+\end{equation}
+whence $\sum_i\E(L_ig)^2\le\E\bigl(\sum_iL_ig\bigr)^2=\E(L_\mu g)^2$. Summing the conditional
+estimates proves ``$\le$'' in \eqref{eq:cmh-product}; testing on functions of a single block
+proves ``$\ge$''. The one-dimensional formula now follows from
+Theorem~\ref{thm:cmh-1d}, and the final affine-image claim uses only the invertible affine
+invariance proved in \S\ref{subsec:cmh-conventions}.
+\end{proof}
+
+\begin{corollary}[Poincar\'e closure under linear images and convolution]
+\label{cor:cmh-linear-images}
+If independent factors each satisfy the affine Poincar\'e inequality with constant $C$, then so
+does every linear image of their product --- in particular every sum of independent such
+factors.
+\end{corollary}
+
+\begin{proof}
+For $Y=T(X_1,\dots,X_m)$ apply the product affine Poincar\'e inequality to $f\circ T$. The
+gradient energy is $\nabla f^\top T\Cov(X)T^\top\nabla f=\inner{\Cov(Y)\nabla f}{\nabla f}$, and
+$\Var_Yf=\Var_X(f\circ T)$.
+\end{proof}
+
+Note that Corollary~\ref{cor:cmh-linear-images} is a statement about $\CPaff$, which is stable
+under noninvertible maps; the canonical CMH constant itself is claimed invariant only under
+invertible affine maps (\S\ref{subsec:cmh-conventions}).
+
+\subsection{The Dirichlet family: geometry and normalization}
+\label{subsec:cmh-dirichlet-setup}
+
+Let $P\sim\Dir(\alpha_1,\dots,\alpha_m)$ with $\alpha_i\ge1$, which is exactly the log-concave
+parameter range, and put $A=\sum_i\alpha_i$, $q_i=\alpha_i/A$. Write
+\begin{equation}
+  C(p)=\diag(p)-pp^\top,
+  \qquad
+  L_\alpha g=\Tr\bigl(C(p)D^2g\bigr)+\inner{\alpha-Ap}{\nabla g}
+  \label{eq:cmh-wright-fisher}
+\end{equation}
+for the Wright--Fisher generator; both expressions are independent of the ambient extension of
+$g$ because $C(p)\one=0$ and $\sum_i(\alpha_i-Ap_i)=0$.
+
+On $\R^m/\mathrm{span}\{\one\}$ consider
+$\varphi(y)=A\log\bigl(\sum_ie^{y_i/A}\bigr)-q\cdot y$. Its gradient is $p-q$ with
+$p_i=e^{y_i/A}/\sum_je^{y_j/A}$, its Hessian is $C(p)/A$, and the softmax Jacobian identifies
+the pushforward of $e^{-\varphi}$ with the centered law $P-q$. Hence the canonical moment-map
+data are
+\begin{equation}
+  H(p)=\tfrac1AC(p),\qquad L_\mu=\tfrac1AL_\alpha,
+  \qquad
+  \Sigma=\frac1{A(A+1)}\Bigl(\diag(\alpha)-\frac{\alpha\alpha^\top}A\Bigr).
+  \label{eq:cmh-dirichlet-data}
+\end{equation}
+For every tangent vector $v$, meaning $\sum_iv_i=0$,
+\begin{equation}
+  v^\top\Sigma^\dagger v=A(A+1)\sum_i\frac{v_i^2}{\alpha_i},
+  \label{eq:cmh-dirichlet-pseudoinverse}
+\end{equation}
+because $x=A(A+1)\diag(\alpha)^{-1}v$ satisfies $\Sigma x=v$ exactly, and the remaining
+$\ker\Sigma=\mathrm{span}\{\one\}$ ambiguity pairs to zero against $v$.
+
+Setting
+\begin{equation}
+  u_i(p)=\bigl(C(p)\nabla g(p)\bigr)_i,
+  \qquad
+  d_\alpha(g)=\E\sum_i\frac{u_i^2}{\alpha_i},
+  \qquad
+  n_\alpha(g)=\E(L_\alpha g)^2,
+  \label{eq:cmh-dirichlet-dn}
+\end{equation}
+equations \eqref{eq:cmh-dirichlet-data}--\eqref{eq:cmh-dirichlet-pseudoinverse} turn
+Definition~\ref{def:cmh} into the statement $A(A+1)d_\alpha(g)\le4n_\alpha(g)$.
+
+\begin{theorem}[Log-concave Dirichlet CMH]
+\label{thm:cmh-dirichlet}
+For every $m\ge2$, every $\alpha_1,\dots,\alpha_m\ge1$, and every $g$ in the core,
+\begin{equation}
+  A(A+1)\,\E\sum_{i=1}^m
+  \frac{\bigl(C(P)\nabla g(P)\bigr)_i^2}{\alpha_i}
+  \le4\,\E\bigl(L_\alpha g(P)\bigr)^2.
+  \label{eq:cmh-dirichlet-main}
+\end{equation}
+Equivalently, every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$.
+\end{theorem}
+
+\subsection{The independent Gamma lift}
+\label{subsec:cmh-gamma-lift}
+
+Let $Y_i\sim\GammaLaw(\alpha_i,1)$ be independent, $S=\sum_iY_i\sim\GammaLaw(A,1)$ and
+$P_i=Y_i/S$; then $P\sim\Dir(\alpha)$ and $S\perp P$. Lift $g$ homogeneously of degree zero by
+$G(Y)=g(Y/S)$. The product-Gamma (Laguerre) generator is
+$\calL_\Gamma G=\sum_i\bigl(Y_iG_{ii}+(\alpha_i-Y_i)G_i\bigr)$, and its integrated Bochner
+identity reads
+\begin{equation}
+  N_\Gamma(G):=\E(\calL_\Gamma G)^2
+  =\E\Bigl[\sum_iY_iG_i^2+\sum_{i,j}Y_iY_jG_{ij}^2\Bigr].
+  \label{eq:cmh-gamma-bochner}
+\end{equation}
+Put $D_i(G)=\E[Y_i^2G_i^2]/\alpha_i$ and $D_\Gamma(G)=\sum_iD_i(G)$.
+
+\begin{lemma}[Exact Gamma row completion]
+\label{lem:cmh-gamma-completion}
+For $\alpha_i\ge1$,
+\begin{equation}
+  N_\Gamma(G)-\tfrac14D_\Gamma(G)=\sum_i\E R_i+\sum_i\delta_iD_i(G),
+  \label{eq:cmh-gamma-completion}
+\end{equation}
+where
+\begin{equation}
+  R_i=Y_i^2\Bigl\lvert G_{ii}-\frac{G_i}{\alpha_i+1}\Bigr\rvert^2
+      +\sum_{j\ne i}Y_iY_j\abs{G_{ij}}^2\ \ge0,
+  \qquad
+  \delta_i=\frac{\alpha_i^2}{(\alpha_i+1)^2}-\frac14\ \ge0.
+  \label{eq:cmh-Ri-deltai}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $Y\sim\GammaLaw(a,1)$, integrating $\E[Y^2(u^2)']$ by parts against $y^{a-1}e^{-y}$ gives
+$\E[Y^2uu']=-\tfrac12\E[((a+1)Y-Y^2)u^2]$. Apply this with $u=G_i$, $u'=G_{ii}$, $a=\alpha_i$
+and expand the first square in \eqref{eq:cmh-Ri-deltai}: the cross term equals
+$\E[Y_iG_i^2]-\E[Y_i^2G_i^2]/(\alpha_i+1)$, so
+\[
+  \E R_i=\E\Bigl[Y_iG_i^2+\sum_jY_iY_jG_{ij}^2\Bigr]
+        -\frac{\alpha_i}{(\alpha_i+1)^2}\E[Y_i^2G_i^2],
+\]
+using $\tfrac1{(\alpha_i+1)^2}-\tfrac1{\alpha_i+1}=-\tfrac{\alpha_i}{(\alpha_i+1)^2}$. Summing
+over $i$ recovers $N_\Gamma(G)$ from \eqref{eq:cmh-gamma-bochner} and leaves
+$-\sum_i\alpha_i^2(\alpha_i+1)^{-2}D_i(G)$; subtracting $D_\Gamma/4$ gives
+\eqref{eq:cmh-gamma-completion}. Finally $\delta_i\ge0$ is equivalent to
+$\alpha_i/(\alpha_i+1)\ge\tfrac12$, i.e.\ to $\alpha_i\ge1$.
+\end{proof}
+
+\begin{remark}[Where log-concavity is spent]
+\label{rem:cmh-dirichlet-logconcavity}
+Lemma~\ref{lem:cmh-gamma-completion} already proves $\mathrm{CMH}(4)$ for the product-Gamma law,
+since $R_i\ge0$ and $\delta_i\ge0$; for that product-Gamma consequence, $\alpha_i\ge1$ is used
+only in the sign of $\delta_i$. The Dirichlet proof does not discard $\delta_i$: it retains its
+exact value inside $F_A(\alpha_i,P_i)$. There the log-concavity hypothesis is consumed when
+Lemma~\ref{lem:cmh-angular-coefficient} is applied with $a=\alpha_i\ge1$.
+\end{remark}
+
+\begin{lemma}[Hessian-row minimization]
+\label{lem:cmh-row-min}
+With $G$ homogeneous of degree zero,
+\begin{equation}
+  R_i\ \ge\ \frac{Y_i}S\Bigl(1+\frac{Y_i}{\alpha_i+1}\Bigr)^2\abs{G_i}^2 .
+  \label{eq:cmh-row-min}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Euler's identity $\sum_jY_jG_j=0$, differentiated in $Y_i$, gives the single linear constraint
+$\sum_jY_jG_{ij}=-G_i$. Set $t_i=Y_i\bigl(G_{ii}-G_i/(\alpha_i+1)\bigr)$ and $t_j=Y_jG_{ij}$
+for $j\ne i$, so that
+$\sum_jt_j=-G_i\bigl(1+Y_i/(\alpha_i+1)\bigr)$ and
+$R_i=t_i^2+\sum_{j\ne i}(Y_i/Y_j)t_j^2$. The reciprocals of these quadratic weights sum to
+$1+\sum_{j\ne i}Y_j/Y_i=S/Y_i$, and the minimum of $\sum_jw_jt_j^2$ under $\sum_jt_j=c$ is
+$c^2/\sum_jw_j^{-1}$, which is the right-hand side of \eqref{eq:cmh-row-min}.
+\end{proof}
+
+Homogeneity also gives the exact dictionary between the lift and the simplex:
+$\calL_\Gamma G=S^{-1}L_\alpha g$ and $Y_iG_i=u_i(P)$. With $A>2$ one has $\E S^{-1}=(A-1)^{-1}$
+and $\E S^{-2}=z_A^{-1}$ where
+\begin{equation}
+  z_A=(A-1)(A-2),
+  \label{eq:cmh-zA}
+\end{equation}
+so independence of $S$ and $P$ yields
+\begin{equation}
+  N_\Gamma(G)=\frac{n_\alpha(g)}{z_A},
+  \qquad
+  D_\Gamma(G)=d_\alpha(g),
+  \label{eq:cmh-radial-relations}
+\end{equation}
+and, substituting $Y_i=SP_i$ and $G_i=u_i/(SP_i)$ into \eqref{eq:cmh-row-min},
+\begin{equation}
+  \E R_i\ \ge\ \E_P\,u_i^2
+  \Bigl[\frac1{z_AP_i}+\frac2{(A-1)(\alpha_i+1)}+\frac{P_i}{(\alpha_i+1)^2}\Bigr].
+  \label{eq:cmh-integrated-row}
+\end{equation}
+
+\subsection{The scalar angular inequality and the proof}
+\label{subsec:cmh-dirichlet-proof}
+
+\begin{lemma}[Angular coefficient]
+\label{lem:cmh-angular-coefficient}
+Let $A\ge3$, $a\ge1$, $0<p\le1$, $z=(A-1)(A-2)$, and
+\begin{equation}
+  F_A(a,p)=\frac ap+\frac{2a(A-2)}{a+1}+\frac{za(a+p)}{(a+1)^2}-\frac z4 .
+  \label{eq:cmh-FA}
+\end{equation}
+Then
+\begin{equation}
+  F_A(a,p)\ \ge\ A-\tfrac12+s_A,
+  \qquad
+  s_A=\begin{cases}\dfrac{z-2}4,&z\le4,\\[6pt]\sqrt z-\dfrac32,&z\ge4,\end{cases}
+  \label{eq:cmh-FA-min}
+\end{equation}
+and $s_A\ge0$ for $A\ge3$.
+\end{lemma}
+
+\begin{proof}
+For fixed $a$ the $p$-dependent part is $a\bigl(p^{-1}+zp(a+1)^{-2}\bigr)$, minimized on
+$(0,1]$ at $p=1$ when $\sqrt z\le a+1$ and at $p_*=(a+1)/\sqrt z$ otherwise.
+
+If $z\le4$ then $\sqrt z\le2\le a+1$ for all $a\ge1$, so $p=1$ and
+$F_A=a+2a(A-2)/(a+1)+za/(a+1)-z/4$, each summand increasing in $a$; the minimum at $a=1$ is
+$A-1+z/4=A-\tfrac12+(z-2)/4$.
+
+If $z\ge4$, then at $p_*$ the two $p$-terms are equal and sum to $2a\sqrt z/(a+1)$, so with
+$r=a/(a+1)$ the value is $2r(\sqrt z+A-2)+zr^2-z/4$, increasing in $r$; since $r\ge\tfrac12$ for
+$a\ge1$ the minimum is at $a=1$, $r=\tfrac12$, and equals $A-2+\sqrt z=A-\tfrac12+\sqrt z-\tfrac32$.
+In the complementary region the expression is increasing in $a$ with a boundary value no
+smaller. Finally $A\ge3$ gives $z\ge2$, so $s_A\ge0$ in both branches.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cmh-dirichlet}]
+If $m=2$ and $A<3$, the law is one dimensional and Theorem~\ref{thm:cmh-1d} applies. In every
+remaining case $A\ge3$ (automatically when $m\ge3$), so $z_A\ge2>0$ and the inverse moments
+$\E S^{-1},\E S^{-2}$ used in \eqref{eq:cmh-radial-relations} are finite.
+
+Combine \eqref{eq:cmh-gamma-completion}, \eqref{eq:cmh-Ri-deltai} and
+\eqref{eq:cmh-integrated-row}. Since $D_i(G)=\E[u_i^2]/\alpha_i$, the total coefficient of
+$\E_P[u_i^2]$ in $N_\Gamma(G)-\tfrac14D_\Gamma(G)$ is
+\[
+  \frac1{z_AP_i}+\frac2{(A-1)(\alpha_i+1)}+\frac{P_i}{(\alpha_i+1)^2}+\frac{\delta_i}{\alpha_i},
+\]
+and multiplying it by $z_A\alpha_i$ gives exactly $F_A(\alpha_i,P_i)$ of \eqref{eq:cmh-FA},
+using $z_A/(A-1)=A-2$. By Lemma~\ref{lem:cmh-angular-coefficient},
+\[
+  N_\Gamma(G)-\tfrac14D_\Gamma(G)
+  \ \ge\ \frac{A-\tfrac12+s_A}{z_A}\sum_i\frac{\E_P[u_i^2]}{\alpha_i}
+  =\frac{A-\tfrac12+s_A}{z_A}\,d_\alpha(g).
+\]
+Substituting \eqref{eq:cmh-radial-relations}, multiplying by $z_A$ and using the identity
+$z_A/4+A-\tfrac12=A(A+1)/4$ gives
+\begin{equation}
+  n_\alpha(g)\ \ge\ \Bigl(\frac{A(A+1)}4+s_A\Bigr)d_\alpha(g),
+  \label{eq:cmh-dirichlet-surplus}
+\end{equation}
+and $s_A\ge0$ yields \eqref{eq:cmh-dirichlet-main}.
+\end{proof}
+
+\begin{corollary}[Quantitative surplus]
+\label{cor:cmh-dirichlet-surplus}
+For $A>3$, $n_\alpha(g)\ge\bigl(\tfrac14+\eps_A\bigr)A(A+1)d_\alpha(g)$ with
+$\eps_A=s_A/(A(A+1))>0$. Equivalently
+$\CMH\le4\bigl(1+4s_A/(A(A+1))\bigr)^{-1}<4$: the constant $4$ is attained only in the limit.
+\end{corollary}
+
+\begin{proof}
+When $A>3$ the Gamma branch of the preceding proof applies, including when $m=2$, and
+\eqref{eq:cmh-dirichlet-surplus} gives the asserted estimate. Moreover $z_A>2$, so either
+$s_A=(z_A-2)/4>0$ or $s_A=\sqrt{z_A}-3/2>0$.
+\end{proof}
+
+\begin{corollary}[Affine Poincar\'e consequences]
+\label{cor:cmh-dirichlet-poincare}
+Every log-concave Dirichlet law satisfies $\CPaff\le4$; so does every linear image, product, and
+convolution of independent such laws.
+\end{corollary}
+
+\begin{proof}
+Combine Theorems~\ref{thm:cmh-implies-affine-poincare} and \ref{thm:cmh-dirichlet} with
+Corollary~\ref{cor:cmh-linear-images}.
+\end{proof}
+
+Qualitative dimension-free KLS bounds for simplices and conservative Gamma models are prior
+art; see \cite[\S1.2]{KolesnikovMilman2016OrliczKLS} as a secondary pointer to that literature.
+The specific content of this proof is the constant $4$, the quantitative surplus, and the
+CMH-level estimate; no broader priority claim is intended.
+
+\begin{remark}[Closure and aggregation]
+\label{rem:cmh-dirichlet-closure}
+The proof is written for smooth $g$ with controlled boundary behavior. The closure argument
+takes polynomials on the simplex, lifts them after a radial cutoff $S\ge\eps$, applies the Gamma
+identities and lets $\eps\downarrow0$; the required inverse Gamma moments are finite because
+$A\ge3$ throughout the Gamma branch. Polynomials form a core for $L_\alpha$, so the closed forms
+extend \eqref{eq:cmh-dirichlet-main} to $\Dom(L_\alpha)$; only the residual branch $m=2$, $A<3$
+uses the one-dimensional no-flux closure instead.
+
+The estimate is also compatible with Dirichlet aggregation. If
+$Q\sim\Dir(\beta_1,\dots,\beta_N)$, the coordinates are partitioned into blocks $G_i$, and
+$P_i=\sum_{a\in G_i}Q_a$, $\alpha_i=\sum_{a\in G_i}\beta_a$, then for functions of $P$ alone the
+generator is the coarse one and
+$\E\bigl[\sum_{a\in G_i}Q_a^2/\beta_a\mid P\bigr]
+ =P_i^2(\alpha_i+\abs{G_i})/(\alpha_i(\alpha_i+1))\ge P_i^2/\alpha_i$,
+so CMH for the fine law implies CMH for its aggregation. This is a consistency check on
+Theorem~\ref{thm:cmh-dirichlet}, not an ingredient of it.
+\end{remark}
+
+\begin{remark}[Sharpness on simplex faces]
+\label{rem:cmh-dirichlet-sharp}
+The constant $4$ cannot be improved uniformly over the family. The face law
+$\mathrm{Beta}(1,b)$ is one dimensional, so Theorem~\ref{thm:cmh-1d} applies; its Neumann
+spectral problem reduces to Bessel's equation and gives
+$\CMH(\mathrm{Beta}(1,b))=(b+1)^2(b+2)/\bigl(b\,j_{b/2,1}^2\bigr)$ with $j_{\nu,1}$ the first
+positive zero of $J_\nu$. Since $j_{b/2,1}\sim b/2$, this tends to $4$; after rescaling
+$\mathrm{Beta}(1,b)$ converges to the one-sided exponential. The extremal mechanism on the
+simplex is therefore the same one-dimensional exponential boundary mechanism that fixes the
+constant in Theorem~\ref{thm:cmh-1d}. Corollary~\ref{cor:cmh-dirichlet-surplus} says the
+interior of the family is strictly safer.
+\end{remark}
+
+\subsection{The saturation risk and the decisive test}
+\label{subsec:cmh-saturation}
+
+\begin{remark}[Exact product saturation and an open perturbative test]
+\label{rem:cmh-saturation-risk}
+By Theorems~\ref{thm:cmh-1d} and \ref{thm:cmh-product}, a product of centered one-sided
+exponentials has $\CMH=4$ \emph{exactly}. Proposition~\ref{prop:cmh-hodge} gives, for every
+admissible test function, the exact splitting of the CMH numerator into its affine Poincar\'e
+part and the nonnegative solenoidal term $\E\inner{w}{\Sigma^{-1}w}$.
+
+No perturbative conclusion follows from those two facts alone. Under a perturbation the
+covariance and its inverse, the canonical Stein kernel, both numerator channels, the
+denominator, and the optimizing test function may all vary. In particular, an increase of the
+solenoidal term for one test function does not by itself imply an increase of the full CMH
+Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the explicit
+open second-variation problem in Question~\ref{q:cmh-solenoidal-perturbation}; a positive answer
+would refute $\mathrm{CMH}(4)$ but would not by itself refute Conjecture~\ref{conj:kls}.
+\end{remark}
+
+\begin{question}[Second-order solenoidal excess at the product endpoint]
+\label{q:cmh-solenoidal-perturbation}
+Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided
+exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$ within the
+smooth strictly convex class. Compute the second variation of $\CMH$ at $\eps=0$, splitting the
+CMH numerator through Proposition~\ref{prop:cmh-hodge} into its gradient and solenoidal parts.
+Either exhibit an admissible perturbation with strictly positive second variation --- refuting
+$\mathrm{CMH}(4)$ and forcing the route to a larger constant --- or identify the structural
+reason the solenoidal part vanishes to second order at a saturating product.
+\end{question}
+
+Question~\ref{q:cmh-solenoidal-perturbation} is the sharpest available probe of the route
+because it attacks the endpoint rather than the machinery, and because both ingredients are
+already exact: the saturation value comes from Theorem~\ref{thm:cmh-product} and the splitting
+from Proposition~\ref{prop:cmh-hodge}. Together with Question~\ref{q:gate-zero} it forms the
+falsification layer of Route C; Questions~\ref{q:mm-invariant-lift} and
+\ref{q:mm-square-root-commutator} remain the construction layer.
+\end{document}

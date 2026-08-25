@@ -75,30 +75,75 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 
 \part{The Kannan--Lov\'asz--Simonovits frontier}
 
-% Route-neutral target, literature frontier, and strategy map
-\subfile{modules/kls/00-strategy-map}
-% Detailed Eldan fixed-cut program: foundations and two subroutes
-\subfile{modules/kls/00-introduction}
-\subfile{modules/kls/01-setup-localization}
-% Common core: reduction, identities, shared dictionary, obstruction, covariance technology, models
-\subfile{modules/kls/02-mass-martingale-centroid}
-\subfile{modules/kls/03-riccati-identities}
-\subfile{modules/kls/04-stein-dictionary}
-\subfile{modules/kls/05-obstruction}
-\subfile{modules/kls/06-covariance-technology}
-\subfile{modules/kls/07-model-geometries}
-% Eldan-A: all-cut Carleson
-\subfile{modules/kls/08-carleson-consumption}
-\subfile{modules/kls/09-product-stress}
-% Eldan-B: weighted geometric package
-\subfile{modules/kls/10-stein-route}
-\subfile{modules/kls/11-excess-propagation}
-\subfile{modules/kls/12-bootstrap}
-\subfile{modules/kls/13-jacobi-splitting}
-% Eldan fixed-cut open targets
-\subfile{modules/kls/14-open-targets}
-% Separate deterministic moment-map/Haar route
-\subfile{modules/kls/15-moment-map-cmh}
+% Part III is grouped by \klsgroup dividers (shared/preamble.tex): orientation,
+% then a self-contained survey of the five strategy families, then the shared
+% localization machinery, then one block per live repository route, then the
+% synthesis. The dividers carry no numbering; section and \label identity --- and
+% therefore every ledger node id --- is unchanged by the grouping.
+
+\klsgroup{Group 0 --- Orientation}{%
+The conjecture, the August 2026 frontier, the architecture of the current proof, and the
+obstruction that shapes every route below.}
+
+\subfile{modules/kls/00-orientation}
+
+\klsgroup{Group 1 --- The five strategy families}{%
+One section per family, each with the same five headings: object followed, what it buys,
+sharpest result, the precise missing estimate, why it stalls.}
+
+\subfile{modules/kls/01-family-needles}
+\subfile{modules/kls/02-family-stochastic-localization}
+\subfile{modules/kls/03-family-bochner-hminus1}
+\subfile{modules/kls/04-family-moment-map}
+\subfile{modules/kls/05-family-transport}
+
+\klsgroup{Group 2 --- Shared localization machinery}{%
+Notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the
+static quadratic-chaos obstruction, covariance technology, and the model geometries. Used by
+Routes E and S alike.}
+
+\subfile{modules/kls/10-notation}
+\subfile{modules/kls/11-mass-martingale}
+\subfile{modules/kls/12-riccati}
+\subfile{modules/kls/13-stein-dictionary}
+\subfile{modules/kls/14-qcts-obstruction}
+\subfile{modules/kls/15-covariance-technology}
+\subfile{modules/kls/16-model-geometries}
+
+\klsgroup{Group 3 --- Route E: the fixed-cut Eldan program}{%
+Follow one candidate bottleneck cut under stochastic localization. Subroute E--A is the
+all-cut Carleson estimate; subroute E--B is the weighted near-Cheeger package.}
+
+\subfile{modules/kls/20-eldan-statements}
+\subfile{modules/kls/21-carleson}
+\subfile{modules/kls/22-product-stress}
+\subfile{modules/kls/23-stein-route}
+\subfile{modules/kls/24-excess-propagation}
+\subfile{modules/kls/25-bootstrap}
+\subfile{modules/kls/26-jacobi-splitting}
+\subfile{modules/kls/27-eldan-open-targets}
+
+\klsgroup{Group 4 --- Route S: the fixed-eigenfunction spectral program}{%
+Follow a first eigenfunction instead of a cut, and feed its whitened posterior tensor to the
+moment-map control of Group~1.}
+
+\subfile{modules/kls/30-spectral-route}
+
+\klsgroup{Group 5 --- Route C: the deterministic moment-map program}{%
+Extend constant moment-map multipliers to test-dependent Haar fields through Schur--Piola
+geometry. No stochastic localization. The construction layer states the Haar/commutator
+programme; the normalization layer fixes the endpoint, proves it implies the affine Poincar\'e
+inequality, and computes it exactly on the line, on products, and on the Dirichlet family.}
+
+\subfile{modules/kls/40-moment-map-cmh}
+\subfile{modules/kls/41-cmh-normalization}
+\subfile{modules/kls/42-cmh-exact-cases}
+
+\klsgroup{Group 6 --- Synthesis}{%
+What a proof of KLS now needs, and how each named gap maps onto an open node of this
+repository's KLS ledger.}
+
+\subfile{modules/kls/50-synthesis}
 
 \begingroup
 \sloppy

@@ -16,11 +16,11 @@ keeping `p_t` in a balanced window for a universal time. Proof posture throughou
 contradiction against a near-worst measure** `h_μ ≤ (1+ε) hstar_n` — this is what makes the
 bootstrap anchor (`thm:bootstrap`) legitimate.
 
-## The legacy proved backbone (unconditional statements; R2 debt recorded)
+## The R2-certified backbone (unconditional statements)
 
-The inline arguments below predate the current standalone-dossier and independent-review
-contract. Their ledger statuses are preserved, but the August 24 audit records the certification
-debt; this heading is not a fresh R2 review.
+The statements below now carry standalone dossiers and distinct-agent reviews.  The August 24
+audit records their former certification debt; the final 2026-08-25 reports under
+`research/reviews/` are the operative R2 certificates.
 
 ```
 mass martingale  d[p]_t = s_t r_t dt           (eq:qv-p)
@@ -54,7 +54,7 @@ gap is the **operator-to-trace upgrade** `q:upgrade`: lift `cor:per-direction` f
 per-direction (quadratic-form) to trace scale, uniformly over cuts. Bounded by
 `obs:proj-ceiling` (projection tests cap at log n) and `obs:two-tail`. First decision point:
 the **product stress test** (`prog:product-test`, executed in
-`modules/kls/09-product-stress.tex`), which has refuted the rank-one counterexample
+`modules/kls/22-product-stress.tex`), which has refuted the rank-one counterexample
 (`obs:rank-one-refuted`) and reduced the remaining danger to the **adapted alignment problem**
 `q:alignment`. The designated Laplace tail-union computation has now been executed through
 $n=1024$: it detects a finite-dimensional alignment pulse but no divergence, so the mathematical

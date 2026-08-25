@@ -1,0 +1,328 @@
+% Standalone solution dossier for the proved geometry/model backbone in Part III.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-nodes: lem:profile-bound; cor:generic-degeneracy;
+%               prop:exact-splitting; prop:persistent-splitting;
+%               prop:gaussian-model; prop:products
+% refines: lem:profile-bound; cor:generic-degeneracy;
+%          prop:exact-splitting; prop:persistent-splitting;
+%          prop:gaussian-model; prop:products
+% manuscript: modules/kls/26-jacobi-splitting.tex;
+%             modules/kls/16-model-geometries.tex
+% depends: cor:generic-degeneracy -> lem:profile-bound
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% authored_by: /root/kls_proof_audit
+% reviewed_by: /root/kls_bootstrap_author
+% review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+% date: 2026-08-25
+% ============================================================================
+
+\section*{Solution: profile curvature, exact splitting, and the Gaussian and product models}
+\label{sec:sol-kls-geometry-models}
+
+\paragraph{Scope and conventions.}
+This dossier proves exactly the six statements listed in the header.  It does not supply the
+regularity hypotheses in Lemma~\ref{lem:profile-bound} or
+Corollary~\ref{cor:generic-degeneracy}, and it does not infer a global splitting from the
+boundary-local condition $\mathfrak K_\Sigma=0$.  For the profile calculation, the smooth
+free-boundary convention is the one in \S\ref{sec:notation}: all support-boundary contributions
+are included in $\mathfrak K_\Sigma=-\calI_\Sigma(1,1)$.  Stochastic-localization notation is
+also that of \S\ref{sec:notation}.
+
+\subsection*{1. Curvature of a smooth minimizing branch}
+
+\begin{lemma}[= Lemma~\ref{lem:profile-bound}]
+\label{lem:sol-profile-bound}
+Suppose that at volume $p$ there is a smooth volume-constrained minimizer $E_p$ with boundary
+$\Sigma_p$, weighted area $P=I(p)$, and that the isoperimetric profile $I$ is twice
+differentiable at $p$.  Then
+\[
+  \mathfrak K_{\Sigma_p}\le -I''(p)I(p)^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose the admissible normal flow $E_s$ whose boundary has unit normal speed at $s=0$; when the
+minimizer meets the support boundary, the flow is taken in the free-boundary class.  Let
+$v(s)=\nu(E_s)$ and $P(s)=\nu^+(E_s)$.  The first-variation formulas, with the orientation used
+in \S\ref{sec:jacobi} \cite{Bayle2004,BayleRosales2003,Rosales2014,Milman2009Isoperimetric},
+give
+\[
+  v'(0)=P,\qquad P'(0)=\lambda P,
+\]
+where the weighted mean curvature $\lambda=H_\nu$ is constant on $\Sigma_p$.  In particular
+$v'(0)>0$, so $v$ has a local smooth inverse.  The Riccati variation of $H_\nu$, including the
+free-boundary term already present in $\mathfrak K_{\Sigma_p}$, gives
+\[
+  P''(0)=-\mathfrak K_{\Sigma_p}+\lambda^2P.
+\]
+Also $v''(0)=P'(0)=\lambda P$.
+
+The competitor branch defines $\Psi(w)=P(v^{-1}(w))$.  Since $E_s$ is an admissible competitor
+at volume $v(s)$,
+\[
+  I(w)\le\Psi(w)\quad\text{near }p,
+  \qquad I(p)=\Psi(p)=P.
+\]
+The chain rule, now retaining both second-derivative terms, yields
+\begin{align*}
+  \Psi''(p)
+  &=\frac{P''(0)v'(0)-P'(0)v''(0)}{v'(0)^3}\\
+  &=\frac{(-\mathfrak K_{\Sigma_p}+\lambda^2P)P-(\lambda P)^2}{P^3}
+    =-\frac{\mathfrak K_{\Sigma_p}}{P^2}.
+\end{align*}
+Because $\Psi-I$ has a local minimum $0$ at $p$ and $I$ is twice differentiable there,
+$I''(p)\le\Psi''(p)$.  Multiplication by $-P^2$ proves the claim.
+\end{proof}
+
+\begin{corollary}[= Corollary~\ref{cor:generic-degeneracy}]
+\label{cor:sol-generic-degeneracy}
+Grant smooth volume-constrained minimizers at almost every $p\in[1/3,2/3]$.  If $h_\nu\le1$,
+then
+\[
+  \int_{1/3}^{2/3}\mathfrak K_{\Sigma_p}\,dp\le C h_\nu^3.
+\]
+This is an averaged statement about the minimizing branches; it gives no control of a fixed cut
+tracked by localization.
+\end{corollary}
+
+\begin{proof}
+The log-concave isoperimetric profile is nonnegative, concave, symmetric under
+$p\leftrightarrow1-p$, and vanishes at $0$ and $1$.  Concavity makes $I(p)/p$ nonincreasing on
+$(0,1/2]$, hence
+\[
+  h_\nu=\inf_{0<p<1}\frac{I(p)}{\min(p,1-p)}=2I(1/2).
+\]
+Symmetry and concavity also make $I(1/2)$ the maximum, so
+$\sup_{[1/3,2/3]}I\le h_\nu/2$.  If $-I''_{\rm dist}$ denotes the nonnegative distributional
+second derivative measure, concavity and the chord bounds at $1/3$ and $2/3$ give
+\[
+  (-I''_{\rm dist})((1/3,2/3))
+  \le I'_+(1/3)-I'_-(2/3)
+  \le 3h_\nu.
+\]
+For example, $I'_+(1/3)\le I(1/3)/(1/3)\le3h_\nu/2$, and symmetry gives the other endpoint
+bound.  A concave function is twice differentiable at Lebesgue-almost every point; the density
+$-I''(p)$ of the absolutely continuous part is bounded in integral by the displayed
+distributional mass.  At almost every point where both the granted smooth minimizer and
+$I''(p)$ exist, Lemma~\ref{lem:sol-profile-bound} gives
+\[
+  \mathfrak K_{\Sigma_p}\le-I''(p)I(p)^2.
+\]
+Consequently
+\[
+  \int_{1/3}^{2/3}\mathfrak K_{\Sigma_p}\,dp
+  \le \frac{h_\nu^2}{4}\int_{1/3}^{2/3}(-I''(p))\,dp
+  \le\frac34h_\nu^3.
+\]
+The hypothesis $h_\nu\le1$ is retained from the manuscript, although the displayed calculation
+does not need it.
+\end{proof}
+
+\subsection*{2. Exact splitting and its persistence}
+
+\begin{proposition}[= Proposition~\ref{prop:exact-splitting}]
+\label{prop:sol-exact-splitting}
+Let $\nu=e^{-V}dx$ be log-concave with convex support $K=K_1\times J$ in orthogonal coordinates
+$x=(y,z)\in\theta^\perp\oplus\R\theta$.  If
+$\nabla^2V(\theta,\cdot)\equiv0$ on $\operatorname{int}K$, then
+\[
+  V(y,z)=V_1(y)+cz
+\]
+for some constant $c$, and $\nu$ is the product of a log-concave law on $K_1$ and the
+log-affine law proportional to $e^{-cz}$ on $J$.  Normalizability forces $J\ne\R$; an unbounded
+$J$ can only be a half-line with the decaying orientation and $c\ne0$.
+
+Conversely, for an already split law of this form and $z_0\in\operatorname{int}J$, the cut
+$E=\{z\le z_0\}$ has $II_\Sigma=0$, $\nabla^2V(n,n)=0$, and
+$\mathfrak K_\Sigma=0$.
+\end{proposition}
+
+\begin{proof}
+On the connected set $\operatorname{int}(K_1\times J)$, the Hessian assumption says
+$\partial_z\nabla V=0$.  Thus $\partial_zV$ is independent of $z$, while the mixed identities
+$\partial_{y_j}\partial_zV=0$ show that it is also independent of $y$.  Hence
+$\partial_zV=c$ and integration gives $V(y,z)=V_1(y)+cz$ (up to an irrelevant additive
+constant).  Both the density and its normalizing integral factorize.  If $J=\R$, the integral
+$\int_\R e^{-cz}\,dz$ diverges for every $c$; the remaining assertions about $J$ follow
+immediately.
+
+For the converse, $\Sigma=K_1\times\{z_0\}$ is a hyperplane in the product cylinder, so
+$II_\Sigma=0$, and the log-affine factor gives $\nabla^2V(n,n)=0$.  The cut does not meet an
+endpoint of $J$.  Along the lateral support boundary, the cylinder is flat in the $\theta$
+direction, so the free-boundary contribution to the constant mode is also zero.  Therefore
+$\mathfrak K_\Sigma=-\calI_\Sigma(1,1)=0$.
+\end{proof}
+
+The converse proved here starts from the global product.  Nothing in the argument proves
+$\mathfrak K_\Sigma=0\Rightarrow$ global cylindrical or log-affine splitting.
+
+\begin{proposition}[= Proposition~\ref{prop:persistent-splitting}]
+\label{prop:sol-persistent-splitting}
+Suppose $V(y,z)=V_1(y)+V_2(z)$ across
+$\theta^\perp\oplus\R\theta$, with $V_2$ convex.  Then the localized potential splits at every
+time, pathwise; $A_t$ is block diagonal across this decomposition; and for a fixed halfspace cut
+orthogonal to $\theta$, $\delta_t\parallel\theta$ and
+$K_t=\kappa_t\theta\theta^T$ for some scalar $\kappa_t$, hence $K_t$ has rank at most one, for
+every $t$.
+\end{proposition}
+
+\begin{proof}
+Decompose $c_t=c_t'+c_t''\theta$.  Up to its scalar normalizer, the localized potential is
+\begin{align*}
+  V_t(y,z)
+  &=V_1(y)+V_2(z)+\frac t2(\abs y^2+z^2)-c_t'\cdot y-c_t''z\\
+  &=\left(V_1(y)+\frac t2\abs y^2-c_t'\cdot y\right)
+    +\left(V_2(z)+\frac t2z^2-c_t''z\right).
+\end{align*}
+Thus the posterior factorizes for every realized $c_t$, so its covariance is block diagonal.
+The event defining an orthogonal halfspace depends only on $z$.  Independence makes the two
+conditional means agree in the $y$ block and makes the two conditional covariances agree there,
+including all cross blocks.  Hence $\delta_t$ is parallel to $\theta$, $G_t$ is supported on
+$\R\theta\otimes\R\theta$, and
+$K_t=G_t+(q_t-p_t)\delta_t\delta_t^T$ has rank at most one.
+\end{proof}
+
+\subsection*{3. Gaussian localization}
+
+\begin{proposition}[= Proposition~\ref{prop:gaussian-model}]
+\label{prop:sol-gaussian-model}
+For the standard Gaussian $\mu=\gamma_n$:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+  \item $A_t=(1+t)^{-1}I_n$ deterministically;
+  \item $\E\int_0^T\lmax(A_t)\,dt\le T$, and the mass-martingale argument gives
+        $\Prob(\tau\le T)\le9T\le1/2$ for $T\le1/18$, hence the conclusion of
+        Theorem~\ref{thm:centroid-implies-kls} without Carleson input;
+  \item every halfspace cut has $e_t(E)=0$ for every $t$;
+  \item for every nontrivial halfspace, with $\sigma_t^2=(1+t)^{-1}$ and
+        $r_t=\sigma_t^2\varphi(\alpha_t)^2/s_t$,
+        \[
+          r_t\le\frac2\pi\sigma_t^2,
+          \qquad
+          D_t=r_t(2\sigma_t^2-r_t)
+          \ge\left(2-\frac2\pi\right)\sigma_t^2r_t>0.
+        \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The posterior density is
+\[
+  Z_t^{-1}\exp\left(-\frac{1+t}{2}\abs x^2+c_t\cdot x\right),
+\]
+so it is Gaussian with mean $a_t=c_t/(1+t)$ and covariance
+$A_t=(1+t)^{-1}I_n$.  This proves (i), and
+$\int_0^T\lmax(A_t)dt=\log(1+T)\le T$.
+
+For a balanced cut started at $p_0=1/2$ and stopped on exiting $[1/3,2/3]$, covariance
+decomposition gives $B_t\preceq A_t$, so the mass quadratic variation satisfies
+\[
+  \E[p]_{T\wedge\tau}
+  =\E\int_0^{T\wedge\tau}s_tr_t\,dt
+  \le\frac14\int_0^T\lmax(A_t)\,dt\le\frac T4.
+\]
+Exiting requires a fluctuation of at least $1/6$; Doob's $L^2$ inequality therefore gives
+$\Prob(\tau\le T)\le36(T/4)=9T$.  At $T\le1/18$ the posterior remains balanced with probability
+at least $1/2$.  Its $T$-uniform log-concavity gives a boundary lower bound of order $\sqrt T$
+\cite{BakryGentilLedoux2014,Bobkov1999LogConcave,Milman2009Isoperimetric},
+and the perimeter supermartingale transfers it to time zero.  This is precisely the stopped
+centroid conclusion in (ii); the same argument handles the nested balanced window with changed
+universal constants.
+
+For a fixed halfspace, every posterior is a scalar-covariance Gaussian, and Gaussian halfspaces
+minimize perimeter at their mass.  Thus
+$\mu_t^+(E)=I_{\mu_t}(p_t)$ and $e_t(E)=0$, proving (iii).
+
+After rotation, the halfspace depends on one $N(0,\sigma_t^2)$ marginal.  If $\alpha_t$ is its
+normalized level, direct truncated-normal integration gives
+\[
+  \abs{\delta_t}=\frac{\sigma_t\varphi(\alpha_t)}{s_t},
+  \qquad r_t=s_t\abs{\delta_t}^2
+       =\frac{\sigma_t^2\varphi(\alpha_t)^2}{s_t}.
+\]
+The inequality $\varphi(\alpha)^2\le(2/\pi)\Phi(\alpha)\Phi(-\alpha)$ follows from
+\[
+  \operatorname{erf}(x)^2\le1-e^{-2x^2},\qquad x\ge0.
+\]
+For completeness, the left side equals
+$(4/\pi)\int_{[0,x]^2}e^{-(u^2+v^2)}\,du\,dv$; the square is contained in the quarter disk of
+radius $\sqrt2x$, whose normalized Gaussian integral is $1-e^{-2x^2}$.  Taking
+$x=\abs\alpha/\sqrt2$ proves $r_t\le(2/\pi)\sigma_t^2$.  Finally $A_t=\sigma_t^2I$ gives
+\[
+  D_t=2s_t\delta_t^TA_t\delta_t-r_t^2
+     =2\sigma_t^2r_t-r_t^2,
+\]
+and (iv) follows.
+\end{proof}
+
+\subsection*{4. Product localization and product KLS}
+
+\begin{proposition}[= Proposition~\ref{prop:products}]
+\label{prop:sol-products}
+Let $\mu=\bigotimes_{i=1}^n\mu^{(i)}$ be a product of isotropic one-dimensional log-concave
+measures.  Then, pathwise:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+  \item $\mu_t$ remains a product and
+        $A_t=\operatorname{diag}(A_t^{(1)},\ldots,A_t^{(n)})$;
+  \item each $A^{(i)}$ is a nonnegative supermartingale and
+        $\Prob(\sup_{s\le t}A_s^{(i)}\ge\lambda)\le1/\lambda$ for $\lambda\ge1$;
+  \item
+        \[
+          h_{\mu_t}\ge c\min_i(A_t^{(i)})^{-1/2}
+          =c\lmax(A_t)^{-1/2}.
+        \]
+        In particular KLS holds for products, and the profile bound propagates the excess of any
+        cut directly, with no bootstrap.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For each realization of $c_t$, the unnormalized posterior density factorizes:
+\[
+  \prod_{i=1}^n
+  \exp\left(-V_i(x_i)+c_{t,i}x_i-\frac t2x_i^2\right).
+\]
+Its normalizer is the product of the one-dimensional normalizers, proving (i).  The diagonal
+covariance SDE reduces coordinatewise to
+\[
+  dA_t^{(i)}=m_{3,t}^{(i)}\,dW_t^{(i)}-(A_t^{(i)})^2dt,
+\]
+where $m_{3,t}^{(i)}$ is the third centered moment of the $i$th posterior.  Thus
+$A^{(i)}\ge0$ is a local supermartingale and hence a supermartingale.  Since
+$A_0^{(i)}=1$, the nonnegative-supermartingale maximal inequality gives (ii).
+
+The Poincar\'e constant tensorizes, while the one-dimensional log-concave bound is affine
+\cite{BakryGentilLedoux2014,LeeVempala2018}:
+\[
+  \CP(\mu_t)=\max_i\CP(\mu_t^{(i)})
+  \le C\max_i A_t^{(i)}=C\lmax(A_t).
+\]
+The reverse Cheeger--Poincar\'e comparison for log-concave measures
+\cite{BakryGentilLedoux2014,LeeVempala2018} then yields
+$h_{\mu_t}\ge c\CP(\mu_t)^{-1/2}$, proving (iii).  At $t=0$, isotropy makes the right side
+universal, which is KLS for product measures.  More explicitly, for any cut $E$,
+\[
+  \mu_t^+(E)=I_{\mu_t}(p_t)+e_t(E)
+  \ge c\lmax(A_t)^{-1/2}\min(p_t,q_t)+e_t(E),
+\]
+which is the asserted direct propagation statement.
+\end{proof}
+
+\paragraph{Dependency and regularity audit.}
+The only ledger edge internal to this dossier runs from
+\texttt{cor:generic-degeneracy} to \texttt{lem:profile-bound}.  The remaining proofs use the
+standard localization identities, Gaussian isoperimetry, tensorization, the one-dimensional
+log-concave Poincar\'e bound, and the log-concave Cheeger--Poincar\'e comparison already imported
+in the manuscript.  The profile statements are expressly conditional on their smooth branch;
+no smoothing argument is used to manufacture minimizers.  Product factorization is an identity
+of densities and survives the usual coordinatewise truncation/regularization.  None of these
+statements uses numerical evidence or asserts a quantitative splitting converse.
+The manuscript phrase ``rank-one $K_t$'' in Proposition~\ref{prop:persistent-splitting} is
+understood structurally as $K_t=\kappa_t\theta\theta^T$; its actual rank can be zero (for example
+at a symmetric median cut), so an exact-rank-one reading would be false.
+
+\end{document}

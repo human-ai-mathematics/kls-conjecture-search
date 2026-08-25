@@ -1,0 +1,200 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Route S: fixed-eigenfunction localization}
+\label{sec:spectral-route}
+
+\paragraph{Thesis.}
+Follow a first eigenfunction --- rather than a candidate cut --- through stochastic localization,
+and apply the moment-map quadratic control of Section~\ref{sec:family-moment-map} to its whitened
+posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate
+over a universal amount of localization time.
+
+This route attacks the spectral object that \emph{defines} KLS directly, and it retains the
+tensor/covariance orientation that a global operator-norm bound discards --- the property
+Section~\ref{subsec:kls-spike-obstruction} showed to be necessary. It shares the localization
+backbone of Group~2 with Route~E and differs only in the object it tracks.
+
+The route is \textbf{live, secondary}. Its control-plane brief is
+\texttt{research/kls/routes/moment-map-spectral/}, and the derivations behind the cycle-1
+decisions below are in the dated explorations of 20~August 2026.
+
+\subsection{Setup and the exact fixed-function SDE}
+\label{subsec:spectral-sde}
+
+Work first on smooth, strongly log-concave isotropic approximants, where the weighted Laplacian
+$L=\Delta-\nabla V\cdot\nabla$ has discrete spectrum. Let $f$ be a normalized first nonconstant
+eigenfunction, $-Lf=\lambda f$, and define along the localization of
+Section~\ref{subsec:sl-process}
+\begin{equation}
+  g_t=\Cov_{\mu_t}(f,X),
+  \qquad
+  H_t=\E_t\bigl[(f-\E_tf)(X-a_t)^{\otimes2}\bigr],
+  \qquad
+  A_t=\Cov_{\mu_t}(X).
+  \label{eq:spectral-quantities}
+\end{equation}
+Here $g_t\in\R^n$ is the covariance of $f$ with the coordinates, and $H_t$ is the
+symmetric-matrix-valued tensor coupling $f$ to the second-order posterior structure.
+
+The exact evolution is
+\begin{equation}
+  \dd g_t=H_t\dd W_t-A_tg_t\dd t .
+  \label{eq:spectral-sde}
+\end{equation}
+So $\norm{H_t}_{\HS}^2$ is the \emph{source} for $\abs{g_t}^2$ and $2g_t^TA_tg_t$ is its
+\emph{exact damping}. This is the fixed-function analogue of the two-color Riccati identity of
+Section~\ref{sec:riccati}: source and damping are separated exactly, with no inequality spent.
+
+\subsection{What the July 2026 input gives, and what it leaves}
+\label{subsec:spectral-whitened}
+
+Conditional on the version-1 preprint of Theorem~\ref{thm:letwin-qcts}, the eigenfunction tensor
+satisfies the optimal \emph{intrinsic} static estimate in whitened coordinates,
+\begin{equation}
+  \norm{A_t^{-1/2}H_tA_t^{-1/2}}_{\HS}^2\le8\,\Var_{\mu_t}(f).
+  \label{eq:whitened-tensor}
+\end{equation}
+This is the exact analogue, for the fixed-eigenfunction object, of the static quadratic-chaos
+input that Section~\ref{sec:qcts} supplies for the fixed-cut object.
+
+Crude unwhitening of \eqref{eq:whitened-tensor} --- multiplying back by $A_t^{1/2}$ on both sides
+--- leaves a factor $\lmax(A_t)^2$, and hence exactly the universal-time dynamic alignment
+problem that Section~\ref{subsec:sl-where-the-log-lives} identified as the residual cost. So this
+route does not escape the difficulty by importing the preprint; it relocates it to an object with
+more structure.
+
+\begin{remark}[The extra structure a cut does not have]
+\label{rem:spectral-extra-structure}
+Unlike an indicator, the eigenfunction satisfies an equation, and that equation fixes two energies
+which the cut has no analogue of:
+\[
+  \E\abs{\nabla f}^2=\lambda,
+  \qquad
+  \E\norm{\Hess f}_{\HS}^2\le\lambda^2 .
+\]
+Exploiting these fixed energies inside the posterior channel is the possible advantage of this
+route over Route~E. The route succeeds only if it controls the tensor's incidence in inflated
+covariance spaces, or consumes the exact damping in \eqref{eq:spectral-sde}. Another global
+covariance-norm estimate is not enough, and by Proposition~\ref{prop:covariance-spike} could not
+be.
+\end{remark}
+
+\subsection{The headline open target}
+\label{subsec:spectral-headline}
+
+\begin{question}[Fixed-eigenfunction absorptive occupation]
+\label{q:mm-spectral-occupation}
+On smooth strongly log-concave isotropic approximants, let $-Lf=\lambda f$ be a normalized first
+nonconstant eigenfunction and let $g_t,H_t,A_t$ be as in \eqref{eq:spectral-quantities}. Do
+universal constants $T_0,C_0,C_1>0$ and $\alpha<1$ exist such that, for every $t\le T_0$,
+\begin{equation}
+  \E\int_0^t\norm{H_s}_{\HS}^2\dd s
+  \le C_0t+C_1\E\int_0^t\abs{g_s}^2\dd s
+  +\alpha\E\int_0^t2g_s^TA_sg_s\dd s,
+  \label{eq:spectral-occupation}
+\end{equation}
+uniformly through approximation?
+\end{question}
+
+\begin{question}[Sufficiency bridge]
+\label{prop:spectral-sufficiency}
+Prove that an affirmative answer to Question~\ref{q:mm-spectral-occupation}, uniform through
+regularization, implies a universal spectral gap, hence Conjecture~\ref{conj:kls}.
+\end{question}
+
+The intended mechanism is the fixed-function SDE \eqref{eq:spectral-sde} together with
+Gr\"onwall, posterior Brascamp--Lieb, and the fixed-gradient density martingale; the shape of the
+argument should parallel the two-color analysis in Sections~\ref{sec:mass-martingale}
+and~\ref{sec:carleson}.  That mechanism has not yet been written as a proof with constants,
+terminal variance control, and a regularization limit, so it is tracked as an open bridge rather
+than a proved implication.  The estimate \eqref{eq:spectral-occupation} itself is also open, and
+must either hold uniformly through regularization or be reformulated for approximate Rayleigh
+minimizers.
+
+The absorption structure of \eqref{eq:spectral-occupation} is worth naming, because it is the same
+in all three of this repository's routes: a source term is charged against a linear budget $C_0t$,
+a lower-order term, and a \emph{fraction $\alpha<1$ of its own exact damping}. That last summand
+is what makes the estimate absorptive rather than merely comparative, and it is why $\alpha<1$ is
+not cosmetic.
+
+\subsection{An equivalent sufficient reformulation}
+\label{subsec:spectral-kappa-form}
+
+There is a second, coarser way to state what this route needs. By
+Proposition~\ref{prop:letwin-kappa}, $\kappa_n\le2\sqrt2$ conditional on the preprint. Hence
+\emph{any} dimension-free comparison of the form
+\begin{equation}
+  \CP(\mu)\le C\bigl(1+\kappa_n^2\bigr)
+  \label{eq:spectral-kappa-sufficient}
+\end{equation}
+valid for every isotropic log-concave $\mu$ would prove KLS. Equivalently: it suffices to remove
+the residual $\sqrt{\log n}$ from the current spectral comparison \eqref{eq:kls-bridge} while
+retaining only a universal function of $\kappa_n$. Formulation
+\eqref{eq:spectral-kappa-sufficient} is useful as a target statement but supplies no mechanism;
+Question~\ref{q:mm-spectral-occupation} is the mechanism-bearing form.
+
+\subsection{The audited \texorpdfstring{$H^{-1}$}{H-1} endpoint}
+\label{subsec:spectral-hminus1-endpoint}
+
+An earlier formulation of this route's first lemma was an $H^{-1}$ residual bound. The cycle-1
+audit reclassified it, and the reclassification is worth recording because it is exactly the kind
+of error the repository's soundness contract exists to catch.
+
+With $b=\int\nabla f\dd\mu$, the proposed target was
+\begin{equation}
+  R(f)=\sum_i\norm{\partial_if-b_i}_{H^{-1}(\mu)}^2\le C\lambda .
+  \label{eq:spectral-residual}
+\end{equation}
+It is still sufficient for KLS. But it is also quantitatively \emph{implied} by KLS: one has the
+two-sided relation
+\begin{equation}
+  1+\abs b^2-\frac{2\abs b^2}\lambda\ \le\ R(f)\ \le\ 1-\frac{\abs b^2}\lambda .
+  \label{eq:spectral-residual-two-sided}
+\end{equation}
+Its exact heat representation controls the short-time and high-frequency parts at the desired
+scale; the long-time low-spectrum tail is the complete KLS-strength residue. Accordingly
+\eqref{eq:spectral-residual} is retained as a \emph{calibrated endpoint and diagnostic}, not
+advertised as a likely preliminary lemma.
+
+A second cycle-1 finding is recorded with it: a direct unweighting of the positive moment-map
+Stein form is \emph{false} on truncated-exponential first eigenfunctions. That is a genuine
+refutation of a natural first attempt, and it is why \eqref{eq:whitened-tensor} is stated in
+whitened form.
+
+\subsection{Fences and comparison with the other routes}
+\label{subsec:spectral-fences}
+
+The obstructions proved elsewhere in Part~III are scoped, and it matters which of them bind here.
+
+\begin{itemize}[leftmargin=1.6em]
+  \item The projection ceiling of Section~\ref{sec:qcts} does \emph{not} refute this route: the
+  moment map uses information beyond radial and projection tests.
+  \item The rank-one product-budget refutation of Section~\ref{sec:product-stress} is specific to
+  a fixed-cut localization counterexample and imposes no no-go here.
+  \item A universal Lipschitz Gaussian transport is too strong for exponential tails
+  (Warning~\ref{rem:no-lipschitz-transport}); the weaker expected-Jacobian criterion
+  \eqref{eq:brownian-derivative} is sufficient for KLS but currently reuses KLS-scale input, so
+  it ranks below the target of this section.
+  \item Classical needles do not preserve the isotropic covariance constraints
+  (Section~\ref{sec:family-needles}); that is a structural warning, not a theorem excluding all
+  needle arguments.
+\end{itemize}
+
+\begin{remark}[Relation to Route~C]
+\label{rem:spectral-vs-cmh}
+Routes~S and~C both consume moment-map information and both must ultimately handle a
+test-dependent object rather than a constant matrix, which is the shared lesson of
+Section~\ref{subsec:mm-audit}. They are nonetheless different programs: Route~S keeps stochastic
+localization and makes the test dependence dynamic, while Route~C
+(Section~\ref{sec:moment-map-cmh}) is deterministic and makes it geometric, through Haar fields on
+Schur fibers. Similarity of the residual loss is \emph{not} evidence that the two open statements
+are equivalent, and no result merges them.
+\end{remark}
+
+\paragraph{Promotion gate.}
+The control plane promotes Question~\ref{q:mm-spectral-occupation}, or admits further internal
+claims on this route, only when one of the following is established: the absorptive
+source/damping estimate \eqref{eq:spectral-occupation} uniformly on regular approximants together
+with a passage to arbitrary log-concave measures; or a route-fatal counterexample to every such
+function-aware occupation estimate.
+\end{document}

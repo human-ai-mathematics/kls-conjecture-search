@@ -57,8 +57,9 @@ Consequently the \emph{Stein-trace norm}
   \;=\;s^2\,\norm{K}_\HS^2 ,
 \end{equation}
 and the functional consumed by the geometric route is
-$\calS_\nu(E)/s=s\norm K_\HS^2$ --- exactly the normalized covariance contrast of the Riccati
-analysis of Section~\ref{sec:riccati}.
+    $\calS_\nu(E)/s=s\norm K_\HS^2$. At balance $K=G$, so this equals the Riccati source
+$S=s\norm G_\HS^2$; off balance the two quantities are related, rather than identified, by
+Lemma~\ref{lem:stein-vs-source}.
 \end{proposition}
 
 \begin{proof}
@@ -81,11 +82,11 @@ $M\mapsto s\inner KM$ is $s\norm K_\HS$, giving \eqref{eq:stein-norm-def}.
 \end{proof}
 
 \begin{remark}
-The identity $\calS_\nu(E)=s^2\norm K_\HS^2$ is a small but clarifying consolidation: the
-``Stein'' functional of the geometric route and the matrix $K_t$ whose square drives the
-Riccati source are literally the same translation-invariant object in two normalizations. The
-two Eldan subroutes therefore exchange a single currency, and the conversion constants below are
-universal on the tight window.
+The identity $\calS_\nu(E)=s^2\norm K_\HS^2$ is a small but clarifying consolidation. The
+``Stein'' functional is the squared norm of the translation-invariant contrast $K$, whereas the
+Riccati source uses $G$. They coincide at balance; away from balance their difference is the
+explicit damping term $(q-p)\delta\delta^T$. Thus the two Eldan subroutes exchange comparable,
+not identical, currency on the tight window, with the universal conversion constants below.
 \end{remark}
 
 \begin{lemma}[Conversion between Stein norm and Riccati source on the tight window]
