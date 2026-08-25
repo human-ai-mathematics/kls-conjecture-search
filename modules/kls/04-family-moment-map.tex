@@ -1,0 +1,282 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+\section{Family 4: moment maps, Monge--Amp\`ere, and Stein kernels}
+\label{sec:family-moment-map}
+
+\paragraph{Object followed.}
+The Hessian $H=\Hess\varphi$ of the moment-map potential of $\mu$, in the coordinates in which
+$\mu$ is the pushforward of its own moment measure.
+
+\paragraph{What it buys.}
+This is where the July 2026 progress happened, and it is currently the cleanest new proof
+component in the subject. In moment-map coordinates the statement ``$\mu$ is isotropic'' becomes
+``$\E_\nu H=I$'', and the Monge--Amp\`ere equation, differentiated twice, produces two
+manifestly positive semidefinite source terms. Exploiting that positivity yields a sharp bound on
+$\E\Tr(BHBH)$ for every \emph{constant} symmetric matrix $B$ --- from which the sharp thin-shell
+constant, the sharp third-moment tensor, and the all-quadratic Poincar\'e inequality all follow.
+
+This section presents the mechanism. The repository's formal statements of the two consequences it
+actually consumes are Theorem~\ref{thm:letwin-qcts} (Section~\ref{sec:qcts}) and
+Proposition~\ref{prop:letwin-kappa} (Section~\ref{sec:covariance-tech}); they are not restated
+here.
+
+\subsection{Moment-map coordinates}
+\label{subsec:mm-coordinates}
+
+For a centered, full-dimensional $\mu=e^{-V}\dd x$, the moment-measure theorem supplies an
+essentially unique convex $\varphi$ with
+\begin{equation}
+  (\nabla\varphi)_\#\nu=\mu,
+  \qquad
+  \dd\nu(y)=e^{-\varphi(y)}\dd y
+  \label{eq:moment-measure}
+\end{equation}
+\cite{CorderoErausquinKlartag2015MomentMeasures,Klartag2013MomentMeasures}. Set
+\[
+  H(y)=\Hess\varphi(y).
+\]
+Change of variables in \eqref{eq:moment-measure} is the Monge--Amp\`ere equation
+\begin{equation}
+  e^{-V(\nabla\varphi(y))}\det H(y)=e^{-\varphi(y)},
+  \qquad\text{that is}\qquad
+  \log\det H=-\varphi+V(\nabla\varphi).
+  \label{eq:MA}
+\end{equation}
+
+If $Y\sim\nu$ and $X=\nabla\varphi(Y)$, then $X\sim\mu$, and integration by parts under $\nu$ gives
+\begin{equation}
+  \E_\nu H(Y)=\E_\nu\bigl[\nabla\varphi(Y)\otimes\nabla\varphi(Y)\bigr]=\Cov\mu=I
+  \label{eq:mean-hessian-identity}
+\end{equation}
+when $\mu$ is isotropic. So \emph{``average Hessian equals identity'' replaces isotropy} in
+moment-map coordinates. This is the structural payoff: isotropy, which
+Section~\ref{sec:family-needles} showed is not inherited by needles, becomes a single linear
+identity for the object being estimated.
+
+\subsection{Differentiating Monge--Amp\`ere}
+\label{subsec:mm-differentiated}
+
+Introduce the elliptic operator associated with the Hessian metric,
+\begin{equation}
+  \calL f=\varphi^{ij}\partial_{ij}f-(V_i\circ\nabla\varphi)\,\partial_if,
+  \qquad (\varphi^{ij})=H^{-1},
+  \label{eq:calL-def}
+\end{equation}
+which is symmetric in $L^2(\nu)$:
+\begin{equation}
+  \E_\nu[(\calL f)g]=-\E_\nu\bigl[\varphi^{ij}(\partial_if)(\partial_jg)\bigr].
+  \label{eq:calL-symmetric}
+\end{equation}
+Differentiating \eqref{eq:MA} twice gives the key identity
+\begin{equation}
+  \calL H_{ij}+H_{ij}
+  =\bigl(H\,\Hess V(\nabla\varphi)\,H\bigr)_{ij}
+  +\varphi^{ac}\varphi^{bd}\varphi_{abi}\varphi_{cdj} .
+  \label{eq:differentiated-MA}
+\end{equation}
+Both terms on the right are positive semidefinite: the first by convexity of $V$, the second
+because it is a Gram matrix of normalized third derivatives. \emph{This positivity is the PDE
+source of the new estimate}; everything below is a way of harvesting it.
+
+\subsection{The fixed-matrix Hessian bound}
+\label{subsec:mm-fixed-matrix}
+
+Let $B\succeq0$ and define
+\[
+  S_B=\Tr(BHBH),
+  \qquad
+  D_B=\varphi^{ab}\Tr\bigl(B(\partial_aH)B(\partial_bH)\bigr).
+\]
+Applying $\calL$ to $S_B$, integrating against $\nu$, and using the two positive sources of
+\eqref{eq:differentiated-MA} yields
+\begin{equation}
+  \E S_B\ge2\,\E D_B .
+  \label{eq:SB-DB}
+\end{equation}
+The nontrivial point is a third-derivative comparison. At a fixed point, normalize $H=I$ and
+diagonalize $B=\diag(b_i)$; writing $T_{ijk}=\varphi_{ijk}$, the difference between the two sides
+reduces to
+\begin{equation}
+  \tfrac12\sum_{i,j,k}(b_i-b_j)^2T_{ijk}^2\ \ge\ 0 .
+  \label{eq:third-derivative-comparison}
+\end{equation}
+
+Next apply Brascamp--Lieb entrywise to $F=B^{1/2}HB^{1/2}$. Since $\E F=B$ by
+\eqref{eq:mean-hessian-identity},
+\[
+  \E\norm{F-B}_{\HS}^2=\E S_B-\Tr(B^2),
+\]
+and the Brascamp--Lieb energy of $F$ is exactly $D_B$, so
+\[
+  \E S_B-\Tr(B^2)\ \le\ \E D_B\ \le\ \tfrac12\E S_B ,
+\]
+the last step by \eqref{eq:SB-DB}. Rearranging gives the main new theorem inside Letwin's proof.
+
+\begin{theorem}[Letwin matrix moment-map estimate]
+\label{thm:letwin-moment-map}
+Under the regular moment-map assumptions used in \cite{Letwin2026QuadraticKLS}, for every
+constant symmetric matrix $B$,
+\begin{equation}
+  \E_\nu\Tr\bigl(BH(Y)BH(Y)\bigr)\le2\Tr(B^2).
+  \label{eq:letwin-matrix}
+\end{equation}
+\end{theorem}
+
+For indefinite $B$ the statement still holds: diagonalizing gives the pointwise bound
+$\Tr(BHBH)\le\Tr(\abs BH\abs BH)$, and \eqref{eq:letwin-matrix} applies to $\abs B\succeq0$.
+
+The $B=I$ case of \eqref{eq:letwin-matrix} is the moment-Hessian estimate shared with the
+contemporaneous Chen--Klartag preprint.
+
+\begin{theorem}[Chen--Klartag moment-Hessian estimate]
+\label{thm:chen-klartag-moment-hessian}
+Under the regularity assumptions of \cite{ChenKlartag2026SharpThinShell},
+\[
+  \E_\nu\norm H_{\HS}^2\le2n.
+\]
+The general log-concave conclusions below follow by the approximation argument in that preprint.
+\end{theorem}
+
+\begin{theorem}[Chen--Klartag sharp thin shell]
+\label{thm:chen-klartag-thin-shell}
+For every isotropic log-concave $X\in\R^n$,
+\[
+  \Var(|X|^2)\le8n.
+\]
+The constant is attained by products of standard centered one-sided exponential variables.
+\end{theorem}
+
+\begin{theorem}[Chen--Klartag sharp third tensor]
+\label{thm:chen-klartag-third-moment}
+If $X\in\R^n$ is isotropic and log-concave and $T_3(X)=(\E X_iX_jX_k)_{i,j,k}$, then
+\[
+  \norm{T_3(X)}_{\HS}^2\le4n.
+\]
+The preprint also proves sharper convex-body estimates with equality for the regular simplex.
+\end{theorem}
+
+\begin{remark}[What each preprint contributes]
+\label{rem:mm-two-preprints}
+Theorems~\ref{thm:letwin-moment-map}--\ref{thm:chen-klartag-third-moment} are imported from
+contemporaneous version-1 preprints
+\cite{ChenKlartag2026SharpThinShell,Letwin2026QuadraticKLS}; they are not promoted here as
+independently certified repository proofs. Letwin's $B=I$ case contains the shared moment-Hessian
+estimate, while Chen--Klartag's sharp third-tensor, cone, simplex, and equality analysis is
+additional. Conversely, Letwin controls every constant symmetric homogeneous quadratic form.
+Neither subsumes the other. Only Letwin's preprint supplies the claimed improvement of the general
+KLS bound.
+\end{remark}
+
+\subsection{The Stein kernel and the \texorpdfstring{$H^{-1}$}{H-1} inequality}
+\label{subsec:mm-stein}
+
+Fathi observed that the moment-map Hessian, read in target coordinates,
+\begin{equation}
+  \tau_\mu(x)=H\bigl((\nabla\varphi)^{-1}(x)\bigr),
+  \label{eq:stein-kernel-def}
+\end{equation}
+is a positive symmetric Stein kernel for $\mu$ \cite{Fathi2019SteinMomentMaps}:
+\begin{equation}
+  \E[X_if(X)]=\E\sum_j\tau_{ij}(X)\,\partial_jf(X).
+  \label{eq:stein-identity}
+\end{equation}
+Combining \eqref{eq:stein-identity} with the $H^{-1}$ calculus of Section~\ref{subsec:hminus1}
+gives, for a linear function $\ell_v(x)=\inner xv$,
+\begin{equation}
+  \norm{\ell_v}_{H^{-1}(\mu)}^2\le\E\abs{\tau_\mu(X)v}^2 .
+  \label{eq:stein-hminus1}
+\end{equation}
+
+By Remark~\ref{rem:quadratics-special}, quadratic test functions have linear derivatives, so
+\eqref{eq:stein-hminus1} can be fed into the Barthe--Klartag inequality
+\eqref{eq:barthe-klartag}. This is the junction at which the two families meet.
+
+\subsection{The noncommutativity trick}
+\label{subsec:mm-noncommutativity}
+
+There is one genuine obstacle between \eqref{eq:letwin-matrix} and a quadratic Poincar\'e
+inequality. For $q_M(x)=\inner{Mx}x$, applying \eqref{eq:stein-hminus1} directly produces
+\[
+  \E\norm{\tau_\mu(X)M}_{\HS}^2 ,
+\]
+which is \emph{not} the expression controlled by \eqref{eq:letwin-matrix}, because $M$ and
+$\tau_\mu(X)$ need not commute.
+
+The resolution is a change of variables. Write $M=\operatorname{sgn}(M)\abs M$ and set
+$Z=\abs M^{1/2}X$, with $\eta$ the law of $Z$. Then
+\[
+  q_M(X)=\inner{\operatorname{sgn}(M)Z}Z ,
+\]
+and the Stein kernel transforms by congruence,
+\begin{equation}
+  \tau_\eta(Z)=\abs M^{1/2}\,\tau_\mu(X)\,\abs M^{1/2},
+  \label{eq:stein-congruence}
+\end{equation}
+so that
+\begin{equation}
+  \E\norm{\tau_\eta(Z)}_{\HS}^2=\E\Tr\bigl(\abs MH\abs MH\bigr)\le2\Tr(M^2)
+  \label{eq:conjugated-bound}
+\end{equation}
+by Theorem~\ref{thm:letwin-moment-map} applied with $B=\abs M$. The conjugation has moved $M$
+inside the trace in exactly the pattern \eqref{eq:letwin-matrix} controls.
+
+Applying the $H^{-1}$ inequality to $F(z)=\inner{\operatorname{sgn}(M)z}z-\Tr M$ and using that
+$\operatorname{sgn}(M)$ is orthogonal gives
+\[
+  \Var\inner{MX}X\le4\,\E\norm{\tau_\eta(Z)}_{\HS}^2\le8\Tr(M^2),
+\]
+while isotropy gives $\E\abs{\nabla\inner{MX}X}^2=4\Tr(M^2)$. Together these are the quadratic
+Poincar\'e inequality recorded as Theorem~\ref{thm:letwin-qcts}, with the constant $2$ that is
+sharp for products of centered exponentials at $M=I$.
+
+The reduction from there to $\kappa_n\le2\sqrt2$ is short and purely algebraic; it is carried out
+as Proposition~\ref{prop:letwin-kappa}. Substituting into the bridge \eqref{eq:kls-bridge} gives
+the current preprint record.
+
+\subsection{Audit and epistemic status}
+\label{subsec:mm-audit}
+
+Letwin's paper is an arXiv version-1 preprint of 27 July 2026, not a peer-reviewed result, and it
+carries an explicit AI-use disclosure. The identities above are internally coherent, and the
+algebra from the quadratic theorem to $\kappa_n\le2\sqrt2$ is transparent. The delicate points for
+independent checking are concentrated elsewhere:
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+  \item the coordinate invariance of the third-derivative comparison
+  \eqref{eq:third-derivative-comparison};
+  \item noncompact integration by parts, specifically the vanishing $\E\calL S_B=0$ used to obtain
+  \eqref{eq:SB-DB};
+  \item approximation and moment-map regularity, that is, the passage from the regular case to
+  arbitrary log-concave laws;
+  \item the extraction of $\CP\lesssim\kappa_n\sqrt{\log n}$, which the preprint obtains by
+  \emph{tracing} Klartag's estimates \cite{Klartag2023Logarithmic} rather than by quoting a
+  theorem stated in that form.
+\end{enumerate}
+
+The preprint's appendix addresses each of (a)--(c). Point (d) is a concatenation of Klartag's
+variance-transfer result with a precise short-time covariance estimate, and is the step this
+repository re-derives for its own use in Section~\ref{sec:covariance-tech}.
+
+Accordingly, throughout Parts~III this result is described as the best \emph{current} bound and
+Klartag's as the best \emph{published} bound. Every repository node depending on it carries
+\texttt{import\_class: preprint-unreviewed}, which by the ledger contract cannot underlie a node
+marked \texttt{proved}. The same status distinction is drawn elsewhere in the literature; see
+\cite{Zhang2026HitAndRun}, whose bibliographic metadata in this repository is itself flagged as
+unverified.
+
+\paragraph{The precise missing estimate.}
+Control of $\E\inner{\tau_\mu(X)\nabla f(X)}{\nabla f(X)}$ for an arbitrary $f$, in place of
+$\E\Tr(BHBH)$ for a constant matrix $B$.
+
+\paragraph{Why it stalls.}
+Brascamp--Lieb in moment-map coordinates already gives
+\begin{equation}
+  \Var_\mu f\le\E_\mu\inner{\tau_\mu(X)\nabla f(X)}{\nabla f(X)},
+  \label{eq:mm-brascamp-lieb}
+\end{equation}
+so KLS would follow from $\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2$. The
+identity $\E\tau_\mu=I$ of \eqref{eq:mean-hessian-identity} is \emph{not} sufficient for this,
+because $\tau_\mu(X)$ can correlate with $\nabla f(X)$. Letwin controls a deterministic $B$; the
+missing theorem must handle an $X$-dependent matrix or direction field. This is exactly the gap
+that Route~C (Group~5) attacks, by replacing constant multipliers with test-dependent Haar fields.
+\end{document}

@@ -6,17 +6,20 @@ Validates every ``research/**/ledger.yaml``:
 * ledger and node identities are unique (duplicate programs are rejected until
   multi-ledger merging has explicit semantics);
 * dependency edges resolve, are acyclic, and do not let a proved node inherit an
-  open, conjectured, refuted, heuristic, or conditional dependency/assumption;
+  open, refuted, heuristic, or conditional dependency/assumption;
 * every conditional node declares a non-empty ``assuming`` contract, including
   inherited imports marked ``import_class: preprint-unreviewed``;
-* numerical evidence artifacts exist and are valid provenance-stamped JSONL;
+* referenced numerical diagnostic artifacts exist and are valid provenance-stamped JSONL;
 * KLS mechanism fences and the reverse
   ``obstructions.yaml.constrains``/ledger ``bounded_by`` map agree exactly.
 
 Cross-program ``bridges: [program/id, ...]`` links are resolved against all
 loaded ledgers. Optional proof-plane ``solution:`` files must exist and be certified
 by ``checked_by: agent|human|lean``. Agent certification additionally requires
-distinct named author/reviewer provenance and a persisted review report.
+distinct named author/reviewer provenance and a persisted review report whose
+Markdown metadata gives an unqualified ``Verdict: pass`` and names both the node
+and reviewer. Every node with ``status: proved`` must carry a certified solution;
+narrative ``proof_provenance`` never substitutes for the proof-plane contract.
 
 Run from the repo root: ``python3 research/check_ledger.py``.
 Exit 0 = clean, 1 = errors. Requires PyYAML.
@@ -43,10 +46,13 @@ KIND = {
     "hypothesis", "question", "program", "remark", "heuristic",
     "conjecture", "obstruction", "baseline", "example", "imported",
 }
-EVIDENCE = {"none", "numerical-directional", "numerical-strong"}
+EVIDENCE = {"none", "numerical-directional"}
 CHECKED_BY = {"none", "agent", "human", "lean"}
 CERTIFIED_BY = {"agent", "human", "lean"}
 IMPORT_CLASSES = {"published", "preprint-unreviewed"}
+REVIEW_PASS_RE = re.compile(
+    r"^\s*-\s+\*\*Verdict:\*\*\s+pass(?:\s|$)", re.IGNORECASE | re.MULTILINE
+)
 
 # A colon following one of these prefixes denotes a repository id/LaTeX label,
 # even if the slug is malformed. This prevents e.g. ``thm:misspelled_id`` from
@@ -61,16 +67,18 @@ INTERNAL_PREFIXES = {
 # separately, including through intermediate dependencies.
 PROGRAMS = {
     "ab": {
-        "status": {"open", "conjectured", "proved", "imported", "refuted"},
-        "unproved": {"open", "conjectured", "refuted"},
+        "status": {"open", "proved", "imported", "refuted"},
+        "unproved": {"open", "refuted"},
     },
     "kls": {
-        "status": {"proved", "conditional", "open", "heuristic", "refuted", "imported"},
+        "status": {
+            "proved", "defined", "conditional", "open", "heuristic", "refuted", "imported",
+        },
         "unproved": {"conditional", "open", "heuristic", "refuted"},
     },
 }
 
-RESOLVE_FIELDS = ("depends_on", "unlocks", "assuming", "discharged_by", "entry_point", "related")
+RESOLVE_FIELDS = ("depends_on", "assuming", "discharged_by", "entry_point", "related")
 
 
 def as_list(value: Any) -> list:
@@ -100,6 +108,15 @@ def looks_internal(ref: Any) -> bool:
 def is_external(ref: Any) -> bool:
     """Compatibility helper: external prose does not start with an internal prefix."""
     return not looks_internal(ref)
+
+
+def _mentions_token(text: str, token: str) -> bool:
+    """Match a complete repository id or agent name, not a longer prefix lookalike."""
+    token_characters = r"A-Za-z0-9_./:\-"
+    return re.search(
+        rf"(?<![{token_characters}]){re.escape(token)}(?![{token_characters}])",
+        text,
+    ) is not None
 
 
 def all_labels(root: Path = ROOT) -> set[str]:
@@ -284,22 +301,6 @@ def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
             )
     if len(objects) < 2:
         errors.append(f"[{program}] {nid}.evidence_run: '{ref}' has provenance but no records")
-    if evidence == "numerical-strong":
-        if not isinstance(params, dict) or params.get("calibration_passed") is not True:
-            errors.append(
-                f"[{program}] {nid}: numerical-strong run '{ref}' lacks calibration_passed=true"
-            )
-        if not isinstance(params, dict) or params.get("shared_battery_passed") is not True:
-            errors.append(
-                f"[{program}] {nid}: numerical-strong run '{ref}' lacks shared_battery_passed=true"
-            )
-        if not isinstance(params, dict) or params.get("shared_battery") != "research/knowledge/instances.md":
-            errors.append(
-                f"[{program}] {nid}: numerical-strong run '{ref}' does not identify "
-                "research/knowledge/instances.md as its shared battery"
-            )
-        if not any(record.get("kind") == "verdict" for record in objects[1:]):
-            errors.append(f"[{program}] {nid}: numerical-strong run '{ref}' has no verdict record")
 
 
 def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
@@ -344,7 +345,7 @@ def _dependency_assumptions(start: str, nodes: dict[str, dict], unproved: set[st
     """Assumptions a node inherits from its dependency subtree.
 
     A conditional dependency contributes its declared ``assuming`` contract, not
-    its own theorem id. Open/heuristic/refuted/conjectured dependencies contribute
+    its own theorem id. Open/heuristic/refuted dependencies contribute
     their ids directly. This lets conditional interfaces compose while preventing
     a parent from silently dropping a child's premise.
     """
@@ -373,6 +374,54 @@ def _dependency_assumptions(start: str, nodes: dict[str, dict], unproved: set[st
 
     visit(start, set())
     return inherited
+
+
+def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
+                           errors: list[str]) -> None:
+    """Validate the optional compact route vocabulary and explicit node routes."""
+    raw_policy = meta.get("route_policy")
+    if raw_policy is None:
+        for nid, node in nodes.items():
+            if "route" in node:
+                errors.append(
+                    f"[{program}] {nid}.route: explicit routes require meta.route_policy"
+                )
+        return
+    context = f"[{program}] meta.route_policy"
+    if not isinstance(raw_policy, dict):
+        errors.append(f"{context}: must be a mapping")
+        return
+
+    default = raw_policy.get("default")
+    if not isinstance(default, str) or not default.strip():
+        errors.append(f"{context}.default: must be a non-empty string")
+
+    raw_allowed = raw_policy.get("allowed")
+    allowed: set[str] = set()
+    if not isinstance(raw_allowed, list):
+        errors.append(f"{context}.allowed: must be a list")
+    else:
+        for route in raw_allowed:
+            if not isinstance(route, str) or not route.strip():
+                errors.append(f"{context}.allowed: entries must be non-empty strings")
+                continue
+            if route in allowed:
+                errors.append(f"{context}.allowed: duplicate route '{route}'")
+            allowed.add(route)
+
+    if isinstance(default, str) and default.strip() and default not in allowed:
+        errors.append(f"{context}.default: '{default}' is not in allowed")
+
+    for nid, node in nodes.items():
+        if "route" not in node:
+            continue
+        route = node.get("route")
+        if not isinstance(route, str) or not route.strip():
+            errors.append(f"[{program}] {nid}.route: must be a non-empty string")
+        elif route not in allowed:
+            errors.append(
+                f"[{program}] {nid}.route: '{route}' is not in meta.route_policy.allowed"
+            )
 
 
 def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
@@ -420,6 +469,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         ledgers.append({
             "program": program,
             "path": path,
+            "meta": meta,
             "nodes": nodes,
             "cfg": PROGRAMS.get(program),
             "vocab": vocabulary,
@@ -442,10 +492,18 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
     for ledger in ledgers:
         program = ledger["program"]
         nodes = ledger["nodes"]
+        meta = ledger["meta"]
         obstruction_ids = ledger["obs_ids"]
         cfg = ledger["cfg"] or PROGRAMS["ab"]
         vocabulary = ledger["vocab"]
         rules = ledger["rules"]
+        for obsolete_field in ("legacy_r2_debt", "legacy_proved_without_solution"):
+            if obsolete_field in meta:
+                errors.append(
+                    f"[{program}] meta.{obsolete_field}: legacy proof exceptions are forbidden; "
+                    "every proved node requires a certified solution"
+                )
+        _validate_route_policy(program, meta, nodes, errors)
 
         def resolves(ref: Any) -> bool:
             if not looks_internal(ref):
@@ -453,6 +511,11 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             return ref in nodes or ref in obstruction_ids or ref in labels
 
         for nid, node in nodes.items():
+            if "unlocks" in node:
+                errors.append(
+                    f"[{program}] {nid}.unlocks: obsolete field; use depends_on on the "
+                    "consuming node only for a genuine proof dependency, otherwise use prose"
+                )
             for field in ("kind", "status", "file", "statement"):
                 if field not in node:
                     errors.append(f"[{program}] {nid}: missing '{field}'")
@@ -460,9 +523,18 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             status = node.get("status")
             if not isinstance(kind, str) or kind not in KIND:
                 errors.append(f"[{program}] {nid}: bad kind '{kind}'")
-            if not isinstance(status, str) or status not in cfg["status"]:
+            if program == "ab" and status == "conjectured":
+                errors.append(
+                    f"[{program}] {nid}: status 'conjectured' is obsolete; use status 'open' "
+                    "and let kind describe the statement type"
+                )
+            elif not isinstance(status, str) or status not in cfg["status"]:
                 errors.append(
                     f"[{program}] {nid}: status '{status}' not allowed for program {program}"
+                )
+            if status == "defined" and kind != "definition":
+                errors.append(
+                    f"[{program}] {nid}: status defined is only valid for kind definition"
                 )
             import_class = node.get("import_class")
             if status == "imported":
@@ -484,11 +556,26 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             if assumptions and len(valid_assumptions) != len(assumptions):
                 errors.append(f"[{program}] {nid}.assuming: entries must be non-empty strings")
 
-            file_ref = node.get("file")
-            if "file" in node and (not isinstance(file_ref, str) or not file_ref.strip()):
-                errors.append(f"[{program}] {nid}.file: must be a non-empty string")
-            elif isinstance(file_ref, str) and not (root / file_ref).exists():
-                errors.append(f"[{program}] {nid}.file: '{file_ref}' does not exist")
+            for file_field in ("file", "proof_file"):
+                if file_field not in node:
+                    continue
+                file_ref = node.get(file_field)
+                context = f"[{program}] {nid}.{file_field}"
+                if not isinstance(file_ref, str) or not file_ref.strip():
+                    errors.append(f"{context}: must be a non-empty string")
+                    continue
+                relative_file = Path(file_ref)
+                if relative_file.is_absolute():
+                    errors.append(f"{context}: want a repo-relative path, got '{file_ref}'")
+                    continue
+                resolved_file = (root / relative_file).resolve()
+                try:
+                    resolved_file.relative_to(root.resolve())
+                except ValueError:
+                    errors.append(f"{context}: path escapes repository root: '{file_ref}'")
+                else:
+                    if not resolved_file.is_file():
+                        errors.append(f"{context}: '{file_ref}' does not exist")
             if "statement" in node and (
                 not isinstance(node.get("statement"), str) or not node["statement"].strip()
             ):
@@ -502,6 +589,15 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
 
             solution = node.get("solution")
             checked_by = node.get("checked_by")
+            proof_provenance = node.get("proof_provenance")
+            if proof_provenance is not None and (
+                not isinstance(proof_provenance, str) or not proof_provenance.strip()
+            ):
+                errors.append(f"[{program}] {nid}.proof_provenance: must be a non-empty string")
+            if status == "proved" and not solution:
+                errors.append(
+                    f"[{program}] {nid}: proved node requires a certified solution"
+                )
             if checked_by is not None and (
                 not isinstance(checked_by, str) or checked_by not in CHECKED_BY
             ):
@@ -552,6 +648,35 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                                 errors.append(
                                     f"[{program}] {nid}.review: '{review}' does not exist"
                                 )
+                            else:
+                                try:
+                                    review_text = artifact.read_text(encoding="utf-8")
+                                except (OSError, UnicodeError) as exc:
+                                    errors.append(
+                                        f"[{program}] {nid}.review: cannot read '{review}': {exc}"
+                                    )
+                                else:
+                                    if not REVIEW_PASS_RE.search(review_text):
+                                        errors.append(
+                                            f"[{program}] {nid}.review: report lacks an "
+                                            "unqualified '- **Verdict:** pass ...' header"
+                                        )
+                                    if not _mentions_token(review_text, nid):
+                                        errors.append(
+                                            f"[{program}] {nid}.review: report does not name "
+                                            f"the certified node '{nid}'"
+                                        )
+                                    if (
+                                        isinstance(reviewed_by, str)
+                                        and reviewed_by.strip()
+                                        and not _mentions_token(
+                                            review_text, reviewed_by.strip()
+                                        )
+                                    ):
+                                        errors.append(
+                                            f"[{program}] {nid}.review: report does not name "
+                                            f"reviewed_by '{reviewed_by.strip()}'"
+                                        )
                 if not solution:
                     errors.append(
                         f"[{program}] {nid}: checked_by agent requires a standalone solution"
@@ -561,6 +686,20 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                     errors.append(f"[{program}] {nid}.solution: path must be a string")
                 elif not (root / solution).exists():
                     errors.append(f"[{program}] {nid}.solution: '{solution}' does not exist")
+                else:
+                    try:
+                        solution_text = (root / solution).read_text(encoding="utf-8")
+                    except (OSError, UnicodeError) as exc:
+                        errors.append(
+                            f"[{program}] {nid}.solution: cannot read '{solution}': {exc}"
+                        )
+                    else:
+                        header = solution_text[:2500]
+                        if "ledger-node" not in header or not _mentions_token(header, nid):
+                            errors.append(
+                                f"[{program}] {nid}.solution: dossier header does not enumerate "
+                                f"the ledger node '{nid}'"
+                            )
                 if checked_by not in CERTIFIED_BY:
                     errors.append(
                         f"[{program}] {nid}: solution present but checked_by is '{checked_by}' "
@@ -573,22 +712,6 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         errors.append(f"[{program}] {nid}.{field}: references must be non-empty strings")
                     elif not resolves(ref):
                         errors.append(f"[{program}] {nid}.{field}: unknown internal id '{ref}'")
-
-            for ref in as_list(node.get("unlocks")):
-                target = nodes.get(ref) if isinstance(ref, str) else None
-                if target is None:
-                    continue
-                premises = set()
-                for field in ("depends_on", "assuming", "discharged_by"):
-                    premises |= {
-                        premise for premise in as_list(target.get(field))
-                        if isinstance(premise, str)
-                    }
-                if nid in premises:
-                    errors.append(
-                        f"[{program}] {nid}.unlocks: '{ref}' already declares {nid} as a premise; "
-                        "unlocks must not duplicate depends_on/assuming/discharged_by"
-                    )
 
             for ref in as_list(node.get("bounded_by")):
                 if not isinstance(ref, str) or not ref.strip():

@@ -1,7 +1,15 @@
 # Route: moment map, Stein kernel, and the first eigenfunction
 
-Status: **live, prose-only**. This route has no ledger yet, in accordance with the one-KLS-ledger
-limitation in [`../../routes.md`](../../routes.md).
+Status: **live, secondary**. This route remains distinct from the deterministic
+[`moment-map-cmh`](../moment-map-cmh/) route. Any new sharpened target is added to the central
+[`../../ledger.yaml`](../../ledger.yaml) with `route: moment-map-spectral`.
+
+**Promoted to the manuscript on 24 August 2026.** The route now has a section of its own,
+`modules/kls/30-spectral-route.tex` (`\label{sec:spectral-route}`, Part III Group 4), which
+carries the fixed-function SDE, the whitened tensor estimate, the headline question
+`q:mm-spectral-occupation`, the audited $H^{-1}$ endpoint, and the fence comparison. That section
+is the exposition of record; this brief remains the control-plane status page and keeps the
+cycle-1 decision history and the promotion gate below.
 
 ## Thesis
 
@@ -36,6 +44,11 @@ They change the first subgoal:
 - a direct unweighting of the positive moment-map Stein form is false on truncated-exponential
   first eigenfunctions.
 
+**Current-priority note (24 August 2026).** The cycle-1 ranking is preserved as historical
+memory. The deterministic CMH exploration subsequently exposed a separate, more sharply
+formulated commutator program. The present route remains live as a secondary strand; no result
+merges it into CMH or refutes its absorptive source/damping target.
+
 ## Why it may beat the localization route
 
 Conditional on the same version-1 preprint, both fixed-cut and fixed-eigenfunction localization
@@ -69,6 +82,8 @@ universal function of $\kappa_n$.
 
 ## First concrete subgoal: absorptive eigenfunction localization
 
+The central ledger tracks this headline as `q:mm-spectral-occupation`.
+
 First work on smooth, strongly log-concave isotropic approximants, where the weighted Laplacian
 $L=\Delta-\nabla V\cdot\nabla$ has discrete spectrum. Let $f$ be a normalized first
 nonconstant eigenfunction, $-Lf=\lambda f$, and define along localization
@@ -95,10 +110,12 @@ $$
 +\alpha\mathbb E\int_0^t2g_s^TA_sg_s\,ds.
 $$
 
-The fixed-function SDE, Gronwall, posterior Brascamp--Lieb, and the fixed-gradient density
-martingale prove that this estimate implies a universal spectral gap. The estimate itself is
-open, and it must hold uniformly through regularization or be formulated for approximate
-Rayleigh minimizers.
+The intended sufficiency argument combines the fixed-function SDE, Gronwall, posterior
+Brascamp--Lieb, and the fixed-gradient density martingale. Its constants, terminal variance
+control, and regularization passage have not yet been written as an R2 proof, so the bridge is the
+separate open node `prop:spectral-sufficiency`, not a proved implication. The occupation estimate
+itself is also open and must hold uniformly through regularization or be formulated for
+approximate Rayleigh minimizers.
 
 ### The audited $H^{-1}$ endpoint
 
@@ -132,11 +149,13 @@ calibrated endpoint rather than presenting it as a likely preliminary lemma.
 
 ## Promotion gate
 
-Keep this route prose-only until at least one of the following is established:
+Promote `q:mm-spectral-occupation` or add further internal claims only when at least one of the
+following is
+established:
 
 1. the absorptive eigenfunction source/damping estimate above (or the weaker one-horizon net
    occupation criterion in the exploration note) uniformly on regular approximants, plus a
    passage to arbitrary log-concave measures; or
 2. a route-fatal counterexample to every such function-aware occupation estimate.
 
-Only then extend the checker to merge multiple `program: kls` ledgers and add a formal DAG.
+Update the central KLS ledger through the orchestrator; do not create a route-local ledger.

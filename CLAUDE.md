@@ -18,29 +18,30 @@ and an exploratory KLS proof program.
 
 | plane | where | what it holds |
 |---|---|---|
-| claims | `research/ledger.yaml`, `research/kls/routes/eldan-localization/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
+| claims | `research/ledger.yaml`, `research/kls/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
 | prose | `modules/**/*.tex` | the manuscript; the `\label`s that node ids bind to |
 | proofs | `solutions/*.tex` | standalone dossiers a reviewer or Lean can check |
-| evidence | `research/runs/*.jsonl` | provenance-stamped `finum` artifacts |
+| diagnostics | `research/runs/*.jsonl` | provenance-stamped `finum` research artifacts |
 | memory | `research/explorations/`, `research/knowledge/`, `research/reviews/` | dated attempt log, shared battery and obstructions, audit reports |
 
 ## The soundness contract
 
-Three signals, ranked by evidentiary strength. They need not occur in a fixed sequence: an
-analytic proof may bypass numerics entirely.
+Three signals with different roles. They are not a ladder whose lower rungs accumulate into a
+proof: an analytic proof is certified independently of numerics.
 
 | signal | mechanism | what it is worth |
 |---|---|---|
 | **R0 — structural** | `python3 research/check_ledger.py` returns 0 errors | cheap and deterministic; **necessary, never sufficient** |
-| **R1 — numerical** | a provenance-stamped `finum` artifact in `research/runs/` | rigorous refutation, or *direction*; **never** proof |
+| **R1 — numerical** | a provenance-stamped `finum` artifact in `research/runs/` | research direction, stress testing, or a candidate refutation; **never** claim or proof validation |
 | **R2 — proof** | `solutions/<id>.tex` with `checked_by ∈ {agent, human, lean}` | the only route to `status: proved` |
 
-**The invariant: R1 may never masquerade as R2.** An agent that "passes numerics" has produced
-evidence *for* a prover, not a proof. Mechanically: `finum` never edits a ledger; uppercase
-`REFUTED` is reserved for a rigorous analytic or exact lower bound (`finum/verdict.py:falsify`),
-while every sampled, MCMC, FEM, or finite-grid quantity goes through `compare_directional` and
-can only be *directional*. This is why **criticism is a first-class role, not QA**: never let a
-prover grade its own proof.
+**The invariant: R1 never validates R2.** A proof dossier and its review must stand without any
+numerical run. `finum` may guide intuition, expose a likely counterexample, or help sharpen a
+statement; sampled, MCMC, FEM, and finite-grid quantities remain directional. If exact arithmetic
+or an analytic lower bound yields a checkable certificate (`finum/verdict.py:falsify`), that
+certificate must be persisted and independently checked in the proof/refutation plane before a
+logical status changes. This is why **criticism is a first-class role, not QA**: never let a prover
+grade its own proof.
 
 ## Definition of done
 
@@ -81,11 +82,13 @@ Specific to this repo; a naive agent swarm hits every one of these.
    `research/explorations/`, `research/runs/`, and (provers) `solutions/`.
 2. **No private Monte Carlo.** The retraction that created `research/explorations/` is the
    cautionary tale: two agents ran ad-hoc scripts, disagreed, and a non-reproducible claim had
-   to be withdrawn. Every numerical claim flows through `finum` with a provenance-stamped
-   artifact, or it does not count.
-3. **The battery is fixed and shared.** An agent must not mint its own happy-path instances to
-   clear `numerical-strong` — that is reward-hacking the soundness gate. New instances are
-   curated into `research/knowledge/instances.md` by the librarian, not minted by the refiner.
+   to be withdrawn. Every numerical observation cited as research guidance flows through `finum`
+   with a provenance-stamped artifact; none counts toward proof certification.
+3. **The research battery is shared.** Use the curated instances in
+   `research/knowledge/instances.md` so stress tests remain comparable and do not collapse to a
+   refiner's happy path. A refiner may propose a new adversarial instance, but the librarian must
+   review it before adding it to the shared registry. Passing any finite battery changes no claim
+   or proof status.
 4. **`check_ledger.py` is necessary, not sufficient.** It verifies structure — labels resolve,
    the DAG is acyclic, no proved node rests on an unproved one, obstruction parity holds. It
    does **not** verify that the `.tex` prose, the ledger `statement:`, and the solution dossier
@@ -94,9 +97,10 @@ Specific to this repo; a naive agent swarm hits every one of these.
 5. **Respect `bounded_by`.** A refined statement that violates a known obstruction is wrong by
    construction — e.g. any A1 bound without a tail term violates `obs:flat-direction`. Check
    this *before* spending a numerical run.
-6. **Don't fan out across the trace-upgrade unification.** `q:upgrade`, the high-rank part of
-   `q:stein-weighted`, and `q:alignment` are the same operator-to-trace problem in three
-   coordinate systems (`rem:trace-upgrade-unification`). One team owns it, then propagates.
+6. **Don't fan out across the trace-upgrade cluster.** `q:upgrade`, the high-rank part of
+   `q:stein-weighted`, and `q:alignment` are three manifestations of the same high-rank
+   occupation difficulty (`rem:trace-upgrade-unification`); their formal equivalence is not
+   proved. One team owns the comparison, then propagates only what has actually been shown.
 7. **`conditional` KLS nodes are Lean-certifiable only as conditional implications.** The
    assumption becomes a hypothesis; the node reaches unconditional `proved` only when the
    assumption is discharged.
@@ -107,9 +111,9 @@ Specific to this repo; a naive agent swarm hits every one of these.
 
 - A node `id` **is** the LaTeX `\label` of its statement. When a statement changes, update both
   the `.tex` and the ledger.
-- `depends_on` means "used in the proof" and must stay acyclic. `unlocks` is a forward pointer
-  only — the checker rejects an `unlocks` edge that duplicates the target's
-  `depends_on`/`assuming`/`discharged_by`.
+- `depends_on` means "used in the proof" and must stay acyclic. Downstream consumers are derived
+  by reversing `depends_on`; speculative roadmap relationships belong in prose, not a second
+  graph.
 - Reproducibility of a `finum` artifact rests on its recorded seed, params, and library
   versions. Nothing gates on the state of the worktree.
 - Math in Markdown files is written in LaTeX `$…$`.

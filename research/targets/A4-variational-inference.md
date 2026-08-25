@@ -180,11 +180,13 @@ separation sweep exists yet.
    separation `D=2a`. Sweep `ε`, `a/σ`, and numerical resolution. Both are lower witnesses: do not
    infer a sharp exponential or polynomial asymptotic without matching upper bounds.
 
-**Promotion to `numerical-strong`:** requires certified or independently validated upper control
-in addition to lower-witness sweeps, resolution/tail stability, and a clean `evidence_run`; the
-current directional diagnostics do not meet this threshold.
+**Research use only:** lower-witness sweeps and resolution/tail stability checks are directional
+diagnostics for choosing conjectures, identifying failure modes, and suggesting analytic
+refutations. Agreement with independently proved upper control does not validate or certify that
+proof, and numerical diagnostics alone never establish the claimed constant. Rigorous refutation
+still requires an analytic argument or exact lower bound.
 
-## Evidence log
+## Numerical research log
 
 _(none yet)_
 

@@ -96,7 +96,7 @@ mass, gradients, and global geometry, none of which TV controls. Convergence
 \eqref{eq:a2-bvm} does not by itself control even posterior covariances, let alone
 functional-inequality constants \cite{KasprzakGiordanoBroderick2025}.
 
-\begin{warning}[A TV-BvM sequence with diverging constants]
+\begin{warning}[A TV-BvM sequence with diverging Poincar\'e constant]
 \label{warn:a2-tv-fails}
 Consider the contamination sequence on $\R$
 \[
@@ -106,8 +106,9 @@ Consider the contamination sequence on $\R$
 Then $\|\mu_n-N(0,1)\|_{\mathrm{TV}}\le\eps_n\to0$, so $\mu_n$ satisfies a BvM-type limit in TV.
 Yet its variance is $\Var_{\mu_n}(x)=1+\eps_n a_n^2-\eps_n^2a_n^2\to\infty$, and the linear test
 $f(x)=x$ gives the lower bound $\CP(\mu_n)\ge\Var_{\mu_n}(x)\to\infty$
-(Remark~\ref{rem:rayleigh-lower-only}). The same remote sliver of mass inflates $\CLS$ and
-$\CTCI$. Hence \eqref{eq:a2-bvm} alone is consistent with all three constants diverging.
+(Remark~\ref{rem:rayleigh-lower-only}). Thus \eqref{eq:a2-bvm} alone is consistent with a
+diverging Poincar\'e constant. This linear variance witness by itself makes no claim about the
+log-Sobolev or transportation-cost constants.
 \end{warning}
 
 The lesson is structural: to extract constants one needs a \emph{strong} Laplace/BvM statement

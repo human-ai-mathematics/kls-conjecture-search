@@ -1,6 +1,7 @@
 # Route: Eldan stochastic localization
 
-The current attack on KLS, ported from the standalone KLS program's roadmap and re-synced to `modules/kls/`.
+The detailed fixed-cut attack on KLS, ported from the standalone KLS program's roadmap and
+re-synced to `modules/kls/`.
 This is **one route** among possible attacks (see [`../../routes.md`](../../routes.md)); the
 route-agnostic facts it must respect live in [`../../shared/`](../../shared/).
 
@@ -16,24 +17,23 @@ route-agnostic facts it must respect live in [`../../shared/`](../../shared/).
 ## Files
 
 ```
-ledger.yaml        canonical logical state + dependency DAG (file: paths → modules/kls/*.tex)
-obstructions.yaml  machine-readable no-go set (mechanism vocabulary + forbids)
-obstructions.md    the no-go prose (kept in parity with the YAML)
 open-problems.md   the P1–P7 dispatchable briefs
-roadmap.md         the narrative map (sub-routes A/B, the proved backbone, the dichotomy prize)
+roadmap.md         the narrative map (Eldan-A/B, R2-certified backbone, the dichotomy prize)
 ```
 
-The checker (`../../../check_ledger.py`) loads `ledger.yaml` here (program `kls`) and its
-sibling `obstructions.{yaml,md}`. This is the **only** `kls` ledger today — see
-[`../../routes.md`](../../routes.md) for why a second route stays prose-only for now.
+The route-spanning checker state is now centralized at [`../../ledger.yaml`](../../ledger.yaml),
+with the machine fences at [`../../obstructions.md`](../../obstructions.md) and
+[`../../obstructions.yaml`](../../obstructions.yaml). Those obstruction mechanisms remain scoped
+to this fixed-cut route. This directory owns only its narrative roadmap and dispatchable briefs;
+all ledger writes still flow through the single orchestrator.
 
-## Two sub-routes (within localization)
+## Two subroutes (within localization)
 
-- **Route A — all-cut stochastic.** Prove `ass:all-cut-carleson` (absorptive two-color
+- **Eldan-A — all-cut stochastic.** Prove `ass:all-cut-carleson` (absorptive two-color
   Carleson for every balanced cut) ⇒ KLS via `thm:intro-all-cut`. Gap: the
   **operator-to-trace upgrade** `q:upgrade` (lift `cor:per-direction` from quadratic-form to
   trace scale). Bounded by `obs:proj-ceiling`, `obs:two-tail`.
-- **Route B — near-Cheeger geometric (weighted).** Prove `ass:weighted-package` ⇒ KLS via
+- **Eldan-B — near-Cheeger geometric (weighted).** Prove `ass:weighted-package` ⇒ KLS via
   `thm:intro-weighted`. Two open inputs: weighted excess propagation `q:weighted` and weighted
   stable Stein trace `q:stein-weighted`. The two-tail model calibrates exponent $5/2$ as the
   minimum pure covariance power for an absolute-excess term in this slice-wise package; this is

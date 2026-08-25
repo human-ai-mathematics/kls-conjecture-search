@@ -1,62 +1,53 @@
 # ledger.yaml — canonical state of the open-target program (Parts I & II)
 # =============================================================================
-# SINGLE SOURCE OF TRUTH for what is open / conjectured / proved / refuted among
+# SINGLE SOURCE OF TRUTH for what is open / proved / refuted among
 # the Bayesian-posterior open targets (A1-A5), and for the dependency edges and
 # the obstructions that constrain them. The LaTeX in modules/open-targets/ is the
 # prose+statement; this file is the machine-readable graph.
 #
 # Every node `id` is the LaTeX \label of the statement (use it with \ref). When a
-# statement is refined, validated, refuted, or proved, update BOTH the .tex and
+# statement is refined, refuted, or proved, update BOTH the .tex and
 # this file.
 #
-# WORKFLOW (two complementary channels):
-#   refinement      sharpen an open statement and, when useful, stress-test it
-#                   numerically (finum). Output: status=conjectured with
-#                   evidence=numerical-strong.
-#   proof           certify an analytic result through a standalone solution and
-#                   independent review. A proof may bypass numerical evidence.
+# This ledger records current logical state, not authoring workflow or history. See
+# research/README.md for the contribution process. A proved node must have a standalone,
+# independently reviewed solution; the proof must stand independently of numerics.
 #
 # status  (logical state):
-#   open           stated in the manuscript, not yet refined into a sharp claim
-#   conjectured    a precise, sharp statement exists (refinement done)
-#   proved         certified through the proof channel (or a documented legacy exception)
+#   open           unresolved, whether the present statement is rough or already precise
+#   proved         certified through the proof channel; no inline or historical exception
 #   imported       taken from the literature with a citation (a calibration anchor)
 #   refuted        the stated form shown false by a rigorous analytic/exact counterexample
 #
-# evidence (numerical support, ORTHOGONAL to status — "seems valid numerically"):
-#   none                   no numerical test yet
-#   numerical-directional  limited / exploratory tests
-#   numerical-strong       passed the shared stress battery (knowledge/instances.md).
-#                          NOT YET REACHABLE: check_ledger.py requires the run to carry
-#                          shared_battery_passed + shared_battery in its provenance params,
-#                          and no finum target emits them yet. Use numerical-directional.
-#   evidence_run:          path to the provenance-stamped finum artifact (when set)
+# numerical diagnostics (ORTHOGONAL to logical and proof status):
+#   evidence: none                   no referenced numerical diagnostic
+#   evidence: numerical-directional  limited / exploratory research direction only
+#   evidence_run:                    path to the provenance-stamped finum artifact (when set)
+# No numerical value validates a claim or proof.
 #
 # kind: theorem|proposition|lemma|corollary|conjecture|question|obstruction|
 #       baseline|example|imported
 #
 # edges:
 #   depends_on   ids used in the proof — MUST stay acyclic
-#   unlocks      ids that become reachable once this is established, and that do NOT
-#                already name this node as a premise (no duplicate of depends_on)
 #   bounded_by   obstruction ids (obs:*) that any valid statement/proof must respect
 #   related      cross-target links (non-logical)
 #   refines      the manuscript node this is the working/sharpened version of
-#   numerics     what finum should compute to validate/refute/refine this node
+#   numerics     what finum should compute to stress or refine this node and search for failures
 #
 # INVARIANTS (python3 research/check_ledger.py):
-#   1. every id in depends_on/unlocks/bounded_by/related/refines exists
+#   1. every id in depends_on/bounded_by/related/refines exists
 #   2. depends_on is acyclic
-#   3. no `proved` node depends_on an `open`/`conjectured`/`refuted` node
+#   3. no `proved` node depends_on an `open`/`refuted` node
 #   4. every bounded_by id is a node with kind: obstruction
-#   5. evidence is one of the allowed values; numerical-strong requires evidence_run
+#   5. evidence is `none` or `numerical-directional`; referenced diagnostics require evidence_run
 # =============================================================================
 
 meta:
   program: ab
   scope: "Parts I & II — Bayesian-posterior functional-inequality constants (A1-A5)"
   goal: "Maintain the certified intermediate results and refine the remaining open targets into sharp theorems."
-  kls_note: "Part III (KLS) has its own ledger at research/kls/routes/eldan-localization/ledger.yaml (program: kls), a route-based proof program with its own no-go machinery. Bridged here via conj:a1-bis."
+  kls_note: "Part III (KLS) has one route-spanning ledger at research/kls/ledger.yaml (program: kls), with currently Eldan-scoped no-go machinery. Bridged here via conj:a1-bis to kls/conj:kls."
 
 # ===========================================================================
 # CROSS-CUTTING OBSTRUCTIONS  (the shared no-go knowledge; prose + numerical
@@ -66,7 +57,7 @@ nodes:
 
   - id: obs:flat-direction
     kind: obstruction
-    status: conjectured
+    status: open
     file: modules/05-tier3-glm.tex
     statement: "For logistic and other saturating links, likelihood curvature can vanish in remote predictor directions; the one-observation logistic family rules out any universal constant-times inverse-mode-Hessian bound. This does not cover uniformly curved GLMs or rule out every tail-free data statistic."
     refines: prop:flat-prior-nonintegrable
@@ -117,7 +108,11 @@ nodes:
     file: modules/open-targets/A2-bernstein-von-mises.tex
     statement: "TV-closeness to the BvM Gaussian does NOT control the constants: a contamination sequence with ||mu_n - N(0,1)||_TV -> 0 can have C_P -> inf."
     refines: warn:a2-tv-fails
-    proof_provenance: "Elementary exact contamination calculation proved inline before the standalone solution plane; retained as a documented legacy obstruction."
+    solution: solutions/obs-tv-insufficient.tex
+    checked_by: agent
+    authored_by: /root/ab_legacy_author
+    reviewed_by: /root/kls_core_author
+    review: research/reviews/2026-08-25-ab-inline-r2-audit.md
     related: [conj:a2]
     numerics: "mu_n=(1-eps_n)N(0,1)+eps_n N(a_n,1), eps_n a_n^2 -> inf: the exact variance lower bound diverges while TV -> 0."
 
@@ -138,7 +133,7 @@ nodes:
 
   - id: obs:restricted-not-finite
     kind: obstruction
-    status: conjectured
+    status: open
     file: modules/open-targets/A4-variational-inference.tex
     statement: "Family-restricted transport is not automatically finite: for pi ~ e^{-|x|^p}, p<2, a Gaussian location family has C_Q = inf, and an unrestricted fixed-KL entropy ball still has infinite W2 radius. Localization needs family coercivity or quadratic-exponential tails, not a KL cutoff alone."
     refines: warn:a4-heavytail
@@ -155,7 +150,11 @@ nodes:
     file: modules/05-tier3-glm.tex
     statement: "Linear-test lower bound: C_P(pi) >= lambda_max(Cov_pi); any test function f gives Var(f)/E||grad f||^2 <= C_P. The universal sound refuter."
     refines: rem:rayleigh-lower-only
-    proof_provenance: "Elementary variational identity proved inline before the standalone solution plane; retained as a documented legacy baseline."
+    solution: solutions/glm-linear-baselines.tex
+    checked_by: agent
+    authored_by: /root/ab_legacy_author
+    reviewed_by: /root/kls_core_author
+    review: research/reviews/2026-08-25-ab-inline-r2-audit.md
     related: [conj:a1, conj:a2, q:a4-mean, q:a5-detect]
     numerics: "finum.constants.poincare_lower(samples) estimates lambda_max(Cov) by empirical covariance and is directional without sampling/mixing error control."
 
@@ -164,7 +163,11 @@ nodes:
     status: proved
     file: modules/05-tier3-glm.tex
     statement: "Data-free GLM bound: C_P <= C_LS <= lambda_max(Sigma0), C_TCI <= lambda_max(Sigma0); dimension-free, data-free. The trivial baseline any A1/A4 bound must beat."
-    proof_provenance: "Elementary inline Bakry-Emery/Otto-Villani proof predating the standalone solution plane; retained as a documented legacy baseline."
+    solution: solutions/glm-linear-baselines.tex
+    checked_by: agent
+    authored_by: /root/ab_legacy_author
+    reviewed_by: /root/kls_core_author
+    review: research/reviews/2026-08-25-ab-inline-r2-audit.md
     related: [conj:a1, q:a4-certificate]
 
   - id: thm:hardy-1d
@@ -180,7 +183,11 @@ nodes:
     status: proved
     file: modules/open-targets/A5-quotient-and-reparameterization.tex
     statement: "Lipschitz transport: T_# nu = mu with T globally L-Lipschitz => C_P(mu) <= L^2 C_P(nu), same for C_LS, C_TCI."
-    proof_provenance: "Elementary inline manuscript proof predating the standalone solution plane; retained as a documented legacy baseline."
+    solution: solutions/a5-lipschitz-quotient.tex
+    checked_by: agent
+    authored_by: /root/ab_legacy_author
+    reviewed_by: /root/kls_core_author
+    review: research/reviews/2026-08-25-ab-inline-r2-audit.md
     related: [q:a5-reparam]
 
   # =========================================================================
@@ -305,7 +312,7 @@ nodes:
     bounded_by: [obs:flat-direction]
     depends_on: [conj:a1]
     related: [conj:a2, q:a4-certificate]
-    bridges: [kls/thm:intro-all-cut]
+    bridges: [kls/conj:kls]
     numerics: "Estimate the realized K = C_P_lower / lambda_max(Cov) across GLM instances; test whether K stays O(1) and mildly geometry-dependent (the structured shadow of the KLS universal constant)."
     note: "Bridge to Part III: the SAME bound for EVERY isotropic log-concave measure with K universal IS the KLS conjecture (research/kls/). A1-bis is the structured, finite-sum case the KLS machinery does not exploit."
 
@@ -320,7 +327,6 @@ nodes:
     statement: "Asymptotic FI constants: n C_P(pi_n) -> lambda_max(I(theta_0)^{-1}) under a spectral-stability/tail hypothesis; global C_LS and C_TCI have this limit only under stronger tail comparisons or n-shrinking priors."
     bounded_by: [obs:tv-insufficient, obs:gaussian-tail-rigidity]
     related: [conj:a1, q:a4-certificate, conj:a5-metastable]
-    unlocks: [thm:a2-target]
     numerics: "n-sweep of n*poincare_lower(samples); does it converge to lambda_max(I^{-1})? Must FALSIFY on the obs:tv-insufficient contamination sequence."
     target_doc: research/targets/A2-bernstein-von-mises.md
 
@@ -509,7 +515,6 @@ nodes:
     bounded_by: [obs:restricted-not-finite, obs:flat-direction, obs:gaussian-tail-rigidity]
     depends_on: [thm:glm-fi]
     related: [conj:a1, conj:a2, conj:a3]
-    unlocks: [q:a4-elbo]
     numerics: "Estimate C_Q,r and C_mean,Q for GLM posteriors with mean-field Gaussian Q; check posterior (not prior) scale; lower bound via linear test."
     target_doc: research/targets/A4-variational-inference.md
 
@@ -663,7 +668,11 @@ nodes:
     status: proved
     file: modules/open-targets/A5-quotient-and-reparameterization.tex
     statement: "Quotient constants are never worse: C_P(pi/G) <= C_P(pi), same for C_LS, C_TCI, under the quotient metric and Dirichlet form."
-    proof_provenance: "Elementary inline manuscript proof predating the standalone solution plane; retained as a documented legacy baseline."
+    solution: solutions/a5-lipschitz-quotient.tex
+    checked_by: agent
+    authored_by: /root/ab_legacy_author
+    reviewed_by: /root/kls_core_author
+    review: research/reviews/2026-08-25-ab-inline-r2-audit.md
     numerics: "Sanity: estimated quotient C_P <= raw C_P on G-invariant posteriors."
 
   - id: prop:a5-ratio

@@ -4,12 +4,15 @@ Where agents write **proofs** of the open targets: self-contained, standalone-co
 human-checkable `.tex` files — **separate from the manuscript** (`../modules/`). This is the
 analytic-proof channel paired with the refinement and stress-testing work in `research/`.
 
-A solution file is the artifact a newly `proved` ledger node points to (via its `solution:` field),
-exactly as `evidence_run:` is the artifact a `numerical-strong` node points to. The ledger
-records the *claim and its state*; this directory holds the *proof an independent reviewer or
-Lean can check*. A small set of elementary inline results predating this plane is explicitly
-marked with `proof_provenance:` in the ledger; that legacy exception is not available to new
-promotions.
+A solution file is the artifact a newly `proved` ledger node points to (via its `solution:`
+field). The ledger records the *claim and its state*; this directory holds the *proof an
+independent reviewer or Lean can check*. Every newly `proved` node must carry a certified dossier;
+narrative provenance and numerical artifacts are not alternatives to R2. There is no historical
+or inline-proof exception: every `status: proved` node must point to a certified dossier.
+
+Definitions use a non-proof status such as KLS `defined`; diagnostic remarks and externally
+imported results are classified according to their actual role. Reclassification is not proof
+certification.
 
 ## Why separate from the manuscript
 
@@ -36,16 +39,17 @@ requires `authored_by`, a distinct `reviewed_by`, and a repo-local `review:` rep
 must state its exact scope and any exclusions. This gate was enabled by the project owner on
 2026-08-21 for independently audited results.
 
-Numerics never appear on this ladder: they refine and refute statements, they never prove
-(the R1/R2 contract in [`../CLAUDE.md`](../CLAUDE.md)).
+Numerics never appear on this ladder: they may guide intuition or suggest a counterexample, but
+they do not validate a claim, justify a proof step, or certify a dossier (the R1/R2 contract in
+[`../CLAUDE.md`](../CLAUDE.md)). Every proof must stand independently of numerical outcomes.
 
 ## Writing a solution
 
 1. Copy `TEMPLATE.tex` to `solutions/<ledger-id>.tex` (replace `:` with `-`). Closely coupled
    nodes may share one target-level dossier if its header and theorem labels enumerate every
    covered ledger id explicitly.
-2. Fill the audit header (ledger node, `refines` label, `bounded_by`, `evidence_run`,
-   `checked_by`, separate author/reviewer identities, review path, and date).
+2. Fill the audit header (ledger node, `refines` label, `bounded_by`, `checked_by`, separate
+   author/reviewer identities, review path, and date).
 3. State the **refined** theorem and prove it. Use `\ref`/
    `\cite` freely — they resolve when lifted into `main.tex` and show `??` standalone (expected).
 4. Compile standalone:

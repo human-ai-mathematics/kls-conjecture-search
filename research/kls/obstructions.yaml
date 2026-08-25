@@ -1,9 +1,9 @@
 # obstructions.yaml — machine-readable no-go set for the KLS program
 # =============================================================================
-# Ported from the standalone KLS program's roadmap; `source` paths re-synced to
-# the unified modules/kls/. Prose lives in obstructions.md; this file is the
-# enforced form. ../check_ledger.py uses it to police KLS proofs against the no-go
-# results.
+# Ported from the Eldan-localization roadmap and colocated with the route-spanning
+# KLS ledger. The present mechanisms are Eldan-route constraints unless a rule
+# explicitly says otherwise. Prose lives in obstructions.md; this file is the
+# enforced form. check_ledger.py uses it to police declarations against the no-go results.
 #
 # Model:
 #   mechanisms   the CLOSED controlled vocabulary of "risky" proof mechanisms an
@@ -37,28 +37,28 @@ obstructions:
     title: "no slice-wise absolute-scale Stein estimate; exponent 5/2 calibrates this package"
     forbids: [slice-wise, absolute-scale-excess]
     regime: "anisotropic posteriors λmax(A_t)=Λ≫1; cannot occur at t=0 (isotropic)"
-    source: modules/kls/05-obstruction.tex   # prop:two-tail
+    source: modules/kls/14-qcts-obstruction.tex   # prop:two-tail
     constrains: [ass:all-cut-carleson, ass:weighted-package, q:upgrade, q:weighted, q:stein-weighted]
 
   - id: obs:proj-ceiling
     title: "projection / radial tests cap at log n"
     forbids: [projection-only, radial-only]
     regime: "static, all dimensions"
-    source: modules/kls/05-obstruction.tex
+    source: modules/kls/14-qcts-obstruction.tex
     constrains: [ass:all-cut-carleson, q:upgrade, prop:qcts-equivalence]
 
   - id: obs:crude-insufficient
     title: "Klartag's own bound defeats the naive bootstrap"
     forbids: [crude-bootstrap]
     regime: "high dimension"
-    source: modules/kls/12-bootstrap.tex   # lem:crude + rem:insufficiency
+    source: modules/kls/25-bootstrap.tex   # lem:crude + rem:insufficiency
     constrains: [lem:crude]
 
   - id: obs:relative-ceiling
     title: "relative scale for all measures is already KLS-sufficient"
     forbids: [relative-scale-all-measures]
     regime: "unweighted all-measure Xi bound vs the distinct h_mu-weighted near-worst target"
-    source: modules/kls/12-bootstrap.tex   # prop:ceiling
+    source: modules/kls/25-bootstrap.tex   # prop:ceiling
     constrains: [ass:all-cut-carleson, q:taming]
 
   - id: obs:circularity
@@ -66,12 +66,12 @@ obstructions:
     forbids: []
     warns: [direct-excess]
     regime: "all; the fixed-family martingale lemma does not apply to the random time-dependent balanced competitor family"
-    source: modules/kls/11-excess-propagation.tex    # lem:excess-identity + lem:inf-martingales
+    source: modules/kls/24-excess-propagation.tex    # lem:excess-identity + lem:inf-martingales
     constrains: [thm:bootstrap, q:weighted]
 
   - id: obs:rank-one-refuted
     title: "on products, a fixed single-coordinate cut cannot ride inflation"
     forbids: [single-coordinate-counterexample]
     regime: "product measures; residue is genuinely high-complexity cuts"
-    source: modules/kls/09-product-stress.tex   # cor:refutation
+    source: modules/kls/22-product-stress.tex   # cor:refutation
     constrains: [q:alignment]

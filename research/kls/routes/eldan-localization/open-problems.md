@@ -1,25 +1,27 @@
-# Open problems — the live KLS frontier (P1–P7)
+# Eldan fixed-cut route — open problems (P1–P7)
 
-The KLS analogue of `../targets/*.md`. KLS is **one interlinked proof program**, not seven
-independent targets, so its open problems are kept together here (with the cross-references
-that bind them) rather than split into one file each. Ported from the
+Within this route, the seven targets form **one interlinked fixed-cut program**, so they are kept
+together here (with the cross-references that bind them) rather than split into one file each.
+They are one route within the broader KLS strategy map. Ported from the
 standalone KLS program's roadmap; references re-synced to the unified `modules/kls/`.
 
 Each entry is a **self-contained brief**:
 - **Statement** — the precise target (`\ref` label + ledger id).
-- **Unlocks** — what it implies (from `ledger.yaml`).
-- **Bounded by** — obstructions any proof must respect (`obstructions.md`).
+- **Downstream role** — how an affirmative resolution would enter later arguments.
+- **Bounded by** — obstructions any proof must respect
+  ([`../../obstructions.md`](../../obstructions.md)).
 - **Attack** — the suggested mechanism / available tools.
 - **Prior work** — what has been tried; entry point.
 
-Cross-check every claimed result against `obstructions.md`, update `ledger.yaml`, and run
+Cross-check every claimed result against `research/kls/obstructions.md`, update the central
+`research/kls/ledger.yaml` through the orchestrator, and run
 `python3 research/check_ledger.py`.
 
 ---
 
-## P1 · `q:upgrade` — operator-to-trace upgrade (Route A headline)
+## P1 · `q:upgrade` — operator-to-trace upgrade (Eldan-A headline)
 
-**Statement** (`q:upgrade`, `modules/kls/14-open-targets.tex`; target `ass:all-cut-carleson`).
+**Statement** (`q:upgrade`, `modules/kls/27-eldan-open-targets.tex`; target `ass:all-cut-carleson`).
 Upgrade the unconditional per-direction Carleson estimate `cor:per-direction`
 ($E\int s_t|G_t\theta|^2\,dt \le \theta^\top R_0\theta \le 1$, every fixed $\theta$) to the
 **trace** scale uniformly over balanced cuts:
@@ -27,7 +29,8 @@ $E\int_{I\cap[0,\tau]} s_t\|G_t\|^2_{\mathrm{HS}}\,dt \le C_0|I| + C_1 E\int r_t
 $\alpha<1$. Equivalently, the source $s_t G_t^2$ must not occupy many almost-orthogonal
 directions for a non-negligible set of early balanced times (noncommutative Carleson).
 
-**Unlocks.** `ass:all-cut-carleson` ⇒ `thm:intro-all-cut` ⇒ **KLS directly**.
+**Downstream role.** A proof would establish `ass:all-cut-carleson`; the conditional theorem
+`thm:intro-all-cut` would then yield **KLS directly**.
 
 **Bounded by.** `obs:proj-ceiling` (projection/radial info alone caps at $\log n$; Letwin's
 moment-map proof bypasses this for intrinsic QCTS, but the dynamic upgrade still needs
@@ -47,13 +50,14 @@ question reduces to `q:alignment` (P6). The designated tail-union model is now i
 
 ---
 
-## P2 · `q:weighted` — weighted excess propagation with rate (Route B input i-w)
+## P2 · `q:weighted` — weighted excess propagation with rate (Eldan-B input i-w)
 
 **Statement** (`q:weighted`; target `ass:weighted-package`). For balanced near-Cheeger $E$
 ($e_0(E)\le1$) and $T\le T_0$:
 $E\int_0^{T\wedge\tau_\eta} e_t(E)\,(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt \le C(T e_0(E) + T^{1+\gamma})$.
 
-**Unlocks.** Half of `ass:weighted-package`.
+**Downstream role.** This is input (i-w), one of the two estimates bundled in
+`ass:weighted-package`.
 
 **Bounded by.** `obs:two-tail` calibrates the covariance power $(1+\|A\|)^{5/2}$, but not the
 time rate $T^{1+\gamma}$; a weaker absolute-scale form is inert (`prop:intro-audit`) and
@@ -74,13 +78,15 @@ to `q:taming` (P4).
 
 ---
 
-## P3 · `q:stein-weighted` — weighted stable Stein trace (Route B input ii-w)
+## P3 · `q:stein-weighted` — weighted stable Stein trace (Eldan-B input ii-w)
 
 **Statement** (`q:stein-weighted`; target `ass:weighted-package`). Prove the weighted stable
 Stein-trace estimate for balanced near-Cheeger cuts, damping $\beta<\tfrac12$, with the excess
 term in the $(1+\|A_t\|)^{5/2}$-weighted form.
 
-**Unlocks.** The other half of `ass:weighted-package` ⇒ (with P2) `thm:intro-weighted` ⇒ **KLS**.
+**Downstream role.** This is input (ii-w), the other estimate bundled in
+`ass:weighted-package`. Together with P2 it would establish that package, after which the
+conditional theorem `thm:intro-weighted` would yield **KLS**.
 
 **Bounded by.** `obs:two-tail` (no slice-wise shortcut).
 
@@ -106,16 +112,17 @@ every isotropic log-concave $\mu$ with $h_\mu \le (1+\varepsilon)h^*_n$ satisfie
 $h_\mu(T_0^{4/3}+\Xi_{T_0}(\mu)) \le \kappa T_0$? Here
 $\Xi_T = \int_0^T E(\lambda_{\max}(A_t)-1)_+\,dt$.
 
-**Unlocks.** Absolute-scale supply $T_0e_0+C\kappa T_0$ for near-worst measures (via
-`thm:bootstrap`), and
-therefore the matched-time completion described in `cor:dichotomy`.
+**Downstream role.** Together with `thm:bootstrap`, an affirmative answer would supply the
+absolute-scale term $T_0e_0+C\kappa T_0$ for near-worst measures. Completing the matched-time
+argument described in `cor:dichotomy` additionally requires the separate
+`hyp:absolute-geometric-completion` input.
 
 **Bounded by.** `obs:relative-ceiling` — the stronger, unweighted all-measure condition
 $\Xi_{T_0}\le\kappa T_0$ at a sufficiently small universal time is already sufficient for KLS.
 The $h_\mu$-weighted near-worst statement above is distinct and genuinely weaker. No converse
 equivalence is proved.
 
-**Attack.** Couple the **splitting analysis** (`modules/kls/13-jacobi-splitting.tex`) to the
+**Attack.** Couple the **splitting analysis** (`modules/kls/26-jacobi-splitting.tex`) to the
 **covariance SDE** (`eq:cov-sde`): covariance inflation is driven by third-moment anisotropy,
 while near-worst measures are conjecturally approximately split along their dangerous
 directions (where variance processes are one-dimensional and tame, `prop:products`(ii)). This
@@ -136,7 +143,9 @@ constant-mode curvature $\mathfrak K_\Sigma$ forces quantitative proximity, alon
 direction, to the split structure of `prop:exact-splitting`, with constants stable under the
 localization tilt (`prop:persistent-splitting`).
 
-**Unlocks.** The constant-mode part of `q:stein-weighted` (P3).
+**Downstream role.** A valid rigidity-and-stability theorem is a proposed ingredient for the
+constant-mode branch of `q:stein-weighted` (P3); no reduction currently proves that it is
+sufficient.
 
 **Attack.** Only a sufficient flat model is proved: a global cylinder with a globally
 Hessian-flat direction splits, and an already split log-affine factor has a flat orthogonal
@@ -149,9 +158,9 @@ transfer is an additional open step.
 
 ---
 
-## P6 · `q:alignment` — adapted alignment problem for products (Route A residue)
+## P6 · `q:alignment` — adapted alignment problem for products (Eldan-A residue)
 
-**Statement** (`q:alignment`, `modules/kls/09-product-stress.tex`). For $\mu$ a product of $n$
+**Statement** (`q:alignment`, `modules/kls/22-product-stress.tex`). For $\mu$ a product of $n$
 isotropic two-sided exponentials: does there exist universal $T_0,C_0,C_1,\alpha<1$ such that
 for every $n$ and every balanced cut $E$,
 $$
@@ -164,9 +173,10 @@ incident to a high coordinate. The obstruction-side negation asks whether a **fi
 spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside a common short
 window, while staying balanced and underdamped.
 
-**Unlocks.** `prog:product-test` decided positively ⇒ strong evidence for / a model of
-`q:upgrade`. A negative answer (an explicit aligning cut) **refutes** `ass:all-cut-carleson`
-and forces Route B.
+**Downstream role.** A positive resolution would settle the remaining residue of
+`prog:product-test` and furnish a model case for `q:upgrade`, without proving the general
+statement. A negative answer (an explicit aligning cut) would **refute**
+`ass:all-cut-carleson` and redirect attention to Eldan-B.
 
 **Bounded by.** `obs:rank-one-refuted` — single-coordinate cuts cannot do it (budget $\le1$,
 spikes self-extinguish); the residue is genuinely high-complexity cuts.
@@ -193,7 +203,7 @@ limit are proved; boundedness of the full stopped observable is conjectural. See
 
 ## P7 · `prog:product-test` — execute/extend the product stress test
 
-**Status.** Largely **executed** in `modules/kls/09-product-stress.tex`: coordinate budgets
+**Status.** Largely **executed** in `modules/kls/22-product-stress.tex`: coordinate budgets
 (`thm:budget`), rank-one refutation (`cor:refutation`), covariance reduction (`cor:V2-implies`),
 dimension-dependent covariance-window discharge (`thm:V2-window`, `cor:KI-discharged`). The
 published fallback reaches $c/\log^2n$; conditional on Letwin v1 the fixed-time moment window
@@ -219,5 +229,5 @@ $n$, then tighten full paths and stopping; another modest-dimensional path sweep
   gives fixed-time moments on $(C\kappa_n^2\log n)^{-1}$; Letwin v1 makes $\kappa_n$ universal
   and hence extends that moment window to $c/\log n$. Keep the latter explicitly
   preprint-conditional and do not silently upgrade the separate sup-time theorem.
-- Geometric module (`13-jacobi-splitting.tex`) results are **model statements**; the
+- Geometric module (`26-jacobi-splitting.tex`) results are **model statements**; the
   quantitative, uniform-in-localization versions are open (`q:splitting`).

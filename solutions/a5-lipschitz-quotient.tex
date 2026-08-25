@@ -1,0 +1,164 @@
+% Standalone R2 dossier for Lipschitz transport and finite-group quotient monotonicity.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-nodes: lem:a5-lipschitz; thm:a5-monotone
+% refines: lem:a5-lipschitz; thm:a5-monotone
+% bounded_by: none
+% evidence_run: none
+% checked_by: agent
+% author: /root/ab_legacy_author
+% reviewer: /root/kls_core_author
+% review: research/reviews/2026-08-25-ab-inline-r2-audit.md
+% date: 2026-08-25
+% ============================================================================
+
+\section*{Solution: Lipschitz transport and quotient monotonicity}
+\label{sec:sol-a5-lipschitz-quotient}
+
+\paragraph{Analytic setting.}
+For the Poincar\'e and log-Sobolev statements, the Dirichlet forms are understood on their closed
+Sobolev domains.  Thus the standard weak chain rule is available: if \(T:X\to Y\) is globally
+\(L\)-Lipschitz and \(f\) is admissible on \(Y\), then
+\begin{equation}\label{eq:sol-a5-chain}
+ \abs{\nabla(f\circ T)}\le L\,\abs{\nabla f}\circ T
+ \quad\text{almost everywhere}.
+\end{equation}
+This includes Euclidean and Riemannian spaces by Rademacher's theorem and closure, and the
+finite-group orbit spaces below with the lifted quotient form.  All measures considered for
+\(T_2\) lie in \(\mathcal P_2\) of their respective complete separable metric spaces.
+
+\subsection*{1. Lipschitz images}
+
+\begin{lemma}[Ledger node \texttt{lem:a5-lipschitz}]
+\label{lem:sol-a5-lipschitz}
+Let \(\nu\) be a probability measure on \(X\), let \(T:X\to Y\) be measurable and globally
+\(L\)-Lipschitz, and put \(\mu=T_\#\nu\).  Under the analytic setting above,
+\[
+ \CP(\mu)\le L^2\CP(\nu),\qquad
+ \CLS(\mu)\le L^2\CLS(\nu),\qquad
+ \CTCI(\mu)\le L^2\CTCI(\nu).
+\]
+No injectivity or measurable inverse for \(T\) is required.
+\end{lemma}
+
+\begin{proof}
+For every admissible \(f:Y\to\R\), the pushforward identity and
+\eqref{eq:sol-a5-chain} give
+\[
+ \Var_\mu(f)=\Var_\nu(f\circ T)
+ \le \CP(\nu)\int_X\abs{\nabla(f\circ T)}^2\dd\nu
+ \le L^2\CP(\nu)\int_Y\abs{\nabla f}^2\dd\mu.
+\]
+The same calculation starts from
+\(\Ent_\mu(f^2)=\Ent_\nu((f\circ T)^2)\) and proves the log-Sobolev bound, including the
+factor two in the repository normalization.
+
+For transport, let \(\eta\ll\mu\), put \(h=\dd\eta/\dd\mu\), and define a measure on \(X\) by
+\begin{equation}\label{eq:sol-a5-density-lift}
+ \dd\widetilde\eta=(h\circ T)\dd\nu.
+\end{equation}
+This is a probability measure, since
+\[
+ \int_Xh\circ T\dd\nu=\int_Yh\dd\mu=1.
+\]
+Moreover, for every bounded measurable \(\phi\),
+\[
+ \int_Y\phi\dd(T_\#\widetilde\eta)
+ =\int_X(\phi h)\circ T\dd\nu
+ =\int_Y\phi h\dd\mu=\int_Y\phi\dd\eta,
+\]
+so \(T_\#\widetilde\eta=\eta\), and
+\begin{equation}\label{eq:sol-a5-entropy-lift}
+ \KL(\widetilde\eta\|\nu)
+ =\int_X(h\log h)\circ T\dd\nu
+ =\int_Yh\log h\dd\mu
+ =\KL(\eta\|\mu).
+\end{equation}
+If \(\Gamma\) is any coupling of \(\widetilde\eta\) and \(\nu\), then
+\((T,T)_\#\Gamma\) couples \(\eta\) and \(\mu\), and its quadratic cost is at most
+\(L^2\) times that of \(\Gamma\).  Taking infima over couplings and using \(T_2\) for \(\nu\)
+therefore gives
+\[
+ W_{2,Y}^2(\eta,\mu)
+ \le L^2W_{2,X}^2(\widetilde\eta,\nu)
+ \le 2L^2\CTCI(\nu)\KL(\widetilde\eta\|\nu)
+ =2L^2\CTCI(\nu)\KL(\eta\|\mu).
+\]
+The construction \eqref{eq:sol-a5-density-lift} is constant on fibers and is valid even when
+\(T\) is noninjective; no choice of a preimage was made.
+\end{proof}
+
+\subsection*{2. Finite isometric quotients}
+
+\begin{theorem}[Ledger node \texttt{thm:a5-monotone}]
+\label{thm:sol-a5-monotone}
+Let a finite group \(G\) act isometrically on \((\Theta,d_\Theta)\), let \(\pi\) be a
+\(G\)-invariant probability measure, and let
+\[
+ q:\Theta\to\bar\Theta=\Theta/G,
+ \qquad \bar\pi=q_\#\pi,
+ \qquad
+ d_{\bar\Theta}([x],[y])=\min_{g\in G}d_\Theta(x,gy).
+\]
+Equip \(\bar\Theta\) with the lifted quotient Dirichlet form from
+Equation~\ref{eq:a5-quotient-form}.  Then
+\[
+ \CP(\bar\pi)\le\CP(\pi),\qquad
+ \CLS(\bar\pi)\le\CLS(\pi),\qquad
+ \CTCI(\bar\pi)\le\CTCI(\pi).
+\]
+\end{theorem}
+
+\begin{proof}
+First, \(\bar\pi\) really is a probability measure:
+\(\bar\pi(\bar\Theta)=\pi(q^{-1}(\bar\Theta))=\pi(\Theta)=1\).  Pullback by \(q\) preserves
+integrals, hence variance and entropy,
+\[
+ \Var_{\bar\pi}(\varphi)=\Var_\pi(\varphi\circ q),
+ \qquad
+ \Ent_{\bar\pi}(\varphi^2)=\Ent_\pi((\varphi\circ q)^2).
+\]
+By the definition of the quotient form,
+\[
+ \mathcal E_{\bar\pi}(\varphi)
+ =\mathcal E_\pi(\varphi\circ q).
+\]
+Thus each quotient test function lifts to an admissible \(G\)-invariant test function upstairs
+with exactly the same Rayleigh or entropy-energy quotient.  Applying the inequalities for
+\(\pi\), or equivalently restricting their variational suprema to this invariant subclass,
+proves the Poincar\'e and log-Sobolev comparisons.
+
+For completeness, we spell out the transport descent rather than merely cite
+Lemma~\ref{lem:sol-a5-lipschitz}.  The quotient map is \(1\)-Lipschitz because the identity
+element is one candidate in the minimum:
+\[
+ d_{\bar\Theta}(q(x),q(y))\le d_\Theta(x,y).
+\]
+Given \(\bar\eta\ll\bar\pi\), set \(h=\dd\bar\eta/\dd\bar\pi\) and
+\(\dd\eta=(h\circ q)\dd\pi\).  The same pushforward calculation as above proves, without any
+choice of orbit representative,
+\[
+ \eta(\Theta)=1,
+ \qquad q_\#\eta=\bar\eta,
+ \qquad \KL(\eta\|\pi)=\KL(\bar\eta\|\bar\pi).
+\]
+If \(\Gamma\) couples \(\eta\) and \(\pi\), then \((q,q)_\#\Gamma\) couples
+\(\bar\eta\) and \(\bar\pi\), and the quotient cost is no larger than the upstairs cost.
+Consequently
+\[
+ W_{2,\bar\Theta}^2(\bar\eta,\bar\pi)
+ \le W_{2,\Theta}^2(\eta,\pi)
+ \le2\CTCI(\pi)\KL(\eta\|\pi)
+ =2\CTCI(\pi)\KL(\bar\eta\|\bar\pi),
+\]
+which proves \(\CTCI(\bar\pi)\le\CTCI(\pi)\).
+\end{proof}
+
+\paragraph{Scope.}
+Monotonicity makes no assertion of strict improvement.  Invariant physical slow modes can survive
+the quotient unchanged; their quantitative separation from label-switching modes is the subject
+of the later invariant/non-invariant gap results.
+
+\end{document}

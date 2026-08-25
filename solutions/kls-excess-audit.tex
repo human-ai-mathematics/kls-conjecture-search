@@ -1,0 +1,311 @@
+% Standalone R2 candidate dossier for the perimeter/excess consumption cluster.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-nodes: prop:intro-audit; prop:trivial-excess;
+%               lem:perimeter-martingale; lem:excess-identity;
+%               lem:inf-martingales
+% refines: prop:intro-audit (modules/kls/20-eldan-statements.tex);
+%          prop:trivial-excess (modules/kls/24-excess-propagation.tex);
+%          lem:perimeter-martingale (modules/kls/24-excess-propagation.tex);
+%          lem:excess-identity (modules/kls/24-excess-propagation.tex);
+%          lem:inf-martingales (modules/kls/24-excess-propagation.tex)
+% proof-location-note: the manuscript proof of prop:intro-audit is displaced to
+%                      modules/kls/24-excess-propagation.tex
+% depends_on: eq:density-sde; eq:perimeter-supermartingale;
+%             isotropic halfspace perimeter upper bound; prop:two-tail;
+%             lem:stein-vs-source; cor:tight-window-consumption
+% bounded_by:
+%   prop:intro-audit: none
+%   prop:trivial-excess: none
+%   lem:perimeter-martingale: none
+%   lem:excess-identity: none
+%   lem:inf-martingales: none
+% evidence_run: none
+% checked_by: agent
+% authored_by: /root/kls_bootstrap_author
+% reviewed_by: /root/kls_core_author
+% review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+% date: 2026-08-25
+% ============================================================================
+
+\section*{Solution: the perimeter martingale and the excess-consumption audit}
+\label{sec:sol-kls-excess-audit}
+
+\paragraph{Scope and regularity.}
+Let $(\mu_t)_{t\geq0}$ be Eldan's stochastic-localization posterior started from a
+log-concave probability measure $\mu$ on $\mathbb R^n$.  We use
+\[
+  F_t(x)=\frac{\dd\mu_t}{\dd\mu}(x),\qquad
+  \dd F_t(x)=F_t(x)(x-a_t)\mathbin\cdot\dd W_t,
+  \qquad a_t=\int x\,\dd\mu_t(x).
+\]
+For a fixed finite-perimeter set $E$, write
+\[
+  p_t=\mu_t(E),\qquad
+  P_t(E)=\mu_t^+(E),\qquad
+  e_t(E)=P_t(E)-I_{\mu_t}(p_t).
+\]
+The martingale identity below is first proved when the initial support is compact and the
+density and boundary have been smoothed.  This is precisely the manuscript's regularity
+convention.  The noncompact statement used later is only the supermartingale property and
+follows directly from nonnegative-local-martingale convergence; it does not assert equality.
+
+\subsection*{1. Perimeter under localization}
+
+\begin{lemma}[Perimeter martingale; Lemma~\ref{lem:perimeter-martingale}]
+\label{lem:sol-perimeter-martingale}
+In the compact-support smooth class, for every fixed finite-perimeter set $E$, $P_t(E)$ is a
+nonnegative true martingale and
+\begin{equation}
+  \dd P_t(E)
+  =\left(\int_{\partial^*E}(x-a_t)\,\dd\sigma_t(x)\right)\mathbin\cdot\dd W_t,
+  \label{eq:sol-perimeter-sde}
+\end{equation}
+where $\sigma_t$ is the weighted surface measure of $\mu_t$ on $\partial^*E$.  Thus its drift
+vanishes identically.  Without compact support, the same construction gives the
+supermartingale inequality
+\begin{equation}
+  \mathbb E[P_t(E)\mid\mathcal F_s]\leq P_s(E),\qquad 0\leq s\leq t,
+  \label{eq:sol-perimeter-supermartingale}
+\end{equation}
+and in particular $\mathbb E P_t(E)\leq P_0(E)$.
+\end{lemma}
+
+\begin{proof}
+Let $w_0$ be the smooth density of $\mu$ and put
+$\dd\sigma_0=w_0\,\dd\mathcal H^{n-1}|_{\partial^*E}$.  Multiplication of a density by $F_t$
+also multiplies its weighted surface measure by $F_t$, hence
+\begin{equation}
+  P_t(E)=\int_{\partial^*E}F_t(x)\,\dd\sigma_0(x),
+  \qquad
+  \dd\sigma_t(x)=F_t(x)\,\dd\sigma_0(x).
+  \label{eq:sol-perimeter-representation}
+\end{equation}
+The surface measure $\sigma_0$ is finite because $E$ has finite $\mu$-perimeter.
+
+Suppose first that the support $K$ of $\mu$ is compact.  Both $x$ and $a_t$ belong to the
+compact convex hull of $K$, so $|x-a_t|\leq D:=\operatorname{diam}K$.  For each fixed $x$,
+$F_t(x)$ is the stochastic exponential with bounded predictable integrand $x-a_t$.
+Novikov's criterion on every bounded time interval therefore makes it a true martingale, and
+for $0\leq s\leq t$,
+\[
+  \mathbb E[F_t(x)\mid\mathcal F_s]=F_s(x).
+\]
+Conditional Tonelli applied to the nonnegative integrand in
+\eqref{eq:sol-perimeter-representation} now gives
+\[
+  \mathbb E[P_t(E)\mid\mathcal F_s]
+  =\int_{\partial^*E}\mathbb E[F_t(x)\mid\mathcal F_s]\,\dd\sigma_0(x)
+  =P_s(E).
+\]
+In particular, $P_t(E)$ is integrable and is a true, not merely local, martingale.
+
+It remains to identify its stochastic differential.  Localize at
+$\rho_N=\inf\{t:P_t(E)\geq N\}$.  On $[0,\rho_N]$,
+\[
+  \left|\int_{\partial^*E}F_t(x)(x-a_t)\,\dd\sigma_0(x)\right|
+  \leq D P_t(E)\leq DN.
+\]
+The square-integrability condition for stochastic Fubini is therefore satisfied on every
+bounded stopped interval.  Integrating the pointwise SDE for $F_t(x)$ and then letting $N$
+increase proves \eqref{eq:sol-perimeter-sde}; the identity
+$F_t\,\dd\sigma_0=\dd\sigma_t$ gives its displayed form.  There is no finite-variation term,
+so the drift vanishes.
+
+For a noncompact support, each $F_t(x)$ is still a nonnegative local martingale and hence a
+supermartingale.  Thus, for $0\leq s\leq t$,
+$\mathbb E[F_t(x)\mid\mathcal F_s]\leq F_s(x)$.  Conditional Tonelli in
+\eqref{eq:sol-perimeter-representation} yields
+\[
+  \mathbb E[P_t(E)\mid\mathcal F_s]
+  \leq \int_{\partial^*E}F_s(x)\,\dd\sigma_0(x)=P_s(E),
+\]
+which is \eqref{eq:sol-perimeter-supermartingale}; taking $s=0$ gives the deterministic-time
+expectation bound.  The standard compact truncation and smoothing procedure gives the same
+inequality for general log-concave data and finite-perimeter sets.
+No uniform-integrability assertion is used in this last step.
+\end{proof}
+
+\subsection*{2. The unconditional excess bound and the exact identity}
+
+\begin{proposition}[Unconditional integrated excess; Proposition~\ref{prop:trivial-excess}]
+\label{prop:sol-trivial-excess}
+Let $\mu$ be isotropic and log-concave, let $\mu(E)=1/2$, and put
+$e_0=P_0(E)-I_\mu(1/2)$.  For every $T>0$ and every stopping time $\tau$,
+\begin{equation}
+  \mathbb E\int_0^{T\wedge\tau}e_t(E)\,\dd t\leq(1+e_0)T.
+  \label{eq:sol-trivial-excess}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The profile is nonnegative, so $0\leq e_t(E)\leq P_t(E)$ pathwise.  Consequently, Tonelli and
+\eqref{eq:sol-perimeter-supermartingale} give
+\[
+  \mathbb E\int_0^{T\wedge\tau}e_t(E)\,\dd t
+  =\int_0^T\mathbb E[\mathbf 1_{\{t<\tau\}}e_t(E)]\,\dd t
+  \leq\int_0^T\mathbb E P_t(E)\,\dd t
+  \leq T P_0(E).
+\]
+This calculation uses neither optional stopping nor independence of $\tau$; only the
+deterministic-time supermartingale bound is used.
+
+To bound $P_0(E)$, take a coordinate marginal of $\mu$.  It is a one-dimensional log-concave
+law of variance one.  If $f$ is its density and $m$ a median, the coordinate halfspace
+$H=\{x:x_1\leq m\}$ has $\mu(H)=1/2$ and $\mu^+(H)=f(m)$.  The standard sharp elementary
+one-dimensional estimate $\|f\|_\infty\leq1$ for a variance-one log-concave density
+\cite{Bobkov1999LogConcave} gives
+$I_\mu(1/2)\leq f(m)\leq1$.  Therefore
+$P_0(E)=I_\mu(1/2)+e_0\leq1+e_0$, proving
+\eqref{eq:sol-trivial-excess}.
+\end{proof}
+
+\begin{lemma}[Exact excess identity; Lemma~\ref{lem:excess-identity}]
+\label{lem:sol-excess-identity}
+Under compact support, for every finite $t\geq0$,
+\begin{equation}
+  \mathbb E e_t(E)
+  =e_0(E)+I_\mu(p_0)-\mathbb E I_{\mu_t}(p_t).
+  \label{eq:sol-excess-identity}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+All quantities are nonnegative and integrable in the compact-support class.  By definition,
+\[
+  \mathbb E e_t(E)=\mathbb E P_t(E)-\mathbb E I_{\mu_t}(p_t).
+\]
+Lemma~\ref{lem:sol-perimeter-martingale} gives
+$\mathbb E P_t(E)=P_0(E)$, while
+$P_0(E)=I_\mu(p_0)+e_0(E)$.  Substitution proves
+\eqref{eq:sol-excess-identity}.  Compact support is essential for the equality used here: the
+noncompact argument above supplies only $\mathbb E P_t(E)\leq P_0(E)$.
+\end{proof}
+
+\subsection*{3. What an infimum of perimeter martingales does and does not imply}
+
+\begin{lemma}[Fixed competitor families; Lemma~\ref{lem:inf-martingales}]
+\label{lem:sol-inf-martingales}
+Let $\mathfrak S$ be a fixed nonempty countable family of finite-perimeter sets and define
+$J_t=\inf_{S\in\mathfrak S}P_t(S)$.  Then $J$ is a supermartingale.  The same conclusion holds
+for a fixed uncountable family whenever its infimum is measurable under the stated selection
+convention.  On $\{t<\tau_\eta\}$ one has the pointwise comparison
+\begin{equation}
+  I_{\mu_t}(p_t)\geq J_t(\eta),
+  \qquad
+  J_t(\eta)=\inf\{P_t(S):\mu_t(S)\in[1/2-\eta,1/2+\eta]\}.
+  \label{eq:sol-window-infimum}
+\end{equation}
+The family in the last infimum depends on $(t,\omega)$; the first assertion therefore does not
+say that $J_t(\eta)$ or $I_{\mu_t}(p_t)$ is a supermartingale.
+\end{lemma}
+
+\begin{proof}
+Fix $0\leq s\leq t$.  For every $S\in\mathfrak S$, $J_t\leq P_t(S)$, hence by monotonicity of
+conditional expectation and Lemma~\ref{lem:sol-perimeter-martingale},
+\[
+  \mathbb E[J_t\mid\mathcal F_s]
+  \leq\mathbb E[P_t(S)\mid\mathcal F_s]
+  =P_s(S).
+\]
+Taking the infimum in $S$ on the right gives
+$\mathbb E[J_t\mid\mathcal F_s]\leq J_s$.  Nonnegativity removes any issue with the negative
+part; the stated measurability convention supplies a random variable in the uncountable case.
+
+On $\{t<\tau_\eta\}$, $p_t\in[1/2-\eta,1/2+\eta]$.  Thus the exact-mass competitor class
+$\{S:\mu_t(S)=p_t\}$ is contained in the windowed class in
+\eqref{eq:sol-window-infimum}.  The infimum over the smaller class is at least the infimum over
+the larger one, proving the pointwise comparison.  But eligibility for the windowed class is
+the random condition $\mu_t(S)\in[1/2-\eta,1/2+\eta]$; it is not a fixed family to which the
+conditional-expectation argument can be applied.
+\end{proof}
+
+\subsection*{4. Consumption audit}
+
+\begin{proposition}[Consumption audit; Proposition~\ref{prop:intro-audit}]
+\label{prop:sol-intro-audit}
+The following three assertions hold.
+\begin{enumerate}
+  \item For every isotropic log-concave $\mu$, every $E$ with $\mu(E)=1/2$, every $T>0$, and
+  every stopping time $\tau$,
+  \[
+    \mathbb E\int_0^{T\wedge\tau}e_t(E)\,\dd t\leq(1+e_0)T.
+  \]
+  \item Replace the covariance weight in the stable Stein-trace estimate by $1$, keeping its
+  fixed tight window and absorption margin.  Then this unweighted estimate, without any
+  separate excess-propagation hypothesis, implies KLS.
+  \item There are log-concave pairs $(\nu,E)$ with $\nu(E)=1/2$, $r=D=0$,
+  $e(E)\to0$, and $\mathcal S_\nu(E)/s\to\infty$.  Hence the unweighted estimate cannot be
+  proved by a universal one-time-slice inequality of the asserted form.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first assertion is Proposition~\ref{prop:sol-trivial-excess}.
+
+For the second, spell out exactly what is consumed.  Fix a universal
+$\eta\in(0,1/6]$ and constants $C_0,C_1,C_2$, $\beta\geq0$ satisfying
+$2\beta+64\eta^2<1$.  The unweighted stable Stein-trace estimate is
+\begin{equation}
+\begin{split}
+  \mathbb E\int_0^{T\wedge\tau_\eta}
+       \frac{\mathcal S_{\mu_t}(E)}{s_t}\,\dd t
+  \leq{}&C_0T+C_1\mathbb E\int_0^{T\wedge\tau_\eta}r_t\,\dd t
+       +\beta\mathbb E\int_0^{T\wedge\tau_\eta}D_t\,\dd t\\
+  &+C_2\mathbb E\int_0^{T\wedge\tau_\eta}e_t(E)\,\dd t .
+\end{split}
+\label{eq:sol-unweighted-stein}
+\end{equation}
+The exact tight-window Stein/source conversion
+(Lemma~\ref{lem:stein-vs-source}) is
+\[
+  \mathbb E\int_0^{T\wedge\tau_\eta}S_t\,\dd t
+  \leq2\mathbb E\int_0^{T\wedge\tau_\eta}
+          \frac{\mathcal S_{\mu_t}(E)}{s_t}\,\dd t
+       +64\eta^2\mathbb E\int_0^{T\wedge\tau_\eta}D_t\,\dd t.
+\]
+For the near-Cheeger cuts used in the contradiction argument, take $e_0\leq1$.  Applying the
+first assertion to \eqref{eq:sol-unweighted-stein} gives
+\[
+\begin{split}
+  \mathbb E\int_0^{T\wedge\tau_\eta}S_t\,\dd t
+  \leq{}&(2C_0+4C_2)T
+       +2C_1\mathbb E\int_0^{T\wedge\tau_\eta}r_t\,\dd t\\
+       &+(2\beta+64\eta^2)
+         \mathbb E\int_0^{T\wedge\tau_\eta}D_t\,\dd t.
+\end{split}
+\label{eq:sol-absorptive-carleson}
+\]
+This is precisely an absorptive tight-window two-color Carleson estimate, with damping
+coefficient strictly below one.  Corollary~\ref{cor:tight-window-consumption} then gives a
+positive universal boundary lower bound for every balanced near-Cheeger cut to which
+\eqref{eq:sol-unweighted-stein} applies.
+
+For completeness, if KLS failed, there would be isotropic log-concave $\mu_k$ with
+$h_{\mu_k}\to0$.  The balanced characterization
+$h_\nu=2I_\nu(1/2)$ permits choices of sets $E_k$ of mass $1/2$ with
+$P_0(E_k)\leq I_{\mu_k}(1/2)+o(1)$.  Thus $P_0(E_k)\to0$ and $e_0(E_k)\leq1$ for all large
+$k$, whereas \eqref{eq:sol-absorptive-carleson} and tight-window consumption give a uniform
+positive lower bound for the same perimeters, a contradiction.  No weighted excess estimate
+was used.
+
+The third assertion is exactly the certified anisotropic two-tail construction of
+Proposition~\ref{prop:two-tail}: it has $r=D=0$, vanishing absolute excess, and divergent
+$\mathcal S/s$.  A slice-wise version of \eqref{eq:sol-unweighted-stein} would have a uniformly
+bounded right-hand side on that family and a divergent left-hand side.  This disproves that
+slice-wise route while making no claim against nonlocal-in-time proofs or the covariance-weighted
+formulation.
+\end{proof}
+
+\paragraph{Obstructions respected.}
+No node in this dossier has a ledger \texttt{bounded\_by} edge.  Nevertheless,
+Lemma~\ref{lem:sol-excess-identity} and Lemma~\ref{lem:sol-inf-martingales} explicitly preserve
+the content of \texttt{obs:circularity}: the exact identity is restricted to compact support,
+and no supermartingale property is inferred for the random time-dependent balanced-profile
+infimum.  Proposition~\ref{prop:sol-intro-audit} uses the separate two-tail obstruction only
+to refute a slice-wise unweighted estimate; it does not promote numerical or directional
+evidence to proof.
+
+\end{document}

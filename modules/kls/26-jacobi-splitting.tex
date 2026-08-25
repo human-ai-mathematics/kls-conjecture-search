@@ -4,8 +4,9 @@
 \label{sec:jacobi}
 
 This section assembles the geometric mechanisms intended to prove the weighted Stein-trace
-estimate for near-minimal cuts. The framework is classical; the statements proved here are the
-exact model statements, and the quantitative versions are posed as open targets in
+estimate for near-minimal cuts. The second-variation and Reilly identities are imported with exact
+normal conventions from the cited sources; the locally proved statements are exact model
+statements, and the quantitative versions are posed as open targets in
 Section~\ref{sec:open}. Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex
 support, and $\Sigma=\partial^*E$ with the notation of Section~\ref{sec:notation}.
 
@@ -30,13 +31,12 @@ the constant-mode curvature of \eqref{eq:constant-mode-K}. Stability of minimize
 entirely by the volume constraint, which removes the constant mode.
 \end{proposition}
 
-\begin{proof}
-The first and second variation formulas for weighted perimeter under a volume constraint are
-classical; see \cite{Bayle2004,BayleRosales2003,Rosales2014,Milman2009Isoperimetric} for the
-weighted (manifold-with-density) setting, including the free-boundary contribution
-$\calB_{\partial K}$ when $\Sigma$ meets the boundary of the support. The sign assertion uses
-both $\nabla^2V\succeq0$ and convexity of the support, with the sign convention of
-\eqref{eq:jacobi-form}.
+\begin{proof}[Published input]
+This is Lemma~4.1(ii) and the index form (4.1) of \cite{Rosales2014}, with its inner-unit-normal
+convention and density $f=e^{-V}$, so $\operatorname{Ric}_f=\nabla^2V$. That formula includes the
+free-boundary term $-\int_{\partial\Sigma}II_{\partial K}(N,N)u^2$; convexity of the support and
+$\nabla^2V\succeq0$ give the signs used in \eqref{eq:jacobi-form}. The local-minimum conclusion
+is precisely nonnegativity of this index form on mean-zero compactly supported variations.
 \end{proof}
 
 \begin{remark}[The constant mode is the obstruction, again]
@@ -135,17 +135,19 @@ small-curvature branch as one that a geometric route must address.
 
 \begin{proposition}[Generalized Reilly identity]
 \label{prop:reilly}
-Let $\Omega$ be a smooth bounded domain compactly contained in the smooth support of $\nu$, with boundary $\Sigma$, inner normal $n$,
-and let $u$ be smooth on $\overline\Omega$. Then, with $L=\Delta-\nabla V\cdot\nabla$ and
-$u_n=\partial_nu$,
+Let $\Omega$ be a smooth bounded domain compactly contained in the smooth support of $\nu$, with
+boundary $\Sigma$ and \emph{outer} unit normal $N$. Use the convention
+$II_\Sigma(X,Y)=\inner{\nabla_XN}{Y}$, and let $u$ be smooth on $\overline\Omega$. Then, with
+$L=\Delta-\nabla V\cdot\nabla$, $u_N=\partial_Nu$, and $H_\nu=H-\partial_NV$,
 \begin{equation}\label{eq:reilly}
   \int_\Omega(Lu)^2\dd\nu
   =\int_\Omega\Bigl(\norm{\nabla^2u}_\HS^2+\nabla u^T\nabla^2V\,\nabla u\Bigr)\dd\nu
-  +\int_\Sigma\Bigl(H_\nu\,u_n^2+2u_n\,L_\Sigma u
+  +\int_\Sigma\Bigl(H_\nu\,u_N^2+2u_N\,L_\Sigma u
   +II_\Sigma(\nabla_\Sigma u,\nabla_\Sigma u)\Bigr)\dd\sigma_\nu ,
 \end{equation}
-where $L_\Sigma$ is the induced weighted Laplacian on $\Sigma$. See
-\cite{Milman2009Isoperimetric,Rosales2014} and the references therein for the weighted form.
+where $L_\Sigma$ is the induced weighted Laplacian on $\Sigma$. This is
+\cite[Thm.~1]{MaDu2010}, followed by weighted integration by parts on the closed boundary
+$\Sigma$, in the source's outer-normal convention.
 In particular, for log-concave $\nu$ the interior terms are nonnegative and
 \eqref{eq:reilly} converts boundary trace data of $\nabla u$ into the interior Dirichlet
 quantity $\int(Lu)^2\dd\nu$, up to curvature boundary terms.
@@ -157,8 +159,8 @@ When $E$ is compactly contained in the support, apply \eqref{eq:reilly} on $\Ome
 Lemma~\ref{lem:boundary-rep}, with centered quadratic data $f_M$. The left side is computable:
 $\int_E(Lu_M)^2\dd\nu=\int_E f_M^2\dd\nu\le\Var_\nu(f_M)$, hence is controlled by
 quadratic-chaos information (Section~\ref{sec:qcts}). The
-interior terms have a sign. The boundary terms involve $u_n^2$ weighted by $H_\nu$, the mixed
-term $2u_nL_\Sigma u$, and $II_\Sigma(\nabla_\Sigma u,\nabla_\Sigma u)$. The intrinsic
+interior terms have a sign. The boundary terms involve $u_N^2$ weighted by $H_\nu$, the mixed
+term $2u_NL_\Sigma u$, and $II_\Sigma(\nabla_\Sigma u,\nabla_\Sigma u)$. The intrinsic
 quadratic-chaos input is now dimension-free by Theorem~\ref{thm:letwin-qcts}, conditional on its
 version-1 preprint status, but neither \eqref{eq:stability} nor the Schur energy
 \eqref{eq:Jsharp-def} currently controls all of these boundary terms for the localized fixed cut.
@@ -231,7 +233,8 @@ $V_t(x)=V(x)+\tfrac t2\abs x^2-c_t\cdot x$ splits as
 $\bigl(V_1(y)+\tfrac t2\abs y^2-c_t'\cdot y\bigr)+\bigl(V_2(z)+\tfrac t2z^2-c_t''z\bigr)$.
 In particular, the splitting direction is preserved pathwise, the covariance $A_t$ is
 block-diagonal across $\theta^\perp\oplus\R\theta$ for all $t$, and halfspace cuts orthogonal
-to $\theta$ have $\delta_t\parallel\theta$ and rank-one $K_t$ for all $t$.
+to $\theta$ have $\delta_t\parallel\theta$ and $K_t=\kappa_t\theta\theta^T$, hence rank at most
+one, for all $t$.
 \end{proposition}
 
 \begin{proof}

@@ -1,6 +1,6 @@
 # Notation glossary
 
-Symbols used throughout `modules/` (Part I) and `modules/kls/` (Part II). The authoritative
+Symbols used throughout `modules/` (Parts I--II) and `modules/kls/` (Part III). The authoritative
 definitions for Part I are in `modules/01-definitions.tex`; the LaTeX macros are in
 `shared/preamble.tex`. The fixed normalization below must not be silently changed.
 
@@ -49,7 +49,7 @@ Consequences of this normalization (proved in `modules/01-definitions.tex`):
 | `sec:tier5` | 5 | mixtures, label-switching, hierarchical funnels |
 | `sec:agenda` | — | open research agenda; bridge to KLS |
 
-## Part II (KLS) — key symbols
+## Part III (KLS) — key symbols
 
 | Symbol | Meaning |
 |---|---|
@@ -57,6 +57,8 @@ Consequences of this normalization (proved in `modules/01-definitions.tex`):
 | `p_t = μ_t(E)` | mass martingale of a fixed cut `E` under Eldan stochastic localization |
 | `A_t` | covariance process of the localization, `dA_t = Θ_t dW_t − A_t² dt` |
 | `Ξ_T` | interface functional `∫_0^T E (λmax(A_t) − 1)_+ dt` |
+| `H=D²φ` | stationary moment-map Hessian metric (CMH route; never the stochastic `H_t`) |
+| `N`, `K_M` | moment-map elliptic operator and compressed multiplier in the CMH route |
 
 The KLS macros (`\hstar`, `\PsiKLS`, `\Per`, `\HS`, `\cal*`, …) live in `shared/preamble.tex`.
 
@@ -64,7 +66,7 @@ The KLS macros (`\hstar`, `\PsiKLS`, `\Per`, `\HS`, `\cal*`, …) live in `share
 
 - `‖M‖_op = λmax(M)` for symmetric PSD `M`; `A ⪰ B` is the Loewner order.
 - `φ`, `Φ` are the standard Gaussian density and CDF.
-- Dimension is `D` (Part I, statistics convention) or `n` (Part II); `n` in Part I is the
+- Dimension is `D` (Part I, statistics convention) or `n` (Part III); `n` in Part I is the
   number of data points.
 - The dimension-free Poincaré bound for *arbitrary* isotropic log-concave measures is the
-  KLS conjecture — the Tier-∞ boundary of Part I, and the subject of Part II.
+  KLS conjecture — the Tier-∞ boundary of Part I, and the subject of Part III.

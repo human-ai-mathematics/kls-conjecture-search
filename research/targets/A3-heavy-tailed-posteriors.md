@@ -102,7 +102,7 @@ cutoffs of `exp(y/2)`, corrected by their negligible mean, give the reverse boun
 
 Directional quadrature still gives `B_HS(1) approximately 1.012444`, so the generic Hardy upper
 bound is about `4.04978`; it is not sharp here. Intrinsic-coordinate FEM increases toward `4` as
-the domain grows. These diagnostics are not provenance-eligible evidence: the exact conclusion
+the domain grows. These diagnostics are not claim validation: the exact conclusion
 rests on the analytic solution, not on finite-domain numerics. The remaining horseshoe frontier is
 stability of the weighted constant under unbounded likelihood tilts.
 
@@ -187,4 +187,6 @@ and must not be read as a sharp constant; a stable sub-threshold eigenvalue woul
 parity-separated boundary sweeps plus residual/two-sided control. The retired 2026-06-20 proxy
 diagnostic is preserved only in the
 [`2026-08-21 weighted-PI audit`](../explorations/2026-08-21-a3-weighted-pi-audit.md); it is not
-live evidence.
+live claim support. All listed computations are directional research diagnostics and possible
+refutation aids; they do not validate or certify the analytic certificate or any proof. Rigorous
+refutation still requires an analytic argument or exact lower bound.

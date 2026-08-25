@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Open targets and roadmap}
+\section{Route E: open targets and roadmap}
 \label{sec:open}
 
 The consolidation leaves a sharper, smaller set of open targets than the original program. We
@@ -47,7 +47,7 @@ Proposition~\ref{prop:two-tail} no slice-wise shortcut exists.
 \label{rem:trace-upgrade-unification}
 Questions~\ref{q:upgrade} and \ref{q:stein-weighted} (its high-rank, mean-zero part) and the
 adapted alignment problem~\ref{q:alignment} all confront a high-rank occupation difficulty, but
-their equivalence has not been proved. Analytically, the Route~A gap is exactly the trace of the occupation
+their equivalence has not been proved. Analytically, the Eldan--A gap is exactly the trace of the occupation
 operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: Corollary~\ref{cor:per-direction} is the
 statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is
 $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically,
@@ -86,9 +86,9 @@ analysis to the covariance SDE.
 \label{rem:taming-type-mismatch}
 The coupling suggested above runs into a
 structural obstruction: $\Xi_T$ is a \emph{cut-free} functional of the covariance process,
-whereas the splitting structure is \emph{cut-indexed}, and the split direction of
-Proposition~\ref{prop:exact-splitting} is precisely the inflating (log-affine, exponential)
-direction along which $\lmax(A_t)$ grows --- so the splitting philosophy controls the
+whereas the splitting structure is \emph{cut-indexed}. Product/splitting alone does not suppress
+coordinatewise covariance excursions; in the one-sided-exponential product stress test, a split
+coordinate can also contribute to $\lmax(A_t)$. Thus the splitting philosophy controls the
 \emph{source} of the cut-aware Stein estimate (Questions~\ref{q:stein-weighted},
 \ref{q:splitting}), not the cut-free $\Xi_T$. The residual non-circular content of
 Question~\ref{q:taming} is therefore a \emph{near-worst-specific} improvement of the
@@ -165,7 +165,7 @@ failure of KLS must lie in the complementary regime $\hstar_n\gtrsim1/\log\log n
 Step & Input & Output \\
 \midrule
 Program~\ref{prog:product-test} & One-dimensional log-concave analysis; explicit variance
-dynamics & Decides whether Route A survives; either outcome redirects effort decisively. \\
+dynamics & Decides whether Eldan--A survives; either outcome redirects effort decisively. \\
 \addlinespace
 Question~\ref{q:weighted} & Perimeter martingale moments against the covariance weight;
 bootstrap technology of Section~\ref{sec:bootstrap} & Propagation half of the weighted
