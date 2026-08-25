@@ -1,10 +1,22 @@
-# A1/A2 independent-agent proof audit
+---
+type: proof-review
+date: "2026-08-21"
+verdict: pass
+authors:
+  - /root/a1_a2
+reviewer: /root/cross_review
+nodes:
+  - prop:a1-euclidean-harmonic
+  - prop:a1-mode-leverage
+  - cor:a1-leverage-asymptotic
+  - prop:a2-subquadratic-global
+  - prop:a2-logistic-global
+solutions:
+  - solutions/a1-harmonic-mode-leverage.tex
+  - solutions/a2-subquadratic-tail-rigidity.tex
+---
 
-- **Date:** 2026-08-21
-- **Proof author:** `/root/a1_a2`
-- **Independent reviewer:** `/root/cross_review`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for the five nodes listed below
+# A1/A2 independent-agent proof audit
 
 ## Certified scope
 

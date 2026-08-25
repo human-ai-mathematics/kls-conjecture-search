@@ -1,9 +1,9 @@
-# Obstructions — the shared no-go knowledge
+# A-series obstructions — cross-target no-go knowledge
 
 Cross-cutting barriers and known-false statement forms. Each obstruction constrains the
 *shape* a valid theorem may take; a conjecture that violates one is wrong by construction.
-The machine-readable nodes live in `../ledger.yaml` (`kind: obstruction`); the prose, the
-*why*, and the **numerical demonstration** live here. Targets reference these via `bounded_by`.
+The machine-readable nodes live in [`ledger.yaml`](ledger.yaml) (`kind: obstruction`); the prose, the
+*why*, and the **diagnostic role** live here. Targets reference these via `bounded_by`.
 
 Math is written in LaTeX (`$…$`); the canonical *formal* statement of each barrier is the
 manuscript `\label` named under "Source" — this file links and explains, it does not restate
@@ -68,7 +68,7 @@ Polynomial/exponential tails admit no classical LSI and no $T_2$ (an LSI forces 
 concentration); for the heaviest tails even the classical Poincaré fails. The correct object is
 a **weighted** (or weak) inequality with a tail-growing weight $a(x) \asymp 1+\|x\|^2$.
 
-**Numerical demonstration.** Generalized Cauchy $\mu_\beta \propto (1+\|x\|^2)^{-\beta}$: the
+**Diagnostic role.** Generalized Cauchy $\mu_\beta \propto (1+\|x\|^2)^{-\beta}$: the
 unweighted 1D Hardy functional $\asymp x^2 \to \infty$ (so $C_P=\infty$); reweighting the
 Dirichlet form by $(1+x^2)$ brings it to $O(1)$. The Student-$t$ closed-form gaps
 $\lambda_{\beta,d}$ (`thm:a3-student`) are the calibration anchor.
@@ -101,7 +101,7 @@ proof and independent-agent audit.
 Total-variation convergence to the BvM Gaussian says nothing about constants — they see tails
 and remote mass that TV does not. A "BvM $\Rightarrow$ constants" claim is **false** as stated.
 
-**Numerical demonstration (the canonical A2 trap).**
+**Diagnostic role (the canonical A2 trap).**
 $\mu_n = (1-\varepsilon_n)N(0,1) + \varepsilon_n N(a_n,1)$ with $\varepsilon_n \to 0$,
 $\varepsilon_n a_n^2 \to \infty$: $\|\mu_n - N(0,1)\|_{\mathrm{TV}} \le \varepsilon_n \to 0$ yet
 the linear test gives $C_P(\mu_n) \ge \mathrm{Var}_{\mu_n}(x) \to \infty$. The reward harness
@@ -120,7 +120,7 @@ mode. Estimating one arbitrary eigenfunction is therefore insufficient. This der
 is independently certified in the scope of
 [`prop-a5-ratio.tex`](../../solutions/prop-a5-ratio.tex) and the persisted A4/A5 review.
 
-**Numerical demonstration.** Folded double well $\mu_a = \tfrac12 N(-a,\sigma^2)+\tfrac12 N(a,\sigma^2)$
+**Diagnostic role.** Folded double well $\mu_a = \tfrac12 N(-a,\sigma^2)+\tfrac12 N(a,\sigma^2)$
 (`ex:a5-folding`) has the normalized logarithmic raw-well law
 $\log(C_P(\mu_a)/\sigma^2)=a^2/(2\sigma^2)+O(\log(a/\sigma))$ as $a/\sigma\to\infty$, while the
 folding map gives $C_P(\bar\mu_a)\le\sigma^2$ and in fact
@@ -143,7 +143,7 @@ over arbitrary tail-reweighting families: fixed entropy balls can have unbounded
 Finiteness needs family coercivity/boundedness on the sublevel, quadratic-exponential target tails,
 or a modified cost.
 
-**Numerical demonstration.** $\pi \propto e^{-|x|^p}$, $1 \le p < 2$, and $q_m = N(m,\sigma^2)$:
+**Diagnostic role.** $\pi \propto e^{-|x|^p}$, $1 \le p < 2$, and $q_m = N(m,\sigma^2)$:
 $W_2^2(q_m,\pi) \asymp m^2$ while $\mathrm{KL}(q_m\|\pi) \asymp |m|^p$, so
 $W_2^2/\mathrm{KL} \asymp |m|^{2-p} \to \infty$. Hence $C_{\mathcal Q}=\infty$ already at
 mean-field Gaussian level for $p<2$. For the unrestricted entropy ball, mixing

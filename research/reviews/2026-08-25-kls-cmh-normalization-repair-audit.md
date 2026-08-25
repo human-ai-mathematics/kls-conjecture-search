@@ -1,16 +1,28 @@
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/kls_proof_audit
+reviewer: /root/kls_evidence_audit
+nodes:
+  - q:cmh-normalization
+  - def:cmh
+  - prop:cmh-bochner
+  - thm:cmh-implies-affine-poincare
+  - prop:cmh-hodge
+  - rem:cmh-stronger-than-kls
+  - prop:letwin-not-gate-zero
+solutions:
+  - solutions/thm-cmh-normalization.tex
+follows_up: research/reviews/2026-08-25-kls-cmh-normalization-audit.md
+---
+
 # Route C CMH normalization layer — independent repair audit
 
-- **Date:** 2026-08-25
-- **Original proof author:** `/orchestrator/kls-cmh-normalization`
-- **Repair author:** `/root/kls_proof_audit`
-- **Independent reviewer:** `/root/kls_evidence_audit`
-- **Reviewed dossier:** `solutions/thm-cmh-normalization.tex`
-- **Reviewed manuscript:** `modules/kls/40-moment-map-cmh.tex` and `modules/kls/41-cmh-normalization.tex`
-- **Certification:** `checked_by: agent`
-- **Review type:** independent index-level re-derivation, operator-domain and closure audit,
-  manuscript/dossier/ledger semantic comparison, scope audit, and standalone/full-manuscript
-  compilation
-- **Verdict:** pass for `q:cmh-normalization`, `def:cmh`, `prop:cmh-bochner`, `thm:cmh-implies-affine-poincare`, `prop:cmh-hodge`, `rem:cmh-stronger-than-kls`, and `prop:letwin-not-gate-zero`
+The original proof author was `/orchestrator/kls-cmh-normalization`; `/root/kls_proof_audit`
+authored the certified repair. The audit also compared the dossier with
+`modules/kls/40-moment-map-cmh.tex` and `modules/kls/41-cmh-normalization.tex`.
 
 ## Certified scope
 

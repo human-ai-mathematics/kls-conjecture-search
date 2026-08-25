@@ -12,10 +12,9 @@ the hard constraints — are in [`CLAUDE.md`](CLAUDE.md).
 > **The live frontier is not narrated here** — it goes stale. Read it off
 > `python3 research/check_ledger.py`, the two ledgers, and the current strategy/cycle summaries:
 > [`research/explorations/2026-08-21-a-series-proof-probes.md`](research/explorations/2026-08-21-a-series-proof-probes.md)
-> (A-series), plus [`research/kls/strategy-map.md`](research/kls/strategy-map.md),
-> [`research/kls/routes.md`](research/kls/routes.md), and the
+> (A-series), plus [`research/kls/routes.md`](research/kls/routes.md) and the
 > [August 24 synthesis](research/explorations/2026-08-24-kls-moment-map-cmh-consolidation.md)
-> (KLS). `research/kls/gating.md` records numerical implementation status only.
+> (KLS). [`experiments/README.md`](experiments/README.md) records numerical implementation status.
 
 ---
 
@@ -26,7 +25,7 @@ the real dependencies and the merge barriers.
 
 ### Axis A — independent target streams
 
-A1–A5 are *federated, not merged*: separate target notebooks, separate obstructions, separate
+A1–A5 are *federated, not merged*: separate target briefs, separate obstructions, separate
 `finum` targets. KLS is a separate program (`program: kls`). The six streams share nothing
 **writable** except `ledger.yaml` and `knowledge/` (see hard constraint 1 in [`CLAUDE.md`](CLAUDE.md)).
 
@@ -34,7 +33,7 @@ A1–A5 are *federated, not merged*: separate target notebooks, separate obstruc
 A1  A2  A3  A4  A5        KLS
  │   │   │   │   │          │
  └───┴───┴───┴───┘          │   ← 5 A-series target streams, fully parallel
-   research/ledger.yaml       research/kls/ledger.yaml
+ research/a-series/ledger.yaml  research/kls/ledger.yaml
        (program: ab)             (program: kls)
 ```
 
@@ -105,7 +104,7 @@ construction-layer CMH observable.
 | Role | Reads | Produces | Reward earned | Parallel |
 |---|---|---|---|---|
 | **Orchestrator / ledger-keeper** | both ledgers, `check_ledger.py` | node assignments; **the only writer of `ledger.yaml`** | keeps R0 green | singleton |
-| **Analyst / refiner** | `targets/*.md`, `modules/**/*.tex`, `obstructions.md` | sharpened statement and optional `numerics:` spec | statement respects every `bounded_by` | 1 / target |
+| **Analyst / refiner** | `research/a-series/targets/*.md`, `modules/**/*.tex`, `research/a-series/obstructions.md` | staged statement delta and optional `numerics:` spec in the target brief | statement respects every `bounded_by` | 1 / target |
 | **Numerical** (finum) | the refined spec, `instances.md` | provenance-stamped `runs/*.jsonl` | research direction / candidate refutation | 1 / target |
 | **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex`, `checked_by: none` | supplies a dossier for R2 review | per ready node |
 | **Critic / adversary** | a conjecture *or* a draft proof | a candidate refuting instance, a proof-gap report, or an independent `checked_by: agent|human` audit | gates proof certification | N / claim |
@@ -121,7 +120,7 @@ construction-layer CMH observable.
   the shared battery does not validate the conjecture or any proof.
 - *Proof channel* → **checker.** A human may set `checked_by: human`; a distinct critic agent may
   set `checked_by: agent` only with a persisted scope report. This is what caught the
-  Klartag–Lehec window citation debt (`rem:kl-window-verified`). The checker audits the analytic
+  Klartag–Lehec window citation debt now recorded on `thm:KL-window`. The checker audits the analytic
   argument independently of numerical outcomes. Never let a prover grade its own proof.
 
 ---

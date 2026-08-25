@@ -18,8 +18,8 @@
 #                A `warns` tag uses the same declaration/clearance discipline but is explicitly
 #                methodological rather than a theorem forbidding the mechanism.
 #
-# Parity invariant (checked): obstruction ids here == ids in obstructions.md ==
-# every id used in any KLS-ledger `bounded_by`.
+# Parity invariant (checked): obstruction ids here == ids in obstructions.md.
+# The canonical reverse relation is derived from ledger `bounded_by` edges.
 # =============================================================================
 
 mechanisms:
@@ -38,28 +38,24 @@ obstructions:
     forbids: [slice-wise, absolute-scale-excess]
     regime: "anisotropic posteriors λmax(A_t)=Λ≫1; cannot occur at t=0 (isotropic)"
     source: modules/kls/14-qcts-obstruction.tex   # prop:two-tail
-    constrains: [ass:all-cut-carleson, ass:weighted-package, q:upgrade, q:weighted, q:stein-weighted]
 
   - id: obs:proj-ceiling
     title: "projection / radial tests cap at log n"
     forbids: [projection-only, radial-only]
     regime: "static, all dimensions"
     source: modules/kls/14-qcts-obstruction.tex
-    constrains: [ass:all-cut-carleson, q:upgrade, prop:qcts-equivalence]
 
   - id: obs:crude-insufficient
     title: "Klartag's own bound defeats the naive bootstrap"
     forbids: [crude-bootstrap]
     regime: "high dimension"
     source: modules/kls/25-bootstrap.tex   # lem:crude + rem:insufficiency
-    constrains: [lem:crude]
 
   - id: obs:relative-ceiling
     title: "relative scale for all measures is already KLS-sufficient"
     forbids: [relative-scale-all-measures]
     regime: "unweighted all-measure Xi bound vs the distinct h_mu-weighted near-worst target"
     source: modules/kls/25-bootstrap.tex   # prop:ceiling
-    constrains: [ass:all-cut-carleson, q:taming]
 
   - id: obs:circularity
     title: "direct profile propagation risks circularity (methodological warning)"
@@ -67,11 +63,9 @@ obstructions:
     warns: [direct-excess]
     regime: "all; the fixed-family martingale lemma does not apply to the random time-dependent balanced competitor family"
     source: modules/kls/24-excess-propagation.tex    # lem:excess-identity + lem:inf-martingales
-    constrains: [thm:bootstrap, q:weighted]
 
   - id: obs:rank-one-refuted
     title: "on products, a fixed single-coordinate cut cannot ride inflation"
     forbids: [single-coordinate-counterexample]
     regime: "product measures; residue is genuinely high-complexity cuts"
     source: modules/kls/22-product-stress.tex   # cor:refutation
-    constrains: [q:alignment]

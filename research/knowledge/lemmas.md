@@ -17,9 +17,8 @@ gives $R[f] = v^\top\mathrm{Cov}_\pi v / \|v\|^2$, maximised at **$C_P \ge \lamb
   A sampled covariance needs explicit confidence/mixing and numerical-error control before it can
   carry that verdict.
 - **finum:** `constants.poincare_lower(samples) = ` $\lambda_{\max}$(empirical cov), a directional
-  estimate unless the preceding controls are supplied; richer
-  test-function bases (quadratic, RBF) and the Pillaud-Vivien estimator give a tighter two-sided
-  $\hat C_P$.
+  estimate unless the preceding controls are supplied; richer test-function bases (quadratic,
+  RBF) and spectral estimators can give tighter directional estimates.
 - **Used by:** A1 (`q:a1-sharp`), A2 (`conj:a2`, the contamination falsification), A4 (`q:a4-mean`),
   A5 (`q:a5-detect`).
 

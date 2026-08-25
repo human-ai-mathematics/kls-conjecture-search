@@ -1,12 +1,23 @@
-# A-series inline baselines — independent R2 audit
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/ab_legacy_author
+reviewer: /root/kls_core_author
+nodes:
+  - lem:linear-test-lower
+  - thm:glm-fi
+  - obs:tv-insufficient
+  - lem:a5-lipschitz
+  - thm:a5-monotone
+solutions:
+  - solutions/glm-linear-baselines.tex
+  - solutions/obs-tv-insufficient.tex
+  - solutions/a5-lipschitz-quotient.tex
+---
 
-- **Date:** 2026-08-25
-- **Proof author:** `/root/ab_legacy_author`
-- **Independent reviewer:** `/root/kls_core_author`
-- **Reviewed dossiers:** `solutions/glm-linear-baselines.tex`, `solutions/obs-tv-insufficient.tex`, and `solutions/a5-lipschitz-quotient.tex`
-- **Certification:** `checked_by: agent`
-- **Review type:** exact ledger/manuscript comparison and independent line-by-line mathematical rederivation
-- **Verdict:** pass
+# A-series inline baselines — independent R2 audit
 
 ## Certified scope
 

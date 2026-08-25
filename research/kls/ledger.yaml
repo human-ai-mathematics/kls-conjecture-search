@@ -6,10 +6,10 @@
 #
 # This is Part III's route-spanning control plane. It began as the Eldan-localization
 # roadmap ledger and was moved to research/kls/ when the deterministic moment-map/CMH
-# route became substantial enough to track. Nodes may carry a route field; all edits still
+# route became substantial enough to track. Every node carries an explicit route field; all edits still
 # pass through one orchestrator because this remains a single-file contention point.
 #
-# DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../ledger.yaml, program: ab)
+# DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../a-series/ledger.yaml, program: ab)
 # is in the REFINEMENT phase (sharpen statements; numerics stress and suggest refutations via finum).
 # KLS is already a PROOF program: the statements are crisp, the work is discharging
 # assumptions and proving conditional implications. Hence the richer status/obstruction
@@ -17,25 +17,24 @@
 # (`finum`) give research direction or suggest refutations here; they never validate a claim or
 # proof and never make a node "proved".
 #
-# status:  proved | conditional | open | heuristic | refuted | imported
-# imported nodes optionally set import_class: published (default) | preprint-unreviewed;
-# the latter must propagate through `assuming` and cannot underlie a proved node.
+# status:  proved | defined | conditional | open | heuristic | refuted | imported
+# imported nodes set import_class: published | preprint-unreviewed plus BibTeX
+# references; an unreviewed import cannot underlie a proved node.
 # kind:    theorem|lemma|proposition|corollary|definition|assumption|hypothesis|
 #          question|program|remark|heuristic
 # edges:   depends_on (acyclic; may include external free-text or \label refs),
-#          assuming (the open node a conditional rests on), bounded_by
-#          (obs:* in obstructions.yaml), discharged_by, entry_point, mechanism +
-#          clearance (no-go discipline), bridges (cross-program links: program/id).
+#          bounded_by (obs:* in obstructions.yaml), and bridges (cross-program
+#          links: program/id). Conditional premises are derived from depends_on.
+#          Non-logical route relationships live in routes.md, not a second graph.
 #
 # Checked by ../check_ledger.py (program-aware): acyclicity, no proved-on-open/refuted,
-# obstruction parity (yaml<->md<->bounded_by), mechanism vocabulary, no-go clearance,
+# obstruction parity (yaml<->md), mechanism vocabulary, no-go clearance,
 # and cross-program bridge resolution.
 # =============================================================================
 
 meta:
   program: kls
   route_policy:
-    default: eldan-localization
     allowed: [shared, eldan-localization, moment-map-spectral, moment-map-cmh]
 
 # ---------------------------------------------------------------------------
@@ -49,12 +48,12 @@ nodes:
     route: shared
     file: modules/kls/00-orientation.tex
     statement: "There is a universal C such that Var_mu(f) <= C int |grad f|^2 dmu for every isotropic log-concave mu in every dimension; equivalently up to universal constants, inf_n hstar_n > 0."
-    entry_point: [thm:intro-all-cut, thm:intro-weighted, q:mm-spectral-occupation, prog:cmh-route]
     bridges: [ab/conj:a1-bis]
 
   - id: lem:survival-implies-kls
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/11-mass-martingale.tex
     statement: "A positive-probability balanced posterior event at one time gives a quantitative boundary lower bound for the cut; if uniform over balanced cuts at universal constants, it implies KLS."
     depends_on: ["Bakry-Emery/Lichnerowicz", eq:perimeter-supermartingale]
@@ -67,20 +66,22 @@ nodes:
   - id: ass:stopped-centroid
     kind: assumption
     status: open
+    route: eldan-localization
     file: modules/kls/11-mass-martingale.tex
     statement: "Stopped centroid estimate: E ∫_0^{T∧τ} |δ_t|^2 dt ≤ CT for balanced cuts."
 
   - id: thm:centroid-implies-kls
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/11-mass-martingale.tex
     statement: "Stopped centroid estimate implies a dimension-free Cheeger lower bound (KLS)."
     depends_on: [eq:qv-p, ass:stopped-centroid, lem:survival-implies-kls]
-    assuming: [ass:stopped-centroid]
 
   - id: lem:matrix-riccati
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/12-riccati.tex
     statement: "Matrix two-color Riccati identity: dB_t = dN_t + (s G^2 - AB - BA + rB) dt; hence dR = dÑ - (R^2 + s G^2) dt."
     depends_on: [eq:cov-sde, eq:CE-minus-pA]
@@ -93,6 +94,7 @@ nodes:
   - id: thm:scalar-riccati
     kind: theorem
     status: proved
+    route: eldan-localization
     file: modules/kls/12-riccati.tex
     statement: "Scalar Riccati: dr_t = dM_t + (S_t - D_t) dt with S=s||G||^2 the only positive source, D≥r^2 coercive."
     depends_on: [lem:matrix-riccati]
@@ -105,6 +107,7 @@ nodes:
   - id: cor:per-direction
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/12-riccati.tex
     statement: "Unconditional per-direction Carleson: E ∫_0^∞ s|Gθ|^2 ≤ θ^T R_0 θ ≤ 1; i.e. E ∫ s G^2 ⪯ R_0 ⪯ I."
     depends_on: [lem:matrix-riccati]
@@ -118,6 +121,7 @@ nodes:
   - id: ass:all-cut-carleson
     kind: assumption
     status: open
+    route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "All-cut absorptive two-color Carleson: E ∫_I S_t ≤ C_0|I| + C_1 E ∫_I r_t + α E ∫_I D_t, α<1, every balanced cut."
     bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
@@ -125,14 +129,15 @@ nodes:
   - id: thm:carleson-implies-centroid
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/21-carleson.tex
     statement: "All-cut Carleson implies the stopped centroid estimate (via Gronwall on E r_{t∧τ}), hence KLS."
     depends_on: [ass:all-cut-carleson, thm:scalar-riccati, eq:qv-p, lem:survival-implies-kls]
-    assuming: [ass:all-cut-carleson]
 
   - id: cor:tight-window-consumption
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/21-carleson.tex
     statement: "An absorptive Carleson estimate on a fixed tight balance window yields universal balanced survival and hence a universal boundary lower bound for the cut."
     depends_on: [thm:scalar-riccati, eq:qv-p, lem:survival-implies-kls]
@@ -145,15 +150,16 @@ nodes:
   - id: thm:intro-all-cut
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "Assumption all-cut-carleson implies KLS (headline of Eldan-A)."
     depends_on: [thm:carleson-implies-centroid]
-    assuming: [ass:all-cut-carleson]
     note: "Bridge: the universal C_P <= K lambda_max(Cov) (every isotropic log-concave measure) IS KLS; ab/conj:a1-bis is its structured GLM counterpart."
 
   - id: lem:pathwise-BL
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/21-carleson.tex
     statement: "Pathwise Brascamp–Lieb source bound: s||K||^2 ≤ 4 λmax(A)/t ≤ 4/t^2."
     depends_on: [eq:BL-cap, prop:stein-rep]
@@ -166,6 +172,7 @@ nodes:
   - id: cor:away-from-zero
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/21-carleson.tex
     statement: "Source is pathwise controlled away from t=0: S_t ≤ 8/t^2 + D_t/2 on the tight window."
     depends_on: [lem:pathwise-BL, lem:stein-vs-source, thm:scalar-riccati]
@@ -183,6 +190,7 @@ nodes:
     kind: theorem
     status: imported
     import_class: preprint-unreviewed
+    references: [ChenKlartag2026SharpThinShell]
     route: shared
     file: modules/kls/04-family-moment-map.tex
     statement: "Chen-Klartag moment-Hessian estimate: for the regular moment map of an isotropic log-concave measure, E_nu ||D^2 phi||_HS^2 <= 2n."
@@ -192,6 +200,7 @@ nodes:
     kind: theorem
     status: imported
     import_class: preprint-unreviewed
+    references: [ChenKlartag2026SharpThinShell]
     route: shared
     file: modules/kls/04-family-moment-map.tex
     statement: "Chen-Klartag sharp thin shell: Var(|X|^2) <= 8n for isotropic log-concave X, with equality for products of standard centered one-sided exponentials."
@@ -202,6 +211,7 @@ nodes:
     kind: theorem
     status: imported
     import_class: preprint-unreviewed
+    references: [ChenKlartag2026SharpThinShell]
     route: shared
     file: modules/kls/04-family-moment-map.tex
     statement: "Chen-Klartag sharp full third-moment tensor: ||T_3(X)||_HS^2 <= 4n for isotropic log-concave X."
@@ -212,6 +222,7 @@ nodes:
     kind: theorem
     status: imported
     import_class: preprint-unreviewed
+    references: [Letwin2026QuadraticKLS]
     route: shared
     file: modules/kls/04-family-moment-map.tex
     statement: "Under Letwin's regular moment-map assumptions, for every constant symmetric B, E_nu tr(B H B H) <= 2 tr(B^2)."
@@ -223,13 +234,16 @@ nodes:
   - id: def:qcts
     kind: definition
     status: defined
+    route: eldan-localization
     file: modules/kls/14-qcts-obstruction.tex
     statement: "Quadratic-chaos thin shell Q(ν)=sup_{||M||=1} Var(X^T M X)."
 
   - id: thm:letwin-qcts
     kind: theorem
     status: imported
+    route: eldan-localization
     import_class: preprint-unreviewed
+    references: [Letwin2026QuadraticKLS]
     file: modules/kls/14-qcts-obstruction.tex
     statement: "Letwin quadratic Poincare inequality: for isotropic log-concave X and symmetric M, Var(X^T M X) <= 8 ||M||_HS^2."
     note: "Imported as a black-box theorem from arXiv:2607.24164v1, Theorem 1.2 (27 July 2026). Its proof uses the matrix moment-map estimate recorded separately as thm:letwin-moment-map; that internal paper dependency is not a second repository assumption. Version-1 preprint, not peer reviewed; downstream improvements retain this caveat."
@@ -237,14 +251,15 @@ nodes:
   - id: cor:qcts-source
     kind: corollary
     status: conditional
+    route: eldan-localization
     file: modules/kls/14-qcts-obstruction.tex
     statement: "Whitened two-color control: s||A^(-1/2) K A^(-1/2)||_HS^2 <= 8; hence s||K||_HS^2 <= 8 lambda_max(A)^2 and, on p in [1/3,2/3], S <= 17 lambda_max(A)^2 (8 at balance)."
     depends_on: [thm:letwin-qcts, prop:stein-rep]
-    assuming: [thm:letwin-qcts]
 
   - id: prop:qcts-equivalence
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/14-qcts-obstruction.tex
     statement: "Time-zero: QCTS ⇔ balanced two-color bound pq||Σ_E-Σ_F||^2 ≤ C (Carbery–Wright)."
     depends_on: [def:qcts, prop:stein-rep]
@@ -261,6 +276,7 @@ nodes:
   - id: prop:stein-rep
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/13-stein-dictionary.tex
     statement: "Two-color Stein representation: ∫_E f_M dν = s⟨K,M⟩ and Stein norm calS_ν(E)=s^2||K||^2. At balance K=G and calS/s equals the Riccati source s||G||^2; off balance lem:stein-vs-source supplies the conversion."
     solution: solutions/kls-qcts-stein-boundary-core.tex
@@ -272,6 +288,7 @@ nodes:
   - id: lem:stein-vs-source
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/13-stein-dictionary.tex
     statement: "On the tight window, S_t and S_{μt}(E)/s_t are equivalent up to 64η^2 D_t (lossless conversion)."
     depends_on: [prop:stein-rep, thm:scalar-riccati]
@@ -284,6 +301,7 @@ nodes:
   - id: lem:boundary-rep
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/23-stein-route.tex
     statement: "Boundary representation for the centered Neumann Poisson problem on a smooth bounded convex support: Cov(1_E,f) = -∫_Σ ∂_n u_f dσ; support-boundary flux vanishes and trace Cauchy–Schwarz follows."
     solution: solutions/kls-qcts-stein-boundary-core.tex
@@ -295,6 +313,7 @@ nodes:
   - id: ass:weighted-package
     kind: assumption
     status: open
+    route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "Weighted near-Cheeger package: (i-w) weighted excess propagation + (ii-w) weighted stable Stein-trace estimate on one fixed tight window eta, with 0<=beta<1/2 and the explicit absorption margin 2 beta + 64 eta^2 < 1."
     bounded_by: [obs:two-tail]
@@ -302,14 +321,15 @@ nodes:
   - id: thm:intro-weighted
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "Weighted geometric package implies KLS (headline of Eldan-B)."
     depends_on: [ass:weighted-package, lem:stein-vs-source, cor:tight-window-consumption]
-    assuming: [ass:weighted-package]
 
   - id: prop:intro-audit
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "Consumption audit: unweighted excess term is inert; unweighted Stein-trace estimate alone would imply KLS but admits no slice-wise proof."
     depends_on: [prop:trivial-excess, prop:two-tail, lem:stein-vs-source, cor:tight-window-consumption]
@@ -325,6 +345,7 @@ nodes:
   - id: prop:trivial-excess
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
     statement: "Unconditional integrated excess bound: E ∫_0^{T∧τ} e_t ≤ (1+e_0) T."
     depends_on: [eq:perimeter-supermartingale, "isotropic halfspace perimeter upper bound"]
@@ -337,6 +358,7 @@ nodes:
   - id: prop:two-tail
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/14-qcts-obstruction.tex
     statement: "Quantified anisotropic two-tail config: S/s ≍ Λ^2 while e ≍ Λ^{-1/2}, r=D=0. Kills any slice-wise absolute-scale Stein estimate; calibrates weight (1+||A||)^{5/2}."
     depends_on: [prop:stein-rep]
@@ -349,6 +371,7 @@ nodes:
   - id: lem:perimeter-martingale
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
     statement: "Perimeter of a fixed cut is a martingale under localization (driftless); supermartingale without compact support."
     depends_on: [eq:density-sde]
@@ -361,6 +384,7 @@ nodes:
   - id: lem:excess-identity
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
     statement: "Under compact support, exact excess identity: E e_t = e_0 + [I_μ(p_0) - E I_{μt}(p_t)]. Excess propagation = drop of the localized profile."
     depends_on: [lem:perimeter-martingale]
@@ -373,6 +397,7 @@ nodes:
   - id: lem:inf-martingales
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
     statement: "The infimum over a FIXED competitor family of perimeter martingales is a supermartingale. The balanced-mass competitor family is random/time-dependent, so this does not prove that the localized profile is a supermartingale."
     depends_on: [lem:perimeter-martingale]
@@ -388,6 +413,7 @@ nodes:
   - id: lem:half
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "Balance pins the Cheeger ratio: h_ν = 2 I_ν(1/2); at p=1/2 Cheeger excess = profile excess."
     solution: solutions/kls-bootstrap-interface.tex
@@ -399,6 +425,7 @@ nodes:
   - id: lem:whitening
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "Whitening comparison: h_ν ≥ hstar_n / λmax(A_ν)^{1/2}; hstar_n nonincreasing in n."
     solution: solutions/kls-bootstrap-interface.tex
@@ -410,6 +437,7 @@ nodes:
   - id: thm:bootstrap
     kind: theorem
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "Bootstrap comparison: for near-worst μ and ANY balanced cut, E[ē_t 1_{t<τη}] ≤ e_0 + h_μ(ε/2+η+P(τ≤t)/2+E X_t/4); compresses propagation into h_μ Ξ_T."
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale, eq:qv-p]
@@ -426,6 +454,7 @@ nodes:
   - id: lem:crude
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "For every isotropic log-concave mu and 1/n <= T <= 1, the crude evaluation gives Xi_T(mu) <= 1 + log(nT)."
     depends_on: [eq:BL-cap, eq:cov-sde]
@@ -441,14 +470,17 @@ nodes:
   - id: hyp:KI
     kind: hypothesis
     status: imported
+    import_class: published
+    references: [KLnotes, KlartagLehec2022Polylog]
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "Known small-time operator-norm control: E||A_t||_op ≤ C_1 for t ≤ c_0(log n)^{-C_2}. (Chen / Klartag–Lehec.)"
-    discharged_by: [cor:KI-discharged]
     note: "Discharged in module 15 via thm:KL-window; tail form VERIFIED (2026-06-14 sweep) = KLnotes Thm 61, moments = KlartagLehec2022Polylog Cor 5.4. Verification flag removed."
 
   - id: cor:loglog
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "Under hyp:KI and t_1(n) <= T <= 1, Xi_T <= C_1 t_1(n) + log(T/t_1(n)) <= C(1+loglog n); if also T<1/8 and eps<=T^(1/3), this gives supply T e_0 + C h_mu(T^(4/3)+1+loglog n)."
     depends_on: [thm:bootstrap, hyp:KI, cor:KI-discharged]
@@ -461,6 +493,7 @@ nodes:
   - id: prop:ceiling
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/25-bootstrap.tex
     statement: "Relative-scale ceiling: if 9(1+κ)T0<=1/2 and Ξ_T0<=κT0 for ALL isotropic log-concave measures, then KLS follows directly. This is a sufficient KLS-strength condition, not a proved equivalence."
     depends_on: [eq:qv-p, lem:survival-implies-kls]
@@ -476,7 +509,9 @@ nodes:
   - id: prop:second-variation
     kind: proposition
     status: imported
+    route: eldan-localization
     import_class: published
+    references: [Rosales2014]
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Second variation / nonnegative index form for smooth critical local minimizers; it does not automatically apply to localized fixed near-minimizers and is not coercive modulo Jacobi zero modes."
     note: "Imported from Rosales (2014), Lemma 4.1(ii) and equation (4.1), using its inner-unit-normal convention and convex-support boundary sign."
@@ -484,6 +519,7 @@ nodes:
   - id: lem:profile-bound
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
     statement: "If volume p admits a smooth volume-constrained minimizer Sigma_p and I is twice differentiable at p, then the profile bound is K_{Sigma_p} <= -I''(p) I(p)^2."
     solution: solutions/kls-geometry-models.tex
@@ -495,6 +531,7 @@ nodes:
   - id: cor:generic-degeneracy
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Grant smooth minimizers at almost every balanced volume. If h_nu <= 1, then int_{1/3}^{2/3} K_{Sigma_p} dp <= C h_nu^3; this is an averaged branch statement, not control of the tracked cut."
     depends_on: [lem:profile-bound]
@@ -508,7 +545,9 @@ nodes:
   - id: prop:reilly
     kind: proposition
     status: imported
+    route: eldan-localization
     import_class: published
+    references: [MaDu2010]
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Generalized weighted Reilly identity; converts boundary trace data into interior Dirichlet energy up to curvature boundary terms."
     note: "Imported from Ma--Du (2010), Theorem 1, in the outer-unit-normal convention, followed by weighted boundary integration by parts. The former inner-normal wording had the wrong boundary sign and was corrected in the manuscript."
@@ -516,6 +555,7 @@ nodes:
   - id: prop:exact-splitting
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Two one-way model implications: global cylinder plus globally Hessian-flat direction => log-affine product; an already split log-affine factor's orthogonal halfspace has 𝔎_Σ=0. No converse from 𝔎_Σ=0 is proved."
     solution: solutions/kls-geometry-models.tex
@@ -527,6 +567,7 @@ nodes:
   - id: rem:almost-stability-gap
     kind: remark
     status: open
+    route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Foundational gap for the Jacobi route: prove a localization-uniform almost-stability trace theorem for the fixed near-Cheeger cut, modulo constants and geometric Jacobi zero modes, and control the Reilly boundary terms."
     depends_on: [prop:second-variation, prop:reilly, lem:boundary-rep]
@@ -534,6 +575,7 @@ nodes:
   - id: prop:persistent-splitting
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
     statement: "Splitting persists under localization: the split direction is preserved pathwise, A_t is block-diagonal, and orthogonal halfspace cuts have K_t=κ_t θθ^T, hence rank at most one."
     solution: solutions/kls-geometry-models.tex
@@ -548,6 +590,7 @@ nodes:
   - id: prop:gaussian-model
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/16-model-geometries.tex
     statement: "Gaussian model: A_t=(1+t)^{-1}I deterministic; centroid mechanism closes unconditionally; halfspace excess ≡ 0; damping strictly active."
     solution: solutions/kls-geometry-models.tex
@@ -559,6 +602,7 @@ nodes:
   - id: prop:products
     kind: proposition
     status: proved
+    route: eldan-localization
     file: modules/kls/16-model-geometries.tex
     statement: "Products: μ_t product pathwise; A_t diagonal; h_{μt} ≳ λmax(A_t)^{-1/2}; KLS holds for products (no bootstrap needed)."
     solution: solutions/kls-geometry-models.tex
@@ -567,18 +611,13 @@ nodes:
     reviewed_by: /root/kls_bootstrap_author
     review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
 
-  - id: prog:product-test
-    kind: program
-    status: open
-    file: modules/kls/16-model-geometries.tex
-    statement: "Product stress test completed through the dimension-dependent early window; the universal-window incident-high residue q:alignment remains open."
-
   # ---------------------------------------------------------------------------
   # PRODUCT STRESS TEST (module 09)
   # ---------------------------------------------------------------------------
   - id: lem:block
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Block support: for product ν and J-measurable E, δ_i=0 off J and G,K supported on J×J."
     solution: solutions/kls-product-covariance.tex
@@ -590,6 +629,7 @@ nodes:
   - id: thm:budget
     kind: theorem
     status: proved
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Coordinate-budget theorem: k-coordinate cut of a product has E ∫_0^∞ S_t ≤ k and μ^+(E) ≥ c min(p,q)/√(1+k)."
     depends_on: [lem:block, cor:per-direction, thm:scalar-riccati, prop:products]
@@ -602,6 +642,7 @@ nodes:
   - id: cor:refutation
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "For a cut and single coordinate fixed before localization, the rank-one dynamic two-tail counterexample candidate is REFUTED: total budget ≤1 and source spikes self-extinguish (~Λ^{-2}); no pathwise adaptive choice is covered."
     depends_on: [thm:budget]
@@ -614,6 +655,7 @@ nodes:
   - id: lem:product-qcts
     kind: lemma
     status: proved
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Quadratic chaos for non-isotropic products: Var(Y^T M Y) ≤ C* ||A^{1/2} M A^{1/2}||^2 (pathwise at every time)."
     solution: solutions/kls-product-covariance.tex
@@ -625,61 +667,57 @@ nodes:
   - id: thm:covariance-bound
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Pathwise covariance bound on the source: conditional on Letwin, S_t ≤ C(1+X_t^2) for all log-concave paths on the balanced window; the product case is unconditional via lem:product-qcts."
     depends_on: [cor:qcts-source, lem:product-qcts]
-    assuming: [thm:letwin-qcts]
 
   - id: cor:V2-implies
     kind: corollary
     status: conditional
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Covariance reduction: conditional on Letwin, (V2) implies the all-cut inequality measure-by-measure for every log-concave path; for products this implication is unconditional."
     depends_on: [thm:covariance-bound]
-    assuming: [thm:letwin-qcts]
 
   - id: thm:KL-window
     kind: theorem
     status: imported
+    import_class: published
+    references: [KLnotes, KlartagLehec2022Polylog]
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "Klartag–Lehec covariance window: P(∃ s≤t: ||A_s||≥2) ≤ exp(-1/(Ct)) for t ≤ 1/(C log^2 n)."
     note: "VERIFIED (2026-06-14 sweep, against arXiv PDFs): the sup-over-time / clean (log^2 n)^{-1}-window form stated here is KLnotes Thm 61, NOT polylog Lemma 5.2 (which is the weaker fixed-time, κ_n-window version). The second moment thm:V2-window needs is published as KlartagLehec2022Polylog Cor 5.4, so no 2nd-moment import debt remains. Caveat: exact statement numbering is version-dependent."
 
-  - id: rem:kl-window-verified
-    kind: remark
-    status: imported
-    import_class: published
-    file: modules/kls/15-covariance-technology.tex
-    statement: "Verified attribution of thm:KL-window (sup-over-time form = KLnotes Thm 61) and the second moment (KlartagLehec2022Polylog Cor 5.4)."
-    depends_on: [thm:KL-window]
-
   - id: prop:letwin-kappa
     kind: proposition
     status: conditional
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "Letwin QCTS implies the third-moment parameter kappa_n <= 2 sqrt(2)."
     depends_on: [thm:letwin-qcts]
-    assuming: [thm:letwin-qcts]
 
   - id: cor:letwin-window
     kind: corollary
     status: conditional
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "For every fixed p, E||A_t||_op^p <= C_p on t <= c/log n, by Klartag-Lehec Corollary 5.4 and prop:letwin-kappa."
     depends_on: [prop:letwin-kappa, "Klartag-Lehec 2022 Corollary 5.4"]
-    assuming: [thm:letwin-qcts]
 
   - id: thm:V2-window
     kind: theorem
     status: conditional
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "Conditional on Letwin v1, (V2) and the all-cut inequality hold for every measure on [0,c/log n]. Published covariance control gives (V2) for every measure on [0,c/log^2 n], but its preprint-independent all-cut consequence here is only for products. Neither window proves the universal-time assumption."
     depends_on: [cor:letwin-window, thm:KL-window, cor:V2-implies, eq:BL-cap]
-    assuming: [thm:letwin-qcts]
 
   - id: cor:KI-discharged
     kind: corollary
     status: proved
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "Published discharge of hyp:KI: thm:KL-window plus the BL cap gives C_2=2."
     depends_on: [thm:KL-window, eq:BL-cap]
@@ -692,16 +730,10 @@ nodes:
   - id: cor:KI-letwin
     kind: corollary
     status: conditional
+    route: eldan-localization
     file: modules/kls/15-covariance-technology.tex
     statement: "Conditional Letwin-v1 sharpening of hyp:KI to C_2=1 via Klartag-Lehec Corollary 5.4."
     depends_on: [cor:letwin-window]
-    assuming: [thm:letwin-qcts]
-
-  - id: heur:V2-fails
-    kind: heuristic
-    status: heuristic
-    file: modules/kls/22-product-stress.tex
-    statement: "Expected failure of (V2) on universal windows for exponential products: ∫ E X_t^2 ≳ log n. Covariance-only route expected to fail; any proof must be cut-aware."
 
   # ---------------------------------------------------------------------------
   # OPEN TARGETS (frontier — see open-problems.md for full briefs P1-P7)
@@ -709,15 +741,16 @@ nodes:
   - id: q:upgrade
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Operator-to-trace upgrade: prove ass:all-cut-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over balanced cuts."
     bounded_by: [obs:proj-ceiling, obs:two-tail]
-    entry_point: prog:product-test
     note: "For Eldan-A the exact gap is Tr(M), M=E∫sG^2⪯R_0⪯I; the target is dynamic occupation density, not static effective rank. The proposed geometric relationship to q:stein-weighted is heuristic until rem:almost-stability-gap is closed."
 
   - id: q:weighted
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Weighted excess propagation with rate: E ∫ e_t (1+||A_t||)^{5/2} ≤ C(T e_0 + T^{1+γ}) for near-Cheeger cuts."
     bounded_by: [obs:two-tail, obs:circularity]
@@ -726,6 +759,7 @@ nodes:
   - id: q:stein-weighted
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Weighted stable Stein trace (ii-w): intrinsic QCTS is available conditional on Letwin v1, but a localization-uniform almost-stability trace theorem modulo Jacobi zero modes and with Reilly boundary terms controlled is missing."
     bounded_by: [obs:two-tail]
@@ -734,21 +768,24 @@ nodes:
   - id: q:taming
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Extremality tames the covariance process: for near-worst μ, does h_μ(T0^(4/3)+Ξ_T0) ≤ κT0 at some universal T0<1/8? This supplies absolute-scale, not relative-scale, excess."
     depends_on: [thm:bootstrap]
     bounded_by: [obs:relative-ceiling]
-    note: "This is distinct from the stronger unweighted all-measure condition in prop:ceiling. The naive splitting↔covariance-SDE coupling faces a type mismatch (Ξ_T cut-free vs splitting cut-indexed; the split direction IS the inflating one) — see rem:taming-type-mismatch. Residual non-circular content: a near-worst-specific KL-window improvement in the regime hstar_n >> 1/loglog n."
+    note: "This is distinct from the stronger unweighted all-measure condition in prop:ceiling. The naive splitting↔covariance-SDE coupling faces a type mismatch (Ξ_T cut-free vs splitting cut-indexed; the split direction IS the inflating one). Residual non-circular content: a near-worst-specific KL-window improvement in the regime hstar_n >> 1/loglog n."
 
   - id: q:splitting
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "First prove rigidity, then quantitative splitting / boundary Obata: under suitable global hypotheses, small constant-mode curvature should imply proximity to a split structure, uniform under localization. prop:exact-splitting proves no converse from zero curvature."
 
   - id: q:alignment
     kind: question
     status: open
+    route: eldan-localization
     file: modules/kls/22-product-stress.tex
     statement: "For products of n isotropic two-sided exponentials, bound the incident-high source S_H (all G entries touching coordinates with A_i>=2) on every I subset [0,T0] by C0|I| + C1 int r + alpha int D with alpha<1, uniformly over fixed balanced cuts."
     note: "Its obstruction-side negation is a high-complexity cut that spends many coordinate budgets in a common short window while balanced and underdamped. The separate kls-align target now implements the complete margin for the designated balanced tail union {max_i |x_i| >= a_n}; the held-out run through n=1024 is non-refuting but finite-family, low-sample, and directional only, with no universal route verdict."
@@ -763,7 +800,6 @@ nodes:
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
     statement: "For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time absorptive bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 + alpha int 2 g_t^T A_t g_t, with alpha<1, uniformly through approximation."
-    related: [thm:letwin-qcts, q:alignment, conj:kls]
     note: "The absorptive estimate itself is open. The expected implication to KLS is tracked separately as prop:spectral-sufficiency because the manuscript currently contains only a mechanism sketch. This stochastic route is distinct from deterministic CMH."
 
   - id: prop:spectral-sufficiency
@@ -772,30 +808,17 @@ nodes:
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
     statement: "Prove that a uniform affirmative answer to q:mm-spectral-occupation, together with the fixed-function SDE, posterior Brascamp-Lieb control and a regularization limit, implies a dimension-free spectral gap."
-    related: [q:mm-spectral-occupation, conj:kls]
     note: "The manuscript records the intended SDE/Gronwall/Brascamp-Lieb mechanism, not an R2 proof. This node prevents the open occupation estimate from being represented as a proved direct edge to KLS."
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
   # ---------------------------------------------------------------------------
-  - id: prog:cmh-route
-    kind: program
-    status: open
-    route: moment-map-cmh
-    file: modules/kls/40-moment-map-cmh.tex
-    statement: "Deterministic CMH route: pass the proved regular-class endpoint reduction through approximation, decide the gate-zero and solenoidal tests, derive the invariant multiplier lift and all-split reduction, control the square-root commutators with retained positive squares, and sum the complete Haar tree."
-    depends_on: [thm:chen-klartag-moment-hessian, thm:letwin-moment-map]
-    entry_point: [q:cmh-approximation, q:gate-zero, q:cmh-solenoidal-perturbation, q:mm-invariant-lift, q:mm-square-root-commutator]
-    note: "The normalization identities and exact model classes have proved nodes; universal CMH(4), its approximation closure, gate zero, the solenoidal perturbation test, and the entire Haar/commutator construction layer remain open. No single open node is asserted to be the sole bottleneck."
-
   - id: q:cmh-normalization
     kind: question
     status: proved
     route: moment-map-cmh
     file: modules/kls/40-moment-map-cmh.tex
     statement: "For the regular moment-map class, define Sigma, L_mu, the L2 space, admissible g, domains and pseudoinverses in C_CMH, and prove CP_aff(mu) <= C_CMH(mu)."
-    related: [conj:kls]
-    discharged_by: [def:cmh, thm:cmh-implies-affine-poincare]
     solution: solutions/thm-cmh-normalization.tex
     checked_by: agent
     authored_by: /root/kls_proof_audit
@@ -810,7 +833,6 @@ nodes:
     file: modules/kls/40-moment-map-cmh.tex
     statement: "Give a uniform regular moment-map approximation and closure argument that passes CP_aff <= C from approximants satisfying C_CMH <= C to an arbitrary centered log-concave limit, including affine-support degeneration."
     depends_on: [def:cmh, thm:cmh-implies-affine-poincare]
-    related: [q:cmh-normalization, conj:kls, prog:cmh-route]
     note: "This is exactly the closure step excluded by the 2026-08-25 independent audit. It is not bundled into the proved regular-class normalization node."
 
   - id: q:mm-invariant-lift
@@ -819,7 +841,6 @@ nodes:
     route: moment-map-cmh
     file: modules/kls/40-moment-map-cmh.tex
     statement: "Derive the target-flat Schur-Piola multiplier lift invariantly, audit its transport coefficient, and reduce arbitrary split dimensions to controlled Codazzi shape components matched with retained positive squares."
-    related: [q:mm-square-root-commutator]
     note: "The displayed fixed-target 1+2 completion of squares has been independently expanded, but the alpha-family, inverse-metric lift, and dimension-free all-split reduction are not certified from the consolidated summary."
 
   - id: q:mm-square-root-commutator
@@ -829,7 +850,6 @@ nodes:
     file: modules/kls/40-moment-map-cmh.tex
     statement: "After defining the retained Letwin/Codazzi/Monge-Ampere/corrector/descendant remainder, control the full Haar sum of [N^(1/2),K_M] errors dimension-freely via the resolvent formula and complete the full-tree analytic estimate."
     depends_on: [q:mm-invariant-lift]
-    related: [q:upgrade, q:stein-weighted, q:alignment, q:cmh-normalization]
     note: "Related to the Eldan operator-to-trace cluster because all preserve matrix orientation, but no equivalence is asserted. Operator domains, Hodge boundary conditions, one-edge flux identity, and higher-dimensional reduction remain part of the task."
 
   # ---------------------------------------------------------------------------
@@ -843,7 +863,7 @@ nodes:
   # SCOPE: nothing here proves KLS, and nothing here supports universal CMH(4).
   # rem:cmh-stronger-than-kls records the extra nonnegative solenoidal channel;
   # no separating measure or strict non-implication from KLS is known.
-  # prog:cmh-route therefore stays open.
+  # The CMH route therefore stays open.
   # ---------------------------------------------------------------------------
   - id: def:cmh
     kind: definition
@@ -879,7 +899,6 @@ nodes:
     file: modules/kls/41-cmh-normalization.tex
     statement: "CP_aff(mu) <= C_CMH(mu) for every centered log-concave mu in the regular moment-map class. Hence a universal bound C_CMH <= 4 would prove conj:kls with affine Poincare constant 4."
     depends_on: [def:cmh]
-    related: [conj:kls, q:cmh-normalization]
     solution: solutions/thm-cmh-normalization.tex
     checked_by: agent
     authored_by: /root/kls_proof_audit
@@ -908,7 +927,6 @@ nodes:
     file: modules/kls/41-cmh-normalization.tex
     statement: "The Hodge identity gives C_CMH(mu) >= CP_aff(mu) and identifies the difference as a nonnegative solenoidal channel, which vanishes identically in dimension one under the no-flux convention. In higher dimension equivalence and strict non-implication at a fixed constant are open; no separating log-concave measure is asserted."
     depends_on: [prop:cmh-hodge, thm:cmh-1d]
-    related: [conj:kls, prog:cmh-route]
     solution: solutions/thm-cmh-normalization.tex
     checked_by: agent
     authored_by: /root/kls_proof_audit
@@ -922,7 +940,6 @@ nodes:
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
     statement: "Gate zero: E[H Sigma^{-1} H] <= 4 Sigma in the Loewner order for every centered log-concave moment measure; equivalently E H^2 <= 4 Id in isotropic position."
-    related: [thm:cmh-implies-affine-poincare, q:upgrade, q:alignment, q:stein-weighted]
     note: "NECESSARY, never sufficient, for universal CMH(4): it is the linear sector g(p) = a.p. Not a known consequence of KLS, so refuting it would close the CMH route without touching conj:kls. The 2026-08-25 target run tested only already-proved model classes and is retained as calibration history, not linked as evidence; its recorded commit does not contain the target source. See rem:gate-zero-trace-upgrade for why the proof side is not dispatchable."
 
   - id: prop:letwin-not-gate-zero
@@ -931,7 +948,6 @@ nodes:
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
     statement: "For every m at least 18 there is a random PSD (m+1)x(m+1) matrix H with E H = Id satisfying E Tr(BHBH) <= 2 Tr(B^2) for EVERY symmetric B, yet lambda_max(E H^2) >= 1 + m/sqrt(2m-1) > 4. Hence positivity, normalization and the constant-matrix estimate do not imply gate zero by matrix algebra; the entire gap is the static commutator, Tr(B^2 H^2) = Tr(BHBH) + (1/2)||[B,H]||_HS^2."
-    related: [thm:letwin-moment-map, conj:gate-zero, q:mm-square-root-commutator]
     solution: solutions/thm-cmh-normalization.tex
     checked_by: agent
     authored_by: /root/kls_proof_audit
@@ -946,19 +962,7 @@ nodes:
     file: modules/kls/41-cmh-normalization.tex
     statement: "Gate zero is an operator-to-trace upgrade with a factor-2 budget: Chen-Klartag give Tr(E H^2) <= 2n, so the average eigenvalue of E H^2 is already at most 2 in isotropic position, while conj:gate-zero asks the maximum to be at most 4."
     depends_on: [thm:chen-klartag-moment-hessian, prop:letwin-not-gate-zero]
-    assuming: [thm:chen-klartag-moment-hessian]
-    related: [conj:gate-zero, q:upgrade, q:stein-weighted, q:alignment, rem:trace-upgrade-unification]
-    note: "Places conj:gate-zero in the ownership cluster of rem:trace-upgrade-unification; NO equivalence with q:upgrade is asserted. Hard constraint 6 of CLAUDE.md applies: the directional counterexample search (q:gate-zero) is dispatchable, while any proof or formal refutation must be routed through independent certification. Conditional because the trace input is a version-1 preprint."
-
-  - id: q:gate-zero
-    kind: question
-    status: open
-    route: moment-map-cmh
-    file: modules/kls/41-cmh-normalization.tex
-    statement: "Decide conj:gate-zero. Either prove E[H Sigma^{-1} H] <= 4 Sigma for every log-concave moment measure using differentiated Monge-Ampere structure - equivalently bound E ||[B,H]||_HS^2 dimension-freely for the relevant multiplier class - or exhibit a genuine moment map whose gate-zero ratio exceeds 4."
-    depends_on: [prop:letwin-not-gate-zero]
-    related: [conj:gate-zero, rem:gate-zero-trace-upgrade]
-    note: "Task M10. Directional counterexample search is dispatchable now and needs moment maps OUTSIDE the classes proved by thm:cmh-1d, thm:cmh-product and thm:cmh-dirichlet; anything needing a numerically solved Monge-Ampere equation remains research guidance only. A formal refutation requires an independently checked exact or analytic certificate. The proof side is not dispatchable as an independent effort - see rem:gate-zero-trace-upgrade."
+    note: "Places conj:gate-zero in the difficulty cluster recorded by manuscript remark rem:trace-upgrade-unification; NO equivalence with q:upgrade is asserted. Hard constraint 6 of CLAUDE.md applies: directional counterexample search for conj:gate-zero is dispatchable, while any proof or formal refutation must be routed through independent certification. Conditional because the trace input is a version-1 preprint."
 
   - id: thm:cmh-1d
     kind: theorem
@@ -1105,33 +1109,19 @@ nodes:
     file: modules/kls/42-cmh-exact-cases.tex
     statement: "Perturb the saturating product moment potential psi_0(s,t) = phi(s) + t^2/2, with phi the one-sided exponential potential, by eps a(s) b(t) inside the smooth strictly convex class; compute the second variation of C_CMH at eps = 0, split through prop:cmh-hodge. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product."
     depends_on: [rem:cmh-saturation-risk]
-    related: [prog:cmh-route, conj:gate-zero]
     note: "Task M9 and the route's sharpest probe: both ingredients are already exact theorems, so it needs no Haar tree, no invariant lift, and no operator domains beyond def:cmh. The delicate part is certifying isotropy to second order - the first covariance variation must vanish so that whitening is I + O(eps^2). A numerical second variation is directional only and must go through finum. A positive numerical answer identifies a candidate CMH(4) refutation but changes no logical status; an independently checked exact or analytic argument would still say NOTHING about conj:kls."
 
   - id: hyp:absolute-geometric-completion
     kind: hypothesis
     status: open
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Absolute-scale interface placeholder at one fixed T0<1/8: for h_mu<=(1+eps_g)hstar_n, the supply T0 e0+κT0 for balanced near-Cheeger cuts suffices to complete the remaining geometric trace/consumption chain. Distinct from the stronger weighted package."
 
   - id: cor:dichotomy
     kind: corollary
     status: conditional
+    route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Residual dichotomy: completing Eldan-B at absolute scale with small constant would already give hstar_n ≥ c/loglog n. Full KLS additionally needs q:taming at the completion's time, or a completion uniform over the supplied time."
     depends_on: [thm:bootstrap, cor:loglog, hyp:absolute-geometric-completion]
-    assuming: [hyp:absolute-geometric-completion]
-
-  - id: rem:trace-upgrade-unification
-    kind: remark
-    status: heuristic
-    file: modules/kls/27-eldan-open-targets.tex
-    statement: "q:upgrade is the full Eldan-A occupation trace; q:alignment is its incident-high product-model residue. q:stein-weighted confronts analogous high-rank boundary modes, but equivalence is not proved."
-    depends_on: [cor:per-direction, thm:budget]
-
-  - id: rem:taming-type-mismatch
-    kind: remark
-    status: heuristic
-    file: modules/kls/27-eldan-open-targets.tex
-    statement: "The naive splitting↔covariance-SDE coupling for q:taming faces a type mismatch: Ξ_T is cut-free while splitting is cut-indexed. Product/splitting does not itself suppress coordinatewise covariance excursions; in the one-sided-exponential product stress test a split coordinate can contribute to λmax(A_t)."
-    depends_on: [prop:exact-splitting, prop:ceiling]

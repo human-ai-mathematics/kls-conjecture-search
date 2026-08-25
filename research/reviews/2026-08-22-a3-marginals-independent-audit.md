@@ -1,10 +1,17 @@
-# A3 fixed-marginal obstruction independent-agent audit
+---
+type: proof-review
+date: "2026-08-22"
+verdict: pass
+authors:
+  - /root/a3
+reviewer: /root/audit_latex
+nodes:
+  - obs:marginals-not-joint
+solutions:
+  - solutions/obs-marginals-not-joint.tex
+---
 
-- **Date:** 2026-08-22
-- **Proof author:** `/root/a3`
-- **Independent reviewer:** `/root/audit_latex`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for `obs:marginals-not-joint`
+# A3 fixed-marginal obstruction independent-agent audit
 
 ## Certified scope
 

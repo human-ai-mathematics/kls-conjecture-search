@@ -112,8 +112,8 @@ the open-node observables:
 Every new `kls-loc` record is therefore explicit `no-verdict`. Missing or red Gaussian,
 initial-state bin/FFT checks, or $dt\mapsto dt/2$ refinement gates prevent even a gated
 diagnostic; tilted-state quadrature convergence is still unavailable, and an all-green engine
-run remains diagnostic until a route observable is implemented. The
-node → quantity → implementation-status map is in `research/kls/gating.md`.
+run remains diagnostic until a route observable is implemented. This Part III section is the
+canonical node → quantity → implementation-status map.
 
 `run --target kls-align` is the isolated product stress test for P6. It computes the full
 incident-high source $S_t^H$ (including both copies of high--low entries), $r_t$, and $D_t$ for

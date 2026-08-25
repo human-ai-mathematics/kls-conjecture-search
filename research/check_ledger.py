@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 """Integrity checker for the research/ control plane (program-aware).
 
-Validates every ``research/**/ledger.yaml``:
+Validates the two explicitly configured production ledgers (and discovers ledgers only in
+isolated test fixtures):
 
 * ledger and node identities are unique (duplicate programs are rejected until
   multi-ledger merging has explicit semantics);
 * dependency edges resolve, are acyclic, and do not let a proved node inherit an
-  open, refuted, heuristic, or conditional dependency/assumption;
-* every conditional node declares a non-empty ``assuming`` contract, including
-  inherited imports marked ``import_class: preprint-unreviewed``;
+  open, refuted, heuristic, conditional, or unreviewed-preprint premise;
+* every conditional node inherits at least one unresolved premise through
+  ``depends_on``; its assumption contract is derived rather than duplicated;
+* nodes use an explicit, program-aware schema; their manuscript anchor exists in
+  the declared file, and every imported node cites existing BibTeX keys;
 * referenced numerical diagnostic artifacts exist and are valid provenance-stamped JSONL;
-* KLS mechanism fences and the reverse
-  ``obstructions.yaml.constrains``/ledger ``bounded_by`` map agree exactly.
+* KLS mechanism fences agree with the canonical ledger ``bounded_by`` edges.
 
 Cross-program ``bridges: [program/id, ...]`` links are resolved against all
 loaded ledgers. Optional proof-plane ``solution:`` files must exist and be certified
 by ``checked_by: agent|human|lean``. Agent certification additionally requires
-distinct named author/reviewer provenance and a persisted review report whose
-Markdown metadata gives an unqualified ``Verdict: pass`` and names both the node
-and reviewer. Every node with ``status: proved`` must carry a certified solution;
-narrative ``proof_provenance`` never substitutes for the proof-plane contract.
+distinct named author/reviewer provenance and a persisted ``type: proof-review``
+report whose structured front matter exactly matches the ledger's nodes, authors,
+reviewer, and solutions. Every node with ``status: proved`` must carry a certified
+solution; unused narrative proof fields never substitute for the proof-plane contract.
 
 Run from the repo root: ``python3 research/check_ledger.py``.
 Exit 0 = clean, 1 = errors. Requires PyYAML.
@@ -30,6 +32,7 @@ import json
 import re
 import sys
 from collections import Counter
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -44,15 +47,17 @@ ROOT = RESEARCH.parent
 KIND = {
     "theorem", "lemma", "proposition", "corollary", "definition", "assumption",
     "hypothesis", "question", "program", "remark", "heuristic",
-    "conjecture", "obstruction", "baseline", "example", "imported",
+    "conjecture", "obstruction", "example",
 }
 EVIDENCE = {"none", "numerical-directional"}
 CHECKED_BY = {"none", "agent", "human", "lean"}
 CERTIFIED_BY = {"agent", "human", "lean"}
 IMPORT_CLASSES = {"published", "preprint-unreviewed"}
-REVIEW_PASS_RE = re.compile(
-    r"^\s*-\s+\*\*Verdict:\*\*\s+pass(?:\s|$)", re.IGNORECASE | re.MULTILINE
-)
+REVIEW_TYPES = {"proof-review", "audit"}
+REVIEW_COMMON_FIELDS = {"type", "date"}
+PROOF_REVIEW_FIELDS = REVIEW_COMMON_FIELDS | {
+    "verdict", "authors", "reviewer", "nodes", "solutions", "follows_up",
+}
 
 # A colon following one of these prefixes denotes a repository id/LaTeX label,
 # even if the slug is malformed. This prevents e.g. ``thm:misspelled_id`` from
@@ -63,8 +68,8 @@ INTERNAL_PREFIXES = {
 }
 
 # Which statuses remain unresolved premises for a proved node. Conditional and
-# heuristic are deliberately included for KLS; ``assuming`` edges are traversed
-# separately, including through intermediate dependencies.
+# heuristic are deliberately included for KLS and discovered recursively through
+# the canonical ``depends_on`` graph.
 PROGRAMS = {
     "ab": {
         "status": {"open", "proved", "imported", "refuted"},
@@ -78,7 +83,45 @@ PROGRAMS = {
     },
 }
 
-RESOLVE_FIELDS = ("depends_on", "assuming", "discharged_by", "entry_point", "related")
+PRODUCTION_LEDGER_PATHS = {
+    "ab": Path("research/a-series/ledger.yaml"),
+    "kls": Path("research/kls/ledger.yaml"),
+}
+
+RESOLVE_FIELDS = ("depends_on",)
+
+COMMON_NODE_FIELDS = {
+    "id", "kind", "status", "file", "label", "statement", "depends_on",
+    "bounded_by", "bridges", "references", "import_class", "solution",
+    "checked_by", "authored_by", "reviewed_by", "review", "numerics",
+    "evidence", "evidence_target", "evidence_run", "target_doc", "note",
+}
+PROGRAM_NODE_FIELDS = {
+    "ab": COMMON_NODE_FIELDS | {"refines"},
+    "kls": COMMON_NODE_FIELDS | {
+        "clearance", "mechanism", "route",
+    },
+}
+LIST_FIELDS = {
+    "depends_on", "bounded_by", "bridges", "references", "mechanism",
+}
+OBSOLETE_NODE_FIELDS = {
+    "assuming": "depends_on; conditional premises are derived from dependency closure",
+    "discharged_by": "depends_on on the result that performs the discharge",
+    "evidence_eligible": "evidence plus evidence_target/evidence_run",
+    "entry_point": "route documentation for non-logical navigation",
+    "proof_file": "solution",
+    "proof_provenance": "solution plus checked_by certification",
+    "related": "route documentation for non-logical relationships",
+    "unlocks": "depends_on on the consuming node, or prose for non-logical relationships",
+}
+BIB_ENTRY_RE = re.compile(r"@[A-Za-z]+\s*\{\s*([^,\s]+)\s*,")
+TOP_LEVEL_FIELDS = {"meta", "nodes"}
+PROGRAM_META_FIELDS = {
+    "ab": {"program", "scope"},
+    "kls": {"program", "route_policy"},
+}
+OBSOLETE_META_FIELDS = {"legacy_r2_debt", "legacy_proved_without_solution"}
 
 
 def as_list(value: Any) -> list:
@@ -119,6 +162,192 @@ def _mentions_token(text: str, token: str) -> bool:
     ) is not None
 
 
+def _review_string_set(metadata: dict, field: str, context: str,
+                       errors: list[str]) -> set[str]:
+    """Validate one required non-empty list of unique review-metadata strings."""
+    value = metadata.get(field)
+    if not isinstance(value, list) or not value:
+        errors.append(f"{context}.{field}: must be a non-empty list")
+        return set()
+    result: set[str] = set()
+    for item in value:
+        if not isinstance(item, str) or not item.strip():
+            errors.append(f"{context}.{field}: entries must be non-empty strings")
+            continue
+        if item in result:
+            errors.append(f"{context}.{field}: duplicate entry '{item}'")
+        result.add(item)
+    return result
+
+
+def _read_review_metadata(path: Path, root: Path, errors: list[str]) -> dict | None:
+    """Parse and validate the YAML front matter of one persisted review report."""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        errors.append(f"{path}: cannot read review report: {exc}")
+        return None
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        errors.append(f"{path}: review report must start with YAML front matter")
+        return None
+    try:
+        closing = next(index for index, line in enumerate(lines[1:], 1) if line.strip() == "---")
+    except StopIteration:
+        errors.append(f"{path}: review front matter lacks a closing '---'")
+        return None
+    try:
+        raw = yaml.safe_load("\n".join(lines[1:closing])) or {}
+    except yaml.YAMLError as exc:
+        errors.append(f"{path}: invalid review front matter: {exc}")
+        return None
+    if not isinstance(raw, dict):
+        errors.append(f"{path}: review front matter must be a mapping")
+        return None
+
+    report_type = raw.get("type")
+    if report_type not in REVIEW_TYPES:
+        errors.append(
+            f"{path}.type: want one of {sorted(REVIEW_TYPES)}, got '{report_type}'"
+        )
+        return None
+    allowed = PROOF_REVIEW_FIELDS if report_type == "proof-review" else REVIEW_COMMON_FIELDS
+    for field in sorted(set(raw) - allowed):
+        errors.append(f"{path}: field '{field}' is not valid for type {report_type}")
+
+    report_date = raw.get("date")
+    if not isinstance(report_date, str):
+        errors.append(f"{path}.date: must be a quoted ISO date YYYY-MM-DD")
+    else:
+        try:
+            date.fromisoformat(report_date)
+        except ValueError:
+            errors.append(f"{path}.date: invalid ISO date '{report_date}'")
+        if not path.name.startswith(f"{report_date}-"):
+            errors.append(f"{path}.date: must match the filename prefix")
+
+    normalized = {"type": report_type, "date": report_date}
+    if report_type == "audit":
+        return normalized
+
+    verdict = raw.get("verdict")
+    if verdict != "pass":
+        errors.append(f"{path}.verdict: a proof-review must have the exact value 'pass'")
+    reviewer = raw.get("reviewer")
+    if not isinstance(reviewer, str) or not reviewer.strip():
+        errors.append(f"{path}.reviewer: must be a non-empty string")
+        reviewer = None
+    normalized.update({
+        "verdict": verdict,
+        "authors": _review_string_set(raw, "authors", str(path), errors),
+        "reviewer": reviewer,
+        "nodes": _review_string_set(raw, "nodes", str(path), errors),
+        "solutions": _review_string_set(raw, "solutions", str(path), errors),
+    })
+
+    follows_up = raw.get("follows_up")
+    if follows_up is not None:
+        context = f"{path}.follows_up"
+        if not isinstance(follows_up, str) or not follows_up.strip():
+            errors.append(f"{context}: must be a non-empty repo-relative path")
+        else:
+            follow_path = Path(follows_up)
+            resolved = (root / follow_path).resolve()
+            reviews_root = (root / "research/reviews").resolve()
+            if follow_path.is_absolute():
+                errors.append(f"{context}: want a repo-relative path, got '{follows_up}'")
+            else:
+                try:
+                    resolved.relative_to(reviews_root)
+                except ValueError:
+                    errors.append(f"{context}: must stay under research/reviews/")
+                else:
+                    if not resolved.is_file():
+                        errors.append(f"{context}: '{follows_up}' does not exist")
+                    elif resolved == path.resolve():
+                        errors.append(f"{context}: a report cannot follow up itself")
+        normalized["follows_up"] = follows_up
+    return normalized
+
+
+def _validate_agent_reviews(root: Path, review_refs: dict[str, list[tuple[str, str, dict]]],
+                            errors: list[str]) -> None:
+    """Validate the review archive and exact ledger/report certification parity."""
+    reviews_root = (root / "research/reviews").resolve()
+    metadata_by_ref: dict[str, dict | None] = {}
+    if reviews_root.is_dir():
+        for path in sorted(reviews_root.rglob("*.md")):
+            if path.name == "README.md":
+                continue
+            relative = path.resolve().relative_to(root.resolve()).as_posix()
+            metadata_by_ref[relative] = _read_review_metadata(path, root, errors)
+
+    for review_ref in sorted(review_refs):
+        path = Path(review_ref)
+        context = f"review '{review_ref}'"
+        if path.is_absolute():
+            errors.append(f"{context}: want a repo-relative path")
+            continue
+        artifact = (root / path).resolve()
+        try:
+            artifact.relative_to(reviews_root)
+        except ValueError:
+            errors.append(f"{context}: agent review reports must be under research/reviews/")
+            continue
+        if artifact.suffix != ".md":
+            errors.append(f"{context}: agent review reports must be Markdown files")
+            continue
+        if not artifact.is_file():
+            errors.append(f"{context}: report does not exist")
+            continue
+
+        normalized_ref = artifact.relative_to(root.resolve()).as_posix()
+        metadata = metadata_by_ref.get(normalized_ref)
+        if metadata is None:
+            continue
+        if metadata.get("type") != "proof-review":
+            errors.append(f"{context}: type '{metadata.get('type')}' cannot certify a proof")
+            continue
+
+        refs = review_refs[review_ref]
+        expected_nodes = {nid for _program, nid, _node in refs}
+        expected_authors = {
+            node["authored_by"] for _program, _nid, node in refs
+            if isinstance(node.get("authored_by"), str) and node["authored_by"].strip()
+        }
+        expected_reviewers = {
+            node["reviewed_by"] for _program, _nid, node in refs
+            if isinstance(node.get("reviewed_by"), str) and node["reviewed_by"].strip()
+        }
+        expected_solutions = {
+            node["solution"] for _program, _nid, node in refs
+            if isinstance(node.get("solution"), str) and node["solution"].strip()
+        }
+
+        for field, declared, expected in (
+            ("nodes", metadata["nodes"], expected_nodes),
+            ("authors", metadata["authors"], expected_authors),
+            ("solutions", metadata["solutions"], expected_solutions),
+        ):
+            if declared != expected:
+                errors.append(
+                    f"{context}.{field}: exact ledger parity mismatch: "
+                    f"missing={sorted(expected - declared)}, extra={sorted(declared - expected)}"
+                )
+        if expected_reviewers != {metadata.get("reviewer")}:
+            errors.append(
+                f"{context}.reviewer: exact ledger parity mismatch: "
+                f"expected={sorted(expected_reviewers)}, got='{metadata.get('reviewer')}'"
+            )
+
+    for review_ref, metadata in sorted(metadata_by_ref.items()):
+        if metadata and metadata.get("type") == "proof-review" and review_ref not in review_refs:
+            errors.append(
+                f"review '{review_ref}': proof-review is not referenced by any "
+                "agent-certified ledger node"
+            )
+
+
 def all_labels(root: Path = ROOT) -> set[str]:
     labels: set[str] = set()
     modules = root / "modules"
@@ -129,11 +358,30 @@ def all_labels(root: Path = ROOT) -> set[str]:
     return labels
 
 
+def bibliography_keys(root: Path = ROOT) -> set[str] | None:
+    """Return the repository BibTeX keys, or ``None`` when the bibliography is absent."""
+    path = root / "fi_references.bib"
+    if not path.is_file():
+        return None
+    try:
+        return set(BIB_ENTRY_RE.findall(path.read_text(encoding="utf-8")))
+    except (OSError, UnicodeError):
+        return None
+
+
+def labels_in_file(path: Path) -> set[str]:
+    """Return LaTeX labels in one readable file without leaking I/O exceptions."""
+    try:
+        return set(re.findall(r"\\label\{([^}]+)\}", path.read_text(encoding="utf-8")))
+    except (OSError, UnicodeError):
+        return set()
+
+
 def _load_obstructions(ledger_path: Path, errors: list[str]):
     """Load the optional sibling obstruction schema.
 
     Returns ``(vocabulary, rules)`` or ``(None, None)``. Each rule contains
-    ``forbids``, optional ``warns``, and the exact reverse ``constrains`` map.
+    ``forbids`` and optional ``warns`` mechanism sets.
     Warned mechanisms are allowed, but (like forbidden mechanisms) must be
     acknowledged by ``bounded_by`` plus a non-empty ``clearance`` note.
     """
@@ -169,13 +417,16 @@ def _load_obstructions(ledger_path: Path, errors: list[str]):
             continue
         forbids = _string_set(raw.get("forbids"), f"{path}: {oid}.forbids", errors)
         warns = _string_set(raw.get("warns"), f"{path}: {oid}.warns", errors)
-        constrains = _string_set(raw.get("constrains"), f"{path}: {oid}.constrains", errors)
         overlap = forbids & warns
         if overlap:
             errors.append(f"{path}: {oid} tags both forbids and warns: {sorted(overlap)}")
         for tag in sorted((forbids | warns) - vocabulary):
             errors.append(f"{path}: {oid} uses mechanism '{tag}' absent from mechanisms")
-        rules[oid] = {"forbids": forbids, "warns": warns, "constrains": constrains}
+        for field in sorted(
+            set(raw) - {"id", "title", "forbids", "warns", "regime", "source"}
+        ):
+            errors.append(f"{path}: {oid}: unknown field '{field}'")
+        rules[oid] = {"forbids": forbids, "warns": warns}
     return vocabulary, rules
 
 
@@ -222,13 +473,14 @@ def _nodes_by_id(path: Path, doc: dict, errors: list[str]) -> dict[str, dict]:
 def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
                            evidence: str, errors: list[str]) -> None:
     ref = node.get("evidence_run")
-    eligible_flag = node.get("evidence_eligible")
-    if eligible_flag is not None and not isinstance(eligible_flag, bool):
-        errors.append(f"[{program}] {nid}: evidence_eligible must be true or false")
-    eligible = evidence != "none" or eligible_flag is True
+    eligible = evidence != "none"
     if eligible and not ref:
         errors.append(f"[{program}] {nid}: evidence eligibility requires evidence_run")
         return
+    if ref and not eligible:
+        errors.append(
+            f"[{program}] {nid}: evidence_run requires evidence numerical-directional"
+        )
     if not ref:
         return
     if not isinstance(ref, str):
@@ -304,11 +556,10 @@ def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
 
 
 def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
-    """Return unresolved dependency/assumption risks inherited by ``start``.
+    """Return unresolved dependency risks inherited by ``start``.
 
     The traversal deliberately crosses intermediate proved/imported/conditional
-    nodes. Conditional nodes' explicit ``assuming`` references are therefore not
-    hidden from a proved ancestor.
+    nodes, so unresolved transitive premises are not hidden from an ancestor.
     """
     found: dict[tuple[str, str], list[str]] = {}
 
@@ -322,9 +573,6 @@ def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
             return
         node = nodes[nid]
         next_stack = stack | {nid}
-        for assumption in as_list(node.get("assuming")):
-            if isinstance(assumption, str):
-                record("assumption", assumption, path + [f"assuming:{assumption}"])
         for dep in as_list(node.get("depends_on")):
             if not isinstance(dep, str) or dep not in nodes:
                 continue
@@ -341,44 +589,9 @@ def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
     return found
 
 
-def _dependency_assumptions(start: str, nodes: dict[str, dict], unproved: set[str]) -> set[str]:
-    """Assumptions a node inherits from its dependency subtree.
-
-    A conditional dependency contributes its declared ``assuming`` contract, not
-    its own theorem id. Open/heuristic/refuted dependencies contribute
-    their ids directly. This lets conditional interfaces compose while preventing
-    a parent from silently dropping a child's premise.
-    """
-    inherited: set[str] = set()
-
-    def visit(nid: str, stack: set[str]):
-        if nid in stack:
-            return
-        next_stack = stack | {nid}
-        for dependency in as_list(nodes[nid].get("depends_on")):
-            if not isinstance(dependency, str) or dependency not in nodes:
-                continue
-            dep_node = nodes[dependency]
-            dep_status = dep_node.get("status")
-            if isinstance(dep_status, str) and dep_status in unproved and dep_status != "conditional":
-                inherited.add(dependency)
-            if (dep_status == "imported"
-                    and dep_node.get("import_class", "published") == "preprint-unreviewed"):
-                inherited.add(dependency)
-            inherited.update(
-                assumption
-                for assumption in as_list(dep_node.get("assuming"))
-                if isinstance(assumption, str) and assumption.strip()
-            )
-            visit(dependency, next_stack)
-
-    visit(start, set())
-    return inherited
-
-
 def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
                            errors: list[str]) -> None:
-    """Validate the optional compact route vocabulary and explicit node routes."""
+    """Validate the optional compact route vocabulary and explicit node ownership."""
     raw_policy = meta.get("route_policy")
     if raw_policy is None:
         for nid, node in nodes.items():
@@ -391,10 +604,8 @@ def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
     if not isinstance(raw_policy, dict):
         errors.append(f"{context}: must be a mapping")
         return
-
-    default = raw_policy.get("default")
-    if not isinstance(default, str) or not default.strip():
-        errors.append(f"{context}.default: must be a non-empty string")
+    for field in sorted(set(raw_policy) - {"allowed"}):
+        errors.append(f"{context}: unknown field '{field}'")
 
     raw_allowed = raw_policy.get("allowed")
     allowed: set[str] = set()
@@ -409,11 +620,9 @@ def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
                 errors.append(f"{context}.allowed: duplicate route '{route}'")
             allowed.add(route)
 
-    if isinstance(default, str) and default.strip() and default not in allowed:
-        errors.append(f"{context}.default: '{default}' is not in allowed")
-
     for nid, node in nodes.items():
         if "route" not in node:
+            errors.append(f"[{program}] {nid}.route: required by meta.route_policy")
             continue
         route = node.get("route")
         if not isinstance(route, str) or not route.strip():
@@ -425,34 +634,81 @@ def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
 
 
 def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
-                        expected_programs: set[str] | None = None) -> dict:
+                        expected_programs: set[str] | None = None,
+                        configured_ledgers: dict[str, str | Path] | None = None) -> dict:
     """Validate a control-plane tree and return errors/warnings plus summary data.
 
     ``research``/``root`` parameters make the checker testable on isolated fixture
-    trees without mutating the real repository.
+    trees without mutating the real repository. Production passes ``configured_ledgers``
+    so program ownership is explicit; fixture tests may omit it and discover temporary
+    ledgers recursively.
     """
     research = Path(research)
     root = Path(root) if root is not None else research.parent
     labels = all_labels(root)
+    bib_keys = bibliography_keys(root)
     errors: list[str] = []
     warnings: list[str] = []
     ledgers: list[dict] = []
     program_paths: dict[str, Path] = {}
+    agent_review_refs: dict[str, list[tuple[str, str, dict]]] = {}
     if expected_programs is None:
         expected_programs = set(PROGRAMS)
 
-    for path in sorted(research.rglob("ledger.yaml")):
+    discovered_paths = sorted(research.rglob("ledger.yaml"))
+    configured_program_by_path: dict[Path, str] = {}
+    if configured_ledgers is None:
+        ledger_paths = discovered_paths
+    else:
+        ledger_paths = []
+        for configured_program, reference in configured_ledgers.items():
+            relative = Path(reference)
+            if relative.is_absolute():
+                errors.append(
+                    f"configured ledger for '{configured_program}' must be repo-relative: "
+                    f"'{reference}'"
+                )
+                continue
+            path = (root / relative).resolve()
+            configured_program_by_path[path] = configured_program
+            if not path.is_file():
+                errors.append(
+                    f"configured ledger for '{configured_program}' does not exist: '{reference}'"
+                )
+                continue
+            ledger_paths.append(path)
+
+        configured_paths = set(configured_program_by_path)
+        for path in discovered_paths:
+            if path.resolve() not in configured_paths:
+                errors.append(
+                    f"{path}: unconfigured ledger; add an explicit production program path "
+                    "or remove the extra ledger"
+                )
+
+    for path in sorted(ledger_paths):
         doc = _load_ledger(path, errors)
         if doc is None:
             continue
+        for field in sorted(set(doc) - TOP_LEVEL_FIELDS):
+            errors.append(f"{path}: unknown top-level field '{field}'")
         meta = doc.get("meta") or {}
         if not isinstance(meta, dict):
             errors.append(f"{path}: 'meta' must be a mapping")
             meta = {}
-        program = meta.get("program") or ("kls" if "kls" in path.parts else "ab")
-        if not isinstance(program, str):
-            errors.append(f"{path}: meta.program must be a string")
+        program = meta.get("program")
+        if not isinstance(program, str) or not program.strip():
+            errors.append(f"{path}: meta.program must be a non-empty string")
             program = f"invalid:{path}"
+        configured_program = configured_program_by_path.get(path.resolve())
+        if configured_program is not None and program != configured_program:
+            errors.append(
+                f"{path}: configured for program '{configured_program}' but declares "
+                f"meta.program '{program}'"
+            )
+        allowed_meta = PROGRAM_META_FIELDS.get(program, {"program"})
+        for field in sorted(set(meta) - allowed_meta - OBSOLETE_META_FIELDS):
+            errors.append(f"[{program}] meta: unknown field '{field}'")
         if program in program_paths:
             errors.append(
                 f"{path}: duplicate ledger for program '{program}' "
@@ -497,7 +753,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         cfg = ledger["cfg"] or PROGRAMS["ab"]
         vocabulary = ledger["vocab"]
         rules = ledger["rules"]
-        for obsolete_field in ("legacy_r2_debt", "legacy_proved_without_solution"):
+        for obsolete_field in OBSOLETE_META_FIELDS:
             if obsolete_field in meta:
                 errors.append(
                     f"[{program}] meta.{obsolete_field}: legacy proof exceptions are forbidden; "
@@ -511,11 +767,19 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             return ref in nodes or ref in obstruction_ids or ref in labels
 
         for nid, node in nodes.items():
-            if "unlocks" in node:
+            for field, replacement in OBSOLETE_NODE_FIELDS.items():
+                if field not in node:
+                    continue
                 errors.append(
-                    f"[{program}] {nid}.unlocks: obsolete field; use depends_on on the "
-                    "consuming node only for a genuine proof dependency, otherwise use prose"
+                    f"[{program}] {nid}.{field}: obsolete field; use {replacement}"
                 )
+            allowed_fields = PROGRAM_NODE_FIELDS.get(program, COMMON_NODE_FIELDS)
+            ignored_obsolete = set(OBSOLETE_NODE_FIELDS)
+            for field in sorted(set(node) - allowed_fields - ignored_obsolete):
+                errors.append(f"[{program}] {nid}: unknown field '{field}'")
+            for field in sorted(LIST_FIELDS & set(node)):
+                if not isinstance(node[field], list):
+                    errors.append(f"[{program}] {nid}.{field}: must be a list")
             for field in ("kind", "status", "file", "statement"):
                 if field not in node:
                     errors.append(f"[{program}] {nid}: missing '{field}'")
@@ -538,25 +802,44 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 )
             import_class = node.get("import_class")
             if status == "imported":
-                effective_import_class = import_class or "published"
-                if effective_import_class not in IMPORT_CLASSES:
+                if import_class is None:
                     errors.append(
-                        f"[{program}] {nid}: bad import_class '{effective_import_class}' "
+                        f"[{program}] {nid}: imported node requires explicit import_class"
+                    )
+                elif import_class not in IMPORT_CLASSES:
+                    errors.append(
+                        f"[{program}] {nid}: bad import_class '{import_class}' "
                         f"(want one of {sorted(IMPORT_CLASSES)})"
                     )
+                references = node.get("references")
+                if not isinstance(references, list) or not references:
+                    errors.append(
+                        f"[{program}] {nid}: imported node requires non-empty references"
+                    )
+                else:
+                    for reference in references:
+                        if not isinstance(reference, str) or not reference.strip():
+                            errors.append(
+                                f"[{program}] {nid}.references: entries must be "
+                                "non-empty BibTeX keys"
+                            )
+                        elif bib_keys is None:
+                            errors.append(
+                                f"[{program}] {nid}.references: fi_references.bib is missing "
+                                "or unreadable"
+                            )
+                        elif reference not in bib_keys:
+                            errors.append(
+                                f"[{program}] {nid}.references: unknown BibTeX key "
+                                f"'{reference}'"
+                            )
             elif import_class is not None:
                 errors.append(f"[{program}] {nid}: import_class is only valid with status imported")
-            assumptions = as_list(node.get("assuming"))
-            valid_assumptions = {
-                assumption for assumption in assumptions
-                if isinstance(assumption, str) and assumption.strip()
-            }
-            if status == "conditional" and not valid_assumptions:
-                errors.append(f"[{program}] {nid}: conditional status requires non-empty assuming")
-            if assumptions and len(valid_assumptions) != len(assumptions):
-                errors.append(f"[{program}] {nid}.assuming: entries must be non-empty strings")
+            elif "references" in node:
+                errors.append(f"[{program}] {nid}: references is only valid with status imported")
 
-            for file_field in ("file", "proof_file"):
+            declared_file: Path | None = None
+            for file_field in ("file", "target_doc"):
                 if file_field not in node:
                     continue
                 file_ref = node.get(file_field)
@@ -576,10 +859,31 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 else:
                     if not resolved_file.is_file():
                         errors.append(f"{context}: '{file_ref}' does not exist")
-            if "statement" in node and (
-                not isinstance(node.get("statement"), str) or not node["statement"].strip()
+                    elif file_field == "file":
+                        declared_file = resolved_file
+            effective_label = node.get("label", nid)
+            if "label" in node and (
+                not isinstance(node.get("label"), str) or not node["label"].strip()
             ):
-                errors.append(f"[{program}] {nid}.statement: must be a non-empty string")
+                errors.append(f"[{program}] {nid}.label: must be a non-empty LaTeX label")
+            elif isinstance(effective_label, str):
+                if effective_label not in labels:
+                    errors.append(
+                        f"[{program}] {nid}: effective manuscript label "
+                        f"'{effective_label}' not found in modules/"
+                    )
+                elif declared_file is not None and effective_label not in labels_in_file(declared_file):
+                    errors.append(
+                        f"[{program}] {nid}.file: '{node.get('file')}' does not contain "
+                        f"effective label '{effective_label}'"
+                    )
+            for text_field in ("statement", "numerics", "note"):
+                if text_field in node and (
+                    not isinstance(node.get(text_field), str) or not node[text_field].strip()
+                ):
+                    errors.append(
+                        f"[{program}] {nid}.{text_field}: must be a non-empty string"
+                    )
 
             evidence = node.get("evidence", "none")
             if not isinstance(evidence, str) or evidence not in EVIDENCE:
@@ -589,11 +893,15 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
 
             solution = node.get("solution")
             checked_by = node.get("checked_by")
-            proof_provenance = node.get("proof_provenance")
-            if proof_provenance is not None and (
-                not isinstance(proof_provenance, str) or not proof_provenance.strip()
-            ):
-                errors.append(f"[{program}] {nid}.proof_provenance: must be a non-empty string")
+            if status != "proved":
+                for proof_field in (
+                    "solution", "checked_by", "authored_by", "reviewed_by", "review",
+                ):
+                    if proof_field in node:
+                        errors.append(
+                            f"[{program}] {nid}.{proof_field}: proof certification metadata "
+                            "is only valid with status proved"
+                        )
             if status == "proved" and not solution:
                 errors.append(
                     f"[{program}] {nid}: proved node requires a certified solution"
@@ -630,53 +938,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         f"[{program}] {nid}: checked_by agent requires a review report"
                     )
                 else:
-                    review_path = Path(review)
-                    if review_path.is_absolute():
-                        errors.append(
-                            f"[{program}] {nid}.review: want a repo-relative path, got '{review}'"
-                        )
-                    else:
-                        artifact = (root / review_path).resolve()
-                        try:
-                            artifact.relative_to(root.resolve())
-                        except ValueError:
-                            errors.append(
-                                f"[{program}] {nid}.review: path escapes repository root: '{review}'"
-                            )
-                        else:
-                            if not artifact.is_file():
-                                errors.append(
-                                    f"[{program}] {nid}.review: '{review}' does not exist"
-                                )
-                            else:
-                                try:
-                                    review_text = artifact.read_text(encoding="utf-8")
-                                except (OSError, UnicodeError) as exc:
-                                    errors.append(
-                                        f"[{program}] {nid}.review: cannot read '{review}': {exc}"
-                                    )
-                                else:
-                                    if not REVIEW_PASS_RE.search(review_text):
-                                        errors.append(
-                                            f"[{program}] {nid}.review: report lacks an "
-                                            "unqualified '- **Verdict:** pass ...' header"
-                                        )
-                                    if not _mentions_token(review_text, nid):
-                                        errors.append(
-                                            f"[{program}] {nid}.review: report does not name "
-                                            f"the certified node '{nid}'"
-                                        )
-                                    if (
-                                        isinstance(reviewed_by, str)
-                                        and reviewed_by.strip()
-                                        and not _mentions_token(
-                                            review_text, reviewed_by.strip()
-                                        )
-                                    ):
-                                        errors.append(
-                                            f"[{program}] {nid}.review: report does not name "
-                                            f"reviewed_by '{reviewed_by.strip()}'"
-                                        )
+                    agent_review_refs.setdefault(review, []).append((program, nid, node))
                 if not solution:
                     errors.append(
                         f"[{program}] {nid}: checked_by agent requires a standalone solution"
@@ -725,7 +987,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 if not isinstance(node["refines"], str):
                     errors.append(f"[{program}] {nid}.refines: must be a string \\label")
                 elif node["refines"] not in labels:
-                    warnings.append(
+                    errors.append(
                         f"[{program}] {nid}.refines: '{node['refines']}' not found as a \\label"
                     )
 
@@ -744,24 +1006,15 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                             f"[{program}] {nid}.mechanism: '{tag}' not in obstructions.yaml vocabulary"
                         )
 
-            if (nid not in labels and node.get("kind") not in ("obstruction", "baseline")
-                    and not node.get("refines")):
-                warnings.append(f"[{program}] {nid}: no matching \\label in modules/ (synthesized or drift?)")
-
         errors.extend(_acyclic(program, nodes))
 
         for nid, node in nodes.items():
             if node.get("status") != "conditional":
                 continue
-            declared = {
-                assumption for assumption in as_list(node.get("assuming"))
-                if isinstance(assumption, str) and assumption.strip()
-            }
-            missing = _dependency_assumptions(nid, nodes, cfg["unproved"]) - declared
-            if missing:
+            if not _inherited_risks(nid, nodes, cfg["unproved"]):
                 errors.append(
-                    f"[{program}] {nid} (conditional) does not propagate inherited assumptions "
-                    f"{sorted(missing)} in assuming"
+                    f"[{program}] {nid} (conditional) must inherit an unresolved premise "
+                    "through depends_on"
                 )
 
         for nid, node in nodes.items():
@@ -774,29 +1027,11 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 )
 
         if rules is not None:
-            used_by = {oid: set() for oid in rules}
-            for nid, node in nodes.items():
-                for oid in as_list(node.get("bounded_by")):
-                    if isinstance(oid, str) and oid in used_by:
-                        used_by[oid].add(nid)
-
             markdown_ids = ledger["obs_md"]
             for oid in sorted(set(rules) - markdown_ids):
                 errors.append(f"[{program}] parity: '{oid}' in obstructions.yaml but not obstructions.md")
             for oid in sorted(markdown_ids - set(rules)):
                 errors.append(f"[{program}] parity: '{oid}' in obstructions.md but not obstructions.yaml")
-
-            for oid, rule in sorted(rules.items()):
-                declared = rule["constrains"]
-                reverse = used_by[oid]
-                for target in sorted(declared - set(nodes)):
-                    errors.append(f"[{program}] {oid}.constrains: unknown ledger node '{target}'")
-                if declared != reverse:
-                    errors.append(
-                        f"[{program}] {oid}.constrains reverse parity mismatch: "
-                        f"yaml-only={sorted(declared - reverse)}, "
-                        f"ledger-only={sorted(reverse - declared)}"
-                    )
 
             for nid, node in nodes.items():
                 mechanisms = {
@@ -825,6 +1060,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                                 "lacks a clearance note"
                             )
 
+    _validate_agent_reviews(root, agent_review_refs, errors)
     return {"errors": errors, "warnings": warnings, "ledgers": ledgers, "labels": labels}
 
 
@@ -854,7 +1090,7 @@ def _acyclic(program: str, nodes: dict[str, dict]) -> list[str]:
 
 
 def main() -> int:
-    report = check_control_plane()
+    report = check_control_plane(configured_ledgers=PRODUCTION_LEDGER_PATHS)
     for warning in report["warnings"]:
         print("WARN:", warning)
     for error in report["errors"]:

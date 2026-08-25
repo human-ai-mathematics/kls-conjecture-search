@@ -21,7 +21,7 @@ with a difficulty gradation.
 The A1--A5 control plane currently records 21 independently reviewed positive intermediate
 results. The main A1, A2, A4, and A5 selection targets remain open; the original marginal-only
 A3 conjecture is refuted and replaced by a dependence-aware target. See the canonical
-[`research/ledger.yaml`](research/ledger.yaml) and the concise
+[`research/a-series/ledger.yaml`](research/a-series/ledger.yaml) and the concise
 [`certified-probe summary`](research/explorations/2026-08-21-a-series-proof-probes.md).
 
 ## Build
@@ -46,8 +46,8 @@ shared/
 modules/            Part I: 00-overview … 08-open-targets
 modules/open-targets/  Part II: A1 … A5 deep dives
 modules/kls/        Part III: three-route strategy map, Eldan dossier, and deterministic CMH route
-research/           the control plane: ledger.yaml, knowledge/, targets/, reviews/, kls/,
-                    runs/ (eligible numerical evidence artifacts), check_ledger.py
+research/           federated control plane: peer a-series/ and kls/ programs; shared
+                    knowledge/, explorations/, reviews/, runs/, decisions/; check_ledger.py
 experiments/        the `finum` numerical channel (uv project) that produces the
                     provenance-stamped run artifacts in research/runs/
 solutions/          proof plane: standalone .tex (+ .lean) proofs, checked_by ladder

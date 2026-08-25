@@ -18,11 +18,11 @@ and an exploratory KLS proof program.
 
 | plane | where | what it holds |
 |---|---|---|
-| claims | `research/ledger.yaml`, `research/kls/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
+| claims | `research/a-series/ledger.yaml`, `research/kls/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
 | prose | `modules/**/*.tex` | the manuscript; the `\label`s that node ids bind to |
 | proofs | `solutions/*.tex` | standalone dossiers a reviewer or Lean can check |
 | diagnostics | `research/runs/*.jsonl` | provenance-stamped `finum` research artifacts |
-| memory | `research/explorations/`, `research/knowledge/`, `research/reviews/` | dated attempt log, shared battery and obstructions, audit reports |
+| memory | `research/explorations/`, `research/knowledge/`, program obstruction files, `research/reviews/`, `research/decisions/` | attempts, shared battery, no-go prose, audits, harness decisions |
 
 ## The soundness contract
 
@@ -45,7 +45,7 @@ grade its own proof.
 
 ## Definition of done
 
-For any contribution:
+For any mathematical or proof contribution:
 
 1. the target is sharpened (or confirmed), or a standalone proof dossier is supplied;
 2. the ledger node is updated with matching status, provenance, and edges;
@@ -53,6 +53,10 @@ For any contribution:
 4. the attempt — **including dead ends** — is logged in
    `research/explorations/YYYY-MM-DD-slug.md`; cross-cutting findings are promoted to
    `research/knowledge/`.
+
+A harness, schema, or repository-organization contribution instead records its rationale and
+validation in `research/decisions/YYYY-MM-DD-slug.md`; it does not create a fictitious
+mathematical attempt or require a claim-status change.
 
 A *proof* contribution has four further requirements, specified in
 [`solutions/README.md`](solutions/README.md): the dossier compiles standalone with a complete
@@ -78,7 +82,7 @@ Specific to this repo; a naive agent swarm hits every one of these.
 
 1. **A ledger is a single-file write-contention point.** Git-worktree isolation helps parallel
    `finum`/`solutions` work but does nothing for a shared YAML. Funnel *all* ledger edits
-   through one orchestrator; squads write only to `research/targets/*.md`,
+   through one orchestrator; squads write only to `research/a-series/targets/*.md`,
    `research/explorations/`, `research/runs/`, and (provers) `solutions/`.
 2. **No private Monte Carlo.** The retraction that created `research/explorations/` is the
    cautionary tale: two agents ran ad-hoc scripts, disagreed, and a non-reproducible claim had
@@ -104,13 +108,16 @@ Specific to this repo; a naive agent swarm hits every one of these.
 7. **`conditional` KLS nodes are Lean-certifiable only as conditional implications.** The
    assumption becomes a hypothesis; the node reaches unconditional `proved` only when the
    assumption is discharged.
-8. **`research/explorations/` is append-only.** It exists so the next agent does not re-run a
-   refuted approach. Add dated files; do not rewrite history.
+8. **`research/explorations/` and `research/decisions/` are append-only.** Explorations prevent
+   refuted mathematical approaches from being rerun; decisions preserve harness rationale. Add
+   dated files; do not rewrite history.
 
 ## Conventions
 
-- A node `id` **is** the LaTeX `\label` of its statement. When a statement changes, update both
-  the `.tex` and the ledger.
+- A new node `id` **is** the LaTeX `\label` of its statement. A stable legacy/synthetic id whose
+  certified provenance cannot be renamed declares an explicit `label:` manuscript anchor; the
+  checker requires that effective label to occur in the node's declared `file`. When a statement
+  changes, update both the `.tex` and the ledger.
 - `depends_on` means "used in the proof" and must stay acyclic. Downstream consumers are derived
   by reversing `depends_on`; speculative roadmap relationships belong in prose, not a second
   graph.

@@ -1,12 +1,14 @@
+---
+type: audit
+date: "2026-08-24"
+---
+
 # KLS route consolidation — independent audit
 
-- **Date:** 2026-08-24
-- **Consolidation author:** `/root` (Codex)
-- **Independent mathematical reviewer:** `/root/kls_math_audit` (Mencius)
-- **Independent claim-graph reviewer:** `/root/kls_claim_graph_audit` (Aristotle)
-- **Independent structural reviewer:** `/root/kls_structure_audit` (Bernoulli)
-- **Review type:** literature, mathematics, control-plane, and editorial consolidation audit
-- **Verdict:** pass for the scoped consolidation; **no KLS or CMH proof certification**
+This is a literature, mathematics, control-plane, and editorial audit by `/root` (Codex), with
+independent mathematical review by `/root/kls_math_audit` (Mencius), claim-graph review by
+`/root/kls_claim_graph_audit` (Aristotle), and structural review by `/root/kls_structure_audit`
+(Bernoulli). Its scoped consolidation passed; it provides no KLS or CMH proof certification.
 
 ## Scope
 

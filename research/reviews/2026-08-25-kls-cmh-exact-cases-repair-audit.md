@@ -1,15 +1,31 @@
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/kls_ledger_audit
+reviewer: /root/cmh_exact_reviewer
+nodes:
+  - thm:cmh-1d
+  - thm:cmh-product
+  - cor:cmh-linear-images
+  - lem:cmh-gamma-completion
+  - lem:cmh-row-min
+  - lem:cmh-angular-coefficient
+  - thm:cmh-dirichlet
+  - cor:cmh-dirichlet-surplus
+  - cor:cmh-dirichlet-poincare
+  - rem:cmh-saturation-risk
+solutions:
+  - solutions/thm-cmh-dirichlet.tex
+follows_up: research/reviews/2026-08-25-kls-cmh-normalization-audit.md
+---
+
 # Route C exact CMH cases — independent repair audit
 
-- **Date:** 2026-08-25
-- **Original proof author:** `/orchestrator/kls-cmh-normalization`
-- **Repair author:** `/root/kls_ledger_audit`
-- **Independent reviewer:** `/root/cmh_exact_reviewer`
-- **Reviewed dossier:** `solutions/thm-cmh-dirichlet.tex`
-- **Reviewed manuscript:** `modules/kls/42-cmh-exact-cases.tex`
-- **Certification:** `checked_by: agent`
-- **Review type:** complete hand re-derivation, manuscript/dossier/ledger semantic comparison,
-  domain and closure audit, citation-scope audit, and standalone/full-manuscript compilation
-- **Verdict:** pass for `thm:cmh-1d`, `thm:cmh-product`, `cor:cmh-linear-images`, `lem:cmh-gamma-completion`, `lem:cmh-row-min`, `lem:cmh-angular-coefficient`, `thm:cmh-dirichlet`, `cor:cmh-dirichlet-surplus`, `cor:cmh-dirichlet-poincare`, and `rem:cmh-saturation-risk`
+The original proof author was `/orchestrator/kls-cmh-normalization`; `/root/kls_ledger_audit`
+authored the certified repair. The audit also compared the dossier with
+`modules/kls/42-cmh-exact-cases.tex`.
 
 ## Certified scope
 

@@ -1,11 +1,14 @@
+---
+type: audit
+date: "2026-08-25"
+---
+
 # Legacy R2 debt — schema and mathematical triage
 
-- **Date:** 2026-08-25
-- **Orchestrator:** `/root`
-- **Schema reviewer:** `/root/ledger_schema_simplify`
-- **Mathematical inventory reviewer:** `/root/legacy_proof_triage`
-- **Review type:** read-only proof-location, claim-classification, and control-plane audit
-- **Verdict:** pass for the debt inventory and classification; **no R2 proof certification**
+This non-certifying, read-only proof-location and control-plane audit was orchestrated by
+`/root`, with schema review by `/root/ledger_schema_simplify` and mathematical inventory review
+by `/root/legacy_proof_triage`. Its debt inventory and classification passed; it provides no R2
+proof certification.
 
 ## Scope
 

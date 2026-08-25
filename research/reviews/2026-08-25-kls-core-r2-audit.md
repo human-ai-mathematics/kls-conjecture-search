@@ -1,12 +1,29 @@
-# KLS localization, Riccati, QCTS, Stein, and boundary core — independent R2 audit
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/kls_core_author
+reviewer: /root/kls_bootstrap_author
+nodes:
+  - lem:survival-implies-kls
+  - lem:matrix-riccati
+  - thm:scalar-riccati
+  - cor:per-direction
+  - cor:away-from-zero
+  - lem:pathwise-BL
+  - cor:tight-window-consumption
+  - prop:qcts-equivalence
+  - prop:stein-rep
+  - lem:stein-vs-source
+  - prop:two-tail
+  - lem:boundary-rep
+solutions:
+  - solutions/kls-localization-riccati-core.tex
+  - solutions/kls-qcts-stein-boundary-core.tex
+---
 
-- **Date:** 2026-08-25
-- **Proof author:** `/root/kls_core_author`
-- **Independent reviewer:** `/root/kls_bootstrap_author`
-- **Reviewed dossiers:** `solutions/kls-localization-riccati-core.tex` and
-  `solutions/kls-qcts-stein-boundary-core.tex`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass
+# KLS localization, Riccati, QCTS, Stein, and boundary core — independent R2 audit
 
 ## Certified scope
 

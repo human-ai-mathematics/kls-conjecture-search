@@ -51,7 +51,7 @@ checkable analytic or exact certificate before it can change logical status.
 
 So this document is the substrate-gap half of the Lean channel: the deliverable is not just
 "contribute to Mathlib," it is "close enough of the gap that the *proved* nodes of
-`research/ledger.yaml` and `research/kls/ledger.yaml` can each acquire a `solutions/*.lean`
+`research/a-series/ledger.yaml` and `research/kls/ledger.yaml` can each acquire a `solutions/*.lean`
 with `checked_by: lean`." §5 names those first targets explicitly.
 
 ---
@@ -188,7 +188,7 @@ Otto–Villani / `T₂` until optimal transport lands.
 
 You can only Lean-certify a node that already has a crisp statement and a Phase-2 (or
 imported/proved) argument. The **formalization-ready nodes today** — `status ∈
-{proved, imported}` in `research/ledger.yaml` — and the spine prerequisites that gate each
+{proved, imported}` in `research/a-series/ledger.yaml` — and the spine prerequisites that gate each
 `solutions/<id>.lean`:
 
 | Ledger node (`\label`) | Statement | Gated by | First-target effort |
@@ -253,7 +253,7 @@ Brascamp–Lieb. Below, the primitives are derived from the **actual proved/impo
 | Carbery–Wright anti-concentration | `def:qcts`, `prop:qcts-equivalence` | **absent** |
 | Isoperimetric profile of log-concave measures + concavity; weighted Reilly; boundary representation | `lem:half`, `lem:profile-bound`, `prop:reilly`, `lem:boundary-rep`, `prop:second-variation` | **absent** |
 | Finite-perimeter sets, coarea, divergence theorem on weighted manifolds (GMT) | `prop:reilly`, `lem:perimeter-martingale`, `lem:boundary-rep` | **mostly absent** (geometric-measure-theory gap) |
-| Klartag–Lehec covariance window | `thm:KL-window`, `hyp:KI`, `rem:kl-window-verified`, `cor:KI-discharged`, `thm:V2-window` | **absent** (literature import) |
+| Klartag–Lehec covariance window | `thm:KL-window`, `hyp:KI`, `cor:KI-discharged`, `thm:V2-window` | **absent** (literature import) |
 
 The KLS backbone and the FI spine **share** the PSD/trace primitives and the
 `IsGaussian`/product substrate; they **diverge** in that KLS additionally needs stochastic
@@ -261,7 +261,7 @@ calculus (the Riccati SDE), GMT (the Reilly/boundary machinery), and Brascamp–
 most reusable cross-cutting contribution is therefore the **FI vocabulary itself**
 (`HasPoincaré`, `HasLSI`, the entropy and Dirichlet functionals) — it underpins both fronts, and
 it is the same vocabulary that backs the Part II ↔ Part III bridge `ab/conj:a1-bis →
-kls/conj:kls` (the `C_P ≤ K·λmax(Cov)` shadow of KLS; `research/kls/shared/target.md`).
+kls/conj:kls` (the `C_P ≤ K·λmax(Cov)` shadow of KLS; `modules/kls/00-orientation.tex`).
 
 Note the epistemic asymmetry: many headline KLS nodes are `conditional` (e.g.
 `thm:intro-all-cut`, `thm:centroid-implies-kls`), resting on `open` assumptions

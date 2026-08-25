@@ -1,10 +1,20 @@
-# Derived-obstructions independent-agent audit
+---
+type: proof-review
+date: "2026-08-22"
+verdict: pass
+authors:
+  - /root/a1_a2
+  - /root/a4_a5
+reviewer: /root/audit_metadata
+nodes:
+  - obs:gaussian-tail-rigidity
+  - obs:symmetry-vs-physical
+solutions:
+  - solutions/a2-subquadratic-tail-rigidity.tex
+  - solutions/prop-a5-ratio.tex
+---
 
-- **Date:** 2026-08-22
-- **Underlying proof authors:** `/root/a1_a2` and `/root/a4_a5`
-- **Independent derived-scope reviewer:** `/root/audit_metadata`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for exactly the two derived obstruction nodes below
+# Derived-obstructions independent-agent audit
 
 ## Certified scope
 

@@ -11,5 +11,7 @@ Record:
   witness if any).
 - **Why** it failed or what it unlocked.
 
-Promote successes into `../targets/*.md` + the `.tex` statement + a `ledger.yaml` update.
+Stage a successful A-series refinement in `../a-series/targets/*.md`; the orchestrator promotes
+it to the `.tex` statement and `../a-series/ledger.yaml`. KLS route work follows the selected
+brief under `../kls/routes/` and enters `../kls/ledger.yaml` through the same orchestrator.
 Promote cross-cutting findings into `../knowledge/`.

@@ -3,8 +3,9 @@
 These project assets keep numerical exploration comparable and reduce selection bias. They are
 curated and shared rather than chosen ad hoc by the agent refining a statement: an agent must not
 mint favorable cases and present them as validation. Running the suite is not a soundness gate,
-and no outcome validates a theorem or proof. `finum` owns the instances as fixed, seeded,
-provenance-stamped generators. Math in LaTeX (`$…$`).
+and no outcome validates a theorem or proof. When a registered instance has a numerical backend,
+`finum` owns its fixed, seeded, provenance-stamped generator. Registration alone does not assert
+that a backend exists. Math in LaTeX (`$…$`).
 
 Two tiers: **calibration** (exact ground truth used to catch implementation errors) and **stress**
 (the adversarial cases named by each obstruction). Passing either tier only licenses further
@@ -131,10 +132,10 @@ directional.
 | id | instance | research role | current status |
 |---|---|---|---|
 | `cal-cmh-gauss-1d` | $N(0,1)$, $\tau\equiv1$ | gate-zero ratio must be exactly $1$ | exact; run calibration anchor |
-| `cal-cmh-uniform-simplex` | $\mathrm{Dir}(1,\dots,1)$ on $\Delta_{m-1}$ | gate-zero ratio must be exactly $2(m+1)/(m+3)$, and $1.2$ at $m=2$ agreeing with the uniform interval | exact formula; floating eigensolve reproduced it to $1.8\times10^{-15}$ for $m=2..12$ as a calibration check |
+| `cal-cmh-uniform-simplex` | $\mathrm{Dir}(1,\dots,1)$ on $\Delta_{m-1}$ | gate-zero ratio must be exactly $2(m+1)/(m+3)$, and $1.2$ at $m=2$ agreeing with the uniform interval | exact formula; a future reproducible run must recover it as a calibration check |
 | `stress-cmh-1d-closed-form` | centered exponential, uniform, Laplace, $\Gamma(a)$, $\mathrm{Beta}(1,b)$ with closed-form $\tau$ | exercise $R_1=\mathbb E\tau^2/\sigma^4$ and `thm:cmh-1d` across the one-dimensional log-concave range | exact $R_1$ (max $2$); the companion $C_P$ is FEM, hence **directional only** |
-| `stress-cmh-dirichlet-asymmetric` | $\alpha=(1,1,10),(1,1,100),(1,1,1000),(1,5,25),(1,2,3,4,5),(1,1,1,1,50)$ | test whether a nonproduct family can drive the gate-zero ratio toward $4$ | exact moment matrices; the historical floating maximum $1.995$ is unlinked calibration, while the hardened backend emits an exact rational Rayleigh lower-bound witness on future runs — **calibration, not support** (all inside `thm:cmh-dirichlet`) |
-| `stress-cmh-dirichlet-galerkin` | polynomial test functions to degree $4$--$6$ on the above | regression-test the surplus of `cor:cmh-dirichlet-surplus` | exact scalar moments feed floating coefficients/matrices/whitening/eigensolve; worst realized $0.933$ of the predicted ceiling is **directional only** |
+| `stress-cmh-dirichlet-asymmetric` | $\alpha=(1,1,10),(1,1,100),(1,1,1000),(1,5,25),(1,2,3,4,5),(1,1,1,1,50)$ | test whether a nonproduct family can drive the gate-zero ratio toward $4$ | exact moment matrices; the hardened backend emits an exact rational Rayleigh lower-bound witness on future runs — **calibration, not support** (all inside `thm:cmh-dirichlet`) |
+| `stress-cmh-dirichlet-galerkin` | polynomial test functions to degree $4$--$6$ on the above | regression-test the surplus of `cor:cmh-dirichlet-surplus` | exact scalar moments feed floating coefficients, matrices, whitening, and eigensolve; the result remains **directional only** |
 | `fence-cmh-algebraic-countermodel` | the $O(m)$-invariant random PSD law of `prop:letwin-not-gate-zero`, $m\ge18$ | verify the three sector coefficients and the perfect-square scalar deficit | exact three-sector algebra, $z$ never sampled; $1+d=4.0426$ at $m=18$ |
 
 **Scope rule for this suite.** Every instance except the countermodel lies **inside** a class

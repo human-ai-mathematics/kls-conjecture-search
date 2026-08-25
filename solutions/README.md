@@ -36,8 +36,10 @@ A proof is only as trustworthy as its check. Every solution declares its level i
 
 Agent certification is deliberately explicit rather than being recorded as human review. It
 requires `authored_by`, a distinct `reviewed_by`, and a repo-local `review:` report. The report
-must state its exact scope and any exclusions. This gate was enabled by the project owner on
-2026-08-21 for independently audited results.
+uses the structured contract in [`../research/reviews/README.md`](../research/reviews/README.md):
+its passing nodes, authors, reviewer, and dossiers must exactly match the ledger nodes pointing
+to it. The report body states the mathematical findings, corrections, and exclusions. This gate
+was enabled by the project owner on 2026-08-21 for independently audited results.
 
 Numerics never appear on this ladder: they may guide intuition or suggest a counterexample, but
 they do not validate a claim, justify a proof step, or certify a dossier (the R1/R2 contract in
@@ -57,7 +59,7 @@ they do not validate a claim, justify a proof step, or certify a dossier (the R1
    cd solutions
    latexmk -pdf -outdir=../build <id>.tex
    ```
-5. Wire the ledger node (`research/ledger.yaml` or a route ledger): add
+5. Wire the ledger node (`research/a-series/ledger.yaml` or `research/kls/ledger.yaml`): add
    `solution: solutions/<id>.tex` and `checked_by: agent|human|lean`. For an agent audit, also
    add `authored_by`, a distinct `reviewed_by`, and `review`. The node may flip to
    `status: proved` only once these artifacts exist — enforced by `research/check_ledger.py`.

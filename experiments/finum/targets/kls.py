@@ -1,19 +1,19 @@
 """Part III (KLS) route-gating — focused & self-contained (NO localization SDE engine).
 
 KLS asserts a universal K with C_P(mu) <= K * lambda_max(Cov_mu) for EVERY isotropic log-concave
-mu (= the A1-bis bridge, research/kls/shared/target.md). The SDE-free numerical signal here is a
+mu (= the A1-bis bridge, ledger node ``kls/conj:kls``). The SDE-free numerical signal here is a
 finite-domain FEM estimate of **K = C_P / lambda_max(Cov)** on isotropic log-concave test
 geometries, plus a rank-one bridge sanity check. Each 1D factor's C_P is approximated by FEM
 (calibrated on the Gaussian); products use tensorization at the discretized-factor level.
 
-This gates the route-AGNOSTIC facts in shared/lower-bounds.md:
+This calibrates the route-agnostic analytic facts stated in the Part III manuscript:
   * exact isotropic linear test: lambda_max(Cov) = 1 implies every universal KLS bound has K>=1;
   * K = O(1) across this small battery, including single-coordinate Gaussian inflation, is
     directional non-refutation of the bridge. It does not test the cut-specific dynamic
     obstruction ``obs:rank-one-refuted``.
 The localization quantities (source occupation for q:upgrade, q:alignment, weighted Stein) live in the companion
 target `kls-loc` (finum/targets/kls_localization.py) on top of finum.localization — see
-research/kls/gating.md.
+experiments/README.md.
 """
 from __future__ import annotations
 
@@ -106,7 +106,7 @@ def run_records(seed: int = 0, d: int = 4):
                         bool(v_bridge.status == "directional-consistent"),
                     "verdict_bridge": v_bridge.dict(), "verdict_isotropic_refuter": v_refuter.dict(),
                     "companion": "localization quantities (q:upgrade source, q:alignment, weighted Stein) "
-                                 "=> target 'kls-loc' on finum.localization; see research/kls/gating.md"})
+                                 "=> target 'kls-loc' on finum.localization; see experiments/README.md"})
     return records, {"d": d, "calibration_passed": cal_ok, "realized_K_max": K_max}
 
 
