@@ -1,8 +1,7 @@
 """Run provenance + repo paths: turn "committed + seeded" into reproducible.
 
-Every artifact carries a header from ``provenance()`` (seed, run params, interpreter/library
-versions, plus the current commit as a best-effort trace). A run that cannot be reproduced from
-its recorded seed and params is not a result.
+Every artifact carries a versioned header from ``provenance()``. Run configuration, execution
+environment, and derived summaries remain separate so a reader can reconstruct the invocation.
 """
 from __future__ import annotations
 
@@ -50,26 +49,34 @@ def _git(*args: str) -> str | None:
         return None
 
 
-def provenance(**params: Any) -> dict[str, Any]:
-    """A JSON-serializable provenance header; pass run params (seed, n, d, ...) as keywords.
+def provenance(*, schema_version: int, target: str, profile: str, stochastic: bool,
+               config: dict[str, Any]) -> dict[str, Any]:
+    """A JSON-serializable artifact header with inputs separated from environment.
 
     ``git_commit`` is a best-effort trace of which checkout produced the artifact. It is
     informational: reproducibility rests on the recorded seed, params, and library versions,
     and nothing gates on the state of the worktree.
     """
     return {
+        "schema_version": int(schema_version),
         "date": date.today().isoformat(),
+        "target": target,
+        "profile": profile,
+        "stochastic": bool(stochastic),
+        "config": config,
         "git_commit": _git("rev-parse", "HEAD"),
-        "python": sys.version.split()[0],
-        "platform": platform.platform(),
-        "numpy": np.__version__,
-        "scipy": scipy.__version__,
-        "params": params,
+        "environment": {
+            "python": sys.version.split()[0],
+            "platform": platform.platform(),
+            "numpy": np.__version__,
+            "scipy": scipy.__version__,
+        },
     }
 
 
-def write_jsonl(path: str | Path, header: dict, records: list[dict]) -> Path:
-    """Write a ``.jsonl`` artifact: provenance header line, then one record per line.
+def write_jsonl(path: str | Path, header: dict, records: list[dict],
+                summary: dict | None = None) -> Path:
+    """Write a versioned JSONL artifact without overwriting an existing path.
 
     ``.jsonl`` (not ``.log``) so the repo's LaTeX .gitignore does not swallow it.
     """
@@ -81,4 +88,6 @@ def write_jsonl(path: str | Path, header: dict, records: list[dict]) -> Path:
         fh.write(json.dumps({"_provenance": header}) + "\n")
         for rec in records:
             fh.write(json.dumps(rec) + "\n")
+        if summary is not None:
+            fh.write(json.dumps({"kind": "run-summary", **summary}) + "\n")
     return path

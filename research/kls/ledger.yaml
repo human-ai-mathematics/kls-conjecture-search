@@ -1,38 +1,72 @@
-# ledger.yaml — canonical logical state of the KLS proof program (Part III)
-# =============================================================================
-# SINGLE SOURCE OF TRUTH for what is proved / conditional / open / refuted in the
-# KLS program, and for the dependency edges. The LaTeX in modules/kls/ is the
-# prose+proof; this file is the machine-readable graph.
-#
-# This is Part III's route-spanning control plane. It began as the Eldan-localization
-# roadmap ledger and was moved to research/kls/ when the deterministic moment-map/CMH
-# route became substantial enough to track. Every node carries an explicit route field; all edits still
-# pass through one orchestrator because this remains a single-file contention point.
-#
-# DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../a-series/ledger.yaml, program: ab)
-# is in the REFINEMENT phase (sharpen statements; numerics stress and suggest refutations via finum).
-# KLS is already a PROOF program: the statements are crisp, the work is discharging
-# assumptions and proving conditional implications. The programs nevertheless share one status
-# vocabulary; KLS additionally has a route-specific fence registry in obstructions.md. Numerics
-# (`finum`) give research direction or suggest refutations here; they never validate a claim or
-# proof and never make a node "proved".
-#
-# Shared schema: research/ledger-schema.md
-# Program workflow and route ownership: research/kls/README.md
-#
-# Checked by ../check_ledger.py (program-aware): acyclicity, no proved-on-open/refuted,
-# obstruction-id resolution, certification provenance, and cross-program bridges.
-# =============================================================================
+# Current KLS claim graph. Statements live in modules/kls/; schema, routes, and workflow live in
+# research/ledger-schema.md and research/kls/.
 
 meta:
   program: kls
   route_policy:
     allowed: [shared, eldan-localization, moment-map-spectral, moment-map-cmh]
 
-# ---------------------------------------------------------------------------
-# CORE STOCHASTIC LAYER  (certified standalone dossiers attached to every proved node)
-# ---------------------------------------------------------------------------
 nodes:
+
+  # ---------------------------------------------------------------------------
+  # OBSTRUCTIONS
+  # ---------------------------------------------------------------------------
+  - id: obs:two-tail
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/14-qcts-obstruction.tex
+    label: prop:two-tail
+    statement: "The anisotropic Gaussian two-tail cut rules out a slice-wise stable Stein estimate with an absolute-scale excess term; covariance weight or expected-occupation control is necessary."
+    depends_on: [prop:two-tail]
+
+  - id: obs:proj-ceiling
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/14-qcts-obstruction.tex
+    label: eq:qcts-log
+    statement: "Radial and projection-only tests yield at best a logarithmic quadratic-chaos bound and cannot supply the dimension-free operator control required by the route."
+
+  - id: obs:crude-insufficient
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/25-bootstrap.tex
+    label: rem:insufficiency
+    statement: "The crude estimate Xi_T <= 1+log(nT) is too large to close the excess bootstrap at known KLS lower-bound scales."
+    depends_on: [lem:crude]
+
+  - id: obs:relative-ceiling
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/25-bootstrap.tex
+    label: prop:ceiling
+    statement: "A universal relative-scale estimate Xi_T0 <= kappa T0 at sufficiently small fixed time already implies KLS and is not a weaker bootstrap input."
+    depends_on: [prop:ceiling]
+
+  - id: obs:circularity
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/24-excess-propagation.tex
+    label: rem:circularity
+    statement: "Directly inserting a lower bound for the time-dependent localized isoperimetric profile risks assuming the Cheeger control the route is meant to prove."
+    depends_on: [lem:excess-identity, lem:inf-martingales]
+
+  - id: obs:rank-one-refuted
+    kind: obstruction
+    status: open
+    route: eldan-localization
+    file: modules/kls/22-product-stress.tex
+    label: cor:refutation
+    statement: "For products, a fixed balanced single-coordinate cut has total expected source budget at most one and cannot sustain a covariance-inflation counterexample."
+    depends_on: [cor:refutation]
+
+  # ---------------------------------------------------------------------------
+  # CORE STOCHASTIC LAYER
+  # ---------------------------------------------------------------------------
 
   - id: conj:kls
     kind: conjecture
@@ -40,7 +74,7 @@ nodes:
     route: shared
     file: modules/kls/00-orientation.tex
     statement: "There is a universal C such that Var_mu(f) <= C int |grad f|^2 dmu for every isotropic log-concave mu in every dimension; equivalently up to universal constants, inf_n hstar_n > 0."
-    bridges: [ab/conj:a1-bis]
+    bridges: [a-series/conj:a1-bis]
 
   - id: lem:survival-implies-kls
     kind: lemma
@@ -157,7 +191,7 @@ nodes:
     review: research/reviews/2026-08-25-kls-core-r2-audit.md
 
   # ---------------------------------------------------------------------------
-  # ROUTE-AGNOSTIC JULY 2026 MOMENT-MAP INPUTS
+  # ROUTE-AGNOSTIC MOMENT-MAP INPUTS
   # ---------------------------------------------------------------------------
   - id: thm:chen-klartag-moment-hessian
     kind: theorem
@@ -637,7 +671,7 @@ nodes:
     depends_on: [cor:letwin-window]
 
   # ---------------------------------------------------------------------------
-  # OPEN TARGETS (frontier — see open-problems.md for full briefs P1-P7)
+  # ELDAN OPEN TARGETS
   # ---------------------------------------------------------------------------
   - id: q:upgrade
     kind: question
@@ -660,7 +694,7 @@ nodes:
     status: open
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "Weighted stable Stein trace (ii-w): intrinsic QCTS is available conditional on Letwin v1, but a localization-uniform almost-stability trace theorem modulo Jacobi zero modes and with Reilly boundary terms controlled is missing."
+    statement: "Prove a localization-uniform almost-stability trace theorem modulo Jacobi zero modes, with the weighted Reilly boundary terms required by ass:weighted-package."
     bounded_by: [obs:two-tail]
 
   - id: q:taming
@@ -677,7 +711,7 @@ nodes:
     status: open
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "First prove rigidity, then quantitative splitting / boundary Obata: under suitable global hypotheses, small constant-mode curvature should imply proximity to a split structure, uniform under localization. prop:exact-splitting proves no converse from zero curvature."
+    statement: "Under suitable global hypotheses, prove that small constant-mode curvature implies proximity to a split structure uniformly under localization."
 
   - id: q:alignment
     kind: question
@@ -686,6 +720,21 @@ nodes:
     file: modules/kls/22-product-stress.tex
     statement: "For products of n isotropic two-sided exponentials, bound the incident-high source S_H (all G entries touching coordinates with A_i>=2) on every I subset [0,T0] by C0|I| + C1 int r + alpha int D with alpha<1, uniformly over fixed balanced cuts."
     bounded_by: [obs:rank-one-refuted]
+
+  - id: hyp:absolute-geometric-completion
+    kind: assumption
+    status: open
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "At one fixed T0<1/8, for h_mu<=(1+eps_g)hstar_n and balanced near-Cheeger cuts, the supply T0 e0+kappa T0 suffices to complete the remaining geometric trace and consumption chain."
+
+  - id: cor:dichotomy
+    kind: corollary
+    status: conditional
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "Absolute-scale completion with a small constant gives hstar_n >= c/loglog n; full KLS additionally requires q:taming at the completion time or completion uniform over the supplied time."
+    depends_on: [thm:bootstrap, cor:loglog, hyp:absolute-geometric-completion]
 
   # ---------------------------------------------------------------------------
   # FIXED-EIGENFUNCTION MOMENT-MAP / SPECTRAL ROUTE
@@ -707,16 +756,6 @@ nodes:
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
   # ---------------------------------------------------------------------------
-  - id: q:cmh-normalization
-    kind: question
-    status: proved
-    route: moment-map-cmh
-    file: modules/kls/40-moment-map-cmh.tex
-    statement: "For the regular moment-map class, define Sigma, L_mu, the L2 space, admissible g, domains and pseudoinverses in C_CMH, and prove CP_aff(mu) <= C_CMH(mu)."
-    solution: solutions/thm-cmh-normalization.tex
-    checked_by: agent
-    review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
-
   - id: q:cmh-approximation
     kind: question
     status: open
@@ -741,17 +780,7 @@ nodes:
     depends_on: [q:mm-invariant-lift]
 
   # ---------------------------------------------------------------------------
-  # DETERMINISTIC MOMENT-MAP / CMH ROUTE - NORMALIZATION LAYER (2026-08-25)
-  #
-  # Logically prior to the Haar/commutator construction layer above, and sharing
-  # almost none of its machinery. Manuscript: modules/kls/41-cmh-normalization.tex
-  # and modules/kls/42-cmh-exact-cases.tex. Exploration:
-  # research/explorations/2026-08-25-kls-cmh-normalization-layer.md.
-  #
-  # SCOPE: nothing here proves KLS, and nothing here supports universal CMH(4).
-  # rem:cmh-stronger-than-kls records the extra nonnegative solenoidal channel;
-  # no separating measure or strict non-implication from KLS is known.
-  # The CMH route therefore stays open.
+  # CMH NORMALIZATION AND EXACT CASES
   # ---------------------------------------------------------------------------
   - id: def:cmh
     kind: definition
@@ -944,18 +973,3 @@ nodes:
     file: modules/kls/42-cmh-exact-cases.tex
     statement: "Perturb the saturating product moment potential psi_0(s,t) = phi(s) + t^2/2, with phi the one-sided exponential potential, by eps a(s) b(t) inside the smooth strictly convex class; compute the second variation of C_CMH at eps = 0, split through prop:cmh-hodge. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product."
     depends_on: [rem:cmh-saturation-risk]
-
-  - id: hyp:absolute-geometric-completion
-    kind: assumption
-    status: open
-    route: eldan-localization
-    file: modules/kls/27-eldan-open-targets.tex
-    statement: "Absolute-scale interface placeholder at one fixed T0<1/8: for h_mu<=(1+eps_g)hstar_n, the supply T0 e0+κT0 for balanced near-Cheeger cuts suffices to complete the remaining geometric trace/consumption chain. Distinct from the stronger weighted package."
-
-  - id: cor:dichotomy
-    kind: corollary
-    status: conditional
-    route: eldan-localization
-    file: modules/kls/27-eldan-open-targets.tex
-    statement: "Residual dichotomy: completing Eldan-B at absolute scale with small constant would already give hstar_n ≥ c/loglog n. Full KLS additionally needs q:taming at the completion's time, or a completion uniform over the supplied time."
-    depends_on: [thm:bootstrap, cor:loglog, hyp:absolute-geometric-completion]

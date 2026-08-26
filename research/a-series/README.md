@@ -1,60 +1,38 @@
-# A-series control plane (A1--A5)
+# A-series control plane
 
-This directory owns the Part I/II open-target program. Its stable machine id is `ab`; the
-human-facing name is A-series. The program refines structured statistical and machine-learning
-statements and then certifies analytic proofs independently of numerical diagnostics.
+This directory owns the A1--A5 program for Parts I/II. Its ledger id is `a-series`.
 
-## Layout and ownership
+## Files
 
-```text
-a-series/
-  ledger.yaml    canonical A-series claim graph and certification pointers
-  obstructions.md  cross-target statement-shape barriers
-  targets/       one mutable refinement brief per A1--A5 stream
-  README.md      program workflow
-```
-
-| information | canonical location |
+| question | source |
 |---|---|
-| claim, status, dependencies, obstructions, certification/refutation pointers | [`ledger.yaml`](ledger.yaml) |
-| shared ledger kinds, statuses, fields, and invariants | [`../ledger-schema.md`](../ledger-schema.md) |
-| accepted statement and exposition | [`../../modules/open-targets/`](../../modules/open-targets/) |
-| proposed statement delta awaiting promotion | [`targets/`](targets/) |
-| dated mathematical attempts | [`../explorations/`](../explorations/) |
-| A-series obstruction prose | [`obstructions.md`](obstructions.md) |
-| reusable lemmas and shared stress instances | [`../knowledge/`](../knowledge/) |
-| numerical implementation and artifacts | [`../../experiments/finum/`](../../experiments/finum/), [`../runs/`](../runs/) |
-| proof and independent certification | [`../../solutions/`](../../solutions/), [`../reviews/`](../reviews/) |
+| What is the accepted statement? | [`../../modules/open-targets/`](../../modules/open-targets/) |
+| What is its status and dependency graph? | [`ledger.yaml`](ledger.yaml) |
+| What constrains an admissible statement? | [`obstructions.md`](obstructions.md) and ledger `bounded_by` |
+| What should a refiner do next? | [`targets/`](targets/) |
+| What has been attempted? | [`../explorations/`](../explorations/) |
+| What reusable tools and instances exist? | [`../knowledge/`](../knowledge/) |
+| Where are proofs and reviews? | [`../../solutions/`](../../solutions/), [`../reviews/`](../reviews/) |
+| Where are numerical implementations and runs? | [`../../experiments/`](../../experiments/), [`../runs/`](../runs/) |
 
-The ledger and manuscript win if a target brief drifts. A1--A5 are parallel streams inside one
-program, not separate programs or separate ledgers. Their cross-target proof dependencies remain
-visible in this single graph.
+The ledger and manuscript are authoritative. Target briefs are mutable handoffs and contain no
+claim status or proof history.
 
 ## Workflow
 
-1. The orchestrator assigns a ledger node and remains the only ledger writer.
-2. A refiner reads the ledger node, manuscript statement, target brief, and every listed
-   `bounded_by` obstruction.
-3. The refiner records the mathematical attempt in a dated exploration and stages only the
-   proposed statement delta or numerical specification in the target brief.
-4. The orchestrator promotes an accepted change to the manuscript and ledger, runs the checker,
-   and clears or replaces the staged candidate.
-5. A `proved` node enters the ledger only after a standalone dossier receives independent
-   certification under the repository proof contract.
+1. Select a node from the ledger or a target brief.
+2. Read its manuscript anchor, `depends_on` closure, and every `bounded_by` obstruction.
+3. Record the attempt in a new dated exploration; stage a proposed statement delta in the target
+   brief when needed.
+4. Send accepted manuscript and ledger changes through the orchestrator.
+5. Certify proofs through a standalone dossier and independent review.
 
-Numerics may guide a refinement or expose a candidate refutation. Passing a finite battery does
-not validate a statement or proof.
+Numerical diagnostics must use `finum` and cannot change logical status.
 
-## Ledger schema
+## KLS bridge
 
-The A-series ledger uses the unified schema in [`../ledger-schema.md`](../ledger-schema.md).
-That document also owns the A-series extensions `meta.scope` and `refines`.
-
-## Bridge to KLS
-
-`conj:a1-bis` asks for `C_P <= K lambda_max(Cov)` on structured GLM posteriors. The same bound
-for every isotropic log-concave measure is KLS. The ledger therefore carries the explicit bridge
-`kls/conj:kls`; neither side is recorded as a proof dependency of the other.
+`conj:a1-bis` is linked to `kls/conj:kls` by `bridges`. The link is a comparison, not a
+proof dependency.
 
 ## Verify
 

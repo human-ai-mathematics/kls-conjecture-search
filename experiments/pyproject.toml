@@ -26,3 +26,6 @@ packages = ["finum"]
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "-q"
+markers = [
+    "slow: expensive Monte Carlo or high-resolution numerical regression",
+]

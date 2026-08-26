@@ -1,49 +1,44 @@
-# KLS research control plane
+# KLS control plane
 
-This directory coordinates the exploratory KLS proof program in Part III. It does not duplicate
-the mathematics: statements and proofs live in `modules/kls/` and `solutions/`.
+This directory coordinates the Part III proof program. Statements live in `modules/kls/`; this
+directory owns logical state, route selection, obstructions, and active acceptance gates.
 
-## Sources of truth
+## Files
 
-| question | authoritative file |
+| question | source |
 |---|---|
-| What is the mathematical statement? | `modules/kls/**/*.tex` |
-| What is each node's logical status? | [`ledger.yaml`](ledger.yaml) |
-| What fields and enum values are valid? | [`../ledger-schema.md`](../ledger-schema.md) |
-| Which route owns a node? | its explicit `route:` field in the ledger |
-| What routes are live and where should work start? | [`routes.md`](routes.md) |
-| Which statement/proof shapes are fenced? | [`obstructions.md`](obstructions.md), referenced by ledger `bounded_by` |
-| What has already been tried? | [`research/explorations/`](../explorations/) |
-| What can `finum` currently compute? | [`experiments/README.md`](../../experiments/README.md) |
+| What is the target and each claim's status? | [`ledger.yaml`](ledger.yaml) |
+| What ledger fields are valid? | [`../ledger-schema.md`](../ledger-schema.md) |
+| Which proof routes are live? | [`routes.md`](routes.md) |
+| What must the next contribution deliver? | [`gating.md`](gating.md) |
+| Which proof shapes are fenced? | [`obstructions.md`](obstructions.md) and ledger `bounded_by` |
+| What has been attempted? | [`../explorations/`](../explorations/) |
+| What can be computed numerically? | [`../../experiments/README.md`](../../experiments/README.md) |
+| Where are proofs and reviews? | [`../../solutions/`](../../solutions/), [`../reviews/`](../reviews/) |
 
-The ledger is deliberately route-spanning and single-writer. Every node declares one of
-`shared`, `eldan-localization`, `moment-map-spectral`, or `moment-map-cmh`; route directories
-contain briefs, never local ledgers.
+Every node has one route: `shared`, `eldan-localization`, `moment-map-spectral`, or
+`moment-map-cmh`. The route-spanning ledger is single-writer; route documents never carry claim
+status or duplicate dependency graphs.
 
-KLS uses the unified schema in [`../ledger-schema.md`](../ledger-schema.md), including the
-KLS-specific `meta.route_policy` and per-node `route` fields.
+## Workflow
 
-## Working contract
+1. Choose a route in `routes.md`, then select an active node and read its gate in `gating.md`.
+2. Read the ledger node, manuscript anchor, dependency closure, and every `bounded_by`
+   obstruction.
+3. Record the attempt in a new dated exploration. Send numerical work through `finum` and treat
+   it as directional.
+4. Send accepted ledger changes through the orchestrator.
+5. Certify proofs through a standalone dossier and independent review.
 
-Choose a route in [`routes.md`](routes.md), then work from that route's open-problem brief. Before
-proposing a KLS ledger change:
-
-1. check the manuscript statement and its exact `\label`;
-2. follow only same-ledger logical `depends_on` edges; conditional premises are derived from that closure;
-3. check every applicable `bounded_by` obstruction;
-4. keep numerical observations inside `finum` and treat them as directional;
-5. funnel the central ledger edit through the orchestrator and log the attempt.
-
-Imported nodes require an explicit publication class and BibTeX references. Every `proved` node
-requires a standalone dossier and the certification metadata specified in `solutions/README.md`.
-A reviewed conditional implication may carry the same certification while remaining conditional.
+Imported nodes require publication class and BibTeX references. A certified conditional
+implication remains `conditional` while any blocking premise or unreviewed import remains.
 
 ## Verify
 
 ```bash
 python3 research/check_ledger.py
+python3 research/check_ledger.py status
 python3 -m unittest discover -s research/tests -p 'test_*.py'
 ```
 
-The checker establishes structural consistency only. It does not certify that manuscript,
-ledger statement, and proof dossier agree mathematically.
+The checker validates structure, not mathematical correctness.

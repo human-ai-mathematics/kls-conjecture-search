@@ -1,11 +1,16 @@
 # Shared research knowledge
 
-This directory contains material deliberately reusable across program or target boundaries:
+This directory is the current reference for material reused across programs or targets:
 
-- [`lemmas.md`](lemmas.md) — analytic tools and exact reusable identities;
-- [`instances.md`](instances.md) — the curated calibration and stress battery shared by `finum`.
+- [`lemmas.md`](lemmas.md) records compact mathematical facts and their guardrails.
+- [`instances.md`](instances.md) is the canonical calibration and stress-instance registry.
 
-Program-specific obstruction prose is colocated with its ledger:
-[`../a-series/obstructions.md`](../a-series/obstructions.md) for A1--A5 and
-[`../kls/obstructions.md`](../kls/obstructions.md) for the currently scoped KLS route fences.
-Promote material here only when reuse is real; program-local findings stay with their program.
+Keep only stable, reusable content here. Claim status and graph structure belong in the ledgers;
+full statements and proofs belong in the manuscript and `solutions/`; attempts and earlier
+formulations belong in `research/explorations/`; numerical results belong in `research/runs/`;
+and harness rationale belongs in `research/decisions/`.
+
+Program-specific obstructions remain in
+[`../a-series/obstructions.md`](../a-series/obstructions.md) and
+[`../kls/obstructions.md`](../kls/obstructions.md). Add an instance to the shared registry only
+after review of its relevance to the common battery. Math in Markdown uses LaTeX `$...$`.

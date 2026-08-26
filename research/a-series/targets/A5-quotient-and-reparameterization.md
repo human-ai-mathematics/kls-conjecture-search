@@ -1,13 +1,10 @@
 # A5 — Quotient and reparameterization constants
 
-> Mutable refinement brief. The ledger and manuscript are authoritative; dated history belongs
-> in `research/explorations/`.
-
 ## Entry points
 
 - Headline node: `conj:a5-metastable`
 - Manuscript: [`modules/open-targets/A5-quotient-and-reparameterization.tex`](../../../modules/open-targets/A5-quotient-and-reparameterization.tex) (`conj:a5-metastable`)
-- Numerical target: [`finum/targets/a5.py`](../../../experiments/finum/targets/a5.py), `finum run --target A5`
+- Numerical target: [`finum/targets/a_series/a5.py`](../../../experiments/finum/targets/a_series/a5.py), `finum run A5`
 - Certified spectral anchor: `prop:a5-ratio`
 
 ## Target-specific guardrails
@@ -36,11 +33,3 @@
 None currently. A metastability proposal must use the worst-cut/connectivity height for a general
 orbit, state its empirical-to-population transfer, and keep the quotient and raw conclusions
 logically separate.
-
-## Context
-
-- [Quotient/reparameterization audit](../../explorations/2026-08-21-a5-quotient-reparameterization-audit.md)
-- [Connectivity next cycle](../../explorations/2026-08-21-a5-connectivity-partial-next-cycle.md)
-- [Spectral-ratio solution](../../../solutions/prop-a5-ratio.tex)
-- [Independent review](../../reviews/2026-08-21-a4-a5-independent-agent-audit.md)
-- [Funnel second review](../../reviews/2026-08-21-a5-funnel-second-agent-audit.md)

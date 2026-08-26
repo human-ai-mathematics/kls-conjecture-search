@@ -1,37 +1,23 @@
-# Target briefs
+# A-series target briefs
 
-This directory is the mutable staging area for the five A-series research streams. Each file is
-a short handoff brief for an analyst or refiner, not a source of mathematical truth and not an
-attempt log.
+Each file is a mutable handoff for one A-series stream. It contains entry points, target-specific
+guardrails, active deliverables, and at most one proposed statement delta.
 
-## Ownership
+## Sources of truth
 
-| information | canonical location |
+| content | location |
 |---|---|
-| claim, status, dependencies, obstructions, certification/refutation pointers | `../ledger.yaml` |
-| exact accepted statement and exposition | `../../../modules/open-targets/` |
-| proposed refinement awaiting promotion | this directory |
-| dated attempts, including dead ends | `../../explorations/` |
-| A-series obstruction prose | `../obstructions.md` |
-| reusable lemmas and shared stress instances | `../../knowledge/` |
-| numerical implementation and artifacts | `../../../experiments/finum/`, `../../runs/` |
-| proof and independent certification | `../../../solutions/`, `../../reviews/` |
+| accepted statement | [`../../../modules/open-targets/`](../../../modules/open-targets/) |
+| status, dependencies, and certification | [`../ledger.yaml`](../ledger.yaml) |
+| cross-target fences | [`../obstructions.md`](../obstructions.md) |
+| attempts | [`../../explorations/`](../../explorations/) |
+| numerical work | [`../../../experiments/`](../../../experiments/), [`../../runs/`](../../runs/) |
+| proofs and reviews | [`../../../solutions/`](../../../solutions/), [`../../reviews/`](../../reviews/) |
 
-The ledger and manuscript win if a brief drifts. Do not copy proof histories, numerical logs, or
-manual status summaries into these files.
+The ledger and manuscript override a drifting brief. Do not copy status, dependency graphs,
+attempt logs, or proof histories into these files.
 
-## Workflow
-
-1. The orchestrator assigns a ledger node and remains the only ledger writer.
-2. A refiner reads the ledger node, manuscript statement, target brief, and every listed
-   `bounded_by` obstruction.
-3. The refiner records the attempt in a dated exploration and stages only the proposed statement
-   delta or numerical specification under **Candidate refinement**.
-4. The orchestrator promotes an accepted change to the manuscript and ledger, runs the checker,
-   and clears or replaces the staged candidate.
-
-One file covers one A-series stream. Do not create per-node files or nested target directories;
-the ledger already supplies node-level organization.
+## Streams
 
 | stream | headline node | brief |
 |---|---|---|
@@ -41,41 +27,8 @@ the ledger already supplies node-level organization.
 | A4 | `q:a4-certificate` | [`A4-variational-inference.md`](A4-variational-inference.md) |
 | A5 | `conj:a5-metastable` | [`A5-quotient-and-reparameterization.md`](A5-quotient-and-reparameterization.md) |
 
-## Brief outline
+## Editing rule
 
-```markdown
-# A<n> — <title>
-
-> Mutable refinement brief. The ledger and manuscript are authoritative;
-> dated history belongs in `research/explorations/`.
-
-## Entry points
-
-- Headline node: `<node-id>`
-- Manuscript: `<path>` (`<label>`)
-- Numerical target: `<finum-id>`, if applicable
-- Baseline: `<node-id>`, if applicable
-
-## Target-specific guardrails
-
-- `<obstruction-id>` — <concrete consequence for this target>.
-
-## Active handoff
-
-| node | requested deliverable |
-|---|---|
-| `<node-id>` | <one concrete outcome> |
-
-## Candidate refinement
-
-<Exact proposed statement or concise delta, or “None currently.”>
-
-## Context
-
-- [Latest relevant exploration](...)
-- [Relevant solution or review](...)
-```
-
-Keep a brief compact enough to scan in one sitting. Read dependencies from the ledger rather
-than copying its graph here. Markdown structure and navigation are intentionally not
-machine-validated.
+One file covers one stream. Record each attempt in a new dated exploration. Put only an exact
+proposed statement or concise delta under **Candidate refinement**; the orchestrator promotes an
+accepted change to the manuscript and ledger.

@@ -2,8 +2,8 @@
 
 Gate zero is the linear-test consequence ``E[H Sigma^{-1} H] <= 4 Sigma`` of the CMH conjecture
 ``C_CMH <= 4``.  Nothing in this target is sampled, but deterministic floating eigensolves, FEM,
-and quadrature are still numerical.  These tests enforce the boundary between their directional
-comparisons and the closed-form/rational certificates that alone may emit ``REFUTED``.
+and quadrature are still numerical. These tests enforce the boundary between directional
+comparisons and closed-form/rational certificates without assigning ledger statuses.
 """
 
 import json
@@ -12,7 +12,8 @@ import math
 import numpy as np
 import pytest
 
-from finum.targets import REGISTRY, cmh_gate_zero as cmh
+from finum.targets import REGISTRY
+from finum.targets.kls import cmh_gate_zero as cmh
 
 
 # --- channel 1: one-dimensional closed-form Stein kernels ---------------------------
@@ -160,81 +161,81 @@ def test_dirichlet_ceiling_formula():
 # --- target wiring and numerical-validity policy -----------------------------------
 
 def test_target_is_registered_and_deterministic():
-    assert REGISTRY["cmh-gate-zero"] is cmh
-    a, _ = cmh.run_records(0)
-    b, _ = cmh.run_records(12345)                               # seed must not change anything
-    assert json.dumps(a) == json.dumps(b)
+    assert REGISTRY["cmh-gate-zero"].module is cmh
+    a = cmh.run_records(0)
+    b = cmh.run_records(12345)                                  # seed must not change anything
+    assert json.dumps(a.records) == json.dumps(b.records)
 
 
 def test_run_records_reports_calibration_and_realized_maxima():
-    records, extra = cmh.run_records(0)
+    result = cmh.run_records(0)
+    records, extra = result.records, result.summary
     assert extra["calibration_passed"] is True
     assert extra["monte_carlo_used"] is False
     for key in ("max_R1_1d_exact", "max_G0ratio_dirichlet_directional",
                 "max_G0ratio_dirichlet_exact_rayleigh_lower",
                 "max_C_CMH_1d_fem_directional", "max_galerkin_Q_over_ceiling"):
         assert np.isfinite(extra[key])
-    assert extra["gate_zero_refuted"] is False                  # nothing exceeded 4
-    assert extra["dirichlet_theorem_refuted"] is False
+    assert extra["exact_exceedance_detected"] is False
+    assert extra["dirichlet_exact_exceedance_detected"] is False
     assert extra["countermodel_identities_exact"] is True
     summary = records[-1]
     assert summary["kind"] == "summary"
-    assert summary["gate_zero_exceeded_instances"] == []
+    assert summary["exact_exceedance_instances"] == []
     assert "NECESSARY" in summary["proof_status"]
     json.dumps(records)                                          # provenance-writer compatible
 
 
 def test_only_exact_quantities_get_an_analytic_verdict():
     """Only rational R1/Rayleigh certificates may be analytic; all float channels are directional."""
-    records, _ = cmh.run_records(0)
-    directional = {"directional-consistent", "directional-exceeds", "no-comparison"}
-    analytic = {"consistent", "REFUTED", "no-verdict"}
+    records = cmh.run_records(0).records
     seen_fem = seen_exact = seen_float_eigenvalue = 0
     for r in records:
         if r["kind"] == "stein-1d":
-            assert r["verdict_C_CMH_directional"]["status"] in directional
-            assert r["verdict_gate_zero_exact"]["status"] in analytic
+            assert r["C_CMH_directional_comparison"]["evidence"] == "directional"
+            assert r["gate_zero_exact_comparison"]["evidence"] == "exact"
             assert r["gate_zero_exact_certificate"]["arithmetic"] == "fractions.Fraction"
             seen_fem += 1
             seen_exact += 1
         if r["kind"] == "dirichlet-gate-zero":
-            assert r["verdict_directional"]["status"] in directional
-            assert r["verdict_exact_rayleigh"]["status"] in analytic
+            assert r["directional_comparison"]["evidence"] == "directional"
+            assert r["exact_rayleigh_comparison"]["evidence"] == "exact"
             assert r["exact_rayleigh_certificate"]["certificate_type"] == \
                 "exact-rational-rayleigh"
             seen_float_eigenvalue += 1
             seen_exact += 1
         if r["kind"] == "dirichlet-galerkin":
-            assert r["verdict_vs_ceiling"]["status"] in directional
-            assert r["verdict_vs_4"]["status"] in directional
+            assert r["ceiling_comparison"]["evidence"] == "directional"
+            assert r["gate_zero_comparison"]["evidence"] == "directional"
             seen_float_eigenvalue += 1
     assert seen_fem >= 12 and seen_exact >= 24 and seen_float_eigenvalue >= 24
 
 
-def test_exact_verdict_gate_rejects_floats_missing_certificates_and_mismatches():
+def test_exact_comparison_gate_rejects_floats_missing_certificates_and_mismatches():
     lower, certificate = cmh._exact_rayleigh_certificate(
         [[cmh.Fraction(5)]], [[cmh.Fraction(1)]], [cmh.Fraction(1)])
     with pytest.raises(TypeError):
-        cmh._falsify_exact_fraction("x <= 4", "x", 4.0, lower, certificate)
+        cmh._compare_exact_fraction("x <= 4", "x", 4.0, lower, certificate)
     with pytest.raises(TypeError):
-        cmh._falsify_exact_fraction("x <= 4", "x", cmh.Fraction(4), 5.0, certificate)
+        cmh._compare_exact_fraction("x <= 4", "x", cmh.Fraction(4), 5.0, certificate)
     with pytest.raises(ValueError):
-        cmh._falsify_exact_fraction("x <= 4", "x", cmh.Fraction(4), lower, {})
+        cmh._compare_exact_fraction("x <= 4", "x", cmh.Fraction(4), lower, {})
     bad = dict(certificate)
     bad["lower_bound"] = {"numerator": 6, "denominator": 1}
     with pytest.raises(ValueError):
-        cmh._falsify_exact_fraction("x <= 4", "x", cmh.Fraction(4), lower, bad)
+        cmh._compare_exact_fraction("x <= 4", "x", cmh.Fraction(4), lower, bad)
 
 
-def test_uppercase_refuted_requires_a_verified_exact_rational_certificate():
+def test_exact_exceedance_requires_a_verified_rational_certificate():
     lower, certificate = cmh._exact_rayleigh_certificate(
         [[cmh.Fraction(5)]], [[cmh.Fraction(1)]], [cmh.Fraction(1)])
-    verdict = cmh._falsify_exact_fraction(
+    comparison = cmh._compare_exact_fraction(
         "synthetic exact Rayleigh quotient <= 4", "exact-5-over-1",
         cmh.Fraction(4), lower, certificate)
     assert lower == cmh.Fraction(5)
     assert certificate["lower_bound"] == {"numerator": 5, "denominator": 1}
-    assert verdict.status == "REFUTED"
+    assert comparison.evidence == "exact"
+    assert comparison.outcome == "exceeds"
 
 
 def test_injected_floating_galerkin_exceedance_remains_directional(monkeypatch):
@@ -247,21 +248,21 @@ def test_injected_floating_galerkin_exceedance_remains_directional(monkeypatch):
         return row
 
     monkeypatch.setattr(cmh, "dirichlet_galerkin", inflated)
-    records, _ = cmh.run_records(
+    records = cmh.run_records(
         0, dirichlet_alphas=((1, 1),), countermodel_ms=(18,),
-        countermodel_tensor_ms=(18,), galerkin_max_m=2)
+        countermodel_tensor_ms=(18,), galerkin_max_m=2).records
     rows = [r for r in records if r["kind"] == "dirichlet-galerkin"]
     assert rows
-    assert all(r["verdict_vs_ceiling"]["status"] == "directional-exceeds" for r in rows)
-    assert all(r["verdict_vs_4"]["status"] == "directional-exceeds" for r in rows)
-    assert records[-1]["dirichlet_theorem_refuted"] is False
+    assert all(r["ceiling_comparison"]["outcome"] == "exceeds" for r in rows)
+    assert all(r["gate_zero_comparison"]["outcome"] == "exceeds" for r in rows)
+    assert records[-1]["dirichlet_exact_exceedance_detected"] is False
 
 
 def test_future_run_provenance_captures_the_effective_battery_and_tolerances():
-    _, extra = cmh.run_records(
+    result = cmh.run_records(
         0, dirichlet_alphas=((1, 1), (1, 5, 25)), countermodel_ms=(18, 19),
         countermodel_tensor_ms=(18,), galerkin_max_m=3)
-    battery = extra["battery"]
+    battery = result.config["battery"]
     assert battery["schema_version"] == 2
     assert battery["dirichlet_gate_zero"]["swept_alphas"] == [[1, 1], [1, 5, 25]]
     assert battery["dirichlet_gate_zero"]["uniform_simplex_m_range_inclusive"] == [2, 12]
@@ -276,7 +277,7 @@ def test_future_run_provenance_captures_the_effective_battery_and_tolerances():
     assert grids["gaussian"] == {"start": -12.0, "stop": 12.0, "num_points": 4001}
     assert grids["exponential-centered"] == {"start": -1.0, "stop": 39.0,
                                              "num_points": 8001}
-    json.dumps(extra)
+    json.dumps(result.config)
 
 
 def test_selftest_checks_all_pass():

@@ -1,15 +1,8 @@
-# ledger.yaml — canonical state of the open-target program (Parts I & II)
-# =============================================================================
-# Machine-readable claim graph for A1-A5. The manuscript owns the complete statements and
-# prose; this ledger owns their current state, proof dependencies, obstructions, provenance,
-# and certification pointers. It records neither workflow history nor numerical proof.
-#
-# Shared schema: research/ledger-schema.md
-# Program workflow: research/a-series/README.md
-# =============================================================================
+# Current A-series claim graph. Statements live in modules/; schema and workflow live in
+# research/ledger-schema.md and research/a-series/README.md.
 
 meta:
-  program: ab
+  program: a-series
   scope: "Parts I & II — Bayesian-posterior functional-inequality constants (A1-A5)"
 
 # ===========================================================================
@@ -132,7 +125,7 @@ nodes:
     kind: proposition
     status: open
     file: modules/open-targets/A1-data-informed-glm.tex
-    statement: "Analytic proof draft: C_P <= C_M E lambda_max(H^-1), hence for every fixed Wbar the displayed bulk-plus-integrated-tail/probability-tail bounds hold. Repository proof certification is pending."
+    statement: "C_P <= C_M E lambda_max(H^-1); hence for every fixed Wbar the displayed bulk-plus-integrated-tail and probability-tail bounds hold."
 
   - id: prop:a1-euclidean-harmonic
     kind: proposition
@@ -198,7 +191,7 @@ nodes:
     kind: question
     status: open
     file: modules/open-targets/A1-data-informed-glm.tex
-    statement: "Quantify the proved vanishing-leverage route at finite sample size, then extend it to growing dimension, high leverage, and unbounded-Hessian likelihoods."
+    statement: "Quantify the vanishing-leverage route at finite sample size and extend it to growing dimension, high leverage, and unbounded-Hessian likelihoods."
     depends_on: [q:a1-poincare, cor:a1-leverage-asymptotic]
 
   - id: q:a1-lsi
@@ -240,7 +233,7 @@ nodes:
     kind: theorem
     status: open
     file: modules/open-targets/A2-bernstein-von-mises.tex
-    statement: "Analytic proof draft: under a global Gaussian density-ratio representation with osc(r_n)=o_P(1), C_P, C_LS, and C_TCI all equal (1+o_P(1)) lambda_max(H_n^{-1}); repository proof certification is pending."
+    statement: "Under a global Gaussian density-ratio representation with osc(r_n)=o_P(1), C_P, C_LS, and C_TCI all equal (1+o_P(1)) lambda_max(H_n^{-1})."
     refines: conj:a2
     bounded_by: [obs:tv-insufficient]
 
@@ -311,7 +304,7 @@ nodes:
     kind: theorem
     status: open
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
-    statement: "Analytic proof draft: if B_j=max(B_{j,+},B_{j,-}), then the product law has weighted Poincare constant at most 4 max_j B_j in the diagonal product metric; certification is pending."
+    statement: "If B_j=max(B_{j,+},B_{j,-}), then the product law has weighted Poincare constant at most 4 max_j B_j in the diagonal product metric."
     depends_on: [thm:hardy-1d]
 
   - id: conj:a3-dependent
@@ -355,14 +348,14 @@ nodes:
     kind: proposition
     status: open
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
-    statement: "Analytic proof draft: the noncentered Gaussian/log-half-Cauchy hierarchical horseshoe prior has optimal weighted Poincare constant 4 in its pullback metric, whose energy includes coefficient-scale cross terms; certification is pending."
+    statement: "The noncentered Gaussian/log-half-Cauchy hierarchical horseshoe prior has optimal weighted Poincare constant 4 in its pullback metric, whose energy includes coefficient-scale cross terms."
     depends_on: [thm:a3-student]
 
   - id: q:a3-horseshoe
     kind: question
     status: open
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
-    statement: "Extend the solved horseshoe marginal theorem to likelihood tilts: find conditions weaker than bounded density ratio that preserve a finite weighted gap, quantify departure from the prior value 4, and identify when the likelihood changes the appropriate tail metric."
+    statement: "For likelihood tilts of the horseshoe marginal, find conditions weaker than bounded density ratio that preserve a finite weighted gap, quantify departure from the prior value 4, and identify when the likelihood changes the appropriate tail metric."
     depends_on: [prop:a3-horseshoe]
 
   - id: q:a3-catalogue
@@ -438,7 +431,7 @@ nodes:
     kind: proposition
     status: open
     file: modules/open-targets/A4-variational-inference.tex
-    statement: "Analytic proof draft: for a Gaussian-prior binary-logistic posterior and any Gaussian variational family containing all translations of one fixed covariance, C_mean,Q = C_Q = C_mean,all = C_TCI = lambda_max(Sigma0); certification is pending."
+    statement: "For a Gaussian-prior binary-logistic posterior and any Gaussian variational family containing all translations of one fixed covariance, C_mean,Q = C_Q = C_mean,all = C_TCI = lambda_max(Sigma0)."
     depends_on: [prop:a2-logistic-global, eq:a4-mean-dual]
 
   - id: prop:a4-local-wellspecified
@@ -551,13 +544,13 @@ nodes:
     kind: example
     status: open
     file: modules/open-targets/A5-quotient-and-reparameterization.tex
-    statement: "Analytic proof draft for the symmetric Gaussian double well: log(C_P(raw)/sigma^2)=a^2/(2 sigma^2)+O(log(a/sigma)); the folded quotient has C_P<=sigma^2 and converges to sigma^2 as a/sigma->infinity."
+    statement: "For the symmetric Gaussian double well, log(C_P(raw)/sigma^2)=a^2/(2 sigma^2)+O(log(a/sigma)); the folded quotient has C_P<=sigma^2 and converges to sigma^2 as a/sigma->infinity."
 
   - id: ex:a5-z2-bridge
     kind: example
     status: open
     file: modules/open-targets/A5-quotient-and-reparameterization.tex
-    statement: "Exact analytic calibration draft for two Gaussian orbit wells of variance sigma^2/n: n^{-1} log C_P(raw)->a^2/(2 sigma^2) while n C_P(quotient)->sigma^2; invariant density-ratio perturbations transfer the two conclusions under o(n) and o(1) oscillation respectively."
+    statement: "For two Gaussian orbit wells of variance sigma^2/n, n^{-1} log C_P(raw)->a^2/(2 sigma^2) while n C_P(quotient)->sigma^2; invariant density-ratio perturbations transfer the two conclusions under o(n) and o(1) oscillation respectively."
     depends_on: [ex:a5-folding, prop:a5-block-stability]
 
   - id: ex:a5-gaussian-crossover

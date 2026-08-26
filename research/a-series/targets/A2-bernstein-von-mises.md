@@ -1,13 +1,10 @@
 # A2 — Asymptotic constants via Bernstein–von Mises
 
-> Mutable refinement brief. The ledger and manuscript are authoritative; dated history belongs
-> in `research/explorations/`.
-
 ## Entry points
 
 - Headline node: `conj:a2`
 - Manuscript: [`modules/open-targets/A2-bernstein-von-mises.tex`](../../../modules/open-targets/A2-bernstein-von-mises.tex) (`conj:a2`)
-- Numerical target: [`finum/targets/a2.py`](../../../experiments/finum/targets/a2.py), `finum run --target A2`
+- Numerical target: [`finum/targets/a_series/a2.py`](../../../experiments/finum/targets/a_series/a2.py), `finum run A2`
 - Finite-sample counterpart: `conj:a1`
 
 ## Target-specific guardrails
@@ -34,10 +31,3 @@
 
 None currently. A proposal must distinguish the Poincaré target from global LSI/$T_2$ and state
 the topology or comparison hypothesis that transfers the constant.
-
-## Context
-
-- [Strong-Laplace audit](../../explorations/2026-08-21-a2-strong-laplace-and-global-constants.md)
-- [Tail-rigidity exploration](../../explorations/2026-08-21-a2-subquadratic-tail-rigidity.md)
-- [Tail-rigidity solution](../../../solutions/a2-subquadratic-tail-rigidity.tex)
-- [Independent review](../../reviews/2026-08-21-a1-a2-independent-agent-audit.md)

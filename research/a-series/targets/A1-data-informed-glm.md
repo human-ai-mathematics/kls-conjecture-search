@@ -1,13 +1,10 @@
 # A1 — Data-informed GLM Poincaré constant
 
-> Mutable refinement brief. The ledger and manuscript are authoritative; dated history belongs
-> in `research/explorations/`.
-
 ## Entry points
 
 - Headline node: `conj:a1`
 - Manuscript: [`modules/open-targets/A1-data-informed-glm.tex`](../../../modules/open-targets/A1-data-informed-glm.tex) (`conj:a1`)
-- Numerical target: [`finum/targets/a1.py`](../../../experiments/finum/targets/a1.py), `finum run --target A1`
+- Numerical target: [`finum/targets/a_series/a1.py`](../../../experiments/finum/targets/a_series/a1.py), `finum run A1`
 - Baseline: `thm:glm-fi`
 
 ## Target-specific guardrails
@@ -35,10 +32,3 @@
 None currently. Stage an exact statement delta here before asking the orchestrator to update the
 manuscript and ledger. Any proposed diagnostic should use the shared instances and treat sampled
 quantities as directional only.
-
-## Context
-
-- [Bulk--tail audit](../../explorations/2026-08-21-a1-bulk-tail-audit.md)
-- [Mode-leverage exploration](../../explorations/2026-08-21-a1-harmonic-mean-and-mode-leverage.md)
-- [Reviewed solution](../../../solutions/a1-harmonic-mode-leverage.tex)
-- [Independent review](../../reviews/2026-08-21-a1-a2-independent-agent-audit.md)

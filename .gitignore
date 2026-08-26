@@ -225,12 +225,14 @@ __marimo__/
 .cursorignore
 .cursorindexingignore
 
-# Codex
-.codex/
+# Agent clients: ignore local state, keep project role definitions/adapters.
 .agents/
-
-# Claude
-.claude/
+.claude/*
+!.claude/agents/
+!.claude/agents/**
+.codex/*
+!.codex/agents/
+!.codex/agents/**
 
 # LaTeX
 *.acn

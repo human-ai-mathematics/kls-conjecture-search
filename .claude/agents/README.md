@@ -1,0 +1,141 @@
+# Agent roles and execution contract
+
+The Markdown files in this directory are the canonical role definitions for this repository.
+`../../CLAUDE.md` is normative and wins on any conflict.
+
+Claude Code reads the Markdown files directly. Codex does not: project-scoped Codex agents are
+standalone TOML files. `../../research/check_agents.py --write-codex` generates
+`../../.codex/agents/*.toml` from these canonical Markdown bodies, and
+`python3 research/check_agents.py` rejects missing or stale adapters. Do not hand-edit a generated
+TOML file.
+
+## The orchestrator is the main session
+
+The orchestrator is not a spawnable role. It owns every single-file merge point:
+
+- both `ledger.yaml` files;
+- `fi_references.bib`;
+- `research/kls/routes.md` and `research/kls/gating.md`;
+- accepted manuscript statement changes; and
+- application of proposed deltas returned by roles.
+
+No role writes those files. A role proposes an exact delta; the orchestrator resolves contention,
+applies accepted changes atomically, and runs the relevant validators.
+
+## Shared handoff envelope
+
+Every role keeps its role-specific report, then ends with this compact envelope:
+
+```yaml
+outcome: complete | revise | blocked | no-change
+artifacts:
+  - <repo-relative path, or none>
+proposed_deltas:
+  - <exact proposal, or none>
+next_role: <role name, orchestrator, or none>
+next_prompt: |
+  <complete instructions for the next role, or empty>
+```
+
+`next_prompt` is an instruction, not a summary. The orchestrator passes it verbatim. A downstream
+role must not be launched from an inferred or softened version of a finding.
+
+For a proof review, `outcome: complete` means the certifying report passed; `revise` means the
+prover receives the reviewer's exact repair instructions; `blocked` means no certification delta
+is applicable. Prose containing words such as “pass” or “done” never controls a transition.
+
+## Concurrency keys
+
+Parallel work is allowed only when concurrency keys differ. Cardinality is enforced by the
+orchestrator, not by a role saying “singleton” about itself.
+
+| key | owner / rule |
+|---|---|
+| `ledger` | orchestrator only |
+| `bibliography` | orchestrator only; literature scouts propose entries |
+| `route-control` | orchestrator only for `routes.md` and `gating.md` |
+| `manuscript` | orchestrator only; `latex-sync` audits and proposes patches |
+| `knowledge` | one `synthesizer` |
+| `finum-code` | one `finum` whenever `experiments/finum/**` changes |
+| `finum-run:<target>:<profile>:<seed>` | parallel only for distinct stable runs |
+| `target:<A1--A5>` | one `refiner` per stream |
+| `solution:<dossier>` | one `prover`; its reviewer uses a distinct agent identity |
+| `review:<dossier>` | one cold `proof-checker` at a time |
+| `kls-gate:<id>` | one prober; the trace-upgrade cluster additionally uses `knowledge` |
+| `exploration:<path>` | exclusive create-only path |
+
+Every role that creates an exploration receives a run id from the orchestrator and uses
+`research/explorations/YYYY-MM-DD-<role>-<scope>-<run-id>.md`. If no run id was supplied, choose a
+collision-resistant suffix and verify that the path does not exist. Never overwrite an earlier
+record.
+
+## Roster
+
+| role | writes | cardinality |
+|---|---|---|
+| [`scout`](scout.md) | nothing | N, parallel |
+| [`refiner`](refiner.md) | one A-series target brief; one new exploration | 1 per target |
+| [`finum`](finum.md) | `experiments/finum/`, generated runs, one new exploration | singleton for code; N for distinct stable runs |
+| [`prover`](prover.md) | one dossier; one new exploration | 1 per dossier |
+| [`refutation-seeker`](refutation-seeker.md) | one new exploration | N, one lens each |
+| [`proof-checker`](proof-checker.md) | one new review | 1 cold reviewer per dossier |
+| [`synthesizer`](synthesizer.md) | knowledge files; one new exploration | **singleton** |
+| [`latex-sync`](latex-sync.md) | nothing; patch proposal only | 1 |
+| [`janitor`](janitor.md) | nothing; proposal only | 1 |
+| [`proof-miner`](proof-miner.md) | one new exploration | N |
+| [`literature-scout`](literature-scout.md) | one new exploration | N; bibliography remains single-writer |
+| [`kls-route-scout`](kls-route-scout.md) | one new exploration | N |
+| [`kls-route-prober`](kls-route-prober.md) | one new exploration | 1 per gate |
+
+Author and reviewer never coincide. A `prover` cannot write `research/reviews/`, and a
+`proof-checker` cannot write `solutions/`. When the runtime permits it, launch the proof checker
+without the prover's conversation history: the reviewer reconstructs the proof from repository
+artifacts, not from the author's account of the work.
+
+## Transitions
+
+Use `scout` for unfamiliar, ambiguous, or broad assignments; it is not a mandatory tax when the
+exact node and artifacts are already known.
+
+```text
+A-series: refiner -> refutation-seeker -> finum (when requested) -> prover
+KLS:      kls-route-scout | kls-route-prober -> finum (when requested) -> prover
+External: literature-scout -> orchestrator
+Mining:   proof-miner -> synthesizer | prover
+Proof:    prover -> proof-checker -> pass: orchestrator
+                                \-> revise: prover (verbatim next_prompt)
+Refute:   refutation-seeker -> prover proves refuter -> proof-checker -> orchestrator
+Memory:   parallel findings -> synthesizer -> orchestrator
+Sync:     latex-sync -> orchestrator
+Hygiene:  janitor -> orchestrator
+```
+
+A numerical result never skips the proof path. An exact `finum` witness is still handed to a
+`prover`, independently certified by a `proof-checker`, and only then used by the orchestrator as
+`refuted_by` provenance.
+
+## Where to fan out, where to converge
+
+Fan out across read-only scouting, distinct A-series streams, KLS gates in different routes,
+refutation lenses, and independent literature/mining questions. Do not fan out writes to a shared
+file. `finum` package edits, bibliography edits, knowledge promotion, manuscript promotion, route
+control, and ledger edits converge through their keys above.
+
+The `synthesizer` owns the three mathematical merge barriers: A1 ↔ A2 consistency, the A1-bis ↔
+KLS bridge, and the trace-upgrade cluster (`CLAUDE.md` constraint 6). The live frontier is derived
+with `python3 research/check_ledger.py status`; no role maintains a second copy.
+
+## Validation
+
+After changing a role or adapter:
+
+```bash
+python3 research/check_agents.py
+```
+
+Regenerate Codex adapters deliberately after reviewing the canonical Markdown change:
+
+```bash
+python3 research/check_agents.py --write-codex
+python3 research/check_agents.py
+```

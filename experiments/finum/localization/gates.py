@@ -17,8 +17,8 @@ reading any DIRECTIONAL number off a multi-coordinate thin-shell run (the P6 /
                           ``tests/test_06_offdiagonal_vs_mc.py`` for a general
                           ``Base1D``.
 
-Neither gate certifies anything; they bound the numerical error so a DIRECTIONAL
-verdict is not an artifact. Per the epistemic contract they never promote a ledger
+Neither gate certifies anything; they bound numerical error so a directional observation is not
+just a discretization artifact. Per the epistemic contract they never promote a ledger
 node. Large ``n`` still needs the deferred saddlepoint / prefix-suffix background
 (see README) -- these gates are how you would *detect* that the FFT background has
 run out of accuracy.

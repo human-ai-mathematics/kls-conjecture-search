@@ -1,13 +1,10 @@
 # A3 — Heavy-tailed posteriors beyond classical LSI
 
-> Mutable refinement brief. The ledger and manuscript are authoritative; dated history belongs
-> in `research/explorations/`.
-
 ## Entry points
 
-- Headline node: `conj:a3-dependent`; `conj:a3` is the retained refuted marginal-only form
+- Headline node: `conj:a3-dependent`
 - Manuscript: [`modules/open-targets/A3-heavy-tailed-posteriors.tex`](../../../modules/open-targets/A3-heavy-tailed-posteriors.tex) (`conj:a3-dependent`)
-- Numerical target: [`finum/targets/a3.py`](../../../experiments/finum/targets/a3.py), `finum run --target A3`
+- Numerical target: [`finum/targets/a_series/a3.py`](../../../experiments/finum/targets/a_series/a3.py), `finum run A3`
 - Calibration anchors: `thm:a3-student`, `prop:a3-horseshoe`
 
 ## Target-specific guardrails
@@ -36,11 +33,3 @@
 
 None currently. The next proposal should specify one posterior model, its complete pullback
 Dirichlet form, and the data/dimension dependence of the block coupling contract.
-
-## Context
-
-- [Weighted-PI audit](../../explorations/2026-08-21-a3-weighted-pi-audit.md)
-- [Horseshoe and block-Gibbs cycle](../../explorations/2026-08-21-a3-horseshoe-gap-block-gibbs.md)
-- [Horseshoe solution](../../../solutions/prop-a3-horseshoe.tex)
-- [Block-Gibbs solution](../../../solutions/thm-a3-block-gibbs.tex)
-- [Independent marginal-obstruction review](../../reviews/2026-08-22-a3-marginals-independent-audit.md)

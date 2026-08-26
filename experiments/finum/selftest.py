@@ -13,12 +13,18 @@ import numpy as np
 from .targets import REGISTRY
 
 
-def selftest(verbose: bool = True) -> int:
-    rng = np.random.default_rng(7)
+def selftest(verbose: bool = True, target: str | None = None, seed: int = 7) -> int:
+    """Run fast target-owned checks with an independent RNG stream per target."""
+    if target is not None and target not in REGISTRY:
+        raise ValueError(f"unknown target '{target}'; have {sorted(REGISTRY)}")
     fails: list[str] = []
-    for name, mod in REGISTRY.items():
+    selected = [(target, REGISTRY[target])] if target else list(REGISTRY.items())
+    streams = np.random.SeedSequence(seed).spawn(len(selected))
+    for (name, spec), stream in zip(selected, streams):
+        mod = spec.module
         if not hasattr(mod, "selftest"):
             continue
+        rng = np.random.default_rng(stream)
         if verbose:
             print(f"[{name}]")
         for label, ok in mod.selftest(rng):

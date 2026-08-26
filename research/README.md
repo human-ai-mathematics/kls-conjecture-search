@@ -1,67 +1,43 @@
-# research/ — federated research control plane
+# Research control plane
 
-This directory coordinates two mathematical programs under one contribution contract and one
-structural checker. The manuscript in `../modules/` owns accepted mathematical prose; the
-ledgers own claim state and logical edges; `../solutions/` owns independently reviewable proofs.
-Numerical artifacts guide research but never certify claims or proofs.
+`research/` coordinates two mathematical programs. The manuscript owns accepted statements,
+the ledgers own logical state and graph edges, `solutions/` owns standalone proofs, and numerical
+runs guide research without certifying claims.
 
 ## Programs
 
-The programs are peers. Each has exactly one ledger and its own workflow documentation.
-
-| program | machine id | phase | entry point |
+| program | ledger id | entry point | purpose |
 |---|---|---|---|
-| A-series (A1--A5, Parts I/II) | `ab` | refine statements, then prove | [`a-series/README.md`](a-series/README.md) |
-| KLS (Part III) | `kls` | compare proof routes and discharge assumptions | [`kls/README.md`](kls/README.md) |
+| A-series (A1--A5, Parts I/II) | `a-series` | [`a-series/README.md`](a-series/README.md) | refine statements and prove structured-posterior results |
+| KLS (Part III) | `kls` | [`kls/README.md`](kls/README.md) | compare proof routes and discharge their open inputs |
 
-The stable machine id `ab` is retained for ledger policy and cross-program bridge references;
-the human-facing directory name is `a-series`.
+Each program has one ledger. All ledger writes pass through one orchestrator.
 
-```text
-research/
-  ledger-schema.md  shared ledger kinds, statuses, fields, and invariants
-  a-series/         A1--A5 ledger, workflow, obstruction prose, and target briefs
-  kls/              route-spanning KLS ledger, route registry, and obstruction prose
-  knowledge/        reusable analytic tools and the curated A/KLS instance battery
-  explorations/     append-only mathematical attempt history, including dead ends
-  reviews/          persisted proof-review and non-certifying audit reports
-  runs/             provenance-stamped finum artifacts
-  decisions/        append-only control-plane and harness decisions
-  check_ledger.py   shared structural checker
-  tests/            checker regression suite
-```
+## Sources of truth
 
-Program-owned material belongs under the corresponding program directory. Root-level planes
-exist only when they are intentionally shared across programs or form one repository-wide
-archive. Historical explorations, reviews, and runs retain their paths so proof and diagnostic
-provenance does not churn during organizational refactors.
+| content | location |
+|---|---|
+| ledger fields and invariants | [`ledger-schema.md`](ledger-schema.md) |
+| accepted mathematical prose | [`../modules/`](../modules/) |
+| claim state and logical edges | `a-series/ledger.yaml`, `kls/ledger.yaml` |
+| proof dossiers | [`../solutions/`](../solutions/) |
+| reusable lemmas and shared instances | [`knowledge/`](knowledge/) |
+| mathematical attempts and dead ends | [`explorations/`](explorations/) |
+| independent reviews | [`reviews/`](reviews/) |
+| numerical artifacts | [`runs/`](runs/) |
+| harness decisions | [`decisions/`](decisions/) |
 
-## Shared ledger schema
+The ledgers use `depends_on` for same-program proof dependencies, `bounded_by` for obstruction
+nodes in the same ledger, and `bridges` for non-logical cross-program comparisons written as
+`program/id`. The A1-bis/KLS bridge is `a-series/conj:a1-bis` ↔ `kls/conj:kls`.
 
-Both ledgers use `depends_on` for same-program claim nodes actually used in a proof,
-`bounded_by` for applicable obstructions, and `bridges` for explicit cross-program links written
-as `program/id`. A program has exactly one ledger; all ledger writes pass through the singleton
-orchestrator.
+## Contribution flow
 
-Kinds, statuses, all common fields, certification requirements, and the A-series/KLS extensions
-are documented only in [`ledger-schema.md`](ledger-schema.md). The checker is their executable
-structural validator.
-
-The A1-bis/KLS bridge connects `ab/conj:a1-bis` to `kls/conj:kls`. It is a bridge between a
-structured-posterior claim and its universal log-concave boundary, not a proof dependency.
-
-## Shared planes
-
-- [`knowledge/`](knowledge/) is the curated cross-target battery and reusable analytic memory.
-- [`explorations/`](explorations/) records mathematical attempts, including failures, without
-  rewriting history.
-- [`reviews/`](reviews/) stores structured proof provenance and non-certifying audits.
-- [`runs/`](runs/) stores immutable, provenance-stamped numerical diagnostics.
-- [`decisions/`](decisions/) records harness, schema, and repository-organization decisions.
-
-The proof output plane remains the repository-root sibling [`../solutions/`](../solutions/).
-Every `proved` node points to a certified standalone dossier. Sampled, MCMC, FEM, floating-point,
-and finite-grid outcomes never supply proof certification.
+1. Select a ledger node and read its manuscript statement, dependencies, and obstructions.
+2. Record the attempt in a new dated exploration; put numerical work through `finum`.
+3. Send accepted statement and ledger changes through the orchestrator.
+4. For a proof, supply a standalone dossier and independent review.
+5. Run the structural checker.
 
 ## Verify
 
@@ -72,6 +48,5 @@ python3 research/check_ledger.py node q:upgrade
 python3 -m unittest discover -s research/tests -p 'test_*.py'
 ```
 
-The checker validates structure, not mathematical correctness. Independent criticism remains
-necessary to compare ledger statements, manuscript labels, dossiers, and obstructions
-semantically. The normative contribution rules are in [`../CLAUDE.md`](../CLAUDE.md).
+The checker validates repository structure, not mathematical correctness. The contribution rules
+are in [`../CLAUDE.md`](../CLAUDE.md).

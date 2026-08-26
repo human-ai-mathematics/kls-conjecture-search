@@ -4,7 +4,8 @@ import json
 
 import numpy as np
 
-from finum.targets import REGISTRY, kls_alignment
+from finum.targets import REGISTRY
+from finum.targets.kls import alignment
 
 
 def test_paired_gate_rejects_a_coarse_only_spike():
@@ -19,7 +20,7 @@ def test_paired_gate_rejects_a_coarse_only_spike():
         "r": np.zeros((4, 1)),
         "D": np.zeros((4, 1)),
     }
-    gate = kls_alignment._paired_refinement_gate(
+    gate = alignment._paired_refinement_gate(
         fine, coarse, intervals,
         np.full(4, 0.1), np.full(4, 0.1),
         np.zeros(4, dtype=bool), np.zeros(4, dtype=bool),
@@ -31,11 +32,12 @@ def test_paired_gate_rejects_a_coarse_only_spike():
 
 
 def test_kls_align_is_registered_and_remains_model_diagnostic():
-    assert REGISTRY["kls-align"] is kls_alignment
-    records, extra = kls_alignment.run_records(
+    assert REGISTRY["kls-align"].module is alignment
+    result = alignment.run_records(
         seed=4, ns=(8,), T=0.12, dt=0.02, n_paths=4,
         widths=(0.04, 0.08), alphas=(0.5, 0.9),
     )
+    records, extra = result.records, result.summary
     config = next(r for r in records if r["kind"] == "alignment-configuration")
     scan = next(r for r in records if r["kind"] == "alignment-window-scan")
     summary = records[-1]
@@ -61,7 +63,7 @@ def test_kls_align_is_registered_and_remains_model_diagnostic():
     assert scan["heldout_paths"] == 2
     assert "heldout_high_count_time_integral" in scan
     assert summary["diagnostic_only"] is True
-    assert summary["proof_status"] == "no-proof/no-route-verdict"
+    assert summary["proof_status"] == "no-proof/no-universal-conclusion"
     assert extra["route_observable_available"] is True
     assert extra["dynamic_quadrature_available"] is True
     # The full payload must be provenance-writer/JSON compatible.

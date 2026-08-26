@@ -1,13 +1,10 @@
 # A4 — Transport constants for variational inference
 
-> Mutable refinement brief. The ledger and manuscript are authoritative; dated history belongs
-> in `research/explorations/`.
-
 ## Entry points
 
 - Headline node: `q:a4-certificate`
 - Manuscript: [`modules/open-targets/A4-variational-inference.tex`](../../../modules/open-targets/A4-variational-inference.tex) (`q:a4-certificate`)
-- Numerical target: [`finum/targets/a4.py`](../../../experiments/finum/targets/a4.py), `finum run --target A4`
+- Numerical target: [`finum/targets/a_series/a4.py`](../../../experiments/finum/targets/a_series/a4.py), `finum run A4`
 - Baselines: `thm:glm-fi`, `prop:a4-logistic-global`
 
 ## Target-specific guardrails
@@ -36,10 +33,3 @@
 
 None currently. A proposed theorem must name the variational family, the nonempty sublevel
 $\delta_{\mathcal Q}+\rho$, the finiteness mechanism, and every approximation/remainder term.
-
-## Context
-
-- [Restricted-transport audit](../../explorations/2026-08-21-a4-restricted-transport-audit.md)
-- [Local-VI next cycle](../../explorations/2026-08-21-a4-local-vi-next-cycle.md)
-- [Mean-dual solution](../../../solutions/eq-a4-mean-dual.tex)
-- [Independent review](../../reviews/2026-08-21-a4-a5-independent-agent-audit.md)

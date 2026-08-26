@@ -15,10 +15,11 @@ from finum.localization.tilt1d import LAPLACE
 
 
 def test_provenance_header_fields():
-    h = provenance.provenance(seed=7, dt=0.01, n=16)
-    assert set(h) >= {"git_commit", "python", "numpy", "scipy", "params"}
-    assert h["params"]["seed"] == 7
-    assert h["numpy"] == np.__version__
+    h = provenance.provenance(schema_version=1, target="test", profile="standard",
+                              stochastic=True, config={"seed": 7, "dt": 0.01, "n": 16})
+    assert set(h) >= {"schema_version", "git_commit", "target", "config", "environment"}
+    assert h["config"]["seed"] == 7
+    assert h["environment"]["numpy"] == np.__version__
 
 
 def test_spawned_streams_are_independent_and_reproducible():

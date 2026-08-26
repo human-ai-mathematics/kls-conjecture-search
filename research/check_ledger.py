@@ -12,7 +12,7 @@ isolated test fixtures):
   ``depends_on``; its assumption contract is derived rather than duplicated;
 * nodes use an explicit, program-aware schema; their manuscript anchor exists in
   the declared file, and every imported node cites existing BibTeX keys;
-* every ``bounded_by`` edge resolves to a declared program obstruction.
+* every ``bounded_by`` edge resolves to a same-ledger obstruction node.
 
 Cross-program ``bridges: [program/id, ...]`` links are resolved against all
 loaded ledgers. Proof-plane ``solution:`` files are confined to ``solutions/`` and
@@ -63,7 +63,7 @@ UNRESOLVED_STATUSES = {"open", "conditional", "refuted"}
 # Unresolved premises are discovered recursively through the canonical
 # ``depends_on`` graph. Unreviewed preprints are handled separately below.
 PROGRAMS = {
-    "ab": {
+    "a-series": {
         "status": SHARED_STATUSES,
         "unproved": UNRESOLVED_STATUSES,
     },
@@ -74,7 +74,7 @@ PROGRAMS = {
 }
 
 PRODUCTION_LEDGER_PATHS = {
-    "ab": Path("research/a-series/ledger.yaml"),
+    "a-series": Path("research/a-series/ledger.yaml"),
     "kls": Path("research/kls/ledger.yaml"),
 }
 
@@ -86,7 +86,7 @@ COMMON_NODE_FIELDS = {
     "checked_by", "review", "accepted_by", "refuted_by",
 }
 PROGRAM_NODE_FIELDS = {
-    "ab": COMMON_NODE_FIELDS | {"refines"},
+    "a-series": COMMON_NODE_FIELDS | {"refines"},
     "kls": COMMON_NODE_FIELDS | {"route"},
 }
 LIST_FIELDS = {
@@ -115,7 +115,7 @@ OBSOLETE_NODE_FIELDS = {
 BIB_ENTRY_RE = re.compile(r"@[A-Za-z]+\s*\{\s*([^,\s]+)\s*,")
 TOP_LEVEL_FIELDS = {"meta", "nodes"}
 PROGRAM_META_FIELDS = {
-    "ab": {"program", "scope"},
+    "a-series": {"program", "scope"},
     "kls": {"program", "route_policy"},
 }
 OBSOLETE_META_FIELDS = {"legacy_r2_debt", "legacy_proved_without_solution"}
@@ -335,7 +335,7 @@ def labels_in_file(path: Path) -> set[str]:
 
 
 def obstruction_ids_md(ledger_path: Path) -> set[str]:
-    """Return obstruction ids declared by headings in the sibling prose registry."""
+    """Return obstruction ids documented by headings in the sibling registry."""
     path = ledger_path.with_name("obstructions.md")
     if not path.exists():
         return set()
@@ -659,7 +659,17 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         nodes = _nodes_by_id(path, doc, errors)
         obstruction_ids = {
             nid for nid, node in nodes.items() if node.get("kind") == "obstruction"
-        } | obstruction_ids_md(path)
+        }
+        documented_obstructions = obstruction_ids_md(path)
+        for nid in sorted(obstruction_ids - documented_obstructions):
+            errors.append(
+                f"[{program}] {nid}: obstruction node has no heading in "
+                f"{path.with_name('obstructions.md')}"
+            )
+        for nid in sorted(documented_obstructions - obstruction_ids):
+            errors.append(
+                f"[{program}] {nid}: obstruction heading has no same-ledger obstruction node"
+            )
         ledgers.append({
             "program": program,
             "path": path,
@@ -685,7 +695,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         nodes = ledger["nodes"]
         meta = ledger["meta"]
         obstruction_ids = ledger["obs_ids"]
-        cfg = ledger["cfg"] or PROGRAMS["ab"]
+        cfg = ledger["cfg"] or PROGRAMS["a-series"]
         for obsolete_field in OBSOLETE_META_FIELDS:
             if obsolete_field in meta:
                 errors.append(
@@ -715,7 +725,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             status = node.get("status")
             if not isinstance(kind, str) or kind not in KIND:
                 errors.append(f"[{program}] {nid}: bad kind '{kind}'")
-            if program == "ab" and status == "conjectured":
+            if program == "a-series" and status == "conjectured":
                 errors.append(
                     f"[{program}] {nid}: status 'conjectured' is obsolete; use status 'open' "
                     "and let kind describe the statement type"
