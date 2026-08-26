@@ -1,7 +1,7 @@
 """finum.localization — the Eldan stochastic-localization engine.
 
 This is the numerical engine beneath the **localization diagnostic** channels. The legacy
-``kls-loc`` target provides source occupation and two-color engine checks but does not assemble
+``loc-engine`` target provides source occupation and two-color engine checks but does not assemble
 the open-node observables. The separate ``kls-align`` target now assembles ``S_high,r,D`` for the
 specific product-Laplace tail-union stress model. Both remain diagnostics, not proof evidence.
 
@@ -12,8 +12,8 @@ moments (incl. the off-diagonal block), and the pathwise Brascamp-Lieb cap asser
 
 A thin-shell occupation number is inspectable only behind the target's full gate set: Gaussian
 calibration, `gates.n_bins_convergence`, `gates.fft_vs_mc`, and time-step refinement. Missing or
-red gates are `no-verdict`; all-green output remains diagnostic until a route observable is
-implemented.
+red gates make the assessment unavailable; all-green output remains diagnostic until a route
+observable is implemented.
 """
 from __future__ import annotations
 

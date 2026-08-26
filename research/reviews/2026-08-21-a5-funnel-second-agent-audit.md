@@ -1,11 +1,21 @@
-# A5 funnel second independent-agent audit
+---
+type: proof-review
+date: "2026-08-21"
+verdict: pass
+authors:
+  - /root/review_a4_a5
+  - /root/a4_a5 + /root/review_a4_a5
+reviewer: /root/cross_review
+nodes:
+  - lem:a5-pi-exp-tail
+  - ex:a5-neal
+  - prop:a5-partial-funnel
+solutions:
+  - solutions/ex-a5-neal.tex
+  - solutions/prop-a5-partial-funnel.tex
+---
 
-- **Date:** 2026-08-21
-- **Original proof author:** `/root/a4_a5`
-- **Proof-gap completion:** `/root/review_a4_a5`
-- **Independent second reviewer:** `/root/cross_review`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for the three nodes below
+# A5 funnel second independent-agent audit
 
 ## Certified scope
 

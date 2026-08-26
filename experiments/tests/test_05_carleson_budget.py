@@ -7,6 +7,7 @@ suffice. A gross violation would mean the source S = s||G||^2 is mis-assembled.
 """
 
 import numpy as np
+import pytest
 
 from finum.localization import cuts, observables as obs
 from finum.localization.state import ProductState
@@ -14,6 +15,7 @@ from finum.localization.sde import spawn_rngs
 from finum.localization.tilt1d import LAPLACE
 
 FAST = {"n_bins": 16384}
+pytestmark = pytest.mark.slow
 
 
 def _occupation(cut, n, *, T, dt, seed, n_paths, direction=None):

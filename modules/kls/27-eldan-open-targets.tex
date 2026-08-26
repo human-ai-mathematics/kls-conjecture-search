@@ -52,7 +52,7 @@ operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: Corollary~\ref{cor:per-direction} 
 statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is
 $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically,
 the proposed Reilly/Jacobi route aims to control analogous high-rank boundary modes, but
-Remark~\ref{rem:almost-stability-gap} records the missing trace bridge; its proposed
+Question~\ref{rem:almost-stability-gap} records the missing trace bridge; its proposed
 constant-mode branch is Question~\ref{q:splitting}. Combinatorially, summing the per-coordinate
 budgets of Theorem~\ref{thm:budget} over a product cut is again $\Tr R_0\le n$; this motivates
 the incident-high residue in Question~\ref{q:alignment} but does not identify it with the full
@@ -108,7 +108,7 @@ proves only a sufficient globally split model and its flat halfspace; it does no
 zero-curvature-to-splitting direction.
 \end{question}
 
-\begin{hypothesis}[Absolute-scale geometric completion]
+\begin{assumption}[Absolute-scale geometric completion]
 \label{hyp:absolute-geometric-completion}
 There exist universal $T_0\in(0,1/8)$ and $\kappa,c_g,\eps_g>0$ such that the following interface implication
 holds. For any isotropic log-concave measure satisfying
@@ -121,12 +121,12 @@ then the remaining geometric trace and stochastic consumption steps yield
 $\mu^+(E)\ge c_g$. This is an explicit placeholder for an absolute-scale completion, weaker
 and logically distinct from Assumption~\ref{ass:weighted-package}; no such implication is proved
 in this report.
-\end{hypothesis}
+\end{assumption}
 
 \begin{corollary}[Residual dichotomy of the bootstrap route]
 \label{cor:dichotomy}
-Assume Hypothesis~\ref{hyp:absolute-geometric-completion}. The published
-Corollary~\ref{cor:KI-discharged} discharges Hypothesis~\ref{hyp:KI}, so by
+Under Assumption~\ref{hyp:absolute-geometric-completion}, the published
+Corollary~\ref{cor:KI-discharged} discharges Assumption~\ref{hyp:KI}, so by
 Corollary~\textup{\ref{cor:loglog}}, this supply is available for near-worst measures in every
 dimension with $\hstar_n\le c\kappa T_0/(1+\log\log n)$, and the resulting contradiction
 confines any failure of KLS to dimensions with $\hstar_n\ge c'/\log\log n$. Such a completion
@@ -138,7 +138,7 @@ would therefore already yield
 an asymptotic improvement over the version-1 preprint bound
 $\hstar_n\ge c(\log n)^{-1/4}$ \cite{Letwin2026QuadraticKLS}. Full KLS would additionally
 follow if Question~\textup{\ref{q:taming}} supplied its estimate at the same universal time
-consumed by Hypothesis~\textup{\ref{hyp:absolute-geometric-completion}} (or if that completion
+consumed by Assumption~\textup{\ref{hyp:absolute-geometric-completion}} (or if that completion
 were uniform over the time supplied); the two existential times are not automatically equal.
 \end{corollary}
 
@@ -198,7 +198,7 @@ geometries (Section~\ref{sec:models}). The preprint-conditional content includes
 quadratic chaos and the $c/\log n$ covariance-moment window. The remaining conditional content is concentrated in the weighted
 package (Assumption~\ref{ass:weighted-package}), the all-cut estimate
 (Assumption~\ref{ass:all-cut-carleson}), and the explicitly hypothetical absolute-scale
-completion (Hypothesis~\ref{hyp:absolute-geometric-completion}), with the open targets posed in
+completion (Assumption~\ref{hyp:absolute-geometric-completion}), with the open targets posed in
 Questions~\ref{q:upgrade}--\ref{q:splitting}. The architecture rests on three structural
 points: the previously postulated excess-propagation assumption is retired (unconditionally
 true as consumed, hence inert); the Stein-trace estimate is stated in the covariance-weighted

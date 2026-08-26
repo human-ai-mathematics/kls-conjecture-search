@@ -1,10 +1,19 @@
-# A3 independent-agent proof audit
+---
+type: proof-review
+date: "2026-08-21"
+verdict: pass
+authors:
+  - /root/a3
+reviewer: /root/cross_review
+nodes:
+  - prop:a3-horseshoe
+  - thm:a3-block-gibbs
+solutions:
+  - solutions/prop-a3-horseshoe.tex
+  - solutions/thm-a3-block-gibbs.tex
+---
 
-- **Date:** 2026-08-21
-- **Proof author:** `/root/a3`
-- **Independent reviewer:** `/root/cross_review`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for the two nodes listed below
+# A3 independent-agent proof audit
 
 ## Certified scope
 

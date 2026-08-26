@@ -1,119 +1,64 @@
-# CLAUDE.md — the rules an agent works under in this repo
+# CLAUDE.md — repository contract
 
-This file is served under two names — `CLAUDE.md` and `AGENTS.md` are the same file, so
-Claude Code and Codex read identical instructions. Other documents link to it as `CLAUDE.md`.
+`AGENTS.md` is a symlink to this file, so Claude Code and Codex receive the same instructions.
+This is the root contract for work entering the repository. Scoped contracts may add narrower
+requirements: [`research/ledger-schema.md`](research/ledger-schema.md) for ledgers,
+[`solutions/README.md`](solutions/README.md) for proofs,
+[`experiments/README.md`](experiments/README.md) for numerical work, and
+[`.claude/agents/`](.claude/agents/README.md) for role permissions. They never override this file.
+Use [`research/README.md`](research/README.md) to locate each plane's source of truth; other
+READMEs are navigation maps.
 
-This is the single normative source for how work enters this repository. The other documents
-are maps, not rules: [`research/README.md`](research/README.md) describes the control plane,
-[`solutions/README.md`](solutions/README.md) the proof plane,
-[`experiments/README.md`](experiments/README.md) the numerical channel, and
-[`orchestration.md`](orchestration.md) how to parallelize across them. When any of them appears
-to contradict this file, this file wins.
+## Universal workflow
 
-The subject is functional inequalities — the Poincaré, log-Sobolev, and transportation-cost
-constants of `P ∝ e^{-U}` — across a manuscript (Parts I–III), an open-target program (A1–A5),
-and an exploratory KLS proof program.
+### Mathematical contribution
 
-## The planes
-
-| plane | where | what it holds |
-|---|---|---|
-| claims | `research/ledger.yaml`, `research/kls/ledger.yaml` | the machine-readable graph: status, edges, provenance pointers |
-| prose | `modules/**/*.tex` | the manuscript; the `\label`s that node ids bind to |
-| proofs | `solutions/*.tex` | standalone dossiers a reviewer or Lean can check |
-| diagnostics | `research/runs/*.jsonl` | provenance-stamped `finum` research artifacts |
-| memory | `research/explorations/`, `research/knowledge/`, `research/reviews/` | dated attempt log, shared battery and obstructions, audit reports |
-
-## The soundness contract
-
-Three signals with different roles. They are not a ladder whose lower rungs accumulate into a
-proof: an analytic proof is certified independently of numerics.
-
-| signal | mechanism | what it is worth |
-|---|---|---|
-| **R0 — structural** | `python3 research/check_ledger.py` returns 0 errors | cheap and deterministic; **necessary, never sufficient** |
-| **R1 — numerical** | a provenance-stamped `finum` artifact in `research/runs/` | research direction, stress testing, or a candidate refutation; **never** claim or proof validation |
-| **R2 — proof** | `solutions/<id>.tex` with `checked_by ∈ {agent, human, lean}` | the only route to `status: proved` |
-
-**The invariant: R1 never validates R2.** A proof dossier and its review must stand without any
-numerical run. `finum` may guide intuition, expose a likely counterexample, or help sharpen a
-statement; sampled, MCMC, FEM, and finite-grid quantities remain directional. If exact arithmetic
-or an analytic lower bound yields a checkable certificate (`finum/verdict.py:falsify`), that
-certificate must be persisted and independently checked in the proof/refutation plane before a
-logical status changes. This is why **criticism is a first-class role, not QA**: never let a prover
-grade its own proof.
-
-## Definition of done
-
-For any contribution:
-
-1. the target is sharpened (or confirmed), or a standalone proof dossier is supplied;
-2. the ledger node is updated with matching status, provenance, and edges;
-3. `python3 research/check_ledger.py` returns 0 errors;
-4. the attempt — **including dead ends** — is logged in
-   `research/explorations/YYYY-MM-DD-slug.md`; cross-cutting findings are promoted to
+1. Sharpen or confirm a target, or supply a standalone proof dossier.
+2. When a claim changes, update its manuscript statement and ledger state, provenance, and edges
+   together.
+3. After a ledger edit, leave `python3 research/check_ledger.py` at 0 errors.
+4. Record the attempt, **including dead ends**, in a new
+   `research/explorations/YYYY-MM-DD-slug.md`; promote genuinely reusable findings to
    `research/knowledge/`.
 
-A *proof* contribution has four further requirements, specified in
-[`solutions/README.md`](solutions/README.md): the dossier compiles standalone with a complete
-audit header, its theorem matches the `\label` it `refines` and respects every `bounded_by`
-obstruction, the node carries `solution:` + `checked_by:`, and agent certification names a
-distinct author and reviewer plus a persisted report under `research/reviews/`.
+### Proof contribution
 
-## Commands
+Follow [`solutions/README.md`](solutions/README.md). An author never certifies their own proof;
+`checked_by: agent` requires a persisted review naming distinct author(s) and reviewer.
 
-```bash
-python3 research/check_ledger.py                                   # R0 — after every ledger edit
-python3 -m unittest discover -s research/tests -p 'test_*.py'      # checker regressions
-cd experiments && uv run python -m finum selftest                  # calibration anchors
-cd experiments && uv run python -m finum run --target A3           # → research/runs/<ts>-A3.jsonl
-cd experiments && uv run pytest                                    # finum oracle suite
-latexmk -pdf -outdir=build main.tex                                # the whole document
-cd solutions && latexmk -pdf -outdir=../build <id>.tex             # one dossier, standalone
-```
+### Harness or repository contribution
+
+Record the rationale and validation in a new `research/decisions/YYYY-MM-DD-slug.md`. Do not
+invent a mathematical attempt; harness work does not by itself change mathematical status.
 
 ## Hard constraints
 
-Specific to this repo; a naive agent swarm hits every one of these.
+These numbers are cited by append-only records. Do not renumber them.
 
-1. **A ledger is a single-file write-contention point.** Git-worktree isolation helps parallel
-   `finum`/`solutions` work but does nothing for a shared YAML. Funnel *all* ledger edits
-   through one orchestrator; squads write only to `research/targets/*.md`,
-   `research/explorations/`, `research/runs/`, and (provers) `solutions/`.
-2. **No private Monte Carlo.** The retraction that created `research/explorations/` is the
-   cautionary tale: two agents ran ad-hoc scripts, disagreed, and a non-reproducible claim had
-   to be withdrawn. Every numerical observation cited as research guidance flows through `finum`
-   with a provenance-stamped artifact; none counts toward proof certification.
-3. **The research battery is shared.** Use the curated instances in
-   `research/knowledge/instances.md` so stress tests remain comparable and do not collapse to a
-   refiner's happy path. A refiner may propose a new adversarial instance, but the librarian must
-   review it before adding it to the shared registry. Passing any finite battery changes no claim
-   or proof status.
-4. **`check_ledger.py` is necessary, not sufficient.** It verifies structure — labels resolve,
-   the DAG is acyclic, no proved node rests on an unproved one, obstruction parity holds. It
-   does **not** verify that the `.tex` prose, the ledger `statement:`, and the solution dossier
-   agree semantically, nor that any proof is correct. That is a critic's responsibility, and it
-   is where a green exit code stops meaning anything.
-5. **Respect `bounded_by`.** A refined statement that violates a known obstruction is wrong by
-   construction — e.g. any A1 bound without a tail term violates `obs:flat-direction`. Check
-   this *before* spending a numerical run.
-6. **Don't fan out across the trace-upgrade cluster.** `q:upgrade`, the high-rank part of
-   `q:stein-weighted`, and `q:alignment` are three manifestations of the same high-rank
-   occupation difficulty (`rem:trace-upgrade-unification`); their formal equivalence is not
-   proved. One team owns the comparison, then propagates only what has actually been shown.
-7. **`conditional` KLS nodes are Lean-certifiable only as conditional implications.** The
-   assumption becomes a hypothesis; the node reaches unconditional `proved` only when the
-   assumption is discharged.
-8. **`research/explorations/` is append-only.** It exists so the next agent does not re-run a
-   refuted approach. Add dated files; do not rewrite history.
+1. **A ledger is a single-file write-contention point.** Funnel every ledger edit through one
+   orchestrator. Role definitions may narrow write access; no spawned role writes a ledger.
+2. **No private Monte Carlo.** Every numerical research observation flows through `finum` into a
+   provenance-stamped artifact. Numerical output certifies no claim, proof step, or dossier.
+   Exact arithmetic or an analytic witness emitted by `finum` remains a candidate until checked
+   independently in the proof or refutation workflow.
+3. **The research battery is shared.** Use `research/knowledge/instances.md`. Anyone may propose
+   an adversarial instance; only the `synthesizer` curates the registry. Passing a finite battery
+   changes no claim or proof status.
+4. **`check_ledger.py` is necessary, not sufficient.** A green check establishes structure only.
+   Semantic agreement among manuscript, ledger, and dossier, and the correctness of a proof,
+   require independent review.
+5. **Respect `bounded_by`.** A statement violating a known obstruction is wrong by construction.
+   Check its fences before proving it or spending a numerical run.
+6. **Do not fan out across the trace-upgrade cluster.** `q:upgrade`, the high-rank part of
+   `q:stein-weighted`, and `q:alignment` share one high-rank occupation difficulty, but
+   `rem:trace-upgrade-unification` proves no equivalence. One owner compares them and propagates
+   only proved implications.
+7. **A certified conditional implication stays `conditional`.** Make its assumption an explicit
+   hypothesis. It becomes `proved` only after that assumption is discharged, for every
+   certification mode, including Lean.
+8. **`research/explorations/` and `research/decisions/` are append-only.** Add dated files; never
+   rewrite or delete their history.
 
-## Conventions
+## Global convention
 
-- A node `id` **is** the LaTeX `\label` of its statement. When a statement changes, update both
-  the `.tex` and the ledger.
-- `depends_on` means "used in the proof" and must stay acyclic. Downstream consumers are derived
-  by reversing `depends_on`; speculative roadmap relationships belong in prose, not a second
-  graph.
-- Reproducibility of a `finum` artifact rests on its recorded seed, params, and library
-  versions. Nothing gates on the state of the worktree.
-- Math in Markdown files is written in LaTeX `$…$`.
+Write Markdown mathematics in LaTeX `$...$`.

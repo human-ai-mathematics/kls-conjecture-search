@@ -1,14 +1,15 @@
+---
+type: audit
+date: "2026-08-25"
+---
+
 # Route C CMH normalization and exact cases — independent adversarial audit
 
-- **Date:** 2026-08-25
-- **Proof author:** `/orchestrator/kls-cmh-normalization`
-- **Independent reviewer:** `/review/kls-cmh-independent-audit`
-- **Review type:** line-by-line mathematical re-derivation, exact symbolic and exact-rational
-  numerical corroboration, literature check, scope and honesty audit
-- **Certification requested:** `checked_by: agent` for 17 KLS ledger nodes
-- **Verdict:** **partial pass.** 13 of 17 nodes may be promoted, 3 only after a required
-  correction, 1 must **not** be promoted. One proof in the dossier and one proof in the
-  manuscript are invalid as written; the corresponding *statements* are nevertheless true.
+This non-certifying audit was performed by `/review/kls-cmh-independent-audit` on work authored
+by `/orchestrator/kls-cmh-normalization`. Its verdict was a partial pass: 13 of 17 nodes were
+recommended for promotion, three required corrections, and one was not recommended. One dossier
+proof and one manuscript proof were invalid as written, although the corresponding statements
+were true.
 
 ---
 

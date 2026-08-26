@@ -7,12 +7,12 @@ analytic-proof channel paired with the refinement and stress-testing work in `re
 A solution file is the artifact a newly `proved` ledger node points to (via its `solution:`
 field). The ledger records the *claim and its state*; this directory holds the *proof an
 independent reviewer or Lean can check*. Every newly `proved` node must carry a certified dossier;
-narrative provenance and numerical artifacts are not alternatives to R2. There is no historical
+narrative provenance and numerical artifacts are not alternatives to a checked proof. There is no historical
 or inline-proof exception: every `status: proved` node must point to a certified dossier.
 
-Definitions use a non-proof status such as KLS `defined`; diagnostic remarks and externally
-imported results are classified according to their actual role. Reclassification is not proof
-certification.
+Definitions use the shared non-proof status `defined`; a ledger-worthy observation uses its
+precise mathematical kind, while expository remarks remain prose. Externally imported results are
+classified according to their actual role. Reclassification is not proof certification.
 
 ## Why separate from the manuscript
 
@@ -23,25 +23,32 @@ certification.
 - **Liftable.** Each file is a `subfiles` document, so once accepted it drops into `main.tex`
   with a single `\subfile{solutions/<id>}` line — no rewrite.
 
-## The `checked_by` ladder
+## Certification modes
 
 A proof is only as trustworthy as its check. Every solution declares its level in the header:
 
-| `checked_by` | meaning | may a ledger node be `proved`? |
+| `checked_by` | meaning | ledger effect |
 |---|---|---|
-| `none`  | drafted, unreviewed | **no** — not a proof yet |
+| `none`  | drafted, unreviewed dossier header only | **no ledger value** — not a proof yet |
 | `agent` | a distinct agent audited the complete natural-language proof and left a persisted report | yes (agent-certified) |
 | `human` | a human read and accepts the natural-language argument | yes (human-certified) |
 | `lean`  | a compiling Lean proof sits beside it (`<id>.lean`) | yes (machine-certified) |
 
 Agent certification is deliberately explicit rather than being recorded as human review. It
-requires `authored_by`, a distinct `reviewed_by`, and a repo-local `review:` report. The report
-must state its exact scope and any exclusions. This gate was enabled by the project owner on
+requires a repo-local `review:` report whose front matter names distinct author(s) and reviewer.
+The report uses the structured contract in
+[`../research/reviews/README.md`](../research/reviews/README.md): its immutable historical scope
+must contain every current node and dossier pointing to it. The report body states the
+mathematical findings, corrections, and exclusions. This gate was enabled by the project owner on
 2026-08-21 for independently audited results.
 
+Human certification requires a named ledger `accepted_by`. Lean certification requires the
+adjacent `<solution-stem>.lean` file. A dossier may certify a conditional implication while the
+node remains `status: conditional`; only discharge of its assumptions permits `status: proved`.
+
 Numerics never appear on this ladder: they may guide intuition or suggest a counterexample, but
-they do not validate a claim, justify a proof step, or certify a dossier (the R1/R2 contract in
-[`../CLAUDE.md`](../CLAUDE.md)). Every proof must stand independently of numerical outcomes.
+they do not validate a claim, justify a proof step, or certify a dossier. Every proof must stand
+independently of numerical outcomes, as required by [`../CLAUDE.md`](../CLAUDE.md).
 
 ## Writing a solution
 
@@ -57,10 +64,11 @@ they do not validate a claim, justify a proof step, or certify a dossier (the R1
    cd solutions
    latexmk -pdf -outdir=../build <id>.tex
    ```
-5. Wire the ledger node (`research/ledger.yaml` or a route ledger): add
+5. Wire the ledger node (`research/a-series/ledger.yaml` or `research/kls/ledger.yaml`): add
    `solution: solutions/<id>.tex` and `checked_by: agent|human|lean`. For an agent audit, also
-   add `authored_by`, a distinct `reviewed_by`, and `review`. The node may flip to
-   `status: proved` only once these artifacts exist — enforced by `research/check_ledger.py`.
+   add `review`; for human acceptance add `accepted_by`. The node may flip to `status: proved`
+   only once these artifacts exist and no unresolved premise remains. A reviewed conditional
+   implication keeps `status: conditional` — enforced by `research/check_ledger.py`.
 
 ## Definition of done (a proof contribution)
 

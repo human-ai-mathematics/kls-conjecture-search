@@ -1,12 +1,28 @@
-# KLS excess and bootstrap interface — independent R2 audit
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/kls_bootstrap_author
+reviewer: /root/kls_core_author
+nodes:
+  - prop:intro-audit
+  - prop:trivial-excess
+  - lem:perimeter-martingale
+  - lem:excess-identity
+  - lem:inf-martingales
+  - lem:half
+  - lem:crude
+  - cor:loglog
+  - lem:whitening
+  - prop:ceiling
+  - thm:bootstrap
+solutions:
+  - solutions/kls-excess-audit.tex
+  - solutions/kls-bootstrap-interface.tex
+---
 
-- **Date:** 2026-08-25
-- **Proof author:** `/root/kls_bootstrap_author`
-- **Independent reviewer:** `/root/kls_core_author`
-- **Reviewed dossiers:** `solutions/kls-excess-audit.tex` and `solutions/kls-bootstrap-interface.tex`
-- **Certification:** `checked_by: agent`
-- **Review type:** complete statement/dependency comparison and independent line-by-line mathematical rederivation
-- **Verdict:** pass
+# KLS excess and bootstrap interface — independent R2 audit
 
 ## Certified scope
 

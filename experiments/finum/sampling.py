@@ -4,7 +4,7 @@ Plain MALA mixes badly on anisotropic / near-flat posteriors (exactly the obs:fl
 stress cases), so we provide *preconditioned* MALA and an adaptive wrapper: a pilot run under a
 curvature preconditioner estimates the covariance, then the main run is preconditioned by that
 estimate — which can capture flat directions a fixed-metric chain misses. The two-seed agreement
-check in ``finum.verdict`` is a diagnostic gate, not a mixing proof or confidence certificate;
+check in ``finum.comparison`` is a diagnostic gate, not a mixing proof or confidence certificate;
 if it fails, no downstream sampled diagnostic is emitted.
 """
 from __future__ import annotations
@@ -12,6 +12,11 @@ from __future__ import annotations
 from typing import Callable
 
 import numpy as np
+
+
+def sigmoid(s):
+    """Numerically stable logistic function used by the GLM diagnostics."""
+    return 0.5 * (1.0 + np.tanh(0.5 * s))
 
 
 def mala(

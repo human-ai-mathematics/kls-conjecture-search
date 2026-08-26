@@ -7,9 +7,11 @@ known-failing approach.
 Record:
 - **What** you tried (which target/node, which conjecture form or `W̄` recipe).
 - **How** (which `finum` run / instances; link the provenance-stamped artifact).
-- **Outcome** — refuted / directional / strong; the numbers (tightness, the falsifying
-  witness if any).
+- **Outcome** — dead end, directional observation, candidate refutation, or analytic result;
+  include the relevant numbers or exact witness without treating a run as certification.
 - **Why** it failed or what it unlocked.
 
-Promote successes into `../targets/*.md` + the `.tex` statement + a `ledger.yaml` update.
+Stage a successful A-series refinement in `../a-series/targets/*.md`; the orchestrator promotes
+it to the `.tex` statement and `../a-series/ledger.yaml`. KLS route work follows the selected
+brief under `../kls/routes/` and enters `../kls/ledger.yaml` through the same orchestrator.
 Promote cross-cutting findings into `../knowledge/`.

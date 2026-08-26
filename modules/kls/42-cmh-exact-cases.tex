@@ -16,7 +16,7 @@ log-concavity hypothesis is consumed in the final scalar angular minimization.
 The section closes at the exact product endpoint: centered one-sided exponentials saturate
 $\mathrm{CMH}(4)$ with \emph{zero} slack. Whether a log-concave perturbation raises the full CMH
 Rayleigh quotient is a separate, open second-variation problem; changing its solenoidal term
-alone is not decisive (Remark~\ref{rem:cmh-saturation-risk},
+alone is not decisive (Corollary~\ref{rem:cmh-saturation-risk},
 Question~\ref{q:cmh-solenoidal-perturbation}).
 
 \subsection{The line}
@@ -77,7 +77,7 @@ Thus $\CP(X)=4$ by the preceding upper bound, and \eqref{eq:cmh-1d-exact} gives 
 
 Theorem~\ref{thm:cmh-1d} is an \emph{identity}, not an inequality: on the line CMH carries
 exactly the information of the affine Poincar\'e inequality and nothing more. This is
-Remark~\ref{rem:cmh-stronger-than-kls} seen from the other side --- the solenoidal channel is
+Corollary~\ref{rem:cmh-stronger-than-kls} seen from the other side --- the solenoidal channel is
 empty in dimension one.
 
 \subsection{Products}
@@ -419,13 +419,15 @@ interior of the family is strictly safer.
 \subsection{The saturation risk and the decisive test}
 \label{subsec:cmh-saturation}
 
-\begin{remark}[Exact product saturation and an open perturbative test]
+\begin{corollary}[Exact product saturation and Hodge splitting]
 \label{rem:cmh-saturation-risk}
 By Theorems~\ref{thm:cmh-1d} and \ref{thm:cmh-product}, a product of centered one-sided
 exponentials has $\CMH=4$ \emph{exactly}. Proposition~\ref{prop:cmh-hodge} gives, for every
 admissible test function, the exact splitting of the CMH numerator into its affine Poincar\'e
 part and the nonnegative solenoidal term $\E\inner{w}{\Sigma^{-1}w}$.
+\end{corollary}
 
+\begin{remark}[Why saturation leaves an open perturbative test]
 No perturbative conclusion follows from those two facts alone. Under a perturbation the
 covariance and its inverse, the canonical Stein kernel, both numerator channels, the
 denominator, and the optimizing test function may all vary. In particular, an increase of the

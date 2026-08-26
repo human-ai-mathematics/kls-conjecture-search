@@ -1,12 +1,28 @@
-# KLS geometry, product, and covariance models — independent R2 audit
+---
+type: proof-review
+date: "2026-08-25"
+verdict: pass
+authors:
+  - /root/kls_proof_audit
+reviewer: /root/kls_bootstrap_author
+nodes:
+  - lem:profile-bound
+  - cor:generic-degeneracy
+  - prop:exact-splitting
+  - prop:persistent-splitting
+  - prop:gaussian-model
+  - prop:products
+  - lem:product-qcts
+  - lem:block
+  - cor:refutation
+  - thm:budget
+  - cor:KI-discharged
+solutions:
+  - solutions/kls-geometry-models.tex
+  - solutions/kls-product-covariance.tex
+---
 
-- **Date:** 2026-08-25
-- **Proof author:** `/root/kls_proof_audit`
-- **Independent reviewer:** `/root/kls_bootstrap_author`
-- **Reviewed dossiers:** `solutions/kls-geometry-models.tex` and
-  `solutions/kls-product-covariance.tex`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass
+# KLS geometry, product, and covariance models — independent R2 audit
 
 ## Certified scope
 

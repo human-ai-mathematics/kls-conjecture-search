@@ -1,10 +1,37 @@
-# A4/A5 independent-agent proof audit
+---
+type: proof-review
+date: "2026-08-21"
+verdict: pass
+authors:
+  - /root/a4_a5
+reviewer: /root/review_a4_a5
+nodes:
+  - eq:a4-mean-dual
+  - prop:a4-mean-local
+  - prop:a4-local-wellspecified
+  - prop:a4-local-misspecified
+  - prop:a4-local-excess
+  - ex:a4-gaussian-local
+  - lem:a4-symmetrization
+  - prop:a5-ratio
+  - prop:a5-block-stability
+  - ex:a5-gaussian-crossover
+  - prop:a5-partial-gaussian
+solutions:
+  - solutions/eq-a4-mean-dual.tex
+  - solutions/prop-a4-mean-local.tex
+  - solutions/prop-a4-local-wellspecified.tex
+  - solutions/prop-a4-local-misspecified.tex
+  - solutions/prop-a4-local-excess.tex
+  - solutions/ex-a4-gaussian-local.tex
+  - solutions/lem-a4-symmetrization.tex
+  - solutions/prop-a5-ratio.tex
+  - solutions/prop-a5-block-stability.tex
+  - solutions/ex-a5-gaussian-crossover.tex
+  - solutions/prop-a5-partial-gaussian.tex
+---
 
-- **Date:** 2026-08-21
-- **Proof author:** `/root/a4_a5`
-- **Independent reviewer:** `/root/review_a4_a5`
-- **Certification:** `checked_by: agent`
-- **Verdict:** pass for the eleven nodes listed below
+# A4/A5 independent-agent proof audit
 
 ## Certified scope
 

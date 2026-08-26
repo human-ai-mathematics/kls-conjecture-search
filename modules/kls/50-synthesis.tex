@@ -108,13 +108,13 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 $\nabla f(X)$. Letwin controls a deterministic $B$; the missing theorem must handle an
 $X$-dependent direction or matrix field.
 
-\emph{Repository target:} Route~C, Group~5 --- \texttt{prog:cmh-route}. Its regular-class
-endpoint is now normalized: Definition~\ref{def:cmh} fixes the operator data and
-Theorem~\ref{thm:cmh-implies-affine-poincare} proves $\CPaff\le\CMH$, discharging
-\texttt{q:cmh-normalization}; passage to arbitrary log-concave limits is the separate open node
+\emph{Repository target:} the deterministic moment-map/CMH route in
+\texttt{research/kls/routes.md}. Definition~\ref{def:cmh} fixes the regular-class operator data
+and Theorem~\ref{thm:cmh-implies-affine-poincare} proves $\CPaff\le\CMH$; passage to arbitrary
+log-concave limits is the separate open node
 \texttt{q:cmh-approximation}. The route's other open sub-targets split into a construction layer
 (\texttt{q:mm-invariant-lift}, \texttt{q:mm-square-root-commutator}) and a falsification layer
-(\texttt{q:gate-zero}, \texttt{q:cmh-solenoidal-perturbation}).
+(\texttt{conj:gate-zero}, \texttt{q:cmh-solenoidal-perturbation}).
 
 Two cautions belong in this table rather than in the route brief, because they change how this
 target should be read. First, $\mathrm{CMH}(4)$ is \emph{not} a reformulation of
@@ -122,7 +122,7 @@ target should be read. First, $\mathrm{CMH}(4)$ is \emph{not} a reformulation of
 Proposition~\ref{prop:cmh-hodge} it additionally demands control of a solenoidal excess that
 vanishes identically in dimension one under the no-flux convention. This proves an additional
 channel, but not a strict-separation theorem; equivalence at constant $4$ remains open
-(Remark~\ref{rem:cmh-stronger-than-kls}). Second, its cheapest necessary consequence, gate zero
+(Corollary~\ref{rem:cmh-stronger-than-kls}). Second, its cheapest necessary consequence, gate zero
 (Conjecture~\ref{conj:gate-zero}), is itself an instance of the row above: in isotropic position
 it asks $\lmax(\E H^2)\le4$ where Theorem~\ref{thm:chen-klartag-moment-hessian} supplies only the
 trace bound $\Tr(\E H^2)\le2n$. Target~2 therefore does not escape the average-versus-uniform
