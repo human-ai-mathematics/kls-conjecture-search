@@ -1,6 +1,6 @@
 # research/ — federated research control plane
 
-This directory coordinates two mathematical programs under one soundness contract and one
+This directory coordinates two mathematical programs under one contribution contract and one
 structural checker. The manuscript in `../modules/` owns accepted mathematical prose; the
 ledgers own claim state and logical edges; `../solutions/` owns independently reviewable proofs.
 Numerical artifacts guide research but never certify claims or proofs.
@@ -19,15 +19,16 @@ the human-facing directory name is `a-series`.
 
 ```text
 research/
-  a-series/       A1--A5 ledger, obstruction prose, schema, and target briefs
-  kls/            route-spanning KLS ledger, route registry, and obstruction prose
-  knowledge/      reusable analytic tools and the curated A/KLS instance battery
-  explorations/   append-only mathematical attempt history, including dead ends
-  reviews/        persisted proof-review and non-certifying audit reports
-  runs/           provenance-stamped finum artifacts
-  decisions/      append-only control-plane and harness decisions
-  check_ledger.py shared R0 checker
-  tests/          checker regression suite
+  ledger-schema.md  shared ledger kinds, statuses, fields, and invariants
+  a-series/         A1--A5 ledger, workflow, obstruction prose, and target briefs
+  kls/              route-spanning KLS ledger, route registry, and obstruction prose
+  knowledge/        reusable analytic tools and the curated A/KLS instance battery
+  explorations/     append-only mathematical attempt history, including dead ends
+  reviews/          persisted proof-review and non-certifying audit reports
+  runs/             provenance-stamped finum artifacts
+  decisions/        append-only control-plane and harness decisions
+  check_ledger.py   shared structural checker
+  tests/            checker regression suite
 ```
 
 Program-owned material belongs under the corresponding program directory. Root-level planes
@@ -35,19 +36,16 @@ exist only when they are intentionally shared across programs or form one reposi
 archive. Historical explorations, reviews, and runs retain their paths so proof and diagnostic
 provenance does not churn during organizational refactors.
 
-## Common graph and status contract
+## Shared ledger schema
 
 Both ledgers use `depends_on` for same-program claim nodes actually used in a proof,
 `bounded_by` for applicable obstructions, and `bridges` for explicit cross-program links written
 as `program/id`. A program has exactly one ledger; all ledger writes pass through the singleton
 orchestrator.
 
-- A-series statuses: `open`, `proved`, `imported`, `refuted`.
-- KLS statuses: `proved`, `defined`, `conditional`, `open`, `heuristic`, `refuted`, `imported`.
-
-`proved` nodes require an R2 dossier. A `conditional` KLS implication may also carry R2
-certification while retaining its unresolved assumptions. A `refuted` node names its certified
-refuter through `refuted_by`; numerical output never fills that role.
+Kinds, statuses, all common fields, certification requirements, and the A-series/KLS extensions
+are documented only in [`ledger-schema.md`](ledger-schema.md). The checker is their executable
+structural validator.
 
 The A1-bis/KLS bridge connects `ab/conj:a1-bis` to `kls/conj:kls`. It is a bridge between a
 structured-posterior claim and its universal log-concave boundary, not a proof dependency.

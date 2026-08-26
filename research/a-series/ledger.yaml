@@ -4,25 +4,8 @@
 # prose; this ledger owns their current state, proof dependencies, obstructions, provenance,
 # and certification pointers. It records neither workflow history nor numerical proof.
 #
-# Schema: research/a-series/README.md, section "Ledger schema". In brief:
-#   kind    = mathematical form only
-#             theorem|proposition|lemma|corollary|conjecture|question|obstruction|example
-#   status  = epistemic state only
-#             open|proved|imported|refuted
-#
-# An id is normally the statement's LaTeX label. A stable synthetic id must declare `label`,
-# and `file` must contain that effective label. `refines` is reserved for a genuine semantic
-# sharpening of another statement; it is not a manuscript-location field.
-#
-# Imported nodes require `import_class` and `references` (BibTeX keys in fi_references.bib).
-# Proved nodes require a certified standalone `solution`; refuted nodes name certified
-# `refuted_by` nodes. R1 specifications and artifacts live outside claim nodes.
-#
-# Canonical logical edges:
-#   depends_on   same-ledger claim nodes actually used by the proof; acyclic
-#   bounded_by   obstruction nodes that constrain a valid statement/proof
-#   bridges      explicit cross-program links written as program/id
-#   refuted_by   certified refuter nodes, also present in depends_on
+# Shared schema: research/ledger-schema.md
+# Program workflow: research/a-series/README.md
 # =============================================================================
 
 meta:
@@ -188,7 +171,6 @@ nodes:
     statement: "Selection target: for an explicit nontrivial class of well-identified GLMs, construct Wbar from (X,y,Sigma0), certify the prop:a1-bulk-tail bound below the prior scale, and obtain O_P(1/n) behavior in regular likelihood-dominated sequences."
     bounded_by: [obs:flat-direction]
     depends_on: [prop:a1-bulk-tail]
-    target_doc: research/a-series/targets/A1-data-informed-glm.md
 
   - id: q:a1-poincare
     kind: question
@@ -253,7 +235,6 @@ nodes:
     file: modules/open-targets/A2-bernstein-von-mises.tex
     statement: "Asymptotic FI constants: n C_P(pi_n) -> lambda_max(I(theta_0)^{-1}) under a spectral-stability/tail hypothesis; global C_LS and C_TCI have this limit only under stronger tail comparisons or n-shrinking priors."
     bounded_by: [obs:tv-insufficient, obs:gaussian-tail-rigidity]
-    target_doc: research/a-series/targets/A2-bernstein-von-mises.md
 
   - id: thm:a2-target
     kind: theorem
@@ -340,7 +321,6 @@ nodes:
     statement: "Dependence-aware hierarchical target: conditional block inequalities plus an explicit inter-block coupling contract imply a joint inequality in the noncentered pullback metric, including scale derivatives and structural cross terms."
     bounded_by: [obs:marginals-not-joint, obs:flat-direction]
     depends_on: [thm:a3-product, prop:a3-hierarchical-prior, thm:a3-block-gibbs]
-    target_doc: research/a-series/targets/A3-heavy-tailed-posteriors.md
 
   - id: thm:a3-student
     kind: theorem
@@ -418,7 +398,6 @@ nodes:
     statement: "Localized VB target: under an explicit family-coercivity/tail contract, there exists rho_0>0 such that on optimizer-centered sublevels r=delta_Q+rho with 0<=rho<=rho_0, C_{Q,r} and the localized mean constant are controlled by posterior bulk terms plus explicit remainders; global location-rich logistic constants remain prior-scale."
     bounded_by: [obs:restricted-not-finite, obs:flat-direction, obs:gaussian-tail-rigidity]
     depends_on: [thm:glm-fi]
-    target_doc: research/a-series/targets/A4-variational-inference.md
 
   - id: q:a4-restricted
     kind: question
@@ -637,7 +616,6 @@ nodes:
     statement: "For fixed K and a G-invariant model, let Gamma_conn be the worst-cut/connectivity height of the free nondegenerate orbit network. Under exponentially quantitative empirical-barrier, collision-stratum, tail, and capacity control, n^{-1} log C_P(pi_Theta)->Gamma_conn in P_{theta_*}-probability while the quotient constant has the Fisher-scale (1+o_P(1))/n law; prefactors are a second target."
     bounded_by: [obs:symmetry-vs-physical]
     depends_on: [prop:a5-ratio]
-    target_doc: research/a-series/targets/A5-quotient-and-reparameterization.md
 
   - id: q:a5-qbvm
     kind: question

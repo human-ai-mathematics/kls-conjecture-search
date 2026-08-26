@@ -12,12 +12,12 @@ interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment compani
 \end{equation}
 The bootstrap of Section~\ref{sec:bootstrap} consumes $\Xi_T$ and the covariance reduction of
 Section~\ref{sec:product-stress} consumes $\Xi^{(2)}_T$; both rest on the small-time
-operator-norm control imported here. We isolate it as a hypothesis and discharge it against
+operator-norm control imported here. We isolate it as an assumption and discharge it against
 the cited covariance technology. The exponent $C_2=2$ follows from the published sup-time
 estimate below; the sharper $C_2=1$ conclusion is conditional on the July 2026 version-1
 preprint input.
 
-\begin{hypothesis}[Known small-time operator-norm control; matched to
+\begin{assumption}[Known small-time operator-norm control; matched to
 {\cite{KlartagLehec2022Polylog,Letwin2026QuadraticKLS}}]
 \label{hyp:KI}
 There are universal constants $c_0,C_1,C_2>0$ such that for every isotropic log-concave $\mu$ on
@@ -26,7 +26,7 @@ $\R^n$, $n\ge3$,
   \E\,\norm{A_t}_\op\ \le\ C_1
   \qquad\text{for all }0\le t\le t_1(n):=c_0(\log n)^{-C_2}.
 \]
-\end{hypothesis}
+\end{assumption}
 
 \noindent
 This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's
@@ -103,10 +103,10 @@ Bull.\ Amer.\ Math.\ Soc.\ \textbf{62} (2025), no.~4, article) for \cite{KLnotes
 arXiv:2203.15551 for \cite{KlartagLehec2022Polylog}.
 \end{remark}
 
-\begin{corollary}[Discharge of Hypothesis~\ref{hyp:KI}]
+\begin{corollary}[Discharge of Assumption~\ref{hyp:KI}]
 \label{cor:KI-discharged}
 The published Theorem~\ref{thm:KL-window}, together with the Brascamp--Lieb cap, discharges
-Hypothesis~\ref{hyp:KI} with $C_2=2$.
+Assumption~\ref{hyp:KI} with $C_2=2$.
 \end{corollary}
 
 \begin{proof}
@@ -118,7 +118,7 @@ $\E\norm{A_t}_\op\le2+t^{-1}e^{-1/(Ct)}\le C_1$.
 \begin{corollary}[Letwin-v1 sharpening of the covariance window]
 \label{cor:KI-letwin}
 Conditional on the preprint input of Theorem~\ref{thm:letwin-qcts},
-Hypothesis~\ref{hyp:KI} holds with $C_2=1$: there is a universal constant $c_0$ such
+Assumption~\ref{hyp:KI} holds with $C_2=1$: there is a universal constant $c_0$ such
 that for every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-1}$,
 \[
   \E\,\norm{A_t}_\op\ \le\ C_1 .

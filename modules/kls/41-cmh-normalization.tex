@@ -14,7 +14,7 @@ was a schema:
   \item an exact weighted Hodge decomposition showing that CMH dominates the affine
         Poincar\'e constant and contains an additional solenoidal channel in dimension at least
         two; whether that channel makes CMH genuinely stronger than KLS remains open
-        (Proposition~\ref{prop:cmh-hodge}, Remark~\ref{rem:cmh-stronger-than-kls});
+        (Proposition~\ref{prop:cmh-hodge}, Corollary~\ref{rem:cmh-stronger-than-kls});
   \item a necessary linear-sector condition, \emph{gate zero}, which is an operator-to-trace
         upgrade of exactly the kind catalogued in Remark~\ref{rem:trace-upgrade-unification},
         and which Theorem~\ref{thm:letwin-moment-map} provably does not supply by matrix algebra
@@ -243,7 +243,7 @@ ratio to $\norm{h}_2^2$ is $\norm{\Aop_1^{-1}}$, which is $\CPaff(\mu)$ by
 \eqref{eq:affine-poincare-constant}.
 \end{proof}
 
-\begin{remark}[What the Hodge identity does and does not prove]
+\begin{corollary}[The exact Hodge consequence]
 \label{rem:cmh-stronger-than-kls}
 $\Sigma\nabla\psi$ is the least-$L^2(\Sigma^{-1})$ field with divergence $-h$, and by
 Proposition~\ref{prop:cmh-hodge} controlling it \emph{is} the affine Poincar\'e inequality. CMH
@@ -258,7 +258,11 @@ comparison
   \CMH(\mu)\ge\CPaff(\mu).
 \]
 In dimension at least two the divergence-free subspace is nontrivial, so the identity displays
-an additional channel that CMH must control.  It does \emph{not}, however, show that this channel
+an additional channel that CMH must control.
+\end{corollary}
+
+\begin{remark}[What the Hodge identity does not prove]
+The identity does \emph{not} show that this channel
 is nonzero for a CMH extremizing sequence, nor does it exhibit a measure separating CMH from
 $\CPaff$.  Thus $\mathrm{CMH}(4)$ is sufficient for KLS with constant $4$, while equivalence
 and strict nonimplication are both open.  The ledger records $\mathrm{CMH}(4)$ as a route target,
@@ -266,7 +270,7 @@ not as an established reformulation or a proved strict strengthening of KLS.
 \end{remark}
 
 The product formula below shows that products of one-sided exponentials saturate
-$\mathrm{CMH}(4)$ with zero slack.  Remark~\ref{rem:cmh-saturation-risk} therefore turns the
+$\mathrm{CMH}(4)$ with zero slack.  Corollary~\ref{rem:cmh-saturation-risk} therefore turns the
 possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
 
 \subsection{Gate zero: the necessary linear-sector condition}
@@ -291,13 +295,17 @@ test function and no operator inverse. A measure with
 $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without
 disproving Conjecture~\ref{conj:kls}.
 
-\begin{remark}[Gate zero is a trace-upgrade problem in disguise]
+\begin{corollary}[Gate zero is a trace-upgrade problem]
 \label{rem:gate-zero-trace-upgrade}
 Theorem~\ref{thm:chen-klartag-moment-hessian} gives
 $\E_\nu\norm{H}_{\HS}^2\le2n$, that is $\Tr(\E H^2)\le2n$: the \emph{average} eigenvalue of
 $\E H^2$ is already at most $2$ in isotropic position. Gate zero asks for the \emph{largest}
 eigenvalue to be at most $4$. It is therefore an operator-to-trace upgrade carrying a factor-$2$
-budget, and belongs to the same difficulty family as \texttt{q:upgrade}, the high-rank part of
+budget.
+\end{corollary}
+
+\begin{remark}[Relation to the shared trace-upgrade difficulty]
+Gate zero belongs to the same difficulty family as \texttt{q:upgrade}, the high-rank part of
 \texttt{q:stein-weighted}, and \texttt{q:alignment}; no equivalence is asserted, exactly as in
 Remark~\ref{rem:trace-upgrade-unification}. The practical consequence is a split verdict:
 gate zero is cheap to \emph{test} on a model and is expected to be as hard to \emph{prove} as
@@ -401,7 +409,7 @@ $\Div_\mu u=\rho^{-1}\Div(\rho u)$. All integrations by parts are justified firs
 supported fields or fields with vanishing normal flux, and the closed forms are obtained by
 completion. The no-flux convention is essential in dimension one, where it is what rules out a
 nonzero constant divergence-free field and forces $w=0$ in
-Remark~\ref{rem:cmh-stronger-than-kls}.
+Corollary~\ref{rem:cmh-stronger-than-kls}.
 
 \paragraph{Closed operators.}
 $\calE_H(f,g)=\E_\mu\inner{H\nabla f}{\nabla g}$ is closable under the smooth moment-map

@@ -24,24 +24,13 @@ and an exploratory KLS proof program.
 | diagnostics | `research/runs/*.jsonl` | provenance-stamped `finum` research artifacts |
 | memory | `research/explorations/`, `research/knowledge/`, program obstruction files, `research/reviews/`, `research/decisions/` | attempts, shared battery, no-go prose, audits, harness decisions |
 
-## The soundness contract
+## Ledger contract
 
-Three signals with different roles. They are not a ladder whose lower rungs accumulate into a
-proof: an analytic proof is certified independently of numerics.
-
-| signal | mechanism | what it is worth |
-|---|---|---|
-| **R0 — structural** | `python3 research/check_ledger.py` returns 0 errors | cheap and deterministic; **necessary, never sufficient** |
-| **R1 — numerical** | a provenance-stamped `finum` artifact in `research/runs/` | research direction, stress testing, or a candidate refutation; **never** claim or proof validation |
-| **R2 — proof** | `solutions/<id>.tex` with `checked_by ∈ {agent, human, lean}` | certifies a proved claim or conditional implication; refutations point to a certified refuter |
-
-**The invariant: R1 never validates R2.** A proof dossier and its review must stand without any
-numerical run. `finum` may guide intuition, expose a likely counterexample, or help sharpen a
-statement; sampled, MCMC, FEM, and finite-grid quantities remain directional. If exact arithmetic
-or an analytic lower bound yields a checkable certificate (`finum/verdict.py:falsify`), that
-certificate must be persisted and independently checked in the proof/refutation plane before a
-logical status changes. This is why **criticism is a first-class role, not QA**: never let a prover
-grade its own proof.
+Both programs use the single shared field-level schema in
+[`research/ledger-schema.md`](research/ledger-schema.md), including the canonical kind and status
+vocabularies, graph fields, provenance, certification metadata, and program-specific extensions.
+`research/check_ledger.py` enforces its structural rules. Numerical evidence never changes a
+logical status without independent proof or refutation certification.
 
 ## Definition of done
 
@@ -67,7 +56,7 @@ persisted report under `research/reviews/` naming distinct author(s) and reviewe
 ## Commands
 
 ```bash
-python3 research/check_ledger.py                                   # R0 — after every ledger edit
+python3 research/check_ledger.py                                   # structural check after every ledger edit
 python3 research/check_ledger.py status                            # derived unresolved frontier
 python3 research/check_ledger.py node q:upgrade                    # one node + derived consumers
 python3 -m unittest discover -s research/tests -p 'test_*.py'      # checker regressions
@@ -89,7 +78,9 @@ Specific to this repo; a naive agent swarm hits every one of these.
 2. **No private Monte Carlo.** The retraction that created `research/explorations/` is the
    cautionary tale: two agents ran ad-hoc scripts, disagreed, and a non-reproducible claim had
    to be withdrawn. Every numerical observation cited as research guidance flows through `finum`
-   with a provenance-stamped artifact; none counts toward proof certification.
+   with a provenance-stamped artifact; none counts toward proof certification. Exact arithmetic
+   or an analytic lower bound emitted by `finum` changes no status until an independent critic
+   checks it in a proof or refutation dossier.
 3. **The research battery is shared.** Use the curated instances in
    `research/knowledge/instances.md` so stress tests remain comparable and do not collapse to a
    refiner's happy path. A refiner may propose a new adversarial instance, but the librarian must
@@ -107,7 +98,7 @@ Specific to this repo; a naive agent swarm hits every one of these.
    `q:stein-weighted`, and `q:alignment` are three manifestations of the same high-rank
    occupation difficulty (`rem:trace-upgrade-unification`); their formal equivalence is not
    proved. One team owns the comparison, then propagates only what has actually been shown.
-7. **`conditional` KLS nodes are Lean-certifiable only as conditional implications.** The
+7. **`conditional` nodes are Lean-certifiable only as conditional implications.** The
    assumption becomes a hypothesis; the node reaches unconditional `proved` only when the
    assumption is discharged.
 8. **`research/explorations/` and `research/decisions/` are append-only.** Explorations prevent

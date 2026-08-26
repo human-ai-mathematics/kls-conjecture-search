@@ -7,12 +7,12 @@ analytic-proof channel paired with the refinement and stress-testing work in `re
 A solution file is the artifact a newly `proved` ledger node points to (via its `solution:`
 field). The ledger records the *claim and its state*; this directory holds the *proof an
 independent reviewer or Lean can check*. Every newly `proved` node must carry a certified dossier;
-narrative provenance and numerical artifacts are not alternatives to R2. There is no historical
+narrative provenance and numerical artifacts are not alternatives to a checked proof. There is no historical
 or inline-proof exception: every `status: proved` node must point to a certified dossier.
 
-Definitions use a non-proof status such as KLS `defined`; diagnostic remarks and externally
-imported results are classified according to their actual role. Reclassification is not proof
-certification.
+Definitions use the shared non-proof status `defined`; a ledger-worthy observation uses its
+precise mathematical kind, while expository remarks remain prose. Externally imported results are
+classified according to their actual role. Reclassification is not proof certification.
 
 ## Why separate from the manuscript
 
@@ -23,7 +23,7 @@ certification.
 - **Liftable.** Each file is a `subfiles` document, so once accepted it drops into `main.tex`
   with a single `\subfile{solutions/<id>}` line — no rewrite.
 
-## The `checked_by` ladder
+## Certification modes
 
 A proof is only as trustworthy as its check. Every solution declares its level in the header:
 
@@ -47,8 +47,8 @@ adjacent `<solution-stem>.lean` file. A dossier may certify a conditional implic
 node remains `status: conditional`; only discharge of its assumptions permits `status: proved`.
 
 Numerics never appear on this ladder: they may guide intuition or suggest a counterexample, but
-they do not validate a claim, justify a proof step, or certify a dossier (the R1/R2 contract in
-[`../CLAUDE.md`](../CLAUDE.md)). Every proof must stand independently of numerical outcomes.
+they do not validate a claim, justify a proof step, or certify a dossier. Every proof must stand
+independently of numerical outcomes, as required by [`../CLAUDE.md`](../CLAUDE.md).
 
 ## Writing a solution
 

@@ -7,8 +7,7 @@ The machine-readable nodes live in [`ledger.yaml`](ledger.yaml) (`kind: obstruct
 
 Math is written in LaTeX (`$…$`); the canonical *formal* statement of each barrier is the
 manuscript `\label` named under "Source" — this file links and explains, it does not restate
-formally. (Part III/KLS keeps its own obstruction registry in
-`../kls/obstructions.md`; its current fences are scoped to the Eldan fixed-cut route.)
+formally.
 
 > When you discover a new barrier useful to more than one target, add it here AND as an `obs:`
 > node in the ledger. Single-target subtleties stay in that target's `.md`.
@@ -149,11 +148,3 @@ $W_2^2/\mathrm{KL} \asymp |m|^{2-p} \to \infty$. Hence $C_{\mathcal Q}=\infty$ a
 mean-field Gaussian level for $p<2$. For the unrestricted entropy ball, mixing
 $\varepsilon_R\asymp r/R^p$ of the target conditioned on $[R,R+1]$ keeps KL below $r$ while its
 second moment grows like $rR^{2-p}$.
-
----
-
-### Note: relationship to the KLS obstruction registry
-Both programs use `bounded_by` as the sole stored obstruction direction. The checker validates
-that ids resolve; authors and independent critics remain responsible for semantic applicability
-and clearance. A-series entries primarily constrain statement shape, while the current KLS entries
-primarily constrain Eldan-route proof designs.

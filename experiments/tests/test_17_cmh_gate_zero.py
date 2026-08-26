@@ -157,7 +157,7 @@ def test_dirichlet_ceiling_formula():
     assert abs(cmh.dirichlet_ceiling(A) - 4.0 / (1 + 4 * s / (A * (A + 1)))) <= 1e-12
 
 
-# --- target wiring, soundness contract ----------------------------------------------
+# --- target wiring and numerical-validity policy -----------------------------------
 
 def test_target_is_registered_and_deterministic():
     assert REGISTRY["cmh-gate-zero"] is cmh

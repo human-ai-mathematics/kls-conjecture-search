@@ -8,7 +8,8 @@ the mathematics: statements and proofs live in `modules/kls/` and `solutions/`.
 | question | authoritative file |
 |---|---|
 | What is the mathematical statement? | `modules/kls/**/*.tex` |
-| What is proved, open, conditional, or imported? | [`ledger.yaml`](ledger.yaml) |
+| What is each node's logical status? | [`ledger.yaml`](ledger.yaml) |
+| What fields and enum values are valid? | [`../ledger-schema.md`](../ledger-schema.md) |
 | Which route owns a node? | its explicit `route:` field in the ledger |
 | What routes are live and where should work start? | [`routes.md`](routes.md) |
 | Which statement/proof shapes are fenced? | [`obstructions.md`](obstructions.md), referenced by ledger `bounded_by` |
@@ -18,6 +19,9 @@ the mathematics: statements and proofs live in `modules/kls/` and `solutions/`.
 The ledger is deliberately route-spanning and single-writer. Every node declares one of
 `shared`, `eldan-localization`, `moment-map-spectral`, or `moment-map-cmh`; route directories
 contain briefs, never local ledgers.
+
+KLS uses the unified schema in [`../ledger-schema.md`](../ledger-schema.md), including the
+KLS-specific `meta.route_policy` and per-node `route` fields.
 
 ## Working contract
 

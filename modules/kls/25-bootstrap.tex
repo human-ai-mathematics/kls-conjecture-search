@@ -161,13 +161,13 @@ $\log n$.
 
 The polylogarithmic covariance technology does beat it. The required input is the small-time
 operator-norm control imported in Section~\ref{sec:covariance-tech}
-(Hypothesis~\ref{hyp:KI}), discharged there on the published $c/\log^2 n$ window and, conditional
+(Assumption~\ref{hyp:KI}), discharged there on the published $c/\log^2 n$ window and, conditional
 on the version-1 input of Theorem~\ref{thm:letwin-qcts}, on the larger $c/\log n$ window
 (Corollaries~\ref{cor:KI-discharged} and \ref{cor:KI-letwin}).
 
 \begin{corollary}[Polylog evaluation]
 \label{cor:loglog}
-Under Hypothesis~\ref{hyp:KI}, for $t_1(n)\le T\le1$,
+Under Assumption~\ref{hyp:KI}, for $t_1(n)\le T\le1$,
 $\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$. Hence, when additionally
 $T<1/8$ and the near-worst parameter satisfies $\eps\le T^{1/3}$, every such $\mu$ and every
 balanced cut $E$ satisfy, by \eqref{eq:clean-form},
@@ -223,7 +223,7 @@ Absolute, $\le C(1+e_0)T$ & Unconditional, all $\mu$, all balanced $E$ &
 Prop.~\ref{prop:trivial-excess}. \\
 \addlinespace
 Absolute with small constant, $\le Te_0+\kappa T$ & Holds for near-worst $\mu$ whenever
-$h_\mu(1+\log\log n)\le c\kappa T$; conditional on Hyp.~\ref{hyp:KI} &
+$h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass.~\ref{hyp:KI} &
 Cor.~\ref{cor:loglog}; the universal-time near-worst extension is Question~\ref{q:taming}. \\
 \addlinespace
 Relative, $\le\kappa\,h_\mu T$ & Requires, as bootstrap input, $\Xi_T\le c\kappa T$,

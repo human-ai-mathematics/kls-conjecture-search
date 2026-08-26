@@ -216,6 +216,7 @@ class CheckerHardeningTests(CheckerFixture):
                     assuming=["ass:x"],
                     related=["ass:x"],
                     entry_point=["ass:x"],
+                    target_doc="research/a-series/targets/A1-data-informed-glm.md",
                     discharged_by=["ass:x"],
                 ),
             ],
@@ -223,7 +224,7 @@ class CheckerHardeningTests(CheckerFixture):
 
         errors = "\n".join(self.check()["errors"])
 
-        for field in ("assuming", "related", "entry_point", "discharged_by"):
+        for field in ("assuming", "related", "entry_point", "target_doc", "discharged_by"):
             self.assertIn(f"thm:conditional.{field}: obsolete field", errors)
 
     def test_ab_conjectured_status_is_rejected_but_open_conjecture_is_valid(self):
@@ -369,13 +370,13 @@ class CheckerHardeningTests(CheckerFixture):
                 status="conditional",
                 depends_on=["thm:child"],
             ),
-            node("heur:h", status="heuristic", kind="heuristic"),
+            node("ass:h", status="open", kind="assumption"),
             node(
                 "thm:middle",
                 status="imported",
                 import_class="published",
                 references=["FixtureReference"],
-                depends_on=["heur:h"],
+                depends_on=["ass:h"],
             ),
             node("thm:top", depends_on=["thm:middle"]),
             node("thm:direct", depends_on=["thm:child"]),
@@ -389,7 +390,7 @@ class CheckerHardeningTests(CheckerFixture):
             errors,
         )
         self.assertNotIn("thm:parent (conditional)", errors)
-        self.assertIn("thm:top (proved) inherits unresolved heuristic 'heur:h'", errors)
+        self.assertIn("thm:top (proved) inherits unresolved open 'ass:h'", errors)
         self.assertIn("thm:direct (proved) inherits unresolved conditional 'thm:child'", errors)
         self.assertIn("thm:direct (proved) inherits unresolved open 'ass:x'", errors)
 
@@ -787,25 +788,66 @@ class CheckerHardeningTests(CheckerFixture):
 
                 self.assertIn(f"meta.{field}: legacy proof exceptions are forbidden", errors)
 
-    def test_kls_defined_status_requires_definition_kind(self):
-        self.add_ledger(
-            "main",
-            "kls",
-            [
-                node("def:valid", status="defined", kind="definition"),
-                node("thm:not-a-definition", status="defined", kind="theorem"),
-            ],
-        )
+    def test_programs_share_status_contract(self):
+        self.assertEqual(CHECKER.PROGRAMS["ab"]["status"], CHECKER.SHARED_STATUSES)
+        self.assertEqual(CHECKER.PROGRAMS["kls"]["status"], CHECKER.SHARED_STATUSES)
+
+    def test_kind_vocabulary_is_shared_and_minimal(self):
+        self.assertEqual(CHECKER.KIND, {
+            "theorem", "proposition", "lemma", "corollary", "conjecture",
+            "assumption", "question", "definition", "obstruction", "example",
+        })
+
+    def test_removed_node_kinds_are_rejected(self):
+        self.add_ledger("main", "kls", [
+            node("ass:valid", status="open", kind="assumption"),
+            node("hyp:invalid", status="open", kind="hypothesis"),
+            node("prog:invalid", status="open", kind="program"),
+            node("rem:invalid", status="open", kind="remark"),
+        ])
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertNotIn("def:valid", errors)
+        self.assertNotIn("ass:valid: bad kind", errors)
+        for nid, kind in (
+            ("hyp:invalid", "hypothesis"),
+            ("prog:invalid", "program"),
+            ("rem:invalid", "remark"),
+        ):
+            self.assertIn(f"{nid}: bad kind '{kind}'", errors)
+
+    def test_defined_status_and_definition_kind_are_reciprocal(self):
+        self.add_ledger("ab-definitions", "ab", [
+            node("def:ab-valid", status="defined", kind="definition"),
+            node("thm:ab-invalid", status="defined", kind="theorem"),
+        ])
+        self.add_ledger("kls-definitions", "kls", [
+            node("def:kls-valid", status="defined", kind="definition"),
+            node("def:kls-invalid", status="open", kind="definition"),
+        ])
+
+        errors = "\n".join(self.check()["errors"])
+
+        self.assertNotIn("def:ab-valid", errors)
+        self.assertNotIn("def:kls-valid", errors)
         self.assertIn(
-            "thm:not-a-definition: status defined is only valid for kind definition",
+            "thm:ab-invalid: status defined is only valid for kind definition",
             errors,
         )
+        self.assertIn("def:kls-invalid: kind definition requires status defined", errors)
 
-    def test_proved_definition_requires_r2_unless_changed_to_defined(self):
+    def test_removed_heuristic_classification_is_rejected(self):
+        self.add_ledger("main", "kls", [
+            node("rem:bad-kind", status="open", kind="heuristic"),
+            node("rem:bad-status", status="heuristic", kind="proposition"),
+        ])
+
+        errors = "\n".join(self.check()["errors"])
+
+        self.assertIn("rem:bad-kind: bad kind 'heuristic'", errors)
+        self.assertIn("rem:bad-status: status 'heuristic' not allowed", errors)
+
+    def test_definition_requires_defined_status(self):
         self.add_ledger(
             "main",
             "kls",
@@ -819,6 +861,7 @@ class CheckerHardeningTests(CheckerFixture):
         errors = "\n".join(self.check()["errors"])
 
         self.assertIn("def:proved: proved node requires a certified solution", errors)
+        self.assertIn("def:proved: kind definition requires status defined", errors)
         self.assertNotIn("def:defined", errors)
 
     def test_route_policy_requires_explicit_routes_and_checks_vocabulary(self):

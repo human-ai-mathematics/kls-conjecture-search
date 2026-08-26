@@ -7,7 +7,7 @@ isolated test fixtures):
 * ledger and node identities are unique (duplicate programs are rejected until
   multi-ledger merging has explicit semantics);
 * dependency edges resolve, are acyclic, and do not let a proved node inherit an
-  open, refuted, heuristic, conditional, or unreviewed-preprint premise;
+  open, refuted, conditional, or unreviewed-preprint premise;
 * every conditional node inherits at least one unresolved premise through
   ``depends_on``; its assumption contract is derived rather than duplicated;
 * nodes use an explicit, program-aware schema; their manuscript anchor exists in
@@ -45,8 +45,7 @@ ROOT = RESEARCH.parent
 
 KIND = {
     "theorem", "lemma", "proposition", "corollary", "definition", "assumption",
-    "hypothesis", "question", "program", "remark", "heuristic",
-    "conjecture", "obstruction", "example",
+    "question", "conjecture", "obstruction", "example",
 }
 CHECKED_BY = {"agent", "human", "lean"}
 IMPORT_CLASSES = {"published", "preprint-unreviewed"}
@@ -56,19 +55,21 @@ PROOF_REVIEW_FIELDS = REVIEW_COMMON_FIELDS | {
     "verdict", "authors", "reviewer", "nodes", "solutions", "follows_up",
 }
 
-# Which statuses remain unresolved premises for a proved node. Conditional and
-# heuristic are deliberately included for KLS and discovered recursively through
-# the canonical ``depends_on`` graph.
+# Both programs share one logical-status vocabulary. Mathematical form belongs
+# in ``kind``; speculative prose is not a ledger classification.
+SHARED_STATUSES = {"open", "conditional", "proved", "imported", "defined", "refuted"}
+UNRESOLVED_STATUSES = {"open", "conditional", "refuted"}
+
+# Unresolved premises are discovered recursively through the canonical
+# ``depends_on`` graph. Unreviewed preprints are handled separately below.
 PROGRAMS = {
     "ab": {
-        "status": {"open", "proved", "imported", "refuted"},
-        "unproved": {"open", "refuted"},
+        "status": SHARED_STATUSES,
+        "unproved": UNRESOLVED_STATUSES,
     },
     "kls": {
-        "status": {
-            "proved", "defined", "conditional", "open", "heuristic", "refuted", "imported",
-        },
-        "unproved": {"conditional", "open", "heuristic", "refuted"},
+        "status": SHARED_STATUSES,
+        "unproved": UNRESOLVED_STATUSES,
     },
 }
 
@@ -82,7 +83,7 @@ RESOLVE_FIELDS = ("depends_on", "refuted_by")
 COMMON_NODE_FIELDS = {
     "id", "kind", "status", "file", "label", "statement", "depends_on",
     "bounded_by", "bridges", "references", "import_class", "solution",
-    "checked_by", "review", "accepted_by", "refuted_by", "target_doc",
+    "checked_by", "review", "accepted_by", "refuted_by",
 }
 PROGRAM_NODE_FIELDS = {
     "ab": COMMON_NODE_FIELDS | {"refines"},
@@ -99,6 +100,7 @@ OBSOLETE_NODE_FIELDS = {
     "evidence_run": "a dated exploration plus an immutable research/runs artifact",
     "evidence_target": "the finum target implementation and a dated exploration",
     "entry_point": "route documentation for non-logical navigation",
+    "target_doc": "the research/a-series/targets/README.md navigation table",
     "mechanism": "bounded_by plus independent semantic review",
     "clearance": "the proof dossier/review discussion of bounded_by",
     "note": "the manuscript, route/target brief, or a dated exploration",
@@ -726,6 +728,10 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 errors.append(
                     f"[{program}] {nid}: status defined is only valid for kind definition"
                 )
+            if kind == "definition" and status != "defined":
+                errors.append(
+                    f"[{program}] {nid}: kind definition requires status defined"
+                )
             import_class = node.get("import_class")
             if status == "imported":
                 if import_class is None:
@@ -765,28 +771,26 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 errors.append(f"[{program}] {nid}: references is only valid with status imported")
 
             declared_file: Path | None = None
-            for file_field in ("file", "target_doc"):
-                if file_field not in node:
-                    continue
-                file_ref = node.get(file_field)
-                context = f"[{program}] {nid}.{file_field}"
+            if "file" in node:
+                file_ref = node.get("file")
+                context = f"[{program}] {nid}.file"
                 if not isinstance(file_ref, str) or not file_ref.strip():
                     errors.append(f"{context}: must be a non-empty string")
-                    continue
-                relative_file = Path(file_ref)
-                if relative_file.is_absolute():
-                    errors.append(f"{context}: want a repo-relative path, got '{file_ref}'")
-                    continue
-                resolved_file = (root / relative_file).resolve()
-                try:
-                    resolved_file.relative_to(root.resolve())
-                except ValueError:
-                    errors.append(f"{context}: path escapes repository root: '{file_ref}'")
                 else:
-                    if not resolved_file.is_file():
-                        errors.append(f"{context}: '{file_ref}' does not exist")
-                    elif file_field == "file":
-                        declared_file = resolved_file
+                    relative_file = Path(file_ref)
+                    if relative_file.is_absolute():
+                        errors.append(f"{context}: want a repo-relative path, got '{file_ref}'")
+                    else:
+                        resolved_file = (root / relative_file).resolve()
+                        try:
+                            resolved_file.relative_to(root.resolve())
+                        except ValueError:
+                            errors.append(f"{context}: path escapes repository root: '{file_ref}'")
+                        else:
+                            if not resolved_file.is_file():
+                                errors.append(f"{context}: '{file_ref}' does not exist")
+                            else:
+                                declared_file = resolved_file
             effective_label = node.get("label", nid)
             if "label" in node and (
                 not isinstance(node.get("label"), str) or not node["label"].strip()
@@ -896,7 +900,7 @@ def _acyclic(program: str, nodes: dict[str, dict]) -> list[str]:
 
 
 def _print_summary(report: dict) -> None:
-    """Print the stable R0 summary used by the historical default command."""
+    """Print the stable structural summary used by the historical default command."""
     ledgers = report["ledgers"]
     total = sum(len(ledger["nodes"]) for ledger in ledgers)
     print(
@@ -911,7 +915,7 @@ def _print_summary(report: dict) -> None:
 
 def _print_status(report: dict) -> None:
     """Print the unresolved frontier derived from ledger state."""
-    frontier_statuses = {"open", "conditional", "heuristic", "refuted"}
+    frontier_statuses = {"open", "conditional", "refuted"}
     for ledger in sorted(report["ledgers"], key=lambda item: item["program"]):
         groups: dict[str, dict[str, list[str]]] = {}
         for nid, node in ledger["nodes"].items():

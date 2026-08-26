@@ -1,8 +1,8 @@
 # Orchestration — parallelizing agents across the open targets
 
 What can run concurrently, where the merge barriers are, and what each agent role reads and
-produces. The rules every agent works under — the soundness contract, the definition of done,
-the hard constraints — are in [`CLAUDE.md`](CLAUDE.md).
+produces. The definition of done and hard constraints every agent works under are in
+[`CLAUDE.md`](CLAUDE.md).
 
 > **Scope.** Parts II (A1–A5, A1-bis; refinement plus active proof certification) and III
 > (KLS; route-based proof program). The Lean channel
@@ -76,7 +76,7 @@ CMH:  endpoint audit + invariant lift/all-split reduction
 ```
 
 The Eldan conditional headline theorems already hold in the inline manuscript, subject to the
-agent-reviewed R2 dossiers for the former inline KLS backbone. Its open assumptions are
+independently reviewed dossiers for the former inline KLS backbone. Its open assumptions are
 `ass:all-cut-carleson` / `ass:weighted-package` (and `ass:stopped-centroid`). The spectral
 sufficiency bridge and the CMH universal headline remain open, although the CMH regular-class
 normalization and exact model classes have proved internal nodes. Numerics are
@@ -104,12 +104,12 @@ construction-layer CMH observable.
 
 | Role | Reads | Produces | Reward earned | Parallel |
 |---|---|---|---|---|
-| **Orchestrator / ledger-keeper** | both ledgers, `check_ledger.py` | node assignments; **the only writer of `ledger.yaml`** | keeps R0 green | singleton |
+| **Orchestrator / ledger-keeper** | both ledgers, `check_ledger.py` | node assignments; **the only writer of `ledger.yaml`** | keeps the structural check green | singleton |
 | **Analyst / refiner** | `research/a-series/targets/*.md`, `modules/**/*.tex`, `research/a-series/obstructions.md` | staged statement delta and optional numerical specification in the target brief | statement respects every `bounded_by` | 1 / target |
 | **Numerical** (finum) | the refined spec, `instances.md` | provenance-stamped `runs/*.jsonl` | research direction / candidate refutation | 1 / target |
-| **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex` with draft-only `checked_by: none` in its header | supplies a dossier for R2 review | per ready node |
+| **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex` with draft-only `checked_by: none` in its header | supplies a dossier for independent review | per ready node |
 | **Critic / adversary** | a conjecture *or* a draft proof | a candidate refuting instance, a proof-gap report, or an independent `checked_by: agent|human` audit | gates proof certification | N / claim |
-| **Lean** (deferred) | `proved` nodes + `LEAN_DESIGN.md` spine | `solutions/<id>.lean`, `checked_by: lean` | R2 (machine) | foundation track |
+| **Lean** (deferred) | `proved` nodes + `LEAN_DESIGN.md` spine | `solutions/<id>.lean`, `checked_by: lean` | machine certification | foundation track |
 | **Librarian** | `explorations/`, `knowledge/` | dedup, promote findings, kill dead-end reruns | keeps memory honest | singleton |
 
 **The critic is load-bearing** (the cultural center of this repo):
@@ -129,5 +129,5 @@ construction-layer CMH observable.
 *Companion documents: [`CLAUDE.md`](CLAUDE.md) (the rules),
 [`research/README.md`](research/README.md) (control plane),
 [`experiments/README.md`](experiments/README.md) (the `finum` numerical channel),
-[`solutions/README.md`](solutions/README.md) (the `checked_by` proof ladder),
+[`solutions/README.md`](solutions/README.md) (proof-certification modes),
 [`LEAN_DESIGN.md`](LEAN_DESIGN.md) (the deferred Lean channel and Mathlib gap).*

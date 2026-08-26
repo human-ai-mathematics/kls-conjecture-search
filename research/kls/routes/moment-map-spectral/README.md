@@ -19,8 +19,8 @@ time without losing its alignment with $A_t$.
 - `prop:spectral-sufficiency`: turn that estimate into a dimension-free spectral gap, including
   terminal variance control and the approximation limit.
 
-The two nodes are separate because the manuscript presently gives a mechanism sketch, not an R2
-sufficiency proof.
+The two nodes are separate because the manuscript presently gives a mechanism sketch, not a
+certified sufficiency proof.
 
 ## Fences
 

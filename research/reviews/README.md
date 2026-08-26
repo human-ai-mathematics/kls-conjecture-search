@@ -64,8 +64,8 @@ date: "YYYY-MM-DD"
 ---
 ```
 
-Its outcome, participants, and scope remain ordinary prose because they have no mechanical R2
-effect.
+Its outcome, participants, and scope remain ordinary prose because they have no mechanical
+proof-certification effect.
 
 ## Report body
 

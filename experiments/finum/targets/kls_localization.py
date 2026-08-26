@@ -11,7 +11,7 @@ the Eldan stochastic-localization engine (``finum.localization``) on source-occu
 
 Accordingly every run is diagnostic and emits ``no-verdict`` even when all numerical gates pass.
 
-Epistemic status (see the finum soundness contract in experiments/README.md): these numbers
+Epistemic status (see the numerical-validity policy in experiments/README.md): these numbers
 NEVER certify. A thin-shell occupation number is eligible to be inspected only behind all passing
 gates:
   * calibration — the Gaussian model oracle ``A_t = (1+t)^{-1} I`` reproduces to ~1e-12

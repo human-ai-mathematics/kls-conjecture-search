@@ -49,8 +49,8 @@ research/           federated control plane: peer a-series/ and kls/ programs; s
                     knowledge/, explorations/, reviews/, runs/, decisions/; check_ledger.py
 experiments/        the `finum` numerical channel (uv project) that produces the
                     provenance-stamped run artifacts in research/runs/
-solutions/          proof plane: standalone .tex (+ .lean) proofs, checked_by ladder
-CLAUDE.md           the rules an agent works under (soundness contract, done, constraints)
+solutions/          proof plane: standalone .tex (+ .lean) proofs and certification
+CLAUDE.md           the rules an agent works under (definition of done and constraints)
 LEAN_DESIGN.md      the Lean (L2) channel plane: Mathlib gap → first solutions/*.lean targets
 build/              compiled artifacts (gitignored)
 ```

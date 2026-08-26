@@ -36,7 +36,7 @@ for which Route~C has a theorem. Combined with
 Theorem~\ref{thm:cmh-implies-affine-poincare} (dossier
 \texttt{solutions/thm-cmh-normalization.tex}) each result yields an affine Poincar\'e bound with
 the same constant. Nothing here bears on universal $\mathrm{CMH}(4)$, which remains open;
-Remark~\ref{rem:cmh-saturation-risk} in the manuscript explains why the product case in
+Corollary~\ref{rem:cmh-saturation-risk} in the manuscript explains why the product case in
 particular is a warning rather than encouragement.
 
 Notation is that of \S\ref{subsec:cmh-definition}: $H$ is the moment-map Stein kernel in target
@@ -365,14 +365,16 @@ Consistency with the sharp external inputs holds: by Theorem~\ref{thm:cmh-1d}, t
 mechanism forcing the constant $4$ is the one-dimensional exponential, which is also the
 extremal case of Theorem~\ref{thm:letwin-moment-map}.
 
-\begin{remark}[= Remark~\ref{rem:cmh-saturation-risk}]
+\begin{corollary}[= Corollary~\ref{rem:cmh-saturation-risk}]
 \label{rem:sol-cmh-saturation-risk}
 Theorems~\ref{thm:sol-cmh-1d} and \ref{thm:sol-cmh-product} prove that products of centered
 one-sided exponentials have $\CMH=4$ exactly. Proposition~\ref{prop:cmh-hodge} proves, for each
 admissible test function, the exact decomposition of the CMH numerator into the affine
 Poincar\'e contribution and a nonnegative solenoidal contribution.
+\end{corollary}
 
-It is an open question, not a consequence of this remark, whether an admissible perturbation
+\begin{remark}[Perturbative caveat]
+It is an open question, not a consequence of this corollary, whether an admissible perturbation
 raises the full CMH Rayleigh quotient. The covariance, canonical Stein kernel, both numerator
 channels, denominator, and optimizer all vary, so increasing a solenoidal term in isolation is
 insufficient. The required full second-variation calculation is

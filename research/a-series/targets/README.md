@@ -33,6 +33,14 @@ manual status summaries into these files.
 One file covers one A-series stream. Do not create per-node files or nested target directories;
 the ledger already supplies node-level organization.
 
+| stream | headline node | brief |
+|---|---|---|
+| A1 | `conj:a1` | [`A1-data-informed-glm.md`](A1-data-informed-glm.md) |
+| A2 | `conj:a2` | [`A2-bernstein-von-mises.md`](A2-bernstein-von-mises.md) |
+| A3 | `conj:a3-dependent` | [`A3-heavy-tailed-posteriors.md`](A3-heavy-tailed-posteriors.md) |
+| A4 | `q:a4-certificate` | [`A4-variational-inference.md`](A4-variational-inference.md) |
+| A5 | `conj:a5-metastable` | [`A5-quotient-and-reparameterization.md`](A5-quotient-and-reparameterization.md) |
+
 ## Brief outline
 
 ```markdown
@@ -69,5 +77,5 @@ the ledger already supplies node-level organization.
 ```
 
 Keep a brief compact enough to scan in one sitting. Read dependencies from the ledger rather
-than copying its graph here. Markdown structure is intentionally not machine-validated;
-`check_ledger.py` only needs to verify that a declared `target_doc` exists.
+than copying its graph here. Markdown structure and navigation are intentionally not
+machine-validated.

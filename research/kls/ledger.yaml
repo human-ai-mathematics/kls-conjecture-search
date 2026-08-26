@@ -12,20 +12,13 @@
 # DIFFERENT PHASE FROM THE A-SERIES. The A1-A5 ledger (../a-series/ledger.yaml, program: ab)
 # is in the REFINEMENT phase (sharpen statements; numerics stress and suggest refutations via finum).
 # KLS is already a PROOF program: the statements are crisp, the work is discharging
-# assumptions and proving conditional implications. Hence the richer status/obstruction
-# vocabulary below and the route-specific fence registry in obstructions.md. Numerics
+# assumptions and proving conditional implications. The programs nevertheless share one status
+# vocabulary; KLS additionally has a route-specific fence registry in obstructions.md. Numerics
 # (`finum`) give research direction or suggest refutations here; they never validate a claim or
 # proof and never make a node "proved".
 #
-# status:  proved | defined | conditional | open | heuristic | refuted | imported
-# imported nodes set import_class: published | preprint-unreviewed plus BibTeX
-# references; an unreviewed import cannot underlie a proved node.
-# kind uses the repository-wide mathematical-form vocabulary in check_ledger.py.
-# edges:   depends_on (acyclic, same-ledger claim nodes only),
-#          bounded_by (obs:* headings in obstructions.md), and bridges (cross-program
-#          links: program/id). Conditional premises are derived from depends_on.
-#          Non-logical route relationships live in routes.md, not a second graph.
-# A conditional implication may carry R2 certification without becoming unconditional.
+# Shared schema: research/ledger-schema.md
+# Program workflow and route ownership: research/kls/README.md
 #
 # Checked by ../check_ledger.py (program-aware): acyclicity, no proved-on-open/refuted,
 # obstruction-id resolution, certification provenance, and cross-program bridges.
@@ -37,7 +30,7 @@ meta:
     allowed: [shared, eldan-localization, moment-map-spectral, moment-map-cmh]
 
 # ---------------------------------------------------------------------------
-# CORE STOCHASTIC LAYER  (standalone R2 dossiers attached to every proved node)
+# CORE STOCHASTIC LAYER  (certified standalone dossiers attached to every proved node)
 # ---------------------------------------------------------------------------
 nodes:
 
@@ -407,7 +400,7 @@ nodes:
     review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
 
   - id: hyp:KI
-    kind: hypothesis
+    kind: assumption
     status: imported
     import_class: published
     references: [KLnotes, KlartagLehec2022Polylog]
@@ -490,7 +483,7 @@ nodes:
     review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
 
   - id: rem:almost-stability-gap
-    kind: remark
+    kind: question
     status: open
     route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
@@ -762,13 +755,10 @@ nodes:
   # ---------------------------------------------------------------------------
   - id: def:cmh
     kind: definition
-    status: proved
+    status: defined
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
     statement: "The canonical moment-Hessian constant C_CMH(mu) is the supremum over g in Dom(A) minus ker(A) of E<H grad g, Sigma^{-1} H grad g> divided by E(L_mu g)^2, where L_mu g = div_mu(H grad g) = Tr(H D^2 g) - p.grad g is the Stein generator, A = -L_mu, the space is L^2(mu), and every inverse is the pseudoinverse on the orthogonal complement of ker A; Sigma^{-1} is the Moore-Penrose inverse on the affine tangent space for measures on a proper affine subspace."
-    solution: solutions/thm-cmh-normalization.tex
-    checked_by: agent
-    review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
 
   - id: prop:cmh-bochner
     kind: proposition
@@ -804,11 +794,11 @@ nodes:
     review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
 
   - id: rem:cmh-stronger-than-kls
-    kind: remark
+    kind: corollary
     status: proved
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
-    statement: "The Hodge identity gives C_CMH(mu) >= CP_aff(mu) and identifies the difference as a nonnegative solenoidal channel, which vanishes identically in dimension one under the no-flux convention. In higher dimension equivalence and strict non-implication at a fixed constant are open; no separating log-concave measure is asserted."
+    statement: "The Hodge identity gives C_CMH(mu) >= CP_aff(mu) and identifies the difference as a nonnegative solenoidal channel, which vanishes identically in dimension one under the no-flux convention."
     depends_on: [prop:cmh-hodge, thm:cmh-1d]
     solution: solutions/thm-cmh-normalization.tex
     checked_by: agent
@@ -832,7 +822,7 @@ nodes:
     review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
 
   - id: rem:gate-zero-trace-upgrade
-    kind: remark
+    kind: corollary
     status: conditional
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
@@ -937,11 +927,11 @@ nodes:
     review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
 
   - id: rem:cmh-saturation-risk
-    kind: remark
+    kind: corollary
     status: proved
     route: moment-map-cmh
     file: modules/kls/42-cmh-exact-cases.tex
-    statement: "Products of centered one-sided exponentials attain C_CMH = 4 exactly, with zero slack, and prop:cmh-hodge decomposes the numerator into an affine Poincare channel plus a nonnegative solenoidal channel. Whether an admissible perturbation raises the full CMH Rayleigh quotient is open."
+    statement: "Products of centered one-sided exponentials attain C_CMH = 4 exactly, with zero slack, and prop:cmh-hodge decomposes the numerator into an affine Poincare channel plus a nonnegative solenoidal channel."
     depends_on: [thm:cmh-product, prop:cmh-hodge]
     solution: solutions/thm-cmh-dirichlet.tex
     checked_by: agent
@@ -956,7 +946,7 @@ nodes:
     depends_on: [rem:cmh-saturation-risk]
 
   - id: hyp:absolute-geometric-completion
-    kind: hypothesis
+    kind: assumption
     status: open
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
