@@ -12,23 +12,22 @@ isolated test fixtures):
   ``depends_on``; its assumption contract is derived rather than duplicated;
 * nodes use an explicit, program-aware schema; their manuscript anchor exists in
   the declared file, and every imported node cites existing BibTeX keys;
-* referenced numerical diagnostic artifacts exist and are valid provenance-stamped JSONL;
-* KLS mechanism fences agree with the canonical ledger ``bounded_by`` edges.
+* every ``bounded_by`` edge resolves to a declared program obstruction.
 
 Cross-program ``bridges: [program/id, ...]`` links are resolved against all
-loaded ledgers. Optional proof-plane ``solution:`` files must exist and be certified
-by ``checked_by: agent|human|lean``. Agent certification additionally requires
-distinct named author/reviewer provenance and a persisted ``type: proof-review``
-report whose structured front matter exactly matches the ledger's nodes, authors,
-reviewer, and solutions. Every node with ``status: proved`` must carry a certified
-solution; unused narrative proof fields never substitute for the proof-plane contract.
+loaded ledgers. Proof-plane ``solution:`` files are confined to ``solutions/`` and
+may certify either an unconditional proved node or a conditional implication.
+Agent identity and historical scope live in a persisted ``type: proof-review``
+report; human acceptance is named explicitly and Lean certification requires an
+adjacent ``.lean`` file. Every proved node carries certification, while every
+refuted node names a proved/imported refuter.
 
-Run from the repo root: ``python3 research/check_ledger.py``.
+Run from the repo root: ``python3 research/check_ledger.py [check|status|node ID]``.
 Exit 0 = clean, 1 = errors. Requires PyYAML.
 """
 from __future__ import annotations
 
-import json
+import argparse
 import re
 import sys
 from collections import Counter
@@ -49,22 +48,12 @@ KIND = {
     "hypothesis", "question", "program", "remark", "heuristic",
     "conjecture", "obstruction", "example",
 }
-EVIDENCE = {"none", "numerical-directional"}
-CHECKED_BY = {"none", "agent", "human", "lean"}
-CERTIFIED_BY = {"agent", "human", "lean"}
+CHECKED_BY = {"agent", "human", "lean"}
 IMPORT_CLASSES = {"published", "preprint-unreviewed"}
 REVIEW_TYPES = {"proof-review", "audit"}
 REVIEW_COMMON_FIELDS = {"type", "date"}
 PROOF_REVIEW_FIELDS = REVIEW_COMMON_FIELDS | {
     "verdict", "authors", "reviewer", "nodes", "solutions", "follows_up",
-}
-
-# A colon following one of these prefixes denotes a repository id/LaTeX label,
-# even if the slug is malformed. This prevents e.g. ``thm:misspelled_id`` from
-# being silently accepted as free-form external prose.
-INTERNAL_PREFIXES = {
-    "ass", "conj", "cor", "def", "eq", "ex", "fam", "heur", "hyp", "lem",
-    "obs", "prog", "prop", "q", "rem", "sec", "subsec", "thm", "warn",
 }
 
 # Which statuses remain unresolved premises for a proved node. Conditional and
@@ -88,30 +77,36 @@ PRODUCTION_LEDGER_PATHS = {
     "kls": Path("research/kls/ledger.yaml"),
 }
 
-RESOLVE_FIELDS = ("depends_on",)
+RESOLVE_FIELDS = ("depends_on", "refuted_by")
 
 COMMON_NODE_FIELDS = {
     "id", "kind", "status", "file", "label", "statement", "depends_on",
     "bounded_by", "bridges", "references", "import_class", "solution",
-    "checked_by", "authored_by", "reviewed_by", "review", "numerics",
-    "evidence", "evidence_target", "evidence_run", "target_doc", "note",
+    "checked_by", "review", "accepted_by", "refuted_by", "target_doc",
 }
 PROGRAM_NODE_FIELDS = {
     "ab": COMMON_NODE_FIELDS | {"refines"},
-    "kls": COMMON_NODE_FIELDS | {
-        "clearance", "mechanism", "route",
-    },
+    "kls": COMMON_NODE_FIELDS | {"route"},
 }
 LIST_FIELDS = {
-    "depends_on", "bounded_by", "bridges", "references", "mechanism",
+    "depends_on", "bounded_by", "bridges", "references", "refuted_by",
 }
 OBSOLETE_NODE_FIELDS = {
     "assuming": "depends_on; conditional premises are derived from dependency closure",
     "discharged_by": "depends_on on the result that performs the discharge",
-    "evidence_eligible": "evidence plus evidence_target/evidence_run",
+    "evidence": "a dated exploration plus an immutable research/runs artifact",
+    "evidence_eligible": "a dated exploration plus an immutable research/runs artifact",
+    "evidence_run": "a dated exploration plus an immutable research/runs artifact",
+    "evidence_target": "the finum target implementation and a dated exploration",
     "entry_point": "route documentation for non-logical navigation",
+    "mechanism": "bounded_by plus independent semantic review",
+    "clearance": "the proof dossier/review discussion of bounded_by",
+    "note": "the manuscript, route/target brief, or a dated exploration",
+    "numerics": "the finum implementation, shared instance registry, or a dated exploration",
     "proof_file": "solution",
     "proof_provenance": "solution plus checked_by certification",
+    "authored_by": "proof-review front matter",
+    "reviewed_by": "proof-review front matter",
     "related": "route documentation for non-logical relationships",
     "unlocks": "depends_on on the consuming node, or prose for non-logical relationships",
 }
@@ -128,29 +123,6 @@ def as_list(value: Any) -> list:
     if value is None:
         return []
     return value if isinstance(value, list) else [value]
-
-
-def _string_set(value: Any, context: str, errors: list[str]) -> set[str]:
-    """Normalize a scalar/list field without letting malformed YAML crash validation."""
-    result: set[str] = set()
-    for item in as_list(value):
-        if not isinstance(item, str) or not item.strip():
-            errors.append(f"{context}: entries must be non-empty strings")
-            continue
-        result.add(item)
-    return result
-
-
-def looks_internal(ref: Any) -> bool:
-    """Return whether ``ref`` uses a reserved repository-id prefix."""
-    if not isinstance(ref, str) or ":" not in ref:
-        return False
-    return ref.split(":", 1)[0] in INTERNAL_PREFIXES
-
-
-def is_external(ref: Any) -> bool:
-    """Compatibility helper: external prose does not start with an internal prefix."""
-    return not looks_internal(ref)
 
 
 def _mentions_token(text: str, token: str) -> bool:
@@ -237,9 +209,12 @@ def _read_review_metadata(path: Path, root: Path, errors: list[str]) -> dict | N
     if not isinstance(reviewer, str) or not reviewer.strip():
         errors.append(f"{path}.reviewer: must be a non-empty string")
         reviewer = None
+    authors = _review_string_set(raw, "authors", str(path), errors)
+    if isinstance(reviewer, str) and reviewer in authors:
+        errors.append(f"{path}.reviewer: must be distinct from every proof author")
     normalized.update({
         "verdict": verdict,
-        "authors": _review_string_set(raw, "authors", str(path), errors),
+        "authors": authors,
         "reviewer": reviewer,
         "nodes": _review_string_set(raw, "nodes", str(path), errors),
         "solutions": _review_string_set(raw, "solutions", str(path), errors),
@@ -272,7 +247,12 @@ def _read_review_metadata(path: Path, root: Path, errors: list[str]) -> dict | N
 
 def _validate_agent_reviews(root: Path, review_refs: dict[str, list[tuple[str, str, dict]]],
                             errors: list[str]) -> None:
-    """Validate the review archive and exact ledger/report certification parity."""
+    """Validate review envelopes and containment of every active certification.
+
+    Reports are immutable historical events. Their declared scope may therefore be
+    larger than the set of nodes that currently points to them, and an old passing
+    report may remain in the archive after every covered node is downgraded.
+    """
     reviews_root = (root / "research/reviews").resolve()
     metadata_by_ref: dict[str, dict | None] = {}
     if reviews_root.is_dir():
@@ -309,43 +289,18 @@ def _validate_agent_reviews(root: Path, review_refs: dict[str, list[tuple[str, s
             errors.append(f"{context}: type '{metadata.get('type')}' cannot certify a proof")
             continue
 
-        refs = review_refs[review_ref]
-        expected_nodes = {nid for _program, nid, _node in refs}
-        expected_authors = {
-            node["authored_by"] for _program, _nid, node in refs
-            if isinstance(node.get("authored_by"), str) and node["authored_by"].strip()
-        }
-        expected_reviewers = {
-            node["reviewed_by"] for _program, _nid, node in refs
-            if isinstance(node.get("reviewed_by"), str) and node["reviewed_by"].strip()
-        }
-        expected_solutions = {
-            node["solution"] for _program, _nid, node in refs
-            if isinstance(node.get("solution"), str) and node["solution"].strip()
-        }
-
-        for field, declared, expected in (
-            ("nodes", metadata["nodes"], expected_nodes),
-            ("authors", metadata["authors"], expected_authors),
-            ("solutions", metadata["solutions"], expected_solutions),
-        ):
-            if declared != expected:
+        for program, nid, node in review_refs[review_ref]:
+            if nid not in metadata["nodes"]:
                 errors.append(
-                    f"{context}.{field}: exact ledger parity mismatch: "
-                    f"missing={sorted(expected - declared)}, extra={sorted(declared - expected)}"
+                    f"{context}.nodes: active [{program}] certification '{nid}' "
+                    "is outside the report's declared historical scope"
                 )
-        if expected_reviewers != {metadata.get("reviewer")}:
-            errors.append(
-                f"{context}.reviewer: exact ledger parity mismatch: "
-                f"expected={sorted(expected_reviewers)}, got='{metadata.get('reviewer')}'"
-            )
-
-    for review_ref, metadata in sorted(metadata_by_ref.items()):
-        if metadata and metadata.get("type") == "proof-review" and review_ref not in review_refs:
-            errors.append(
-                f"review '{review_ref}': proof-review is not referenced by any "
-                "agent-certified ledger node"
-            )
+            solution = node.get("solution")
+            if isinstance(solution, str) and solution not in metadata["solutions"]:
+                errors.append(
+                    f"{context}.solutions: active [{program}] certification '{nid}' uses "
+                    f"'{solution}', outside the report's declared historical scope"
+                )
 
 
 def all_labels(root: Path = ROOT) -> set[str]:
@@ -377,64 +332,16 @@ def labels_in_file(path: Path) -> set[str]:
         return set()
 
 
-def _load_obstructions(ledger_path: Path, errors: list[str]):
-    """Load the optional sibling obstruction schema.
-
-    Returns ``(vocabulary, rules)`` or ``(None, None)``. Each rule contains
-    ``forbids`` and optional ``warns`` mechanism sets.
-    Warned mechanisms are allowed, but (like forbidden mechanisms) must be
-    acknowledged by ``bounded_by`` plus a non-empty ``clearance`` note.
-    """
-    path = ledger_path.with_name("obstructions.yaml")
-    if not path.exists():
-        return None, None
-    try:
-        data = yaml.safe_load(path.read_text()) or {}
-    except yaml.YAMLError as exc:
-        errors.append(f"{path}: invalid YAML: {exc}")
-        return set(), {}
-    if not isinstance(data, dict):
-        errors.append(f"{path}: top level must be a mapping")
-        return set(), {}
-
-    vocabulary = _string_set(data.get("mechanisms"), f"{path}.mechanisms", errors)
-    rules: dict[str, dict[str, set[str]]] = {}
-    raw_rules = data.get("obstructions") or []
-    if not isinstance(raw_rules, list):
-        errors.append(f"{path}: 'obstructions' must be a list")
-        return vocabulary, rules
-
-    for index, raw in enumerate(raw_rules):
-        if not isinstance(raw, dict) or not raw.get("id"):
-            errors.append(f"{path}: obstruction #{index + 1} must be a mapping with an id")
-            continue
-        oid = raw["id"]
-        if not isinstance(oid, str) or not oid.strip():
-            errors.append(f"{path}: obstruction #{index + 1} id must be a non-empty string")
-            continue
-        if oid in rules:
-            errors.append(f"{path}: duplicate obstruction id '{oid}'")
-            continue
-        forbids = _string_set(raw.get("forbids"), f"{path}: {oid}.forbids", errors)
-        warns = _string_set(raw.get("warns"), f"{path}: {oid}.warns", errors)
-        overlap = forbids & warns
-        if overlap:
-            errors.append(f"{path}: {oid} tags both forbids and warns: {sorted(overlap)}")
-        for tag in sorted((forbids | warns) - vocabulary):
-            errors.append(f"{path}: {oid} uses mechanism '{tag}' absent from mechanisms")
-        for field in sorted(
-            set(raw) - {"id", "title", "forbids", "warns", "regime", "source"}
-        ):
-            errors.append(f"{path}: {oid}: unknown field '{field}'")
-        rules[oid] = {"forbids": forbids, "warns": warns}
-    return vocabulary, rules
-
-
 def obstruction_ids_md(ledger_path: Path) -> set[str]:
+    """Return obstruction ids declared by headings in the sibling prose registry."""
     path = ledger_path.with_name("obstructions.md")
     if not path.exists():
         return set()
-    return set(re.findall(r"\bobs:[A-Za-z0-9\-]+", path.read_text()))
+    return set(re.findall(
+        r"^#{2,6}\s+`?(obs:[A-Za-z0-9\-]+)`?\b",
+        path.read_text(encoding="utf-8"),
+        flags=re.MULTILINE,
+    ))
 
 
 def _load_ledger(path: Path, errors: list[str]) -> dict | None:
@@ -468,91 +375,6 @@ def _nodes_by_id(path: Path, doc: dict, errors: list[str]) -> dict[str, dict]:
             continue
         nodes[nid] = node
     return nodes
-
-
-def _validate_evidence_run(root: Path, program: str, nid: str, node: dict,
-                           evidence: str, errors: list[str]) -> None:
-    ref = node.get("evidence_run")
-    eligible = evidence != "none"
-    if eligible and not ref:
-        errors.append(f"[{program}] {nid}: evidence eligibility requires evidence_run")
-        return
-    if ref and not eligible:
-        errors.append(
-            f"[{program}] {nid}: evidence_run requires evidence numerical-directional"
-        )
-    if not ref:
-        return
-    if not isinstance(ref, str):
-        errors.append(f"[{program}] {nid}.evidence_run: path must be a string")
-        return
-
-    relative = Path(ref)
-    if relative.is_absolute():
-        errors.append(f"[{program}] {nid}.evidence_run: want a repo-relative path, got '{ref}'")
-        return
-    artifact = (root / relative).resolve()
-    try:
-        artifact.relative_to(root.resolve())
-    except ValueError:
-        errors.append(f"[{program}] {nid}.evidence_run: path escapes repository root: '{ref}'")
-        return
-    if not artifact.is_file():
-        errors.append(f"[{program}] {nid}.evidence_run: '{ref}' does not exist")
-        return
-    if artifact.suffix != ".jsonl":
-        errors.append(f"[{program}] {nid}.evidence_run: '{ref}' must be .jsonl")
-
-    try:
-        lines = artifact.read_text().splitlines()
-    except OSError as exc:
-        errors.append(f"[{program}] {nid}.evidence_run: cannot read '{ref}': {exc}")
-        return
-    if not lines:
-        errors.append(f"[{program}] {nid}.evidence_run: '{ref}' is empty")
-        return
-
-    objects: list[dict] = []
-    for line_no, line in enumerate(lines, 1):
-        if not line.strip():
-            errors.append(f"[{program}] {nid}.evidence_run: blank JSONL line {line_no} in '{ref}'")
-            continue
-        try:
-            item = json.loads(line)
-        except json.JSONDecodeError as exc:
-            errors.append(f"[{program}] {nid}.evidence_run: invalid JSON on line {line_no} of '{ref}': {exc.msg}")
-            continue
-        if not isinstance(item, dict):
-            errors.append(f"[{program}] {nid}.evidence_run: line {line_no} of '{ref}' is not an object")
-            continue
-        objects.append(item)
-    if not objects:
-        return
-
-    provenance = objects[0].get("_provenance")
-    if not isinstance(provenance, dict):
-        errors.append(f"[{program}] {nid}.evidence_run: first line of '{ref}' lacks _provenance object")
-        return
-    required = {"params"}
-    missing = sorted(required - set(provenance))
-    if missing:
-        errors.append(f"[{program}] {nid}.evidence_run: provenance missing {missing} in '{ref}'")
-    params = provenance.get("params")
-    if not isinstance(params, dict):
-        errors.append(f"[{program}] {nid}.evidence_run: provenance.params must be an object in '{ref}'")
-    elif not isinstance(params.get("target"), str) or not params["target"].strip():
-        errors.append(f"[{program}] {nid}.evidence_run: provenance.params.target missing in '{ref}'")
-    expected_target = node.get("evidence_target")
-    if eligible and (not isinstance(expected_target, str) or not expected_target.strip()):
-        errors.append(f"[{program}] {nid}: evidence eligibility requires evidence_target")
-    elif isinstance(params, dict) and isinstance(expected_target, str):
-        if params.get("target") != expected_target:
-            errors.append(
-                f"[{program}] {nid}.evidence_run: target '{params.get('target')}' "
-                f"does not match evidence_target '{expected_target}'"
-            )
-    if len(objects) < 2:
-        errors.append(f"[{program}] {nid}.evidence_run: '{ref}' has provenance but no records")
 
 
 def _inherited_risks(start: str, nodes: dict[str, dict], unproved: set[str]):
@@ -633,10 +455,127 @@ def _validate_route_policy(program: str, meta: dict, nodes: dict[str, dict],
             )
 
 
+def _validate_certification(root: Path, program: str, nid: str, node: dict,
+                            nodes: dict[str, dict],
+                            agent_review_refs: dict[str, list[tuple[str, str, dict]]],
+                            errors: list[str]) -> None:
+    """Validate proof/refutation provenance independently of logical graph checks."""
+    status = node.get("status")
+    solution = node.get("solution")
+    checked_by = node.get("checked_by")
+    certification_fields = ("solution", "checked_by", "review", "accepted_by")
+    certifiable_status = isinstance(status, str) and status in {"proved", "conditional"}
+    if not certifiable_status:
+        for proof_field in certification_fields:
+            if proof_field in node:
+                errors.append(
+                    f"[{program}] {nid}.{proof_field}: proof certification metadata "
+                    "is valid only with status proved or conditional"
+                )
+    if status == "proved" and not solution:
+        errors.append(f"[{program}] {nid}: proved node requires a certified solution")
+    if status == "proved" and not checked_by:
+        errors.append(f"[{program}] {nid}: proved node requires checked_by")
+    if status == "conditional" and any(field in node for field in certification_fields):
+        if not solution or not checked_by:
+            errors.append(
+                f"[{program}] {nid}: a certified conditional implication requires "
+                "both solution and checked_by"
+            )
+    if checked_by is not None and (
+        not isinstance(checked_by, str) or checked_by not in CHECKED_BY
+    ):
+        errors.append(
+            f"[{program}] {nid}: bad checked_by '{checked_by}' "
+            f"(want one of {sorted(CHECKED_BY)})"
+        )
+
+    if checked_by == "agent":
+        review = node.get("review")
+        if not isinstance(review, str) or not review.strip():
+            errors.append(f"[{program}] {nid}: checked_by agent requires a review report")
+        else:
+            agent_review_refs.setdefault(review, []).append((program, nid, node))
+        if not solution:
+            errors.append(f"[{program}] {nid}: checked_by agent requires a standalone solution")
+        if "accepted_by" in node:
+            errors.append(f"[{program}] {nid}.accepted_by: valid only with checked_by human")
+    elif checked_by == "human":
+        accepted_by = node.get("accepted_by")
+        if not isinstance(accepted_by, str) or not accepted_by.strip():
+            errors.append(f"[{program}] {nid}: checked_by human requires non-empty accepted_by")
+        if "review" in node:
+            errors.append(f"[{program}] {nid}.review: valid only with checked_by agent")
+    elif checked_by == "lean":
+        for field in ("review", "accepted_by"):
+            if field in node:
+                errors.append(f"[{program}] {nid}.{field}: not valid with checked_by lean")
+
+    if solution:
+        if not isinstance(solution, str):
+            errors.append(f"[{program}] {nid}.solution: path must be a string")
+        else:
+            relative_solution = Path(solution)
+            artifact = (root / relative_solution).resolve()
+            solutions_root = (root / "solutions").resolve()
+            if relative_solution.is_absolute():
+                errors.append(
+                    f"[{program}] {nid}.solution: want a repo-relative path, got '{solution}'"
+                )
+            else:
+                try:
+                    artifact.relative_to(solutions_root)
+                except ValueError:
+                    errors.append(f"[{program}] {nid}.solution: must stay under solutions/")
+                else:
+                    if artifact.suffix != ".tex":
+                        errors.append(f"[{program}] {nid}.solution: '{solution}' must be a .tex dossier")
+                    if not artifact.is_file():
+                        errors.append(f"[{program}] {nid}.solution: '{solution}' does not exist")
+                    else:
+                        try:
+                            solution_text = artifact.read_text(encoding="utf-8")
+                        except (OSError, UnicodeError) as exc:
+                            errors.append(f"[{program}] {nid}.solution: cannot read '{solution}': {exc}")
+                        else:
+                            header = solution_text[:2500]
+                            if "ledger-node" not in header or not _mentions_token(header, nid):
+                                errors.append(
+                                    f"[{program}] {nid}.solution: dossier header does not "
+                                    f"enumerate the ledger node '{nid}'"
+                                )
+                    if checked_by == "lean" and not artifact.with_suffix(".lean").is_file():
+                        errors.append(
+                            f"[{program}] {nid}: checked_by lean requires adjacent "
+                            f"'{artifact.with_suffix('.lean').name}'"
+                        )
+        if checked_by not in CHECKED_BY:
+            errors.append(
+                f"[{program}] {nid}: solution present but checked_by is '{checked_by}' "
+                "(want agent, human, or lean)"
+            )
+
+    refuters = as_list(node.get("refuted_by"))
+    if status == "refuted":
+        if not refuters:
+            errors.append(f"[{program}] {nid}: refuted node requires refuted_by")
+        dependencies = set(as_list(node.get("depends_on")))
+        for ref in refuters:
+            if isinstance(ref, str) and ref in nodes:
+                if nodes[ref].get("status") not in {"proved", "imported"}:
+                    errors.append(f"[{program}] {nid}.refuted_by: '{ref}' is not proved or imported")
+                if ref not in dependencies:
+                    errors.append(
+                        f"[{program}] {nid}.refuted_by: '{ref}' must also appear in depends_on"
+                    )
+    elif "refuted_by" in node:
+        errors.append(f"[{program}] {nid}.refuted_by: valid only with status refuted")
+
+
 def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         expected_programs: set[str] | None = None,
                         configured_ledgers: dict[str, str | Path] | None = None) -> dict:
-    """Validate a control-plane tree and return errors/warnings plus summary data.
+    """Validate a control-plane tree and return errors plus summary data.
 
     ``research``/``root`` parameters make the checker testable on isolated fixture
     trees without mutating the real repository. Production passes ``configured_ledgers``
@@ -648,7 +587,6 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
     labels = all_labels(root)
     bib_keys = bibliography_keys(root)
     errors: list[str] = []
-    warnings: list[str] = []
     ledgers: list[dict] = []
     program_paths: dict[str, Path] = {}
     agent_review_refs: dict[str, list[tuple[str, str, dict]]] = {}
@@ -717,21 +655,16 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         else:
             program_paths[program] = path
         nodes = _nodes_by_id(path, doc, errors)
-        vocabulary, rules = _load_obstructions(path, errors)
-        if rules is not None:
-            obstruction_ids = set(rules)
-        else:
-            obstruction_ids = {nid for nid, node in nodes.items() if node.get("kind") == "obstruction"}
+        obstruction_ids = {
+            nid for nid, node in nodes.items() if node.get("kind") == "obstruction"
+        } | obstruction_ids_md(path)
         ledgers.append({
             "program": program,
             "path": path,
             "meta": meta,
             "nodes": nodes,
             "cfg": PROGRAMS.get(program),
-            "vocab": vocabulary,
-            "rules": rules,
             "obs_ids": obstruction_ids,
-            "obs_md": obstruction_ids_md(path),
         })
         if program not in PROGRAMS:
             errors.append(f"{path}: unknown program '{program}'")
@@ -751,8 +684,6 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         meta = ledger["meta"]
         obstruction_ids = ledger["obs_ids"]
         cfg = ledger["cfg"] or PROGRAMS["ab"]
-        vocabulary = ledger["vocab"]
-        rules = ledger["rules"]
         for obsolete_field in OBSOLETE_META_FIELDS:
             if obsolete_field in meta:
                 errors.append(
@@ -760,11 +691,6 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                     "every proved node requires a certified solution"
                 )
         _validate_route_policy(program, meta, nodes, errors)
-
-        def resolves(ref: Any) -> bool:
-            if not looks_internal(ref):
-                return True
-            return ref in nodes or ref in obstruction_ids or ref in labels
 
         for nid, node in nodes.items():
             for field, replacement in OBSOLETE_NODE_FIELDS.items():
@@ -877,7 +803,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         f"[{program}] {nid}.file: '{node.get('file')}' does not contain "
                         f"effective label '{effective_label}'"
                     )
-            for text_field in ("statement", "numerics", "note"):
+            for text_field in ("statement",):
                 if text_field in node and (
                     not isinstance(node.get(text_field), str) or not node[text_field].strip()
                 ):
@@ -885,95 +811,18 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                         f"[{program}] {nid}.{text_field}: must be a non-empty string"
                     )
 
-            evidence = node.get("evidence", "none")
-            if not isinstance(evidence, str) or evidence not in EVIDENCE:
-                errors.append(f"[{program}] {nid}: bad evidence '{evidence}'")
-            else:
-                _validate_evidence_run(root, program, nid, node, evidence, errors)
-
-            solution = node.get("solution")
-            checked_by = node.get("checked_by")
-            if status != "proved":
-                for proof_field in (
-                    "solution", "checked_by", "authored_by", "reviewed_by", "review",
-                ):
-                    if proof_field in node:
-                        errors.append(
-                            f"[{program}] {nid}.{proof_field}: proof certification metadata "
-                            "is only valid with status proved"
-                        )
-            if status == "proved" and not solution:
-                errors.append(
-                    f"[{program}] {nid}: proved node requires a certified solution"
-                )
-            if checked_by is not None and (
-                not isinstance(checked_by, str) or checked_by not in CHECKED_BY
-            ):
-                errors.append(
-                    f"[{program}] {nid}: bad checked_by '{checked_by}' "
-                    f"(want one of {sorted(CHECKED_BY)})"
-                )
-            if checked_by == "agent":
-                authored_by = node.get("authored_by")
-                reviewed_by = node.get("reviewed_by")
-                review = node.get("review")
-                if not isinstance(authored_by, str) or not authored_by.strip():
-                    errors.append(
-                        f"[{program}] {nid}: checked_by agent requires non-empty authored_by"
-                    )
-                if not isinstance(reviewed_by, str) or not reviewed_by.strip():
-                    errors.append(
-                        f"[{program}] {nid}: checked_by agent requires non-empty reviewed_by"
-                    )
-                if (
-                    isinstance(authored_by, str)
-                    and isinstance(reviewed_by, str)
-                    and authored_by.strip() == reviewed_by.strip()
-                ):
-                    errors.append(
-                        f"[{program}] {nid}: agent author and reviewer must be distinct"
-                    )
-                if not isinstance(review, str) or not review.strip():
-                    errors.append(
-                        f"[{program}] {nid}: checked_by agent requires a review report"
-                    )
-                else:
-                    agent_review_refs.setdefault(review, []).append((program, nid, node))
-                if not solution:
-                    errors.append(
-                        f"[{program}] {nid}: checked_by agent requires a standalone solution"
-                    )
-            if solution:
-                if not isinstance(solution, str):
-                    errors.append(f"[{program}] {nid}.solution: path must be a string")
-                elif not (root / solution).exists():
-                    errors.append(f"[{program}] {nid}.solution: '{solution}' does not exist")
-                else:
-                    try:
-                        solution_text = (root / solution).read_text(encoding="utf-8")
-                    except (OSError, UnicodeError) as exc:
-                        errors.append(
-                            f"[{program}] {nid}.solution: cannot read '{solution}': {exc}"
-                        )
-                    else:
-                        header = solution_text[:2500]
-                        if "ledger-node" not in header or not _mentions_token(header, nid):
-                            errors.append(
-                                f"[{program}] {nid}.solution: dossier header does not enumerate "
-                                f"the ledger node '{nid}'"
-                            )
-                if checked_by not in CERTIFIED_BY:
-                    errors.append(
-                        f"[{program}] {nid}: solution present but checked_by is '{checked_by}' "
-                        "(an unchecked proof is not proved; want agent, human, or lean)"
-                    )
+            _validate_certification(
+                root, program, nid, node, nodes, agent_review_refs, errors
+            )
 
             for field in RESOLVE_FIELDS:
                 for ref in as_list(node.get(field)):
                     if not isinstance(ref, str) or not ref.strip():
                         errors.append(f"[{program}] {nid}.{field}: references must be non-empty strings")
-                    elif not resolves(ref):
-                        errors.append(f"[{program}] {nid}.{field}: unknown internal id '{ref}'")
+                    elif ref not in nodes:
+                        errors.append(
+                            f"[{program}] {nid}.{field}: '{ref}' is not a node in this ledger"
+                        )
 
             for ref in as_list(node.get("bounded_by")):
                 if not isinstance(ref, str) or not ref.strip():
@@ -997,15 +846,6 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                 elif ref not in qualified:
                     errors.append(f"[{program}] {nid}.bridges: '{ref}' not found (want program/id)")
 
-            if vocabulary is not None:
-                for tag in as_list(node.get("mechanism")):
-                    if not isinstance(tag, str) or not tag.strip():
-                        errors.append(f"[{program}] {nid}.mechanism: entries must be non-empty strings")
-                    elif tag not in vocabulary:
-                        errors.append(
-                            f"[{program}] {nid}.mechanism: '{tag}' not in obstructions.yaml vocabulary"
-                        )
-
         errors.extend(_acyclic(program, nodes))
 
         for nid, node in nodes.items():
@@ -1026,42 +866,8 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
                     f"via {' -> '.join(path)}"
                 )
 
-        if rules is not None:
-            markdown_ids = ledger["obs_md"]
-            for oid in sorted(set(rules) - markdown_ids):
-                errors.append(f"[{program}] parity: '{oid}' in obstructions.yaml but not obstructions.md")
-            for oid in sorted(markdown_ids - set(rules)):
-                errors.append(f"[{program}] parity: '{oid}' in obstructions.md but not obstructions.yaml")
-
-            for nid, node in nodes.items():
-                mechanisms = {
-                    mechanism for mechanism in as_list(node.get("mechanism"))
-                    if isinstance(mechanism, str) and mechanism.strip()
-                }
-                if not mechanisms:
-                    continue
-                bounded = set(as_list(node.get("bounded_by")))
-                clearance = node.get("clearance")
-                cleared = isinstance(clearance, str) and bool(clearance.strip())
-                for oid, rule in rules.items():
-                    for relation in ("forbids", "warns"):
-                        hit = mechanisms & rule[relation]
-                        if not hit:
-                            continue
-                        descriptor = "forbidden" if relation == "forbids" else "warned about"
-                        if oid not in bounded:
-                            errors.append(
-                                f"[{program}] {nid}: mechanism {sorted(hit)} {descriptor} by {oid} "
-                                "not in bounded_by (uncleared)"
-                            )
-                        elif not cleared:
-                            errors.append(
-                                f"[{program}] {nid}: mechanism {sorted(hit)} {descriptor} by {oid} "
-                                "lacks a clearance note"
-                            )
-
     _validate_agent_reviews(root, agent_review_refs, errors)
-    return {"errors": errors, "warnings": warnings, "ledgers": ledgers, "labels": labels}
+    return {"errors": errors, "ledgers": ledgers, "labels": labels}
 
 
 def _acyclic(program: str, nodes: dict[str, dict]) -> list[str]:
@@ -1089,23 +895,88 @@ def _acyclic(program: str, nodes: dict[str, dict]) -> list[str]:
     return errors
 
 
-def main() -> int:
-    report = check_control_plane(configured_ledgers=PRODUCTION_LEDGER_PATHS)
-    for warning in report["warnings"]:
-        print("WARN:", warning)
-    for error in report["errors"]:
-        print("FAIL:", error)
+def _print_summary(report: dict) -> None:
+    """Print the stable R0 summary used by the historical default command."""
     ledgers = report["ledgers"]
     total = sum(len(ledger["nodes"]) for ledger in ledgers)
     print(
         f"\n{len(ledgers)} ledger(s), {total} nodes, {len(report['labels'])} labels. "
-        f"{len(report['errors'])} error(s), {len(report['warnings'])} warning(s)."
+        f"{len(report['errors'])} error(s)."
     )
     for ledger in sorted(ledgers, key=lambda item: (item["program"], str(item["path"]))):
         counts = Counter(str(node.get("status")) for node in ledger["nodes"].values())
         statuses = ", ".join(f"{key}={value}" for key, value in sorted(counts.items()))
         print(f"  [{ledger['program']}] {len(ledger['nodes'])} nodes — {statuses}")
-    return 1 if report["errors"] else 0
+
+
+def _print_status(report: dict) -> None:
+    """Print the unresolved frontier derived from ledger state."""
+    frontier_statuses = {"open", "conditional", "heuristic", "refuted"}
+    for ledger in sorted(report["ledgers"], key=lambda item: item["program"]):
+        groups: dict[str, dict[str, list[str]]] = {}
+        for nid, node in ledger["nodes"].items():
+            status = node.get("status")
+            if status not in frontier_statuses:
+                continue
+            group = str(node.get("route", ledger["program"]))
+            groups.setdefault(group, {}).setdefault(str(status), []).append(nid)
+        for group, statuses in sorted(groups.items()):
+            label = ledger["program"] if group == ledger["program"] else f"{ledger['program']}/{group}"
+            print(f"[{label}]")
+            for status, node_ids in sorted(statuses.items()):
+                print(f"  {status} ({len(node_ids)}): {', '.join(sorted(node_ids))}")
+
+
+def _print_node(report: dict, reference: str) -> bool:
+    """Print one node and its derived consumers without storing a reverse graph."""
+    matches: list[tuple[dict, str, dict]] = []
+    for ledger in report["ledgers"]:
+        for nid, node in ledger["nodes"].items():
+            if reference in {nid, f"{ledger['program']}/{nid}"}:
+                matches.append((ledger, nid, node))
+    if not matches:
+        print(f"No ledger node matches '{reference}'.", file=sys.stderr)
+        return False
+    if len(matches) > 1:
+        choices = ", ".join(f"{ledger['program']}/{nid}" for ledger, nid, _node in matches)
+        print(f"Ambiguous node '{reference}'; use one of: {choices}", file=sys.stderr)
+        return False
+
+    ledger, nid, node = matches[0]
+    print(f"[{ledger['program']}] {nid}")
+    print(yaml.safe_dump(node, sort_keys=False, allow_unicode=True).rstrip())
+    consumers = sorted(
+        candidate_id for candidate_id, candidate in ledger["nodes"].items()
+        if nid in as_list(candidate.get("depends_on"))
+    )
+    print("used_by:", consumers or "[]")
+    return True
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Validate and inspect the research control plane")
+    parser.add_argument("command", nargs="?", choices=("check", "status", "node"), default="check")
+    parser.add_argument("node_id", nargs="?", help="node id, optionally qualified as program/id")
+    args = parser.parse_args(argv)
+    if args.command != "node" and args.node_id:
+        parser.error(f"{args.command} does not accept a node id")
+
+    report = check_control_plane(configured_ledgers=PRODUCTION_LEDGER_PATHS)
+    for error in report["errors"]:
+        print("FAIL:", error)
+    if report["errors"]:
+        _print_summary(report)
+        return 1
+    if args.command == "status":
+        _print_status(report)
+    elif args.command == "node":
+        if not args.node_id:
+            parser.error("node requires NODE_ID")
+        if not _print_node(report, args.node_id):
+            return 1
+    else:
+        _print_summary(report)
+    return 0
 
 
 if __name__ == "__main__":

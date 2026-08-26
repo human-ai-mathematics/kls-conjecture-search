@@ -1,7 +1,7 @@
 # Obstructions — the KLS search-space fence
 
 Hard-won negative results that bound what a proof through the Eldan fixed-cut program can
-look like. They are colocated with the route-spanning KLS ledger for machine enforcement;
+look like. They are colocated with the route-spanning KLS ledger as the obstruction registry;
 they do not automatically constrain the moment-map/spectral or deterministic CMH routes.
 Before proposing an Eldan-route approach, check it here. Each obstruction has a stable
 `obs:` id used by `ledger.yaml` (`bounded_by:` edges).
@@ -9,11 +9,10 @@ Before proposing an Eldan-route approach, check it here. Each obstruction has a 
 Ported from the standalone KLS program's roadmap; `\label`/module references re-synced to
 the unified `modules/kls/`.
 
-> **Machine-readable mirror:** [`obstructions.yaml`](obstructions.yaml) carries the closed
-> `mechanism` vocabulary and what each obstruction `forbids`. `../check_ledger.py` enforces
-> it: a KLS-ledger node whose proof declares a forbidden `mechanism` tag must clear the
-> obstruction (`bounded_by` + a `clearance` note) or the check fails. The `obs:` ids here
-> stay in parity with the YAML (the checker verifies this).
+> **Structural boundary:** the headings below declare the stable `obs:` vocabulary.
+> `../check_ledger.py` verifies that every ledger `bounded_by` edge resolves here. Whether a
+> statement or proof should carry a particular obstruction, and whether it genuinely clears it,
+> is a semantic responsibility of the author and independent critic.
 
 ---
 
@@ -80,8 +79,7 @@ supermartingale property for the localized profile.
 phenomenon. This is not a formal no-go: additional structure could control the moving infimum.
 The external worst-case constant $h^*_n$ is one sound anchor, used by `thm:bootstrap`, but is not
 proved to be the only possible anchor.
-**Regime.** All. Constrains: `thm:bootstrap`, `q:weighted` as a proof-design warning only; it
-forbids no mechanism in `obstructions.yaml`.
+**Regime.** All. Constrains: `thm:bootstrap`, `q:weighted` as a proof-design warning only.
 
 ### `obs:rank-one-refuted` — on products, a fixed single-coordinate cut cannot ride inflation
 **Statement.** `cor:refutation` (`modules/kls/22-product-stress.tex`). For a product measure

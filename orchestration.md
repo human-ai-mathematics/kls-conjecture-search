@@ -10,7 +10,8 @@ the hard constraints — are in [`CLAUDE.md`](CLAUDE.md).
 > first-wave target.
 >
 > **The live frontier is not narrated here** — it goes stale. Read it off
-> `python3 research/check_ledger.py`, the two ledgers, and the current strategy/cycle summaries:
+> `python3 research/check_ledger.py status`, with `node <id>` for a focused view. The route and
+> target briefs add acceptance criteria; dated cycle summaries are historical context:
 > [`research/explorations/2026-08-21-a-series-proof-probes.md`](research/explorations/2026-08-21-a-series-proof-probes.md)
 > (A-series), plus [`research/kls/routes.md`](research/kls/routes.md) and the
 > [August 24 synthesis](research/explorations/2026-08-24-kls-moment-map-cmh-consolidation.md)
@@ -104,9 +105,9 @@ construction-layer CMH observable.
 | Role | Reads | Produces | Reward earned | Parallel |
 |---|---|---|---|---|
 | **Orchestrator / ledger-keeper** | both ledgers, `check_ledger.py` | node assignments; **the only writer of `ledger.yaml`** | keeps R0 green | singleton |
-| **Analyst / refiner** | `research/a-series/targets/*.md`, `modules/**/*.tex`, `research/a-series/obstructions.md` | staged statement delta and optional `numerics:` spec in the target brief | statement respects every `bounded_by` | 1 / target |
+| **Analyst / refiner** | `research/a-series/targets/*.md`, `modules/**/*.tex`, `research/a-series/obstructions.md` | staged statement delta and optional numerical specification in the target brief | statement respects every `bounded_by` | 1 / target |
 | **Numerical** (finum) | the refined spec, `instances.md` | provenance-stamped `runs/*.jsonl` | research direction / candidate refutation | 1 / target |
-| **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex`, `checked_by: none` | supplies a dossier for R2 review | per ready node |
+| **Prover** (NL) | a precise unresolved (`status: open`) node and analytic sources | `solutions/<id>.tex` with draft-only `checked_by: none` in its header | supplies a dossier for R2 review | per ready node |
 | **Critic / adversary** | a conjecture *or* a draft proof | a candidate refuting instance, a proof-gap report, or an independent `checked_by: agent|human` audit | gates proof certification | N / claim |
 | **Lean** (deferred) | `proved` nodes + `LEAN_DESIGN.md` spine | `solutions/<id>.lean`, `checked_by: lean` | R2 (machine) | foundation track |
 | **Librarian** | `explorations/`, `knowledge/` | dedup, promote findings, kill dead-end reruns | keeps memory honest | singleton |

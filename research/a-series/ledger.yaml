@@ -15,13 +15,14 @@
 # sharpening of another statement; it is not a manuscript-location field.
 #
 # Imported nodes require `import_class` and `references` (BibTeX keys in fi_references.bib).
-# Proved nodes require a certified standalone `solution`. Numerical fields are orthogonal to
-# status and never validate a claim or proof.
+# Proved nodes require a certified standalone `solution`; refuted nodes name certified
+# `refuted_by` nodes. R1 specifications and artifacts live outside claim nodes.
 #
 # Canonical logical edges:
-#   depends_on   premises actually used by the proof; acyclic
+#   depends_on   same-ledger claim nodes actually used by the proof; acyclic
 #   bounded_by   obstruction nodes that constrain a valid statement/proof
 #   bridges      explicit cross-program links written as program/id
+#   refuted_by   certified refuter nodes, also present in depends_on
 # =============================================================================
 
 meta:
@@ -29,8 +30,8 @@ meta:
   scope: "Parts I & II — Bayesian-posterior functional-inequality constants (A1-A5)"
 
 # ===========================================================================
-# CROSS-CUTTING OBSTRUCTIONS  (the shared no-go knowledge; prose + numerical
-# diagnostic role live in research/a-series/obstructions.md)
+# CROSS-CUTTING OBSTRUCTIONS  (the shared no-go knowledge; explanatory prose
+# lives in research/a-series/obstructions.md)
 # ===========================================================================
 nodes:
 
@@ -40,7 +41,6 @@ nodes:
     file: modules/05-tier3-glm.tex
     label: prop:flat-prior-nonintegrable
     statement: "For logistic and other saturating links, likelihood curvature can vanish in remote predictor directions; the one-observation logistic family rules out any universal constant-times inverse-mode-Hessian bound. This does not cover uniformly curved GLMs or rule out every tail-free data statistic."
-    numerics: "Separable logistic: compare each specified local-curvature upper proposal with a rigorously controlled lower bound; only a proposal whose RHS falls below that lower bound is falsified."
 
   - id: obs:gaussian-tail-rigidity
     kind: obstruction
@@ -51,10 +51,7 @@ nodes:
     depends_on: [prop:a2-logistic-global]
     solution: solutions/a2-subquadratic-tail-rigidity.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/audit_metadata
     review: research/reviews/2026-08-22-derived-obstructions-audit.md
-    numerics: "Analytic obstruction. Any finite-n logistic claim with global C_LS or C_TCI below lambda_max(Sigma0) must be falsified; local/restricted constants are tested separately."
 
   - id: obs:heavy-tail-no-classical
     kind: obstruction
@@ -64,7 +61,6 @@ nodes:
     label: thm:heavy-tail-no-lsi
     statement: "Polynomial/exponential tails admit no classical LSI, no T2, and (heaviest tails) no classical Poincare; the correct object is a weighted/weak inequality."
     references: [BobkovGotze1999, OttoVillani2000, Muckenhoupt1972]
-    numerics: "Generalized-Cauchy mu_beta: unweighted Hardy functional ~ x^2 -> inf (C_P=inf); weighted by (1+x^2) -> O(1)."
 
   - id: obs:marginals-not-joint
     kind: obstruction
@@ -75,10 +71,7 @@ nodes:
     depends_on: [thm:a3-student]
     solution: solutions/obs-marginals-not-joint.tex
     checked_by: agent
-    authored_by: /root/a3
-    reviewed_by: /root/audit_latex
     review: research/reviews/2026-08-22-a3-marginals-independent-audit.md
-    numerics: "Analytic fixed-marginal copula counterexample; future dependence-aware tests must vary the copula while holding every marginal fixed."
 
   - id: obs:tv-insufficient
     kind: obstruction
@@ -88,10 +81,7 @@ nodes:
     statement: "TV-closeness to the BvM Gaussian does NOT control the constants: a contamination sequence with ||mu_n - N(0,1)||_TV -> 0 can have C_P -> inf."
     solution: solutions/obs-tv-insufficient.tex
     checked_by: agent
-    authored_by: /root/ab_legacy_author
-    reviewed_by: /root/kls_core_author
     review: research/reviews/2026-08-25-ab-inline-r2-audit.md
-    numerics: "mu_n=(1-eps_n)N(0,1)+eps_n N(a_n,1), eps_n a_n^2 -> inf: the exact variance lower bound diverges while TV -> 0."
 
   - id: obs:symmetry-vs-physical
     kind: obstruction
@@ -102,10 +92,7 @@ nodes:
     depends_on: [prop:a5-ratio]
     solution: solutions/prop-a5-ratio.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/audit_metadata
     review: research/reviews/2026-08-22-derived-obstructions-audit.md
-    numerics: "Folded double well (ex:a5-folding): test the two restricted spectral blocks separately; lower estimates alone do not certify the raw asymptotic."
 
   - id: obs:restricted-not-finite
     kind: obstruction
@@ -113,7 +100,6 @@ nodes:
     file: modules/open-targets/A4-variational-inference.tex
     label: warn:a4-heavytail
     statement: "Family-restricted transport is not automatically finite: for pi ~ e^{-|x|^p}, p<2, a Gaussian location family has C_Q = inf, and an unrestricted fixed-KL entropy ball still has infinite W2 radius. Localization needs family coercivity or quadratic-exponential tails, not a KL cutoff alone."
-    numerics: "q_m=N(m,sigma^2), pi~e^{-|x|^p}: the analytic ratio W2^2/KL ~ |m|^{2-p} -> inf as |m|->inf; finite grids are directional only."
 
   # =========================================================================
   # SHARED TOOLS / BASELINES  (lemmas reused across targets; see knowledge/lemmas.md)
@@ -127,10 +113,7 @@ nodes:
     statement: "Linear-test lower bound: C_P(pi) >= lambda_max(Cov_pi); any test function f gives Var(f)/E||grad f||^2 <= C_P. The universal sound refuter."
     solution: solutions/glm-linear-baselines.tex
     checked_by: agent
-    authored_by: /root/ab_legacy_author
-    reviewed_by: /root/kls_core_author
     review: research/reviews/2026-08-25-ab-inline-r2-audit.md
-    numerics: "finum.constants.poincare_lower(samples) estimates lambda_max(Cov) by empirical covariance and is directional without sampling/mixing error control."
 
   - id: thm:glm-fi
     kind: theorem
@@ -139,8 +122,6 @@ nodes:
     statement: "Data-free GLM bound: C_P <= C_LS <= lambda_max(Sigma0), C_TCI <= lambda_max(Sigma0); dimension-free, data-free. The trivial baseline any A1/A4 bound must beat."
     solution: solutions/glm-linear-baselines.tex
     checked_by: agent
-    authored_by: /root/ab_legacy_author
-    reviewed_by: /root/kls_core_author
     review: research/reviews/2026-08-25-ab-inline-r2-audit.md
 
   - id: thm:hardy-1d
@@ -150,7 +131,6 @@ nodes:
     file: modules/02-results-toolkit.tex
     statement: "1D weighted Hardy/Muckenhoupt criterion: weighted Poincare holds iff the Hardy quantities B_+,B_- are finite, pinning the optimal constant up to factor 4."
     references: [Muckenhoupt1972, BobkovGotze1999]
-    numerics: "finum can evaluate the Hardy supremum sup_x mu([x,inf)) int^x dt/(a(t)p(t)) numerically."
 
   - id: lem:a5-lipschitz
     kind: lemma
@@ -159,8 +139,6 @@ nodes:
     statement: "Lipschitz transport: T_# nu = mu with T globally L-Lipschitz => C_P(mu) <= L^2 C_P(nu), same for C_LS, C_TCI."
     solution: solutions/a5-lipschitz-quotient.tex
     checked_by: agent
-    authored_by: /root/ab_legacy_author
-    reviewed_by: /root/kls_core_author
     review: research/reviews/2026-08-25-ab-inline-r2-audit.md
 
   # =========================================================================
@@ -172,7 +150,6 @@ nodes:
     status: open
     file: modules/open-targets/A1-data-informed-glm.tex
     statement: "Analytic proof draft: C_P <= C_M E lambda_max(H^-1), hence for every fixed Wbar the displayed bulk-plus-integrated-tail/probability-tail bounds hold. Repository proof certification is pending."
-    numerics: "Calibration only: evaluate the complete certificate including its tail term; numerics do not prove the universal comparison."
 
   - id: prop:a1-euclidean-harmonic
     kind: proposition
@@ -181,8 +158,6 @@ nodes:
     statement: "If U is C-infinity and mI <= Hess U <= MI on Euclidean space, then C_P <= E[1/lambda_min(Hess U)] with factor one. This includes every finite Gaussian-prior logistic posterior."
     solution: solutions/a1-harmonic-mode-leverage.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
 
   - id: prop:a1-mode-leverage
@@ -194,10 +169,7 @@ nodes:
     bounded_by: [obs:flat-direction]
     solution: solutions/a1-harmonic-mode-leverage.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
-    numerics: "Evaluate eta, K_d(eta), the radial tail ratio, and the complete certificate; eta>=1 is an explicit certificate failure gate, not a claim that C_P is infinite."
 
   - id: cor:a1-leverage-asymptotic
     kind: corollary
@@ -207,8 +179,6 @@ nodes:
     depends_on: [prop:a1-euclidean-harmonic, prop:a1-mode-leverage]
     solution: solutions/a1-harmonic-mode-leverage.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
 
   - id: conj:a1
@@ -218,7 +188,6 @@ nodes:
     statement: "Selection target: for an explicit nontrivial class of well-identified GLMs, construct Wbar from (X,y,Sigma0), certify the prop:a1-bulk-tail bound below the prior scale, and obtain O_P(1/n) behavior in regular likelihood-dominated sequences."
     bounded_by: [obs:flat-direction]
     depends_on: [prop:a1-bulk-tail]
-    numerics: "Check the bound holds vs lem:linear-test-lower across instances; tightness ratio; beats thm:glm-fi baseline; bulk-dominated vs separable regimes."
     target_doc: research/a-series/targets/A1-data-informed-glm.md
 
   - id: q:a1-poincare
@@ -227,7 +196,6 @@ nodes:
     file: modules/open-targets/A1-data-informed-glm.tex
     statement: "Independently certify the separate universal bulk-tail comparison and extend the proved factor-one Euclidean theorem beyond globally bounded Hessians to unbounded-Hessian Poisson GLMs, nonsmooth losses, or a precise approximation/Mosco contract."
     depends_on: [prop:a1-bulk-tail, prop:a1-euclidean-harmonic]
-    numerics: "Estimate the realized universal constant C from data; check C is O(1) and stable across instances."
 
   - id: q:a1-barw
     kind: question
@@ -235,7 +203,6 @@ nodes:
     file: modules/open-targets/A1-data-informed-glm.tex
     statement: "Compare the explicit mode-leverage rowwise Wbar(R) with posterior-quantile and genuinely spectral constructions; the remaining target is a less conservative certificate for high-leverage instances."
     depends_on: [prop:a1-bulk-tail, prop:a1-mode-leverage]
-    numerics: "For each Wbar recipe compute the bound + pi(G_Wbar^c); pick the recipe minimizing the certified bound."
 
   - id: q:a1-tail
     kind: question
@@ -244,7 +211,6 @@ nodes:
     statement: "Improve the explicit mode-leverage radial tail ratio using posterior concentration, finite-sample Laplace, or self-improving spectral bootstraps, especially when eta>=1 makes the direct K_d certificate unavailable."
     depends_on: [prop:a1-mode-leverage, q:a1-barw]
     bounded_by: [obs:flat-direction]
-    numerics: "MCMC estimate of pi(G_Wbar^c); does the claimed eps hold? cross-check by independent sampler."
 
   - id: q:a1-sharp
     kind: question
@@ -252,7 +218,6 @@ nodes:
     file: modules/open-targets/A1-data-informed-glm.tex
     statement: "Quantify the proved vanishing-leverage route at finite sample size, then extend it to growing dimension, high leverage, and unbounded-Hessian likelihoods."
     depends_on: [q:a1-poincare, cor:a1-leverage-asymptotic]
-    numerics: "Sweep n; check n * bound -> lambda_max(I^{-1}); A1<->A2 consistency gap."
 
   - id: q:a1-lsi
     kind: question
@@ -261,7 +226,6 @@ nodes:
     statement: "Formulate localized/restricted or warm-start data-informed LSI/transport inequalities for logistic GLMs, and identify stronger-tail GLMs admitting a global version; a global posterior-scale logistic claim is impossible."
     depends_on: [prop:a2-logistic-global]
     bounded_by: [obs:flat-direction, obs:gaussian-tail-rigidity]
-    numerics: "Estimate C_LS (entropy-based); does the clean bulk bound hold or is a Phi(pi(G^c)) factor needed?"
 
   - id: q:a1-sampling
     kind: question
@@ -278,8 +242,6 @@ nodes:
     bounded_by: [obs:flat-direction]
     depends_on: [conj:a1]
     bridges: [kls/conj:kls]
-    numerics: "Estimate the realized K = C_P_lower / lambda_max(Cov) across GLM instances; test whether K stays O(1) and mildly geometry-dependent (the structured shadow of the KLS universal constant)."
-    note: "Bridge to Part III: the SAME bound for EVERY isotropic log-concave measure with K universal IS the KLS conjecture (research/kls/). A1-bis is the structured, finite-sum case the KLS machinery does not exploit."
 
   # =========================================================================
   # A2 — asymptotic constants via Bernstein-von Mises
@@ -291,7 +253,6 @@ nodes:
     file: modules/open-targets/A2-bernstein-von-mises.tex
     statement: "Asymptotic FI constants: n C_P(pi_n) -> lambda_max(I(theta_0)^{-1}) under a spectral-stability/tail hypothesis; global C_LS and C_TCI have this limit only under stronger tail comparisons or n-shrinking priors."
     bounded_by: [obs:tv-insufficient, obs:gaussian-tail-rigidity]
-    numerics: "n-sweep of n*poincare_lower(samples); does it converge to lambda_max(I^{-1})? Must FALSIFY on the obs:tv-insufficient contamination sequence."
     target_doc: research/a-series/targets/A2-bernstein-von-mises.md
 
   - id: thm:a2-target
@@ -310,8 +271,6 @@ nodes:
     depends_on: [prop:a2-subquadratic-global]
     solution: solutions/a2-subquadratic-tail-rigidity.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
 
   - id: prop:a2-subquadratic-global
@@ -321,8 +280,6 @@ nodes:
     statement: "A convex Gaussian-prior perturbation whose Gaussian average is o(t^2) along one top covariance direction has exact global C_LS=C_TCI=lambda_max(Sigma0); fixed finite logistic loss is a corollary, and shrinking Gaussian priors exhibit an exact local-information/global-tail tradeoff."
     solution: solutions/a2-subquadratic-tail-rigidity.tex
     checked_by: agent
-    authored_by: /root/a1_a2
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a1-a2-independent-agent-audit.md
 
   - id: q:a2-poincare
@@ -331,7 +288,6 @@ nodes:
     file: modules/open-targets/A2-bernstein-von-mises.tex
     statement: "Beyond the proved fixed-dimensional logistic vanishing-leverage theorem, find the weakest random-posterior spectral-stability assumptions for the Fisher-scale C_P limit, including unbounded Hessians and growing dimension."
     depends_on: [conj:a2, cor:a1-leverage-asymptotic]
-    numerics: "Confirm the limit across regular logistic/Poisson over n; estimate the o_P(1) rate."
 
   - id: q:a2-lsi
     kind: question
@@ -340,7 +296,6 @@ nodes:
     statement: "Characterize when global n C_LS and n C_TCI are Fisher-local versus governed by global PL/tail scales; Gaussian-prior logistic is an exact prior-scale counterexample, so classify tail/prior assumptions and localized alternatives."
     depends_on: [conj:a2, prop:a2-subquadratic-global]
     bounded_by: [obs:tv-insufficient, obs:gaussian-tail-rigidity]
-    numerics: "Compare n*C_LS estimate to lambda_max(I^{-1}) vs 1/mu_PL on a Fisher-local and a non-Fisher-local model."
 
   - id: q:a2-multimodal
     kind: question
@@ -367,8 +322,9 @@ nodes:
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
     label: warn:a3-marginal-only
     statement: "Refuted marginal-only form: polynomial coordinate tails and their one-dimensional Hardy constants do not by themselves control a dependent joint weighted Poincare constant."
+    depends_on: [obs:marginals-not-joint]
+    refuted_by: [obs:marginals-not-joint]
     bounded_by: [obs:heavy-tail-no-classical, obs:marginals-not-joint]
-    note: "Retired historical target. The live dependence-aware replacement is conj:a3-dependent; the counterexample remains recorded as obs:marginals-not-joint."
 
   - id: thm:a3-product
     kind: theorem
@@ -393,7 +349,6 @@ nodes:
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
     statement: "Sharp weighted Poincare for generalized Cauchy / Student-t: explicit optimal spectral gap lambda_{beta,d}. The A3 calibration theorem."
     references: [Huguet2024Cauchy, BonnefontJoulinMa2016]
-    numerics: "Calibration oracle: numerical weighted spectral gap must match the closed-form lambda_{beta,d}."
 
   - id: prop:a3-horseshoe
     kind: proposition
@@ -404,10 +359,7 @@ nodes:
     bounded_by: [obs:heavy-tail-no-classical]
     solution: solutions/prop-a3-horseshoe.tex
     checked_by: agent
-    authored_by: /root/a3
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a3-independent-agent-audit.md
-    numerics: "Check scale covariance and the closed positive E1/Barta residual; finite-domain FEM remains directional and does not certify the infinite-line equality C_HS=4."
 
   - id: thm:a3-block-gibbs
     kind: theorem
@@ -417,8 +369,6 @@ nodes:
     bounded_by: [obs:marginals-not-joint]
     solution: solutions/thm-a3-block-gibbs.tex
     checked_by: agent
-    authored_by: /root/a3
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a3-independent-agent-audit.md
 
   - id: prop:a3-hierarchical-prior
@@ -434,7 +384,6 @@ nodes:
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
     statement: "Extend the solved horseshoe marginal theorem to likelihood tilts: find conditions weaker than bounded density ratio that preserve a finite weighted gap, quantify departure from the prior value 4, and identify when the likelihood changes the appropriate tail metric."
     depends_on: [prop:a3-horseshoe]
-    numerics: "For specified likelihood tilts, estimate the weighted gap relative to the proved prior value 4; the unperturbed marginal is calibration, not an open numerical target."
 
   - id: q:a3-catalogue
     kind: question
@@ -442,7 +391,6 @@ nodes:
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
     statement: "Build the scale-mixture catalogue: per robust-Bayes prior record tail index, weighted Hardy constant, Stein-kernel constant (alpha>1)."
     depends_on: [thm:a3-product]
-    numerics: "finum table: for each prior compute the Hardy tail floor and full bulk supremum separately; tail-index-only scaling is insufficient."
 
   - id: q:a3-weak
     kind: question
@@ -470,7 +418,6 @@ nodes:
     statement: "Localized VB target: under an explicit family-coercivity/tail contract, there exists rho_0>0 such that on optimizer-centered sublevels r=delta_Q+rho with 0<=rho<=rho_0, C_{Q,r} and the localized mean constant are controlled by posterior bulk terms plus explicit remainders; global location-rich logistic constants remain prior-scale."
     bounded_by: [obs:restricted-not-finite, obs:flat-direction, obs:gaussian-tail-rigidity]
     depends_on: [thm:glm-fi]
-    numerics: "Estimate C_Q,r and C_mean,Q for GLM posteriors with mean-field Gaussian Q; check posterior (not prior) scale; lower bound via linear test."
     target_doc: research/a-series/targets/A4-variational-inference.md
 
   - id: q:a4-restricted
@@ -480,7 +427,6 @@ nodes:
     statement: "Compute C_{Q,delta_Q+rho} for GLM and hierarchical posteriors under an explicit family-coercivity/tail contract; calibrate the well-specified small-radius limit by the Wasserstein/Fisher tangent generalized eigenvalue."
     depends_on: [q:a4-certificate]
     bounded_by: [obs:restricted-not-finite, obs:gaussian-tail-rigidity]
-    numerics: "Sup over q in Q of W2^2(q,pi)/(2 KL) on a KL sublevel; compare to thm:glm-fi prior-scale baseline."
 
   - id: q:a4-mean
     kind: question
@@ -488,7 +434,6 @@ nodes:
     file: modules/open-targets/A4-variational-inference.tex
     statement: "Using the proved global and localized unrestricted cumulant duals, compute family-restricted/per-functional constants; characterize realizable entropy tilts and strict gaps such as C_mean,Q=0 with C_Q=inf."
     depends_on: [q:a4-certificate, eq:a4-mean-dual, prop:a4-mean-local]
-    numerics: "Estimate ||E_q theta - E_pi theta||^2/(2 KL); find the worst direction u; compare to lambda_max(Cov)."
 
   - id: eq:a4-mean-dual
     kind: theorem
@@ -498,8 +443,6 @@ nodes:
     statement: "The unrestricted linear posterior-mean constant equals the supremum, over unit directions and nonzero tilts, of twice the centered log-MGF divided by t^2, as an extended-valued identity."
     solution: solutions/eq-a4-mean-dual.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a4-mean-local
@@ -510,8 +453,6 @@ nodes:
     depends_on: [eq:a4-mean-dual]
     solution: solutions/prop-a4-mean-local.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a4-logistic-global
@@ -529,8 +470,6 @@ nodes:
     bounded_by: [obs:restricted-not-finite]
     solution: solutions/prop-a4-local-wellspecified.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a4-local-misspecified
@@ -541,8 +480,6 @@ nodes:
     bounded_by: [obs:restricted-not-finite]
     solution: solutions/prop-a4-local-misspecified.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a4-local-excess
@@ -553,8 +490,6 @@ nodes:
     bounded_by: [obs:restricted-not-finite]
     solution: solutions/prop-a4-local-excess.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: ex:a4-gaussian-local
@@ -564,8 +499,6 @@ nodes:
     statement: "For a fixed-covariance Gaussian location family, exact formulas separate the raw misspecification baseline, localized mean constant, and optimizer-centered excess constants, the latter both equal to lambda_max(Sigma)."
     solution: solutions/ex-a4-gaussian-local.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: lem:a4-symmetrization
@@ -576,8 +509,6 @@ nodes:
     bounded_by: [obs:symmetry-vs-physical]
     solution: solutions/lem-a4-symmetrization.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: q:a4-modified
@@ -595,7 +526,6 @@ nodes:
     statement: "For the Gaussian mixture with centers +/-a (separation 2a), turn component-reweighting and mode-collapse lower witnesses into rigorous family-dependent bounds; determine rather than assume their sharp separation scaling, and pair symmetry-induced cases with the quotient escape."
     depends_on: [q:a4-certificate]
     bounded_by: [obs:symmetry-vs-physical]
-    numerics: "Separated mixture: compute approximate lower witnesses from actual component reweighting and mode collapse; report directional growth only unless rigorous error control and matching upper bounds are available."
 
   - id: q:a4-elbo
     kind: question
@@ -615,10 +545,7 @@ nodes:
     statement: "Quotient constants are never worse: C_P(pi/G) <= C_P(pi), same for C_LS, C_TCI, under the quotient metric and Dirichlet form."
     solution: solutions/a5-lipschitz-quotient.tex
     checked_by: agent
-    authored_by: /root/ab_legacy_author
-    reviewed_by: /root/kls_core_author
     review: research/reviews/2026-08-25-ab-inline-r2-audit.md
-    numerics: "Sanity: estimated quotient C_P <= raw C_P on G-invariant posteriors."
 
   - id: prop:a5-ratio
     kind: proposition
@@ -628,8 +555,6 @@ nodes:
     depends_on: [thm:a5-monotone]
     solution: solutions/prop-a5-ratio.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a5-block-stability
@@ -641,8 +566,6 @@ nodes:
     bounded_by: [obs:symmetry-vs-physical]
     solution: solutions/prop-a5-block-stability.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: ex:a5-folding
@@ -665,8 +588,6 @@ nodes:
     statement: "For the normalized scalar Gaussian hierarchy, the centered and noncentered Poincare constants, and the scale-normalized kappa_P criteria, cross at unit normalized data precision."
     solution: solutions/ex-a5-gaussian-crossover.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: prop:a5-partial-gaussian
@@ -676,8 +597,6 @@ nodes:
     statement: "For the scalar Gaussian hierarchy, among z_alpha=theta-alpha u, both C_P and the Gaussian condition number are uniquely minimized at alpha*=1/(1+rB), interpolating continuously from noncentered to centered as data precision grows."
     solution: solutions/prop-a5-partial-gaussian.tex
     checked_by: agent
-    authored_by: /root/a4_a5
-    reviewed_by: /root/review_a4_a5
     review: research/reviews/2026-08-21-a4-a5-independent-agent-audit.md
 
   - id: lem:a5-pi-exp-tail
@@ -687,8 +606,6 @@ nodes:
     statement: "A finite Euclidean Poincare constant C forces every real 1-Lipschitz L2 observable to have an exponential moment about a median for every c < (log 2)/(2 sqrt(C))."
     solution: solutions/ex-a5-neal.tex
     checked_by: agent
-    authored_by: /root/review_a4_a5
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a5-funnel-second-agent-audit.md
 
   - id: ex:a5-neal
@@ -699,8 +616,6 @@ nodes:
     bounded_by: [obs:heavy-tail-no-classical]
     solution: solutions/ex-a5-neal.tex
     checked_by: agent
-    authored_by: /root/a4_a5 + /root/review_a4_a5
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a5-funnel-second-agent-audit.md
     depends_on: [lem:a5-pi-exp-tail]
 
@@ -712,8 +627,6 @@ nodes:
     bounded_by: [obs:heavy-tail-no-classical]
     solution: solutions/prop-a5-partial-funnel.tex
     checked_by: agent
-    authored_by: /root/a4_a5 + /root/review_a4_a5
-    reviewed_by: /root/cross_review
     review: research/reviews/2026-08-21-a5-funnel-second-agent-audit.md
     depends_on: [lem:a5-pi-exp-tail]
 
@@ -724,7 +637,6 @@ nodes:
     statement: "For fixed K and a G-invariant model, let Gamma_conn be the worst-cut/connectivity height of the free nondegenerate orbit network. Under exponentially quantitative empirical-barrier, collision-stratum, tail, and capacity control, n^{-1} log C_P(pi_Theta)->Gamma_conn in P_{theta_*}-probability while the quotient constant has the Fisher-scale (1+o_P(1))/n law; prefactors are a second target."
     bounded_by: [obs:symmetry-vs-physical]
     depends_on: [prop:a5-ratio]
-    numerics: "Folded vs raw separated mixture: test the logarithmic raw barrier slope and quotient 1/n scale with convergence diagnostics; lower estimates alone cannot certify upper laws."
     target_doc: research/a-series/targets/A5-quotient-and-reparameterization.md
 
   - id: q:a5-qbvm
@@ -747,7 +659,6 @@ nodes:
     file: modules/open-targets/A5-quotient-and-reparameterization.tex
     statement: "Estimate invariant and non-invariant restricted gaps in separate group-projected Ritz blocks, with residual/two-sided bounds and a degeneracy case; do not classify one arbitrary first eigenfunction."
     depends_on: [prop:a5-ratio]
-    numerics: "Estimate invariant and non-invariant Ritz blocks separately, including residual bounds and the equal-gap/degenerate case."
 
   - id: q:a5-stratified
     kind: question
@@ -763,4 +674,3 @@ nodes:
     statement: "Extend the exact Gaussian optimum alpha*=1/(1+rB) to multilevel/block models under a fixed normalization, and determine which likelihoods regularize the singular partial-Neal phase; separate local conditioning from global tail failure."
     depends_on: [lem:a5-lipschitz, ex:a5-gaussian-crossover, prop:a5-partial-gaussian, ex:a5-neal, prop:a5-partial-funnel]
     bounded_by: [obs:heavy-tail-no-classical]
-    numerics: "Neal funnel: estimate C_P in centered vs non-centered coords; half-Cauchy vs log-tau p(tau)."

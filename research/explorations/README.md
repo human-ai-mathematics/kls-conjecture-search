@@ -7,8 +7,8 @@ known-failing approach.
 Record:
 - **What** you tried (which target/node, which conjecture form or `W̄` recipe).
 - **How** (which `finum` run / instances; link the provenance-stamped artifact).
-- **Outcome** — refuted / directional / strong; the numbers (tightness, the falsifying
-  witness if any).
+- **Outcome** — dead end, directional observation, candidate refutation, or analytic result;
+  include the relevant numbers or exact witness without treating a run as certification.
 - **Why** it failed or what it unlocked.
 
 Stage a successful A-series refinement in `../a-series/targets/*.md`; the orchestrator promotes

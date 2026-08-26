@@ -7,8 +7,8 @@ The machine-readable nodes live in [`ledger.yaml`](ledger.yaml) (`kind: obstruct
 
 Math is written in LaTeX (`$…$`); the canonical *formal* statement of each barrier is the
 manuscript `\label` named under "Source" — this file links and explains, it does not restate
-formally. (Part III/KLS keeps its own, machine-enforced no-go set in
-`../kls/obstructions.md`; its current mechanisms are scoped to the Eldan fixed-cut route.)
+formally. (Part III/KLS keeps its own obstruction registry in
+`../kls/obstructions.md`; its current fences are scoped to the Eldan fixed-cut route.)
 
 > When you discover a new barrier useful to more than one target, add it here AND as an `obs:`
 > node in the ledger. Single-target subtleties stay in that target's `.md`.
@@ -152,9 +152,8 @@ second moment grows like $rR^{2-p}$.
 
 ---
 
-### Note: relationship to the KLS obstruction machinery
-The KLS program (`../kls/obstructions.yaml`) enforces a controlled
-vocabulary of forbidden *proof mechanisms* (slice-wise, circular, …) via `check_ledger`. A-series
-proof certification is already active, but its shared obstructions currently constrain statement
-shape rather than route-specific proof mechanisms. Extend that vocabulary only when an A-series
-proof route actually needs machine-enforced mechanism clearance.
+### Note: relationship to the KLS obstruction registry
+Both programs use `bounded_by` as the sole stored obstruction direction. The checker validates
+that ids resolve; authors and independent critics remain responsible for semantic applicability
+and clearance. A-series entries primarily constrain statement shape, while the current KLS entries
+primarily constrain Eldan-route proof designs.

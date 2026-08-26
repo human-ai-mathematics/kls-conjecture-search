@@ -7,5 +7,5 @@ This directory contains material deliberately reusable across program or target 
 
 Program-specific obstruction prose is colocated with its ledger:
 [`../a-series/obstructions.md`](../a-series/obstructions.md) for A1--A5 and
-[`../kls/obstructions.md`](../kls/obstructions.md) for the currently scoped KLS mechanism fences.
+[`../kls/obstructions.md`](../kls/obstructions.md) for the currently scoped KLS route fences.
 Promote material here only when reuse is real; program-local findings stay with their program.

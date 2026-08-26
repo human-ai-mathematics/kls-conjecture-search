@@ -1,9 +1,9 @@
 """Dispatch a target run -> a provenance-stamped JSONL research artifact.
 
-A ledger node may point to the artifact with ``evidence: numerical-directional`` and an
-``evidence_run`` path. ``finum`` does not edit the ledger, validate claims, or certify proofs;
-the artifact records research direction only. Each target module owns its calibration gate and
-diagnostic logic in ``run_records``.
+The artifact may be cited by a dated exploration, but it does not enter a claim node.
+``finum`` does not edit the ledger, validate claims, or certify proofs; the artifact records
+research direction only. Each target module owns its calibration gate and diagnostic logic in
+``run_records``.
 """
 from __future__ import annotations
 

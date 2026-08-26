@@ -16,7 +16,7 @@ a-series/
 
 | information | canonical location |
 |---|---|
-| claim, status, dependencies, obstructions, diagnostic pointers | [`ledger.yaml`](ledger.yaml) |
+| claim, status, dependencies, obstructions, certification/refutation pointers | [`ledger.yaml`](ledger.yaml) |
 | accepted statement and exposition | [`../../modules/open-targets/`](../../modules/open-targets/) |
 | proposed statement delta awaiting promotion | [`targets/`](targets/) |
 | dated mathematical attempts | [`../explorations/`](../explorations/) |
@@ -49,7 +49,8 @@ not validate a statement or proof.
 - `open`: unresolved, whether rough or already precise.
 - `proved`: certified through a standalone proof dossier.
 - `imported`: accepted from named literature with explicit source metadata.
-- `refuted`: independently certified false in the stated form.
+- `refuted`: independently certified false in the stated form, with `refuted_by` naming the
+  proved/imported refuter.
 
 `kind: conjecture` describes mathematical form; it is not a second unresolved status.
 
@@ -78,9 +79,10 @@ between ledger, manuscript, and dossier remains a critic responsibility.
 
 | field | meaning |
 |---|---|
-| `depends_on` | Premises actually used by the proof; this sole stored dependency direction is acyclic. |
+| `depends_on` | Same-ledger claim nodes actually used by the proof; this sole stored dependency direction is acyclic. |
 | `bounded_by` | Obstruction ids constraining the admissible statement or proof. |
 | `bridges` | Cross-program claim links written as `program/id`. |
+| `refuted_by` | Proved/imported refuter nodes; required for `status: refuted` and also listed in `depends_on`. |
 
 Non-logical roadmap links belong in target briefs or other prose. Downstream consumers are
 derived by reversing `depends_on`; the retired `related` and `unlocks` graphs must not return.
@@ -101,26 +103,21 @@ certifies its own proof, the node is `proved` instead.
 |---|---|
 | `solution` | Existing standalone dossier; required for `status: proved`. |
 | `checked_by` | `agent`, `human`, or `lean` for a certified solution. |
-| `authored_by` | Required named author for agent certification. |
-| `reviewed_by` | Required distinct named reviewer for agent certification. |
-| `review` | Required `research/reviews/*.md` proof-review with exact ledger/report parity. |
+| `review` | Required for `checked_by: agent`; the immutable report owns authors, reviewer, and historical scope. |
+| `accepted_by` | Required named acceptor for `checked_by: human`. |
 
-These fields are valid only on proved A-series nodes. An unwired draft dossier may declare
-`checked_by: none` in its own header, but it does not enter the ledger.
+`checked_by: lean` requires an adjacent `.lean` file. An unwired draft dossier may declare
+`checked_by: none` in its own header, but `none` is not a ledger certification value.
 
-### Research-direction and navigation fields
+### Navigation field
 
 | field | meaning |
 |---|---|
-| `numerics` | Proposed `finum` stress test, calibration, or refutation search. |
-| `evidence` | `none` or `numerical-directional`. |
-| `evidence_target` | Expected `finum` target recorded by directional artifact provenance. |
-| `evidence_run` | Existing provenance-stamped JSONL path; invalid without directional classification. |
 | `target_doc` | Primary A1--A5 refinement brief, normally only on a stream headline. |
-| `note` | Short exceptional locator, caveat, or retirement pointer—not workflow history. |
 
-Exact analytic certificates still enter through the proof/refutation plane. Numerical fields can
-never replace a dossier or independent review.
+Numerical specifications live in `finum`, the shared instance registry, or a target brief;
+results live in immutable runs and dated explorations. They do not enter claim nodes. Exact
+analytic certificates still enter through the proof/refutation plane.
 
 ## Bridge to KLS
 

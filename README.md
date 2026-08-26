@@ -18,11 +18,10 @@ with a difficulty gradation.
   literature/strategy map, a detailed Eldan fixed-cut program, the fixed-eigenfunction
   localization route, and a deterministic moment-map/Haar/Schur--Piola route.
 
-The A1--A5 control plane currently records 21 independently reviewed positive intermediate
-results. The main A1, A2, A4, and A5 selection targets remain open; the original marginal-only
-A3 conjecture is refuted and replaced by a dependence-aware target. See the canonical
-[`research/a-series/ledger.yaml`](research/a-series/ledger.yaml) and the concise
-[`certified-probe summary`](research/explorations/2026-08-21-a-series-proof-probes.md).
+The main A1, A2, A4, and A5 selection targets remain open; the original marginal-only A3
+conjecture is refuted and replaced by a dependence-aware target. Current counts and frontiers are
+derived from the canonical [`research/a-series/ledger.yaml`](research/a-series/ledger.yaml) by
+`python3 research/check_ledger.py status`; dated summaries remain historical context.
 
 ## Build
 

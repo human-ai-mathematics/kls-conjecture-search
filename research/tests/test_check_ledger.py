@@ -10,7 +10,6 @@ ledgers or append-only run artifacts.
 from __future__ import annotations
 
 import importlib.util
-import json
 import subprocess
 import sys
 import tempfile
@@ -58,7 +57,7 @@ class CheckerFixture(unittest.TestCase):
         self.tempdir.cleanup()
 
     def add_ledger(self, relative: str, program: str, nodes: list[dict], *,
-                   obstruction_doc: dict | None = None, obstruction_md: str = "",
+                   obstruction_md: str = "",
                    meta_fields: dict | None = None,
                    certify_fixture_proofs: bool = True) -> Path:
         path = self.research / relative / "ledger.yaml"
@@ -92,28 +91,16 @@ class CheckerFixture(unittest.TestCase):
                 for item in bare_proved:
                     item["solution"] = solution
                     item.setdefault("checked_by", "human")
+                    item.setdefault("accepted_by", "fixture human")
+        for item in fixture_nodes:
+            if item.get("checked_by") == "human":
+                item.setdefault("accepted_by", "fixture human")
         path.write_text(
             CHECKER.yaml.safe_dump({"meta": meta, "nodes": fixture_nodes}, sort_keys=False)
         )
-        if obstruction_doc is not None:
-            path.with_name("obstructions.yaml").write_text(
-                CHECKER.yaml.safe_dump(obstruction_doc, sort_keys=False)
-            )
+        if obstruction_md:
             path.with_name("obstructions.md").write_text(obstruction_md)
         return path
-
-    def add_artifact(self, name: str, *, valid: bool = True) -> str:
-        relative = f"research/runs/{name}.jsonl"
-        path = self.root / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        if valid:
-            params = {"target": "fixture"}
-            header = {"_provenance": {"params": params}}
-            record = {"kind": "diagnostic"}
-            path.write_text(json.dumps(header) + "\n" + json.dumps(record) + "\n")
-        else:
-            path.write_text("{not-json}\n")
-        return relative
 
     def add_solution(self, name: str, *, node_ids: tuple[str, ...] = ()) -> str:
         relative = f"solutions/{name}.tex"
@@ -190,7 +177,7 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertIn("duplicate node id 'thm:a'", errors)
         self.assertIn("duplicate ledger for program 'ab'", errors)
 
-    def test_internal_looking_malformed_id_cannot_escape_resolution(self):
+    def test_dependencies_accept_only_nodes_in_the_same_ledger(self):
         self.add_ledger(
             "main",
             "ab",
@@ -199,8 +186,8 @@ class CheckerHardeningTests(CheckerFixture):
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("unknown internal id 'thm:missing_slug'", errors)
-        self.assertNotIn("external theorem in prose", errors)
+        self.assertIn("depends_on: 'thm:missing_slug' is not a node in this ledger", errors)
+        self.assertIn("depends_on: 'external theorem in prose' is not a node in this ledger", errors)
 
     def test_unlocks_is_an_obsolete_field_even_when_empty(self):
         nodes = [
@@ -438,132 +425,44 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertNotIn("thm:conditional (conditional)", errors)
         self.assertNotIn("thm:published-use (proved) inherits", errors)
 
-    def test_artifacts_are_validated_without_git_metadata(self):
-        artifact = self.add_artifact("run")
-        nodes = [
-            node(
-                "obs:history",
-                kind="obstruction",
-                evidence="numerical-directional",
-                evidence_run=artifact,
-                evidence_target="fixture",
-            ),
-            node(
-                "conj:directional",
-                status="open",
-                kind="conjecture",
-                evidence="numerical-directional",
-                evidence_run=artifact,
-                evidence_target="fixture",
-            ),
-        ]
-        self.add_ledger("main", "ab", nodes)
-
-        errors = "\n".join(self.check()["errors"])
-
-        self.assertNotIn("evidence", errors)
-
-    def test_evidence_run_must_exist_and_be_valid_jsonl(self):
-        malformed = self.add_artifact("malformed", valid=False)
-        nodes = [
-            node("obs:missing", kind="obstruction", evidence_run="research/runs/missing.jsonl"),
-            node("obs:malformed", kind="obstruction", evidence_run=malformed),
-        ]
-        self.add_ledger("main", "ab", nodes)
-
-        errors = "\n".join(self.check()["errors"])
-
-        self.assertIn("research/runs/missing.jsonl' does not exist", errors)
-        self.assertIn("invalid JSON on line 1", errors)
-
-    def test_numerical_strong_is_rejected(self):
+    def test_numerical_and_narrative_ledger_fields_are_retired(self):
         self.add_ledger(
             "main",
             "ab",
-            [
-                node(
-                    "conj:strong",
-                    status="open",
-                    kind="conjecture",
-                    evidence="numerical-strong",
-                ),
-            ],
+            [node(
+                "q:retired",
+                status="open",
+                kind="question",
+                evidence="numerical-directional",
+                evidence_run="research/runs/old.jsonl",
+                evidence_target="A1",
+                numerics="old inline specification",
+                note="old inline navigation",
+            )],
         )
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("conj:strong: bad evidence 'numerical-strong'", errors)
+        for field in ("evidence", "evidence_run", "evidence_target", "numerics", "note"):
+            self.assertIn(f"q:retired.{field}: obsolete field", errors)
 
-    def test_numerical_directional_requires_artifact_and_matching_target(self):
-        artifact = self.add_artifact("directional")
-        malformed = self.add_artifact("directional-malformed", valid=False)
-        nodes = [
-            node(
-                "conj:missing-run",
-                status="open",
-                kind="conjecture",
-                evidence="numerical-directional",
-            ),
-            node(
-                "conj:missing-target",
-                status="open",
-                kind="conjecture",
-                evidence="numerical-directional",
-                evidence_run=artifact,
-            ),
-            node(
-                "conj:mismatched-target",
-                status="open",
-                kind="conjecture",
-                evidence="numerical-directional",
-                evidence_run=artifact,
-                evidence_target="other-target",
-            ),
-            node(
-                "conj:malformed-run",
-                status="open",
-                kind="conjecture",
-                evidence="numerical-directional",
-                evidence_run=malformed,
-                evidence_target="fixture",
-            ),
-        ]
-        self.add_ledger("main", "ab", nodes)
-
-        errors = "\n".join(self.check()["errors"])
-
-        self.assertIn("conj:missing-run: evidence eligibility requires evidence_run", errors)
-        self.assertIn("conj:missing-target: evidence eligibility requires evidence_target", errors)
-        self.assertIn(
-            "conj:mismatched-target.evidence_run: target 'fixture' "
-            "does not match evidence_target 'other-target'",
-            errors,
-        )
-        self.assertIn("conj:malformed-run.evidence_run: invalid JSON on line 1", errors)
-
-    def test_bounded_by_is_the_only_reverse_map_and_warn_clearance_is_enforced(self):
-        obstructions = {
-            "mechanisms": ["direct-excess"],
-            "obstructions": [{
-                "id": "obs:warning",
-                "forbids": [],
-                "warns": ["direct-excess"],
-                "constrains": ["thm:a"],
-            }],
-        }
+    def test_bounded_by_uses_markdown_obstruction_registry_only(self):
         self.add_ledger(
             "main",
             "kls",
-            [node("thm:a", mechanism=["direct-excess"], bounded_by=["obs:warning"])],
-            obstruction_doc=obstructions,
-            obstruction_md="## `obs:warning`\n",
+            [
+                node("thm:bounded", bounded_by=["obs:warning"]),
+                node("thm:unknown", bounded_by=["obs:missing"]),
+                node("thm:old-mechanism", mechanism=["direct-excess"]),
+            ],
+            obstruction_md="## `obs:warning` — methodological warning\n",
         )
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("obs:warning: unknown field 'constrains'", errors)
-        self.assertIn("warned about by obs:warning lacks a clearance note", errors)
-        self.assertNotIn("reverse parity", errors)
+        self.assertNotIn("thm:bounded.bounded_by", errors)
+        self.assertIn("thm:unknown.bounded_by: 'obs:missing' is not a declared obstruction", errors)
+        self.assertIn("thm:old-mechanism.mechanism: obsolete field", errors)
 
     def test_independent_agent_certification_requires_provenance(self):
         solution = self.add_solution(
@@ -591,24 +490,18 @@ class CheckerHardeningTests(CheckerFixture):
                 "thm:agent-pass",
                 solution=solution,
                 checked_by="agent",
-                authored_by="/root/prover",
-                reviewed_by="/root/reviewer",
                 review=review,
             ),
             node(
                 "thm:agent-self-review",
                 solution=solution,
                 checked_by="agent",
-                authored_by="/root/same",
-                reviewed_by="/root/same",
                 review=self_review,
             ),
             node(
                 "thm:agent-missing-review",
                 solution=solution,
                 checked_by="agent",
-                authored_by="/root/prover",
-                reviewed_by="/root/reviewer",
                 review="research/reviews/missing.md",
             ),
         ]
@@ -617,7 +510,10 @@ class CheckerHardeningTests(CheckerFixture):
         errors = "\n".join(self.check()["errors"])
 
         self.assertNotIn("thm:agent-pass", errors)
-        self.assertIn("thm:agent-self-review: agent author and reviewer must be distinct", errors)
+        self.assertIn(
+            "agent-self-review-audit.md.reviewer: must be distinct from every proof author",
+            errors,
+        )
         self.assertIn("review 'research/reviews/missing.md': report does not exist", errors)
 
     def test_agent_certification_rejects_partial_or_out_of_scope_review(self):
@@ -651,24 +547,18 @@ class CheckerHardeningTests(CheckerFixture):
                     "thm:partial",
                     solution=solution,
                     checked_by="agent",
-                    authored_by="/root/prover",
-                    reviewed_by="/root/reviewer",
                     review=partial,
                 ),
                 node(
                     "thm:wrong-scope",
                     solution=solution,
                     checked_by="agent",
-                    authored_by="/root/prover",
-                    reviewed_by="/root/reviewer",
                     review=wrong_scope,
                 ),
                 node(
                     "thm:wrong-reviewer",
                     solution=solution,
                     checked_by="agent",
-                    authored_by="/root/prover",
-                    reviewed_by="/root/reviewer",
                     review=wrong_reviewer,
                 ),
             ],
@@ -677,10 +567,13 @@ class CheckerHardeningTests(CheckerFixture):
         errors = "\n".join(self.check()["errors"])
 
         self.assertIn("partial-audit.md.verdict: a proof-review must have", errors)
-        self.assertIn("wrong-scope-audit.md'.nodes: exact ledger parity mismatch", errors)
-        self.assertIn("wrong-reviewer-audit.md'.reviewer: exact ledger parity mismatch", errors)
+        self.assertIn(
+            "wrong-scope-audit.md'.nodes: active [ab] certification 'thm:wrong-scope'",
+            errors,
+        )
+        self.assertNotIn("wrong-reviewer-audit.md'.reviewer", errors)
 
-    def test_agent_review_rejects_wrong_author_solution_and_unwired_scope(self):
+    def test_agent_review_owns_identity_and_may_retain_historical_scope(self):
         solution = self.add_solution("agent-proof", node_ids=("thm:contract",))
         review = self.add_review(
             "wrong-contract-audit",
@@ -695,17 +588,18 @@ class CheckerHardeningTests(CheckerFixture):
                 "thm:contract",
                 solution=solution,
                 checked_by="agent",
-                authored_by="/root/prover",
-                reviewed_by="/root/reviewer",
                 review=review,
             )],
         )
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("wrong-contract-audit.md'.nodes: exact ledger parity mismatch", errors)
-        self.assertIn("wrong-contract-audit.md'.authors: exact ledger parity mismatch", errors)
-        self.assertIn("wrong-contract-audit.md'.solutions: exact ledger parity mismatch", errors)
+        self.assertIn(
+            "wrong-contract-audit.md'.solutions: active [ab] certification 'thm:contract'",
+            errors,
+        )
+        self.assertNotIn("wrong-contract-audit.md'.nodes", errors)
+        self.assertNotIn("wrong-contract-audit.md'.authors", errors)
 
     def test_audit_pass_prose_cannot_certify_and_review_path_is_confined(self):
         solution = self.add_solution(
@@ -739,16 +633,12 @@ class CheckerHardeningTests(CheckerFixture):
                     "thm:audit",
                     solution=solution,
                     checked_by="agent",
-                    authored_by="/root/prover",
-                    reviewed_by="/root/reviewer",
                     review=audit,
                 ),
                 node(
                     "thm:outside",
                     solution=solution,
                     checked_by="agent",
-                    authored_by="/root/prover",
-                    reviewed_by="/root/reviewer",
                     review=outside,
                 ),
             ],
@@ -759,7 +649,7 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertIn("type 'audit' cannot certify a proof", errors)
         self.assertIn("agent review reports must be under research/reviews/", errors)
 
-    def test_review_archive_rejects_orphaned_proof_review_and_missing_front_matter(self):
+    def test_review_archive_allows_historical_orphans_but_validates_envelopes(self):
         self.add_review(
             "orphaned-proof-review",
             node_ids=("thm:orphan",),
@@ -771,11 +661,10 @@ class CheckerHardeningTests(CheckerFixture):
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("orphaned-proof-review.md': proof-review is not referenced", errors)
+        self.assertNotIn("orphaned-proof-review.md", errors)
         self.assertIn("malformed-audit.md: review report must start with YAML front matter", errors)
 
     def test_every_proved_node_requires_a_solution_and_no_other_signal_bypasses(self):
-        directional = self.add_artifact("directional-proof-substitute")
         self.add_ledger(
             "main",
             "ab",
@@ -785,7 +674,7 @@ class CheckerHardeningTests(CheckerFixture):
                 node(
                     "thm:numerics-only",
                     evidence="numerical-directional",
-                    evidence_run=directional,
+                    evidence_run="research/runs/directional.jsonl",
                     evidence_target="fixture",
                 ),
             ],
@@ -805,6 +694,84 @@ class CheckerHardeningTests(CheckerFixture):
             "thm:narrative-only.proof_provenance: obsolete field",
             errors,
         )
+
+    def test_refuted_nodes_name_a_certified_refuter(self):
+        nodes = [
+            node("obs:proved-counterexample", kind="obstruction"),
+            node("q:open-counterexample", status="open", kind="question"),
+            node(
+                "conj:refuted",
+                status="refuted",
+                kind="conjecture",
+                depends_on=["obs:proved-counterexample"],
+                refuted_by=["obs:proved-counterexample"],
+            ),
+            node("conj:missing-refuter", status="refuted", kind="conjecture"),
+            node(
+                "conj:open-refuter",
+                status="refuted",
+                kind="conjecture",
+                depends_on=["q:open-counterexample"],
+                refuted_by=["q:open-counterexample"],
+            ),
+            node(
+                "conj:unlinked-refuter",
+                status="refuted",
+                kind="conjecture",
+                refuted_by=["obs:proved-counterexample"],
+            ),
+        ]
+        self.add_ledger("main", "ab", nodes)
+
+        errors = "\n".join(self.check()["errors"])
+
+        self.assertNotIn("conj:refuted.refuted_by", errors)
+        self.assertIn("conj:missing-refuter: refuted node requires refuted_by", errors)
+        self.assertIn("conj:open-refuter.refuted_by: 'q:open-counterexample' is not proved", errors)
+        self.assertIn(
+            "conj:unlinked-refuter.refuted_by: 'obs:proved-counterexample' must also appear",
+            errors,
+        )
+
+    def test_human_and_lean_certification_contracts(self):
+        human_solution = self.add_solution("human-proof", node_ids=("thm:human",))
+        lean_solution = self.add_solution("lean-proof", node_ids=("thm:lean",))
+        self.add_ledger(
+            "main",
+            "ab",
+            [
+                node(
+                    "thm:human",
+                    solution=human_solution,
+                    checked_by="human",
+                    accepted_by="",
+                ),
+                node("thm:lean", solution=lean_solution, checked_by="lean"),
+            ],
+        )
+
+        errors = "\n".join(self.check()["errors"])
+        self.assertIn("thm:human: checked_by human requires non-empty accepted_by", errors)
+        self.assertIn("thm:lean: checked_by lean requires adjacent 'lean-proof.lean'", errors)
+
+        (self.root / lean_solution).with_suffix(".lean").write_text("-- fixture\n")
+        errors = "\n".join(self.check()["errors"])
+        self.assertNotIn("thm:lean: checked_by lean", errors)
+
+    def test_solution_path_is_confined_to_tex_dossiers(self):
+        self.module.write_text("% ledger-node: thm:outside\n\\label{thm:outside}\n")
+        self.add_ledger(
+            "main",
+            "ab",
+            [node(
+                "thm:outside",
+                solution="modules/test.tex",
+                checked_by="human",
+            )],
+        )
+
+        errors = "\n".join(self.check()["errors"])
+        self.assertIn("thm:outside.solution: must stay under solutions/", errors)
 
     def test_legacy_proof_exception_fields_are_forbidden(self):
         for field in ("legacy_r2_debt", "legacy_proved_without_solution"):
@@ -924,40 +891,34 @@ class CheckerHardeningTests(CheckerFixture):
 
         self.assertIn("dossier header does not enumerate", errors)
 
-    def test_clean_conditional_evidence_and_warning_contract_passes(self):
-        clean = self.add_artifact("clean")
-        obstructions = {
-            "mechanisms": ["direct-excess"],
-            "obstructions": [{
-                "id": "obs:warning",
-                "forbids": [],
-                "warns": ["direct-excess"],
-            }],
-        }
+    def test_certified_conditional_and_bounded_open_node_pass(self):
+        solution = self.add_solution("conditional-proof", node_ids=("thm:conditional",))
+        review = self.add_review(
+            "conditional-proof-review",
+            node_ids=("thm:conditional",),
+            solutions=(solution,),
+        )
         nodes = [
             node("ass:x", status="open", kind="assumption"),
             node(
                 "thm:conditional",
                 status="conditional",
                 depends_on=["ass:x"],
+                solution=solution,
+                checked_by="agent",
+                review=review,
             ),
             node(
                 "q:open",
                 status="open",
                 kind="question",
-                mechanism=["direct-excess"],
                 bounded_by=["obs:warning"],
-                clearance="The fixture acknowledges the warning.",
-                evidence="numerical-directional",
-                evidence_run=clean,
-                evidence_target="fixture",
             ),
         ]
         self.add_ledger(
             "main",
             "kls",
             nodes,
-            obstruction_doc=obstructions,
             obstruction_md="## `obs:warning`\n",
         )
         self.add_ledger("ab", "ab", [node("thm:ab")])
@@ -970,7 +931,6 @@ class CheckerHardeningTests(CheckerFixture):
             "kind": [],
             "status": [],
             "file": [],
-            "evidence": [],
             "checked_by": {},
             "solution": {},
             "depends_on": [{}],
@@ -1005,6 +965,41 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertEqual(result.returncode, 1)
         self.assertIn("status '[]' not allowed", result.stdout)
         self.assertNotIn("Traceback", result.stderr)
+
+    def test_cli_status_and_node_views_are_derived(self):
+        self.add_ledger(
+            "a-series",
+            "ab",
+            [
+                node("lem:base"),
+                node(
+                    "q:frontier",
+                    status="open",
+                    kind="question",
+                    depends_on=["lem:base"],
+                ),
+            ],
+        )
+        self.add_ledger("kls", "kls", [])
+        script = self.research / "check_ledger.py"
+        script.write_text((REPO / "research/check_ledger.py").read_text())
+
+        status = subprocess.run(
+            [sys.executable, str(script), "status"], cwd=self.root,
+            capture_output=True, text=True, check=False,
+        )
+        detail = subprocess.run(
+            [sys.executable, str(script), "node", "q:frontier"], cwd=self.root,
+            capture_output=True, text=True, check=False,
+        )
+
+        self.assertEqual(status.returncode, 0)
+        self.assertIn("[ab]", status.stdout)
+        self.assertIn("open (1): q:frontier", status.stdout)
+        self.assertEqual(detail.returncode, 0)
+        self.assertIn("[ab] q:frontier", detail.stdout)
+        self.assertIn("depends_on:", detail.stdout)
+        self.assertIn("used_by: []", detail.stdout)
 
 
 if __name__ == "__main__":

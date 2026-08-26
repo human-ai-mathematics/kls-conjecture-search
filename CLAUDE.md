@@ -33,7 +33,7 @@ proof: an analytic proof is certified independently of numerics.
 |---|---|---|
 | **R0 — structural** | `python3 research/check_ledger.py` returns 0 errors | cheap and deterministic; **necessary, never sufficient** |
 | **R1 — numerical** | a provenance-stamped `finum` artifact in `research/runs/` | research direction, stress testing, or a candidate refutation; **never** claim or proof validation |
-| **R2 — proof** | `solutions/<id>.tex` with `checked_by ∈ {agent, human, lean}` | the only route to `status: proved` |
+| **R2 — proof** | `solutions/<id>.tex` with `checked_by ∈ {agent, human, lean}` | certifies a proved claim or conditional implication; refutations point to a certified refuter |
 
 **The invariant: R1 never validates R2.** A proof dossier and its review must stand without any
 numerical run. `finum` may guide intuition, expose a likely counterexample, or help sharpen a
@@ -48,7 +48,7 @@ grade its own proof.
 For any mathematical or proof contribution:
 
 1. the target is sharpened (or confirmed), or a standalone proof dossier is supplied;
-2. the ledger node is updated with matching status, provenance, and edges;
+2. the ledger node is updated with matching status, certification/refutation provenance, and edges;
 3. `python3 research/check_ledger.py` returns 0 errors;
 4. the attempt — **including dead ends** — is logged in
    `research/explorations/YYYY-MM-DD-slug.md`; cross-cutting findings are promoted to
@@ -61,13 +61,15 @@ mathematical attempt or require a claim-status change.
 A *proof* contribution has four further requirements, specified in
 [`solutions/README.md`](solutions/README.md): the dossier compiles standalone with a complete
 audit header, its theorem matches the `\label` it `refines` and respects every `bounded_by`
-obstruction, the node carries `solution:` + `checked_by:`, and agent certification names a
-distinct author and reviewer plus a persisted report under `research/reviews/`.
+obstruction, the node carries `solution:` + `checked_by:`, and agent certification points to a
+persisted report under `research/reviews/` naming distinct author(s) and reviewer.
 
 ## Commands
 
 ```bash
 python3 research/check_ledger.py                                   # R0 — after every ledger edit
+python3 research/check_ledger.py status                            # derived unresolved frontier
+python3 research/check_ledger.py node q:upgrade                    # one node + derived consumers
 python3 -m unittest discover -s research/tests -p 'test_*.py'      # checker regressions
 cd experiments && uv run python -m finum selftest                  # calibration anchors
 cd experiments && uv run python -m finum run --target A3           # → research/runs/<ts>-A3.jsonl
@@ -94,7 +96,7 @@ Specific to this repo; a naive agent swarm hits every one of these.
    review it before adding it to the shared registry. Passing any finite battery changes no claim
    or proof status.
 4. **`check_ledger.py` is necessary, not sufficient.** It verifies structure — labels resolve,
-   the DAG is acyclic, no proved node rests on an unproved one, obstruction parity holds. It
+   the DAG is acyclic, no proved node rests on an unproved one, obstruction ids resolve. It
    does **not** verify that the `.tex` prose, the ledger `statement:`, and the solution dossier
    agree semantically, nor that any proof is correct. That is a critic's responsibility, and it
    is where a green exit code stops meaning anything.
@@ -118,9 +120,10 @@ Specific to this repo; a naive agent swarm hits every one of these.
   certified provenance cannot be renamed declares an explicit `label:` manuscript anchor; the
   checker requires that effective label to occur in the node's declared `file`. When a statement
   changes, update both the `.tex` and the ledger.
-- `depends_on` means "used in the proof" and must stay acyclic. Downstream consumers are derived
-  by reversing `depends_on`; speculative roadmap relationships belong in prose, not a second
-  graph.
+- `depends_on` means "repository claim nodes used in the proof" and must stay intra-program and
+  acyclic. Manuscript equations and ordinary literature citations stay in the dossier/manuscript.
+  Downstream consumers are derived by reversing `depends_on`; speculative roadmap relationships
+  belong in prose, not a second graph.
 - Reproducibility of a `finum` artifact rests on its recorded seed, params, and library
   versions. Nothing gates on the state of the worktree.
 - Math in Markdown files is written in LaTeX `$…$`.

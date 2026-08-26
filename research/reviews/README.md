@@ -33,16 +33,14 @@ failed work is an `audit` until a new follow-up proof review passes. `authors`, 
 `solutions` are non-empty lists without duplicates. One report has one reviewer, but it may cover
 multiple authors, nodes, and dossiers.
 
-The front matter declares exact scope, not search terms. Across all ledger nodes pointing to the
-report:
+The front matter declares the immutable historical scope, not search terms. It is canonical for
+the proof authors and reviewer. Every currently agent-certified ledger node pointing to the report
+must occur in `nodes`, and its active dossier must occur in `solutions`. The report may retain
+extra formerly active nodes/dossiers, and an old passing report may remain unreferenced after a
+later downgrade. This preserves history without forcing stale certification into current state.
 
-- `nodes` exactly matches their ids;
-- `authors` exactly matches their distinct `authored_by` values;
-- `reviewer` exactly matches their common `reviewed_by` value;
-- `solutions` exactly matches their distinct `solution` paths.
-
-The checker rejects missing and extra entries, proof reviews not wired into a ledger, reports
-outside this directory, and attempts to use an `audit` as proof provenance.
+The checker rejects active certifications outside the declared scope, reports outside this
+directory, self-review, and attempts to use an `audit` as proof provenance.
 
 A repaired proof may add the optional repo-relative pointer:
 
@@ -51,6 +49,9 @@ follows_up: research/reviews/YYYY-MM-DD-earlier-audit.md
 ```
 
 Never rewrite an earlier verdict after a repair. Preserve it and write a new report.
+If a later audit invalidates an earlier passing proof, remove the node's active certification or
+downgrade its status as appropriate and retain both reports; the old proof review remains a
+historical event, not current authority.
 
 ## Audit front matter
 
@@ -78,7 +79,7 @@ Do not repeat the machine-readable node list in a verdict sentence merely for va
 reports are proof provenance, never numerical evidence; computation may expose a defect but cannot
 certify an analytic step.
 
-Validate the archive and its exact ledger parity with:
+Validate the archive and every active certification pointer with:
 
 ```bash
 python3 research/check_ledger.py

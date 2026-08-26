@@ -20,7 +20,7 @@ the human-facing directory name is `a-series`.
 ```text
 research/
   a-series/       A1--A5 ledger, obstruction prose, schema, and target briefs
-  kls/            route-spanning KLS ledger, route registry, and mechanism fences
+  kls/            route-spanning KLS ledger, route registry, and obstruction prose
   knowledge/      reusable analytic tools and the curated A/KLS instance battery
   explorations/   append-only mathematical attempt history, including dead ends
   reviews/        persisted proof-review and non-certifying audit reports
@@ -37,13 +37,17 @@ provenance does not churn during organizational refactors.
 
 ## Common graph and status contract
 
-Both ledgers use `depends_on` for premises actually used in a proof, `bounded_by` for applicable
-obstructions, and `bridges` for explicit cross-program links written as `program/id`. A program
-has exactly one ledger; all ledger writes pass through the singleton orchestrator.
+Both ledgers use `depends_on` for same-program claim nodes actually used in a proof,
+`bounded_by` for applicable obstructions, and `bridges` for explicit cross-program links written
+as `program/id`. A program has exactly one ledger; all ledger writes pass through the singleton
+orchestrator.
 
 - A-series statuses: `open`, `proved`, `imported`, `refuted`.
 - KLS statuses: `proved`, `defined`, `conditional`, `open`, `heuristic`, `refuted`, `imported`.
-- Numerical evidence: `none` or `numerical-directional`, orthogonal to logical status.
+
+`proved` nodes require an R2 dossier. A `conditional` KLS implication may also carry R2
+certification while retaining its unresolved assumptions. A `refuted` node names its certified
+refuter through `refuted_by`; numerical output never fills that role.
 
 The A1-bis/KLS bridge connects `ab/conj:a1-bis` to `kls/conj:kls`. It is a bridge between a
 structured-posterior claim and its universal log-concave boundary, not a proof dependency.
@@ -65,6 +69,8 @@ and finite-grid outcomes never supply proof certification.
 
 ```bash
 python3 research/check_ledger.py
+python3 research/check_ledger.py status
+python3 research/check_ledger.py node q:upgrade
 python3 -m unittest discover -s research/tests -p 'test_*.py'
 ```
 

@@ -14,8 +14,8 @@ certified; the universal-time source control is open.
 The main model residue is `q:alignment`. The unweighted excess bootstrap is proved, but the
 weighted covariance/excess interaction and universal-time geometric consumption are not.
 
-The route-specific mechanism fences are [`../../obstructions.md`](../../obstructions.md) and
-[`../../obstructions.yaml`](../../obstructions.yaml). In particular, projection/radial data alone,
+The route-specific fences are [`../../obstructions.md`](../../obstructions.md). In particular,
+projection/radial data alone,
 slice-wise absolute-scale estimates, and crude covariance bootstraps do not close this route.
 
 Work from [`open-problems.md`](open-problems.md). Logical status and dependencies are only in the

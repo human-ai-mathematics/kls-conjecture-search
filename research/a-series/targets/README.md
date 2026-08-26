@@ -8,7 +8,7 @@ attempt log.
 
 | information | canonical location |
 |---|---|
-| claim, status, dependencies, obstructions, diagnostic pointers | `../ledger.yaml` |
+| claim, status, dependencies, obstructions, certification/refutation pointers | `../ledger.yaml` |
 | exact accepted statement and exposition | `../../../modules/open-targets/` |
 | proposed refinement awaiting promotion | this directory |
 | dated attempts, including dead ends | `../../explorations/` |
@@ -18,7 +18,7 @@ attempt log.
 | proof and independent certification | `../../../solutions/`, `../../reviews/` |
 
 The ledger and manuscript win if a brief drifts. Do not copy proof histories, numerical logs, or
-manual status/evidence summaries into these files.
+manual status summaries into these files.
 
 ## Workflow
 
