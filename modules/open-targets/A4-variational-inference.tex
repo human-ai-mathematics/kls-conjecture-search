@@ -33,9 +33,9 @@ infinite, and to state the certification theorem one should aim for.
 
 \noindent\textbf{Reviewed status.}
 The unrestricted mean dual, its localized refinement, the three distinct local-VI expansions,
-the exact Gaussian calibration, and the symmetrization lemma have passed independent review.
-The global logistic-family rigidity statement and the multimodal lower-witness calculations remain
-explicit analytic proof drafts. The final posterior-scale GLM certificate remains an open question.
+the exact Gaussian calibration, the symmetrization lemma, and the global logistic-family rigidity
+statement have passed independent review. The multimodal lower-witness calculations remain an
+explicit analytic draft. The final posterior-scale GLM certificate remains an open question.
 
 \subsection{Setup: the variational objective and the transport bridge}
 \label{subsec:a4-setup}
@@ -287,7 +287,7 @@ $C_{\mathrm{mean},\mathcal Q}$ is therefore the \emph{right primary object}, wit
 constant a stronger but frequently unattainable companion; the same construction gives a
 per-functional constant $C_{f,\mathcal Q}$ for any scalar observable $f(\theta)$.
 
-\begin{proposition}[Global prior-scale rigidity for Gaussian variational families (analytic proof draft)]
+\begin{proposition}[Global prior-scale rigidity for Gaussian variational families]
 \label{prop:a4-logistic-global}
 Let $\pi$ be the Gaussian-prior binary-logistic posterior of
 Proposition~\ref{prop:a2-logistic-global}. If $\mathcal Q$ contains all translates
@@ -309,6 +309,10 @@ whereas both $W_2^2(q_{tv},\pi)$ and the squared mean displacement are at least
 $t^2\norm v^2+O(\abs t)$. Optimizing over $v$ supplies the reverse bound
 $\lmax(\Sigmaz)$.
 \end{proof}
+
+\noindent The independently agent-certified standalone proof, including the full Gaussian
+translation KL expansion and both equality chains, is
+\path{solutions/prop-a4-logistic-global.tex}.
 
 The mean/transport gap can also be strict: for the centred scale family
 $\mathcal Q=\{N(0,s^2):s>0\}$ and symmetric target $\pi\propto e^{-\abs x^p}$, $1\le p<2$,
@@ -525,6 +529,44 @@ posterior-specific \emph{classification}: for each robust-Bayes prior (Laplace, 
 horseshoe, scale mixtures) identify the strongest cost $\alpha$ for which \eqref{eq:a4-modified}
 holds, on $\mathcal Q$ or on KL sublevels.
 
+The one-dimensional log-concave case already has an exact published classification.  For
+$1\le p\le2$, put
+\[
+ \theta_p(t)=
+ \begin{cases}
+ t^2,&\abs t\le1,\\[1mm]
+ \dfrac{2}{p}\abs t^p+1-\dfrac{2}{p},&\abs t\ge1.
+ \end{cases}
+\]
+
+\begin{theorem}[One-dimensional modified-transport classification]
+\label{thm:a4-modified-transport-1d}
+Let $\mu$ be a nonatomic, full-support log-concave probability law on $\R$.  Let
+$\alpha:\R\to[0,\infty)$ be even, continuous, nondecreasing and superadditive on $\R_+$, with
+$\alpha(0)=0$ and $\alpha(t)=t^2$ for $\abs t\le1$, and assume additionally that $\alpha$ is
+convex.  A scaled global inequality
+\[
+ \mathcal T_{\alpha(a\,\cdot)}(\nu,\mu)\le \KL(\nu\|\mu)
+ \qquad\text{for every probability law }\nu
+\]
+holds for some $a>0$ if and only if
+$\int\exp(\alpha(bx))\,\mu(\dd x)<\infty$ for some $b>0$.
+Consequently, if $\pi_p(\dd x)\propto e^{-\abs x^p}\dd x$ with $1\le p\le2$, then
+\[
+ \mathcal T_{\theta_p(a_p\,\cdot)}(\nu,\pi_p)
+ \le \KL(\nu\|\pi_p)
+\]
+for some $a_p>0$.  In contrast, a polynomial-tail law admits no global
+transport--entropy inequality with a nontrivial unbounded convex cost.
+\end{theorem}
+
+\noindent This is Gozlan's real-line criterion \cite[Theorem~57 and
+Propositions~16, 26]{Gozlan2007RealLine}.  The positive conclusion is one-dimensional and
+existential: it gives neither an optimal $a_p$ nor a dependent, likelihood-tilted, or
+family-restricted posterior theorem.  The negative conclusion explains why Student-$t$ and
+horseshoe targets require a weighted, weak, restricted, or KL-sublevel formulation rather than
+a global convex-cost substitute for $T_2$.
+
 \subsection{Front 3b: multimodality --- the lower bound is family-dependent}
 \label{subsec:a4-multimodal}
 
@@ -684,12 +726,32 @@ posterior-scale question must be localized.
 
 \begin{question}[Modified transport for heavy-tailed posteriors]
 \label{q:a4-modified}
-Classify, for each robust-Bayes prior, the strongest cost $\alpha$ for which the modified
-transport inequality \eqref{eq:a4-modified} holds on $\mathcal Q$ or on KL sublevels, turning
-the Tier-4 obstruction (Family~\ref{fam:heavy-tail-classification}) into a computable
-diagnostic. The modified-LSI / weighted-transport theory
-\cite{BobkovLedoux1997,GentilGuillinMiclo2005,GozlanLeonard2007,BolleyVillani2005} supplies the
-language; posterior-specific constants are undeveloped. This is the $\Wtwo$ counterpart of A3.
+The one-dimensional generalized-normal branch is solved by
+Theorem~\ref{thm:a4-modified-transport-1d}, while a polynomial-tail Student or horseshoe law
+admits no global transport--entropy inequality with a nontrivial unbounded convex cost.  For a
+first residual target, take
+\[
+ \pi_{\nu,n}(\dd x)\propto
+ \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}
+ \operatorname{sigmoid}(x)^n\dd x,
+ \qquad \nu>2,\quad n\in\mathbb N,\ n\ge1,
+\]
+and the fixed-scale Gaussian location family
+$\mathcal Q_s=\{q_m=N(m,s^2):m\in\R\}$, $s>0$.  Writing
+$K(m)=\KL(q_m\|\pi_{\nu,n})$, $\delta=\min_mK(m)$, and
+$M_\rho=\{m:K(m)\le\delta+\rho\}$, first prove continuity and reverse-KL coercivity of $K$,
+$\delta>0$, and nonempty compactness of every complete sublevel $M_\rho$.  Then obtain explicit
+matching upper and lower bounds, including
+the sharp large-$\rho$ order, for
+\[
+ C_{\nu,n,s}(\rho)
+ =\sup_{m\in M_\rho}
+ \frac{W_2^2(q_m,\pi_{\nu,n})}{2K(m)},
+ \qquad \rho\ge0.
+\]
+Finiteness must come from this named family's compact sublevels and the $\mathcal P_2$ tail
+contract $\nu>2$, not from a KL cutoff alone.  A horseshoe target must instead specify a
+weighted, weak, bounded, or otherwise finite cost together with its family-coercivity contract.
 \end{question}
 
 \begin{question}[Family-aware multimodal lower bounds]

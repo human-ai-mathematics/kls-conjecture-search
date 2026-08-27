@@ -89,7 +89,7 @@ $$
 
 **Guardrail.** The witness must be globally Lipschitz in the metric of the claimed inequality.
 
-## `prop:a1-bulk-tail` — inverse-Hessian certificate
+## `prop:a1-euclidean-harmonic` — factor-one inverse-Hessian certificate
 
 **Fact.** For smooth $U$ on $\mathbb R^d$ with
 $mI\preceq\nabla^2U\preceq MI$ and $\pi\propto e^{-U}$,
@@ -149,3 +149,96 @@ ordering.
 
 **Guardrail.** The ratio $W_2^2/\mathrm{KL}$ need not decrease under averaging, and the
 variational family must contain the average.
+
+## `thm:a2-target` — sharp global-oscillation transfer
+
+**Fact.** Fix $d$. If, after mode-Hessian whitening, a posterior has density
+$e^{-r_n}/\int e^{-r_n}\,d\gamma$ relative to $\gamma=N(0,I_d)$ with
+$\operatorname{osc}(r_n)=o_P(1)$, then
+$$
+ C_P(\pi_n),\ C_{\mathrm{LS}}(\pi_n),\ C_{\mathrm{TCI}}(\pi_n)
+ =(1+o_P(1))\lambda_{\max}(H_n^{-1}).
+$$
+If $H_n/n\to I(\theta_0)\succ0$ in probability, all three $n$-scaled constants converge to
+$\lambda_{\max}(I(\theta_0)^{-1})$.
+
+**Use.** Turn a genuinely global Gaussian comparison into sharp functional-inequality
+asymptotics, including the covariance lower bounds needed to match Holley--Stroock upper bounds.
+
+**Guardrail.** The oscillation bound is global and the stated proof fixes $d$; total variation or
+a local Laplace expansion is insufficient. Fixed-prior logistic posteriors need not satisfy this
+hypothesis, and their global LSI/$T_2$ constants remain prior-scale.
+
+## `prop:a3-hierarchical-prior` — tensorize, then pull back the metric
+
+**Fact.** For independent $z_j\sim N(0,1)$ and independent log-half-Cauchy variables $u,v_j$,
+the base product has optimal Poincaré constant $4$. Under
+$\theta_j=e^{u+v_j}z_j$, the same optimal constant holds for the pullback energy
+$$
+ \sum_j e^{2u+2v_j}|\partial_{\theta_j}f|^2
+ +\sum_j|\partial_{v_j}f+\theta_j\partial_{\theta_j}f|^2
+ +\left|\partial_uf+\sum_j\theta_j\partial_{\theta_j}f\right|^2.
+$$
+
+**Use.** Derive a hierarchical weighted metric from independent base coordinates without losing
+the product constant, and expose the coefficient--scale and inter-coefficient cross terms forced
+by noncentering.
+
+**Guardrail.** This is a prior statement in the exact pullback metric, not a raw Euclidean claim.
+A likelihood tilt creates dependence that still needs conditional inequalities and a positive
+block gap; coordinate marginal constants alone do not transfer it.
+
+## `prop:a4-logistic-global` — translation-ray variational rigidity
+
+**Fact.** For a finite binary-logistic posterior with Gaussian prior covariance $\Sigma_0$, if a
+Gaussian variational family contains every translation of one fixed covariance, then
+$$
+ C_{\mathrm{mean},\mathcal Q}=C_{\mathcal Q}
+ =C_{\mathrm{mean},\mathrm{all}}=C_{\mathrm{TCI}}
+ =\lambda_{\max}(\Sigma_0).
+$$
+Remote translations give the matching lower bound; the likelihood contributes only lower-order
+growth along the translation ray.
+
+**Use.** Detect when a location-rich variational family necessarily sees the global prior-tail
+scale even though the posterior bulk is much tighter.
+
+**Guardrail.** The conclusion is global and uses the entire translation ray. It does not rule out
+posterior-scale localized constants on compact optimizer-centered sublevels, nor does it apply to
+a family without those translation witnesses.
+
+## `thm:a4-modified-transport-1d` — real-line tail/cost matching
+
+**Fact.** For a nonatomic full-support log-concave law on $\mathbb R$ and an admissible convex
+cost $\alpha$ that is quadratic near zero, a scaled global inequality
+$\mathcal T_{\alpha(a\,\cdot)}\le\mathrm{KL}$ holds for some $a>0$ exactly when
+$\int e^{\alpha(bx)}\,d\mu(x)<\infty$ for some $b>0$. Thus
+$e^{-|x|^p}$, $1\le p\le2$, admits a quadratic-to-$p$-power cost up to scaling, while a
+polynomial-tail law admits no nonzero unbounded convex-cost global TCI.
+
+**Use.** Match a one-dimensional log-concave tail to the strongest global convex transport cost
+and identify when A4 must switch to a weighted, weak, restricted, or sublevel formulation.
+
+**Guardrail.** The imported criterion is one-dimensional and its scale is existential. It gives
+no dependent-posterior theorem, no optimal scale, and no finite localized $W_2^2/\mathrm{KL}$
+coefficient for Student or horseshoe targets.
+
+## `thm:a5-two-well-eyring-kramers` — fixed-landscape metastability anchor
+
+**Fact.** For $\mu_\varepsilon\propto e^{-H/\varepsilon}$ under the imported fixed $C^3$ Morse
+two-equal-well, unique-index-one-saddle hypotheses,
+$$
+ C_P(\mu_\varepsilon)
+ =\left(1+O(\sqrt\varepsilon|\log\varepsilon|^{3/2})\right)
+ \frac{2\pi\varepsilon}{\kappa_1+\kappa_2}
+ \frac{\sqrt{|\det\nabla^2H(s)|}}{|\lambda_-(s)|}
+ e^{(H(s)-H(m_2))/\varepsilon}.
+$$
+In particular, at $\varepsilon=1/n$, $n^{-1}\log C_P$ converges to the communication height.
+
+**Use.** Calibrate the raw A5 barrier exponent and prefactor in the simplest certified
+metastable landscape.
+
+**Guardrail.** This is a fixed raw two-well theorem. It supplies no uniform random empirical
+landscape control, repeated-orbit network capacities, collision-stratum estimates, or quotient
+Bernstein--von Mises conclusion.

@@ -29,8 +29,7 @@ that remains open.
 The vanishing-leverage logistic Poincar\'e implication below is the A2 specialization of the
 reviewed A1 mode-leverage theorem. Propositions~\ref{prop:a2-subquadratic-global}
 and~\ref{prop:a2-logistic-global} have independently reviewed proofs. The general
-strong-Laplace transfer, Theorem~\ref{thm:a2-target}, remains an analytic proof draft pending the
-repository review step.
+strong-Laplace transfer, Theorem~\ref{thm:a2-target}, is also independently agent-certified.
 
 \subsection{Setup, scaling, and the precise target}
 \label{subsec:a2-setup}
@@ -220,14 +219,13 @@ regime these upper and lower bounds do not identify the $T_2$ asymptotic: it may
 equality with the LSI scale requires a separate argument. A Fisher-local $T_2$ conclusion here is
 a consequence of a \emph{sharp} LSI comparison plus covariance control, never of TV-BvM alone.
 
-\subsection{A strong sufficient transfer theorem (analytic draft)}
+\subsection{A strong sufficient transfer theorem}
 \label{subsec:a2-theorem}
 
 The honest statement is not ``BvM implies the constants'' but a strong-Laplace statement that
-adds the missing tail and perturbation control. The implication and proof below are an analytic
-draft; repository certification requires the separate solution/review step.
+adds the missing tail and perturbation control.
 
-\begin{theorem}[Strong-Laplace transfer --- analytic proof draft]
+\begin{theorem}[Strong-Laplace transfer]
 \label{thm:a2-target}
 Let $d$ be fixed, $\theta_0$ interior, the prior density positive and smooth near $\theta_0$,
 and the model regular with $\tfrac1n H_n\to I(\theta_0)\succ0$ in $\Prob_{\theta_0}$-probability.
@@ -257,6 +255,10 @@ $\CLS$; $T_2(C)$ implies the linear sub-Gaussian bound and therefore
 $C\ge\lmax(\Cov)$, giving the matching lower bound for $\CTCI$. Finally
 $H_n/n\to I(\theta_0)$ yields the displayed limits.
 \end{proof}
+
+\noindent The independently agent-certified standalone proof, including the full probabilistic
+quantifiers and the separate $T_2$ covariance lower bound, is
+\path{solutions/thm-a2-target.tex}.
 
 \noindent Global $o_P(1)$ oscillation is a sufficient Gaussian-comparison hypothesis, not an
 equivalent reformulation of an arbitrary tail/no-bottleneck condition. Replacing it by a weaker

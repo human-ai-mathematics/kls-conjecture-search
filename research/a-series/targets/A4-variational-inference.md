@@ -31,5 +31,40 @@
 
 ## Candidate refinement
 
-None currently. A proposed theorem must name the variational family, the nonempty sublevel
-$\delta_{\mathcal Q}+\rho$, the finiteness mechanism, and every approximation/remainder term.
+### Exact replacement for `q:a4-modified`
+
+For $1\le p\le2$, let
+$\theta_p(t)=t^2$ for $|t|\le1$ and
+$\theta_p(t)=\frac2p|t|^p+1-\frac2p$ for $|t|\ge1$.  The global one-dimensional
+generalized-normal branch is closed by `thm:a4-modified-transport-1d`: for
+$\pi_p(dx)\propto e^{-|x|^p}dx$ there is $a_p>0$ such that
+$\mathcal T_{\theta_p(a_p\,\cdot)}(q,\pi_p)\le\KL(q\|\pi_p)$ for every $q$.  The same theorem
+rules out a global transport--entropy inequality with any nonzero unbounded convex cost for a
+polynomial-tail Student or horseshoe law.  Neither conclusion is an open deliverable of this
+node.
+
+The first residual target is the one-dimensional Student-logistic posterior and fixed-scale
+Gaussian location family
+$$
+ \pi_{\nu,n}(dx)=Z_{\nu,n}^{-1}
+ \left(1+\frac{x^2}{\nu}\right)^{-(\nu+1)/2}\operatorname{sigmoid}(x)^n\,dx,
+ \qquad \nu>2,\quad n\in\mathbb N,\ n\ge1,
+ \qquad
+ \mathcal Q_s=\{q_m=N(m,s^2):m\in\mathbb R\},\quad s>0.
+$$
+Writing $K(m)=\KL(q_m\|\pi_{\nu,n})$ and
+$\delta=\min_m K(m)$, first prove that $K$ is continuous and coercive, that $\delta>0$, and that every complete
+sublevel $M_\rho=\{m:K(m)\le\delta+\rho\}$ is nonempty and compact.  Then determine explicit
+matching upper and lower bounds, including the sharp large-$\rho$ order, for
+$$
+ C_{\nu,n,s}(\rho)
+ :=\sup_{m\in M_\rho}
+ \frac{W_2^2(q_m,\pi_{\nu,n})}{2K(m)},
+ \qquad \rho\ge0.
+$$
+Finiteness must be deduced from this named family's coercive compact sublevel and the
+$\mathcal P_2$ moment condition $\nu>2$; a KL cutoff alone is not a finiteness hypothesis.
+Any finite bound here improves the global baseline $+\infty$ only on this family and sublevel.
+For horseshoe posteriors, a later target must first specify a weighted, weak, bounded, or
+otherwise finite cost and its family coercivity contract; no global unbounded-convex-cost claim
+is retained.
