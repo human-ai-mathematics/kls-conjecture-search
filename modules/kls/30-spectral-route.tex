@@ -78,6 +78,41 @@ covariance-norm estimate is not enough, and by Proposition~\ref{prop:covariance-
 be.
 \end{remark}
 
+\begin{lemma}[Posterior eigenfunction-defect calculus]
+\label{lem:mm-posterior-defect}
+In the regular setting above, realize localization through the planted channel
+$c_t=tX+B_t^{\mathrm{obs}}$, where $X\sim\mu$ and $B^{\mathrm{obs}}$ is an independent Brownian
+motion, and put
+\[
+  R_t(x)=(c_t-tx)\cdot\nabla f(x),
+  \qquad \rho_t=R_t-\E_tR_t,
+  \qquad m_t=\E_tf.
+\]
+Define
+\[
+  b_t=\E_t\nabla f,
+  \quad C_t=\E_t[(X-a_t)\otimes\nabla f],
+  \quad u_t=\E_t[\rho_t(X-a_t)],
+  \quad K_t=\E_t[\rho_t(X-a_t)^{\otimes2}].
+\]
+Then, for every $t\ge0$,
+\begin{align}
+  \E_tR_t&=\lambda m_t,
+  &\lambda g_t&=b_t+u_t,
+  &\lambda H_t&=2\operatorname{sym}C_t+K_t,
+  \label{eq:mm-posterior-defect-identities}\\
+  \E\Var_t(R_t)
+  &=t\lambda-\lambda^2\int_0^t\E\abs{g_s}^2\dd s,
+  &\E\int_0^t\norm{C_s}_{\HS}^2\dd s
+  &\le\lambda-\lambda^2\abs{g_0}^2,
+  \label{eq:mm-posterior-defect-budgets}\\
+  \E\E_t\abs{\nabla R_t}^2
+  &\le t\lambda^2+t^2\lambda.
+  \label{eq:mm-posterior-defect-gradient}
+\end{align}
+These identities do not by themselves unwhiten the high-covariance part of $H_t$.
+\end{lemma}
+
 \subsection{The headline open target}
 \label{subsec:spectral-headline}
 

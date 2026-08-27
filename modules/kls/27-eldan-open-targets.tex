@@ -17,6 +17,20 @@ dynamic upgrade must use cut-specific structure and covariance occupation. The f
 decision point is Program~\ref{prog:product-test}.
 \end{question}
 
+\begin{lemma}[Scale-weighted all-cut source budget]
+\label{lem:time-weighted-source}
+For every isotropic log-concave initial law, every fixed measurable cut $E$ with
+$0<\mu(E)<1$, and every $T>0$, the two-color localization quantities satisfy
+\begin{equation}
+  \E\int_0^T t^2\bigl(S_t+r_t^2\bigr)\dd t
+  \le T^2\E r_T\le T.
+  \label{eq:time-weighted-source}
+\end{equation}
+Consequently, the same upper bound holds after restricting the nonnegative integrand to any
+balanced stopped window. This statement does not remove the quadratic time weight at the
+initial endpoint.
+\end{lemma}
+
 \begin{question}[Weighted excess propagation with rate]
 \label{q:weighted}
 Prove \eqref{eq:intro-weighted-excess}: for balanced near-Cheeger cuts,
