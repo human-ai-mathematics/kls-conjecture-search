@@ -53,6 +53,29 @@ moment-map coordinates. This is the structural payoff: isotropy, which
 Section~\ref{sec:family-needles} showed is not inherited by needles, becomes a single linear
 identity for the object being estimated.
 
+\begin{theorem}[Compact-target regular moment map]
+\label{thm:regular-moment-map-compact-target}
+Let $P\subset\R^n$ be a convex body and let
+$\mu(dx)=g(x)\mathbf 1_{\operatorname{int}P}(x)\,dx$ be a centered probability measure, where
+$g\in C^\infty(\R^n)$ is positive. Then the canonical moment potential $\varphi$ is smooth and
+strictly convex on $\R^n$, and
+\[
+  \nabla\varphi:\R^n\longrightarrow\operatorname{int}P
+\]
+is a diffeomorphism. Moreover,
+\[
+  \tau_\mu(x)=D^2\varphi\bigl((\nabla\varphi)^{-1}(x)\bigr)
+\]
+is a smooth positive symmetric Stein kernel: $\Div_\mu\tau_\mu=-x$ distributionally, with weak
+zero boundary flux, and $\E_\mu\tau_\mu=\Cov(\mu)$.
+\end{theorem}
+
+The moment-potential regularity and global gradient-image statement are
+Theorem~1.1 of \cite{BermanBerndtsson2013RealMA}; the target-coordinate Stein identity and weak
+zero-flux formulation are Theorem~2.3 of \cite{Fathi2019SteinMomentMaps}. This compact-target
+class is the published regularity input used by the approximation closure in
+Question~\ref{q:cmh-approximation}.
+
 \subsection{Differentiating Monge--Amp\`ere}
 \label{subsec:mm-differentiated}
 

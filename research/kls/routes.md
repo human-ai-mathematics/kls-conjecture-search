@@ -7,7 +7,7 @@ log-concave measure. Its bridge to the A-series is `a-series/conj:a1-bis`.
 |---|---|---|
 | [`eldan-localization`](routes/eldan-localization.md) | A balanced cut cannot be identified too quickly under stochastic localization. | high-rank occupation and covariance/excess alignment |
 | [`moment-map-spectral`](routes/moment-map-spectral.md) | Preserve eigenfunction tensor orientation through localization. | unwhitening without losing alignment |
-| [`moment-map-cmh`](routes/moment-map-cmh.md) | Bound the canonical moment-Hessian quotient. | approximation, commutators, and the solenoidal channel |
+| [`moment-map-cmh`](routes/moment-map-cmh.md) | Bound the canonical moment-Hessian quotient. | uniform CMH control on certified approximants, commutators, and the solenoidal channel |
 
 Choose a route here, then use [`gating.md`](gating.md) for current deliverables,
 [`ledger.yaml`](ledger.yaml) for exact statements and logical state, and

@@ -57,17 +57,27 @@ Theorem~\ref{thm:cmh-implies-affine-poincare} then proves
 $\CPaff(\mu)\le\CMH(\mu)$ by a single Cauchy--Schwarz step, with a spectral truncation in place
 of an assumed gap.
 
+\begin{assumption}[Uniform CMH control on regular approximants]
+\label{ass:uniform-cmh-approximants}
+There is a universal $C<\infty$ such that, for every centered log-concave law $\mu$, the
+centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants
+$\mu_k$ satisfy $\sup_k\CMH(\mu_k)\le C$.
+\end{assumption}
+
 \begin{question}[Approximation closure for CMH]
 \label{q:cmh-approximation}
-Suppose a universal estimate $\CMH(\mu_k)\le C$ holds along regular moment-map approximants
-$\mu_k$ of an arbitrary centered log-concave law $\mu$.  Establish hypotheses and a closure
-argument under which the affine Poincar\'e inequalities pass to $\mu$, uniformly under
-isotropic normalization and affine-support degeneration.
+Under Assumption~\ref{ass:uniform-cmh-approximants}, establish a closure argument under which the
+affine Poincar\'e inequalities pass to $\mu$, uniformly under isotropic normalization and
+affine-support degeneration.
 \end{question}
 
-This approximation question remains open; in particular, the regular-class reduction by itself
-does not claim a theorem for every nonsmooth log-concave law. Two consequences of the
-now-explicit normalization bear directly on the rest of this section.
+The approximation closure is now certified conditionally. Centered Gaussian-convolution,
+Gaussian-tilt, and growing-ball approximants converge in ambient $W_2$, and the affine
+Poincar\'e inequality passes with no loss on the intrinsic closed covariance-form domain,
+including proper affine-support degeneration. The uniform premise
+$\sup_k\CMH(\mu_k)\le C$ remains unresolved; no bound on $\CMH$ is supplied by the closure
+argument. Two consequences of the now-explicit normalization bear directly on the rest of this
+section.
 
 First, the reduction is not known to be an equivalence. Proposition~\ref{prop:cmh-hodge} splits
 the CMH numerator into an affine Poincar\'e part and a nonnegative solenoidal excess, which

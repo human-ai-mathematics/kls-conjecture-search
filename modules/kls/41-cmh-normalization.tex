@@ -426,18 +426,19 @@ class, matching the affine invariance of $\CPaff$. For a \emph{noninvertible} ma
 transported Stein kernel need not be the canonical moment-map kernel of the image, so only the
 Poincar\'e-level statement of Corollary~\ref{cor:cmh-linear-images} is available there.
 
-\paragraph{Conditional template for general log-concave measures.}
-Theorem~\ref{thm:cmh-implies-affine-poincare} is stated on the regular moment-map class.  For an
-arbitrary log-concave $\mu$, take the regular approximants $\mu_q$ of
-\S\ref{subsec:mm-audit} so that $\mu_q\to\mu$ with second moments and hence
-$\Sigma_q\to\Sigma$.  If $\sup_q\CMH(\mu_q)\le C$, the theorem gives, for every smooth compactly
-supported $f$,
+\paragraph{Conditional closure for general log-concave measures.}
+Question~\ref{q:cmh-approximation} is certified at the Poincar\'e level as follows. For an
+arbitrary centered log-concave $\mu$, centered Gaussian-convolution, Gaussian-tilt, and
+growing-ball approximants $\mu_q$ belong to the published compact-target regular class of
+Theorem~\ref{thm:regular-moment-map-compact-target} and converge to $\mu$ in ambient $W_2$ with
+second moments, hence $\Sigma_q\to\Sigma$. If $\sup_q\CMH(\mu_q)\le C$, then for every smooth
+compactly supported $f$,
 \[
   \Var_{\mu_q}f\le C\int\inner{\Sigma_q\nabla f}{\nabla f}\,d\mu_q.
 \]
 Both sides converge because $f$ and $\nabla f$ are bounded and continuous and the covariances
-converge. Subject to smooth-core density for the limiting, possibly affine-degenerate law, the
-same inequality then extends to $H^1_\Sigma(\mu)$. This is a conditional template, not a closure
-theorem: Question~\ref{q:cmh-approximation} records the remaining construction of approximants,
-affine-support control, and limiting density argument. No continuity of $\CMH$ is asserted.
+converge. Intrinsic smooth-core density on $S=\operatorname{Ran}\Sigma$ extends the inequality to
+the closed covariance-form relaxation $H^1_\Sigma(\mu)$, while $\Sigma$ and $\Sigma^+$ annihilate
+ambient normal derivatives. This proves constant-preserving closure, including singular
+covariance. It does not prove the uniform premise and asserts no continuity of $\CMH$.
 \end{document}

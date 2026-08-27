@@ -193,6 +193,15 @@ nodes:
   # ---------------------------------------------------------------------------
   # ROUTE-AGNOSTIC MOMENT-MAP INPUTS
   # ---------------------------------------------------------------------------
+  - id: thm:regular-moment-map-compact-target
+    kind: theorem
+    status: imported
+    import_class: published
+    references: [BermanBerndtsson2013RealMA, Fathi2019SteinMomentMaps]
+    route: shared
+    file: modules/kls/04-family-moment-map.tex
+    statement: "If P is a convex body and μ(dx)=g(x)1_int(P)(x)dx is a centered probability with positive smooth g, then its canonical moment potential is smooth and strictly convex, its gradient is a diffeomorphism from R^n onto int(P), and the target-coordinate Hessian is a smooth positive symmetric Stein kernel satisfying Div_μ H=-x and E_μ H=Cov(μ)."
+
   - id: thm:chen-klartag-moment-hessian
     kind: theorem
     status: imported
@@ -681,6 +690,17 @@ nodes:
     statement: "Operator-to-trace upgrade: prove ass:all-cut-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over balanced cuts."
     bounded_by: [obs:proj-ceiling, obs:two-tail]
 
+  - id: lem:time-weighted-source
+    kind: lemma
+    status: proved
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "Scale-weighted all-cut source budget: for every isotropic log-concave initial law, every fixed cut of nontrivial mass, and every T>0, E int_0^T t^2(S_t+r_t^2) dt <= T^2 E r_T <= T; hence the same bound holds under any balanced stopping, without removing the quadratic time weight."
+    depends_on: [thm:scalar-riccati]
+    solution: solutions/lem-time-weighted-source.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-time-weighted-source-proof-review.md
+
   - id: q:weighted
     kind: question
     status: open
@@ -739,6 +759,16 @@ nodes:
   # ---------------------------------------------------------------------------
   # FIXED-EIGENFUNCTION MOMENT-MAP / SPECTRAL ROUTE
   # ---------------------------------------------------------------------------
+  - id: lem:mm-posterior-defect
+    kind: lemma
+    status: proved
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "For a regular normalized first eigenfunction under the planted localization channel, the posterior defect R_t=(c_t-tX)·grad f satisfies E_t R_t=lambda m_t, lambda g_t=b_t+u_t, lambda H_t=2 sym(C_t)+K_t, E Var_t(R_t)=t lambda-lambda^2 int_0^t E|g_s|^2 ds, E int_0^t ||C_s||_HS^2 ds <= lambda-lambda^2|g_0|^2, and E E_t|grad R_t|^2 <= t lambda^2+t^2 lambda."
+    solution: solutions/lem-mm-posterior-defect.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-mm-posterior-defect-proof-review.md
+
   - id: q:mm-spectral-occupation
     kind: question
     status: open
@@ -756,13 +786,23 @@ nodes:
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
   # ---------------------------------------------------------------------------
-  - id: q:cmh-approximation
-    kind: question
+  - id: ass:uniform-cmh-approximants
+    kind: assumption
     status: open
     route: moment-map-cmh
     file: modules/kls/40-moment-map-cmh.tex
-    statement: "Give a uniform regular moment-map approximation and closure argument that passes CP_aff <= C from approximants satisfying C_CMH <= C to an arbitrary centered log-concave limit, including affine-support degeneration."
-    depends_on: [def:cmh, thm:cmh-implies-affine-poincare]
+    statement: "There is a universal C such that for every centered log-concave μ, the centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants μ_k satisfy sup_k C_CMH(μ_k) <= C."
+
+  - id: q:cmh-approximation
+    kind: question
+    status: conditional
+    route: moment-map-cmh
+    file: modules/kls/40-moment-map-cmh.tex
+    statement: "Under ass:uniform-cmh-approximants, the affine Poincare inequalities of the regular approximants pass with no loss to every centered log-concave limit, including affine-support degeneration."
+    depends_on: [ass:uniform-cmh-approximants, def:cmh, thm:cmh-implies-affine-poincare, thm:regular-moment-map-compact-target]
+    solution: solutions/q-cmh-approximation.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-q-cmh-approximation-proof-review.md
 
   - id: q:mm-invariant-lift
     kind: question
