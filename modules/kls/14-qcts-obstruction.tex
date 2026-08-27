@@ -118,13 +118,30 @@ Taking the supremum over $M$ and using \eqref{eq:color-tensor} gives the two-col
 the slightly unbalanced case is handled by the explicit $(q-p)\delta\delta^T$ term and
 $B\preceq A$.
 
-Conversely, fix $M$ with $\norm M_{\HS}=1$ and set $Y=X^TMX-\Tr M$. In the atomless case choose a
-median $m$ of $Y$ and let $E=\{Y\ge m\}$; in the general case use the standard randomized threshold
-on the level set $\{Y=m\}$ to obtain exact mass $1/2$. The balanced two-color estimate bounds
-$\abs{\E[gY]}$ universally. Since $g$ is the sign of $Y-m$ after randomization, this controls
-$\E\abs{Y-m}$ up to a universal factor. Reverse Holder inequalities for bounded-degree polynomials
-under log-concave measures, due to Carbery--Wright \cite{CarberyWright2001}, give
-$\norm{Y-\E Y}_{L^2}\lesssim\norm{Y-\E Y}_{L^1}$, and hence $\Var(Y)\lesssim C$.
+Conversely, fix $M$ with $\norm M_{\HS}=1$ and set
+$Y=X^TMX-\Tr M$. Since $\nu$ is isotropic, its convex support has nonempty interior and $\nu$
+is absolutely continuous there. The polynomial $x\mapsto x^TMx$ is nonconstant, because
+$M\ne0$, and each of its level sets has Lebesgue measure zero. Thus the law of $Y$ is atomless,
+and there is a median $m$ for which the deterministic cut $E=\{Y\ge m\}$ has mass exactly
+$1/2$.
+
+For this cut, $g=2\one_E-1=\operatorname{sgn}(Y-m)$ almost surely and $\E g=0$, so
+\[
+  \E[gY]=\E[g(Y-m)]=\E\abs{Y-m}.
+\]
+The balanced two-color estimate and \eqref{eq:color-tensor} give
+$\norm{\E[gZ]}_{\HS}\le\sqrt C$, hence
+$\E\abs{Y-m}=\inner{\E[gZ]}M\le\sqrt C$.
+The Carbery--Wright reverse moment inequality for polynomials of degree at most two
+\cite{CarberyWright2001} now gives
+\[
+  \sqrt{\Var(Y)}
+  \le\norm{Y-m}_{L^2}
+  \lesssim\norm{Y-m}_{L^1}
+  \lesssim\sqrt C.
+\]
+Taking the supremum over symmetric $M$ with $\norm M_{\HS}=1$ proves
+$\Var(X^TMX)\lesssim C\norm M_{\HS}^2$.
 \end{proof}
 
 \subsection{Why ordinary thin shell did not suffice}

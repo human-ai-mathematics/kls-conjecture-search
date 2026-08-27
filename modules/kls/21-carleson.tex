@@ -138,6 +138,39 @@ Choose $M=K_t/\norm{K_t}_{\HS}$. The second inequality follows from $A_t\preceq 
 Brascamp--Lieb bound applied to linear functions, recorded as \eqref{eq:BL-cap}.
 \end{proof}
 
+\begin{lemma}[Cut-oriented Lyapunov--Stein duality]
+\label{lem:lyapunov-stein-duality}
+For $t>0$, let $\mathscr L_{A_t}$ be the Lyapunov operator on symmetric matrices,
+\[
+  \mathscr L_{A_t}(M)=\frac{A_tM+MA_t}{2}.
+\]
+Then, on the covariance support,
+\begin{equation}\label{eq:lyapunov-stein-duality}
+  s_t\inner{K_t}{\mathscr L_{A_t}^{-1}K_t}\le\frac4t.
+\end{equation}
+For $K\ne0$ define the cut-oriented covariance scale
+\[
+  \lambda_{\rm cut}(A,K)
+  :=\frac{\norm K_{\HS}^2}{\inner K{\mathscr L_A^{-1}K}},
+\]
+and set it to zero for $K=0$. Then
+\begin{equation}\label{eq:cut-oriented-source-scale}
+  s_t\norm{K_t}_{\HS}^2
+  \le\frac{4\lambda_{\rm cut}(A_t,K_t)}t.
+\end{equation}
+The scale ignores independent spectator blocks:
+\[
+  \lambda_{\rm cut}(A\oplus B,K\oplus0)=\lambda_{\rm cut}(A,K).
+\]
+\end{lemma}
+
+In an $A$-eigenbasis, $\lambda_{\rm cut}(A,K)$ is the $|K_{ij}|^2$-weighted harmonic
+mean of $(\lambda_i(A)+\lambda_j(A))/2$. Thus it equals the inflated variance in the
+anisotropic two-tail example while remaining unchanged under irrelevant direct sums. This is a
+calibrated tensor-stable replacement candidate for the global operator norm, not an
+initial-layer occupation estimate: \eqref{eq:cut-oriented-source-scale} still has a singular
+$t^{-1}$ factor.
+
 \begin{corollary}[The source is pathwise controlled away from zero]
 \label{cor:away-from-zero}
 There exists a universal $\eta_0>0$ such that, for $0<\eta\le\eta_0$ and on $\{t<\tau_\eta\}$,

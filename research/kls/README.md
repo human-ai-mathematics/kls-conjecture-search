@@ -16,9 +16,9 @@ directory owns logical state, route selection, obstructions, and active acceptan
 | What can be computed numerically? | [`../../experiments/README.md`](../../experiments/README.md) |
 | Where are proofs and reviews? | [`../../solutions/`](../../solutions/), [`../reviews/`](../reviews/) |
 
-Every node has one route: `shared`, `eldan-localization`, `moment-map-spectral`, or
-`moment-map-cmh`. The route-spanning ledger is single-writer; route documents never carry claim
-status or duplicate dependency graphs.
+Every node has one route: `shared`, `eldan-localization`, `moment-map-spectral`,
+`moment-map-cmh`, or `conditional-fiber-frame`. The route-spanning ledger is single-writer;
+route documents never carry claim status or duplicate dependency graphs.
 
 ## Workflow
 

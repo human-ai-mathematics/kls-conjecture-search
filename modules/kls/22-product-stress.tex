@@ -34,8 +34,9 @@ question is whether the \emph{program's estimate} holds there.
 
 \begin{lemma}[Block support]
 \label{lem:block}
-Let $\nu$ be a product probability measure on $\R^n$ and let $E$ be measurable with respect to
-the coordinates in $J\subset\{1,\dots,n\}$. Then the two-color quantities of the pair
+Let $\nu$ be a product probability measure on $\R^n$ with finite second moment, and let $E$ be
+measurable with respect to the coordinates in $J\subset\{1,\dots,n\}$. Assume
+$0<\nu(E)<1$. Then the two-color quantities of the pair
 $(\nu,E)$ satisfy: $\delta_i=0$ for $i\notin J$, and $G_{ij}=K_{ij}=0$ unless both
 $i,j\in J$.
 \end{lemma}
@@ -98,7 +99,8 @@ $\mu^+(E)\ge\E\mu_{T_k}^+(E)\ge c\sqrt{T_k}\cdot\tfrac13\cdot\tfrac12\ge c'/\sqr
 
 \begin{corollary}[Refutation of the rank-one dynamic two-tail candidate]
 \label{cor:refutation}
-Let $\mu$ be a product as above and let $E$ be \emph{any fixed} balanced cut depending on one
+Let $\mu$ be a product as above and let $E$ be \emph{any fixed} cut with
+$p_0\in[2/5,3/5]$ depending on one
 fixed coordinate $i$, chosen before localization. This includes a fixed two-tail cut in a
 coordinate whose variance subsequently inflates, but not a pathwise choice of $E$ or $i$. Then
 \[
@@ -193,8 +195,8 @@ $\{p_t\in[1/3,2/3]\}$,
 \begin{equation}\label{eq:S-le-X2}
   S_t\ \le\ C\bigl(1+X_t^2\bigr),
 \end{equation}
-with $C$ universal. The same conclusion holds unconditionally when $\mu$ is a product as in
-Theorem~\textup{\ref{thm:budget}}.
+with $C$ universal. The same conclusion holds unconditionally when $\mu$ is a product of
+isotropic one-dimensional log-concave measures.
 \end{theorem}
 
 \begin{proof}
@@ -292,7 +294,7 @@ The formerly open fixed-time moment window between $c/\log^2n$ and $c/\log n$ is
 combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen
 the distinct published \emph{sup-over-time} statement of Theorem~\ref{thm:KL-window}. The scale
 $1/\log n$ is also the natural endpoint for covariance-only control: the explicit product of
-two-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order
+centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order
 $1/\log n$ \cite[Remarks~62, 64 and Prop.~65]{KLnotes}. Thus the live gap for
 $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the
 sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal
@@ -300,7 +302,7 @@ alignment must replace covariance-only control.
 
 \begin{heuristic}[Expected failure of (V2) on universal windows for exponential products]
 \label{heur:V2-fails}
-Let $\mu$ be the product of $n$ two-sided exponentials. Suppose, as the sharpness discussion
+Let $\mu$ be the product of $n$ centered one-sided exponentials. Suppose, as the sharpness discussion
 of \cite[Remark~62]{KLnotes} and \cite{KlartagChenNotes} indicates, that with probability
 bounded below some coordinate variance reaches the scale of the Brascamp--Lieb cap,
 $A_t^{(i)}\asymp1/t$, on a time window $[t_1,2t_1]$ with $t_1\asymp1/\log n$. Then on that

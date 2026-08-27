@@ -202,8 +202,9 @@ Equivalently, every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$.
 Let $Y_i\sim\GammaLaw(\alpha_i,1)$ be independent, $S=\sum_iY_i\sim\GammaLaw(A,1)$ and
 $P_i=Y_i/S$; then $P\sim\Dir(\alpha)$ and $S\perp P$. Lift $g$ homogeneously of degree zero by
 $G(Y)=g(Y/S)$. The product-Gamma (Laguerre) generator is
-$\calL_\Gamma G=\sum_i\bigl(Y_iG_{ii}+(\alpha_i-Y_i)G_i\bigr)$, and its integrated Bochner
-identity reads
+$\calL_\Gamma G=\sum_i\bigl(Y_iG_{ii}+(\alpha_i-Y_i)G_i\bigr)$.
+Proposition~\ref{prop:cmh-bochner}, specialized to the Gamma moment Hessian
+$H_\Gamma=\diag(Y_i)$, gives the integrated Bochner identity
 \begin{equation}
   N_\Gamma(G):=\E(\calL_\Gamma G)^2
   =\E\Bigl[\sum_iY_iG_i^2+\sum_{i,j}Y_iY_jG_{ij}^2\Bigr].

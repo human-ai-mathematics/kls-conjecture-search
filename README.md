@@ -9,7 +9,7 @@ The manuscript has three parts:
 
 - [`modules/`](modules/) develops the general toolkit and structured model families;
 - [`modules/open-targets/`](modules/open-targets/) studies the A1--A5 statistical targets; and
-- [`modules/kls/`](modules/kls/) develops three routes toward the KLS conjecture.
+- [`modules/kls/`](modules/kls/) develops four routes toward the KLS conjecture.
 
 ## Build
 

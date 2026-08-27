@@ -17,9 +17,10 @@
 % evidence_run: none
 % checked_by: agent
 % authored_by: /root/kls_proof_audit
-% reviewed_by: /root/kls_bootstrap_author
-% review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
-% date: 2026-08-25
+% repaired_by: /root/repair_product_dossier
+% reviewed_by: /root/review_product_w0
+% review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
+% date: 2026-08-27
 % ============================================================================
 
 \section*{Solution: product coordinate budgets, quadratic chaos,
@@ -33,39 +34,51 @@ Corollary~\ref{cor:per-direction}, the scalar Riccati identity
 Theorem~\ref{thm:scalar-riccati}, and product persistence from
 Proposition~\ref{prop:products}.  The final covariance-window corollary uses only the published
 sup-over-time Klartag--Lehec window and the Brascamp--Lieb cap; it does not use the conditional
-Letwin input.
+Letwin input.  The current bytes are an unreviewed repair: the former review is historical and
+does not certify this version.
 
-For a pair $(\nu,E)$, write $p=\nu(E)$, $q=1-p$, $s=pq$,
+For an initial law $\mu$, let $\mu_t$ denote its Eldan localization posterior, and write
+$a_t$ and $A_t$ for the posterior mean and covariance.  For a pair $(\nu,E)$, write
+$p=\nu(E)$, $q=1-p$, $s=pq$,
 $\delta=m^E-m^F$, $G=\Sigma^E-\Sigma^F$, and
 $K=G+(q-p)\delta\delta^T$.  Along localization use the same symbols with subscript $t$, and set
 \[
   B_t=s_t\delta_t\delta_t^T,
   \quad R_t=A_t-B_t,
   \quad r_t=\Tr B_t=s_t\abs{\delta_t}^2,
-  \quad S_t=s_t\norm{G_t}_{\HS}^2.
+  \quad S_t=s_t\norm{G_t}_{\HS}^2,
+  \quad D_t=2s_t\delta_t^TA_t\delta_t-r_t^2.
 \]
+For the coordinate-budget theorem, the coarse balanced stopping time is
+\begin{equation}\label{eq:sol-product-tau}
+  \tau:=\inf\{t\ge0:p_t\notin[1/3,2/3]\},
+  \qquad \inf\varnothing:=\infty.
+\end{equation}
 
 \subsection*{1. Coordinate support}
 
 \begin{lemma}[= Lemma~\ref{lem:block}]
 \label{lem:sol-block}
-Let $\nu=\bigotimes_{i=1}^n\nu_i$ be a product probability measure and let $E$ be measurable
-with respect to the coordinates in $J\subset\{1,\dots,n\}$.  Then $\delta_i=0$ for
-$i\notin J$, and $G_{ij}=K_{ij}=0$ unless $i,j\in J$.
+Let $\nu=\bigotimes_{i=1}^n\nu_i$ be a product probability measure on $\R^n$ with finite
+second moment, and let $E$ be measurable with respect to the coordinates in
+$J\subset\{1,\dots,n\}$.  Assume $0<\nu(E)<1$, so that both conditional means and
+conditional covariance matrices are defined.  Then $\delta_i=0$ for $i\notin J$, and
+$G_{ij}=K_{ij}=0$ unless $i,j\in J$.
 \end{lemma}
 
 \begin{proof}
-If $i\notin J$, then $X_i$ is independent of the indicator $\one_E$, so
-$\E[X_i\mid E]=\E X_i=\E[X_i\mid E^c]$ and $\delta_i=0$.  More generally, conditional on either
-color, all coordinates outside $J$ retain their original joint product law and remain
-independent of the coordinates in $J$.  Thus for $i\notin J$,
+Because $\one_E$ is measurable with respect to $(X_j)_{j\in J}$, the entire vector
+$(X_i)_{i\notin J}$ is independent of both $\one_E$ and $(X_j)_{j\in J}$.  Hence, for
+$i\notin J$,
+$\E[X_i\mid E]=\E X_i=\E[X_i\mid E^c]$ and $\delta_i=0$.  Conditional on either color, the
+coordinates outside $J$ retain their original joint product law and remain independent of the
+coordinates in $J$.  Thus for $i\notin J$,
 \[
   \Cov(X_i,X_j\mid E)=\Cov(X_i,X_j\mid E^c)=\Cov(X_i,X_j)
 \]
 when $j\notin J$, while both conditional cross-covariances are zero when $j\in J$.  Therefore
 $G$ is supported on $J\times J$.  Since $\delta\delta^T$ has the same support, so does $K$.
-The proof uses only conditional independence and applies to arbitrary measurable $E$ of
-nontrivial mass.
+All displayed moments are finite by hypothesis.  The proof uses only conditional independence.
 \end{proof}
 
 \subsection*{2. The coordinate budget}
@@ -73,8 +86,9 @@ nontrivial mass.
 \begin{theorem}[= Theorem~\ref{thm:budget}]
 \label{thm:sol-budget}
 Let $\mu=\bigotimes_i\mu^{(i)}$ be a product of isotropic one-dimensional log-concave measures,
-and let $E$ be measurable with respect to $k$ coordinates $J$, with
-$p_0\in[2/5,3/5]$.  Then:
+and let $E$ be measurable with respect to a fixed set $J$ of $k$ coordinates, with
+$p_0:=\mu(E)\in[2/5,3/5]$ and $q_0:=1-p_0$.  Let $\tau$ be the stopping time in
+\eqref{eq:sol-product-tau}.  Then:
 \begin{enumerate}[label=(\roman*),leftmargin=2.2em]
   \item $\displaystyle\E\int_0^\infty S_t\,dt
         \le\sum_{i\in J}(R_0)_{ii}\le k$;
@@ -88,7 +102,9 @@ $p_0\in[2/5,3/5]$.  Then:
 
 \begin{proof}
 Product structure is preserved pathwise by localization.  The fixed event $E$ remains
-$J$-measurable, so Lemma~\ref{lem:sol-block} applied to $(\mu_t,E)$ gives
+$J$-measurable.  At every finite time the posterior likelihood is strictly positive
+$\mu$-almost everywhere, so $0<p_t<1$; its second moment is finite.  Thus
+Lemma~\ref{lem:sol-block} applied to $(\mu_t,E)$ gives
 \[
   S_t=s_t\norm{G_t}_{\HS}^2
      =\sum_{i\in J}s_t\abs{G_te_i}^2.
@@ -106,8 +122,10 @@ The scalar Riccati identity is
   dr_t=dM_t+(S_t-D_t)dt,
   \qquad D_t\ge0.
 \]
-Stop first at $t\wedge\tau$ and at a localizing sequence that makes $M$ a true martingale.
-Taking expectations, discarding $D$, and then applying Fatou while using (i) yields
+Let $(\sigma_m)$ be an increasing sequence of bounded stopping times, tending to infinity,
+such that $M^{\sigma_m}$ is a true martingale and all stopped coefficients are integrable.
+At $t\wedge\tau\wedge\sigma_m$, take expectations and discard the nonnegative $D$ term.
+Fatou's lemma on the left and monotone convergence for the nonnegative source on the right give
 \[
   \E r_{t\wedge\tau}
   \le r_0+\E\int_0^{t\wedge\tau}S_u\,du
@@ -120,8 +138,8 @@ The stopped mass martingale has quadratic variation
 \[
   [p]_{T\wedge\tau}=\int_0^{T\wedge\tau}s_tr_t\,dt.
 \]
-Because $s_t\le1/4$ and $r_{t\wedge\tau}\ge
-\one_{\{t<\tau\}}r_t$,
+Because $s_t\le1/4$ and
+$\one_{\{t<\tau\}}r_t\le r_{t\wedge\tau}$,
 \[
   \E[p]_{T\wedge\tau}
   \le\frac14\int_0^T\E r_{t\wedge\tau}\,dt
@@ -149,17 +167,21 @@ The perimeter supermartingale inequality and the survival event give
 \]
 Since $\min(p_0,q_0)\le1$, this implies (iii), after renaming the universal constant.
 
-All stochastic expectation steps above are first performed under the usual bounded
-localization.  For general one-dimensional log-concave factors, coordinatewise truncation and
-smoothing preserve the product and $J$-measurable structures; the bounds are uniform, and the
-standard lower-semicontinuity passage for Minkowski perimeter gives the displayed conclusion.
-If $\mu^+(E)=\infty$, the boundary assertion is immediate.
+All stochastic expectation steps above are first performed at the bounded stopping times just
+specified.  Isotropy gives finite second moments at time zero, and the Gaussian localization
+factor gives every polynomial moment at positive times.  The standard stochastic-localization
+construction for a general log-concave law is obtained by coordinatewise product-preserving
+truncation and smoothing; the nonnegative occupation bounds pass by Fatou.  The perimeter step
+uses only the fixed-set supermartingale inequality
+$\E\mu_T^+(E)\le\mu^+(E)$, obtained directly from the likelihood martingale by applying Fatou
+to outer neighborhoods of $E$.  If $\mu^+(E)=\infty$, the boundary assertion is immediate.
 \end{proof}
 
 \begin{corollary}[= Corollary~\ref{cor:refutation}]
 \label{cor:sol-refutation}
 Let $\mu$ be a product as in Theorem~\ref{thm:sol-budget}, and let $E$ be a fixed balanced cut
-depending on a single coordinate.  Then
+depending on a single coordinate, where here ``balanced'' means explicitly
+$p_0=\mu(E)\in[2/5,3/5]$.  Then
 \[
   \E\int_0^\infty S_t\,dt\le1,
   \qquad
@@ -231,8 +253,9 @@ posterior $Y=X-a_t$.
 
 \begin{corollary}[= Corollary~\ref{cor:KI-discharged}]
 \label{cor:sol-KI-discharged}
-The published sup-over-time estimate of Theorem~\ref{thm:KL-window}, together with the
-Brascamp--Lieb cap \eqref{eq:BL-cap}, discharges Assumption~\ref{hyp:KI} with exponent $C_2=2$.
+For every $n\ge3$, the published sup-over-time estimate of
+Theorem~\ref{thm:KL-window}, together with the Brascamp--Lieb cap \eqref{eq:BL-cap}, discharges
+Assumption~\ref{hyp:KI} with exponent $C_2=2$.
 \end{corollary}
 
 \begin{proof}
@@ -269,5 +292,21 @@ does not replace that sum by an operator-norm estimate.  The refutation is restr
 single-coordinate cuts.  Lemma~\ref{lem:sol-product-qcts} is an unconditional product argument.
 Corollary~\ref{cor:sol-KI-discharged} consumes the published $1/\log^2n$ sup-time window and the
 Brascamp--Lieb cap only; the conditional $1/\log n$ Letwin window is outside its scope.
+
+The balance hypothesis $p_0\in[2/5,3/5]$ belongs to the packaged statement of
+Theorem~\ref{thm:sol-budget}.  Part~(i) in fact uses only $0<p_0<1$, while the nested-window
+survival argument in part~(iii) uses the displayed balance hypothesis.  Every consequence
+claimed in this dossier retains that hypothesis: Corollary~\ref{cor:sol-refutation} spells it
+out, and the later product-alignment discussion concerns fixed balanced cuts.  The phrase
+``product as in Theorem~\ref{thm:budget}'' in the covariance-bound manuscript statement uses
+only the theorem's product-measure class; its proof instead uses
+Lemma~\ref{lem:sol-product-qcts} and is valid for an arbitrary nontrivial cut on the coarse
+window.
+
+None of the five ledger nodes covered here has a \texttt{bounded\_by} edge.  The rank-one
+obstruction \texttt{obs:rank-one-refuted} is downstream of
+Corollary~\ref{cor:sol-refutation}; this dossier proves only the fixed-cut, deterministic-level
+occupation statement and does not permit a coordinate or cut chosen after observing the
+localization path.
 
 \end{document}

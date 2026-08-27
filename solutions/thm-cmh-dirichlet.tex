@@ -10,7 +10,8 @@
 %               rem:cmh-saturation-risk
 % refines: prog:cmh-route   (modules/kls/40-moment-map-cmh.tex)
 % manuscript: modules/kls/42-cmh-exact-cases.tex
-% depends: thm:cmh-implies-affine-poincare (solutions/thm-cmh-normalization.tex)
+% depends: prop:cmh-bochner; thm:cmh-implies-affine-poincare
+%          (solutions/thm-cmh-normalization.tex)
 % bounded_by: none
 %   The Eldan obstruction set of research/kls/obstructions.md is scoped in that
 %   file to the fixed-cut program. obs:proj-ceiling is method-specific to radial /
@@ -19,10 +20,15 @@
 %   Analytic. The finum target `cmh-gate-zero` regression-tests
 %   eq:cmh-dirichlet-surplus on exact Dirichlet moments; it can refute but not prove.
 % checked_by: agent
-% authored_by: /root/kls_ledger_audit (repairs to the original dossier)
-% reviewed_by: /root/cmh_exact_reviewer
-% review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
-% date: 2026-08-25
+% authored_by: /root/kls_ledger_audit (earlier repair);
+%              /root/repair_cmh_hodge_domain_w3 (Gamma-Bochner provenance repair)
+% prior_reviewed_by: /root/cmh_exact_reviewer
+% prior_review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+%   (certifies the nine unchanged nodes on the earlier bytes)
+% reviewer: /root/review_cmh_gamma_dependency_w3
+% review: research/reviews/2026-08-27-lem-cmh-gamma-bochner-repair-proof-review.md
+%   (supplementary certification of lem:cmh-gamma-completion)
+% date: 2026-08-27
 % ============================================================================
 
 \section*{Solution: exact CMH constants on the line, on products,
@@ -178,10 +184,28 @@ $A(A+1)\,d_\alpha(g)\le4\,n_\alpha(g)$.
 Let $Y_i\sim\GammaLaw(\alpha_i,1)$ independent, $S=\sum_iY_i$, $P=Y/S$; then
 $S\sim\GammaLaw(A,1)$, $P\sim\Dir(\alpha)$, and $S\perp P$. Set $G(Y)=g(Y/S)$, homogeneous of
 degree $0$, and let $\calL_\Gamma G=\sum_i(Y_iG_{ii}+(\alpha_i-Y_i)G_i)$ be the Laguerre
-generator, with
-$N_\Gamma(G)=\E(\calL_\Gamma G)^2=\E[\sum_iY_iG_i^2+\sum_{i,j}Y_iY_jG_{ij}^2]$
-its integrated Bochner identity, and $D_i(G)=\E[Y_i^2G_i^2]/\alpha_i$,
-$D_\Gamma=\sum_iD_i$.
+generator.  To identify the source of its integrated Bochner identity, center the product-Gamma
+law by writing $X_i=Y_i-\alpha_i$.  Its canonical moment Hessian, expressed in the unchanged
+$Y$ coordinates, is
+\[
+  H_\Gamma=\diag(Y_1,\ldots,Y_m).
+\]
+Indeed, writing $\rho_\Gamma$ for the product-Gamma density,
+\[
+  \Div_\Gamma(H_\Gamma\nabla G)
+  =\sum_i\rho_\Gamma^{-1}\partial_i(\rho_\Gamma Y_iG_i)
+  =\sum_i\bigl(Y_iG_{ii}+(\alpha_i-Y_i)G_i\bigr)=\calL_\Gamma G.
+\]
+Thus Proposition~\ref{prop:cmh-bochner}, specialized to $H_\Gamma$, gives
+\begin{equation}
+  N_\Gamma(G):=\E(\calL_\Gamma G)^2
+  =\E\left[\sum_iY_iG_i^2+\sum_{i,j}Y_iY_jG_{ij}^2\right].
+  \label{eq:sol-cmh-gamma-bochner}
+\end{equation}
+Here the second sum is over ordered pairs: because $D^2G$ is symmetric, each off-diagonal
+square occurs twice, exactly as in
+$\Tr(H_\Gamma D^2G\,H_\Gamma D^2G)$.  There is no additional factor of $2$ or $1/2$.
+Finally set $D_i(G)=\E[Y_i^2G_i^2]/\alpha_i$ and $D_\Gamma=\sum_iD_i$.
 
 \begin{lemma}[= Lemma~\ref{lem:cmh-gamma-completion}]
 \label{lem:sol-gamma-completion}
@@ -190,6 +214,10 @@ $R_i,\delta_i$ as in \eqref{eq:cmh-Ri-deltai}, both nonnegative.
 \end{lemma}
 
 \begin{proof}
+The occurrence of the first-order row
+$\E[Y_iG_i^2]$ and the full ordered Hessian row
+$\E[\sum_jY_iY_jG_{ij}^2]$ below is precisely the $i$th-row contribution to the specialized
+Bochner identity \eqref{eq:sol-cmh-gamma-bochner}.
 For $Y\sim\GammaLaw(a,1)$ and smooth $u$ with the usual decay,
 \[
   \E[Y^2uu']=\tfrac12\E[Y^2(u^2)']

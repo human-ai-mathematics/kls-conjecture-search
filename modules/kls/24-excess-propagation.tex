@@ -14,7 +14,8 @@ Section~\ref{sec:qcts}.
 
 \begin{proposition}[Unconditional integrated excess bound]
 \label{prop:trivial-excess}
-Let $\mu$ be isotropic log-concave on $\R^n$, $E$ measurable with $\mu(E)=\tfrac12$ and excess
+Let $\mu$ be isotropic log-concave on $\R^n$, and let $E$ be Borel with
+$\mu(E)=\tfrac12$, finite initial lower outer Minkowski perimeter, and excess
 $e_0=e_0(E)$. Then for every $T>0$ and every stopping time $\tau$,
 \begin{equation}\label{eq:trivial-excess}
   \E\int_0^{T\wedge\tau}e_t(E)\dd t\ \le\ (1+e_0)\,T .
@@ -25,9 +26,12 @@ $e_0=e_0(E)$. Then for every $T>0$ and every stopping time $\tau$,
 Since $I_{\mu_t}\ge0$, $e_t\le\mu_t^+(E)$ pathwise. By the perimeter supermartingale property
 \eqref{eq:perimeter-supermartingale} and Tonelli,
 $\E\int_0^{T\wedge\tau}e_t\le\int_0^T\E\mu_t^+(E)\dd t\le T\mu^+(E)=T(I_\mu(\tfrac12)+e_0)$.
-Finally $I_\mu(\tfrac12)\le1$: a coordinate halfspace through the median of the first marginal
-has perimeter at most $\norm{f_1}_\infty\le1$, the supremum bound for unit-variance log-concave
-densities on $\R$ \cite{Bobkov1999LogConcave}.
+Finally $I_\mu(\tfrac12)\le1$. Indeed, let $f$ be the unit-variance first marginal density and
+$m$ one of its medians. The corresponding coordinate halfspace has mass $1/2$ and perimeter
+$f(m)$. Bobkov's one-dimensional identity and variance estimate
+\cite[Proposition~4.1 and (4.2)]{Bobkov1999LogConcave} give
+$\operatorname{Is}(f)=2f(m)$ and $\operatorname{Is}(f)^2\le2$, so
+$f(m)\le1/\sqrt2<1$.
 \end{proof}
 
 \begin{proof}[Proof of Proposition~\ref{prop:intro-audit}]
@@ -35,7 +39,11 @@ densities on $\R$ \cite{Bobkov1999LogConcave}.
 Theorem~\ref{thm:intro-weighted} in Section~\ref{subsec:consumption} with the weight replaced
 by $1$ and the weighted excess propagation input replaced by \eqref{eq:trivial-excess}; every
 step goes through with the universal constant $C_0'=2C_0+2C_2(1+e_0)\le2C_0+4C_2$ for
-$e_0\le1$, and KLS follows. (c) is Proposition~\ref{prop:two-tail} of Section~\ref{sec:qcts}.
+$e_0\le1$. Thus Corollary~\ref{cor:tight-window-consumption} gives a universal positive
+boundary lower bound for every balanced near-Cheeger cut to which the estimate applies. If KLS
+failed, Lemma~\ref{lem:half} would provide isotropic log-concave $\mu_k$ and balanced cuts $E_k$
+with $\mu_k^+(E_k)\to0$ and $e_0(E_k)\le1$ for all large $k$, contradicting that lower bound.
+Hence KLS follows. (c) is Proposition~\ref{prop:two-tail} of Section~\ref{sec:qcts}.
 \end{proof}
 
 \begin{remark}[Interpretation of the audit]
@@ -45,20 +53,29 @@ package. An additive excess term whose integral is a priori $O(T)$ is inert next
 term: it can be deleted without changing the strength of the assumption, so the unweighted
 Stein-trace estimate silently carried the entire logical weight of the route. Item (c) shows
 this weight cannot be discharged slice-wise. The weighted restatement
-(Assumption~\ref{ass:weighted-package}) is the repair: the weighted excess term is no longer
-inert, the static obstruction is consistent with it, and the burden is honestly distributed
-between a stability estimate (Stein trace) and a propagation estimate (weighted excess), each
-now a non-inert stated input of this repaired package. Other proof architectures need not use
-this decomposition.
+(Assumption~\ref{ass:weighted-package}) was a proposed repair: it made the excess term non-inert
+and passed the static two-tail calibration. Proposition~\ref{prop:weighted-spectator-obstruction}
+now refutes its global-operator-norm propagation clause, because that weight responds to
+independent spectator coordinates. Proposition~\ref{prop:spectator-excess-rate-obstruction}
+further proves that a tensor-stable replacement weight alone is insufficient: the uniform
+superlinear remainder already fails with weight one. A viable replacement must also allow an
+$O(T)$ scale, use a genuinely source-tied remainder, or assume near-worstness. Other proof
+architectures need not use this decomposition.
 \end{remark}
 
 \subsection{Why direct propagation risks circularity}
 \label{subsec:circularity}
 
-\begin{lemma}[Perimeter martingale]
+\begin{lemma}[Fixed-cut perimeter supermartingale and smooth martingale]
 \label{lem:perimeter-martingale}
-Within the regularity convention (compact support, smooth data), for a fixed finite-perimeter
-set $E$ the process $t\mapsto\mu_t^+(E)$ is a nonnegative martingale, with
+For every fixed Borel set $E$ of finite initial lower outer Minkowski perimeter,
+$t\mapsto\mu_t^+(E)$ is an integrable nonnegative supermartingale:
+\begin{equation}\label{eq:perimeter-conditional-supermartingale}
+  \E[\mu_t^+(E)\mid\mathcal F_s]\le\mu_s^+(E),\qquad 0\le s\le t.
+\end{equation}
+If the initial density is smooth and compactly supported and $E$ has a $C^2$ boundary with a
+tubular neighborhood over that support, the same lower Minkowski perimeter is a true
+martingale, with
 \begin{equation}\label{eq:perimeter-sde}
   \dd\,\mu_t^+(E)=\Bigl(\int_{\partial^*E}(x-a_t)\dd\sigma_t(x)\Bigr)\cdot\dd W_t ,
 \end{equation}
@@ -67,14 +84,46 @@ perimeter vanishes identically.
 \end{lemma}
 
 \begin{proof}
-$\mu_t^+(E)=\int_{\partial^*E}F_t(x)\dd\sigma_0(x)$ with $F_t$ the pointwise density process of
-\eqref{eq:density-sde}; stochastic Fubini on the compact boundary transfers the driftless SDE
-of $F_t$ to the integral.
+Put $E_q=\{x:\operatorname{dist}(x,E)<q\}$ and, for rational $q>0$,
+\[
+  X_{q,t}=\frac{\mu_t(E_q)-\mu_t(E)}q
+         =\frac{\mu_t(E_q\setminus E)}q.
+\]
+For fixed $q$, \eqref{eq:loc-martingale} makes $X_{q,t}$ a bounded nonnegative martingale. For
+$n\ge1$ set
+\[
+  Y_{n,t}=\inf\{X_{q,t}:q\in\mathbb Q,\ 0<q<1/n\}.
+\]
+The family is fixed and countable, so conditional expectation followed by the infimum gives
+$\E[Y_{n,t}\mid\mathcal F_s]\le Y_{n,s}$. Continuity from below of
+$q\mapsto\mu_t(E_q\setminus E)$ shows that the rational and real infima agree, and hence
+$Y_{n,t}\uparrow\mu_t^+(E)$ pathwise. Conditional monotone convergence proves
+\eqref{eq:perimeter-conditional-supermartingale}; taking $s=0$ first also proves integrability
+from the assumed finite initial perimeter.
+
+In the stated smooth compact-support class, the one-sided tube formula gives
+\[
+  \mu_t^+(E)=\int_{\partial^*E}F_t(x)\dd\sigma_0(x),
+  \qquad \dd\sigma_t=F_t\dd\sigma_0.
+\]
+Let $D$ be the diameter of the initial support. Since $|x-a_u|\le D$ on that support, localization
+of the pointwise density SDE, It\^o's formula, and Gronwall give
+$\E F_u(x)^2\le e^{D^2u}$. Thus, for every finite $T$,
+\[
+  \E\int_0^T\int_{\partial^*E}|F_u(x)(x-a_u)|^2
+       \dd\sigma_0(x)\dd u
+  \le D^2\sigma_0(\partial^*E)\int_0^T e^{D^2u}\dd u<\infty.
+\]
+This is a pre-interchange stochastic-Fubini bound, so \eqref{eq:density-sde} yields
+\eqref{eq:perimeter-sde}. The same $L^2$ estimate makes each $F_t(x)$ a true martingale on
+bounded intervals; conditional Tonelli then upgrades
+\eqref{eq:perimeter-conditional-supermartingale} to equality in this smooth class.
 \end{proof}
 
 \begin{lemma}[Exact excess identity]
 \label{lem:excess-identity}
-Under compact support, for every $t\ge0$,
+If the initial density is smooth and compactly supported and $E$ has a $C^2$ boundary with a
+tubular neighborhood over that support, then for every finite $t\ge0$,
 \begin{equation}\label{eq:excess-identity}
   \E\,e_t(E)\ =\ e_0(E)+\Bigl[\,I_\mu(p_0)-\E\,I_{\mu_t}(p_t)\,\Bigr].
 \end{equation}
@@ -85,16 +134,19 @@ Take expectations in $e_t=\mu_t^+(E)-I_{\mu_t}(p_t)$ and use
 $\E\mu_t^+(E)=\mu^+(E)=I_\mu(p_0)+e_0$ from Lemma~\ref{lem:perimeter-martingale}.
 \end{proof}
 
-Identity \eqref{eq:excess-identity} is conceptually decisive: excess propagation is not about
-the set $E$ at all, except through the random volume $p_t$. It is exactly the question of
+Within this smooth compact-support class, identity \eqref{eq:excess-identity} is conceptually
+decisive: excess propagation is not about the set $E$ at all, except through the random volume
+$p_t$. It is exactly the question of
 lower-bounding the expected isoperimetric profile of the random posterior at the current mass;
 the set enters only through the driftless perimeter martingale.
 
 \begin{lemma}[Infima over a fixed competitor family]
 \label{lem:inf-martingales}
-Let $\mathfrak S$ be any \emph{fixed} family of finite-perimeter sets (countable, or rendered
-measurable by the usual selection conventions), and define
-$J_t=\inf\{\mu_t^+(S):S\in\mathfrak S\}$. Then $J$ is a supermartingale. Pointwise, on
+Let $\mathfrak S$ be a \emph{fixed nonempty countable} family of Borel sets of finite initial
+lower outer Minkowski perimeter and define
+$J_t=\inf\{\mu_t^+(S):S\in\mathfrak S\}$. Then $J$ is a supermartingale. The same conclusion
+holds for a fixed family admitting a fixed countable determining subfamily whose pointwise
+infimum agrees almost surely at every time. Pointwise, on
 $\{t<\tau_\eta\}$,
 \[
   I_{\mu_t}(p_t)\ge J_t(\eta),
@@ -107,8 +159,12 @@ does \emph{not} imply that $J(\eta)$ or $I_{\mu_t}(p_t)$ is a supermartingale.
 \end{lemma}
 
 \begin{proof}
-For each fixed $S$, $\mu_t^+(S)$ is a martingale by Lemma~\ref{lem:perimeter-martingale}, so
-$\E[J_t\mid\mathcal F_s]\le\mu_s^+(S)$ for every $S$; take the infimum over $S$. The second
+Countability supplies measurability and one common null set for the fixed-cut inequalities. For
+each fixed $S$, Lemma~\ref{lem:perimeter-martingale} gives
+$\E[\mu_t^+(S)\mid\mathcal F_s]\le\mu_s^+(S)$ (with equality in its smooth compact-support
+class). Hence
+$\E[J_t\mid\mathcal F_s]\le\mu_s^+(S)$ for every $S$; take the infimum over $S$. Nonemptiness
+also gives an integrable upper bound for $J_t$. The second
 pointwise comparison holds because the constrained family at exact mass $p_t$ is contained in
 the windowed family when $p_t$ is in the window. No conditional-expectation comparison is
 available from this inclusion because the eligible family changes with $t$.
@@ -116,8 +172,9 @@ available from this inclusion because the eligible family changes with $t$.
 
 \begin{remark}[The circularity, formalized]
 \label{rem:circularity}
-By Lemma~\ref{lem:excess-identity}, excess propagation is equivalent to a lower bound on
-$\E I_{\mu_t}(p_t)$. Such a lower bound is itself a Cheeger-type statement for the random
+Within the smooth compact-support class of Lemma~\ref{lem:excess-identity}, excess propagation
+is equivalent to a lower bound on $\E I_{\mu_t}(p_t)$. Such a lower bound is itself a
+Cheeger-type statement for the random
 posterior, so an argument that simply inserts a lower bound for the localized profile risks
 assuming the phenomenon the program is meant to prove. Lemma~\ref{lem:inf-martingales} supplies
 no monotonicity for that profile, because the mass-constrained competitor family changes with

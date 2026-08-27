@@ -217,27 +217,50 @@ the constant transfers with no loss: the reduction is exactly one Cauchy--Schwar
 \subsection{The Hodge content: the affine channel and the solenoidal excess}
 \label{subsec:cmh-hodge}
 
-Set $u=H\nabla g$ and $h=-\Div_\mu u=-L_\mu g$. Let $\psi$ solve the ordinary weighted
-covariance divergence problem $-\Div_\mu(\Sigma\nabla\psi)=h$ on the centered subspace, and put
-$w=u-\Sigma\nabla\psi$, so that $\Div_\mu w=0$.
+Let
+\[
+  \Aop_1=-\Div_\mu(\Sigma\nabla\,\cdot\,)
+\]
+denote the closed nonnegative covariance generator on $L^2(\mu)$, and write
+$L^2_0(\mu)=(\ker\Aop_1)^\perp$.
 
 \begin{proposition}[Weighted Hodge identity]
 \label{prop:cmh-hodge}
-The fields $\Sigma\nabla\psi$ and $w$ are orthogonal in $L^2(\mu;\Sigma^{-1})$, and
+Let $g\in\Dom(\Aop)$ be such that
+$u=H\nabla g\in L^2(\mu;\Sigma^{-1})$, and set
+\[
+  h=\Aop g=-\Div_\mu u\in L^2_0(\mu),\qquad
+  \psi=\Aop_1^{-1}h,\qquad
+  w=u-\Sigma\nabla\psi,
+\]
+where
+\[
+  \Aop_1^{-1}:L^2_0(\mu)\longrightarrow
+  \Dom(\Aop_1)\cap L^2_0(\mu)
+\]
+is the inverse on the centered subspace. Then $\Div_\mu w=0$, the fields
+$\Sigma\nabla\psi$ and $w$ are orthogonal in $L^2(\mu;\Sigma^{-1})$, and
 \begin{equation}
   \E_\mu\inner{u}{\Sigma^{-1}u}
-  =\E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}+\E_\mu\inner{w}{\Sigma^{-1}w}.
+  =\E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}
+   +\E_\mu\inner{w}{\Sigma^{-1}w}.
   \label{eq:cmh-hodge}
 \end{equation}
-Moreover the operator norm of $h\mapsto\E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}$ on the
-centered subspace of $L^2(\mu)$ is exactly $\CPaff(\mu)$.
+Moreover,
+\[
+  \sup_{0\ne h\in L^2_0(\mu)}
+  \frac{\E_\mu\inner{\Sigma\nabla\Aop_1^{-1}h}
+                         {\nabla\Aop_1^{-1}h}}
+       {\norm h_2^2}
+  =\CPaff(\mu).
+\]
 \end{proposition}
 
 \begin{proof}
 Weighted integration by parts gives
 $\E\inner{\Sigma\nabla\psi}{\Sigma^{-1}w}=\E\inner{\nabla\psi}{w}=-\E[\psi\Div_\mu w]=0$, and
-expanding the square proves \eqref{eq:cmh-hodge}. For the last claim, let
-$\Aop_1=-\Div_\mu(\Sigma\nabla\,\cdot\,)$, so $\psi=\Aop_1^{-1}h$ and
+expanding the square proves \eqref{eq:cmh-hodge}. For the last claim,
+$\psi=\Aop_1^{-1}h$ and
 $\E\inner{\Sigma\nabla\psi}{\nabla\psi}=\inner{h}{\Aop_1^{-1}h}$; the supremum over $h$ of the
 ratio to $\norm{h}_2^2$ is $\norm{\Aop_1^{-1}}$, which is $\CPaff(\mu)$ by
 \eqref{eq:affine-poincare-constant}.
@@ -441,4 +464,66 @@ converge. Intrinsic smooth-core density on $S=\operatorname{Ran}\Sigma$ extends 
 the closed covariance-form relaxation $H^1_\Sigma(\mu)$, while $\Sigma$ and $\Sigma^+$ annihilate
 ambient normal derivatives. This proves constant-preserving closure, including singular
 covariance. It does not prove the uniform premise and asserts no continuity of $\CMH$.
+
+\begin{lemma}[Affine Poincar\'e lower semicontinuity along regular recovery]
+\label{lem:affine-poincare-w2-liminf}
+Every centered log-concave probability $\mu$ admits centered, full-dimensional,
+compactly-supported regular moment-map approximants $\mu_k$ such that
+$W_2(\mu_k,\mu)\to0$ in the original ambient coordinates and
+\begin{equation}
+  \CPaff(\mu)\le\liminf_{k\to\infty}\CPaff(\mu_k),
+  \label{eq:affine-poincare-w2-liminf}
+\end{equation}
+including when the limit is carried by a proper affine subspace.  The limit passage uses only the
+covariance Dirichlet forms; it asserts neither convergence nor lower semicontinuity of $\CMH$.
+\end{lemma}
+
+\begin{proposition}[CMH recovery calculus]
+\label{prop:cmh-recovery-calculus}
+For a centered log-concave probability $\mu$ in a declared ambient Euclidean space, define its
+CMH recovery envelope by
+\[
+  \mathfrak R_{\rm CMH}(\mu)
+  :=\inf_{(\mu_k)}
+       \liminf_{k\to\infty}\CMH(\mu_k),
+\]
+where the infimum runs over centered, full-dimensional, compactly supported regular moment-map
+laws in that ambient space with $W_2(\mu_k,\mu)\to0$. Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2.8em]
+  \item $\CPaff(\mu)\le\mathfrak R_{\rm CMH}(\mu)$;
+  \item $\mathfrak R_{\rm CMH}$ is invariant under invertible linear maps, is nonincreasing
+  under singular square linear limits in the same ambient dimension, and satisfies
+  \[
+    \mathfrak R_{\rm CMH}(\mu_1\otimes\cdots\otimes\mu_m)
+    \le\max_i\mathfrak R_{\rm CMH}(\mu_i);
+  \]
+  \item an intrinsic recovery sequence on a proper affine support with envelope at most $C$
+  extends to an ambient full-dimensional recovery sequence with envelope at most
+  $\max\{C,1\}$ by tensoring compact Gaussian normal factors whose scale vanishes.
+\end{enumerate}
+Consequently the envelope equals $1$ for centered Gaussian laws and equals $4$ for finite
+products of one-dimensional log-concave laws containing a centered one-sided-exponential
+factor. It is at most $4$ for invertible linear images, same-ambient singular square linear
+images, and affine-support embeddings of finite products built from one-dimensional
+log-concave laws and uniform-simplex blocks. This calculus does not assert a universal bound for
+arbitrary log-concave laws and therefore does not discharge
+Assumption~\ref{ass:cmh-recovery-envelope}.
+\end{proposition}
+
+\begin{assumption}[Bounded CMH recovery envelope]
+\label{ass:cmh-recovery-envelope}
+There is a universal $C$ such that every centered log-concave probability $\mu$ has at least one
+regular recovery sequence as in Lemma~\ref{lem:affine-poincare-w2-liminf} satisfying
+\[
+  \liminf_{k\to\infty}\CMH(\mu_k)\le C.
+\]
+Only one well-chosen recovery sequence is required; no uniform bound over every regularization
+parameter or every canonical approximation family is assumed.
+\end{assumption}
+
+\begin{corollary}[One CMH recovery sequence suffices]
+\label{cor:cmh-recovery-sequence-suffices}
+Under Assumption~\ref{ass:cmh-recovery-envelope}, every centered log-concave probability satisfies
+$\CPaff(\mu)\le C$.  In particular the assumption implies Conjecture~\ref{conj:kls}.
+\end{corollary}
 \end{document}

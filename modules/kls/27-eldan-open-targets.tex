@@ -6,15 +6,17 @@
 The consolidation leaves a sharper, smaller set of open targets than the original program. We
 state them in decreasing order of strength.
 
-\begin{question}[Operator-to-trace upgrade; all-cut Carleson]
+\begin{question}[Operator-to-trace upgrade; tight-prefix Carleson]
 \label{q:upgrade}
-Prove Assumption~\ref{ass:all-cut-carleson}: upgrade the unconditional per-direction Carleson
-estimate (Corollary~\ref{cor:per-direction}) to the trace scale, uniformly over balanced cuts,
-with damping coefficient $\alpha<1$. By Theorem~\ref{thm:intro-all-cut} this alone implies KLS.
-The projection-test ceiling of Section~\ref{sec:qcts} remains a no-go for that proof method,
-although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. The
-dynamic upgrade must use cut-specific structure and covariance occupation. The first
-decision point is Program~\ref{prog:product-test}.
+Prove Assumption~\ref{ass:tight-prefix-carleson}: upgrade the unconditional per-direction
+Carleson estimate (Corollary~\ref{cor:per-direction}) to the trace scale, uniformly over fixed
+initially balanced cuts and prefixes from time zero, with damping coefficient $\alpha<1$.
+Corollary~\ref{cor:tight-window-consumption} makes this the exact sufficient consumer; the
+stronger every-interval Assumption~\ref{ass:all-cut-carleson} is not required. The projection-test
+ceiling of Section~\ref{sec:qcts} remains a no-go for that proof method, although Letwin's
+moment-map argument bypasses it for the intrinsic static quadratic chaos. The dynamic upgrade
+must use cut-specific structure and covariance occupation. The first decision point is
+Program~\ref{prog:product-test}.
 \end{question}
 
 \begin{lemma}[Scale-weighted all-cut source budget]
@@ -31,30 +33,110 @@ balanced stopped window. This statement does not remove the quadratic time weigh
 initial endpoint.
 \end{lemma}
 
-\begin{question}[Weighted excess propagation with rate]
+\begin{lemma}[One-dimensional density--variance bound]
+\label{lem:one-dimensional-density-variance}
+By \cite[Prop.~2.1]{BobkovChistyakov2015Concentration}, if a one-dimensional log-concave
+probability density $f$ has variance $v>0$, then
+\[
+  \frac1{12}\le v\norm{f}_\infty^2\le1.
+\]
+In particular, the boundary density of every quantile halfline is at most $v^{-1/2}$.
+\end{lemma}
+
+\begin{proposition}[Exponential-spectator obstruction to global weighted propagation]
+\label{prop:weighted-spectator-obstruction}
+For every proposed constants $C,T_0,\gamma>0$, every $\eta\in(0,1/2)$, and every
+$\delta>0$, there exist a dimension $d$, an isotropic product $\mu$ of $d$ centered
+one-sided exponentials, a finite-perimeter cylinder $E$ with $\mu(E)=1/2$,
+\[
+  e_0(E)\le\delta,
+  \qquad
+  \frac{e_0(E)}{I_\mu(1/2)}\le\delta,
+\]
+and a time $0<T\le T_0$ such that
+\[
+  \E\int_0^{T\wedge\tau_\eta}
+  e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t
+  >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
+\]
+This proves that the global operator-norm weight is unstable under independent spectators and
+refutes the literal rate in Question~\ref{q:weighted}. It does not refute KLS, since all witness
+measures are products.
+\end{proposition}
+
+\begin{proposition}[Spectator obstruction to a superlinear excess remainder]
+\label{prop:spectator-excess-rate-obstruction}
+For every proposed constants $C,T_0,\gamma>0$, every $\eta\in(0,1/2)$, and every
+$\delta>0$, there exist a dimension $d$, an isotropic product $\mu$ of $d$ centered
+one-sided exponentials, a finite-perimeter cylinder $E$ with $\mu(E)=1/2$,
+\[
+  e_0(E)\le\delta,
+  \qquad
+  \frac{e_0(E)}{I_\mu(1/2)}\le\delta,
+\]
+and a time $0<T\le T_0$ such that
+\[
+  \E\int_0^{T\wedge\tau_\eta}e_t(E)\dd t
+  >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
+\]
+Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not
+by itself enough to repair the current propagation gate: a surviving uniform statement must
+also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an
+explicit near-worst-measure premise. The product witnesses do not refute KLS.
+\end{proposition}
+
+\begin{question}[Refuted global-operator-norm weighted excess rate]
 \label{q:weighted}
-Prove \eqref{eq:intro-weighted-excess}: for balanced near-Cheeger cuts,
+Do there exist universal $C,T_0,\gamma>0$ and $\eta\in(0,1/4]$ such that, for every isotropic
+log-concave law and every balanced finite-perimeter cut with $e_0(E)\le1$,
 \[
   \E\int_0^{T\wedge\tau_\eta}e_t(E)\,\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t
   \ \le\ C\bigl(Te_0(E)+T^{1+\gamma}\bigr),\qquad T\le T_0 .
 \]
+This is exactly the weighted-excess component \eqref{eq:intro-weighted-excess} consumed by the
+literal package. The answer is negative: Proposition~\ref{prop:weighted-spectator-obstruction}
+gives, for every proposed choice of constants, a product-cylinder counterexample with
+arbitrarily small additive and relative initial excess.
 Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package,
 $5/2$ is the weakest exponent statically consistent with the two-tail mode
-(Proposition~\ref{prop:two-tail}); the time exponent is a deliberately stronger open demand,
-not fixed by that static example. The bootstrap of Theorem~\ref{thm:bootstrap} resolves the
-unweighted analogue but the weighted version requires, in addition, second-moment control of
-the perimeter martingale against the covariance weight, which is open.
+(Proposition~\ref{prop:two-tail}); the time exponent was a deliberately stronger demand,
+not fixed by that static example. The near-worst bootstrap of Theorem~\ref{thm:bootstrap}
+supplies a different, externally anchored unweighted interface. It is not a uniform
+superlinear-remainder statement of the form above.
+Proposition~\ref{prop:spectator-excess-rate-obstruction} proves that the superlinear remainder
+already fails after the global covariance weight is removed. Thus changing only the weight
+cannot repair the uniform package: the replacement must also change the remainder or impose an
+explicit near-worst-measure premise.
 \end{question}
 
-\begin{question}[Weighted stable Stein trace]
+\begin{question}[Weighted stable Stein-trace ingredient extracted from the refuted package]
 \label{q:stein-weighted}
-Prove \eqref{eq:intro-weighted-stein} for balanced near-Cheeger cuts, with damping coefficient
-$\beta<\tfrac12$. The intrinsic quadratic-chaos input is now available from
+Do there exist universal constants $T_0,C_0,C_1,C_2>0$,
+$0\le\beta<\tfrac12$, and $\eta\in(0,\tfrac14]$ satisfying
+$2\beta+64\eta^2<1$ such that, for every isotropic log-concave law, every initial
+finite-perimeter cut $E$ with $e_0(E)\le1$ and
+$\abs{p_0-\tfrac12}\le\eta/2$, and every $0<T\le T_0$,
+\[
+\begin{aligned}
+  \E\int_0^{T\wedge\tau_\eta}\frac{\calS_{\mu_t}(E)}{s_t}\dd t
+  &\le C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
+  +\beta\E\int_0^{T\wedge\tau_\eta}D_t\dd t \\
+  &\qquad
+  +C_2\E\int_0^{T\wedge\tau_\eta}
+    e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t?
+\end{aligned}
+\]
+This is exactly the stable Stein-trace clause of
+Assumption~\ref{ass:weighted-package}, now considered as an independent analytic ingredient.
+It does not repair that refuted package or imply KLS without a viable companion propagation
+statement.
+
+The intrinsic quadratic-chaos input is available from
 Theorem~\ref{thm:letwin-qcts}, conditional on the version-1 preprint. The proposed mechanism of
-Section~\ref{sec:jacobi} still lacks a quantitative almost-stability trace theorem for the
-localized fixed cut, modulo tangential Jacobi zero modes and with the Reilly boundary terms
-controlled. Any chaining must be uniform along localization and at the covariance-weighted scale; by
-Proposition~\ref{prop:two-tail} no slice-wise shortcut exists.
+Section~\ref{sec:jacobi} still lacks a localization-uniform quantitative almost-stability trace
+theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms
+controlled. Proposition~\ref{prop:two-tail} rules out a slice-wise shortcut. No implication
+between this question, Question~\ref{q:upgrade}, and Question~\ref{q:alignment} has been proved.
 \end{question}
 
 \begin{remark}[A shared dynamic occupation problem, and a missing geometric bridge]
@@ -181,13 +263,14 @@ Step & Input & Output \\
 Program~\ref{prog:product-test} & One-dimensional log-concave analysis; explicit variance
 dynamics & Decides whether Eldan--A survives; either outcome redirects effort decisively. \\
 \addlinespace
-Question~\ref{q:weighted} & Perimeter martingale moments against the covariance weight;
-bootstrap technology of Section~\ref{sec:bootstrap} & Propagation half of the weighted
-package. \\
+Replacement for Question~\ref{q:weighted} & A cut-local or tensor-stable covariance scale,
+plus a near-worst or source-deficit remainder that survives spectator products & Literal
+global-operator-norm statement refuted; replacement not yet formulated. \\
 \addlinespace
 Question~\ref{q:stein-weighted} & Letwin quadratic chaos; a new almost-stability trace lemma;
-Reilly boundary terms and zero modes; constant mode via Question~\ref{q:splitting} & Stability half of the weighted package; with
-Question~\ref{q:weighted}, KLS by Theorem~\ref{thm:intro-weighted}. \\
+Reilly boundary terms and zero modes; constant mode via Question~\ref{q:splitting} & Open
+analytic ingredient extracted from the refuted package; it has no KLS consumer until a matching
+tensor-stable propagation package is formulated. \\
 \addlinespace
 Question~\ref{q:taming} & Coupling of splitting structure to the covariance SDE & Absolute-scale
 bootstrap supply for near-worst measures; with the separate geometric completion in
@@ -209,14 +292,17 @@ excess identities, and the circularity warning (Section~\ref{sec:excess}); the b
 comparison theorem with its interface evaluation and ceiling (Section~\ref{sec:bootstrap}); the
 explicit sufficient model statements for splitting (Section~\ref{sec:jacobi}); and the model
 geometries (Section~\ref{sec:models}). The preprint-conditional content includes dimension-free
-quadratic chaos and the $c/\log n$ covariance-moment window. The remaining conditional content is concentrated in the weighted
-package (Assumption~\ref{ass:weighted-package}), the all-cut estimate
-(Assumption~\ref{ass:all-cut-carleson}), and the explicitly hypothetical absolute-scale
-completion (Assumption~\ref{hyp:absolute-geometric-completion}), with the open targets posed in
-Questions~\ref{q:upgrade}--\ref{q:splitting}. The architecture rests on three structural
-points: the previously postulated excess-propagation assumption is retired (unconditionally
-true as consumed, hence inert); the Stein-trace estimate is stated in the covariance-weighted
-form forced by the static obstruction; and the residual difficulty of propagation is
-compressed into the single scalar interface $h_\mu\,\Xi_T$, evaluated to within a
-$\log\log n$ factor of what the route requires.
+quadratic chaos and the $c/\log n$ covariance-moment window. The all-cut estimate
+(Assumption~\ref{ass:all-cut-carleson}) and the explicitly hypothetical absolute-scale
+completion (Assumption~\ref{hyp:absolute-geometric-completion}) remain conditional. The literal
+weighted package (Assumption~\ref{ass:weighted-package}) and Question~\ref{q:weighted} are now
+refuted by the weighted spectator product; the unweighted spectator proposition separately
+refutes the package's uniform superlinear remainder shape. Their conditional implication to KLS
+is retained only as an audit trail. The live targets are Question~\ref{q:upgrade}, the trace and bootstrap questions
+\ref{q:stein-weighted}--\ref{q:splitting}, and the formulation of a tensor-stable replacement.
+The architecture rests on three structural points: unweighted excess propagation is true as
+consumed and therefore inert; static two-tail calibration alone does not produce a tensor-stable
+weight or a viable uniform remainder; and the currently available near-worst propagation mechanism is compressed into the
+single scalar interface $h_\mu\,\Xi_T$, evaluated to within a $\log\log n$ factor of what the
+route requires.
 \end{document}

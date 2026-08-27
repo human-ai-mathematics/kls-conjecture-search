@@ -168,22 +168,17 @@ For full smooth support, $\mathfrak K_\Sigma=\int_\Sigma\qJac_\Sigma\dd\sigma_\n
 
 \subsection{Regularity convention}
 
-The stochastic identities are first proved for compactly supported, smooth log-concave measures and
-for smooth approximations of finite-perimeter sets. The general case is recovered by the standard
-approximation procedure: restrict to $B(0,R)$, smooth the density and boundary, place the resulting
-measure in isotropic position, prove estimates with constants independent of the approximation,
-and then pass to the limit in perimeter, mass, covariance, and stopped stochastic integrals. This is
-the usual regularization layer in stochastic localization and geometric measure arguments. The
-report does not attempt to optimize these approximation details; all substantive estimates are
-stated with constants stable under this passage.
+Each stochastic identity below is used only in the regularity class stated at its label or in its
+certified dossier. In particular, no blanket rough-set approximation is used to identify lower
+outer Minkowski perimeter with weighted reduced-boundary area.
 
-Under compact support, all local martingales below are true martingales on bounded time intervals,
-and the density process $\dd\mu_t/\dd\mu$ is a nonnegative martingale. Without compact support, the
-supermartingale direction still suffices for the perimeter averaging step:
+For every fixed Borel set $E$ with finite initial lower outer Minkowski perimeter,
+Lemma~\ref{lem:perimeter-martingale} proves the conditional supermartingale inequality and hence
 \begin{equation}\label{eq:perimeter-supermartingale}
   \E\,\mu_T^+(E)\le\mu^+(E).
 \end{equation}
-Indeed, the pointwise density is a nonnegative local martingale and hence a supermartingale, and
-Tonelli may be applied on $\partial^*E$. Under compact support, \eqref{eq:density-sde} upgrades
-this to an equality (Lemma~\ref{lem:perimeter-martingale}).
+If the initial density is smooth and compactly supported and $E$ has a $C^2$ boundary with a
+tubular neighborhood over that support, the same lower Minkowski perimeter is weighted surface
+area and \eqref{eq:density-sde} upgrades the inequality to the driftless surface martingale
+identity. No equality is asserted here for an arbitrary rough set merely from compact support.
 \end{document}

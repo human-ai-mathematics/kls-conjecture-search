@@ -287,3 +287,50 @@ $|Ha|^2=(a^THa)^2+\|[a\otimes a,H]\|_{\mathrm{HS}}^2/2$.
 constant-matrix control do not bound the transverse term. It is not a moment-map counterexample.
 This static commutator is not the stochastic high-incidence block, a moving spectral-projector
 It\^o residue, or the square-root/Haar commutator of `q:mm-square-root-commutator`.
+
+## Cut-oriented Lyapunov dual scale
+
+**Source.** Dualization of the agent-certified `lem:pathwise-BL` in
+`solutions/kls-localization-riccati-core.tex`; the direct-sum and two-tail calibrations are
+recorded in
+`research/explorations/2026-08-27-synthesizer-kls-wave-one.md`.
+
+**Fact.** For $A\succ0$ define the Lyapunov operator on symmetric matrices by
+$$
+\mathscr L_A(M)=\frac{AM+MA}{2}.
+$$
+The anisotropic form of the certified pathwise Brascamp--Lieb calculation is
+$$
+s\langle K,M\rangle^2
+\le \frac4t\langle M,\mathscr L_A M\rangle
+\qquad(M=M^T),
+$$
+and Hilbert-space duality therefore gives
+$$
+s\langle K,\mathscr L_A^{-1}K\rangle\le\frac4t.
+$$
+For $K\ne0$ put
+$$
+\lambda_{\mathrm{cut}}(A,K)
+=\frac{\|K\|_{\mathrm{HS}}^2}
+{\langle K,\mathscr L_A^{-1}K\rangle},
+$$
+and set it to zero for $K=0$. Then
+$$
+s\|K\|_{\mathrm{HS}}^2\le\frac{4\lambda_{\mathrm{cut}}(A,K)}t.
+$$
+In an $A$-eigenbasis, $\lambda_{\mathrm{cut}}$ is the $K_{ij}^2$-weighted harmonic mean of
+$(\lambda_i+\lambda_j)/2$. It is invariant under irrelevant direct sums:
+$\lambda_{\mathrm{cut}}(A\oplus B,K\oplus0)=\lambda_{\mathrm{cut}}(A,K)$, and on the certified
+anisotropic two-tail example it equals the inflated variance $\Lambda$.
+
+**Use.** Separate covariance directions incident to a fixed cut tensor from independent
+spectator spikes. It is a calibrated candidate scale for a tensor-stable replacement of the
+global operator norm in the weighted-excess route.
+
+**Guardrail.** This is a repackaging of a positive-time static inequality, not an occupation or
+excess-propagation theorem. The factor $t^{-1}$ is singular at the initial endpoint, and no
+bound for an integral weighted by $\lambda_{\mathrm{cut}}$ follows. The scale depends on the
+cut tensor and cannot replace a cut-free covariance functional. For singular $A$, restrict the
+operator to the covariance support (or state the corresponding Moore--Penrose convention)
+before using the formula.
