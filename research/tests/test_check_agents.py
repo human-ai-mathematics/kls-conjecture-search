@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -45,6 +46,24 @@ class AgentCheckerFixture(unittest.TestCase):
         result = self.run_checker()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("stale or hand-edited", result.stdout)
+
+    def test_codex_model_and_effort_policy(self):
+        ultra_roles = {
+            "kls-route-prober",
+            "kls-route-scout",
+            "proof-checker",
+            "proof-miner",
+            "prover",
+            "refiner",
+            "refutation-seeker",
+            "synthesizer",
+        }
+        for adapter in sorted((self.root / ".codex/agents").glob("*.toml")):
+            parsed = tomllib.loads(adapter.read_text(encoding="utf-8"))
+            with self.subTest(role=parsed["name"]):
+                self.assertEqual(parsed["model"], "gpt-5.6-sol")
+                expected_effort = "ultra" if parsed["name"] in ultra_roles else "high"
+                self.assertEqual(parsed["model_reasoning_effort"], expected_effort)
 
     def test_read_only_claude_role_cannot_declare_write_tool(self):
         role = self.root / ".claude/agents/scout.md"
