@@ -38,8 +38,9 @@ horseshoe theorem $+$ a general scale-mixture / dependence programme.}
 \noindent\textbf{Reviewed status.}
 The sharp generalized-Cauchy result below is imported from the cited literature.  The horseshoe,
 fixed-marginal obstruction, and block-Gibbs results have standalone solution dossiers and passed
-independent agent review. The hierarchical-prior, product, and bounded-likelihood results remain
-analytic proof drafts and have not passed the repository's independent certification step.
+independent agent review. The product and hierarchical-prior results below are likewise
+independently agent-certified; the bounded-likelihood posterior transfer remains an analytic
+draft.
 
 \subsection{Why the right object is the weighted Poincar\'e constant}
 \label{subsec:a3-weighted}
@@ -389,9 +390,9 @@ route of Subsection~\ref{subsec:a3-hardy} is the robust one.
 \subsection{Tensorization: product priors are dimension-free, hierarchical posteriors are not}
 \label{subsec:a3-tensor}
 
-\begin{theorem}[Product Hardy certificate --- analytic proof draft]
+\begin{theorem}[Product Hardy certificate]
 \label{thm:a3-product}
-Let $\mu=\bigotimes_i\mu_i$. If each coordinate satisfies
+Let $d\ge1$ be finite and $\mu=\bigotimes_{i=1}^d\mu_i$. If each coordinate satisfies
 $\Var_{\mu_i}(g)\le C_i\int a_i\abs{g'}^2\dd\mu_i$, then
 \begin{equation}\label{eq:a3-tensor}
   \Var_\mu(f)\ \le\ \Big(\max_i C_i\Big)\int\sum_i a_i(x_i)\,\abs{\partial_i f}^2\dd\mu.
@@ -405,10 +406,9 @@ Conditional-variance tensorization gives \eqref{eq:a3-tensor}; the weighted Hard
 $C_i\le4B_i$ in each coordinate.
 \end{proof}
 
-This analytic draft gives a \emph{dimension-free} weighted constant for independent Student-$t$,
+This theorem gives a \emph{dimension-free} weighted constant for independent Student-$t$,
 independent horseshoe marginals (weight $\tau^2+\theta_j^2$), and independent regularly varying
-scale mixtures. It is the easy half of the tensorization clause, but remains outside the
-independently reviewed A3 set.
+scale mixtures. It is the independently reviewed easy half of the tensorization clause.
 
 The hard half is the genuine \emph{hierarchical posterior}. With a global scale $\tau$, local
 scales $\lambda_j$, and a likelihood $L(y\mid\theta)$,
@@ -427,12 +427,13 @@ for $(\lambda,\tau)$ and a two-scale / decomposition argument to obtain posterio
 constants is the genuinely open Bayesian direction, and is especially delicate when the likelihood
 couples coordinates or changes the tail behaviour (Warning~\ref{warn:a3-likelihood}).
 
-There is nevertheless a concrete prior-side analytic draft in the natural non-centred metric.
+There is also a concrete certified prior-side result in the natural non-centred metric.
 
-\begin{proposition}[Hierarchical horseshoe prior in the pullback metric --- analytic proof draft]
+\begin{proposition}[Hierarchical horseshoe prior in the pullback metric]
 \label{prop:a3-hierarchical-prior}
-Let $z_j\sim N(0,1)$ and let $u,v_j$ be independent log-half-Cauchy variables, all independent,
-and set $\theta_j=e^{u+v_j}z_j$. The joint prior satisfies a weighted Poincar\'e inequality with
+Fix a finite $d\ge1$. Let $z_1,\ldots,z_d\sim N(0,1)$ and let
+$u,v_1,\ldots,v_d$ be independent log-half-Cauchy variables, all mutually independent, and set
+$\theta_j=e^{u+v_j}z_j$ for $1\le j\le d$. The joint prior satisfies a weighted Poincar\'e inequality with
 optimal constant $4$ and Dirichlet energy
 \[
  \int\!\left\{
@@ -451,6 +452,13 @@ $(z,u,v)$ therefore has constant $4$. Tensorization and the chain rule under
 $\theta_j=e^{u+v_j}z_j$ give the displayed pullback energy. Testing a function of $u$ alone shows
 that the constant is optimal.
 \end{proof}
+
+\noindent Both results are independently agent-certified in the shared standalone dossier
+\begin{center}\small
+\path{solutions/a3-product-hierarchical-prior.tex}.
+\end{center}
+The review checks the sharp tensorization constant, log-half-Cauchy normalization, complete
+pullback cross terms, and optimality.
 
 \subsection{Dependence obstruction and replacement target}
 \label{subsec:a3-theorem}

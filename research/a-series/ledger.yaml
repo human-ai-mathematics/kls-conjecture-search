@@ -231,11 +231,14 @@ nodes:
 
   - id: thm:a2-target
     kind: theorem
-    status: open
+    status: proved
     file: modules/open-targets/A2-bernstein-von-mises.tex
-    statement: "Under a global Gaussian density-ratio representation with osc(r_n)=o_P(1), C_P, C_LS, and C_TCI all equal (1+o_P(1)) lambda_max(H_n^{-1})."
+    statement: "In fixed dimension, if H_n/n converges in probability to I(theta_0)>0 and the mode-whitened posterior has a global Gaussian density-ratio representation with osc(r_n)=o_P(1), then C_P, C_LS, and C_TCI all equal (1+o_P(1)) lambda_max(H_n^{-1}), and each n-rescaled constant converges to lambda_max(I(theta_0)^{-1})."
     refines: conj:a2
-    bounded_by: [obs:tv-insufficient]
+    bounded_by: [obs:tv-insufficient, obs:gaussian-tail-rigidity]
+    solution: solutions/thm-a2-target.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-a2-strong-laplace-post-promotion-proof-review.md
 
   - id: prop:a2-logistic-global
     kind: proposition
@@ -302,10 +305,14 @@ nodes:
 
   - id: thm:a3-product
     kind: theorem
-    status: open
+    status: proved
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
-    statement: "If B_j=max(B_{j,+},B_{j,-}), then the product law has weighted Poincare constant at most 4 max_j B_j in the diagonal product metric."
+    statement: "For a finite product whose factors satisfy weighted Poincare inequalities with constants C_i, the product satisfies the diagonal-metric inequality with optimal constant max_i C_i; if B_i=max(B_{i,+},B_{i,-}), this is at most 4 max_i B_i."
     depends_on: [thm:hardy-1d]
+    bounded_by: [obs:heavy-tail-no-classical, obs:marginals-not-joint]
+    solution: solutions/a3-product-hierarchical-prior.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-a3-product-hierarchical-prior-post-promotion-proof-review.md
 
   - id: conj:a3-dependent
     kind: conjecture
@@ -346,10 +353,14 @@ nodes:
 
   - id: prop:a3-hierarchical-prior
     kind: proposition
-    status: open
+    status: proved
     file: modules/open-targets/A3-heavy-tailed-posteriors.tex
-    statement: "The noncentered Gaussian/log-half-Cauchy hierarchical horseshoe prior has optimal weighted Poincare constant 4 in its pullback metric, whose energy includes coefficient-scale cross terms."
+    statement: "For every finite d, mutually independent standard Gaussians Z_j and log-half-Cauchy variables U,V_j, with Theta_j=exp(U+V_j)Z_j, the hierarchical prior has optimal weighted Poincare constant 4 in the full pullback metric including all coefficient-scale cross terms."
     depends_on: [thm:a3-student]
+    bounded_by: [obs:heavy-tail-no-classical, obs:marginals-not-joint]
+    solution: solutions/a3-product-hierarchical-prior.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-a3-product-hierarchical-prior-post-promotion-proof-review.md
 
   - id: q:a3-horseshoe
     kind: question
@@ -429,10 +440,14 @@ nodes:
 
   - id: prop:a4-logistic-global
     kind: proposition
-    status: open
+    status: proved
     file: modules/open-targets/A4-variational-inference.tex
     statement: "For a Gaussian-prior binary-logistic posterior and any Gaussian variational family containing all translations of one fixed covariance, C_mean,Q = C_Q = C_mean,all = C_TCI = lambda_max(Sigma0)."
     depends_on: [prop:a2-logistic-global, eq:a4-mean-dual]
+    bounded_by: [obs:flat-direction, obs:gaussian-tail-rigidity]
+    solution: solutions/prop-a4-logistic-global.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-a4-logistic-global-post-promotion-proof-review.md
 
   - id: prop:a4-local-wellspecified
     kind: proposition
@@ -487,9 +502,18 @@ nodes:
     kind: question
     status: open
     file: modules/open-targets/A4-variational-inference.tex
-    statement: "Classify the strongest modified-transport cost alpha for which T_alpha(q,pi) <= C_alpha KL holds for each robust-Bayes prior (the W2 counterpart of A3)."
-    depends_on: [q:a4-certificate]
+    statement: "Treat the one-dimensional generalized-normal theta_p inequality as solved by thm:a4-modified-transport-1d and the global unbounded-convex-cost programme as impossible for polynomial-tail Student/horseshoe laws. For the first residual target, take the one-dimensional Student-logistic posterior pi_{nu,n}(dx) proportional to (1+x^2/nu)^(-(nu+1)/2) sigmoid(x)^n dx with nu>2 and integer n>=1, and the fixed-scale Gaussian location family Q_s={N(m,s^2)} with s>0: prove continuity and reverse-KL coercivity, delta>0, and nonempty compactness of every complete sublevel {KL<=delta+rho}; then for every rho>=0 obtain explicit matching bounds and the sharp large-rho order of the localized restricted W2^2/(2 KL) coefficient. Do not infer finiteness from a KL cutoff alone; use the named family compactness and P2 tail contract."
+    depends_on: [thm:a4-modified-transport-1d]
     bounded_by: [obs:restricted-not-finite, obs:heavy-tail-no-classical]
+
+  - id: thm:a4-modified-transport-1d
+    kind: theorem
+    status: imported
+    import_class: published
+    file: modules/open-targets/A4-variational-inference.tex
+    statement: "For a nonatomic full-support log-concave law mu on R and an even continuous nondecreasing superadditive convex cost alpha with alpha(0)=0 and alpha(t)=t^2 on |t|<=1, a scaled global inequality T_{alpha(a·)}(nu,mu) <= KL(nu||mu) holds for some a>0 iff int exp(alpha(bx)) dmu(x)<infinity for some b>0; consequently exp(-|x|^p), 1<=p<=2, admits the explicit quadratic-to-p-power cost theta_p up to scaling, whereas polynomial-tail laws admit no global TCI with a nontrivial unbounded convex cost."
+    references: [Gozlan2007RealLine]
+    bounded_by: [obs:heavy-tail-no-classical, obs:restricted-not-finite]
 
   - id: q:a4-multimodal
     kind: question
@@ -609,6 +633,15 @@ nodes:
     statement: "For fixed K and a G-invariant model, let Gamma_conn be the worst-cut/connectivity height of the free nondegenerate orbit network. Under exponentially quantitative empirical-barrier, collision-stratum, tail, and capacity control, n^{-1} log C_P(pi_Theta)->Gamma_conn in P_{theta_*}-probability while the quotient constant has the Fisher-scale (1+o_P(1))/n law; prefactors are a second target."
     bounded_by: [obs:symmetry-vs-physical]
     depends_on: [prop:a5-ratio]
+
+  - id: thm:a5-two-well-eyring-kramers
+    kind: theorem
+    status: imported
+    import_class: published
+    file: modules/open-targets/A5-quotient-and-reparameterization.tex
+    statement: "For mu_epsilon proportional to exp(-H/epsilon), where H is a C3 Morse potential satisfying the stated growth hypotheses and having exactly two equal-depth nondegenerate minima joined through a unique nondegenerate index-one saddle, C_P obeys the Menz-Schlichting Eyring-Kramers formula with relative error O(sqrt(epsilon)|log epsilon|^(3/2)); hence for epsilon=1/n, n^{-1} log C_P converges to the communication height."
+    references: [MenzSchlichting2014]
+    bounded_by: [obs:symmetry-vs-physical]
 
   - id: q:a5-qbvm
     kind: question

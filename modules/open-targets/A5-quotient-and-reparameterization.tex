@@ -29,12 +29,11 @@ out to be a statement about which \emph{metric} the sampler sees, not about the 
 posterior law.
 
 \noindent\textbf{Reviewed status.}
-Seven dossier-backed results have passed independent review: the invariant/non-invariant gap
-ratio, its density-ratio stability, the exact Gaussian crossover, optimal scalar partial
-non-centring, the exponential-tail consequence of Poincar\'e, Neal's funnel separation, and the
-singular prior-only partial-funnel phase. The quotient-monotonicity theorem and Lipschitz transport
-lemma are retained as elementary inline baselines but are not counted in that reviewed set. The
-folding and $\mathbb Z_2$ bridge examples and the general metastability theorem remain explicitly
+Nine dossier-backed results have passed independent review: quotient monotonicity, Lipschitz
+transport, the invariant/non-invariant gap ratio and its density-ratio stability, the exact
+Gaussian crossover, optimal scalar partial non-centring, the exponential-tail consequence of
+Poincar\'e, Neal's funnel separation, and the singular prior-only partial-funnel phase. The folding
+and $\mathbb Z_2$ bridge examples and the general metastability theorem remain explicitly
 unreviewed drafts or conjectures.
 
 \subsection{Setup: the symmetry quotient}
@@ -307,6 +306,43 @@ Only under such quantitative hypotheses does energy-landscape theory
 \cite{MenzSchlichting2014} predict the raw exponential rate while the quotient recovers the local
 Laplace / Bernstein--von Mises scale of A2 (Section~\ref{sec:a2}).
 
+The fixed-potential two-well part is available with its sharp prefactor.  It is useful as a
+calibration, but its hypotheses deliberately exclude the random repeated-orbit landscape of the
+conjecture below.
+
+\begin{theorem}[Two-well Eyring--Kramers Poincar\'e law]
+\label{thm:a5-two-well-eyring-kramers}
+Let $\mu_\varepsilon(\dd x)\propto e^{-H(x)/\varepsilon}\dd x$, where
+$H\in C^3(\R^d)$ is a nonnegative Morse function satisfying
+\[
+ \liminf_{\abs x\to\infty}\abs{\nabla H(x)}>0,
+ \qquad
+ \liminf_{\abs x\to\infty}
+ \bigl(\abs{\nabla H(x)}^2-\Delta H(x)\bigr)>-\infty.
+\]
+Assume that $H$ has exactly two equal-depth nondegenerate minima $m_1,m_2$, connected through a
+unique nondegenerate index-one saddle $s$.  Set
+$\kappa_i=\sqrt{\det\nabla^2H(m_i)}$, and let $\lambda_-(s)<0$ be the negative eigenvalue of
+$\nabla^2H(s)$.  Then, as $\varepsilon\downarrow0$,
+\[
+ \CP(\mu_\varepsilon)
+ =\left(1+O\!\left(\sqrt\varepsilon\abs{\log\varepsilon}^{3/2}\right)\right)
+ \frac{2\pi\varepsilon}{\kappa_1+\kappa_2}
+ \frac{\sqrt{\abs{\det\nabla^2H(s)}}}{\abs{\lambda_-(s)}}
+ \exp\!\left(\frac{H(s)-H(m_2)}{\varepsilon}\right).
+\]
+In particular, for $\varepsilon=1/n$,
+\[
+ \frac1n\log\CP\!\left(Z_n^{-1}e^{-nH}\dd x\right)
+ \longrightarrow H(s)-H(m_2).
+\]
+\end{theorem}
+
+\noindent This is the equal-depth two-well specialization of
+\cite[Corollaries~2.15 and 2.18]{MenzSchlichting2014}.  It controls only the raw constant for a
+fixed landscape.  It does not supply uniform empirical capacities, repeated-saddle orbit-network
+control, collision-stratum estimates, or the quotient Bernstein--von Mises conclusion.
+
 \begin{conjecture}[Raw-versus-quotient metastability]
 \label{conj:a5-metastable}
 For fixed $K$, suppose both prior and likelihood are $G$-invariant, the population risk has a
@@ -560,7 +596,7 @@ non-centering or the ancillarity--sufficiency interweaving strategy \cite{YuMeng
 \subsection{What is genuinely open}
 \label{subsec:a5-open}
 
-The seven independently reviewed quotient and funnel results above settle the exact finite-model
+The nine independently reviewed quotient and funnel results above settle the exact finite-model
 calibrations and the relevant structural obstructions. The following are the remaining research
 targets, in increasing difficulty; the elementary monotonicity theorem alone does not settle any
 strict improvement or posterior asymptotic.
