@@ -116,15 +116,15 @@ These identities do not by themselves unwhiten the high-covariance part of $H_t$
 \subsection{The headline open target}
 \label{subsec:spectral-headline}
 
-\begin{question}[Fixed-eigenfunction absorptive occupation]
+\begin{question}[Fixed-eigenfunction full-damping occupation]
 \label{q:mm-spectral-occupation}
 On smooth strongly log-concave isotropic approximants, let $-Lf=\lambda f$ be a normalized first
 nonconstant eigenfunction and let $g_t,H_t,A_t$ be as in \eqref{eq:spectral-quantities}. Do
-universal constants $T_0,C_0,C_1>0$ and $\alpha<1$ exist such that, for every $t\le T_0$,
+universal constants $T_0,C_0,C_1>0$ exist such that, for every $t\le T_0$,
 \begin{equation}
   \E\int_0^t\norm{H_s}_{\HS}^2\dd s
   \le C_0t+C_1\E\int_0^t\abs{g_s}^2\dd s
-  +\alpha\E\int_0^t2g_s^TA_sg_s\dd s,
+  +\E\int_0^t2g_s^TA_sg_s\dd s,
   \label{eq:spectral-occupation}
 \end{equation}
 uniformly through approximation?
@@ -145,11 +145,28 @@ than a proved implication.  The estimate \eqref{eq:spectral-occupation} itself i
 must either hold uniformly through regularization or be reformulated for approximate Rayleigh
 minimizers.
 
-The absorption structure of \eqref{eq:spectral-occupation} is worth naming, because it is the same
-in all three of this repository's routes: a source term is charged against a linear budget $C_0t$,
-a lower-order term, and a \emph{fraction $\alpha<1$ of its own exact damping}. That last summand
-is what makes the estimate absorptive rather than merely comparative, and it is why $\alpha<1$ is
-not cosmetic.
+The endpoint structure of \eqref{eq:spectral-occupation} is worth naming.  Here the source may be
+charged against the \emph{full} exact damping.  In the evolution of $\E|g_t|^2$ those two terms
+then cancel, leaving a closed Gr\"onwall inequality from the linear budget and the lower-order
+term.  A strict damping surplus would be useful but is not required for the KLS sufficiency
+bridge; this differs from the absorption margins required in the two-color route.
+
+\begin{lemma}[Time-weighted fixed-function source budget]
+\label{lem:mm-time-weighted-fixed-source}
+Let $\mu=e^{-V}\dd x$ be a smooth probability with $\Hess V\succeq\kappa I$, $\kappa\ge0$, and
+let $f$ be a fixed square-integrable test for which the posterior identities are justified.  Put
+$g_t=\Cov_{\mu_t}(f,X)$, $H_t=\E_t[(f-\E_tf)(X-a_t)^{\otimes2}]$, and $A_t=\Cov_{\mu_t}(X)$.
+Then, for every $T>0$,
+\begin{align}
+ &\E\int_0^T(\kappa+t)\norm{H_t}_{\HS}^2\dd t
+ +2\E\int_0^T\left(\abs{g_t}^2-(\kappa+t)g_t^TA_tg_t\right)\dd t \notag\\
+ &\hspace{7em}\le \Var_\mu(f)-\kappa\abs{g_0}^2.
+ \label{eq:mm-time-weighted-fixed-source}
+\end{align}
+In particular, for $\kappa=0$,
+$\E\int_0^\infty t\norm{H_t}_{\HS}^2\dd t\le\Var_\mu(f)$.
+This estimate retains one power of time and by itself gives no unweighted initial-layer bound.
+\end{lemma}
 
 \subsection{An equivalent sufficient reformulation}
 \label{subsec:spectral-kappa-form}

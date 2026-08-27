@@ -9,6 +9,7 @@ preserving its orientation in the posterior covariance tensor.
 |---|---|
 | `q:mm-spectral-occupation` | absorb the tensor source over universal time |
 | `prop:spectral-sufficiency` | convert the occupation estimate into a dimension-free gap |
+| `lem:mm-time-weighted-fixed-source` | retain one exact time weight for every fixed test function |
 
 Detailed deliverables are in [`../gating.md`](../gating.md); exact statements and dependencies
 are in [`../ledger.yaml`](../ledger.yaml).

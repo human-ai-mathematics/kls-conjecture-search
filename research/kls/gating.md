@@ -40,8 +40,9 @@ counterexample. A finite tail-union diagnostic is not a universal conclusion.
 
 ### `q:mm-spectral-occupation`
 
-Prove the universal-time absorptive source/damping estimate uniformly on regular approximants,
-preserving tensor orientation under unwhitening.
+Prove the universal-time full-damping source estimate uniformly on regular approximants,
+preserving tensor orientation under unwhitening. The source may consume the entire exact damping;
+a strict damping surplus is not required for the KLS bridge.
 
 ### `prop:spectral-sufficiency`
 
@@ -49,6 +50,14 @@ Derive a dimension-free spectral gap from that occupation estimate, including te
 control and the regularization limit.
 
 ## Deterministic moment-map / CMH
+
+### `ass:cmh-recovery-envelope`
+
+Construct, for every centered log-concave law, at least one regular compact-target moment-map
+recovery sequence with a universal bound on $\liminf C_{\mathrm{CMH}}$. The unconditional affine
+Poincar\'e lower-semicontinuity lemma and the regular CMH endpoint then pass the bound to the
+limit. This is the preferred approximation gate; it does not demand control of every
+regularization choice.
 
 ### `ass:uniform-cmh-approximants`
 
@@ -58,6 +67,9 @@ $\sup_k C_{\mathrm{CMH}}(\mu_k)\le C$. The certified conditional node
 `q:cmh-approximation` then passes the affine Poincaré inequalities to the limit with no loss,
 including proper affine-support degeneration; it asserts no continuity of
 $C_{\mathrm{CMH}}$.
+
+This remains a stronger sufficient premise for the already-certified
+`q:cmh-approximation`; it is not necessary if `ass:cmh-recovery-envelope` is discharged.
 
 ### `q:mm-invariant-lift`
 

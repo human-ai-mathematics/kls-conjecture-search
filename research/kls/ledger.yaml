@@ -774,14 +774,22 @@ nodes:
     status: open
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
-    statement: "For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time absorptive bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 + alpha int 2 g_t^T A_t g_t, with alpha<1, uniformly through approximation."
+    statement: "For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 plus the full exact damping int 2 g_t^T A_t g_t, uniformly through approximation."
 
   - id: prop:spectral-sufficiency
     kind: question
     status: open
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
-    statement: "Prove that a uniform affirmative answer to q:mm-spectral-occupation, together with the fixed-function SDE, posterior Brascamp-Lieb control and a regularization limit, implies a dimension-free spectral gap."
+    statement: "Prove that the full-damping estimate in q:mm-spectral-occupation, together with the fixed-function SDE, posterior Brascamp-Lieb control and a regularization limit, implies a dimension-free spectral gap; no strict damping surplus is required."
+    depends_on: [q:mm-spectral-occupation]
+
+  - id: lem:mm-time-weighted-fixed-source
+    kind: lemma
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "For a smooth kappa-uniformly log-concave law and every fixed admissible square-integrable test f, E int_0^T (kappa+t)||H_t||_HS^2 dt + 2 E int_0^T (|g_t|^2-(kappa+t)g_t^T A_t g_t) dt <= Var_mu(f)-kappa|g_0|^2; hence for kappa=0, E int_0^infinity t||H_t||_HS^2 dt <= Var_mu(f), without an unweighted initial-layer conclusion."
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
@@ -803,6 +811,29 @@ nodes:
     solution: solutions/q-cmh-approximation.tex
     checked_by: agent
     review: research/reviews/2026-08-27-q-cmh-approximation-proof-review.md
+
+  - id: lem:affine-poincare-w2-liminf
+    kind: lemma
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/41-cmh-normalization.tex
+    statement: "Every centered log-concave law admits centered full-dimensional compactly-supported regular moment-map approximants mu_k converging in ambient W2 such that C_P^aff(mu) <= liminf_k C_P^aff(mu_k), including proper affine-support degeneration; no continuity of C_CMH is asserted."
+    depends_on: [thm:regular-moment-map-compact-target]
+
+  - id: ass:cmh-recovery-envelope
+    kind: assumption
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/41-cmh-normalization.tex
+    statement: "There is a universal C such that every centered log-concave law has at least one regular recovery sequence mu_k with ambient W2 convergence and liminf_k C_CMH(mu_k) <= C; no bound over every regularization choice is required."
+
+  - id: cor:cmh-recovery-sequence-suffices
+    kind: corollary
+    status: conditional
+    route: moment-map-cmh
+    file: modules/kls/41-cmh-normalization.tex
+    statement: "The bounded CMH recovery-envelope assumption implies C_P^aff(mu) <= C for every centered log-concave law, hence KLS, using one recovery sequence and preserving the constant through affine-support degeneration."
+    depends_on: [ass:cmh-recovery-envelope, lem:affine-poincare-w2-liminf, def:cmh, thm:cmh-implies-affine-poincare]
 
   - id: q:mm-invariant-lift
     kind: question

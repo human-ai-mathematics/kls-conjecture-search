@@ -7,6 +7,7 @@
 
 | node | role |
 |---|---|
+| `ass:cmh-recovery-envelope` | find one regular recovery sequence with bounded CMH liminf |
 | `ass:uniform-cmh-approximants` | bound CMH uniformly along the certified regular approximation family |
 | `q:mm-invariant-lift` | construct the target-flat multiplier invariantly |
 | `q:mm-square-root-commutator` | control the complete Haar commutator sum |
@@ -15,7 +16,8 @@
 
 `q:cmh-approximation` is certified conditionally: it closes the limit passage without loss under
 `ass:uniform-cmh-approximants`, but does not establish that premise or continuity of
-$C_{\mathrm{CMH}}$. Detailed remaining deliverables are in [`../gating.md`](../gating.md);
+$C_{\mathrm{CMH}}$. The weaker `ass:cmh-recovery-envelope` asks only for one well-chosen sequence;
+its lower-semicontinuity and sufficiency bridge are tracked separately. Detailed remaining deliverables are in [`../gating.md`](../gating.md);
 exact statements and dependencies are in [`../ledger.yaml`](../ledger.yaml).
 
 ## Main fence

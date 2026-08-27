@@ -441,4 +441,34 @@ converge. Intrinsic smooth-core density on $S=\operatorname{Ran}\Sigma$ extends 
 the closed covariance-form relaxation $H^1_\Sigma(\mu)$, while $\Sigma$ and $\Sigma^+$ annihilate
 ambient normal derivatives. This proves constant-preserving closure, including singular
 covariance. It does not prove the uniform premise and asserts no continuity of $\CMH$.
+
+\begin{lemma}[Affine Poincar\'e lower semicontinuity along regular recovery]
+\label{lem:affine-poincare-w2-liminf}
+Every centered log-concave probability $\mu$ admits centered, full-dimensional,
+compactly-supported regular moment-map approximants $\mu_k$ such that
+$W_2(\mu_k,\mu)\to0$ in the original ambient coordinates and
+\begin{equation}
+  \CPaff(\mu)\le\liminf_{k\to\infty}\CPaff(\mu_k),
+  \label{eq:affine-poincare-w2-liminf}
+\end{equation}
+including when the limit is carried by a proper affine subspace.  The limit passage uses only the
+covariance Dirichlet forms; it asserts neither convergence nor lower semicontinuity of $\CMH$.
+\end{lemma}
+
+\begin{assumption}[Bounded CMH recovery envelope]
+\label{ass:cmh-recovery-envelope}
+There is a universal $C$ such that every centered log-concave probability $\mu$ has at least one
+regular recovery sequence as in Lemma~\ref{lem:affine-poincare-w2-liminf} satisfying
+\[
+  \liminf_{k\to\infty}\CMH(\mu_k)\le C.
+\]
+Only one well-chosen recovery sequence is required; no uniform bound over every regularization
+parameter or every canonical approximation family is assumed.
+\end{assumption}
+
+\begin{corollary}[One CMH recovery sequence suffices]
+\label{cor:cmh-recovery-sequence-suffices}
+Under Assumption~\ref{ass:cmh-recovery-envelope}, every centered log-concave probability satisfies
+$\CPaff(\mu)\le C$.  In particular the assumption implies Conjecture~\ref{conj:kls}.
+\end{corollary}
 \end{document}
