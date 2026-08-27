@@ -231,6 +231,7 @@ __marimo__/
 !.claude/agents/
 !.claude/agents/**
 .codex/*
+!.codex/config.toml
 !.codex/agents/
 !.codex/agents/**
 
