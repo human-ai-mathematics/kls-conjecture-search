@@ -99,7 +99,7 @@ gives, for every proposed choice of constants, a product-cylinder counterexample
 arbitrarily small additive and relative initial excess.
 Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package,
 $5/2$ is the weakest exponent statically consistent with the two-tail mode
-(Proposition~\ref{prop:two-tail}); the time exponent is a deliberately stronger open demand,
+(Proposition~\ref{prop:two-tail}); the time exponent was a deliberately stronger demand,
 not fixed by that static example. The near-worst bootstrap of Theorem~\ref{thm:bootstrap}
 supplies a different, externally anchored unweighted interface. It is not a uniform
 superlinear-remainder statement of the form above.
@@ -109,15 +109,34 @@ cannot repair the uniform package: the replacement must also change the remainde
 explicit near-worst-measure premise.
 \end{question}
 
-\begin{question}[Weighted stable Stein trace]
+\begin{question}[Weighted stable Stein-trace ingredient extracted from the refuted package]
 \label{q:stein-weighted}
-Prove \eqref{eq:intro-weighted-stein} for balanced near-Cheeger cuts, with damping coefficient
-$\beta<\tfrac12$. The intrinsic quadratic-chaos input is now available from
+Do there exist universal constants $T_0,C_0,C_1,C_2>0$,
+$0\le\beta<\tfrac12$, and $\eta\in(0,\tfrac14]$ satisfying
+$2\beta+64\eta^2<1$ such that, for every isotropic log-concave law, every initial
+finite-perimeter cut $E$ with $e_0(E)\le1$ and
+$\abs{p_0-\tfrac12}\le\eta/2$, and every $0<T\le T_0$,
+\[
+\begin{aligned}
+  \E\int_0^{T\wedge\tau_\eta}\frac{\calS_{\mu_t}(E)}{s_t}\dd t
+  &\le C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
+  +\beta\E\int_0^{T\wedge\tau_\eta}D_t\dd t \\
+  &\qquad
+  +C_2\E\int_0^{T\wedge\tau_\eta}
+    e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t?
+\end{aligned}
+\]
+This is exactly the stable Stein-trace clause of
+Assumption~\ref{ass:weighted-package}, now considered as an independent analytic ingredient.
+It does not repair that refuted package or imply KLS without a viable companion propagation
+statement.
+
+The intrinsic quadratic-chaos input is available from
 Theorem~\ref{thm:letwin-qcts}, conditional on the version-1 preprint. The proposed mechanism of
-Section~\ref{sec:jacobi} still lacks a quantitative almost-stability trace theorem for the
-localized fixed cut, modulo tangential Jacobi zero modes and with the Reilly boundary terms
-controlled. Any chaining must be uniform along localization and at the covariance-weighted scale; by
-Proposition~\ref{prop:two-tail} no slice-wise shortcut exists.
+Section~\ref{sec:jacobi} still lacks a localization-uniform quantitative almost-stability trace
+theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms
+controlled. Proposition~\ref{prop:two-tail} rules out a slice-wise shortcut. No implication
+between this question, Question~\ref{q:upgrade}, and Question~\ref{q:alignment} has been proved.
 \end{question}
 
 \begin{remark}[A shared dynamic occupation problem, and a missing geometric bridge]
@@ -249,8 +268,9 @@ plus a near-worst or source-deficit remainder that survives spectator products &
 global-operator-norm statement refuted; replacement not yet formulated. \\
 \addlinespace
 Question~\ref{q:stein-weighted} & Letwin quadratic chaos; a new almost-stability trace lemma;
-Reilly boundary terms and zero modes; constant mode via Question~\ref{q:splitting} & Candidate
-stability input, to be re-audited only after a tensor-stable propagation package is formulated. \\
+Reilly boundary terms and zero modes; constant mode via Question~\ref{q:splitting} & Open
+analytic ingredient extracted from the refuted package; it has no KLS consumer until a matching
+tensor-stable propagation package is formulated. \\
 \addlinespace
 Question~\ref{q:taming} & Coupling of splitting structure to the covariance SDE & Absolute-scale
 bootstrap supply for near-worst measures; with the separate geometric completion in

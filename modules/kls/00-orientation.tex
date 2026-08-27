@@ -321,7 +321,7 @@ target~3 of Section~\ref{sec:kls-synthesis} concrete.
 \subsection{The obstruction that shapes every route below}
 \label{subsec:kls-spike-obstruction}
 
-The following fact is the reason none of the routes in Groups~3--5 tries to bound
+The following fact is the reason none of the routes in Groups~3--6 tries to bound
 $\norm{A_t}_\op$ better.
 
 \begin{proposition}[Covariance spikes are compatible with KLS]
@@ -362,6 +362,8 @@ Every live route of this repository is a response to that constraint:
   \item Route~S (Group~4) retains the covariance tensor of one fixed first eigenfunction.
   \item Route~C (Group~5) abandons stochastic localization altogether and works in deterministic
   moment-map coordinates.
+  \item Route~F (Group~6) replaces Euclidean directions by one test-independent isotropic frame
+  of inverse-variance-normalized conditional line resamplings.
 \end{itemize}
 
 \subsection{Strategy map and reading guide}
@@ -397,7 +399,7 @@ covariance & Dimension-free operator control in expectation & \ref{sec:family-tr
 \end{center}
 
 \paragraph{The repository's own routes.}
-Groups~3--5 are this repository's work. Each is a response to
+Groups~3--6 are this repository's work. Each is a response to
 Section~\ref{subsec:kls-spike-obstruction}, each has an exactly stated open estimate, and each is
 tracked as a route in the control plane \texttt{research/kls/routes.md}.
 
@@ -418,11 +420,15 @@ Unwhiten for a universal time without losing tensor/covariance alignment
 C --- deterministic moment map & Hessian metric, Haar fields, Schur fibers, Stein residuals &
 Freeze the endpoint and lift, prove an all-split reduction, control the global square-root
 commutator & 5 \\
+\addlinespace
+F --- conditional fibers & One measure-dependent, test-independent isotropic frame of
+inverse-variance line resamplings & Prove a universal form gap, or decide the all-frame simplex
+dual; the natural root frame already fails & 6 \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-Group~6 (Section~\ref{sec:kls-synthesis}) closes the part by mapping each named gap in the
+Group~7 (Section~\ref{sec:kls-synthesis}) closes the part by mapping each named gap in the
 literature onto the corresponding open node of the KLS ledger.
 
 \paragraph{The bridge to Part~II.}

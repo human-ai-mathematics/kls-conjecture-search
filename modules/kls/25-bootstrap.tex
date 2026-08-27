@@ -149,6 +149,31 @@ This proves \eqref{eq:bootstrap-exit}.
 $\int_0^T\Prob(\tau_\eta\le t)\dd t\le\tfrac1{4\eta^2}(\tfrac{T^2}2+T\Xi_T)$.
 \end{proof}
 
+\begin{theorem}[Stopped covariance-interface refinement, candidate]
+\label{thm:bootstrap-stopped-interface}
+Under the hypotheses of Theorem~\ref{thm:bootstrap}, define
+\[
+  \widehat\Xi_{T,\eta}(\mu,E)
+  :=\int_0^T\E\bigl[X_s\one_{\{s<\tau_\eta\}}\bigr]\dd s.
+\]
+Then
+\begin{align}
+  \int_0^T\E\bigl[\bar e_t(E)\one_{\{t<\tau_\eta\}}\bigr]\dd t
+  \le Te_0+h_\mu\biggl[
+  &\Bigl(\frac\eps2+\eta\Bigr)T+\frac{T^2}{16\eta^2}\notag\\
+  &+\Bigl(\frac{T}{8\eta^2}+\frac14\Bigr)
+    \widehat\Xi_{T,\eta}(\mu,E)\biggr].
+  \label{eq:bootstrap-stopped-interface}
+\end{align}
+Consequently, for $0<T<1/8$, $\eta=T^{1/3}$, and $\eps\le T^{1/3}$,
+\[
+  \int_0^T\E\bigl[\bar e_t(E)\one_{\{t<\tau_\eta\}}\bigr]\dd t
+  \le Te_0+C h_\mu\bigl(T^{4/3}+\widehat\Xi_{T,\eta}(\mu,E)\bigr).
+\]
+This is a stopped refinement of the certified theorem, not a universal bound on the new
+interface.
+\end{theorem}
+
 \begin{remark}[Features]
 \label{rem:bootstrap-features}
 (a) The estimate holds for every balanced cut; near-minimality enters only through the size of

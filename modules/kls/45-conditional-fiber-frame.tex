@@ -1,0 +1,139 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\section{Route F: inverse-variance conditional-fiber frames}
+\label{sec:conditional-fiber-frame}
+
+This route asks whether one can choose a single isotropic frame of directions, depending on the
+measure but not on the test function, so that normalized conditional line resampling has a
+dimension-free spectral gap. It is a sufficient-condition route rather than a reformulation of
+KLS. Its normalization is designed so that linear functions have exactly the Euclidean energy,
+while the sharp one-dimensional log-concave Poincar\'e inequality compares the form from above
+with the usual gradient form.
+
+Let $\mu$ be a full-dimensional probability on $\R^d$ with finite second moment. For
+$\theta\in S^{d-1}$, disintegrate along the affine lines parallel to $\theta$:
+\[
+  \int h(x)\dd\mu(x)
+  =\int_{\theta^\perp}\int_\R h(z+t\theta)
+    \dd\mu_{\theta,z}(t)\dd\bar\mu_\theta(z).
+\]
+Write $\sigma_{\theta,z}^2=\Var_{\mu_{\theta,z}}(T)$. An \emph{admissible frame} is an even
+Borel probability $\rho$ on $S^{d-1}$ satisfying
+\begin{equation}\label{eq:conditional-frame-isotropy}
+  d\int_{S^{d-1}}\theta\theta^T\dd\rho(\theta)=I_d.
+\end{equation}
+For such a frame define
+\begin{equation}\label{eq:conditional-fiber-form}
+  \mathcal D_{\mu,\rho}(f)
+  :=d\int_{S^{d-1}}\int_{\theta^\perp}
+  \frac{\Var_{\mu_{\theta,z}}(f(z+T\theta))}
+       {\Var_{\mu_{\theta,z}}(T)}
+  \dd\bar\mu_\theta(z)\dd\rho(\theta).
+\end{equation}
+Null fibers and fibers with zero denominator contribute zero. The maximal form domain is
+$\{f\in L^2(\mu):\mathcal D_{\mu,\rho}(f)<\infty\}$, using jointly measurable conditional
+versions.
+
+\begin{lemma}[Conditional-fiber form and factor-$4$ bridge, candidate]
+\label{lem:conditional-fiber-form}
+For a full-dimensional probability with density and finite second moment, and an admissible
+frame, the quadratic form
+\eqref{eq:conditional-fiber-form} is densely defined, closed, symmetric, Markovian, and
+reversible. Its nonlocal self-adjoint generator is understood in form sense, and agrees with the
+conditional pair-jump formula on the natural sufficient Bochner domain even when pointwise total
+jump rates are infinite.
+
+If $\mu$ is log-concave, then for every locally Lipschitz $f$ in the form domain,
+\begin{equation}\label{eq:conditional-fiber-gradient-comparison}
+  \mathcal D_{\mu,\rho}(f)
+  \le4\int\abs{\nabla f}^2\dd\mu.
+\end{equation}
+Consequently, a form gap
+$\Var_\mu(f)\le C\mathcal D_{\mu,\rho}(f)$ implies $C_P(\mu)\le4C$.
+For every linear test $f_a(x)=a\cdot x$, one has
+$\mathcal D_{\mu,\rho}(f_a)=\abs{a}^2$; hence linear tests have quotient one when $\mu$ is
+isotropic. Every admissible frame has form gap one for the standard Gaussian, and the coordinate
+frame has form gap one for a standardized product law.
+\end{lemma}
+
+\begin{question}[Conditional-fiber frame]
+\label{q:conditional-fiber-frame}
+For every full-dimensional isotropic log-concave $\mu$ on $\R^d$, does there exist an admissible
+frame $\rho_\mu$, chosen independently of $f$, and a universal $C$ such that
+\begin{equation}\label{eq:conditional-fiber-gap}
+  \Var_\mu(f)\le C\mathcal D_{\mu,\rho_\mu}(f)
+\end{equation}
+for every $f$ in the maximal closed form domain?
+\end{question}
+
+An affirmative answer implies KLS by
+\eqref{eq:conditional-fiber-gradient-comparison}. The order of quantifiers is essential:
+$\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
+
+\subsection{The simplex root frame: a rigorous failed implementation}
+
+Let $P$ be uniform on the simplex $\Delta_{m-1}$, put $H_0=\mathbf1^\perp$ and
+\[
+  X=\sqrt{m(m+1)}\left(P-\frac1m\mathbf1\right)\in H_0.
+\]
+Then $X$ is isotropic in dimension $d=m-1$. The even $A_{m-1}$ root frame is
+\[
+  \theta_{ij}=\frac{e_i-e_j}{\sqrt2},
+  \qquad
+  \rho_{\rm root}=\frac1{m(m-1)}\sum_{i\ne j}\delta_{\theta_{ij}}.
+\]
+It satisfies
+$d\int\theta\theta^T\dd\rho_{\rm root}=I_{H_0}$. If $\Var_{ij}$ denotes conditional
+variance under redistribution of $(P_i,P_j)$ with their sum fixed, then
+\begin{equation}\label{eq:conditional-root-form}
+  \mathcal D_{\rm root}(f)
+  =\frac{12}{m^2(m+1)}\sum_{i<j}
+    \E\frac{\Var_{ij}(f)}{(P_i+P_j)^2}.
+\end{equation}
+
+\begin{proposition}[Vertex-cap obstruction for the root frame, candidate]
+\label{prop:conditional-fiber-root-obstruction}
+For $m\ge2$ and $\varepsilon\in(0,1)$, let $\eta_i=mP_i$ and
+$A_{m,\varepsilon}=\{\eta_1>m-\varepsilon\}$. Then
+\[
+  p_{m,\varepsilon}:=\mu(A_{m,\varepsilon})
+  =\left(\frac\varepsilon m\right)^{m-1},
+\]
+and the centered cap indicator belongs to the maximal root-form domain and satisfies
+\begin{equation}\label{eq:conditional-root-cap}
+  \frac{\mathcal D_{\rm root}(\one_{A_{m,\varepsilon}})}
+       {\Var(\one_{A_{m,\varepsilon}})}
+  \le
+  \frac{12(m-1)}{(m+1)(m-\varepsilon)^2
+  \left(1-(\varepsilon/m)^{m-1}\right)}.
+\end{equation}
+Consequently $\operatorname{gap}(\mathcal D_{\rm root})=O(m^{-2})$.
+\end{proposition}
+
+The same failure mechanism has published prior art in negative-rate energy-exchange models.
+
+\begin{proposition}[Negative-rate simplex exchange obstruction, imported]
+\label{prop:sasada-negative-exchange}
+For a symmetric-Dirichlet law of shape $a>0$, a complete-graph heat-bath form with pair rate
+$(\eta_i+\eta_j)^s$ and $s<0$ has spectral gap at most $2^{-s}m^s$ in the exchange
+normalization. In particular, at $a=1$ and $s=-2$, the corresponding $A_{m-1}$ root
+conditional-fiber form has gap at most
+\[
+  \frac{48}{m(m+1)}.
+\]
+\end{proposition}
+
+This is a published consequence of Sasada's vertex-cap argument
+\cite{Sasada2015EnergyExchange}. Caputo proves a dimension-free gap for the unweighted flat
+simplex heat bath, while Carlen--Posta--T\'oth prove uniform gaps for nonnegative exponents
+$s\in[0,1]$ \cite{Caputo2008BinaryCollision,CarlenPostaToth2025Exchange}. The inverse-variance
+root form lies at $s=-2$, outside those positive results.
+
+The root calculation does \emph{not} refute Question~\ref{q:conditional-fiber-frame}. A general
+permutation-invariant admissible frame may mix continuously many direction orbits, and no proof
+shows that the root orbit is optimal. The decisive simplex alternative is an exact all-frame
+dual certificate with objective tending to zero, or a uniform lower bound after optimizing over
+all admissible frames. Floating finite sweeps and root-only tests decide neither statement.
+
+\end{document}

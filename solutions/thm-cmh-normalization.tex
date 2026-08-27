@@ -18,10 +18,15 @@
 %   The results here are analytic. The companion finum target `cmh-gate-zero`
 %   can refute conj:gate-zero but supports no statement proved in this dossier.
 % checked_by: agent
-% authored_by: /root/kls_proof_audit (repairs to the original dossier)
-% reviewed_by: /root/kls_evidence_audit
-% review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
-% date: 2026-08-25
+% authored_by: /root/kls_proof_audit (earlier repair);
+%              /root/repair_cmh_hodge_domain_w3 (operator-domain repair)
+% prior_reviewed_by: /root/kls_evidence_audit
+% prior_review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+%   (certifies the five unchanged nodes on the earlier bytes)
+% reviewer: /root/review_cmh_hodge_domain_w3
+% review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
+%   (supplementary certification of prop:cmh-hodge and rem:cmh-stronger-than-kls)
+% date: 2026-08-27
 % ============================================================================
 
 \section*{Solution: the CMH estimate, its endpoint reduction, its Hodge content,
@@ -223,26 +228,107 @@ the moment-map one.
 
 \subsection*{4. The Hodge content: the affine channel and the solenoidal excess}
 
+Let
+\[
+  \Aop_1=-\Div_\mu(\Sigma\nabla\,\cdot\,)
+\]
+be the closed nonnegative self-adjoint operator associated with the covariance form
+\[
+  \calE_\Sigma(f,k)=\E_\mu\inner{\Sigma\nabla f}{\nabla k},
+  \qquad \Dom(\calE_\Sigma)=H^1_\Sigma(\mu),
+\]
+and set $L^2_0(\mu)=(\ker\Aop_1)^\perp$.  The support is connected and $\Sigma\succ0$, so
+$\ker\Aop_1$ consists of the constants.  Moreover $\CPaff(\mu)<\infty$ for each fixed
+full-dimensional log-concave probability measure (only a dimension-free bound is open).
+Consequently the restriction of $\Aop_1$ to $L^2_0(\mu)$ has a bounded, everywhere-defined
+inverse
+\begin{equation}
+  \Aop_1^{-1}:L^2_0(\mu)\longrightarrow
+  \Dom(\Aop_1)\cap L^2_0(\mu).
+  \label{eq:sol-cmh-a1-inverse}
+\end{equation}
+
 \begin{proposition}[= Proposition~\ref{prop:cmh-hodge}]
 \label{prop:sol-cmh-hodge}
-Let $u=H\nabla g$, $h=-\Div_\mu u$, let $\psi$ solve $-\Div_\mu(\Sigma\nabla\psi)=h$ on the
-centered subspace, and put $w=u-\Sigma\nabla\psi$. Then $\Div_\mu w=0$,
+Let $g\in\Dom(\Aop)$ be such that
+$u=H\nabla g\in L^2(\mu;\Sigma^{-1})$, and set
+\[
+  h=\Aop g=-\Div_\mu u\in L^2_0(\mu),\qquad
+  \psi=\Aop_1^{-1}h,\qquad
+  w=u-\Sigma\nabla\psi.
+\]
+Then $\Div_\mu w=0$,
 \[
   \E_\mu\inner{u}{\Sigma^{-1}u}
   =\E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}+\E_\mu\inner{w}{\Sigma^{-1}w},
 \]
-and $\sup_h\E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}/\norm h_2^2=\CPaff(\mu)$.
+and
+\[
+  \sup_{0\ne h\in L^2_0(\mu)}
+  \frac{\E_\mu\inner{\Sigma\nabla\Aop_1^{-1}h}
+                         {\nabla\Aop_1^{-1}h}}
+       {\norm h_2^2}
+  =\CPaff(\mu).
+\]
 \end{proposition}
 
 \begin{proof}
-$\Div_\mu w=\Div_\mu u-\Div_\mu(\Sigma\nabla\psi)=-h-(-h)=0$. Orthogonality in
-$L^2(\mu;\Sigma^{-1})$ is
-$\E\inner{\Sigma\nabla\psi}{\Sigma^{-1}w}=\E\inner{\nabla\psi}{w}=-\E[\psi\Div_\mu w]=0$, and
-the displayed identity is the expansion of $\norm{\Sigma\nabla\psi+w}^2_{L^2(\Sigma^{-1})}$. For
-the last claim, with $\Aop_1=-\Div_\mu(\Sigma\nabla\,\cdot\,)$ we have $\psi=\Aop_1^{-1}h$ and
-$\E\inner{\Sigma\nabla\psi}{\nabla\psi}=\inner{h}{\Aop_1^{-1}h}$, whose operator norm is
-$\norm{\Aop_1^{-1}}$ on the centered subspace; by \eqref{eq:affine-poincare-constant} that is
-$\CPaff(\mu)$.
+Put $\mathscr H_\Sigma=L^2(\mu;\Sigma^{-1})$ and let
+\[
+  G_\Sigma:H^1_\Sigma(\mu)\subset L^2(\mu)\longrightarrow\mathscr H_\Sigma,
+  \qquad G_\Sigma f=\Sigma\nabla f.
+\]
+This is a densely defined closed operator, its adjoint is the weak weighted divergence
+$G_\Sigma^*=-\Div_\mu$, and $\Aop_1=G_\Sigma^*G_\Sigma$.  Here the assertion
+$h=-\Div_\mu u\in L^2$ means precisely that $u\in\Dom(G_\Sigma^*)$ and
+$G_\Sigma^*u=h$: the usual integration-by-parts identity is first valid on the smooth core and
+extends to $H^1_\Sigma(\mu)$ by closed-form density.  Since
+$\psi\in\Dom(\Aop_1)$ and $\Aop_1\psi=h$, we also have
+$G_\Sigma\psi\in\Dom(G_\Sigma^*)$ and
+$G_\Sigma^*G_\Sigma\psi=h$.  Therefore
+\[
+  w=u-G_\Sigma\psi\in\Dom(G_\Sigma^*),
+  \qquad G_\Sigma^*w=h-h=0,
+\]
+which is the weak statement $\Div_\mu w=0$.  The required integration by parts is now the
+adjoint identity at exactly these domains:
+\[
+  \E_\mu\inner{\Sigma\nabla\psi}{\Sigma^{-1}w}
+  =\inner{G_\Sigma\psi}{w}_{\mathscr H_\Sigma}
+  =\inner{\psi}{G_\Sigma^*w}_{L^2(\mu)}=0.
+\]
+Thus $G_\Sigma\psi$ and $w$ are orthogonal in $\mathscr H_\Sigma$, and expanding
+$u=G_\Sigma\psi+w$ gives the displayed Hodge identity.  The same argument shows minimality:
+if $v\in\Dom(G_\Sigma^*)$ and $G_\Sigma^*v=h$, then
+$v-G_\Sigma\psi\in\ker G_\Sigma^*$ and hence
+\[
+  \norm v_{\mathscr H_\Sigma}^2
+  =\norm{G_\Sigma\psi}_{\mathscr H_\Sigma}^2
+   +\norm{v-G_\Sigma\psi}_{\mathscr H_\Sigma}^2.
+\]
+
+Finally, for every $h\in L^2_0(\mu)$,
+\[
+  \E_\mu\inner{\Sigma\nabla\psi}{\nabla\psi}
+  =\norm{G_\Sigma\psi}_{\mathscr H_\Sigma}^2
+  =\inner{\Aop_1\psi}{\psi}_{L^2(\mu)}
+  =\inner{h}{\Aop_1^{-1}h}_{L^2(\mu)}.
+\]
+The spectral theorem for the positive self-adjoint restriction of $\Aop_1$ to $L^2_0(\mu)$
+therefore gives
+\[
+  \sup_{0\ne h\in L^2_0(\mu)}
+  \frac{\inner{h}{\Aop_1^{-1}h}}{\norm h_2^2}
+  =\norm{\Aop_1^{-1}}
+  =\left(
+     \inf_{\substack{0\ne f\in H^1_\Sigma(\mu)\\ f\perp\ker\Aop_1}}
+     \frac{\calE_\Sigma(f,f)}{\norm f_2^2}
+    \right)^{-1}
+  =\CPaff(\mu),
+\]
+where the last equality is exactly the variational definition
+\eqref{eq:affine-poincare-constant}.  This also verifies that no integration by parts has been
+applied outside the form/operator domains declared above.
 \end{proof}
 
 \begin{corollary}[Exact consequence of the Hodge decomposition]
