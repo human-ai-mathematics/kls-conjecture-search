@@ -50,10 +50,14 @@ control and the regularization limit.
 
 ## Deterministic moment-map / CMH
 
-### `q:cmh-approximation`
+### `ass:uniform-cmh-approximants`
 
-Specify the approximation topology and common core, prove lower semicontinuity with constant
-preservation, and handle degeneration to a proper affine support.
+Prove a universal $C$ such that the centered Gaussian-convolution, Gaussian-tilt, and
+growing-ball regular moment-map approximants of every centered log-concave law satisfy
+$\sup_k C_{\mathrm{CMH}}(\mu_k)\le C$. The certified conditional node
+`q:cmh-approximation` then passes the affine Poincaré inequalities to the limit with no loss,
+including proper affine-support degeneration; it asserts no continuity of
+$C_{\mathrm{CMH}}$.
 
 ### `q:mm-invariant-lift`
 

@@ -1,0 +1,486 @@
+% Standalone solution dossier for the CMH approximation-closure gate.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node : q:cmh-approximation
+% refines     : q:cmh-approximation  (modules/kls/40-moment-map-cmh.tex)
+% bounded_by  : none
+% checked_by  : agent
+% author      : /root/prove_cmh_approximation
+% reviewer    : /root/review_cmh_approximation
+% review      : research/reviews/2026-08-27-q-cmh-approximation-proof-review.md
+% date        : 2026-08-27
+% ============================================================================
+
+\section*{Solution candidate: constant-preserving CMH approximation closure}
+\label{sec:sol-cmh-approximation}
+
+\paragraph{Scope.}
+This dossier answers Question~\ref{q:cmh-approximation} with the closed-form convention already
+used by Definition~\ref{def:cmh} and
+Theorem~\ref{thm:cmh-implies-affine-poincare}.  It constructs regular compact-target
+approximants of every centered log-concave law, including a law carried by a proper affine
+subspace, and proves that a uniform CMH estimate on those approximants passes to the affine
+Poincar\'e inequality with no loss.  The uniform CMH estimate is an explicit hypothesis: nothing
+below proves universal $\mathrm{CMH}(4)$ or Conjecture~\ref{conj:kls}, and no continuity of
+$\CMH$ is asserted.
+
+\subsection*{1. Statement and the limiting closed form}
+
+Let $\mu$ be a centered log-concave probability measure on $\R^n$, let
+$\Sigma=\Cov(\mu)$, and put
+\[
+  S=\operatorname{Ran}\Sigma,
+  \qquad d=\dim S,
+  \qquad \Sigma_S=\Sigma|_S.
+\]
+The affine hull of $\mu$ is $S$.  Indeed, if $v\in\ker\Sigma$, then
+$\Var_\mu\inner{v}{X}=0$ and centeredness gives $\inner{v}{X}=0$ almost surely, so the affine hull is
+contained in $(\ker\Sigma)^\perp=\operatorname{Ran}\Sigma$.  Conversely, the covariance is
+positive definite on the affine hull: otherwise the support would lie in a proper affine
+hyperplane of its own affine hull.  Thus $\Sigma_S\succ0$ when $d>0$.
+
+For $d>0$, start on the globally Lipschitz functions $f:S\to\R$ that belong to $L^2(\mu)$ with
+the covariance pre-form
+\begin{equation}
+  \calE_{\Sigma,\mu}^{0}(f)
+  =\int_S\inner{\Sigma_S\nabla_S f}{\nabla_S f}\,\dd\mu.
+  \label{eq:sol-cmh-approx-covariance-preform}
+\end{equation}
+Its closed relaxation in $L^2(\mu)$ is denoted by
+$\calE_{\Sigma,\mu}$, and its domain by $H^1_\Sigma(\mu)$.  This is the intrinsic convention
+throughout the dossier; no equality with a separately defined maximal distributional or
+Neumann Sobolev domain is claimed.  Section~4 below proves both closability and density of
+\[
+  \mathscr C_S=\R+C_c^\infty(S)
+  \label{eq:sol-cmh-approx-intrinsic-core}
+\]
+in this domain.  Define
+\begin{equation}
+  \CPaff(\mu)
+  =\sup_{f\in H^1_\Sigma(\mu)\setminus\R}
+       \frac{\Var_\mu f}{\calE_{\Sigma,\mu}(f)}.
+  \label{eq:sol-cmh-approx-affine-constant}
+\end{equation}
+If $d=0$, then $\mu=\delta_0$; by convention
+$H^1_\Sigma(\mu)=L^2(\mu)=\R$ and $\CPaff(\mu)=0$.
+
+\begin{theorem}[Approximation closure for CMH]
+\label{thm:sol-cmh-approximation}
+For every centered log-concave probability $\mu$ on $\R^n$ there is an explicit sequence of
+centered, full-dimensional, compactly supported log-concave probabilities $\mu_k$ such that:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+  \item $\Wtwo(\mu_k,\mu)\to0$ in the original ambient coordinates;
+  \item each $\mu_k$ belongs to the regular compact-target moment-map class of
+        Theorem~\ref{thm:regular-moment-map-compact-target}, with the closed ambient-core Stein
+        form and constant kernel used in Definition~\ref{def:cmh};
+  \item writing $\Sigma_k=\Cov(\mu_k)$,
+        \begin{equation}
+          \CPaff(\mu)
+          \le \liminf_{k\to\infty}\CPaff(\mu_k)
+          \le \liminf_{k\to\infty}\CMH(\mu_k).
+          \label{eq:sol-cmh-approx-liminf}
+        \end{equation}
+\end{enumerate}
+Consequently, if the route premise
+\begin{equation}
+  \sup_k\CMH(\mu_k)\le C
+  \label{eq:sol-cmh-approx-premise}
+\end{equation}
+holds for this sequence, then
+\[
+  \Var_\mu f\le C\calE_{\Sigma,\mu}(f)
+  \quad\text{for every }f\in H^1_\Sigma(\mu),
+  \qquad\text{and hence}\qquad
+  \CPaff(\mu)\le C.
+\]
+This conclusion includes degeneration to a proper affine support and preserves the constant
+exactly.
+\end{theorem}
+
+\subsection*{2. Construction of regular compact-target approximants}
+
+Let $X\sim\mu$ and let $G\sim N(0,I_n)$ be independent.  For $\delta>0$ write
+\[
+  \lambda_\delta=\mathcal L(X+\sqrt\delta G),
+  \qquad
+  q_\delta=\frac{\dd\lambda_\delta}{\dd x}.
+\]
+The density $q_\delta$ is positive and $C^\infty$ on $\R^n$.  It is log-concave by the
+Pr\'ekopa theorem (equivalently, convolution preserves log-concavity).  Moreover
+\begin{equation}
+  \Wtwo^2(\lambda_\delta,\mu)\le n\delta,
+  \qquad
+  \int x\,\dd\lambda_\delta(x)=0,
+  \qquad
+  \Cov(\lambda_\delta)=\Sigma+\delta I_n.
+  \label{eq:sol-cmh-approx-gaussian-smoothing}
+\end{equation}
+
+For $\delta,\eps>0$ and $R<\infty$, define
+\begin{equation}
+  Z_{\delta,\eps,R}
+  =\int_{B(0,R)}q_\delta(x)e^{-\eps|x|^2/2}\,\dd x,
+  \qquad
+  \dd\widetilde\mu_{\delta,\eps,R}(x)
+  =Z_{\delta,\eps,R}^{-1}\one_{B(0,R)}(x)
+    q_\delta(x)e^{-\eps|x|^2/2}\,\dd x.
+  \label{eq:sol-cmh-approx-family}
+\end{equation}
+Let $m_{\delta,\eps,R}$ be its mean and center it:
+\begin{equation}
+  \mu_{\delta,\eps,R}
+  =(x\mapsto x-m_{\delta,\eps,R})_\#
+    \widetilde\mu_{\delta,\eps,R}.
+  \label{eq:sol-cmh-approx-centering}
+\end{equation}
+
+For fixed $\delta$, as $\eps\downarrow0$ and $R\uparrow\infty$, the density ratio in
+\eqref{eq:sol-cmh-approx-family} converges pointwise to one relative to $\lambda_\delta$ and is
+bounded above by $1/Z_{\delta,\eps,R}$, with
+$Z_{\delta,\eps,R}\to1$.  Dominated convergence therefore gives weak convergence to
+$\lambda_\delta$ and convergence of the second moment: for the latter, apply it to
+$|x|^2\one_{B(0,R)}e^{-\eps|x|^2/2}$, dominated by the $\lambda_\delta$-integrable function
+$|x|^2$.  The weak-plus-second-moment characterization of quadratic Wasserstein convergence
+gives
+\begin{equation}
+  \Wtwo(\widetilde\mu_{\delta,\eps,R},\lambda_\delta)\longrightarrow0.
+  \label{eq:sol-cmh-approx-fixed-delta}
+\end{equation}
+
+Here is an explicit diagonal choice.  Set $\delta_k=k^{-4}$.  By
+\eqref{eq:sol-cmh-approx-fixed-delta}, choose
+\[
+  0<\eps_k<k^{-1},
+  \qquad R_k>k,
+  \qquad
+  \Wtwo(\widetilde\mu_{\delta_k,\eps_k,R_k},\lambda_{\delta_k})<k^{-1},
+\]
+and put $m_k=m_{\delta_k,\eps_k,R_k}$ and
+$\mu_k=\mu_{\delta_k,\eps_k,R_k}$.  Since $\lambda_{\delta_k}$ is centered, comparison of
+means under any coupling gives
+\[
+  |m_k|
+  \le \Wtwo(\widetilde\mu_{\delta_k,\eps_k,R_k},\lambda_{\delta_k})<k^{-1}.
+\]
+Translation by $-m_k$, the triangle inequality, and
+\eqref{eq:sol-cmh-approx-gaussian-smoothing} now yield the quantitative diagonal estimate
+\begin{equation}
+  \Wtwo(\mu_k,\mu)
+  \le |m_k|
+      +\Wtwo(\widetilde\mu_{\delta_k,\eps_k,R_k},\lambda_{\delta_k})
+      +\Wtwo(\lambda_{\delta_k},\mu)
+  <\frac2k+\frac{\sqrt n}{k^2}.
+  \label{eq:sol-cmh-approx-diagonal-bound}
+\end{equation}
+No whitening has been used.
+
+We next check every target hypothesis.  The support of $\mu_k$ is the convex body
+\[
+  P_k=B(-m_k,R_k),
+\]
+and, on its interior,
+\begin{equation}
+  \dd\mu_k(z)=g_k(z)\,\dd z,
+  \qquad
+  g_k(z)=Z_{\delta_k,\eps_k,R_k}^{-1}
+  q_{\delta_k}(z+m_k)e^{-\eps_k|z+m_k|^2/2}.
+  \label{eq:sol-cmh-approx-density}
+\end{equation}
+The function $g_k$ extends to a positive $C^\infty$ function on all of $\R^n$.  The measure is
+centered by construction and full-dimensional because $g_k>0$ on the nonempty open ball
+$\operatorname{int}P_k$.  In particular, its covariance $\Sigma_k$ is positive definite.
+Also $0\in\operatorname{int}P_k$: the barycenter of a positive density on a full-dimensional
+convex body cannot lie on a supporting hyperplane of that body.
+
+Writing $V_k=-\log g_k$ on $\operatorname{int}P_k$, log-concavity of $q_{\delta_k}$ gives
+\begin{equation}
+  D^2V_k(z)
+  =D^2(-\log q_{\delta_k})(z+m_k)+\eps_k I_n
+  \succeq \eps_k I_n.
+  \label{eq:sol-cmh-approx-strict-target}
+\end{equation}
+Thus $\mu_k$ is log-concave, and its interior potential is smooth and strictly convex.  (The
+additional standard convolution identity gives
+$D^2(-\log q_{\delta_k})\preceq\delta_k^{-1}I_n$, but no uniform Hessian bound is used.)
+
+The published compact-target regularity theorem
+\cite{BermanBerndtsson2013RealMA}, in the repository form of
+Theorem~\ref{thm:regular-moment-map-compact-target}, now applies to the centered probability
+$g_k\one_{\operatorname{int}P_k}\,\dd x$.  It supplies a smooth strictly convex canonical
+moment potential $\varphi_k$ on $\R^n$ and a global diffeomorphism
+\[
+  \nabla\varphi_k:\R^n\longrightarrow\operatorname{int}P_k.
+\]
+With target coordinate $x=\nabla\varphi_k(y)$, define
+\begin{equation}
+  H_k(x)=D^2\varphi_k((\nabla\varphi_k)^{-1}(x)).
+  \label{eq:sol-cmh-approx-kernel}
+\end{equation}
+Fathi's moment-map Stein theorem \cite{Fathi2019SteinMomentMaps} gives a smooth positive
+symmetric field on $\operatorname{int}P_k$ satisfying, for every scalar ambient test
+$F\in C_c^\infty(\R^n)$,
+\begin{equation}
+  \int x_iF(x)\,\dd\mu_k(x)
+  =\int (H_k)_{ij}(x)\partial_jF(x)\,\dd\mu_k(x).
+  \label{eq:sol-cmh-approx-stein}
+\end{equation}
+Equivalently, $\operatorname{Div}_{\mu_k}H_k=-x$ distributionally on the ambient space.  The
+absence of a boundary distribution in \eqref{eq:sol-cmh-approx-stein} is precisely the weak
+zero-normal-flux convention used by the certified endpoint.  Since $P_k$ is bounded, testing
+with a cutoff that equals the coordinate function $x_j$ near $P_k$ gives
+\begin{equation}
+  \E_{\mu_k}H_k=\E_{\mu_k}[X\otimes X]=\Sigma_k.
+  \label{eq:sol-cmh-approx-mean-kernel}
+\end{equation}
+Thus every hypothesis of the imported regular moment-map input has been matched.
+
+\subsection*{3. The exact closed Stein form on each approximant}
+
+For fixed $k$, let
+\[
+  \mathscr D_k
+  =\{F|_{P_k}:F\in\R+C_c^\infty(\R^n)\}
+\]
+and define on this ambient restriction core
+\begin{equation}
+  \calE_{H_k}^0(f,g)
+  =\int_{P_k}\inner{H_k\nabla f}{\nabla g}\,\dd\mu_k.
+  \label{eq:sol-cmh-approx-H-form}
+\end{equation}
+The value is independent of the ambient extension, because two smooth extensions agreeing on
+the open set $\operatorname{int}P_k$ have the same gradient there.  The core is dense in
+$L^2(\mu_k)$, and \eqref{eq:sol-cmh-approx-mean-kernel} shows that every core function has
+finite energy:
+\[
+  \calE_{H_k}^0(f,f)
+  \le\norm{\nabla f}_\infty^2\int\Tr H_k\,\dd\mu_k
+  =\norm{\nabla f}_\infty^2\Tr\Sigma_k<\infty.
+\]
+
+\begin{lemma}[Closability and constant kernel]
+\label{lem:sol-cmh-approx-stein-closure}
+The form \eqref{eq:sol-cmh-approx-H-form} is closable in $L^2(\mu_k)$.  Its closure
+$\calE_{H_k}$ has kernel exactly the constants.  We use its nonnegative self-adjoint form
+operator $\Aop_k$ as the closed Stein generator $-L_{\mu_k}$.
+\end{lemma}
+
+\begin{proof}
+Suppose $f_j\in\mathscr D_k$, $f_j\to0$ in $L^2(\mu_k)$, and
+$H_k^{1/2}\nabla f_j$ converges in $L^2(\mu_k;\R^n)$ to a field $u$.  Let
+$K\Subset\operatorname{int}P_k$.  On $K$, the density $g_k$ is bounded above and below by
+positive constants and the smooth positive matrix fields $H_k^{1/2}$ and $H_k^{-1/2}$ are
+bounded.  Hence
+\[
+  f_j\longrightarrow0\quad\text{in }L^2(K,\dd x),
+  \qquad
+  \nabla f_j\longrightarrow H_k^{-1/2}u
+     \quad\text{in }L^2(K,\dd x).
+\]
+Distributional differentiation is closed, so $H_k^{-1/2}u=0$ on $K$.  Exhausting the interior
+by compact subsets and using that the boundary of a convex body has Lebesgue, hence
+$\mu_k$, measure zero gives $u=0$.  This is the closability criterion.
+
+If $f$ lies in the closed form domain with $\calE_{H_k}(f,f)=0$, take core approximants
+$f_j\to f$ in $L^2(\mu_k)$ with $H_k^{1/2}\nabla f_j\to0$.  The same local argument shows
+that $f$ has zero distributional gradient on the connected set
+$\operatorname{int}P_k$, so $f$ is constant almost everywhere.  Constants plainly have zero
+energy.
+\end{proof}
+
+The weak Stein identity gives, on smooth tests for which the displayed quantities are
+integrable,
+\[
+  \operatorname{Div}_{\mu_k}(H_k\nabla g)
+  =\Tr(H_kD^2g)-x\cdot\nabla g,
+  \qquad
+  -\int fL_{\mu_k}g\,\dd\mu_k=\calE_{H_k}^0(f,g).
+\]
+Thus the Friedrichs form operator in Lemma~\ref{lem:sol-cmh-approx-stein-closure} is exactly the
+closed-form object used by Definition~\ref{def:cmh}; its inverse is understood only on the
+orthogonal complement of its constant kernel.  We do not identify this domain with an unnamed
+maximal Neumann or maximal distributional domain.
+
+Theorem~\ref{thm:cmh-implies-affine-poincare} is therefore applicable to every $\mu_k$ and gives
+\begin{equation}
+  \CPaff(\mu_k)\le\CMH(\mu_k).
+  \label{eq:sol-cmh-approx-regular-endpoint}
+\end{equation}
+This is the only step at which the CMH quantity is used.
+
+\subsection*{4. The intrinsic domain at a singular limit}
+
+A log-concave probability whose affine hull is $S$ has a density with respect to
+$d$-dimensional Lebesgue measure on $S$; that density is positive and locally bounded above and
+below on the relative interior of its convex support.  Consequently the same local
+distributional-derivative argument as in
+Lemma~\ref{lem:sol-cmh-approx-stein-closure}, now with the constant positive matrix
+$\Sigma_S$, proves that the pre-form
+\eqref{eq:sol-cmh-approx-covariance-preform} is closable.  It also shows that the kernel of its
+closure consists of the constants, because the relative interior of a convex support is
+connected.
+
+We now prove the promised core density rather than assume it.  It is enough to approximate a
+globally Lipschitz $f\in L^2(\mu)$ in the form norm.
+\begin{enumerate}[label=(\arabic*),leftmargin=2.2em]
+  \item Let $T_Mf=(-M)\vee f\wedge M$.  The Lipschitz chain rule and dominated convergence give
+        $T_Mf\to f$ in $L^2(\mu)$ and
+        $\calE_{\Sigma,\mu}^0(T_Mf-f)\to0$.
+  \item For bounded $f$, choose $\chi_R\in C_c^\infty(S)$ equal to one on $B_S(0,R)$,
+        supported in $B_S(0,2R)$, with $|\nabla_S\chi_R|\le c/R$.  Then
+        $\chi_Rf\to f$ in $L^2(\mu)$ and in energy.  Indeed, the tail part containing
+        $(1-\chi_R)\nabla_Sf$ tends to zero by dominated convergence, while
+        \[
+          \int f^2\inner{\Sigma_S\nabla_S\chi_R}{\nabla_S\chi_R}\,\dd\mu
+          \le \norm{f}_\infty^2\norm{\Sigma_S}_\op c^2R^{-2}\longrightarrow0.
+        \]
+  \item A compactly supported Lipschitz function on the Euclidean space $S$ can be mollified
+        inside $S$.  The mollifications converge uniformly in value, their gradients converge
+        Lebesgue-almost everywhere, and their gradients are uniformly bounded by the original
+        Lipschitz constant.  Since $\mu$ is absolutely continuous on $S$, dominated convergence
+        gives convergence in both $L^2(\mu)$ and the covariance energy.
+\end{enumerate}
+The resulting functions belong to $C_c^\infty(S)$, proving that
+$\mathscr C_S$ is dense in $H^1_\Sigma(\mu)$.  When $d=0$, the intrinsic space is the singleton
+space and this statement reduces to density of the constants.
+
+This intrinsic core is exactly the restriction of the one common ambient core
+\[
+  \mathscr C=\R+C_c^\infty(\R^n).
+  \label{eq:sol-cmh-approx-ambient-core}
+\]
+Indeed, an ambient test restricts to an element of $\mathscr C_S$.  Conversely, in the
+orthogonal splitting $x=s+t\in S\oplus S^\perp$, extend
+$\phi\in C_c^\infty(S)$ by
+\[
+  F(s+t)=\phi(s)\eta(t),
+\]
+where $\eta\in C_c^\infty(S^\perp)$ equals one near $0$.  Then $F\in C_c^\infty(\R^n)$,
+$F|_S=\phi$, and its normal derivative vanishes on $S$.
+
+More generally, if two ambient extensions agree on $S$, their tangential gradients agree and
+the difference of their ambient gradients lies in $S^\perp$.  With $P_S$ denoting orthogonal
+projection,
+\begin{equation}
+  \Sigma=P_S\Sigma_SP_S,
+  \qquad
+  \Sigma^+=P_S\Sigma_S^{-1}P_S,
+  \qquad
+  \Sigma P_{S^\perp}=\Sigma^+P_{S^\perp}=0.
+  \label{eq:sol-cmh-approx-normal-annihilation}
+\end{equation}
+Hence ambient restriction and intrinsic evaluation agree in the covariance energy, and both
+$\Sigma$ and its Moore--Penrose inverse annihilate every normal derivative.  This is exactly the
+affine-tangent convention in Definition~\ref{def:cmh}; no inverse is taken in a collapsing
+normal direction.
+
+\subsection*{5. Constant-preserving lower semicontinuity}
+
+Quadratic Wasserstein convergence in
+\eqref{eq:sol-cmh-approx-diagonal-bound} implies weak convergence together with convergence of
+second moments.  Since all measures are centered,
+\begin{equation}
+  \Sigma_k=\int xx^\top\,\dd\mu_k(x)
+  \longrightarrow
+  \int xx^\top\,\dd\mu(x)=\Sigma
+  \label{eq:sol-cmh-approx-covariance-convergence}
+\end{equation}
+in every matrix norm (apply second-moment uniform integrability to each entry, or use
+polarization).
+
+Fix one $F\in\mathscr C$.  Both $F$ and $F^2$ are bounded and continuous, so
+\begin{equation}
+  \Var_{\mu_k}F\longrightarrow\Var_\mu F.
+  \label{eq:sol-cmh-approx-variance-convergence}
+\end{equation}
+For the energies, set
+$h(x)=\inner{\Sigma\nabla F(x)}{\nabla F(x)}$, a bounded continuous function.  Then
+\begin{align}
+ &\left|\int\inner{\Sigma_k\nabla F}{\nabla F}\,\dd\mu_k
+          -\int\inner{\Sigma\nabla F}{\nabla F}\,\dd\mu\right| \notag\\
+ &\quad\le
+   \norm{\Sigma_k-\Sigma}_\op\norm{\nabla F}_\infty^2
+   +\left|\int h\,\dd\mu_k-\int h\,\dd\mu\right|
+   \longrightarrow0.
+  \label{eq:sol-cmh-approx-energy-convergence}
+\end{align}
+
+Let $L=\liminf_k\CPaff(\mu_k)$ and select a subsequence along which the constants converge to
+$L$.  If $L=\infty$ there is nothing to prove.  Otherwise, the affine Poincar\'e inequality on
+each approximant, followed by
+\eqref{eq:sol-cmh-approx-variance-convergence}--
+\eqref{eq:sol-cmh-approx-energy-convergence}, gives on the common core
+\[
+  \Var_\mu F
+  \le L\int\inner{\Sigma\nabla F}{\nabla F}\,\dd\mu.
+\]
+Restricting to $S$ and using the core density proved in Section~4 extends the inequality to
+every $f\in H^1_\Sigma(\mu)$.  Therefore
+\[
+  \CPaff(\mu)\le\liminf_k\CPaff(\mu_k).
+\]
+Combining this with the pointwise certified endpoint
+\eqref{eq:sol-cmh-approx-regular-endpoint} proves
+\eqref{eq:sol-cmh-approx-liminf}.  In particular,
+\eqref{eq:sol-cmh-approx-premise} yields $\CPaff(\mu)\le C$ with no change of constant.  Notice
+that the argument passes only the Poincar\'e/Dirichlet-form inequality.  It uses neither
+convergence of $H_k$ nor lower semicontinuity of $\CMH$.
+
+\subsection*{6. Eigenvalues, whitening, and affine-support collapse}
+
+Order covariance eigenvalues decreasingly.  If
+$\lambda_1(\Sigma)\ge\cdots\ge\lambda_d(\Sigma)>0$ are the positive eigenvalues, followed by
+$n-d$ zeros, then \eqref{eq:sol-cmh-approx-covariance-convergence} and Weyl's inequality give
+\begin{equation}
+  \lambda_i(\Sigma_k)\longrightarrow\lambda_i(\Sigma)>0
+       \quad(1\le i\le d),
+  \qquad
+  \lambda_i(\Sigma_k)\longrightarrow0
+       \quad(d<i\le n).
+  \label{eq:sol-cmh-approx-eigenvalues}
+\end{equation}
+Every $\Sigma_k$ is positive definite, so each approximant may be whitened by the invertible
+map $A_k=\Sigma_k^{-1/2}$.  Invertible affine covariance of both $\CMH$ and $\CPaff$ allows one
+to apply the regular endpoint in those isotropic coordinates and then pull its inequality back
+to $\mu_k$.
+
+When $d<n$, however, \eqref{eq:sol-cmh-approx-eigenvalues} shows that $A_k$ diverges in the
+collapsing normal directions.  The whitened laws all have covariance $I_n$ and therefore cannot
+converge in $\Wtwo$ to a law with covariance $\Sigma$ singular.  The valid order is:
+\begin{enumerate}[label=(\arabic*),leftmargin=2.2em]
+  \item whiten an individual full-dimensional approximant if desired;
+  \item use invertible affine covariance to unwhiten its Poincar\'e inequality;
+  \item take the $\Wtwo$ limit in the original coordinates using
+        \eqref{eq:sol-cmh-approx-energy-convergence}.
+\end{enumerate}
+No canonical moment-map kernel is pushed through a noninvertible limiting map.  At the limit,
+only the intrinsic covariance form on $S=\operatorname{Ran}\Sigma$ remains, with normal
+directions removed by \eqref{eq:sol-cmh-approx-normal-annihilation}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:sol-cmh-approximation}]
+The construction and the quantitative $\Wtwo$ convergence are proved in Section~2.  The
+published compact-target theorem, the Stein identity, and the exact closed-form convention are
+verified in Sections~2--3, so the certified regular endpoint applies.  Sections~4--5 prove the
+intrinsic affine-support convention, common-core density, and the constant-preserving liminf
+inequality.  Section~6 verifies that optional whitening is undone before the singular limit.
+These facts prove all three assertions and the conditional consequence.
+\end{proof}
+
+\paragraph{Obstructions respected.}
+The ledger gives \texttt{q:cmh-approximation} no \texttt{bounded\_by} edge.  The argument also
+does not enter the fixed-cut obstruction regime: it uses no tail split, projection-only test,
+localization occupation estimate, relative trace upgrade, evolving isoperimetric competitor, or
+rank-one product-cut assertion.  In particular, affine-support collapse is handled at the
+Poincar\'e form level rather than by transporting a canonical Stein kernel through a
+noninvertible map.
+
+\paragraph{Conditional status and exclusions.}
+The approximation sequence exists unconditionally, and the closure theorem is analytic.  The
+only unresolved premise in the route implication is
+\eqref{eq:sol-cmh-approx-premise}.  Thus this dossier can at most certify the conditional node
+``uniform CMH on the constructed regular approximants implies the affine Poincar\'e inequality
+for the limit.''  CMH is used only as a sufficient condition.  No converse, no universal
+$\mathrm{CMH}(4)$ estimate, and no proof of KLS appears here.
+
+\end{document}

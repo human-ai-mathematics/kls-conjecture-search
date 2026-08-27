@@ -193,6 +193,15 @@ nodes:
   # ---------------------------------------------------------------------------
   # ROUTE-AGNOSTIC MOMENT-MAP INPUTS
   # ---------------------------------------------------------------------------
+  - id: thm:regular-moment-map-compact-target
+    kind: theorem
+    status: imported
+    import_class: published
+    references: [BermanBerndtsson2013RealMA, Fathi2019SteinMomentMaps]
+    route: shared
+    file: modules/kls/04-family-moment-map.tex
+    statement: "If P is a convex body and μ(dx)=g(x)1_int(P)(x)dx is a centered probability with positive smooth g, then its canonical moment potential is smooth and strictly convex, its gradient is a diffeomorphism from R^n onto int(P), and the target-coordinate Hessian is a smooth positive symmetric Stein kernel satisfying Div_μ H=-x and E_μ H=Cov(μ)."
+
   - id: thm:chen-klartag-moment-hessian
     kind: theorem
     status: imported
@@ -756,13 +765,23 @@ nodes:
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
   # ---------------------------------------------------------------------------
-  - id: q:cmh-approximation
-    kind: question
+  - id: ass:uniform-cmh-approximants
+    kind: assumption
     status: open
     route: moment-map-cmh
     file: modules/kls/40-moment-map-cmh.tex
-    statement: "Give a uniform regular moment-map approximation and closure argument that passes CP_aff <= C from approximants satisfying C_CMH <= C to an arbitrary centered log-concave limit, including affine-support degeneration."
-    depends_on: [def:cmh, thm:cmh-implies-affine-poincare]
+    statement: "There is a universal C such that for every centered log-concave μ, the centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants μ_k satisfy sup_k C_CMH(μ_k) <= C."
+
+  - id: q:cmh-approximation
+    kind: question
+    status: conditional
+    route: moment-map-cmh
+    file: modules/kls/40-moment-map-cmh.tex
+    statement: "Under ass:uniform-cmh-approximants, the affine Poincare inequalities of the regular approximants pass with no loss to every centered log-concave limit, including affine-support degeneration."
+    depends_on: [ass:uniform-cmh-approximants, def:cmh, thm:cmh-implies-affine-poincare, thm:regular-moment-map-compact-target]
+    solution: solutions/q-cmh-approximation.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-q-cmh-approximation-proof-review.md
 
   - id: q:mm-invariant-lift
     kind: question
