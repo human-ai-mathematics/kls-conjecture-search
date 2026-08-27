@@ -1,4 +1,4 @@
-% Standalone candidate proof dossier for the perimeter/excess consumption cluster.
+% Standalone proof dossier for the perimeter/excess consumption cluster.
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
@@ -13,9 +13,14 @@
 %          lem:inf-martingales (modules/kls/24-excess-propagation.tex)
 % proof-location-note: the manuscript proof of prop:intro-audit is displaced to
 %                      modules/kls/24-excess-propagation.tex
-% depends_on: eq:density-sde; eq:perimeter-supermartingale;
-%             isotropic halfspace perimeter upper bound; prop:two-tail;
-%             lem:stein-vs-source; cor:tight-window-consumption
+% depends_on:
+%   prop:intro-audit: prop:trivial-excess; prop:two-tail;
+%                     lem:stein-vs-source; cor:tight-window-consumption;
+%                     lem:half
+%   prop:trivial-excess: lem:perimeter-martingale
+%   lem:perimeter-martingale: eq:loc-martingale; eq:density-sde
+%   lem:excess-identity: lem:perimeter-martingale
+%   lem:inf-martingales: lem:perimeter-martingale
 % bounded_by:
 %   prop:intro-audit: none
 %   prop:trivial-excess: none
@@ -25,9 +30,14 @@
 % evidence_run: none
 % checked_by: agent
 % authored_by: /root/kls_bootstrap_author
-% reviewed_by: /root/kls_core_author
-% review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
-% date: 2026-08-25
+% repaired_by: /root/repair_excess_dossier
+% prior_reviewed_by: /root/kls_core_author
+% prior_review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+% prior-review-note: historical provenance for the pre-repair bytes
+% repair-contract: research/reviews/2026-08-27-kls-excess-repair-w0-audit.md
+% reviewer: /root/review_excess_repair_w0r2
+% review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
+% date: 2026-08-27
 % ============================================================================
 
 \section*{Solution: the perimeter martingale and the excess-consumption audit}
@@ -41,99 +51,169 @@ log-concave probability measure $\mu$ on $\mathbb R^n$.  We use
   \dd F_t(x)=F_t(x)(x-a_t)\mathbin\cdot\dd W_t,
   \qquad a_t=\int x\,\dd\mu_t(x).
 \]
-For a fixed finite-perimeter set $E$, write
+For a Borel set $E$ and $r>0$, put
+\[
+  E_r=\{x\in\mathbb R^n:\operatorname{dist}(x,E)<r\},
+\]
+and use the lower outer Minkowski convention of the manuscript,
+\begin{equation}
+  P_t(E)=\mu_t^+(E)
+  :=\liminf_{r\downarrow0}\frac{\mu_t(E_r)-\mu_t(E)}r.
+  \label{eq:sol-minkowski-perimeter}
+\end{equation}
+We also write
 \[
   p_t=\mu_t(E),\qquad
-  P_t(E)=\mu_t^+(E),\qquad
   e_t(E)=P_t(E)-I_{\mu_t}(p_t).
 \]
-The martingale identity below is first proved when the initial support is compact and the
-density and boundary have been smoothed.  This is precisely the manuscript's regularity
-convention.  The noncompact statement used later is only the supermartingale property and
-follows directly from nonnegative-local-martingale convergence; it does not assert equality.
+The general fixed-cut result below assumes $P_0(E)<\infty$ and uses only bounded-test mass
+martingales.  The stronger martingale identity is stated separately in the compact-support
+smooth regularity class: the initial density is smooth and compactly supported and $E$ has a
+$C^2$ boundary with a tubular neighborhood over the support of the density, so the one-sided
+tube formula identifies
+\eqref{eq:sol-minkowski-perimeter} with weighted surface area.  No rough-set approximation or
+identification of inequivalent perimeter conventions is used.
 
 \subsection*{1. Perimeter under localization}
 
 \begin{lemma}[Perimeter martingale; Lemma~\ref{lem:perimeter-martingale}]
 \label{lem:sol-perimeter-martingale}
-In the compact-support smooth class, for every fixed finite-perimeter set $E$, $P_t(E)$ is a
-nonnegative true martingale and
+For every Borel set $E$ with $P_0(E)<\infty$, the lower Minkowski perimeter process is an
+integrable nonnegative supermartingale:
+\begin{equation}
+  \mathbb E[P_t(E)\mid\mathcal F_s]\leq P_s(E),\qquad 0\leq s\leq t.
+  \label{eq:sol-perimeter-supermartingale}
+\end{equation}
+In the compact-support smooth regularity class specified above, $P_t(E)$ is instead a true
+martingale and
 \begin{equation}
   \dd P_t(E)
   =\left(\int_{\partial^*E}(x-a_t)\,\dd\sigma_t(x)\right)\mathbin\cdot\dd W_t,
   \label{eq:sol-perimeter-sde}
 \end{equation}
 where $\sigma_t$ is the weighted surface measure of $\mu_t$ on $\partial^*E$.  Thus its drift
-vanishes identically.  Without compact support, the same construction gives the
-supermartingale inequality
-\begin{equation}
-  \mathbb E[P_t(E)\mid\mathcal F_s]\leq P_s(E),\qquad 0\leq s\leq t,
-  \label{eq:sol-perimeter-supermartingale}
-\end{equation}
-and in particular $\mathbb E P_t(E)\leq P_0(E)$.
+vanishes identically and $\mathbb E P_t(E)=P_0(E)$.
 \end{lemma}
 
 \begin{proof}
-Let $w_0$ be the smooth density of $\mu$ and put
-$\dd\sigma_0=w_0\,\dd\mathcal H^{n-1}|_{\partial^*E}$.  Multiplication of a density by $F_t$
-also multiplies its weighted surface measure by $F_t$, hence
+We first prove the general lower-Minkowski assertion directly.  For $q\in\mathbb Q_{>0}$ define
+\[
+  X_{q,t}=\frac{\mu_t(E_q)-\mu_t(E)}q
+         =\frac{\mu_t(E_q\setminus E)}q.
+\]
+For each fixed $q$, this is $q^{-1}$ times the mass of a fixed Borel set.  The bounded-test
+localization identity \eqref{eq:loc-martingale} therefore makes
+$(X_{q,t})_{t\geq0}$ a bounded, nonnegative true
+martingale.  For $n\geq1$ let
+\[
+  Y_{n,t}=\inf\{X_{q,t}:q\in\mathbb Q,\ 0<q<1/n\}.
+\]
+The infimum is over a nonempty countable fixed family.  For every admissible $q$ and
+$0\leq s\leq t$,
+\[
+  \mathbb E[Y_{n,t}\mid\mathcal F_s]
+  \leq\mathbb E[X_{q,t}\mid\mathcal F_s]=X_{q,s}.
+\]
+Because there are only countably many $q$, the inequalities may be realized on one common
+full-probability set.  Infimizing there gives
+\begin{equation}
+  \mathbb E[Y_{n,t}\mid\mathcal F_s]\leq Y_{n,s}.
+  \label{eq:sol-boundary-layer-supermartingale}
+\end{equation}
+Also $0\leq Y_{n,t}\leq X_{q_n,t}$ for any one admissible rational $q_n$, so $Y_{n,t}$ is
+integrable.
+
+For any probability measure $\nu$, the map $r\mapsto\nu(E_r\setminus E)$ is continuous from
+below: if $q_k\uparrow r$, then $E_{q_k}\setminus E\uparrow E_r\setminus E$.  Approximating
+every real $r>0$ from below by rationals consequently shows that the infimum over rational
+$q\in(0,1/n)$ equals the infimum over all real $r\in(0,1/n)$.  Hence, pathwise,
+\begin{equation}
+  Y_{n,t}\uparrow
+  \liminf_{r\downarrow0}\frac{\mu_t(E_r)-\mu_t(E)}r=P_t(E).
+  \label{eq:sol-boundary-layer-limit}
+\end{equation}
+Ordinary monotone convergence and \eqref{eq:sol-boundary-layer-supermartingale} with $s=0$
+give
+\[
+  \mathbb E P_t(E)
+  =\lim_n\mathbb E Y_{n,t}
+  \leq\lim_nY_{n,0}=P_0(E)<\infty.
+\]
+Thus $P_t(E)$ is integrable.  Conditional monotone convergence in
+\eqref{eq:sol-boundary-layer-supermartingale} now yields
+\[
+  \mathbb E[P_t(E)\mid\mathcal F_s]
+  =\lim_n\mathbb E[Y_{n,t}\mid\mathcal F_s]
+  \leq\lim_nY_{n,s}=P_s(E),
+\]
+which proves \eqref{eq:sol-perimeter-supermartingale} for arbitrary support and without a
+rough-set approximation.
+
+It remains to prove the stronger statement in the compact-support smooth class, using the same
+Minkowski convention.  Let $w_0$ be the smooth compactly supported density of $\mu$ and put
+$\dd\sigma_0=w_0\,\dd\mathcal H^{n-1}|_{\partial^*E}$.  The one-sided tubular-neighborhood
+formula for a smooth boundary and the continuous density $w_t=F_tw_0$ gives, for every fixed
+$t$ and sample path,
 \begin{equation}
   P_t(E)=\int_{\partial^*E}F_t(x)\,\dd\sigma_0(x),
   \qquad
   \dd\sigma_t(x)=F_t(x)\,\dd\sigma_0(x).
   \label{eq:sol-perimeter-representation}
 \end{equation}
-The surface measure $\sigma_0$ is finite because $E$ has finite $\mu$-perimeter.
+Indeed, in outward normal coordinates the Jacobian is $1+O(r)$ and
+$w_t(x+r\mathbf n_x)\to w_t(x)$, so division of the boundary-layer integral by its thickness
+and dominated convergence gives the displayed surface integral.  Thus
+\eqref{eq:sol-perimeter-representation} is precisely the lower Minkowski perimeter
+\eqref{eq:sol-minkowski-perimeter}, not a change of convention.  Its initial surface measure is
+finite.
 
-Suppose first that the support $K$ of $\mu$ is compact.  Both $x$ and $a_t$ belong to the
-compact convex hull of $K$, so $|x-a_t|\leq D:=\operatorname{diam}K$.  For each fixed $x$,
-$F_t(x)$ is the stochastic exponential with bounded predictable integrand $x-a_t$.
-Novikov's criterion on every bounded time interval therefore makes it a true martingale, and
-for $0\leq s\leq t$,
+Let $K$ contain the support of $\mu$ and set $D=\operatorname{diam}K$.  Both $x$ and $a_u$
+belong to the convex hull of $K$ for $\sigma_0$-almost every $x$, so $|x-a_u|\leq D$.  For fixed
+$x$, let $\rho_m\uparrow\infty$ localize the stochastic integral in the pointwise SDE and apply It\^o's
+formula to $F_{u\wedge\rho_m}(x)^2$.  Taking expectations gives
 \[
-  \mathbb E[F_t(x)\mid\mathcal F_s]=F_s(x).
+  \mathbb E F_{u\wedge\rho_m}(x)^2
+  \leq 1+D^2\int_0^u\mathbb E F_{v\wedge\rho_m}(x)^2\,\dd v.
 \]
-Conditional Tonelli applied to the nonnegative integrand in
-\eqref{eq:sol-perimeter-representation} now gives
+Gronwall and then Fatou as $m\uparrow\infty$ give
+\begin{equation}
+  \mathbb E F_u(x)^2\leq \exp(D^2u).
+  \label{eq:sol-density-L2}
+\end{equation}
+Consequently, for every finite $T$,
+\begin{align*}
+  \mathbb E\int_0^T\int_{\partial^*E}
+    |F_u(x)(x-a_u)|^2\,\dd\sigma_0(x)\,\dd u
+  &\leq D^2\sigma_0(\partial^*E)\int_0^T e^{D^2u}\,\dd u<\infty.
+\end{align*}
+Since $\sigma_0$ is finite, Cauchy--Schwarz also gives
+\[
+  \mathbb E\int_0^T
+  \left|\int_{\partial^*E}F_u(x)(x-a_u)\,\dd\sigma_0(x)\right|^2\dd u<\infty.
+\]
+These are pre-interchange stochastic-Fubini bounds.  Stochastic Fubini applied to the pointwise
+density SDE therefore proves \eqref{eq:sol-perimeter-sde};
+$F_t\,\dd\sigma_0=\dd\sigma_t$ gives its displayed coefficient.
+
+Finally, the same bound (or Novikov directly) makes every fixed-$x$ process $F_t(x)$ a true
+martingale on bounded intervals.  Conditional Tonelli in
+\eqref{eq:sol-perimeter-representation} gives
 \[
   \mathbb E[P_t(E)\mid\mathcal F_s]
   =\int_{\partial^*E}\mathbb E[F_t(x)\mid\mathcal F_s]\,\dd\sigma_0(x)
   =P_s(E).
 \]
-In particular, $P_t(E)$ is integrable and is a true, not merely local, martingale.
-
-It remains to identify its stochastic differential.  Localize at
-$\rho_N=\inf\{t:P_t(E)\geq N\}$.  On $[0,\rho_N]$,
-\[
-  \left|\int_{\partial^*E}F_t(x)(x-a_t)\,\dd\sigma_0(x)\right|
-  \leq D P_t(E)\leq DN.
-\]
-The square-integrability condition for stochastic Fubini is therefore satisfied on every
-bounded stopped interval.  Integrating the pointwise SDE for $F_t(x)$ and then letting $N$
-increase proves \eqref{eq:sol-perimeter-sde}; the identity
-$F_t\,\dd\sigma_0=\dd\sigma_t$ gives its displayed form.  There is no finite-variation term,
-so the drift vanishes.
-
-For a noncompact support, each $F_t(x)$ is still a nonnegative local martingale and hence a
-supermartingale.  Thus, for $0\leq s\leq t$,
-$\mathbb E[F_t(x)\mid\mathcal F_s]\leq F_s(x)$.  Conditional Tonelli in
-\eqref{eq:sol-perimeter-representation} yields
-\[
-  \mathbb E[P_t(E)\mid\mathcal F_s]
-  \leq \int_{\partial^*E}F_s(x)\,\dd\sigma_0(x)=P_s(E),
-\]
-which is \eqref{eq:sol-perimeter-supermartingale}; taking $s=0$ gives the deterministic-time
-expectation bound.  The standard compact truncation and smoothing procedure gives the same
-inequality for general log-concave data and finite-perimeter sets.
-No uniform-integrability assertion is used in this last step.
+Thus the smooth compact-support lower Minkowski perimeter is a true martingale with the stated
+SDE.
 \end{proof}
 
 \subsection*{2. The unconditional excess bound and the exact identity}
 
 \begin{proposition}[Unconditional integrated excess; Proposition~\ref{prop:trivial-excess}]
 \label{prop:sol-trivial-excess}
-Let $\mu$ be isotropic and log-concave, let $\mu(E)=1/2$, and put
-$e_0=P_0(E)-I_\mu(1/2)$.  For every $T>0$ and every stopping time $\tau$,
+Let $\mu$ be isotropic and log-concave, let $E$ be Borel with
+$\mu(E)=1/2$ and $P_0(E)<\infty$, and put $e_0=P_0(E)-I_\mu(1/2)$.  For every $T>0$ and every
+stopping time $\tau$,
 \begin{equation}
   \mathbb E\int_0^{T\wedge\tau}e_t(E)\,\dd t\leq(1+e_0)T.
   \label{eq:sol-trivial-excess}
@@ -153,18 +233,21 @@ This calculation uses neither optional stopping nor independence of $\tau$; only
 deterministic-time supermartingale bound is used.
 
 To bound $P_0(E)$, take a coordinate marginal of $\mu$.  It is a one-dimensional log-concave
-law of variance one.  If $f$ is its density and $m$ a median, the coordinate halfspace
-$H=\{x:x_1\leq m\}$ has $\mu(H)=1/2$ and $\mu^+(H)=f(m)$.  The standard sharp elementary
-one-dimensional estimate $\|f\|_\infty\leq1$ for a variance-one log-concave density
-\cite{Bobkov1999LogConcave} gives
-$I_\mu(1/2)\leq f(m)\leq1$.  Therefore
+law $\nu$ of variance one.  If $f$ is its density and $m$ a median, the coordinate halfspace
+$H=\{x:x_1\leq m\}$ has $\mu(H)=1/2$ and $\mu^+(H)=f(m)$.  Bobkov's
+one-dimensional isoperimetric identity and variance estimate
+\cite[Proposition~4.1 and (4.2)]{Bobkov1999LogConcave} give
+$\operatorname{Is}(\nu)=2f(m)$ and
+$\operatorname{Is}(\nu)^2\leq2/\operatorname{Var}_\nu(X)$, hence
+$I_\mu(1/2)\leq f(m)\leq1/\sqrt2<1$.  Therefore
 $P_0(E)=I_\mu(1/2)+e_0\leq1+e_0$, proving
 \eqref{eq:sol-trivial-excess}.
 \end{proof}
 
 \begin{lemma}[Exact excess identity; Lemma~\ref{lem:excess-identity}]
 \label{lem:sol-excess-identity}
-Under compact support, for every finite $t\geq0$,
+Under the compact-support smooth regularity hypotheses of
+Lemma~\ref{lem:sol-perimeter-martingale}, for every finite $t\geq0$,
 \begin{equation}
   \mathbb E e_t(E)
   =e_0(E)+I_\mu(p_0)-\mathbb E I_{\mu_t}(p_t).
@@ -184,14 +267,18 @@ $P_0(E)=I_\mu(p_0)+e_0(E)$.  Substitution proves
 noncompact argument above supplies only $\mathbb E P_t(E)\leq P_0(E)$.
 \end{proof}
 
-\subsection*{3. What an infimum of perimeter martingales does and does not imply}
+\subsection*{3. What a countable infimum of fixed-cut perimeter supermartingales implies}
 
 \begin{lemma}[Fixed competitor families; Lemma~\ref{lem:inf-martingales}]
 \label{lem:sol-inf-martingales}
-Let $\mathfrak S$ be a fixed nonempty countable family of finite-perimeter sets and define
+Let $\mathfrak S$ be a fixed nonempty countable family of Borel sets of finite initial lower
+Minkowski perimeter and define
 $J_t=\inf_{S\in\mathfrak S}P_t(S)$.  Then $J$ is a supermartingale.  The same conclusion holds
-for a fixed uncountable family whenever its infimum is measurable under the stated selection
-convention.  On $\{t<\tau_\eta\}$ one has the pointwise comparison
+when a prescribed uncountable family has a fixed nonempty countable determining subfamily
+$\mathfrak S_0$ satisfying
+$\inf_{S\in\mathfrak S}P_t(S)=\inf_{S\in\mathfrak S_0}P_t(S)$ almost surely at every time under
+consideration; in that case $J$ means the latter countable infimum.  On
+$\{t<\tau_\eta\}$ one has the pointwise comparison
 \begin{equation}
   I_{\mu_t}(p_t)\geq J_t(\eta),
   \qquad
@@ -204,15 +291,21 @@ say that $J_t(\eta)$ or $I_{\mu_t}(p_t)$ is a supermartingale.
 
 \begin{proof}
 Fix $0\leq s\leq t$.  For every $S\in\mathfrak S$, $J_t\leq P_t(S)$, hence by monotonicity of
-conditional expectation and Lemma~\ref{lem:sol-perimeter-martingale},
+conditional expectation and the noncompact part of
+Lemma~\ref{lem:sol-perimeter-martingale},
 \[
   \mathbb E[J_t\mid\mathcal F_s]
   \leq\mathbb E[P_t(S)\mid\mathcal F_s]
-  =P_s(S).
+  \leq P_s(S).
 \]
 Taking the infimum in $S$ on the right gives
-$\mathbb E[J_t\mid\mathcal F_s]\leq J_s$.  Nonnegativity removes any issue with the negative
-part; the stated measurability convention supplies a random variable in the uncountable case.
+$\mathbb E[J_t\mid\mathcal F_s]\leq J_s$.  This argument needs only that each fixed-cut
+perimeter is a supermartingale; in the compact-support class the second inequality happens to
+be an equality.  Moreover, choosing one $S_\star\in\mathfrak S$ gives
+$0\leq J_t\leq P_t(S_\star)$ and
+$\mathbb E P_t(S_\star)\leq P_0(S_\star)<\infty$, so $J_t$ is integrable.
+The determining-subfamily variant is exactly the same countable argument.  No conclusion is
+claimed for a raw uncountable pointwise infimum merely assumed measurable.
 
 On $\{t<\tau_\eta\}$, $p_t\in[1/2-\eta,1/2+\eta]$.  Thus the exact-mass competitor class
 $\{S:\mu_t(S)=p_t\}$ is contained in the windowed class in
@@ -228,8 +321,8 @@ conditional-expectation argument can be applied.
 \label{prop:sol-intro-audit}
 The following three assertions hold.
 \begin{enumerate}
-  \item For every isotropic log-concave $\mu$, every $E$ with $\mu(E)=1/2$, every $T>0$, and
-  every stopping time $\tau$,
+  \item For every isotropic log-concave $\mu$, every Borel $E$ with $\mu(E)=1/2$ and
+  $P_0(E)<\infty$, every $T>0$, and every stopping time $\tau$,
   \[
     \mathbb E\int_0^{T\wedge\tau}e_t(E)\,\dd t\leq(1+e_0)T.
   \]
@@ -284,8 +377,8 @@ positive universal boundary lower bound for every balanced near-Cheeger cut to w
 \eqref{eq:sol-unweighted-stein} applies.
 
 For completeness, if KLS failed, there would be isotropic log-concave $\mu_k$ with
-$h_{\mu_k}\to0$.  The balanced characterization
-$h_\nu=2I_\nu(1/2)$ permits choices of sets $E_k$ of mass $1/2$ with
+$h_{\mu_k}\to0$.  The balanced characterization from Lemma~\ref{lem:half},
+$h_\nu=2I_\nu(1/2)$, permits choices of sets $E_k$ of mass $1/2$ with
 $P_0(E_k)\leq I_{\mu_k}(1/2)+o(1)$.  Thus $P_0(E_k)\to0$ and $e_0(E_k)\leq1$ for all large
 $k$, whereas \eqref{eq:sol-absorptive-carleson} and tight-window consumption give a uniform
 positive lower bound for the same perimeters, a contradiction.  No weighted excess estimate

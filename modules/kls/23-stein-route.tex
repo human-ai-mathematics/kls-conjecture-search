@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Route E--B: the weighted near-Cheeger route and boundary Stein traces}
+\section{Route E--B: the failed literal weighted package and boundary Stein traces}
 \label{sec:stein}
 
 The geometric route trades the all-cut hypothesis for near-minimality. Its stochastic currency
@@ -63,8 +63,13 @@ two warnings established in this report constrain any such proof: by
 Proposition~\ref{prop:two-tail} it cannot proceed one time-slice at a time with an
 absolute-scale excess term, and by the consumption audit
 (Proposition~\ref{prop:intro-audit}(b)) an absolute-scale excess term would carry no logical
-weight anyway. The weighted formulation \eqref{eq:intro-weighted-stein} is the corrected
-target.
+weight anyway. The covariance-weighted trace estimate \eqref{eq:intro-weighted-stein} remains a
+meaningful geometric target, but it is no longer by itself part of a corrected package:
+Proposition~\ref{prop:weighted-spectator-obstruction} refutes its paired global-operator-norm
+propagation clause, while Proposition~\ref{prop:spectator-excess-rate-obstruction} refutes the
+same uniform superlinear remainder even at weight one. Any replacement must first choose a
+cut-local or tensor-stable scale and a surviving remainder or near-worst premise, then re-audit
+the trace estimate against both.
 \end{remark}
 
 \subsection{Consumption: proof of Theorem~\ref{thm:intro-weighted}}
@@ -109,10 +114,11 @@ contradicting $\mu_k^+(E_k)\to0$. Hence $\inf_n\hstar_n>0$.
 \begin{remark}
 The proof shows that the only place the excess enters the consumption is through the single
 scalar $\E\int e_t(1+\norm{A_t}_\op)^{5/2}\dd t$, and that any bound of size $O(T)$ for it,
-with universal constant, suffices. The rate $T^{1+\gamma}$ in
-\eqref{eq:intro-weighted-excess} is therefore not needed for consumption; it is the
-\emph{provability} shape forced by the Brascamp--Lieb cap, as explained in
-Remark~\ref{rem:weight-explains-rate}. This separation of consumption from provability is
-deliberate.
+with universal constant, suffices. The stronger $T^{1+\gamma}$ remainder in
+\eqref{eq:intro-weighted-excess} is not needed for consumption, and the literal uniform premise
+is now refuted. The unweighted spectator obstruction proves that merely replacing the covariance
+weight does not rescue that remainder. A replacement may instead allow an $O(T)$ supply tied to
+a near-worst hypothesis, or use a remainder that vanishes with a genuinely cut-local source
+deficit; either choice requires a new consumption audit.
 \end{remark}
 \end{document}

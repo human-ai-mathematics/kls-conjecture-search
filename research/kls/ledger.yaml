@@ -133,12 +133,31 @@ nodes:
     checked_by: agent
     review: research/reviews/2026-08-25-kls-core-r2-audit.md
 
+  - id: cor:full-matrix-dissipation
+    kind: corollary
+    status: proved
+    route: eldan-localization
+    file: modules/kls/12-riccati.tex
+    statement: "The full Loewner dissipation estimate E int_0^infinity (R_t^2+s_t G_t^2) dt <= R_0 holds before scalarization; discarding R_t^2 recovers cor:per-direction, while taking a trace can still cost n."
+    depends_on: [lem:matrix-riccati]
+    solution: solutions/cor-full-matrix-dissipation.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-cor-full-matrix-dissipation-repair-proof-review.md
+
   - id: ass:all-cut-carleson
     kind: assumption
     status: open
     route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "All-cut absorptive two-color Carleson: E ∫_I S_t ≤ C_0|I| + C_1 E ∫_I r_t + α E ∫_I D_t, α<1, every balanced cut."
+    bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
+
+  - id: ass:tight-prefix-carleson
+    kind: assumption
+    status: open
+    route: eldan-localization
+    file: modules/kls/20-eldan-statements.tex
+    statement: "There exist universal eta in (0,1/6], T0,C0,C1 and alpha<1 such that every isotropic log-concave mu, every fixed cut with |mu(E)-1/2|<=eta/2, and every 0<T<=T0 satisfy E int_0^(T wedge tau_eta) S_t dt <= C0 T + C1 E int_0^(T wedge tau_eta) r_t dt + alpha E int_0^(T wedge tau_eta) D_t dt."
     bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
 
   - id: thm:carleson-implies-centroid
@@ -178,6 +197,17 @@ nodes:
     solution: solutions/kls-localization-riccati-core.tex
     checked_by: agent
     review: research/reviews/2026-08-25-kls-core-r2-audit.md
+
+  - id: lem:lyapunov-stein-duality
+    kind: lemma
+    status: proved
+    route: eldan-localization
+    file: modules/kls/21-carleson.tex
+    statement: "For t>0, on the covariance support H_t=Ran(A_t), let L_A(M)=(AM+MA)/2 and interpret L_A^(-1) as the inverse on Sym(Ran(A)), extended by zero. Then s<K,L_A^(-1)K> <= 4/t. For K != 0 set lambda_cut(A,K)=||K||_HS^2/<K,L_A^(-1)K>, and set lambda_cut(A,0)=0; hence s||K||_HS^2 <= 4 lambda_cut(A,K)/t. If A,B are positive semidefinite and K is supported on Ran(A), then lambda_cut(A⊕B,K⊕0)=lambda_cut(A,K)."
+    depends_on: [lem:pathwise-BL, prop:two-tail]
+    solution: solutions/lem-lyapunov-stein-duality.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-lyapunov-stein-duality-repair-proof-review.md
 
   - id: cor:away-from-zero
     kind: corollary
@@ -240,6 +270,42 @@ nodes:
     file: modules/kls/04-family-moment-map.tex
     statement: "Under Letwin's regular moment-map assumptions, for every constant symmetric B, E_nu tr(B H B H) <= 2 tr(B^2)."
 
+  - id: thm:kl-stopped-rank-tail
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    references: [KlartagLehec2025ThinShell]
+    route: shared
+    file: modules/kls/15-covariance-technology.tex
+    statement: "For simplified stochastic localization of an isotropic compactly supported log-concave law, every stopping time sigma and t>0 satisfy sum_i P(lambda_i(A_{t wedge sigma})>=3) <= C n exp(-t^(-1/8)); consequently the rank-k entrance time sigma_k obeys P(sigma_k<=t)<=C(n/k)exp(-t^(-1/8)) and E sigma_k^(-2)<=C(1+log(n/k))^16."
+
+  - id: thm:kl-integrated-rank-covariance
+    kind: theorem
+    status: imported
+    import_class: preprint-unreviewed
+    references: [KlartagLehec2025ThinShell]
+    route: shared
+    file: modules/kls/15-covariance-technology.tex
+    statement: "For simplified stochastic localization of an isotropic compactly supported log-concave law, E sum_i exp(2 int_0^1 lambda_i(A_t) dt) <= C n."
+
+  - id: prop:covariance-spike
+    kind: proposition
+    status: imported
+    import_class: published
+    references: [KLnotes]
+    route: shared
+    file: modules/kls/00-orientation.tex
+    statement: "For n independent centered rate-one exponentials and independent standard Gaussian G, P(||Cov(X|X+sqrt(s)G)||_op >= c_sp s) >= 1-(1-exp(-s)/2)^n. Hence for s<=log n the event has universal positive probability and the expected operator norm is at least c s."
+
+  - id: lem:one-dimensional-density-variance
+    kind: lemma
+    status: imported
+    import_class: published
+    references: [BobkovChistyakov2015Concentration]
+    route: shared
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "For every one-dimensional log-concave probability density f of variance v>0, 1/12 <= v ||f||_infty^2 <= 1; consequently every quantile halfline has boundary density at most v^(-1/2)."
+
   # ---------------------------------------------------------------------------
   # STATIC OBSTRUCTION LAYER (quadratic chaos / thin shell)
   # ---------------------------------------------------------------------------
@@ -272,7 +338,7 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/14-qcts-obstruction.tex
-    statement: "Time-zero: QCTS ⇔ balanced two-color bound pq||Σ_E-Σ_F||^2 ≤ C (Carbery–Wright)."
+    statement: "For every isotropic log-concave law, the dimension-free quadratic-chaos bound Var(X^T M X) <= C||M||_HS^2 is equivalent, up to universal constants, to pq||Sigma_E-Sigma_F||_HS^2 <= C for every measurable balanced cut E."
     depends_on: [def:qcts, prop:stein-rep]
     bounded_by: [obs:proj-ceiling]
     solution: solutions/kls-qcts-stein-boundary-core.tex
@@ -297,7 +363,7 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/13-stein-dictionary.tex
-    statement: "On the tight window, S_t and S_{μt}(E)/s_t are equivalent up to 64η^2 D_t (lossless conversion)."
+    statement: "For 0 < eta <= 1/4, on {t < tau_eta}, S_t <= 2 calS_{mu_t}(E)/s_t + 64 eta^2 D_t and calS_{mu_t}(E)/s_t <= 2 S_t + 64 eta^2 D_t."
     depends_on: [prop:stein-rep, thm:scalar-riccati]
     solution: solutions/kls-qcts-stein-boundary-core.tex
     checked_by: agent
@@ -315,11 +381,13 @@ nodes:
 
   - id: ass:weighted-package
     kind: assumption
-    status: open
+    status: refuted
     route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
-    statement: "Weighted near-Cheeger package: (i-w) weighted excess propagation + (ii-w) weighted stable Stein-trace estimate on one fixed tight window eta, with 0<=beta<1/2 and the explicit absorption margin 2 beta + 64 eta^2 < 1."
+    statement: "There are universal T0,C0,C1,C2,gamma>0, eta in (0,1/4], and beta in [0,1/2) with 2 beta+64 eta^2<1 such that the weighted excess and weighted stable Stein-trace estimates hold on the fixed tight window for every finite-perimeter cut with e0<=1 and p0=1/2 (or |p0-1/2|<=eta/2)."
+    depends_on: [prop:weighted-spectator-obstruction]
     bounded_by: [obs:two-tail]
+    refuted_by: [prop:weighted-spectator-obstruction]
 
   - id: thm:intro-weighted
     kind: theorem
@@ -335,10 +403,10 @@ nodes:
     route: eldan-localization
     file: modules/kls/20-eldan-statements.tex
     statement: "Consumption audit: unweighted excess term is inert; unweighted Stein-trace estimate alone would imply KLS but admits no slice-wise proof."
-    depends_on: [prop:trivial-excess, prop:two-tail, lem:stein-vs-source, cor:tight-window-consumption]
+    depends_on: [prop:trivial-excess, prop:two-tail, lem:stein-vs-source, cor:tight-window-consumption, lem:half]
     solution: solutions/kls-excess-audit.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
 
   # ---------------------------------------------------------------------------
   # EXCESS PROPAGATION (audit, obstruction, circularity)
@@ -348,10 +416,11 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
-    statement: "Unconditional integrated excess bound: E ∫_0^{T∧τ} e_t ≤ (1+e_0) T."
+    statement: "For every isotropic log-concave mu, every finite-perimeter E with mu(E)=1/2 and excess e0, every T>0 and every stopping time tau, E int_0^{T wedge tau} e_t(E) dt <= (1+e0)T."
+    depends_on: [lem:perimeter-martingale]
     solution: solutions/kls-excess-audit.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
 
   - id: prop:two-tail
     kind: proposition
@@ -369,32 +438,32 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
-    statement: "Perimeter of a fixed cut is a martingale under localization (driftless); supermartingale without compact support."
+    statement: "For every fixed Borel cut E with finite initial lower outer Minkowski perimeter, the process mu_t^+(E) is an integrable nonnegative supermartingale. If the initial density is smooth and compactly supported and E has C2 boundary with a tubular neighborhood over that support, the same lower Minkowski perimeter is a true martingale with the displayed driftless weighted-surface SDE."
     solution: solutions/kls-excess-audit.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
 
   - id: lem:excess-identity
     kind: lemma
     status: proved
     route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
-    statement: "Under compact support, exact excess identity: E e_t = e_0 + [I_μ(p_0) - E I_{μt}(p_t)]. Excess propagation = drop of the localized profile."
+    statement: "If the initial density is smooth and compactly supported and E has C2 boundary with a tubular neighborhood over that support, then E e_t = e_0 + [I_μ(p_0) - E I_{μt}(p_t)]; in this class excess propagation is exactly the drop of the localized profile."
     depends_on: [lem:perimeter-martingale]
     solution: solutions/kls-excess-audit.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
 
   - id: lem:inf-martingales
     kind: lemma
     status: proved
     route: eldan-localization
     file: modules/kls/24-excess-propagation.tex
-    statement: "The infimum over a FIXED competitor family of perimeter martingales is a supermartingale. The balanced-mass competitor family is random/time-dependent, so this does not prove that the localized profile is a supermartingale."
+    statement: "The infimum over a fixed nonempty countable family of Borel sets with finite initial lower outer Minkowski perimeter is a supermartingale because each fixed-cut perimeter is a supermartingale (a martingale in the stated smooth compact-support class); the same holds with a fixed countable determining subfamily. Mere measurability of an uncountable family is insufficient. The balanced-mass family is random/time-dependent, so this does not prove that the localized profile is a supermartingale."
     depends_on: [lem:perimeter-martingale]
     solution: solutions/kls-excess-audit.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
 
   # ---------------------------------------------------------------------------
   # BOOTSTRAP COMPARISON + INTERFACE FUNCTIONAL
@@ -424,12 +493,12 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/25-bootstrap.tex
-    statement: "Bootstrap comparison: for near-worst μ and ANY balanced cut, E[ē_t 1_{t<τη}] ≤ e_0 + h_μ(ε/2+η+P(τ≤t)/2+E X_t/4); compresses propagation into h_μ Ξ_T."
+    statement: "Let n>=2, epsilon in (0,1], mu be isotropic log-concave with h_mu <= (1+epsilon)hstar_n, E be any balanced cut, and eta in (0,1/2). Then for every t>0, E[bar e_t 1_{t<tau_eta}] <= e_0+h_mu(epsilon/2+eta+P(tau_eta<=t)/2+E X_t/4), and P(tau_eta<=t) <= (t+int_0^t E X_s ds)/(4 eta^2); integration yields the stated h_mu Xi_T bound and, for T<1/8, eta=T^(1/3), epsilon<=T^(1/3), the clean bound T e_0+C h_mu(T^(4/3)+Xi_T)."
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale]
     bounded_by: [obs:circularity]
     solution: solutions/kls-bootstrap-interface.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+    review: research/reviews/2026-08-27-thm-bootstrap-semantic-repair-proof-review.md
 
   - id: lem:crude
     kind: lemma
@@ -493,7 +562,7 @@ nodes:
     statement: "If volume p admits a smooth volume-constrained minimizer Sigma_p and I is twice differentiable at p, then the profile bound is K_{Sigma_p} <= -I''(p) I(p)^2."
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   - id: cor:generic-degeneracy
     kind: corollary
@@ -504,7 +573,7 @@ nodes:
     depends_on: [lem:profile-bound]
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   - id: prop:reilly
     kind: proposition
@@ -523,7 +592,7 @@ nodes:
     statement: "Two one-way model implications: global cylinder plus globally Hessian-flat direction => log-affine product; an already split log-affine factor's orthogonal halfspace has 𝔎_Σ=0. No converse from 𝔎_Σ=0 is proved."
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   - id: rem:almost-stability-gap
     kind: question
@@ -538,10 +607,10 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/26-jacobi-splitting.tex
-    statement: "Splitting persists under localization: the split direction is preserved pathwise, A_t is block-diagonal, and orthogonal halfspace cuts have K_t=κ_t θθ^T, hence rank at most one."
+    statement: "Fix theta. If proper lower-semicontinuous convex extended-valued V_1 on theta^perp and V_2 on R have positive finite normalizers and V(y+z theta)=V_1(y)+V_2(z) globally, including off the effective support, then localization preserves the product splitting pathwise; A_t is block-diagonal, and every fixed nontrivial halfspace E_a={z<=a} has delta_t=d_t theta, G_t=g_t theta theta^T, and K_t=kappa_t theta theta^T, hence rank at most one."
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   # ---------------------------------------------------------------------------
   # MODEL GEOMETRIES
@@ -554,7 +623,7 @@ nodes:
     statement: "Gaussian model: A_t=(1+t)^{-1}I deterministic; centroid mechanism closes unconditionally; halfspace excess ≡ 0; damping strictly active."
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   - id: prop:products
     kind: proposition
@@ -564,7 +633,7 @@ nodes:
     statement: "Products: μ_t product pathwise; A_t diagonal; h_{μt} ≳ λmax(A_t)^{-1/2}; KLS holds for products (no bootstrap needed)."
     solution: solutions/kls-geometry-models.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
   # ---------------------------------------------------------------------------
   # PRODUCT STRESS TEST (module 09)
@@ -574,32 +643,32 @@ nodes:
     status: proved
     route: eldan-localization
     file: modules/kls/22-product-stress.tex
-    statement: "Block support: for product ν and J-measurable E, δ_i=0 off J and G,K supported on J×J."
+    statement: "For a finite-second-moment product law nu and a nontrivial J-measurable cut E, delta_i=0 off J and G,K are supported on J x J."
     solution: solutions/kls-product-covariance.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: thm:budget
     kind: theorem
     status: proved
     route: eldan-localization
     file: modules/kls/22-product-stress.tex
-    statement: "Coordinate-budget theorem: k-coordinate cut of a product has E ∫_0^∞ S_t ≤ k and μ^+(E) ≥ c min(p,q)/√(1+k)."
+    statement: "If mu is a product of isotropic one-dimensional log-concave laws and E is measurable with respect to k coordinates with p_0 in [2/5,3/5], then (i) E int_0^infinity S_t dt <= sum_{i in J}(R_0)_{ii} <= k; (ii) E r_{t wedge tau} <= 1+k for every t, where tau is the coarse balanced exit time; and (iii) mu^+(E) >= c min(p_0,q_0)/sqrt(1+k)."
     depends_on: [lem:block, cor:per-direction, thm:scalar-riccati, prop:products]
     solution: solutions/kls-product-covariance.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: cor:refutation
     kind: corollary
     status: proved
     route: eldan-localization
     file: modules/kls/22-product-stress.tex
-    statement: "For a cut and single coordinate fixed before localization, the rank-one dynamic two-tail counterexample candidate is REFUTED: total budget ≤1 and source spikes self-extinguish (~Λ^{-2}); no pathwise adaptive choice is covered."
+    statement: "For a cut with p_0 in [2/5,3/5], a single coordinate fixed before localization, and every deterministic level Lambda, the rank-one dynamic two-tail candidate is refuted: total source budget is at most one and expected spike occupation is O(Lambda^(-2)); no pathwise adaptive choice is covered."
     depends_on: [thm:budget]
     solution: solutions/kls-product-covariance.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: lem:product-qcts
     kind: lemma
@@ -609,7 +678,7 @@ nodes:
     statement: "Quadratic chaos for non-isotropic products: Var(Y^T M Y) ≤ C* ||A^{1/2} M A^{1/2}||^2 (pathwise at every time)."
     solution: solutions/kls-product-covariance.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: thm:covariance-bound
     kind: theorem
@@ -669,7 +738,7 @@ nodes:
     depends_on: [thm:KL-window]
     solution: solutions/kls-product-covariance.tex
     checked_by: agent
-    review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+    review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: cor:KI-letwin
     kind: corollary
@@ -687,8 +756,8 @@ nodes:
     status: open
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "Operator-to-trace upgrade: prove ass:all-cut-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over balanced cuts."
-    bounded_by: [obs:proj-ceiling, obs:two-tail]
+    statement: "Operator-to-trace upgrade: prove ass:tight-prefix-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero."
+    bounded_by: [obs:proj-ceiling, obs:two-tail, obs:relative-ceiling]
 
   - id: lem:time-weighted-source
     kind: lemma
@@ -703,11 +772,35 @@ nodes:
 
   - id: q:weighted
     kind: question
-    status: open
+    status: refuted
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "Weighted excess propagation with rate: E ∫ e_t (1+||A_t||)^{5/2} ≤ C(T e_0 + T^{1+γ}) for near-Cheeger cuts."
+    statement: "Do universal C,T0,gamma>0 and eta in (0,1/4] exist such that every isotropic log-concave law and every balanced finite-perimeter cut with e0<=1 satisfy E int_0^{T wedge tau_eta} e_t(1+||A_t||_op)^(5/2) dt <= C(T e0+T^(1+gamma)) for all T<=T0?"
+    depends_on: [prop:weighted-spectator-obstruction]
     bounded_by: [obs:two-tail, obs:circularity]
+    refuted_by: [prop:weighted-spectator-obstruction]
+
+  - id: prop:weighted-spectator-obstruction
+    kind: proposition
+    status: proved
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but violates the q:weighted global-operator-norm rate at a time T<=T0."
+    depends_on: [prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]
+    solution: solutions/prop-weighted-spectator-obstruction.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-prop-weighted-spectator-obstruction-repair-proof-review.md
+
+  - id: prop:spectator-excess-rate-obstruction
+    kind: proposition
+    status: proved
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but satisfies E int_0^{T wedge tau_eta} e_t dt > C(T e0+T^(1+gamma)) at a time T<=T0. Thus a tensor-stable replacement weight alone cannot preserve the uniform superlinear-remainder rate."
+    depends_on: [prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]
+    solution: solutions/prop-spectator-excess-rate-obstruction.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-prop-spectator-excess-rate-obstruction-proof-review.md
 
   - id: q:stein-weighted
     kind: question
@@ -777,19 +870,25 @@ nodes:
     statement: "For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 plus the full exact damping int 2 g_t^T A_t g_t, uniformly through approximation."
 
   - id: prop:spectral-sufficiency
-    kind: question
-    status: open
+    kind: proposition
+    status: conditional
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
-    statement: "Prove that the full-damping estimate in q:mm-spectral-occupation, together with the fixed-function SDE, posterior Brascamp-Lieb control and a regularization limit, implies a dimension-free spectral gap; no strict damping surplus is required."
+    statement: "If q:mm-spectral-occupation holds with universal T0,C0,C1 uniformly through regularization, then with M_*=(1+C0 T0)exp(C1 T0) and T_*=min(T0,1/(2M_*)), every isotropic log-concave law satisfies C_P<=2/T_*; no strict damping surplus or eigenfunction convergence is required."
     depends_on: [q:mm-spectral-occupation]
+    solution: solutions/prop-spectral-sufficiency.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-prop-spectral-sufficiency-proof-review.md
 
   - id: lem:mm-time-weighted-fixed-source
     kind: lemma
-    status: open
+    status: proved
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
     statement: "For a smooth kappa-uniformly log-concave law and every fixed admissible square-integrable test f, E int_0^T (kappa+t)||H_t||_HS^2 dt + 2 E int_0^T (|g_t|^2-(kappa+t)g_t^T A_t g_t) dt <= Var_mu(f)-kappa|g_0|^2; hence for kappa=0, E int_0^infinity t||H_t||_HS^2 dt <= Var_mu(f), without an unweighted initial-layer conclusion."
+    solution: solutions/lem-mm-time-weighted-fixed-source.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-mm-time-weighted-fixed-source-proof-review.md
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
@@ -814,11 +913,14 @@ nodes:
 
   - id: lem:affine-poincare-w2-liminf
     kind: lemma
-    status: open
+    status: proved
     route: moment-map-cmh
     file: modules/kls/41-cmh-normalization.tex
     statement: "Every centered log-concave law admits centered full-dimensional compactly-supported regular moment-map approximants mu_k converging in ambient W2 such that C_P^aff(mu) <= liminf_k C_P^aff(mu_k), including proper affine-support degeneration; no continuity of C_CMH is asserted."
     depends_on: [thm:regular-moment-map-compact-target]
+    solution: solutions/lem-affine-poincare-w2-liminf.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-affine-poincare-w2-liminf-proof-review.md
 
   - id: ass:cmh-recovery-envelope
     kind: assumption
@@ -827,6 +929,17 @@ nodes:
     file: modules/kls/41-cmh-normalization.tex
     statement: "There is a universal C such that every centered log-concave law has at least one regular recovery sequence mu_k with ambient W2 convergence and liminf_k C_CMH(mu_k) <= C; no bound over every regularization choice is required."
 
+  - id: prop:cmh-recovery-calculus
+    kind: proposition
+    status: proved
+    route: moment-map-cmh
+    file: modules/kls/41-cmh-normalization.tex
+    statement: "The CMH recovery envelope dominates C_P^aff, is invariant under invertible linear maps, is nonincreasing under singular square linear limits in the same declared ambient dimension, is at most the maximum of the factor envelopes on finite products, and an intrinsic recovery on an affine support extends to an ambient full-dimensional recovery at cost max(C,1) by tensoring vanishing compact Gaussian normal factors. Consequently the envelope equals 1 for centered Gaussian laws, equals 4 for finite products of one-dimensional log-concave laws containing a centered one-sided exponential factor, and is at most 4 for invertible linear images, same-ambient singular square linear images, and affine-support embeddings of finite products of one-dimensional log-concave laws and uniform-simplex blocks."
+    depends_on: [def:cmh, lem:affine-poincare-w2-liminf, thm:cmh-implies-affine-poincare, thm:regular-moment-map-compact-target, thm:cmh-1d, thm:cmh-product, thm:cmh-dirichlet]
+    solution: solutions/prop-cmh-recovery-calculus.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-prop-cmh-recovery-calculus-proof-review.md
+
   - id: cor:cmh-recovery-sequence-suffices
     kind: corollary
     status: conditional
@@ -834,6 +947,9 @@ nodes:
     file: modules/kls/41-cmh-normalization.tex
     statement: "The bounded CMH recovery-envelope assumption implies C_P^aff(mu) <= C for every centered log-concave law, hence KLS, using one recovery sequence and preserving the constant through affine-support degeneration."
     depends_on: [ass:cmh-recovery-envelope, lem:affine-poincare-w2-liminf, def:cmh, thm:cmh-implies-affine-poincare]
+    solution: solutions/lem-affine-poincare-w2-liminf.tex
+    checked_by: agent
+    review: research/reviews/2026-08-27-lem-affine-poincare-w2-liminf-proof-review.md
 
   - id: q:mm-invariant-lift
     kind: question

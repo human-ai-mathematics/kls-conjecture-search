@@ -42,14 +42,18 @@ Section~\ref{subsec:kls-reading-map}, not separate routes of the control plane.
   \item \textbf{All-cut stochastic route.}  Prove an absorptive two-color Carleson estimate for
   every balanced cut. This immediately yields KLS.
 
-  \item \textbf{Near-Cheeger geometric route (weighted form).}  Work only with near-minimizers of
-  the isoperimetric profile. This is sufficient for KLS, but it requires two additional
-  mechanisms, which must be taken in \emph{covariance-weighted}
-  form: weighted excess propagation under localization, and a weighted stable Stein-trace
-  estimate. The consumption audit of Section~\ref{sec:excess} shows that the unweighted form of
-  the second mechanism implied KLS by itself, with the unweighted excess term
-  inert; the quantified two-tail obstruction shows that the unweighted form admits no slice-wise
-  proof. The weighted form stated below is the correct formulation of the route.
+  \item \textbf{Near-Cheeger geometric route (literal weighted package refuted).}  Work only with
+  near-minimizers of the isoperimetric profile. The conditional architecture below couples
+  weighted excess propagation under localization to a weighted stable Stein-trace estimate.
+  The consumption audit of Section~\ref{sec:excess} shows that the unweighted Stein estimate
+  implied KLS by itself, with the unweighted excess term inert, while the quantified two-tail
+  obstruction rules out a slice-wise absolute-scale proof. However,
+  Proposition~\ref{prop:weighted-spectator-obstruction} now refutes the package's literal
+  global-operator-norm propagation clause even on product cylinders, and
+  Proposition~\ref{prop:spectator-excess-rate-obstruction} shows that changing only the weight
+  leaves the uniform superlinear remainder false. A live replacement must use a cut-local or
+  tensor-stable covariance scale and also permit an $O(T)$ supply, use a genuinely source-tied
+  remainder, or impose an explicit near-worst-measure hypothesis.
 \end{enumerate}
 
 The second route is the natural one for the boundary/Jacobi ideas. It should not be advertised as
@@ -112,9 +116,31 @@ The proof is given in Sections~\ref{sec:mass-martingale}--\ref{sec:carleson}. It
 stochastic localization, the two-color Riccati identity, and the fact that a $T$-uniformly
 log-concave posterior has a dimension-free Cheeger lower bound at scale $\sqrt T$.
 
-For the geometric route, the central package is now stated in weighted form.
+The certified consumer in Corollary~\ref{cor:tight-window-consumption} needs less than the
+all-interval formulation above. We isolate its exact live premise.
 
-\begin{assumption}[Weighted near-Cheeger geometric package]
+\begin{assumption}[Tight-prefix absorptive two-color Carleson estimate]
+\label{ass:tight-prefix-carleson}
+There exist universal constants $\eta\in(0,1/6]$, $T_0,C_0,C_1>0$, and $\alpha<1$ such that,
+for every isotropic log-concave $\mu$, every fixed measurable cut $E$ with
+$\abs{\mu(E)-1/2}\le\eta/2$, and every $0<T\le T_0$,
+\begin{equation}\label{eq:tight-prefix-carleson}
+  \E\int_0^{T\wedge\tau_\eta} S_t\dd t
+  \le C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
+  +\alpha\E\int_0^{T\wedge\tau_\eta}D_t\dd t .
+\end{equation}
+\end{assumption}
+
+This prefix-only statement is strictly weaker than
+Assumption~\ref{ass:all-cut-carleson}. Corollary~\ref{cor:tight-window-consumption} already
+certifies its boundary-lower-bound consequence for each cut; universal validity would therefore
+give KLS by the same balanced near-minimizer reduction. No implication from the current
+soft-projector calculations to this assumption is yet certified.
+
+For reference, the exact literal package consumed by the conditional theorem is recorded below.
+It is retained so that both the valid implication and the failed premise remain auditable.
+
+\begin{assumption}[Refuted literal weighted near-Cheeger package]
 \label{ass:weighted-package}
 There are universal constants $T_0,C_0,C_1,C_2$, $0\le\beta<\tfrac12$, $\gamma>0$, and
 $\eta\in(0,\tfrac14]$ satisfying
@@ -122,8 +148,8 @@ $\eta\in(0,\tfrac14]$ satisfying
   2\beta+64\eta^2<1,
 \end{equation}
 such that, for the corresponding fixed tight stopping window $\tau_\eta$, the following two
-estimates hold for every initial
-near-Cheeger set $E$ with $p_0=1/2$ (or $\abs{p_0-1/2}\le\eta/2$).
+estimates hold for every initial finite-perimeter set $E$ with
+$e_0(E)\le1$ and $p_0=1/2$ (or $\abs{p_0-1/2}\le\eta/2$).
 
 \begin{enumerate}[label=(\roman*-w),leftmargin=3.2em]
   \item \textbf{Weighted excess propagation.}
@@ -149,24 +175,32 @@ near-Cheeger set $E$ with $p_0=1/2$ (or $\abs{p_0-1/2}\le\eta/2$).
 \end{enumerate}
 \end{assumption}
 
+Proposition~\ref{prop:weighted-spectator-obstruction} proves that item (i-w) is false with these
+global quantifiers, even when the initial cut has arbitrarily small additive and relative excess.
+Thus Assumption~\ref{ass:weighted-package} is refuted as stated. It remains below only as the
+explicit antecedent of the next theorem.
+
 \begin{theorem}[Weighted geometric package implies KLS]
 \label{thm:intro-weighted}
 Assumption~\ref{ass:weighted-package} implies the KLS conjecture.
 \end{theorem}
 
-The proof is given in Section~\ref{sec:stein}, using the audit and propagation analysis of
-Section~\ref{sec:excess}. The weight $(1+\norm{A_t}_\op)^{5/2}$ is calibrated on the anisotropic
-two-tail configuration (Proposition~\ref{prop:two-tail}): among pure powers of $\lmax(A_t)$
-multiplying absolute excess in this slice-wise package, $5/2$ is the smallest statically
-consistent exponent. This does not assert that every possible proof of KLS needs this weight.
-The following audit explains the constraint on the present formulation.
+The implication is proved in Section~\ref{sec:stein}, using the audit and propagation analysis
+of Section~\ref{sec:excess}; refuting its antecedent does not invalidate that conditional proof.
+The weight $(1+\norm{A_t}_\op)^{5/2}$ is calibrated on the anisotropic two-tail configuration
+(Proposition~\ref{prop:two-tail}): among pure powers of $\lmax(A_t)$ multiplying absolute excess
+in this slice-wise package, $5/2$ is the smallest statically consistent exponent. Static
+consistency is not enough: the same global norm also sees irrelevant independent spectators.
+The following audit explains the first constraint, and
+Proposition~\ref{prop:weighted-spectator-obstruction} supplies the second.
 
 \begin{proposition}[Consumption audit; deceptive strength of the unweighted estimate]
 \label{prop:intro-audit}
 \leavevmode
 \begin{enumerate}[label=(\alph*),leftmargin=2.2em]
-\item For every isotropic log-concave $\mu$, every measurable $E$ with $\mu(E)=1/2$ and excess
-$e_0=e_0(E)$, every $T>0$ and every stopping time $\tau$,
+\item For every isotropic log-concave $\mu$, every Borel set $E$ with $\mu(E)=1/2$, finite
+initial lower outer Minkowski perimeter, and excess $e_0=e_0(E)$, every $T>0$ and every
+stopping time $\tau$,
 \[
   \E\int_0^{T\wedge\tau}e_t(E)\dd t\ \le\ (1+e_0)\,T .
 \]
@@ -183,9 +217,12 @@ pairs $(\nu,E)$ with $\nu(E)=1/2$, $r=D=0$, excess $e(E)\to0$, and $\calS_\nu(E)
 The proof is given in Section~\ref{sec:excess}. Item (b) is not good news about excess
 propagation; it is a warning that the unweighted geometric package concentrated its entire
 logical weight, invisibly, in the Stein-trace estimate. Item (c) shows that this weight cannot be
-discharged one time-slice at a time. The weighted formulation of
-Assumption~\ref{ass:weighted-package} redistributes the weight correctly: the weighted excess term
-is no longer inert, and the static obstruction is consistent with it.
+discharged one time-slice at a time. The proposed weighted formulation made the excess term
+non-inert and passed the static two-tail calibration, but the spectator obstruction proves that
+its global-operator-norm version is not tensor-stable. The separate unweighted spectator
+obstruction also refutes every uniform superlinear source-vanishing remainder of the same form.
+The next formulation must meet the static, tensor-stability, and time-scale constraints rather
+than merely changing the covariance weight.
 
 Finally, Section~\ref{sec:bootstrap} provides the propagation mechanism available today: a
 bootstrap comparison theorem anchored at $\hstar_n$, valid for \emph{every} balanced cut of a
@@ -212,7 +249,10 @@ Quadratic-chaos thin shell & Static time-zero form of two-color covariance contr
 \addlinespace
 Consumption audit of the excess term & Shows the unweighted excess term is inert and the unweighted Stein-trace estimate alone implies KLS & Proved (Section~\ref{sec:excess}). \\
 \addlinespace
-Quantified two-tail obstruction and weight calibration & Forces the covariance weight $(1+\norm{A_t}_\op)^{5/2}$ on any slice-wise excess term; the $T^{1+\gamma}$ rate remains a strong open target & Proved (Section~\ref{sec:qcts}). \\
+Two-tail calibration and spectator obstructions & The static aligned mode forces at least the
+$5/2$ pure-power scale, while independent spectators refute both the resulting global-norm rate
+and every uniform superlinear remainder even at weight one & Proved
+(Sections~\ref{sec:qcts} and~\ref{sec:open}). \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -228,7 +268,9 @@ Bootstrap comparison theorem & Reduces near-worst excess propagation to the inte
 \addlinespace
 Interface evaluation & $\log\log n$ loss from known covariance technology; crude evaluation provably insufficient; a relative bound for all measures at a sufficiently small universal time is KLS-sufficient & Proved, given the imported covariance input of Assumption~\ref{hyp:KI}. \\
 \addlinespace
-Weighted excess propagation & Keeps a near-Cheeger cut near-minimal at the weighted scale & Open and central. \\
+Weighted excess propagation & A replacement must ignore irrelevant spectator covariance, retain
+the aligned two-tail mode, and change the uniform superlinear remainder or assume near-worstness
+& Two literal spectator obstructions proved; replacement open. \\
 \addlinespace
 Extremality tames the covariance process & Residual target of the bootstrap route & Open; proposed coupling of the splitting analysis to the covariance SDE. \\
 \addlinespace

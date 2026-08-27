@@ -97,18 +97,53 @@ negative),
   \hstar_n\Bigl(\frac12-\eta\Bigr)\Bigl(\Prob(\tau_\eta>t)-\frac{\E X_t}2\Bigr).
 \]
 
-\emph{Step 3.} Combine with $\hstar_n\ge h_\mu/(1+\eps)\ge(1-\eps)h_\mu$ and
-$\hstar_n\le h_\mu$. Writing $P=\Prob(\tau_\eta\le t)$,
+\emph{Step 3.} Write
 \[
-  \frac12-(1-\eps)\Bigl(\frac12-\eta\Bigr)(1-P)
-  \ \le\ \eta+\frac P2+\frac\eps2 ,
+  P=\Prob(\tau_\eta\le t),\qquad Y=\E X_t,\qquad
+  a=\frac12-\eta,\qquad \rho=\frac{\hstar_n}{h_\mu}.
 \]
-since $\tfrac12-(\tfrac12-\eta)(1-P)=\eta+(\tfrac12-\eta)P\le\eta+\tfrac P2$ and the
-$\eps$-term contributes at most $\eps/2$. This yields \eqref{eq:bootstrap-main}.
+Near-worstness and the definition of $\hstar_n$ give
+\[
+  \frac1{1+\eps}\le\rho\le1,
+  \qquad\text{hence}\qquad \rho\ge1-\eps.
+\]
+If $1-P-Y/2\ge0$, Steps 1--2 give
+\[
+\begin{split}
+  \E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
+  &\le h_\mu\left\{\frac12-(1-\eps)a(1-P-Y/2)\right\}\\
+  &\le h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
+\end{split}
+\]
+Indeed, $\frac12-a(1-P)=\eta+aP\le\eta+P/2$, the $Y$ contribution is at most
+$Y/4$, and the $\eps$ contribution is at most $\eps/2$.
 
-\emph{Step 4.} $p$ is a martingale with $\dd[p]_t=s_tr_t\dd t$ by \eqref{eq:qv-p}, and
-$s_tr_t\le\tfrac14\lmax(A_t)\le\tfrac14(1+X_t)$ by \eqref{eq:B-le-A} and $s\le\tfrac14$.
-Doob's $L^2$ inequality gives \eqref{eq:bootstrap-exit}.
+If $1-P-Y/2<0$, use only the nonnegativity of
+$h_{\mu_t}\min(p_t,q_t)\one_{\{t<\tau_\eta\}}$ in Step 1. The case assumption gives
+$P/2+Y/4>1/2$, and therefore
+\[
+  \E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
+  \le\frac{h_\mu}{2}
+  <h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
+\]
+Thus \eqref{eq:bootstrap-main} holds in both cases.
+
+\emph{Step 4.} The stopped process
+$M_u=p_{u\wedge\tau_\eta}-\tfrac12$ is a bounded continuous martingale. On
+$\{\tau_\eta\le t\}$, continuity gives $\sup_{u\le t}|M_u|\ge\eta$. Hence the $L^2$ maximal
+inequality, martingale isometry, \eqref{eq:qv-p}, and
+$s_tr_t\le\tfrac14\lmax(A_t)\le\tfrac14(1+X_t)$ give
+\[
+\begin{split}
+  \Prob(\tau_\eta\le t)
+  &\le\eta^{-2}\E M_t^2
+   =\eta^{-2}\E[p]_{t\wedge\tau_\eta}\\
+  &\le\frac1{4\eta^2}\int_0^t
+       \E[\one_{\{s<\tau_\eta\}}(1+X_s)]\dd s\\
+  &\le\frac1{4\eta^2}\left(t+\int_0^t\E X_s\dd s\right).
+\end{split}
+\]
+This proves \eqref{eq:bootstrap-exit}.
 
 \emph{Step 5.} Integrate \eqref{eq:bootstrap-main} over $[0,T]$ using
 $\int_0^T\Prob(\tau_\eta\le t)\dd t\le\tfrac1{4\eta^2}(\tfrac{T^2}2+T\Xi_T)$.

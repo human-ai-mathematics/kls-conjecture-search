@@ -130,22 +130,43 @@ universal constants $T_0,C_0,C_1>0$ exist such that, for every $t\le T_0$,
 uniformly through approximation?
 \end{question}
 
-\begin{question}[Sufficiency bridge]
+\begin{proposition}[Full-damping sufficiency bridge]
 \label{prop:spectral-sufficiency}
-Prove that an affirmative answer to Question~\ref{q:mm-spectral-occupation}, uniform through
-regularization, implies a universal spectral gap, hence Conjecture~\ref{conj:kls}.
-\end{question}
+Suppose Question~\ref{q:mm-spectral-occupation} holds with constants $T_0,C_0,C_1>0$ uniformly
+through regularization.  Set
+\[
+  M_*=(1+C_0T_0)e^{C_1T_0},
+  \qquad
+  T_* = \min\left\{T_0,\frac1{2M_*}\right\}.
+\]
+Then every isotropic log-concave probability satisfies
+$\CP\le2/T_*$.  In particular, the occupation estimate implies
+Conjecture~\ref{conj:kls}; no strict damping surplus is required.
+\end{proposition}
 
-The intended mechanism is the fixed-function SDE \eqref{eq:spectral-sde} together with
-Gr\"onwall, posterior Brascamp--Lieb, and the fixed-gradient density martingale; the shape of the
-argument should parallel the two-color analysis in Sections~\ref{sec:mass-martingale}
-and~\ref{sec:carleson}.  That mechanism has not yet been written as a proof with constants,
-terminal variance control, and a regularization limit, so it is tracked as an open bridge rather
-than a proved implication.  The estimate \eqref{eq:spectral-occupation} itself is also open, and
-must either hold uniformly through regularization or be reformulated for approximate Rayleigh
-minimizers.
+\begin{proof}
+For a normalized first eigenfunction in the regular class, the fixed-function SDE
+\eqref{eq:spectral-sde} and It\^o's formula give
+\[
+  q(t)=\abs{g_0}^2+
+  \E\int_0^t\bigl(\norm{H_s}_{\HS}^2-2g_s^TA_sg_s\bigr)\dd s,
+  \qquad q(t)=\E\abs{g_t}^2.
+\]
+Bessel's inequality gives $\abs{g_0}^2\le1$.  The full-damping occupation hypothesis cancels
+the entire last term and Gr\"onwall yields $q(t)\le M_*$ on $[0,T_0]$.  Since
+\[
+  \E\Var_{\mu_t}(f)=1-\int_0^tq(s)\dd s,
+\]
+the left side is at least $1/2$ at $t=T_*$.  Posterior Brascamp--Lieb and the fixed-test tower
+property bound it above by
+$T_*^{-1}\E\abs{\nabla f}^2=\lambda/T_*$, so the first eigenvalue satisfies
+$\lambda\ge T_*/2$.  Smooth strongly convex approximants, whitening, and passage of the
+uniform Poincar\'e inequality on fixed smooth tests give the same bound for every isotropic
+log-concave law, without convergence of eigenfunctions.  The full domain and approximation
+argument is recorded in the certified standalone dossier.
+\end{proof}
 
-The endpoint structure of \eqref{eq:spectral-occupation} is worth naming.  Here the source may be
+The endpoint structure of \eqref{eq:spectral-occupation} is worth emphasizing.  Here the source may be
 charged against the \emph{full} exact damping.  In the evolution of $\E|g_t|^2$ those two terms
 then cancel, leaving a closed Gr\"onwall inequality from the linear budget and the lower-order
 term.  A strict damping surplus would be useful but is not required for the KLS sufficiency

@@ -226,15 +226,18 @@ Question~\ref{q:splitting}.
 
 \begin{proposition}[Persistence of splitting under localization]
 \label{prop:persistent-splitting}
-If $V$ splits across $\theta$ in the sense of
-Proposition~\textup{\ref{prop:exact-splitting}} (additively, $V(y,z)=V_1(y)+V_2(z)$ with
-$V_2$ convex), then so does the localized potential at every time:
+Fix $\theta\in S^{n-1}$ and write $x=y+z\theta$. Suppose there are proper lower-semicontinuous
+convex extended-valued functions $V_1$ on $\theta^\perp$ and $V_2$ on $\R$, each with positive
+finite normalizer, such that the global identity
+$V(y+z\theta)=V_1(y)+V_2(z)$ holds for every $(y,z)$. Thus the effective support as well as the
+density has product form. Then the localized potential has the same additive splitting at every time:
 $V_t(x)=V(x)+\tfrac t2\abs x^2-c_t\cdot x$ splits as
 $\bigl(V_1(y)+\tfrac t2\abs y^2-c_t'\cdot y\bigr)+\bigl(V_2(z)+\tfrac t2z^2-c_t''z\bigr)$.
 In particular, the splitting direction is preserved pathwise, the covariance $A_t$ is
-block-diagonal across $\theta^\perp\oplus\R\theta$ for all $t$, and halfspace cuts orthogonal
-to $\theta$ have $\delta_t\parallel\theta$ and $K_t=\kappa_t\theta\theta^T$, hence rank at most
-one, for all $t$.
+block-diagonal across $\theta^\perp\oplus\R\theta$ for all $t$, and every fixed nontrivial
+halfspace $E_a=\{y+z\theta:z\le a\}$ has
+$\delta_t=d_t\theta$, $G_t=g_t\theta\theta^T$, and
+$K_t=\kappa_t\theta\theta^T$, hence rank at most one, for all $t$.
 \end{proposition}
 
 \begin{proof}

@@ -329,12 +329,22 @@ $\norm{A_t}_\op$ better.
 Let $\mu$ be the law of $n$ independent centered one-sided exponential coordinates and let $G$ be a
 standard Gaussian independent of $X\sim\mu$. Then $\CP(\mu)=O(1)$ by tensorization, yet
 \[
+  \Prob\!\left(
+    \bigl\lVert\Cov(X\mid X+\sqrt sG)\bigr\rVert_\op\ge c_{\rm sp}s
+  \right)
+  \ge1-\left(1-\tfrac12e^{-s}\right)^n
+\]
+for a universal $c_{\rm sp}>0$. Consequently, for $s\le\log n$,
+\[
   \E\bigl\lVert\Cov(X\mid X+\sqrt sG)\bigr\rVert_\op\gtrsim s
-  \qquad\text{for } s\le\log n .
+  \qquad\text{and}\qquad
+  \Prob\!\left(
+    \bigl\lVert\Cov(X\mid X+\sqrt sG)\bigr\rVert_\op\ge c_{\rm sp}s
+  \right)\ge1-e^{-1/2}.
 \]
 \end{proposition}
 
-This is worked out in Section~8.1 of the Klartag--Lehec lecture notes \cite{KLnotes}; it is
+This is worked out in Section~8.1 and Proposition~65 of Klartag--Lehec \cite{KLnotes}; it is
 imported here, not proved.
 
 The consequence is structural, and it is worth stating flatly: \emph{uniform operator-norm control
@@ -397,8 +407,9 @@ tracked as a route in the control plane \texttt{research/kls/routes.md}.
 Route & Object retained & What it would take to win & Group \\
 \midrule
 E --- fixed cut & Mass and two-color covariance of one candidate bottleneck set &
-Discharge the operator-to-trace upgrade (E--A), or weighted excess propagation together with the
-weighted stable Stein trace (E--B) & 3 \\
+Discharge the tight-prefix operator-to-trace upgrade (E--A), or replace both the refuted global
+weight and the refuted uniform superlinear remainder by a tensor-stable near-Cheeger package and
+re-audit its Stein trace (E--B) & 3 \\
 \addlinespace
 S --- fixed eigenfunction & Covariance tensor of a first spectral mode &
 Unwhiten for a universal time without losing tensor/covariance alignment

@@ -8,22 +8,32 @@ statements and status remain in `ledger.yaml`; applicable fences remain in `boun
 
 ### `q:upgrade`
 
-Produce a uniform absorptive trace estimate that directly discharges
-`ass:all-cut-carleson`, with every source and damping term matched to
-`thm:scalar-riccati`. The estimate must use cut-aware information and handle small-time
-high-rank occupation.
+Produce the tight-prefix absorptive trace estimate `ass:tight-prefix-carleson`, with every source
+and damping term matched to `thm:scalar-riccati`. For one fixed cutoff $\chi=0$ on
+$(-\infty,3]$ and $\chi=1$ on $[4,\infty)$, the next exact gate is the prefix soft-projector
+injection estimate: control its two cut-dependent $D^2\chi$ curvature and $D\chi$
+cross-variation contractions by $C_0T+C_1\mathbb E\int r_t+\gamma\mathbb E\int D_t$ with
+$\gamma<1/8$. The time-zero prefix removes the interval-boundary decrement. Rank tails alone do
+not control either surviving contraction.
 
 ### `q:weighted`
 
-Prove the ledger rate for balanced near-Cheeger cuts with the calibrated
-$(1+\|A_t\|)^{5/2}$ weight. The argument must not insert an unproved lower bound for the
-localized isoperimetric profile.
+The literal $e_0\le1$ global-operator-norm rate is refuted by the certified
+`prop:weighted-spectator-obstruction`. Formulate a replacement that either uses an explicit
+near-worst-measure hypothesis and re-audits consumption, or uses a cut-local, tensor-stable
+covariance weight that ignores independent spectators while still dominating the aligned
+two-tail mode. It must not insert an unproved lower bound for the localized profile. The
+certified `prop:spectator-excess-rate-obstruction` also refutes every uniform superlinear
+source-vanishing remainder even with weight one. The consumer only needs an $O(T)$ supply, so a
+surviving statement must allow that scale, make the remainder vanish with a genuinely cut-local
+source deficit, or impose an explicit near-worst-measure premise.
 
 ### `q:stein-weighted`
 
-Supply the exact weighted input required by `ass:weighted-package`: a
-localization-uniform almost-stability trace theorem modulo Jacobi zero modes, with explicit
-domains, boundary conventions, and controlled Reilly terms.
+First specify the tensor-stable replacement for the refuted `ass:weighted-package`, then supply
+the matching localization-uniform almost-stability trace theorem modulo Jacobi zero modes, with
+explicit domains, boundary conventions, and controlled Reilly terms. The old weighted trace
+formula remains a candidate analytic ingredient, not a complete live package.
 
 ### `q:taming` and `q:splitting`
 
@@ -46,8 +56,9 @@ a strict damping surplus is not required for the KLS bridge.
 
 ### `prop:spectral-sufficiency`
 
-Derive a dimension-free spectral gap from that occupation estimate, including terminal variance
-control and the regularization limit.
+This bridge is now certified: full damping, terminal variance control, and the regularization
+limit give $C_P\le2/T_*$.  No independent deliverable remains here; the live gate is exactly
+`q:mm-spectral-occupation`.
 
 ## Deterministic moment-map / CMH
 

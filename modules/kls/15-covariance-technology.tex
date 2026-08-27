@@ -45,6 +45,42 @@ and every $t\le\dfrac1{C\log^2n}$,
 \]
 \end{theorem}
 
+The newer parallel-coupling preprint contains rank-sensitive information that is stronger than
+an operator-norm window but still cut-free.  We record it without wiring it to a live gate.
+
+\begin{theorem}[{Stopped rank tails; \cite{KlartagLehec2025ThinShell}}]
+\label{thm:kl-stopped-rank-tail}
+For the simplified stochastic localization of an isotropic compactly supported log-concave law,
+write $\lambda_1(t)\ge\cdots\ge\lambda_n(t)$ for the eigenvalues of $A_t$.  There is a universal
+$C$ such that, for every stopping time $\sigma$ and $t>0$,
+\[
+  \sum_{i=1}^n\Prob\bigl(\lambda_i(t\wedge\sigma)\ge3\bigr)
+  \le Cn\exp(-t^{-1/8}).
+\]
+Consequently, if $\sigma_k=\inf\{t:\lambda_k(t)\ge3\}$, then
+\[
+  \Prob(\sigma_k\le t)\le C\frac nk\exp(-t^{-1/8}),
+  \qquad
+  \E\sigma_k^{-2}\le C\left(1+\log\frac nk\right)^{16}.
+\]
+\end{theorem}
+
+\begin{theorem}[{Integrated rank covariance; \cite{KlartagLehec2025ThinShell}}]
+\label{thm:kl-integrated-rank-covariance}
+Under the same hypotheses,
+\[
+  \E\sum_{i=1}^n
+  \exp\left(2\int_0^1\lambda_i(t)\dd t\right)\le Cn .
+\]
+\end{theorem}
+
+Both results are imported from version 2 of an unreviewed preprint.  They control how many
+covariance eigenvalues are large and how long each rank can remain large.  They do not control
+the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source
+relative to those eigenspaces.  In particular, neither theorem by itself discharges
+Question~\ref{q:upgrade}, Question~\ref{q:mm-spectral-occupation}, or the high-rank part of
+Question~\ref{q:stein-weighted}.
+
 \begin{proposition}[Letwin's third-moment bound]
 \label{prop:letwin-kappa}
 Define

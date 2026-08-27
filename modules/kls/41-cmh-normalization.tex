@@ -455,6 +455,38 @@ including when the limit is carried by a proper affine subspace.  The limit pass
 covariance Dirichlet forms; it asserts neither convergence nor lower semicontinuity of $\CMH$.
 \end{lemma}
 
+\begin{proposition}[CMH recovery calculus]
+\label{prop:cmh-recovery-calculus}
+For a centered log-concave probability $\mu$ in a declared ambient Euclidean space, define its
+CMH recovery envelope by
+\[
+  \mathfrak R_{\rm CMH}(\mu)
+  :=\inf_{(\mu_k)}
+       \liminf_{k\to\infty}\CMH(\mu_k),
+\]
+where the infimum runs over centered, full-dimensional, compactly supported regular moment-map
+laws in that ambient space with $W_2(\mu_k,\mu)\to0$. Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2.8em]
+  \item $\CPaff(\mu)\le\mathfrak R_{\rm CMH}(\mu)$;
+  \item $\mathfrak R_{\rm CMH}$ is invariant under invertible linear maps, is nonincreasing
+  under singular square linear limits in the same ambient dimension, and satisfies
+  \[
+    \mathfrak R_{\rm CMH}(\mu_1\otimes\cdots\otimes\mu_m)
+    \le\max_i\mathfrak R_{\rm CMH}(\mu_i);
+  \]
+  \item an intrinsic recovery sequence on a proper affine support with envelope at most $C$
+  extends to an ambient full-dimensional recovery sequence with envelope at most
+  $\max\{C,1\}$ by tensoring compact Gaussian normal factors whose scale vanishes.
+\end{enumerate}
+Consequently the envelope equals $1$ for centered Gaussian laws and equals $4$ for finite
+products of one-dimensional log-concave laws containing a centered one-sided-exponential
+factor. It is at most $4$ for invertible linear images, same-ambient singular square linear
+images, and affine-support embeddings of finite products built from one-dimensional
+log-concave laws and uniform-simplex blocks. This calculus does not assert a universal bound for
+arbitrary log-concave laws and therefore does not discharge
+Assumption~\ref{ass:cmh-recovery-envelope}.
+\end{proposition}
+
 \begin{assumption}[Bounded CMH recovery envelope]
 \label{ass:cmh-recovery-envelope}
 There is a universal $C$ such that every centered log-concave probability $\mu$ has at least one

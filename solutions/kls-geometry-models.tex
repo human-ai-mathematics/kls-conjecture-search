@@ -15,10 +15,12 @@
 % bounded_by: none
 % evidence_run: none
 % checked_by: agent
-% authored_by: /root/kls_proof_audit
-% reviewed_by: /root/kls_bootstrap_author
-% review: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
-% date: 2026-08-25
+% authored_by: /root/kls_proof_audit; repair_by: /root/repair_splitting_dossier
+% reviewed_by: /root/review_splitting_w0
+% review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
+% prior_reviewed_version_by: /root/kls_bootstrap_author
+% prior_reviewed_version: research/reviews/2026-08-25-kls-geometry-product-r2-audit.md
+% date: 2026-08-27
 % ============================================================================
 
 \section*{Solution: profile curvature, exact splitting, and the Gaussian and product models}
@@ -31,7 +33,11 @@ Corollary~\ref{cor:generic-degeneracy}, and it does not infer a global splitting
 boundary-local condition $\mathfrak K_\Sigma=0$.  For the profile calculation, the smooth
 free-boundary convention is the one in \S\ref{sec:notation}: all support-boundary contributions
 are included in $\mathfrak K_\Sigma=-\calI_\Sigma(1,1)$.  Stochastic-localization notation is
-also that of \S\ref{sec:notation}.
+also that of \S\ref{sec:notation}.  The repair dated 2026-08-27 changes only the statement and
+proof of Proposition~\ref{prop:sol-persistent-splitting}, by making its global product-support
+hypothesis explicit.  The other five proofs are retained from the previously reviewed version,
+but the modified coupled dossier has \texttt{checked\_by: none} pending a fresh independent
+review.
 
 \subsection*{1. Curvature of a smooth minimizing branch}
 
@@ -163,28 +169,94 @@ $\mathfrak K_\Sigma=0\Rightarrow$ global cylindrical or log-affine splitting.
 
 \begin{proposition}[= Proposition~\ref{prop:persistent-splitting}]
 \label{prop:sol-persistent-splitting}
-Suppose $V(y,z)=V_1(y)+V_2(z)$ across
-$\theta^\perp\oplus\R\theta$, with $V_2$ convex.  Then the localized potential splits at every
-time, pathwise; $A_t$ is block diagonal across this decomposition; and for a fixed halfspace cut
-orthogonal to $\theta$, $\delta_t\parallel\theta$ and
-$K_t=\kappa_t\theta\theta^T$ for some scalar $\kappa_t$, hence $K_t$ has rank at most one, for
-every $t$.
+Fix $\theta\in S^{n-1}$ and write $x=y+z\theta$ in
+$\theta^\perp\oplus\R\theta$.  Let
+\[
+  V_1:\theta^\perp\longrightarrow(-\infty,+\infty],
+  \qquad
+  V_2:\R\longrightarrow(-\infty,+\infty]
+\]
+be proper lower-semicontinuous convex functions satisfying
+$0<\int e^{-V_i}<\infty$, and suppose that the extended-valued potential of $\mu$ obeys the
+global identity
+\begin{equation}\label{eq:sol-global-additive-potential}
+  V(y+z\theta)=V_1(y)+V_2(z)
+  \qquad\text{for every }(y,z)\in\theta^\perp\times\R.
+\end{equation}
+Thus the identity includes the value $+\infty$ off the effective domain; in particular
+$\overline{\operatorname{dom}V}=\overline{\operatorname{dom}V_1}
+\times\overline{\operatorname{dom}V_2}$ and
+$\mu=\mu_1\otimes\mu_2$.
+
+Then, at every time for which stochastic localization is defined and for every sample path, the
+localized extended-valued potential remains additively split and $\mu_t$ remains a product
+across $\theta^\perp\oplus\R\theta$.  Consequently $A_t$ is block diagonal.  Moreover, for
+every fixed orthogonal halfspace
+\[
+  E_a=\{y+z\theta:z\le a\}
+  \qquad\text{with}\qquad 0<\mu(E_a)<1,
+\]
+there are real scalars $d_t,g_t,\kappa_t$ such that
+\[
+  \delta_t=d_t\theta,
+  \qquad G_t=g_t\theta\theta^T,
+  \qquad K_t=\kappa_t\theta\theta^T.
+\]
+In particular $K_t$ has rank at most one for every $t$.
 \end{proposition}
 
 \begin{proof}
-Decompose $c_t=c_t'+c_t''\theta$.  Up to its scalar normalizer, the localized potential is
+The global identity \eqref{eq:sol-global-additive-potential} and Tonelli's theorem give
+$\mu=\mu_1\otimes\mu_2$; crucially, this also records the product effective domain rather than
+merely an additive formula on an unspecified support.  Decompose
+$c_t=c_t'+c_t''\theta$, with $c_t'\in\theta^\perp$.  Pointwise in the extended reals, the
+localized potential is
 \begin{align*}
   V_t(y,z)
   &=V_1(y)+V_2(z)+\frac t2(\abs y^2+z^2)-c_t'\cdot y-c_t''z\\
   &=\left(V_1(y)+\frac t2\abs y^2-c_t'\cdot y\right)
     +\left(V_2(z)+\frac t2z^2-c_t''z\right).
 \end{align*}
-Thus the posterior factorizes for every realized $c_t$, so its covariance is block diagonal.
-The event defining an orthogonal halfspace depends only on $z$.  Independence makes the two
-conditional means agree in the $y$ block and makes the two conditional covariances agree there,
-including all cross blocks.  Hence $\delta_t$ is parallel to $\theta$, $G_t$ is supported on
-$\R\theta\otimes\R\theta$, and
-$K_t=G_t+(q_t-p_t)\delta_t\delta_t^T$ has rank at most one.
+The two summands are again proper convex extended-valued functions.  Their normalizing integrals
+are positive and finite: at $t=0$ this is an assumption and $c_0=0$, while at $t>0$ the positive
+quadratic term makes every linear tilt integrable, since
+\[
+  e^{c_t'\cdot y-t\abs y^2/2}\le e^{\abs{c_t'}^2/(2t)},
+  \qquad
+  e^{c_t''z-tz^2/2}\le e^{\abs{c_t''}^2/(2t)}.
+\]
+Hence the normalizer factorizes and, for
+every realized $c_t$,
+\[
+  \mu_t=\mu_{1,t}\otimes\mu_{2,t}.
+\]
+This is a pathwise identity, not an identity obtained after averaging over the localization
+noise.  It proves the asserted block form of $A_t$.
+
+The localization density is strictly positive and finite on $\operatorname{dom}V$, so $\mu_t$
+and $\mu$ have
+the same null sets.  Thus $0<p_t,q_t<1$ for the nontrivial fixed halfspace $E_a$.  Since $E_a$
+depends only on $z$, its two conditional laws factor as
+\[
+  \mu_t(\,dy\,dz\mid E_a)
+     =\mu_{1,t}(dy)\,\mu_{2,t}(dz\mid z\le a),
+  \qquad
+  \mu_t(\,dy\,dz\mid E_a^c)
+     =\mu_{1,t}(dy)\,\mu_{2,t}(dz\mid z>a).
+\]
+The $y$-conditional means and covariances therefore coincide on the two colors, and all
+conditional cross-covariances vanish.  If $d_t$ is the difference of the two conditional means
+in the $z$ coordinate and $g_t$ the difference of their conditional variances, then
+\[
+  \delta_t=d_t\theta,
+  \qquad G_t=g_t\theta\theta^T.
+\]
+Finally, by the definition \eqref{eq:K-def},
+\[
+  K_t=G_t+(q_t-p_t)\delta_t\delta_t^T
+     =\bigl(g_t+(q_t-p_t)d_t^2\bigr)\theta\theta^T.
+\]
+Taking $\kappa_t=g_t+(q_t-p_t)d_t^2$ proves the claim.
 \end{proof}
 
 \subsection*{3. Gaussian localization}
@@ -319,7 +391,10 @@ standard localization identities, Gaussian isoperimetry, tensorization, the one-
 log-concave Poincar\'e bound, and the log-concave Cheeger--Poincar\'e comparison already imported
 in the manuscript.  The profile statements are expressly conditional on their smooth branch;
 no smoothing argument is used to manufacture minimizers.  Product factorization is an identity
-of densities and survives the usual coordinatewise truncation/regularization.  None of these
+of densities and survives the usual coordinatewise truncation/regularization.  For
+Proposition~\ref{prop:sol-persistent-splitting}, that identity is assumed globally for the
+extended-valued potential, so it includes product factorization of the effective support; an
+additive formula asserted only on a nonproduct support would not suffice.  None of these
 statements uses numerical evidence or asserts a quantitative splitting converse.
 The manuscript phrase ``rank-one $K_t$'' in Proposition~\ref{prop:persistent-splitting} is
 understood structurally as $K_t=\kappa_t\theta\theta^T$; its actual rank can be zero (for example

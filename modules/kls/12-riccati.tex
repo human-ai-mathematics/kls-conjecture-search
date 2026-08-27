@@ -118,6 +118,17 @@ Apply \eqref{eq:dR} to the scalar process $\theta^TR_t\theta$. Its drift is
 $-\abs{R_t\theta}^2-s_t\abs{G_t\theta}^2$. Take expectations and use $R_T\succeq0$.
 \end{proof}
 
+\begin{corollary}[Full matrix dissipation]
+\label{cor:full-matrix-dissipation}
+The matrix Riccati identity yields the Loewner-order estimate
+\begin{equation}\label{eq:full-matrix-dissipation}
+  \E\int_0^\infty\bigl(R_t^2+s_tG_t^2\bigr)\dd t\preceq R_0.
+\end{equation}
+In particular, \eqref{eq:loewner-carleson} is obtained by discarding the nonnegative
+$R_t^2$ term. Taking a trace can still cost the dimension, so this strengthening does not by
+itself perform the operator-to-trace upgrade.
+\end{corollary}
+
 \begin{remark}[The missing step is an operator-to-trace upgrade]
 Estimate \eqref{eq:loewner-carleson} is dimension-free at the level of quadratic forms. It only
 implies
