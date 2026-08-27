@@ -242,3 +242,48 @@ metastable landscape.
 **Guardrail.** This is a fixed raw two-well theorem. It supplies no uniform random empirical
 landscape control, repeated-orbit network capacities, collision-stratum estimates, or quotient
 Bernstein--von Mises conclusion.
+
+## Covariance-threshold block extraction
+
+**Source.** The common algebra isolated in
+`research/explorations/2026-08-27-kls-route-prober-upgrade-par-01.md` and
+`research/explorations/2026-08-27-kls-route-prober-mm-spectral-occupation-par-02.md`.
+
+**Fact.** Let $A\succeq0$, let $X=X^T=A^{1/2}ZA^{1/2}$, and for $L>0$ put
+$P=\mathbf 1_{(L,\infty)}(A)$ and $Q=I-P$. Then
+$$
+\|X\|_{\mathrm{HS}}^2
+=\|QXQ\|_{\mathrm{HS}}^2+\|PXP\|_{\mathrm{HS}}^2
++2\|PXQ\|_{\mathrm{HS}}^2,
+$$
+and
+$$
+\|QXQ\|_{\mathrm{HS}}^2\le L^2\|QZQ\|_{\mathrm{HS}}^2
+\le L^2\|Z\|_{\mathrm{HS}}^2.
+$$
+
+**Use.** Convert an intrinsic or whitened Hilbert--Schmidt estimate into a bounded low-covariance
+block while retaining every entry incident to the high-covariance space as one explicit residue.
+
+**Guardrail.** This is algebra at a fixed state only. It gives no occupation estimate for the
+high-incidence residue, and differentiating the random projector creates additional terms. The
+factorization and the bound on $Z$ must be justified in the application; in the two KLS probes
+the latter uses the unreviewed Letwin quadratic-Poincar\'e preprint. The identity does not relate
+the cut tensor to the eigenfunction tensor.
+
+## `prop:letwin-not-gate-zero` — static commutator split
+
+**Fact.** For symmetric matrices $B,H$,
+$$
+\operatorname{Tr}(B^2H^2)
+=\operatorname{Tr}(BHBH)+\frac12\|[B,H]\|_{\mathrm{HS}}^2.
+$$
+
+**Use.** Separate the constant-matrix channel controlled by the Letwin inequality from the
+transverse term required by the CMH linear sector. For $B=a\otimes a$, it reads
+$|Ha|^2=(a^THa)^2+\|[a\otimes a,H]\|_{\mathrm{HS}}^2/2$.
+
+**Guardrail.** The algebraic countermodel certifies only that positivity, $\mathbb EH=I$, and
+constant-matrix control do not bound the transverse term. It is not a moment-map counterexample.
+This static commutator is not the stochastic high-incidence block, a moving spectral-projector
+It\^o residue, or the square-root/Haar commutator of `q:mm-square-root-commutator`.
