@@ -825,12 +825,15 @@ nodes:
 
   - id: prop:split-screened-supply
     kind: proposition
-    status: open
+    status: proved
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "For a product of isotropic one-dimensional log-concave laws, a J-measurable cut with |J|=k and 0<p_0<1, every eta in (0,1/4], kappa>0, and every T>0, the screened weighted excess satisfies E int_0^{T wedge tau_eta} e_t (1+lambda_cut(A_t,K_t))^(5/2) 1{Q_t >= kappa e_t W_cut} dt <= (2k+64 eta^2 (1+k))/kappa, uniformly in the ambient dimension and in every spectator coordinate. Total-budget form, not proportional to T."
-    depends_on: [lem:stein-vs-source, thm:budget, lem:block, thm:scalar-riccati, lem:lyapunov-stein-duality, prop:trivial-excess]
+    statement: "For a product of isotropic one-dimensional log-concave laws in the regular split class of the dossier (compact-smooth product-preserving; general split laws are covered only in the defined-on-approximants sense, with the screened-indicator limit interchange open), a J-measurable cut with |J|=k and 0<p_0<1, every eta in (0,1/4], kappa>0, and every T>0, the screened weighted excess satisfies E int_0^{T wedge tau_eta} e_t (1+lambda_cut(A_t,K_t))^(5/2) 1{Q_t >= kappa e_t W_cut} dt <= (2k+64 eta^2 (1+k))/kappa, uniformly in T, the ambient dimension, and every spectator coordinate. Total-budget form, not proportional to T."
+    depends_on: [prop:stein-rep, lem:stein-vs-source, lem:block, cor:per-direction, thm:scalar-riccati, lem:lyapunov-stein-duality, prop:products, lem:perimeter-martingale]
     bounded_by: [obs:two-tail, obs:circularity]
+    solution: solutions/prop-split-screened-supply.tex
+    checked_by: agent
+    review: research/reviews/2026-08-30-prop-split-screened-supply-proof-review.md
 
   - id: q:stein-weighted
     kind: question
