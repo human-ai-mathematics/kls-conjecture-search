@@ -25,12 +25,19 @@ A1--A5 live in ``targets.a_series``. KLS (Part III route-gating) lives in ``targ
               exact rational pencils and certified lower/upper bounds for root, vertex, and
               mixture frames, exact cap-descent proxies, plus a seeded directional spherical
               channel. Library lower bounds never decide the all-frame gate.
+  "cmh-ab"  the anisotropic-bootstrap matrices N = int H^2, D = int H^{ab}(d_a H)(d_b H),
+              R = N - D of the CMH linear-recovery probe, plus the M9 second-variation probe at
+              the saturating exponential-Gaussian product (kls/cmh_ab/). Exact rational Loewner
+              verdicts on one-dimensional and Dirichlet moment maps; directional quadrature on
+              two-dimensional moment maps and on the perturbed CMH Rayleigh quotient. An exact
+              indefinite verdict is a refutation CANDIDATE for one stated matrix inequality on
+              one stated instance, never a status change.
 """
 from __future__ import annotations
 
 from ..contract import TargetSpec
 from .a_series import a1, a2, a3, a4, a5
-from .kls import alignment, bridge, cmh_gate_zero, fiber_frame_dual, loc_engine, screening
+from .kls import alignment, bridge, cmh_ab, cmh_gate_zero, fiber_frame_dual, loc_engine, screening
 
 REGISTRY = {
     "A1": TargetSpec(
@@ -132,6 +139,23 @@ REGISTRY = {
                 "spherical_samples": 40000,
                 "do_certify": True,
             },
+        },
+    ),
+    "cmh-ab": TargetSpec(
+        "cmh-ab", cmh_ab, "CMH anisotropic-bootstrap (N, D, R) and M9 probe", False,
+        {
+            "standard": {},
+            "exact-only": {"run_sourcemap": False, "run_m9": False},
+            "fast": {"dirichlet_alphas": ((1, 1), (1, 1, 1), (1, 1, 10)),
+                     "sourcemap_base_nodes": 120,
+                     "dirichlet_engine_base_nodes": 96,
+                     "sourcemap_epsilons": (0.05,),
+                     "sourcemap_dirichlet_alphas": ((1, 1, 1),),
+                     "m9_resolution": (140, 24), "m9_degree": 4,
+                     "m9_epsilons": (0.05,), "m9_enrichment": (0.4,),
+                     "m9_refine_degree": 5, "m9_refine_resolution": (180, 32),
+                     "m9_longitudinal": (("u-bump", 1.2, 0.8),),
+                     "m9_transverse": (1, 2), "m9_shapes": (1.0, 1.5)},
         },
     ),
 }
