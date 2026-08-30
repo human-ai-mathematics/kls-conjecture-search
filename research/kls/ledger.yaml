@@ -958,11 +958,14 @@ nodes:
 
   - id: prop:mm-window-occupation
     kind: proposition
-    status: open
+    status: conditional
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
-    statement: "Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, q:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law satisfies C_P <= C log^2 n conditional on thm:letwin-qcts."
+    statement: "Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, q:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law (n>=2) satisfies C_P <= C log^2 n conditional on thm:letwin-qcts."
     depends_on: [thm:letwin-qcts, thm:KL-window, thm:klartag-logn, lem:mm-stopped-window-source, lem:mm-restart-deweighting, lem:mm-smallgap-fourth-moment, lem:mm-time-weighted-fixed-source]
+    solution: solutions/prop-mm-window-occupation.tex
+    checked_by: agent
+    review: research/reviews/2026-08-30-prop-mm-window-occupation-proof-review.md
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
