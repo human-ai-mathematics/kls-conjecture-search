@@ -334,3 +334,98 @@ bound for an integral weighted by $\lambda_{\mathrm{cut}}$ follows. The scale de
 cut tensor and cannot replace a cut-free covariance functional. For singular $A$, restrict the
 operator to the covariance support (or state the corresponding Moore--Penrose convention)
 before using the formula.
+
+## Screened absorption preconditions
+
+**Source.** Section 1 of
+`research/explorations/2026-08-30-kls-route-prober-weighted-screened-interface-w4w01.md`
+(consumer algebra of the screened `q:weighted` interface), audited and routed through
+`research/explorations/2026-08-30-synthesizer-screened-kernel-comparison-w4y01.md`. Certified
+inputs: `lem:stein-vs-source`, `cor:per-direction`, `thm:scalar-riccati`,
+`cor:tight-window-consumption`.
+
+**Fact.** For the screened pair
+(S) $\mathbb E\int e_tW_{\rm cut}\mathbf 1_{\mathcal A_{\kappa,t}}\,dt\le C_ET$ and
+(C) $\mathbb E\int Q_t\,dt\le C_0T+C_1\mathbb E\int r_t+\beta\mathbb E\int D_t
++C_2\mathbb E\int e_tW_{\rm cut}\mathbf 1_{\mathcal A_{\kappa,t}}
++\theta\mathbb E\int Q_t\mathbf 1_{\mathcal A_{\kappa,t}^c}$ on $[0,T\wedge\tau_\eta]$:
+
+1. Absorbing the $\theta$-term requires the a priori finiteness
+   $\mathbb E\int Q_t\,dt<\infty$ **before** subtraction. It holds with the dimension-dependent
+   certified chain $Q_t\le2S_t+64\eta^2D_t$,
+   $\mathbb E\int S_t\,dt\le\operatorname{Tr}R_0\le n$,
+   $\mathbb E\int D_t\,dt\le1+n$, so
+   $\mathbb E\int Q_t\,dt\le2n+64\eta^2(1+n)$. Dimension dependence is harmless here.
+2. Feeding `cor:tight-window-consumption` demands the damping coefficient
+   $\alpha=2\beta/(1-\theta)+64\eta^2<1$. Since $64\eta^2<1$ forces $\eta<1/8$, the admissible
+   window is $\eta\in(0,1/8)$ with $\beta<(1-\theta)(1-64\eta^2)/2$; there is no admissible
+   choice with $\eta\ge1/8$.
+3. A constant supply $\mathbb E\int e_tW_{\rm cut}\mathbf 1_{\mathcal A}\,dt\le c_E$ (not
+   $\propto T$) also suffices: Gronwall reads
+   $u(T)\le(1+2C_2c_E/(1-\theta)+C_0'T)e^{C_1'T}$ and the survival time shrinks with $c_E$.
+4. At $\theta=0$ the condition degenerates to the $2\beta+64\eta^2<1$ arithmetic of
+   `ass:weighted-package`/`q:stein-weighted`; the screened algebra strictly generalizes it.
+
+**Use.** Preconditions for any consumer-side (absorption/consumption) argument on the screened
+Eldan interface; prevents wasted probes at $\eta\in[1/8,1/6]$ and silent subtraction of a
+possibly infinite term.
+
+**Guardrail.** Sketch-level: no dossier certifies the assembled chain, and item 3 is an
+uncertified one-line Gronwall restatement of `cor:tight-window-consumption` (technical gap,
+listed in the `w4w01` handoff). The constants $2$ and $64\eta^2$ are the certified
+`lem:stein-vs-source` values; any $\varepsilon$-weighted refinement of the conversion is
+uncertified, so the boxed coefficient is the current gate arithmetic. Nothing here bounds the
+supply or companion themselves; both remain open.
+
+## Aligned screen: initial-layer reduction and pathwise pin
+
+**Source.** Sections 3.2–3.3 and 4 of
+`research/explorations/2026-08-30-kls-route-prober-weighted-screened-interface-w4w01.md`;
+comparison verdict in
+`research/explorations/2026-08-30-synthesizer-screened-kernel-comparison-w4y01.md`. Certified
+inputs: `lem:lyapunov-stein-duality`, `lem:pathwise-BL`, `prop:trivial-excess`,
+`prop:two-tail`.
+
+**Fact.** With $Q_t=s_t\|K_t\|_{\rm HS}^2$,
+$W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ (convention
+$\lambda_{\rm cut}(A,0)=0$), and screen
+$\mathcal A_{\kappa,t}=\{Q_t\ge\kappa e_tW_{\rm cut}\}$:
+
+1. *Reduction (proved at certified-domination level).* For every $t_*>0$,
+   $$
+   \mathbb E\int_0^{T\wedge\tau_\eta}e_tW_{\rm cut}\mathbf 1_{\mathcal A_{\kappa,t}}\,dt
+   \le\Bigl(1+\tfrac1{t_*}\Bigr)^{5/2}(1+e_0)\,T
+   +\frac1\kappa\,\mathbb E\int_0^{t_*\wedge T\wedge\tau_\eta}
+   Q_t\mathbf 1_{\mathcal A_{\kappa,t}}\,dt ,
+   $$
+   so the screened supply reduces, modulo a universal $O(T)$ layer, to the aligned
+   initial-layer occupation estimate (AIK).
+2. *Pathwise pin.* On $\mathcal A_{\kappa,t}$,
+   $\kappa e_tW_{\rm cut}\le Q_t\le4\lambda_{\rm cut}/t$, hence
+   $e_t\le4/(\kappa t(1+\lambda_{\rm cut})^{3/2})$: two-tail-calibrated states
+   ($e\asymp\lambda^{-1/2}$) can be aligned only for $t\lesssim4/(\kappa\lambda)$.
+3. *Chargeability threshold.* With $a=\Phi^{-1}(3/4)$,
+   $\kappa_{\rm TT}=2^{-5/2}\cdot16a^2\varphi(a)^2/(2\varphi(a)-\varphi(0))\approx0.5492$;
+   every fixed $\kappa<\kappa_{\rm TT}$ keeps all certified two-tail states in
+   $\mathcal A_{\kappa,t}$ for all $\Lambda\ge1$.
+4. *Spectator inertness.* Independent spectator blocks change neither $Q_t$ nor $W_{\rm cut}$
+   (certified direct-sum invariance) and can only inflate $e_t$, i.e. shrink the charge set;
+   the screen excludes the certified weighted-spectator and leakage witnesses, worst states
+   first.
+
+**Use.** Standard time-splitting and calibration facts for any attack on the screened supply;
+cite this entry instead of re-deriving the reduction.
+
+**Guardrail.** Item 1 uses `prop:trivial-excess`, which requires $\mu(E)=1/2$; keep the
+balanced-start hypothesis. For singular $A_t$ use the covariance-support/Moore–Penrose
+convention of `lem:lyapunov-stein-duality`. For general laws the screened statement is defined
+on the certified product-preserving approximants; the screened indicator does not pass to
+limits monotonically. Choosing $\kappa\ge\kappa_{\rm TT}$ silently discards the certified
+two-tail obstruction and is not admissible calibration. AIK itself is open
+(needs-new-idea), and it is **formally incomparable** with `ass:tight-prefix-carleson`: the
+tight-prefix estimate implies only the constant-relaxed form AIK$^{+}$ (additive constant
+$(2\alpha+64\eta^2)/(1-\alpha)$), the screen excludes excess-inflated states the prefix
+estimate must count, the missing $r$/$D$ budgets cut the other way, and the zero-damping
+two-tail family lies in both charges. No equivalence or ledger edge exists; trace-cluster
+comparisons involving this object stay with the single synthesizer owner (CLAUDE.md
+constraint 6).
