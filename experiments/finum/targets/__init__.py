@@ -16,12 +16,17 @@ A1--A5 live in ``targets.a_series``. KLS (Part III route-gating) lives in ``targ
               floating generalized-eigenvalue/Galerkin diagnostics. No Monte Carlo; gate zero is
               NECESSARY, never sufficient, and an exact emitted certificate still requires
               independent proof/refutation review.
+  "fiber-frame-dual" the conditional-fiber-frame all-frame simplex min-max Lambda_{m,k}
+              probed by a frame library on the degree-<=k quotient (kls/fiber_frame_dual/):
+              exact rational pencils and certified lower/upper bounds for root, vertex, and
+              mixture frames, exact cap-descent proxies, plus a seeded directional spherical
+              channel. Library lower bounds never decide the all-frame gate.
 """
 from __future__ import annotations
 
 from ..contract import TargetSpec
 from .a_series import a1, a2, a3, a4, a5
-from .kls import alignment, bridge, cmh_gate_zero, loc_engine
+from .kls import alignment, bridge, cmh_gate_zero, fiber_frame_dual, loc_engine
 
 REGISTRY = {
     "A1": TargetSpec(
@@ -73,5 +78,33 @@ REGISTRY = {
     "cmh-gate-zero": TargetSpec(
         "cmh-gate-zero", cmh_gate_zero, "deterministic CMH gate-zero battery", False,
         {"standard": {}},
+    ),
+    "fiber-frame-dual": TargetSpec(
+        "fiber-frame-dual", fiber_frame_dual,
+        "conditional-fiber-frame all-frame simplex pencil library", True,
+        {
+            "standard": {
+                "k2_ms": (3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                "k2_root_extra_ms": (13, 14, 15),
+                "k3_ms": (3, 4, 5, 6, 7),
+                "k3_root_extra_ms": (8,),
+                "mixture_grid_denominator": 8,
+                "spherical_k2_ms": (3, 4, 5, 6, 7, 8, 9, 10, 12),
+                "spherical_k3_ms": (3, 4, 5, 6),
+                "spherical_samples": 20000,
+                "do_certify": True,
+            },
+            "deep": {
+                "k2_ms": (3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
+                "k2_root_extra_ms": (15,),
+                "k3_ms": (3, 4, 5, 6, 7, 8),
+                "k3_root_extra_ms": (),
+                "mixture_grid_denominator": 8,
+                "spherical_k2_ms": (3, 4, 5, 6, 7, 8, 9, 10, 12, 14),
+                "spherical_k3_ms": (3, 4, 5, 6, 7),
+                "spherical_samples": 40000,
+                "do_certify": True,
+            },
+        },
     ),
 }

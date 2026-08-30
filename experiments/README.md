@@ -52,6 +52,7 @@ development lane. Full pytest includes the expensive localization Monte Carlo re
 | `loc-engine` | legacy localization-engine regression; no route observable | `standard`, `full` |
 | `kls-align` | product-Laplace tail-union alignment diagnostic | `standard`, `high-n` |
 | `cmh-gate-zero` | deterministic necessary-condition CMH battery | `standard` |
+| `fiber-frame-dual` | conditional-fiber-frame all-frame simplex pencil library | `standard`, `deep` |
 
 Use `finum list` as the executable source of truth. `loc-engine` replaces the misleading public
 name `kls-loc`; historical artifacts keep their original target id unchanged.
