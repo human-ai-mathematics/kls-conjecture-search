@@ -1,0 +1,222 @@
+% Standalone candidate dossier for the small-gap fourth-moment bootstrap.
+% Candidate node, ledger acceptance pending: lem:mm-smallgap-fourth-moment is an
+% orchestrator-accepted candidate id whose ledger entry has not yet been created.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER (proof provenance) =====================================
+% ledger-node : lem:mm-smallgap-fourth-moment   (candidate node, ledger acceptance pending)
+% refines     : lem:mm-smallgap-fourth-moment   (candidate statement; supports q:mm-spectral-occupation)
+% bounded_by  : none (no bounded_by edge proposed for the candidate node; all
+%               registered route fences checked below anyway)
+% evidence_run: none
+% checked_by  : none
+% author      : claude-prover-w4p02
+% reviewer    :
+% review      :
+% depends_on  : thm:klartag-logn (published import, ledger acceptance pending;
+%               reference Klartag2023Logarithmic)
+% date        : 2026-08-30
+% ============================================================================
+
+\section*{Solution candidate: small-gap fourth-moment bootstrap from the published
+frontier}
+\label{sec:sol-lem-mm-smallgap-fourth-moment}
+
+\paragraph{Refined statement and standing.}
+The lemma is an \emph{unconditional implication}: it assumes a uniform Poincar\'e
+constant $K_n$ for isotropic log-concave laws in dimension $n$ and bootstraps a
+dimension-free fourth moment for first eigenfunctions whose gap is small on the scale
+$1/K_n$.  Its intended instantiation is the \emph{published} frontier
+$K_n=C_K\log n$ ($n\ge2$): Klartag \cite{Klartag2023Logarithmic} proves the Cheeger
+constant bound $\psi_n\le C\sqrt{\log n}$, and Cheeger's inequality converts it into
+$\CP\le C_K\log n$ for every isotropic log-concave probability on $\R^n$.  This
+instantiation is the import node \texttt{thm:klartag-logn} (published import; ledger
+acceptance pending as of this dossier's date); it is cited, not proved, here.  No
+unreviewed preprint input occurs anywhere in this dossier; in particular
+Theorem~\ref{thm:letwin-qcts} is not used.
+
+\begin{hypothesis}[Uniform frontier input in dimension $n$]
+\label{hyp:sol-sfm-frontier}
+$K_n>0$ is a constant such that every isotropic log-concave probability measure on
+$\R^n$ satisfies the Poincar\'e inequality with constant $K_n$: for every locally
+Lipschitz $h\in L^2$,
+\[
+  \Var(h)\le K_n\,\E\abs{\nabla h}^2 .
+\]
+By the published import \texttt{thm:klartag-logn}
+\cite{Klartag2023Logarithmic}, Hypothesis~\ref{hyp:sol-sfm-frontier} holds with
+$K_n=C_K\log n$ for $n\ge2$, with $C_K$ universal.
+\end{hypothesis}
+
+\begin{theorem}[Small-gap fourth moment]
+\label{thm:sol-lem-mm-smallgap-fourth-moment}
+Assume Hypothesis~\ref{hyp:sol-sfm-frontier}.  Let
+\[
+  \dd\mu(x)=Z^{-1}e^{-V(x)}\dd x,
+  \qquad V\in C^\infty(\R^n),\qquad\nabla^2V\succeq\varepsilon I_n,\ \varepsilon>0,
+\]
+be a smooth, strongly log-concave, centered \emph{isotropic} probability measure (a
+regular isotropic approximant in the sense of Section~\ref{subsec:spectral-sde}), let
+$L=\Delta-\nabla V\cdot\nabla$ be its Friedrichs realization, and let $f$ be a
+normalized first nonconstant eigenfunction:
+\[
+  -Lf=\lambda f,\qquad\E_\mu f=0,\qquad\E_\mu f^2=1 .
+\]
+If
+\[
+  \lambda\ \le\ \frac{3}{8K_n},
+\]
+then
+\begin{equation}
+  \E_\mu f^4\ \le\ 2 .
+  \label{eq:sol-sfm-main}
+\end{equation}
+The bound $2$ is universal: it depends on neither $n$, $\varepsilon$, $\mu$, nor
+$\lambda$.  The regularization enters only through the qualitative finiteness
+$\E_\mu f^4<\infty$.
+\end{theorem}
+
+\begin{proof}
+\noindent\emph{Step 1: qualitative $L^4$ finiteness ($\varepsilon$-dependent, used only
+for finiteness).}
+The Bakry--\'Emery criterion \cite{BakryEmery1985} for the $\varepsilon$-uniformly
+convex potential gives a logarithmic Sobolev inequality for $\mu$ with constant
+depending only on $\varepsilon$, and hence, by Gross's theorem, hypercontractivity of
+the semigroup $P_t=e^{tL}$: there are $t_0=t_0(\varepsilon)>0$ and an exponent
+$q(t_0)\ge4$ with $\norm{P_{t_0}g}_{L^4(\mu)}\le\norm g_{L^2(\mu)}$ (see
+\cite[Ch.~5]{BakryGentilLedoux2014}).  Since $P_{t_0}f=e^{-\lambda t_0}f$,
+\[
+  \norm f_{L^4(\mu)}=e^{\lambda t_0}\norm{P_{t_0}f}_{L^4(\mu)}
+  \le e^{\lambda t_0}\norm f_{L^2(\mu)}<\infty .
+\]
+Thus $\E_\mu f^4<\infty$.  The bound is $\varepsilon$-dependent and is used only to
+license the rearrangement in Step~4; no quantitative use is made of it.  We also
+record that $f\in C^\infty(\R^n)$ by elliptic regularity for the equation
+$\Delta f-\nabla V\cdot\nabla f=-\lambda f$ with smooth coefficients, and that
+$f$ lies in the form domain $W^{1,2}(\mu)$ with
+$\E_\mu\abs{\nabla f}^2=\langle f,-Lf\rangle=\lambda$.
+
+\medskip
+\noindent\emph{Step 2: the eigenvalue--energy identity
+$\lambda\,\E f^4=3\,\E f^2\abs{\nabla f}^2$.}
+For $k\in\mathbb N$ let $\varphi_k:\R\to\R$ be the truncated cubic
+\[
+  \varphi_k(s)=
+  \begin{cases}
+    s^3, & \abs s\le k,\\
+    k^3+3k^2(s-k), & s>k,\\
+    -k^3+3k^2(s+k), & s<-k,
+  \end{cases}
+\]
+which is $C^1$, odd, nondecreasing, globally Lipschitz with constant $3k^2$, and
+satisfies $\varphi_k(0)=0$, $\varphi_k'(s)=3(\abs s\wedge k)^2$.  Since the Dirichlet
+form of the Friedrichs realization is a Dirichlet form, composition of the
+form-domain element $f$ with a Lipschitz function vanishing at $0$ stays in the form
+domain, with the chain rule $\nabla\varphi_k(f)=\varphi_k'(f)\nabla f$; concretely,
+$\varphi_k(f)\in L^2(\mu)$ because $\abs{\varphi_k(f)}\le3k^2\abs f$, and
+$\abs{\nabla\varphi_k(f)}\le3k^2\abs{\nabla f}\in L^2(\mu)$.  Pairing the
+eigenequation with $\varphi_k(f)$ in the form,
+\begin{equation}
+  \lambda\,\E_\mu\bigl[f\,\varphi_k(f)\bigr]
+  =\E_\mu\bigl[\nabla f\cdot\nabla\varphi_k(f)\bigr]
+  =\E_\mu\bigl[\varphi_k'(f)\abs{\nabla f}^2\bigr]
+  =3\,\E_\mu\bigl[(\abs f\wedge k)^2\abs{\nabla f}^2\bigr].
+  \label{eq:sol-sfm-truncated}
+\end{equation}
+Both extreme members are monotone nondecreasing in $k$:
+$s\,\varphi_k(s)\ge0$ increases pointwise to $s^4$ (for $\abs s>k$,
+$s\varphi_k(s)=\abs s\,(k^3+3k^2(\abs s-k))\le s^4$ and is nondecreasing in $k$), and
+$(\abs f\wedge k)^2\abs{\nabla f}^2$ increases pointwise to $f^2\abs{\nabla f}^2$.
+Monotone convergence on both sides of \eqref{eq:sol-sfm-truncated} yields the identity
+in $[0,\infty]$:
+\begin{equation}
+  \lambda\,\E_\mu f^4=3\,\E_\mu\bigl[f^2\abs{\nabla f}^2\bigr].
+  \label{eq:sol-sfm-identity}
+\end{equation}
+By Step~1 the left side is finite, hence so is
+$\E_\mu[f^2\abs{\nabla f}^2]=\lambda\,\E_\mu f^4/3$ (recall $\lambda>0$: a first
+nonconstant eigenfunction has $\lambda=\E\abs{\nabla f}^2>0$).
+
+\medskip
+\noindent\emph{Step 3: Poincar\'e applied to $f^2$.}
+The measure $\mu$ is isotropic and log-concave, so
+Hypothesis~\ref{hyp:sol-sfm-frontier} applies to it.  The function $h=f^2$ is $C^1$
+(hence locally Lipschitz), lies in $L^2(\mu)$ by Step~1, and has
+$\E\abs{\nabla h}^2=4\,\E[f^2\abs{\nabla f}^2]<\infty$ by Step~2.  Therefore
+\begin{equation}
+  \E_\mu f^4-1=\E_\mu f^4-\bigl(\E_\mu f^2\bigr)^2=\Var_\mu\bigl(f^2\bigr)
+  \le K_n\,\E_\mu\abs{\nabla f^2}^2
+  =4K_n\,\E_\mu\bigl[f^2\abs{\nabla f}^2\bigr].
+  \label{eq:sol-sfm-poincare}
+\end{equation}
+
+\medskip
+\noindent\emph{Step 4: closure of the bootstrap at $\lambda\le3/(8K_n)$.}
+Substituting \eqref{eq:sol-sfm-identity} into \eqref{eq:sol-sfm-poincare} and using the
+small-gap hypothesis,
+\[
+  \E_\mu f^4-1
+  \le\frac{4K_n\lambda}{3}\,\E_\mu f^4
+  \le\frac{4K_n}{3}\cdot\frac{3}{8K_n}\,\E_\mu f^4
+  =\frac12\,\E_\mu f^4 .
+\]
+Since $\E_\mu f^4<\infty$ (Step~1), the term $\tfrac12\E_\mu f^4$ may be subtracted,
+giving $\tfrac12\E_\mu f^4\le1$, i.e.\ \eqref{eq:sol-sfm-main}.
+\end{proof}
+
+\begin{remark}[The external frontier input is genuinely needed]
+\label{rem:sol-sfm-no-self-bootstrap}
+The trivially available Poincar\'e constant for $\mu$ itself is $K=\CP(\mu)=1/\lambda$
+(sharp for the first eigenfunction).  With that choice the coefficient in Step~4 is
+$4K\lambda/3=4/3>1$, and the bootstrap closes for no $L^p$, $p>2$: the analogous
+computation (pairing the eigenequation with truncations of $\abs s^{p-2}s$, which gives
+$\lambda\,\E\abs f^p=(p-1)\,\E[\abs f^{p-2}\abs{\nabla f}^2]$, then Poincar\'e for
+$\abs f^{p/2}$) produces the coefficient $Kp^2\lambda/(4(p-1))$, which at $K=1/\lambda$
+equals $p^2/(4(p-1))=1+(p-2)^2/(4(p-1))>1$ for every $p>2$, independently of the
+dimension.  An \emph{external} bound $K_n$ with
+$K_n\lambda$ small is therefore what makes the argument close, and only on the
+small-gap branch $\lambda\le3/(8K_n)$.  This is the probe's structural observation,
+recorded here as a remark; it is not a claim and no statement is derived from it.
+This use of the frontier is not circular for the downstream assembly: the pipeline
+consuming this lemma outputs $\CP=O(\log^2n)$, strictly \emph{weaker} than its input
+$O(\log n)$; the import is a calibrated external ingredient, not a hidden assumption
+of the conclusion.
+\end{remark}
+
+\begin{remark}[Large-gap branch]
+\label{rem:sol-sfm-large-gap}
+Measures whose first eigenvalue violates the small-gap hypothesis satisfy
+$\CP=1/\lambda<8K_n/3$ outright, at the frontier scale, and need no fourth-moment
+control.  The branch split is performed by the consuming assembly dossier, not here.
+\end{remark}
+
+\begin{remark}[Hypotheses actually used]
+\label{rem:sol-sfm-hypotheses}
+The proof uses: smoothness and $\varepsilon$-strong log-concavity of $\mu$ (only for
+elliptic regularity and the qualitative hypercontractive $L^4$ bound of Step~1);
+centering and isotropy of $\mu$ (only so that Hypothesis~\ref{hyp:sol-sfm-frontier}
+applies to $\mu$ in Step~3); the eigenequation through the Friedrichs form pairing;
+the Dirichlet-form contraction and chain-rule property for Lipschitz post-composition;
+and Hypothesis~\ref{hyp:sol-sfm-frontier}, discharged by the published import
+\texttt{thm:klartag-logn} \cite{Klartag2023Logarithmic}.  No stochastic localization,
+no Letwin input, no numerical evidence, and no unreviewed premise is used.  Modulo
+ledger acceptance of the published import node, the implication proved here is
+unconditional.
+\end{remark}
+
+\paragraph{Obstructions respected.}
+The candidate node carries no \texttt{bounded\_by} edge; the registered route fences
+were checked individually.  The argument is static and cut-free: no slice, excess, or
+localized isoperimetric estimate occurs (\texttt{obs:two-tail},
+\texttt{obs:circularity}, \texttt{obs:rank-one-refuted}); no projection or radial test
+is promoted to a tensor bound (\texttt{obs:proj-ceiling}); no covariance occupation
+functional appears (\texttt{obs:crude-insufficient},
+\texttt{obs:relative-ceiling}).  Regarding \texttt{obs:relative-ceiling} specifically:
+the a~priori input here is the published frontier constant $K_n$, used to produce a
+strictly weaker downstream output, not an all-measure relative occupation premise.  The
+covariance-spike fence is untouched (no localization occurs).
+
+% No \printbibliography here (matches modules/*.tex): main.tex prints the single shared
+% bibliography. Standalone, \cite shows "[?]" and \ref shows "??" --- expected.
+\end{document}
