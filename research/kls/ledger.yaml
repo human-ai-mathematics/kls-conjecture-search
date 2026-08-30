@@ -933,11 +933,14 @@ nodes:
 
   - id: lem:mm-restart-deweighting
     kind: lemma
-    status: open
+    status: proved
     route: moment-map-spectral
     file: modules/kls/30-spectral-route.tex
     statement: "For every a.s. positive stopping time sigma of the observation filtration on an eps-regular approximant and every fixed L^2 test, E[int_sigma^infty ||H_t||_HS^2 dt | F_sigma] <= Var_{mu_sigma}(f)/(eps+sigma) <= v_sigma/sigma, by conditional application of lem:mm-time-weighted-fixed-source with kappa = eps+sigma after the strong-Markov restart of the localization."
     depends_on: [lem:mm-time-weighted-fixed-source]
+    solution: solutions/lem-mm-restart-deweighting.tex
+    checked_by: agent
+    review: research/reviews/2026-08-30-lem-mm-restart-deweighting-proof-review.md
 
   - id: lem:mm-smallgap-fourth-moment
     kind: lemma
