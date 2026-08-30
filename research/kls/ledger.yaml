@@ -1107,6 +1107,14 @@ nodes:
     statement: "Gate zero is an operator-to-trace upgrade with a factor-2 budget: Chen-Klartag give Tr(E H^2) <= 2n, so the average eigenvalue of E H^2 is already at most 2 in isotropic position, while conj:gate-zero asks the maximum to be at most 4."
     depends_on: [thm:chen-klartag-moment-hessian, prop:letwin-not-gate-zero]
 
+  - id: lem:cmh-linear-spectral-resolution
+    kind: lemma
+    status: open
+    route: moment-map-cmh
+    file: modules/kls/41-cmh-normalization.tex
+    statement: "For a regular isotropic compact-target moment map with source potential psi, Stein generator A_op = -L in source coordinates, and columns Ha = grad(partial_a psi): the u_b = partial_b psi are centered orthonormal eigenfunctions of A_op at its Brascamp-Lieb spectral gap 1; the columns satisfy (1-A_op)(Ha)=(A+Q)a with (A+Q)a orthogonal to every u_b and E[A+Q]=I; and with the induced decomposition Ha = a + sum_b M_ab u_b + v one has a^T N a = 1+|M_a|^2+|v|^2, a^T D a = |M_a|^2+<v,A_op v>, a^T R a = 1 - <v,(A_op-1)v>. Consequently R <= I with equality iff the column fluctuation is spectrally pure at the gap; (AB)_{rho,beta} is equivalent to <v,(A_op-1)v> + rho(|M_a|^2+|v|^2) <= 1+beta-rho for all unit a; R >= N - nI holds unconditionally; and R >= D holds for all regular finite products of one-dimensional laws."
+    depends_on: [thm:regular-moment-map-compact-target, def:cmh, prop:cmh-bochner]
+
   - id: thm:cmh-1d
     kind: theorem
     status: proved

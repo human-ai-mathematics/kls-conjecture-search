@@ -327,6 +327,34 @@ eigenvalue to be at most $4$. It is therefore an operator-to-trace upgrade carry
 budget.
 \end{corollary}
 
+The 2026-08-30 anisotropic-bootstrap probe resolved the linear sector's three gate matrices
+spectrally. The following candidate statement is staged in a standalone dossier pending
+independent review; its ledger status is \emph{open}.
+
+\begin{lemma}[Spectral resolution of the linear-sector gate matrices]
+\label{lem:cmh-linear-spectral-resolution}
+For a regular isotropic compact-target moment map with source potential $\psi$, source density
+$e^{-\psi}$, and Stein generator $\mathsf A_{\rm op}=-\mathcal L$ in source coordinates, where
+$\mathcal Lf=e^{\psi}\operatorname{div}(e^{-\psi}H^{-1}\nabla f)$ and $H=D^2\psi$: the
+functions $u_b=\partial_b\psi$ are centered orthonormal eigenfunctions of $\mathsf A_{\rm op}$
+at its Brascamp--Lieb spectral gap $1$; the columns $Ha=\nabla(\partial_a\psi\cdot a)$ satisfy
+$(1-\mathsf A_{\rm op})(Ha)=(A+Q)a$ with $(A+Q)a$ orthogonal to every $u_b$ and
+$\int(A+Q)\,d\eta=I$; and, with the induced decomposition
+$Ha=a+\sum_bM_{ab}u_b+v$, the gate matrices $\mathsf N=\int H^2$,
+$\mathsf D=\int H^{ab}(\partial_aH)(\partial_bH)$, $\mathsf R=\mathsf N-\mathsf D$ resolve as
+\[
+  a^T\mathsf Na=1+\norm{M_a}^2+\norm v^2,\qquad
+  a^T\mathsf Da=\norm{M_a}^2+\langle v,\mathsf A_{\rm op}v\rangle,\qquad
+  a^T\mathsf Ra=1-\langle v,(\mathsf A_{\rm op}-1)v\rangle .
+\]
+Consequently $\mathsf R\preceq I$, with equality in a direction exactly when the column
+fluctuation is spectrally pure at the gap; the bootstrap $(\mathrm{AB})_{\rho,\beta}$ is
+equivalent to the channel inequality
+$\langle v,(\mathsf A_{\rm op}-1)v\rangle+\rho(\norm{M_a}^2+\norm v^2)\le1+\beta-\rho$ for all
+unit $a$; $\mathsf R\succeq\mathsf N-nI$ holds unconditionally, so $Q_{\rm lin}\le n+1$; and
+$\mathsf R\succeq\mathsf D$ holds for every regular finite product of one-dimensional laws.
+\end{lemma}
+
 \begin{remark}[Relation to the shared trace-upgrade difficulty]
 Gate zero belongs to the same difficulty family as \texttt{q:upgrade}, the high-rank part of
 \texttt{q:stein-weighted}, and \texttt{q:alignment}; no equivalence is asserted, exactly as in
