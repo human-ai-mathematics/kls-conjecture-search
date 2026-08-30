@@ -189,6 +189,63 @@ $\E\int_0^\infty t\norm{H_t}_{\HS}^2\dd t\le\Var_\mu(f)$.
 This estimate retains one power of time and by itself gives no unweighted initial-layer bound.
 \end{lemma}
 
+\subsection{The initial-layer window chain}
+\label{subsec:spectral-window-chain}
+
+The following four candidate statements assemble the initial layer of
+Question~\ref{q:mm-spectral-occupation} completely up to the published covariance window. They
+were isolated in the 2026-08-30 initial-layer probe; their proofs are staged in standalone
+dossiers pending independent review, so each carries status \emph{open} in the ledger. The first
+and last are conditional on the unreviewed quadratic-Poincar\'e import
+(Theorem~\ref{thm:letwin-qcts}); that conditionality is part of the statements.
+
+\begin{lemma}[Stopped initial-layer source bound; conditional on Theorem~\ref{thm:letwin-qcts}]
+\label{lem:mm-stopped-window-source}
+For every regular approximant, every fixed unit-variance test $f$, every $L\ge1$ and $T>0$, let
+$\tau_L=\inf\{t:\norm{A_t}_\op\ge L\}$. Then
+$\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le 8L^2T$, uniformly in the dimension and in
+the regularization.
+\end{lemma}
+
+\begin{lemma}[Restart deweighting at a stopping time]
+\label{lem:mm-restart-deweighting}
+For every almost surely positive stopping time $\sigma$ of the observation filtration on an
+$\eps$-regular approximant and every fixed $L^2$ test,
+\[
+  \E\Bigl[\int_\sigma^\infty\norm{H_t}_{\HS}^2\dd t\ \Big|\ \F_\sigma\Bigr]
+  \ \le\ \frac{\Var_{\mu_\sigma}(f)}{\eps+\sigma}\ \le\ \frac{v_\sigma}{\sigma},
+\]
+by conditional application of Lemma~\ref{lem:mm-time-weighted-fixed-source} with
+$\kappa=\eps+\sigma$ after the strong-Markov restart of the planted localization channel.
+\end{lemma}
+
+\begin{lemma}[Small-gap fourth moment from the published frontier]
+\label{lem:mm-smallgap-fourth-moment}
+Let $K_n$ be the constant of Theorem~\ref{thm:klartag-logn}, so that every isotropic
+log-concave law in dimension $n$ satisfies $\CP\le K_n$. Then every normalized first
+eigenfunction of a regular isotropic approximant with $\lambda\le 3/(8K_n)$ satisfies
+$\E f^4\le2$, via the eigen-identity $\lambda\,\E f^4=3\,\E f^2\abs{\nabla f}^2$ and the
+Poincar\'e inequality applied to $f^2$.
+\end{lemma}
+
+\begin{proposition}[Window occupation and frontier reproduction; conditional on
+Theorem~\ref{thm:letwin-qcts}]
+\label{prop:mm-window-occupation}
+With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from Theorem~\ref{thm:KL-window}, the
+occupation hypothesis \eqref{eq:spectral-occupation} holds on $[0,T_0(n)]$ with $C_0=34$ and
+$C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the certified
+bridge argument of Proposition~\ref{prop:spectral-sufficiency} run at fixed $n$ and the trivial
+large-gap branch, every isotropic log-concave law satisfies $\CP\le C\log^2n$, conditional on
+Theorem~\ref{thm:letwin-qcts}.
+\end{proposition}
+
+Proposition~\ref{prop:mm-window-occupation} is a route-health certificate: it reproduces the
+polylogarithmic frontier through Route~S machinery without improving it, and it does not decide
+Question~\ref{q:mm-spectral-occupation}, whose remaining content is exactly the post-spike
+charge beyond the covariance window. The 2026-08-30 probe also shows the certified budgets are
+exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch
+admits no shortcut from the certified budgets alone.
+
 \subsection{An equivalent sufficient reformulation}
 \label{subsec:spectral-kappa-form}
 

@@ -532,6 +532,15 @@ nodes:
     file: modules/kls/15-covariance-technology.tex
     statement: "Known small-time operator-norm control: E||A_t||_op ≤ C_1 for t ≤ c_0(log n)^{-C_2}. (Chen / Klartag–Lehec.)"
 
+  - id: thm:klartag-logn
+    kind: theorem
+    status: imported
+    import_class: published
+    references: [Klartag2023Logarithmic]
+    route: shared
+    file: modules/kls/15-covariance-technology.tex
+    statement: "Every isotropic log-concave probability on R^n (n>=2) satisfies C_P <= C log n, via the Cheeger bound hstar_n >= c (log n)^(-1/2) and Cheeger's inequality."
+
   - id: cor:loglog
     kind: corollary
     status: proved
@@ -814,6 +823,15 @@ nodes:
     checked_by: agent
     review: research/reviews/2026-08-27-prop-spectator-excess-rate-obstruction-proof-review.md
 
+  - id: prop:split-screened-supply
+    kind: proposition
+    status: open
+    route: eldan-localization
+    file: modules/kls/27-eldan-open-targets.tex
+    statement: "For a product of isotropic one-dimensional log-concave laws, a J-measurable cut with |J|=k and 0<p_0<1, every eta in (0,1/4], kappa>0, and every T>0, the screened weighted excess satisfies E int_0^{T wedge tau_eta} e_t (1+lambda_cut(A_t,K_t))^(5/2) 1{Q_t >= kappa e_t W_cut} dt <= (2k+64 eta^2 (1+k))/kappa, uniformly in the ambient dimension and in every spectator coordinate. Total-budget form, not proportional to T."
+    depends_on: [lem:stein-vs-source, thm:budget, lem:block, thm:scalar-riccati, lem:lyapunov-stein-duality, prop:trivial-excess]
+    bounded_by: [obs:two-tail, obs:circularity]
+
   - id: q:stein-weighted
     kind: question
     status: open
@@ -901,6 +919,38 @@ nodes:
     solution: solutions/lem-mm-time-weighted-fixed-source.tex
     checked_by: agent
     review: research/reviews/2026-08-27-lem-mm-time-weighted-fixed-source-proof-review.md
+
+  - id: lem:mm-stopped-window-source
+    kind: lemma
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "Conditional on thm:letwin-qcts: for every regular approximant, every fixed unit-variance test, every L>=1 and T>0, with tau_L the first time ||A_t||_op reaches L, E int_0^{T wedge tau_L} ||H_t||_HS^2 dt <= 8 L^2 T, uniformly in dimension and regularization."
+    depends_on: [thm:letwin-qcts]
+
+  - id: lem:mm-restart-deweighting
+    kind: lemma
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "For every a.s. positive stopping time sigma of the observation filtration on an eps-regular approximant and every fixed L^2 test, E[int_sigma^infty ||H_t||_HS^2 dt | F_sigma] <= Var_{mu_sigma}(f)/(eps+sigma) <= v_sigma/sigma, by conditional application of lem:mm-time-weighted-fixed-source with kappa = eps+sigma after the strong-Markov restart of the localization."
+    depends_on: [lem:mm-time-weighted-fixed-source]
+
+  - id: lem:mm-smallgap-fourth-moment
+    kind: lemma
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "If every isotropic log-concave law in dimension n satisfies C_P <= K_n (thm:klartag-logn), then every normalized first eigenfunction of a regular isotropic approximant with lambda <= 3/(8 K_n) satisfies E f^4 <= 2, via lambda E f^4 = 3 E f^2 |grad f|^2 and Poincare for f^2."
+    depends_on: [thm:klartag-logn]
+
+  - id: prop:mm-window-occupation
+    kind: proposition
+    status: open
+    route: moment-map-spectral
+    file: modules/kls/30-spectral-route.tex
+    statement: "Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, q:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law satisfies C_P <= C log^2 n conditional on thm:letwin-qcts."
+    depends_on: [thm:letwin-qcts, thm:KL-window, thm:klartag-logn, lem:mm-stopped-window-source, lem:mm-restart-deweighting, lem:mm-smallgap-fourth-moment, lem:mm-time-weighted-fixed-source]
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
