@@ -10,6 +10,10 @@ A1--A5 live in ``targets.a_series``. KLS (Part III route-gating) lives in ``targ
             observables are implemented (kls/loc_engine.py)
   "kls-align" the product tail-union q:alignment stress test; model-diagnostic only
               (kls/alignment.py)
+  "kls-screen" the cut-local screened-supply q:weighted diagnostic on the same tail-union
+              localization engine: lambda_cut, W_cut, Q, the aligned set A_kappa, the
+              screened supply, and the spectator-cylinder control (kls/screening.py). Its
+              excess is a competitor-based SURROGATE that understates the true excess.
   "cmh-gate-zero" the deterministic moment-map/CMH gate-zero battery
               E[H Sigma^{-1} H] <= 4 Sigma (kls/cmh_gate_zero/) -- exact 1D Stein kernels
               and Dirichlet moment matrices, an exact algebraic countermodel, and directional
@@ -26,7 +30,7 @@ from __future__ import annotations
 
 from ..contract import TargetSpec
 from .a_series import a1, a2, a3, a4, a5
-from .kls import alignment, bridge, cmh_gate_zero, fiber_frame_dual, loc_engine
+from .kls import alignment, bridge, cmh_gate_zero, fiber_frame_dual, loc_engine, screening
 
 REGISTRY = {
     "A1": TargetSpec(
@@ -73,6 +77,29 @@ REGISTRY = {
                        "n_paths": 32, "widths": (0.01, 0.02, 0.05, 0.1, 0.2),
                        "alphas": (0.0, 0.1, 0.25, 0.5, 0.75, 0.9), "C1": 1.0,
                        "high_threshold": 2.0},
+        },
+    ),
+    "kls-screen": TargetSpec(
+        "kls-screen", screening, "cut-local screened-supply q:weighted diagnostic", True,
+        {
+            # A uniform snapshot grid of spacing 0.05 or 0.02 fails this target's own
+            # paired snapshot-refinement gate, because the surrogate excess has a steep
+            # initial layer.  The run profiles use spacing 0.005 on [0,0.06] and 0.02 after.
+            "smoke": {"ns": (64,), "T": 0.2, "dt": 0.005, "snapshot_stride": 4,
+                      "n_paths": 4, "kappas": (0.05,), "widths": (0.04, 0.1),
+                      "dense_until": 0.06,
+                      "spectator_ns": (64, 128), "spectator_n0": 8,
+                      "spectator_paths": 2, "spectator_stride": 4},
+            "standard": {"ns": (256, 1024), "T": 0.4, "dt": 0.005, "snapshot_stride": 4,
+                         "n_paths": 16, "kappas": (0.01, 0.05, 0.1, 0.25, 0.5, 1.0),
+                         "widths": (0.04, 0.1, 0.2), "dense_until": 0.06,
+                         "spectator_ns": (256, 1024), "spectator_n0": 32,
+                         "spectator_paths": 8, "spectator_stride": 8},
+            "high-n": {"ns": (1024, 4096), "T": 0.4, "dt": 0.005, "snapshot_stride": 4,
+                       "n_paths": 16, "kappas": (0.01, 0.05, 0.1, 0.25, 0.5, 1.0),
+                       "widths": (0.04, 0.1, 0.2), "dense_until": 0.06,
+                       "spectator_ns": (256, 4096), "spectator_n0": 32,
+                       "spectator_paths": 8, "spectator_stride": 8},
         },
     ),
     "cmh-gate-zero": TargetSpec(
