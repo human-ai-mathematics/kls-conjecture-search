@@ -1274,6 +1274,14 @@ nodes:
     checked_by: agent
     review: research/reviews/2026-08-27-conditional-fiber-frame-structure-proof-review.md
 
+  - id: lem:fiber-root-degree-two
+    kind: lemma
+    status: open
+    route: conditional-fiber-frame
+    file: modules/kls/45-conditional-fiber-frame.tex
+    statement: "For every m>=3, on the degree-<=2 quotient V_{m,2} of L^2 of the isotropic uniform simplex modulo constants, the A_{m-1} root-frame pair form K(f,f)=(12/(m^2(m+1))) sum_{i<j} E[Var_{ij}(f)/(P_i+P_j)^2] and G=Var satisfy lambda_min(K,G)=(m+2)(m+3)/(5m^2), attained exactly on the radial line R[|X|^2-(m-1)]. Granting the certified root-pencil identification, every degree-two dual certificate in the all-frame min-max framework has objective at least (m+2)(m+3)/(5m^2) > 1/5, so any fixed-degree polynomial dual refuter requires degree at least three and Lambda_{m,2} >= (m+2)(m+3)/(5m^2). No upper bound on Lambda_{m,2}, no degree-three statement, and no full-L^2 claim."
+    depends_on: [lem:conditional-fiber-form, prop:conditional-fiber-root-obstruction]
+
   - id: prop:sasada-negative-exchange
     kind: proposition
     status: imported
