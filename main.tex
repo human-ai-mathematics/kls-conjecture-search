@@ -1,12 +1,20 @@
 % main.tex
 % -----------------------------------------------------------------------------
-% Unified master document for the functional-inequalities program. Assembles the
-% modules via the subfiles package:
-%   Part I   (modules/)              structured statistical/ML families, by difficulty
-%   Part II  (modules/open-targets/) A-series results and open-target deep dives
-%   Part III (modules/kls/)          the Kannan--Lovasz--Simonovits frontier
+% Master document for the Kannan--Lovasz--Simonovits program. Assembles the
+% modules via the subfiles package.
 %
 %   latexmk -pdf -outdir=build main.tex
+%
+% The structured-posterior program that formerly stood as Parts I and II now
+% lives in the sibling repository posterior-inequalities-exploration; see
+% README.md. Its conjecture A1-bis is the structured counterpart of the KLS
+% conjecture, and is referred to here as an external comparison only.
+%
+% The document is grouped by \klsgroup dividers (shared/preamble.tex):
+% orientation, then a self-contained survey of the five strategy families, then
+% the shared localization machinery, then one block per live repository route,
+% then the synthesis. The dividers carry no numbering; section and \label
+% identity --- and therefore every ledger node id --- is unchanged.
 %
 % Bibliography: biblatex + biber, single shared file fi_references.bib.
 % Cross-references resolve when compiling main.tex; a standalone module shows
@@ -17,9 +25,9 @@
 \usepackage{subfiles}
 \input{\subfix{shared/preamble.tex}}
 
-\title{Functional Inequalities for Statistical and Machine-Learning Distributions\\[0.4em]
-\large Poincar\'e, log-Sobolev, and transportation-cost constants, from structured families
-to the Kannan--Lov\'asz--Simonovits frontier}
+\title{The Kannan--Lov\'asz--Simonovits Frontier\\[0.4em]
+\large Routes toward a dimension-free Poincar\'e constant for isotropic
+log-concave measures}
 \author{Nicolas Brosse}
 \date{\today}
 
@@ -27,60 +35,31 @@ to the Kannan--Lov\'asz--Simonovits frontier}
 \maketitle
 
 \begin{abstract}
-  This is a unified treatment of three functional inequalities --- the Poincar\'e ($C_{\mathrm P}$),
-  log-Sobolev ($C_{\mathrm{LS}}$), and quadratic transportation-cost ($C_{\mathrm{TCI}}$) constants
-  --- for measures $P\propto e^{-U}$ used in statistics and machine learning, organized as a
-  difficulty gradation. \textbf{Part~I} certifies explicit, dimension-controlled constants for
-  structured parameterized families by routing each to a classical template (Bakry--\'Emery,
-  Brascamp--Lieb, Holley--Stroock, tensorization, Otto--Villani, Hardy/Muckenhoupt): Gaussian and
-  log-concave calibration, bounded perturbations and products, the flagship Gaussian-prior
-  generalized-linear-model posterior bound $C_{\mathrm P}\le\lambda_{\max}(\Sigma_0)$ (data-free,
-  dimension-free), the heavy-tailed obstruction to LSI/$T_2$, and multimodal / hierarchical
-  posteriors; it closes with the open research agenda for sharp Bayesian-posterior constants.
-  \textbf{Part~II} develops that agenda as A-series results and open-target deep dives, one section
-  per flagship problem
-  --- data-informed GLM-posterior constants, the Bernstein--von Mises limit, heavy-tailed posteriors
-  beyond classical LSI, variational-inference transport constants, and the
-  quotient/reparameterization of symmetry- and funnel-induced slow modes. It promotes the
-  twenty-one independently reviewed results and sharp model calibrations already obtained, records useful
-  obstructions, and separates them from proof drafts and the remaining open targets.
-  \textbf{Part~III} maps the Kannan--Lov\'asz--Simonovits frontier --- the dimension-free
-  Poincar\'e bound for arbitrary isotropic log-concave measures, the ``Tier-$\infty$'' boundary of
-  Part~I. It distinguishes the sharp July 2026 radial and homogeneous-quadratic results from full KLS,
-  develops the conditional fixed-cut Eldan program in detail, and records the separate
-  fixed-eigenfunction, deterministic moment-map/Haar, and inverse-variance conditional-fiber
-  routes with their exact open bottlenecks.
+  This document maps the Kannan--Lov\'asz--Simonovits frontier --- the dimension-free Poincar\'e
+  bound $C_{\mathrm P}\le K\lambda_{\max}(\mathrm{Cov})$ for an arbitrary isotropic log-concave
+  measure, open since 1995. It distinguishes the sharp July 2026 radial and homogeneous-quadratic
+  results from full KLS, develops the conditional fixed-cut Eldan program in detail, and records
+  the separate fixed-eigenfunction, deterministic moment-map/Haar, and inverse-variance
+  conditional-fiber routes with their exact open bottlenecks. It opens with an orientation to the
+  conjecture, the August 2026 frontier, and the covariance-spike obstruction that constrains every
+  route, followed by a self-contained survey of the five strategy families in the literature. It
+  then develops this repository's own work: the shared localization machinery, the conditional
+  fixed-cut Eldan program, the fixed-eigenfunction spectral route, and the distinct deterministic
+  moment-map/Haar route with its commutator bottleneck --- that last route carrying a second,
+  logically prior layer in which the proposed endpoint is given precise operator data, proved to
+  dominate the affine Poincar\'e constant, and computed exactly on the line, on products, and on
+  every log-concave Dirichlet law, together with the two reasons that endpoint may nonetheless be
+  false. It closes by mapping each remaining gap in the literature onto an open node of this
+  repository's KLS ledger.
+
+  KLS is the unstructured limit of a difficulty gradation: every structured family buys an
+  explicit constant precisely by having more usable structure than a general log-concave measure.
+  The structured end of that gradation --- Bayesian-posterior constants, and the
+  structured-posterior conjecture A1-bis --- is developed in the companion repository
+  \texttt{posterior-inequalities-exploration}, and appears here only as a comparison.
 \end{abstract}
 
 \tableofcontents
-
-\part{Functional inequalities for statistical and machine-learning distributions}
-
-\subfile{modules/00-overview}
-\subfile{modules/01-definitions}
-\subfile{modules/02-results-toolkit}
-\subfile{modules/03-tier1-gaussian}
-\subfile{modules/04-tier2-perturbations}
-\subfile{modules/05-tier3-glm}
-\subfile{modules/06-tier4-heavy-tails}
-\subfile{modules/07-tier5-mixtures}
-\subfile{modules/08-open-targets}
-
-\part{A-series results and open-target deep dives}
-
-\subfile{modules/open-targets/A1-data-informed-glm}
-\subfile{modules/open-targets/A2-bernstein-von-mises}
-\subfile{modules/open-targets/A3-heavy-tailed-posteriors}
-\subfile{modules/open-targets/A4-variational-inference}
-\subfile{modules/open-targets/A5-quotient-and-reparameterization}
-
-\part{The Kannan--Lov\'asz--Simonovits frontier}
-
-% Part III is grouped by \klsgroup dividers (shared/preamble.tex): orientation,
-% then a self-contained survey of the five strategy families, then the shared
-% localization machinery, then one block per live repository route, then the
-% synthesis. The dividers carry no numbering; section and \label identity --- and
-% therefore every ledger node id --- is unchanged by the grouping.
 
 \klsgroup{Group 0 --- Orientation}{%
 The conjecture, the August 2026 frontier, the architecture of the current proof, and the

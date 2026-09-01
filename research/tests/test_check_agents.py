@@ -38,7 +38,7 @@ class AgentCheckerFixture(unittest.TestCase):
     def test_generated_adapters_match_canonical_roles(self):
         result = self.run_checker()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("0 errors (13 roles)", result.stdout)
+        self.assertIn("0 errors (12 roles)", result.stdout)
 
     def test_stale_codex_adapter_is_rejected(self):
         adapter = self.root / ".codex/agents/scout.toml"
@@ -54,7 +54,6 @@ class AgentCheckerFixture(unittest.TestCase):
             "proof-checker",
             "proof-miner",
             "prover",
-            "refiner",
             "refutation-seeker",
             "synthesizer",
         }

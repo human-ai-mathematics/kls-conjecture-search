@@ -13,7 +13,7 @@ TOML file.
 
 The orchestrator is not a spawnable role. It owns every single-file merge point:
 
-- both `ledger.yaml` files;
+- `research/kls/ledger.yaml`;
 - `fi_references.bib`;
 - `research/kls/routes.md` and `research/kls/gating.md`;
 - accepted manuscript statement changes; and
@@ -58,7 +58,6 @@ orchestrator, not by a role saying “singleton” about itself.
 | `knowledge` | one `synthesizer` |
 | `finum-code` | one `finum` whenever `experiments/finum/**` changes |
 | `finum-run:<target>:<profile>:<seed>` | parallel only for distinct stable runs |
-| `target:<A1--A5>` | one `refiner` per stream |
 | `solution:<dossier>` | one `prover`; its reviewer uses a distinct agent identity |
 | `review:<dossier>` | one cold `proof-checker` at a time |
 | `kls-gate:<id>` | one prober; the trace-upgrade cluster additionally uses `knowledge` |
@@ -74,7 +73,6 @@ record.
 | role | writes | cardinality |
 |---|---|---|
 | [`scout`](scout.md) | nothing | N, parallel |
-| [`refiner`](refiner.md) | one A-series target brief; one new exploration | 1 per target |
 | [`finum`](finum.md) | `experiments/finum/`, generated runs, one new exploration | singleton for code; N for distinct stable runs |
 | [`prover`](prover.md) | one dossier; one new exploration | 1 per dossier |
 | [`refutation-seeker`](refutation-seeker.md) | one new exploration | N, one lens each |
@@ -98,8 +96,8 @@ Use `scout` for unfamiliar, ambiguous, or broad assignments; it is not a mandato
 exact node and artifacts are already known.
 
 ```text
-A-series: refiner -> refutation-seeker -> finum (when requested) -> prover
-KLS:      kls-route-scout | kls-route-prober -> finum (when requested) -> prover
+KLS:      kls-route-scout | kls-route-prober -> refutation-seeker -> finum (when requested)
+                                            -> prover
 External: literature-scout -> orchestrator
 Mining:   proof-miner -> synthesizer | prover
 Proof:    prover -> proof-checker -> pass: orchestrator
@@ -116,14 +114,17 @@ A numerical result never skips the proof path. An exact `finum` witness is still
 
 ## Where to fan out, where to converge
 
-Fan out across read-only scouting, distinct A-series streams, KLS gates in different routes,
-refutation lenses, and independent literature/mining questions. Do not fan out writes to a shared
+Fan out across read-only scouting, KLS gates in different routes, refutation lenses, and
+independent literature/mining questions. Do not fan out writes to a shared
 file. `finum` package edits, bibliography edits, knowledge promotion, manuscript promotion, route
 control, and ledger edits converge through their keys above.
 
-The `synthesizer` owns the three mathematical merge barriers: A1 ↔ A2 consistency, the A1-bis ↔
-KLS bridge, and the trace-upgrade cluster (`CLAUDE.md` constraint 6). The live frontier is derived
-with `python3 research/check_ledger.py status`; no role maintains a second copy.
+The `synthesizer` owns the mathematical merge barriers: the trace-upgrade cluster (`CLAUDE.md`
+constraint 6), and the comparison between `conj:kls` and the structured `conj:a1-bis` pursued in
+the companion repository `posterior-inequalities-exploration`. That comparison may never be
+asserted as an implication in either direction without a proof restated locally. The live
+frontier is derived with `python3 research/check_ledger.py status`; no role maintains a second
+copy.
 
 ## Validation
 

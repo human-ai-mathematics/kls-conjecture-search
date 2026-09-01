@@ -25,22 +25,21 @@ of you at a time.
 ## Write surface
 
 - `research/knowledge/lemmas.md` — compact reusable facts **with their guardrails**.
-- `research/knowledge/instances.md` — you are the curator: a refiner, prober or seeker may
+- `research/knowledge/instances.md` — you are the curator: a prober or seeker may
   propose an adversarial instance; you decide whether it enters the shared battery
   (`CLAUDE.md` constraint 3). Reject instances that only serve one agent's happy path.
 - `research/explorations/YYYY-MM-DD-<slug>.md` — the comparison or synthesis itself.
 
 ## The merge barriers — converge here, do not fan out
 
-1. **A1 ↔ A2 consistency.** `q:a1-sharp` must reproduce $\lambda_{\max}(I^{-1})$ as $n\to\infty$
-   (`conj:a2`, `thm:a2-target`). A bulk-tight A1 bound and the BvM limit must agree; a delta that
-   breaks the limit is not a refinement.
-2. **A1-bis ↔ KLS bridge.** `a-series/conj:a1-bis` ($C_P \le K\lambda_{\max}(\mathrm{Cov})$ for
-   structured GLM posteriors) is the structured shadow of the route-neutral `kls/conj:kls` — the
-   same bound for *every* isotropic log-concave measure **is** KLS. Keep the link a `bridges`
-   comparison. Proving the structured case does not prove KLS; assuming KLS trivializes the
-   structured case.
-3. **The trace-upgrade cluster.** `q:upgrade`, the high-rank part of `q:stein-weighted`, and
+1. **The structured counterpart.** `conj:kls` ($C_P \le K\lambda_{\max}(\mathrm{Cov})$ for *every*
+   isotropic log-concave measure) has a structured shadow, `conj:a1-bis` — the same bound for
+   structured GLM posteriors — tracked in the companion repository
+   `posterior-inequalities-exploration`. Keep the link a comparison, in prose; it is deliberately
+   not a ledger field, because `bridges` resolves only inside one repository. Proving the
+   structured case does not prove KLS; assuming KLS trivializes the structured case. Never import
+   a claim from the companion repository as a dependency: restate and prove it here first.
+2. **The trace-upgrade cluster.** `q:upgrade`, the high-rank part of `q:stein-weighted`, and
    `q:alignment` are three manifestations of the same high-rank occupation difficulty, but
    `rem:trace-upgrade-unification` states their formal equivalence is **not proved**
    (`CLAUDE.md` constraint 6). One owner — you — holds the comparison. The CMH square-root

@@ -1,7 +1,7 @@
 # Ledger schema
 
-This is the field-level schema for [`a-series/ledger.yaml`](a-series/ledger.yaml) and
-[`kls/ledger.yaml`](kls/ledger.yaml). [`check_ledger.py`](check_ledger.py) is the executable
+This is the field-level schema for [`kls/ledger.yaml`](kls/ledger.yaml).
+[`check_ledger.py`](check_ledger.py) is the executable
 validator; [`../CLAUDE.md`](../CLAUDE.md) owns the contribution rules.
 
 ## Document shape
@@ -10,7 +10,7 @@ Each production ledger has exactly two top-level keys:
 
 ```yaml
 meta:
-  program: a-series | kls
+  program: kls
 nodes:
   - id: ...
 ```
@@ -21,9 +21,8 @@ nodes:
 
 | field | program | requirement |
 |---|---|---|
-| `program` | both | Program id: `a-series` or `kls`. |
-| `scope` | A-series | Human-readable graph boundary. |
-| `route_policy.allowed` | KLS | Closed route vocabulary used by every node's `route`. |
+| `program` | required | Program id: `kls`. |
+| `route_policy.allowed` | required | Closed route vocabulary used by every node's `route`. |
 
 ## Node fields
 
@@ -74,11 +73,10 @@ All graph-valued fields are YAML lists.
 
 | field | program | meaning |
 |---|---|---|
-| `refines` | A-series | One LaTeX statement genuinely sharpened by the node. |
-| `route` | KLS | Owning route from `meta.route_policy.allowed`. |
+| `route` | required | Owning route from `meta.route_policy.allowed`. |
 | `depends_on` | both | Same-ledger claims actually used in the proof; acyclic. |
 | `bounded_by` | both | Same-ledger nodes with `kind: obstruction` that constrain the claim or proof. |
-| `bridges` | both | Cross-program comparison links written as `program/id`; never proof dependencies. |
+| `bridges` | optional | Comparison links inside this repository, written as `program/id`; never proof dependencies. The comparison with `conj:a1-bis` in `posterior-inequalities-exploration` is prose only (`CLAUDE.md` constraint 9). |
 | `refuted_by` | both | Proved/imported refuters, each also listed in `depends_on`. |
 
 Conditional premises and downstream consumers are derived from `depends_on`. Roadmap

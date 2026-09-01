@@ -30,7 +30,6 @@ For each node in scope:
 2. Read the `\label`ed environment in full. Compare it against the ledger `statement:` — same
    quantifiers, same constants, same hypotheses, same direction of inequality.
 3. If the node has a `solution:`, compare the dossier theorem against both.
-4. For an A-series node, confirm `refines` points at a statement genuinely sharpened by this node.
 5. Check the environment kind matches the ledger `kind` (a `\begin{conjecture}` behind
    `kind: theorem` is a real defect).
 6. Check that a `conditional` node's manuscript statement carries its hypothesis visibly, and

@@ -58,6 +58,11 @@ These numbers are cited by append-only records. Do not renumber them.
    certification mode, including Lean.
 8. **`research/explorations/` and `research/decisions/` are append-only.** Add dated files; never
    rewrite or delete their history.
+9. **The structured counterpart lives in another repository.** `conj:a1-bis` is tracked in
+   `posterior-inequalities-exploration`. The relationship to `conj:kls` is a comparison, in prose
+   only: never a `depends_on` or `bridges` edge, since both resolve within one repository. Never
+   import a result from that repository as a dependency — restate and prove or cite it here
+   first.
 
 ## Global convention
 

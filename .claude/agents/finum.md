@@ -1,6 +1,6 @@
 ---
 name: finum
-description: The only agent that runs numerics. Builds or extends a finum target/observable, executes it, and emits a provenance-stamped artifact under research/runs/. Use when a refiner, prober, or refutation-seeker has specified a diagnostic. It never changes a logical status.
+description: The only agent that runs numerics. Builds or extends a finum target/observable, executes it, and emits a provenance-stamped artifact under research/runs/. Use when a route prober or refutation-seeker has specified a diagnostic. It never changes a logical status.
 tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 

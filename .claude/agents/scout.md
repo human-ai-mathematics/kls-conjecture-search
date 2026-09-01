@@ -20,14 +20,12 @@ facts, not opinions about how to proceed. Many scouts run in parallel; each is c
 
 ## Method
 
-1. Resolve the node in its ledger (`research/a-series/ledger.yaml` or `research/kls/ledger.yaml`)
-   and read `python3 research/check_ledger.py node <id>` for its derived consumers.
+1. Resolve the node in `research/kls/ledger.yaml` and read `python3 research/check_ledger.py node <id>` for its derived consumers.
 2. Open the manuscript anchor: the node `id` is its LaTeX `\label` unless `label:` overrides it;
    the file is the node's `file`.
 3. Follow the whole `depends_on` closure and record each dependency's status.
 4. Read **every** `bounded_by` obstruction in the program obstruction file, in full.
-5. Read the target brief (`research/a-series/targets/*.md`) or route entry
-   (`research/kls/routes.md`, `research/kls/gating.md`).
+5. Read the route entry (`research/kls/routes.md`, `research/kls/gating.md`).
 6. Grep `research/explorations/` for prior attempts on this node and summarize their outcomes —
    especially the dead ends.
 7. Note existing dossiers (`solutions/`), reviews (`research/reviews/`), and run artifacts

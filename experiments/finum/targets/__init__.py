@@ -4,7 +4,7 @@ Each implementation module exposes:
   run_records(seed, **cfg) -> RunResult
   selftest(rng)           -> list[(name: str, ok: bool)]
 
-A1--A5 live in ``targets.a_series``. KLS (Part III route-gating) lives in ``targets.kls``:
+The KLS route-gating batteries live in ``targets.kls``:
   "kls"     SDE-free, sound bridge/Poincare-level signals (kls/bridge.py)
   "loc-engine" legacy localization SDE diagnostics; no route observable or claim conclusion
             observables are implemented (kls/loc_engine.py)
@@ -20,30 +20,9 @@ A1--A5 live in ``targets.a_series``. KLS (Part III route-gating) lives in ``targ
 from __future__ import annotations
 
 from ..contract import TargetSpec
-from .a_series import a1, a2, a3, a4, a5
 from .kls import alignment, bridge, cmh_gate_zero, loc_engine
 
 REGISTRY = {
-    "A1": TargetSpec(
-        "A1", a1, "GLM curvature and flat-direction diagnostics", True,
-        {"standard": {"n_cal": 20_000, "n_stress": 4_000}},
-    ),
-    "A2": TargetSpec(
-        "A2", a2, "Bernstein-von Mises transfer diagnostics", True,
-        {"standard": {}},
-    ),
-    "A3": TargetSpec(
-        "A3", a3, "weighted Poincare heavy-tail diagnostics", False,
-        {"standard": {}},
-    ),
-    "A4": TargetSpec(
-        "A4", a4, "restricted transport diagnostics", False,
-        {"standard": {}},
-    ),
-    "A5": TargetSpec(
-        "A5", a5, "quotient and reparameterization diagnostics", False,
-        {"standard": {}},
-    ),
     "kls": TargetSpec(
         "kls", bridge, "SDE-free Poincare/KLS bridge diagnostics", False,
         {"standard": {"d": 4}},
