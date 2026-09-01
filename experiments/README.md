@@ -1,6 +1,6 @@
 # finum — numerical research diagnostics
 
-`finum` runs calibrated numerical batteries for the A-series and KLS research programs. Its
+`finum` runs calibrated numerical batteries for the KLS research program. Its
 output guides exploration; it never changes a ledger status or certifies a proof.
 
 ## Boundary
@@ -25,16 +25,16 @@ Run from this directory so `uv` uses the tracked lock file:
 ```bash
 uv run python -m finum list
 uv run python -m finum check
-uv run python -m finum check A3
-uv run python -m finum run A3
+uv run python -m finum check kls
+uv run python -m finum run kls
 uv run python -m finum run loc-engine --profile full
 uv run python -m finum run kls-align --profile high-n --seed 20260824
 uv run pytest -m "not slow"
 uv run pytest
 ```
 
-`selftest` remains a compatibility alias for `check`; `run --target A3` remains a compatibility
-form of `run A3`. A run target is otherwise mandatory—there is no silent default.
+`selftest` remains a compatibility alias for `check`; `run --target kls` remains a compatibility
+form of `run kls`. A run target is otherwise mandatory—there is no silent default.
 
 `check` is the fast installed-package smoke lane. Pytest without the `slow` marker is the normal
 development lane. Full pytest includes the expensive localization Monte Carlo regressions.
@@ -43,18 +43,15 @@ development lane. Full pytest includes the expensive localization Monte Carlo re
 
 | target | role | profiles |
 |---|---|---|
-| `A1` | GLM curvature and flat-direction diagnostics | `standard` |
-| `A2` | Bernstein–von Mises transfer diagnostics | `standard` |
-| `A3` | weighted-Poincaré heavy-tail diagnostics | `standard` |
-| `A4` | restricted transportation-cost diagnostics | `standard` |
-| `A5` | quotient and reparameterization diagnostics | `standard` |
 | `kls` | SDE-free Poincaré/KLS bridge checks | `standard` |
 | `loc-engine` | legacy localization-engine regression; no route observable | `standard`, `full` |
 | `kls-align` | product-Laplace tail-union alignment diagnostic | `standard`, `high-n` |
 | `cmh-gate-zero` | deterministic necessary-condition CMH battery | `standard` |
 
 Use `finum list` as the executable source of truth. `loc-engine` replaces the misleading public
-name `kls-loc`; historical artifacts keep their original target id unchanged.
+name `kls-loc`; historical artifacts keep their original target id unchanged. The A1--A5
+batteries moved with that program to the companion repository
+`posterior-inequalities-exploration`.
 
 ## Artifact contract
 
@@ -82,7 +79,6 @@ finum/
   sampling.py       seeded adaptive/preconditioned MALA
   localization/     localization state, cuts, moments, gates, and alignment observables
   targets/          stable public registry
-    a_series/       A1--A5 batteries
     kls/            bridge, localization, alignment, and CMH batteries
 tests/              fast deterministic/oracle tests plus explicitly marked slow MC regressions
 ```

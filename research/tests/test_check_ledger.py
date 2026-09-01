@@ -155,36 +155,32 @@ class CheckerHardeningTests(CheckerFixture):
         self.assertIn("missing ledger for configured program 'kls'", errors)
 
     def test_production_configuration_rejects_legacy_or_extra_ledger_paths(self):
-        self.add_ledger("legacy", "a-series", [node("thm:legacy")])
-        self.add_ledger("kls", "kls", [node("thm:kls")])
+        self.add_ledger("legacy", "kls", [node("thm:legacy")])
 
         report = CHECKER.check_control_plane(
             self.research,
             self.root,
-            configured_ledgers={
-                "a-series": "research/a-series/ledger.yaml",
-                "kls": "research/kls/ledger.yaml",
-            },
+            configured_ledgers={"kls": "research/kls/ledger.yaml"},
         )
         errors = "\n".join(report["errors"])
 
-        self.assertIn("configured ledger for 'a-series' does not exist", errors)
+        self.assertIn("configured ledger for 'kls' does not exist", errors)
         self.assertIn("unconfigured ledger; add an explicit production program path", errors)
 
     def test_duplicate_program_ledgers_and_node_ids_fail(self):
         duplicated = [node("thm:a"), node("thm:a")]
-        self.add_ledger("first", "a-series", duplicated)
-        self.add_ledger("second", "a-series", [node("thm:b")])
+        self.add_ledger("first", "kls", duplicated)
+        self.add_ledger("second", "kls", [node("thm:b")])
 
         errors = "\n".join(self.check()["errors"])
 
         self.assertIn("duplicate node id 'thm:a'", errors)
-        self.assertIn("duplicate ledger for program 'a-series'", errors)
+        self.assertIn("duplicate ledger for program 'kls'", errors)
 
     def test_dependencies_accept_only_nodes_in_the_same_ledger(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [node("thm:a", depends_on=["thm:missing_slug", "external theorem in prose"])],
         )
 
@@ -231,10 +227,10 @@ class CheckerHardeningTests(CheckerFixture):
         for field in ("assuming", "related", "entry_point", "target_doc", "discharged_by"):
             self.assertIn(f"thm:conditional.{field}: obsolete field", errors)
 
-    def test_a_series_conjectured_status_is_rejected_but_open_conjecture_is_valid(self):
+    def test_conjectured_status_is_rejected_but_open_conjecture_is_valid(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node("conj:open", status="open", kind="conjecture"),
                 node("conj:legacy", status="conjectured", kind="conjecture"),
@@ -252,7 +248,7 @@ class CheckerHardeningTests(CheckerFixture):
     def test_kind_records_mathematical_form_not_role_or_provenance(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node("thm:baseline", status="open", kind="baseline"),
                 node("thm:imported-kind", status="open", kind="imported"),
@@ -304,10 +300,10 @@ class CheckerHardeningTests(CheckerFixture):
             errors,
         )
 
-    def test_a_series_schema_rejects_unknown_retired_and_non_list_fields(self):
+    def test_schema_rejects_unknown_retired_and_non_list_fields(self):
         ledger = self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node(
                     "q:schema",
@@ -340,7 +336,7 @@ class CheckerHardeningTests(CheckerFixture):
         other.write_text("fixture without the anchor\n")
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node(
                     "obs:synthetic",
@@ -433,7 +429,7 @@ class CheckerHardeningTests(CheckerFixture):
     def test_numerical_and_narrative_ledger_fields_are_retired(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [node(
                 "q:retired",
                 status="open",
@@ -522,7 +518,7 @@ class CheckerHardeningTests(CheckerFixture):
                 review="research/reviews/missing.md",
             ),
         ]
-        self.add_ledger("main", "a-series", nodes)
+        self.add_ledger("main", "kls", nodes)
 
         errors = "\n".join(self.check()["errors"])
 
@@ -558,7 +554,7 @@ class CheckerHardeningTests(CheckerFixture):
         )
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node(
                     "thm:partial",
@@ -585,7 +581,7 @@ class CheckerHardeningTests(CheckerFixture):
 
         self.assertIn("partial-audit.md.verdict: a proof-review must have", errors)
         self.assertIn(
-            "wrong-scope-audit.md'.nodes: active [a-series] certification 'thm:wrong-scope'",
+            "wrong-scope-audit.md'.nodes: active [kls] certification 'thm:wrong-scope'",
             errors,
         )
         self.assertNotIn("wrong-reviewer-audit.md'.reviewer", errors)
@@ -600,7 +596,7 @@ class CheckerHardeningTests(CheckerFixture):
         )
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [node(
                 "thm:contract",
                 solution=solution,
@@ -612,7 +608,7 @@ class CheckerHardeningTests(CheckerFixture):
         errors = "\n".join(self.check()["errors"])
 
         self.assertIn(
-            "wrong-contract-audit.md'.solutions: active [a-series] certification 'thm:contract'",
+            "wrong-contract-audit.md'.solutions: active [kls] certification 'thm:contract'",
             errors,
         )
         self.assertNotIn("wrong-contract-audit.md'.nodes", errors)
@@ -644,7 +640,7 @@ class CheckerHardeningTests(CheckerFixture):
         )
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node(
                     "thm:audit",
@@ -674,7 +670,7 @@ class CheckerHardeningTests(CheckerFixture):
         )
         malformed = self.root / "research/reviews/2026-08-25-malformed-audit.md"
         malformed.write_text("# Missing front matter\n")
-        self.add_ledger("main", "a-series", [node("thm:fixture")])
+        self.add_ledger("main", "kls", [node("thm:fixture")])
 
         errors = "\n".join(self.check()["errors"])
 
@@ -684,7 +680,7 @@ class CheckerHardeningTests(CheckerFixture):
     def test_every_proved_node_requires_a_solution_and_no_other_signal_bypasses(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node("thm:missing"),
                 node("thm:narrative-only", proof_provenance="inline manuscript argument"),
@@ -738,7 +734,7 @@ class CheckerHardeningTests(CheckerFixture):
                 refuted_by=["obs:proved-counterexample"],
             ),
         ]
-        self.add_ledger("main", "a-series", nodes)
+        self.add_ledger("main", "kls", nodes)
 
         errors = "\n".join(self.check()["errors"])
 
@@ -755,7 +751,7 @@ class CheckerHardeningTests(CheckerFixture):
         lean_solution = self.add_solution("lean-proof", node_ids=("thm:lean",))
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node(
                     "thm:human",
@@ -779,7 +775,7 @@ class CheckerHardeningTests(CheckerFixture):
         self.module.write_text("% ledger-node: thm:outside\n\\label{thm:outside}\n")
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [node(
                 "thm:outside",
                 solution="modules/test.tex",
@@ -795,7 +791,7 @@ class CheckerHardeningTests(CheckerFixture):
             with self.subTest(field=field):
                 self.add_ledger(
                     "main",
-                    "a-series",
+                    "kls",
                     [node("thm:certified")],
                     meta_fields={field: {}},
                 )
@@ -805,8 +801,8 @@ class CheckerHardeningTests(CheckerFixture):
                 self.assertIn(f"meta.{field}: legacy proof exceptions are forbidden", errors)
 
     def test_programs_share_status_contract(self):
-        self.assertEqual(CHECKER.PROGRAMS["a-series"]["status"], CHECKER.SHARED_STATUSES)
-        self.assertEqual(CHECKER.PROGRAMS["kls"]["status"], CHECKER.SHARED_STATUSES)
+        for program in CHECKER.PROGRAMS.values():
+            self.assertEqual(program["status"], CHECKER.SHARED_STATUSES)
 
     def test_kind_vocabulary_is_shared_and_minimal(self):
         self.assertEqual(CHECKER.KIND, {
@@ -833,21 +829,18 @@ class CheckerHardeningTests(CheckerFixture):
             self.assertIn(f"{nid}: bad kind '{kind}'", errors)
 
     def test_defined_status_and_definition_kind_are_reciprocal(self):
-        self.add_ledger("a-series-definitions", "a-series", [
-            node("def:a-series-valid", status="defined", kind="definition"),
-            node("thm:a-series-invalid", status="defined", kind="theorem"),
-        ])
         self.add_ledger("kls-definitions", "kls", [
             node("def:kls-valid", status="defined", kind="definition"),
+            node("thm:kls-invalid", status="defined", kind="theorem"),
             node("def:kls-invalid", status="open", kind="definition"),
         ])
 
         errors = "\n".join(self.check()["errors"])
 
-        self.assertNotIn("def:a-series-valid", errors)
+        self.assertNotIn("def:kls-valid", errors)
         self.assertNotIn("def:kls-valid", errors)
         self.assertIn(
-            "thm:a-series-invalid: status defined is only valid for kind definition",
+            "thm:kls-invalid: status defined is only valid for kind definition",
             errors,
         )
         self.assertIn("def:kls-invalid: kind definition requires status defined", errors)
@@ -921,7 +914,7 @@ class CheckerHardeningTests(CheckerFixture):
     def test_legacy_proof_fields_are_rejected(self):
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [
                 node("thm:proof-file", proof_file="modules/test.tex"),
                 node("thm:narrative", proof_provenance="inline proof"),
@@ -942,7 +935,7 @@ class CheckerHardeningTests(CheckerFixture):
         )
         self.add_ledger(
             "main",
-            "a-series",
+            "kls",
             [node("thm:missing-from-header", solution=solution, checked_by="human")],
         )
 
@@ -980,11 +973,10 @@ class CheckerHardeningTests(CheckerFixture):
             "kls",
             nodes,
         )
-        self.add_ledger("a-series", "a-series", [node("thm:a-series")])
 
         self.assertEqual(self.check()["errors"], [])
 
-    def test_missing_configured_program_and_malformed_types_report_without_crashing(self):
+    def test_malformed_field_types_report_without_crashing(self):
         malformed = node("thm:bad")
         malformed.update({
             "kind": [],
@@ -994,13 +986,15 @@ class CheckerHardeningTests(CheckerFixture):
             "solution": {},
             "depends_on": [{}],
             "bounded_by": [{}],
-            "refines": {},
+            "route": {},
         })
-        self.add_ledger("main", "a-series", [malformed])
+        self.add_ledger("main", "kls", [malformed])
 
+        # The missing-ledger branch is covered by
+        # test_program_is_never_inferred_from_ledger_directory; this case checks that
+        # malformed field types are reported rather than crashing the checker.
         errors = "\n".join(self.check()["errors"])
 
-        self.assertIn("missing ledger for configured program 'kls'", errors)
         self.assertIn("bad kind '[]'", errors)
         self.assertIn("status '[]' not allowed", errors)
         self.assertIn("references must be non-empty strings", errors)
@@ -1008,8 +1002,7 @@ class CheckerHardeningTests(CheckerFixture):
     def test_cli_reports_malformed_status_instead_of_crashing(self):
         malformed = node("thm:bad")
         malformed["status"] = []
-        self.add_ledger("a-series", "a-series", [malformed])
-        self.add_ledger("kls", "kls", [])
+        self.add_ledger("kls", "kls", [malformed])
         script = self.research / "check_ledger.py"
         script.write_text((REPO / "research/check_ledger.py").read_text())
 
@@ -1027,8 +1020,8 @@ class CheckerHardeningTests(CheckerFixture):
 
     def test_cli_status_and_node_views_are_derived(self):
         self.add_ledger(
-            "a-series",
-            "a-series",
+            "kls",
+            "kls",
             [
                 node("lem:base"),
                 node(
@@ -1039,7 +1032,6 @@ class CheckerHardeningTests(CheckerFixture):
                 ),
             ],
         )
-        self.add_ledger("kls", "kls", [])
         script = self.research / "check_ledger.py"
         script.write_text((REPO / "research/check_ledger.py").read_text())
 
@@ -1053,10 +1045,10 @@ class CheckerHardeningTests(CheckerFixture):
         )
 
         self.assertEqual(status.returncode, 0)
-        self.assertIn("[a-series]", status.stdout)
+        self.assertIn("[kls]", status.stdout)
         self.assertIn("open (1): q:frontier", status.stdout)
         self.assertEqual(detail.returncode, 0)
-        self.assertIn("[a-series] q:frontier", detail.stdout)
+        self.assertIn("[kls] q:frontier", detail.stdout)
         self.assertIn("depends_on:", detail.stdout)
         self.assertIn("used_by: []", detail.stdout)
 

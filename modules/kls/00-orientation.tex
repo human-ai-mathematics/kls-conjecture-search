@@ -3,7 +3,7 @@
 \section{Orientation: the conjecture, the frontier, and the shape of the problem}
 \label{sec:kls-orientation}
 
-This section is the entry point to Part~III. It states the Kannan--Lov\'asz--Simonovits
+This section is the entry point to this document. It states the Kannan--Lov\'asz--Simonovits
 conjecture in the three forms used below, records the quantitative frontier as of
 24~August 2026, separates the neighbouring conjectures that have recently been resolved from
 the conjecture itself, exhibits the architecture of the current best argument, and isolates the
@@ -50,7 +50,7 @@ two-sided comparison
 \end{equation}
 so $\CP\asymp\PsiKLS^2$ with universal constants; the explicit constants are recorded in
 \cite{Klartag2023Logarithmic,Milman2009Isoperimetric}. The lower bound is Cheeger's inequality in
-the normalization $\CP(\mu)\le4h_\mu^{-2}$ used throughout Part~III.
+the normalization $\CP(\mu)\le4h_\mu^{-2}$ used throughout.
 
 \begin{conjecture}[KLS]
 \label{conj:kls}
@@ -89,7 +89,7 @@ Three formulations are used interchangeably below.
   gives $\Var_\mu f=\inner{\Cov\mu\,v}{v}$ and $\int|\nabla f|^2\dd\mu=|v|^2$. So
   \eqref{eq:kls-affine} says exactly this: \emph{up to a universal constant, linear functions
   already detect the slowest mode of every log-concave measure.} This is the form that connects
-  Part~III to Part~II; see Section~\ref{subsec:kls-reading-map}.
+  the conjecture to its structured counterparts; see Section~\ref{subsec:kls-reading-map}.
 
   \item \textbf{Geometric form.} The least-expanding arbitrary cut of a convex body is, up to a
   universal factor, no worse than the least-expanding hyperplane cut
@@ -428,16 +428,20 @@ dual; the natural root frame already fails & 6 \\
 \end{tabularx}
 \end{center}
 
-Group~7 (Section~\ref{sec:kls-synthesis}) closes the part by mapping each named gap in the
+Group~7 (Section~\ref{sec:kls-synthesis}) closes the document by mapping each named gap in the
 literature onto the corresponding open node of the KLS ledger.
 
-\paragraph{The bridge to Part~II.}
-The affine form \eqref{eq:kls-affine} is what links Part~III back to Part~I and Part~II. Its
-structured-posterior counterpart, A1-bis, asks for $\CP\le K\lambda_{\max}(\Cov)$ for
-generalized-linear-model posteriors; the \emph{same} bound for \emph{every} isotropic log-concave
-measure with $K$ universal \emph{is} Conjecture~\ref{conj:kls}. That is the precise sense in which
-Part~III is the ``Tier-$\infty$'' boundary of Part~I: every structured family in Part~I buys its
-explicit constant by having more usable structure than a general log-concave measure.
+\paragraph{The structured counterpart.}
+The affine form \eqref{eq:kls-affine} is what links this conjecture to the structured end of the
+same problem. Its structured-posterior counterpart, A1-bis, asks for
+$\CP\le K\lambda_{\max}(\Cov)$ for generalized-linear-model posteriors; the \emph{same} bound for
+\emph{every} isotropic log-concave measure with $K$ universal \emph{is}
+Conjecture~\ref{conj:kls}. KLS is therefore the ``Tier-$\infty$'' boundary of a difficulty
+gradation over structured families: each such family buys its explicit constant by having more
+usable structure than a general log-concave measure. That gradation, and A1-bis itself, are
+developed in the companion repository \texttt{posterior-inequalities-exploration}. The
+relationship is a comparison, never a proof dependency in either direction: proving the
+structured case does not prove KLS, and assuming KLS trivializes the structured case.
 
 \paragraph{Suggested external reading order.}
 For a reader coming to the subject rather than to this repository:

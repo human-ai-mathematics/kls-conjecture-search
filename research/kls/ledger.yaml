@@ -68,13 +68,16 @@ nodes:
   # CORE STOCHASTIC LAYER
   # ---------------------------------------------------------------------------
 
+  # The structured-posterior counterpart of this node is conj:a1-bis, tracked in the
+  # companion repository posterior-inequalities-exploration. That link is a comparison,
+  # never a proof dependency, and it deliberately has no ledger field: bridges resolve
+  # only inside one repository.
   - id: conj:kls
     kind: conjecture
     status: open
     route: shared
     file: modules/kls/00-orientation.tex
     statement: "There is a universal C such that Var_mu(f) <= C int |grad f|^2 dmu for every isotropic log-concave mu in every dimension; equivalently up to universal constants, inf_n hstar_n > 0."
-    bridges: [a-series/conj:a1-bis]
 
   - id: lem:survival-implies-kls
     kind: lemma

@@ -25,7 +25,6 @@ EXPECTED_ROLES = {
     "proof-checker",
     "proof-miner",
     "prover",
-    "refiner",
     "refutation-seeker",
     "scout",
     "synthesizer",
@@ -40,7 +39,6 @@ CODEX_ULTRA_REASONING_ROLES = {
     "proof-checker",
     "proof-miner",
     "prover",
-    "refiner",
     "refutation-seeker",
     "synthesizer",
 }

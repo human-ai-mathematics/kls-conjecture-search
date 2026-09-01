@@ -12,7 +12,7 @@ from finum.targets import REGISTRY
 
 
 def test_registry_has_explicit_metadata_and_standard_profiles():
-    assert "loc-engine" in REGISTRY
+    assert set(REGISTRY) == {"kls", "loc-engine", "kls-align", "cmh-gate-zero"}
     assert "kls-loc" not in REGISTRY
     for target, spec in REGISTRY.items():
         assert spec.id == target
@@ -44,7 +44,7 @@ def test_kls_run_writes_versioned_envelope_and_separate_summary(tmp_path):
 
 def test_target_rejects_unknown_profile():
     with pytest.raises(ValueError, match="no profile"):
-        REGISTRY["A3"].config_for("heavy")
+        REGISTRY["kls"].config_for("heavy")
 
 
 def test_cli_requires_a_target_and_maps_the_legacy_localization_spelling(monkeypatch, tmp_path):

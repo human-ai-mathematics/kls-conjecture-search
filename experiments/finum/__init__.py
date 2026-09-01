@@ -1,10 +1,9 @@
-"""finum — the numerical channel for the functional-inequalities open targets.
+"""finum — the numerical channel for the KLS program.
 
 Role (see ../research/README.md, complementary refinement and proof channels):
-  * Part II  — refine and stress-test *statements* (A1-A5): produce a provenance-stamped
-               diagnostic artifact. Numerics NEVER promote a statement to proved.
-  * Part III — the same core later refines KLS *sub-statements* and gates/refutes proof
-               *routes* (research/kls/routes.md).
+  * Refine KLS *sub-statements* and gate or refute proof *routes*
+    (research/kls/routes.md): produce a provenance-stamped diagnostic artifact.
+    Numerics NEVER promote a statement to proved.
 
 Soundness contract: artifacts label comparisons as exact, directional, or calibration evidence.
 Their neutral outcomes are not ledger statuses. Raw Monte Carlo, MCMC, FEM, and grid estimates

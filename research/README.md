@@ -1,25 +1,33 @@
 # Research control plane
 
-`research/` coordinates two mathematical programs. The manuscript owns accepted statements,
-the ledgers own logical state and graph edges, `solutions/` owns standalone proofs, and numerical
-runs guide research without certifying claims.
+`research/` coordinates the KLS program. The manuscript owns accepted statements, the ledger owns
+logical state and graph edges, `solutions/` owns standalone proofs, and numerical runs guide
+research without certifying claims.
 
-## Programs
+## Program
 
 | program | ledger id | entry point | purpose |
 |---|---|---|---|
-| A-series (A1--A5, Parts I/II) | `a-series` | [`a-series/README.md`](a-series/README.md) | refine statements and prove structured-posterior results |
-| KLS (Part III) | `kls` | [`kls/README.md`](kls/README.md) | compare proof routes and discharge their open inputs |
+| KLS | `kls` | [`kls/README.md`](kls/README.md) | compare proof routes and discharge their open inputs |
 
-Each program has one ledger. All ledger writes pass through one orchestrator.
+There is one ledger. All ledger writes pass through one orchestrator.
+
+The structured end of the same problem — explicit functional-inequality constants for Bayesian
+posteriors, including the structured-posterior conjecture `conj:a1-bis` — is pursued in the
+companion repository `posterior-inequalities-exploration`. The two programs were split out of a
+single repository on 2026-09-01; see
+[`decisions/2026-09-01-split-a-series-and-kls-repositories.md`](decisions/2026-09-01-split-a-series-and-kls-repositories.md).
+The relationship between `conj:kls` and `conj:a1-bis` is a comparison and is recorded only in
+prose: `bridges` resolves within one repository, and no node here may depend on a node there.
 
 ## Sources of truth
 
 | content | location |
 |---|---|
 | ledger fields and invariants | [`ledger-schema.md`](ledger-schema.md) |
-| accepted mathematical prose | [`../modules/`](../modules/) |
-| claim state and logical edges | `a-series/ledger.yaml`, `kls/ledger.yaml` |
+| accepted mathematical prose | [`../modules/kls/`](../modules/kls/) |
+| claim state and logical edges | `kls/ledger.yaml` |
+| route status and gating | `kls/routes.md`, `kls/gating.md` |
 | proof dossiers | [`../solutions/`](../solutions/) |
 | reusable lemmas and shared instances | [`knowledge/`](knowledge/) |
 | mathematical attempts and dead ends | [`explorations/`](explorations/) |
@@ -27,9 +35,7 @@ Each program has one ledger. All ledger writes pass through one orchestrator.
 | numerical artifacts | [`runs/`](runs/) |
 | harness decisions | [`decisions/`](decisions/) |
 
-The ledgers use `depends_on` for same-program proof dependencies, `bounded_by` for obstruction
-nodes in the same ledger, and `bridges` for non-logical cross-program comparisons written as
-`program/id`. The A1-bis/KLS bridge is `a-series/conj:a1-bis` ↔ `kls/conj:kls`.
+The ledger uses `depends_on` for proof dependencies and `bounded_by` for obstruction nodes.
 
 ## Contribution flow
 

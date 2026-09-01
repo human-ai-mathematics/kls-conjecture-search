@@ -14,7 +14,7 @@ isolated test fixtures):
   the declared file, and every imported node cites existing BibTeX keys;
 * every ``bounded_by`` edge resolves to a same-ledger obstruction node.
 
-Cross-program ``bridges: [program/id, ...]`` links are resolved against all
+Intra-repository ``bridges: [program/id, ...]`` links are resolved against all
 loaded ledgers. Proof-plane ``solution:`` files are confined to ``solutions/`` and
 may certify either an unconditional proved node or a conditional implication.
 Agent identity and historical scope live in a persisted ``type: proof-review``
@@ -60,13 +60,13 @@ PROOF_REVIEW_FIELDS = REVIEW_COMMON_FIELDS | {
 SHARED_STATUSES = {"open", "conditional", "proved", "imported", "defined", "refuted"}
 UNRESOLVED_STATUSES = {"open", "conditional", "refuted"}
 
+# Fallback vocabulary for a ledger whose program is unknown, so that an unknown
+# program is reported once rather than crashing every downstream field check.
+DEFAULT_PROGRAM_CFG = {"status": SHARED_STATUSES, "unproved": UNRESOLVED_STATUSES}
+
 # Unresolved premises are discovered recursively through the canonical
 # ``depends_on`` graph. Unreviewed preprints are handled separately below.
 PROGRAMS = {
-    "a-series": {
-        "status": SHARED_STATUSES,
-        "unproved": UNRESOLVED_STATUSES,
-    },
     "kls": {
         "status": SHARED_STATUSES,
         "unproved": UNRESOLVED_STATUSES,
@@ -74,7 +74,6 @@ PROGRAMS = {
 }
 
 PRODUCTION_LEDGER_PATHS = {
-    "a-series": Path("research/a-series/ledger.yaml"),
     "kls": Path("research/kls/ledger.yaml"),
 }
 
@@ -86,7 +85,6 @@ COMMON_NODE_FIELDS = {
     "checked_by", "review", "accepted_by", "refuted_by",
 }
 PROGRAM_NODE_FIELDS = {
-    "a-series": COMMON_NODE_FIELDS | {"refines"},
     "kls": COMMON_NODE_FIELDS | {"route"},
 }
 LIST_FIELDS = {
@@ -100,7 +98,7 @@ OBSOLETE_NODE_FIELDS = {
     "evidence_run": "a dated exploration plus an immutable research/runs artifact",
     "evidence_target": "the finum target implementation and a dated exploration",
     "entry_point": "route documentation for non-logical navigation",
-    "target_doc": "the research/a-series/targets/README.md navigation table",
+    "target_doc": "route documentation for non-logical navigation",
     "mechanism": "bounded_by plus independent semantic review",
     "clearance": "the proof dossier/review discussion of bounded_by",
     "note": "the manuscript, route/target brief, or a dated exploration",
@@ -115,7 +113,6 @@ OBSOLETE_NODE_FIELDS = {
 BIB_ENTRY_RE = re.compile(r"@[A-Za-z]+\s*\{\s*([^,\s]+)\s*,")
 TOP_LEVEL_FIELDS = {"meta", "nodes"}
 PROGRAM_META_FIELDS = {
-    "a-series": {"program", "scope"},
     "kls": {"program", "route_policy"},
 }
 OBSOLETE_META_FIELDS = {"legacy_r2_debt", "legacy_proved_without_solution"}
@@ -695,7 +692,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
         nodes = ledger["nodes"]
         meta = ledger["meta"]
         obstruction_ids = ledger["obs_ids"]
-        cfg = ledger["cfg"] or PROGRAMS["a-series"]
+        cfg = ledger["cfg"] or DEFAULT_PROGRAM_CFG
         for obsolete_field in OBSOLETE_META_FIELDS:
             if obsolete_field in meta:
                 errors.append(
@@ -725,7 +722,7 @@ def check_control_plane(research: Path = RESEARCH, root: Path | None = None,
             status = node.get("status")
             if not isinstance(kind, str) or kind not in KIND:
                 errors.append(f"[{program}] {nid}: bad kind '{kind}'")
-            if program == "a-series" and status == "conjectured":
+            if status == "conjectured":
                 errors.append(
                     f"[{program}] {nid}: status 'conjectured' is obsolete; use status 'open' "
                     "and let kind describe the statement type"

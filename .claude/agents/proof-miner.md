@@ -45,8 +45,8 @@ For each proof you mine:
    the dossier and its review.
 2. **What breaks first if you relax it?** Name the step and the quantity that blows up, not a
    vague difficulty.
-3. **Does the mechanism transfer?** Across A-series targets, across KLS routes, or across the
-   A1-bis/KLS bridge. State the transfer as a claim someone could prove, with the normalization
+3. **Does the mechanism transfer?** Across KLS routes, or toward the structured counterpart that
+   `conj:kls` calibrates against. State the transfer as a claim someone could prove, with the normalization
    made common.
 4. **What is the true bottleneck?** The step whose improvement improves the conclusion — as
    against the steps that are merely long.
