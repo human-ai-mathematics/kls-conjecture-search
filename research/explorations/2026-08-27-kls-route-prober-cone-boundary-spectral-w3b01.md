@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - obs:circularity
+---
 # KLS route probe W3-B01: rounded isotropic right-cone boundary gap
 
 Date: 2026-08-27

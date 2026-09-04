@@ -2,22 +2,25 @@
 
 The original failure was "two agents' MC disagreed, neither's code in the repo." Committed code
 is necessary but not sufficient: the run must reproduce exactly from its recorded seed. These
-tests pin both the provenance header (finum.provenance) and the determinism of the seeded path
-integral (finum.localization).
+tests pin both the provenance header (numerics.artifact) and the determinism of the seeded path
+integral (numerics.localization).
 """
 
 import numpy as np
 
-from finum import provenance
-from finum.localization import cuts, observables as obs
-from finum.localization.sde import make_rng, spawn_rngs
-from finum.localization.tilt1d import LAPLACE
+from numerics import artifact as provenance
+from numerics.localization import cuts, observables as obs
+from numerics.localization.sde import make_rng, spawn_rngs
+from numerics.localization.tilt1d import LAPLACE
 
 
 def test_provenance_header_fields():
-    h = provenance.provenance(schema_version=1, target="test", profile="standard",
+    h = provenance.provenance(target="test", profile="standard",
                               stochastic=True, config={"seed": 7, "dt": 0.01, "n": 16})
-    assert set(h) >= {"schema_version", "git_commit", "target", "config", "environment"}
+    assert set(h) >= {"schema_version", "git_commit", "git_dirty", "git_diff_sha256",
+                      "target", "profile", "stochastic", "config", "environment"}
+    assert h["schema_version"] == 1
+    assert h["environment"]["scipy"] is not None
     assert h["config"]["seed"] == 7
     assert h["environment"]["numpy"] == np.__version__
 

@@ -313,4 +313,27 @@ hypothesis fails and the bootstrap is vacuous --- correctly so: products are not
 counterexamples, and their excess propagation follows directly from
 $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization (Proposition~\ref{prop:products}).
 \end{remark}
+\subsection{Fences this section establishes}
+\label{subsec:bootstrap-fences}
+
+Both statements below are scoped methodological fences on the bootstrap input, not certified
+theorems; consumers carry them as heuristic barriers.
+
+\begin{obstruction}[The crude covariance integral cannot bootstrap]
+\label{obs:crude-insufficient}
+The crude bound \(\Xi_T\lesssim\log n\) of Lemma~\ref{lem:crude}, discussed in
+Remark~\ref{rem:insufficiency}, is too large to certify the required excess estimate at known KLS
+lower-bound scales. A viable bootstrap input must improve the logarithm; the available
+polylogarithmic technology reaches only the scale of Corollary~\ref{cor:loglog}.
+\end{obstruction}
+
+\begin{obstruction}[An all-measure relative bound already implies KLS]
+\label{obs:relative-ceiling}
+By Proposition~\ref{prop:ceiling}, a universal bound \(\Xi_{T_0}(\mu)\le\kappa T_0\) at a
+sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input,
+and a route that aims at it has replaced the target by an equivalent-strength statement. The
+Question~\ref{q:taming} must instead use near-worst structure and the \(h_\mu\)-weighted absolute
+scale.
+\end{obstruction}
+
 \end{document}

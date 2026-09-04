@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-25"
+outcome: directional
+nodes:
+  - conj:gate-zero
+---
 # Archived CMH construction regression models
 
 This is the preserved 2026-08-25 model inventory formerly maintained as

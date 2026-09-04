@@ -1,4 +1,4 @@
-"""Oracle: the thin-shell (P6 / q:alignment) family respects the proved facts.
+"""Oracle: the thin-shell (q:alignment) family respects the proved facts.
 
 Before trusting any DIRECTIONAL thin-shell run (runs/2026-06-18-thinshell-alignment.py)
 the machinery must reproduce settled facts on the permutation-symmetric thin-shell cut
@@ -11,16 +11,16 @@ the machinery must reproduce settled facts on the permutation-symmetric thin-she
   * the path integral is bit-for-bit reproducible from its seed.
 
 Small ``n`` and a short horizon keep this in the suite; the deferred large-``n`` run is
-gated on these plus the FFT-vs-MC cross-check (``finum.localization.gates.fft_vs_mc``).
+gated on these plus the FFT-vs-MC cross-check (``numerics.localization.gates.fft_vs_mc``).
 """
 
 import numpy as np
 
-from finum.localization import cuts, gates
-from finum.localization.state import ProductState
-from finum.localization.observables import ensemble_mean, integrate_path
-from finum.localization.sde import make_rng
-from finum.localization.tilt1d import LAPLACE
+from numerics.localization import cuts, gates
+from numerics.localization.state import ProductState
+from numerics.localization.observables import ensemble_mean, integrate_path
+from numerics.localization.sde import make_rng
+from numerics.localization.tilt1d import LAPLACE
 
 
 def _balanced_thinshell(n: int):

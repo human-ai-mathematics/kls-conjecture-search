@@ -1,16 +1,16 @@
 [project]
-name = "finum"
+name = "numerics"
 version = "0.1.0"
-description = "Numerical channel for the functional-inequalities open targets: refine statements (Parts II & III) and gate/refute proof routes (Part III). Refutes and directs; never proves."
+description = "Numerical channel for the KLS program: refine statements and gate or refute proof routes. Refutes and directs; never proves."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.24",
-    "scipy>=1.10",   # eigh_tridiagonal for the 1D weighted-Poincare FEM gap (A3/A5)
+    "scipy>=1.10",   # eigh_tridiagonal for the 1D weighted-Poincare FEM gap
 ]
 
 [project.scripts]
-finum = "finum.__main__:main"
+numerics = "numerics.__main__:main"
 
 [dependency-groups]
 dev = ["pytest>=8.0"]
@@ -20,12 +20,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["finum"]
+packages = ["numerics"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
-addopts = "-q"
+# The slow lane is opt-in, so `uv run pytest` stays fast and scripts/check.sh can
+# invoke it unchanged. Run the other lane with `uv run pytest -m slow`.
+addopts = "-q -m 'not slow'"
 markers = [
     "slow: expensive Monte Carlo or high-resolution numerical regression",
 ]

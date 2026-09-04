@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - prop:spectral-sufficiency
+---
 # Prover: full-damping spectral sufficiency
 
 Date: 2026-08-27

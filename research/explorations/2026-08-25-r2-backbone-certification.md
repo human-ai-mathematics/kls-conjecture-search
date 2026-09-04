@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-25"
+outcome: directional
+nodes:
+  - def:qcts
+---
 # R2 backbone certification and removal of the historical exception
 
 Date: 2026-08-25

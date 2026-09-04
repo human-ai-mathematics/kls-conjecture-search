@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - conj:kls
+---
 # Literature scout: conditional-fiber frames and simplex exchange gaps
 
 Date: 2026-08-27

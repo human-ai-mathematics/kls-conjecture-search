@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - ass:cmh-recovery-envelope
+---
 # KLS Wave 2: proof-ready target staging
 
 Date: 2026-08-27

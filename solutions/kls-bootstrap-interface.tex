@@ -2,31 +2,15 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
-% ledger-nodes: lem:half; lem:whitening; thm:bootstrap; lem:crude;
-%               cor:loglog; prop:ceiling
-% refines: lem:half; lem:whitening; thm:bootstrap; lem:crude; cor:loglog;
-%          prop:ceiling (all in modules/kls/25-bootstrap.tex)
-% depends_on: lem:perimeter-martingale; eq:perimeter-supermartingale;
-%             eq:qv-p; eq:B-le-A; eq:cov-sde; eq:BL-cap; hyp:KI;
-%             cor:KI-discharged; lem:survival-implies-kls
-% bounded_by:
-%   lem:half: none
-%   lem:whitening: none
-%   thm:bootstrap: obs:circularity
-%   lem:crude: obs:crude-insufficient
-%   cor:loglog: none
-%   prop:ceiling: none (establishes obs:relative-ceiling)
-% evidence_run: none
-% checked_by: agent
-% authored_by: /root/kls_bootstrap_author
-% reviewed_by: /root/kls_core_author
-% review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
-% thm:bootstrap reviewed_by: /root/review_bootstrap_sync_w0
-% thm:bootstrap review: research/reviews/2026-08-27-thm-bootstrap-semantic-repair-proof-review.md
-% date: 2026-08-25
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : lem:half; lem:whitening; thm:bootstrap; lem:crude; cor:loglog; prop:ceiling
+% refines : lem:half; lem:whitening; thm:bootstrap; lem:crude; cor:loglog;
+% author : /root/kls_bootstrap_author
+% date : 2026-08-25
 % ============================================================================
-
 \section*{Solution: the near-worst bootstrap and its covariance interface}
 \label{sec:sol-kls-bootstrap-interface}
 

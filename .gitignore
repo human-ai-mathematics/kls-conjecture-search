@@ -166,7 +166,12 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
+#
+# The stock Python .gitignore ignores /site here, because mkdocs *generates* into it.
+# This repository does not use mkdocs, and /site is the hand-written frontend of the
+# published website — source, not output. The rule is removed rather than negated so
+# that nothing has to remember why an exception exists. What the site build *generates*
+# is build/site/, covered by the build/ rule at the end of this file.
 
 # mypy
 .mypy_cache/
@@ -200,7 +205,9 @@ cython_debug/
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
 #   and can be added to the global gitignore or merged into this file. However, if you prefer, 
 #   you could uncomment the following to ignore the entire vscode folder
-.vscode/
+.vscode/*
+# ...but the shared LaTeX out-dir setting belongs to the project, not the developer.
+!.vscode/settings.json
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
@@ -230,6 +237,8 @@ __marimo__/
 .claude/*
 !.claude/agents/
 !.claude/agents/**
+!.claude/lenses/
+!.claude/lenses/**
 .codex/*
 !.codex/config.toml
 !.codex/agents/

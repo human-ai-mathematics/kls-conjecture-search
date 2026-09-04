@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - lem:block
+  - lem:perimeter-martingale
+---
 # Wave-zero semantic repairs
 
 Date: 2026-08-27  

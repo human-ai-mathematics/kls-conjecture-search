@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - thm:bootstrap
+---
 # KLS Wave 3: proof-surplus target staging
 
 Date: 2026-08-27

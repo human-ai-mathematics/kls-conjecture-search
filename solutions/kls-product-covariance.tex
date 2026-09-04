@@ -2,27 +2,16 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
-% ledger-nodes: lem:block; thm:budget; cor:refutation;
-%               lem:product-qcts; cor:KI-discharged
-% refines: lem:block; thm:budget; cor:refutation;
-%          lem:product-qcts; cor:KI-discharged
-% manuscript: modules/kls/22-product-stress.tex;
-%             modules/kls/15-covariance-technology.tex
-% depends: thm:budget -> lem:block, cor:per-direction,
-%          thm:scalar-riccati, prop:products;
-%          cor:refutation -> thm:budget;
-%          cor:KI-discharged -> thm:KL-window, eq:BL-cap
-% bounded_by: none
-% evidence_run: none
-% checked_by: agent
-% authored_by: /root/kls_proof_audit
-% repaired_by: /root/repair_product_dossier
-% reviewed_by: /root/review_product_w0
-% review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
-% date: 2026-08-27
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : lem:block; thm:budget; cor:refutation; lem:product-qcts; cor:KI-discharged
+% refines : lem:block; thm:budget; cor:refutation;
+% bounded_by : none
+% author : /root/kls_proof_audit
+% date : 2026-08-27
 % ============================================================================
-
 \section*{Solution: product coordinate budgets, quadratic chaos,
 and the published covariance window}
 \label{sec:sol-kls-product-covariance}

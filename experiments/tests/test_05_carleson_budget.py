@@ -9,10 +9,10 @@ suffice. A gross violation would mean the source S = s||G||^2 is mis-assembled.
 import numpy as np
 import pytest
 
-from finum.localization import cuts, observables as obs
-from finum.localization.state import ProductState
-from finum.localization.sde import spawn_rngs
-from finum.localization.tilt1d import LAPLACE
+from numerics.localization import cuts, observables as obs
+from numerics.localization.state import ProductState
+from numerics.localization.sde import spawn_rngs
+from numerics.localization.tilt1d import LAPLACE
 
 FAST = {"n_bins": 16384}
 pytestmark = pytest.mark.slow

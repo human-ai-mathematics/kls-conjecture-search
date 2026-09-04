@@ -2,35 +2,16 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
-% ledger-nodes: thm:cmh-1d; thm:cmh-product; cor:cmh-linear-images;
-%               lem:cmh-gamma-completion; lem:cmh-row-min;
-%               lem:cmh-angular-coefficient; thm:cmh-dirichlet;
-%               cor:cmh-dirichlet-surplus; cor:cmh-dirichlet-poincare;
-%               rem:cmh-saturation-risk
-% refines: prog:cmh-route   (modules/kls/40-moment-map-cmh.tex)
-% manuscript: modules/kls/42-cmh-exact-cases.tex
-% depends: prop:cmh-bochner; thm:cmh-implies-affine-poincare
-%          (solutions/thm-cmh-normalization.tex)
-% bounded_by: none
-%   The Eldan obstruction set of research/kls/obstructions.md is scoped in that
-%   file to the fixed-cut program. obs:proj-ceiling is method-specific to radial /
-%   projection tests and is not used here; see "Obstructions respected" below.
-% evidence_run: none
-%   Analytic. The finum target `cmh-gate-zero` regression-tests
-%   eq:cmh-dirichlet-surplus on exact Dirichlet moments; it can refute but not prove.
-% checked_by: agent
-% authored_by: /root/kls_ledger_audit (earlier repair);
-%              /root/repair_cmh_hodge_domain_w3 (Gamma-Bochner provenance repair)
-% prior_reviewed_by: /root/cmh_exact_reviewer
-% prior_review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
-%   (certifies the nine unchanged nodes on the earlier bytes)
-% reviewer: /root/review_cmh_gamma_dependency_w3
-% review: research/reviews/2026-08-27-lem-cmh-gamma-bochner-repair-proof-review.md
-%   (supplementary certification of lem:cmh-gamma-completion)
-% date: 2026-08-27
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : thm:cmh-1d; thm:cmh-product; cor:cmh-linear-images; lem:cmh-gamma-completion; lem:cmh-row-min; lem:cmh-angular-coefficient; thm:cmh-dirichlet; cor:cmh-dirichlet-surplus; cor:cmh-dirichlet-poincare; rem:cmh-saturation-risk
+% refines : prog:cmh-route
+% bounded_by : none
+% author : /root/kls_ledger_audit (earlier repair)
+% date : 2026-08-27
 % ============================================================================
-
 \section*{Solution: exact CMH constants on the line, on products,
 and on the log-concave Dirichlet family}
 \label{sec:sol-cmh-dirichlet}
@@ -384,8 +365,9 @@ $\Dom(L_\alpha)$. Only the residual branch $m=2$, $A<3$ uses the one-dimensional
 of Theorem~\ref{thm:sol-cmh-1d} instead.
 
 \paragraph{Obstructions respected.}
-No \texttt{bounded\_by} edge applies: the entries of \texttt{research/kls/obstructions.md} are
-scoped there to the fixed-cut Eldan program. The only one with method-level reach,
+No \texttt{bounded\_by} edge applies: the obstruction nodes of
+\texttt{research/program/ledger.yaml} are scoped by their own statements to the fixed-cut
+Eldan program. The only one with method-level reach,
 \texttt{obs:proj-ceiling}, forbids deriving quadratic-chaos thin shell from radial or projection
 information alone; the Dirichlet proof uses the full Hessian row through the Euler constraint of
 Lemma~\ref{lem:sol-row-min}, not projection tests, and makes no thin-shell claim.

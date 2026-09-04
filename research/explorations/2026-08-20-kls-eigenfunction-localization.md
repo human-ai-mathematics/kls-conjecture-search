@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-20"
+outcome: directional
+nodes:
+  - conj:kls
+---
 # KLS eigenfunctions under stochastic localization
 
 Date: 2026-08-20

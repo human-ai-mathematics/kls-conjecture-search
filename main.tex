@@ -5,25 +5,20 @@
 %
 %   latexmk -pdf -outdir=build main.tex
 %
-% The structured-posterior program that formerly stood as Parts I and II now
-% lives in the sibling repository posterior-inequalities-exploration; see
-% README.md. Its conjecture A1-bis is the structured counterpart of the KLS
-% conjecture, and is referred to here as an external comparison only.
-%
-% The document is grouped by \klsgroup dividers (shared/preamble.tex):
+% The document is grouped by \klsgroup dividers (preamble.tex):
 % orientation, then a self-contained survey of the five strategy families, then
 % the shared localization machinery, then one block per live repository route,
 % then the synthesis. The dividers carry no numbering; section and \label
 % identity --- and therefore every ledger node id --- is unchanged.
 %
-% Bibliography: biblatex + biber, single shared file fi_references.bib.
+% Bibliography: biblatex + biber, single shared file references.bib.
 % Cross-references resolve when compiling main.tex; a standalone module shows
 % undefined \ref as "??", which is expected for syntax/math checking.
 % -----------------------------------------------------------------------------
 
 \documentclass[11pt]{article}
 \usepackage{subfiles}
-\input{\subfix{shared/preamble.tex}}
+\input{\subfix{preamble.tex}}
 
 \title{The Kannan--Lov\'asz--Simonovits Frontier\\[0.4em]
 \large Routes toward a dimension-free Poincar\'e constant for isotropic
@@ -51,12 +46,6 @@ log-concave measures}
   every log-concave Dirichlet law, together with the two reasons that endpoint may nonetheless be
   false. It closes by mapping each remaining gap in the literature onto an open node of this
   repository's KLS ledger.
-
-  KLS is the unstructured limit of a difficulty gradation: every structured family buys an
-  explicit constant precisely by having more usable structure than a general log-concave measure.
-  The structured end of that gradation --- Bayesian-posterior constants, and the
-  structured-posterior conjecture A1-bis --- is developed in the companion repository
-  \texttt{posterior-inequalities-exploration}, and appears here only as a comparison.
 \end{abstract}
 
 \tableofcontents

@@ -2,33 +2,16 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
-% ledger-nodes: q:cmh-normalization; def:cmh; prop:cmh-bochner;
-%               thm:cmh-implies-affine-poincare;
-%               prop:cmh-hodge; rem:cmh-stronger-than-kls;
-%               prop:letwin-not-gate-zero
-% refines: q:cmh-normalization   (modules/kls/40-moment-map-cmh.tex)
-% manuscript: modules/kls/41-cmh-normalization.tex
-% bounded_by: none
-%   Route C is not fenced by the Eldan obstruction set (research/kls/obstructions.md
-%   scopes obs:two-tail, obs:proj-ceiling, obs:crude-insufficient,
-%   obs:relative-ceiling, obs:circularity, obs:rank-one-refuted to the fixed-cut
-%   program). obs:proj-ceiling is discussed below and is not violated.
-% evidence_run: none
-%   The results here are analytic. The companion finum target `cmh-gate-zero`
-%   can refute conj:gate-zero but supports no statement proved in this dossier.
-% checked_by: agent
-% authored_by: /root/kls_proof_audit (earlier repair);
-%              /root/repair_cmh_hodge_domain_w3 (operator-domain repair)
-% prior_reviewed_by: /root/kls_evidence_audit
-% prior_review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
-%   (certifies the five unchanged nodes on the earlier bytes)
-% reviewer: /root/review_cmh_hodge_domain_w3
-% review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
-%   (supplementary certification of prop:cmh-hodge and rem:cmh-stronger-than-kls)
-% date: 2026-08-27
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : prop:cmh-bochner; thm:cmh-implies-affine-poincare; prop:cmh-hodge; rem:cmh-stronger-than-kls; prop:letwin-not-gate-zero
+% refines : q:cmh-normalization
+% bounded_by : none
+% author : /root/kls_proof_audit (earlier repair)
+% date : 2026-08-27
 % ============================================================================
-
 \section*{Solution: the CMH estimate, its endpoint reduction, its Hodge content,
 and the failure of matrix algebra to supply gate zero}
 \label{sec:sol-cmh-normalization}
@@ -428,8 +411,9 @@ deficit vanishes identically.
 \end{corollary}
 
 \paragraph{Obstructions respected.}
-Route C carries no \texttt{bounded\_by} edges: the six entries of
-\texttt{research/kls/obstructions.md} are scoped in that file to the fixed-cut Eldan program.
+Route C carries no \texttt{bounded\_by} edges: the six obstruction nodes of
+\texttt{research/program/ledger.yaml} are scoped by their own statements to the fixed-cut
+Eldan program.
 The one with a method-level reach beyond it, \texttt{obs:proj-ceiling}, forbids proving
 quadratic-chaos thin shell from radial or projection information alone; nothing above uses
 projection tests --- the endpoint reduction is a duality argument and the countermodel is exact
@@ -439,7 +423,7 @@ an operator-to-trace upgrade of the same family as \texttt{q:upgrade} and
 equivalence with those nodes is made here.
 
 \paragraph{Numerical status.}
-The \texttt{cmh-gate-zero} finum target computes
+The \texttt{cmh-gate-zero} numerics target computes
 $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})$ in closed form on one-dimensional laws,
 products, and from exact moment matrices on the Dirichlet family, and regression-tests the sector
 identities of Proposition~\ref{prop:sol-countermodel}. Only an exact rational certificate may

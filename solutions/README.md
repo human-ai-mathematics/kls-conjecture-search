@@ -1,17 +1,18 @@
-# solutions/ — the proof output plane
+# solutions/ — proof dossiers
 
-Where agents write **proofs** of the open targets: self-contained, standalone-compilable,
-human-checkable `.tex` files — **separate from the manuscript** (`../modules/`). This is the
-analytic-proof channel paired with the refinement and stress-testing work in `research/`.
+Where the `researcher` writes **proofs** of the open targets: self-contained,
+standalone-compilable, human-checkable `.tex` files — **separate from the manuscript**
+(`../modules/`). This is the analytic-proof channel paired with the refinement and
+stress-testing work in `research/`.
 
-A solution file is the artifact a newly `proved` ledger node points to (via its `solution:`
-field). The ledger records the *claim and its state*; this directory holds the *proof an
-independent reviewer or Lean can check*. Every newly `proved` node must carry a certified dossier;
-narrative provenance and numerical artifacts are not alternatives to a checked proof. There is no historical
-or inline-proof exception: every `status: proved` node must point to a certified dossier.
+A solution file is an artifact a newly `proved` ledger node points to (via a `proofs:` record).
+The ledger records the *claim and its state*; this directory holds the *proof an
+independent reviewer can check*. Every internally proved node must carry a certified dossier;
+narrative provenance and numerical artifacts are not alternatives. Literature-provenance nodes
+instead carry their source classification and references.
 
 Definitions use the shared non-proof status `defined`; a ledger-worthy observation uses its
-precise mathematical kind, while expository remarks remain prose. Externally imported results are
+precise mathematical kind, while expository remarks remain prose. Literature results are
 classified according to their actual role. Reclassification is not proof certification.
 
 ## Why separate from the manuscript
@@ -25,26 +26,72 @@ classified according to their actual role. Reclassification is not proof certifi
 
 ## Certification modes
 
-A proof is only as trustworthy as its check. Every solution declares its level in the header:
+A proof is only as trustworthy as its check. The level is recorded once, in the ledger's
+`proofs[]` record for the node — never in the dossier:
 
-| `checked_by` | meaning | ledger effect |
+| ledger | meaning | ledger effect |
 |---|---|---|
-| `none`  | drafted, unreviewed dossier header only | **no ledger value** — not a proof yet |
-| `agent` | a distinct agent audited the complete natural-language proof and left a persisted report | yes (agent-certified) |
-| `human` | a human read and accepts the natural-language argument | yes (human-certified) |
-| `lean`  | a compiling Lean proof sits beside it (`<id>.lean`) | yes (machine-certified) |
+| no `proofs[]` record names this file | a drafted dossier | **no ledger value** — not a proof yet |
+| `mode: agent` + `review:` | a distinct agent audited the complete natural-language proof and left a persisted report | yes (agent-certified) |
+| `mode: human` + `accepted_by:` | a human read and accepts the natural-language argument | yes (human-certified) |
+
+A dossier says nothing about how far it has been checked, because it has no way to stay
+right about it. Certification metadata is not part of its header vocabulary. **A dossier that
+no `proofs[]` record names is a draft, and that absence is the whole signal.**
+
+There is no machine mode. Add one only when `check.py` actually invokes its kernel with pinned
+tooling; a file-presence check certifies nothing.
+
+This program has a companion Lean formalization, `kls-lean`, and it is not an exception to the
+paragraph above: no checker here invokes its kernel, so a Lean file certifies no node in this
+repository and `lean` is not a value `proofs[].mode` accepts. What the formalization does carry
+is antecedents. Emptying a node's `assumes` requires the antecedent discharged for *every*
+certification mode the claim is in use under, Lean included — that is
+[`../CLAUDE.md`](../CLAUDE.md) P2, and it is the one place the companion repository bears on a
+status here.
 
 Agent certification is deliberately explicit rather than being recorded as human review. It
 requires a repo-local `review:` report whose front matter names distinct author(s) and reviewer.
 The report uses the structured contract in
 [`../research/reviews/README.md`](../research/reviews/README.md): its immutable historical scope
 must contain every current node and dossier pointing to it. The report body states the
-mathematical findings, corrections, and exclusions. This gate was enabled by the project owner on
-2026-08-21 for independently audited results.
+mathematical findings, corrections, and exclusions.
 
-Human certification requires a named ledger `accepted_by`. Lean certification requires the
-adjacent `<solution-stem>.lean` file. A dossier may certify a conditional implication while the
-node remains `status: conditional`; only discharge of its assumptions permits `status: proved`.
+Human certification requires `proofs[].accepted_by`. A proved implication remains
+`status: proved` even when an antecedent is open: antecedents go in `assumes`, conclusions in
+`implies`, and only proof dependencies in `depends_on`.
+
+## The dossier header
+
+The parser reads fields only inside the complete block opened by `% === SOLUTION HEADER ...`
+and closed by its `% ===...` divider; both delimiters are mandatory. Exactly one field is
+checked semantically: `ledger-node`, which must name the node whose `proofs[]` record points
+here. A value ends at the first run of two or more spaces, so the gloss to its right is ignored.
+The rest of the header — `refines`, `bounded_by`, author, date — is for a human reader.
+
+The header carries no certification and no reviewer identity. `checked_by`, `reviewer` and
+`review` are rejected by name: the ledger's `proofs[]` record owns the mode and the review
+path, and the review's own front matter owns the identities. A second copy would have no
+owner to keep it true, which is how every previous version of this header drifted.
+
+## Refutation is the same channel
+
+A refutation ends where a proof ends: in a certified dossier under `solutions/`. What makes
+one a refutation is a ledger edge, not anything about the file.
+
+1. The witness or divergent family is a **candidate** in a checkpoint — never a result
+   (`CLAUDE.md` constraint 2), whatever its arithmetic says.
+2. The statement it establishes becomes a **refuter node** with a manuscript statement, and
+   the checkpoint recording that promotion retires the candidate in the same act.
+3. The refuter gets an ordinary dossier here, and an ordinary independent review.
+4. Only then does the target become `status: refuted`, naming the now-proved refuter in
+   `refuted_by`.
+
+The refuter does not appear in the target's `depends_on`: that field records facts a proof
+used, and a refuted statement has no proof. A single witness discharges a universal claim;
+a dimension-free or uniform constant generally needs a certified family with the relevant
+divergence (constraint 10). The worked instance is
+[`../example/solutions/prop-example-refuter.tex`](../example/solutions/prop-example-refuter.tex).
 
 Numerics never appear on this ladder: they may guide intuition or suggest a counterexample, but
 they do not validate a claim, justify a proof step, or certify a dossier. Every proof must stand
@@ -52,11 +99,15 @@ independently of numerical outcomes, as required by [`../CLAUDE.md`](../CLAUDE.m
 
 ## Writing a solution
 
-1. Copy `TEMPLATE.tex` to `solutions/<ledger-id>.tex` (replace `:` with `-`). Closely coupled
-   nodes may share one target-level dossier if its header and theorem labels enumerate every
-   covered ledger id explicitly.
-2. Fill the audit header (ledger node, `refines` label, `bounded_by`, `checked_by`, separate
-   author/reviewer identities, review path, and date).
+1. Run `python3 scripts/new.py dossier <ledger-id>`, or copy
+   [`../templates/solution.tex`](../templates/solution.tex) to `solutions/<ledger-id>.tex`
+   yourself (replace `:` with `-`). Closely coupled nodes may share one target-level dossier
+   if its header and theorem labels enumerate every covered ledger id explicitly. In this
+   repository that is the norm rather than the exception, and the worked cases to read first
+   are `thm-cmh-dirichlet.tex` (ten ids), `kls-localization-riccati-core.tex` (seven) and
+   `kls-geometry-models.tex` (six).
+2. Fill the header (`ledger-node`, `refines`, `bounded_by`, author, and date). Certification
+   is not among them — it belongs to the ledger.
 3. State the **refined** theorem and prove it. Use `\ref`/
    `\cite` freely — they resolve when lifted into `main.tex` and show `??` standalone (expected).
 4. Compile standalone:
@@ -64,18 +115,15 @@ independently of numerical outcomes, as required by [`../CLAUDE.md`](../CLAUDE.m
    cd solutions
    latexmk -pdf -outdir=../build <id>.tex
    ```
-5. Wire the ledger node (`research/a-series/ledger.yaml` or `research/kls/ledger.yaml`): add
-   `solution: solutions/<id>.tex` and `checked_by: agent|human|lean`. For an agent audit, also
-   add `review`; for human acceptance add `accepted_by`. The node may flip to `status: proved`
-   only once these artifacts exist and no unresolved premise remains. A reviewed conditional
-   implication keeps `status: conditional` — enforced by `research/check_ledger.py`.
+5. Propose a ledger `proofs` record naming the artifact and `mode: agent|human`. For an agent
+   audit add `review`; for human acceptance add `accepted_by`. Only the orchestrator applies it.
 
 ## Definition of done (a proof contribution)
 
 1. `solutions/<id>.tex` exists, compiles standalone, audit header complete.
-2. The theorem matches the refined statement in the manuscript `\label` it `refines`, and
+2. The theorem matches the manuscript statement(s) it `refines`, and
    respects every `bounded_by` obstruction.
-3. The ledger node has `solution:` + `checked_by` set; `python3 research/check_ledger.py`
+3. The ledger node has a complete `proofs:` record; `python3 scripts/check.py`
    returns 0 errors.
-4. `checked_by: agent` (independent named agent plus persisted report), `checked_by: human`
-   (a named human accepted it), or `checked_by: lean` (with `<id>.lean`).
+4. The proof record uses `mode: agent` (independent named agent plus persisted report) or
+   `mode: human` (named acceptance). There is no third mode.

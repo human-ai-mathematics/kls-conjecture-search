@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-25"
+outcome: directional
+nodes:
+  - conj:gate-zero
+---
 # KLS CMH soundness repair
 
 Date: 2026-08-25

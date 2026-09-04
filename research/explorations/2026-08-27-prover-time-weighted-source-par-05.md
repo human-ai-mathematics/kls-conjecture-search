@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - lem:time-weighted-source
+---
 # Prover: scale-weighted all-cut source budget
 
 Date: 2026-08-27

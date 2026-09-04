@@ -1,3 +1,13 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:upgrade
+  - q:stein-weighted
+  - q:mm-spectral-occupation
+  - cor:tight-window-consumption
+---
 # Synthesis: KLS Wave One
 
 Date: 2026-08-27

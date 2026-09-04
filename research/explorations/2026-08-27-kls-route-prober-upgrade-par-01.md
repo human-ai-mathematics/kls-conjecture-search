@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:upgrade
+---
 # KLS route probe: the all-cut operator-to-trace upgrade
 
 Date: 2026-08-27

@@ -2,21 +2,16 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
 % ledger-node : thm:bootstrap-stopped-interface
-% refines     : thm:bootstrap-stopped-interface
-% manuscript  : modules/kls/25-bootstrap.tex
-% depends_on  : lem:half; lem:whitening; lem:perimeter-martingale
-% setup_used  : eq:qv-p; eq:B-le-A; eq:cov-sde
-% bounded_by  : obs:circularity; obs:relative-ceiling
-% evidence_run: none
-% checked_by  : agent
-% authored_by : /root/prove_bootstrap_stopped_interface_w3
-% reviewer    : /root/review_bootstrap_stopped_interface_w3
-% review      : research/reviews/2026-08-27-thm-bootstrap-stopped-interface-proof-review.md
-% date        : 2026-08-27
+% refines : thm:bootstrap-stopped-interface
+% bounded_by : obs:circularity; obs:relative-ceiling
+% author : /root/prove_bootstrap_stopped_interface_w3
+% date : 2026-08-27
 % ============================================================================
-
 \section*{Solution: the stopped covariance interface in the near-worst bootstrap}
 \label{sec:sol-bootstrap-stopped-interface}
 

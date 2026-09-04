@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-20"
+outcome: directional
+nodes:
+  - q:alignment
+---
 # KLS research program — cycle 1 synthesis
 
 Date: 2026-08-20

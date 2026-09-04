@@ -1,3 +1,12 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - thm:cmh-1d
+  - lem:conditional-fiber-form
+  - prop:conditional-fiber-root-obstruction
+---
 # Prover: conditional-fiber form structure and simplex root obstruction
 
 Date: 2026-08-27

@@ -288,4 +288,30 @@ coupling excess to large $\norm{A_t}_\op$, rather than separate pointwise estima
 $T^{1+\gamma}$ term in \eqref{eq:intro-weighted-excess} is a deliberately strong open target,
 not a consequence of the static power matching in part~(b).
 \end{remark}
+\subsection{Fences this section establishes}
+\label{subsec:qcts-fences}
+
+The two obstructions below name the proof shapes this section rules out. Each is stated as a
+scoped methodological fence rather than a theorem about the KLS conjecture: it records what a proof may
+not do, and it is not itself certified, so consumers list it among their heuristic barriers rather
+than as a logical bound.
+
+\begin{obstruction}[Absolute-scale slice bounds fail]
+\label{obs:two-tail}
+The anisotropic Gaussian two-tail cut of Proposition~\ref{prop:two-tail} rules out a slice-wise
+stable Stein estimate carrying an absolute-scale excess term. On that cut \(r=D=0\) while the
+Stein source is of order \(\Lambda^{2}\) and the excess of order \(\Lambda^{-1/2}\), so a
+slice-wise excess estimate needs covariance weight at least
+\((1+\norm{A}_{\op})^{5/2}\). An unweighted proof must instead control the expected occupation of
+inflated configurations.
+\end{obstruction}
+
+\begin{obstruction}[Projection tests lose a logarithm]
+\label{obs:proj-ceiling}
+Radial and projection-only information yields at best
+\(\Var(X^{T}MX)\lesssim\log n\,\norm{M}_{\HS}^{2}\), by \eqref{eq:qcts-log} and the adjacent
+operator construction. A proof requiring dimension-free quadratic-chaos control must therefore use
+tensor-aware information beyond projection tests.
+\end{obstruction}
+
 \end{document}

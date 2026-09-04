@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import json
 
-import finum.localization as localization
-from finum.localization.gates import GateResult
-from finum.localization.observables import EnsembleResult
-from finum.targets.kls import loc_engine as target
+import numerics.localization as localization
+from numerics.localization.gates import GateResult
+from numerics.localization.observables import EnsembleResult
+from numerics.targets.kls import loc_engine as target
 
 
 def _gate(name: str, passed: bool) -> GateResult:
@@ -42,11 +42,13 @@ def _assert_diagnostic_only(records):
     for rec in records:
         if "assessment" in rec:
             assert rec["assessment"]["evidence"] == "directional"
-            assert rec["assessment"]["outcome"] == "unavailable"
+            assert rec["assessment"]["outcome"] == "inconclusive"
 
 
 def _thinshell(records):
-    return next(rec for rec in records if rec.get("instance") == "thinshell-n2")
+    # These records test no claim — the route observables are not implemented — so the
+    # contract keeps them as auxiliary data under `case` rather than `instance`.
+    return next(rec for rec in records if rec.get("case") == "thinshell-n2")
 
 
 def test_failed_calibration_short_circuits_all_downstream_gates(monkeypatch):
@@ -135,8 +137,8 @@ def test_red_dt_and_all_green_runs_both_remain_no_verdict(monkeypatch):
     green = _thinshell(green_records)
     summary = next(rec for rec in green_records if rec["kind"] == "diagnostic-summary")
     assert green["assessment"]["gates_passed"] is True
-    assert green["assessment"]["outcome"] == "unavailable"
-    assert summary["assessment"]["outcome"] == "unavailable"
+    assert green["assessment"]["outcome"] == "inconclusive"
+    assert summary["assessment"]["outcome"] == "inconclusive"
     assert "not built" in summary["assessment"]["reason"]
     assert extra["diagnostic_only"] is True
     assert extra["route_observable_available"] is False

@@ -2,12 +2,12 @@
 
 import numpy as np
 
-from finum.localization.tail_union import (
+from numerics.localization.tail_union import (
     balanced_tail_radius,
     observe_tail_union,
     tilted_laplace_symmetric_truncation,
 )
-from finum.localization.tilt1d import LAPLACE, tilted
+from numerics.localization.tilt1d import LAPLACE, tilted
 
 
 def _quadrature_truncation(c, t, radius):

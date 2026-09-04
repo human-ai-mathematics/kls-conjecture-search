@@ -1,3 +1,13 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:alignment
+  - q:upgrade
+  - q:stein-weighted
+  - ass:all-cut-carleson
+---
 # KLS route probe: rank tails versus source orientation
 
 Date: 2026-08-27

@@ -1,3 +1,12 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - prop:intro-audit
+  - prop:trivial-excess
+  - lem:perimeter-martingale
+---
 # Excess-audit dossier repair W0R01
 
 Date: 2026-08-27  

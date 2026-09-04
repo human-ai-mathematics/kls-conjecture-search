@@ -1,3 +1,13 @@
+---
+type: exploration
+date: "2026-08-20"
+outcome: directional
+nodes:
+  - q:taming
+  - q:alignment
+  - def:qcts
+  - prop:ceiling
+---
 # KLS frontier audit: Letwin QCTS, route triage, and numerical retraction
 
 Date: 2026-08-20

@@ -2,7 +2,7 @@
 
 This directory holds persisted review provenance. Reports have one of two explicit types:
 
-| `type` | purpose | may certify `checked_by: agent`? |
+| `type` | purpose | may certify `proofs[].mode: agent`? |
 |---|---|---|
 | `proof-review` | Independent review of one or more standalone proof dossiers | yes |
 | `audit` | Historical, diagnostic, editorial, literature, or control-plane review | no |
@@ -53,6 +53,21 @@ If a later audit invalidates an earlier passing proof, remove the node's active 
 downgrade its status as appropriate and retain both reports; the old proof review remains a
 historical event, not current authority.
 
+## Audit currency is per subject
+
+`python3 scripts/check.py checkpoints` prints the current audit heads — every `type: audit`
+report nothing later supersedes. That list is only as honest as its curation, and two
+unrelated audits are not competing versions of one document: an audit of the numerics
+harness does not go stale because someone later audited the roles.
+
+So: when you write an audit that replaces an earlier reading **of the same subject**, name
+that earlier report in `supersedes:`. When your subject is new, name nothing. Neither
+record is ever edited or deleted; supersession only ever changes which one to read first.
+
+An audit that says "a further pass is still needed" and is never superseded will keep
+showing up as current long after that pass happened, which is a curation failure rather
+than a checker one — nothing can infer it.
+
 ## Audit front matter
 
 A non-certifying report uses only:
@@ -61,11 +76,25 @@ A non-certifying report uses only:
 ---
 type: audit
 date: "YYYY-MM-DD"
+supersedes:
+  - research/reviews/YYYY-MM-DD-earlier-audit.md
 ---
 ```
 
 Its outcome, participants, and scope remain ordinary prose because they have no mechanical
 proof-certification effect.
+
+`supersedes` is optional and lists earlier audits this report replaces as the current
+reading. Nothing is rewritten or deleted: an audit whose findings a later schema change
+overtook stays exactly as it is, and the reader is simply pointed at the record that succeeded
+it. It is the same relation checkpoints use (`research/explorations/README.md`), and it is
+available only to audits — a proof review is a certification event, not a summary, and uses
+`follows_up` instead.
+
+Two audits dated the same day are not ordered by their filenames, so a same-day supersession
+is accepted in either direction and the relation is verified acyclic instead. `date:` also
+accepts a UTC timestamp `YYYY-MM-DDTHH:MM:SSZ`, whose date part must still match the filename
+prefix; use one when two reports on one day really do need an order.
 
 ## Report body
 
@@ -82,5 +111,6 @@ certify an analytic step.
 Validate the archive and every active certification pointer with:
 
 ```bash
-python3 research/check_ledger.py
+python3 scripts/check.py --lane proofs
+python3 scripts/check.py checkpoints    # also lists superseded audits
 ```

@@ -1,3 +1,12 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:weighted
+  - lem:one-dimensional-density-variance
+  - prop:covariance-spike
+---
 # Literature scout: weighted-spectator inputs
 
 Date: 2026-08-27

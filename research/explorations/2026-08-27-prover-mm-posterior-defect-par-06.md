@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - lem:mm-posterior-defect
+---
 # Prover: posterior eigenfunction-defect calculus
 
 Date: 2026-08-27

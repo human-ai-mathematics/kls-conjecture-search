@@ -1,3 +1,13 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:alignment
+  - q:stein-weighted
+  - q:upgrade
+  - thm:letwin-qcts
+---
 # Synthesis: first parallel KLS gate wave
 
 Date: 2026-08-27

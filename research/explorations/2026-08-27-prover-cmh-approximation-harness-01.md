@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:cmh-approximation
+---
 # Prover attempt: CMH approximation closure
 
 Date: 2026-08-27

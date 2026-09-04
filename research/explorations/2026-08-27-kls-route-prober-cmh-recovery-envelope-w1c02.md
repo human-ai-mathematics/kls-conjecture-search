@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - ass:cmh-recovery-envelope
+---
 # KLS route probe: the existential CMH recovery envelope
 
 Date: 2026-08-27

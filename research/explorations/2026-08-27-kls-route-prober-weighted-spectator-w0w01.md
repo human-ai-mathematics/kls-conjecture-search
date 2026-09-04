@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+approach: ap:eldan-weighted-excess
+outcome: proposed
+nodes:
+  - q:weighted
+---
 # KLS route probe: the global weighted-excess gate and exponential spectators
 
 Date: 2026-08-27

@@ -9,9 +9,9 @@
 
 import numpy as np
 
-from finum.localization.state import ProductState
-from finum.localization.sde import localization_path, make_rng
-from finum.localization.tilt1d import GAUSSIAN, LAPLACE
+from numerics.localization.state import ProductState
+from numerics.localization.sde import localization_path, make_rng
+from numerics.localization.tilt1d import GAUSSIAN, LAPLACE
 
 
 def test_gaussian_covariance_deterministic():

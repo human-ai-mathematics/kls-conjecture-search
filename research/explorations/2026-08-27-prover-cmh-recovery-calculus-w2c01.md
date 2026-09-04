@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - ass:cmh-recovery-envelope
+  - prop:cmh-recovery-calculus
+---
 # CMH recovery calculus proof dossier W2C01
 
 - Date: 2026-08-27

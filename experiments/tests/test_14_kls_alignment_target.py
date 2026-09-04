@@ -4,8 +4,8 @@ import json
 
 import numpy as np
 
-from finum.targets import REGISTRY
-from finum.targets.kls import alignment
+from numerics.targets import REGISTRY
+from numerics.targets.kls import alignment
 
 
 def test_paired_gate_rejects_a_coarse_only_spike():

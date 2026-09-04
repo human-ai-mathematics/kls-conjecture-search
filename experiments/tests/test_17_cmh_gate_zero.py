@@ -12,8 +12,8 @@ import math
 import numpy as np
 import pytest
 
-from finum.targets import REGISTRY
-from finum.targets.kls import cmh_gate_zero as cmh
+from numerics.targets import REGISTRY
+from numerics.targets.kls import cmh_gate_zero as cmh
 
 
 # --- channel 1: one-dimensional closed-form Stein kernels ---------------------------
@@ -235,7 +235,7 @@ def test_exact_exceedance_requires_a_verified_rational_certificate():
     assert lower == cmh.Fraction(5)
     assert certificate["lower_bound"] == {"numerator": 5, "denominator": 1}
     assert comparison.evidence == "exact"
-    assert comparison.outcome == "exceeds"
+    assert comparison.outcome == "contradicts"
 
 
 def test_injected_floating_galerkin_exceedance_remains_directional(monkeypatch):
@@ -253,8 +253,8 @@ def test_injected_floating_galerkin_exceedance_remains_directional(monkeypatch):
         countermodel_tensor_ms=(18,), galerkin_max_m=2).records
     rows = [r for r in records if r["kind"] == "dirichlet-galerkin"]
     assert rows
-    assert all(r["ceiling_comparison"]["outcome"] == "exceeds" for r in rows)
-    assert all(r["gate_zero_comparison"]["outcome"] == "exceeds" for r in rows)
+    assert all(r["ceiling_comparison"]["outcome"] == "contradicts" for r in rows)
+    assert all(r["gate_zero_comparison"]["outcome"] == "contradicts" for r in rows)
     assert records[-1]["dirichlet_exact_exceedance_detected"] is False
 
 

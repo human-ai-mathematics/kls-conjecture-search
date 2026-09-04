@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-20"
+outcome: directional
+nodes:
+  - conj:kls
+---
 # Tail-union alignment at high dimension
 
 Date: 2026-08-20

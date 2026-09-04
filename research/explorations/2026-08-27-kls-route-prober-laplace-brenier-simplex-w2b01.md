@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+approach: ap:laplace-brenier-simplex
+outcome: proposed
+nodes:
+  - conj:kls
+---
 # Laplace--Brenier route probe: the rotation-optimized simplex gate
 
 Date: 2026-08-27

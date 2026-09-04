@@ -10,9 +10,9 @@ exact answers.
 import numpy as np
 from scipy.stats import norm
 
-from finum.localization import cuts, observables as obs
-from finum.localization.state import ProductState
-from finum.localization.tilt1d import GAUSSIAN
+from numerics.localization import cuts, observables as obs
+from numerics.localization.state import ProductState
+from numerics.localization.tilt1d import GAUSSIAN
 
 
 def _setup(t=0.7, c0=0.9, x0=1.3, n=3):

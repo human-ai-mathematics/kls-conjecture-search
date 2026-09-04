@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from finum import provenance as provenance_module
+from numerics import artifact as provenance_module
 
 
 def test_write_jsonl_uses_exclusive_creation(tmp_path):
@@ -26,10 +26,12 @@ def test_provenance_does_not_gate_on_worktree_state(monkeypatch):
     answers = {("rev-parse", "HEAD"): "abc123"}
     monkeypatch.setattr(provenance_module, "_git", lambda *args: answers.get(args))
     header = provenance_module.provenance(
-        schema_version=1, target="test", profile="standard", stochastic=False,
+        target="test", profile="standard", stochastic=False,
         config={"seed": 0},
     )
     assert header["git_commit"] == "abc123"
     assert header["config"] == {"seed": 0}
-    assert "git_dirty" not in header
+    # The header now records worktree state rather than omitting it: a dirty tree is
+    # reported honestly, and it still does not gate the run.
+    assert "git_dirty" in header
     assert "evidence_eligible" not in header

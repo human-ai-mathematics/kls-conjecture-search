@@ -12,22 +12,6 @@ machinery; then one block per live route — the fixed-cut Eldan program, the fi
 spectral program, the deterministic moment-map/CMH program, and conditional-fiber frames — and a
 synthesis mapping each named gap onto an open ledger node.
 
-## Relation to `posterior-inequalities-exploration`
-
-This repository and
-[`posterior-inequalities-exploration`](https://github.com/numina-functional-inequalities/posterior-inequalities-exploration)
-were one repository until 2026-09-01. The structured-posterior program — explicit Poincaré,
-log-Sobolev and transportation-cost constants for statistical and machine-learning families, and
-the A1–A5 open targets — now lives there with its own ledger and proof dossiers.
-
-The two programs are mathematically disjoint in this repository's sense: no claim here depends on
-a claim there, and the split introduced no dangling cross-reference. What connects them is a
-comparison. `conj:kls` asks for the affine bound over *every* isotropic log-concave measure;
-`conj:a1-bis` asks for the same bound over a structured class of GLM posteriors. KLS is the
-Tier-$\infty$ limit of a difficulty gradation in which structure is exactly what buys an explicit
-constant. That comparison is recorded in prose only — never as a ledger edge — and neither program
-may import the other's result as a dependency.
-
 ## Build
 
 Requires a TeX Live install with `latexmk`, `biber`, `subfiles`, `biblatex`.
@@ -43,15 +27,23 @@ expected in standalone builds.
 
 | content | source |
 |---|---|
-| master document and bibliography | [`main.tex`](main.tex), [`fi_references.bib`](fi_references.bib) |
+| master document and bibliography | [`main.tex`](main.tex), [`references.bib`](references.bib) |
 | manuscript modules | [`modules/kls/`](modules/kls/) |
-| research program and claim ledger | [`research/`](research/) |
+| claim ledger, problem brief, search portfolio | [`research/program/`](research/program/) |
+| search checkpoints, reviews, run artifacts | [`research/`](research/) |
 | standalone proof dossiers | [`solutions/`](solutions/) |
 | numerical diagnostics | [`experiments/`](experiments/) |
 | repository contribution contract | [`CLAUDE.md`](CLAUDE.md) |
 
-Current claim counts and research frontiers are derived from the ledger:
+Current claim counts, the unresolved frontier and what the search is doing are all derived:
 
 ```bash
-python3 research/check_ledger.py status
+python3 scripts/check.py            # every lane; 0 errors is the invariant
+python3 scripts/check.py status     # the unresolved frontier
+python3 scripts/check.py portfolio  # families, routes, blockers
+python3 scripts/check.py node conj:kls
 ```
+
+The full verification matrix, including the numerical suite and the standalone dossier builds, is
+[`scripts/check.sh`](scripts/check.sh). The checker validates structure, not mathematical
+correctness ([`CLAUDE.md`](CLAUDE.md) constraint 4).

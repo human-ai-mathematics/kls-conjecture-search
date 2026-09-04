@@ -109,6 +109,31 @@ cannot repair the uniform package: the replacement must also change the remainde
 explicit near-worst-measure premise.
 \end{question}
 
+The source-screened replacement interface charges the weighted excess only on the aligned set
+$\mathcal A_{\kappa,t}=\{Q_t\ge\kappa\,e_tW_{\rm cut}\}$, where
+$Q_t=\calS_{\mu_t}(E)/s_t=s_t\norm{K_t}_{\HS}^2$ and
+$W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ with the cut-oriented scale of
+Lemma~\ref{lem:lyapunov-stein-duality}. Its first positive statement, isolated in the
+2026-08-30 screened-interface probe, is proved in a standalone certified dossier for the
+regular split class; general split laws are covered only in the defined-on-approximants sense,
+with the screened-indicator limit interchange recorded there as open.
+
+\begin{proposition}[Split-class screened supply, total-budget form]
+\label{prop:split-screened-supply}
+Let $\mu$ be a product of isotropic one-dimensional log-concave laws in the regular
+(compact-smooth, product-preserving) split class of the certified dossier, and let $E$ be
+measurable with respect to a fixed coordinate set $J$ with $\abs J=k$ and $0<p_0<1$. Then for
+every $\eta\in(0,1/4]$, every $\kappa>0$, and every $T>0$,
+\[
+  \E\int_0^{T\wedge\tau_\eta}
+  e_t\,\bigl(1+\lambda_{\rm cut}(A_t,K_t)\bigr)^{5/2}
+  \mathbf 1_{\{Q_t\ge\kappa e_tW_{\rm cut}\}}\dd t
+  \ \le\ \frac{2k+64\eta^2(1+k)}{\kappa},
+\]
+uniformly in the ambient dimension and in every spectator coordinate. The bound is a total
+budget, not of the form $C(k)\,T$, and asserts nothing about the trace-upgrade cluster.
+\end{proposition}
+
 \begin{question}[Weighted stable Stein-trace ingredient extracted from the refuted package]
 \label{q:stein-weighted}
 Do there exist universal constants $T_0,C_0,C_1,C_2>0$,

@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-20"
+outcome: directional
+nodes:
+  - conj:kls
+---
 # KLS first-eigenfunction \(H^{-1}\) residual: model cases and the heat-time split
 
 Date: 2026-08-20

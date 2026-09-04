@@ -6,10 +6,10 @@ the drift or the cut probability would break the martingale property.
 
 import numpy as np
 
-from finum.localization import cuts, observables as obs
-from finum.localization.state import ProductState
-from finum.localization.sde import localization_path, spawn_rngs
-from finum.localization.tilt1d import LAPLACE
+from numerics.localization import cuts, observables as obs
+from numerics.localization.state import ProductState
+from numerics.localization.sde import localization_path, spawn_rngs
+from numerics.localization.tilt1d import LAPLACE
 
 
 def test_mass_is_martingale():

@@ -5,14 +5,17 @@ import json
 
 import pytest
 
-from finum.__main__ import main
-from finum.contract import ARTIFACT_SCHEMA_VERSION, RunResult
-from finum.run import run
-from finum.targets import REGISTRY
+from numerics.__main__ import main
+from numerics.contract import ARTIFACT_SCHEMA_VERSION, RunResult
+from numerics.artifact import run
+from numerics.targets import REGISTRY
 
 
 def test_registry_has_explicit_metadata_and_standard_profiles():
-    assert set(REGISTRY) == {"kls", "loc-engine", "kls-align", "cmh-gate-zero"}
+    assert set(REGISTRY) == {
+        "kls", "loc-engine", "kls-align", "cmh-gate-zero",
+        "kls-screen", "fiber-frame-dual", "cmh-ab",
+    }
     assert "kls-loc" not in REGISTRY
     for target, spec in REGISTRY.items():
         assert spec.id == target
@@ -57,6 +60,6 @@ def test_cli_requires_a_target_and_maps_the_legacy_localization_spelling(monkeyp
         called.update(target=target, seed=seed, profile=profile, out=out)
         return tmp_path / "artifact.jsonl"
 
-    monkeypatch.setattr("finum.run.run", fake_run)
+    monkeypatch.setattr("numerics.artifact.run", fake_run)
     assert main(["run", "--target", "kls-loc", "--heavy", "--seed", "9"]) == 0
     assert called == {"target": "loc-engine", "seed": 9, "profile": "full", "out": None}

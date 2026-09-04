@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:weighted
+---
 # KLS route probe: cut-local replacement for the refuted weighted gate
 
 Date: 2026-08-27

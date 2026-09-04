@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-24"
+outcome: directional
+nodes:
+  - conj:kls
+---
 # KLS consolidation: July quadratic sector and the deterministic CMH route
 
 Date: 2026-08-24

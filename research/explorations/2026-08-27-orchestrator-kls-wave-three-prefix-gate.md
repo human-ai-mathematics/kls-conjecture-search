@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - ass:all-cut-carleson
+---
 # KLS Wave 3: exact tight-prefix trace gate
 
 Date: 2026-08-27

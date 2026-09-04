@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - q:weighted
+---
 # Orchestrator launch: KLS certification and refutation wave zero
 
 Date: 2026-08-27

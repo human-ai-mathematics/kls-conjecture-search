@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - ass:cmh-recovery-envelope
+---
 # KLS route probe: linear CMH recovery and the anisotropic Hessian bootstrap
 
 Date: 2026-08-27

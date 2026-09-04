@@ -88,8 +88,7 @@ Three formulations are used interchangeably below.
   inequality on the linear function $f(x)=\inner{x}{v}$ with $v$ a top eigenvector of $\Cov\mu$
   gives $\Var_\mu f=\inner{\Cov\mu\,v}{v}$ and $\int|\nabla f|^2\dd\mu=|v|^2$. So
   \eqref{eq:kls-affine} says exactly this: \emph{up to a universal constant, linear functions
-  already detect the slowest mode of every log-concave measure.} This is the form that connects
-  the conjecture to its structured counterparts; see Section~\ref{subsec:kls-reading-map}.
+  already detect the slowest mode of every log-concave measure.}
 
   \item \textbf{Geometric form.} The least-expanding arbitrary cut of a convex body is, up to a
   universal factor, no worse than the least-expanding hyperplane cut
@@ -401,7 +400,7 @@ covariance & Dimension-free operator control in expectation & \ref{sec:family-tr
 \paragraph{The repository's own routes.}
 Groups~3--6 are this repository's work. Each is a response to
 Section~\ref{subsec:kls-spike-obstruction}, each has an exactly stated open estimate, and each is
-tracked as a route in the control plane \texttt{research/kls/routes.md}.
+tracked as an approach in \texttt{research/program/portfolio.yaml}.
 
 \begin{center}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}Y>{\raggedright\arraybackslash}p{0.14\textwidth}@{}}
@@ -430,18 +429,6 @@ dual; the natural root frame already fails & 6 \\
 
 Group~7 (Section~\ref{sec:kls-synthesis}) closes the document by mapping each named gap in the
 literature onto the corresponding open node of the KLS ledger.
-
-\paragraph{The structured counterpart.}
-The affine form \eqref{eq:kls-affine} is what links this conjecture to the structured end of the
-same problem. Its structured-posterior counterpart, A1-bis, asks for
-$\CP\le K\lambda_{\max}(\Cov)$ for generalized-linear-model posteriors; the \emph{same} bound for
-\emph{every} isotropic log-concave measure with $K$ universal \emph{is}
-Conjecture~\ref{conj:kls}. KLS is therefore the ``Tier-$\infty$'' boundary of a difficulty
-gradation over structured families: each such family buys its explicit constant by having more
-usable structure than a general log-concave measure. That gradation, and A1-bis itself, are
-developed in the companion repository \texttt{posterior-inequalities-exploration}. The
-relationship is a comparison, never a proof dependency in either direction: proving the
-structured case does not prove KLS, and assuming KLS trivializes the structured case.
 
 \paragraph{Suggested external reading order.}
 For a reader coming to the subject rather than to this repository:

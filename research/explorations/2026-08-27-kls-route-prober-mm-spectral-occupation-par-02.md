@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - q:mm-spectral-occupation
+---
 # Route-S probe: posterior defect and the surviving high-incidence block
 
 Date: 2026-08-27

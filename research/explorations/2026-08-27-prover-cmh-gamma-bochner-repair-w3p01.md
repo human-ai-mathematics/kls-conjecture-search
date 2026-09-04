@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - lem:cmh-gamma-completion
+  - prop:cmh-bochner
+---
 # CMH Gamma-completion Bochner provenance repair
 
 - Date: 2026-08-27

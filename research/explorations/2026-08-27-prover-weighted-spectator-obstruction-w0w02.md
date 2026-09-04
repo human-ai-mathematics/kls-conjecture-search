@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - prop:weighted-spectator-obstruction
+---
 # Prover: exponential-spectator obstruction
 
 Date: 2026-08-27

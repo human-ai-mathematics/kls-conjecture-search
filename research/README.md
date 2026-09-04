@@ -1,58 +1,64 @@
 # Research control plane
 
-`research/` coordinates the KLS program. The manuscript owns accepted statements, the ledger owns
-logical state and graph edges, `solutions/` owns standalone proofs, and numerical runs guide
-research without certifying claims.
+`research/` holds the three domains the root contract keeps apart. The manuscript owns accepted
+statements, the ledger owns logical state and graph edges, the portfolio owns what the search is
+doing, `solutions/` owns standalone proofs, and numerical runs guide research without certifying
+anything.
+
+> Ledger = what is mathematically claimed. Portfolio = what the search is doing.
+> Checkpoints = why the portfolio changed.
 
 ## Program
 
-| program | ledger id | entry point | purpose |
-|---|---|---|---|
-| KLS | `kls` | [`kls/README.md`](kls/README.md) | compare proof routes and discharge their open inputs |
-
-There is one ledger. All ledger writes pass through one orchestrator.
-
-The structured end of the same problem — explicit functional-inequality constants for Bayesian
-posteriors, including the structured-posterior conjecture `conj:a1-bis` — is pursued in the
-companion repository `posterior-inequalities-exploration`. The two programs were split out of a
-single repository on 2026-09-01; see
-[`decisions/2026-09-01-split-a-series-and-kls-repositories.md`](decisions/2026-09-01-split-a-series-and-kls-repositories.md).
-The relationship between `conj:kls` and `conj:a1-bis` is a comparison and is recorded only in
-prose: `bridges` resolves within one repository, and no node here may depend on a node there.
+One program, `kls`, and one ledger. All ledger writes pass through one orchestrator
+(`CLAUDE.md` constraint 1).
 
 ## Sources of truth
 
 | content | location |
 |---|---|
-| ledger fields and invariants | [`ledger-schema.md`](ledger-schema.md) |
 | accepted mathematical prose | [`../modules/kls/`](../modules/kls/) |
-| claim state and logical edges | `kls/ledger.yaml` |
-| route status and gating | `kls/routes.md`, `kls/gating.md` |
+| claim state and logical edges | [`program/ledger.yaml`](program/ledger.yaml) |
+| ledger fields and invariants | [`program/ledger-schema.md`](program/ledger-schema.md) |
+| the target, its negation, completion criteria, traps | [`program/brief.md`](program/brief.md) |
+| route families, states, blockers, saturation | [`program/portfolio.yaml`](program/portfolio.yaml) |
+| portfolio and brief field contract | [`program/portfolio-schema.md`](program/portfolio-schema.md) |
 | proof dossiers | [`../solutions/`](../solutions/) |
-| reusable lemmas and shared instances | [`knowledge/`](knowledge/) |
-| mathematical attempts and dead ends | [`explorations/`](explorations/) |
+| the shared calibration and adversarial battery | [`instances.md`](instances.md) |
+| search checkpoints, including dead ends | [`explorations/`](explorations/) |
 | independent reviews | [`reviews/`](reviews/) |
 | numerical artifacts | [`runs/`](runs/) |
-| harness decisions | [`decisions/`](decisions/) |
+| byte-preserved sources of migrated numerical artifacts | [`legacy-runs/`](legacy-runs/) |
 
-The ledger uses `depends_on` for proof dependencies and `bounded_by` for obstruction nodes.
+The ledger uses `depends_on` for facts a proof used, `assumes` for antecedents that govern
+applicability rather than truth, `bounded_by` for proved obstructions, and `heuristic_barriers`
+for unproved ones.
+
+There is no separate registry of reusable lemmas and no mutable route or gating document. A
+finding reusable enough to be cited elsewhere earns a ledger node and a manuscript statement; a
+statement not yet stable enough for that is a `cand:` in the checkpoint that proposed it.
 
 ## Contribution flow
 
-1. Select a ledger node and read its manuscript statement, dependencies, and obstructions.
-2. Record the attempt in a new dated exploration; put numerical work through `finum`.
-3. Send accepted statement and ledger changes through the orchestrator.
-4. For a proof, supply a standalone dossier and independent review.
-5. Run the structural checker.
+1. Read [`program/brief.md`](program/brief.md), then select a route from
+   [`program/portfolio.yaml`](program/portfolio.yaml) or a node from the ledger.
+2. Read that node's manuscript statement, dependencies, and barriers before spending work.
+3. Record the attempt in a new dated checkpoint under [`explorations/`](explorations/), including
+   dead ends; put numerical work through the `numerics` harness.
+4. Send accepted statement and ledger changes through the orchestrator; return a
+   `portfolio_delta` rather than editing the portfolio.
+5. For a proof, supply a standalone dossier and an independent review.
 
 ## Verify
 
 ```bash
-python3 research/check_ledger.py
-python3 research/check_ledger.py status
-python3 research/check_ledger.py node q:upgrade
-python3 -m unittest discover -s research/tests -p 'test_*.py'
+python3 scripts/check.py            # every lane
+python3 scripts/check.py ready      # can a sustained search start here?
+python3 scripts/check.py status     # the unresolved frontier
+python3 scripts/check.py portfolio  # what the search is doing
+python3 scripts/check.py node conj:kls
+python3 -m unittest discover -s scripts/tests -p 'test_*.py'
 ```
 
-The checker validates repository structure, not mathematical correctness. The contribution rules
-are in [`../CLAUDE.md`](../CLAUDE.md).
+The checker validates repository structure, not mathematical correctness
+(`CLAUDE.md` constraint 4). The contribution rules are in [`../CLAUDE.md`](../CLAUDE.md).

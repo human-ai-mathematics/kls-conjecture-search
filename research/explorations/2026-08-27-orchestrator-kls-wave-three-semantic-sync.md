@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - q:stein-weighted
+---
 # KLS Wave 3: semantic synchronization
 
 Date: 2026-08-27

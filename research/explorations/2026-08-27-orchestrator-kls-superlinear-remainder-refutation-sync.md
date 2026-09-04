@@ -1,3 +1,10 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: directional
+nodes:
+  - prop:spectator-excess-rate-obstruction
+---
 # KLS superlinear excess-remainder refutation sync
 
 Date: 2026-08-27

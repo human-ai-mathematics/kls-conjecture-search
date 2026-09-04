@@ -9,9 +9,9 @@ exactly the regime the surrogate got wrong.
 
 import numpy as np
 
-from finum.localization import cuts
-from finum.localization.state import ProductState
-from finum.localization.tilt1d import LAPLACE
+from numerics.localization import cuts
+from numerics.localization.state import ProductState
+from numerics.localization.tilt1d import LAPLACE
 
 
 def _inverse_cdf_sampler(c_i, t, rng, N):

@@ -2,12 +2,12 @@
 
 import numpy as np
 
-from finum.localization.alignment import (
+from numerics.localization.alignment import (
     filtering_trajectory,
     grid_intervals,
     integrate_alignment_path,
 )
-from finum.localization.tail_union import balanced_tail_radius, observe_tail_union
+from numerics.localization.tail_union import balanced_tail_radius, observe_tail_union
 
 
 def test_filtering_trajectory_is_reproducible_and_coarsens_exactly():

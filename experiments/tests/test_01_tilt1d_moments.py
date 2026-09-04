@@ -7,7 +7,7 @@ must give Var(x^2) = 5 (the retraction used the Gaussian surrogate's 4/pi).
 
 import numpy as np
 
-from finum.localization.tilt1d import GAUSSIAN, LAPLACE, tilted
+from numerics.localization.tilt1d import GAUSSIAN, LAPLACE, tilted
 
 
 def test_laplace_isotropic_moments():

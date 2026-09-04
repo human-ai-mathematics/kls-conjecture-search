@@ -1,3 +1,13 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - prop:persistent-splitting
+  - cor:generic-degeneracy
+  - lem:profile-bound
+  - prop:exact-splitting
+---
 # Persistent-splitting dossier repair (`w0r03`)
 
 - Date: 2026-08-27

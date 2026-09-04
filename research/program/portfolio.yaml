@@ -1,0 +1,229 @@
+# What the search is doing — as against research/program/ledger.yaml, which records what is
+# mathematically claimed. Field contract: research/program/portfolio-schema.md.
+#
+# Single-writer: the `synthesizer` holds the `portfolio` concurrency key. Everyone else
+# proposes changes through the `portfolio_delta` of their handoff.
+#
+# Coordination state only. A blocker is named by its `cand:` id or ledger node id and never
+# restated here (CLAUDE.md constraint 11). A family says what mechanism it tries; a route says
+# what it tries within that family. Neither is a claim, and neither has a truth value.
+#
+# The four live families are the four routes the manuscript develops. `shared` was a ledger
+# route value covering the target and the literature imports; it is not a search route and has
+# no family. Approach objectives are the gate deliverables formerly held in research/kls/gating.md.
+
+target: conj:kls
+
+families:
+  - id: fam:eldan-localization
+    mechanism: >-
+      Follow a fixed balanced cut under stochastic localization and absorb the Stein source into
+      the Riccati damping, showing the cut cannot be identified too quickly.
+    state: active
+
+  - id: fam:mm-spectral
+    mechanism: >-
+      Follow a normalized first eigenfunction through stochastic localization while preserving
+      its orientation in the posterior covariance tensor.
+    state: active
+
+  - id: fam:mm-cmh
+    mechanism: >-
+      Bound the canonical moment-Hessian quotient deterministically and pass it to an affine
+      Poincare inequality through the certified bridge.
+    state: active
+
+  - id: fam:conditional-fiber
+    mechanism: >-
+      Build a test-independent isotropic frame of inverse-variance-normalized conditional line
+      resamplings and bound its L2 gap from below.
+    state: active
+
+  - id: fam:novel-routes
+    mechanism: >-
+      Registered probes that survived a first falsification test but are not yet routes: each
+      needs one dimension-free estimate decided before it can carry a gate.
+    state: parked
+    closure_checkpoint: research/explorations/2026-09-04-synthesizer-search-state-migration.md
+    reopen_if: >-
+      cand:cone-seam-capacity or cand:brenier-simplex-hessian is proved or refuted, at which
+      point the probe it blocks becomes a route with a stated gate.
+
+approaches:
+  # --- fixed-cut stochastic localization ------------------------------------------------
+  - id: ap:eldan-trace-upgrade
+    family: fam:eldan-localization
+    objective: >-
+      Upgrade directional occupation control to trace scale for all balanced cuts, producing the
+      tight-prefix absorptive trace estimate with every source and damping term matched to the
+      scalar Riccati bound.
+    state: active
+
+  - id: ap:eldan-weighted-excess
+    family: fam:eldan-localization
+    objective: >-
+      Propagate the perimeter excess with a global operator-norm covariance weight at the
+      unit-rate scale.
+    state: blocked
+    blocker: prop:weighted-spectator-obstruction
+    reopen_if: >-
+      A cut-local, tensor-stable covariance weight that ignores independent spectators while
+      still dominating the aligned two-tail mode is proposed, or a replacement carrying an
+      explicit near-worst-measure premise is certified.
+    checkpoints:
+      - research/explorations/2026-08-27-kls-route-prober-weighted-spectator-w0w01.md
+
+  - id: ap:eldan-screened-supply
+    family: fam:eldan-localization
+    objective: >-
+      Charge the weighted excess only on the aligned screen where the trace term dominates, and
+      return at most an absorbable fraction on its complement.
+    parent: ap:eldan-weighted-excess
+    state: active
+
+  - id: ap:eldan-stein-weighted
+    family: fam:eldan-localization
+    objective: >-
+      Specify the tensor-stable replacement for the refuted weighted package and supply the
+      matching localization-uniform almost-stability trace theorem modulo Jacobi zero modes.
+    state: queued
+
+  - id: ap:eldan-taming-splitting
+    family: fam:eldan-localization
+    objective: >-
+      Define one bridge object carrying both the cut-free covariance index and the cut-indexed
+      boundary geometry, and prove the covariance-taming or almost-splitting estimate from it.
+    state: queued
+
+  - id: ap:eldan-alignment
+    family: fam:eldan-localization
+    objective: >-
+      Decide the incident-high product-cut model with a uniform analytic bound for fixed balanced
+      product cuts, or a certified counterexample.
+    state: queued
+
+  # --- fixed-eigenfunction spectral localization ----------------------------------------
+  - id: ap:spectral-occupation
+    family: fam:mm-spectral
+    objective: >-
+      Prove the universal-time full-damping source estimate uniformly on regular approximants,
+      preserving tensor orientation under unwhitening.
+    state: active
+
+  - id: ap:spectral-window-chain
+    family: fam:mm-spectral
+    objective: >-
+      Close the occupation estimate on the published polylogarithmic covariance window through
+      the initial-layer window chain.
+    parent: ap:spectral-occupation
+    state: completed
+    checkpoints:
+      - research/explorations/2026-08-30-kls-route-prober-mm-occupation-initial-layer-w4s01.md
+
+  # --- deterministic moment-map / CMH ---------------------------------------------------
+  - id: ap:cmh-recovery-envelope
+    family: fam:mm-cmh
+    objective: >-
+      Construct, for every centered log-concave law, one regular compact-target moment-map
+      recovery sequence with a universal bound on the CMH liminf.
+    state: active
+
+  - id: ap:cmh-anisotropic-bootstrap
+    family: fam:mm-cmh
+    objective: >-
+      Prove the anisotropic source-retention inequality that would bound the linear-test quotient
+      through the exact isotropic-coordinate matrices.
+    parent: ap:cmh-recovery-envelope
+    state: blocked
+    blocker: lem:cmh-linear-spectral-resolution
+    reopen_if: >-
+      That node is independently certified, or an integrated corrector or nonlocal coercivity
+      replaces matrix polarization, which alone has no pointwise Loewner promotion.
+    checkpoints:
+      - research/explorations/2026-08-30-kls-route-prober-cmh-anisotropic-bootstrap-w4c01.md
+
+  - id: ap:cmh-uniform-approximants
+    family: fam:mm-cmh
+    objective: >-
+      Bound the CMH constant uniformly along the certified regular approximant families, a
+      stronger premise than the recovery envelope and not needed if that one is discharged.
+    state: queued
+
+  - id: ap:cmh-invariant-lift
+    family: fam:mm-cmh
+    objective: >-
+      Derive the target-flat multiplier invariantly and reduce arbitrary split dimensions to
+      controlled Codazzi components paired with named positive squares.
+    state: queued
+
+  - id: ap:cmh-square-root-commutator
+    family: fam:mm-cmh
+    objective: >-
+      Control the complete Haar sum of square-root commutators on a common core, accounting for
+      every retained positive and error term without double spending.
+    parent: ap:cmh-invariant-lift
+    state: queued
+
+  - id: ap:cmh-solenoidal-perturbation
+    family: fam:mm-cmh
+    objective: >-
+      Compute the exact second variation through the Hodge split at an admissible perturbation of
+      the saturating one-sided-exponential product.
+    state: queued
+
+  - id: ap:cmh-gate-zero
+    family: fam:mm-cmh
+    objective: >-
+      Decide the necessary linear moment-map inequality by an independently checked analytic
+      argument or a genuine moment-map counterexample.
+    state: queued
+    related:
+      - to: ap:eldan-trace-upgrade
+        relation: overlaps
+
+  # --- conditional-fiber frames ---------------------------------------------------------
+  - id: ap:fiber-frame-construction
+    family: fam:conditional-fiber
+    objective: >-
+      Construct one test-independent isotropic frame with a universal L2 gap on the maximal
+      closed form domain.
+    state: active
+
+  - id: ap:fiber-simplex-dual
+    family: fam:conditional-fiber
+    objective: >-
+      Refute the all-frame gate with an exact fixed-degree uniform-simplex dual certificate whose
+      objective tends to zero.
+    parent: ap:fiber-frame-construction
+    state: blocked
+    blocker: lem:fiber-root-degree-two
+    reopen_if: >-
+      That node is independently certified, or a certificate of degree at least three is
+      constructed; the exact degree-two floors rule out any degree-two refuter.
+    checkpoints:
+      - research/explorations/2026-08-30-prover-fiber-root-degree-two-w4p04.md
+
+  # --- parked probes --------------------------------------------------------------------
+  - id: ap:cone-boundary-gap
+    family: fam:novel-routes
+    objective: >-
+      Establish a universal tangential Poincare gap for normalized cone measure, feeding the
+      published Hardy boundary bridge.
+    state: blocked
+    blocker: cand:cone-seam-capacity
+    reopen_if: >-
+      cand:cone-seam-capacity is proved or refuted.
+    checkpoints:
+      - research/explorations/2026-09-04-synthesizer-search-state-migration.md
+
+  - id: ap:laplace-brenier-simplex
+    family: fam:novel-routes
+    objective: >-
+      Decide the rotation-optimized simplex transmission bound before registering a
+      Laplace-Brenier route.
+    state: blocked
+    blocker: cand:brenier-simplex-hessian
+    reopen_if: >-
+      cand:brenier-simplex-hessian is proved or refuted.
+    checkpoints:
+      - research/explorations/2026-08-27-kls-route-prober-laplace-brenier-simplex-w2b01.md

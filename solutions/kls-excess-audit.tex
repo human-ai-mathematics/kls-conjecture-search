@@ -2,44 +2,15 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-% === SOLUTION HEADER (proof provenance) =====================================
-% ledger-nodes: prop:intro-audit; prop:trivial-excess;
-%               lem:perimeter-martingale; lem:excess-identity;
-%               lem:inf-martingales
-% refines: prop:intro-audit (modules/kls/20-eldan-statements.tex);
-%          prop:trivial-excess (modules/kls/24-excess-propagation.tex);
-%          lem:perimeter-martingale (modules/kls/24-excess-propagation.tex);
-%          lem:excess-identity (modules/kls/24-excess-propagation.tex);
-%          lem:inf-martingales (modules/kls/24-excess-propagation.tex)
-% proof-location-note: the manuscript proof of prop:intro-audit is displaced to
-%                      modules/kls/24-excess-propagation.tex
-% depends_on:
-%   prop:intro-audit: prop:trivial-excess; prop:two-tail;
-%                     lem:stein-vs-source; cor:tight-window-consumption;
-%                     lem:half
-%   prop:trivial-excess: lem:perimeter-martingale
-%   lem:perimeter-martingale: eq:loc-martingale; eq:density-sde
-%   lem:excess-identity: lem:perimeter-martingale
-%   lem:inf-martingales: lem:perimeter-martingale
-% bounded_by:
-%   prop:intro-audit: none
-%   prop:trivial-excess: none
-%   lem:perimeter-martingale: none
-%   lem:excess-identity: none
-%   lem:inf-martingales: none
-% evidence_run: none
-% checked_by: agent
-% authored_by: /root/kls_bootstrap_author
-% repaired_by: /root/repair_excess_dossier
-% prior_reviewed_by: /root/kls_core_author
-% prior_review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
-% prior-review-note: historical provenance for the pre-repair bytes
-% repair-contract: research/reviews/2026-08-27-kls-excess-repair-w0-audit.md
-% reviewer: /root/review_excess_repair_w0r2
-% review: research/reviews/2026-08-27-kls-excess-repair-w0r2-proof-review.md
-% date: 2026-08-27
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : prop:intro-audit; prop:trivial-excess; lem:perimeter-martingale; lem:excess-identity; lem:inf-martingales
+% refines : prop:intro-audit (modules/kls/20-eldan-statements.tex);
+% author : /root/kls_bootstrap_author
+% date : 2026-08-27
 % ============================================================================
-
 \section*{Solution: the perimeter martingale and the excess-consumption audit}
 \label{sec:sol-kls-excess-audit}
 

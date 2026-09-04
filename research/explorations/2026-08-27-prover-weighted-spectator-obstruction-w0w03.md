@@ -1,3 +1,11 @@
+---
+type: exploration
+date: "2026-08-27"
+outcome: proposed
+nodes:
+  - prop:weighted-spectator-obstruction
+  - q:weighted
+---
 # Weighted-spectator obstruction: mechanical repair round W0W03
 
 - Date: 2026-08-27
