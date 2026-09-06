@@ -197,6 +197,29 @@ def cmd_agents(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_status(args: argparse.Namespace) -> int:
+    """Regenerate the manuscript's status macros from the ledger, then validate.
+
+    Same shape as ``cmd_agents``: this is a derived file, so it is overwritten without
+    asking, and the checker refuses the tree if it ever disagrees with its source.
+    """
+    from checks import analyze, editorial, failures
+
+    report = analyze(args.root)
+    blocking = failures(report, ("core",))
+    if blocking:
+        for message in blocking:
+            print(f"new.py: {message}", file=sys.stderr)
+        print("new.py: the ledger does not validate; nothing was written", file=sys.stderr)
+        return 1
+
+    written = editorial.write(args.root, report["ledgers"])
+    count = sum(len(item["nodes"]) for item in report["ledgers"])
+    print(f"wrote {written}: {count} node standing(s) derived from the ledger")
+    print("next: 'python3 scripts/check.py --lane editorial' to confirm")
+    return 0
+
+
 def cmd_role(args: argparse.Namespace) -> int:
     packs = args.root / "packs"
     source = packs / args.pack / f"{args.pack}.md"
@@ -278,6 +301,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     agents = sub.add_parser("agents", help="regenerate agent files from profiles.yaml")
     agents.set_defaults(handler=cmd_agents)
+
+    status = sub.add_parser(
+        "status", help="regenerate status.tex, the manuscript's ledger-derived standings")
+    status.set_defaults(handler=cmd_status)
     return parser
 
 

@@ -1,13 +1,16 @@
 % preamble.tex
 % -----------------------------------------------------------------------------
 % Single source of truth for packages, theorem environments, macros, and the
-% bibliography resource for the unified functional-inequalities document
-% (Part I: statistical/ML families; Part II: A-series; Part III: the KLS frontier). Inputted by
-% main.tex via
+% bibliography resource for the KLS frontier manuscript. Inputted by main.tex via
 %   \usepackage{subfiles}
 %   \input{\subfix{preamble.tex}}
-% so that both `latexmk main.tex` and standalone `latexmk modules/NN-*.tex`
-% (and `modules/kls/NN-*.tex`) resolve the same preamble and bibliography.
+% so that both `latexmk main.tex` and a standalone `latexmk modules/kls/NN-*.tex`
+% resolve the same preamble and bibliography.
+%
+% "Part" in this file always means a \klspart divider of THIS document (Part I ---
+% the problem and its frontier, ... , Part V --- synthesis, then the appendices).
+% An older revision used the word for the three halves of a since-split unified
+% document; no trace of that numbering survives here.
 % Do NOT put \documentclass or \usepackage{subfiles} here (those live in
 % main.tex).
 %
@@ -37,6 +40,7 @@
 \addbibresource{\subfix{references.bib}}
 
 \hypersetup{
+  bookmarksdepth=3,
   colorlinks=true,
   linkcolor=blue!55!black,
   citecolor=blue!55!black,
@@ -81,15 +85,16 @@
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
-% --- Part III group dividers -------------------------------------------------
-% Part III (KLS) is long and multi-route. \klsgroup{<heading>}{<subtitle>} emits a
+% --- Part dividers -----------------------------------------------------------
+% The document is long and multi-route. \klspart{<heading>}{<subtitle>} emits a
 % visible divider plus a table-of-contents entry ABOVE \section level, so that the
-% grouping of sections into orientation / survey / shared machinery / one block per
-% route is legible both in the TOC and on the page. It introduces no numbering of
-% its own: section numbers, theorem numbers, and every \label are untouched, which
-% matters because a KLS \label IS a ledger node id (see CLAUDE.md).
+% grouping of sections into problem / landscape / routes / synthesis / appendices
+% is legible both in the TOC and on the page. It introduces no numbering of its
+% own: section numbers, theorem numbers, and every \label are untouched, which
+% matters because a KLS \label IS a ledger node id (see CLAUDE.md). The Roman
+% numeral is therefore part of the heading TEXT, not a counter.
 \makeatletter
-\newcommand{\l@klsgroup}[2]{%
+\newcommand{\l@klspart}[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty{-\@highpenalty}%
     \vskip 1.0em \@plus\p@
@@ -101,7 +106,7 @@
     \endgroup
   \fi}
 \makeatother
-\newcommand{\klsgroup}[2]{%
+\newcommand{\klspart}[2]{%
   \par\addvspace{2.0\baselineskip}%
   \phantomsection
   \noindent\textcolor{blue!55!black}{\rule{\textwidth}{1.1pt}}\par\vspace{0.30em}%
@@ -110,9 +115,34 @@
   {\noindent\itshape #2\par}%
   \vspace{0.30em}%
   \noindent\textcolor{blue!55!black}{\rule{\textwidth}{0.4pt}}\par
-  \addcontentsline{toc}{klsgroup}{#1}%
+  \addcontentsline{toc}{klspart}{#1}%
   \addvspace{1.0\baselineskip}%
 }
+
+% --- reader-facing epistemic standing ----------------------------------------
+% \klsstatus{<node-id>} sets the standing of that ledger node beside its statement:
+% "Published result", "Unreviewed preprint", "Certified here", "Open premise", and so
+% on. The strings are NOT written here. They live in status.tex, which is generated from
+% research/program/ledger.yaml by `python3 scripts/new.py status`, and
+% `check.py --lane editorial` fails the tree if the two disagree --- so the badge on the
+% page can never outrun the evidence behind it, and no one has to remember to update it.
+%
+% The node id is passed explicitly rather than read off the enclosing \label, because
+% LaTeX cannot do the latter reliably. The same lane therefore also checks that every
+% claim environment carries exactly one \klsstatus naming its own \label.
+\input{\subfix{status.tex}}
+% Rendered as a small right-flushed tag on its own line directly under the theorem
+% header, pulled tight against the statement it belongs to. Colour is decorative: the
+% word itself carries the meaning, so the tag survives a greyscale print.
+\newcommand{\klsstatus}[1]{%
+  \ifcsname klsstatus@#1\endcsname
+    \leavevmode\unskip\nobreak\hfill
+    {\normalfont\footnotesize\sffamily\color{blue!35!black}%
+     [\,\csname klsstatus@#1\endcsname\,]}%
+    \par\nobreak\noindent\ignorespaces
+  \else
+    \PackageWarning{kls}{no recorded standing for '#1'; run scripts/new.py status}%
+  \fi}
 
 % --- common macros -----------------------------------------------------------
 \newcommand{\R}{\mathbb{R}}
@@ -135,7 +165,7 @@
 \newcommand{\lmax}{\lambda_{\max}}
 \newcommand{\lmin}{\lambda_{\min}}
 
-% --- Part I (statistical/ML families) macros ---------------------------------
+% --- general functional-inequality macros ------------------------------------
 \newcommand{\Pstar}{P}                 % target measure P propto e^{-U}
 \newcommand{\CP}{C_{\mathrm P}}        % Poincare constant
 \newcommand{\CLS}{C_{\mathrm{LS}}}     % log-Sobolev constant
@@ -143,7 +173,7 @@
 \newcommand{\Wtwo}{W_2}
 \newcommand{\Sigmaz}{\Sigma_0}         % Gaussian prior covariance
 
-% --- Part III (KLS) macros ---------------------------------------------------
+% --- KLS-specific macros -----------------------------------------------------
 \newcommand{\Vol}{\operatorname{Vol}}
 \newcommand{\HS}{\mathrm{HS}}
 \newcommand{\supp}{\operatorname{supp}}

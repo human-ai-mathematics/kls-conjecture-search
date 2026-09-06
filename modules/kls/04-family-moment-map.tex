@@ -54,7 +54,7 @@ Section~\ref{sec:family-needles} showed is not inherited by needles, becomes a s
 identity for the object being estimated.
 
 \begin{theorem}[Compact-target regular moment map]
-\label{thm:regular-moment-map-compact-target}
+\label{thm:regular-moment-map-compact-target}\klsstatus{thm:regular-moment-map-compact-target}
 Let $P\subset\R^n$ be a convex body and let
 $\mu(dx)=g(x)\mathbf 1_{\operatorname{int}P}(x)\,dx$ be a centered probability measure, where
 $g\in C^\infty(\R^n)$ is positive. Then the canonical moment potential $\varphi$ is smooth and
@@ -136,7 +136,7 @@ and the Brascamp--Lieb energy of $F$ is exactly $D_B$, so
 the last step by \eqref{eq:SB-DB}. Rearranging gives the main new theorem inside Letwin's proof.
 
 \begin{theorem}[Letwin matrix moment-map estimate]
-\label{thm:letwin-moment-map}
+\label{thm:letwin-moment-map}\klsstatus{thm:letwin-moment-map}
 Under the regular moment-map assumptions used in \cite{Letwin2026QuadraticKLS}, for every
 constant symmetric matrix $B$,
 \begin{equation}
@@ -152,7 +152,7 @@ The $B=I$ case of \eqref{eq:letwin-matrix} is the moment-Hessian estimate shared
 contemporaneous Chen--Klartag preprint.
 
 \begin{theorem}[Chen--Klartag moment-Hessian estimate]
-\label{thm:chen-klartag-moment-hessian}
+\label{thm:chen-klartag-moment-hessian}\klsstatus{thm:chen-klartag-moment-hessian}
 Under the regularity assumptions of \cite{ChenKlartag2026SharpThinShell},
 \[
   \E_\nu\norm H_{\HS}^2\le2n.
@@ -161,7 +161,7 @@ The general log-concave conclusions below follow by the approximation argument i
 \end{theorem}
 
 \begin{theorem}[Chen--Klartag sharp thin shell]
-\label{thm:chen-klartag-thin-shell}
+\label{thm:chen-klartag-thin-shell}\klsstatus{thm:chen-klartag-thin-shell}
 For every isotropic log-concave $X\in\R^n$,
 \[
   \Var(|X|^2)\le8n.
@@ -170,7 +170,7 @@ The constant is attained by products of standard centered one-sided exponential 
 \end{theorem}
 
 \begin{theorem}[Chen--Klartag sharp third tensor]
-\label{thm:chen-klartag-third-moment}
+\label{thm:chen-klartag-third-moment}\klsstatus{thm:chen-klartag-third-moment}
 If $X\in\R^n$ is isotropic and log-concave and $T_3(X)=(\E X_iX_jX_k)_{i,j,k}$, then
 \[
   \norm{T_3(X)}_{\HS}^2\le4n.
@@ -300,6 +300,13 @@ Brascamp--Lieb in moment-map coordinates already gives
 so KLS would follow from $\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2$. The
 identity $\E\tau_\mu=I$ of \eqref{eq:mean-hessian-identity} is \emph{not} sufficient for this,
 because $\tau_\mu(X)$ can correlate with $\nabla f(X)$. Letwin controls a deterministic $B$; the
-missing theorem must handle an $X$-dependent matrix or direction field. This is exactly the gap
-that Route~C (Group~5) attacks, by replacing constant multipliers with test-dependent Haar fields.
+missing theorem must handle an $X$-dependent matrix or direction field.
+
+\paragraph{How this family feeds the live routes.}
+It supplies two of them. Route~C (Section~\ref{sec:moment-map-cmh}) attacks the gap above
+head-on, replacing constant multipliers by test-dependent Haar fields, and its endpoint
+$\CMH$ is defined in these coordinates. Route~S consumes the family's quadratic control as the
+estimate it feeds its whitened posterior tensor to. The fixed-matrix bound
+(Theorem~\ref{thm:letwin-moment-map}) is therefore the single literature input both routes are
+trying to make adaptive.
 \end{document}

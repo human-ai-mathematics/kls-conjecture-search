@@ -1,18 +1,27 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Orientation: the conjecture, the frontier, and the shape of the problem}
+\section{The conjecture and why it matters}
 \label{sec:kls-orientation}
 
-This section is the entry point to this document. It states the Kannan--Lov\'asz--Simonovits
-conjecture in the three forms used below, records the quantitative frontier as of
-24~August 2026, separates the neighbouring conjectures that have recently been resolved from
-the conjecture itself, exhibits the architecture of the current best argument, and isolates the
-single obstruction that shapes every route developed later in this part.
+Part~I is the entry point to this document, and it is meant to be readable on its own. This
+section states the Kannan--Lov\'asz--Simonovits conjecture in the forms used below and fixes the
+normalizations that make quoted exponents comparable;
+Section~\ref{sec:kls-known} records what is known and how the current best bound is built;
+Section~\ref{sec:kls-remaining} isolates what is left over, which is the thing every route in
+Parts~III and~IV is a response to.
 
-Nothing in Groups~0 and~1 is a repository result. These two groups are exposition of the
-published and preprint literature, written so that Groups~2--6 --- which \emph{are} repository
-work --- can be read without leaving the document. Imported statements are attributed
-individually, and version-1 preprints are marked as such wherever they are used.
+Nothing in Parts~I and~II is a repository result. Both are exposition of the published and
+preprint literature, written so that Parts~III--V --- which \emph{are} repository work --- can be
+read without leaving the document. Imported statements are attributed individually, and version-1
+preprints are marked as such wherever they are used.
+
+The conjecture is a statement about \emph{expansion}. A log-concave measure cannot be cut in two
+without paying for the cut, and KLS asserts that in the right normalization the price does not
+decay as the dimension grows. Equivalently, in its analytic form, the measure has a spectral gap
+bounded below independently of $n$: no function of many variables can have large variance and
+small gradient energy at the same time. Both readings are made precise in the next few pages, and
+the two-sided comparison \eqref{eq:cheeger-two-sided} is what allows them to be used
+interchangeably.
 
 \subsection{The conjecture}
 \label{subsec:kls-conjecture}
@@ -53,7 +62,7 @@ so $\CP\asymp\PsiKLS^2$ with universal constants; the explicit constants are rec
 the normalization $\CP(\mu)\le4h_\mu^{-2}$ used throughout.
 
 \begin{conjecture}[KLS]
-\label{conj:kls}
+\label{conj:kls}\klsstatus{conj:kls}
 There is a universal constant $C<\infty$ such that, for every dimension, every isotropic
 log-concave $\mu$, and every locally Lipschitz $f$,
 \[
@@ -108,6 +117,13 @@ class.
 
 Finally, no family is known that forces the ratio in \eqref{eq:kls-affine} to grow with $n$. The
 entire gap is in the upper bound; it is not a gap between competing upper and lower power laws.
+
+\section{What is known}
+\label{sec:kls-known}
+
+Where the problem actually stands: the quantitative frontier, the two neighbouring conjectures
+that have been settled and why settling them did not settle KLS, the architecture of the argument
+that produces the current best bound, and the exact place the surviving logarithm enters.
 
 \subsection{Status as of 24 August 2026}
 \label{subsec:kls-status}
@@ -317,14 +333,40 @@ $\CP\lesssim t_*^{-1/2}\lesssim\kappa_n\sqrt{\log n}$. The logarithm is the \emp
 replacing a matrix maximum by a soft maximum over $n$ directions}. That diagnosis is what makes
 target~3 of Section~\ref{sec:kls-synthesis} concrete.
 
-\subsection{The obstruction that shapes every route below}
+\section{The shape of the remaining problem}
+\label{sec:kls-remaining}
+
+The July 2026 preprints changed the shape of the problem, and it is worth stating the change
+precisely rather than as a mood: \emph{the remaining difficulty is no longer quadratic forms or
+third moments}. Conditional on \cite{Letwin2026QuadraticKLS}, $\kappa_n=O(1)$ and every quadratic
+witness is eliminated. What survives is a difficulty of a different type, and this section states
+it in the two forms every route below must answer.
+
+\subsection{Fixed and averaged, against adaptive and uniform}
+\label{subsec:kls-adaptive-residue}
+
+Every method surveyed in Part~II controls something. Needles control one-dimensional conditional
+measures sharply; stochastic localization controls short-time covariance and, conditionally,
+third moments; heat-flow and $H^{-1}$ arguments control coordinate and quadratic spectral mass;
+moment maps control fixed deterministic matrix energies $\E\Tr(BHBH)$; parallel coupling controls
+linear exponential tilts; Brownian transport controls averaged derivatives to within a
+polylogarithm. Section~\ref{subsec:synthesis-table} tabulates these one by one.
+
+What none of them controls is the same object when it is allowed to \emph{adapt}. In every row of
+that table the estimate holds for a fixed matrix, a fixed direction, a fixed tilt, or on average
+along a path, and KLS needs it uniformly, for an object that may depend on the measure or on the
+extremizing function. The gap is not a constant to be improved; it is a quantifier in the wrong
+place. A reader who remembers one sentence from Part~I should remember this one, because it is the
+sentence each of the four routes of Parts~III and~IV proposes a different way around.
+
+\subsection{The covariance spike, and why the direct repair is false}
 \label{subsec:kls-spike-obstruction}
 
-The following fact is the reason none of the routes in Groups~3--6 tries to bound
-$\norm{A_t}_\op$ better.
+The most natural repair --- bound $\norm{A_t}_\op$ better --- cannot work, and this is not a
+guess about difficulty but a proved fact.
 
 \begin{proposition}[Covariance spikes are compatible with KLS]
-\label{prop:covariance-spike}
+\label{prop:covariance-spike}\klsstatus{prop:covariance-spike}
 Let $\mu$ be the law of $n$ independent centered one-sided exponential coordinates and let $G$ be a
 standard Gaussian independent of $X\sim\mu$. Then $\CP(\mu)=O(1)$ by tensorization, yet
 \[
@@ -353,92 +395,42 @@ $\norm{A_t}_\op$ is therefore attempting to prove something stronger than KLS, a
 is not true. A successful potential must exploit eigenvalue profiles, averaging, tensorization, or
 the particular extremizing function --- not better pointwise bounds.
 
-Every live route of this repository is a response to that constraint:
+There is a second consequence, and it cuts the other way. Rare covariance spikes can be
+\emph{harmless}: the measure above satisfies KLS with a universal constant while spiking. A
+potential that charges the full largest eigenvalue whenever a spike occurs is therefore
+overcharging, and overcharging in a way that is easy to detect.
+
+\subsection{The tensorization test}
+\label{subsec:kls-tensorization-test}
+
+That gives a cheap and surprisingly discriminating test, which any proposal --- including every
+route below --- should be made to pass before it is developed.
+
+\begin{quote}
+  \emph{Evaluate the proposed potential on a product of $n$ independent copies of a
+  one-dimensional measure. A quantity that is not tensorization-aware will charge $n$ independent
+  coordinates $n$ times for a phenomenon that costs $O(1)$.}
+\end{quote}
+
+The test is not a formality. Section~\ref{sec:product-stress} applies it to the all-cut Carleson
+estimate of Route~E and it is where the rank-one candidate is refuted; the same computation is
+what identifies the surviving adapted alignment problem. A proposal that fails it is not merely
+inefficient, it is false at scale, and the failure is usually visible in a page.
+
+Every live route of this repository is a response to the two constraints of this section:
 
 \begin{itemize}[leftmargin=1.6em]
-  \item Route~E (Group~3) retains the two-color covariance of one fixed candidate cut, rather
-  than the full spectrum of $A_t$.
-  \item Route~S (Group~4) retains the covariance tensor of one fixed first eigenfunction.
-  \item Route~C (Group~5) abandons stochastic localization altogether and works in deterministic
-  moment-map coordinates.
-  \item Route~F (Group~6) replaces Euclidean directions by one test-independent isotropic frame
-  of inverse-variance-normalized conditional line resamplings.
+  \item Route~E (Section~\ref{sec:introduction}) retains the two-color covariance of one fixed
+  candidate cut, rather than the full spectrum of $A_t$.
+  \item Route~S (Section~\ref{sec:spectral-route}) retains the covariance tensor of one fixed
+  first eigenfunction.
+  \item Route~C (Section~\ref{sec:moment-map-cmh}) abandons stochastic localization altogether
+  and works in deterministic moment-map coordinates.
+  \item Route~F (Section~\ref{sec:conditional-fiber-frame}) replaces Euclidean directions by one
+  test-independent isotropic frame of inverse-variance-normalized conditional line resamplings.
 \end{itemize}
 
-\subsection{Strategy map and reading guide}
-\label{subsec:kls-reading-map}
-\label{sec:kls-strategy-map}
+Section~\ref{sec:frontier-atlas} compares them side by side, with the advance and the exact
+blocker of each; the chapters of Parts~III and~IV then develop them at their natural lengths.
 
-\paragraph{The five strategy families.}
-Group~1 surveys the five families in the literature, one section each, in a common format:
-object followed, what it buys, sharpest result, precise missing estimate, why it stalls.
-
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}Y>{\raggedright\arraybackslash}p{0.13\textwidth}@{}}
-\toprule
-Family & Object followed & Present obstruction & Section \\
-\midrule
-Classical needles & One-dimensional restrictions & Global isotropy is not inherited needle by
-needle & \ref{sec:family-needles} \\
-\addlinespace
-Stochastic localization & Mass, centroid, and covariance along a filtration & Controlling
-$\lmax(A_t)$ along the whole path; see Proposition~\ref{prop:covariance-spike} &
-\ref{sec:family-sl} \\
-\addlinespace
-Bochner, $H^{-1}$, heat flow & First eigenspace and derivative energies & Trace, coordinate, or
-averaged spectral information does not bound every slow mode & \ref{sec:family-bochner} \\
-\addlinespace
-Moment maps and Stein kernels & Hessian metric of the moment map & Correlation of the random
-Stein kernel with an arbitrary $\nabla f$ & \ref{sec:family-moment-map} \\
-\addlinespace
-Transport (Caffarelli, F\"ollmer, entropic barrier) & Transport Jacobian or conditional
-covariance & Dimension-free operator control in expectation & \ref{sec:family-transport} \\
-\bottomrule
-\end{tabularx}
-\end{center}
-
-\paragraph{The repository's own routes.}
-Groups~3--6 are this repository's work. Each is a response to
-Section~\ref{subsec:kls-spike-obstruction}, each has an exactly stated open estimate, and each is
-tracked as an approach in \texttt{research/program/portfolio.yaml}.
-
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}Y>{\raggedright\arraybackslash}p{0.14\textwidth}@{}}
-\toprule
-Route & Object retained & What it would take to win & Group \\
-\midrule
-E --- fixed cut & Mass and two-color covariance of one candidate bottleneck set &
-Discharge the tight-prefix operator-to-trace upgrade (E--A), or replace both the refuted global
-weight and the refuted uniform superlinear remainder by a tensor-stable near-Cheeger package and
-re-audit its Stein trace (E--B) & 3 \\
-\addlinespace
-S --- fixed eigenfunction & Covariance tensor of a first spectral mode &
-Unwhiten for a universal time without losing tensor/covariance alignment
-(Question~\ref{q:mm-spectral-occupation}) & 4 \\
-\addlinespace
-C --- deterministic moment map & Hessian metric, Haar fields, Schur fibers, Stein residuals &
-Freeze the endpoint and lift, prove an all-split reduction, control the global square-root
-commutator & 5 \\
-\addlinespace
-F --- conditional fibers & One measure-dependent, test-independent isotropic frame of
-inverse-variance line resamplings & Prove a universal form gap, or decide the all-frame simplex
-dual; the natural root frame already fails & 6 \\
-\bottomrule
-\end{tabularx}
-\end{center}
-
-Group~7 (Section~\ref{sec:kls-synthesis}) closes the document by mapping each named gap in the
-literature onto the corresponding open node of the KLS ledger.
-
-\paragraph{Suggested external reading order.}
-For a reader coming to the subject rather than to this repository:
-\cite{KannanLovaszSimonovits1995} for the conjecture and deterministic localization;
-\cite{Eldan2013ThinShell} for stochastic localization and the third-moment parameter;
-\cite{LeeVempala2018,LeeVempala2024} for the cleanest entry to the covariance SDE and the
-set-transfer argument; \cite{KLnotes} for the best conceptual exposition of localization,
-filtering, Bochner, and the operator-norm obstruction; \cite{KlartagLehec2022Polylog} for heat
-flow, spectral measures, and $H^{-1}$; \cite{Klartag2023Logarithmic} for improved Lichnerowicz and
-the published bound; \cite{Letwin2026QuadraticKLS} for the current preprint record; and
-\cite{KlartagLehec2025ThinShell,ChenKlartag2026SharpThinShell} for the strongest related tools and
-the clearest illustration of the quadratic-to-all-functions gap.
 \end{document}

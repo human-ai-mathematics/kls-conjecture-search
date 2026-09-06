@@ -3,6 +3,80 @@
 \section{Route E: the fixed-cut program and its main conditional statements}
 \label{sec:introduction}
 
+\subsection*{Route gateway}
+\addcontentsline{toc}{subsection}{Route gateway}
+
+Every route in Parts~III and~IV opens with the same eight fields, so that its state can be
+compared with the others' without reading either in full. The atlas,
+Section~\ref{sec:frontier-atlas}, is these eight fields for all four routes at once.
+
+\begin{description}[leftmargin=0pt,style=nextline,itemsep=0.3em]
+  \item[1. Thesis.] Follow one \emph{fixed} candidate bottleneck cut $E$ under stochastic
+  localization, and show it cannot be identified too quickly.
+
+  \item[2. Bridge to KLS.] Proved, and conditional at exactly one place:
+  \[
+    \underbrace{\text{a balanced cut survives to a universal time}}_{\text{open: }
+    \texttt{ass:tight-prefix-carleson}}
+    \ \xRightarrow[\ \text{proved}\ ]{}\
+    \text{boundary lower bound}
+    \ \xRightarrow[\ \text{proved}\ ]{}\
+    \text{KLS}.
+  \]
+  The two proved arrows are Lemma~\ref{lem:survival-implies-kls} and its stopped form
+  Theorem~\ref{thm:centroid-implies-kls}. The open arrow is an \emph{assumption}, not a
+  theorem: Theorem~\ref{thm:intro-all-cut} states that the all-cut Carleson assumption implies
+  KLS, and Theorem~\ref{thm:intro-weighted} does the same for subroute E--B. Proving either
+  \emph{sufficient condition} would prove KLS; refuting one would not refute KLS.
+
+  \item[3. Established inputs.] From the literature: the localization process and the
+  covariance SDE, and the improved Lichnerowicz estimate
+  (Theorem~\ref{thm:improved-lichnerowicz}, published). Certified here: the two-colour Riccati
+  identities (Theorem~\ref{thm:scalar-riccati}, Appendix~\ref{sec:riccati}), the Stein
+  dictionary (Appendix~\ref{sec:stein-dictionary}), and the covariance technology
+  (Appendix~\ref{sec:covariance-tech}). Each statement below carries its own standing.
+
+  \item[4. Main advance so far.] Three things, all internal and certified. The bootstrap
+  comparison theorem and the interface functional $\Xi_T$ (Section~\ref{sec:bootstrap}),
+  together with the proof that the crude evaluation of $\Xi_T$ \emph{cannot} suffice --- a
+  negative result that redirects the route rather than stalling it. The scale-weighted all-cut
+  source budget, Lemma~\ref{lem:time-weighted-source}. And the coordinate budgets and
+  covariance reduction of the product stress test (Section~\ref{sec:product-stress}), which is
+  where the route is tested against the measure that defeats naive covariance control.
+
+  \item[5. Exact bottleneck.] Subroute E--A: \texttt{q:upgrade}, the operator-to-trace upgrade
+  --- prove \texttt{ass:tight-prefix-carleson} by lifting
+  Corollary~\ref{cor:per-direction} from quadratic-form scale to trace scale, uniformly over
+  fixed initial data (Section~\ref{sec:open}). Subroute E--B: \texttt{q:stein-weighted}, a
+  tensor-stable replacement for the refuted package together with its matching
+  localization-uniform almost-stability trace theorem.
+
+  \item[6. Failed variants and obstructions.] Two refutations, both proved here, and they are
+  the most reusable output of the route. \texttt{ass:weighted-package} and \texttt{q:weighted}
+  are \emph{refuted}, by Proposition~\ref{prop:weighted-spectator-obstruction}: a global
+  operator-norm covariance weight charges independent spectator coordinates that contribute
+  nothing, and a balanced cylinder in a one-sided-exponential product makes the overcharge
+  unbounded. Proposition~\ref{prop:spectator-excess-rate-obstruction} rules out the uniform
+  superlinear remainder in the same way, and the rank-one candidate is refuted in
+  Section~\ref{sec:budgets}. Advisory rather than proved: the two-tail obstruction
+  (Obstruction~\ref{obs:two-tail}) and the circularity warning of Section~\ref{sec:excess}.
+
+  \item[7. Completion or reopening criterion.] E--A closes if \texttt{q:upgrade} is proved with
+  universal constants; it dies if a certified family shows the trace-scale statement false for
+  balanced cuts. E--B is currently \emph{blocked}, and reopens on a cut-local, tensor-stable
+  covariance weight that ignores independent spectators while still dominating the aligned
+  two-tail mode --- or on a replacement carrying an explicit near-worst-measure premise. That
+  condition is recorded as the \texttt{reopen\_if} of \texttt{ap:eldan-weighted-excess} in
+  \texttt{research/program/portfolio.yaml}, which is where route state lives.
+
+  \item[8. Technical reading guide.] Conceptual prelude:
+  Section~\ref{sec:localization-prelude}. Static input and its fence: Section~\ref{sec:qcts}.
+  The route proper: this section for the conditional statements, then
+  Sections~\ref{sec:carleson}--\ref{sec:open}. Full apparatus:
+  Appendices~\ref{sec:notation}--\ref{sec:models}. Certified proofs: the dossiers named in the
+  \texttt{proofs} records of the nodes cited above.
+\end{description}
+
 \paragraph{Thesis.}
 Follow the posterior evolution of one \emph{fixed} candidate bottleneck cut $E$ under stochastic
 localization:
@@ -28,11 +102,13 @@ themselves control a fixed bottleneck set under localization.
 
 The shared localization machinery this route runs on --- notation, the mass martingale, the
 two-color Riccati identities and Stein dictionary, the static obstruction, the covariance
-technology, and the model geometries --- is Group~2,
-Sections~\ref{sec:notation}--\ref{sec:models}. The present section states what the route proves
+technology, and the model geometries --- is deferred to
+Appendices~\ref{sec:notation}--\ref{sec:models}; the conceptual summary a reader needs to follow
+this route is the prelude, Section~\ref{sec:localization-prelude}. The present section states what the route proves
 conditionally; Sections~\ref{sec:carleson}--\ref{sec:open} carry it out.
 
 \subsection{The two Eldan subroutes}
+\label{subsec:two-subroutes}
 
 Within the fixed-cut program the report separates two subroutes, named Eldan--A and Eldan--B.
 They are subroutes of Route~E in the sense of the route map of
@@ -96,7 +172,7 @@ $[1/3,2/3]$, and let $\tau_\eta$ be the tight window of \eqref{eq:tau-tight} bel
 \subsection{Main conditional statements}
 
 \begin{assumption}[All-cut absorptive two-color Carleson estimate]
-\label{ass:all-cut-carleson}
+\label{ass:all-cut-carleson}\klsstatus{ass:all-cut-carleson}
 There exist universal constants $T_0,C_0,C_1$ and $\alpha<1$ such that for every isotropic
 log-concave $\mu$, every balanced measurable set $E$, and every interval $I\subset[0,T_0]$,
 \begin{equation}\label{eq:all-cut-carleson}
@@ -108,7 +184,7 @@ log-concave $\mu$, every balanced measurable set $E$, and every interval $I\subs
 \end{assumption}
 
 \begin{theorem}[All-cut Carleson implies KLS]
-\label{thm:intro-all-cut}
+\label{thm:intro-all-cut}\klsstatus{thm:intro-all-cut}
 Assumption~\ref{ass:all-cut-carleson} implies the KLS conjecture.
 \end{theorem}
 
@@ -120,7 +196,7 @@ The certified consumer in Corollary~\ref{cor:tight-window-consumption} needs les
 all-interval formulation above. We isolate its exact live premise.
 
 \begin{assumption}[Tight-prefix absorptive two-color Carleson estimate]
-\label{ass:tight-prefix-carleson}
+\label{ass:tight-prefix-carleson}\klsstatus{ass:tight-prefix-carleson}
 There exist universal constants $\eta\in(0,1/6]$, $T_0,C_0,C_1>0$, and $\alpha<1$ such that,
 for every isotropic log-concave $\mu$, every fixed measurable cut $E$ with
 $\abs{\mu(E)-1/2}\le\eta/2$, and every $0<T\le T_0$,
@@ -141,7 +217,7 @@ For reference, the exact literal package consumed by the conditional theorem is 
 It is retained so that both the valid implication and the failed premise remain auditable.
 
 \begin{assumption}[Refuted literal weighted near-Cheeger package]
-\label{ass:weighted-package}
+\label{ass:weighted-package}\klsstatus{ass:weighted-package}
 There are universal constants $T_0,C_0,C_1,C_2$, $0\le\beta<\tfrac12$, $\gamma>0$, and
 $\eta\in(0,\tfrac14]$ satisfying
 \begin{equation}\label{eq:weighted-absorption-margin}
@@ -181,7 +257,7 @@ Thus Assumption~\ref{ass:weighted-package} is refuted as stated. It remains belo
 explicit antecedent of the next theorem.
 
 \begin{theorem}[Weighted geometric package implies KLS]
-\label{thm:intro-weighted}
+\label{thm:intro-weighted}\klsstatus{thm:intro-weighted}
 Assumption~\ref{ass:weighted-package} implies the KLS conjecture.
 \end{theorem}
 
@@ -195,7 +271,7 @@ The following audit explains the first constraint, and
 Proposition~\ref{prop:weighted-spectator-obstruction} supplies the second.
 
 \begin{proposition}[Consumption audit; deceptive strength of the unweighted estimate]
-\label{prop:intro-audit}
+\label{prop:intro-audit}\klsstatus{prop:intro-audit}
 \leavevmode
 \begin{enumerate}[label=(\alph*),leftmargin=2.2em]
 \item For every isotropic log-concave $\mu$, every Borel set $E$ with $\mu(E)=1/2$, finite

@@ -36,7 +36,7 @@ $L_\mu f=\tau f''-xf'=\rho^{-1}(\tau\rho f')'$, so that $h=-L_\mu f$ has
 \end{equation}
 
 \begin{theorem}[Exact one-dimensional CMH constant]
-\label{thm:cmh-1d}
+\label{thm:cmh-1d}\klsstatus{thm:cmh-1d}
 For every centered one-dimensional law for which the operators above are defined,
 \begin{equation}
   \CMH(\mu)=\frac{\CP(\mu)}{\Var(\mu)}.
@@ -89,7 +89,7 @@ $H=\diag(H_1,\dots,H_m)$, and $L_\mu=\sum_iL_i$, where the $L_i$ are commuting n
 generators acting in their respective blocks.
 
 \begin{theorem}[Product formula]
-\label{thm:cmh-product}
+\label{thm:cmh-product}\klsstatus{thm:cmh-product}
 For a product of centered CMH factors,
 \begin{equation}
   \CMH\Bigl(\bigotimes_i\mu_i\Bigr)=\max_i\CMH(\mu_i).
@@ -123,7 +123,7 @@ invariance proved in \S\ref{subsec:cmh-conventions}.
 \end{proof}
 
 \begin{corollary}[Poincar\'e closure under linear images and convolution]
-\label{cor:cmh-linear-images}
+\label{cor:cmh-linear-images}\klsstatus{cor:cmh-linear-images}
 If independent factors each satisfy the affine Poincar\'e inequality with constant $C$, then so
 does every linear image of their product --- in particular every sum of independent such
 factors.
@@ -185,7 +185,7 @@ equations \eqref{eq:cmh-dirichlet-data}--\eqref{eq:cmh-dirichlet-pseudoinverse} 
 Definition~\ref{def:cmh} into the statement $A(A+1)d_\alpha(g)\le4n_\alpha(g)$.
 
 \begin{theorem}[Log-concave Dirichlet CMH]
-\label{thm:cmh-dirichlet}
+\label{thm:cmh-dirichlet}\klsstatus{thm:cmh-dirichlet}
 For every $m\ge2$, every $\alpha_1,\dots,\alpha_m\ge1$, and every $g$ in the core,
 \begin{equation}
   A(A+1)\,\E\sum_{i=1}^m
@@ -213,7 +213,7 @@ $H_\Gamma=\diag(Y_i)$, gives the integrated Bochner identity
 Put $D_i(G)=\E[Y_i^2G_i^2]/\alpha_i$ and $D_\Gamma(G)=\sum_iD_i(G)$.
 
 \begin{lemma}[Exact Gamma row completion]
-\label{lem:cmh-gamma-completion}
+\label{lem:cmh-gamma-completion}\klsstatus{lem:cmh-gamma-completion}
 For $\alpha_i\ge1$,
 \begin{equation}
   N_\Gamma(G)-\tfrac14D_\Gamma(G)=\sum_i\E R_i+\sum_i\delta_iD_i(G),
@@ -229,21 +229,7 @@ where
 \end{equation}
 \end{lemma}
 
-\begin{proof}
-For $Y\sim\GammaLaw(a,1)$, integrating $\E[Y^2(u^2)']$ by parts against $y^{a-1}e^{-y}$ gives
-$\E[Y^2uu']=-\tfrac12\E[((a+1)Y-Y^2)u^2]$. Apply this with $u=G_i$, $u'=G_{ii}$, $a=\alpha_i$
-and expand the first square in \eqref{eq:cmh-Ri-deltai}: the cross term equals
-$\E[Y_iG_i^2]-\E[Y_i^2G_i^2]/(\alpha_i+1)$, so
-\[
-  \E R_i=\E\Bigl[Y_iG_i^2+\sum_jY_iY_jG_{ij}^2\Bigr]
-        -\frac{\alpha_i}{(\alpha_i+1)^2}\E[Y_i^2G_i^2],
-\]
-using $\tfrac1{(\alpha_i+1)^2}-\tfrac1{\alpha_i+1}=-\tfrac{\alpha_i}{(\alpha_i+1)^2}$. Summing
-over $i$ recovers $N_\Gamma(G)$ from \eqref{eq:cmh-gamma-bochner} and leaves
-$-\sum_i\alpha_i^2(\alpha_i+1)^{-2}D_i(G)$; subtracting $D_\Gamma/4$ gives
-\eqref{eq:cmh-gamma-completion}. Finally $\delta_i\ge0$ is equivalent to
-$\alpha_i/(\alpha_i+1)\ge\tfrac12$, i.e.\ to $\alpha_i\ge1$.
-\end{proof}
+\noindent\emph{Proof.} One integration by parts for the Gamma law, applied coordinatewise and summed, which recovers $N_\Gamma$ and leaves an explicit negative multiple of $D_i$. The calculation is carried out in Appendix~\ref{sec:appendix-moment-map}.
 
 \begin{remark}[Where log-concavity is spent]
 \label{rem:cmh-dirichlet-logconcavity}
@@ -255,7 +241,7 @@ Lemma~\ref{lem:cmh-angular-coefficient} is applied with $a=\alpha_i\ge1$.
 \end{remark}
 
 \begin{lemma}[Hessian-row minimization]
-\label{lem:cmh-row-min}
+\label{lem:cmh-row-min}\klsstatus{lem:cmh-row-min}
 With $G$ homogeneous of degree zero,
 \begin{equation}
   R_i\ \ge\ \frac{Y_i}S\Bigl(1+\frac{Y_i}{\alpha_i+1}\Bigr)^2\abs{G_i}^2 .
@@ -263,15 +249,7 @@ With $G$ homogeneous of degree zero,
 \end{equation}
 \end{lemma}
 
-\begin{proof}
-Euler's identity $\sum_jY_jG_j=0$, differentiated in $Y_i$, gives the single linear constraint
-$\sum_jY_jG_{ij}=-G_i$. Set $t_i=Y_i\bigl(G_{ii}-G_i/(\alpha_i+1)\bigr)$ and $t_j=Y_jG_{ij}$
-for $j\ne i$, so that
-$\sum_jt_j=-G_i\bigl(1+Y_i/(\alpha_i+1)\bigr)$ and
-$R_i=t_i^2+\sum_{j\ne i}(Y_i/Y_j)t_j^2$. The reciprocals of these quadratic weights sum to
-$1+\sum_{j\ne i}Y_j/Y_i=S/Y_i$, and the minimum of $\sum_jw_jt_j^2$ under $\sum_jt_j=c$ is
-$c^2/\sum_jw_j^{-1}$, which is the right-hand side of \eqref{eq:cmh-row-min}.
-\end{proof}
+\noindent\emph{Proof.} Euler's identity, differentiated once, leaves a single linear constraint; the row minimum is then the elementary minimum of a weighted sum of squares subject to one linear constraint. The calculation is carried out in Appendix~\ref{sec:appendix-moment-map}.
 
 Homogeneity also gives the exact dictionary between the lift and the simplex:
 $\calL_\Gamma G=S^{-1}L_\alpha g$ and $Y_iG_i=u_i(P)$. With $A>2$ one has $\E S^{-1}=(A-1)^{-1}$
@@ -298,7 +276,7 @@ and, substituting $Y_i=SP_i$ and $G_i=u_i/(SP_i)$ into \eqref{eq:cmh-row-min},
 \label{subsec:cmh-dirichlet-proof}
 
 \begin{lemma}[Angular coefficient]
-\label{lem:cmh-angular-coefficient}
+\label{lem:cmh-angular-coefficient}\klsstatus{lem:cmh-angular-coefficient}
 Let $A\ge3$, $a\ge1$, $0<p\le1$, $z=(A-1)(A-2)$, and
 \begin{equation}
   F_A(a,p)=\frac ap+\frac{2a(A-2)}{a+1}+\frac{za(a+p)}{(a+1)^2}-\frac z4 .
@@ -314,50 +292,12 @@ Then
 and $s_A\ge0$ for $A\ge3$.
 \end{lemma}
 
-\begin{proof}
-For fixed $a$ the $p$-dependent part is $a\bigl(p^{-1}+zp(a+1)^{-2}\bigr)$, minimized on
-$(0,1]$ at $p=1$ when $\sqrt z\le a+1$ and at $p_*=(a+1)/\sqrt z$ otherwise.
+\noindent\emph{Proof.} Minimize in $p$ first --- the minimizer is interior only when $\sqrt z>a+1$ --- and then check monotonicity in $a$ separately on the two branches $z\le4$ and $z\ge4$. The calculation is carried out in Appendix~\ref{sec:appendix-moment-map}.
 
-If $z\le4$ then $\sqrt z\le2\le a+1$ for all $a\ge1$, so $p=1$ and
-$F_A=a+2a(A-2)/(a+1)+za/(a+1)-z/4$, each summand increasing in $a$; the minimum at $a=1$ is
-$A-1+z/4=A-\tfrac12+(z-2)/4$.
-
-If $z\ge4$, then at $p_*$ the two $p$-terms are equal and sum to $2a\sqrt z/(a+1)$, so with
-$r=a/(a+1)$ the value is $2r(\sqrt z+A-2)+zr^2-z/4$, increasing in $r$; since $r\ge\tfrac12$ for
-$a\ge1$ the minimum is at $a=1$, $r=\tfrac12$, and equals $A-2+\sqrt z=A-\tfrac12+\sqrt z-\tfrac32$.
-In the complementary region the expression is increasing in $a$ with a boundary value no
-smaller. Finally $A\ge3$ gives $z\ge2$, so $s_A\ge0$ in both branches.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:cmh-dirichlet}]
-If $m=2$ and $A<3$, the law is one dimensional and Theorem~\ref{thm:cmh-1d} applies. In every
-remaining case $A\ge3$ (automatically when $m\ge3$), so $z_A\ge2>0$ and the inverse moments
-$\E S^{-1},\E S^{-2}$ used in \eqref{eq:cmh-radial-relations} are finite.
-
-Combine \eqref{eq:cmh-gamma-completion}, \eqref{eq:cmh-Ri-deltai} and
-\eqref{eq:cmh-integrated-row}. Since $D_i(G)=\E[u_i^2]/\alpha_i$, the total coefficient of
-$\E_P[u_i^2]$ in $N_\Gamma(G)-\tfrac14D_\Gamma(G)$ is
-\[
-  \frac1{z_AP_i}+\frac2{(A-1)(\alpha_i+1)}+\frac{P_i}{(\alpha_i+1)^2}+\frac{\delta_i}{\alpha_i},
-\]
-and multiplying it by $z_A\alpha_i$ gives exactly $F_A(\alpha_i,P_i)$ of \eqref{eq:cmh-FA},
-using $z_A/(A-1)=A-2$. By Lemma~\ref{lem:cmh-angular-coefficient},
-\[
-  N_\Gamma(G)-\tfrac14D_\Gamma(G)
-  \ \ge\ \frac{A-\tfrac12+s_A}{z_A}\sum_i\frac{\E_P[u_i^2]}{\alpha_i}
-  =\frac{A-\tfrac12+s_A}{z_A}\,d_\alpha(g).
-\]
-Substituting \eqref{eq:cmh-radial-relations}, multiplying by $z_A$ and using the identity
-$z_A/4+A-\tfrac12=A(A+1)/4$ gives
-\begin{equation}
-  n_\alpha(g)\ \ge\ \Bigl(\frac{A(A+1)}4+s_A\Bigr)d_\alpha(g),
-  \label{eq:cmh-dirichlet-surplus}
-\end{equation}
-and $s_A\ge0$ yields \eqref{eq:cmh-dirichlet-main}.
-\end{proof}
+\noindent\emph{Proof.} Reduce $m=2$ to the line, then combine the Gamma completion, the row minimum and the integrated row bound: the total coefficient of $\E_P[u_i^2]$ is exactly $F_A(\alpha_i,P_i)$, and Lemma~\ref{lem:cmh-angular-coefficient} bounds that below. The calculation is carried out in Appendix~\ref{sec:appendix-moment-map}.
 
 \begin{corollary}[Quantitative surplus]
-\label{cor:cmh-dirichlet-surplus}
+\label{cor:cmh-dirichlet-surplus}\klsstatus{cor:cmh-dirichlet-surplus}
 For $A>3$, $n_\alpha(g)\ge\bigl(\tfrac14+\eps_A\bigr)A(A+1)d_\alpha(g)$ with
 $\eps_A=s_A/(A(A+1))>0$. Equivalently
 $\CMH\le4\bigl(1+4s_A/(A(A+1))\bigr)^{-1}<4$: the constant $4$ is attained only in the limit.
@@ -370,7 +310,7 @@ $s_A=(z_A-2)/4>0$ or $s_A=\sqrt{z_A}-3/2>0$.
 \end{proof}
 
 \begin{corollary}[Affine Poincar\'e consequences]
-\label{cor:cmh-dirichlet-poincare}
+\label{cor:cmh-dirichlet-poincare}\klsstatus{cor:cmh-dirichlet-poincare}
 Every log-concave Dirichlet law satisfies $\CPaff\le4$; so does every linear image, product, and
 convolution of independent such laws.
 \end{corollary}
@@ -421,7 +361,7 @@ interior of the family is strictly safer.
 \label{subsec:cmh-saturation}
 
 \begin{corollary}[Exact product saturation and Hodge splitting]
-\label{rem:cmh-saturation-risk}
+\label{rem:cmh-saturation-risk}\klsstatus{rem:cmh-saturation-risk}
 By Theorems~\ref{thm:cmh-1d} and \ref{thm:cmh-product}, a product of centered one-sided
 exponentials has $\CMH=4$ \emph{exactly}. Proposition~\ref{prop:cmh-hodge} gives, for every
 admissible test function, the exact splitting of the CMH numerator into its affine Poincar\'e
@@ -439,7 +379,7 @@ would refute $\mathrm{CMH}(4)$ but would not by itself refute Conjecture~\ref{co
 \end{remark}
 
 \begin{question}[Second-order solenoidal excess at the product endpoint]
-\label{q:cmh-solenoidal-perturbation}
+\label{q:cmh-solenoidal-perturbation}\klsstatus{q:cmh-solenoidal-perturbation}
 Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided
 exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$ within the
 smooth strictly convex class. Compute the second variation of $\CMH$ at $\eps=0$, splitting the

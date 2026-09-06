@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Second variation, Reilly identities, and the splitting mechanism}
+\section{Reilly, Jacobi, and splitting formulas}
 \label{sec:jacobi}
 
 This section assembles the geometric mechanisms intended to prove the weighted Stein-trace
@@ -13,7 +13,7 @@ support, and $\Sigma=\partial^*E$ with the notation of Section~\ref{sec:notation
 \subsection{Second variation and stability of near-minimizers}
 
 \begin{proposition}[Second variation; stability inequality]
-\label{prop:second-variation}
+\label{prop:second-variation}\klsstatus{prop:second-variation}
 Let $E$ be a smooth critical set of the weighted perimeter under the volume constraint, so
 that the weighted mean curvature $H_\nu=H-\partial_nV$ is constant on $\Sigma$. For a normal
 variation with speed $u$ satisfying the linearized volume constraint
@@ -92,7 +92,7 @@ with a factor-two slack for a pure constant test.
 The same curvature controls the local concavity of the isoperimetric profile.
 
 \begin{lemma}[Profile bound]
-\label{lem:profile-bound}
+\label{lem:profile-bound}\klsstatus{lem:profile-bound}
 Suppose that at volume $p$ there is a smooth volume-constrained minimizer $E_p$ with boundary
 $\Sigma_p$, weighted area $P=I(p)$, and that $I$ is twice differentiable at $p$. Then
 \begin{equation}\label{eq:profile-bound}
@@ -111,7 +111,7 @@ $I(p)=\Psi(p)$, twice differentiability gives $I''(p)\le\Psi''(p)$.
 \end{proof}
 
 \begin{corollary}[Constant-mode degeneracy in the small-Cheeger regime]
-\label{cor:generic-degeneracy}
+\label{cor:generic-degeneracy}\klsstatus{cor:generic-degeneracy}
 Grant smooth minimizers at almost every balanced volume. If $h_\nu\le1$, then
 \begin{equation}\label{eq:K-average}
   \int_{1/3}^{2/3}\mathfrak K_{\Sigma_p}\dd p\le C h_\nu^3 .
@@ -134,7 +134,7 @@ small-curvature branch as one that a geometric route must address.
 \subsection{The weighted Reilly identity}
 
 \begin{proposition}[Generalized Reilly identity]
-\label{prop:reilly}
+\label{prop:reilly}\klsstatus{prop:reilly}
 Let $\Omega$ be a smooth bounded domain compactly contained in the smooth support of $\nu$, with
 boundary $\Sigma$ and \emph{outer} unit normal $N$. Use the convention
 $II_\Sigma(X,Y)=\inner{\nabla_XN}{Y}$, and let $u$ be smooth on $\overline\Omega$. Then, with
@@ -175,7 +175,7 @@ these second-order terms; they belong to the same missing bridge.
 \end{remark}
 
 \begin{question}[Foundational almost-stability target]
-\label{rem:almost-stability-gap}
+\label{rem:almost-stability-gap}\klsstatus{rem:almost-stability-gap}
 Proposition~\ref{prop:second-variation} applies to a smooth critical local minimizer. A fixed
 near-Cheeger set transported through stochastic localization is generally neither critical nor a
 minimizer for $\mu_t$, and small perimeter excess alone does not imply
@@ -190,7 +190,7 @@ here.
 \subsection{Splitting: exact model statements}
 
 \begin{proposition}[Flat cylindrical direction yields splitting; split halfspaces are flat]
-\label{prop:exact-splitting}
+\label{prop:exact-splitting}\klsstatus{prop:exact-splitting}
 Let $\nu=e^{-V}dx$ be log-concave with convex support $K$ under the smooth/free-boundary
 convention of Section~\ref{sec:notation}, let $\theta\in S^{n-1}$, and suppose
 $K$ is a cylinder in the $\theta$-direction: in coordinates $x=(y,z)$, $z=\inner x\theta$,
@@ -225,7 +225,7 @@ geometry and Hessian flatness. That missing rigidity statement remains part of
 Question~\ref{q:splitting}.
 
 \begin{proposition}[Persistence of splitting under localization]
-\label{prop:persistent-splitting}
+\label{prop:persistent-splitting}\klsstatus{prop:persistent-splitting}
 Fix $\theta\in S^{n-1}$ and write $x=y+z\theta$. Suppose there are proper lower-semicontinuous
 convex extended-valued functions $V_1$ on $\theta^\perp$ and $V_2$ on $\R$, each with positive
 finite normalizer, such that the global identity

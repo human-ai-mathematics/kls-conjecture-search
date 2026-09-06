@@ -28,7 +28,8 @@ except ImportError:  # pragma: no cover - environment guard
 #: domains and not one of CLAUDE.md's activation gates. A lane whose files are
 #: absent contributes nothing: that is what makes activation structural rather
 #: than a configured mode.
-LANES = ("core", "proofs", "checkpoints", "portfolio", "numerics", "roles", "docs")
+LANES = ("core", "proofs", "checkpoints", "portfolio", "numerics", "roles", "docs",
+         "editorial")
 
 #: A portfolio approach id. Shared, because the portfolio declares these ids and the
 #: checkpoint lane resolves against them; one regex keeps the two lanes agreeing.

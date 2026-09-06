@@ -27,7 +27,7 @@ one computes
 At exact balance, $p=q=1/2$, this is $\frac12(\Sigma_E-\Sigma_F)$.
 
 \begin{definition}[Quadratic-chaos thin shell]
-\label{def:qcts}
+\label{def:qcts}\klsstatus{def:qcts}
 For isotropic log-concave $\nu$, define
 \[
   \calQ(\nu)=\sup_{\norm M_{\HS}=1}\Var_\nu(X^TMX).
@@ -40,7 +40,7 @@ with a universal constant $C$.
 \end{definition}
 
 \begin{theorem}[Quadratic Poincar\'e inequality; Letwin]
-\label{thm:letwin-qcts}
+\label{thm:letwin-qcts}\klsstatus{thm:letwin-qcts}
 If $X$ is isotropic and log-concave on $\R^n$, then for every symmetric matrix $M$,
 \begin{equation}\label{eq:letwin-qcts}
   \Var(X^TMX)
@@ -60,7 +60,7 @@ displayed estimate; they should be read with the same preprint caveat.
 \end{remark}
 
 \begin{corollary}[Whitened two-color control and its exact alignment loss]
-\label{cor:qcts-source}
+\label{cor:qcts-source}\klsstatus{cor:qcts-source}
 Let $\nu$ be centered and log-concave with positive-definite covariance $A$, let $E$ have mass
 $p\in(0,1)$, put $s=p(1-p)$, and let $K$ be the translation-invariant two-color contrast from
 Proposition~\ref{prop:stein-rep}. Then
@@ -99,7 +99,7 @@ At balance the correction term vanishes.
 \end{proof}
 
 \begin{proposition}[Time-zero equivalence, modulo standard regularization]
-\label{prop:qcts-equivalence}
+\label{prop:qcts-equivalence}\klsstatus{prop:qcts-equivalence}
 Up to universal constants, \eqref{eq:QCTS} is equivalent to the balanced two-color estimate
 \begin{equation}\label{eq:balanced-two-color-static}
   pq\norm{\Sigma_E-\Sigma_F}_{\HS}^2\le C
@@ -212,7 +212,7 @@ covariance-weighted form by Eldan--B (Section~\ref{sec:stein}) and the configura
 dynamical occupation Eldan--A must control (Section~\ref{sec:carleson}).
 
 \begin{proposition}[Quantified two-tail configuration]
-\label{prop:two-tail}
+\label{prop:two-tail}\klsstatus{prop:two-tail}
 Let $\Lambda\ge1$, $\nu_\Lambda=N(0,\diag(\Lambda,1,\dots,1))$ on $\R^n$, and
 \[
   E_\Lambda=\bigl\{x:\abs{x_1}\ge a\sqrt\Lambda\bigr\},
@@ -297,7 +297,7 @@ not do, and it is not itself certified, so consumers list it among their heurist
 than as a logical bound.
 
 \begin{obstruction}[Absolute-scale slice bounds fail]
-\label{obs:two-tail}
+\label{obs:two-tail}\klsstatus{obs:two-tail}
 The anisotropic Gaussian two-tail cut of Proposition~\ref{prop:two-tail} rules out a slice-wise
 stable Stein estimate carrying an absolute-scale excess term. On that cut \(r=D=0\) while the
 Stein source is of order \(\Lambda^{2}\) and the excess of order \(\Lambda^{-1/2}\), so a
@@ -307,7 +307,7 @@ inflated configurations.
 \end{obstruction}
 
 \begin{obstruction}[Projection tests lose a logarithm]
-\label{obs:proj-ceiling}
+\label{obs:proj-ceiling}\klsstatus{obs:proj-ceiling}
 Radial and projection-only information yields at best
 \(\Var(X^{T}MX)\lesssim\log n\,\norm{M}_{\HS}^{2}\), by \eqref{eq:qcts-log} and the adjacent
 operator construction. A proof requiring dimension-free quadratic-chaos control must therefore use

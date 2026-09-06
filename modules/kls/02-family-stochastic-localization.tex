@@ -13,8 +13,8 @@ the needle dichotomy of Section~\ref{sec:family-needles} --- ``one dimension, no
 by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of
 controlling it only in law.
 
-This section fixes the process and the three identities used by the stochastic routes in
-Groups~3--4. The
+This section fixes the process and the three identities used by the stochastic routes of Part~III,
+Routes~E and~S. The
 repository's own two-color refinement of them is Section~\ref{sec:notation} onward; what follows
 is the scalar/matrix backbone as it appears in the literature.
 
@@ -93,7 +93,7 @@ of the transfer \cite{LeeVempala2018}:
   \label{eq:lv-criterion}
 \end{equation}
 
-The mechanism has three steps, and it is worth separating them because the routes of Groups~3--4
+The mechanism has three steps, and it is worth separating them because Routes~E and~S
 modify exactly one of them each:
 \begin{enumerate}[label=(\arabic*),leftmargin=2.4em]
   \item the covariance bound keeps $g_T$ away from $0$ and $1$ with positive probability --- the
@@ -216,5 +216,12 @@ on $\norm{A_t}_\op$ --- is false, even for measures that satisfy KLS. So the mis
 cannot be obtained by sharpening the covariance bound; it has to come from a potential that
 recognizes when a covariance spike is harmless. Products of centered exponentials are the
 canonical instance of a harmless spike, which is why they recur as the stress test throughout
-Groups~3--4 (Sections~\ref{sec:models} and~\ref{sec:product-stress}).
+Part~III (Sections~\ref{sec:models} and~\ref{sec:product-stress}).
+
+\paragraph{How this family feeds the live routes.}
+It is the engine of both routes of Part~III, which differ only in what they refuse to average
+away. Route~E (Section~\ref{sec:introduction}) keeps one fixed cut and its two-colour covariance;
+Route~S (Section~\ref{sec:spectral-route}) keeps one fixed eigenfunction and its covariance
+tensor. The conceptual summary they share is Section~\ref{sec:localization-prelude}, and the
+apparatus is in the appendices.
 \end{document}

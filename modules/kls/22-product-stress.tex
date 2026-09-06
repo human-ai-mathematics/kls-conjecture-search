@@ -33,7 +33,7 @@ question is whether the \emph{program's estimate} holds there.
 \label{sec:budgets}
 
 \begin{lemma}[Block support]
-\label{lem:block}
+\label{lem:block}\klsstatus{lem:block}
 Let $\nu$ be a product probability measure on $\R^n$ with finite second moment, and let $E$ be
 measurable with respect to the coordinates in $J\subset\{1,\dots,n\}$. Assume
 $0<\nu(E)<1$. Then the two-color quantities of the pair
@@ -52,7 +52,7 @@ block vanish, and likewise for $K=G+(q-p)\delta\delta^T$.
 \end{proof}
 
 \begin{theorem}[Coordinate-budget theorem]
-\label{thm:budget}
+\label{thm:budget}\klsstatus{thm:budget}
 Let $\mu=\bigotimes_i\mu^{(i)}$ be a product of isotropic one-dimensional log-concave
 measures, and let $E$ be measurable with respect to $k$ coordinates, with
 $p_0\in[2/5,3/5]$. Then:
@@ -67,38 +67,10 @@ $\displaystyle \E\int_0^\infty S_t\dd t\ \le\ \sum_{i\in J}(R_0)_{ii}\ \le\ k$;
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-(i) Since $\mu_t$ is a product pathwise and $E$ is $J$-measurable, Lemma~\ref{lem:block}
-applies to $(\mu_t,E)$ at every time: $G_t$ is supported on the $J\times J$ block, so
-\[
-  S_t=s_t\norm{G_t}_\HS^2=\sum_{i\in J}s_t\abs{G_te_i}^2 .
-\]
-The per-direction Carleson estimate Corollary~\ref{cor:per-direction} gives, for each fixed $i$
-and every $T$,
-\[
-  \E\int_0^T s_t\abs{G_te_i}^2\dd t\le e_i^TR_0e_i=(R_0)_{ii}\le1,
-\]
-using $R_0=A_0-B_0\preceq A_0=I$. Sum over $i\in J$ and let $T\to\infty$ by monotone convergence.
-
-(ii) The scalar Riccati identity Theorem~\ref{thm:scalar-riccati} gives, after stopping and taking
-expectations within the regularity convention,
-$\E r_{t\wedge\tau}\le r_0+\E\int_0^{t\wedge\tau}S_s\dd s\le1+k$, using $D\ge0$ and
-$r_0\le1$ (rank-one $B_0\preceq I$).
-
-(iii) By \eqref{eq:qv-p}, $\dd[p]_t=s_tr_t\dd t$ with $s_t\le\tfrac14$, so
-\[
-  \E[p]_{T\wedge\tau}\le\frac14\int_0^T\E r_{t\wedge\tau}\dd t\le\frac{(1+k)T}4 .
-\]
-Doob's $L^2$ inequality for the exit of the nested coarse window gives
-$\Prob(\tau\le T)\le C_1(1+k)T$ with a universal $C_1$; choose $T_k=1/(2C_1(1+k))$ so that
-$\Prob(\tau>T_k)\ge\tfrac12$, on which event $\min(p_{T_k},q_{T_k})\ge\tfrac13$. The
-$T_k$-uniform log-concavity of $\mu_{T_k}$ and the perimeter supermartingale then give, as in
-Theorem~\ref{thm:centroid-implies-kls},
-$\mu^+(E)\ge\E\mu_{T_k}^+(E)\ge c\sqrt{T_k}\cdot\tfrac13\cdot\tfrac12\ge c'/\sqrt{1+k}$.
-\end{proof}
+\noindent\emph{Proof.} The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate (Corollary~\ref{cor:per-direction}) can be applied one direction at a time and summed. The calculation is carried out in Appendix~\ref{sec:appendix-route-e}.
 
 \begin{corollary}[Refutation of the rank-one dynamic two-tail candidate]
-\label{cor:refutation}
+\label{cor:refutation}\klsstatus{cor:refutation}
 Let $\mu$ be a product as above and let $E$ be \emph{any fixed} cut with
 $p_0\in[2/5,3/5]$ depending on one
 fixed coordinate $i$, chosen before localization. This includes a fixed two-tail cut in a
@@ -157,7 +129,7 @@ the same intrinsic input for every log-concave posterior, conditional on its ver
 status; the unwhitening loss remains exactly the cut-free covariance factor.
 
 \begin{lemma}[Quadratic chaos for non-isotropic products]
-\label{lem:product-qcts}
+\label{lem:product-qcts}\klsstatus{lem:product-qcts}
 Let $\nu=\bigotimes_i\nu^{(i)}$ be a product of centered one-dimensional log-concave measures
 with variances $\sigma_i^2$, $A=\diag(\sigma_i^2)$, $Y\sim\nu$. Then for every symmetric $M$,
 \begin{equation}\label{eq:product-qcts}
@@ -166,29 +138,13 @@ with variances $\sigma_i^2$, $A=\diag(\sigma_i^2)$, $Y\sim\nu$. Then for every s
 with $C_*$ universal.
 \end{lemma}
 
-\begin{proof}
-Expand $Y^TMY=\sum_iM_{ii}Y_i^2+\sum_{i\ne j}M_{ij}Y_iY_j$. By independence and centering, all
-cross-covariances vanish: $\Cov(Y_i^2,Y_iY_j)=\E[Y_i^3]\E[Y_j]=0$,
-$\Cov(Y_iY_j,Y_iY_k)=\E[Y_i^2]\E[Y_j]\E[Y_k]=0$ for $j\ne k$, and disjoint pairs are
-independent. Hence, using $M_{ij}=M_{ji}$ so that each unordered pair $\{i,j\}$ contributes
-$\Var\bigl(2M_{ij}Y_iY_j\bigr)=4M_{ij}^2\sigma_i^2\sigma_j^2$,
-\[
-  \Var(Y^TMY)=\sum_iM_{ii}^2\Var(Y_i^2)
-  +\sum_{i<j}4M_{ij}^2\sigma_i^2\sigma_j^2
-  =\sum_iM_{ii}^2\Var(Y_i^2)+2\sum_{i\ne j}M_{ij}^2\sigma_i^2\sigma_j^2 .
-\]
-For one-dimensional log-concave $Y_i$, the reverse H\"older inequalities (see e.g.\
-\cite[Cor.~5]{KLnotes}) give $\E Y_i^4\le C_4\sigma_i^4$ with $C_4$ universal, so
-$\Var(Y_i^2)\le(C_4-1)\sigma_i^4$. Both sums are dominated by
-$C_*\sum_{ij}M_{ij}^2\sigma_i^2\sigma_j^2=C_*\norm{A^{1/2}MA^{1/2}}_\HS^2$ with
-$C_*=\max(C_4-1,2)$.
-\end{proof}
+\noindent\emph{Proof.} Expand the quadratic form and use independence and centering to kill every cross-covariance, leaving a diagonal and an off-diagonal sum. The calculation is carried out in Appendix~\ref{sec:appendix-route-e}.
 
 Lemma~\ref{lem:product-qcts} remains a preprint-independent proof of the input on product paths.
 For general log-concave posteriors it is replaced by Corollary~\ref{cor:qcts-source}.
 
 \begin{theorem}[Pathwise covariance bound on the source]
-\label{thm:covariance-bound}
+\label{thm:covariance-bound}\klsstatus{thm:covariance-bound}
 Conditional on Theorem~\ref{thm:letwin-qcts}, let $\mu$ be any isotropic log-concave initial
 measure and $E$ any measurable set. Then pathwise, on the coarse balanced window
 $\{p_t\in[1/3,2/3]\}$,
@@ -210,7 +166,7 @@ conclusion with a different universal constant and without the preprint input.
 \end{proof}
 
 \begin{corollary}[Covariance reduction of the all-cut estimate]
-\label{cor:V2-implies}
+\label{cor:V2-implies}\klsstatus{cor:V2-implies}
 Define the \emph{second-moment interface condition} on a window $[0,T_0]$:
 \begin{equation}\label{eq:V2}
   \tag{V2}
@@ -253,7 +209,7 @@ quadratic-chaos input and the Klartag--Lehec moment theorem together extend the 
 second-moment window to $c/\log n$.
 
 \begin{theorem}[Letwin-enhanced second-moment interface window]
-\label{thm:V2-window}
+\label{thm:V2-window}\klsstatus{thm:V2-window}
 Conditional on Theorem~\ref{thm:letwin-qcts}, there are universal constants $c_0,K_0$ such that
 for every isotropic log-concave $\mu$ on $\R^n$ and every
 $t\le t_1(n):=c_0(\log n)^{-1}$,
@@ -273,20 +229,7 @@ via the product case of Corollary~\ref{cor:V2-implies}. For non-product measures
 still uses Theorem~\ref{thm:letwin-qcts}.
 \end{theorem}
 
-\begin{proof}
-On $t\le c_0/\log n$, Corollary~\ref{cor:letwin-window} with $p=2$ gives
-$\E\norm{A_t}_\op^2\le C_2$, hence $\E X_t^2\le C_2$. This pointwise estimate integrates over
-every subinterval and proves \textup{(V2)}. The consequences follow from
-Corollary~\ref{cor:V2-implies}.
-
-For the preprint-independent fallback, on the event $\{\norm{A_t}_\op<2\}$ one has $X_t\le1$.
-On the complement, of probability at most $e^{-1/(Ct)}$ by
-Theorem~\ref{thm:KL-window}, the Brascamp--Lieb cap \eqref{eq:BL-cap} gives $X_t\le t^{-1}$,
-and therefore
-\[
-  \E X_t^2\le1+t^{-2}e^{-1/(Ct)}\le1+\sup_{u>0}u^2e^{-u/C}=1+(2C/e)^2=:K_0 .
-\]
-\end{proof}
+\noindent\emph{Proof.} On the short window the second-moment covariance bound is pointwise and integrates directly; the preprint-independent fallback instead splits on $\{\norm{A_t}_\op<2\}$ and pays the Brascamp--Lieb cap on the small complement. The calculation is carried out in Appendix~\ref{sec:appendix-route-e}.
 
 \subsubsection{The natural endpoint and the remaining universal-time gap}
 
@@ -352,7 +295,7 @@ around which a two-tail configuration would have to center are random. The decis
 is whether (b)--(d) are simultaneously achievable.
 
 \begin{question}[Adapted alignment problem for products]
-\label{q:alignment}
+\label{q:alignment}\klsstatus{q:alignment}
 Let $\mu$ be a product of $n$ isotropic two-sided exponentials. Does there exist a universal
 $T_0$ and constants $C_0,C_1,\alpha<1$ such that for every $n$ and every balanced cut $E$,
 writing $P_t^H$ for the coordinate projection onto
@@ -407,7 +350,7 @@ the all-cut estimate.
 \label{subsec:product-fences}
 
 \begin{obstruction}[Single-coordinate product cuts self-extinguish]
-\label{obs:rank-one-refuted}
+\label{obs:rank-one-refuted}\klsstatus{obs:rank-one-refuted}
 For a product measure and a fixed balanced cut depending on one coordinate,
 \(\E\int_0^\infty S_t\dd t\le1\) by Corollary~\ref{cor:refutation}. Such a cut cannot sustain a
 covariance-inflation counterexample, so any surviving witness or proof must treat

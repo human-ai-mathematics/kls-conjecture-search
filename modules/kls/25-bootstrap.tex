@@ -6,7 +6,7 @@
 \subsection{Two elementary lemmas}
 
 \begin{lemma}[Balance pins the Cheeger ratio]
-\label{lem:half}
+\label{lem:half}\klsstatus{lem:half}
 For log-concave $\nu$, with the generalized concavity of the isoperimetric profile
 \cite{Bobkov1999LogConcave,Milman2009Isoperimetric},
 \[
@@ -24,14 +24,14 @@ $h_\nu\min(p,q)=I(\tfrac12)$.
 \end{proof}
 
 \begin{definition}[Cheeger excess]
-\label{def:cheeger-excess}
+\label{def:cheeger-excess}\klsstatus{def:cheeger-excess}
 $\bar e_t(E)=\mu_t^+(E)-h_{\mu_t}\min(p_t,q_t)\ \ge\ e_t(E)\ \ge0$, the excess over the Cheeger
 line rather than over the profile. It is the quantity that propagates through the bootstrap;
 since $\bar e\ge e$, any consumption stated for $e$ is implied.
 \end{definition}
 
 \begin{lemma}[Whitening comparison]
-\label{lem:whitening}
+\label{lem:whitening}\klsstatus{lem:whitening}
 Let $\nu$ be log-concave on $\R^n$ with nondegenerate covariance $A_\nu$. Then
 \[
   h_\nu\ \ge\ \frac{\hstar_n}{\lmax(A_\nu)^{1/2}} ,
@@ -54,7 +54,7 @@ $h_{\nu\otimes\gamma_{n-m}}\le h_\nu$, so $\hstar_n\le\hstar_m$.
 \subsection{The main inequality}
 
 \begin{theorem}[Bootstrap comparison]
-\label{thm:bootstrap}
+\label{thm:bootstrap}\klsstatus{thm:bootstrap}
 Let $n\ge2$, $\eps\in(0,1]$, and let $\mu$ be isotropic log-concave on $\R^n$ with
 $h_\mu\le(1+\eps)\hstar_n$ (a near-worst measure of its dimension). Let $E$ be \emph{any}
 measurable set with $\mu(E)=\tfrac12$, $e_0=e_0(E)=\bar e_0(E)$, and let $\eta\in(0,\tfrac12)$.
@@ -82,75 +82,10 @@ $\eps\le T^{1/3}$ gives the clean form
 \end{equation}
 \end{theorem}
 
-\begin{proof}
-\emph{Step 1.} By the perimeter supermartingale \eqref{eq:perimeter-supermartingale} and
-Lemma~\ref{lem:half},
-$\E[\mu_t^+(E)\one_{\{t<\tau_\eta\}}]\le\mu^+(E)=\tfrac{h_\mu}2+e_0$.
-
-\emph{Step 2.} On $\{t<\tau_\eta\}$, $\min(p_t,q_t)\ge\tfrac12-\eta$. By
-Lemma~\ref{lem:whitening} and the elementary bound
-$\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ for $\lambda>0$ (trivial when the right side is
-negative),
-\[
-  \E\bigl[h_{\mu_t}\min(p_t,q_t)\one_{\{t<\tau_\eta\}}\bigr]
-  \ \ge\
-  \hstar_n\Bigl(\frac12-\eta\Bigr)\Bigl(\Prob(\tau_\eta>t)-\frac{\E X_t}2\Bigr).
-\]
-
-\emph{Step 3.} Write
-\[
-  P=\Prob(\tau_\eta\le t),\qquad Y=\E X_t,\qquad
-  a=\frac12-\eta,\qquad \rho=\frac{\hstar_n}{h_\mu}.
-\]
-Near-worstness and the definition of $\hstar_n$ give
-\[
-  \frac1{1+\eps}\le\rho\le1,
-  \qquad\text{hence}\qquad \rho\ge1-\eps.
-\]
-If $1-P-Y/2\ge0$, Steps 1--2 give
-\[
-\begin{split}
-  \E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
-  &\le h_\mu\left\{\frac12-(1-\eps)a(1-P-Y/2)\right\}\\
-  &\le h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
-\end{split}
-\]
-Indeed, $\frac12-a(1-P)=\eta+aP\le\eta+P/2$, the $Y$ contribution is at most
-$Y/4$, and the $\eps$ contribution is at most $\eps/2$.
-
-If $1-P-Y/2<0$, use only the nonnegativity of
-$h_{\mu_t}\min(p_t,q_t)\one_{\{t<\tau_\eta\}}$ in Step 1. The case assumption gives
-$P/2+Y/4>1/2$, and therefore
-\[
-  \E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
-  \le\frac{h_\mu}{2}
-  <h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
-\]
-Thus \eqref{eq:bootstrap-main} holds in both cases.
-
-\emph{Step 4.} The stopped process
-$M_u=p_{u\wedge\tau_\eta}-\tfrac12$ is a bounded continuous martingale. On
-$\{\tau_\eta\le t\}$, continuity gives $\sup_{u\le t}|M_u|\ge\eta$. Hence the $L^2$ maximal
-inequality, martingale isometry, \eqref{eq:qv-p}, and
-$s_tr_t\le\tfrac14\lmax(A_t)\le\tfrac14(1+X_t)$ give
-\[
-\begin{split}
-  \Prob(\tau_\eta\le t)
-  &\le\eta^{-2}\E M_t^2
-   =\eta^{-2}\E[p]_{t\wedge\tau_\eta}\\
-  &\le\frac1{4\eta^2}\int_0^t
-       \E[\one_{\{s<\tau_\eta\}}(1+X_s)]\dd s\\
-  &\le\frac1{4\eta^2}\left(t+\int_0^t\E X_s\dd s\right).
-\end{split}
-\]
-This proves \eqref{eq:bootstrap-exit}.
-
-\emph{Step 5.} Integrate \eqref{eq:bootstrap-main} over $[0,T]$ using
-$\int_0^T\Prob(\tau_\eta\le t)\dd t\le\tfrac1{4\eta^2}(\tfrac{T^2}2+T\Xi_T)$.
-\end{proof}
+\noindent\emph{Proof.} Six steps: the perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event; and the remaining steps collect the error terms into the interface functional. The calculation is carried out in Appendix~\ref{sec:appendix-route-e}.
 
 \begin{theorem}[Stopped covariance-interface refinement, candidate]
-\label{thm:bootstrap-stopped-interface}
+\label{thm:bootstrap-stopped-interface}\klsstatus{thm:bootstrap-stopped-interface}
 Under the hypotheses of Theorem~\ref{thm:bootstrap}, define
 \[
   \widehat\Xi_{T,\eta}(\mu,E)
@@ -195,7 +130,7 @@ probability may suffice for a future stability argument needing pathwise near-mi
 \label{subsec:interface}
 
 \begin{lemma}[Crude evaluation]
-\label{lem:crude}
+\label{lem:crude}\klsstatus{lem:crude}
 For every isotropic log-concave $\mu$ on $\R^n$ and $1/n\le T\le1$,
 $\Xi_T(\mu)\le1+\log(nT)$.
 \end{lemma}
@@ -226,7 +161,7 @@ on the version-1 input of Theorem~\ref{thm:letwin-qcts}, on the larger $c/\log n
 (Corollaries~\ref{cor:KI-discharged} and \ref{cor:KI-letwin}).
 
 \begin{corollary}[Polylog evaluation]
-\label{cor:loglog}
+\label{cor:loglog}\klsstatus{cor:loglog}
 Under Assumption~\ref{hyp:KI}, for $t_1(n)\le T\le1$,
 $\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$. Hence, when additionally
 $T<1/8$ and the near-worst parameter satisfies $\eps\le T^{1/3}$, every such $\mu$ and every
@@ -242,7 +177,7 @@ On $[0,t_1]$, $\E X_t\le\E\norm{A_t}_\op\le C_1$; on $[t_1,T]$, $X_t\le t^{-1}$ 
 \end{proof}
 
 \begin{proposition}[The relative-scale ceiling]
-\label{prop:ceiling}
+\label{prop:ceiling}\klsstatus{prop:ceiling}
 Fix $\kappa\in(0,1]$ and a universal $T_0>0$ satisfying
 \begin{equation}\label{eq:ceiling-smallness}
   9(1+\kappa)T_0\le\frac12.
@@ -320,7 +255,7 @@ Both statements below are scoped methodological fences on the bootstrap input, n
 theorems; consumers carry them as heuristic barriers.
 
 \begin{obstruction}[The crude covariance integral cannot bootstrap]
-\label{obs:crude-insufficient}
+\label{obs:crude-insufficient}\klsstatus{obs:crude-insufficient}
 The crude bound \(\Xi_T\lesssim\log n\) of Lemma~\ref{lem:crude}, discussed in
 Remark~\ref{rem:insufficiency}, is too large to certify the required excess estimate at known KLS
 lower-bound scales. A viable bootstrap input must improve the logarithm; the available
@@ -328,7 +263,7 @@ polylogarithmic technology reaches only the scale of Corollary~\ref{cor:loglog}.
 \end{obstruction}
 
 \begin{obstruction}[An all-measure relative bound already implies KLS]
-\label{obs:relative-ceiling}
+\label{obs:relative-ceiling}\klsstatus{obs:relative-ceiling}
 By Proposition~\ref{prop:ceiling}, a universal bound \(\Xi_{T_0}(\mu)\le\kappa T_0\) at a
 sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input,
 and a route that aims at it has replaced the target by an equivalent-strength statement. The

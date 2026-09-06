@@ -3,6 +3,63 @@
 \section{Route S: fixed-eigenfunction localization}
 \label{sec:spectral-route}
 
+\subsection*{Route gateway}
+\addcontentsline{toc}{subsection}{Route gateway}
+
+\begin{description}[leftmargin=0pt,style=nextline,itemsep=0.3em]
+  \item[1. Thesis.] Follow a fixed first eigenfunction, rather than a candidate cut, through
+  stochastic localization, and keep its tensor orientation alive in the posterior covariance.
+
+  \item[2. Bridge to KLS.] One proved arrow with one open antecedent:
+  \[
+    \underbrace{\texttt{q:mm-spectral-occupation}}_{\text{open}}
+    \ \xRightarrow[\ \text{proved: Prop.~\ref{prop:spectral-sufficiency}}\ ]{}\
+    \text{KLS}.
+  \]
+  Proposition~\ref{prop:spectral-sufficiency} is \emph{proved} and its
+  \texttt{assumes} list is non-empty, which is exactly the situation the ledger records as
+  applicability-blocked: a theorem, and not progress on Conjecture~\ref{conj:kls} until the
+  antecedent is discharged. Its standing label says so.
+
+  \item[3. Established inputs.] From the literature, and load-bearing: the sharp
+  quadratic/third-moment input $\kappa_n=O(1)$ (Theorem~\ref{thm:letwin-qcts}), which is an
+  \emph{unreviewed version-1 preprint} and is recorded as \texttt{open}; and the published
+  polylogarithmic covariance window. Certified here: the exact fixed-function SDE and the
+  posterior-defect estimate (Lemma~\ref{lem:mm-posterior-defect}).
+
+  \item[4. Main advance so far.] The initial-layer window chain,
+  Proposition~\ref{prop:mm-window-occupation}: conditional on the same preprint input, the
+  occupation estimate \emph{does} close on the published polylogarithmic window. The route
+  therefore fails only in the gap between a polylogarithmic time and a universal one, which is
+  a sharper statement of the difficulty than the route began with. The supporting chain ---
+  the time-weighted fixed source, the stopped window source, and restart de-weighting
+  (Lemmas~\ref{lem:mm-time-weighted-fixed-source}, \ref{lem:mm-stopped-window-source},
+  \ref{lem:mm-restart-deweighting}) --- is certified.
+
+  \item[5. Exact bottleneck.] Question~\ref{q:mm-spectral-occupation}: prove the
+  \emph{universal-time} full-damping source estimate uniformly on regular approximants, without
+  losing tensor/covariance alignment under unwhitening. The whole difficulty is the word
+  universal; the polylogarithmic case is done.
+
+  \item[6. Failed variants and obstructions.] No variant of this route has been refuted, which
+  is a statement about its youth rather than its strength. The standing fence is external and
+  decisive: Proposition~\ref{prop:covariance-spike} forbids the uniform operator-norm bound
+  that a coarser version of this argument would want, which is precisely why the route retains
+  the eigenfunction's tensor rather than the covariance's top eigenvalue.
+
+  \item[7. Completion or reopening criterion.] The route closes if
+  Question~\ref{q:mm-spectral-occupation} is answered affirmatively at a universal time; it is
+  decisively damaged if the unwhitening step is shown to lose alignment for a certified family.
+  Note the premise risk: if Theorem~\ref{thm:letwin-qcts} does not survive review, the route
+  does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
+
+  \item[8. Technical reading guide.] Conceptual prelude:
+  Section~\ref{sec:localization-prelude} --- Route~S shares it entirely with Route~E and
+  differs only in the object followed. Moment-map control it consumes:
+  Section~\ref{sec:family-moment-map}. Apparatus:
+  Appendices~\ref{sec:notation}--\ref{sec:models}.
+\end{description}
+
 \paragraph{Thesis.}
 Follow a first eigenfunction --- rather than a candidate cut --- through stochastic localization,
 and apply the moment-map quadratic control of Section~\ref{sec:family-moment-map} to its whitened
@@ -12,7 +69,8 @@ over a universal amount of localization time.
 This route attacks the spectral object that \emph{defines} KLS directly, and it retains the
 tensor/covariance orientation that a global operator-norm bound discards --- the property
 Section~\ref{subsec:kls-spike-obstruction} showed to be necessary. It shares the localization
-backbone of Group~2 with Route~E and differs only in the object it tracks.
+backbone of Section~\ref{sec:localization-prelude} with Route~E and differs only in the object it
+tracks.
 
 The route is \textbf{live, secondary}. Its current entry points are the approaches of
 \texttt{research/program/portfolio.yaml}, and each approach's \texttt{objective} states what
@@ -80,7 +138,7 @@ be.
 \end{remark}
 
 \begin{lemma}[Posterior eigenfunction-defect calculus]
-\label{lem:mm-posterior-defect}
+\label{lem:mm-posterior-defect}\klsstatus{lem:mm-posterior-defect}
 In the regular setting above, realize localization through the planted channel
 $c_t=tX+B_t^{\mathrm{obs}}$, where $X\sim\mu$ and $B^{\mathrm{obs}}$ is an independent Brownian
 motion, and put
@@ -118,7 +176,7 @@ These identities do not by themselves unwhiten the high-covariance part of $H_t$
 \label{subsec:spectral-headline}
 
 \begin{question}[Fixed-eigenfunction full-damping occupation]
-\label{q:mm-spectral-occupation}
+\label{q:mm-spectral-occupation}\klsstatus{q:mm-spectral-occupation}
 On smooth strongly log-concave isotropic approximants, let $-Lf=\lambda f$ be a normalized first
 nonconstant eigenfunction and let $g_t,H_t,A_t$ be as in \eqref{eq:spectral-quantities}. Do
 universal constants $T_0,C_0,C_1>0$ exist such that, for every $t\le T_0$,
@@ -132,7 +190,7 @@ uniformly through approximation?
 \end{question}
 
 \begin{proposition}[Full-damping sufficiency bridge]
-\label{prop:spectral-sufficiency}
+\label{prop:spectral-sufficiency}\klsstatus{prop:spectral-sufficiency}
 Suppose Question~\ref{q:mm-spectral-occupation} holds with constants $T_0,C_0,C_1>0$ uniformly
 through regularization.  Set
 \[
@@ -174,7 +232,7 @@ term.  A strict damping surplus would be useful but is not required for the KLS 
 bridge; this differs from the absorption margins required in the two-color route.
 
 \begin{lemma}[Time-weighted fixed-function source budget]
-\label{lem:mm-time-weighted-fixed-source}
+\label{lem:mm-time-weighted-fixed-source}\klsstatus{lem:mm-time-weighted-fixed-source}
 Let $\mu=e^{-V}\dd x$ be a smooth probability with $\Hess V\succeq\kappa I$, $\kappa\ge0$, and
 let $f$ be a fixed square-integrable test for which the posterior identities are justified.  Put
 $g_t=\Cov_{\mu_t}(f,X)$, $H_t=\E_t[(f-\E_tf)(X-a_t)^{\otimes2}]$, and $A_t=\Cov_{\mu_t}(X)$.
@@ -201,7 +259,7 @@ and last are conditional on the unreviewed quadratic-Poincar\'e import
 (Theorem~\ref{thm:letwin-qcts}); that conditionality is part of the statements.
 
 \begin{lemma}[Stopped initial-layer source bound; conditional on Theorem~\ref{thm:letwin-qcts}]
-\label{lem:mm-stopped-window-source}
+\label{lem:mm-stopped-window-source}\klsstatus{lem:mm-stopped-window-source}
 For every regular approximant, every fixed unit-variance test $f$, every $L\ge1$ and $T>0$, let
 $\tau_L=\inf\{t:\norm{A_t}_\op\ge L\}$. Then
 $\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le 8L^2T$, uniformly in the dimension and in
@@ -209,7 +267,7 @@ the regularization.
 \end{lemma}
 
 \begin{lemma}[Restart deweighting at a stopping time]
-\label{lem:mm-restart-deweighting}
+\label{lem:mm-restart-deweighting}\klsstatus{lem:mm-restart-deweighting}
 For every almost surely positive stopping time $\sigma$ of the observation filtration on an
 $\eps$-regular approximant and every fixed $L^2$ test,
 \[
@@ -221,7 +279,7 @@ $\kappa=\eps+\sigma$ after the strong-Markov restart of the planted localization
 \end{lemma}
 
 \begin{lemma}[Small-gap fourth moment from the published frontier]
-\label{lem:mm-smallgap-fourth-moment}
+\label{lem:mm-smallgap-fourth-moment}\klsstatus{lem:mm-smallgap-fourth-moment}
 Let $K_n$ be the constant of Theorem~\ref{thm:klartag-logn}, so that every isotropic
 log-concave law in dimension $n$ satisfies $\CP\le K_n$. Then every normalized first
 eigenfunction of a regular isotropic approximant with $\lambda\le 3/(8K_n)$ satisfies
@@ -231,7 +289,7 @@ Poincar\'e inequality applied to $f^2$.
 
 \begin{proposition}[Window occupation and frontier reproduction; conditional on
 Theorem~\ref{thm:letwin-qcts}]
-\label{prop:mm-window-occupation}
+\label{prop:mm-window-occupation}\klsstatus{prop:mm-window-occupation}
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from Theorem~\ref{thm:KL-window}, the
 occupation hypothesis \eqref{eq:spectral-occupation} holds on $[0,T_0(n)]$ with $C_0=34$ and
 $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the certified
@@ -264,6 +322,7 @@ retaining only a universal function of $\kappa_n$. Formulation
 Question~\ref{q:mm-spectral-occupation} is the mechanism-bearing form.
 
 \subsection{The audited \texorpdfstring{$H^{-1}$}{H-1} endpoint}
+\label{subsec:spectral-h-minus-one}
 \label{subsec:spectral-hminus1-endpoint}
 
 An earlier formulation of this route's first lemma was an $H^{-1}$ residual bound. The cycle-1

@@ -19,7 +19,7 @@ preprint input.
 
 \begin{assumption}[Known small-time operator-norm control; matched to
 {\cite{KlartagLehec2022Polylog,Letwin2026QuadraticKLS}}]
-\label{hyp:KI}
+\label{hyp:KI}\klsstatus{hyp:KI}
 There are universal constants $c_0,C_1,C_2>0$ such that for every isotropic log-concave $\mu$ on
 $\R^n$, $n\ge3$,
 \[
@@ -37,7 +37,7 @@ window, it gives $C_2=1$. The standard two-sided-exponential product example sug
 $1/\log n$ is the natural endpoint for covariance-only control.
 
 \begin{theorem}[{Klartag--Lehec; the sup-over-time form is \cite[Thm.~61]{KLnotes}}]
-\label{thm:KL-window}
+\label{thm:KL-window}\klsstatus{thm:KL-window}
 There is a universal constant $C$ such that for every isotropic log-concave $\mu$ on $\R^n$
 and every $t\le\dfrac1{C\log^2n}$,
 \[
@@ -46,7 +46,7 @@ and every $t\le\dfrac1{C\log^2n}$,
 \end{theorem}
 
 \begin{theorem}[{Isoperimetric $\log n$ frontier; \cite{Klartag2023Logarithmic}}]
-\label{thm:klartag-logn}
+\label{thm:klartag-logn}\klsstatus{thm:klartag-logn}
 There is a universal constant $C$ such that every isotropic log-concave probability on $\R^n$,
 $n\ge2$, satisfies $\hstar_n\ge C^{-1}(\log n)^{-1/2}$; by Cheeger's inequality, every such law
 has $\CP\le C\log n$.
@@ -59,7 +59,7 @@ The newer parallel-coupling preprint contains rank-sensitive information that is
 an operator-norm window but still cut-free.  We record it without wiring it to a live gate.
 
 \begin{theorem}[{Stopped rank tails; \cite{KlartagLehec2025ThinShell}}]
-\label{thm:kl-stopped-rank-tail}
+\label{thm:kl-stopped-rank-tail}\klsstatus{thm:kl-stopped-rank-tail}
 For the simplified stochastic localization of an isotropic compactly supported log-concave law,
 write $\lambda_1(t)\ge\cdots\ge\lambda_n(t)$ for the eigenvalues of $A_t$.  There is a universal
 $C$ such that, for every stopping time $\sigma$ and $t>0$,
@@ -76,7 +76,7 @@ Consequently, if $\sigma_k=\inf\{t:\lambda_k(t)\ge3\}$, then
 \end{theorem}
 
 \begin{theorem}[{Integrated rank covariance; \cite{KlartagLehec2025ThinShell}}]
-\label{thm:kl-integrated-rank-covariance}
+\label{thm:kl-integrated-rank-covariance}\klsstatus{thm:kl-integrated-rank-covariance}
 Under the same hypotheses,
 \[
   \E\sum_{i=1}^n
@@ -92,7 +92,7 @@ Question~\ref{q:upgrade}, Question~\ref{q:mm-spectral-occupation}, or the high-r
 Question~\ref{q:stein-weighted}.
 
 \begin{proposition}[Letwin's third-moment bound]
-\label{prop:letwin-kappa}
+\label{prop:letwin-kappa}\klsstatus{prop:letwin-kappa}
 Define
 \[
   \kappa_n
@@ -117,7 +117,7 @@ $\norm M_{\HS}^4\le8\norm M_{\HS}^2$. The claim follows, including the case $M=0
 \end{proof}
 
 \begin{corollary}[The quadratic-chaos covariance window]
-\label{cor:letwin-window}
+\label{cor:letwin-window}\klsstatus{cor:letwin-window}
 For every fixed $p\ge1$ there are universal constants $c,C_p>0$ such that, for every isotropic
 log-concave initial measure and
 \[
@@ -150,7 +150,7 @@ arXiv:2203.15551 for \cite{KlartagLehec2022Polylog}.
 \end{remark}
 
 \begin{corollary}[Discharge of Assumption~\ref{hyp:KI}]
-\label{cor:KI-discharged}
+\label{cor:KI-discharged}\klsstatus{cor:KI-discharged}
 The published Theorem~\ref{thm:KL-window}, together with the Brascamp--Lieb cap, discharges
 Assumption~\ref{hyp:KI} with $C_2=2$.
 \end{corollary}
@@ -162,7 +162,7 @@ $\E\norm{A_t}_\op\le2+t^{-1}e^{-1/(Ct)}\le C_1$.
 \end{proof}
 
 \begin{corollary}[Letwin-v1 sharpening of the covariance window]
-\label{cor:KI-letwin}
+\label{cor:KI-letwin}\klsstatus{cor:KI-letwin}
 Conditional on the preprint input of Theorem~\ref{thm:letwin-qcts},
 Assumption~\ref{hyp:KI} holds with $C_2=1$: there is a universal constant $c_0$ such
 that for every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-1}$,

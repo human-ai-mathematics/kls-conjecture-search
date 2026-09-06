@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{The two-color Riccati identities}
+\section{The two-colour Riccati identities}
 \label{sec:riccati}
 
 The evolution of $r_t=s_t\abs{\delta_t}^2$ is governed by an exact Riccati identity. The matrix
@@ -16,7 +16,7 @@ Also put
 \end{equation}
 
 \begin{lemma}[Matrix two-color Riccati identity]
-\label{lem:matrix-riccati}
+\label{lem:matrix-riccati}\klsstatus{lem:matrix-riccati}
 Under stochastic localization,
 \begin{equation}\label{eq:dB}
   \dd B_t=\dd N_t+\bigl(s_tG_t^2-A_tB_t-B_tA_t+r_tB_t\bigr)\dd t,
@@ -60,7 +60,7 @@ This yields \eqref{eq:dR}.
 \end{proof}
 
 \begin{theorem}[Scalar two-color Riccati identity]
-\label{thm:scalar-riccati}
+\label{thm:scalar-riccati}\klsstatus{thm:scalar-riccati}
 The binary information rate satisfies
 \begin{equation}\label{eq:scalar-riccati}
   \dd r_t=\dd M_t+(S_t-D_t)\dd t,
@@ -101,7 +101,7 @@ Thus the only positive term in the scalar Riccati identity is the source
 \]
 
 \begin{corollary}[Unconditional per-direction Carleson estimate]
-\label{cor:per-direction}
+\label{cor:per-direction}\klsstatus{cor:per-direction}
 For every $T>0$ and every unit vector $\theta\in\R^n$,
 \begin{equation}\label{eq:per-direction}
   \E\int_0^T\left(s_t\abs{G_t\theta}^2+\abs{R_t\theta}^2\right)\dd t
@@ -119,7 +119,7 @@ $-\abs{R_t\theta}^2-s_t\abs{G_t\theta}^2$. Take expectations and use $R_T\succeq
 \end{proof}
 
 \begin{corollary}[Full matrix dissipation]
-\label{cor:full-matrix-dissipation}
+\label{cor:full-matrix-dissipation}\klsstatus{cor:full-matrix-dissipation}
 The matrix Riccati identity yields the Loewner-order estimate
 \begin{equation}\label{eq:full-matrix-dissipation}
   \E\int_0^\infty\bigl(R_t^2+s_tG_t^2\bigr)\dd t\preceq R_0.

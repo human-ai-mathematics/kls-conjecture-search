@@ -1,6 +1,6 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{The mass martingale and the stopped centroid reduction}
+\section{The mass martingale, It\^o calculations, and the stopped centroid reduction}
 \label{sec:mass-martingale}
 
 \subsection{Quadratic variation and information rate}
@@ -72,7 +72,7 @@ particular certificate; no claim about every possible propagation argument is ma
 \subsection{Stopped centroid estimate}
 
 \begin{lemma}[A balanced posterior event gives boundary; uniformly, KLS]
-\label{lem:survival-implies-kls}
+\label{lem:survival-implies-kls}\klsstatus{lem:survival-implies-kls}
 Let $\mu$ be isotropic log-concave and $E$ measurable. If, for some $T_0,c_0,b_0>0$,
 \[
   \Prob\bigl(\min(p_{T_0},q_{T_0})\ge b_0\bigr)\ge c_0,
@@ -98,7 +98,7 @@ dimension-free Cheeger lower bound.
 \end{proof}
 
 \begin{assumption}[Stopped centroid estimate]
-\label{ass:stopped-centroid}
+\label{ass:stopped-centroid}\klsstatus{ass:stopped-centroid}
 There exist universal constants $T_0,C$ such that for every isotropic log-concave $\mu$ and every
 measurable set $E$ with $p_0\in[2/5,3/5]$,
 \begin{equation}\label{eq:stopped-centroid}
@@ -108,7 +108,7 @@ measurable set $E$ with $p_0\in[2/5,3/5]$,
 \end{assumption}
 
 \begin{theorem}[Stopped centroid estimate implies KLS]
-\label{thm:centroid-implies-kls}
+\label{thm:centroid-implies-kls}\klsstatus{thm:centroid-implies-kls}
 Assumption~\ref{ass:stopped-centroid} implies a dimension-free lower bound on $h_\mu$ for every
 isotropic log-concave $\mu$.
 \end{theorem}
