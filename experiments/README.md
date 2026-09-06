@@ -50,6 +50,7 @@ development lane. Full pytest includes the expensive localization Monte Carlo re
 | `cmh-gate-zero` | deterministic necessary-condition CMH battery | `standard` |
 | `cmh-ab` | CMH anisotropic-bootstrap (N, D, R) and M9 probe | `standard`, `exact-only`, `fast` |
 | `fiber-frame-dual` | conditional-fiber-frame all-frame simplex pencil library | `standard`, `deep` |
+| `cmh-cone` | exponential-cone gate matrices and CMH Galerkin battery | `standard`, `exact-only` |
 
 Use `numerics list` as the executable source of truth. `loc-engine` replaces the misleading public
 name `kls-loc`; historical artifacts keep their original target id unchanged.

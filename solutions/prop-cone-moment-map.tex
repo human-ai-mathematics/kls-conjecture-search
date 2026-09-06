@@ -1,0 +1,911 @@
+% Standalone solution dossier for the exponential-cone family of Route C:
+% the cone lift of the moment map, its linear sector, and the cube cone.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+%
+% ledger-node : prop:cone-moment-map; prop:cone-linear-sector; cor:cube-cone-gate-zero
+% refines : prop:cone-moment-map; prop:cone-linear-sector; cor:cube-cone-gate-zero
+% bounded_by : none (all three nodes)
+% author : /w5/researcher-cone-lift
+% author : /w5/researcher-cone-lift-repair  (repair round w5p04, per research/reviews/2026-09-06-prop-cone-moment-map-audit.md)
+% date : 2026-09-06
+% ============================================================================
+\section*{Solution candidate: the exponential cones --- moment map, linear sector, cube cone}
+\label{sec:sol-cone-moment-map}
+
+\paragraph{Scope.}
+This dossier proves, in the order stated, Proposition~\ref{prop:cone-moment-map}
+(Theorem~\ref{thm:sol-cone-A} below), Proposition~\ref{prop:cone-linear-sector}
+(Theorem~\ref{thm:sol-cone-B}) and Corollary~\ref{cor:cube-cone-gate-zero}
+(Theorem~\ref{thm:sol-cone-C}), for the exponential cone measures of
+Definition~\ref{def:exponential-cone}.  Every step is analytic.  The only inputs from outside
+this file are: the compact-target regular moment-map theorem recorded as
+Theorem~\ref{thm:regular-moment-map-compact-target} (published; applied to the uniform
+probability on a convex body), the uniqueness-up-to-translation part of the moment-measure
+theorem of \cite{CorderoErausquinKlartag2015MomentMeasures}, and the elementary moments of the
+Gamma law.  Proposition~\ref{prop:cmh-hodge} and Lemma~\ref{lem:linear-sector-third-moment}
+are \emph{not} used; where the manuscript statements refer to them, this dossier proves the
+relevant identity directly and records the interpretation (\S\ref{subsec:sol-cone-remarks}).
+
+\subsection*{0. Standing conventions}
+\label{subsec:sol-cone-conventions}
+
+\paragraph{Moment potentials.}
+A convex function $\psi:\R^d\to\R\cup\{+\infty\}$ is \emph{essentially continuous}
+(Definition~2 of \cite{CorderoErausquinKlartag2015MomentMeasures}) if it is lower
+semi-continuous and its set of discontinuity points has zero $\mathcal H^{d-1}$-measure.
+Following \eqref{eq:moment-measure}, a \emph{moment potential} of a probability measure $\eta$
+on $\R^d$ is an essentially-continuous convex function $\psi:\R^d\to\R\cup\{+\infty\}$ with
+$\int e^{-\psi}=1$ whose moment measure is $\eta$, that is
+$(\nabla\psi)_\#(e^{-\psi}\dd y)=\eta$.  A finite convex function on $\R^d$ is continuous,
+hence essentially continuous; so every finite convex $\psi$ with $\int e^{-\psi}=1$ and
+$(\nabla\psi)_\#(e^{-\psi}\dd y)=\eta$ is a moment potential of $\eta$ in this sense, and in
+particular so is each of the potentials constructed in this dossier ($\varphi$ of
+\eqref{eq:sol-cone-phi}, the rescaled $\lambda$ of \eqref{eq:sol-cone-rescaled}, the product
+$\Lambda$ of Lemma~\ref{lem:sol-cone-product}, and $\phi_T$ of Lemma~\ref{lem:sol-cone-affine}).
+We use the following published fact.
+
+\begin{theorem}[Cordero-Erausquin--Klartag; existence and uniqueness]
+\label{thm:sol-cone-cek}
+Let $\eta$ be a Borel probability measure on $\R^d$ with finite first moment, barycenter at
+the origin, and not supported in a hyperplane.  Then $\eta$ has a moment potential, and it is
+unique up to translation: any two moment potentials $\psi_1,\psi_2$ of $\eta$ satisfy
+$\psi_2(y)=\psi_1(y+a)$ for some $a\in\R^d$.
+\end{theorem}
+
+This is Theorem~2 of the arXiv version \texttt{1304.0630v1} of
+\cite{CorderoErausquinKlartag2015MomentMeasures} (see also \cite{Klartag2013MomentMeasures}),
+stated there for a finite Borel measure $\mu$ with $0<\mu(\R^d)<\infty$, not supported in a
+lower-dimensional subspace, with barycenter at the origin (so in particular with finite first
+moment); the conclusion there is the existence of an essentially-continuous convex
+$\psi:\R^d\to\R\cup\{+\infty\}$ with moment measure $\mu$, unique up to translation.  For a
+probability measure $\eta$ ``not supported in a lower-dimensional subspace'' is ``not
+supported in a hyperplane'', and the normalization $\int e^{-\psi}=\mu(\R^d)=1$ is part of the
+definition of the moment measure.  It is the ``essentially unique'' of \eqref{eq:moment-measure}.
+The theorem number refers to the arXiv text; the numbering in the journal version is noted in
+Remark~\ref{rem:sol-cone-open}(a).
+
+\paragraph{The canonical Stein kernel.}
+If $\eta$ has a moment potential $\psi\in C^\infty(\R^d)$ with $D^2\psi\succ0$ everywhere and
+$\nabla\psi$ a diffeomorphism of $\R^d$ onto an open set $\Omega$, the \emph{canonical Stein
+kernel} of $\eta$ is, as in \eqref{eq:stein-kernel-def},
+\begin{equation}
+  \tau_\eta(x)=D^2\psi\bigl((\nabla\psi)^{-1}(x)\bigr),\qquad x\in\Omega.
+  \label{eq:sol-cone-kernel-def}
+\end{equation}
+It does not depend on the translate: if $\tilde\psi(y)=\psi(y+a)$ then
+$\nabla\tilde\psi=\nabla\psi(\cdot+a)$, $(\nabla\tilde\psi)^{-1}(x)=(\nabla\psi)^{-1}(x)-a$,
+and $D^2\tilde\psi((\nabla\tilde\psi)^{-1}(x))=D^2\psi((\nabla\psi)^{-1}(x))$.  By
+Theorem~\ref{thm:sol-cone-cek} the kernel is therefore an invariant of $\eta$, and \emph{any}
+moment potential of $\eta$ with the regularity above computes it.
+
+\paragraph{Weighted divergence and closed forms.}
+Let $\Omega\subset\R^d$ be a connected open set and $\eta=\rho\dd x$ a probability measure
+with $\rho\in C^\infty(\Omega)$, $\rho>0$ on $\Omega$, $\rho=0$ off $\Omega$.  For a $C^1$
+field $v$ on $\Omega$, $\Div_\eta v=\rho^{-1}\Div(\rho v)$ as in \eqref{eq:stein-generator}.
+Let
+\[
+  \mathscr C=\R+C_c^\infty(\R^d)
+\]
+(functions on $\R^d$, restricted to $\Omega$).  For a continuous field $M$ of positive
+definite symmetric matrices on $\Omega$ with $\E_\eta\Tr M<\infty$, the pre-form
+$\calE_M(f,g)=\E_\eta\inner{M\nabla f}{\nabla g}$ is finite on $\mathscr C$.
+
+\begin{lemma}[Closability, kernel, operator]
+\label{lem:sol-cone-closable}
+In the setting above, $\calE_M$ on $\mathscr C$ is closable in $L^2(\eta)$.  Denote the closure
+again by $\calE_M$, its domain by $\Dom(\calE_M)$, and for $f\in\Dom(\calE_M)$ write
+$\nabla f$ for the $L^2(\eta;\R^d)$-limit, weighted by $M^{1/2}$, of the gradients of an
+approximating sequence, so that $\calE_M(f,g)=\E_\eta\inner{M\nabla f}{\nabla g}$ on the
+whole domain.  The kernel of $\calE_M$ consists exactly of the constants.  The nonnegative
+self-adjoint operator $\Aop_M$ of $\calE_M$ has domain
+\[
+  \Dom(\Aop_M)=\bigl\{g\in\Dom(\calE_M):\ \exists\,h\in L^2(\eta)\ \text{with}\
+  \calE_M(g,f)=\E_\eta[hf]\ \ \forall f\in\Dom(\calE_M)\bigr\},\qquad \Aop_Mg=h .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $f_j\in\mathscr C$ with $f_j\to0$ in $L^2(\eta)$ and $M^{1/2}\nabla f_j\to v$ in
+$L^2(\eta;\R^d)$.  On a compact $Q\subset\Omega$ the density $\rho$ is bounded above and below
+and $M^{\pm1/2}$ are bounded, so $f_j\to0$ and $\nabla f_j\to M^{-1/2}v$ in $L^2(Q,\dd x)$.
+For $\phi\in C_c^\infty(\operatorname{int}Q)$,
+$\int\nabla f_j\,\phi=-\int f_j\nabla\phi\to0$, hence $M^{-1/2}v=0$ a.e.\ on $Q$; exhausting
+$\Omega$ by compacts gives $v=0$.  This is closability.  If $f\in\Dom(\calE_M)$ has
+$\calE_M(f)=0$, the same local argument shows that the distributional gradient of $f$ on
+$\Omega$ vanishes, so $f$ is a.e.\ equal to a constant on the connected open set $\Omega$;
+conversely constants lie in $\mathscr C$ with zero energy.  The description of the operator is
+Kato's first representation theorem for closed nonnegative forms.
+\end{proof}
+
+When $\Omega$, $\eta$ are as above and $M$ is bounded near infinity in a suitable sense, the
+domain contains functions of polynomial growth; the instances needed are verified where they
+are used (Lemma~\ref{lem:sol-cone-domains}).  We write $\Aop_1=\Aop_\Sigma$ for the covariance
+generator of \S\ref{subsec:cmh-hodge} and $\Aop=\Aop_\tau$ for the Stein generator
+$-L_\mu$ of \eqref{eq:stein-generator}, both understood as the operators of the closures from
+$\mathscr C$ (the no-flux convention of \S\ref{subsec:cmh-conventions}).
+
+\paragraph{Polynomial growth.}
+$\mathscr P(\R^d)$ denotes the class of $f\in C^1(\R^d)$ for which there are $C,p$ with
+$\abs{f(x)}+\abs{\nabla f(x)}\le C(1+\abs x)^p$ for all $x$.  Note $\mathscr C\subset\mathscr P$.
+
+\subsection*{1. The exponential cone measures}
+\label{subsec:sol-cone-measure}
+
+Fix $n\ge2$, $m=n-1$, a convex body $K\subset\R^m$ with barycenter at the origin, and
+$\beta\ge n$.  Write $x=(x_1,x')\in\R\times\R^m$, let $C_K$ be the open cone of
+Definition~\ref{def:exponential-cone}, and let
+\[
+  \gamma_\beta(s)=\frac{s^{\beta-1}e^{-s}}{\Gamma(\beta)}\one_{s>0},
+  \qquad
+  c_K=\sup_{u\in K}\abs{(1,u)}<\infty .
+\]
+For $x\in C_K$ put $s=x_1>0$ and $u=x'/x_1\in\operatorname{int}K$, so that $x=s(1,u)$.
+
+\begin{lemma}[Structure of $\mu_{K,\beta}$]
+\label{lem:sol-cone-structure}
+Let $S\sim\GammaLaw(\beta,1)$ and $U$ uniform on $K$ be independent, and $X=S(1,U)$.
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+  \item $\int_{C_K}x_1^{\beta-n}e^{-x_1}\dd x=\Gamma(\beta)\abs K$, and the law of $X$ is
+  $\mu_{K,\beta}$, with density
+  $\rho(x)=\dfrac{x_1^{\beta-n}e^{-x_1}}{\Gamma(\beta)\abs K}\one_{C_K}(x)$.
+  \item $\mu_{K,\beta}$ is log-concave, and $\abs X\le c_KS$, so $\mu_{K,\beta}$ has finite
+  moments of all orders.
+  \item $\E S^k=\beta(\beta+1)\cdots(\beta+k-1)$ for $k\in\mathbb N$; in particular
+  $\E S=\beta$, $\Var S=\beta$, $\E S^2=\beta(\beta+1)$, $\E S^3=\beta(\beta+1)(\beta+2)$,
+  $\E(S-\beta)^3=2\beta$ and $\E[(S-\beta)S^2]=2\beta(\beta+1)$.
+  \item $\E X=\beta e_1$ and
+  $\Sigma:=\Cov(X)=\beta\,e_1e_1^\top\oplus\beta(\beta+1)\Cov(U)$, which is positive
+  definite; this is \eqref{eq:cone-covariance}.  Consequently $\Sigma e_1=\beta e_1$,
+  $\Sigma^{-1}=\beta^{-1}e_1e_1^\top\oplus(\beta(\beta+1))^{-1}\Cov(U)^{-1}$, and
+  $\Sigma^{\pm1/2}e_1=\beta^{\pm1/2}e_1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The map $\Psi:(s,u)\mapsto(s,su)$ is a diffeomorphism of $(0,\infty)\times\operatorname{int}K$
+onto $C_K$, with inverse $x\mapsto(x_1,x'/x_1)$ and Jacobian determinant
+$\det\begin{psmallmatrix}1&0\\u&s\Id_m\end{psmallmatrix}=s^m$.  Hence for measurable
+$F\ge0$,
+\[
+  \int_{C_K}F(x)\dd x=\int_{\operatorname{int}K}\int_0^\infty F(s,su)\,s^m\dd s\dd u .
+\]
+With $F(x)=x_1^{\beta-n}e^{-x_1}$ the inner integral is $\int_0^\infty s^{\beta-1}e^{-s}\dd s
+=\Gamma(\beta)$, giving the normalization.  The joint density of $(S,U)$ is
+$\gamma_\beta(s)\abs K^{-1}$, so the density of $X=\Psi(S,U)$ at $x=(s,su)$ is
+$\gamma_\beta(s)\abs K^{-1}s^{-m}=x_1^{\beta-1-m}e^{-x_1}/(\Gamma(\beta)\abs K)$, which is
+$\rho$.
+
+(b) $-\log\rho(x)=x_1-(\beta-n)\log x_1+\mathrm{const}$ on $C_K$ and $+\infty$ off $C_K$.
+The cone $C_K$ is convex (it is the cone over the convex set $\{1\}\times\operatorname{int}K$),
+$x\mapsto x_1$ is linear, and $x\mapsto-(\beta-n)\log x_1$ is convex on $\{x_1>0\}$ because
+$\beta-n\ge0$.  The bound $\abs X=S\abs{(1,U)}\le c_KS$ and the finiteness of all moments of
+$S$ give the moment claim.
+
+(c) $\E S^k=\Gamma(\beta+k)/\Gamma(\beta)$.  The listed values follow; for the two cubic
+ones,
+\[
+  \E(S-\beta)^3=\E S^3-3\beta\E S^2+3\beta^2\E S-\beta^3
+  =(\beta^3+3\beta^2+2\beta)-3\beta^3-3\beta^2+3\beta^3-\beta^3=2\beta,
+\]
+\[
+  \E[(S-\beta)S^2]=\E S^3-\beta\E S^2=\beta(\beta+1)(\beta+2)-\beta^2(\beta+1)=2\beta(\beta+1).
+\]
+
+(d) $\E X=\E S\,(1,\E U)=\beta e_1$ since the barycenter of $K$ is $0$.  Then
+$X-\beta e_1=(S-\beta,SU)$ and, by independence and $\E U=0$:
+$\Var(S-\beta)=\beta$; $\E[(S-\beta)SU]=\E[(S-\beta)S]\,\E U=0$;
+$\E[S^2UU^\top]=\E S^2\,\E UU^\top=\beta(\beta+1)\Cov(U)$.  Since $K$ has nonempty interior,
+$\Cov(U)\succ0$, so $\Sigma\succ0$; the block formulas for $\Sigma^{-1}$ and
+$\Sigma^{\pm1/2}$ follow from the block-diagonal form.
+\end{proof}
+
+Throughout, $\mu=\mu_{K,\beta}$, $\bar\mu=\bar\mu_{K,\beta}$ is the law of $\bar x=x-\beta e_1$,
+and $\E$ denotes expectation for $x\sim\mu$ (equivalently $\bar x\sim\bar\mu$).  The translation
+$x\mapsto\bar x$ maps $C_K$ onto $C_K-\beta e_1$ and preserves gradients, weighted
+divergences, the classes $\mathscr C$, $\mathscr P$, and the closed forms of
+Lemma~\ref{lem:sol-cone-closable}; we therefore state functional identities in the coordinate
+$x\in C_K$ and read them for $\bar\mu$ without further comment.
+
+\subsection*{2. The cone lift of the moment map}
+\label{subsec:sol-cone-lift}
+
+\begin{lemma}[The base and its rescaling]
+\label{lem:sol-cone-base}
+Let $\lambda_K$ be a moment potential of the uniform probability on $K$.  Then $\lambda_K$ is
+smooth and strictly convex, $D^2\lambda_K\succ0$ everywhere, $\nabla\lambda_K$ is a
+diffeomorphism of $\R^m$ onto $\operatorname{int}K$, the canonical kernel
+$\tau_K=D^2\lambda_K\circ(\nabla\lambda_K)^{-1}$ is smooth and positive definite on
+$\operatorname{int}K$, and $\E\,\tau_K(U)=\Cov(U)$ for $U$ uniform on $K$.  Moreover, for
+$\beta>0$, the function
+\begin{equation}
+  \lambda(y')=\lambda_K(\beta y')-m\log\beta
+  \label{eq:sol-cone-rescaled}
+\end{equation}
+is a moment potential of the uniform probability on $\beta K$, every moment potential of that
+law is a translate of it, and the canonical kernels satisfy
+\begin{equation}
+  \tau_{\beta K}(\beta u)=\beta^2\,\tau_K(u),\qquad u\in\operatorname{int}K .
+  \label{eq:sol-cone-scaling}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The uniform probability on $K$ is $g\one_{\operatorname{int}K}\dd x$ with $g\equiv\abs K^{-1}$,
+smooth and positive, and is centered because the barycenter of $K$ is $0$.
+Theorem~\ref{thm:regular-moment-map-compact-target}, applied in dimension $m$ with $P=K$,
+gives a moment potential $\lambda_K^0$ of this law (the canonical one of that theorem) which
+is smooth and strictly convex, with $\nabla\lambda_K^0$ a diffeomorphism of $\R^m$ onto
+$\operatorname{int}K$, and with $\E\tau_K(U)=\Cov(U)$ for the kernel
+$D^2\lambda_K^0\circ(\nabla\lambda_K^0)^{-1}$.  The law is centered, has finite first moment
+(it is compactly supported) and is not supported in a hyperplane
+($\operatorname{int}K$ is open and nonempty), so by Theorem~\ref{thm:sol-cone-cek} the given
+moment potential is a translate, $\lambda_K=\lambda_K^0(\cdot+a)$; translation preserves
+smoothness, strict convexity, the diffeomorphism property of the gradient (with the same
+image) and, by the invariance noted after \eqref{eq:sol-cone-kernel-def}, the kernel, so every
+statement holds for $\lambda_K$.  The Jacobian of the diffeomorphism
+$\nabla\lambda_K$ is $D^2\lambda_K$, which is therefore invertible; being positive
+semidefinite by convexity it is positive definite, and $\tau_K$ is smooth and positive
+definite as the composition of $D^2\lambda_K$ with the smooth inverse.
+
+For \eqref{eq:sol-cone-rescaled}: by the substitution $z=\beta y'$,
+$\int e^{-\lambda(y')}\dd y'=\beta^m\int e^{-\lambda_K(\beta y')}\dd y'=\int e^{-\lambda_K(z)}\dd z=1$,
+and $e^{-\lambda(y')}\dd y'$ is the law of $Y_0/\beta$ when $Y_0\sim e^{-\lambda_K(z)}\dd z$.
+Since $\nabla\lambda(y')=\beta(\nabla\lambda_K)(\beta y')$, the pushforward of this law under
+$\nabla\lambda$ is the law of $\beta\nabla\lambda_K(Y_0)$, which is the uniform probability on
+$\beta K$ because $\nabla\lambda_K(Y_0)$ is uniform on $K$.  The function $\lambda$ is finite,
+smooth and strictly convex, so by Theorem~\ref{thm:sol-cone-cek} (the uniform probability on
+$\beta K$ is centered, has finite first moment, and is not supported in a hyperplane) every
+moment potential of the uniform probability on $\beta K$ is a translate of $\lambda$.  In
+particular $\tau_{\beta K}$ may be computed from $\lambda$:
+$D^2\lambda(y')=\beta^2D^2\lambda_K(\beta y')$ and
+$(\nabla\lambda)^{-1}(z)=\beta^{-1}(\nabla\lambda_K)^{-1}(z/\beta)$, so
+\[
+  \tau_{\beta K}(z)=\beta^2D^2\lambda_K\bigl((\nabla\lambda_K)^{-1}(z/\beta)\bigr)=\beta^2\tau_K(z/\beta),
+\]
+which is \eqref{eq:sol-cone-scaling} at $z=\beta u$.
+\end{proof}
+
+From now on $\lambda$ denotes a moment potential of the uniform probability on $\beta K$
+(any one; all are translates of \eqref{eq:sol-cone-rescaled}); it is smooth, strictly convex
+with $D^2\lambda\succ0$, and $\nabla\lambda:\R^m\to\beta\operatorname{int}K$ is a
+diffeomorphism.  Set, for $y=(y_1,y')\in\R\times\R^m$,
+\begin{equation}
+  E(y)=\exp\bigl(y_1+\lambda(y')/\beta\bigr),\qquad
+  u(y')=\nabla\lambda(y')/\beta\in\operatorname{int}K,\qquad
+  \varphi(y)=E(y)-\beta y_1+\log\Gamma(\beta).
+  \label{eq:sol-cone-phi}
+\end{equation}
+
+\begin{theorem}[Cone lift of the moment map; Proposition~\ref{prop:cone-moment-map}]
+\label{thm:sol-cone-A}
+\begin{enumerate}[label=(\roman*),leftmargin=2.8em]
+  \item $\varphi\in C^\infty(\R^n)$, $D^2\varphi\succ0$ everywhere, and
+  \begin{equation}
+    \nabla\varphi(y)=\bigl(E-\beta,\ E\,u\bigr),\qquad
+    D^2\varphi(y)=E\begin{pmatrix}1&u^\top\\ u&uu^\top+D^2\lambda(y')/\beta\end{pmatrix},
+    \label{eq:sol-cone-grad-hess}
+  \end{equation}
+  with $E=E(y)$, $u=u(y')$.
+  \item $\nabla\varphi$ is a diffeomorphism of $\R^n$ onto $C_K-\beta e_1$; explicitly
+  $\nabla\varphi(y)=x-\beta e_1$ with $x=(x_1,x_1u)$, $x_1=E(y)$, $u=u(y')$.
+  \item $\int_{\R^n}e^{-\varphi}=1$ and $(\nabla\varphi)_\#(e^{-\varphi}\dd y)=\bar\mu$.  Hence
+  $\varphi$ is a moment potential of $\bar\mu$, and every moment potential of $\bar\mu$ is a
+  translate of $\varphi$.
+  \item The canonical Stein kernel of $\bar\mu$ at $\bar x=x-\beta e_1$, $x=(x_1,x_1u)\in C_K$,
+  is
+  \begin{equation}
+    \tau(\bar x)=x_1\begin{pmatrix}1&u^\top\\ u&uu^\top+\beta\,\tau_K(u)\end{pmatrix},
+    \label{eq:sol-cone-kernel}
+  \end{equation}
+  and in particular $\tau(\bar x)e_1=x$.  Moreover $\E\,\tau=\Sigma$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) Put $g(y)=y_1+\lambda(y')/\beta$, a smooth convex function with
+$\nabla g=(1,u)$ and $D^2g=0\oplus D^2\lambda/\beta$.  Then $\varphi=e^g-\beta y_1+\log\Gamma(\beta)$
+is smooth, $\nabla\varphi=e^g\nabla g-\beta e_1=(E-\beta,Eu)$, and
+$D^2\varphi=e^g(\nabla g\nabla g^\top+D^2g)$, which is \eqref{eq:sol-cone-grad-hess}.  For
+$v=(v_1,v')\ne0$,
+$v^\top D^2\varphi\,v=E\bigl[(v_1+\inner u{v'})^2+v'^\top D^2\lambda\,v'/\beta\bigr]$; if this
+vanishes then $v'=0$ because $D^2\lambda\succ0$, and then $v_1=0$.  So $D^2\varphi\succ0$.
+
+(ii) The map $\Theta:y\mapsto(E(y),u(y'))$ is a diffeomorphism of $\R^n$ onto
+$(0,\infty)\times\operatorname{int}K$: it is smooth, and its inverse
+$(x_1,u)\mapsto\bigl(\log x_1-\lambda(y')/\beta,\ y'\bigr)$ with $y'=(\nabla\lambda)^{-1}(\beta u)$
+is smooth because $\nabla\lambda$ is a diffeomorphism onto $\beta\operatorname{int}K$.
+Composing with the diffeomorphism $\Psi$ of Lemma~\ref{lem:sol-cone-structure}(a) and the
+translation by $-\beta e_1$ gives $\nabla\varphi=(\Psi\circ\Theta)-\beta e_1$, a diffeomorphism
+of $\R^n$ onto $C_K-\beta e_1$.
+
+(iii) Write $\Phi(y')=e^{\lambda(y')/\beta}$, so $E(y)=e^{y_1}\Phi(y')$ and
+$e^{-\varphi(y)}=\Gamma(\beta)^{-1}\exp(-E+\beta y_1)$.  Fix $y'$ and substitute
+$x_1=e^{y_1}\Phi(y')$ in the $y_1$-integral: $\dd y_1=\dd x_1/x_1$ and
+$e^{\beta y_1}=x_1^\beta\Phi(y')^{-\beta}$, so
+\[
+  e^{-\varphi(y)}\dd y_1
+  =\Gamma(\beta)^{-1}\Phi(y')^{-\beta}x_1^{\beta-1}e^{-x_1}\dd x_1
+  =e^{-\lambda(y')}\gamma_\beta(x_1)\dd x_1 .
+\]
+Therefore, by Tonelli, for every measurable $F\ge0$ on $(0,\infty)\times\operatorname{int}K$,
+\begin{equation}
+  \int_{\R^n}F\bigl(\Theta(y)\bigr)e^{-\varphi(y)}\dd y
+  =\int_{\R^m}e^{-\lambda(y')}\Bigl(\int_0^\infty F\bigl(x_1,u(y')\bigr)\gamma_\beta(x_1)\dd x_1\Bigr)\dd y'
+  =\E\bigl[F(S,U)\bigr],
+  \label{eq:sol-cone-pushforward}
+\end{equation}
+where the last equality uses that $e^{-\lambda(y')}\dd y'$ is a probability measure whose
+pushforward under $\nabla\lambda$ is uniform on $\beta K$, so that its pushforward under
+$u=\nabla\lambda/\beta$ is uniform on $K$, and $S\sim\GammaLaw(\beta,1)$ is independent of $U$.
+Taking $F\equiv1$ gives $\int e^{-\varphi}=1$; taking $F=G\circ\Psi$ for bounded measurable
+$G\ge0$ on $C_K$ gives $\int G(\Psi\Theta(y))e^{-\varphi}\dd y=\E\,G(X)$, i.e.\
+$(\Psi\circ\Theta)_\#(e^{-\varphi}\dd y)=\mu$, and translating,
+$(\nabla\varphi)_\#(e^{-\varphi}\dd y)=\bar\mu$.  So $\varphi$ is a finite smooth convex
+moment potential of $\bar\mu$.  The measure $\bar\mu$ is centered
+(Lemma~\ref{lem:sol-cone-structure}(d)), has finite first moment
+(Lemma~\ref{lem:sol-cone-structure}(b)), and is not supported in a hyperplane because
+$C_K-\beta e_1$ is open and nonempty; Theorem~\ref{thm:sol-cone-cek} gives that every moment
+potential of $\bar\mu$ is a translate of $\varphi$.
+
+(iv) By (ii), (iii) and the convention \eqref{eq:sol-cone-kernel-def}, the canonical kernel of
+$\bar\mu$ at $\bar x=\nabla\varphi(y)$ is $D^2\varphi(y)$.  In \eqref{eq:sol-cone-grad-hess},
+$E(y)=x_1$, $u(y')=u$, and $D^2\lambda(y')=\tau_{\beta K}(\nabla\lambda(y'))=\tau_{\beta K}(\beta u)
+=\beta^2\tau_K(u)$ by the definition \eqref{eq:sol-cone-kernel-def} of $\tau_{\beta K}$ and
+\eqref{eq:sol-cone-scaling}.  Substituting gives \eqref{eq:sol-cone-kernel}; the first column
+is $x_1(1,u)=x$.  Finally, by independence of $x_1=S$ and $u=U$ under $\mu$
+(Lemma~\ref{lem:sol-cone-structure}), $\E[x_1]=\beta$, $\E[x_1u]=\beta\E U=0$ and
+$\E\bigl[x_1(uu^\top+\beta\tau_K(u))\bigr]=\beta\bigl(\Cov(U)+\beta\Cov(U)\bigr)
+=\beta(\beta+1)\Cov(U)$, using $\E\tau_K(U)=\Cov(U)$ from Lemma~\ref{lem:sol-cone-base}.
+This is $\Sigma$.
+\end{proof}
+
+The next lemma is the Stein identity for $\tau$ on a class large enough for all subsequent
+uses; it is the target-coordinate reading of \eqref{eq:stein-identity} for the noncompact
+target $C_K$.
+
+\begin{lemma}[Stein identity and moment bounds]
+\label{lem:sol-cone-stein}
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+  \item For every $q\ge0$ and all $i,j$, $\E\bigl[x_1^{q}\abs{\tau_{ij}}\bigr]<\infty$; in
+  particular $\E[(1+\abs x)^{q}\Tr\tau]<\infty$.
+  \item For every $f\in\mathscr P(\R^n)$ and every $i\in\{1,\dots,n\}$,
+  \begin{equation}
+    \E\bigl[\bar x_i\,f(\bar x)\bigr]=\E\bigl[\inner{\tau(\bar x)e_i}{\nabla f(\bar x)}\bigr].
+    \label{eq:sol-cone-stein}
+  \end{equation}
+  \item In particular, for $f\in\mathscr P(\R^n)$,
+  \begin{equation}
+    \E\bigl[\inner{x}{\nabla f(x)}\bigr]=\E\bigl[(x_1-\beta)f(x)\bigr].
+    \label{eq:sol-cone-radial}
+  \end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Since $\tau_K(u)\succeq0$, $\abs{(\tau_K)_{ij}}\le\Tr\tau_K$, and $\abs u\le c_K$ on $K$,
+\eqref{eq:sol-cone-kernel} gives $\abs{\tau_{ij}}\le x_1\bigl(1+c_K^2+\beta\Tr\tau_K(u)\bigr)$.
+By independence of $x_1$ and $u$, $\E[x_1^q\abs{\tau_{ij}}]\le\E[x_1^{q+1}]\,(1+c_K^2+\beta\Tr\Cov(U))<\infty$,
+using $\E\Tr\tau_K(U)=\Tr\Cov(U)$.  The second claim follows from $\abs x\le c_Kx_1$.
+
+(b) Let $F=f\circ\nabla\varphi\in C^1(\R^n)$.  By the chain rule and
+$\tau_{ij}(\nabla\varphi(y))=\varphi_{ij}(y)$,
+$\partial_iF(y)=\sum_j\partial_jf(\nabla\varphi(y))\,\tau_{ij}(\nabla\varphi(y))$.  By the
+pushforward of Theorem~\ref{thm:sol-cone-A}(iii),
+\[
+  \int\partial_i\varphi\,F\,e^{-\varphi}\dd y=\E[\bar x_if(\bar x)],\qquad
+  \int\partial_iF\,e^{-\varphi}\dd y=\E\bigl[\inner{\tau e_i}{\nabla f}\bigr],\qquad
+  \int\abs F\,e^{-\varphi}\dd y=\E\abs{f(\bar x)},
+\]
+and all three are absolutely convergent: $\bar\mu$ has all moments, $f$ and $\nabla f$ have
+polynomial growth, and (a) bounds $\E[(1+\abs x)^p\abs{\tau_{ij}}]$.  Choose
+$\chi\in C_c^\infty(\R^n)$ with $0\le\chi\le1$, $\chi=1$ on the unit ball, and set
+$\chi_R=\chi(\cdot/R)$, so $\norm{\nabla\chi_R}_\infty\le\norm{\nabla\chi}_\infty/R$.  Since
+$F\chi_R$ has compact support, integration by parts on $\R^n$ gives
+\[
+  \int\partial_i\varphi\,F\chi_R\,e^{-\varphi}
+  =-\int\partial_i(e^{-\varphi})F\chi_R
+  =\int e^{-\varphi}\bigl(\partial_iF\,\chi_R+F\,\partial_i\chi_R\bigr).
+\]
+As $R\to\infty$ the left side and the first term on the right converge by dominated
+convergence to $\E[\bar x_if]$ and $\E\inner{\tau e_i}{\nabla f}$ respectively, and the last
+term is bounded by $\norm{\nabla\chi}_\infty R^{-1}\E\abs f\to0$.  This is
+\eqref{eq:sol-cone-stein}.
+
+(c) Take $i=1$ in (b): $\tau e_1=x$ by Theorem~\ref{thm:sol-cone-A}(iv), $\bar x_1=x_1-\beta$,
+and $f(\bar x)$ ranges over $\mathscr P$ as $f$ does, so \eqref{eq:sol-cone-radial} is
+\eqref{eq:sol-cone-stein} written in the coordinate $x$.
+\end{proof}
+
+\begin{remark}[Direct radial proof of \eqref{eq:sol-cone-radial}]
+\label{rem:sol-cone-radial}
+The first-column identity also follows from a one-dimensional integration by parts that
+makes the zero boundary flux visible.  For $x=s(1,u)$ and $f\in\mathscr P$,
+$\frac{\dd}{\dd s}f(s(1,u))=\inner{(1,u)}{\nabla f(s(1,u))}$, so
+$\inner{x}{\nabla f(x)}=s\,\frac{\dd}{\dd s}f(s(1,u))$.  Since
+$(s\gamma_\beta)'(s)=(\beta-s)\gamma_\beta(s)$ and $s\gamma_\beta(s)f(s(1,u))\to0$ as
+$s\downarrow0$ (as $s^\beta$) and as $s\to\infty$ (as $s^{\beta+p}e^{-s}$), for each fixed
+$u\in\operatorname{int}K$,
+\[
+  \int_0^\infty s\,\gamma_\beta(s)\,\frac{\dd}{\dd s}f(s(1,u))\dd s
+  =\int_0^\infty(s-\beta)\gamma_\beta(s)f(s(1,u))\dd s ,
+\]
+both integrals being absolutely convergent.  Integrating in $u$ against the uniform
+probability on $K$ and using Lemma~\ref{lem:sol-cone-structure}(a) gives
+\eqref{eq:sol-cone-radial}.  Geometrically, the field $x$ is tangent to the lateral boundary of
+the dilation-invariant cone $C_K$, and $\rho\abs x\to0$ at the apex and at infinity, so no
+boundary term appears even for test functions that do not vanish on $\partial C_K$; this is
+the weak zero-flux formulation of Theorem~\ref{thm:regular-moment-map-compact-target}.
+\end{remark}
+
+\subsection*{3. The linear sector}
+\label{subsec:sol-cone-linear}
+
+Let $\Omega=C_K$, $\eta=\mu$, and apply Lemma~\ref{lem:sol-cone-closable} with $M=\Sigma$
+(constant) and with $M=\tau$ (smooth and positive definite on $C_K$ by
+Theorem~\ref{thm:sol-cone-A}, with $\E\Tr\tau=\Tr\Sigma<\infty$).  This defines the closed
+covariance form $\calE_\Sigma$ with operator $\Aop_1$, and the closed Stein form
+$\calE_\tau$ with operator $\Aop=-L_\mu$.  Set
+\begin{equation}
+  \psi(x)=\tfrac12\,x^\top\Sigma^{-1}x,\qquad\text{so that}\qquad \nabla\psi=\Sigma^{-1}x,
+  \quad \Sigma\nabla\psi=x .
+  \label{eq:sol-cone-psi}
+\end{equation}
+
+\begin{lemma}[Domains]
+\label{lem:sol-cone-domains}
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+  \item Every polynomial $f$ belongs to $\Dom(\calE_\Sigma)$ and to $\Dom(\calE_\tau)$, with
+  form-gradient equal to the classical gradient $\nabla f$.
+  \item $\psi\in\Dom(\Aop_1)$ and $\Aop_1\psi=\bar x_1=x_1-\beta$.
+  \item $g(x)=x_1$ belongs to $\Dom(\Aop)$ and $\Aop g=\bar x_1$, i.e.\ $L_\mu g=-\bar x_1$;
+  $g\notin\ker\Aop$.
+  \item For every $f\in\Dom(\calE_\Sigma)$,
+  $\E[\bar x_1f]=\calE_\Sigma(\psi,f)=\E\inner{x}{\nabla f}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Let $f$ be a polynomial and $\chi_R$ as in Lemma~\ref{lem:sol-cone-stein}, so
+$\chi_Rf\in C_c^\infty(\R^n)\subset\mathscr C$.  Then $\chi_Rf\to f$ in $L^2(\mu)$ by dominated
+convergence ($\mu$ has all moments), and
+$\nabla(\chi_Rf)-\nabla f=(\chi_R-1)\nabla f+f\nabla\chi_R$.  For $M\in\{\Sigma,\tau\}$,
+\[
+  \E\inner{M(\nabla(\chi_Rf)-\nabla f)}{\nabla(\chi_Rf)-\nabla f}
+  \le2\,\E\bigl[(1-\chi_R)^2\inner{M\nabla f}{\nabla f}\bigr]
+   +\frac{2\norm{\nabla\chi}_\infty^2}{R^2}\,\E\bigl[f^2\,\Tr M\bigr],
+\]
+using $\inner{Mv}{v}\le\Tr M\,\abs v^2$.  Both expectations are finite by
+Lemma~\ref{lem:sol-cone-stein}(a) (for $M=\tau$) or because $\Sigma$ is constant, so the first
+term tends to $0$ by dominated convergence and the second is $O(R^{-2})$.  Hence
+$(\chi_Rf)$ is Cauchy in the form norm, $f$ lies in the closed domain, and its form-gradient
+is the limit $\nabla f$.
+
+(b) By (a), $\psi\in\Dom(\calE_\Sigma)$ with gradient $\Sigma^{-1}x$.  For $f\in\mathscr C\subset\mathscr P$,
+\eqref{eq:sol-cone-radial} gives
+$\calE_\Sigma(\psi,f)=\E\inner{\Sigma\nabla\psi}{\nabla f}=\E\inner x{\nabla f}=\E[\bar x_1f]$.
+Both sides are continuous in $f$ for the form norm (the left because $\psi\in\Dom(\calE_\Sigma)$,
+the right because $\bar x_1\in L^2(\mu)$), and $\mathscr C$ is dense in $\Dom(\calE_\Sigma)$ by
+construction, so the identity holds for all $f\in\Dom(\calE_\Sigma)$.  By
+Lemma~\ref{lem:sol-cone-closable} this says $\psi\in\Dom(\Aop_1)$ with $\Aop_1\psi=\bar x_1$.
+This also proves (d).
+
+(c) By (a), $g\in\Dom(\calE_\tau)$ with gradient $e_1$, and for $f\in\mathscr C$,
+$\calE_\tau(g,f)=\E\inner{\tau e_1}{\nabla f}=\E\inner x{\nabla f}=\E[\bar x_1f]$ by
+Theorem~\ref{thm:sol-cone-A}(iv) and \eqref{eq:sol-cone-radial}.  The same continuity and
+density argument gives $g\in\Dom(\Aop)$, $\Aop g=\bar x_1$.  Since $g$ is not constant it is
+not in $\ker\Aop$ (Lemma~\ref{lem:sol-cone-closable}).
+\end{proof}
+
+\begin{lemma}[Affine covariance of the canonical kernel]
+\label{lem:sol-cone-affine}
+Let $\eta$ be a probability measure on $\R^d$ with a moment potential
+$\phi\in C^\infty(\R^d)$, $D^2\phi\succ0$, $\nabla\phi$ a diffeomorphism onto an open
+set $\Omega$, and let $T$ be an invertible $d\times d$ matrix.  Then
+$\phi_T(y)=\phi(T^\top y)-\log\abs{\det T}$ is a moment potential of $T_\#\eta$ with the same
+regularity, $\nabla\phi_T$ is a diffeomorphism onto $T\Omega$, and the canonical kernels
+satisfy $\tau_{T_\#\eta}(Tx)=T\,\tau_\eta(x)\,T^\top$ for $x\in\Omega$.
+\end{lemma}
+
+\begin{proof}
+$\phi_T$ is smooth with $\nabla\phi_T(y)=T\nabla\phi(T^\top y)$ and
+$D^2\phi_T(y)=TD^2\phi(T^\top y)T^\top\succ0$; $\nabla\phi_T=T\circ\nabla\phi\circ T^\top$ is
+a diffeomorphism of $\R^d$ onto $T\Omega$.  If $Y_0\sim e^{-\phi(z)}\dd z$ then
+$W=(T^\top)^{-1}Y_0$ has density $e^{-\phi(T^\top y)}\abs{\det T}=e^{-\phi_T(y)}$, so
+$\int e^{-\phi_T}=1$, and $\nabla\phi_T(W)=T\nabla\phi(Y_0)\sim T_\#\eta$.  Thus $\phi_T$ is a
+moment potential of $T_\#\eta$.  For the kernel, $(\nabla\phi_T)^{-1}(Tx)=(T^\top)^{-1}(\nabla\phi)^{-1}(x)$,
+hence $\tau_{T_\#\eta}(Tx)=D^2\phi_T\bigl((T^\top)^{-1}(\nabla\phi)^{-1}(x)\bigr)
+=TD^2\phi\bigl((\nabla\phi)^{-1}(x)\bigr)T^\top=T\tau_\eta(x)T^\top$.  (If $T_\#\eta$ satisfies
+the hypotheses of Theorem~\ref{thm:sol-cone-cek} --- it does whenever $\eta$ does --- this is the
+canonical kernel of $T_\#\eta$.)
+\end{proof}
+
+\begin{theorem}[The linear sector; Proposition~\ref{prop:cone-linear-sector}]
+\label{thm:sol-cone-B}
+Let $\mu=\bar\mu_{K,\beta}$, with $\Sigma$ and $\tau$ as in Lemma~\ref{lem:sol-cone-structure}
+and Theorem~\ref{thm:sol-cone-A}, and $\bar x=x-\beta e_1$.
+\begin{enumerate}[label=(\roman*),leftmargin=2.8em]
+  \item The field $x=\tau e_1$ satisfies $\Div_\mu x=-\bar x_1$ pointwise on $C_K$, and the
+  weak zero-flux identity $\E\inner x{\nabla f}=\E[\bar x_1f]$ holds for every
+  $f\in\mathscr P(\R^n)$ and every $f\in\Dom(\calE_\Sigma)$.  It is a covariance gradient,
+  $x=\Sigma\nabla\psi$ with $\psi$ as in \eqref{eq:sol-cone-psi}, $\psi\in\Dom(\Aop_1)$ and
+  $\Aop_1\psi=\bar x_1$; in the decomposition of Proposition~\ref{prop:cmh-hodge} applied to
+  the field $u=x$ (with $h=\bar x_1$), the solenoidal part is $w=x-\Sigma\nabla\Aop_1^{-1}\bar x_1=0$.
+  Moreover
+  \begin{equation}
+    \sup_{f\in\Dom(\calE_\Sigma)\setminus\R}
+    \frac{\bigl(\E[\bar x_1f]\bigr)^2}{\E\inner{\Sigma\nabla f}{\nabla f}}
+    =\E\bigl[x^\top\Sigma^{-1}x\bigr]=\beta+n,
+    \label{eq:sol-cone-hminus1}
+  \end{equation}
+  and the supremum is attained at $f=\psi$.  The same value and attainment hold with the
+  supremum restricted to nonconstant $f\in\mathscr P(\R^n)$.
+  \item
+  \[
+    \frac{e_1^\top\,\E[\tau\Sigma^{-1}\tau]\,e_1}{e_1^\top\Sigma e_1}=1+\frac n\beta\le2,
+  \]
+  with equality if and only if $\beta=n$.  The function $g(x)=x_1$ lies in
+  $\Dom(\Aop)\setminus\ker\Aop$, and the CMH Rayleigh quotient \eqref{eq:cmh-constant} at
+  $g$ equals
+  \[
+    \frac{\E\inner{\tau\nabla g}{\Sigma^{-1}\tau\nabla g}}{\E(L_\mu g)^2}
+    =\frac{\beta+n}{\beta}=1+\frac n\beta .
+  \]
+  \item Let $Z=\Sigma^{-1/2}\bar x$ and $\tau_Z(Z)=\Sigma^{-1/2}\tau(\bar x)\Sigma^{-1/2}$, the
+  canonical kernel of the isotropic law of $Z$.  Then, with
+  $T_3(e_1)=\E[Z_1\,Z\otimes Z]$,
+  \[
+    T_3(e_1)=2\beta^{-1/2}\,\Id_n,\qquad
+    \tau_Ze_1=e_1+\beta^{-1/2}Z=e_1+\tfrac12T_3(e_1)Z\quad\text{identically},
+  \]
+  so $\norm{T_3(e_1)}_{\HS}^2=4n/\beta$, and the residual
+  $v_{e_1}:=\tau_Ze_1-e_1-\tfrac12T_3(e_1)Z$ vanishes identically for every base $K$ and every
+  $\beta\ge n$.
+\end{enumerate}
+In particular, for $\beta=n$: $e_1^\top\E[\tau\Sigma^{-1}\tau]e_1=2\,e_1^\top\Sigma e_1$,
+which is equality in \eqref{eq:gate-zero-sharp} in the direction $e_1$, and
+$\norm{T_3(e_1)}_{\HS}=2$.
+\end{theorem}
+
+\begin{proof}
+(i) On $C_K$, with $\rho$ the density of Lemma~\ref{lem:sol-cone-structure}(a),
+$\nabla\log\rho=\bigl((\beta-n)/x_1-1\bigr)e_1$ and $\Div x=n$, so
+\[
+  \Div_\mu x=\Div x+\inner{x}{\nabla\log\rho}=n+(\beta-n)-x_1=\beta-x_1=-\bar x_1 .
+\]
+The weak identity on $\mathscr P$ is \eqref{eq:sol-cone-radial}, and on $\Dom(\calE_\Sigma)$
+it is Lemma~\ref{lem:sol-cone-domains}(d).  That $x=\Sigma\nabla\psi$ is
+\eqref{eq:sol-cone-psi}; $\psi\in\Dom(\Aop_1)$ with $\Aop_1\psi=\bar x_1$ is
+Lemma~\ref{lem:sol-cone-domains}(b).  Since $\ker\Aop_1$ consists of the constants
+(Lemma~\ref{lem:sol-cone-closable}), $L^2_0(\mu)=(\ker\Aop_1)^\perp$ is the space of
+centered functions, $\bar x_1\in L^2_0(\mu)$, and $\Aop_1$ is injective on
+$\Dom(\Aop_1)\cap L^2_0(\mu)$; the unique centered solution of $\Aop_1\psi_0=\bar x_1$ is
+$\psi_0=\psi-\E\psi$, so $\Aop_1^{-1}\bar x_1=\psi-\E\psi$ and
+$w=x-\Sigma\nabla(\psi-\E\psi)=x-x=0$.
+
+For \eqref{eq:sol-cone-hminus1}: for $f\in\Dom(\calE_\Sigma)$, Lemma~\ref{lem:sol-cone-domains}(d)
+and the Cauchy--Schwarz inequality for the nonnegative form $\calE_\Sigma$ give
+\[
+  \bigl(\E[\bar x_1f]\bigr)^2=\calE_\Sigma(\psi,f)^2\le\calE_\Sigma(\psi)\,\calE_\Sigma(f),
+  \qquad
+  \calE_\Sigma(\psi)=\E\inner{\Sigma\nabla\psi}{\nabla\psi}=\E\bigl[x^\top\Sigma^{-1}x\bigr],
+\]
+and $\calE_\Sigma(f)>0$ for nonconstant $f$.  At $f=\psi$ the ratio equals
+$\calE_\Sigma(\psi)^2/\calE_\Sigma(\psi)=\calE_\Sigma(\psi)$.  The same argument applies verbatim
+on $\mathscr P$, using \eqref{eq:sol-cone-radial} and the pointwise Cauchy--Schwarz inequality
+$\inner{x}{\nabla f}=\inner{\Sigma^{-1/2}x}{\Sigma^{1/2}\nabla f}$; $\psi\in\mathscr P$.  For
+the value, by Lemma~\ref{lem:sol-cone-structure}(c),(d) and independence of $x_1$ and $u$,
+\begin{align*}
+  \E\bigl[x^\top\Sigma^{-1}x\bigr]
+  &=\E\Bigl[\frac{x_1^2}{\beta}+\frac{x_1^2\,u^\top\Cov(U)^{-1}u}{\beta(\beta+1)}\Bigr]
+  =\frac{\E x_1^2}{\beta}+\frac{\E x_1^2}{\beta(\beta+1)}\,\E\Tr\bigl(\Cov(U)^{-1}UU^\top\bigr)\\
+  &=(\beta+1)+\Tr\bigl(\Cov(U)^{-1}\Cov(U)\bigr)=(\beta+1)+m=\beta+n .
+\end{align*}
+
+(ii) Since $\tau$ is symmetric, $e_1^\top\tau\Sigma^{-1}\tau e_1=(\tau e_1)^\top\Sigma^{-1}(\tau e_1)
+=x^\top\Sigma^{-1}x$, a nonnegative random variable with expectation $\beta+n$ by (i); and
+$e_1^\top\Sigma e_1=\beta$.  Hence the ratio is $(\beta+n)/\beta=1+n/\beta$, which is $\le2$
+if and only if $n\le\beta$, with equality if and only if $\beta=n$.  For the Rayleigh quotient,
+Lemma~\ref{lem:sol-cone-domains}(c) gives $g\in\Dom(\Aop)\setminus\ker\Aop$ with form-gradient
+$\nabla g=e_1$ and $L_\mu g=-\Aop g=-\bar x_1$, so the numerator of \eqref{eq:cmh-constant} is
+$\E\inner{\tau e_1}{\Sigma^{-1}\tau e_1}=\beta+n$ and the denominator is
+$\E\bar x_1^2=\Var(x_1)=\beta$.
+
+(iii) By Lemma~\ref{lem:sol-cone-structure}(d) the law of $Z$ is isotropic, and by
+Lemma~\ref{lem:sol-cone-affine} with $T=\Sigma^{-1/2}$ its canonical kernel at $Z$ is
+$\Sigma^{-1/2}\tau(\bar x)\Sigma^{-1/2}$.  Using $\Sigma^{-1/2}e_1=\beta^{-1/2}e_1$,
+$\tau e_1=x=\bar x+\beta e_1$ and $\Sigma^{-1/2}\bar x=Z$,
+\[
+  \tau_Ze_1=\beta^{-1/2}\Sigma^{-1/2}\tau e_1
+  =\beta^{-1/2}\Sigma^{-1/2}(\bar x+\beta e_1)
+  =\beta^{-1/2}Z+\beta^{1/2}\cdot\beta^{-1/2}e_1=e_1+\beta^{-1/2}Z .
+\]
+Next, $Z_1=\bar x_1/\sqrt\beta=(S-\beta)/\sqrt\beta$ and
+$Z'=(\beta(\beta+1))^{-1/2}\Cov(U)^{-1/2}SU$.  By independence and
+Lemma~\ref{lem:sol-cone-structure}(c):
+\begin{align*}
+  \E[Z_1^3]&=\beta^{-3/2}\E(S-\beta)^3=2\beta^{-1/2},\\
+  \E[Z_1^2Z']&=\beta^{-1}(\beta(\beta+1))^{-1/2}\,\E[(S-\beta)^2S]\;\Cov(U)^{-1/2}\E U=0,\\
+  \E[Z_1Z'Z'^\top]&=\frac{\E[(S-\beta)S^2]}{\sqrt\beta\,\beta(\beta+1)}\,\Cov(U)^{-1/2}\E[UU^\top]\Cov(U)^{-1/2}
+  =\frac{2\beta(\beta+1)}{\sqrt\beta\,\beta(\beta+1)}\,\Id_m=2\beta^{-1/2}\Id_m .
+\end{align*}
+Hence $T_3(e_1)=\E[Z_1ZZ^\top]=2\beta^{-1/2}\Id_n$, $\norm{T_3(e_1)}_{\HS}^2=4\beta^{-1}n$,
+$\tfrac12T_3(e_1)Z=\beta^{-1/2}Z$, and the displayed identity for $\tau_Ze_1$ shows
+$v_{e_1}\equiv0$.
+
+The final sentence is (ii) and (iii) at $\beta=n$: $1+n/\beta=2$ and $4n/\beta=4$.
+\end{proof}
+
+\subsection*{4. The cube cone}
+\label{subsec:sol-cone-cube}
+
+\begin{lemma}[{The kernel of the uniform law on $[-1,1]$}]
+\label{lem:sol-cone-1d}
+The canonical Stein kernel of the uniform probability on $[-1,1]$ is
+$\tau_1(t)=\tfrac12(1-t^2)$, $t\in(-1,1)$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:sol-cone-base} in dimension $m=1$ with $K=[-1,1]$, a moment potential
+$\lambda_1$ is smooth, $\lambda_1''>0$, and $\lambda_1'$ is an increasing diffeomorphism of $\R$
+onto $(-1,1)$.  For bounded measurable $h$ on $(-1,1)$ the defining pushforward and the
+substitution $t=\lambda_1'(y)$, $\dd t=\lambda_1''(y)\dd y$, give
+\[
+  \int_\R h(\lambda_1'(y))e^{-\lambda_1(y)}\dd y=\int_{-1}^1h(t)\tfrac12\dd t
+  =\int_\R h(\lambda_1'(y))\tfrac12\lambda_1''(y)\dd y .
+\]
+Since $h\circ\lambda_1'$ ranges over all bounded measurable functions on $\R$, the continuous
+functions $e^{-\lambda_1}$ and $\tfrac12\lambda_1''$ coincide: $\lambda_1''=2e^{-\lambda_1}$
+(the one-dimensional case of \eqref{eq:MA}).  Consequently
+\[
+  \frac{\dd}{\dd y}\Bigl[(\lambda_1')^2+4e^{-\lambda_1}\Bigr]
+  =2\lambda_1'\bigl(\lambda_1''-2e^{-\lambda_1}\bigr)=0,
+\]
+so $(\lambda_1')^2+4e^{-\lambda_1}\equiv c$.  As $y\to+\infty$, $\lambda_1'(y)\to1$; moreover
+$\lambda_1'(y_0)>0$ for some $y_0$, so $\lambda_1(y)\ge\lambda_1(y_0)+\lambda_1'(y_0)(y-y_0)\to\infty$
+and $e^{-\lambda_1(y)}\to0$.  Thus $c=1$ and $2e^{-\lambda_1}=\tfrac12\bigl(1-(\lambda_1')^2\bigr)$.
+At $t=\lambda_1'(y)$ the kernel is $\tau_1(t)=\lambda_1''(y)=2e^{-\lambda_1(y)}=\tfrac12(1-t^2)$.
+\end{proof}
+
+This agrees with \eqref{eq:cmh-1d-stein}: for $\rho\equiv\tfrac12$ on $(-1,1)$,
+$-\rho(t)^{-1}\int_{-1}^tv\rho(v)\dd v=\tfrac12(1-t^2)$.
+
+\begin{lemma}[Product bases]
+\label{lem:sol-cone-product}
+For $K=[-1,1]^m$ the canonical kernel of the uniform probability on $K$ is
+$\tau_K(u)=\tfrac12\diag(1-u_1^2,\dots,1-u_m^2)$, and $\Cov(U)=\tfrac13\Id_m$.
+\end{lemma}
+
+\begin{proof}
+Let $\lambda_1$ be as in Lemma~\ref{lem:sol-cone-1d} and $\Lambda(y')=\sum_{j=1}^m\lambda_1(y_j)$.
+Then $\Lambda$ is smooth and strictly convex, $\int e^{-\Lambda}=\prod_j\int e^{-\lambda_1}=1$,
+$e^{-\Lambda}\dd y'$ is the product of $m$ copies of $e^{-\lambda_1}\dd y_j$, and
+$\nabla\Lambda(y')=(\lambda_1'(y_j))_j$ pushes it to the product of $m$ copies of the uniform
+probability on $[-1,1]$, i.e.\ to the uniform probability on $K$; and $\nabla\Lambda$ is a
+diffeomorphism onto $(-1,1)^m=\operatorname{int}K$.  So $\Lambda$ is a moment potential of
+the uniform law on $K$ with the regularity of \eqref{eq:sol-cone-kernel-def}, and by
+Theorem~\ref{thm:sol-cone-cek} it computes the canonical kernel:
+$D^2\Lambda=\diag(\lambda_1''(y_j))$ and $(\nabla\Lambda)^{-1}(u)=((\lambda_1')^{-1}(u_j))_j$,
+so $\tau_K(u)=\diag(\tau_1(u_j))=\tfrac12\diag(1-u_j^2)$.  Finally the coordinates of $U$ are
+i.i.d.\ uniform on $[-1,1]$ with $\E U_j^2=\int_{-1}^1t^2\tfrac12\dd t=\tfrac13$.
+\end{proof}
+
+\begin{theorem}[The cube cone; Corollary~\ref{cor:cube-cone-gate-zero}]
+\label{thm:sol-cone-C}
+Let $K=[-1,1]^{n-1}$, $n\ge2$, $\beta\ge n$, and $\mu=\bar\mu_{K,\beta}$.  Then
+$\tau_K(u)=\tfrac12\diag(1-u_j^2)$, $\E[\tau\Sigma^{-1}\tau]$ is finite, and the normalized
+gate matrix satisfies
+\begin{equation}
+  \Sigma^{-1/2}\,\E[\tau\Sigma^{-1}\tau]\,\Sigma^{-1/2}
+  =\Bigl(1+\frac n\beta\Bigr)\ \oplus\ G'\,\Id_{n-1},
+  \qquad
+  G'=\frac{6\beta^2+11\beta+5n+4}{5\beta(\beta+1)} .
+  \label{eq:sol-cone-cube-gate}
+\end{equation}
+Both eigenvalues are at most $2$: $1+n/\beta\le2$ with equality if and only if $\beta=n$, and
+$G'\le2$ with equality if and only if $n=\beta=2$.  Hence
+$\E[\tau\Sigma^{-1}\tau]\preceq2\Sigma$, which is \eqref{eq:gate-zero-sharp} for $\mu$, for
+every $n\ge2$ and $\beta\ge n$.  For $n=\beta=2$ the matrix \eqref{eq:sol-cone-cube-gate} is
+$2\,\Id_2$, and $\mu$ is the image of a product of two centered standard exponential laws
+under $\sqrt2$ times an orthogonal map; equivalently, in the orthonormal frame
+$(e_1\pm e_2)/\sqrt2$, $\mu$ is a product of two centered exponential laws.
+\end{theorem}
+
+\begin{proof}
+The kernel of the base is Lemma~\ref{lem:sol-cone-product}; write $D=\diag(1-u_j^2)$ and
+$B=uu^\top+\tfrac\beta2D$, so that by \eqref{eq:sol-cone-kernel}
+$\tau=x_1\begin{psmallmatrix}1&u^\top\\u&B\end{psmallmatrix}$.  Since $\Cov(U)=\tfrac13\Id_m$,
+Lemma~\ref{lem:sol-cone-structure}(d) gives $\Sigma=\beta\oplus\sigma^2\Id_m$ with
+$\sigma^2=\beta(\beta+1)/3$, and $\Sigma^{-1}=\beta^{-1}\oplus\sigma^{-2}\Id_m$.  Multiplying
+out,
+\[
+  \tau\Sigma^{-1}\tau
+  =x_1^2\begin{pmatrix}
+    \dfrac1\beta+\dfrac{\abs u^2}{\sigma^2}
+    & \dfrac{u^\top}{\beta}+\dfrac{u^\top B}{\sigma^2}\\[8pt]
+    \dfrac u\beta+\dfrac{Bu}{\sigma^2}
+    & \dfrac{uu^\top}{\beta}+\dfrac{B^2}{\sigma^2}
+  \end{pmatrix}.
+\]
+All entries are bounded by a constant times $x_1^2$ (the base kernel is bounded on $K$), so
+$\E[\tau\Sigma^{-1}\tau]$ is finite.  Under $\mu$, $x_1=S$ and $u=U$ are independent,
+$\E x_1^2=\beta(\beta+1)$, and the coordinates $u_j$ are i.i.d.\ uniform on $[-1,1]$, with
+\[
+  \E u_j^2=\tfrac13,\qquad \E u_j^4=\tfrac15,\qquad \E u_j^6=\tfrac17,\qquad
+  \E\bigl[u_j^{2a+1}\,h(u_1,\dots,u_{j-1},u_{j+1},\dots,u_m)\,k(u_j^2)\bigr]=0
+\]
+for bounded $h,k$ and $a\ge0$, by the symmetry $u_j\mapsto-u_j$ of the law.
+
+\emph{Top-left entry.}
+$\E x_1^2\bigl(\tfrac1\beta+\tfrac{m/3}{\sigma^2}\bigr)=(\beta+1)+\beta(\beta+1)\cdot\tfrac m3\cdot\tfrac3{\beta(\beta+1)}
+=\beta+1+m=\beta+n$; dividing by $\Sigma_{11}=\beta$ gives $1+n/\beta$, in agreement with
+Theorem~\ref{thm:sol-cone-B}(ii).
+
+\emph{Off-diagonal block.}
+$\E u=0$ and $\E[u^\top B]=\E\bigl[\abs u^2u^\top+\tfrac\beta2u^\top D\bigr]$ has $j$th entry
+$\E[\abs u^2u_j]+\tfrac\beta2\E[u_j(1-u_j^2)]=0$, each term being odd in $u_j$.  So the block
+vanishes.
+
+\emph{Lower block.}
+$\E[uu^\top]=\tfrac13\Id_m$.  Expanding,
+$B^2=\abs u^2uu^\top+\tfrac\beta2\bigl(uu^\top D+Duu^\top\bigr)+\tfrac{\beta^2}4D^2$, whose
+$(j,k)$ entry is
+\[
+  \abs u^2u_ju_k+\tfrac\beta2u_ju_k\bigl(2-u_j^2-u_k^2\bigr)+\tfrac{\beta^2}4(1-u_j^2)^2\delta_{jk}.
+\]
+For $j\ne k$ every term is odd in $u_j$, so its expectation vanishes.  For $j=k$,
+\[
+  \gamma:=\E\bigl[(B^2)_{jj}\bigr]
+  =\E\bigl[\abs u^2u_j^2\bigr]+\beta\,\E\bigl[u_j^2(1-u_j^2)\bigr]+\tfrac{\beta^2}4\E\bigl[(1-u_j^2)^2\bigr]
+  =\Bigl(\tfrac15+\tfrac{m-1}9\Bigr)+\tfrac{2\beta}{15}+\tfrac{2\beta^2}{15},
+\]
+using $\E[\abs u^2u_j^2]=\E u_j^4+\sum_{k\ne j}\E u_k^2\E u_j^2$, $\E[u_j^2-u_j^4]=\tfrac13-\tfrac15$
+and $\E[1-2u_j^2+u_j^4]=1-\tfrac23+\tfrac15=\tfrac8{15}$.  Hence $\E B^2=\gamma\Id_m$ with
+\[
+  9\gamma=\tfrac95+(m-1)+\tfrac{6\beta}5+\tfrac{6\beta^2}5
+  =\frac{6\beta^2+6\beta+5m+4}5=\frac{6\beta^2+6\beta+5n-1}5 .
+\]
+The lower block of $\E[\tau\Sigma^{-1}\tau]$ is therefore
+$\beta(\beta+1)\bigl[\tfrac1{3\beta}+\tfrac{\gamma}{\sigma^2}\bigr]\Id_m
+=\bigl[\tfrac{\beta+1}3+3\gamma\bigr]\Id_m$, and after normalization by $\sigma^{-2}$ on both
+sides,
+\[
+  G'=\frac3{\beta(\beta+1)}\Bigl[\frac{\beta+1}3+3\gamma\Bigr]
+  =\frac1\beta+\frac{9\gamma}{\beta(\beta+1)}
+  =\frac{5(\beta+1)+6\beta^2+6\beta+5n-1}{5\beta(\beta+1)}
+  =\frac{6\beta^2+11\beta+5n+4}{5\beta(\beta+1)} .
+\]
+Since $\Sigma^{-1/2}=\beta^{-1/2}\oplus\sigma^{-1}\Id_m$ and the off-diagonal block vanishes,
+this proves \eqref{eq:sol-cone-cube-gate}.
+
+\emph{The inequalities.}
+Since $\beta>0$, $1+n/\beta\le2\iff n/\beta\le1\iff n\le\beta$, which holds by hypothesis,
+with equality if and only if $\beta=n$.  Next,
+\[
+  G'\le2
+  \iff 6\beta^2+11\beta+5n+4\le10\beta^2+10\beta
+  \iff 4\beta^2-\beta-5n-4\ge0 .
+\]
+Using $n\le\beta$ and then $\beta\ge n\ge2$,
+\[
+  4\beta^2-\beta-5n-4\ \ge\ 4\beta^2-6\beta-4\ =\ 2(2\beta+1)(\beta-2)\ \ge\ 0,
+\]
+so $G'\le2$.  The first inequality is strict unless $n=\beta$ and the second is strict
+unless $\beta=2$; hence $G'=2$ if and only if $n=\beta=2$.  At $n=\beta=2$ both eigenvalues
+equal $2$ and the matrix is $2\,\Id_2$.  Since $\Sigma^{-1/2}\E[\tau\Sigma^{-1}\tau]\Sigma^{-1/2}\preceq2\Id_n$
+is equivalent to $\E[\tau\Sigma^{-1}\tau]\preceq2\Sigma$, every cube cone satisfies
+\eqref{eq:gate-zero-sharp}.
+
+\emph{The product structure at $n=\beta=2$.}
+Here $K=[-1,1]$, $C_K=\{x_1>\abs{x_2}\}$ and $\rho(x)=\tfrac12e^{-x_1}\one_{C_K}$ by
+Lemma~\ref{lem:sol-cone-structure}(a).  The linear map $A(c_1,c_2)=(c_1+c_2,c_1-c_2)$ has
+$\abs{\det A}=2$, maps $(0,\infty)^2$ onto $C_K$, and satisfies $e^{-c_1-c_2}=e^{-x_1}$; so
+if $c_1,c_2$ are i.i.d.\ standard exponential, $A(c_1,c_2)$ has density
+$e^{-x_1}/\abs{\det A}=\rho(x)$ on $C_K$, i.e.\ $A_\#(\mathrm{Exp}(1)^{\otimes2})=\mu_{K,2}$,
+and since $A(1,1)=(2,0)=\beta e_1$, $\bar\mu_{K,2}=A_\#\bigl((\mathrm{Exp}(1)-1)^{\otimes2}\bigr)$.
+As $A=\sqrt2\,R$ with $R$ the orthogonal map with columns $(e_1\pm e_2)/\sqrt2$ (a
+reflection, $\det R=-1$), in the orthonormal frame $(e_1\pm e_2)/\sqrt2$ the coordinates of
+$\bar x$ are $\sqrt2(c_1-1)$, $\sqrt2(c_2-1)$: independent centered exponential laws.  (Since
+the i.i.d.\ product law is invariant under the coordinate swap $\sigma(c_1,c_2)=(c_2,c_1)$,
+one may also write $\bar\mu_{K,2}=(A\sigma)_\#\bigl((\mathrm{Exp}(1)-1)^{\otimes2}\bigr)$ with
+$A\sigma=\sqrt2\,R\sigma$ and $R\sigma$ a rotation.)
+\end{proof}
+
+\subsection*{5. Remarks: hypotheses, conventions, and what is not claimed}
+\label{subsec:sol-cone-remarks}
+
+\begin{remark}[Hypotheses actually used]
+\label{rem:sol-cone-hypotheses}
+(1) $\beta\ge n$ is used only for log-concavity (Lemma~\ref{lem:sol-cone-structure}(b)) and for
+the inequalities $1+n/\beta\le2$ and $G'\le2$; every identity holds for all $\beta>0$.
+(2) The barycenter condition on $K$ is used for $\E U=0$ (centering, the block-diagonal
+$\Sigma$, the vanishing odd moments) and to place the uniform law on $K$ in the hypotheses of
+Theorem~\ref{thm:regular-moment-map-compact-target} and Theorem~\ref{thm:sol-cone-cek}.
+(3) From Theorem~\ref{thm:regular-moment-map-compact-target} only the base facts of
+Lemma~\ref{lem:sol-cone-base} are used; the Stein identity for the cone itself is proved here
+(Lemma~\ref{lem:sol-cone-stein}), since the cone is not a compact target.
+(4) Theorem~\ref{thm:sol-cone-cek} (uniqueness up to translation among essentially-continuous
+potentials, the class in which ``moment potential'' is defined in
+\S\ref{subsec:sol-cone-conventions}) is used to identify the constructed potentials ---
+$\varphi$, the rescaled base potential, the product potential of the cube, and $\phi_T$, all
+finite and therefore in that class --- with \emph{the} moment potential, and thereby the
+constructed kernels with the canonical ones.  Without it, every statement remains true with
+``the moment potential'' read as ``the moment potential $\varphi$ of \eqref{eq:sol-cone-phi}''.
+The restriction to essentially-continuous potentials is not cosmetic: uniqueness fails among
+all convex $\psi$ with $\int e^{-\psi}=1$ and $(\nabla\psi)_\#(e^{-\psi}\dd y)=\eta$.  For
+$\eta=\mathrm{Unif}[-1,1]$ and $c>1$ put $T_c=\tfrac2{\sqrt c}\operatorname{artanh}(1/\sqrt c)$
+and $\psi_c(y)=\log\tfrac4c+2\log\cosh(\tfrac{\sqrt c}2y)$ on $[-T_c,T_c]$, $\psi_c=+\infty$
+outside.  Then $\psi_c$ is convex and lower semi-continuous, $\psi_c'=\sqrt c\tanh(\tfrac{\sqrt c}2y)$
+increases from $-1$ to $1$ on $[-T_c,T_c]$, $\psi_c''=\tfrac c2\cosh^{-2}(\tfrac{\sqrt c}2y)=2e^{-\psi_c}$,
+so $\int e^{-\psi_c}=\tfrac12[\psi_c']_{-T_c}^{T_c}=1$ and the pushforward of $e^{-\psi_c}\dd y$
+under $\psi_c'$ has density $e^{-\psi_c}/\psi_c''=\tfrac12$ on $(-1,1)$; but $\psi_c$ is
+discontinuous at $\pm T_c$ (finite there, $+\infty$ beyond), hence not essentially
+continuous, and it is not a translate of the finite potential of Lemma~\ref{lem:sol-cone-1d}.
+\end{remark}
+
+\begin{remark}[Conventions on domains]
+\label{rem:sol-cone-conventions}
+The closed forms $\calE_\Sigma$, $\calE_\tau$ and their operators $\Aop_1$, $\Aop$ are the
+closures from the core $\mathscr C=\R+C_c^\infty(\R^n)$ restricted to the open cone, which is
+the no-flux (Neumann-type) reading of \S\ref{subsec:cmh-conventions}, the same core used in
+the proof of Theorem~\ref{thm:cmh-implies-affine-poincare}, and the one under which the Stein
+identity holds for test functions not vanishing on $\partial C_K$.  Under this convention
+Lemma~\ref{lem:sol-cone-domains} proves $x_1\in\Dom(\Aop)$, so the phrase ``the CMH Rayleigh
+quotient at the linear test function $g=x_1$'' in Proposition~\ref{prop:cone-linear-sector}(ii)
+is a statement about an admissible test function of Definition~\ref{def:cmh}, not merely a
+formal evaluation.  If the closed form were instead generated from $C_c^\infty(C_K-\beta e_1)$
+(a Dirichlet-type reading), the value of the quotient at $g=x_1$ would be unchanged but the
+membership $g\in\Dom(\Aop)$ would have to be re-examined; the dossier does not address that
+reading.
+\end{remark}
+
+\begin{remark}[What is proved about the Hodge decomposition]
+\label{rem:sol-cone-hodge}
+Theorem~\ref{thm:sol-cone-B}(i) verifies the hypotheses of Proposition~\ref{prop:cmh-hodge}
+for $g=x_1$ --- $g\in\Dom(\Aop)$ and $u=\tau\nabla g=x\in L^2(\mu;\Sigma^{-1})$ since
+$\E x^\top\Sigma^{-1}x=\beta+n<\infty$ --- and computes the objects of that proposition directly:
+$h=\Aop g=\bar x_1$, $\Aop_1^{-1}h=\psi-\E\psi$, $w=0$.  The proposition itself is not used;
+the identity $\E\inner u{\Sigma^{-1}u}=\E\inner{\Sigma\nabla\psi}{\nabla\psi}$ it would yield
+is here the trivial consequence of $u=\Sigma\nabla\psi$.
+\end{remark}
+
+\begin{remark}[What is proved about the third-moment decomposition]
+\label{rem:sol-cone-third}
+Theorem~\ref{thm:sol-cone-B}(iii) proves the pointwise identity
+$\tau_Ze_1=e_1+\tfrac12T_3(e_1)Z$ directly.  Lemma~\ref{lem:linear-sector-third-moment} is not
+invoked and its hypothesis $\E_\nu\norm{D^2\varphi}_{\HS}^2<\infty$ is not verified here for a
+general base $K$ (it is immediate for the cube, where $\tau_K$ is bounded, by
+Lemma~\ref{lem:sol-cone-stein}(a)).  The statement ``$v_{e_1}=0$'' is understood as: the
+residual $\tau_Ze_1-e_1-\tfrac12T_3(e_1)Z$, which is the quantity that lemma calls $v_{e_1}$,
+vanishes identically.  Likewise, for a general base only the $(1,1)$ entry of
+$\E[\tau\Sigma^{-1}\tau]$ is shown finite; finiteness of the whole matrix requires
+$\E\norm{\tau_K(U)}_{\HS}^2<\infty$ and is not needed for Proposition~\ref{prop:cone-linear-sector}.
+\end{remark}
+
+\begin{remark}[Steps flagged for the reviewer]
+\label{rem:sol-cone-open}
+No step of the argument is left open.  Two items are flagged for verification rather than
+proved here.
+(a) Theorem~\ref{thm:sol-cone-cek} is cited as Theorem~2 of the arXiv text
+\texttt{1304.0630v1} of \cite{CorderoErausquinKlartag2015MomentMeasures}, whose statement and
+Definition~2 were read; only the theorem number in the journal version (J.~Funct.\ Anal.\ 268
+(2015)) has not been checked against the journal text, and should be confirmed before the
+citation is lifted into the manuscript with a journal-numbered reference.
+(b) In the manuscript prose after Definition~\ref{def:exponential-cone} the cone with a square
+base is said not to be an affine image of a product of one-dimensional laws; this dossier
+neither uses nor proves that sentence.
+\end{remark}
+
+\paragraph{Obstructions respected.}
+None of the three nodes carries a \texttt{bounded\_by} fence.  The statements are exact
+computations on a specific family and assert no universal bound; in particular they do not
+claim \eqref{eq:gate-zero-sharp} beyond the cube cones and the axis direction of a general
+cone, and they say nothing about $\CMH$ itself.
+
+% No \printbibliography here (matches modules/*.tex): main.tex prints the single shared
+% bibliography. Standalone, \cite shows "[?]" and \ref shows "??" --- expected.
+\end{document}

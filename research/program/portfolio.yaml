@@ -132,15 +132,18 @@ approaches:
     family: fam:mm-cmh
     objective: >-
       Prove the anisotropic source-retention inequality that would bound the linear-test quotient
-      through the exact isotropic-coordinate matrices.
+      through the exact isotropic-coordinate matrices, working from the weak column equation of
+      lem:cmh-linear-spectral-resolution without assuming its strong operator-domain form, and
+      supplying the integrated corrector or nonlocal coercivity that matrix polarization alone
+      cannot.
     parent: ap:cmh-recovery-envelope
-    state: blocked
-    blocker: lem:cmh-linear-spectral-resolution
-    reopen_if: >-
-      That node is independently certified, or an integrated corrector or nonlocal coercivity
-      replaces matrix polarization, which alone has no pointwise Loewner promotion.
+    state: queued
+    related:
+      - to: ap:cmh-gate-zero
+        relation: overlaps
     checkpoints:
       - research/explorations/2026-08-30-kls-route-prober-cmh-anisotropic-bootstrap-w4c01.md
+      - research/explorations/2026-09-06-researcher-clsr-repair-w5p03.md
 
   - id: ap:cmh-uniform-approximants
     family: fam:mm-cmh
@@ -167,19 +170,37 @@ approaches:
   - id: ap:cmh-solenoidal-perturbation
     family: fam:mm-cmh
     objective: >-
-      Compute the exact second variation through the Hodge split at an admissible perturbation of
-      the saturating one-sided-exponential product.
+      Compute the exact second variation through the Hodge split at an admissible target-side
+      perturbation of the saturating one-sided-exponential product, aimed at the radial Gamma
+      factor rather than at the base of an exponential cone.
     state: queued
+    related:
+      - to: ap:cmh-gate-zero
+        relation: overlaps
 
   - id: ap:cmh-gate-zero
     family: fam:mm-cmh
     objective: >-
-      Decide the necessary linear moment-map inequality by an independently checked analytic
-      argument or a genuine moment-map counterexample.
-    state: queued
+      Decide the necessary linear moment-map inequality, first in its sharp form
+      conj:gate-zero-sharp and then at the CMH constant conj:gate-zero, by an independently
+      checked analytic argument or a genuine moment-map counterexample, using the certified
+      third-moment decomposition of the linear sector and the exact exponential-cone battery as
+      the equality set any argument must be tight on.
+    state: active
     related:
       - to: ap:eldan-trace-upgrade
         relation: overlaps
+      - to: ap:cmh-anisotropic-bootstrap
+        relation: overlaps
+      - to: ap:cmh-solenoidal-perturbation
+        relation: overlaps
+    checkpoints:
+      - research/explorations/2026-09-06-researcher-cone-lift-w5p01.md
+      - research/explorations/2026-09-06-researcher-cone-lift-repair-w5p04.md
+      - research/explorations/2026-09-06-researcher-third-moment-w5p02.md
+      - research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md
+      - research/explorations/2026-09-06-literature-scout-cone-lift-w5l01.md
+      - research/explorations/2026-09-06-synthesizer-kls-wave-five-w5y01.md
 
   # --- conditional-fiber frames ---------------------------------------------------------
   - id: ap:fiber-frame-construction
@@ -192,14 +213,11 @@ approaches:
   - id: ap:fiber-simplex-dual
     family: fam:conditional-fiber
     objective: >-
-      Refute the all-frame gate with an exact fixed-degree uniform-simplex dual certificate whose
-      objective tends to zero.
+      Refute the all-frame gate with an exact uniform-simplex dual certificate of polynomial
+      degree at least three whose objective tends to zero, the certified degree-two floors of
+      lem:fiber-root-degree-two having ruled out every degree-two refuter.
     parent: ap:fiber-frame-construction
-    state: blocked
-    blocker: lem:fiber-root-degree-two
-    reopen_if: >-
-      That node is independently certified, or a certificate of degree at least three is
-      constructed; the exact degree-two floors rule out any degree-two refuter.
+    state: queued
     checkpoints:
       - research/explorations/2026-08-30-prover-fiber-root-degree-two-w4p04.md
 

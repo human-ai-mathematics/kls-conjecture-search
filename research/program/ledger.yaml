@@ -1190,11 +1190,15 @@ nodes:
 
   - id: lem:cmh-linear-spectral-resolution
     kind: lemma
-    status: open
+    status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'For a regular isotropic compact-target moment map with source potential psi, Stein generator A_op = -L in source coordinates, and columns Ha = grad(partial_a psi): the u_b = partial_b psi are centered orthonormal eigenfunctions of A_op at its Brascamp-Lieb spectral gap 1; the columns satisfy (1-A_op)(Ha)=(A+Q)a with (A+Q)a orthogonal to every u_b and E[A+Q]=I; and with the induced decomposition Ha = a + sum_b M_ab u_b + v one has a^T N a = 1+|M_a|^2+|v|^2, a^T D a = |M_a|^2+<v,A_op v>, a^T R a = 1 - <v,(A_op-1)v>. Consequently R <= I with equality iff the column fluctuation is spectrally pure at the gap; (AB)_{rho,beta} is equivalent to <v,(A_op-1)v> + rho(|M_a|^2+|v|^2) <= 1+beta-rho for all unit a; R >= N - nI holds unconditionally; and R >= D holds for all regular finite products of one-dimensional laws.'
-    depends_on: ['thm:regular-moment-map-compact-target', 'def:cmh', 'prop:cmh-bochner']
+    summary: 'For a regular isotropic compact-target moment map with source potential psi, Stein generator A_op = -L in source coordinates, and columns Ha = grad(partial_a psi): the u_b = partial_b psi are centered orthonormal eigenfunctions of A_op at its Brascamp-Lieb spectral gap 1; the columns lie in the form domain and satisfy the weak column equation E(f,Ha) = <f,Ha> - <f,(A+Q)a> for bounded smooth finite-energy f, with (A+Q)a in L^1 orthogonal to every u_b and E[A+Q]=I; and with the induced decomposition Ha = a + sum_b M_ab u_b + v one has a^T N a = 1+|M_a|^2+|v|^2, a^T D a = |M_a|^2+<v,A_op v>, a^T R a = 1 - <v,(A_op-1)v>, where <v,A_op v> is the closed-form value. Consequently R <= I with equality iff the column fluctuation is spectrally pure at the gap; (AB)_{rho,beta} is equivalent to <v,(A_op-1)v> + rho(|M_a|^2+|v|^2) <= 1+beta-rho for all unit a; R >= N - nI holds unconditionally; and R >= D holds for all regular finite products of one-dimensional laws.'
+    depends_on: ['thm:regular-moment-map-compact-target', 'def:cmh']
+    proofs:
+      - artifact: solutions/lem-cmh-linear-spectral-resolution.tex
+        mode: agent
+        review: research/reviews/2026-09-06-lem-cmh-linear-spectral-resolution-proof-review.md
 
   - id: thm:cmh-1d
     kind: theorem
@@ -1357,11 +1361,15 @@ nodes:
 
   - id: lem:fiber-root-degree-two
     kind: lemma
-    status: open
+    status: proved
     provenance: internal
     file: modules/kls/45-conditional-fiber-frame.tex
     summary: For every m>=3, on the degree-<=2 quotient V_{m,2} of L^2 of the isotropic uniform simplex modulo constants, the A_{m-1} root-frame pair form K(f,f)=(12/(m^2(m+1))) sum_{i<j} E[Var_{ij}(f)/(P_i+P_j)^2] and G=Var satisfy lambda_min(K,G)=(m+2)(m+3)/(5m^2), attained exactly on the radial line R[|X|^2-(m-1)]. Granting the certified root-pencil identification, every degree-two dual certificate in the all-frame min-max framework has objective at least (m+2)(m+3)/(5m^2) > 1/5, so any fixed-degree polynomial dual refuter requires degree at least three and Lambda_{m,2} >= (m+2)(m+3)/(5m^2). No upper bound on Lambda_{m,2}, no degree-three statement, and no full-L^2 claim.
     depends_on: ['lem:conditional-fiber-form', 'prop:conditional-fiber-root-obstruction']
+    proofs:
+      - artifact: solutions/lem-fiber-root-degree-two.tex
+        mode: agent
+        review: research/reviews/2026-09-06-lem-fiber-root-degree-two-proof-review.md
 
   - id: prop:sasada-negative-exchange
     kind: proposition
@@ -1371,3 +1379,77 @@ nodes:
     summary: For every symmetric-Dirichlet shape a>0, every negative pair-rate exponent s<0, and every m>=2, the complete-graph heat-bath form with pair rate (eta_i+eta_j)^s has spectral gap at most 2^(-s)m^s in the exchange normalization. In particular, for the flat simplex and s=-2, the A_(m-1) root conditional-fiber form has gap at most 48/[m(m+1)].
     import_class: published
     references: [Sasada2015EnergyExchange]
+
+  - id: conj:gate-zero-sharp
+    kind: conjecture
+    status: open
+    provenance: internal
+    file: modules/kls/41-cmh-normalization.tex
+    summary: 'Sharp gate zero, the operator form of the Chen-Klartag trace bound: E[H Sigma^{-1} H] <= 2 Sigma in the Loewner order for every centered log-concave moment measure, equivalently E H^2 <= 2 Id in isotropic position. Attained in every direction by products of centered exponentials and in the axis direction by every exponential cone measure with beta = n.'
+    refines: ['conj:gate-zero']
+
+  - id: lem:linear-sector-third-moment
+    kind: lemma
+    status: proved
+    provenance: internal
+    file: modules/kls/41-cmh-normalization.tex
+    summary: 'For an isotropic log-concave mu that is the moment measure of a C^2 convex phi with E_nu ||D^2 phi||_HS^2 finite, and canonical Stein kernel tau, each column decomposes orthogonally in L^2(mu;R^n) as tau a = a + (1/2) T_3(a) X + v_a with E v_a = 0 and E[v_a (x) X] = 0, where T_3(a) = E[<X,a> X (x) X]; hence E|tau a|^2 = |a|^2 + (1/4)||T_3(a)||_HS^2 + E|v_a|^2. Equivalently E_nu[d_ij phi d_k phi] = (1/2) E_mu[X_i X_j X_k]; when phi is C^3 with D^3 phi in L^1(nu) this identifies the gap-mode coefficient tensor E_nu[d_ijk phi] of lem:cmh-linear-spectral-resolution with half the third-moment tensor.'
+    proofs:
+      - artifact: solutions/lem-linear-sector-third-moment.tex
+        mode: agent
+        review: research/reviews/2026-09-06-lem-linear-sector-third-moment-proof-review.md
+
+  - id: cor:gate-zero-third-moment
+    kind: corollary
+    status: proved
+    provenance: internal
+    file: modules/kls/41-cmh-normalization.tex
+    summary: 'Under lem:linear-sector-third-moment, for every unit a: ||T_3(a)||_HS^2 <= 4(a^T E[tau^2] a - 1) <= 4(lambda_max(E tau^2) - 1). So E tau^2 <= c Id on a class forces every directional third moment there to be at most 2 sqrt(c-1): gate zero gives 2 sqrt 3, sharp gate zero gives the sharp 2; and any isotropic law in the class with a directional third moment above 2 sqrt 3 refutes gate zero.'
+    depends_on: ['lem:linear-sector-third-moment']
+    proofs:
+      - artifact: solutions/lem-linear-sector-third-moment.tex
+        mode: agent
+        review: research/reviews/2026-09-06-lem-linear-sector-third-moment-proof-review.md
+
+  - id: def:exponential-cone
+    kind: definition
+    status: defined
+    provenance: internal
+    file: modules/kls/42-cmh-exact-cases.tex
+    summary: 'For n >= 2, a convex body K in R^{n-1} with barycenter 0, the open cone C_K = {(x_1,x''): x_1 > 0, x''/x_1 in int K}, and beta >= n, the exponential cone measure mu_{K,beta} has density proportional to x_1^{beta-n} e^{-x_1} on C_K, and bar mu_{K,beta} is its centering (the law of X - beta e_1). It is log-concave, X = S(1,U) with S ~ Gamma(beta,1) and U ~ Unif(K) independent, E X = beta e_1, and Cov X = beta e_1 e_1^T (+) beta(beta+1) Cov(U).'
+
+  - id: prop:cone-moment-map
+    kind: proposition
+    status: proved
+    provenance: internal
+    file: modules/kls/42-cmh-exact-cases.tex
+    summary: 'Cone lift of the moment map: if lambda is the moment potential of Unif(beta K), the moment potential of bar mu_{K,beta} is phi(y_1,y'') = exp(y_1 + lambda(y'')/beta) - beta y_1 + log Gamma(beta), grad phi is a diffeomorphism of R^n onto C_K - beta e_1, and the canonical Stein kernel at x - beta e_1, x = (x_1, x_1 u), is x_1 [[1, u^T],[u, u u^T + beta tau_K(u)]] with tau_K the canonical Stein kernel of Unif(K). In particular tau e_1 = x, the position vector.'
+    depends_on: ['thm:regular-moment-map-compact-target']
+    proofs:
+      - artifact: solutions/prop-cone-moment-map.tex
+        mode: agent
+        review: research/reviews/2026-09-06-prop-cone-moment-map-proof-review.md
+
+  - id: prop:cone-linear-sector
+    kind: proposition
+    status: proved
+    provenance: internal
+    file: modules/kls/42-cmh-exact-cases.tex
+    summary: 'For mu = bar mu_{K,beta}: (i) the field x = tau e_1 has Div_mu x = -bar x_1 with zero boundary flux and x = Sigma grad psi with psi = x^T Sigma^{-1} x / 2, so the first Stein column has no solenoidal part and the affine H^{-1} norm of bar x_1 is E[x^T Sigma^{-1} x] = beta + n, attained at psi; (ii) the normalized gate matrix in the axis direction equals 1 + n/beta <= 2, with equality iff beta = n, and this is the CMH Rayleigh quotient at g = x_1; (iii) in isotropic coordinates T_3(e_1) = 2 beta^{-1/2} Id, tau_Z e_1 = e_1 + (1/2) T_3(e_1) Z, so ||T_3(e_1)||_HS^2 = 4n/beta and the high-mode term v_{e_1} of lem:linear-sector-third-moment vanishes for every base and every beta >= n. Every exponential cone with beta = n saturates conj:gate-zero-sharp in its axis direction and attains ||T_3(e_1)||_HS = 2.'
+    depends_on: ['prop:cone-moment-map']
+    proofs:
+      - artifact: solutions/prop-cone-moment-map.tex
+        mode: agent
+        review: research/reviews/2026-09-06-prop-cone-moment-map-proof-review.md
+
+  - id: cor:cube-cone-gate-zero
+    kind: corollary
+    status: proved
+    provenance: internal
+    file: modules/kls/42-cmh-exact-cases.tex
+    summary: 'For K = [-1,1]^{n-1}, tau_K(u) = (1/2) diag(1 - u_j^2) and the normalized gate matrix of bar mu_{K,beta} is (1 + n/beta) (+) ((6 beta^2 + 11 beta + 5n + 4)/(5 beta (beta+1))) Id_{n-1}. Both eigenvalues are at most 2 for all n >= 2 and beta >= n, so every cube cone satisfies conj:gate-zero-sharp; equality holds in the axis direction iff beta = n and in the transverse directions only for n = beta = 2, the product of two centered exponentials.'
+    depends_on: ['prop:cone-moment-map']
+    proofs:
+      - artifact: solutions/prop-cone-moment-map.tex
+        mode: agent
+        review: research/reviews/2026-09-06-prop-cone-moment-map-proof-review.md

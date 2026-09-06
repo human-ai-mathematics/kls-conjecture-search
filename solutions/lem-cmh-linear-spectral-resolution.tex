@@ -16,7 +16,8 @@
 % refines : lem:cmh-linear-spectral-resolution   (modules/kls/41-cmh-normalization.tex)
 % bounded_by : none
 % author : prover w4p03 (Claude agent, session 2026-08-30)
-% date : 2026-08-30
+% author : /w5/researcher-clsr-repair (Claude agent, run w5p03, repair round 2026-09-06)
+% date : 2026-09-06
 % ============================================================================
 %
 % Reader's notes below, deliberately not in field shape so that nothing here is
@@ -45,8 +46,9 @@ $\mathsf N,\mathsf D,\mathsf R$}
 This dossier proves the candidate Lemma~\ref{lem:cmh-linear-spectral-resolution} of
 Section~\ref{sec:cmh-normalization}: on one fixed regular isotropic compact-target moment map,
 the three linear-sector gate matrices resolve exactly along the spectrum of the Stein operator,
-with the columns of the moment Hessian solving an eigen-type equation forced by the
-differentiated Monge--Amp\`ere structure.  It also proves the unconditional
+with the columns of the moment Hessian solving, in the weak (closed-form) sense stated in the
+manuscript lemma, an eigen-type equation forced by the differentiated Monge--Amp\`ere
+structure.  It also proves the unconditional
 dimension-dependent retention $\mathsf R\succeq\mathsf N-n\Id$ (hence
 $Q_{\mathrm{lin}}\le n+1$) and the sharp retention $\mathsf R\succeq\mathsf D$ on regular
 finite products of one-dimensional laws.
@@ -96,8 +98,11 @@ $\R^n$ and $\overline P$ is compact).
 
 \begin{remark}[Imported pointwise Hessian bound]
 \label{rem:sol-clsr-klartag-import}
-For a centered log-concave target supported in the compact convex $P$, Theorem~1.1 of
-\cite{Klartag2013MomentMeasures} gives the pointwise bound
+Theorem~1.1 of \cite{Klartag2013MomentMeasures} gives $\Delta\psi\le2R(P)^2$ on $\R^n$ for a
+centered log-concave target on a bounded convex $P$ whose potential $V$ is smooth with all
+derivatives bounded on $P$ (his conditions~(1), satisfied here because $V\in C^\infty(\R^n)$
+and $\overline P$ is compact); since $H\succ0$, this yields $H\preceq(\Tr H)\Id\preceq2R(P)^2\Id$,
+i.e.\ the pointwise bound
 \begin{equation}
   0\prec H(y)\preceq 2R(P)^2\,\Id\qquad\text{for all }y\in\R^n.
   \label{eq:sol-clsr-Hbound}
@@ -165,8 +170,8 @@ Lemma~\ref{lem:cmh-linear-spectral-resolution}]
 \label{thm:sol-clsr-main}
 Let the map be as in Definition~\ref{def:sol-clsr-class}, with the import
 \eqref{eq:sol-clsr-Hbound}.  For a unit vector $a\in\R^n$ put
-$u_a=\inner a{\nabla\psi}$, so that $\nabla u_a=Ha$ (componentwise $(Ha)_i=H_{ai}a$-contracted;
-for coordinate vectors, $u_b=\partial_b\psi$).  Then:
+$u_a=\inner a{\nabla\psi}$, so that the column is $Ha=\nabla\inner a{\nabla\psi}=\nabla u_a$
+(componentwise $(Ha)_i=H_{ik}a_k$; for coordinate vectors, $u_b=\partial_b\psi$).  Then:
 \begin{enumerate}[label=(\alph*),leftmargin=2.2em]
 \item\label{it:sol-clsr-a} \textup{(Symmetric form and pullback.)}  Pointwise on $\R^n$,
 \[
@@ -185,23 +190,29 @@ $u_1,\dots,u_n$ are bounded, centered, orthonormal in $L^2(\eta)$, lie in $\Dom(
 satisfy $\Aop u_b=u_b$.  Brascamp--Lieb gives $\inner f{\Aop f}\ge\norm f_2^2$ for every
 centered $f\in\Dom(\calE)$; hence the spectrum of $\Aop$ on $\one^\perp$ is contained in
 $[1,\infty)$ and the spectral gap of $\Aop$ equals $1$ exactly, attained at each $u_b$.
-\item\label{it:sol-clsr-c} \textup{(Column equation, normalization, orthogonality.)}
+\item\label{it:sol-clsr-c} \textup{(Weak column equation, normalization, orthogonality.)}
 $A\succeq0$ and $Q\succeq0$ pointwise, $\calL H+H=A+Q$ pointwise, the entries of $A+Q$ are in
 $L^1(\eta)$ with
 \[
   \int(A+Q)\,\dd\eta=\Id ,
 \]
-each column component $(Ha)_i=H_{ai}$ (contracted with $a$) lies in $\Dom(\calE)$, and the
-column equation holds in the weak form
+so in particular $(A+Q)a\in L^1(\eta;\R^n)$.  The columns $Ha=\nabla\inner a{\nabla\psi}$
+lie in the form domain $\Dom(\calE)$, componentwise, and satisfy the column equation in the
+weak form
 \begin{equation}
   \calE\bigl(f,(Ha)_i\bigr)
   =\bigl\langle f,(Ha)_i\bigr\rangle_{L^2(\eta)}
    -\bigl\langle f,\bigl((A+Q)a\bigr)_i\bigr\rangle_{L^2(\eta),L^1}
   \label{eq:sol-clsr-weak-column}
 \end{equation}
-for every $f$ that is smooth, bounded, and of finite energy (in particular for every core
-element and for every $u_b$).  Consequently $(A+Q)a$ is orthogonal to every $u_b$:
-$\int u_b\,\bigl((A+Q)a\bigr)_i\,\dd\eta=0$ for all $i,b$.
+for every bounded smooth finite-energy $f$, i.e.\ every $f\in C^\infty(\R^n)\cap L^\infty$
+with $\int\inner{H^{-1}\nabla f}{\nabla f}\dd\eta<\infty$ (the class $\mathfrak B$ of
+Lemma~\ref{lem:sol-clsr-form-membership}, every member of which lies in $\Dom(\calE)$; in
+particular every core element and every $u_b$).
+Consequently $(A+Q)a$ is orthogonal to every $u_b$:
+$\int u_b\,\bigl((A+Q)a\bigr)_i\,\dd\eta=0$ for all $i,b$.  This weak form is exactly the
+column equation asserted by Lemma~\ref{lem:cmh-linear-spectral-resolution}; no membership
+$(Ha)_i\in\Dom(\Aop)$ is asserted (Remark~\ref{rem:sol-clsr-weak-vs-strong}).
 \item\label{it:sol-clsr-d} \textup{(Resolution.)}  Decompose, componentwise and orthogonally in
 $L^2(\eta)$,
 \[
@@ -222,8 +233,9 @@ $\Aop$-pairings read as quadratic-form values,
   a^\top\mathsf Ra=1-\inner v{(\Aop-1)v},\;}
   \label{eq:sol-clsr-resolution}
 \end{equation}
-where $\inner v{\Aop v}:=\sum_i\calE(v_i)$ and
-$T_a:=\inner v{(\Aop-1)v}=\sum_i[\calE(v_i)-\norm{v_i}_2^2]\ge0$.  In particular
+where $\inner v{\Aop v}:=\sum_i\calE(v_i)$ is the closed-form value (written $\calE(v,v)$ in
+Lemma~\ref{lem:cmh-linear-spectral-resolution}; no membership $v_i\in\Dom(\Aop)$ is asserted)
+and $T_a:=\inner v{(\Aop-1)v}=\sum_i[\calE(v_i)-\norm{v_i}_2^2]\ge0$.  In particular
 $\mathsf N-\Id\preceq\mathsf D$.
 \item\label{it:sol-clsr-e} \textup{(Corollaries C1--C5.)}
 \begin{itemize}[leftmargin=1.6em]
@@ -274,12 +286,17 @@ the sharp constants on every such product.
 
 \begin{remark}[Weak versus strong column equation]
 \label{rem:sol-clsr-weak-vs-strong}
-The manuscript writes the column equation as $(1-\Aop)(Ha)=(A+Q)a$.  This dossier proves it in
-the weak form \eqref{eq:sol-clsr-weak-column}, which is what every downstream identity uses.
-The strong (operator-domain) form --- $(Ha)_i\in\Dom(\Aop)$ with
-$\Aop(Ha)_i=(Ha)_i-((A+Q)a)_i$ in $L^2(\eta)$ --- is \emph{equivalent} to the additional
-integrability $\Tr Q\in L^2(\eta)$, which this dossier does \emph{not} establish on the whole
-compact-target class; see Remark~\ref{rem:sol-clsr-gap} for the precise open gap.  It does hold
+Lemma~\ref{lem:cmh-linear-spectral-resolution} states the column equation in the weak form:
+the columns $Ha$ lie in $\Dom(\calE)$ and satisfy \eqref{eq:sol-clsr-weak-column} for every
+bounded smooth finite-energy $f$, with $(A+Q)a\in L^1(\eta)$.  That is exactly what
+part~\ref{it:sol-clsr-c} proves, and it is what every downstream identity of this dossier
+uses (the resolution of part~\ref{it:sol-clsr-d} tests \eqref{eq:sol-clsr-weak-column}
+against $f=(Ha)_i$ and $f=u_b$, both in $\mathfrak B$).  The strong (operator-domain) form
+--- $(Ha)_i\in\Dom(\Aop)$ with $\Aop(Ha)_i=(Ha)_i-((A+Q)a)_i$ in $L^2(\eta)$, i.e.\ the
+operator identity $(1-\Aop)(Ha)=(A+Q)a$ --- is \emph{not} part of the lemma and is not
+claimed here.  It is a separate open question on the compact-target class: by
+Remark~\ref{rem:sol-clsr-gap} it is \emph{equivalent} to the additional integrability
+$\Tr Q\in L^2(\eta)$, which this dossier does not establish on the whole class.  It does hold
 for the products of part~\ref{it:sol-clsr-g}, where $\Tr Q$ is bounded
 (Remark~\ref{rem:sol-clsr-product-strong}).
 \end{remark}
@@ -420,7 +437,7 @@ uniformly, since $\nabla\psi\in P$.
 \label{lem:sol-clsr-ibp}
 (i) For $u,\phi\in C^\infty(\R^n)$ with $\phi$ compactly supported,
 $\int\phi\,\calL u\,\dd\eta=-\int\inner{H^{-1}\nabla\phi}{\nabla u}\,\dd\eta$.
-(ii) For $X\in C^\infty(\R)$ with $X'$ supported in a compact subset of $\R$,
+(ii) For $X\in C^\infty(\R)$ with $X'$ vanishing on $[t,\infty)$ for some $t\in\R$,
 $\int\calL\bigl(X(\psi)\bigr)\dd\eta=0$, where
 $\calL(X(\psi))=X''(\psi)\,\Gamma+X'(\psi)\bigl(n-\inner{\nabla V\circ\nabla\psi}{\nabla\psi}\bigr)$
 and $\Gamma:=\inner{H^{-1}\nabla\psi}{\nabla\psi}$.
@@ -432,7 +449,8 @@ $\phi\,e^{-\psi}H^{-1}\nabla u$, using Lemma~\ref{lem:sol-clsr-symmetric-form}. 
 $\partial_i X(\psi)=X'\psi_i$ and $\partial_{ij}X(\psi)=X''\psi_i\psi_j+X'H_{ij}$ give the
 displayed formula for $\calL(X(\psi))$; the field
 $e^{-\psi}H^{-1}X'(\psi)\nabla\psi$ is smooth with support in the compact set
-$\{\psi\le\sup\operatorname{supp}X'\}$ (Lemma~\ref{lem:sol-clsr-coercive}), so its divergence
+$\{\psi\le t\}$ (Lemma~\ref{lem:sol-clsr-coercive}; no lower bound on
+$\operatorname{supp}X'$ is needed because $\psi$ is bounded below), so its divergence
 integrates to zero.
 \end{proof}
 
@@ -735,9 +753,11 @@ $\Aop(Ha)=(Ha)-(A+Q)a$ in $L^2(\eta;\R^n)$; (b) $(A+Q)a\in L^2(\eta;\R^n)$.  Sin
 $\abs{(A+Q)a}\le\Tr(A+Q)$ pointwise and $\Tr A\le n\,c_{V''}(2R^2)^2$ is bounded, (b) holds
 whenever $\Tr Q\in L^2(\eta)$.  This dossier proves $\Tr Q\in L^1(\eta)$
 (Lemma~\ref{lem:sol-clsr-normalization}) but \emph{not} $\Tr Q\in L^2(\eta)$ on the general
-compact-target class; the manuscript display $(1-\Aop)(Ha)=(A+Q)a$ is therefore certified here
-in the weak form \eqref{eq:sol-clsr-weak-column} only.  Every statement of
-Theorem~\ref{thm:sol-clsr-main} downstream uses only the weak form.  On the products of
+compact-target class.  Lemma~\ref{lem:cmh-linear-spectral-resolution} asserts only the weak
+form \eqref{eq:sol-clsr-weak-column}, which is proved (Lemma~\ref{lem:sol-clsr-form-membership});
+the strong form (a) is therefore \emph{not} a claim of the lemma, and whether it holds on the
+whole class is a separate open question, equivalent to $\Tr Q\in L^2(\eta)$.  Every statement
+of Theorem~\ref{thm:sol-clsr-main} downstream uses only the weak form.  On the products of
 part~\ref{it:sol-clsr-g} the strong form does hold
 (Remark~\ref{rem:sol-clsr-product-strong}).
 \end{remark}
@@ -1079,19 +1099,23 @@ Remark~\ref{rem:sol-clsr-product-strong}.
 (4) Essential uniqueness of the moment potential
 \cite{CorderoErausquinKlartag2015MomentMeasures} (part~\ref{it:sol-clsr-g} only).
 (5) Definition~\ref{def:cmh} operator conventions (form core, closability, self-adjoint
-$\Aop$); \texttt{prop:cmh-bochner} is a listed ledger dependency but no identity of this
-dossier consumes it.
+$\Aop$); \texttt{prop:cmh-bochner} is a listed ledger dependency (\texttt{depends\_on} of
+\texttt{lem:cmh-linear-spectral-resolution}) but no identity of this dossier consumes it,
+so under \texttt{CLAUDE.md} constraint~8 it should be dropped from \texttt{depends\_on} when
+the \texttt{proofs[]} record is wired; the repair handoff proposes that delta.
 No other external input is used; in particular no unreviewed preprint import is load-bearing
 (the trace bound $\Tr\mathsf N\le2n$ is re-derived, not imported).
 
 \paragraph{Flagged gaps.}
-Exactly one step of the manuscript statement is certified in a weaker form than its literal
-display: the column equation holds weakly \eqref{eq:sol-clsr-weak-column}; its strong
-operator-domain form is equivalent to $\Tr Q\in L^2(\eta)$, open on the general class
-(Remark~\ref{rem:sol-clsr-gap}), proved on products
-(Remark~\ref{rem:sol-clsr-product-strong}).  No other step is conditional: given the
-published imports above, Theorem~\ref{thm:sol-clsr-main} as stated is unconditional on the
-class of Definition~\ref{def:sol-clsr-class}.
+None.  The statement of Lemma~\ref{lem:cmh-linear-spectral-resolution} now agrees with
+Theorem~\ref{thm:sol-clsr-main}: the column equation is stated and proved in the weak form
+\eqref{eq:sol-clsr-weak-column} (columns in $\Dom(\calE)$, $(A+Q)a\in L^1(\eta)$, bounded
+smooth finite-energy test functions), and $\inner v{\Aop v}$ is the closed-form value.  The
+strong operator-domain form $(1-\Aop)(Ha)=(A+Q)a$ is not asserted by the lemma; it is
+equivalent to $\Tr Q\in L^2(\eta)$, open on the general class (Remark~\ref{rem:sol-clsr-gap})
+and proved on products (Remark~\ref{rem:sol-clsr-product-strong}).  No step is conditional:
+given the published imports above, Theorem~\ref{thm:sol-clsr-main} as stated is
+unconditional on the class of Definition~\ref{def:sol-clsr-class}.
 
 \paragraph{Obstructions respected.}
 The ledger node carries no \texttt{bounded\_by} edge; the six obstruction nodes of
