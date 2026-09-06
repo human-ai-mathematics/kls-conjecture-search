@@ -2,7 +2,7 @@
 name: synthesizer
 description: Converges parallel work and owns the search portfolio. Curates approach families, deduplicates routes, declares saturation with a reopening condition, holds the merge barriers where fanning out is forbidden, and keeps durable memory honest. Singleton — never run two at once.
 tools: Read, Grep, Glob, Bash, Edit, Write
-model: opus
+model: fable
 effort: high
 color: purple
 ---

@@ -12,7 +12,7 @@
 # A variant is a named tier, not a scattered per-role override, so that a
 # checkpoint can cite the configuration it was produced under.
 
-active: survey
+active: campaign
 
 # A tier is one resource level, specified per client, because the two clients
 # reach it differently: Claude differentiates by model, Codex by effort on a

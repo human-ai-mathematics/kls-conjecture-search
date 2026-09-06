@@ -2,7 +2,7 @@
 name: researcher
 description: Attacks one target through one assignment lens — prove, refute, mine, or construct. Writes proof dossiers, hunts counterexamples, mines existing proofs for what they really buy, and records durable checkpoints. It never reviews, certifies, or grades its own work.
 tools: Read, Grep, Glob, Bash, Edit, Write
-model: opus
+model: fable
 effort: high
 color: blue
 ---
