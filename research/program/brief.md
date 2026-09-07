@@ -66,7 +66,7 @@ currently instantiates it, so the list stays checkable:
 |---|---|
 | any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
 | an implication whose antecedent is open | `prop:spectral-sufficiency`, `q:cmh-approximation`, `cor:cmh-recovery-sequence-suffices`, `lem:mm-stopped-window-source`, `prop:mm-window-occupation` — all `proved` with a non-empty `assumes` |
-| a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
+| a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
 | a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so CMH(4) would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
 
 A node that is `proved` with a non-empty `assumes` is progress on a *route*, never on the target
@@ -110,7 +110,16 @@ the reasoning a new route needs before it runs anything.
 6. **Conventions that must be stated or the estimate is not a statement.** $0\le\chi\le1$ and
    $\chi'\ge0$ for any retained cutoff; affine-support degeneration in the approximation limit;
    the regular class boundary, with non-smooth laws admissible only as boundary calibrations.
-7. **The five failure lenses a refutation attempt should sweep**, one per attempt and blind to the
+7. **Exponential cone measures** (`def:exponential-cone`, `prop:cone-linear-sector`). The law
+   with density $\propto x_1^{\beta-n}e^{-x_1}$ on the cone over a centered convex body $K$ has
+   an explicit moment map (`prop:cone-moment-map`) and, for every base $K$, saturates the sharp
+   linear-sector inequality of `conj:gate-zero-sharp` in its axis direction exactly when
+   $\beta=n$, with the directional third moment attaining $\lVert T_3(e_1)\rVert_{\mathrm{HS}}=2$.
+   They are the non-product equality cases of the sharp gate. Any gate-zero or CMH argument
+   must survive them; any sharp-constant claim must be tight on them. The cube-cone kernel is
+   fully explicit, and the first exact sweep found no violation and no CMH(4) pressure from
+   the base.
+8. **The five failure lenses a refutation attempt should sweep**, one per attempt and blind to the
    others: remote curvature loss and saturating likelihood (tail); separated scales and
    operator-versus-trace gaps (anisotropy); polynomial tails where Poincaré survives but stronger
    inequalities fail (heavy tail); metastable wells and symmetry-versus-physical barriers
@@ -144,6 +153,12 @@ the reasoning a new route needs before it runs anything.
    residue, and not the Haar commutator of `q:mm-square-root-commutator`.
 9. **An exact number is still a candidate.** Exact Loewner verdicts emitted by a `numerics` target
    refute nothing until a reviewed dossier says so.
+10. **The sharp linear sector is not the CMH constant.** Gate zero at constant $4$ is what
+    $\mathrm{CMH}(4)$ needs; the natural sharp form is `conj:gate-zero-sharp` at constant $2$,
+    the operator form of the Chen–Klartag trace bound, and by `cor:gate-zero-third-moment` it
+    already contains the sharp directional third-moment bound $\kappa_n\le2$ that the literature
+    proves only at $2\sqrt2$. A proof of the sharp form is therefore at least as hard as a sharp
+    third-moment estimate, and refuting it leaves $\mathrm{CMH}(4)$ untouched.
 
 ## Initial families and their reopening criteria
 

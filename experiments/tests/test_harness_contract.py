@@ -14,7 +14,7 @@ from numerics.targets import REGISTRY
 def test_registry_has_explicit_metadata_and_standard_profiles():
     assert set(REGISTRY) == {
         "kls", "loc-engine", "kls-align", "cmh-gate-zero",
-        "kls-screen", "fiber-frame-dual", "cmh-ab",
+        "kls-screen", "fiber-frame-dual", "cmh-ab", "cmh-cone",
     }
     assert "kls-loc" not in REGISTRY
     for target, spec in REGISTRY.items():

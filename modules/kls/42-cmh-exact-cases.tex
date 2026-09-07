@@ -1,10 +1,12 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Route C, exact cases: one dimension, products, and the log-concave Dirichlet family}
+\section{Route C, exact cases: one dimension, products, the log-concave Dirichlet family, and
+exponential cones}
 \label{sec:cmh-exact-cases}
 
 Section~\ref{sec:cmh-normalization} fixed the CMH estimate and proved that it dominates the
-affine Poincar\'e constant. This section computes it exactly in the three classes where it is
+affine Poincar\'e constant. This section computes it --- or, in the fourth class, its linear
+sector --- exactly, in the four classes where it is
 tractable. Two of them --- the line and products --- are the expected calibrations, and they
 already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is
 possible. The third is the first genuinely nonproduct family for which the route has a theorem
@@ -13,11 +15,25 @@ at all: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$
 variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the
 log-concavity hypothesis is consumed in the final scalar angular minimization.
 
+The fourth class is solvable in a weaker but more pointed sense. The exponential cones of
+\S\ref{subsec:cmh-cones} attach a Gamma radial variable to an arbitrary centered base, and
+their moment map is explicit in terms of the base's own
+(Proposition~\ref{prop:cone-moment-map}); unlike the first three classes they are not compactly
+supported and, for a general base, not affine images of products. What is computed exactly on
+them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so
+every cone with $\beta=n$ saturates sharp gate zero
+(Conjecture~\ref{conj:gate-zero-sharp}) in its axis direction
+(Proposition~\ref{prop:cone-linear-sector}), and over a cube base the entire gate matrix is a
+closed form bounded by $2$ (Corollary~\ref{cor:cube-cone-gate-zero}). They are the first
+non-product equality set the sharp linear sector has, which is what makes them a constraint on
+any argument for it.
+
 The section closes at the exact product endpoint: centered one-sided exponentials saturate
 $\mathrm{CMH}(4)$ with \emph{zero} slack. Whether a log-concave perturbation raises the full CMH
 Rayleigh quotient is a separate, open second-variation problem; changing its solenoidal term
 alone is not decisive (Corollary~\ref{rem:cmh-saturation-risk},
-Question~\ref{q:cmh-solenoidal-perturbation}).
+Question~\ref{q:cmh-solenoidal-perturbation}). The cone family bears on where to look for such a
+perturbation, and \S\ref{subsec:cmh-cones} records what the first exact sweep of it found.
 
 \subsection{The line}
 \label{subsec:cmh-1d}
@@ -356,6 +372,136 @@ simplex is therefore the same one-dimensional exponential boundary mechanism tha
 constant in Theorem~\ref{thm:cmh-1d}. Corollary~\ref{cor:cmh-dirichlet-surplus} says the
 interior of the family is strictly safer.
 \end{remark}
+
+\subsection{Exponential cones: a second solvable non-product family}
+\label{subsec:cmh-cones}
+
+The Dirichlet family is solvable because the simplex lifts to independent Gamma variables. A
+lift in the opposite direction --- attach a Gamma radial variable to a fixed base --- produces
+measures on cones whose moment map is explicit in terms of the moment map of the base, and on
+which the linear sector of Route~C is computed exactly. Unlike products and Dirichlet laws these
+measures are not compactly supported, and for a general base they are not invertible affine
+images of products.
+
+\begin{definition}[Exponential cone measures]
+\label{def:exponential-cone}\klsstatus{def:exponential-cone}
+Let $n\ge2$, let $K\subset\R^{n-1}$ be a convex body with barycenter at the origin, let
+\[
+  C_K=\bigl\{(x_1,x')\in\R\times\R^{n-1}:\ x_1>0,\ x'/x_1\in\operatorname{int}K\bigr\}
+\]
+be the open cone over $K$, and let $\beta\ge n$. The \emph{exponential cone measure}
+$\mu_{K,\beta}$ is the probability measure on $\R^n$ with density proportional to
+$x_1^{\beta-n}e^{-x_1}\one_{C_K}(x)$, and $\bar\mu_{K,\beta}$ is its centering, the law of
+$X-\beta e_1$ for $X\sim\mu_{K,\beta}$.
+\end{definition}
+
+The measure $\mu_{K,\beta}$ is log-concave because $\beta\ge n$, and $X\sim\mu_{K,\beta}$ has
+the representation $X=S\,(1,U)$ with $S\sim\GammaLaw(\beta,1)$ and $U$ uniform on $K$
+independent. Hence $\E X=\beta e_1$ and
+\begin{equation}
+  \Sigma=\Cov(X)=\beta\,e_1e_1^\top\oplus\beta(\beta+1)\Cov(U).
+  \label{eq:cone-covariance}
+\end{equation}
+For $\beta=n$ the density is $e^{-x_1}$ on the cone; that case is the cone construction of
+Lemma~4.2 of \cite{ChenKlartag2026SharpThinShell}, whose conical integration formula they
+attribute to \cite[Lem.~2.1]{Klartag2018IsotropicMahler}, and the general family $\beta\ge n$
+and its moment map are not treated there. When $K$ is a simplex and $\beta=n$ this
+is an affine image of a product of centered exponentials; for a square base it is not an
+invertible affine image of any product of one-dimensional laws, since its support has four
+pairwise non-parallel facets.
+
+\begin{proposition}[Cone lift of the moment map]
+\label{prop:cone-moment-map}\klsstatus{prop:cone-moment-map}
+Let $\lambda$ be the moment potential of the uniform probability on $\beta K$, so that
+$\lambda$ is smooth and strictly convex on $\R^{n-1}$ and $\nabla\lambda$ is a diffeomorphism
+onto $\beta\operatorname{int}K$ by Theorem~\ref{thm:regular-moment-map-compact-target}. Then
+the moment potential of $\bar\mu_{K,\beta}$ is
+\begin{equation}
+  \varphi(y_1,y')=\exp\bigl(y_1+\lambda(y')/\beta\bigr)-\beta y_1+\log\Gamma(\beta),
+  \label{eq:cone-moment-potential}
+\end{equation}
+$\nabla\varphi$ is a diffeomorphism of $\R^n$ onto $C_K-\beta e_1$, and the canonical Stein
+kernel of $\bar\mu_{K,\beta}$ at the point $x-\beta e_1$, $x=(x_1,x_1u)\in C_K$, is
+\begin{equation}
+  \tau(x-\beta e_1)=x_1
+  \begin{pmatrix}1&u^\top\\ u&uu^\top+\beta\,\tau_K(u)\end{pmatrix},
+  \label{eq:cone-stein-kernel}
+\end{equation}
+where $\tau_K$ is the canonical Stein kernel of the uniform probability on $K$. In particular
+the first column is the position vector itself, $\tau(x-\beta e_1)\,e_1=x$.
+\end{proposition}
+
+\begin{proposition}[The linear sector of an exponential cone]
+\label{prop:cone-linear-sector}\klsstatus{prop:cone-linear-sector}
+Let $\mu=\bar\mu_{K,\beta}$, with $\Sigma$ and $\tau$ as in \eqref{eq:cone-covariance} and
+\eqref{eq:cone-stein-kernel}, and write $\bar x=x-\beta e_1$ for the centered coordinate.
+\begin{enumerate}[label=(\roman*),leftmargin=2.8em]
+  \item The field $x=\tau e_1$ satisfies $\Div_\mu x=-\bar x_1$ with zero boundary flux, and
+  $x=\Sigma\nabla\psi$ for $\psi=\tfrac12\,x^\top\Sigma^{-1}x$. Hence the first Stein column
+  is a covariance gradient with no solenoidal part in the sense of
+  Proposition~\ref{prop:cmh-hodge}, and
+  \[
+    \sup_{f}\frac{\bigl(\E_\mu[\bar x_1f]\bigr)^2}{\E_\mu\inner{\Sigma\nabla f}{\nabla f}}
+    =\E_\mu\bigl[x^\top\Sigma^{-1}x\bigr]=\beta+n,
+  \]
+  the supremum over $f$ of finite covariance energy being attained at $f=\psi$.
+  \item The gate matrix is exact in the axis direction:
+  \[
+    \frac{e_1^\top\,\E_\mu[\tau\Sigma^{-1}\tau]\,e_1}{e_1^\top\Sigma\,e_1}
+    =1+\frac n\beta\ \le\ 2,
+  \]
+  with equality if and only if $\beta=n$; this is also the value of the CMH Rayleigh quotient
+  \eqref{eq:cmh-constant} at the linear test function $g=x_1$.
+  \item In isotropic coordinates $Z=\Sigma^{-1/2}\bar x$, with kernel
+  $\tau_Z=\Sigma^{-1/2}\tau\Sigma^{-1/2}$, the axis column is exactly its gap-mode projection:
+  $T_3(e_1)=\E[Z_1\,Z\otimes Z]=2\beta^{-1/2}\,\Id$ and
+  $\tau_Ze_1=e_1+\tfrac12T_3(e_1)Z$. Hence $\norm{T_3(e_1)}_{\HS}^2=4n/\beta$ and the
+  high-mode term of Lemma~\ref{lem:linear-sector-third-moment} vanishes, $v_{e_1}=0$, for every
+  base $K$ and every $\beta\ge n$.
+\end{enumerate}
+In particular every exponential cone measure with $\beta=n$ saturates the sharp gate-zero
+inequality \eqref{eq:gate-zero-sharp} in its axis direction and attains
+$\norm{T_3(e_1)}_{\HS}=2$.
+\end{proposition}
+
+At $\beta=n$, part~(iii) is the third-moment computation of Lemma~4.2 of
+\cite{ChenKlartag2026SharpThinShell}, which gives $T(Y)_{ijk}=2\delta_{ij}/\sqrt k$,
+$T(Y)_{ikk}=0$ and $T(Y)_{kkk}=2/\sqrt k$ with $k=\beta$; parts~(i)--(ii) and the general
+$\beta$ are new here.
+Proposition~\ref{prop:cone-linear-sector} gives a family of equality cases of
+Conjecture~\ref{conj:gate-zero-sharp} that are not products, and it gives them for every base:
+the axis direction of a cone sees only the Gamma radial law, which is why the value $1+n/\beta$
+does not depend on $K$. The transverse block does depend on $K$, through the base kernel
+$\tau_K$; when the base is a cube it is explicit.
+
+\begin{corollary}[The cube cone, exactly]
+\label{cor:cube-cone-gate-zero}\klsstatus{cor:cube-cone-gate-zero}
+For $K=[-1,1]^{n-1}$ the base kernel is $\tau_K(u)=\tfrac12\operatorname{diag}(1-u_j^2)$, and
+the normalized gate matrix $\Sigma^{-1/2}\,\E[\tau\Sigma^{-1}\tau]\,\Sigma^{-1/2}$ of
+$\bar\mu_{K,\beta}$ equals
+\[
+  \Bigl(1+\frac n\beta\Bigr)\ \oplus\ \frac{6\beta^2+11\beta+5n+4}{5\beta(\beta+1)}\,\Id_{n-1}.
+\]
+Both eigenvalues are at most $2$ for all $n\ge2$ and $\beta\ge n$: every cube cone satisfies
+\eqref{eq:gate-zero-sharp}. Equality holds in the axis direction exactly when $\beta=n$, and
+in the transverse directions only for $n=\beta=2$, where the matrix is $2\,\Id_2$ and the
+measure is a product of two centered exponentials.
+\end{corollary}
+
+The cube cones are the first non-product family in this document on which the sharp linear
+sector is saturated while every object entering $\CMH$ --- the kernel, the generator, and all
+moments --- is a rational function of independent Gamma and uniform variables. They are
+therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of
+Corollary~\ref{rem:cmh-saturation-risk}: the perturbation that
+Question~\ref{q:cmh-solenoidal-perturbation} could not realise inside the log-concave class is
+realised here by the base, and any Galerkin quotient above $4$ on a cube cone would be a
+refutation candidate for $\mathrm{CMH}(4)$, subject to the certification channel of
+\texttt{solutions/README.md}. The first exact sweep of this family, recorded in
+\texttt{research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md}, is directional
+evidence in the other direction: on cube cones the polynomial Galerkin quotients sit strictly
+below the exponential-product values at equal degree, so a non-product base appears to dilute
+the one-dimensional exponential mechanism rather than add to it, and the pressure on
+$\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor.
 
 \subsection{The saturation risk and the decisive test}
 \label{subsec:cmh-saturation}

@@ -43,15 +43,23 @@
   Hodge content is identified, separating an affine channel from a solenoidal excess
   (Proposition~\ref{prop:cmh-hodge}); and it is evaluated \emph{exactly} on the line, on
   products, and on every log-concave Dirichlet law (Section~\ref{sec:cmh-exact-cases}). That
-  last is a genuine theorem about a nontrivial family, not a consistency check.
+  last is a genuine theorem about a nontrivial family, not a consistency check. The linear
+  sector is now resolved separately and exactly: it equals a directional third moment plus a
+  named high-mode remainder (Lemma~\ref{lem:linear-sector-third-moment},
+  Corollary~\ref{cor:gate-zero-third-moment}), and the exponential cones of
+  \S\ref{subsec:cmh-cones} give it an explicit non-product equality set with an explicit moment
+  map (Propositions~\ref{prop:cone-moment-map}--\ref{prop:cone-linear-sector}).
 
   \item[5. Exact bottleneck.] The route splits, and the split is the point. A
   \emph{construction} layer: \texttt{q:mm-invariant-lift}, deriving the target-flat
   Schur--Piola multiplier lift invariantly, and \texttt{q:mm-square-root-commutator},
   controlling the full Haar sum of $[N^{1/2},K_M]$ errors without double-spending the positive
-  reservoir. A \emph{falsification} layer: gate zero (Conjecture~\ref{conj:gate-zero}) and the
-  solenoidal perturbation test \texttt{q:cmh-solenoidal-perturbation}. The route can be closed
-  by the first pair or killed by the second.
+  reservoir. A \emph{falsification} layer: gate zero (Conjecture~\ref{conj:gate-zero}), its
+  sharp form (Conjecture~\ref{conj:gate-zero-sharp}), and the solenoidal perturbation test
+  \texttt{q:cmh-solenoidal-perturbation}. The route can be closed by the first pair or killed
+  by the second. The two gate statements are not interchangeable as falsifiers: refuting the
+  sharp form at constant~$2$ would leave $\mathrm{CMH}(4)$ untouched, since only the
+  constant~$4$ statement is what CMH needs on linear tests.
 
   \item[6. Failed variants and obstructions.] Proposition~\ref{prop:letwin-not-gate-zero} is
   the decisive negative result: no matrix-moment argument supplies gate zero, so the

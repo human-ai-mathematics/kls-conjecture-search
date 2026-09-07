@@ -5,6 +5,12 @@ from fractions import Fraction
 
 from ....comparison import compare_exact
 
+#: Certificate genres this guard recognizes by default. A target that emits a different
+#: self-contained exact genre passes its own set through ``allowed_types``; the guard
+#: itself -- Fraction arithmetic, and a certificate whose recorded lower bound is the
+#: number being compared -- is deliberately shared rather than reimplemented per target.
+DEFAULT_CERTIFICATE_TYPES = frozenset({"closed-form-rational", "exact-rational-rayleigh"})
+
 
 def fraction_payload(value: Fraction) -> dict[str, int]:
     if not isinstance(value, Fraction):
@@ -17,7 +23,7 @@ def fraction_from_payload(payload: dict[str, int]) -> Fraction:
 
 
 def compare_exact_fraction(claim: str, instance: str, bound: Fraction, lower: Fraction,
-                           certificate: dict, note: str = ""):
+                           certificate: dict, note: str = "", allowed_types=None):
     """Compare Fractions only after checking a matching exact certificate."""
     if not isinstance(bound, Fraction) or not isinstance(lower, Fraction):
         raise TypeError("exact comparison requires Fraction bound and lower value")
@@ -25,8 +31,8 @@ def compare_exact_fraction(claim: str, instance: str, bound: Fraction, lower: Fr
         raise ValueError("exact comparison requires a Fraction-arithmetic certificate")
     if certificate.get("lower_bound") != fraction_payload(lower):
         raise ValueError("certificate lower_bound does not match the exact lower value")
-    if certificate.get("certificate_type") not in {
-            "closed-form-rational", "exact-rational-rayleigh"}:
+    if certificate.get("certificate_type") not in (
+            DEFAULT_CERTIFICATE_TYPES if allowed_types is None else frozenset(allowed_types)):
         raise ValueError("unrecognized exact certificate type")
 
     result = compare_exact(

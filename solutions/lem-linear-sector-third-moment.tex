@@ -1,0 +1,577 @@
+% solutions/lem-linear-sector-third-moment.tex
+% Standalone proof dossier for the two coupled ledger nodes
+%   lem:linear-sector-third-moment  and  cor:gate-zero-third-moment,
+% which research/program/ledger.yaml carries with status: open.
+%   cd solutions && latexmk -pdf -interaction=nonstopmode -outdir=../build lem-linear-sector-third-moment.tex
+% Cross-module \ref/\cite show "??"/"[?]" standalone -- expected.
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+% === SOLUTION HEADER =========================================================
+% Certification is not recorded here: research/program/ledger.yaml owns the
+% proofs[] mode and review path, and the review's front matter owns identities.
+% No proofs[] record names this file, and that absence is the whole signal:
+% this is a draft, not yet a proof for ledger purposes.
+%
+% ledger-node : lem:linear-sector-third-moment; cor:gate-zero-third-moment
+% refines : lem:linear-sector-third-moment; cor:gate-zero-third-moment   (modules/kls/41-cmh-normalization.tex, subsec:gate-zero)
+% bounded_by : none
+% author : /w5/researcher-third-moment
+% date : 2026-09-06
+% ============================================================================
+%
+% Reader's notes, deliberately not in field shape so nothing here parses as metadata.
+%
+%   Neither node carries a bounded_by edge or a heuristic_barriers entry in the ledger.
+%   The closing paragraph audits the six obstruction nodes anyway.
+%
+%   Dependencies: none on ledger nodes. Every identity below is proved from the
+%   hypotheses of the manuscript lemma using only classical analysis (divergence
+%   theorem on balls, Fubini in polar coordinates, dominated convergence, the
+%   inverse function theorem, and the C^1 equal-dimension case of Sard's theorem,
+%   which is proved here in full). The mean-Hessian identity eq:mean-hessian-identity
+%   and the Stein identity eq:stein-identity are NOT cited: the special cases this
+%   dossier needs are proved here.
+%
+%   Published imports, used ONLY in remarks and never in a proof step:
+%   Klartag 2013 (Thm 1.1, pointwise Hessian bound on the compact-target class),
+%   Cordero-Erausquin--Klartag 2015 (essential uniqueness of the moment potential).
+%
+%   No numerical evidence appears anywhere in this file.
+
+\section*{Solution: the linear sector of the canonical Stein kernel and the third-moment
+tensor}
+\label{sec:sol-lstm}
+
+\paragraph{Scope.}
+This dossier proves Lemma~\ref{lem:linear-sector-third-moment} and
+Corollary~\ref{cor:gate-zero-third-moment} of Section~\ref{subsec:gate-zero}, verbatim, as
+Theorem~\ref{thm:sol-lstm-main} and Corollary~\ref{cor:sol-lstm-gate} below.  It is
+self-contained: no ledger node is used, and in particular nothing is taken from the
+uncertified dossier for Lemma~\ref{lem:cmh-linear-spectral-resolution}.
+
+\emph{What this dossier does not prove.}  It proves nothing about
+Conjecture~\ref{conj:gate-zero}, Conjecture~\ref{conj:gate-zero-sharp} or
+Conjecture~\ref{conj:kls} beyond the exact implication stated in
+Corollary~\ref{cor:sol-lstm-gate}; no bound on $\kappa_n$ of \eqref{eq:kappa-def}; no
+statement about the trace-upgrade cluster (\texttt{q:upgrade}, high-rank
+\texttt{q:stein-weighted}, \texttt{q:alignment}), which is not opened here.  The final
+sentence of the manuscript lemma, which identifies the third-moment tensor with
+$\E_\nu[\partial_{ijk}\varphi]$, is proved under one additional explicitly stated hypothesis
+(Proposition~\ref{prop:sol-lstm-third-derivative} and
+Remark~\ref{rem:sol-lstm-third-derivative-hypothesis}); everything else is proved under the
+manuscript's hypotheses exactly.
+
+\subsection*{1. Setting, conventions, and the refined statements}
+
+Throughout, $n\ge1$, $\inner{\cdot}{\cdot}$ and $\abs{\cdot}$ are the Euclidean inner product
+and norm on $\R^n$, $\norm{\cdot}_{\HS}$ is the Hilbert--Schmidt norm on matrices and on
+$3$-tensors, and $\mathrm{Sym}_n$ is the space of real symmetric $n\times n$ matrices.
+For a $C^2$ function $\varphi$ we write $\varphi_i=\partial_i\varphi$,
+$\varphi_{ij}=\partial_{ij}\varphi$, $H=D^2\varphi=(\varphi_{ij})$, and, when $\varphi\in C^3$,
+$\varphi_{ijk}=\partial_{ijk}\varphi$.  $B_R=\{\abs y<R\}$, $\partial B_R$ its boundary,
+$\sigma_R$ the $(n-1)$-dimensional surface measure on $\partial B_R$ (for $n=1$, counting
+measure on $\{\pm R\}$), and $\mathbf n(y)=y/\abs y$ the outward unit normal.  Repeated indices
+are \emph{not} summed unless a sum sign is written.
+
+\begin{definition}[Hypotheses]
+\label{def:sol-lstm-hyp}
+The standing hypotheses, written $(\mathrm H)$, are:
+\begin{enumerate}
+\item[$(\mathrm H1)$] $\varphi\in C^2(\R^n)$ is convex and $\nu:=e^{-\varphi(y)}\dd y$ is a
+  probability measure on $\R^n$;
+\item[$(\mathrm H2)$] $\mu:=(\nabla\varphi)_\#\nu$ (the moment measure of $\varphi$,
+  \eqref{eq:moment-measure}) is absolutely continuous with respect to Lebesgue measure, has
+  finite third moment $\E_\mu\abs X^3<\infty$, and is isotropic: $\E_\mu X=0$ and
+  $\E_\mu[X\otimes X]=\Id$;
+\item[$(\mathrm H3)$] $\E_\nu\norm{D^2\varphi}_{\HS}^2<\infty$.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}[The manuscript hypotheses imply $(\mathrm H)$]
+\label{lem:sol-lstm-logconcave}
+Let $\mu$ be an isotropic log-concave probability measure on $\R^n$ which is the moment
+measure of a convex $\varphi\in C^2(\R^n)$ with $\E_\nu\norm{D^2\varphi}_{\HS}^2<\infty$.
+Then $(\mathrm H1)$--$(\mathrm H3)$ hold.
+\end{lemma}
+
+\begin{proof}
+$(\mathrm H1)$ and $(\mathrm H3)$ are the hypotheses.  In the convention of
+Section~\ref{sec:notation}, a log-concave measure has a density $e^{-V}$ on its convex support
+$K$ with $V$ convex; extending $V$ by $+\infty$ off $K$ gives a convex
+$V:\R^n\to(-\infty,+\infty]$ with $\int e^{-V}=1$.  So $\mu\ll\mathrm{Leb}$, and
+Lemma~\ref{lem:sol-lstm-linear-growth} below gives $\E_\mu\abs X^3<\infty$.  Isotropy is
+the hypothesis.
+\end{proof}
+
+\begin{definition}[Third-moment tensor]
+\label{def:sol-lstm-T3}
+Under $(\mathrm H2)$ put, exactly as in Section~\ref{subsec:gate-zero},
+\[
+  T_{ijk}:=\E_\mu[X_iX_jX_k],\qquad T_3(\mu):=(T_{ijk})_{i,j,k},\qquad
+  T_3(a):=\E_\mu\bigl[\inner Xa\,X\otimes X\bigr]\in\mathrm{Sym}_n\quad(a\in\R^n),
+\]
+so that $T_3(a)_{ib}=\sum_kT_{kib}\,a_k$.  All entries are finite by
+$\E_\mu\abs X^3<\infty$, $T_{ijk}$ is symmetric in $(i,j,k)$, $T_3(a)$ is symmetric, and
+$\norm{T_3(a)}_{\HS}^2=\sum_{i,b}T_3(a)_{ib}^2$.
+\end{definition}
+
+The canonical Stein kernel is defined in Section~\ref{subsec:mm-stein} as
+$\tau_\mu=H\circ(\nabla\varphi)^{-1}$, \eqref{eq:stein-kernel-def}.  Under $(\mathrm H)$
+alone $\nabla\varphi$ need not be injective on all of $\R^n$; Lemma~\ref{lem:sol-lstm-structure}
+shows that it is injective on an open set of full $\nu$-measure whose image is an open set of
+full $\mu$-measure, so that \eqref{eq:stein-kernel-def} defines $\tau$ $\mu$-almost
+everywhere, which is all that $L^2(\mu)$ statements need.  In the compact-target regular
+class of Theorem~\ref{thm:regular-moment-map-compact-target} the two open sets are $\R^n$ and
+$\operatorname{int}P$ and nothing is new.
+
+\begin{theorem}[refined form of Lemma~\ref{lem:linear-sector-third-moment}]
+\label{thm:sol-lstm-main}
+Assume $(\mathrm H)$ and let $\tau$ be the canonical Stein kernel of
+Lemma~\ref{lem:sol-lstm-structure}.  Then every entry $\tau_{ij}$ lies in $L^2(\mu)$, and:
+\begin{enumerate}
+\item[(a)] $\E_\mu[\tau]=\Id$, and for all $i,j,k$,
+  \[
+    \E_\mu[\tau_{ij}X_k]=\E_\nu[\varphi_{ij}\varphi_k]=\tfrac12\,\E_\mu[X_iX_jX_k];
+  \]
+  in particular $\bigl(\E_\nu[\varphi_{ij}\varphi_k]\bigr)_{i,j,k}$ is totally symmetric.
+\item[(b)] For every $a\in\R^n$ the column $\tau a$ decomposes in $L^2(\mu;\R^n)$ as
+  \[
+    \tau a=a+\tfrac12\,T_3(a)\,X+v_a,\qquad \E_\mu[v_a]=0,\qquad \E_\mu[v_a\otimes X]=0,
+  \]
+  the three summands $a$, $\tfrac12T_3(a)X$, $v_a$ being pairwise orthogonal in
+  $L^2(\mu;\R^n)$, and consequently
+  \begin{equation}
+    \E_\mu\abs{\tau a}^2=\abs a^2+\tfrac14\norm{T_3(a)}_{\HS}^2+\E_\mu\abs{v_a}^2 .
+    \label{eq:sol-lstm-pythagoras}
+  \end{equation}
+\item[(c)] If in addition $\varphi\in C^3(\R^n)$ and $\varphi_{ijk}\in L^1(\nu)$ for all
+  $i,j,k$, then $\E_\nu[\varphi_{ijk}]=\tfrac12\,\E_\mu[X_iX_jX_k]$.
+\end{enumerate}
+\end{theorem}
+
+Part (b) is the display of Lemma~\ref{lem:linear-sector-third-moment}; part (a) is the
+source-coordinate content of its last sentence, and part (c) is that sentence's
+third-derivative form (see Remark~\ref{rem:sol-lstm-third-derivative-hypothesis}).
+
+\begin{corollary}[refined form of Corollary~\ref{cor:gate-zero-third-moment}]
+\label{cor:sol-lstm-gate}
+Assume $(\mathrm H)$.  Then $\E_\mu[\tau^2]=\E_\nu[H^2]$ is a finite symmetric positive
+semidefinite matrix and, for every unit vector $a$,
+\[
+  \norm{T_3(a)}_{\HS}^2\le4\bigl(a^\top\E_\mu[\tau^2]\,a-1\bigr)
+  \le4\bigl(\lmax(\E_\mu[\tau^2])-1\bigr).
+\]
+In particular, if $\mathcal C$ is any class of measures satisfying $(\mathrm H)$ with
+$\E_\mu[\tau^2]\preceq c\,\Id$ for every member, then $c\ge1$ and every directional third
+moment in $\mathcal C$ satisfies $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$ for all unit $a$: the
+constant $c=4$ of \eqref{eq:gate-zero} gives $2\sqrt3$ and the constant $c=2$ of
+\eqref{eq:gate-zero-sharp} gives $2$, which the products of centered exponentials of
+Example~\ref{ex:sol-lstm-exponential} attain in every direction.  Conversely, if a measure
+satisfying $(\mathrm H)$ has $\norm{T_3(a)}_{\HS}>2\sqrt3$ for some unit $a$, then
+$a^\top\E_\nu[H^2]a>4$, so $\E_\nu[H^2]\not\preceq4\Id$ and $\mu$ violates \eqref{eq:gate-zero}.
+\end{corollary}
+
+\subsection*{2. Preliminaries}
+
+\begin{lemma}[Linear growth of an integrable convex function]
+\label{lem:sol-lstm-linear-growth}
+Let $V:\R^n\to(-\infty,+\infty]$ be convex with $0<\int_{\R^n}e^{-V(y)}\dd y<\infty$.  Then
+there are $c>0$ and $C<\infty$ with $V(y)\ge c\abs y-C$ for every $y\in\R^n$.  Consequently
+$\int e^{\eps\abs y}e^{-V}\dd y<\infty$ for every $\eps<c$, and $\int\abs y^ke^{-V}\dd y<\infty$
+for every $k\ge0$.
+\end{lemma}
+
+\begin{proof}
+Let $D=\{V<\infty\}$, a convex set.  Since $\int e^{-V}>0$, $D$ has positive Lebesgue
+measure, hence nonempty interior (a convex set with empty interior lies in an affine
+hyperplane).  Fix $y_0\in\operatorname{int}D$; $V$ is finite and continuous on a
+neighbourhood of $y_0$ and has a subgradient $g$ at $y_0$:
+$V(y)\ge V(y_0)+\inner g{y-y_0}$ for all $y$.  Put $m_0=V(y_0)$ and $K=\{V\le m_0+1\}$, a
+convex set containing a ball $B_\delta(y_0)$, $\delta>0$, and of finite Lebesgue measure,
+since $e^{-(m_0+1)}\mathrm{Leb}(K)\le\int e^{-V}$.  If $z\in K$ then
+$\operatorname{conv}(B_\delta(y_0)\cup\{z\})\subset K$ contains the cone with apex $z$ over the
+$(n-1)$-disc of radius $\delta$ centred at $y_0$ and orthogonal to $z-y_0$, whose volume is
+$\frac1n\omega_{n-1}\delta^{n-1}\abs{z-y_0}$ ($\omega_{n-1}$ the volume of the unit ball of
+$\R^{n-1}$, $\omega_0=1$).  Hence $\abs{z-y_0}\le\rho_0:=n\,\mathrm{Leb}(K)/(\omega_{n-1}\delta^{n-1})$
+for every $z\in K$.  Put $\rho=\rho_0+1$; every $z$ with $\abs{z-y_0}=\rho$ satisfies
+$V(z)>m_0+1$.
+
+Let $\abs{y-y_0}\ge\rho$ and $V(y)<\infty$.  With $t=\rho/\abs{y-y_0}\in(0,1]$ and
+$z=y_0+t(y-y_0)$, convexity gives $V(z)\le tV(y)+(1-t)m_0$, so
+$V(y)\ge m_0+(V(z)-m_0)/t\ge m_0+\abs{y-y_0}/\rho$; the same bound is trivial when
+$V(y)=+\infty$.  For $\abs{y-y_0}<\rho$ the subgradient inequality gives
+$V(y)\ge m_0-\abs g\rho$.  Hence $V(y)\ge\abs{y-y_0}/\rho-C_1$ for all $y$, with
+$C_1=\abs g\rho+\abs{m_0}+1$, and therefore $V(y)\ge c\abs y-C$ with $c=1/\rho$,
+$C=C_1+\abs{y_0}/\rho$.  Finally $e^{\eps\abs y}e^{-V(y)}\le e^{C}e^{-(c-\eps)\abs y}$ is
+integrable for $\eps<c$, and $\abs y^k\le k!\,\eps^{-k}e^{\eps\abs y}$.
+\end{proof}
+
+\begin{lemma}[Critical values of a $C^1$ map are null]
+\label{lem:sol-lstm-sard}
+Let $F\in C^1(\R^n;\R^n)$ and $Z=\{y:\det DF(y)=0\}$.  Then $F(Z)$ is a Lebesgue-null set.
+\end{lemma}
+
+\begin{proof}
+$Z$ is closed, so $F(Z)$ is $\sigma$-compact and it suffices to treat $Z\cap Q_0$ for a closed
+cube $Q_0$ of side $1$.  Let $L=\max_{Q_0}\norm{DF}_{\op}$ and
+$\omega(d)=\sup\{\norm{DF(y)-DF(y')}_{\op}:y,y'\in Q_0,\ \abs{y-y'}\le d\}$, so that
+$\omega(d)\to0$ as $d\to0$ by uniform continuity of $DF$ on $Q_0$.  Partition $Q_0$ into
+$N^n$ closed subcubes of side $1/N$ and diameter $d=\sqrt n/N$.  Let $Q$ be a subcube meeting
+$Z$ at some $y_0$.  For $y\in Q$,
+\[
+  F(y)-F(y_0)-DF(y_0)(y-y_0)=\int_0^1\bigl(DF(y_0+s(y-y_0))-DF(y_0)\bigr)(y-y_0)\dd s
+\]
+has norm at most $\omega(d)d$, while $DF(y_0)(y-y_0)$ lies in the range of $DF(y_0)$, a
+linear subspace of dimension at most $n-1$, hence in some hyperplane $E'$, and has norm at
+most $Ld$.  Splitting the remainder into its components along $E'$ and $E'^{\perp}$,
+$F(Q)-F(y_0)$ is contained in the cylinder
+$\{e+r:\ e\in E',\ \abs e\le(L+\omega(d))d,\ r\perp E',\ \abs r\le\omega(d)d\}$, whose
+volume is $2\omega_{n-1}\bigl((L+\omega(d))d\bigr)^{n-1}\omega(d)d$.  Summing over at most
+$N^n$ subcubes,
+\[
+  \mathrm{Leb}\bigl(F(Z\cap Q_0)\bigr)\le N^n\cdot2\omega_{n-1}(L+\omega(d))^{n-1}\omega(d)\,d^n
+  =2\omega_{n-1}n^{n/2}(L+\omega(d))^{n-1}\,\omega(d)\xrightarrow[N\to\infty]{}0 .\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Structure of the moment map; the canonical Stein kernel]
+\label{lem:sol-lstm-structure}
+Assume $(\mathrm H1)$ and $\mu=(\nabla\varphi)_\#\nu\ll\mathrm{Leb}$.  Let
+$G=\{y\in\R^n:\det H(y)>0\}$ and $\Omega=\nabla\varphi(G)$.  Then:
+\begin{enumerate}
+\item[(i)] if $y_1\ne y_2$ and $\nabla\varphi(y_1)=\nabla\varphi(y_2)$, then
+  $H(y_1)(y_2-y_1)=0$; in particular $\nabla\varphi$ is injective on $G$ and
+  $(\nabla\varphi)^{-1}(\Omega)=G$;
+\item[(ii)] $G$ is open with $\nu(G)=1$, $\Omega$ is open with $\mu(\Omega)=1$, and
+  $\nabla\varphi|_G:G\to\Omega$ is a $C^1$ diffeomorphism;
+\item[(iii)] the function $\tau:\R^n\to\mathrm{Sym}_n$ defined by
+  $\tau:=H\circ(\nabla\varphi|_G)^{-1}$ on $\Omega$ and $\tau:=\Id$ on $\R^n\setminus\Omega$
+  is Borel, continuous and positive semidefinite on $\Omega$, and satisfies
+  $\tau\circ\nabla\varphi=H$ on $G$, hence $\nu$-almost everywhere.  It is the canonical
+  Stein kernel \eqref{eq:stein-kernel-def}, and any two versions of it agree $\mu$-a.e.;
+\item[(iv)] (transport) for every Borel $\Phi:\R^n\times\mathrm{Sym}_n\to[0,\infty]$,
+  $\E_\mu\bigl[\Phi(X,\tau(X))\bigr]=\E_\nu\bigl[\Phi(\nabla\varphi,H)\bigr]$; the same holds
+  for real-valued $\Phi$ whenever either side is absolutely convergent, and then both are.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Put $p=\nabla\varphi(y_1)=\nabla\varphi(y_2)$ and $w=y_2-y_1\ne0$.  The subgradient
+inequalities $\varphi(y_2)\ge\varphi(y_1)+\inner pw$ and $\varphi(y_1)\ge\varphi(y_2)-\inner pw$
+add to $0\ge0$, so both are equalities.  The function
+$g(t)=\varphi(y_1+tw)-\varphi(y_1)-t\inner pw$, $t\in\R$, is $C^2$, convex, nonnegative (by the
+subgradient inequality at $y_1$), and $g(0)=g(1)=0$; by convexity $g\equiv0$ on $[0,1]$.
+Hence $g''(0)=\inner{H(y_1)w}{w}=0$ (the two-sided second derivative exists because
+$\varphi\in C^2$, and it is computed from the right, where $g$ vanishes identically).  Since
+$H(y_1)\succeq0$, $\inner{H(y_1)w}w=0$ forces $H(y_1)w=0$.  Thus a point of $G$ shares its
+gradient with no other point: $\nabla\varphi$ is injective on $G$, and a point outside $G$
+cannot map into $\Omega$, i.e.\ $(\nabla\varphi)^{-1}(\Omega)=G$.
+
+(ii) $G$ is open by continuity of $\det H$.  $Z:=\R^n\setminus G=\{\det H=0\}$ is the critical
+set of the $C^1$ map $\nabla\varphi$, so $\nabla\varphi(Z)$ is Lebesgue-null by
+Lemma~\ref{lem:sol-lstm-sard}, hence $\mu$-null by $\mu\ll\mathrm{Leb}$, hence
+$0=\mu(\nabla\varphi(Z))=\nu\bigl((\nabla\varphi)^{-1}(\nabla\varphi(Z))\bigr)\ge\nu(Z)$.  So
+$\nu(G)=1$ and $\mu(\Omega)=\nu((\nabla\varphi)^{-1}(\Omega))=\nu(G)=1$ by (i).  On $G$ the
+map $\nabla\varphi$ is $C^1$, injective, with invertible differential $H$; by the inverse
+function theorem it is open, so $\Omega$ is open, and its inverse is $C^1$ on $\Omega$.
+
+(iii) Continuity on $\Omega$ follows from (ii); Borel measurability on $\R^n$ from that and
+from $\Omega$ being open; positive semidefiniteness from convexity of $\varphi$.  For $y\in G$,
+$\tau(\nabla\varphi(y))=H\bigl((\nabla\varphi|_G)^{-1}(\nabla\varphi(y))\bigr)=H(y)$.  The
+formula \eqref{eq:stein-kernel-def} is exactly $H\circ(\nabla\varphi)^{-1}$ on the set
+$\Omega$ where the inverse is defined, and $\mu(\R^n\setminus\Omega)=0$.
+
+(iv) For $y\in G$, $\Phi(\nabla\varphi(y),\tau(\nabla\varphi(y)))=\Phi(\nabla\varphi(y),H(y))$
+by (iii), so the two functions agree $\nu$-a.e.\ and
+$\E_\nu[\Phi(\nabla\varphi,\tau\circ\nabla\varphi)]=\E_\nu[\Phi(\nabla\varphi,H)]$; the
+left side equals $\E_\mu[\Phi(X,\tau(X))]$ by the definition of the pushforward.  The
+real-valued case follows by applying this to $\abs\Phi$, $\Phi^+$ and $\Phi^-$.
+\end{proof}
+
+\begin{lemma}[Shell selection]
+\label{lem:sol-lstm-shells}
+Assume $(\mathrm H1)$.  Let $F_1,\dots,F_m:\R^n\to[0,\infty]$ be Borel with
+$\int F_l\dd\nu<\infty$ for each $l$.  Then there is a sequence $R_k\to\infty$ such that
+$\int_{\partial B_{R_k}}F_l\,e^{-\varphi}\dd\sigma_{R_k}\to0$ for every $l=1,\dots,m$.
+\end{lemma}
+
+\begin{proof}
+Put $F=F_1+\dots+F_m$ and $S(R)=\int_{\partial B_R}Fe^{-\varphi}\dd\sigma_R\in[0,\infty]$.
+By Tonelli's theorem in polar coordinates, $S$ is Borel on $(0,\infty)$ and
+$\int_0^\infty S(R)\dd R=\int_{\R^n}Fe^{-\varphi}\dd y<\infty$.  For each $k\ge1$ the set
+$\{R\ge k:S(R)\le1/k\}$ has positive Lebesgue measure, since otherwise $S>1/k$ a.e.\ on
+$[k,\infty)$ and $S\notin L^1$; pick $R_k$ in it.  Then $R_k\ge k$ and
+$0\le\int_{\partial B_{R_k}}F_le^{-\varphi}\dd\sigma_{R_k}\le S(R_k)\le1/k$.
+\end{proof}
+
+\subsection*{3. The Stein identity for polynomials of degree at most two}
+
+\begin{proposition}[Quadratic Stein identity]
+\label{prop:sol-lstm-stein}
+Assume $(\mathrm H)$ and let $f:\R^n\to\R$ be a polynomial of degree at most $2$.  Then for
+every $i$, $X_if(X)\in L^1(\mu)$, $\tau_{ij}(X)\,\partial_jf(X)\in L^1(\mu)$ for every $j$, and
+\begin{equation}
+  \E_\mu\bigl[X_if(X)\bigr]=\sum_{j=1}^n\E_\mu\bigl[\tau_{ij}(X)\,\partial_jf(X)\bigr] .
+  \label{eq:sol-lstm-stein}
+\end{equation}
+In source coordinates: $\E_\nu[\varphi_i\,f(\nabla\varphi)]=\sum_j\E_\nu[\varphi_{ij}\,(\partial_jf)(\nabla\varphi)]$.
+\end{proposition}
+
+\begin{proof}
+Choose $C_f<\infty$ with $\abs{f(x)}\le C_f(1+\abs x^2)$ and $\abs{\partial_jf(x)}\le C_f(1+\abs x)$
+for all $x$ and $j$.  \emph{Integrability.}  $\abs{X_if(X)}\le C_f\abs X(1+\abs X^2)\in L^1(\mu)$
+by $(\mathrm H2)$.  Next, $\E_\mu[\tau_{ij}^2]=\E_\nu[\varphi_{ij}^2]\le\E_\nu\norm H_{\HS}^2<\infty$
+by Lemma~\ref{lem:sol-lstm-structure}(iv) and $(\mathrm H3)$, so
+$\abs{\tau_{ij}\partial_jf}\le C_f\abs{\tau_{ij}}(1+\abs X)\le C_f\bigl(\tfrac12\tau_{ij}^2+1+\abs X^2\bigr)\in L^1(\mu)$,
+using $\E_\mu\abs X^2=\Tr\Id=n$.  By Lemma~\ref{lem:sol-lstm-structure}(iv) the source
+integrands $\varphi_if(\nabla\varphi)$ and $\varphi_{ij}(\partial_jf)(\nabla\varphi)$ are in
+$L^1(\nu)$ with the same integrals.
+
+\emph{Integration by parts on balls.}  The vector field $W=f(\nabla\varphi)e^{-\varphi}e_i$ is
+$C^1$ on $\R^n$ because $\varphi\in C^2$, with
+\[
+  \Div W=\partial_i\bigl[f(\nabla\varphi)e^{-\varphi}\bigr]
+  =\Bigl[\sum_j(\partial_jf)(\nabla\varphi)\,\varphi_{ji}-f(\nabla\varphi)\,\varphi_i\Bigr]e^{-\varphi}.
+\]
+The divergence theorem on $B_R$ and $\varphi_{ji}=\varphi_{ij}$ give, for every $R>0$,
+\begin{equation}
+  \sum_j\int_{B_R}\varphi_{ij}(\partial_jf)(\nabla\varphi)\dd\nu-\int_{B_R}\varphi_if(\nabla\varphi)\dd\nu
+  =\int_{\partial B_R}f(\nabla\varphi)\,\mathbf n_i\,e^{-\varphi}\dd\sigma_R .
+  \label{eq:sol-lstm-ibp-ball}
+\end{equation}
+The right side is bounded in absolute value by $C_f\int_{\partial B_R}(1+\abs{\nabla\varphi}^2)e^{-\varphi}\dd\sigma_R$,
+and $\int(1+\abs{\nabla\varphi}^2)\dd\nu=1+\E_\mu\abs X^2=1+n<\infty$.  Apply
+Lemma~\ref{lem:sol-lstm-shells} with $F_1=1+\abs{\nabla\varphi}^2$ and let $R=R_k\to\infty$ in
+\eqref{eq:sol-lstm-ibp-ball}: the right side tends to $0$, and each integral on the left
+converges to the integral over $\R^n$ by dominated convergence, since the integrands are in
+$L^1(\nu)$.  This is the source-coordinate identity; \eqref{eq:sol-lstm-stein} follows by
+Lemma~\ref{lem:sol-lstm-structure}(iv).
+\end{proof}
+
+\begin{corollary}[Consequences]
+\label{cor:sol-lstm-stein-consequences}
+Assume $(\mathrm H)$.  Then, for all $i,j,k$:
+\begin{enumerate}
+\item[(i)] $\E_\mu[\tau_{ij}]=\E_\mu[X_iX_j]=\delta_{ij}$, i.e.\ $\E_\mu\tau=\E_\nu H=\Id$;
+\item[(ii)] $\E_\mu[X_iX_jX_k]=\E_\mu[\tau_{ij}X_k]+\E_\mu[\tau_{ik}X_j]$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Take $f(x)=x_j$ in \eqref{eq:sol-lstm-stein}: $\partial_lf=\delta_{lj}$, so
+$\E_\mu[X_iX_j]=\E_\mu[\tau_{ij}]$, and $\E_\mu[X_iX_j]=\delta_{ij}$ by isotropy; the source
+form is Lemma~\ref{lem:sol-lstm-structure}(iv).  Take $f(x)=x_jx_k$:
+$\partial_lf(x)=\delta_{lj}x_k+\delta_{lk}x_j$, so
+$\E_\mu[X_iX_jX_k]=\E_\mu[\tau_{ij}X_k]+\E_\mu[\tau_{ik}X_j]$.
+\end{proof}
+
+\subsection*{4. Total symmetry of the mixed tensor}
+
+\begin{lemma}[The mixed tensor is half the third moment]
+\label{lem:sol-lstm-N}
+Assume $(\mathrm H)$ and put $N_{ijk}:=\E_\mu[\tau_{ij}X_k]=\E_\nu[\varphi_{ij}\varphi_k]$.
+Then every $N_{ijk}$ is finite, $N$ is totally symmetric in $(i,j,k)$, and
+$N_{ijk}=\tfrac12T_{ijk}$ for all $i,j,k$.
+\end{lemma}
+
+\begin{proof}
+The two expressions for $N_{ijk}$ agree by Lemma~\ref{lem:sol-lstm-structure}(iv), and
+$\abs{N_{ijk}}\le(\E_\mu\tau_{ij}^2)^{1/2}(\E_\mu X_k^2)^{1/2}<\infty$ by Cauchy--Schwarz,
+$(\mathrm H3)$ and isotropy.  Symmetry in the first two indices, $N_{ijk}=N_{jik}$, is the
+symmetry of $H$.  Corollary~\ref{cor:sol-lstm-stein-consequences}(ii) reads
+$T_{ijk}=N_{ijk}+N_{ikj}$; the same identity with the roles of $i$ and $j$ exchanged reads
+$T_{jik}=N_{jik}+N_{jki}$.  Since $T_{ijk}=T_{jik}$ and $N_{ijk}=N_{jik}$, subtracting gives
+$N_{ikj}=N_{jki}$, and applying first-pair symmetry to the right side, $N_{ikj}=N_{kji}$.
+Relabelling $(i,k,j)\to(a,b,c)$ this is $N_{abc}=N_{cba}$: $N$ is invariant under the
+transposition of its first and third indices.  Together with invariance under the transposition
+of the first two indices, $N$ is invariant under the group these two transpositions generate,
+namely all of $S_3$.  Finally $T_{ijk}=N_{ijk}+N_{ikj}=2N_{ijk}$.
+\end{proof}
+
+\subsection*{5. Proof of Theorem~\ref{thm:sol-lstm-main}}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sol-lstm-main}]
+$\tau_{ij}\in L^2(\mu)$ was shown in the proof of Proposition~\ref{prop:sol-lstm-stein}.
+
+\emph{(a)} is Corollary~\ref{cor:sol-lstm-stein-consequences}(i) and Lemma~\ref{lem:sol-lstm-N}.
+
+\emph{(b)} By isotropy, the functions $\mathbf 1,X_1,\dots,X_n$ are orthonormal in $L^2(\mu)$:
+$\E_\mu[\mathbf 1^2]=1$, $\E_\mu[X_b]=0$, $\E_\mu[X_bX_c]=\delta_{bc}$.  Let $P$ be the
+orthogonal projection of $L^2(\mu)$ onto their span $\mathcal V$.  For $u\in L^2(\mu)$,
+$Pu=\E_\mu[u]\,\mathbf 1+\sum_b\E_\mu[uX_b]\,X_b$, and $u-Pu\perp\mathcal V$, i.e.\
+$\E_\mu[u-Pu]=0$ and $\E_\mu[(u-Pu)X_b]=0$ for all $b$.  Fix $a\in\R^n$ and apply this to
+$u_i:=(\tau a)_i=\sum_k\tau_{ik}a_k\in L^2(\mu)$.  By (a),
+\[
+  \E_\mu[u_i]=\sum_k\delta_{ik}a_k=a_i,
+  \qquad
+  \E_\mu[u_iX_b]=\sum_ka_kN_{ikb}=\tfrac12\sum_ka_kT_{kib}=\tfrac12\,T_3(a)_{ib},
+\]
+using total symmetry $N_{ikb}=N_{kib}$, Lemma~\ref{lem:sol-lstm-N}, and
+Definition~\ref{def:sol-lstm-T3}.  Hence $Pu_i=a_i\mathbf 1+\tfrac12\sum_bT_3(a)_{ib}X_b=\bigl(a+\tfrac12T_3(a)X\bigr)_i$.
+Define $v_a:=\tau a-a-\tfrac12T_3(a)X$, so that $(v_a)_i=u_i-Pu_i$.  Then $\E_\mu[(v_a)_i]=0$
+and $\E_\mu[(v_a)_iX_b]=0$ for all $i,b$, which is $\E_\mu[v_a]=0$ and $\E_\mu[v_a\otimes X]=0$.
+Pairwise orthogonality in $L^2(\mu;\R^n)$:
+$\E_\mu\inner a{T_3(a)X}=\inner a{T_3(a)\E_\mu X}=0$;
+$\E_\mu\inner a{v_a}=\inner a{\E_\mu v_a}=0$;
+$\E_\mu\inner{T_3(a)X}{v_a}=\sum_{i,b}T_3(a)_{ib}\E_\mu[X_b(v_a)_i]=0$.
+Therefore, expanding $\abs{\tau a}^2=\abs{a+\tfrac12T_3(a)X+v_a}^2$ and taking expectations,
+the cross terms vanish and
+\[
+  \E_\mu\abs{\tau a}^2=\abs a^2+\tfrac14\E_\mu\abs{T_3(a)X}^2+\E_\mu\abs{v_a}^2,
+  \qquad
+  \E_\mu\abs{T_3(a)X}^2=\sum_{i,b,c}T_3(a)_{ib}T_3(a)_{ic}\E_\mu[X_bX_c]=\norm{T_3(a)}_{\HS}^2,
+\]
+which is \eqref{eq:sol-lstm-pythagoras}.
+
+\emph{(c)} is Proposition~\ref{prop:sol-lstm-third-derivative} below.
+\end{proof}
+
+\subsection*{6. Proof of Corollary~\ref{cor:sol-lstm-gate}, and the saturating example}
+
+\begin{proof}[Proof of Corollary~\ref{cor:sol-lstm-gate}]
+Each entry of $\tau^2$ satisfies $\abs{(\tau^2)_{ij}}\le\norm\tau_{\HS}^2$, which is
+$\mu$-integrable by $(\mathrm H3)$ and Lemma~\ref{lem:sol-lstm-structure}(iv); the same
+lemma gives $\E_\mu[\tau^2]=\E_\nu[H^2]$ entrywise, and this matrix is symmetric positive
+semidefinite as an average of squares of symmetric matrices.  Since $\tau$ is symmetric,
+$\abs{\tau a}^2=a^\top\tau^\top\tau a=a^\top\tau^2a$, so $\E_\mu\abs{\tau a}^2=a^\top\E_\mu[\tau^2]a\le\lmax(\E_\mu[\tau^2])\abs a^2$.
+For unit $a$, \eqref{eq:sol-lstm-pythagoras} gives
+$\norm{T_3(a)}_{\HS}^2=4\bigl(\E_\mu\abs{\tau a}^2-1-\E_\mu\abs{v_a}^2\bigr)\le4\bigl(a^\top\E_\mu[\tau^2]a-1\bigr)\le4\bigl(\lmax(\E_\mu[\tau^2])-1\bigr)$.
+
+If $\E_\mu[\tau^2]\preceq c\,\Id$ on a class, then for any member and unit $a$,
+$c\ge a^\top\E_\mu[\tau^2]a=\E_\mu\abs{\tau a}^2\ge\abs a^2=1$ by
+\eqref{eq:sol-lstm-pythagoras}, and $\norm{T_3(a)}_{\HS}^2\le4(c-1)$.  With $c=4$ this is
+$2\sqrt3$ and with $c=2$ it is $2$; Example~\ref{ex:sol-lstm-exponential} shows that the
+products of centered exponentials satisfy $(\mathrm H)$, have $\E_\mu[\tau^2]=2\Id$, and have
+$\norm{T_3(a)}_{\HS}=2$ for every unit $a$.  Conversely, if $\norm{T_3(a)}_{\HS}>2\sqrt3$ for
+some unit $a$, the first inequality gives $a^\top\E_\nu[H^2]a=a^\top\E_\mu[\tau^2]a>1+3=4$,
+so $\E_\nu[H^2]\not\preceq4\Id$, which is the negation of \eqref{eq:gate-zero} for $\mu$ in
+isotropic position ($\Sigma=\Id$).
+\end{proof}
+
+\begin{example}[Products of centered exponentials]
+\label{ex:sol-lstm-exponential}
+Let $\varphi(y)=\sum_{j=1}^n(e^{y_j}-y_j)$ on $\R^n$.  It is smooth and convex, and
+$e^{-\varphi(y)}=\prod_je^{y_j}e^{-e^{y_j}}$ is the density of $(\log E_1,\dots,\log E_n)$
+for independent $E_j\sim\mathrm{Exp}(1)$, so $\nu$ is a probability measure and $(\mathrm H1)$
+holds.  $\nabla\varphi(y)=(e^{y_j}-1)_j$, so $\mu$ is the law of $(E_j-1)_j$: a product of
+centered exponentials, which is log-concave with density $e^{-\sum_j(x_j+1)}$ on
+$(-1,\infty)^n$, has all moments finite, and is isotropic since $\E E_j=\Var E_j=1$; so
+$(\mathrm H2)$ holds.  $H(y)=\diag(e^{y_j})$, $\E_\nu\norm H_{\HS}^2=\sum_j\E E_j^2=2n<\infty$;
+so $(\mathrm H3)$ holds.  Here $\nabla\varphi$ is a diffeomorphism of $\R^n$ onto
+$(-1,\infty)^n$ and $\tau(x)=\diag(1+x_j)$ on that set.  Using
+$\E E^k=k!$: $\E_\mu[X_j^3]=\E(E-1)^3=6-6+3-1=2$, and every $T_{ijk}$ with indices not all
+equal vanishes by independence and centering, so $T_{ijk}=2\delta_{ij}\delta_{jk}$,
+$T_3(a)=\diag(2a_j)$, and $\norm{T_3(a)}_{\HS}^2=4\abs a^2$: $\norm{T_3(a)}_{\HS}=2$ for
+every unit $a$.  Also $\E_\mu[\tau^2]=\diag(\E(1+X_j)^2)=\diag(\E E_j^2)=2\Id$.  Finally
+$\tau a=(a_j(1+X_j))_j=a+\diag(a_j)X=a+\tfrac12T_3(a)X$, so $v_a=0$ and
+\eqref{eq:sol-lstm-pythagoras} reads $2=1+1+0$.  Thus this family attains the bound
+$2\sqrt{c-1}$ of Corollary~\ref{cor:sol-lstm-gate} with $c=2$ in every direction, and has no
+high-mode term.
+\end{example}
+
+\subsection*{7. The third-derivative form}
+
+\begin{proposition}[Third derivatives]
+\label{prop:sol-lstm-third-derivative}
+Assume $(\mathrm H)$, $\varphi\in C^3(\R^n)$, and $\varphi_{ijk}\in L^1(\nu)$ for all $i,j,k$.
+Then $\E_\nu[\varphi_{ijk}]=\E_\nu[\varphi_{ij}\varphi_k]=\tfrac12\E_\mu[X_iX_jX_k]$.
+\end{proposition}
+
+\begin{proof}
+The vector field $W=\varphi_{ij}e^{-\varphi}e_k$ is $C^1$ since $\varphi\in C^3$, with
+$\Div W=(\varphi_{ijk}-\varphi_{ij}\varphi_k)e^{-\varphi}$.  The divergence theorem on $B_R$
+gives $\int_{B_R}\varphi_{ijk}\dd\nu-\int_{B_R}\varphi_{ij}\varphi_k\dd\nu=\int_{\partial B_R}\varphi_{ij}\mathbf n_ke^{-\varphi}\dd\sigma_R$,
+whose right side is bounded by $\int_{\partial B_R}\norm H_{\HS}e^{-\varphi}\dd\sigma_R$.
+Since $\int\norm H_{\HS}\dd\nu\le(\E_\nu\norm H_{\HS}^2)^{1/2}<\infty$,
+Lemma~\ref{lem:sol-lstm-shells} with $F_1=\norm H_{\HS}$ gives $R_k\to\infty$ along which
+the right side tends to $0$.  Both integrands on the left are in $L^1(\nu)$ (the second by
+Lemma~\ref{lem:sol-lstm-N}), so dominated convergence gives
+$\E_\nu[\varphi_{ijk}]=\E_\nu[\varphi_{ij}\varphi_k]=N_{ijk}=\tfrac12T_{ijk}$.
+\end{proof}
+
+\begin{remark}[Which hypothesis the manuscript's last sentence uses]
+\label{rem:sol-lstm-third-derivative-hypothesis}
+The last sentence of Lemma~\ref{lem:linear-sector-third-moment},
+``$\E_\nu[\partial_{ijk}\varphi]=\tfrac12\E_\mu[X_iX_jX_k]$'', presupposes that
+$\partial_{ijk}\varphi$ exists and is $\nu$-integrable, which the hypothesis
+$\varphi\in C^2$ does not provide.  This dossier therefore proves it exactly under the
+additional hypothesis of Proposition~\ref{prop:sol-lstm-third-derivative}, and proves
+\emph{unconditionally} the statement that the manuscript's ``gap-mode coefficient'' actually
+uses, namely $\E_\nu[\varphi_{ij}\varphi_k]=\tfrac12\E_\mu[X_iX_jX_k]$
+(Theorem~\ref{thm:sol-lstm-main}(a)): in the decomposition of
+Theorem~\ref{thm:sol-lstm-main}(b) the coefficient of $X_b$ in $(\tau a)_i$ is
+$\E_\mu[(\tau a)_iX_b]=\sum_ka_k\E_\nu[\varphi_{ik}\varphi_b]$, which involves only second
+derivatives of $\varphi$.  The identification with the coefficient tensor of
+Lemma~\ref{lem:cmh-linear-spectral-resolution} is a matter of that lemma's definitions and is
+not asserted here; nothing in this dossier depends on that lemma.  On the compact-target
+regular class the extra hypothesis is a separate claim (bounded $H$ does not by itself bound
+$D^3\varphi$) and is left to whichever dossier certifies that class.
+\end{remark}
+
+\subsection*{8. Remarks}
+
+\begin{remark}[Where each hypothesis is used]
+\label{rem:sol-lstm-hypotheses}
+Convexity and $C^2$ regularity of $\varphi$: the divergence-theorem computations
+(Proposition~\ref{prop:sol-lstm-stein}), the structure Lemma~\ref{lem:sol-lstm-structure}
+(convexity is what makes the fibres of $\nabla\varphi$ segments on which $H$ degenerates), and
+$\tau\succeq0$.  Absolute continuity of $\mu$: only to make $\nabla\varphi$ injective off a
+$\nu$-null set (Lemma~\ref{lem:sol-lstm-structure}(ii)), i.e.\ to give
+\eqref{eq:stein-kernel-def} a meaning; a reader who prefers to define $\tau$ only where
+$\nabla\varphi$ is invertible needs nothing else.  Finite third moment of $\mu$: absolute
+convergence of the left side of \eqref{eq:sol-lstm-stein} for quadratic $f$, and the
+definition of $T_3$.  Isotropy: orthonormality of $\{\mathbf 1,X_b\}$ and
+$\E_\nu\abs{\nabla\varphi}^2=n$.  $(\mathrm H3)$: $\tau_{ij}\in L^2(\mu)$, the domination of
+the interior integrands, and the shell function $\norm H_{\HS}$.  Log-concavity of $\mu$ is
+used only through Lemma~\ref{lem:sol-lstm-logconcave}, i.e.\ to supply absolute continuity
+and finite third moments; the theorem holds for any moment measure with those two
+properties.  The essential uniqueness of the moment potential
+\cite{CorderoErausquinKlartag2015MomentMeasures} is not used in any proof; it is what
+identifies the $\varphi$ of the hypothesis with ``the'' potential of
+Conjecture~\ref{conj:gate-zero} (any two differ by a translation, under which $\E_\nu[H^2]$
+is invariant).
+\end{remark}
+
+\begin{remark}[Symmetric laws and the compact-target class]
+\label{rem:sol-lstm-specialisations}
+If $\mu$ is symmetric ($X$ and $-X$ have the same law) then $T_3(\mu)=0$, so
+$\tau a=a+v_a$ and $\E_\mu\abs{\tau a}^2=\abs a^2+\E_\mu\abs{v_a}^2$: the whole of
+$a^\top\E_\mu[\tau^2]a-\abs a^2$ is the high-mode term.  For a product of centered
+exponentials the opposite holds (Example~\ref{ex:sol-lstm-exponential}).  For a member of the
+compact-target regular class of Theorem~\ref{thm:regular-moment-map-compact-target} which is
+isotropic and log-concave, $(\mathrm H)$ holds: $(\mathrm H1)$ and the diffeomorphism property
+are that theorem, $(\mathrm H2)$ follows from the density and the compact support, and
+$(\mathrm H3)$ follows from the pointwise bound $0\preceq D^2\varphi\preceq2R(P)^2\Id$ of
+\cite[Thm.~1.1]{Klartag2013MomentMeasures} ($R(P)$ the radius of a Euclidean ball centred at the origin that contains $P$), as recorded in
+the manuscript after Lemma~\ref{lem:linear-sector-third-moment}.  This published bound is
+used only in this remark.
+\end{remark}
+
+\begin{remark}[Source versus target coordinates in gate zero]
+\label{rem:sol-lstm-coordinates}
+Conjecture~\ref{conj:gate-zero} is written with $\E[H^2]$, the source expectation
+$\E_\nu[(D^2\varphi)^2]$; Corollary~\ref{cor:gate-zero-third-moment} is written with
+$\E_\mu[\tau^2]$.  Lemma~\ref{lem:sol-lstm-structure}(iv) shows the two matrices coincide
+under $(\mathrm H)$, so the conversion between the two conjectures' phrasing and the
+corollary's is exact and not merely up to a Jensen inequality.
+\end{remark}
+
+\paragraph{Obstructions respected.}
+Neither node carries a \texttt{bounded\_by} or \texttt{heuristic\_barriers} entry.  Of the
+ledger's six obstruction nodes: \texttt{obs:two-tail}, \texttt{obs:proj-ceiling},
+\texttt{obs:crude-insufficient} and \texttt{obs:rank-one-refuted} concern localization-route
+estimates and are not touched, since nothing here is a bound on a Poincar\'e or Cheeger
+constant; \texttt{obs:relative-ceiling} is respected because nothing here is a statement of
+KLS-equivalent strength (the theorem is an exact identity on a fixed measure, and the
+corollary is an implication whose antecedent is the open Conjecture~\ref{conj:gate-zero});
+\texttt{obs:circularity} is respected because no isoperimetric profile is used.  The CMH-route
+guardrail \texttt{prop:letwin-not-gate-zero} (the constant-matrix estimate does not imply
+gate zero) is respected: this dossier neither uses the constant-matrix estimate nor claims
+gate zero; it proves only that gate zero \emph{implies} a directional third-moment bound.
+Program constraint P1 is respected: no member of the trace-upgrade cluster is opened, and no
+transfer between its members is asserted.
+
+% No \printbibliography here (matches modules/*.tex): main.tex prints the single shared
+% bibliography. Standalone, \cite shows "[?]" and \ref shows "??" -- expected.
+\end{document}

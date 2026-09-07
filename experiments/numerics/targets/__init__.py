@@ -14,6 +14,14 @@ The KLS route-gating batteries live in ``targets.kls``:
               localization engine: lambda_cut, W_cut, Q, the aligned set A_kappa, the
               screened supply, and the spectator-cylinder control (kls/screening.py). Its
               excess is a competitor-based SURROGATE that understates the true excess.
+  "cmh-cone" the exponential-cone battery of def:exponential-cone (kls/cmh_cone/): exact
+              rational gate matrices E[tau Sigma^{-1} tau] for cube cones and for cones over
+              products of simplices and intervals, each stated gate inequality DECIDED in
+              exact arithmetic by a symmetric-pivot LDL^T of c Sigma - M, a directional
+              quadrature channel for ball cones via the radial moment-map ODE, and an exactly
+              assembled CMH Galerkin quotient with one certified rational test function. Every
+              value is computed FROM eq:cone-stein-kernel, whose node prop:cone-moment-map is
+              open, so a disagreement indicts the formula as readily as the conjecture.
   "cmh-gate-zero" the deterministic moment-map/CMH gate-zero battery
               E[H Sigma^{-1} H] <= 4 Sigma (kls/cmh_gate_zero/) -- exact 1D Stein kernels
               and Dirichlet moment matrices, an exact algebraic countermodel, and directional
@@ -36,7 +44,8 @@ The KLS route-gating batteries live in ``targets.kls``:
 from __future__ import annotations
 
 from ..contract import TargetSpec
-from .kls import alignment, bridge, cmh_ab, cmh_gate_zero, fiber_frame_dual, loc_engine, screening
+from .kls import (alignment, bridge, cmh_ab, cmh_cone, cmh_gate_zero, fiber_frame_dual,
+                  loc_engine, screening)
 
 REGISTRY = {
     "kls": TargetSpec(
@@ -86,6 +95,13 @@ REGISTRY = {
                        "widths": (0.04, 0.1, 0.2), "dense_until": 0.06,
                        "spectator_ns": (256, 4096), "spectator_n0": 32,
                        "spectator_paths": 8, "spectator_stride": 8},
+        },
+    ),
+    "cmh-cone": TargetSpec(
+        "cmh-cone", cmh_cone, "exponential-cone gate matrices and CMH Galerkin battery", False,
+        {
+            "standard": {},
+            "exact-only": {"run_ball": False},
         },
     ),
     "cmh-gate-zero": TargetSpec(
