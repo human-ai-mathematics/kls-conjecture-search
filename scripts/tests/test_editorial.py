@@ -471,11 +471,17 @@ class BareIdsInProse(ProseFixture):
             [],
         )
 
-    def test_a_mechanism_blocks_while_a_gloss_is_only_listed_today(self):
-        """The enforcement policy, made visible: a pair blocks once its list is empty."""
-        self.assertTrue(self.errors(mechanism="Follow the cut of thm:a under flow."))
-        self.assertEqual(self.errors(summary="Follow the cut of thm:a under flow."), [])
-        self.assertTrue(self.findings("bare-id", summary="Follow thm:a under flow."))
+    def test_a_gloss_blocks_while_a_candidate_statement_is_only_listed_today(self):
+        """The enforcement policy, made visible: a pair blocks once its list is empty.
+
+        The two surfaces swapped sides when the glosses were repaired. A summary now
+        blocks, because its list is empty; a candidate statement does not, because four
+        remain and they sit in append-only checkpoints (constraint 6), so no writer this
+        checker is allowed to be may repair them yet.
+        """
+        self.assertTrue(self.errors(summary="Follow the cut of thm:a under flow."))
+        self.assertEqual(self.errors(statement="Follow the cut of thm:a under flow."), [])
+        self.assertTrue(self.findings("bare-id", statement="Follow thm:a under flow."))
 
 
 class LiveProse(unittest.TestCase):

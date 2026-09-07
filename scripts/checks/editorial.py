@@ -486,16 +486,28 @@ SEARCH_NAMESPACES = ("cand", "ap", "fam")
 #:
 #: ``(ASCII, SUMMARY)`` was the first to arrive, after the 103 glosses it listed were
 #: rewritten. The rest of the ASCII rule joins it immediately because objectives and
-#: mechanisms were already typeset; ``(BARE_ID, MECHANISM)`` for the same reason. The
-#: four pairs that are absent have live violations and no writer this checker is allowed
-#: to be: the ledger is one orchestrator's (constraint 1), the portfolio is the
-#: synthesizer's (constraint 11), and a candidate statement lives in an append-only
-#: checkpoint (constraint 6).
+#: mechanisms were already typeset; ``(BARE_ID, MECHANISM)`` for the same reason.
+#:
+#: ``(BARE_ID, SUMMARY)`` and ``(BARE_ID, OBJECTIVE)`` joined once the orchestrator
+#: rewrote the 26 glosses and 3 objectives that quoted an address where a name belongs
+#: --- the repair this rule existed to make finite. It could not be made by whoever wrote
+#: the rule: the ledger has one writer (constraint 1) and the portfolio has one
+#: (constraint 11), so the guard and the clean tree arrived from different hands and met
+#: at a merge.
+#:
+#: The two pairs still absent are both ``STATEMENT``. A candidate statement is canonical
+#: text (constraint 7) living in an append-only checkpoint (constraint 6), so repairing
+#: the four that remain is not a formatting pass anyone may simply perform --- it is a
+#: question about what append-only protects, and it is open. Until it is answered the
+#: violations stay listed, which is the honest state: visible, and not silently blocking
+#: a repair no writer is permitted to make.
 ENFORCED = frozenset({
     (ASCII, SUMMARY),
     (ASCII, OBJECTIVE),
     (ASCII, MECHANISM),
     (BARE_ID, MECHANISM),
+    (BARE_ID, SUMMARY),
+    (BARE_ID, OBJECTIVE),
 })
 
 
