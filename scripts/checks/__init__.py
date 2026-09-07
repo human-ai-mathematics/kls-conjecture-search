@@ -53,7 +53,8 @@ def analyze(root: Path | None = None, research: Path | None = None,
     links = docs.check(root, errors["docs"])
     editorial.check(root, ledgers, errors["editorial"])
     editorial.check_titles(labels, errors["editorial"])
-    editorial.ascii_gloss_errors(ledgers, errors["editorial"])
+    editorial.check_prose(ledgers, live_portfolio, memory["candidates"],
+                          errors["editorial"])
 
     reader_guide = guide.load(root, errors["editorial"])
     guide.check(
