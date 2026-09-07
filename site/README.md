@@ -10,7 +10,7 @@ The frontend of the published website. Four files, and a rule that explains all 
 | [`index.html`](index.html) | the shell: masthead, nav, colophon. No mathematics. |
 | [`site.css`](site.css) | presentation. Colour never carries meaning alone. |
 | [`site.js`](site.js) | the router, the two maps, and every view. Knows no mathematics. |
-| [`tex4ht.cfg`](tex4ht.cfg) | what preserves the anchor invariant through LaTeX → HTML. |
+| [`tex4ht.cfg`](tex4ht.cfg) | what preserves the anchor invariant, and the manuscript's macros, through LaTeX → HTML. |
 
 Nothing substantive is written here. Everything a reader sees — statements, standings,
 titles, approaches, blockers, checkpoints, certifications, and which four routes the
@@ -21,6 +21,15 @@ typed into these files would drift from the ledger and the portfolio the first t
 either changed, and the prettier copy would win the argument.
 [`../scripts/tests/test_site.py`](../scripts/tests/test_site.py) asserts that no claim
 gloss, candidate statement, approach objective or node id appears in this directory.
+
+The one block of generated text that does live here follows the same rule for the same
+reason. `tex4ht.cfg` carries [`../preamble.tex`](../preamble.tex)'s macros into MathJax,
+because `make4ht` does not and the manuscript's own notation reached the reader as red
+source without it — but the macro list is *derived* by
+[`../scripts/checks/mathjax.py`](../scripts/checks/mathjax.py) and rewritten by
+`python3 scripts/new.py mathjax`, and `check.py --lane editorial` fails the tree when it
+and the preamble disagree. A macro list typed here by hand would drift exactly the way a
+gloss typed here would.
 
 The status badge is the derived **standing**, not the schema status: eight tones from
 [`../scripts/checks/editorial.py`](../scripts/checks/editorial.py), the same projection

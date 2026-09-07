@@ -13,10 +13,12 @@ nobody can trust twice.
     python3 scripts/new.py node lem:key --kind lemma --file 01-reductions.tex
     python3 scripts/new.py role numerics                    # installs a capability pack
     python3 scripts/new.py agents                           # regenerate agent files
+    python3 scripts/new.py mathjax                          # regenerate the HTML macros
 
-Scaffolds never overwrite an existing hand-authored file. The ``agents`` command is the
-deliberate exception for generated material: it restamps role frontmatter and replaces
-Codex adapters from the profile table. Nothing here edits research/program/ledger.yaml —
+Scaffolds never overwrite an existing hand-authored file. ``agents``, ``status`` and
+``mathjax`` are the deliberate exceptions for generated material: role frontmatter and
+Codex adapters from the profile table, the manuscript's standings from the ledger, and
+the HTML conversion's macros from the preamble. Nothing here edits research/program/ledger.yaml —
 that file has exactly one writer (CLAUDE.md constraint 1), so ``node`` prints a block for
 the orchestrator to paste rather than reaching into it.
 
@@ -220,6 +222,31 @@ def cmd_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_mathjax(args: argparse.Namespace) -> int:
+    """Regenerate the MathJax macro transport in ``site/tex4ht.cfg`` from the preamble.
+
+    Third of the derived-file commands, and the same bargain as the other two: written
+    without asking, and refused by the checker the moment it stops matching its source.
+    Without it the HTML conversion prints this repository's own notation as red source,
+    which no PDF build and no lane of the checker can see.
+    """
+    from checks import mathjax
+
+    config = args.root / mathjax.CONFIG_PATH
+    if not config.is_file():
+        return fail(f"{mathjax.CONFIG_PATH} does not exist; nothing to regenerate")
+    if not (args.root / mathjax.PREAMBLE_PATH).is_file():
+        return fail(f"{mathjax.PREAMBLE_PATH} does not exist; nothing to derive from")
+
+    written, macros, skipped = mathjax.write(args.root)
+    print(f"wrote {written}: {len(macros)} macro(s) carried to MathJax "
+          f"from {mathjax.PREAMBLE_PATH}")
+    for name, reason in skipped:
+        print(f"  skipped \\{name}: {reason}")
+    print("next: 'python3 scripts/check.py --lane editorial' to confirm")
+    return 0
+
+
 def cmd_role(args: argparse.Namespace) -> int:
     packs = args.root / "packs"
     source = packs / args.pack / f"{args.pack}.md"
@@ -305,6 +332,11 @@ def build_parser() -> argparse.ArgumentParser:
     status = sub.add_parser(
         "status", help="regenerate status.tex, the manuscript's ledger-derived standings")
     status.set_defaults(handler=cmd_status)
+
+    mathjax_cmd = sub.add_parser(
+        "mathjax",
+        help="regenerate site/tex4ht.cfg's MathJax macros from preamble.tex")
+    mathjax_cmd.set_defaults(handler=cmd_mathjax)
     return parser
 
 
