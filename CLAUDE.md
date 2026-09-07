@@ -205,7 +205,7 @@ Write Markdown mathematics in LaTeX `$...$`.
 ./scripts/check.sh --strict           # a missing tool is a failure, not a skip
 
 python3 scripts/check.py              # 0 errors required after any ledger edit
-python3 scripts/check.py --lane core  # one lane: core|proofs|checkpoints|portfolio|numerics|roles|docs
+python3 scripts/check.py --lane core  # one lane: core|proofs|checkpoints|portfolio|numerics|roles|docs|editorial
 python3 scripts/check.py ready        # can a search start here?
 python3 scripts/check.py publish-ready    # is the manuscript fit to show?
 python3 scripts/check.py status       # the live frontier
@@ -213,6 +213,7 @@ python3 scripts/check.py portfolio    # the live search
 python3 scripts/check.py checkpoints  # current heads of durable memory
 python3 scripts/check.py candidates   # statements proposed but not yet nodes
 python3 scripts/check.py dossiers     # active dossiers, for the standalone LaTeX build
+python3 scripts/check.py glosses      # gloss lengths (advisory) and ASCII mathematics (editorial lane)
 python3 scripts/check.py --root example   # the worked example, kept green as a fixture
 ```
 

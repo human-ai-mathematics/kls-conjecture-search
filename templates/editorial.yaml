@@ -1,0 +1,50 @@
+# Validated by scripts/checks/guide.py, in the `editorial` lane. A filled-in instance is
+# research/program/editorial.yaml.
+#
+# Optional, and last. This file answers one question nothing else in the repository can:
+# of everything the search has accumulated, what should a new reader see first, and where
+# should they go next? The ledger knows every claim and cannot say which ten matter most;
+# the portfolio knows every approach and not how the manuscript groups them; the
+# manuscript knows both and says so in prose no exporter can read. Create this only once
+# there is enough material that a stranger would otherwise be lost — until then the site
+# renders the audit views alone, which is a correct answer and not a degraded one.
+#
+# It holds identifiers, display names and manuscript anchors. It holds no mathematics.
+# `summary`, `statement`, `status`, `objective`, `blocker` and their kin are refused
+# outright wherever they appear: each is canonical somewhere else, and a second copy here
+# would be the prettiest one in the repository and the first to drift (constraint 7).
+#
+# Every id must resolve to a ledger node or a portfolio family, and every anchor to a
+# \label the checker already found under modules/ — so this file cannot describe a
+# repository that does not exist, and cannot send a reader to a section that is not there.
+
+site:
+  name: <the public name of the problem, not the repository slug>
+  tagline: <one sentence a non-specialist could repeat>
+
+# The mathematical routes the manuscript is organized into, and the portfolio families
+# each one covers. Together with `probes` below these must account for every family: one
+# left out would stay live in the portfolio and vanish from the public site.
+routes:
+  - code: <a short letter or number used as the route's name throughout>
+    name: <the mechanism, in words>
+    families: [fam:<slug>]
+    anchor: <the \label of that route's entry section in modules/>
+
+# Anything registered but not yet a route. Listed apart so it does not read as one.
+probes:
+  name: Other probes
+  families: []
+
+# Where the problem stands outside this repository. Ledger node ids, literature ones.
+frontier: []
+
+# A selection, not a ranking: between 6 and 24 claims, each tagged with the job it does.
+# roles: bridge | advance | bottleneck | obstruction | refuted | model
+featured:
+  - {id: <node id>, role: bridge, route: <route code, optional>}
+
+# The manuscript's own hierarchy, in reading order. Anchors survive into the HTML
+# conversion, so each of these opens the section itself rather than the document.
+reading:
+  - {label: <what a reader would call this section>, anchor: sec:<slug>}

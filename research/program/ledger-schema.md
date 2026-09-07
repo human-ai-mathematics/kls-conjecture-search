@@ -60,6 +60,14 @@ exists so `check.py status` and `check.py node` are readable without opening LaT
 called `statement`, which invited exactly the drift it was supposed to survive; that name is
 now rejected.
 
+Write its mathematics in LaTeX `$...$`, as everywhere else (`CLAUDE.md`, "Global
+convention"). A gloss is typeset by the website and read as-is in the terminal, and one
+written in ASCII — `E H^2 <= 4 Id` — is a transcription of the claim rather than the claim.
+The editorial lane fails on the spellings listed in `views.ASCII_MATHS`; it never requires
+that a gloss *contain* mathematics, because a bridge or an obstruction is often clearer in
+plain words. Length is advisory only: `check.py glosses` prints what is over budget, and
+shortening a gloss is editing rather than formatting.
+
 Note the deliberate asymmetry with a **candidate**, whose `statement:` in checkpoint front
 matter *is* canonical — nothing else holds that text, which is the whole reason a candidate
 is allowed to carry one.

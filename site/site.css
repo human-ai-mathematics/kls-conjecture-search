@@ -39,6 +39,20 @@
   --defined: #4a4a80;
   --defined-soft: #eaeaf6;
 
+  /* Standing. The schema has four statuses; a reader has more questions than that, so
+     the derived standing has eight tones. `published` and `certified` are deliberately
+     not the same green: one is a result the literature carries, the other a result this
+     repository certified against a dossier, and a page that draws them alike is making
+     a claim about evidence that the ledger does not make. */
+  --published: #1c5f8a;
+  --published-soft: #e2eff7;
+  --preprint: #7a5a99;
+  --preprint-soft: #f0eaf8;
+  --premise: #6b6252;
+  --premise-soft: #f2efe8;
+  --barrier: #a35a12;
+  --barrier-soft: #fbeeda;
+
   --radius: 7px;
   --radius-lg: 11px;
   --shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 6px 18px -12px rgba(0, 0, 0, .3);
@@ -71,6 +85,14 @@
     --refuted-soft: #331c1b;
     --defined: #a4a4dd;
     --defined-soft: #22223a;
+    --published: #6fb4dd;
+    --published-soft: #142835;
+    --preprint: #b99ada;
+    --preprint-soft: #251d33;
+    --premise: #b6ab96;
+    --premise-soft: #2a2721;
+    --barrier: #dda05a;
+    --barrier-soft: #33240f;
 
     --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 6px 18px -12px rgba(0, 0, 0, .8);
   }
@@ -111,7 +133,7 @@ a:hover { text-decoration-thickness: 2px; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  background: color-mix(in srgb, var(--ground) 94%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
@@ -186,6 +208,12 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .card h3 { margin-top: 0; }
 .card > :last-child { margin-bottom: 0; }
 
+/* Cards side by side in a grid are already drawn to a common height. Their action rows
+   should sit on a common line too — otherwise the card whose description runs one line
+   longer drags its button down, and a row of equals reads as a sequence. */
+.grid > .card { display: flex; flex-direction: column; }
+.grid > .card > .actions:last-child { margin-top: auto; padding-top: .6rem; }
+
 .section-head {
   display: flex;
   align-items: baseline;
@@ -219,7 +247,159 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .badge.kind    { background: transparent; color: var(--ink-soft); border-color: var(--rule-strong); font-weight: 520; }
 .badge.warn    { background: var(--open-soft); color: var(--open); border-color: var(--open); }
 
+/* The eight standing tones. Three of them reuse the `proved` green on purpose — a
+   certified result, an attested one and one proved elsewhere are all proved — and are
+   told apart by their words and, for the weaker two, by a lighter weight of border.
+   Colour is never the only signal: every badge carries its glyph and its label. */
+.badge.standing.certified        { background: var(--proved-soft);    color: var(--proved);    border-color: var(--proved); }
+.badge.standing.attested,
+.badge.standing.proved-elsewhere { background: var(--proved-soft);    color: var(--proved);    border-color: transparent; }
+.badge.standing.published        { background: var(--published-soft); color: var(--published); border-color: var(--published); }
+.badge.standing.preprint         { background: var(--preprint-soft);  color: var(--preprint);  border-color: var(--preprint); }
+.badge.standing.open             { background: var(--open-soft);      color: var(--open);      border-color: var(--open); }
+.badge.standing.premise          { background: var(--premise-soft);   color: var(--premise);   border-color: var(--premise); }
+.badge.standing.barrier          { background: var(--barrier-soft);   color: var(--barrier);   border-color: var(--barrier); }
+.badge.standing.refuted          { background: var(--refuted-soft);   color: var(--refuted);   border-color: var(--refuted); }
+.badge.standing.definition       { background: var(--defined-soft);   color: var(--defined);   border-color: var(--defined); }
+
+/* "Certified here, conditional" is a proved result resting on an open antecedent. The
+   dashed edge is the same convention `.fence.soft` already uses for something that
+   guides without settling — it qualifies the badge rather than recolouring it. */
+.badge.standing.conditional { border-style: dashed; }
+
 .badges { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
+
+/* ------------------------------------------------- titles, tallies and list rows ---- */
+
+.subhead { margin: .15rem 0 .6rem; font-size: .85rem; color: var(--ink-faint); }
+.subhead .note { font-size: .95em; }
+
+/* Claim titles are links, and have to look like it before the cursor arrives.
+ *
+ * A title reading as plain bold text, underlined only on `:hover`, hides the one route
+ * from Key results or the 138-claim list into the claim — and hides it completely on a
+ * touch screen, which has no hover at all. It also inverts the hierarchy: the `.id` chip
+ * beside the title is drawn as a link, so the identifier looks more clickable than the
+ * name. So the underline is always drawn, in the rule colour rather than the text
+ * colour, which signals the link without turning a heading into body copy; hover and
+ * focus promote it to the accent. Colour is not the only carrier: the underline is. */
+.row-name,
+.card-name a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.row-name:hover, .row-name:focus-visible,
+.card-name a:hover, .card-name a:focus-visible {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+.row-name { font-weight: 600; }
+.row-note { margin: .15rem 0 .3rem; }
+
+.card-name { margin: 0 0 .4rem; font-size: 1.02rem; line-height: 1.35; }
+
+.standing-tally { list-style: none; margin: .6rem 0; padding: 0; display: grid; gap: .3rem; }
+.standing-tally li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .3rem .1rem;
+  border-bottom: 1px solid var(--rule);
+}
+/* Filters. Deliberately quiet: they are a way to see the list, not part of it. */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .8rem;
+  align-items: flex-end;
+  margin: .2rem 0 .6rem;
+}
+.filters label { display: flex; flex-direction: column; gap: .15rem; }
+.filters label.grow { flex: 1 1 12rem; }
+.filters .note { text-transform: uppercase; letter-spacing: .06em; font-size: .68rem; }
+.filters select,
+.filters input {
+  font: inherit;
+  font-size: .86rem;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: .25rem .4rem;
+}
+.filters input { width: 100%; }
+
+.route-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.35; }
+/* Same rule as .row-name above, and for the same reason. */
+.route-card h3 a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.route-card h3 a:hover, .route-card h3 a:focus-visible {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+.route-card .row-note { margin: .35rem 0 0; }
+
+.reading-path .row-head { justify-content: space-between; gap: .8rem; }
+
+.standing-tally .tally {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--ink-soft);
+  min-width: 2.4rem;
+  text-align: right;
+}
+
+/* The share of the largest category, as length. Rule 1 of this file is that colour never
+   carries meaning alone; this bar carries none that the printed count does not, so it is
+   free to be tinted with its category's hue, and it is aria-hidden for the same reason. */
+.standing-tally .tally-bar {
+  margin-left: auto;
+  flex: 0 1 clamp(48px, 24%, 210px);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--panel-sunken);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.standing-tally .tally-bar .fill {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--ink-faint);
+}
+.standing-tally .fill.certified,
+.standing-tally .fill.attested,
+.standing-tally .fill.proved-elsewhere { background: var(--proved); }
+.standing-tally .fill.published        { background: var(--published); }
+.standing-tally .fill.preprint         { background: var(--preprint); }
+.standing-tally .fill.open             { background: var(--open); }
+.standing-tally .fill.premise          { background: var(--premise); }
+.standing-tally .fill.barrier          { background: var(--barrier); }
+.standing-tally .fill.refuted          { background: var(--refuted); }
+.standing-tally .fill.definition       { background: var(--defined); }
+
+/* A disclosure over the tail of a long list. Native <details>, so the rows behind it are
+   in the document rather than absent from it, and the summary says how many there are —
+   a list that silently stopped at five would be misreporting an append-only record. */
+.more { margin-top: .7rem; }
+.more > summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: .85rem;
+  padding: .2rem 0;
+  width: fit-content;
+}
+.more > summary:hover { text-decoration: underline; }
+.more[open] > summary { margin-bottom: .5rem; }
 
 /* ------------------------------------------------------------------ id and math ---- */
 
@@ -307,6 +487,10 @@ a.id:hover { border-color: var(--accent); }
 }
 .map-controls label { display: inline-flex; align-items: center; gap: .3rem; cursor: pointer; }
 .map-controls .group { display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; }
+
+/* What a one-choice dropdown becomes. It reads as the caption to the select beside it,
+   so it is deliberately quieter than a control and carries no border or affordance. */
+.map-controls .control-label { color: var(--ink-soft); }
 .map-controls select, .map-controls input[type="search"] {
   font: inherit;
   padding: .2rem .4rem;
@@ -315,7 +499,17 @@ a.id:hover { border-color: var(--accent); }
   background: var(--panel);
   color: inherit;
 }
-.map-stage { position: relative; height: min(64vh, 620px); background: var(--panel); }
+/* Height follows the drawn graph's shape, which site.js sets as an `aspect-ratio` on
+   this element, between a floor that keeps a very wide graph readable and the ceiling
+   the stage used to be fixed at. */
+.map-stage {
+  position: relative;
+  height: auto;
+  min-height: 300px;
+  max-height: min(64vh, 620px);
+  aspect-ratio: 3 / 2;
+  background: var(--panel);
+}
 .map-stage svg { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 .map-stage svg.dragging { cursor: grabbing; }
 .map-hint {
@@ -400,6 +594,21 @@ button.action:hover { border-color: var(--accent); color: var(--accent); }
 .crumb { font-size: .84rem; color: var(--ink-faint); }
 .crumb a { color: var(--ink-soft); }
 
+/* The Audit sub-navigation: same weight as a breadcrumb, because that is what it is —
+   where you are and what sits beside it, not a second masthead. */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .55rem;
+  align-items: baseline;
+  font-size: .84rem;
+  color: var(--ink-faint);
+  margin-bottom: .5rem;
+}
+.subnav a { color: var(--ink-soft); }
+.subnav > * + *::before { content: "/"; color: var(--rule-strong); margin-right: .55rem; }
+.subnav [aria-current="page"] { color: var(--ink); font-weight: 600; }
+
 .actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .3rem; }
 .action {
   display: inline-flex;
@@ -449,7 +658,28 @@ button.action:hover { border-color: var(--accent); color: var(--accent); }
   h1 { font-size: 1.35rem; }
   .kv { grid-template-columns: 1fr; gap: .1rem .5rem; }
   .kv dd { margin-bottom: .5rem; }
-  .map-stage { height: 58vh; }
+  .map-stage { min-height: 260px; max-height: 58vh; }
+}
+
+/* Paper.
+ *
+ * This file's first rule — colour never carries meaning alone — was written partly so
+ * that a page could be printed and still be read, and a stylesheet is what makes that
+ * true rather than nearly true. What comes off is what only works under a cursor: the
+ * navigation, the filter bars, the action links, and the map, which is an interactive
+ * neighbourhood of a graph whose complete contents are in the list beneath it. The
+ * colophon stays, because a printed status without the caveat beside it is a claim this
+ * site does not make. */
+@media print {
+  body { background: #fff; color: #000; }
+  .skip-link, .masthead, .filters, .map, .actions { display: none; }
+  main { max-width: none; padding: 0; }
+  a { color: inherit; text-decoration: underline; }
+  .card, .rows > li, .standing-tally li { break-inside: avoid; }
+  .colophon { background: none; border-top: 1px solid var(--rule-strong); }
+  /* A closed disclosure prints closed. Keep its summary, so the paper says what it is
+     not showing rather than showing a list that appears to be the whole of one. */
+  .more > summary { color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {

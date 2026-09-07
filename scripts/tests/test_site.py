@@ -24,6 +24,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from fixtures import REPO, CheckerFixture, node  # noqa: E402
@@ -34,6 +36,23 @@ from fixtures import REPO, CheckerFixture, node  # noqa: E402
 _spec = importlib.util.spec_from_file_location("harness_site", REPO / "scripts/site.py")
 site_module = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(site_module)
+
+#: ``id:`` values anywhere in a document, plus the keys of a mapping of them. Blunt on
+#: purpose: this is used to prove an *absence*, so over-collecting is the safe direction.
+def _identifiers(value: object):
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if isinstance(key, str) and ":" in key:
+                yield key
+            if key == "id" and isinstance(item, str) and ":" in item:
+                yield item
+            yield from _identifiers(item)
+    elif isinstance(value, list):
+        for item in value:
+            if isinstance(item, str) and ":" in item and " " not in item:
+                yield item
+            yield from _identifiers(item)
+
 
 EXAMPLE = REPO / "example"
 FRONTEND = REPO / "site"
@@ -156,6 +175,113 @@ class ClaimExport(SiteFixture):
         self.assertEqual(claims["conj:target"]["edges"]["depends_on"], [])
         self.assertEqual(claims["conj:target"]["edges"]["refuted_by"], ["prop:refuter"])
         self.assertEqual(claims["prop:refuter"]["reverse"]["refutes"], ["conj:target"])
+
+
+class ReaderFacingProjections(SiteFixture):
+    """Titles, standings and the guide: what the frontend is allowed to render."""
+
+    def test_the_manuscript_title_is_exported_as_the_claim_s_name(self):
+        """The heading a mathematician reads, taken from the claim's own environment."""
+        self.add_ledger("program", "test", [node("thm:a")])
+        # Rewritten after add_ledger, which plants an untitled anchor of its own; two
+        # would be a duplicate label, which the core lane correctly refuses.
+        self.module.write_text(
+            "\\begin{theorem}[All-cut Carleson implies KLS]\n"
+            "\\label{thm:a}\nfixture\n\\end{theorem}\n")
+
+        claim = self.data()["claims"]["thm:a"]
+
+        self.assertEqual(claim["title"], "All-cut Carleson implies KLS")
+        self.assertEqual(claim["id"], "thm:a", "the identifier is demoted, never dropped")
+
+    def test_a_claim_without_a_title_exports_null_rather_than_its_id(self):
+        """The fallback belongs to the frontend, which knows it is falling back."""
+        self.add_ledger("program", "test", [node("thm:a")])
+
+        self.assertIsNone(self.data()["claims"]["thm:a"]["title"])
+
+    def test_the_standing_is_exported_beside_the_schema_status(self):
+        """Both, not one. The badge shows the standing; the status stays auditable."""
+        self.add_ledger("program", "test", [
+            node("thm:published", status="proved", provenance="literature",
+                 import_class="published", references=["FixtureReference"]),
+        ], certify_fixture_proofs=False)
+
+        claim = self.data()["claims"]["thm:published"]
+
+        self.assertEqual(claim["status"], "proved")
+        self.assertEqual(claim["standing"], "Published result")
+        self.assertEqual(claim["standing_tone"], "published")
+        self.assertFalse(claim["standing_conditional"])
+
+    def test_a_literature_import_is_never_labelled_certified_here(self):
+        """The homepage used to say every proved node had a certified dossier. Ten did not."""
+        self.add_ledger("program", "test", [
+            node("thm:import", status="proved", provenance="literature",
+                 import_class="published", references=["FixtureReference"]),
+        ], certify_fixture_proofs=False)
+
+        claim = self.data()["claims"]["thm:import"]
+
+        self.assertEqual(claim["proofs"], [])
+        self.assertNotEqual(claim["standing_tone"], "certified")
+
+    def test_a_conditional_result_keeps_its_status_and_says_it_is_conditional(self):
+        self.add_ledger("program", "test", [
+            node("asm:open", status="open", kind="assumption"),
+            node("thm:conditional", assumes=["asm:open"]),
+        ])
+
+        claim = self.data()["claims"]["thm:conditional"]
+
+        self.assertEqual(claim["status"], "proved")
+        self.assertTrue(claim["standing_conditional"])
+        self.assertIn("conditional", claim["standing"])
+
+    def test_a_tree_with_no_guide_exports_null_and_still_publishes(self):
+        """Every Explore view degrades to the audit views it indexes."""
+        self.add_ledger("program", "test", [node("thm:a")])
+
+        self.assertIsNone(self.data()["guide"])
+
+    def test_a_guide_reaches_the_frontend_through_data_json(self):
+        """The one route by which route names and featured ids may reach site.js."""
+        self.add_ledger("program", "test", [
+            node("conj:target", status="open", kind="conjecture"),
+            *(node(f"thm:{letter}") for letter in "abcdef"),
+        ])
+        self.add_portfolio({
+            "target": "conj:target",
+            "families": [{"id": "fam:one", "mechanism": "m", "state": "active"}],
+            "approaches": [{"id": "ap:one", "family": "fam:one", "objective": "o",
+                            "state": "active"}],
+        })
+        (self.research / "program/editorial.yaml").write_text(
+            "site:\n  name: Test programme\n"
+            "routes:\n"
+            "  - code: E\n    name: One mechanism\n"
+            "    families: [fam:one]\n    anchor: conj:target\n"
+            "featured:\n"
+            + "".join(f"  - {{id: thm:{letter}, role: advance}}\n"
+                      for letter in "abcdef")
+        )
+
+        guide = self.data()["guide"]
+
+        self.assertEqual(guide["site"]["name"], "Test programme")
+        self.assertEqual(guide["routes"][0]["code"], "E")
+        self.assertEqual(len(guide["featured"]), 6)
+
+    def test_a_guide_that_does_not_validate_is_not_published_at_all(self):
+        """It is checked in the editorial lane, so site.py refuses the whole revision."""
+        self.add_ledger("program", "test", [node("thm:a")])
+        (self.research / "program/editorial.yaml").write_text(
+            "featured:\n  - {id: thm:ghost, role: bridge}\n")
+
+        data, errors = self.publish()
+
+        self.assertTrue(any("thm:ghost" in error for error in errors))
+        self.assertEqual(data, {})
 
 
 class CertificationIsNotFlattened(SiteFixture):
@@ -404,6 +530,26 @@ class TheFrontendHoldsNoMathematics(unittest.TestCase):
         for identifier in [*self.data["claims"], *self.data["search"]["routes"],
                            *self.data["search"]["families"]]:
             self.assertNotIn(identifier, text, identifier)
+
+    def test_this_repository_s_own_identifiers_are_not_hard_coded_either(self):
+        """The example names five nodes; this repository names 138.
+
+        The check above can only catch an id the *worked example* happens to use, so a
+        curated selection typed straight into site.js would sail past it untouched. The
+        Explore views do select claims by id and do name families, and every one of those
+        choices belongs in research/program/editorial.yaml where the editorial lane can
+        validate it against the ledger and the portfolio. This is the test that says so.
+        """
+        text = self.frontend_text()
+        for relative in ("research/program/ledger.yaml",
+                         "research/program/portfolio.yaml",
+                         "research/program/editorial.yaml"):
+            path = REPO / relative
+            if not path.is_file():
+                continue
+            document = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            for identifier in _identifiers(document):
+                self.assertNotIn(identifier, text, f"{relative}: {identifier}")
 
     def test_the_worked_example_exercises_every_genre_the_site_renders(self):
         """If this fails, the fixture stopped covering a path the site draws."""

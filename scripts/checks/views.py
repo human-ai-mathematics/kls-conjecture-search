@@ -7,6 +7,7 @@ list anywhere in the repository.
 """
 from __future__ import annotations
 
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -366,3 +367,106 @@ def dossiers(report: dict) -> None:
                     found.append(artifact)
     for path in sorted(found):
         print(path)
+
+
+# --------------------------------------------------------------------------------------
+# glosses: an advisory view, on its way to being a rule
+# --------------------------------------------------------------------------------------
+
+#: A gloss helps a reader recognize a claim; the statement is the \label in modules/.
+#: Past roughly this length it stops being a gloss and becomes a compressed restatement,
+#: and a list of 138 of those reads as a wall rather than an index.
+GLOSS_BUDGET = 240
+
+#: ASCII spellings of things that are mathematics. Written between dollars they typeset;
+#: written bare they are what a reader currently meets, e.g. `sqrt(||Cov mu||_op / t)`.
+#: Deliberately conservative --- the editorial lane fails on these, so it would rather
+#: miss a case than cry wolf on ordinary prose.
+#:
+#: A token that starts with a letter is matched on a word boundary. Without that, `int `
+#: fires inside "constraint ", "joint ", "point " --- ordinary English in a gloss that
+#: contains no bare integral at all, and exactly the false positive that would make a
+#: blocking check something people learn to work around rather than satisfy.
+ASCII_MATHS = (
+    ("<=", "≤"), (">=", "≥"), ("!=", "≠"), ("||", "a norm"), ("^2", "an exponent"),
+    ("^{", "an exponent"), ("_i", "a subscript"), ("_n", "a subscript"),
+    ("sqrt(", "a root"), ("int ", "an integral"), ("sum_", "a sum"),
+    ("E(", "an expectation"), ("<f,", "an inner product"), ("->", "→"),
+)
+
+#: One compiled matcher per token, in the same order, with the word-boundary guard
+#: applied to the ones that need it.
+ASCII_MATH_RES = tuple(
+    (
+        re.compile((r"(?<![A-Za-z])" if token[0].isalpha() else "") + re.escape(token)),
+        name,
+    )
+    for token, name in ASCII_MATHS
+)
+
+
+def _outside_math(text: str) -> str:
+    """``text`` with every ``$...$`` span blanked, so only prose is inspected."""
+    out, inside = [], False
+    for part in text.split("$"):
+        out.append(" " * len(part) if inside else part)
+        inside = not inside
+    return "$".join(out)
+
+
+def ascii_mathematics(gloss: str) -> list[str]:
+    """The names of the ASCII spellings written outside ``$...$`` in ``gloss``."""
+    prose = _outside_math(gloss)
+    return sorted({name for pattern, name in ASCII_MATH_RES if pattern.search(prose)})
+
+
+def glosses(report: dict) -> None:
+    """Which ledger glosses are too long, or write mathematics in ASCII.
+
+    The ASCII half of this view is now enforced: every gloss was rewritten into
+    ``$...$`` and :func:`checks.editorial.ascii_gloss_errors` fails the editorial lane on
+    a regression, which is what this docstring used to say should happen once the list
+    was empty. What is printed here is the same projection, browsable, plus the length
+    advisory that stays advisory --- shortening a gloss is mathematical editing with no
+    mechanical right answer, and a budget that blocked would be met by deleting content.
+
+    Note what is *not* checked: that every gloss contains mathematics. Plenty are
+    legitimately prose --- a proof bridge, a methodological obstruction --- and demanding
+    a dollar sign in those would buy nothing and cost their readability.
+    """
+    long_ones: list[tuple[int, str]] = []
+    ascii_ones: list[tuple[str, list[str]]] = []
+    total = 0
+    for item in report["ledgers"]:
+        for nid, node in sorted(item["nodes"].items()):
+            gloss = node.get("summary")
+            if not isinstance(gloss, str) or not gloss:
+                continue
+            total += 1
+            if len(gloss) > GLOSS_BUDGET:
+                long_ones.append((len(gloss), nid))
+            found = ascii_mathematics(gloss)
+            if found:
+                ascii_ones.append((nid, found))
+
+    typeset = total - len(ascii_ones)
+    print(f"{total} gloss(es); {typeset} free of bare ASCII mathematics, "
+          f"{len(long_ones)} over {GLOSS_BUDGET} characters")
+
+    if ascii_ones:
+        print(f"\nmathematics written outside $...$ ({len(ascii_ones)}):")
+        for nid, found in ascii_ones:
+            print(f"  {nid:44s} {', '.join(found)}")
+    if long_ones:
+        print(f"\nlonger than a gloss ({len(long_ones)}):")
+        for length, nid in sorted(long_ones, reverse=True):
+            print(f"  {nid:44s} {length} characters")
+    if not ascii_ones and not long_ones:
+        print("\nNothing to report.")
+    elif ascii_ones:
+        print("\nThe ASCII list above fails the editorial lane. The length list does not:"
+              "\na gloss is a recognition aid, not the statement --- the canonical text is"
+              "\nthe \\label in modules/, and shortening one is editing, not formatting.")
+    else:
+        print("\nAdvisory: nothing above fails a lane. A gloss is a recognition aid, not"
+              "\nthe statement --- the canonical text is the \\label in modules/.")

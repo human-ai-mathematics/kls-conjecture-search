@@ -14,7 +14,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from . import checkpoints, docs, editorial, ledger, numerics, portfolio, proofs, roles
+from . import (checkpoints, docs, editorial, guide, ledger, numerics, portfolio, proofs,
+               roles)
 from .common import LANES
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -51,6 +52,15 @@ def analyze(root: Path | None = None, research: Path | None = None,
     role_definitions = roles.check(root, errors["roles"])
     links = docs.check(root, errors["docs"])
     editorial.check(root, ledgers, errors["editorial"])
+    editorial.check_titles(labels, errors["editorial"])
+    editorial.ascii_gloss_errors(ledgers, errors["editorial"])
+
+    reader_guide = guide.load(root, errors["editorial"])
+    guide.check(
+        root, reader_guide, node_ids,
+        set((live_portfolio or {}).get("families") or {}),
+        labels, errors["editorial"],
+    )
 
     return {
         "errors": errors,
@@ -64,6 +74,7 @@ def analyze(root: Path | None = None, research: Path | None = None,
         "roles": role_definitions,
         "archive": archive,
         "links": links,
+        "guide": reader_guide,
     }
 
 

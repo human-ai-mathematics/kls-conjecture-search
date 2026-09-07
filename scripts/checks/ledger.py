@@ -48,6 +48,56 @@ SELF_LABELLING_ENVIRONMENTS = frozenset({
 ENVIRONMENT_RE = re.compile(r"\\(begin|end)\{([A-Za-z][A-Za-z0-9*]*)\}")
 LABEL_RE = re.compile(r"\\label\{([^}]+)\}")
 
+
+def optional_title(text: str, position: int) -> str | None:
+    """The raw amsthm optional argument beginning at or after ``position``, if any.
+
+    ``position`` is the offset just past a ``\\begin{...}``. amsthm allows whitespace —
+    including a newline — between the environment name and its ``[title]``, so that is
+    skipped first; anything else means the environment has no title and ``None`` comes
+    back.
+
+    The scan is brace- and bracket-aware because real titles are not flat. Two live
+    shapes in ``modules/`` would both defeat a ``[^\\]]*`` regex:
+
+        [{Klartag--Lehec; the sup-over-time form is \\cite[Thm.~61]{KLnotes}}]
+        [Klartag--Lehec \\cite[Thm.~61]{KLnotes}]
+
+    In the first the ``]`` of the citation sits inside a brace group; in the second it
+    does not. Counting ``[``/``]`` only at brace depth 0 closes both correctly: the inner
+    citation is invisible in the first and balanced in the second. A backslash escapes
+    the character after it, so a literal ``\\[`` never opens a group.
+
+    Returns the argument without its outer brackets. Normalizing it for display is
+    ``editorial.title_display`` — this function only finds the bytes, so that the core
+    lane keeps knowing about structure and nothing else.
+    """
+    index = position
+    while index < len(text) and text[index] in " \t\r\n":
+        index += 1
+    if index >= len(text) or text[index] != "[":
+        return None
+    start = index + 1
+    brackets, braces = 1, 0
+    while index + 1 < len(text):
+        index += 1
+        character = text[index]
+        if character == "\\":
+            index += 1           # escaped: the next character is literal
+            continue
+        if character == "{":
+            braces += 1
+        elif character == "}":
+            braces = max(0, braces - 1)
+        elif braces == 0:
+            if character == "[":
+                brackets += 1
+            elif character == "]":
+                brackets -= 1
+                if brackets == 0:
+                    return text[start:index]
+    return None                  # unbalanced: treat as untitled rather than guess
+
 # One logical-status vocabulary. Mathematical form belongs in ``kind``;
 # speculative prose is not a ledger classification.
 STATUSES = {"open", "proved", "defined", "refuted"}
@@ -117,7 +167,7 @@ def strip_comments(text: str) -> str:
     return "".join(out)
 
 
-def _labels_with_environments(text: str) -> list[tuple[str, str | None, int]]:
+def _labels_with_environments(text: str) -> list[tuple[str, str | None, int, str | None]]:
     """Pair every ``\\label`` in one file with the claim environment enclosing it.
 
     The enclosing environment is the innermost open *claim* environment, so a label
@@ -133,31 +183,41 @@ def _labels_with_environments(text: str) -> list[tuple[str, str | None, int]]:
     every offset *and* every newline, so counting them here is exact — and it is the only
     place in the repository that knows where an anchor physically sits, which is what lets
     a reader be sent to the statement rather than to the file holding it.
+
+    The fourth element is the enclosing claim's raw amsthm title, when it has one. It
+    travels with the label rather than being scanned separately because the two are the
+    same object seen twice: a heading and its anchor. ``None`` for a structural label, and
+    for a claim written without a title.
     """
     events = sorted(
-        [(match.start(), "env", match.group(1), match.group(2))
+        [(match.start(), "env", match.group(1), match.group(2), match.end())
          for match in ENVIRONMENT_RE.finditer(text)]
-        + [(match.start(), "label", match.group(1), None)
+        + [(match.start(), "label", match.group(1), None, match.end())
            for match in LABEL_RE.finditer(text)]
     )
-    stack: list[str] = []
-    found: list[tuple[str, str | None, int]] = []
-    for position, kind, first, second in events:
+    stack: list[tuple[str, str | None]] = []
+    found: list[tuple[str, str | None, int, str | None]] = []
+    for position, kind, first, second, end in events:
         if kind == "env":
             if first == "begin":
-                stack.append(second)
-            elif stack and second in stack:
-                # Close to the matching \begin, tolerating unbalanced prose above it.
-                del stack[stack.index(second):]
+                title = optional_title(text, end) if second in CLAIM_ENVIRONMENTS else None
+                stack.append((second, title))
+            else:
+                names = [name for name, _title in stack]
+                if second in names:
+                    # Close to the matching \begin, tolerating unbalanced prose above it.
+                    del stack[names.index(second):]
         else:
-            enclosing = None
-            for name in reversed(stack):
+            enclosing = enclosing_title = None
+            for name, title in reversed(stack):
                 if name in SELF_LABELLING_ENVIRONMENTS:
                     break  # the equation, figure or table owns this label
                 if name in CLAIM_ENVIRONMENTS:
-                    enclosing = name
+                    enclosing, enclosing_title = name, title
                     break
-            found.append((first, enclosing, text.count("\n", 0, position) + 1))
+            found.append(
+                (first, enclosing, text.count("\n", 0, position) + 1, enclosing_title)
+            )
     return found
 
 
@@ -169,9 +229,10 @@ def manuscript_labels(root: Path, errors: list[str] | None = None) -> dict[str, 
     structural label is not a node at all. Returned as a mapping so a duplicate is
     detectable — a set silently merged two anchors that disagree.
 
-    Each entry carries ``environment``, ``file`` and the 1-based ``line`` of the
-    ``\\label``. The line is derived, never stored anywhere, and no validation depends
-    on it: it exists so a derived view can point a reader at the statement itself.
+    Each entry carries ``environment``, ``file``, the 1-based ``line`` of the ``\\label``
+    and the raw amsthm ``title`` of the enclosing claim. Neither the line nor the title is
+    stored anywhere, and no validation depends on either: they exist so a derived view can
+    point a reader at the statement itself, and name it in words rather than in an id.
     """
     labels: dict[str, dict] = {}
     modules = root / "modules"
@@ -185,14 +246,18 @@ def manuscript_labels(root: Path, errors: list[str] | None = None) -> dict[str, 
             if errors is not None:
                 errors.append(f"{relative}: cannot read manuscript module: {exc}")
             continue
-        for label, environment, line in _labels_with_environments(strip_comments(text)):
+        for label, environment, line, title in _labels_with_environments(
+                strip_comments(text)):
             if label in labels and errors is not None:
                 errors.append(
                     f"{relative}: duplicate manuscript label '{label}', already at "
                     f"{labels[label]['file']}; one anchor, one place"
                 )
                 continue
-            labels[label] = {"environment": environment, "file": relative, "line": line}
+            labels[label] = {
+                "environment": environment, "file": relative, "line": line,
+                "title": title,
+            }
     return labels
 
 
