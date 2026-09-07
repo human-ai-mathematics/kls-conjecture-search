@@ -2,22 +2,38 @@
 #
 # `blank_issues_enabled: true` on purpose: the five forms cover what the site's buttons
 # open, and a contributor with something that fits none of them should not have to
-# pretend it does.
+# pretend it does. It is also, while both contact links below are withdrawn, the only
+# way in for anything that is not one of the five.
 #
 # The two URLs below are the only place in the repository that hardcodes the
 # owner/repo slug: everything the site links derives it from the `origin` remote.
 # A fork therefore has to repoint exactly this file, which is README.md's
 # instantiation step 5 and docs/PUBLISHING-THE-SITE.md.
+#
+# Both are commented out because both currently 404, and a dead link in the one file
+# every contributor is shown is worse than one fewer link. Each comes back by
+# uncommenting it, once — and only once — the thing it points at exists:
+#
+#   "Ask a question, or think out loud" needs Discussions enabled
+#       (Settings -> General -> Features -> Discussions).
+#       `gh repo view --json hasDiscussionsEnabled` currently reports false.
+#
+#   "Read the search first" needs the site actually published
+#       (Settings -> Pages -> Build and deployment -> Source: GitHub Actions, then
+#       dispatch .github/workflows/pages.yml from the default branch).
+#       docs/PUBLISHING-THE-SITE.md is the full path; publishing is manual because it
+#       is expensive and because it is a claim. Note the repository is private, so
+#       this is a decision about visibility and not only about readiness.
 blank_issues_enabled: true
-contact_links:
-  - name: Ask a question, or think out loud
-    url: https://github.com/numina-functional-inequalities/kls-exploration/discussions
-    about: >
-      Interpretation, background, why a route was abandoned, whether an idea is worth
-      trying. Nothing has to be finished to be worth saying here.
-
-  - name: Read the search first
-    url: https://numina-functional-inequalities.github.io/kls-exploration/
-    about: >
-      The target, what is established and at what certification level, what remains
-      open, which mechanisms have been tried, and why each route stopped.
+contact_links: []
+#  - name: Ask a question, or think out loud
+#    url: https://github.com/numina-functional-inequalities/kls-exploration/discussions
+#    about: >
+#      Interpretation, background, why a route was abandoned, whether an idea is worth
+#      trying. Nothing has to be finished to be worth saying here.
+#
+#  - name: Read the search first
+#    url: https://numina-functional-inequalities.github.io/kls-exploration/
+#    about: >
+#      The target, what is established and at what certification level, what remains
+#      open, which mechanisms have been tried, and why each route stopped.
