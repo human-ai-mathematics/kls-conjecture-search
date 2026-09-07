@@ -133,7 +133,7 @@ a:hover { text-decoration-thickness: 2px; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  background: color-mix(in srgb, var(--ground) 94%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
@@ -207,6 +207,12 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 }
 .card h3 { margin-top: 0; }
 .card > :last-child { margin-bottom: 0; }
+
+/* Cards side by side in a grid are already drawn to a common height. Their action rows
+   should sit on a common line too — otherwise the card whose description runs one line
+   longer drags its button down, and a row of equals reads as a sequence. */
+.grid > .card { display: flex; flex-direction: column; }
+.grid > .card > .actions:last-child { margin-top: auto; padding-top: .6rem; }
 
 .section-head {
   display: flex;
@@ -315,11 +321,55 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .reading-path .row-head { justify-content: space-between; gap: .8rem; }
 
 .standing-tally .tally {
-  margin-left: auto;
   font-variant-numeric: tabular-nums;
   font-weight: 650;
   color: var(--ink-soft);
+  min-width: 2.4rem;
+  text-align: right;
 }
+
+/* The share of the largest category, as length. Rule 1 of this file is that colour never
+   carries meaning alone; this bar carries none that the printed count does not, so it is
+   free to be tinted with its category's hue, and it is aria-hidden for the same reason. */
+.standing-tally .tally-bar {
+  margin-left: auto;
+  flex: 0 1 clamp(48px, 24%, 210px);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--panel-sunken);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.standing-tally .tally-bar .fill {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--ink-faint);
+}
+.standing-tally .fill.certified,
+.standing-tally .fill.attested,
+.standing-tally .fill.proved-elsewhere { background: var(--proved); }
+.standing-tally .fill.published        { background: var(--published); }
+.standing-tally .fill.preprint         { background: var(--preprint); }
+.standing-tally .fill.open             { background: var(--open); }
+.standing-tally .fill.premise          { background: var(--premise); }
+.standing-tally .fill.barrier          { background: var(--barrier); }
+.standing-tally .fill.refuted          { background: var(--refuted); }
+.standing-tally .fill.definition       { background: var(--defined); }
+
+/* A disclosure over the tail of a long list. Native <details>, so the rows behind it are
+   in the document rather than absent from it, and the summary says how many there are —
+   a list that silently stopped at five would be misreporting an append-only record. */
+.more { margin-top: .7rem; }
+.more > summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: .85rem;
+  padding: .2rem 0;
+  width: fit-content;
+}
+.more > summary:hover { text-decoration: underline; }
+.more[open] > summary { margin-bottom: .5rem; }
 
 /* ------------------------------------------------------------------ id and math ---- */
 
@@ -550,6 +600,27 @@ button.action:hover { border-color: var(--accent); color: var(--accent); }
   .kv { grid-template-columns: 1fr; gap: .1rem .5rem; }
   .kv dd { margin-bottom: .5rem; }
   .map-stage { height: 58vh; }
+}
+
+/* Paper.
+ *
+ * This file's first rule — colour never carries meaning alone — was written partly so
+ * that a page could be printed and still be read, and a stylesheet is what makes that
+ * true rather than nearly true. What comes off is what only works under a cursor: the
+ * navigation, the filter bars, the action links, and the map, which is an interactive
+ * neighbourhood of a graph whose complete contents are in the list beneath it. The
+ * colophon stays, because a printed status without the caveat beside it is a claim this
+ * site does not make. */
+@media print {
+  body { background: #fff; color: #000; }
+  .skip-link, .masthead, .filters, .map, .actions { display: none; }
+  main { max-width: none; padding: 0; }
+  a { color: inherit; text-decoration: underline; }
+  .card, .rows > li, .standing-tally li { break-inside: avoid; }
+  .colophon { background: none; border-top: 1px solid var(--rule-strong); }
+  /* A closed disclosure prints closed. Keep its summary, so the paper says what it is
+     not showing rather than showing a list that appears to be the whole of one. */
+  .more > summary { color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {

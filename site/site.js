@@ -304,7 +304,7 @@ function glossBlock(claim) {
     /* A control that is simply absent tells a reader nothing; they conclude the
        statement is unavailable rather than that one rendering of it is. Say which. */
     rendered && pdf ? null : el('p', { class: 'note' },
-      `${missing.join(' and ')} of the manuscript `
+      `${sentence(missing.join(' and '))} of the manuscript `
       + `${missing.length > 1 ? 'are' : 'is'} not attached to this build`,
       rendered || pdf || source.file
         ? '. The links above reach the statement by the routes that are.'
@@ -389,12 +389,29 @@ function statCard(value, label) {
     el('span', { class: 'label', text: label }));
 }
 
+/* Names of missing renderings read as sentence fragments ("the PDF"), and a fragment
+   pasted at the head of a sentence starts it in lower case. Capitalise the join, once,
+   here rather than duplicating a capitalised variant of every name. */
+function sentence(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
+
 function emptyState(text) { return el('p', { class: 'empty', text }); }
+
+/* How many of a claim's checkpoints a node page opens with, newest first. */
+const RECENT_CHECKPOINTS = 5;
 
 /* -------------------------------------------------------------------------- maps ---- */
 
 const NODE_W = 212;
 const NODE_H = 56;
+
+/* Breathing room around the drawn subgraph, in layout units. Small on purpose: the fit
+   scales the content box to the stage, so padding here is paid for in legibility. */
+const PAD_X = 56;
+const PAD_Y = 40;
+
+/* The closest the initial fit will ever get — roughly five boxes across. */
+const MIN_VIEW_W = NODE_W * 5;
+const MIN_VIEW_H = NODE_H * 7.5;
 
 /* Above this many nodes, "Whole map" stops being a map.
  *
@@ -563,6 +580,39 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     return { x: from.x + dx * scale, y: from.y + dy * scale };
   }
 
+  /**
+   * Where the nodes that are actually drawn go.
+   *
+   * The exporter's layout is global: every node is placed once, against all of them, so
+   * a layer a hundred nodes wide is fifteen thousand units wide. A neighbourhood is a
+   * handful of those, and at their global coordinates two neighbours in the same layer
+   * can sit nine thousand units apart with nothing drawn in between — the fit then
+   * scales the whole picture down until no label is legible, which is the state this
+   * view was in.
+   *
+   * So the drawn subgraph is compacted. The layer an exporter assigned is kept exactly
+   * — a dependency still sits below what rests on it, which is the only thing this
+   * geometry is allowed to mean — and inside a layer the gaps left by nodes that are
+   * not shown are closed, in the exporter's own left-to-right order. Position within a
+   * layer carries no meaning, so closing those gaps takes none away.
+   */
+  function place(shown) {
+    const rows = new Map();
+    for (const node of nodes) {
+      if (!shown.has(node.id)) continue;
+      if (!rows.has(node.y)) rows.set(node.y, []);
+      rows.get(node.y).push(node);
+    }
+    const pitch = NODE_W + 48;
+    const at = new Map();
+    for (const row of rows.values()) {
+      row.sort((a, b) => a.x - b.x || a.id.localeCompare(b.id));
+      const start = -((row.length - 1) * pitch) / 2;
+      row.forEach((node, index) => at.set(node.id, { x: start + index * pitch, y: node.y }));
+    }
+    return at;
+  }
+
   function draw() {
     const shown = visible();
     clear(stage);
@@ -572,11 +622,22 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
       stage.appendChild(emptyState('Nothing to draw here yet.'));
       return;
     }
-    const minX = Math.min(...placed.map((n) => n.x)) - NODE_W;
-    const maxX = Math.max(...placed.map((n) => n.x)) + NODE_W;
-    const minY = Math.min(...placed.map((n) => n.y)) - NODE_H;
-    const maxY = Math.max(...placed.map((n) => n.y)) + NODE_H;
-    if (!view) view = { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+    const at = place(shown);
+    const spots = placed.map((node) => at.get(node.id));
+    const minX = Math.min(...spots.map((p) => p.x)) - NODE_W / 2 - PAD_X;
+    const maxX = Math.max(...spots.map((p) => p.x)) + NODE_W / 2 + PAD_X;
+    const minY = Math.min(...spots.map((p) => p.y)) - NODE_H / 2 - PAD_Y;
+    const maxY = Math.max(...spots.map((p) => p.y)) + NODE_H / 2 + PAD_Y;
+    if (!view) {
+      /* Fit what is drawn — but never closer than a floor. Most neighbourhoods here are
+         two or three nodes, and a two-node picture stretched to fill a 600-pixel stage
+         is a diagram of nothing, drawn enormous. The floor is stated in layout units
+         rather than as a scale because the stage has no measurable width on the first
+         draw: the graph is built before it is put on the page. */
+      const w = Math.max(maxX - minX, MIN_VIEW_W);
+      const h = Math.max(maxY - minY, MIN_VIEW_H);
+      view = { x: (minX + maxX) / 2 - w / 2, y: (minY + maxY) / 2 - h / 2, w, h };
+    }
 
     canvas = svg('svg', {
       viewBox: `${view.x} ${view.y} ${view.w} ${view.h}`,
@@ -601,8 +662,8 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     for (const edge of edges) {
       if (state.off.has(edge.kind)) continue;
       if (!shown.has(edge.from) || !shown.has(edge.to)) continue;
-      const a = byId.get(edge.from);
-      const b = byId.get(edge.to);
+      const a = at.get(edge.from);
+      const b = at.get(edge.to);
       if (!a || !b) continue;
       const start = boxEdge(a, b);
       const end = boxEdge(b, a);
@@ -625,7 +686,8 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
       const group = svg('g', {
         class: classes.join(' '), tabindex: '0', role: 'button',
         'aria-label': `${node.name || node.label || node.id}, ${node.meta}`,
-        transform: `translate(${node.x - NODE_W / 2} ${node.y - NODE_H / 2})`,
+        transform: `translate(${at.get(node.id).x - NODE_W / 2} `
+          + `${at.get(node.id).y - NODE_H / 2})`,
         onclick: () => select(node.id),
         onkeydown: (event) => {
           if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(node.id); }
@@ -887,6 +949,7 @@ function viewOverview() {
     statCard(live.length, `approach${live.length === 1 ? '' : 'es'} live`),
     statCard(blocked.length, `approach${blocked.length === 1 ? '' : 'es'} blocked`)));
 
+  const largest = standings.length ? standings[0][1].count : 0;
   page.appendChild(el('h3', { text: 'What those claims are, one category at a time' }));
   page.appendChild(el('ul', { class: 'standing-tally' }, standings.map(([label, entry]) =>
     el('li', {},
@@ -894,6 +957,15 @@ function viewOverview() {
         el('span', { class: 'glyph', 'aria-hidden': 'true',
           text: STANDING_GLYPH[entry.tone] || '?' }),
         label),
+      /* Length beside the number, never instead of it. Eleven rows of right-aligned
+         digits is an inventory a reader has to add up; the bar answers "which of these
+         dominate" at a glance and the count stays printed for the answer that matters.
+         It is scaled against the largest row rather than the total because that is the
+         question it is being asked, and it is hidden from assistive technology, which
+         is already reading the number it duplicates. */
+      el('span', { class: 'tally-bar', 'aria-hidden': 'true' },
+        el('span', { class: `fill ${entry.tone}`,
+          style: `width:${largest ? (entry.count / largest) * 100 : 0}%` })),
       el('span', { class: 'tally', text: String(entry.count) })))));
   page.appendChild(el('p', { class: 'note' },
     'Derived from each node\u2019s status, provenance, import class, proof records and '
@@ -1242,10 +1314,28 @@ function viewNode(id) {
         claim.blocks_routes.map((id) => approachRow(DATA.search.routes[id])))));
   }
   if (claim.checkpoints.length) {
-    around.push(el('div', { class: 'card' },
+    /* Newest first, and only the newest few unfolded.
+     *
+     * A claim near the centre of a search collects dozens of these. In the order the
+     * ledger stores them the reader meets the oldest first and scrolls past a year of
+     * work to reach what happened last week, on a page whose question is what this claim
+     * is doing now. Nothing is dropped: constraint 6 makes this record append-only, and a
+     * page that quietly truncated it would be misreporting the memory. The rest are
+     * behind a disclosure that says how many. */
+    const records = claim.checkpoints
+      .map((path) => DATA.memory.checkpoints.find((record) => record.path === path))
+      .filter(Boolean)
+      .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    const card = el('div', { class: 'card' },
       el('h3', { text: 'Checkpoints that engaged it' }),
-      el('ul', { class: 'rows' }, claim.checkpoints.map((path) =>
-        checkpointRow(DATA.memory.checkpoints.find((record) => record.path === path))))));
+      el('ul', { class: 'rows' }, records.slice(0, RECENT_CHECKPOINTS).map(checkpointRow)));
+    if (records.length > RECENT_CHECKPOINTS) {
+      const rest = records.length - RECENT_CHECKPOINTS;
+      card.appendChild(el('details', { class: 'more' },
+        el('summary', { text: `${rest} earlier record${rest === 1 ? '' : 's'}` }),
+        el('ul', { class: 'rows' }, records.slice(RECENT_CHECKPOINTS).map(checkpointRow))));
+    }
+    around.push(card);
   }
   page.appendChild(around.length
     ? el('div', { class: 'grid two' }, around)
@@ -1791,9 +1881,11 @@ function viewManuscript() {
     if (!html) missing.push('the HTML conversion');
     if (!pdf) missing.push('the PDF');
     page.appendChild(el('p', { class: 'note' },
-      `${missing.join(' and ')} ${missing.length > 1 ? 'were' : 'was'} not attached to `
-      + 'this build. Both are produced by the publishing workflow, which compiles LaTeX; '
-      + 'a build made without it reaches the manuscript through the source instead.'));
+      `${sentence(missing.join(' and '))} `
+      + `${missing.length > 1 ? 'were' : 'was'} not attached to this build. `
+      + `${missing.length > 1 ? 'Both are' : 'It is'} produced by the publishing `
+      + 'workflow, which compiles LaTeX; a build made without it reaches the manuscript '
+      + 'through the source instead.'));
   }
 
   if (g && (g.reading || []).length) {
@@ -1889,7 +1981,18 @@ const MOVED = [
   [/^\/route\/(.+)$/, (match) => `#/approach/${match[1]}`],
 ];
 
-function render() {
+/**
+ * Draw the view the hash names.
+ *
+ * `navigated` is true for every render but the first. On a hash change the whole of
+ * <main> is replaced and nothing says so: a sighted reader watches it happen, a screen
+ * reader carries on announcing the page that is no longer there, and the next Tab
+ * continues from wherever focus happened to be rather than from the top of what is now
+ * shown. Moving focus into <main> — which carries `tabindex="-1"` for exactly this —
+ * fixes all three. It is deliberately not done on the first render: nothing changed
+ * then, and taking focus away from a reader on load is its own defect.
+ */
+function render(navigated) {
   const main = document.getElementById('main');
   const path = decodeURIComponent(location.hash.replace(/^#/, '')) || '/';
   for (const [pattern, target] of MOVED) {
@@ -1925,6 +2028,7 @@ function render() {
     else link.removeAttribute('aria-current');
   }
   window.scrollTo(0, 0);
+  if (navigated) main.focus();
   typeset(main);
 }
 
@@ -1972,7 +2076,7 @@ fetch('data.json', { cache: 'no-cache' })
   .then((data) => {
     DATA = data;
     chrome();
-    window.addEventListener('hashchange', render);
+    window.addEventListener('hashchange', () => render(true));
     render();
   })
   .catch((error) => {

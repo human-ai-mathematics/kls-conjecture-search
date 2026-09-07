@@ -21,6 +21,14 @@
 <link rel="stylesheet" href="site.css">
 
 <!--
+  The brand mark, as the tab icon. Inline rather than a file because the build copies a
+  fixed list of frontend files and a missing favicon is a 404 on every page load; a data
+  URI cannot go missing. currentColor is not available to a favicon, so the accent is
+  written out, and `fill-opacity` keeps it legible on a light or a dark tab strip.
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.2 14.8 8 8 14.8 1.2 8Z' fill='%232b5f9e' fill-opacity='.18' stroke='%232b5f9e' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<!--
   Optional typesetting. Glosses and candidate statements are written in LaTeX $...$
   (CLAUDE.md, "Global convention"). MathJax renders them when it loads; when it does not
   — offline, blocked, CDN down — the source stays visible and legible, which is the whole
