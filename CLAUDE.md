@@ -213,7 +213,7 @@ python3 scripts/check.py portfolio    # the live search
 python3 scripts/check.py checkpoints  # current heads of durable memory
 python3 scripts/check.py candidates   # statements proposed but not yet nodes
 python3 scripts/check.py dossiers     # active dossiers, for the standalone LaTeX build
-python3 scripts/check.py glosses      # advisory: glosses that are too long or write ASCII mathematics
+python3 scripts/check.py glosses      # gloss lengths (advisory) and ASCII mathematics (editorial lane)
 python3 scripts/check.py --root example   # the worked example, kept green as a fixture
 ```
 

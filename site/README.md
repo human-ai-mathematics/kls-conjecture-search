@@ -39,6 +39,18 @@ The nav is a split, and the split is the design:
 | Overview, Routes, Key results, Manuscript | orient a reader in one screen, then send them into the manuscript at an anchor |
 | Audit | the complete research state, unreduced — claims, portfolio, evidence |
 
+"In one screen" is what decides how much the Overview draws. It lists the four routes as
+a row apiece — name, composition, the exact bottleneck — and the full cards, with the
+bridge and the way into the manuscript gateway, are what Routes is for. Drawing the same
+card in both made Routes a copy of a section the reader had already scrolled past. For
+the same reason the recent records on the front page carry their dates, outcomes and
+engaged claims but not their excerpts: a checkpoint's opening paragraph is written by
+the roles running the search, and its proper home is Evidence.
+
+Audit's three views link to each other directly. The index page stays, because what it
+explains — claims, portfolio and evidence are three domains and are never merged — is
+worth a page; it is just no longer the only road between them.
+
 The **Explore** half is a selection, and a selection needs a selector: it is driven by
 [`../research/program/editorial.yaml`](../research/program/editorial.yaml), which holds
 identifiers, display names and manuscript anchors and no mathematics at all. A repository
@@ -89,10 +101,27 @@ Python and drawn as plain SVG — a research program's claim graph has tens of n
 thousands, and a deterministic layout is diffable, works offline, and cannot silently
 fail to load.
 
+Both maps open on a neighbourhood chosen to show something. Centring on the declared
+target is right only when the target has neighbours: a conjecture nothing has yet been
+proved *from* has one edge, and a map that opens there draws two boxes in a wide empty
+stage and tells the reader the program has no structure. `openingView` keeps the
+preferred centre when it reaches a few nodes and otherwise takes the best-connected one,
+growing the depth until the view is not degenerate; the stage then takes the shape of
+what was drawn rather than letterboxing it into a fixed height. Nothing is hidden by
+either: the centre, the depth and the scope are controls, and the whole list is below.
+
 The one thing loaded from a network is MathJax, and only to typeset the LaTeX `$...$` in
 glosses and candidate statements. It is deliberately optional: the raw source is placed
 in the DOM first and typeset afterwards, so a blocked or missing CDN leaves the
 mathematics visible and readable rather than blank.
+
+It only has something to do because the glosses are written in `$...$`. They were not
+always: 103 of 138 spelled their mathematics in ASCII, MathJax typeset two elements on
+the whole site, and a reader met `E[H Sigma^{-1} H] <= 4 Sigma` where the claim says
+something legible. That is a ledger property, not a frontend one, so the fix was in the
+ledger and the guard is in the editorial lane —
+[`../scripts/checks/editorial.py`](../scripts/checks/editorial.py) fails on a bare ASCII
+spelling, and `check.py glosses` still prints the length budget, which stays advisory.
 
 ## Editing it
 

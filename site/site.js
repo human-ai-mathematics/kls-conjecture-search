@@ -125,6 +125,20 @@ const STANDING_GLYPH = {
   refuted: '✗', definition: '≡',
 };
 
+/* One reading order over the same tones: what is settled, then what rests on evidence
+   of decreasing weight, then what is open, then what is closed the other way. It orders
+   a list and nothing else — no claim is made that a `published` result outranks a
+   `certified` one as mathematics, only that this is a sensible order to read them in. */
+const STANDING_ORDER = [
+  'published', 'certified', 'attested', 'proved-elsewhere', 'preprint',
+  'definition', 'premise', 'open', 'barrier', 'refuted',
+];
+
+function standingRank(claim) {
+  const index = STANDING_ORDER.indexOf(claim.standing_tone);
+  return index === -1 ? STANDING_ORDER.length : index;
+}
+
 /**
  * The reader-facing standing of a claim.
  *
@@ -323,21 +337,36 @@ function glossBlock(claim) {
  * row -> element. Filtering is presentation only — it hides rows, never reinterprets
  * them, and the count line says exactly what is being withheld.
  */
-function filteredList(rows, { facets, search, render, noun }) {
+/**
+ * A list with facet filters, a search box and, optionally, a choice of order.
+ *
+ * `orders` is a list of `{ label, compare }`; the first is the default. It exists
+ * because a long list is always in *some* order and a reader who cannot see which is
+ * reading an arbitrary one: 138 claims sorted by title open on "A balanced posterior
+ * event…", which tells nobody that the alphabet is what put it there. Naming the order
+ * in a control fixes that and makes the alternative one click away, which is worth more
+ * than picking a cleverer default would be — sorting by standing without saying so
+ * would just be a different arbitrary order.
+ */
+function filteredList(rows, { facets, search, render, noun, orders }) {
   const chosen = new Map();
   let query = '';
+  let order = (orders && orders[0]) || null;
   const list = el('ul', { class: 'rows' });
   const count = el('p', { class: 'note' });
 
-  const matches = () => rows.filter((row) => {
-    for (const [label, value] of chosen) {
-      const facet = facets.find((entry) => entry.label === label);
-      const of = facet.of(row);
-      const values = Array.isArray(of) ? of : [of];
-      if (!values.includes(value)) return false;
-    }
-    return !query || (search(row) || '').toLowerCase().includes(query);
-  });
+  const matches = () => {
+    const kept = rows.filter((row) => {
+      for (const [label, value] of chosen) {
+        const facet = facets.find((entry) => entry.label === label);
+        const of = facet.of(row);
+        const values = Array.isArray(of) ? of : [of];
+        if (!values.includes(value)) return false;
+      }
+      return !query || (search(row) || '').toLowerCase().includes(query);
+    });
+    return order ? kept.sort(order.compare) : kept;
+  };
 
   const draw = () => {
     const shown = matches();
@@ -352,6 +381,18 @@ function filteredList(rows, { facets, search, render, noun }) {
   };
 
   const controls = el('div', { class: 'filters' });
+  if (orders && orders.length > 1) {
+    controls.appendChild(el('label', {},
+      el('span', { class: 'note', text: 'order' }),
+      el('select', {
+        'aria-label': `Order ${noun} by`,
+        onchange: (event) => {
+          order = orders[Number(event.target.value)] || orders[0];
+          draw();
+        },
+      }, orders.map((entry, index) =>
+        el('option', { value: index, text: entry.label })))));
+  }
   for (const facet of facets) {
     const values = [...new Set(rows.flatMap((row) => {
       const of = facet.of(row);
@@ -409,9 +450,16 @@ const NODE_H = 56;
 const PAD_X = 56;
 const PAD_Y = 40;
 
-/* The closest the initial fit will ever get — roughly five boxes across. */
+/* The closest the initial fit will ever get — roughly five boxes across, four down.
+ *
+ * The vertical floor used to be 7.5 boxes, sized for an opening view of two or three
+ * nodes that had to be stopped from filling the stage. openingView() no longer produces
+ * one, so a floor that tall now does the opposite job: the layout is one column per
+ * depth layer, a small star is two layers, and forcing that into a box seven boxes deep
+ * is what left a band of drawing in the middle of an empty stage. The stage follows the
+ * drawn shape instead — see the aspect ratio set at the end of draw(). */
 const MIN_VIEW_W = NODE_W * 5;
-const MIN_VIEW_H = NODE_H * 7.5;
+const MIN_VIEW_H = NODE_H * 4;
 
 /* Above this many nodes, "Whole map" stops being a map.
  *
@@ -424,21 +472,72 @@ const MIN_VIEW_H = NODE_H * 7.5;
  * above it, with its filters, is where a reader browses all of them. */
 const WHOLE_MAP_LIMIT = 60;
 
+/* How many boxes the opening view has to reach before it counts as showing something.
+ *
+ * Roughly a small star: enough that a reader sees a shape rather than a pair. */
+const OPENING_MIN_NODES = 6;
+
+/** The set reachable from `focus` within `depth` undirected steps. */
+function neighbourhood(adjacency, focus, depth) {
+  let frontier = new Set([focus]);
+  const seen = new Set(frontier);
+  for (let step = 0; step < depth; step += 1) {
+    const next = new Set();
+    for (const id of frontier) {
+      for (const other of adjacency.get(id) || []) {
+        if (!seen.has(other)) { seen.add(other); next.add(other); }
+      }
+    }
+    frontier = next;
+  }
+  return seen;
+}
+
+/**
+ * Where the map opens: a focus, and how far out from it.
+ *
+ * `preferred` is what the page *means* to centre on — the program's target on the claim
+ * map, the first family on the portfolio map. That is the right anchor when the node
+ * sits among its neighbours, and the wrong one when it does not. A target can easily
+ * have degree one: a conjecture nothing has yet been proved *from* has an edge to
+ * whatever bridges to it and nothing else. A map that opens there draws two boxes in a
+ * full-width stage, and a reader's first impression of a graph of a hundred-odd claims
+ * is that it is empty. The ledger is not wrong about that node, so the fix belongs
+ * here, in what the view opens on.
+ *
+ * So the preference is honoured when it can be seen and dropped when it cannot, in
+ * favour of the best-connected node, which is where the structure actually is. Either
+ * way the depth grows until the view stops being degenerate. Nothing is hidden by this:
+ * the focus and depth controls sit above the stage, the target keeps its `target` chip
+ * wherever it is drawn, and the complete list is beneath.
+ */
+function openingView(nodes, adjacency, preferred) {
+  const depths = [1, 2, 3];
+  const reach = (id) => depths.map((depth) => neighbourhood(adjacency, id, depth));
+
+  const candidates = [];
+  if (preferred && adjacency.has(preferred)) candidates.push(preferred);
+  const best = nodes.slice()
+    .sort((a, b) => (adjacency.get(b.id)?.size || 0) - (adjacency.get(a.id)?.size || 0))[0];
+  if (best && best.id !== preferred) candidates.push(best.id);
+
+  for (const id of candidates) {
+    const reached = reach(id);
+    const index = reached.findIndex((set) => set.size >= OPENING_MIN_NODES);
+    if (index !== -1) return { focus: id, depth: depths[index] };
+  }
+  /* Nothing reaches the floor — a sparse graph, or one small enough that `scope: all`
+     is about to show everything anyway. Open widest on the best candidate there is. */
+  const id = candidates[0] || (nodes[0] && nodes[0].id) || null;
+  return { focus: id, depth: id ? depths[depths.length - 1] : 1 };
+}
+
 /**
  * Draw one graph. Layout arrives precomputed and deterministic from the exporter —
  * geometry here is navigation only. Proximity, centrality and column position carry no
  * mathematical meaning whatever, and no interaction in this function creates any.
  */
 function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
-  const state = {
-    focus: focusId || null,
-    depth: 1,
-    scope: nodes.length > 14 ? 'neighbourhood' : 'all',
-    tooLarge: nodes.length > WHOLE_MAP_LIMIT,
-    off: new Set(),
-    selected: null,
-  };
-
   const stage = el('div', { class: 'map-stage' });
   const controls = el('div', { class: 'map-controls' });
   const legendBar = el('div', { class: 'legend' });
@@ -453,33 +552,38 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     if (adjacency.has(edge.to)) adjacency.get(edge.to).add(edge.from);
   }
 
+  const opening = openingView(nodes, adjacency, focusId);
+  const state = {
+    focus: opening.focus,
+    depth: opening.depth,
+    scope: nodes.length > 14 ? 'neighbourhood' : 'all',
+    tooLarge: nodes.length > WHOLE_MAP_LIMIT,
+    off: new Set(),
+    selected: null,
+  };
+
   function visible() {
     if (state.scope === 'all' || !state.focus || !byId.has(state.focus)) {
       return new Set(byId.keys());
     }
-    let frontier = new Set([state.focus]);
-    const seen = new Set(frontier);
-    for (let step = 0; step < state.depth; step += 1) {
-      const next = new Set();
-      for (const id of frontier) {
-        for (const other of adjacency.get(id) || []) {
-          if (!seen.has(other)) { seen.add(other); next.add(other); }
-        }
-      }
-      frontier = next;
-    }
-    return seen;
+    return neighbourhood(adjacency, state.focus, state.depth);
   }
 
   /* --- controls ------------------------------------------------------------------ */
 
-  const scopeSelect = el('select', {
-    'aria-label': 'How much of the map to show',
-    onchange: (event) => { state.scope = event.target.value; refit(); },
-  },
-    el('option', { value: 'neighbourhood', text: 'Neighbourhood of…' }),
-    state.tooLarge ? null : el('option', { value: 'all', text: 'Whole map' }));
-  scopeSelect.value = state.scope;
+  /* A control with one choice is not a control. Above WHOLE_MAP_LIMIT the whole map is
+     withheld, which leaves "Neighbourhood of…" alone in a dropdown that looks live,
+     opens, and offers the reader the option they already have. So it becomes the label
+     it always was, and stays a real select wherever both scopes exist. */
+  const scopeSelect = state.tooLarge
+    ? el('span', { class: 'control-label', text: 'Neighbourhood of' })
+    : el('select', {
+      'aria-label': 'How much of the map to show',
+      onchange: (event) => { state.scope = event.target.value; refit(); },
+    },
+      el('option', { value: 'neighbourhood', text: 'Neighbourhood of…' }),
+      el('option', { value: 'all', text: 'Whole map' }));
+  if (!state.tooLarge) scopeSelect.value = state.scope;
 
   const focusSelect = el('select', {
     'aria-label': 'Centre of the neighbourhood',
@@ -493,6 +597,7 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     'aria-label': 'How many steps out',
     onchange: (event) => { state.depth = Number(event.target.value); refit(); },
   }, [1, 2, 3].map((n) => el('option', { value: n, text: `${n} step${n > 1 ? 's' : ''}` })));
+  depthSelect.value = String(state.depth);
 
   const search = el('input', {
     type: 'search', placeholder: 'find by name, id or gloss…',
@@ -703,6 +808,18 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     }
 
     stage.appendChild(canvas);
+
+    /* Let the stage take the shape of what is in it.
+     *
+     * An SVG viewBox is letterboxed into its element, so a wide, shallow graph in a
+     * stage fixed at 620px tall is drawn as a band across the middle of a large empty
+     * rectangle — the emptiness is the element, not the drawing. Handing the ratio to
+     * CSS lets the height follow the width, between the floor and ceiling the
+     * stylesheet sets, and needs no measurement: the graph is built before it is on the
+     * page and has no width to read at this point. Panning and zooming afterwards only
+     * change `view`, so the stage keeps the shape it opened with. */
+    stage.style.aspectRatio = `${Math.round(view.w)} / ${Math.round(view.h)}`;
+
     stage.appendChild(el('span', { class: 'map-hint',
       text: state.tooLarge
         ? `${stageNote || 'drag to pan · scroll to zoom · click a box'} · `
@@ -746,7 +863,9 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
   }
 
   draw();
-  if (focusId) select(focusId);
+  /* The card below the stage describes what the stage is centred on, which after
+     openingView() is not always what the caller asked for. */
+  if (state.focus) select(state.focus);
   return container;
 }
 
@@ -903,9 +1022,8 @@ function viewOverview() {
     if ((g.routes || []).length) {
       page.appendChild(el('div', { class: 'section-head' },
         el('h2', { text: 'Four routes are studied here' }),
-        el('a', { href: '#/routes', text: 'All four →' })));
-      page.appendChild(el('div', { class: 'grid two' },
-        g.routes.map((route) => routeCard(route))));
+        el('a', { href: '#/routes', text: 'All four, in full →' })));
+      page.appendChild(el('ul', { class: 'rows' }, g.routes.map(routeRow)));
     }
 
     if ((g.reading || []).length) {
@@ -982,7 +1100,12 @@ function viewOverview() {
   if (!heads.length) {
     page.appendChild(emptyState('No checkpoints recorded yet.'));
   } else {
-    page.appendChild(el('ul', { class: 'rows' }, heads.slice(0, 5).map(checkpointRow)));
+    page.appendChild(el('ul', { class: 'rows' },
+      heads.slice(0, 5).map((record) => checkpointRow(record, { excerpt: false }))));
+    page.appendChild(el('p', { class: 'note' },
+      'What the search has been working on, and which claims it touched. Each record '
+      + 'opens in the repository; the excerpts are under ',
+      el('a', { href: '#/audit/evidence' }, 'Evidence'), '.'));
   }
 
   /* --- into the audit layer -------------------------------------------------------- */
@@ -1014,6 +1137,7 @@ function viewOverview() {
 
 function viewClaims() {
   const page = el('div', {});
+  page.appendChild(auditNav('#/audit/claims'));
   page.appendChild(el('h1', { text: 'The mathematical map' }));
   page.appendChild(el('p', { class: 'lede' },
     'Every statement this program has committed to, and how they rest on each other. '
@@ -1042,9 +1166,19 @@ function viewClaims() {
   }
 
   page.appendChild(el('h2', { text: 'Every claim, as a list' }));
-  page.appendChild(filteredList(claims.slice().sort((a, b) =>
-    claimName(a).localeCompare(claimName(b))), {
+  page.appendChild(filteredList(claims.slice(), {
     noun: 'claims',
+    orders: [
+      { label: 'by name',
+        compare: (a, b) => claimName(a).localeCompare(claimName(b)) },
+      /* Strongest evidence first, then by name inside each band. STANDING_ORDER is a
+         presentation decision over the tone names the repository exports, on the same
+         footing as the glyph each tone is drawn with. */
+      { label: 'by standing',
+        compare: (a, b) => (standingRank(a) - standingRank(b))
+          || claimName(a).localeCompare(claimName(b)) },
+      { label: 'by identifier', compare: (a, b) => a.id.localeCompare(b.id) },
+    ],
     facets: [
       { label: 'kind', of: (claim) => claim.kind },
       { label: 'standing', of: (claim) => claim.standing },
@@ -1082,6 +1216,7 @@ function claimSummaryCard(claim) {
 
 function viewSearch() {
   const page = el('div', {});
+  page.appendChild(auditNav('#/audit/portfolio'));
   page.appendChild(el('h1', { text: 'The portfolio' }));
   page.appendChild(el('p', { class: 'lede' },
     'What the search is doing, which is not what is true. A family is a mechanism; an '
@@ -1130,11 +1265,20 @@ function viewSearch() {
   return page;
 }
 
+/* The id is drawn as this row's name, not as metadata beside one.
+ *
+ * A claim row leads with a title and carries its id alongside; an approach has no title
+ * to lead with — the portfolio schema gives it an `id` and an `objective` and nothing
+ * else, deliberately, because an approach is coordination state rather than a statement
+ * with a name. So the two lists were reading differently for a reason, but drawing the
+ * id as a small chip made it look like a footnote to a row with no heading at all. It
+ * stays monospace, because it is an id and is quoted as one. Inventing a display name
+ * here is what this directory does not do. */
 function approachRow(route) {
   if (!route) return null;
   return el('li', { class: 'tight' },
     el('div', { class: 'row-head' },
-      el('a', { class: 'id', href: `#/approach/${route.id}`, text: route.id }),
+      el('a', { class: 'id row-name', href: `#/approach/${route.id}`, text: route.id }),
       approachBadge(route.state),
       route.parent ? el('span', { class: 'note' }, 'from ', idLink(route.parent)) : null,
       route.blocker ? el('span', { class: 'note' }, 'blocked on ', idLink(route.blocker)) : null),
@@ -1465,7 +1609,21 @@ function viewApproach(id) {
 
 /* -------------------------------------------------------------------- evidence ----- */
 
-function checkpointRow(record) {
+/**
+ * One dated record.
+ *
+ * `excerpt: false` drops the prose and keeps the structure — date, outcome, the record
+ * itself, the approach, the nodes it engaged. A checkpoint is written by and for the
+ * roles running the search, so its opening paragraph is frequently operational rather
+ * than mathematical: which role wrote it, under which run and identity, holding which
+ * concurrency key. That is the right content for the record, and it is right under
+ * Audit, where a reader has come to see what the search did. On the front page it is
+ * the last thing before the contribution links, and it reads as machine exhaust to the
+ * mathematician the front page exists to reach. The dates, the outcomes and the engaged
+ * claims still say what a front page needs to say — that the search is live, and what it
+ * has been touching.
+ */
+function checkpointRow(record, { excerpt = true } = {}) {
   if (!record) return null;
   const superseded = record.superseded_by && record.superseded_by.length;
   return el('li', {},
@@ -1477,7 +1635,7 @@ function checkpointRow(record) {
       superseded ? el('span', { class: 'badge warn' }, 'superseded') : null,
       fileLink(record.path, null, record.path.split('/').pop()),
       record.approach ? idLink(record.approach) : null),
-    record.excerpt ? el('p', { class: 'row-body' }, math(record.excerpt)) : null,
+    excerpt && record.excerpt ? el('p', { class: 'row-body' }, math(record.excerpt)) : null,
     record.nodes && record.nodes.length
       ? el('p', { class: 'row-note' }, 'engaged ', idList(record.nodes)) : null,
     superseded
@@ -1489,6 +1647,7 @@ function checkpointRow(record) {
 
 function viewEvidence() {
   const page = el('div', {});
+  page.appendChild(auditNav('#/audit/evidence'));
   page.appendChild(el('h1', { text: 'Durable evidence' }));
   page.appendChild(el('p', { class: 'lede' },
     'Why the search is where it is. These records are append-only: nothing here is '
@@ -1723,6 +1882,33 @@ function routeCard(route) {
       manuscriptAction(route.anchor, 'Route gateway in the manuscript')));
 }
 
+/**
+ * The same four routes, named and counted, as one row apiece.
+ *
+ * The front page and the Routes page were drawing the identical `routeCard`, which made
+ * Routes a copy of a section the reader had already scrolled past and gave the tab
+ * nothing to add but "Other probes". The nav's own split says the Overview should
+ * orient in one screen; four rows do that, and the full cards — bridge, bottleneck, and
+ * the way into the manuscript gateway — are what the reader finds on arriving at Routes.
+ */
+function routeRow(route) {
+  const approaches = approachesOf(route);
+  const blockers = featuredFor(route.code, 'bottleneck');
+  return el('li', {},
+    el('div', { class: 'row-head' },
+      el('a', { class: 'row-name', href: `#/routes/${route.code}`,
+        text: `Route ${route.code} — ${route.name}` })),
+    el('p', { class: 'row-note' },
+      approaches.length
+        ? `${approaches.length} approach${approaches.length === 1 ? '' : 'es'}: `
+          + `${composition(approaches)}`
+        : 'No approach in the portfolio is filed under this route.'),
+    blockers.length ? el('p', { class: 'row-note' },
+      el('span', { class: 'gloss-tag', text: 'Exact bottleneck' }), ' ',
+      el('a', { href: `#/node/${blockers[0].claim.id}` },
+        math(claimName(blockers[0].claim)))) : null);
+}
+
 function viewRoutes() {
   const page = el('div', {});
   const g = guide();
@@ -1916,6 +2102,31 @@ function viewManuscript() {
     })));
   }
   return page;
+}
+
+/* The three audit views, and the order the Audit page lists them in. */
+const AUDIT_SECTIONS = [
+  { href: '#/audit/claims', label: 'Claims' },
+  { href: '#/audit/portfolio', label: 'Portfolio' },
+  { href: '#/audit/evidence', label: 'Evidence' },
+];
+
+/**
+ * A breadcrumb back to Audit, and a link to each sibling view.
+ *
+ * Audit holds three views and the masthead reaches only their index, so moving from the
+ * claim graph to the portfolio meant going back through a hub page whose whole content
+ * is three cards — a toll booth on the one section a reader browses rather than lands
+ * on. The hub keeps its place, because what it explains (claims, portfolio and evidence
+ * are three separate domains and are never merged) is worth a page; it just stops being
+ * the only road between them.
+ */
+function auditNav(current) {
+  return el('nav', { class: 'subnav', 'aria-label': 'Audit sections' },
+    el('a', { href: '#/audit', text: 'Audit' }),
+    AUDIT_SECTIONS.map((section) => (section.href === current
+      ? el('span', { 'aria-current': 'page', text: section.label })
+      : el('a', { href: section.href, text: section.label }))));
 }
 
 function viewAudit() {

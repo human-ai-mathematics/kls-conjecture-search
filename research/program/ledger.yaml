@@ -30,7 +30,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: The crude estimate Xi_T <= 1+log(nT) is too large to close the excess bootstrap at known KLS lower-bound scales.
+    summary: 'The crude estimate $\Xi_T \le 1+\log(nT)$ is too large to close the excess bootstrap at known KLS lower-bound scales.'
     depends_on: ['lem:crude']
 
   - id: obs:relative-ceiling
@@ -38,7 +38,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: A universal relative-scale estimate Xi_T0 <= kappa T0 at sufficiently small fixed time already implies KLS and is not a weaker bootstrap input.
+    summary: 'A universal relative-scale estimate $\Xi_{T_0} \le \kappa T_0$ at sufficiently small fixed time already implies KLS and is not a weaker bootstrap input.'
     depends_on: ['prop:ceiling']
 
   - id: obs:circularity
@@ -65,7 +65,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/00-orientation.tex
-    summary: There is a universal C such that Var_mu(f) <= C int |grad f|^2 dmu for every isotropic log-concave mu in every dimension; equivalently up to universal constants, inf_n hstar_n > 0.
+    summary: 'There is a universal $C$ such that $\mathrm{Var}_\mu(f) \le C\int|\nabla f|^2\,d\mu$ for every isotropic log-concave $\mu$ in every dimension; equivalently up to universal constants, $\inf_n h^*_n > 0$.'
 
   - id: lem:survival-implies-kls
     kind: lemma
@@ -83,7 +83,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/11-mass-martingale.tex
-    summary: 'Stopped centroid estimate: E ∫_0^{T∧τ} |δ_t|^2 dt ≤ CT for balanced cuts.'
+    summary: 'Stopped centroid estimate: $\mathbb{E}\int_0^{T\wedge\tau}|\delta_t|^2\,dt \le CT$ for balanced cuts.'
 
   - id: thm:centroid-implies-kls
     kind: theorem
@@ -98,7 +98,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/12-riccati.tex
-    summary: 'Matrix two-color Riccati identity: dB_t = dN_t + (s G^2 - AB - BA + rB) dt; hence dR = dÑ - (R^2 + s G^2) dt.'
+    summary: 'Matrix two-color Riccati identity: $dB_t = dN_t + (sG^2 - AB - BA + rB)\,dt$; hence $dR = d\tilde{N} - (R^2 + sG^2)\,dt$.'
     proofs:
       - artifact: solutions/kls-localization-riccati-core.tex
         mode: agent
@@ -109,7 +109,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/12-riccati.tex
-    summary: 'Scalar Riccati: dr_t = dM_t + (S_t - D_t) dt with S=s||G||^2 the only positive source, D≥r^2 coercive.'
+    summary: 'Scalar Riccati: $dr_t = dM_t + (S_t - D_t)\,dt$ with $S = s\|G\|^2$ the only positive source, $D \ge r^2$ coercive.'
     depends_on: ['lem:matrix-riccati']
     proofs:
       - artifact: solutions/kls-localization-riccati-core.tex
@@ -121,7 +121,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/12-riccati.tex
-    summary: 'Unconditional per-direction Carleson: E ∫_0^∞ s|Gθ|^2 ≤ θ^T R_0 θ ≤ 1; i.e. E ∫ s G^2 ⪯ R_0 ⪯ I.'
+    summary: 'Unconditional per-direction Carleson: $\mathbb{E}\int_0^\infty s|G\theta|^2 \le \theta^T R_0 \theta \le 1$; i.e. $\mathbb{E}\int sG^2 \preceq R_0 \preceq I$.'
     depends_on: ['lem:matrix-riccati']
     proofs:
       - artifact: solutions/kls-localization-riccati-core.tex
@@ -133,7 +133,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/12-riccati.tex
-    summary: The full Loewner dissipation estimate E int_0^infinity (R_t^2+s_t G_t^2) dt <= R_0 holds before scalarization; discarding R_t^2 recovers cor:per-direction, while taking a trace can still cost n.
+    summary: 'The full Loewner dissipation estimate $\mathbb{E}\int_0^\infty (R_t^2 + s_t G_t^2)\,dt \le R_0$ holds before scalarization; discarding $R_t^2$ recovers cor:per-direction, while taking a trace can still cost $n$.'
     depends_on: ['lem:matrix-riccati']
     proofs:
       - artifact: solutions/cor-full-matrix-dissipation.tex
@@ -153,7 +153,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/20-eldan-statements.tex
-    summary: There exist universal eta in (0,1/6], T0,C0,C1 and alpha<1 such that every isotropic log-concave mu, every fixed cut with |mu(E)-1/2|<=eta/2, and every 0<T<=T0 satisfy E int_0^(T wedge tau_eta) S_t dt <= C0 T + C1 E int_0^(T wedge tau_eta) r_t dt + alpha E int_0^(T wedge tau_eta) D_t dt.
+    summary: 'There exist universal $\eta \in (0,1/6]$, $T_0,C_0,C_1$ and $\alpha<1$ such that every isotropic log-concave $\mu$, every fixed cut with $|\mu(E)-1/2| \le \eta/2$, and every $0<T\le T_0$ satisfy $\mathbb{E}\int_0^{T\wedge\tau_\eta} S_t\,dt \le C_0 T + C_1\,\mathbb{E}\int_0^{T\wedge\tau_\eta} r_t\,dt + \alpha\,\mathbb{E}\int_0^{T\wedge\tau_\eta} D_t\,dt$.'
     heuristic_barriers: ['obs:two-tail', 'obs:relative-ceiling', 'obs:proj-ceiling']
 
   - id: thm:carleson-implies-centroid
@@ -189,7 +189,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/21-carleson.tex
-    summary: 'Pathwise Brascamp–Lieb source bound: s||K||^2 ≤ 4 λmax(A)/t ≤ 4/t^2.'
+    summary: 'Pathwise Brascamp--Lieb source bound: $s\|K\|^2 \le 4\lambda_{\max}(A)/t \le 4/t^2$.'
     depends_on: ['prop:stein-rep']
     proofs:
       - artifact: solutions/kls-localization-riccati-core.tex
@@ -201,7 +201,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/21-carleson.tex
-    summary: For t>0, on the covariance support H_t=Ran(A_t), let L_A(M)=(AM+MA)/2 and interpret L_A^(-1) as the inverse on Sym(Ran(A)), extended by zero. Then s<K,L_A^(-1)K> <= 4/t. For K != 0 set lambda_cut(A,K)=||K||_HS^2/<K,L_A^(-1)K>, and set lambda_cut(A,0)=0; hence s||K||_HS^2 <= 4 lambda_cut(A,K)/t. If A,B are positive semidefinite and K is supported on Ran(A), then lambda_cut(A⊕B,K⊕0)=lambda_cut(A,K).
+    summary: 'For $t>0$, on the covariance support $H_t=\mathrm{Ran}(A_t)$, let $L_A(M)=(AM+MA)/2$ and interpret $L_A^{-1}$ as the inverse on $\mathrm{Sym}(\mathrm{Ran}(A))$, extended by zero. Then $s\langle K,L_A^{-1}K\rangle \le 4/t$. For $K \ne 0$ set $\lambda_{\mathrm{cut}}(A,K)=\|K\|_{\mathrm{HS}}^2/\langle K,L_A^{-1}K\rangle$, and set $\lambda_{\mathrm{cut}}(A,0)=0$; hence $s\|K\|_{\mathrm{HS}}^2 \le 4\lambda_{\mathrm{cut}}(A,K)/t$. If $A,B$ are positive semidefinite and $K$ is supported on $\mathrm{Ran}(A)$, then $\lambda_{\mathrm{cut}}(A\oplus B,K\oplus 0)=\lambda_{\mathrm{cut}}(A,K)$.'
     depends_on: ['lem:pathwise-BL', 'prop:two-tail']
     proofs:
       - artifact: solutions/lem-lyapunov-stein-duality.tex
@@ -213,7 +213,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/21-carleson.tex
-    summary: 'Source is pathwise controlled away from t=0: S_t ≤ 8/t^2 + D_t/2 on the tight window.'
+    summary: 'Source is pathwise controlled away from $t=0$: $S_t \le 8/t^2 + D_t/2$ on the tight window.'
     depends_on: ['lem:pathwise-BL', 'lem:stein-vs-source', 'thm:scalar-riccati']
     proofs:
       - artifact: solutions/kls-localization-riccati-core.tex
@@ -228,7 +228,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/04-family-moment-map.tex
-    summary: If P is a convex body and μ(dx)=g(x)1_int(P)(x)dx is a centered probability with positive smooth g, then its canonical moment potential is smooth and strictly convex, its gradient is a diffeomorphism from R^n onto int(P), and the target-coordinate Hessian is a smooth positive symmetric Stein kernel satisfying Div_μ H=-x and E_μ H=Cov(μ).
+    summary: 'If $P$ is a convex body and $\mu(dx)=g(x)\mathbf{1}_{\mathrm{int}(P)}(x)\,dx$ is a centered probability with positive smooth $g$, then its canonical moment potential is smooth and strictly convex, its gradient is a diffeomorphism from $\mathbb{R}^n$ onto $\mathrm{int}(P)$, and the target-coordinate Hessian is a smooth positive symmetric Stein kernel satisfying $\mathrm{Div}_\mu H=-x$ and $\mathbb{E}_\mu H=\mathrm{Cov}(\mu)$.'
     import_class: published
     references: [BermanBerndtsson2013RealMA, Fathi2019SteinMomentMaps]
 
@@ -237,7 +237,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/04-family-moment-map.tex
-    summary: 'Chen-Klartag moment-Hessian estimate: for the regular moment map of an isotropic log-concave measure, E_nu ||D^2 phi||_HS^2 <= 2n.'
+    summary: 'Chen--Klartag moment-Hessian estimate: for the regular moment map of an isotropic log-concave measure, $\mathbb{E}_\nu\|D^2\varphi\|_{\mathrm{HS}}^2 \le 2n$.'
     import_class: preprint-unreviewed
     references: [ChenKlartag2026SharpThinShell]
 
@@ -246,7 +246,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/04-family-moment-map.tex
-    summary: 'Chen-Klartag sharp thin shell: Var(|X|^2) <= 8n for isotropic log-concave X, with equality for products of standard centered one-sided exponentials.'
+    summary: 'Chen--Klartag sharp thin shell: $\mathrm{Var}(|X|^2) \le 8n$ for isotropic log-concave $X$, with equality for products of standard centered one-sided exponentials.'
     import_class: preprint-unreviewed
     references: [ChenKlartag2026SharpThinShell]
     depends_on: ['thm:chen-klartag-moment-hessian']
@@ -256,7 +256,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/04-family-moment-map.tex
-    summary: 'Chen-Klartag sharp full third-moment tensor: ||T_3(X)||_HS^2 <= 4n for isotropic log-concave X.'
+    summary: 'Chen--Klartag sharp full third-moment tensor: $\|T_3(X)\|_{\mathrm{HS}}^2 \le 4n$ for isotropic log-concave $X$.'
     import_class: preprint-unreviewed
     references: [ChenKlartag2026SharpThinShell]
     depends_on: ['thm:chen-klartag-moment-hessian']
@@ -266,7 +266,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/04-family-moment-map.tex
-    summary: Under Letwin's regular moment-map assumptions, for every constant symmetric B, E_nu tr(B H B H) <= 2 tr(B^2).
+    summary: 'Under Letwin''s regular moment-map assumptions, for every constant symmetric $B$, $\mathbb{E}_\nu\,\mathrm{tr}(BHBH) \le 2\,\mathrm{tr}(B^2)$.'
     import_class: preprint-unreviewed
     references: [Letwin2026QuadraticKLS]
 
@@ -275,7 +275,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/15-covariance-technology.tex
-    summary: For simplified stochastic localization of an isotropic compactly supported log-concave law, every stopping time sigma and t>0 satisfy sum_i P(lambda_i(A_{t wedge sigma})>=3) <= C n exp(-t^(-1/8)); consequently the rank-k entrance time sigma_k obeys P(sigma_k<=t)<=C(n/k)exp(-t^(-1/8)) and E sigma_k^(-2)<=C(1+log(n/k))^16.
+    summary: 'For simplified stochastic localization of an isotropic compactly supported log-concave law, every stopping time $\sigma$ and $t>0$ satisfy $\sum_i \mathbb{P}(\lambda_i(A_{t\wedge\sigma})\ge 3) \le Cn\exp(-t^{-1/8})$; consequently the rank-$k$ entrance time $\sigma_k$ obeys $\mathbb{P}(\sigma_k\le t)\le C(n/k)\exp(-t^{-1/8})$ and $\mathbb{E}\,\sigma_k^{-2}\le C(1+\log(n/k))^{16}$.'
     import_class: preprint-unreviewed
     references: [KlartagLehec2025ThinShell]
 
@@ -284,7 +284,7 @@ nodes:
     status: open
     provenance: literature
     file: modules/kls/15-covariance-technology.tex
-    summary: For simplified stochastic localization of an isotropic compactly supported log-concave law, E sum_i exp(2 int_0^1 lambda_i(A_t) dt) <= C n.
+    summary: 'For simplified stochastic localization of an isotropic compactly supported log-concave law, $\mathbb{E}\sum_i\exp\left(2\int_0^1\lambda_i(A_t)\,dt\right) \le Cn$.'
     import_class: preprint-unreviewed
     references: [KlartagLehec2025ThinShell]
 
@@ -293,7 +293,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/03-family-bochner-hminus1.tex
-    summary: "Klartag's improved Lichnerowicz estimate: if mu = e^{-U} dx on R^n has Hess U >= tI for some t > 0, then C_P(mu) <= sqrt(||Cov mu||_op / t)."
+    summary: 'Klartag''s improved Lichnerowicz estimate: if $\mu=e^{-U}dx$ on $\mathbb{R}^n$ has $\mathrm{Hess}\,U \ge tI$ for some $t>0$, then $C_P(\mu) \le \sqrt{\|\mathrm{Cov}\,\mu\|_{\mathrm{op}}/t}$.'
     import_class: published
     references: [Klartag2023Logarithmic]
 
@@ -302,7 +302,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/00-orientation.tex
-    summary: For n independent centered rate-one exponentials and independent standard Gaussian G, P(||Cov(X|X+sqrt(s)G)||_op >= c_sp s) >= 1-(1-exp(-s)/2)^n. Hence for s<=log n the event has universal positive probability and the expected operator norm is at least c s.
+    summary: 'For $n$ independent centered rate-one exponentials and independent standard Gaussian $G$, $\mathbb{P}(\|\mathrm{Cov}(X\mid X+\sqrt{s}G)\|_{\mathrm{op}} \ge c_{\mathrm{sp}}s) \ge 1-(1-e^{-s}/2)^n$. Hence for $s\le\log n$ the event has universal positive probability and the expected operator norm is at least $cs$.'
     import_class: published
     references: [KLnotes]
 
@@ -311,7 +311,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/27-eldan-open-targets.tex
-    summary: For every one-dimensional log-concave probability density f of variance v>0, 1/12 <= v ||f||_infty^2 <= 1; consequently every quantile halfline has boundary density at most v^(-1/2).
+    summary: 'For every one-dimensional log-concave probability density $f$ of variance $v>0$, $1/12 \le v\|f\|_\infty^2 \le 1$; consequently every quantile halfline has boundary density at most $v^{-1/2}$.'
     import_class: published
     references: [BobkovChistyakov2015Concentration]
 
@@ -323,14 +323,14 @@ nodes:
     status: defined
     provenance: internal
     file: modules/kls/14-qcts-obstruction.tex
-    summary: Quadratic-chaos thin shell Q(ν)=sup_{||M||=1} Var(X^T M X).
+    summary: 'Quadratic-chaos thin shell $Q(\nu)=\sup_{\|M\|=1}\mathrm{Var}(X^T M X)$.'
 
   - id: thm:letwin-qcts
     kind: theorem
     status: open
     provenance: literature
     file: modules/kls/14-qcts-obstruction.tex
-    summary: 'Letwin quadratic Poincare inequality: for isotropic log-concave X and symmetric M, Var(X^T M X) <= 8 ||M||_HS^2.'
+    summary: 'Letwin quadratic Poincare inequality: for isotropic log-concave $X$ and symmetric $M$, $\mathrm{Var}(X^T M X) \le 8\|M\|_{\mathrm{HS}}^2$.'
     import_class: preprint-unreviewed
     references: [Letwin2026QuadraticKLS]
 
@@ -339,7 +339,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/14-qcts-obstruction.tex
-    summary: 'Whitened two-color control: s||A^(-1/2) K A^(-1/2)||_HS^2 <= 8; hence s||K||_HS^2 <= 8 lambda_max(A)^2 and, on p in [1/3,2/3], S <= 17 lambda_max(A)^2 (8 at balance).'
+    summary: 'Whitened two-color control: $s\|A^{-1/2}KA^{-1/2}\|_{\mathrm{HS}}^2 \le 8$; hence $s\|K\|_{\mathrm{HS}}^2 \le 8\lambda_{\max}(A)^2$ and, on $p\in[1/3,2/3]$, $S \le 17\lambda_{\max}(A)^2$ ($8$ at balance).'
     depends_on: ['thm:letwin-qcts', 'prop:stein-rep']
 
   - id: prop:qcts-equivalence
@@ -347,7 +347,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/14-qcts-obstruction.tex
-    summary: For every isotropic log-concave law, the dimension-free quadratic-chaos bound Var(X^T M X) <= C||M||_HS^2 is equivalent, up to universal constants, to pq||Sigma_E-Sigma_F||_HS^2 <= C for every measurable balanced cut E.
+    summary: 'For every isotropic log-concave law, the dimension-free quadratic-chaos bound $\mathrm{Var}(X^T M X) \le C\|M\|_{\mathrm{HS}}^2$ is equivalent, up to universal constants, to $pq\|\Sigma_E-\Sigma_F\|_{\mathrm{HS}}^2 \le C$ for every measurable balanced cut $E$.'
     depends_on: ['def:qcts', 'prop:stein-rep']
     heuristic_barriers: ['obs:proj-ceiling']
     proofs:
@@ -363,7 +363,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/13-stein-dictionary.tex
-    summary: 'Two-color Stein representation: ∫_E f_M dν = s⟨K,M⟩ and Stein norm calS_ν(E)=s^2||K||^2. At balance K=G and calS/s equals the Riccati source s||G||^2; off balance lem:stein-vs-source supplies the conversion.'
+    summary: 'Two-color Stein representation: $\int_E f_M\,d\nu = s\langle K,M\rangle$ and Stein norm $\mathcal{S}_\nu(E)=s^2\|K\|^2$. At balance $K=G$ and $\mathcal{S}/s$ equals the Riccati source $s\|G\|^2$; off balance lem:stein-vs-source supplies the conversion.'
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.tex
         mode: agent
@@ -374,7 +374,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/13-stein-dictionary.tex
-    summary: For 0 < eta <= 1/4, on {t < tau_eta}, S_t <= 2 calS_{mu_t}(E)/s_t + 64 eta^2 D_t and calS_{mu_t}(E)/s_t <= 2 S_t + 64 eta^2 D_t.
+    summary: 'For $0<\eta\le 1/4$, on $\{t<\tau_\eta\}$, $S_t \le 2\mathcal{S}_{\mu_t}(E)/s_t + 64\eta^2 D_t$ and $\mathcal{S}_{\mu_t}(E)/s_t \le 2S_t + 64\eta^2 D_t$.'
     depends_on: ['prop:stein-rep', 'thm:scalar-riccati']
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.tex
@@ -386,7 +386,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/23-stein-route.tex
-    summary: 'Boundary representation for the centered Neumann Poisson problem on a smooth bounded convex support: Cov(1_E,f) = -∫_Σ ∂_n u_f dσ; support-boundary flux vanishes and trace Cauchy–Schwarz follows.'
+    summary: 'Boundary representation for the centered Neumann Poisson problem on a smooth bounded convex support: $\mathrm{Cov}(\mathbf{1}_E,f) = -\int_\Sigma \partial_n u_f\,d\sigma$; support-boundary flux vanishes and trace Cauchy--Schwarz follows.'
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.tex
         mode: agent
@@ -397,7 +397,7 @@ nodes:
     status: refuted
     provenance: internal
     file: modules/kls/20-eldan-statements.tex
-    summary: There are universal T0,C0,C1,C2,gamma>0, eta in (0,1/4], and beta in [0,1/2) with 2 beta+64 eta^2<1 such that the weighted excess and weighted stable Stein-trace estimates hold on the fixed tight window for every finite-perimeter cut with e0<=1 and p0=1/2 (or |p0-1/2|<=eta/2).
+    summary: 'There are universal $T_0,C_0,C_1,C_2,\gamma>0$, $\eta\in(0,1/4]$, and $\beta\in[0,1/2)$ with $2\beta+64\eta^2<1$ such that the weighted excess and weighted stable Stein-trace estimates hold on the fixed tight window for every finite-perimeter cut with $e_0\le 1$ and $p_0=1/2$ (or $|p_0-1/2|\le\eta/2$).'
     heuristic_barriers: ['obs:two-tail']
     refuted_by: ['prop:weighted-spectator-obstruction']
 
@@ -429,7 +429,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/24-excess-propagation.tex
-    summary: For every isotropic log-concave mu, every finite-perimeter E with mu(E)=1/2 and excess e0, every T>0 and every stopping time tau, E int_0^{T wedge tau} e_t(E) dt <= (1+e0)T.
+    summary: 'For every isotropic log-concave $\mu$, every finite-perimeter $E$ with $\mu(E)=1/2$ and excess $e_0$, every $T>0$ and every stopping time $\tau$, $\mathbb{E}\int_0^{T\wedge\tau} e_t(E)\,dt \le (1+e_0)T$.'
     depends_on: ['lem:perimeter-martingale']
     proofs:
       - artifact: solutions/kls-excess-audit.tex
@@ -441,7 +441,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/14-qcts-obstruction.tex
-    summary: 'Quantified anisotropic two-tail config: S/s ≍ Λ^2 while e ≍ Λ^{-1/2}, r=D=0. Kills any slice-wise absolute-scale Stein estimate; calibrates weight (1+||A||)^{5/2}.'
+    summary: 'Quantified anisotropic two-tail config: $S/s \asymp \Lambda^2$ while $e \asymp \Lambda^{-1/2}$, $r=D=0$. Kills any slice-wise absolute-scale Stein estimate; calibrates weight $(1+\|A\|)^{5/2}$.'
     depends_on: ['prop:stein-rep']
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.tex
@@ -502,14 +502,14 @@ nodes:
     status: defined
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: "Excess over the Cheeger line rather than over the profile: e-bar_t(E) = mu_t^+(E) - h_{mu_t} min(p_t,q_t) >= e_t(E) >= 0. It is the quantity that propagates through the bootstrap, and e-bar >= e means any consumption stated for e is implied."
+    summary: 'Excess over the Cheeger line rather than over the profile: $\bar{e}_t(E) = \mu_t^+(E) - h_{\mu_t}\min(p_t,q_t) \ge e_t(E) \ge 0$. It is the quantity that propagates through the bootstrap, and $\bar{e}\ge e$ means any consumption stated for $e$ is implied.'
 
   - id: lem:whitening
     kind: lemma
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: 'Whitening comparison: h_ν ≥ hstar_n / λmax(A_ν)^{1/2}; hstar_n nonincreasing in n.'
+    summary: 'Whitening comparison: $h_\nu \ge h^*_n/\lambda_{\max}(A_\nu)^{1/2}$; $h^*_n$ nonincreasing in $n$.'
     proofs:
       - artifact: solutions/kls-bootstrap-interface.tex
         mode: agent
@@ -520,7 +520,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: Let n>=2, epsilon in (0,1], mu be isotropic log-concave with h_mu <= (1+epsilon)hstar_n, E be any balanced cut, and eta in (0,1/2). Then for every t>0, E[bar e_t 1_{t<tau_eta}] <= e_0+h_mu(epsilon/2+eta+P(tau_eta<=t)/2+E X_t/4), and P(tau_eta<=t) <= (t+int_0^t E X_s ds)/(4 eta^2); integration yields the stated h_mu Xi_T bound and, for T<1/8, eta=T^(1/3), epsilon<=T^(1/3), the clean bound T e_0+C h_mu(T^(4/3)+Xi_T).
+    summary: 'Let $n\ge2$, $\epsilon\in(0,1]$, $\mu$ be isotropic log-concave with $h_\mu \le (1+\epsilon)h^*_n$, $E$ be any balanced cut, and $\eta\in(0,1/2)$. Then for every $t>0$, $\mathbb{E}[\bar{e}_t\mathbf{1}_{t<\tau_\eta}] \le e_0+h_\mu(\epsilon/2+\eta+\mathbb{P}(\tau_\eta\le t)/2+\mathbb{E}X_t/4)$, and $\mathbb{P}(\tau_\eta\le t) \le (t+\int_0^t\mathbb{E}X_s\,ds)/(4\eta^2)$; integration yields the stated $h_\mu\Xi_T$ bound and, for $T<1/8$, $\eta=T^{1/3}$, $\epsilon\le T^{1/3}$, the clean bound $Te_0+Ch_\mu(T^{4/3}+\Xi_T)$.'
     depends_on: ['lem:half', 'lem:whitening', 'lem:perimeter-martingale']
     heuristic_barriers: ['obs:circularity']
     proofs:
@@ -533,7 +533,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: Under the near-worst hypotheses of thm:bootstrap, let widehat Xi_(T,eta)(mu,E)=int_0^T E[X_s 1_{s<tau_eta}] ds. Then int_0^T E[bar e_t(E)1_{t<tau_eta}] dt <= T e0+h_mu[(epsilon/2+eta)T+T^2/(16 eta^2)+(T/(8 eta^2)+1/4)widehat Xi_(T,eta)]. For T<1/8, eta=T^(1/3), and epsilon<=T^(1/3), this is at most T e0+C h_mu(T^(4/3)+widehat Xi_(T,eta)).
+    summary: 'Under the near-worst hypotheses of thm:bootstrap, let $\widehat{\Xi}_{T,\eta}(\mu,E)=\int_0^T\mathbb{E}[X_s\mathbf{1}_{s<\tau_\eta}]\,ds$. Then $\int_0^T\mathbb{E}[\bar{e}_t(E)\mathbf{1}_{t<\tau_\eta}]\,dt \le Te_0+h_\mu[(\epsilon/2+\eta)T+T^2/(16\eta^2)+(T/(8\eta^2)+1/4)\widehat{\Xi}_{T,\eta}]$. For $T<1/8$, $\eta=T^{1/3}$, and $\epsilon\le T^{1/3}$, this is at most $Te_0+Ch_\mu(T^{4/3}+\widehat{\Xi}_{T,\eta})$.'
     depends_on: ['lem:half', 'lem:whitening', 'lem:perimeter-martingale']
     heuristic_barriers: ['obs:circularity', 'obs:relative-ceiling']
     proofs:
@@ -546,7 +546,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: For every isotropic log-concave mu and 1/n <= T <= 1, the crude evaluation gives Xi_T(mu) <= 1 + log(nT).
+    summary: 'For every isotropic log-concave $\mu$ and $1/n \le T \le 1$, the crude evaluation gives $\Xi_T(\mu) \le 1+\log(nT)$.'
     heuristic_barriers: ['obs:crude-insufficient']
     proofs:
       - artifact: solutions/kls-bootstrap-interface.tex
@@ -558,7 +558,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/15-covariance-technology.tex
-    summary: 'Known small-time operator-norm control: E||A_t||_op ≤ C_1 for t ≤ c_0(log n)^{-C_2}. (Chen / Klartag–Lehec.)'
+    summary: 'Known small-time operator-norm control: $\mathbb{E}\|A_t\|_{\mathrm{op}} \le C_1$ for $t \le c_0(\log n)^{-C_2}$. (Chen / Klartag--Lehec.)'
     import_class: published
     references: [KLnotes, KlartagLehec2022Polylog]
 
@@ -567,7 +567,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/15-covariance-technology.tex
-    summary: Every isotropic log-concave probability on R^n (n>=2) satisfies C_P <= C log n, via the Cheeger bound hstar_n >= c (log n)^(-1/2) and Cheeger's inequality.
+    summary: 'Every isotropic log-concave probability on $\mathbb{R}^n$ ($n\ge2$) satisfies $C_P \le C\log n$, via the Cheeger bound $h^*_n \ge c(\log n)^{-1/2}$ and Cheeger''s inequality.'
     import_class: published
     references: [Klartag2023Logarithmic]
 
@@ -576,7 +576,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: Under hyp:KI and t_1(n) <= T <= 1, Xi_T <= C_1 t_1(n) + log(T/t_1(n)) <= C(1+loglog n); if also T<1/8 and eps<=T^(1/3), this gives supply T e_0 + C h_mu(T^(4/3)+1+loglog n).
+    summary: 'Under hyp:KI and $t_1(n) \le T \le 1$, $\Xi_T \le C_1 t_1(n)+\log(T/t_1(n)) \le C(1+\log\log n)$; if also $T<1/8$ and $\epsilon\le T^{1/3}$, this gives supply $Te_0+Ch_\mu(T^{4/3}+1+\log\log n)$.'
     depends_on: ['thm:bootstrap', 'hyp:KI', 'cor:KI-discharged']
     proofs:
       - artifact: solutions/kls-bootstrap-interface.tex
@@ -588,7 +588,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: 'Relative-scale ceiling: if 9(1+κ)T0<=1/2 and Ξ_T0<=κT0 for ALL isotropic log-concave measures, then KLS follows directly. This is a sufficient KLS-strength condition, not a proved equivalence.'
+    summary: 'Relative-scale ceiling: if $9(1+\kappa)T_0\le1/2$ and $\Xi_{T_0}\le\kappa T_0$ for ALL isotropic log-concave measures, then KLS follows directly. This is a sufficient KLS-strength condition, not a proved equivalence.'
     depends_on: ['lem:survival-implies-kls']
     proofs:
       - artifact: solutions/kls-bootstrap-interface.tex
@@ -612,7 +612,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/26-jacobi-splitting.tex
-    summary: If volume p admits a smooth volume-constrained minimizer Sigma_p and I is twice differentiable at p, then the profile bound is K_{Sigma_p} <= -I''(p) I(p)^2.
+    summary: 'If volume $p$ admits a smooth volume-constrained minimizer $\Sigma_p$ and $I$ is twice differentiable at $p$, then the profile bound is $K_{\Sigma_p} \le -I''''(p)I(p)^2$.'
     proofs:
       - artifact: solutions/kls-geometry-models.tex
         mode: agent
@@ -623,7 +623,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/26-jacobi-splitting.tex
-    summary: Grant smooth minimizers at almost every balanced volume. If h_nu <= 1, then int_{1/3}^{2/3} K_{Sigma_p} dp <= C h_nu^3; this is an averaged branch statement, not control of the tracked cut.
+    summary: 'Grant smooth minimizers at almost every balanced volume. If $h_\nu\le1$, then $\int_{1/3}^{2/3} K_{\Sigma_p}\,dp \le Ch_\nu^3$; this is an averaged branch statement, not control of the tracked cut.'
     depends_on: ['lem:profile-bound']
     proofs:
       - artifact: solutions/kls-geometry-models.tex
@@ -663,7 +663,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/26-jacobi-splitting.tex
-    summary: Fix theta. If proper lower-semicontinuous convex extended-valued V_1 on theta^perp and V_2 on R have positive finite normalizers and V(y+z theta)=V_1(y)+V_2(z) globally, including off the effective support, then localization preserves the product splitting pathwise; A_t is block-diagonal, and every fixed nontrivial halfspace E_a={z<=a} has delta_t=d_t theta, G_t=g_t theta theta^T, and K_t=kappa_t theta theta^T, hence rank at most one.
+    summary: 'Fix $\theta$. If proper lower-semicontinuous convex extended-valued $V_1$ on $\theta^\perp$ and $V_2$ on $\mathbb{R}$ have positive finite normalizers and $V(y+z\theta)=V_1(y)+V_2(z)$ globally, including off the effective support, then localization preserves the product splitting pathwise; $A_t$ is block-diagonal, and every fixed nontrivial halfspace $E_a=\{z\le a\}$ has $\delta_t=d_t\theta$, $G_t=g_t\theta\theta^T$, and $K_t=\kappa_t\theta\theta^T$, hence rank at most one.'
     proofs:
       - artifact: solutions/kls-geometry-models.tex
         mode: agent
@@ -677,7 +677,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/16-model-geometries.tex
-    summary: 'Gaussian model: A_t=(1+t)^{-1}I deterministic; centroid mechanism closes unconditionally; halfspace excess ≡ 0; damping strictly active.'
+    summary: 'Gaussian model: $A_t=(1+t)^{-1}I$ deterministic; centroid mechanism closes unconditionally; halfspace excess $\equiv 0$; damping strictly active.'
     proofs:
       - artifact: solutions/kls-geometry-models.tex
         mode: agent
@@ -688,7 +688,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/16-model-geometries.tex
-    summary: 'Products: μ_t product pathwise; A_t diagonal; h_{μt} ≳ λmax(A_t)^{-1/2}; KLS holds for products (no bootstrap needed).'
+    summary: 'Products: $\mu_t$ product pathwise; $A_t$ diagonal; $h_{\mu_t} \gtrsim \lambda_{\max}(A_t)^{-1/2}$; KLS holds for products (no bootstrap needed).'
     proofs:
       - artifact: solutions/kls-geometry-models.tex
         mode: agent
@@ -702,7 +702,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: For a finite-second-moment product law nu and a nontrivial J-measurable cut E, delta_i=0 off J and G,K are supported on J x J.
+    summary: 'For a finite-second-moment product law $\nu$ and a nontrivial $J$-measurable cut $E$, $\delta_i=0$ off $J$ and $G,K$ are supported on $J\times J$.'
     proofs:
       - artifact: solutions/kls-product-covariance.tex
         mode: agent
@@ -713,7 +713,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: If mu is a product of isotropic one-dimensional log-concave laws and E is measurable with respect to k coordinates with p_0 in [2/5,3/5], then (i) E int_0^infinity S_t dt <= sum_{i in J}(R_0)_{ii} <= k; (ii) E r_{t wedge tau} <= 1+k for every t, where tau is the coarse balanced exit time; and (iii) mu^+(E) >= c min(p_0,q_0)/sqrt(1+k).
+    summary: 'If $\mu$ is a product of isotropic one-dimensional log-concave laws and $E$ is measurable with respect to $k$ coordinates with $p_0\in[2/5,3/5]$, then (i) $\mathbb{E}\int_0^\infty S_t\,dt \le \sum_{i\in J}(R_0)_{ii} \le k$; (ii) $\mathbb{E}\,r_{t\wedge\tau} \le 1+k$ for every $t$, where $\tau$ is the coarse balanced exit time; and (iii) $\mu^+(E) \ge c\min(p_0,q_0)/\sqrt{1+k}$.'
     depends_on: ['lem:block', 'cor:per-direction', 'thm:scalar-riccati', 'prop:products']
     proofs:
       - artifact: solutions/kls-product-covariance.tex
@@ -737,7 +737,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: 'Quadratic chaos for non-isotropic products: Var(Y^T M Y) ≤ C* ||A^{1/2} M A^{1/2}||^2 (pathwise at every time).'
+    summary: 'Quadratic chaos for non-isotropic products: $\mathrm{Var}(Y^T M Y) \le C_*\|A^{1/2}MA^{1/2}\|^2$ (pathwise at every time).'
     proofs:
       - artifact: solutions/kls-product-covariance.tex
         mode: agent
@@ -748,7 +748,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: 'Pathwise covariance bound on the source: conditional on Letwin, S_t ≤ C(1+X_t^2) for all log-concave paths on the balanced window; the product case is unconditional via lem:product-qcts.'
+    summary: 'Pathwise covariance bound on the source: conditional on Letwin, $S_t \le C(1+X_t^2)$ for all log-concave paths on the balanced window; the product case is unconditional via lem:product-qcts.'
     depends_on: ['cor:qcts-source', 'lem:product-qcts']
 
   - id: cor:V2-implies
@@ -764,7 +764,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/15-covariance-technology.tex
-    summary: 'Klartag–Lehec covariance window: P(∃ s≤t: ||A_s||≥2) ≤ exp(-1/(Ct)) for t ≤ 1/(C log^2 n).'
+    summary: 'Klartag--Lehec covariance window: $\mathbb{P}(\exists s\le t: \|A_s\|\ge2) \le \exp(-1/(Ct))$ for $t \le 1/(C\log^2 n)$.'
     import_class: published
     references: [KLnotes, KlartagLehec2022Polylog]
 
@@ -773,7 +773,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/15-covariance-technology.tex
-    summary: Letwin QCTS implies the third-moment parameter kappa_n <= 2 sqrt(2).
+    summary: 'Letwin QCTS implies the third-moment parameter $\kappa_n \le 2\sqrt{2}$.'
     depends_on: ['thm:letwin-qcts']
 
   - id: cor:letwin-window
@@ -781,7 +781,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/15-covariance-technology.tex
-    summary: For every fixed p, E||A_t||_op^p <= C_p on t <= c/log n, by Klartag-Lehec Corollary 5.4 and prop:letwin-kappa.
+    summary: 'For every fixed $p$, $\mathbb{E}\|A_t\|_{\mathrm{op}}^p \le C_p$ on $t \le c/\log n$, by Klartag--Lehec Corollary 5.4 and prop:letwin-kappa.'
     depends_on: ['prop:letwin-kappa']
 
   - id: thm:V2-window
@@ -789,7 +789,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: Conditional on Letwin v1, (V2) and the all-cut inequality hold for every measure on [0,c/log n]. Published covariance control gives (V2) for every measure on [0,c/log^2 n], but its preprint-independent all-cut consequence here is only for products. Neither window proves the universal-time assumption.
+    summary: 'Conditional on Letwin v1, (V2) and the all-cut inequality hold for every measure on $[0,c/\log n]$. Published covariance control gives (V2) for every measure on $[0,c/\log^2 n]$, but its preprint-independent all-cut consequence here is only for products. Neither window proves the universal-time assumption.'
     depends_on: ['cor:letwin-window', 'thm:KL-window', 'cor:V2-implies']
 
   - id: cor:KI-discharged
@@ -828,7 +828,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: 'Scale-weighted all-cut source budget: for every isotropic log-concave initial law, every fixed cut of nontrivial mass, and every T>0, E int_0^T t^2(S_t+r_t^2) dt <= T^2 E r_T <= T; hence the same bound holds under any balanced stopping, without removing the quadratic time weight.'
+    summary: 'Scale-weighted all-cut source budget: for every isotropic log-concave initial law, every fixed cut of nontrivial mass, and every $T>0$, $\mathbb{E}\int_0^T t^2(S_t+r_t^2)\,dt \le T^2\,\mathbb{E}r_T \le T$; hence the same bound holds under any balanced stopping, without removing the quadratic time weight.'
     depends_on: ['thm:scalar-riccati']
     proofs:
       - artifact: solutions/lem-time-weighted-source.tex
@@ -840,7 +840,7 @@ nodes:
     status: refuted
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: Do universal C,T0,gamma>0 and eta in (0,1/4] exist such that every isotropic log-concave law and every balanced finite-perimeter cut with e0<=1 satisfy E int_0^{T wedge tau_eta} e_t(1+||A_t||_op)^(5/2) dt <= C(T e0+T^(1+gamma)) for all T<=T0?
+    summary: 'Do universal $C,T_0,\gamma>0$ and $\eta\in(0,1/4]$ exist such that every isotropic log-concave law and every balanced finite-perimeter cut with $e_0\le1$ satisfy $\mathbb{E}\int_0^{T\wedge\tau_\eta} e_t(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt \le C(Te_0+T^{1+\gamma})$ for all $T\le T_0$?'
     heuristic_barriers: ['obs:two-tail', 'obs:circularity']
     refuted_by: ['prop:weighted-spectator-obstruction']
 
@@ -849,7 +849,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but violates the q:weighted global-operator-norm rate at a time T<=T0.
+    summary: 'For every $C,T_0,\gamma>0$, $\eta\in(0,1/2)$, and $\delta>0$, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most $\delta$ but violates the q:weighted global-operator-norm rate at a time $T\le T_0$.'
     depends_on: ['prop:covariance-spike', 'lem:one-dimensional-density-variance', 'prop:products', 'lem:half']
     proofs:
       - artifact: solutions/prop-weighted-spectator-obstruction.tex
@@ -861,7 +861,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but satisfies E int_0^{T wedge tau_eta} e_t dt > C(T e0+T^(1+gamma)) at a time T<=T0. Thus a tensor-stable replacement weight alone cannot preserve the uniform superlinear-remainder rate.
+    summary: 'For every $C,T_0,\gamma>0$, $\eta\in(0,1/2)$, and $\delta>0$, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most $\delta$ but satisfies $\mathbb{E}\int_0^{T\wedge\tau_\eta} e_t\,dt > C(Te_0+T^{1+\gamma})$ at a time $T\le T_0$. Thus a tensor-stable replacement weight alone cannot preserve the uniform superlinear-remainder rate.'
     depends_on: ['prop:covariance-spike', 'lem:one-dimensional-density-variance', 'prop:products', 'lem:half']
     proofs:
       - artifact: solutions/prop-spectator-excess-rate-obstruction.tex
@@ -873,7 +873,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: For a product of isotropic one-dimensional log-concave laws in the regular split class of the dossier (compact-smooth product-preserving; general split laws are covered only in the defined-on-approximants sense, with the screened-indicator limit interchange open), a J-measurable cut with |J|=k and 0<p_0<1, every eta in (0,1/4], kappa>0, and every T>0, the screened weighted excess satisfies E int_0^{T wedge tau_eta} e_t (1+lambda_cut(A_t,K_t))^(5/2) 1{Q_t >= kappa e_t W_cut} dt <= (2k+64 eta^2 (1+k))/kappa, uniformly in T, the ambient dimension, and every spectator coordinate. Total-budget form, not proportional to T.
+    summary: 'For a product of isotropic one-dimensional log-concave laws in the regular split class of the dossier (compact-smooth product-preserving; general split laws are covered only in the defined-on-approximants sense, with the screened-indicator limit interchange open), a $J$-measurable cut with $|J|=k$ and $0<p_0<1$, every $\eta\in(0,1/4]$, $\kappa>0$, and every $T>0$, the screened weighted excess satisfies $\mathbb{E}\int_0^{T\wedge\tau_\eta} e_t(1+\lambda_{\mathrm{cut}}(A_t,K_t))^{5/2}\mathbf{1}\{Q_t \ge \kappa e_t W_{\mathrm{cut}}\}\,dt \le (2k+64\eta^2(1+k))/\kappa$, uniformly in $T$, the ambient dimension, and every spectator coordinate. Total-budget form, not proportional to $T$.'
     depends_on: ['prop:stein-rep', 'lem:stein-vs-source', 'lem:block', 'cor:per-direction', 'thm:scalar-riccati', 'lem:lyapunov-stein-duality', 'prop:products', 'lem:perimeter-martingale']
     heuristic_barriers: ['obs:two-tail', 'obs:circularity']
     proofs:
@@ -886,7 +886,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: Do universal T0,C0,C1,C2>0, beta in [0,1/2), and eta in (0,1/4] with 2 beta+64 eta^2<1 exist such that every isotropic log-concave law and every finite-perimeter cut with e0<=1 and |p0-1/2|<=eta/2 satisfy E int_0^{T wedge tau_eta} calS_mu_t(E)/s_t dt <= C0 T+C1 E int r_t dt+beta E int D_t dt+C2 E int e_t(E)(1+||A_t||_op)^(5/2) dt for all T<=T0? This is an independent analytic ingredient extracted from the refuted ass:weighted-package; the proposed mechanism is a localization-uniform Jacobi/Reilly almost-stability theorem, and no implication with q:upgrade or q:alignment is proved.
+    summary: 'Do universal $T_0,C_0,C_1,C_2>0$, $\beta\in[0,1/2)$, and $\eta\in(0,1/4]$ with $2\beta+64\eta^2<1$ exist such that every isotropic log-concave law and every finite-perimeter cut with $e_0\le1$ and $|p_0-1/2|\le\eta/2$ satisfy $\mathbb{E}\int_0^{T\wedge\tau_\eta}\mathcal{S}_{\mu_t}(E)/s_t\,dt \le C_0 T+C_1\mathbb{E}\int r_t\,dt+\beta\,\mathbb{E}\int D_t\,dt+C_2\mathbb{E}\int e_t(E)(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt$ for all $T\le T_0$? This is an independent analytic ingredient extracted from the refuted ass:weighted-package; the proposed mechanism is a localization-uniform Jacobi/Reilly almost-stability theorem, and no implication with q:upgrade or q:alignment is proved.'
     heuristic_barriers: ['obs:two-tail']
 
   - id: q:taming
@@ -910,7 +910,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: For products of n isotropic two-sided exponentials, bound the incident-high source S_H (all G entries touching coordinates with A_i>=2) on every I subset [0,T0] by C0|I| + C1 int r + alpha int D with alpha<1, uniformly over fixed balanced cuts.
+    summary: 'For products of $n$ isotropic two-sided exponentials, bound the incident-high source $S_H$ (all $G$ entries touching coordinates with $A_i\ge2$) on every $I\subset[0,T_0]$ by $C_0|I| + C_1\int r + \alpha\int D$ with $\alpha<1$, uniformly over fixed balanced cuts.'
     heuristic_barriers: ['obs:rank-one-refuted']
 
   - id: hyp:absolute-geometric-completion
@@ -918,14 +918,14 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: At one fixed T0<1/8, for h_mu<=(1+eps_g)hstar_n and balanced near-Cheeger cuts, the supply T0 e0+kappa T0 suffices to complete the remaining geometric trace and consumption chain.
+    summary: 'At one fixed $T_0<1/8$, for $h_\mu\le(1+\epsilon_g)h^*_n$ and balanced near-Cheeger cuts, the supply $T_0e_0+\kappa T_0$ suffices to complete the remaining geometric trace and consumption chain.'
 
   - id: cor:dichotomy
     kind: corollary
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: Absolute-scale completion with a small constant gives hstar_n >= c/loglog n; full KLS additionally requires q:taming at the completion time or completion uniform over the supplied time.
+    summary: 'Absolute-scale completion with a small constant gives $h^*_n \ge c/\log\log n$; full KLS additionally requires q:taming at the completion time or completion uniform over the supplied time.'
     depends_on: ['thm:bootstrap', 'cor:loglog', 'hyp:absolute-geometric-completion']
 
   # ---------------------------------------------------------------------------
@@ -936,7 +936,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: For a regular normalized first eigenfunction under the planted localization channel, the posterior defect R_t=(c_t-tX)·grad f satisfies E_t R_t=lambda m_t, lambda g_t=b_t+u_t, lambda H_t=2 sym(C_t)+K_t, E Var_t(R_t)=t lambda-lambda^2 int_0^t E|g_s|^2 ds, E int_0^t ||C_s||_HS^2 ds <= lambda-lambda^2|g_0|^2, and E E_t|grad R_t|^2 <= t lambda^2+t^2 lambda.
+    summary: 'For a regular normalized first eigenfunction under the planted localization channel, the posterior defect $R_t=(c_t-tX)\cdot\nabla f$ satisfies $\mathbb{E}_t R_t=\lambda m_t$, $\lambda g_t=b_t+u_t$, $\lambda H_t=2\,\mathrm{sym}(C_t)+K_t$, $\mathbb{E}\,\mathrm{Var}_t(R_t)=t\lambda-\lambda^2\int_0^t\mathbb{E}|g_s|^2\,ds$, $\mathbb{E}\int_0^t\|C_s\|_{\mathrm{HS}}^2\,ds \le \lambda-\lambda^2|g_0|^2$, and $\mathbb{E}\,\mathbb{E}_t|\nabla R_t|^2 \le t\lambda^2+t^2\lambda$.'
     proofs:
       - artifact: solutions/lem-mm-posterior-defect.tex
         mode: agent
@@ -947,14 +947,14 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time bound on the localization source int ||H_t||_HS^2 by C0 t + C1 int |g_t|^2 plus the full exact damping int 2 g_t^T A_t g_t, uniformly through approximation.
+    summary: 'For a normalized first eigenfunction on regular isotropic log-concave approximants, prove a universal-time bound on the localization source $\int\|H_t\|_{\mathrm{HS}}^2$ by $C_0 t + C_1\int|g_t|^2$ plus the full exact damping $\int 2g_t^T A_t g_t$, uniformly through approximation.'
 
   - id: prop:spectral-sufficiency
     kind: proposition
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: If q:mm-spectral-occupation holds with universal T0,C0,C1 uniformly through regularization, then with M_*=(1+C0 T0)exp(C1 T0) and T_*=min(T0,1/(2M_*)), every isotropic log-concave law satisfies C_P<=2/T_*; no strict damping surplus or eigenfunction convergence is required.
+    summary: 'If q:mm-spectral-occupation holds with universal $T_0,C_0,C_1$ uniformly through regularization, then with $M_*=(1+C_0T_0)\exp(C_1T_0)$ and $T_*=\min(T_0,1/(2M_*))$, every isotropic log-concave law satisfies $C_P\le2/T_*$; no strict damping surplus or eigenfunction convergence is required.'
     assumes: ['q:mm-spectral-occupation']
     implies: ['conj:kls']
     proofs:
@@ -967,7 +967,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: For a smooth kappa-uniformly log-concave law and every fixed admissible square-integrable test f, E int_0^T (kappa+t)||H_t||_HS^2 dt + 2 E int_0^T (|g_t|^2-(kappa+t)g_t^T A_t g_t) dt <= Var_mu(f)-kappa|g_0|^2; hence for kappa=0, E int_0^infinity t||H_t||_HS^2 dt <= Var_mu(f), without an unweighted initial-layer conclusion.
+    summary: 'For a smooth $\kappa$-uniformly log-concave law and every fixed admissible square-integrable test $f$, $\mathbb{E}\int_0^T(\kappa+t)\|H_t\|_{\mathrm{HS}}^2\,dt + 2\,\mathbb{E}\int_0^T(|g_t|^2-(\kappa+t)g_t^T A_t g_t)\,dt \le \mathrm{Var}_\mu(f)-\kappa|g_0|^2$; hence for $\kappa=0$, $\mathbb{E}\int_0^\infty t\|H_t\|_{\mathrm{HS}}^2\,dt \le \mathrm{Var}_\mu(f)$, without an unweighted initial-layer conclusion.'
     proofs:
       - artifact: solutions/lem-mm-time-weighted-fixed-source.tex
         mode: agent
@@ -978,7 +978,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'Conditional on thm:letwin-qcts: for every regular approximant, every fixed unit-variance test, every L>=1 and T>0, with tau_L the first time ||A_t||_op reaches L, E int_0^{T wedge tau_L} ||H_t||_HS^2 dt <= 8 L^2 T, uniformly in dimension and regularization.'
+    summary: 'Conditional on thm:letwin-qcts: for every regular approximant, every fixed unit-variance test, every $L\ge1$ and $T>0$, with $\tau_L$ the first time $\|A_t\|_{\mathrm{op}}$ reaches $L$, $\mathbb{E}\int_0^{T\wedge\tau_L}\|H_t\|_{\mathrm{HS}}^2\,dt \le 8L^2T$, uniformly in dimension and regularization.'
     assumes: ['thm:letwin-qcts']
     proofs:
       - artifact: solutions/lem-mm-stopped-window-source.tex
@@ -990,7 +990,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: For every a.s. positive stopping time sigma of the observation filtration on an eps-regular approximant and every fixed L^2 test, E[int_sigma^infty ||H_t||_HS^2 dt | F_sigma] <= Var_{mu_sigma}(f)/(eps+sigma) <= v_sigma/sigma, by conditional application of lem:mm-time-weighted-fixed-source with kappa = eps+sigma after the strong-Markov restart of the localization.
+    summary: 'For every a.s. positive stopping time $\sigma$ of the observation filtration on an $\epsilon$-regular approximant and every fixed $L^2$ test, $\mathbb{E}[\int_\sigma^\infty\|H_t\|_{\mathrm{HS}}^2\,dt \mid \mathcal{F}_\sigma] \le \mathrm{Var}_{\mu_\sigma}(f)/(\epsilon+\sigma) \le v_\sigma/\sigma$, by conditional application of lem:mm-time-weighted-fixed-source with $\kappa=\epsilon+\sigma$ after the strong-Markov restart of the localization.'
     depends_on: ['lem:mm-time-weighted-fixed-source']
     proofs:
       - artifact: solutions/lem-mm-restart-deweighting.tex
@@ -1002,7 +1002,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: If every isotropic log-concave law in dimension n satisfies C_P <= K_n (thm:klartag-logn), then every normalized first eigenfunction of a regular isotropic approximant with lambda <= 3/(8 K_n) satisfies E f^4 <= 2, via lambda E f^4 = 3 E f^2 |grad f|^2 and Poincare for f^2.
+    summary: 'If every isotropic log-concave law in dimension $n$ satisfies $C_P \le K_n$ (thm:klartag-logn), then every normalized first eigenfunction of a regular isotropic approximant with $\lambda \le 3/(8K_n)$ satisfies $\mathbb{E}f^4 \le 2$, via $\lambda\,\mathbb{E}f^4 = 3\,\mathbb{E}f^2|\nabla f|^2$ and Poincare for $f^2$.'
     depends_on: ['thm:klartag-logn']
     proofs:
       - artifact: solutions/lem-mm-smallgap-fourth-moment.tex
@@ -1014,7 +1014,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, q:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law (n>=2) satisfies C_P <= C log^2 n conditional on thm:letwin-qcts.'
+    summary: 'Conditional on thm:letwin-qcts: with $T_0(n)=\min(t_c, 1/(\bar{C}\log^2 n))$ from thm:KL-window, q:mm-spectral-occupation holds on $[0,T_0(n)]$ with $C_0=34$, $C_1=0$ for every first eigenfunction with $\lambda \le 3/(8K_n)$; combined with the certified bridge argument at fixed $n$ and the large-gap branch, every isotropic log-concave law ($n\ge2$) satisfies $C_P \le C\log^2 n$ conditional on thm:letwin-qcts.'
     depends_on: ['thm:KL-window', 'thm:klartag-logn', 'lem:mm-stopped-window-source', 'lem:mm-restart-deweighting', 'lem:mm-smallgap-fourth-moment', 'lem:mm-time-weighted-fixed-source']
     assumes: ['thm:letwin-qcts']
     proofs:
@@ -1030,7 +1030,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/40-moment-map-cmh.tex
-    summary: There is a universal C such that for every centered log-concave μ, the centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants μ_k satisfy sup_k C_CMH(μ_k) <= C.
+    summary: 'There is a universal $C$ such that for every centered log-concave $\mu$, the centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants $\mu_k$ satisfy $\sup_k C_{\mathrm{CMH}}(\mu_k) \le C$.'
 
   - id: q:cmh-approximation
     kind: question
@@ -1050,7 +1050,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: Every centered log-concave law admits centered full-dimensional compactly-supported regular moment-map approximants mu_k converging in ambient W2 such that C_P^aff(mu) <= liminf_k C_P^aff(mu_k), including proper affine-support degeneration; no continuity of C_CMH is asserted.
+    summary: 'Every centered log-concave law admits centered full-dimensional compactly-supported regular moment-map approximants $\mu_k$ converging in ambient $W_2$ such that $C_P^{\mathrm{aff}}(\mu) \le \liminf_k C_P^{\mathrm{aff}}(\mu_k)$, including proper affine-support degeneration; no continuity of $C_{\mathrm{CMH}}$ is asserted.'
     depends_on: ['thm:regular-moment-map-compact-target']
     proofs:
       - artifact: solutions/lem-affine-poincare-w2-liminf.tex
@@ -1062,7 +1062,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: There is a universal C such that every centered log-concave law has at least one regular recovery sequence mu_k with ambient W2 convergence and liminf_k C_CMH(mu_k) <= C; no bound over every regularization choice is required.
+    summary: 'There is a universal $C$ such that every centered log-concave law has at least one regular recovery sequence $\mu_k$ with ambient $W_2$ convergence and $\liminf_k C_{\mathrm{CMH}}(\mu_k) \le C$; no bound over every regularization choice is required.'
 
   - id: prop:cmh-recovery-calculus
     kind: proposition
@@ -1081,7 +1081,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: The bounded CMH recovery-envelope assumption implies C_P^aff(mu) <= C for every centered log-concave law, hence KLS, using one recovery sequence and preserving the constant through affine-support degeneration.
+    summary: 'The bounded CMH recovery-envelope assumption implies $C_P^{\mathrm{aff}}(\mu) \le C$ for every centered log-concave law, hence KLS, using one recovery sequence and preserving the constant through affine-support degeneration.'
     depends_on: ['lem:affine-poincare-w2-liminf', 'def:cmh', 'thm:cmh-implies-affine-poincare']
     assumes: ['ass:cmh-recovery-envelope']
     proofs:
@@ -1112,14 +1112,14 @@ nodes:
     status: defined
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: The canonical moment-Hessian constant C_CMH(mu) is the supremum over g in Dom(A) minus ker(A) of E<H grad g, Sigma^{-1} H grad g> divided by E(L_mu g)^2, where L_mu g = div_mu(H grad g) = Tr(H D^2 g) - p.grad g is the Stein generator, A = -L_mu, the space is L^2(mu), and every inverse is the pseudoinverse on the orthogonal complement of ker A; Sigma^{-1} is the Moore-Penrose inverse on the affine tangent space for measures on a proper affine subspace.
+    summary: 'The canonical moment-Hessian constant $C_{\mathrm{CMH}}(\mu)$ is the supremum over $g \in \mathrm{Dom}(A)\setminus\ker(A)$ of $\mathbb{E}\langle H\nabla g, \Sigma^{-1}H\nabla g\rangle$ divided by $\mathbb{E}(L_\mu g)^2$, where $L_\mu g = \mathrm{div}_\mu(H\nabla g) = \mathrm{Tr}(HD^2g) - p\cdot\nabla g$ is the Stein generator, $A=-L_\mu$, the space is $L^2(\mu)$, and every inverse is the pseudoinverse on the orthogonal complement of $\ker A$; $\Sigma^{-1}$ is the Moore--Penrose inverse on the affine tangent space for measures on a proper affine subspace.'
 
   - id: prop:cmh-bochner
     kind: proposition
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Integrated Bochner identity for the Stein generator: E(L_mu g)^2 = E[<H grad g, grad g> + Tr(H D^2 g H D^2 g)].'
+    summary: 'Integrated Bochner identity for the Stein generator: $\mathbb{E}(L_\mu g)^2 = \mathbb{E}[\langle H\nabla g,\nabla g\rangle + \mathrm{Tr}(HD^2g\,HD^2g)]$.'
     depends_on: ['def:cmh']
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
@@ -1131,7 +1131,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: CP_aff(mu) <= C_CMH(mu) for every centered log-concave mu in the regular moment-map class. Hence a universal bound C_CMH <= 4 would prove conj:kls with affine Poincare constant 4.
+    summary: '$C_P^{\mathrm{aff}}(\mu) \le C_{\mathrm{CMH}}(\mu)$ for every centered log-concave $\mu$ in the regular moment-map class. Hence a universal bound $C_{\mathrm{CMH}} \le 4$ would prove conj:kls with affine Poincare constant $4$.'
     depends_on: ['def:cmh']
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
@@ -1143,7 +1143,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: Let A1=-div_mu(Sigma grad) be the closed covariance generator and L2_0=(ker A1)^perp. For g in Dom(A) with u=H grad g in L2(mu;Sigma^(-1)), set h=A g=-div_mu u in L2_0, psi=A1^(-1)h with A1^(-1):L2_0 -> Dom(A1) intersect L2_0, and w=u-Sigma grad psi. Then Sigma grad psi and w are orthogonal in L2(mu;Sigma^(-1)), the corresponding energies add exactly, and the supremum of <h,A1^(-1)h>/||h||_2^2 over nonzero h in L2_0 is CP_aff(mu).
+    summary: 'Let $A_1=-\mathrm{div}_\mu(\Sigma\nabla)$ be the closed covariance generator and $L^2_0=(\ker A_1)^\perp$. For $g\in\mathrm{Dom}(A)$ with $u=H\nabla g \in L^2(\mu;\Sigma^{-1})$, set $h=Ag=-\mathrm{div}_\mu u \in L^2_0$, $\psi=A_1^{-1}h$ with $A_1^{-1}: L^2_0 \to \mathrm{Dom}(A_1)\cap L^2_0$, and $w=u-\Sigma\nabla\psi$. Then $\Sigma\nabla\psi$ and $w$ are orthogonal in $L^2(\mu;\Sigma^{-1})$, the corresponding energies add exactly, and the supremum of $\langle h,A_1^{-1}h\rangle/\|h\|_2^2$ over nonzero $h\in L^2_0$ is $C_P^{\mathrm{aff}}(\mu)$.'
     depends_on: ['def:cmh']
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
@@ -1155,7 +1155,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: The Hodge identity gives C_CMH(mu) >= CP_aff(mu) and identifies the difference as a nonnegative solenoidal channel, which vanishes identically in dimension one under the no-flux convention.
+    summary: 'The Hodge identity gives $C_{\mathrm{CMH}}(\mu) \ge C_P^{\mathrm{aff}}(\mu)$ and identifies the difference as a nonnegative solenoidal channel, which vanishes identically in dimension one under the no-flux convention.'
     depends_on: ['prop:cmh-hodge', 'thm:cmh-1d']
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
@@ -1167,14 +1167,14 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Gate zero: E[H Sigma^{-1} H] <= 4 Sigma in the Loewner order for every centered log-concave moment measure; equivalently E H^2 <= 4 Id in isotropic position.'
+    summary: 'Gate zero: $\mathbb{E}[H\Sigma^{-1}H] \le 4\Sigma$ in the Loewner order for every centered log-concave moment measure; equivalently $\mathbb{E}H^2 \le 4\,\mathrm{Id}$ in isotropic position.'
 
   - id: prop:letwin-not-gate-zero
     kind: proposition
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: For every m at least 18 there is a random PSD (m+1)x(m+1) matrix H with E H = Id satisfying E Tr(BHBH) <= 2 Tr(B^2) for EVERY symmetric B, yet lambda_max(E H^2) >= 1 + m/sqrt(2m-1) > 4. Hence positivity, normalization and the constant-matrix estimate do not imply gate zero by matrix algebra; the entire gap is the static commutator, Tr(B^2 H^2) = Tr(BHBH) + (1/2)||[B,H]||_HS^2.
+    summary: 'For every $m$ at least $18$ there is a random PSD $(m+1)\times(m+1)$ matrix $H$ with $\mathbb{E}H=\mathrm{Id}$ satisfying $\mathbb{E}\,\mathrm{Tr}(BHBH) \le 2\,\mathrm{Tr}(B^2)$ for EVERY symmetric $B$, yet $\lambda_{\max}(\mathbb{E}H^2) \ge 1+m/\sqrt{2m-1} > 4$. Hence positivity, normalization and the constant-matrix estimate do not imply gate zero by matrix algebra; the entire gap is the static commutator, $\mathrm{Tr}(B^2H^2) = \mathrm{Tr}(BHBH) + (1/2)\|[B,H]\|_{\mathrm{HS}}^2$.'
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
         mode: agent
@@ -1185,7 +1185,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Gate zero is an operator-to-trace upgrade with a factor-2 budget: Chen-Klartag give Tr(E H^2) <= 2n, so the average eigenvalue of E H^2 is already at most 2 in isotropic position, while conj:gate-zero asks the maximum to be at most 4.'
+    summary: 'Gate zero is an operator-to-trace upgrade with a factor-$2$ budget: Chen--Klartag give $\mathrm{Tr}(\mathbb{E}H^2) \le 2n$, so the average eigenvalue of $\mathbb{E}H^2$ is already at most $2$ in isotropic position, while conj:gate-zero asks the maximum to be at most $4$.'
     depends_on: ['thm:chen-klartag-moment-hessian', 'prop:letwin-not-gate-zero']
 
   - id: lem:cmh-linear-spectral-resolution
@@ -1193,7 +1193,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'For a regular isotropic compact-target moment map with source potential psi, Stein generator A_op = -L in source coordinates, and columns Ha = grad(partial_a psi): the u_b = partial_b psi are centered orthonormal eigenfunctions of A_op at its Brascamp-Lieb spectral gap 1; the columns lie in the form domain and satisfy the weak column equation E(f,Ha) = <f,Ha> - <f,(A+Q)a> for bounded smooth finite-energy f, with (A+Q)a in L^1 orthogonal to every u_b and E[A+Q]=I; and with the induced decomposition Ha = a + sum_b M_ab u_b + v one has a^T N a = 1+|M_a|^2+|v|^2, a^T D a = |M_a|^2+<v,A_op v>, a^T R a = 1 - <v,(A_op-1)v>, where <v,A_op v> is the closed-form value. Consequently R <= I with equality iff the column fluctuation is spectrally pure at the gap; (AB)_{rho,beta} is equivalent to <v,(A_op-1)v> + rho(|M_a|^2+|v|^2) <= 1+beta-rho for all unit a; R >= N - nI holds unconditionally; and R >= D holds for all regular finite products of one-dimensional laws.'
+    summary: 'For a regular isotropic compact-target moment map with source potential $\psi$, Stein generator $A_{\mathrm{op}}=-L$ in source coordinates, and columns $Ha=\nabla(\partial_a\psi)$: the $u_b=\partial_b\psi$ are centered orthonormal eigenfunctions of $A_{\mathrm{op}}$ at its Brascamp--Lieb spectral gap $1$; the columns lie in the form domain and satisfy the weak column equation $\mathcal{E}(f,Ha) = \langle f,Ha\rangle - \langle f,(A+Q)a\rangle$ for bounded smooth finite-energy $f$, with $(A+Q)a \in L^1$ orthogonal to every $u_b$ and $\mathbb{E}[A+Q]=I$; and with the induced decomposition $Ha = a + \sum_b M_{ab}u_b + v$ one has $a^T N a = 1+|M_a|^2+|v|^2$, $a^T D a = |M_a|^2+\langle v,A_{\mathrm{op}}v\rangle$, $a^T R a = 1 - \langle v,(A_{\mathrm{op}}-1)v\rangle$, where $\langle v,A_{\mathrm{op}}v\rangle$ is the closed-form value. Consequently $R \le I$ with equality iff the column fluctuation is spectrally pure at the gap; $(\mathrm{AB})_{\rho,\beta}$ is equivalent to $\langle v,(A_{\mathrm{op}}-1)v\rangle + \rho(|M_a|^2+|v|^2) \le 1+\beta-\rho$ for all unit $a$; $R \ge N-nI$ holds unconditionally; and $R \ge D$ holds for all regular finite products of one-dimensional laws.'
     depends_on: ['thm:regular-moment-map-compact-target', 'def:cmh']
     proofs:
       - artifact: solutions/lem-cmh-linear-spectral-resolution.tex
@@ -1217,7 +1217,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: For a product of centered factors carrying canonical CMH data, C_CMH of the product equals the maximum of the factor constants. For one-dimensional factors this is max_i CP(mu_i)/Var(mu_i); hence block products of CMH(4) factors and their invertible affine images satisfy CMH(4).
+    summary: 'For a product of centered factors carrying canonical CMH data, $C_{\mathrm{CMH}}$ of the product equals the maximum of the factor constants. For one-dimensional factors this is $\max_i C_P(\mu_i)/\mathrm{Var}(\mu_i)$; hence block products of CMH(4) factors and their invertible affine images satisfy CMH(4).'
     depends_on: ['def:cmh', 'thm:cmh-1d']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1240,7 +1240,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Exact Gamma row completion: for alpha_i >= 1 and G homogeneous of degree zero, N_Gamma(G) - D_Gamma(G)/4 = sum_i E R_i + sum_i delta_i D_i(G), with R_i >= 0 and delta_i = alpha_i^2/(alpha_i+1)^2 - 1/4 >= 0.'
+    summary: 'Exact Gamma row completion: for $\alpha_i \ge 1$ and $G$ homogeneous of degree zero, $N_\Gamma(G) - D_\Gamma(G)/4 = \sum_i \mathbb{E}R_i + \sum_i \delta_i D_i(G)$, with $R_i \ge 0$ and $\delta_i = \alpha_i^2/(\alpha_i+1)^2 - 1/4 \ge 0$.'
     depends_on: ['prop:cmh-bochner']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1252,7 +1252,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Hessian-row minimization: for G homogeneous of degree zero, R_i >= (Y_i/S)(1 + Y_i/(alpha_i+1))^2 |G_i|^2, obtained by minimizing R_i under the differentiated Euler constraint sum_j Y_j G_ij = -G_i.'
+    summary: 'Hessian-row minimization: for $G$ homogeneous of degree zero, $R_i \ge (Y_i/S)(1 + Y_i/(\alpha_i+1))^2|G_i|^2$, obtained by minimizing $R_i$ under the differentiated Euler constraint $\sum_j Y_j G_{ij} = -G_i$.'
     depends_on: ['lem:cmh-gamma-completion']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1264,7 +1264,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Angular coefficient: for A >= 3, a >= 1, 0 < p <= 1 and z = (A-1)(A-2), the function F_A(a,p) = a/p + 2a(A-2)/(a+1) + z a(a+p)/(a+1)^2 - z/4 satisfies F_A >= A - 1/2 + s_A, where s_A = (z-2)/4 for z <= 4 and sqrt(z) - 3/2 for z >= 4; and s_A >= 0.'
+    summary: 'Angular coefficient: for $A \ge 3$, $a \ge 1$, $0 < p \le 1$ and $z=(A-1)(A-2)$, the function $F_A(a,p) = a/p + 2a(A-2)/(a+1) + za(a+p)/(a+1)^2 - z/4$ satisfies $F_A \ge A - 1/2 + s_A$, where $s_A = (z-2)/4$ for $z \le 4$ and $\sqrt{z}-3/2$ for $z \ge 4$; and $s_A \ge 0$.'
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
         mode: agent
@@ -1275,7 +1275,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Every log-concave Dirichlet law satisfies CMH(4): for m >= 2, alpha_i >= 1, A = sum alpha_i and every g in the core, A(A+1) E sum_i (C(P) grad g(P))_i^2/alpha_i <= 4 E (L_alpha g(P))^2, where C(p) = diag(p) - p p^T and L_alpha is the Wright-Fisher generator.'
+    summary: 'Every log-concave Dirichlet law satisfies CMH(4): for $m \ge 2$, $\alpha_i \ge 1$, $A = \sum\alpha_i$ and every $g$ in the core, $A(A+1)\,\mathbb{E}\sum_i (C(P)\nabla g(P))_i^2/\alpha_i \le 4\,\mathbb{E}(L_\alpha g(P))^2$, where $C(p)=\mathrm{diag}(p)-pp^T$ and $L_\alpha$ is the Wright--Fisher generator.'
     depends_on: ['def:cmh', 'thm:cmh-1d', 'lem:cmh-gamma-completion', 'lem:cmh-row-min', 'lem:cmh-angular-coefficient']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1287,7 +1287,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Quantitative surplus: for A > 3, n_alpha(g) >= (1/4 + eps_A) A(A+1) d_alpha(g) with eps_A = s_A/(A(A+1)) > 0; equivalently C_CMH <= 4/(1 + 4 s_A/(A(A+1))) < 4.'
+    summary: 'Quantitative surplus: for $A>3$, $n_\alpha(g) \ge (1/4+\epsilon_A)A(A+1)d_\alpha(g)$ with $\epsilon_A = s_A/(A(A+1)) > 0$; equivalently $C_{\mathrm{CMH}} \le 4/(1+4s_A/(A(A+1))) < 4$.'
     depends_on: ['thm:cmh-dirichlet', 'lem:cmh-angular-coefficient']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1299,7 +1299,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: Every log-concave Dirichlet law satisfies the affine Poincare inequality CP_aff <= 4, as does every product, linear image and convolution of independent such laws.
+    summary: 'Every log-concave Dirichlet law satisfies the affine Poincare inequality $C_P^{\mathrm{aff}} \le 4$, as does every product, linear image and convolution of independent such laws.'
     depends_on: ['thm:cmh-dirichlet', 'thm:cmh-implies-affine-poincare', 'cor:cmh-linear-images']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1323,7 +1323,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: Perturb the saturating product moment potential psi_0(s,t) = phi(s) + t^2/2, with phi the one-sided exponential potential, by eps a(s) b(t) inside the smooth strictly convex class; compute the second variation of C_CMH at eps = 0, split through prop:cmh-hodge. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product.
+    summary: 'Perturb the saturating product moment potential $\psi_0(s,t) = \varphi(s) + t^2/2$, with $\varphi$ the one-sided exponential potential, by $\epsilon a(s)b(t)$ inside the smooth strictly convex class; compute the second variation of $C_{\mathrm{CMH}}$ at $\epsilon=0$, split through prop:cmh-hodge. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product.'
     depends_on: ['rem:cmh-saturation-risk']
 
   # ---------------------------------------------------------------------------
@@ -1334,7 +1334,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/45-conditional-fiber-frame.tex
-    summary: For a full-dimensional probability with density and finite second moment, the inverse-conditional-variance line-resampling form is a densely defined closed reversible Dirichlet form with its generator understood in form sense, and pointwise on the stated sufficient Bochner domain. If mu is log-concave, every admissible tight frame satisfies D_(mu,rho)(f) <= 4 int |grad f|^2 dmu, so a frame gap C implies CP(mu) <= 4C. Every linear test f_a(x)=a dot x has D_(mu,rho)(f_a)=|a|^2, hence quotient one under isotropy; every admissible Gaussian frame and the coordinate frame on standardized products have form gap one.
+    summary: 'For a full-dimensional probability with density and finite second moment, the inverse-conditional-variance line-resampling form is a densely defined closed reversible Dirichlet form with its generator understood in form sense, and pointwise on the stated sufficient Bochner domain. If $\mu$ is log-concave, every admissible tight frame satisfies $D_{\mu,\rho}(f) \le 4\int|\nabla f|^2\,d\mu$, so a frame gap $C$ implies $C_P(\mu) \le 4C$. Every linear test $f_a(x)=a\cdot x$ has $D_{\mu,\rho}(f_a)=|a|^2$, hence quotient one under isotropy; every admissible Gaussian frame and the coordinate frame on standardized products have form gap one.'
     depends_on: ['thm:cmh-1d']
     proofs:
       - artifact: solutions/conditional-fiber-frame-structure.tex
@@ -1346,14 +1346,14 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/45-conditional-fiber-frame.tex
-    summary: For every full-dimensional isotropic log-concave mu on R^d, there exists one even test-function-independent probability rho_mu on S^(d-1) with d int theta theta^T d rho_mu = I such that Var_mu(f) <= C D_(mu,rho_mu)(f) for all f in the maximal closed conditional-fiber form domain, with C universal.
+    summary: 'For every full-dimensional isotropic log-concave $\mu$ on $\mathbb{R}^d$, there exists one even test-function-independent probability $\rho_\mu$ on $S^{d-1}$ with $d\int\theta\theta^T d\rho_\mu = I$ such that $\mathrm{Var}_\mu(f) \le C D_{\mu,\rho_\mu}(f)$ for all $f$ in the maximal closed conditional-fiber form domain, with $C$ universal.'
 
   - id: prop:conditional-fiber-root-obstruction
     kind: proposition
     status: proved
     provenance: internal
     file: modules/kls/45-conditional-fiber-frame.tex
-    summary: For the isotropic uniform (m-1)-simplex and the even A_(m-1) root frame, a vertex-cap indicator has normalized conditional-fiber Rayleigh quotient at most 12(m-1)/[(m+1)(m-epsilon)^2(1-(epsilon/m)^(m-1))]; hence the root-frame gap is O(m^(-2)).
+    summary: 'For the isotropic uniform $(m-1)$-simplex and the even $A_{m-1}$ root frame, a vertex-cap indicator has normalized conditional-fiber Rayleigh quotient at most $12(m-1)/[(m+1)(m-\epsilon)^2(1-(\epsilon/m)^{m-1})]$; hence the root-frame gap is $O(m^{-2})$.'
     proofs:
       - artifact: solutions/conditional-fiber-frame-structure.tex
         mode: agent
@@ -1364,7 +1364,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/45-conditional-fiber-frame.tex
-    summary: For every m>=3, on the degree-<=2 quotient V_{m,2} of L^2 of the isotropic uniform simplex modulo constants, the A_{m-1} root-frame pair form K(f,f)=(12/(m^2(m+1))) sum_{i<j} E[Var_{ij}(f)/(P_i+P_j)^2] and G=Var satisfy lambda_min(K,G)=(m+2)(m+3)/(5m^2), attained exactly on the radial line R[|X|^2-(m-1)]. Granting the certified root-pencil identification, every degree-two dual certificate in the all-frame min-max framework has objective at least (m+2)(m+3)/(5m^2) > 1/5, so any fixed-degree polynomial dual refuter requires degree at least three and Lambda_{m,2} >= (m+2)(m+3)/(5m^2). No upper bound on Lambda_{m,2}, no degree-three statement, and no full-L^2 claim.
+    summary: 'For every $m\ge3$, on the degree-$\le2$ quotient $V_{m,2}$ of $L^2$ of the isotropic uniform simplex modulo constants, the $A_{m-1}$ root-frame pair form $K(f,f)=(12/(m^2(m+1)))\sum_{i<j}\mathbb{E}[\mathrm{Var}_{ij}(f)/(P_i+P_j)^2]$ and $G=\mathrm{Var}$ satisfy $\lambda_{\min}(K,G)=(m+2)(m+3)/(5m^2)$, attained exactly on the radial line $\mathbb{R}[|X|^2-(m-1)]$. Granting the certified root-pencil identification, every degree-two dual certificate in the all-frame min-max framework has objective at least $(m+2)(m+3)/(5m^2) > 1/5$, so any fixed-degree polynomial dual refuter requires degree at least three and $\Lambda_{m,2} \ge (m+2)(m+3)/(5m^2)$. No upper bound on $\Lambda_{m,2}$, no degree-three statement, and no full-$L^2$ claim.'
     depends_on: ['lem:conditional-fiber-form', 'prop:conditional-fiber-root-obstruction']
     proofs:
       - artifact: solutions/lem-fiber-root-degree-two.tex
@@ -1376,7 +1376,7 @@ nodes:
     status: proved
     provenance: literature
     file: modules/kls/45-conditional-fiber-frame.tex
-    summary: For every symmetric-Dirichlet shape a>0, every negative pair-rate exponent s<0, and every m>=2, the complete-graph heat-bath form with pair rate (eta_i+eta_j)^s has spectral gap at most 2^(-s)m^s in the exchange normalization. In particular, for the flat simplex and s=-2, the A_(m-1) root conditional-fiber form has gap at most 48/[m(m+1)].
+    summary: 'For every symmetric-Dirichlet shape $a>0$, every negative pair-rate exponent $s<0$, and every $m\ge2$, the complete-graph heat-bath form with pair rate $(\eta_i+\eta_j)^s$ has spectral gap at most $2^{-s}m^s$ in the exchange normalization. In particular, for the flat simplex and $s=-2$, the $A_{m-1}$ root conditional-fiber form has gap at most $48/[m(m+1)]$.'
     import_class: published
     references: [Sasada2015EnergyExchange]
 
@@ -1385,7 +1385,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Sharp gate zero, the operator form of the Chen-Klartag trace bound: E[H Sigma^{-1} H] <= 2 Sigma in the Loewner order for every centered log-concave moment measure, equivalently E H^2 <= 2 Id in isotropic position. Attained in every direction by products of centered exponentials and in the axis direction by every exponential cone measure with beta = n.'
+    summary: 'Sharp gate zero, the operator form of the Chen--Klartag trace bound: $\mathbb{E}[H\Sigma^{-1}H] \le 2\Sigma$ in the Loewner order for every centered log-concave moment measure, equivalently $\mathbb{E}H^2 \le 2\,\mathrm{Id}$ in isotropic position. Attained in every direction by products of centered exponentials and in the axis direction by every exponential cone measure with $\beta=n$.'
     refines: ['conj:gate-zero']
 
   - id: lem:linear-sector-third-moment
@@ -1393,7 +1393,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'For an isotropic log-concave mu that is the moment measure of a C^2 convex phi with E_nu ||D^2 phi||_HS^2 finite, and canonical Stein kernel tau, each column decomposes orthogonally in L^2(mu;R^n) as tau a = a + (1/2) T_3(a) X + v_a with E v_a = 0 and E[v_a (x) X] = 0, where T_3(a) = E[<X,a> X (x) X]; hence E|tau a|^2 = |a|^2 + (1/4)||T_3(a)||_HS^2 + E|v_a|^2. Equivalently E_nu[d_ij phi d_k phi] = (1/2) E_mu[X_i X_j X_k]; when phi is C^3 with D^3 phi in L^1(nu) this identifies the gap-mode coefficient tensor E_nu[d_ijk phi] of lem:cmh-linear-spectral-resolution with half the third-moment tensor.'
+    summary: 'For an isotropic log-concave $\mu$ that is the moment measure of a $C^2$ convex $\varphi$ with $\mathbb{E}_\nu\|D^2\varphi\|_{\mathrm{HS}}^2$ finite, and canonical Stein kernel $\tau$, each column decomposes orthogonally in $L^2(\mu;\mathbb{R}^n)$ as $\tau a = a + (1/2)T_3(a)X + v_a$ with $\mathbb{E}v_a = 0$ and $\mathbb{E}[v_a \otimes X] = 0$, where $T_3(a) = \mathbb{E}[\langle X,a\rangle X\otimes X]$; hence $\mathbb{E}|\tau a|^2 = |a|^2 + (1/4)\|T_3(a)\|_{\mathrm{HS}}^2 + \mathbb{E}|v_a|^2$. Equivalently $\mathbb{E}_\nu[\partial_{ij}\varphi\,\partial_k\varphi] = (1/2)\mathbb{E}_\mu[X_iX_jX_k]$; when $\varphi$ is $C^3$ with $D^3\varphi \in L^1(\nu)$ this identifies the gap-mode coefficient tensor $\mathbb{E}_\nu[\partial_{ijk}\varphi]$ of lem:cmh-linear-spectral-resolution with half the third-moment tensor.'
     proofs:
       - artifact: solutions/lem-linear-sector-third-moment.tex
         mode: agent
@@ -1404,7 +1404,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Under lem:linear-sector-third-moment, for every unit a: ||T_3(a)||_HS^2 <= 4(a^T E[tau^2] a - 1) <= 4(lambda_max(E tau^2) - 1). So E tau^2 <= c Id on a class forces every directional third moment there to be at most 2 sqrt(c-1): gate zero gives 2 sqrt 3, sharp gate zero gives the sharp 2; and any isotropic law in the class with a directional third moment above 2 sqrt 3 refutes gate zero.'
+    summary: 'Under lem:linear-sector-third-moment, for every unit $a$: $\|T_3(a)\|_{\mathrm{HS}}^2 \le 4(a^T\mathbb{E}[\tau^2]a - 1) \le 4(\lambda_{\max}(\mathbb{E}\tau^2)-1)$. So $\mathbb{E}\tau^2 \le c\,\mathrm{Id}$ on a class forces every directional third moment there to be at most $2\sqrt{c-1}$: gate zero gives $2\sqrt{3}$, sharp gate zero gives the sharp $2$; and any isotropic law in the class with a directional third moment above $2\sqrt{3}$ refutes gate zero.'
     depends_on: ['lem:linear-sector-third-moment']
     proofs:
       - artifact: solutions/lem-linear-sector-third-moment.tex
@@ -1416,7 +1416,7 @@ nodes:
     status: defined
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'For n >= 2, a convex body K in R^{n-1} with barycenter 0, the open cone C_K = {(x_1,x''): x_1 > 0, x''/x_1 in int K}, and beta >= n, the exponential cone measure mu_{K,beta} has density proportional to x_1^{beta-n} e^{-x_1} on C_K, and bar mu_{K,beta} is its centering (the law of X - beta e_1). It is log-concave, X = S(1,U) with S ~ Gamma(beta,1) and U ~ Unif(K) independent, E X = beta e_1, and Cov X = beta e_1 e_1^T (+) beta(beta+1) Cov(U).'
+    summary: 'For $n \ge 2$, a convex body $K \subset \mathbb{R}^{n-1}$ with barycenter $0$, the open cone $C_K = \{(x_1,x''): x_1 > 0,\ x''/x_1 \in \mathrm{int}\,K\}$, and $\beta \ge n$, the exponential cone measure $\mu_{K,\beta}$ has density proportional to $x_1^{\beta-n}e^{-x_1}$ on $C_K$, and $\bar\mu_{K,\beta}$ is its centering (the law of $X-\beta e_1$). It is log-concave, $X = S(1,U)$ with $S \sim \Gamma(\beta,1)$ and $U \sim \mathrm{Unif}(K)$ independent, $\mathbb{E}X = \beta e_1$, and $\mathrm{Cov}\,X = \beta e_1e_1^T \oplus \beta(\beta+1)\mathrm{Cov}(U)$.'
 
   - id: prop:cone-moment-map
     kind: proposition
@@ -1435,7 +1435,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'For mu = bar mu_{K,beta}: (i) the field x = tau e_1 has Div_mu x = -bar x_1 with zero boundary flux and x = Sigma grad psi with psi = x^T Sigma^{-1} x / 2, so the first Stein column has no solenoidal part and the affine H^{-1} norm of bar x_1 is E[x^T Sigma^{-1} x] = beta + n, attained at psi; (ii) the normalized gate matrix in the axis direction equals 1 + n/beta <= 2, with equality iff beta = n, and this is the CMH Rayleigh quotient at g = x_1; (iii) in isotropic coordinates T_3(e_1) = 2 beta^{-1/2} Id, tau_Z e_1 = e_1 + (1/2) T_3(e_1) Z, so ||T_3(e_1)||_HS^2 = 4n/beta and the high-mode term v_{e_1} of lem:linear-sector-third-moment vanishes for every base and every beta >= n. Every exponential cone with beta = n saturates conj:gate-zero-sharp in its axis direction and attains ||T_3(e_1)||_HS = 2.'
+    summary: 'For $\mu = \bar\mu_{K,\beta}$: (i) the field $x = \tau e_1$ has $\mathrm{Div}_\mu x = -\bar x_1$ with zero boundary flux and $x = \Sigma\nabla\psi$ with $\psi = x^T\Sigma^{-1}x/2$, so the first Stein column has no solenoidal part and the affine $H^{-1}$ norm of $\bar x_1$ is $\mathbb{E}[x^T\Sigma^{-1}x] = \beta+n$, attained at $\psi$; (ii) the normalized gate matrix in the axis direction equals $1+n/\beta \le 2$, with equality iff $\beta=n$, and this is the CMH Rayleigh quotient at $g=x_1$; (iii) in isotropic coordinates $T_3(e_1) = 2\beta^{-1/2}\mathrm{Id}$, $\tau_Z e_1 = e_1 + (1/2)T_3(e_1)Z$, so $\|T_3(e_1)\|_{\mathrm{HS}}^2 = 4n/\beta$ and the high-mode term $v_{e_1}$ of lem:linear-sector-third-moment vanishes for every base and every $\beta \ge n$. Every exponential cone with $\beta = n$ saturates conj:gate-zero-sharp in its axis direction and attains $\|T_3(e_1)\|_{\mathrm{HS}} = 2$.'
     depends_on: ['prop:cone-moment-map']
     proofs:
       - artifact: solutions/prop-cone-moment-map.tex
@@ -1447,7 +1447,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'For K = [-1,1]^{n-1}, tau_K(u) = (1/2) diag(1 - u_j^2) and the normalized gate matrix of bar mu_{K,beta} is (1 + n/beta) (+) ((6 beta^2 + 11 beta + 5n + 4)/(5 beta (beta+1))) Id_{n-1}. Both eigenvalues are at most 2 for all n >= 2 and beta >= n, so every cube cone satisfies conj:gate-zero-sharp; equality holds in the axis direction iff beta = n and in the transverse directions only for n = beta = 2, the product of two centered exponentials.'
+    summary: 'For $K = [-1,1]^{n-1}$, $\tau_K(u) = (1/2)\mathrm{diag}(1-u_j^2)$ and the normalized gate matrix of $\bar\mu_{K,\beta}$ is $(1+n/\beta) \oplus ((6\beta^2+11\beta+5n+4)/(5\beta(\beta+1)))\mathrm{Id}_{n-1}$. Both eigenvalues are at most $2$ for all $n \ge 2$ and $\beta \ge n$, so every cube cone satisfies conj:gate-zero-sharp; equality holds in the axis direction iff $\beta = n$ and in the transverse directions only for $n = \beta = 2$, the product of two centered exponentials.'
     depends_on: ['prop:cone-moment-map']
     proofs:
       - artifact: solutions/prop-cone-moment-map.tex

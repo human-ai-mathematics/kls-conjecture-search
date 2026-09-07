@@ -274,13 +274,33 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .subhead { margin: .15rem 0 .6rem; font-size: .85rem; color: var(--ink-faint); }
 .subhead .note { font-size: .95em; }
 
-.row-name { font-weight: 600; color: var(--ink); text-decoration: none; }
-.row-name:hover { text-decoration: underline; }
+/* Claim titles are links, and have to look like it before the cursor arrives.
+ *
+ * A title reading as plain bold text, underlined only on `:hover`, hides the one route
+ * from Key results or the 138-claim list into the claim — and hides it completely on a
+ * touch screen, which has no hover at all. It also inverts the hierarchy: the `.id` chip
+ * beside the title is drawn as a link, so the identifier looks more clickable than the
+ * name. So the underline is always drawn, in the rule colour rather than the text
+ * colour, which signals the link without turning a heading into body copy; hover and
+ * focus promote it to the accent. Colour is not the only carrier: the underline is. */
+.row-name,
+.card-name a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.row-name:hover, .row-name:focus-visible,
+.card-name a:hover, .card-name a:focus-visible {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+.row-name { font-weight: 600; }
 .row-note { margin: .15rem 0 .3rem; }
 
 .card-name { margin: 0 0 .4rem; font-size: 1.02rem; line-height: 1.35; }
-.card-name a { color: var(--ink); text-decoration: none; }
-.card-name a:hover { text-decoration: underline; }
 
 .standing-tally { list-style: none; margin: .6rem 0; padding: 0; display: grid; gap: .3rem; }
 .standing-tally li {
@@ -314,8 +334,18 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .filters input { width: 100%; }
 
 .route-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.35; }
-.route-card h3 a { color: var(--ink); text-decoration: none; }
-.route-card h3 a:hover { text-decoration: underline; }
+/* Same rule as .row-name above, and for the same reason. */
+.route-card h3 a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.route-card h3 a:hover, .route-card h3 a:focus-visible {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
 .route-card .row-note { margin: .35rem 0 0; }
 
 .reading-path .row-head { justify-content: space-between; gap: .8rem; }
@@ -457,6 +487,10 @@ a.id:hover { border-color: var(--accent); }
 }
 .map-controls label { display: inline-flex; align-items: center; gap: .3rem; cursor: pointer; }
 .map-controls .group { display: flex; gap: .7rem; flex-wrap: wrap; align-items: center; }
+
+/* What a one-choice dropdown becomes. It reads as the caption to the select beside it,
+   so it is deliberately quieter than a control and carries no border or affordance. */
+.map-controls .control-label { color: var(--ink-soft); }
 .map-controls select, .map-controls input[type="search"] {
   font: inherit;
   padding: .2rem .4rem;
@@ -465,7 +499,17 @@ a.id:hover { border-color: var(--accent); }
   background: var(--panel);
   color: inherit;
 }
-.map-stage { position: relative; height: min(64vh, 620px); background: var(--panel); }
+/* Height follows the drawn graph's shape, which site.js sets as an `aspect-ratio` on
+   this element, between a floor that keeps a very wide graph readable and the ceiling
+   the stage used to be fixed at. */
+.map-stage {
+  position: relative;
+  height: auto;
+  min-height: 300px;
+  max-height: min(64vh, 620px);
+  aspect-ratio: 3 / 2;
+  background: var(--panel);
+}
 .map-stage svg { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 .map-stage svg.dragging { cursor: grabbing; }
 .map-hint {
@@ -550,6 +594,21 @@ button.action:hover { border-color: var(--accent); color: var(--accent); }
 .crumb { font-size: .84rem; color: var(--ink-faint); }
 .crumb a { color: var(--ink-soft); }
 
+/* The Audit sub-navigation: same weight as a breadcrumb, because that is what it is —
+   where you are and what sits beside it, not a second masthead. */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .55rem;
+  align-items: baseline;
+  font-size: .84rem;
+  color: var(--ink-faint);
+  margin-bottom: .5rem;
+}
+.subnav a { color: var(--ink-soft); }
+.subnav > * + *::before { content: "/"; color: var(--rule-strong); margin-right: .55rem; }
+.subnav [aria-current="page"] { color: var(--ink); font-weight: 600; }
+
 .actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .3rem; }
 .action {
   display: inline-flex;
@@ -599,7 +658,7 @@ button.action:hover { border-color: var(--accent); color: var(--accent); }
   h1 { font-size: 1.35rem; }
   .kv { grid-template-columns: 1fr; gap: .1rem .5rem; }
   .kv dd { margin-bottom: .5rem; }
-  .map-stage { height: 58vh; }
+  .map-stage { min-height: 260px; max-height: 58vh; }
 }
 
 /* Paper.

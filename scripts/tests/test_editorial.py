@@ -307,5 +307,75 @@ class GuideValidation(CheckerFixture):
         self.assertEqual(errors, [])
 
 
+class TypesetGlosses(unittest.TestCase):
+    """A gloss is typeset, so its mathematics is written between dollars.
+
+    This was an advisory view (``check.py glosses``) until the 103 nodes it listed were
+    rewritten. It is a lane rule now, so what these tests protect is not the rewrite ---
+    that is done, and the last test here asserts it stayed done --- but the detector's
+    two edges: it must fire on real ASCII mathematics, and it must not fire on ordinary
+    English that happens to spell one of its tokens.
+    """
+
+    def errors(self, gloss: str) -> list[str]:
+        ledgers = [{"program": "p",
+                    "nodes": {"thm:a": {"id": "thm:a", "summary": gloss}}}]
+        found: list[str] = []
+        editorial.ascii_gloss_errors(ledgers, found)
+        return found
+
+    def test_ascii_mathematics_is_an_error(self):
+        self.assertTrue(self.errors("The bound is E H^2 <= 4 Id in isotropic position."))
+
+    def test_the_same_line_typeset_is_not(self):
+        self.assertEqual(
+            self.errors(
+                "The bound is $\\mathbb{E}H^2 \\le 4\\,\\mathrm{Id}$ in isotropic position."
+            ),
+            [],
+        )
+
+    def test_prose_that_spells_a_token_is_not_mathematics(self):
+        """``int `` lives inside "constraint", "joint", "point".
+
+        A blocking check that fires on ordinary English is one people learn to route
+        around, so this is the case that decides whether the rule is worth having.
+        """
+        for word in ("constraint", "joint", "point", "print", "sprint"):
+            with self.subTest(word=word):
+                self.assertEqual(
+                    self.errors(f"Minimized under the Euler {word} stated above."), []
+                )
+
+    def test_mathematics_inside_dollars_is_never_read_as_prose(self):
+        self.assertEqual(
+            self.errors("Every $a_i \\le 2$ and $\\sum_i a_i^2 \\ge 1$."), []
+        )
+
+    def test_a_gloss_of_plain_words_is_fine(self):
+        self.assertEqual(
+            self.errors(
+                "Numerical agreement over the instances tried constrains nothing."
+            ),
+            [],
+        )
+
+    def test_an_empty_or_absent_gloss_is_not_this_rule_s_business(self):
+        ledgers = [{"program": "p", "nodes": {"thm:a": {"id": "thm:a"}}}]
+        found: list[str] = []
+        editorial.ascii_gloss_errors(ledgers, found)
+        self.assertEqual(found, [])
+
+    def test_this_repository_has_no_ascii_gloss_left(self):
+        """The rewrite, asserted rather than remembered."""
+        document = yaml.safe_load(
+            (REPO / "research/program/ledger.yaml").read_text(encoding="utf-8"))
+        ledgers = [{"program": "kls",
+                    "nodes": {item["id"]: item for item in document["nodes"]}}]
+        found: list[str] = []
+        editorial.ascii_gloss_errors(ledgers, found)
+        self.assertEqual(found, [])
+
+
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

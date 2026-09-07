@@ -31,6 +31,7 @@ import re
 import unicodedata
 from pathlib import Path
 
+from . import views
 from .common import as_list
 from .ledger import (
     CLAIM_ENVIRONMENTS,
@@ -429,6 +430,35 @@ def check_titles(labels: dict[str, dict], errors: list[str]) -> None:
                 f"{entry['file']}:{entry['line']}: title of '{label}' reduces to nothing; "
                 "give it words or remove it"
             )
+
+
+def ascii_gloss_errors(ledgers: list[dict], errors: list[str]) -> None:
+    """Every gloss writes its mathematics in ``$...$``, not in ASCII.
+
+    A gloss is the one line a reader meets before deciding whether to open the claim, on
+    the website and in ``check.py status`` alike. Written in ASCII it reads
+    ``E[H Sigma^{-1} H] <= 4 Sigma``, which is not what the claim says so much as a
+    transcription of it, and the site loads MathJax precisely so that it does not have
+    to be read that way.
+
+    This was `check.py glosses`, advisory, until the 103 nodes it listed were rewritten;
+    it blocks now because the expensive part is done and the cheap part --- not
+    regressing --- is what a checker is for. What it does *not* demand is that a gloss
+    contain mathematics: a bridge or an obstruction is often better in plain words, and
+    only the ASCII spellings in ``views.ASCII_MATHS`` are errors.
+    """
+    for item in ledgers:
+        for nid, node in sorted(item["nodes"].items()):
+            gloss = node.get("summary")
+            if not isinstance(gloss, str) or not gloss:
+                continue
+            found = views.ascii_mathematics(gloss)
+            if found:
+                errors.append(
+                    f"[{item['program']}] {nid}.summary: writes {', '.join(found)} "
+                    "outside $...$; a gloss is typeset, so its mathematics goes "
+                    "between dollars"
+                )
 
 
 def check(root: Path, ledgers: list[dict], errors: list[str]) -> None:

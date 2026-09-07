@@ -7,6 +7,7 @@ list anywhere in the repository.
 """
 from __future__ import annotations
 
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -379,13 +380,28 @@ GLOSS_BUDGET = 240
 
 #: ASCII spellings of things that are mathematics. Written between dollars they typeset;
 #: written bare they are what a reader currently meets, e.g. `sqrt(||Cov mu||_op / t)`.
-#: Deliberately conservative --- this view exists to be believed, so it would rather miss
-#: a case than cry wolf on ordinary prose.
+#: Deliberately conservative --- the editorial lane fails on these, so it would rather
+#: miss a case than cry wolf on ordinary prose.
+#:
+#: A token that starts with a letter is matched on a word boundary. Without that, `int `
+#: fires inside "constraint ", "joint ", "point " --- ordinary English in a gloss that
+#: contains no bare integral at all, and exactly the false positive that would make a
+#: blocking check something people learn to work around rather than satisfy.
 ASCII_MATHS = (
     ("<=", "≤"), (">=", "≥"), ("!=", "≠"), ("||", "a norm"), ("^2", "an exponent"),
     ("^{", "an exponent"), ("_i", "a subscript"), ("_n", "a subscript"),
     ("sqrt(", "a root"), ("int ", "an integral"), ("sum_", "a sum"),
     ("E(", "an expectation"), ("<f,", "an inner product"), ("->", "→"),
+)
+
+#: One compiled matcher per token, in the same order, with the word-boundary guard
+#: applied to the ones that need it.
+ASCII_MATH_RES = tuple(
+    (
+        re.compile((r"(?<![A-Za-z])" if token[0].isalpha() else "") + re.escape(token)),
+        name,
+    )
+    for token, name in ASCII_MATHS
 )
 
 
@@ -398,14 +414,21 @@ def _outside_math(text: str) -> str:
     return "$".join(out)
 
 
+def ascii_mathematics(gloss: str) -> list[str]:
+    """The names of the ASCII spellings written outside ``$...$`` in ``gloss``."""
+    prose = _outside_math(gloss)
+    return sorted({name for pattern, name in ASCII_MATH_RES if pattern.search(prose)})
+
+
 def glosses(report: dict) -> None:
     """Which ledger glosses are too long, or write mathematics in ASCII.
 
-    Advisory on purpose, and it exits 0. Rewriting 138 glosses into ``$...$`` is
-    mathematical editing, not a text substitution --- adding TeX changes grouping, and a
-    careless pass would change meaning while turning every lane green. So this reports
-    and does not block; when the list is empty the rule belongs in the editorial lane,
-    where a regression can be caught instead of merely noticed.
+    The ASCII half of this view is now enforced: every gloss was rewritten into
+    ``$...$`` and :func:`checks.editorial.ascii_gloss_errors` fails the editorial lane on
+    a regression, which is what this docstring used to say should happen once the list
+    was empty. What is printed here is the same projection, browsable, plus the length
+    advisory that stays advisory --- shortening a gloss is mathematical editing with no
+    mechanical right answer, and a budget that blocked would be met by deleting content.
 
     Note what is *not* checked: that every gloss contains mathematics. Plenty are
     legitimately prose --- a proof bridge, a methodological obstruction --- and demanding
@@ -422,8 +445,7 @@ def glosses(report: dict) -> None:
             total += 1
             if len(gloss) > GLOSS_BUDGET:
                 long_ones.append((len(gloss), nid))
-            prose = _outside_math(gloss)
-            found = sorted({name for token, name in ASCII_MATHS if token in prose})
+            found = ascii_mathematics(gloss)
             if found:
                 ascii_ones.append((nid, found))
 
@@ -440,7 +462,11 @@ def glosses(report: dict) -> None:
         for length, nid in sorted(long_ones, reverse=True):
             print(f"  {nid:44s} {length} characters")
     if not ascii_ones and not long_ones:
-        print("\nNothing to report. This view is ready to become an editorial-lane rule.")
+        print("\nNothing to report.")
+    elif ascii_ones:
+        print("\nThe ASCII list above fails the editorial lane. The length list does not:"
+              "\na gloss is a recognition aid, not the statement --- the canonical text is"
+              "\nthe \\label in modules/, and shortening one is editing, not formatting.")
     else:
         print("\nAdvisory: nothing above fails a lane. A gloss is a recognition aid, not"
               "\nthe statement --- the canonical text is the \\label in modules/.")
