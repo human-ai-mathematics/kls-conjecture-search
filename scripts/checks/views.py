@@ -366,3 +366,81 @@ def dossiers(report: dict) -> None:
                     found.append(artifact)
     for path in sorted(found):
         print(path)
+
+
+# --------------------------------------------------------------------------------------
+# glosses: an advisory view, on its way to being a rule
+# --------------------------------------------------------------------------------------
+
+#: A gloss helps a reader recognize a claim; the statement is the \label in modules/.
+#: Past roughly this length it stops being a gloss and becomes a compressed restatement,
+#: and a list of 138 of those reads as a wall rather than an index.
+GLOSS_BUDGET = 240
+
+#: ASCII spellings of things that are mathematics. Written between dollars they typeset;
+#: written bare they are what a reader currently meets, e.g. `sqrt(||Cov mu||_op / t)`.
+#: Deliberately conservative --- this view exists to be believed, so it would rather miss
+#: a case than cry wolf on ordinary prose.
+ASCII_MATHS = (
+    ("<=", "≤"), (">=", "≥"), ("!=", "≠"), ("||", "a norm"), ("^2", "an exponent"),
+    ("^{", "an exponent"), ("_i", "a subscript"), ("_n", "a subscript"),
+    ("sqrt(", "a root"), ("int ", "an integral"), ("sum_", "a sum"),
+    ("E(", "an expectation"), ("<f,", "an inner product"), ("->", "→"),
+)
+
+
+def _outside_math(text: str) -> str:
+    """``text`` with every ``$...$`` span blanked, so only prose is inspected."""
+    out, inside = [], False
+    for part in text.split("$"):
+        out.append(" " * len(part) if inside else part)
+        inside = not inside
+    return "$".join(out)
+
+
+def glosses(report: dict) -> None:
+    """Which ledger glosses are too long, or write mathematics in ASCII.
+
+    Advisory on purpose, and it exits 0. Rewriting 138 glosses into ``$...$`` is
+    mathematical editing, not a text substitution --- adding TeX changes grouping, and a
+    careless pass would change meaning while turning every lane green. So this reports
+    and does not block; when the list is empty the rule belongs in the editorial lane,
+    where a regression can be caught instead of merely noticed.
+
+    Note what is *not* checked: that every gloss contains mathematics. Plenty are
+    legitimately prose --- a proof bridge, a methodological obstruction --- and demanding
+    a dollar sign in those would buy nothing and cost their readability.
+    """
+    long_ones: list[tuple[int, str]] = []
+    ascii_ones: list[tuple[str, list[str]]] = []
+    total = 0
+    for item in report["ledgers"]:
+        for nid, node in sorted(item["nodes"].items()):
+            gloss = node.get("summary")
+            if not isinstance(gloss, str) or not gloss:
+                continue
+            total += 1
+            if len(gloss) > GLOSS_BUDGET:
+                long_ones.append((len(gloss), nid))
+            prose = _outside_math(gloss)
+            found = sorted({name for token, name in ASCII_MATHS if token in prose})
+            if found:
+                ascii_ones.append((nid, found))
+
+    typeset = total - len(ascii_ones)
+    print(f"{total} gloss(es); {typeset} free of bare ASCII mathematics, "
+          f"{len(long_ones)} over {GLOSS_BUDGET} characters")
+
+    if ascii_ones:
+        print(f"\nmathematics written outside $...$ ({len(ascii_ones)}):")
+        for nid, found in ascii_ones:
+            print(f"  {nid:44s} {', '.join(found)}")
+    if long_ones:
+        print(f"\nlonger than a gloss ({len(long_ones)}):")
+        for length, nid in sorted(long_ones, reverse=True):
+            print(f"  {nid:44s} {length} characters")
+    if not ascii_ones and not long_ones:
+        print("\nNothing to report. This view is ready to become an editorial-lane rule.")
+    else:
+        print("\nAdvisory: nothing above fails a lane. A gloss is a recognition aid, not"
+              "\nthe statement --- the canonical text is the \\label in modules/.")

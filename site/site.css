@@ -39,6 +39,20 @@
   --defined: #4a4a80;
   --defined-soft: #eaeaf6;
 
+  /* Standing. The schema has four statuses; a reader has more questions than that, so
+     the derived standing has eight tones. `published` and `certified` are deliberately
+     not the same green: one is a result the literature carries, the other a result this
+     repository certified against a dossier, and a page that draws them alike is making
+     a claim about evidence that the ledger does not make. */
+  --published: #1c5f8a;
+  --published-soft: #e2eff7;
+  --preprint: #7a5a99;
+  --preprint-soft: #f0eaf8;
+  --premise: #6b6252;
+  --premise-soft: #f2efe8;
+  --barrier: #a35a12;
+  --barrier-soft: #fbeeda;
+
   --radius: 7px;
   --radius-lg: 11px;
   --shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 6px 18px -12px rgba(0, 0, 0, .3);
@@ -71,6 +85,14 @@
     --refuted-soft: #331c1b;
     --defined: #a4a4dd;
     --defined-soft: #22223a;
+    --published: #6fb4dd;
+    --published-soft: #142835;
+    --preprint: #b99ada;
+    --preprint-soft: #251d33;
+    --premise: #b6ab96;
+    --premise-soft: #2a2721;
+    --barrier: #dda05a;
+    --barrier-soft: #33240f;
 
     --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 6px 18px -12px rgba(0, 0, 0, .8);
   }
@@ -219,7 +241,85 @@ h3 { font-size: .95rem; margin: 1.4rem 0 .5rem; }
 .badge.kind    { background: transparent; color: var(--ink-soft); border-color: var(--rule-strong); font-weight: 520; }
 .badge.warn    { background: var(--open-soft); color: var(--open); border-color: var(--open); }
 
+/* The eight standing tones. Three of them reuse the `proved` green on purpose — a
+   certified result, an attested one and one proved elsewhere are all proved — and are
+   told apart by their words and, for the weaker two, by a lighter weight of border.
+   Colour is never the only signal: every badge carries its glyph and its label. */
+.badge.standing.certified        { background: var(--proved-soft);    color: var(--proved);    border-color: var(--proved); }
+.badge.standing.attested,
+.badge.standing.proved-elsewhere { background: var(--proved-soft);    color: var(--proved);    border-color: transparent; }
+.badge.standing.published        { background: var(--published-soft); color: var(--published); border-color: var(--published); }
+.badge.standing.preprint         { background: var(--preprint-soft);  color: var(--preprint);  border-color: var(--preprint); }
+.badge.standing.open             { background: var(--open-soft);      color: var(--open);      border-color: var(--open); }
+.badge.standing.premise          { background: var(--premise-soft);   color: var(--premise);   border-color: var(--premise); }
+.badge.standing.barrier          { background: var(--barrier-soft);   color: var(--barrier);   border-color: var(--barrier); }
+.badge.standing.refuted          { background: var(--refuted-soft);   color: var(--refuted);   border-color: var(--refuted); }
+.badge.standing.definition       { background: var(--defined-soft);   color: var(--defined);   border-color: var(--defined); }
+
+/* "Certified here, conditional" is a proved result resting on an open antecedent. The
+   dashed edge is the same convention `.fence.soft` already uses for something that
+   guides without settling — it qualifies the badge rather than recolouring it. */
+.badge.standing.conditional { border-style: dashed; }
+
 .badges { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
+
+/* ------------------------------------------------- titles, tallies and list rows ---- */
+
+.subhead { margin: .15rem 0 .6rem; font-size: .85rem; color: var(--ink-faint); }
+.subhead .note { font-size: .95em; }
+
+.row-name { font-weight: 600; color: var(--ink); text-decoration: none; }
+.row-name:hover { text-decoration: underline; }
+.row-note { margin: .15rem 0 .3rem; }
+
+.card-name { margin: 0 0 .4rem; font-size: 1.02rem; line-height: 1.35; }
+.card-name a { color: var(--ink); text-decoration: none; }
+.card-name a:hover { text-decoration: underline; }
+
+.standing-tally { list-style: none; margin: .6rem 0; padding: 0; display: grid; gap: .3rem; }
+.standing-tally li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .3rem .1rem;
+  border-bottom: 1px solid var(--rule);
+}
+/* Filters. Deliberately quiet: they are a way to see the list, not part of it. */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .8rem;
+  align-items: flex-end;
+  margin: .2rem 0 .6rem;
+}
+.filters label { display: flex; flex-direction: column; gap: .15rem; }
+.filters label.grow { flex: 1 1 12rem; }
+.filters .note { text-transform: uppercase; letter-spacing: .06em; font-size: .68rem; }
+.filters select,
+.filters input {
+  font: inherit;
+  font-size: .86rem;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: .25rem .4rem;
+}
+.filters input { width: 100%; }
+
+.route-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.35; }
+.route-card h3 a { color: var(--ink); text-decoration: none; }
+.route-card h3 a:hover { text-decoration: underline; }
+.route-card .row-note { margin: .35rem 0 0; }
+
+.reading-path .row-head { justify-content: space-between; gap: .8rem; }
+
+.standing-tally .tally {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
 
 /* ------------------------------------------------------------------ id and math ---- */
 

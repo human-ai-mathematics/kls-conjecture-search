@@ -55,6 +55,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from checks import analyze, failures  # noqa: E402
 from checks.common import LANES, as_list  # noqa: E402
 from checks.ledger import LEDGER_PATH, applicability_blockers  # noqa: E402
+from checks.editorial import standing_detail, title_display  # noqa: E402
 
 #: Where the frontend lives, and where a build lands. Both repo-relative. ``build/`` is
 #: already gitignored, so a built site is never committed by accident.
@@ -241,6 +242,15 @@ def _claims(report: dict, archive: dict) -> dict[str, dict]:
                 "status": node.get("status"),
                 "provenance": node.get("provenance"),
                 "import_class": node.get("import_class"),
+                # The reader-facing projection of the four fields above, derived by the
+                # same `checks.editorial` the manuscript badges come from. Exported, not
+                # recomputed here: two implementations of one taxonomy is one too many.
+                **standing_detail(node, nodes),
+                # The heading a mathematician reads. It is the amsthm optional argument
+                # of the claim's own environment, so the site and the manuscript name a
+                # theorem the same way; `id` stays exported beside it, and stays visible
+                # in the interface, because that is what cross-references are quoted by.
+                "title": title_display(anchor.get("title"))[0],
                 # Named `gloss`, not `statement`. The canonical text is the \label in
                 # modules/ and nowhere else (CLAUDE.md constraint 7); this one line is
                 # what `ledger-schema.md` calls a gloss, and the interface says so next
@@ -502,6 +512,12 @@ def export(report: dict, root: Path, *, repository: str | None = None,
         "search": search,
         "memory": memory,
         "documents": documents,
+        # Presentation order and selection, straight from the validated editorial guide.
+        # It reaches the frontend through this file like everything else, so the four
+        # route names and the featured ids stay out of site.js and the frontend still
+        # owns no state of its own. `null` when the repository keeps no guide, which is
+        # the ordinary case for a template and for the worked example.
+        "guide": report.get("guide"),
         "vocabulary": {
             "relations": [{"field": field, "class": relation_class,
                            "label": label, "gloss": gloss}
@@ -658,7 +674,7 @@ def main(argv: list[str] | None = None) -> int:
     revision = generated["short_commit"] or "unknown revision"
     print(f"wrote {out}{' (working tree is dirty)' if generated['dirty'] else ''}")
     print(f"  {len(data['claims'])} claim(s), "
-          f"{len((data['search'] or {'routes': {}})['routes'])} route(s), "
+          f"{len((data['search'] or {'routes': {}})['routes'])} approach(es), "
           f"{len(data['memory']['checkpoints'])} checkpoint(s) — at {revision}")
     if not data["program"]["instantiated"]:
         print("  note: this repository is still an uninstantiated template; the site "

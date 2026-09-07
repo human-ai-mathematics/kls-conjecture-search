@@ -15,7 +15,7 @@
       Portfolio = what the search is doing.
       Checkpoints = why the portfolio changed.
 
-  A route is not a theorem. `completed` means a route's objective ended, never that the
+  An approach is not a theorem. `completed` means an approach's objective ended, never that the
   target was settled; `saturated` is a synthesis judgment about effort, not a fact about
   mathematics. The two maps never share a canvas.
 */
@@ -96,7 +96,7 @@ function typeset(scope) {
    carrier of meaning. What the states *mean* is the repository's business, not this
    file's — the words below are the repository's own vocabulary, unaltered. */
 const STATUS_GLYPH = { proved: '✓', open: '○', refuted: '✗', defined: '≡' };
-const ROUTE_GLYPH = {
+const APPROACH_GLYPH = {
   queued: '·', active: '▸', blocked: '■', completed: '✓', duplicate: '⧉',
 };
 const FAMILY_GLYPH = { active: '▸', saturated: '◼', parked: '❙❙' };
@@ -115,9 +115,61 @@ function statusBadge(status) {
     status || 'unknown');
 }
 
-function routeBadge(state) {
+/* The tone glyphs. Same discipline as STATUS_GLYPH above: a shape so the badge survives
+   monochrome and colour-blindness, and the words themselves carry the meaning. The tone
+   names are the repository's, exported in data.json beside every claim; this file only
+   decides what each one looks like. */
+const STANDING_GLYPH = {
+  published: '◆', preprint: '◇', certified: '✓', attested: '✓',
+  'proved-elsewhere': '✓', open: '○', premise: '◻', barrier: '⚠',
+  refuted: '✗', definition: '≡',
+};
+
+/**
+ * The reader-facing standing of a claim.
+ *
+ * The text is `claim.standing` verbatim — the same string scripts/checks/editorial.py
+ * writes into status.tex — so a badge here and a badge in the PDF can never say
+ * different things. `standing_tone` chooses the drawing; `standing_conditional` adds a
+ * modifier rather than a replacement, because a proved implication resting on an open
+ * antecedent is still proved (repository contract, constraint 8) and still not progress
+ * on the target (P2). The label already says both; the class only has to draw both.
+ */
+function standingBadge(claim) {
+  const tone = claim.standing_tone || 'neutral';
+  const conditional = claim.standing_conditional ? ' conditional' : '';
+  return el('span', {
+    class: `badge standing ${tone}${conditional}`,
+    title: `schema status: ${claim.status}`,
+  },
+  el('span', { class: 'glyph', 'aria-hidden': 'true', text: STANDING_GLYPH[tone] || '?' }),
+  claim.standing || claim.status || 'unknown');
+}
+
+/**
+ * What to call a claim in a heading, a list or a graph box.
+ *
+ * The manuscript titles its own theorems, and that title is the name a mathematician
+ * already uses for the result. The stable id stays exported, stays visible beside it and
+ * stays copyable — it is what cross-references, issues and this site's own URLs are
+ * written in — but it stops being the headline. A claim with no title keeps the id as
+ * its name, which is the honest fallback rather than an invented one.
+ */
+function claimName(claim) {
+  return (claim && claim.title) || (claim && claim.id) || 'unknown';
+}
+
+/* SVG text neither wraps nor clips, and a node box is a fixed 212px. Titles are prose
+   and run to a hundred characters, so the box gets a shortened form and the full name
+   goes to the tooltip and the accessible name, where there is room for it. */
+function ellipsis(text, limit) {
+  const value = String(text || '');
+  return value.length <= limit ? value : `${value.slice(0, limit - 1).trimEnd()}…`;
+}
+
+function approachBadge(state) {
   return el('span', { class: 'badge neutral' },
-    el('span', { class: 'glyph', 'aria-hidden': 'true', text: ROUTE_GLYPH[state] || '·' }),
+    el('span', { class: 'glyph', 'aria-hidden': 'true', text: APPROACH_GLYPH[state] || '·' }),
     state || 'unknown');
 }
 
@@ -154,10 +206,10 @@ function idLink(id) {
   if (!id) return null;
   if (DATA.claims[id]) return el('a', { class: 'id', href: `#/node/${id}`, text: id });
   if (DATA.search && DATA.search.routes[id]) {
-    return el('a', { class: 'id', href: `#/route/${id}`, text: id });
+    return el('a', { class: 'id', href: `#/approach/${id}`, text: id });
   }
   if (DATA.memory.candidates.some((entry) => entry.id === id)) {
-    return el('a', { class: 'id', href: '#/evidence', text: id });
+    return el('a', { class: 'id', href: '#/audit/evidence', text: id });
   }
   return el('code', { class: 'id', text: id });
 }
@@ -225,6 +277,11 @@ function idList(ids, emptyText) {
 function glossBlock(claim) {
   const source = claim.source || {};
   const rendered = statementLink(claim.id);
+  const documents = DATA.documents || {};
+  const pdf = documents.pdf && documents.pdf.manuscript;
+  const missing = [];
+  if (!rendered) missing.push('the HTML conversion');
+  if (!pdf) missing.push('the PDF');
   return el('div', {},
     el('span', { class: 'gloss-tag', text: 'One-line gloss — not the statement' }),
     el('p', { class: 'gloss' }, math(claim.gloss)),
@@ -237,9 +294,93 @@ function glossBlock(claim) {
       rendered
         ? el('a', { class: 'action', href: rendered }, 'Read the statement')
         : null,
-      DATA.documents && DATA.documents.pdf && DATA.documents.pdf.manuscript
-        ? el('a', { class: 'action', href: DATA.documents.pdf.manuscript, target: '_blank' },
-          'Manuscript (PDF)') : null));
+      pdf ? el('a', { class: 'action', href: pdf, target: '_blank' },
+        'Manuscript (PDF)') : null,
+      (() => {
+        const href = source.file ? sourceLink(source.file, source.line) : null;
+        return href ? el('a', { class: 'action', href, rel: 'noopener', target: '_blank' },
+          'LaTeX source') : null;
+      })()),
+    /* A control that is simply absent tells a reader nothing; they conclude the
+       statement is unavailable rather than that one rendering of it is. Say which. */
+    rendered && pdf ? null : el('p', { class: 'note' },
+      `${missing.join(' and ')} of the manuscript `
+      + `${missing.length > 1 ? 'are' : 'is'} not attached to this build`,
+      rendered || pdf || source.file
+        ? '. The links above reach the statement by the routes that are.'
+        : '. Nothing here can reach the statement, which is a build defect.'));
+}
+
+/**
+ * A filter bar over a list, and the list it filters.
+ *
+ * 138 claims and 92 checkpoints in one alphabetical column is preservation, not
+ * navigation: everything is there and nothing can be found. Each facet is derived from
+ * the rows themselves, so a filter can never offer a value that matches nothing, and the
+ * whole thing is inert with a single row.
+ *
+ * `facets` is [{ label, of(row) }]; `search` is a row -> haystack string; `render` is a
+ * row -> element. Filtering is presentation only — it hides rows, never reinterprets
+ * them, and the count line says exactly what is being withheld.
+ */
+function filteredList(rows, { facets, search, render, noun }) {
+  const chosen = new Map();
+  let query = '';
+  const list = el('ul', { class: 'rows' });
+  const count = el('p', { class: 'note' });
+
+  const matches = () => rows.filter((row) => {
+    for (const [label, value] of chosen) {
+      const facet = facets.find((entry) => entry.label === label);
+      const of = facet.of(row);
+      const values = Array.isArray(of) ? of : [of];
+      if (!values.includes(value)) return false;
+    }
+    return !query || (search(row) || '').toLowerCase().includes(query);
+  });
+
+  const draw = () => {
+    const shown = matches();
+    clear(list);
+    append(list, shown.map(render));
+    count.textContent = shown.length === rows.length
+      ? `All ${rows.length} ${noun}.`
+      : `${shown.length} of ${rows.length} ${noun}; the rest are filtered out, not gone.`;
+    if (!shown.length) list.appendChild(el('li', { class: 'tight' },
+      el('span', { class: 'note', text: 'Nothing matches every filter at once.' })));
+    typeset(list);
+  };
+
+  const controls = el('div', { class: 'filters' });
+  for (const facet of facets) {
+    const values = [...new Set(rows.flatMap((row) => {
+      const of = facet.of(row);
+      return (Array.isArray(of) ? of : [of]).filter((value) => value != null && value !== '');
+    }))].sort();
+    if (values.length < 2) continue;
+    controls.appendChild(el('label', {},
+      el('span', { class: 'note', text: facet.label }),
+      el('select', {
+        'aria-label': `Filter by ${facet.label}`,
+        onchange: (event) => {
+          if (event.target.value) chosen.set(facet.label, event.target.value);
+          else chosen.delete(facet.label);
+          draw();
+        },
+      },
+      el('option', { value: '', text: `any ${facet.label}` }),
+      values.map((value) => el('option', { value, text: String(value) })))));
+  }
+  controls.appendChild(el('label', { class: 'grow' },
+    el('span', { class: 'note', text: 'search' }),
+    el('input', {
+      type: 'search', placeholder: 'name, id or text…',
+      'aria-label': `Search ${noun}`,
+      oninput: (event) => { query = event.target.value.trim().toLowerCase(); draw(); },
+    })));
+
+  draw();
+  return el('div', {}, controls, count, list);
 }
 
 function statCard(value, label) {
@@ -255,6 +396,17 @@ function emptyState(text) { return el('p', { class: 'empty', text }); }
 const NODE_W = 212;
 const NODE_H = 56;
 
+/* Above this many nodes, "Whole map" stops being a map.
+ *
+ * The layout is one column per proof-depth layer, which is the right convention — a
+ * dependency sits below what rests on it — and it is what makes the whole graph 15,000
+ * pixels wide once a program has a hundred claims. Wrapping a wide layer into several
+ * rows would fix the width and break the convention: several rows of one depth read as
+ * several depths. So the honest answer is to withhold the view rather than degrade the
+ * meaning of the one that remains. The neighbourhood graph is unaffected, and the list
+ * above it, with its filters, is where a reader browses all of them. */
+const WHOLE_MAP_LIMIT = 60;
+
 /**
  * Draw one graph. Layout arrives precomputed and deterministic from the exporter —
  * geometry here is navigation only. Proximity, centrality and column position carry no
@@ -265,6 +417,7 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     focus: focusId || null,
     depth: 1,
     scope: nodes.length > 14 ? 'neighbourhood' : 'all',
+    tooLarge: nodes.length > WHOLE_MAP_LIMIT,
     off: new Set(),
     selected: null,
   };
@@ -308,13 +461,15 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
     onchange: (event) => { state.scope = event.target.value; refit(); },
   },
     el('option', { value: 'neighbourhood', text: 'Neighbourhood of…' }),
-    el('option', { value: 'all', text: 'Whole map' }));
+    state.tooLarge ? null : el('option', { value: 'all', text: 'Whole map' }));
   scopeSelect.value = state.scope;
 
   const focusSelect = el('select', {
     'aria-label': 'Centre of the neighbourhood',
     onchange: (event) => { state.focus = event.target.value; refit(); },
-  }, nodes.map((node) => el('option', { value: node.id, text: node.id })));
+  }, nodes.slice()
+    .sort((a, b) => (a.name || a.id).localeCompare(b.name || b.id))
+    .map((node) => el('option', { value: node.id, text: node.name || node.id })));
   if (state.focus) focusSelect.value = state.focus;
 
   const depthSelect = el('select', {
@@ -323,11 +478,16 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
   }, [1, 2, 3].map((n) => el('option', { value: n, text: `${n} step${n > 1 ? 's' : ''}` })));
 
   const search = el('input', {
-    type: 'search', placeholder: 'find an id…', 'aria-label': 'Find a node by id',
+    type: 'search', placeholder: 'find by name, id or gloss…',
+    'aria-label': 'Find a node by name, identifier or gloss',
     oninput: (event) => {
       const query = event.target.value.trim().toLowerCase();
       if (!query) { state.selected = null; draw(); return; }
-      const hit = nodes.find((node) => node.id.toLowerCase().includes(query));
+      /* Prefer a hit in the name over one buried in a gloss: someone typing "carleson"
+         means the theorem called that, not every claim whose gloss mentions it. */
+      const matches = nodes.filter((node) => (node.haystack || node.id.toLowerCase()).includes(query));
+      const hit = matches.find((node) => (node.name || node.id).toLowerCase().includes(query))
+        || matches[0];
       if (hit) { state.focus = hit.id; focusSelect.value = hit.id; select(hit.id); }
     },
   });
@@ -464,7 +624,7 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
       if (dim) classes.push('dimmed');
       const group = svg('g', {
         class: classes.join(' '), tabindex: '0', role: 'button',
-        'aria-label': `${node.id}, ${node.meta}`,
+        'aria-label': `${node.name || node.label || node.id}, ${node.meta}`,
         transform: `translate(${node.x - NODE_W / 2} ${node.y - NODE_H / 2})`,
         onclick: () => select(node.id),
         onkeydown: (event) => {
@@ -472,7 +632,8 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
         },
       },
         svg('rect', { class: 'box', width: NODE_W, height: NODE_H, rx: 8 }),
-        svg('text', { class: 'glabel', x: 12, y: 22 }, node.id),
+        svg('title', {}, `${node.name || node.id}\n${node.id}`),
+        svg('text', { class: 'glabel', x: 12, y: 22 }, node.label || node.id),
         svg('text', { class: 'gmeta', x: 12, y: 40 }, node.meta),
         node.isTarget ? svg('text', { class: 'gkind', x: NODE_W - 12, y: 22,
           'text-anchor': 'end' }, 'target') : null);
@@ -481,7 +642,11 @@ function graph({ nodes, edges, legend, focusId, selectHandler, stageNote }) {
 
     stage.appendChild(canvas);
     stage.appendChild(el('span', { class: 'map-hint',
-      text: stageNote || 'drag to pan · scroll to zoom · click a box' }));
+      text: state.tooLarge
+        ? `${stageNote || 'drag to pan · scroll to zoom · click a box'} · `
+          + `${nodes.length} nodes is too many to draw at once, so this shows a `
+          + 'neighbourhood; the list below holds all of them'
+        : (stageNote || 'drag to pan · scroll to zoom · click a box') }));
     wirePanZoom();
   }
 
@@ -530,10 +695,15 @@ function claimGraphModel() {
   const target = DATA.program.target;
   const nodes = Object.values(DATA.claims).map((claim) => ({
     id: claim.id,
+    label: ellipsis(claimName(claim), 26),
+    name: claimName(claim),
+    /* What the find box matches. A mathematician looking for a theorem types a word
+       from its name, not its stable identifier — and may well type one from the gloss. */
+    haystack: `${claim.id} ${claim.title || ''} ${claim.gloss || ''}`.toLowerCase(),
     x: (layout[claim.id] || { x: 0 }).x,
     y: -(layout[claim.id] || { y: 0 }).y,
-    tone: claim.status,
-    meta: `${claim.kind || '?'} · ${claim.status || '?'}`,
+    tone: claim.standing_tone || claim.status,
+    meta: `${claim.kind || '?'} · ${claim.standing || claim.status || '?'}`,
     isTarget: claim.id === target,
   }));
   const edges = [];
@@ -578,7 +748,7 @@ function searchGraphModel() {
       x: (layout[route.id] || { x: 0 }).x,
       y: -(layout[route.id] || { y: 0 }).y,
       tone: 'neutral',
-      meta: `route · ${route.state || '?'}`,
+      meta: `approach · ${route.state || '?'}`,
     });
   }
   const edges = [];
@@ -598,17 +768,17 @@ function searchGraphModel() {
   }
   const used = new Set(edges.map((edge) => edge.kind));
   const legend = [
-    { key: 'family', label: 'family / parent', gloss: 'Which family a route belongs to, and which route it grew out of.' },
-    { key: 'overlaps', label: 'overlaps', gloss: 'Two routes cover some of the same ground.' },
-    { key: 'duplicates', label: 'duplicates', gloss: 'The same idea as another route. Both may not be active.' },
-    { key: 'refines', label: 'refines', gloss: 'A sharper version of another route.' },
+    { key: 'family', label: 'family / parent', gloss: 'Which family an approach belongs to, and which approach it grew out of.' },
+    { key: 'overlaps', label: 'overlaps', gloss: 'Two approaches cover some of the same ground.' },
+    { key: 'duplicates', label: 'duplicates', gloss: 'The same idea as another approach. Both may not be active.' },
+    { key: 'refines', label: 'refines', gloss: 'A sharper version of another approach.' },
   ].filter((entry) => used.has(entry.key));
   return { nodes, edges, legend };
 }
 
 /* ------------------------------------------------------------------------- views ---- */
 
-function viewTarget() {
+function viewOverview() {
   const page = el('div', {});
   const program = DATA.program;
 
@@ -630,8 +800,12 @@ function viewTarget() {
 
   const target = program.target ? DATA.claims[program.target] : null;
 
-  page.appendChild(el('h1', {}, target ? 'The target' : 'This repository'));
-  if (program.scope) {
+  const g = guide();
+  page.appendChild(el('h1', {},
+    (g && g.site && g.site.name) || (target ? 'The target' : 'This repository')));
+  if (g && g.site && g.site.tagline) {
+    page.appendChild(el('p', { class: 'lede' }, math(g.site.tagline)));
+  } else if (program.scope) {
     page.appendChild(el('p', { class: 'lede' }, math(program.scope)));
   }
 
@@ -654,88 +828,97 @@ function viewTarget() {
         proofCount ? null : discussLink('Discuss'))));
   }
 
+  /* --- the frontier, the routes, the way in ---------------------------------------- */
+
+  if (g) {
+    const frontier = (g.frontier || []).map((id) => DATA.claims[id]).filter(Boolean);
+    if (frontier.length) {
+      page.appendChild(el('h2', { text: 'Where the problem stands in the literature' }));
+      page.appendChild(el('ul', { class: 'rows' },
+        frontier.map((claim) => featuredRow({ id: claim.id, claim }))));
+    }
+
+    if ((g.routes || []).length) {
+      page.appendChild(el('div', { class: 'section-head' },
+        el('h2', { text: 'Four routes are studied here' }),
+        el('a', { href: '#/routes', text: 'All four →' })));
+      page.appendChild(el('div', { class: 'grid two' },
+        g.routes.map((route) => routeCard(route))));
+    }
+
+    if ((g.reading || []).length) {
+      page.appendChild(el('h2', { text: 'Read the manuscript' }));
+      page.appendChild(el('div', { class: 'actions' },
+        g.reading.slice(0, 3).map((entry) =>
+          manuscriptAction(entry.anchor, entry.label)).filter(Boolean),
+        el('a', { class: 'action', href: '#/manuscript' }, 'All entry points')));
+    }
+  }
+
   /* --- state of the search ------------------------------------------------------- */
 
   const claims = Object.values(DATA.claims);
-  const counts = {};
-  for (const claim of claims) counts[claim.status] = (counts[claim.status] || 0) + 1;
-  const routes = DATA.search ? Object.values(DATA.search.routes) : [];
-  const live = routes.filter((route) => ['active', 'queued'].includes(route.state));
-  const blocked = routes.filter((route) => route.state === 'blocked');
+  const approaches = DATA.search ? Object.values(DATA.search.routes) : [];
+  const live = approaches.filter((approach) => ['active', 'queued'].includes(approach.state));
+  const blocked = approaches.filter((approach) => approach.state === 'blocked');
   const heads = DATA.memory.checkpoints.filter((record) => !record.superseded_by.length);
+
+  /* Counted by standing, not by schema status.
+   *
+   * `proved` is 86 nodes here and means four different things: a theorem published in a
+   * journal, an unreviewed preprint imported as a premise, a result certified in this
+   * repository against a dossier, and an implication proved here whose antecedent is
+   * still open. One number over all of them, captioned with the strongest of the four,
+   * is a claim about evidence that the ledger does not support. Each row below is
+   * separately true, which is the only kind of total worth printing. */
+  const byStanding = new Map();
+  for (const claim of claims) {
+    const label = claim.standing || claim.status || 'unknown';
+    const entry = byStanding.get(label)
+      || { count: 0, tone: claim.standing_tone || 'neutral' };
+    entry.count += 1;
+    byStanding.set(label, entry);
+  }
+  const standings = [...byStanding.entries()].sort((a, b) => b[1].count - a[1].count);
 
   page.appendChild(el('h2', { text: 'Where the search stands' }));
   page.appendChild(el('div', { class: 'grid three' },
     statCard(claims.length, `claim${claims.length === 1 ? '' : 's'} in the ledger`),
-    statCard(counts.proved || 0, 'proved, each with a certified dossier'),
-    statCard(counts.open || 0, 'open'),
-    statCard(counts.refuted || 0, 'refuted'),
-    statCard(live.length, 'route(s) live'),
-    statCard(blocked.length, 'route(s) blocked')));
+    statCard(live.length, `approach${live.length === 1 ? '' : 'es'} live`),
+    statCard(blocked.length, `approach${blocked.length === 1 ? '' : 'es'} blocked`)));
 
-  /* --- blockers ------------------------------------------------------------------ */
-
-  page.appendChild(el('h2', { text: 'What is holding the search up' }));
-  if (!blocked.length) {
-    page.appendChild(emptyState('No route is recorded as blocked.'));
-  } else {
-    page.appendChild(el('ul', { class: 'rows' }, blocked.map((route) => el('li', {},
-      el('div', { class: 'row-head' },
-        el('a', { class: 'id', href: `#/route/${route.id}`, text: route.id }),
-        routeBadge(route.state),
-        el('span', { class: 'note' }, 'blocked on ', idLink(route.blocker))),
-      route.objective ? el('p', { class: 'row-body' }, math(route.objective)) : null,
-      route.reopen_if ? el('p', { class: 'row-note' }, 'Reopens if: ', math(route.reopen_if)) : null))));
-  }
-
-  /* --- live routes --------------------------------------------------------------- */
-
-  page.appendChild(el('h2', { text: 'What is being tried' }));
-  if (!DATA.search) {
-    page.appendChild(emptyState(
-      'No search portfolio. A repository with one target and one live route coordinates '
-      + 'itself; the portfolio is created when several routes, agents or sessions are in '
-      + 'flight at once.'));
-  } else if (!live.length) {
-    page.appendChild(emptyState('No route is active or queued.'));
-  } else {
-    page.appendChild(el('ul', { class: 'rows' }, live.map((route) => el('li', {},
-      el('div', { class: 'row-head' },
-        el('a', { class: 'id', href: `#/route/${route.id}`, text: route.id }),
-        routeBadge(route.state)),
-      route.objective ? el('p', { class: 'row-body' }, math(route.objective)) : null))));
-  }
+  page.appendChild(el('h3', { text: 'What those claims are, one category at a time' }));
+  page.appendChild(el('ul', { class: 'standing-tally' }, standings.map(([label, entry]) =>
+    el('li', {},
+      el('span', { class: `badge standing ${entry.tone}` },
+        el('span', { class: 'glyph', 'aria-hidden': 'true',
+          text: STANDING_GLYPH[entry.tone] || '?' }),
+        label),
+      el('span', { class: 'tally', text: String(entry.count) })))));
+  page.appendChild(el('p', { class: 'note' },
+    'Derived from each node\u2019s status, provenance, import class, proof records and '
+    + 'open antecedents \u2014 the same projection that prints the standing beside every '
+    + 'statement in the manuscript. "Certified here" means a dossier and an independent '
+    + 'review exist in this repository; it does not mean the proof is right, which is '
+    + 'settled by that review and not by this page.'));
 
   /* --- recent durable advances --------------------------------------------------- */
 
   page.appendChild(el('div', { class: 'section-head' },
     el('h2', { text: 'Recent durable records' }),
-    el('a', { href: '#/evidence', text: 'All evidence →' })));
+    el('a', { href: '#/audit/evidence', text: 'All evidence →' })));
   if (!heads.length) {
     page.appendChild(emptyState('No checkpoints recorded yet.'));
   } else {
     page.appendChild(el('ul', { class: 'rows' }, heads.slice(0, 5).map(checkpointRow)));
   }
 
-  /* --- entries into the maps ------------------------------------------------------ */
+  /* --- into the audit layer -------------------------------------------------------- */
 
-  page.appendChild(el('h2', { text: 'Two maps, deliberately not one' }));
-  page.appendChild(el('div', { class: 'grid two' },
-    el('div', { class: 'card' },
-      el('h3', { text: 'Mathematics' }),
-      el('p', { class: 'note' },
-        'What is claimed: statements, proof dependencies, implication antecedents, '
-        + 'refinements, refutations, and the two kinds of obstruction. Everything here '
-        + 'has a truth status and a provenance.'),
-      el('div', { class: 'actions' }, el('a', { class: 'action', href: '#/claims' }, 'Open the claim graph'))),
-    el('div', { class: 'card' },
-      el('h3', { text: 'Search' }),
-      el('p', { class: 'note' },
-        'What the search is doing: approach families, routes, blockers, and the '
-        + 'checkpoints that explain why a route changed state. None of it is a claim — '
-        + 'a completed route settles nothing by itself, and saturation is a judgment '
-        + 'about effort.'),
-      el('div', { class: 'actions' }, el('a', { class: 'action', href: '#/search' }, 'Open the search map')))));
+  page.appendChild(el('p', { class: 'note' },
+    'The two maps are drawn separately and never merged: what is claimed has a truth '
+    + 'status and a provenance, and what the search is doing has neither. Both are under ',
+    el('a', { href: '#/audit' }, 'Audit'), ', in full.'));
 
   /* --- contribute ----------------------------------------------------------------- */
 
@@ -743,7 +926,7 @@ function viewTarget() {
     page.appendChild(el('h2', { text: 'Where another mathematician could help' }));
     page.appendChild(el('p', { class: 'note' },
       'Everything below opens a public inbox. Nothing that arrives through it becomes a '
-      + 'candidate, a route, a claim, a proof record, or a status by itself — it is '
+      + 'candidate, an approach, a claim, a proof record, or a status by itself — it is '
       + 'triaged by the repository’s own roles, and proofs still pass through a '
       + 'standalone dossier and independent certification.'));
     page.appendChild(el('div', { class: 'actions' },
@@ -780,29 +963,46 @@ function viewClaims() {
     stageNote: 'dependencies sit below what rests on them',
   }));
 
+  const routeOf = {};
+  const g = guide();
+  if (g) {
+    for (const entry of g.featured || []) if (entry.route) routeOf[entry.id] = `Route ${entry.route}`;
+  }
+
   page.appendChild(el('h2', { text: 'Every claim, as a list' }));
-  page.appendChild(el('ul', { class: 'rows' }, claims
-    .slice()
-    .sort((a, b) => a.id.localeCompare(b.id))
-    .map((claim) => el('li', {},
+  page.appendChild(filteredList(claims.slice().sort((a, b) =>
+    claimName(a).localeCompare(claimName(b))), {
+    noun: 'claims',
+    facets: [
+      { label: 'kind', of: (claim) => claim.kind },
+      { label: 'standing', of: (claim) => claim.standing },
+      { label: 'provenance', of: (claim) => claim.provenance },
+      { label: 'route', of: (claim) => routeOf[claim.id] },
+    ],
+    search: (claim) => `${claim.id} ${claim.title || ''} ${claim.gloss || ''}`,
+    render: (claim) => el('li', {},
       el('div', { class: 'row-head' },
-        el('a', { class: 'id', href: `#/node/${claim.id}`, text: claim.id }),
+        el('a', { class: 'row-name', href: `#/node/${claim.id}` }, math(claimName(claim))),
         el('span', { class: 'badge kind', text: claim.kind || '?' }),
-        statusBadge(claim.status),
+        standingBadge(claim),
         claim.applicability_blocked_by.length
           ? el('span', { class: 'badge warn' }, 'applicability-blocked') : null,
         claim.id === DATA.program.target ? el('span', { class: 'badge neutral', text: 'target' }) : null),
-      el('p', { class: 'row-body' }, math(claim.gloss))))));
+      el('p', { class: 'row-note' }, el('code', { class: 'id', text: claim.id })),
+      el('p', { class: 'row-body' }, math(claim.gloss))),
+  }));
   return page;
 }
 
 function claimSummaryCard(claim) {
   if (!claim) return el('div', {});
   return el('div', { class: 'card', style: 'margin-top:1rem' },
+    el('h3', { class: 'card-name' },
+      el('a', { href: `#/node/${claim.id}` }, math(claimName(claim)))),
     el('div', { class: 'badges' },
-      el('a', { class: 'id', href: `#/node/${claim.id}`, text: claim.id }),
+      el('code', { class: 'id', text: claim.id }),
       el('span', { class: 'badge kind', text: claim.kind || '?' }),
-      statusBadge(claim.status)),
+      standingBadge(claim)),
     el('p', { class: 'row-body gloss' }, math(claim.gloss)),
     el('div', { class: 'actions' },
       el('a', { class: 'action', href: `#/node/${claim.id}` }, 'Full record')));
@@ -810,18 +1010,22 @@ function claimSummaryCard(claim) {
 
 function viewSearch() {
   const page = el('div', {});
-  page.appendChild(el('h1', { text: 'The search map' }));
+  page.appendChild(el('h1', { text: 'The portfolio' }));
   page.appendChild(el('p', { class: 'lede' },
-    'What the search is doing, which is not what is true. A family is a mechanism; a '
-    + 'route is one attempt within it. "Completed" means a route’s objective '
+    'What the search is doing, which is not what is true. A family is a mechanism; an '
+    + 'approach is one attempt within it. "Completed" means an approach’s objective '
     + 'ended, not that anything was settled, and "saturated" is a judgment about effort '
     + 'that carries a reopening condition.'));
+  page.appendChild(el('p', { class: 'note' },
+    'These are not the four routes. Route E, S, C and F are the mathematical '
+    + 'organization of the manuscript; the approaches below are the search state '
+    + 'underneath them, and there are far more of them.'));
 
   if (!DATA.search) {
     page.appendChild(emptyState(
       'This repository has no search portfolio. That is a normal state: a portfolio is '
-      + 'created when several routes, agents or sessions are in flight at once, and one '
-      + 'describing a search nobody is running is overhead.'));
+      + 'created when several approaches, agents or sessions are in flight at once, and '
+      + 'one describing a search nobody is running is overhead.'));
     return page;
   }
 
@@ -831,13 +1035,13 @@ function viewSearch() {
       ...model,
       focusId: model.nodes[0].id,
       selectHandler: (id) => (DATA.search.routes[id]
-        ? routeSummaryCard(DATA.search.routes[id])
+        ? approachSummaryCard(DATA.search.routes[id])
         : familySummaryCard(DATA.search.families[id])),
-      stageNote: 'families on top, routes beneath them',
+      stageNote: 'families on top, approaches beneath them',
     }));
   }
 
-  page.appendChild(el('h2', { text: 'Families and their routes' }));
+  page.appendChild(el('h2', { text: 'Families and their approaches' }));
   for (const family of Object.values(DATA.search.families)) {
     page.appendChild(el('div', { class: 'card', style: 'margin-bottom:1rem' },
       el('div', { class: 'badges' },
@@ -849,30 +1053,30 @@ function viewSearch() {
       family.closure_checkpoint
         ? el('p', { class: 'row-note' }, 'Closed at ', fileLink(family.closure_checkpoint)) : null,
       el('ul', { class: 'rows', style: 'margin-top:.8rem' },
-        family.routes.map((id) => routeRow(DATA.search.routes[id])))));
+        family.routes.map((id) => approachRow(DATA.search.routes[id])))));
   }
   return page;
 }
 
-function routeRow(route) {
+function approachRow(route) {
   if (!route) return null;
   return el('li', { class: 'tight' },
     el('div', { class: 'row-head' },
-      el('a', { class: 'id', href: `#/route/${route.id}`, text: route.id }),
-      routeBadge(route.state),
+      el('a', { class: 'id', href: `#/approach/${route.id}`, text: route.id }),
+      approachBadge(route.state),
       route.parent ? el('span', { class: 'note' }, 'from ', idLink(route.parent)) : null,
       route.blocker ? el('span', { class: 'note' }, 'blocked on ', idLink(route.blocker)) : null),
     route.objective ? el('p', { class: 'row-body' }, math(route.objective)) : null);
 }
 
-function routeSummaryCard(route) {
+function approachSummaryCard(route) {
   return el('div', { class: 'card', style: 'margin-top:1rem' },
     el('div', { class: 'badges' },
-      el('a', { class: 'id', href: `#/route/${route.id}`, text: route.id }),
-      routeBadge(route.state)),
+      el('a', { class: 'id', href: `#/approach/${route.id}`, text: route.id }),
+      approachBadge(route.state)),
     route.objective ? el('p', { class: 'row-body' }, math(route.objective)) : null,
     el('div', { class: 'actions' },
-      el('a', { class: 'action', href: `#/route/${route.id}` }, 'Full record')));
+      el('a', { class: 'action', href: `#/approach/${route.id}` }, 'Full record')));
 }
 
 function familySummaryCard(family) {
@@ -924,17 +1128,20 @@ function viewNode(id) {
       + 'may have been a candidate that was never promoted, or a route — those live '
       + 'on the search map.'));
     page.appendChild(el('div', { class: 'actions' },
-      el('a', { class: 'action', href: '#/claims' }, 'The claim graph'),
-      el('a', { class: 'action', href: '#/search' }, 'The search map')));
+      el('a', { class: 'action', href: '#/audit/claims' }, 'The claim graph'),
+      el('a', { class: 'action', href: '#/audit/portfolio' }, 'The search map')));
     return page;
   }
 
   page.appendChild(el('div', { class: 'detail-head' },
-    el('p', { class: 'crumb' }, el('a', { href: '#/claims', text: 'Mathematics' }), ' / ', claim.id),
-    el('h1', { text: claim.id }),
+    el('p', { class: 'crumb' }, el('a', { href: '#/audit/claims', text: 'Claims' }), ' / ', claim.id),
+    el('h1', {}, math(claimName(claim))),
+    claim.title ? el('p', { class: 'subhead' },
+      el('code', { class: 'id', text: claim.id }),
+      el('span', { class: 'note', text: ' — the stable identifier: quote this one.' })) : null,
     el('div', { class: 'badges' },
       el('span', { class: 'badge kind', text: claim.kind || '?' }),
-      statusBadge(claim.status),
+      standingBadge(claim),
       el('span', { class: 'badge kind', text: claim.provenance || 'unknown provenance' }),
       claim.import_class ? el('span', { class: 'badge kind', text: claim.import_class }) : null,
       claim.id === DATA.program.target ? el('span', { class: 'badge neutral', text: 'target' }) : null,
@@ -1032,7 +1239,7 @@ function viewNode(id) {
     around.push(el('div', { class: 'card' },
       el('h3', { text: 'Routes blocked on this' }),
       el('ul', { class: 'rows' },
-        claim.blocks_routes.map((id) => routeRow(DATA.search.routes[id])))));
+        claim.blocks_routes.map((id) => approachRow(DATA.search.routes[id])))));
   }
   if (claim.checkpoints.length) {
     around.push(el('div', { class: 'card' },
@@ -1065,33 +1272,52 @@ function viewNode(id) {
 
 /* --------------------------------------------------------------- route detail ------ */
 
-function viewRoute(id) {
+function viewApproach(id) {
   const page = el('div', {});
   const route = DATA.search && DATA.search.routes[id];
   if (!route) {
-    page.appendChild(el('h1', { text: 'No such route' }));
+    page.appendChild(el('h1', { text: 'No such approach' }));
     page.appendChild(el('p', { class: 'lede' },
-      'The portfolio has no route ', el('code', { class: 'id', text: id }),
-      '. Routes are transient by design and this one may never have existed; the '
+      'The portfolio has no approach ', el('code', { class: 'id', text: id }),
+      '. Approaches are transient by design and this one may never have existed; the '
       + 'portfolio records what the search is doing now, not everything it ever did.'));
     page.appendChild(el('div', { class: 'actions' },
-      el('a', { class: 'action', href: '#/search' }, 'The search map')));
+      el('a', { class: 'action', href: '#/audit/portfolio' }, 'The portfolio')));
     return page;
   }
   const family = DATA.search.families[route.family];
+  /* Which of the four mathematical routes contains this approach, if any. Shown above
+     everything else: the objective and the blocker below are far easier to place once a
+     reader knows which route they belong to. */
+  const g = guide();
+  const within = g && [...(g.routes || []),
+    ...(g.probes ? [{ code: null, name: g.probes.name, families: g.probes.families }] : [])]
+    .find((entry) => (entry.families || []).includes(route.family));
 
   page.appendChild(el('div', { class: 'detail-head' },
-    el('p', { class: 'crumb' }, el('a', { href: '#/search', text: 'Search' }), ' / ', route.id),
+    el('p', { class: 'crumb' }, el('a', { href: '#/audit/portfolio', text: 'Portfolio' }), ' / ', route.id),
     el('h1', { text: route.id }),
     el('div', { class: 'badges' },
-      routeBadge(route.state),
-      family ? el('span', { class: 'badge kind', text: family.id }) : null)));
+      approachBadge(route.state),
+      family ? el('span', { class: 'badge kind', text: family.id }) : null,
+      within ? el('a', { class: 'badge kind',
+        href: within.code ? `#/routes/${within.code}` : '#/routes',
+        text: within.code ? `Route ${within.code}` : within.name }) : null)));
+
+  page.appendChild(el('div', { class: 'banner' },
+    el('strong', { text: 'This page describes search activity, not mathematical truth. ' }),
+    'An approach records what is being tried and why it stopped. Nothing on it is a '
+    + 'claim; the claims it names are, and each of those links to its own page.',
+    within && within.code
+      ? [' It sits under ', el('a', { href: `#/routes/${within.code}` },
+        `Route ${within.code} — ${within.name}`), '.']
+      : []));
 
   page.appendChild(el('div', { class: 'card' },
     el('span', { class: 'gloss-tag', text: 'Objective — an intention, never a claim' }),
     el('p', { class: 'gloss' }, math(route.objective || '—')),
     el('p', { class: 'note' },
-      'A route has no truth value. "Completed" would mean this route’s objective '
+      'An approach has no truth value. "Completed" would mean this approach’s objective '
       + 'is finished and there is nothing left to try along it — it says nothing about '
       + 'whether the target is settled.')));
 
@@ -1217,11 +1443,33 @@ function viewEvidence() {
     `Checkpoints — ${heads.length} current`,
     stale.length ? `, ${stale.length} superseded` : ''));
   page.appendChild(heads.length
-    ? el('ul', { class: 'rows' }, heads.map(checkpointRow))
+    ? filteredList(heads, {
+      noun: 'current checkpoints',
+      facets: [
+        { label: 'approach', of: (record) => record.approach },
+        { label: 'outcome', of: (record) => record.outcome },
+        { label: 'year', of: (record) => (record.date || '').slice(0, 4) },
+      ],
+      search: (record) => `${record.path} ${record.excerpt || ''} ${record.nodes.join(' ')}`,
+      render: checkpointRow,
+    })
     : emptyState('No checkpoints recorded.'));
   if (stale.length) {
     page.appendChild(el('h3', { text: 'Superseded' }));
-    page.appendChild(el('ul', { class: 'rows' }, stale.map(checkpointRow)));
+    page.appendChild(el('p', { class: 'note' },
+      'Kept, never rewritten: research/explorations/ is append-only, and a superseded '
+      + 'record still says truthfully what was believed when it was written. The heir '
+      + 'named on each one is which to read first.'));
+    page.appendChild(filteredList(stale, {
+      noun: 'superseded checkpoints',
+      facets: [
+        { label: 'approach', of: (record) => record.approach },
+        { label: 'outcome', of: (record) => record.outcome },
+        { label: 'year', of: (record) => (record.date || '').slice(0, 4) },
+      ],
+      search: (record) => `${record.path} ${record.excerpt || ''}`,
+      render: checkpointRow,
+    }));
   }
 
   /* --- reviews --------------------------------------------------------------------- */
@@ -1284,21 +1532,373 @@ function viewEvidence() {
 
 /* ------------------------------------------------------------------------ router ---- */
 
-const ROUTES = [
-  [/^\/?$/, viewTarget, 'target'],
-  [/^\/claims\/?$/, viewClaims, 'claims'],
-  [/^\/search\/?$/, viewSearch, 'search'],
-  [/^\/evidence\/?$/, viewEvidence, 'evidence'],
-  [/^\/node\/(.+)$/, viewNode, 'claims'],
-  [/^\/route\/(.+)$/, viewRoute, 'search'],
+/* -------------------------------------------------------------- explore views ------ */
+
+/**
+ * The editorial guide, or a null object.
+ *
+ * Everything below degrades to the audit views when no guide is published: a repository
+ * that keeps none is complete, and the site must not be the reason someone writes one.
+ */
+function guide() {
+  return DATA.guide || null;
+}
+
+function routeByCode(code) {
+  const g = guide();
+  return g && (g.routes || []).find((route) => route.code === code);
+}
+
+/** Every portfolio approach belonging to one route's families, in portfolio order. */
+function approachesOf(entry) {
+  if (!DATA.search || !entry) return [];
+  const families = new Set(entry.families || []);
+  return Object.values(DATA.search.routes)
+    .filter((approach) => families.has(approach.family))
+    .sort((a, b) => a.id.localeCompare(b.id));
+}
+
+/**
+ * What a route is made of, as a composition rather than a single state.
+ *
+ * A route holding four active approaches, one blocked and two queued is not "active",
+ * and a badge saying so would flatten the one thing a reader wants from this line. The
+ * portfolio has five approach states and this prints whichever are present, in the order
+ * a reader cares about them.
+ */
+const APPROACH_ORDER = ['active', 'blocked', 'queued', 'completed', 'duplicate'];
+
+function composition(approaches) {
+  const counts = {};
+  for (const approach of approaches) counts[approach.state] = (counts[approach.state] || 0) + 1;
+  return APPROACH_ORDER.filter((state) => counts[state])
+    .map((state) => `${counts[state]} ${state}`)
+    .join(' · ');
+}
+
+function featuredFor(code, role) {
+  const g = guide();
+  if (!g) return [];
+  return (g.featured || [])
+    .filter((entry) => (code === null || entry.route === code)
+      && (role === null || entry.role === role))
+    .map((entry) => ({ ...entry, claim: DATA.claims[entry.id] }))
+    .filter((entry) => entry.claim);
+}
+
+/** A link into the rendered manuscript at one \label, or null when none is attached. */
+function anchorLink(anchor) {
+  const html = DATA.documents && DATA.documents.html;
+  return html && html.manuscript ? `${html.manuscript}#${anchor}` : null;
+}
+
+function manuscriptAction(anchor, label) {
+  const href = anchorLink(anchor);
+  return href ? el('a', { class: 'action', href }, label) : null;
+}
+
+/** One claim, named and standing-badged, as a row in a curated list. */
+function featuredRow(entry) {
+  const claim = entry.claim;
+  return el('li', {},
+    el('div', { class: 'row-head' },
+      el('a', { class: 'row-name', href: `#/node/${claim.id}` }, math(claimName(claim))),
+      el('span', { class: 'badge kind', text: claim.kind || '?' }),
+      standingBadge(claim),
+      entry.route ? el('span', { class: 'badge kind', text: `Route ${entry.route}` }) : null),
+    el('p', { class: 'row-note' }, el('code', { class: 'id', text: claim.id })),
+    el('p', { class: 'row-body' }, math(claim.gloss)));
+}
+
+function routeCard(route) {
+  const approaches = approachesOf(route);
+  const bridges = featuredFor(route.code, 'bridge');
+  const blockers = featuredFor(route.code, 'bottleneck');
+  return el('div', { class: 'card route-card' },
+    el('h3', {},
+      el('a', { href: `#/routes/${route.code}`, text: `Route ${route.code} — ${route.name}` })),
+    el('p', { class: 'note' },
+      approaches.length
+        ? `${approaches.length} approach${approaches.length === 1 ? '' : 'es'} in the `
+          + `portfolio: ${composition(approaches)}`
+        : 'No approach in the portfolio is filed under this route.'),
+    bridges.length ? el('p', { class: 'row-note' },
+      el('span', { class: 'gloss-tag', text: 'Bridge to KLS' }), ' ',
+      el('a', { href: `#/node/${bridges[0].claim.id}` }, math(claimName(bridges[0].claim)))) : null,
+    blockers.length ? el('p', { class: 'row-note' },
+      el('span', { class: 'gloss-tag', text: 'Exact bottleneck' }), ' ',
+      el('a', { href: `#/node/${blockers[0].claim.id}` }, math(claimName(blockers[0].claim)))) : null,
+    el('div', { class: 'actions' },
+      el('a', { class: 'action', href: `#/routes/${route.code}` }, 'Open the route'),
+      manuscriptAction(route.anchor, 'Route gateway in the manuscript')));
+}
+
+function viewRoutes() {
+  const page = el('div', {});
+  const g = guide();
+  page.appendChild(el('h1', { text: 'Four routes' }));
+  if (!g) {
+    page.appendChild(el('p', { class: 'lede' },
+      'This repository publishes no editorial guide, so there is no curated route '
+      + 'grouping. The portfolio itself is under Audit.'));
+    page.appendChild(el('div', { class: 'actions' },
+      el('a', { class: 'action', href: '#/audit/portfolio' }, 'The portfolio')));
+    return page;
+  }
+  page.appendChild(el('p', { class: 'lede' },
+    'The manuscript organizes this work into four mathematical routes. They are the '
+    + 'organization to read by. Beneath each sit the portfolio approaches actually in '
+    + 'flight — search state, which changes with the week and carries no truth value.'));
+  page.appendChild(el('div', { class: 'grid two' },
+    (g.routes || []).map((route) => routeCard(route))));
+
+  if (g.probes && (g.probes.families || []).length) {
+    const probes = approachesOf(g.probes);
+    page.appendChild(el('h2', { text: g.probes.name || 'Other probes' }));
+    page.appendChild(el('p', { class: 'note' },
+      'Registered probes that have not become a route. They are listed apart from E, S, '
+      + 'C and F on purpose: drawing them level would claim a standing the portfolio '
+      + 'does not give them.'));
+    page.appendChild(probes.length
+      ? el('ul', { class: 'rows' }, probes.map(approachRow))
+      : emptyState('No probe is registered.'));
+  }
+  return page;
+}
+
+function viewRouteDetail(code) {
+  const page = el('div', {});
+  const route = routeByCode(code);
+  if (!route) {
+    page.appendChild(el('h1', { text: 'No such route' }));
+    page.appendChild(el('p', { class: 'lede' },
+      'This site names four routes, E, S, C and F. ',
+      el('code', { class: 'id', text: code }), ' is not one of them.'));
+    page.appendChild(el('div', { class: 'actions' },
+      el('a', { class: 'action', href: '#/routes' }, 'The four routes')));
+    return page;
+  }
+  const approaches = approachesOf(route);
+
+  page.appendChild(el('div', { class: 'detail-head' },
+    el('p', { class: 'crumb' }, el('a', { href: '#/routes', text: 'Routes' }), ' / ', code),
+    el('h1', { text: `Route ${code} — ${route.name}` }),
+    el('div', { class: 'badges' },
+      el('span', { class: 'badge kind', text: composition(approaches) || 'no approaches' }))));
+
+  page.appendChild(el('p', { class: 'lede' },
+    'The mechanism, the bridge to KLS, the main advance, the exact bottleneck and the '
+    + 'failed variants are stated once, in the manuscript’s route gateway. This page '
+    + 'names the claims and the live approaches and sends you there rather than '
+    + 'paraphrasing it into a second version that nothing keeps in step.'));
+  page.appendChild(el('div', { class: 'actions' },
+    manuscriptAction(route.anchor, 'Route gateway in the manuscript')
+      || el('p', { class: 'note' },
+        'The HTML manuscript is not attached to this build, so the gateway cannot be '
+        + 'linked here.')));
+
+  for (const [role, heading] of [
+    ['bridge', 'Bridge to KLS'],
+    ['advance', 'Main advance so far'],
+    ['bottleneck', 'Exact bottleneck'],
+    ['obstruction', 'Proved obstruction'],
+    ['refuted', 'Refuted variant'],
+    ['model', 'Decisive model computation'],
+  ]) {
+    const entries = featuredFor(code, role);
+    if (!entries.length) continue;
+    page.appendChild(el('h2', { text: heading }));
+    page.appendChild(el('ul', { class: 'rows' }, entries.map(featuredRow)));
+  }
+
+  page.appendChild(el('h2', { text: 'Approaches in flight' }));
+  page.appendChild(el('p', { class: 'note' },
+    'Search state, not mathematics. An approach records what is being tried; '
+    + '"completed" means its objective ended, never that anything was settled.'));
+  page.appendChild(approaches.length
+    ? el('ul', { class: 'rows' }, approaches.map(approachRow))
+    : emptyState('No approach in the portfolio is filed under this route.'));
+  return page;
+}
+
+function viewResults() {
+  const page = el('div', {});
+  const g = guide();
+  page.appendChild(el('h1', { text: 'Key results' }));
+  if (!g || !(g.featured || []).length) {
+    page.appendChild(el('p', { class: 'lede' },
+      'This repository publishes no curated selection. Every claim is under Audit.'));
+    page.appendChild(el('div', { class: 'actions' },
+      el('a', { class: 'action', href: '#/audit/claims' }, 'Every claim')));
+    return page;
+  }
+  const total = Object.keys(DATA.claims).length;
+  page.appendChild(el('p', { class: 'lede' },
+    `${g.featured.length} claims of ${total}, grouped by the job each one does in the `
+    + 'argument. This is a reading order, not a ranking, and it is the only part of this '
+    + 'site that is a matter of editorial judgment rather than derivation. The complete '
+    + 'inventory is under Audit.'));
+
+  for (const [role, heading, blurb] of [
+    ['bridge', 'Bridges to KLS',
+      'What would give the conjecture, if its antecedent were discharged.'],
+    ['advance', 'Principal established advances',
+      'What this repository has actually proved and certified.'],
+    ['bottleneck', 'Exact open bottlenecks',
+      'The precise statements whose absence stops each route.'],
+    ['obstruction', 'Proved obstructions',
+      'Fences. A statement violating one is wrong by construction.'],
+    ['refuted', 'Refuted variants',
+      'Attempts settled in the negative, kept because knowing what fails is a result.'],
+    ['model', 'Decisive model computations',
+      'Exact cases that fixed the shape of the general question.'],
+  ]) {
+    const entries = featuredFor(null, role);
+    if (!entries.length) continue;
+    page.appendChild(el('h2', { text: heading }));
+    page.appendChild(el('p', { class: 'note' }, blurb));
+    page.appendChild(el('ul', { class: 'rows' }, entries.map(featuredRow)));
+  }
+  return page;
+}
+
+function viewManuscript() {
+  const page = el('div', {});
+  const g = guide();
+  const documents = DATA.documents || {};
+  const html = documents.html && documents.html.manuscript;
+  const pdf = documents.pdf && documents.pdf.manuscript;
+
+  page.appendChild(el('h1', { text: 'The manuscript' }));
+  page.appendChild(el('p', { class: 'lede' },
+    'The mathematics lives here, not on this site. The manuscript states every claim, '
+    + 'proves what is proved, and explains the frontier in an order meant to be read. '
+    + 'Everything else on this site is an index into it.'));
+
+  page.appendChild(el('div', { class: 'actions' },
+    html ? el('a', { class: 'action', href: html }, 'Read it (HTML)') : null,
+    pdf ? el('a', { class: 'action', href: pdf, target: '_blank' }, 'Download it (PDF)') : null,
+    (() => {
+      const source = sourceLink('main.tex');
+      return source ? el('a', { class: 'action', href: source, rel: 'noopener', target: '_blank' },
+        'LaTeX source') : null;
+    })()));
+
+  /* Missing renderings are named, not hidden. A control that is simply absent tells a
+     reader the manuscript is unavailable rather than that one form of it is. */
+  if (!html || !pdf) {
+    const missing = [];
+    if (!html) missing.push('the HTML conversion');
+    if (!pdf) missing.push('the PDF');
+    page.appendChild(el('p', { class: 'note' },
+      `${missing.join(' and ')} ${missing.length > 1 ? 'were' : 'was'} not attached to `
+      + 'this build. Both are produced by the publishing workflow, which compiles LaTeX; '
+      + 'a build made without it reaches the manuscript through the source instead.'));
+  }
+
+  if (g && (g.reading || []).length) {
+    page.appendChild(el('h2', { text: 'Where to start' }));
+    page.appendChild(el('p', { class: 'note' },
+      'Each of these is a section of the manuscript, linked at its own anchor.'));
+    page.appendChild(el('ul', { class: 'rows reading-path' }, g.reading.map((entry) => {
+      const href = anchorLink(entry.anchor);
+      return el('li', {},
+        el('div', { class: 'row-head' },
+          href
+            ? el('a', { class: 'row-name', href, text: entry.label })
+            : el('span', { class: 'row-name', text: entry.label }),
+          el('code', { class: 'id', text: entry.anchor })));
+    })));
+  }
+
+  if (g && (g.routes || []).length) {
+    page.appendChild(el('h2', { text: 'The four route gateways' }));
+    page.appendChild(el('ul', { class: 'rows reading-path' }, g.routes.map((route) => {
+      const href = anchorLink(route.anchor);
+      return el('li', {},
+        el('div', { class: 'row-head' },
+          href
+            ? el('a', { class: 'row-name', href, text: `Route ${route.code} — ${route.name}` })
+            : el('span', { class: 'row-name', text: `Route ${route.code} — ${route.name}` }),
+          el('a', { class: 'id', href: `#/routes/${route.code}`, text: `on this site` })));
+    })));
+  }
+  return page;
+}
+
+function viewAudit() {
+  const page = el('div', {});
+  page.appendChild(el('h1', { text: 'Audit' }));
+  page.appendChild(el('p', { class: 'lede' },
+    'The complete research state, unreduced: every claim and every edge, the live search '
+    + 'portfolio, and the durable evidence behind both. Nothing here is curated — that is '
+    + 'the point of it.'));
+  const counts = {
+    claims: Object.keys(DATA.claims).length,
+    approaches: DATA.search ? Object.keys(DATA.search.routes).length : 0,
+    checkpoints: DATA.memory.checkpoints.length,
+  };
+  page.appendChild(el('div', { class: 'grid three' },
+    el('div', { class: 'card' },
+      el('h3', { text: 'Claims' }),
+      el('p', { class: 'note' },
+        `All ${counts.claims} ledger nodes, the dependency graph, statuses, provenance, `
+        + 'proof dossiers and independent reviews.'),
+      el('div', { class: 'actions' },
+        el('a', { class: 'action', href: '#/audit/claims' }, 'Open'))),
+    el('div', { class: 'card' },
+      el('h3', { text: 'Portfolio' }),
+      el('p', { class: 'note' },
+        `All ${counts.approaches} approaches and their families: objectives, states, `
+        + 'blockers and reopening conditions. Search state, never truth.'),
+      el('div', { class: 'actions' },
+        el('a', { class: 'action', href: '#/audit/portfolio' }, 'Open'))),
+    el('div', { class: 'card' },
+      el('h3', { text: 'Evidence' }),
+      el('p', { class: 'note' },
+        `All ${counts.checkpoints} checkpoints, plus candidates, reviews, audits, `
+        + 'numerical artifacts and build provenance.'),
+      el('div', { class: 'actions' },
+        el('a', { class: 'action', href: '#/audit/evidence' }, 'Open')))));
+  return page;
+}
+
+const PAGES = [
+  [/^\/?$/, viewOverview, 'overview'],
+  [/^\/routes\/?$/, viewRoutes, 'routes'],
+  [/^\/routes\/(.+)$/, viewRouteDetail, 'routes'],
+  [/^\/results\/?$/, viewResults, 'results'],
+  [/^\/manuscript\/?$/, viewManuscript, 'manuscript'],
+  [/^\/audit\/?$/, viewAudit, 'audit'],
+  [/^\/audit\/claims\/?$/, viewClaims, 'audit'],
+  [/^\/audit\/portfolio\/?$/, viewSearch, 'audit'],
+  [/^\/audit\/evidence\/?$/, viewEvidence, 'audit'],
+  [/^\/node\/(.+)$/, viewNode, 'audit'],
+  [/^\/approach\/(.+)$/, viewApproach, 'audit'],
+];
+
+/* The hashes this site published before the Explore layer existed.
+ *
+ * A URL that was once correct stays correct: these are in citations, in issues, and in
+ * whatever anyone bookmarked. Redirecting costs one line each and is cheaper than any
+ * conversation about a link that used to work. */
+const MOVED = [
+  [/^\/claims\/?$/, () => '#/audit/claims'],
+  [/^\/search\/?$/, () => '#/audit/portfolio'],
+  [/^\/evidence\/?$/, () => '#/audit/evidence'],
+  [/^\/route\/(.+)$/, (match) => `#/approach/${match[1]}`],
 ];
 
 function render() {
   const main = document.getElementById('main');
   const path = decodeURIComponent(location.hash.replace(/^#/, '')) || '/';
+  for (const [pattern, target] of MOVED) {
+    const match = pattern.exec(path);
+    if (match) { location.replace(target(match)); return; }
+  }
   let page = null;
-  let tab = 'target';
-  for (const [pattern, view, name] of ROUTES) {
+  let tab = 'overview';
+  for (const [pattern, view, name] of PAGES) {
     const match = pattern.exec(path);
     if (match) { page = view(match[1]); tab = name; break; }
   }
@@ -1307,10 +1907,19 @@ function render() {
       el('h1', { text: 'Not found' }),
       el('p', { class: 'lede' }, 'Nothing is published at ',
         el('code', { class: 'id', text: path }), '.'),
-      el('div', { class: 'actions' }, el('a', { class: 'action', href: '#/' }, 'The target')));
+      el('div', { class: 'actions' }, el('a', { class: 'action', href: '#/' }, 'Start here')));
   }
   clear(main);
   main.appendChild(page);
+  /* Name the tab after what is in it. A dozen bookmarks all reading "kls — conjecture
+     search" are a dozen bookmarks nobody can tell apart, and a shared link should say
+     what it opens before it opens. The heading the page just rendered is the best
+     available answer, and there is always one. */
+  const heading = page.querySelector('h1');
+  const site = (DATA.guide && DATA.guide.site && DATA.guide.site.name)
+    || DATA.program.id || 'Conjecture search';
+  const named = heading ? heading.textContent.trim() : '';
+  document.title = !named || named === site ? site : `${named} — ${site}`;
   for (const link of document.querySelectorAll('.tabs a')) {
     if (link.dataset.tab === tab) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
@@ -1322,15 +1931,21 @@ function render() {
 function chrome() {
   const program = DATA.program;
   const generated = DATA.generated;
-  document.getElementById('brand-name').textContent = program.id || 'Conjecture search';
-  document.getElementById('brand-sub').textContent = program.target
-    ? `target: ${program.target}`
-    : 'no target yet — uninstantiated template';
-  document.title = program.id ? `${program.id} — conjecture search` : 'Conjecture search';
+  /* The masthead names the problem, not the repository slug. `kls` is what the ledger
+     and every cross-reference call this program and it stays exported; it is not what a
+     mathematician arriving at the page is looking for. render() sets document.title per
+     page, so nothing is set here. */
+  const site = (DATA.guide && DATA.guide.site) || {};
+  document.getElementById('brand-name').textContent =
+    site.name || program.id || 'Conjecture search';
+  document.getElementById('brand-sub').textContent = site.name
+    ? (program.id || '')
+    : (program.target ? `target: ${program.target}`
+      : 'no target yet — uninstantiated template');
 
   const build = document.getElementById('build-provenance');
   const parts = [];
-  parts.push(`built ${generated.built_at}`);
+  parts.push(`built ${generated.built_at} `);
   if (generated.short_commit) {
     const link = repoBase()
       ? `${repoBase()}/commit/${generated.commit}` : null;

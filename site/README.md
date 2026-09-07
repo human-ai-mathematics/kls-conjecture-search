@@ -12,14 +12,45 @@ The frontend of the published website. Four files, and a rule that explains all 
 | [`site.js`](site.js) | the router, the two maps, and every view. Knows no mathematics. |
 | [`tex4ht.cfg`](tex4ht.cfg) | what preserves the anchor invariant through LaTeX → HTML. |
 
-Nothing substantive is written here. Everything a reader sees — statements, statuses,
-routes, blockers, checkpoints, certifications — arrives at load time in `data.json`,
-which [`../scripts/site.py`](../scripts/site.py) derives from the same validated report
-[`../scripts/check.py`](../scripts/check.py) prints from. A gloss or a route objective
+Nothing substantive is written here. Everything a reader sees — statements, standings,
+titles, approaches, blockers, checkpoints, certifications, and which four routes the
+front page leads with — arrives at load time in `data.json`, which
+[`../scripts/site.py`](../scripts/site.py) derives from the same validated report
+[`../scripts/check.py`](../scripts/check.py) prints from. A gloss or an approach objective
 typed into these files would drift from the ledger and the portfolio the first time
 either changed, and the prettier copy would win the argument.
 [`../scripts/tests/test_site.py`](../scripts/tests/test_site.py) asserts that no claim
-gloss, candidate statement, route objective or node id appears in this directory.
+gloss, candidate statement, approach objective or node id appears in this directory.
+
+The status badge is the derived **standing**, not the schema status: eight tones from
+[`../scripts/checks/editorial.py`](../scripts/checks/editorial.py), the same projection
+that prints the badge beside every statement in the PDF. `proved` is 86 nodes here and
+means four different things, and a published theorem, an unreviewed preprint, a result
+certified against a dossier and an implication with an open antecedent are not one green
+badge. Headings are the manuscript's own theorem titles; the stable id stays visible
+beside them, because that is what cross-references are quoted by.
+
+## Explore and Audit
+
+The nav is a split, and the split is the design:
+
+| section | what it is for |
+|---|---|
+| Overview, Routes, Key results, Manuscript | orient a reader in one screen, then send them into the manuscript at an anchor |
+| Audit | the complete research state, unreduced — claims, portfolio, evidence |
+
+The **Explore** half is a selection, and a selection needs a selector: it is driven by
+[`../research/program/editorial.yaml`](../research/program/editorial.yaml), which holds
+identifiers, display names and manuscript anchors and no mathematics at all. A repository
+that publishes none still builds; every Explore view degrades to the Audit views it
+indexes, which is what a template does and is not a defect.
+
+One word carries a load here. On this site a **route** is one of the four the manuscript
+is organized into — E, S, C, F — and the nineteen objects in the portfolio are
+**approaches**. The portfolio schema calls those `routes:` internally and keeps doing so;
+renaming a validated schema to fix a caption would be the tail wagging the dog. What is
+not allowed is a reader meeting nineteen things under a name the manuscript gives to
+four.
 
 ## Build it
 

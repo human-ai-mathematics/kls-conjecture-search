@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Structural checker and derived views for this repository.
 
-One entry point, seven validation lanes:
+One entry point, eight validation lanes:
 
 * ``core`` — the claim graph: node schema, the acyclic proof DAG, manuscript anchors,
   the separation of proof dependencies from implication antecedents, and both classes
@@ -16,7 +16,10 @@ One entry point, seven validation lanes:
 * ``roles`` — the agent roster, the model/effort profile table, and the artifacts
   generated from it for both clients;
 * ``docs`` — repository-relative Markdown links, so a navigation table cannot point at a
-  file that is not there.
+  file that is not there;
+* ``editorial`` — what a reader is shown: the generated ``status.tex`` badges, the
+  manuscript titles the site sets as headings, and the optional reading guide in
+  ``research/program/editorial.yaml``.
 
 A lane is an implementation partition of this checker. It is not one of the three
 domains the repository is organized into (mathematical state, search state, durable
@@ -56,7 +59,7 @@ from checks.common import LANES  # noqa: E402
 from checks.ledger import LEDGER_PATH  # noqa: E402
 
 VIEWS = ("ready", "publish-ready", "status", "node", "candidates", "portfolio",
-         "checkpoints", "dossiers")
+         "checkpoints", "dossiers", "glosses")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -96,6 +99,8 @@ def main(argv: list[str] | None = None) -> int:
         views.portfolio(report)
     elif args.command == "checkpoints":
         views.checkpoints(report)
+    elif args.command == "glosses":
+        views.glosses(report)
     elif args.command == "node":
         if not args.node_id:
             parser.error("node requires NODE_ID")
