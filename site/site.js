@@ -85,9 +85,19 @@ function math(text) {
 }
 
 function typeset(scope) {
-  if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
-    window.MathJax.typesetPromise([scope]).catch(() => { /* source stays visible */ });
-  }
+  const run = () => {
+    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+      window.MathJax.typesetPromise([scope]).catch(() => { /* source stays visible */ });
+    }
+  };
+  /* Typeset when MathJax says it is ready, not when this happens to be called. The
+     first view is drawn while MathJax is still starting — more so now that its startup
+     waits for data.json, which may carry the manuscript's macro table — and without the
+     handshake the opening view was the one view that never got typeset, which reads as
+     MathJax being broken rather than early. `MATHJAX_STARTED` never settles when the CDN
+     is blocked, which is exactly when nothing should be typeset. */
+  if (window.MATHJAX_STARTED) window.MATHJAX_STARTED.then(run, run);
+  else run();
 }
 
 /* ------------------------------------------------------------------- vocabulary ---- */
@@ -286,6 +296,157 @@ function discussLink(label) {
 function idList(ids, emptyText) {
   if (!ids || !ids.length) return el('span', { class: 'note', text: emptyText || 'none' });
   return el('ul', { class: 'inline-list' }, ids.map((id) => el('li', {}, idLink(id))));
+}
+
+/* ------------------------------------------------------------------------- prose ---- */
+
+/*
+ * The two long-form things on this site — a claim's statement and a durable record's
+ * body — arrive as the same small block model, derived by scripts/site.py from the
+ * manuscript and from research/explorations/ respectively. Nothing below knows what any
+ * of it means: it draws `paragraph`, `heading`, `math`, `list`, `quote`, `code`, `table`
+ * and `rule`, and it draws spans, and that is the whole vocabulary.
+ *
+ * Mathematics keeps the rule the rest of the site keeps. The LaTeX source goes into the
+ * DOM as text and is typeset afterwards, so a blocked MathJax leaves it readable rather
+ * than blank. Code is the exception in the other direction: index.html puts `pre` and
+ * `code` in `skipHtmlTags`, so a `$` inside a YAML snippet is never mistaken for a
+ * formula.
+ */
+
+function recordBySlug(slug) {
+  return DATA.memory.checkpoints.find((entry) => entry.slug === slug) || null;
+}
+
+function recordByPath(path) {
+  return DATA.memory.checkpoints.find((entry) => entry.path === path) || null;
+}
+
+/** A durable record, as a link to its own page — with the raw file as a fallback. */
+function recordLink(path, label) {
+  const record = recordByPath(path);
+  const text = label || (record && record.title) || String(path).split('/').pop();
+  if (!record) return fileLink(path, null, text);
+  return el('a', { href: `#/record/${encodeURIComponent(record.slug)}` }, math(text));
+}
+
+function proseSpan(span) {
+  switch (span.t) {
+    case 'math':
+      return el('span', { class: 'math', text: span.v });
+    case 'code':
+      return el('code', { text: span.v });
+    case 'id':
+      return idLink(span.v);
+    case 'ref': {
+      /* A \ref into the manuscript. When it names a claim it is navigation; when it
+         names an equation or a section it is an address, and printing the address is
+         more honest than printing a number this site cannot compute. */
+      const link = DATA.claims[span.v] ? idLink(span.v) : null;
+      return link || el('code', { class: 'id', text: span.v });
+    }
+    case 'cite':
+      return el('span', { class: 'cite', text: `[${span.v}]` });
+    case 'em':
+      return el('em', {}, proseSpans(span.spans));
+    case 'strong':
+      return el('strong', {}, proseSpans(span.spans));
+    case 'link': {
+      const inner = proseSpans(span.spans);
+      if (span.record) {
+        return el('a', { href: `#/record/${encodeURIComponent(span.record)}` }, inner);
+      }
+      if (span.path) {
+        const href = sourceLink(span.path);
+        return href
+          ? el('a', { href, rel: 'noopener', target: '_blank' }, inner)
+          : el('span', {}, inner);
+      }
+      return span.href
+        ? el('a', { href: span.href, rel: 'noopener', target: '_blank' }, inner)
+        : el('span', {}, inner);
+    }
+    default:
+      return document.createTextNode(span.v || '');
+  }
+}
+
+function proseSpans(spans) {
+  const fragment = document.createDocumentFragment();
+  for (const span of spans || []) fragment.appendChild(proseSpan(span));
+  return fragment;
+}
+
+function proseBlock(block) {
+  switch (block.type) {
+    case 'heading':
+      return el(`h${Math.min(6, Math.max(2, (block.level || 1) + 1))}`, {},
+        proseSpans(block.spans));
+    case 'math':
+      return el('div', { class: 'math display', text: block.tex });
+    case 'code':
+      return el('pre', { class: 'code' },
+        el('code', { class: block.language ? `lang-${block.language}` : null,
+          text: block.text }));
+    case 'quote':
+      return el('blockquote', {}, proseBlocks(block.blocks));
+    case 'rule':
+      return el('hr', {});
+    case 'list':
+      return el(block.ordered ? 'ol' : 'ul', { class: 'prose-list',
+        start: block.ordered && block.start ? block.start : null },
+      (block.items || []).map((item) => el('li', {}, proseBlocks(item))));
+    case 'table':
+      /* Wide tables scroll inside their own box. A record's table is written for a
+         terminal and is routinely wider than a column of prose. */
+      return el('div', { class: 'table-scroll' }, el('table', { class: 'prose-table' },
+        el('thead', {}, el('tr', {}, (block.head || []).map((cell, index) =>
+          el('th', { class: (block.align || [])[index] || null }, proseSpans(cell))))),
+        el('tbody', {}, (block.rows || []).map((row) => el('tr', {},
+          row.map((cell, index) =>
+            el('td', { class: (block.align || [])[index] || null }, proseSpans(cell))))))));
+    default:
+      return el('p', {}, proseSpans(block.spans));
+  }
+}
+
+function proseBlocks(blocks) {
+  const fragment = document.createDocumentFragment();
+  for (const block of blocks || []) fragment.appendChild(proseBlock(block));
+  return fragment;
+}
+
+function prose(blocks, className) {
+  return el('div', { class: className || 'prose' }, proseBlocks(blocks));
+}
+
+/**
+ * What the claim actually says, copied from the manuscript at build time.
+ *
+ * The site used to have 138 pages that would not tell a reader what they indexed: a
+ * one-line gloss stamped "not the statement", a file:line, and a link out. This is the
+ * statement itself — sliced verbatim out of the \label in modules/, re-verified against
+ * it on every build, and labelled as the copy it is. If it ever disagrees with the
+ * manuscript the manuscript is right; the build is what is broken, and scripts/site.py
+ * refuses to publish rather than let that reach a page.
+ */
+function statementBlock(claim) {
+  const statement = claim.statement;
+  if (!statement || !statement.blocks || !statement.blocks.length) return null;
+  const source = claim.source || {};
+  return el('div', { class: 'card statement-card' },
+    el('span', { class: 'gloss-tag copy', text: 'The statement — a copy of the manuscript' }),
+    prose(statement.blocks, 'prose statement'),
+    el('p', { class: 'note' },
+      'Copied verbatim from ',
+      el('code', { class: 'id', text: `\\label{${claim.id}}` }),
+      source.file ? [' in ', fileLink(source.file, statement.line || source.line)] : [],
+      ' when this site was built, and checked against it again before publishing. The '
+      + 'manuscript is canonical; this is a projection of it, like the gloss below.'),
+    DATA.macros ? null : el('p', { class: 'note' },
+      'No macro table is attached to this build, so a command defined in the '
+      + 'manuscript preamble appears here unexpanded. That is a missing build input, '
+      + 'not a defect in the statement.'));
 }
 
 function glossBlock(claim) {
@@ -1364,6 +1525,8 @@ function viewNode(id) {
       claim.applicability_blocked_by.length
         ? el('span', { class: 'badge warn' }, 'applicability-blocked') : null)));
 
+  const statement = statementBlock(claim);
+  if (statement) page.appendChild(statement);
   page.appendChild(el('div', { class: 'card' }, glossBlock(claim)));
 
   /* --- what fences it ------------------------------------------------------------- */
@@ -1633,7 +1796,7 @@ function checkpointRow(record, { excerpt = true } = {}) {
         ? el('span', { class: 'badge neutral', text: OUTCOME_WORD[record.outcome] || record.outcome })
         : null,
       superseded ? el('span', { class: 'badge warn' }, 'superseded') : null,
-      fileLink(record.path, null, record.path.split('/').pop()),
+      el('span', { class: 'row-name' }, recordLink(record.path)),
       record.approach ? idLink(record.approach) : null),
     excerpt && record.excerpt ? el('p', { class: 'row-body' }, math(record.excerpt)) : null,
     record.nodes && record.nodes.length
@@ -1641,8 +1804,145 @@ function checkpointRow(record, { excerpt = true } = {}) {
     superseded
       ? el('p', { class: 'row-note' }, 'Read instead: ',
         el('ul', { class: 'inline-list' }, record.superseded_by.map((path) =>
-          el('li', {}, fileLink(path, null, path.split('/').pop())))))
+          el('li', {}, recordLink(path)))))
       : null);
+}
+
+/* ------------------------------------------------------------- one durable record --- */
+
+/*
+ * The body of a record is fetched, not carried. Rendered, the 92 records under
+ * research/explorations/ are several times the size of everything else this site knows
+ * put together, and a reader opening the front page should not pay for all of them to
+ * read one. data.json carries the envelope — date, outcome, approach, engaged nodes,
+ * supersession — and `records/<slug>.json` carries the prose.
+ */
+const RECORD_BODIES = new Map();
+
+function loadRecordBody(record) {
+  if (!RECORD_BODIES.has(record.slug)) {
+    RECORD_BODIES.set(record.slug, fetch(record.document, { cache: 'no-cache' })
+      .then((response) => {
+        if (!response.ok) throw new Error(`${record.document}: ${response.status}`);
+        return response.json();
+      }));
+  }
+  return RECORD_BODIES.get(record.slug);
+}
+
+function viewRecord(slug) {
+  const page = el('div', {});
+  const record = recordBySlug(slug);
+  if (!record) {
+    page.appendChild(el('h1', { text: 'No such record' }));
+    page.appendChild(el('p', { class: 'lede' },
+      'Durable memory holds no record ', el('code', { class: 'id', text: slug }),
+      '. research/explorations/ is append-only, so a record that ever existed is still '
+      + 'there — this is a mistyped or an outdated address, not a deletion.'));
+    page.appendChild(el('div', { class: 'actions' },
+      el('a', { class: 'action', href: '#/audit/evidence' }, 'All durable evidence')));
+    return page;
+  }
+
+  const superseded = record.superseded_by && record.superseded_by.length;
+  page.appendChild(el('div', { class: 'detail-head' },
+    el('p', { class: 'crumb' },
+      el('a', { href: '#/audit/evidence', text: 'Evidence' }), ' / ', record.date || '—'),
+    el('h1', {}, math(record.title || record.path.split('/').pop())),
+    el('div', { class: 'badges' },
+      el('span', { class: 'badge kind', text: record.date || 'undated' }),
+      record.outcome
+        ? el('span', { class: 'badge neutral',
+          text: OUTCOME_WORD[record.outcome] || record.outcome })
+        : null,
+      superseded ? el('span', { class: 'badge warn' }, 'superseded') : null)));
+
+  if (superseded) {
+    page.appendChild(el('div', { class: 'card fence soft' },
+      el('span', { class: 'fence-label', text: 'Superseded — read the heir first' }),
+      el('p', { class: 'row-body' },
+        'A later record declares itself the current summary of this one. Nothing here '
+        + 'was rewritten or withdrawn: this record still says truthfully what was '
+        + 'believed when it was written, and the heir is what to read first.'),
+      el('ul', { class: 'inline-list' },
+        record.superseded_by.map((path) => el('li', {}, recordLink(path))))));
+  }
+
+  const supersedes = DATA.memory.checkpoints.filter((entry) =>
+    (entry.superseded_by || []).includes(record.path));
+
+  const facts = el('dl', { class: 'kv' });
+  append(facts, [
+    el('dt', { text: 'approach' }),
+    el('dd', {}, record.approach
+      ? idLink(record.approach)
+      : el('span', { class: 'note', text: 'none — this record names no portfolio approach' })),
+    el('dt', { text: 'engaged claims' }), el('dd', {}, idList(record.nodes)),
+    record.artifacts.length ? el('dt', { text: 'run artifacts' }) : null,
+    record.artifacts.length ? el('dd', {}, el('ul', { class: 'inline-list' },
+      record.artifacts.map((path) => el('li', {}, fileLink(path, null,
+        path.split('/').pop()))))) : null,
+    record.candidates.length ? el('dt', { text: 'proposed' }) : null,
+    record.candidates.length ? el('dd', {}, el('ul', { class: 'inline-list' },
+      record.candidates.map((entry) => el('li', {},
+        el('code', { class: 'id', text: entry.id }))))) : null,
+    record.retires.length ? el('dt', { text: 'retired' }) : null,
+    record.retires.length ? el('dd', {}, el('ul', { class: 'inline-list' },
+      record.retires.map((id) => el('li', {}, el('code', { class: 'id', text: id }))))) : null,
+    record.promotes.length ? el('dt', { text: 'promoted' }) : null,
+    record.promotes.length ? el('dd', {}, el('ul', { class: 'inline-list' },
+      record.promotes.map((entry) => el('li', {},
+        el('code', { class: 'id', text: entry.candidate }), ' → ', idLink(entry.node))))) : null,
+    supersedes.length ? el('dt', { text: 'supersedes' }) : null,
+    supersedes.length ? el('dd', {}, el('ul', { class: 'inline-list' },
+      supersedes.map((entry) => el('li', {}, recordLink(entry.path))))) : null,
+  ]);
+  page.appendChild(el('div', { class: 'card' }, facts,
+    el('div', { class: 'actions' },
+      (() => {
+        const href = sourceLink(record.path);
+        return href ? el('a', { class: 'action', href, rel: 'noopener', target: '_blank' },
+          'Source (Markdown)') : null;
+      })(),
+      el('a', { class: 'action', href: '#/audit/evidence' }, 'All durable evidence'))));
+
+  if (record.candidates.length) {
+    page.appendChild(el('h2', { text: 'Candidate statements proposed here' }));
+    page.appendChild(el('p', { class: 'note' },
+      'A candidate is a statement somebody thought worth writing down and nothing more. '
+      + 'It has no manuscript anchor, no status and no certification, and it is not a '
+      + 'claim. Unlike a ledger node’s gloss its text is canonical: nothing else in the '
+      + 'repository holds it.'));
+    page.appendChild(el('ul', { class: 'rows' }, record.candidates.map((entry) =>
+      el('li', {},
+        el('div', { class: 'row-head' },
+          el('code', { class: 'id', text: entry.id }),
+          el('span', { class: 'badge neutral', text: 'candidate — not a claim' })),
+        el('p', { class: 'row-body gloss' }, math(entry.statement))))));
+  }
+
+  /* The body arrives after the envelope, and only this part of the page is typeset when
+     it does — the rest is already on screen and re-typesetting it would be work for
+     nothing on a page that can carry a hundred formulas. */
+  const body = el('div', { class: 'record-body' },
+    el('p', { class: 'note', text: 'Loading the record…' }));
+  page.appendChild(body);
+  loadRecordBody(record)
+    .then((document_) => {
+      clear(body);
+      body.appendChild(prose(document_.blocks));
+      typeset(body);
+    })
+    .catch((error) => {
+      clear(body);
+      append(body, [
+        el('p', { class: 'note' },
+          'The rendered body of this record could not be loaded, so it is not being '
+          + 'shown. The record itself is unaffected — it is the file linked above.'),
+        el('p', { class: 'note', text: String(error) }),
+      ]);
+    });
+  return page;
 }
 
 function viewEvidence() {
@@ -1670,7 +1970,7 @@ function viewEvidence() {
         el('span', { class: 'badge neutral', text: 'candidate — not a claim' }),
         el('span', { class: 'note', text: candidate.date || '' })),
       el('p', { class: 'row-body gloss' }, math(candidate.statement)),
-      el('p', { class: 'row-note' }, 'proposed in ', fileLink(candidate.source)),
+      el('p', { class: 'row-note' }, 'proposed in ', recordLink(candidate.source)),
       candidate.blocks_routes && candidate.blocks_routes.length
         ? el('p', { class: 'row-note' }, 'blocks ', idList(candidate.blocks_routes)) : null)))
     : emptyState('No live candidates.'));
@@ -1699,7 +1999,7 @@ function viewEvidence() {
         { label: 'outcome', of: (record) => record.outcome },
         { label: 'year', of: (record) => (record.date || '').slice(0, 4) },
       ],
-      search: (record) => `${record.path} ${record.excerpt || ''} ${record.nodes.join(' ')}`,
+      search: (record) => `${record.title || ''} ${record.path} ${record.excerpt || ''} ${record.nodes.join(' ')}`,
       render: checkpointRow,
     })
     : emptyState('No checkpoints recorded.'));
@@ -1716,7 +2016,7 @@ function viewEvidence() {
         { label: 'outcome', of: (record) => record.outcome },
         { label: 'year', of: (record) => (record.date || '').slice(0, 4) },
       ],
-      search: (record) => `${record.path} ${record.excerpt || ''}`,
+      search: (record) => `${record.title || ''} ${record.path} ${record.excerpt || ''}`,
       render: checkpointRow,
     }));
   }
@@ -1942,6 +2242,55 @@ function viewRoutes() {
   return page;
 }
 
+/**
+ * The durable records that touched one route, newest first — the route's own timeline.
+ *
+ * This is what "focus on one route" was missing. The site could say what a route claims
+ * and which approaches are in flight under it, and could not say what has actually
+ * happened on it, because the only way into the 92 records was a link out to a raw file.
+ *
+ * A record belongs to a route on either of two declared grounds, and the row says which:
+ * it names one of the route's portfolio approaches, or it engaged a claim the route is
+ * built on — one the editorial guide features under this route, or one an approach of
+ * the route is blocked on. Both are joins over data that is already here; neither is a
+ * judgment made by this file, which knows no mathematics and does not know what a route
+ * is about.
+ */
+function routeTimeline(route) {
+  if (!DATA.search) return [];
+  const approaches = new Set(approachesOf(route).map((approach) => approach.id));
+  const claims = new Set(featuredFor(route.code, null).map((entry) => entry.id));
+  for (const id of approaches) {
+    const blocker = DATA.search.routes[id].blocker;
+    if (blocker) claims.add(blocker);
+  }
+  return DATA.memory.checkpoints
+    .filter((record) => approaches.has(record.approach)
+      || (record.nodes || []).some((id) => claims.has(id)))
+    .map((record) => ({
+      record,
+      why: approaches.has(record.approach) ? 'this route’s approach' : 'a claim of this route',
+    }))
+    .sort((a, b) => String(b.record.date || '').localeCompare(String(a.record.date || '')));
+}
+
+function timelineRow(entry) {
+  const record = entry.record;
+  const superseded = record.superseded_by && record.superseded_by.length;
+  return el('li', { class: 'timeline-row' },
+    el('div', { class: 'row-head' },
+      el('span', { class: 'note', text: record.date || '—' }),
+      record.outcome
+        ? el('span', { class: 'badge neutral',
+          text: OUTCOME_WORD[record.outcome] || record.outcome })
+        : null,
+      superseded ? el('span', { class: 'badge warn' }, 'superseded') : null,
+      el('span', { class: 'row-name' }, recordLink(record.path))),
+    el('p', { class: 'row-note' }, `via ${entry.why}`,
+      record.approach ? [' — ', idLink(record.approach)] : null),
+    record.excerpt ? el('p', { class: 'row-body' }, math(record.excerpt)) : null);
+}
+
 function viewRouteDetail(code) {
   const page = el('div', {});
   const route = routeByCode(code);
@@ -1994,6 +2343,19 @@ function viewRouteDetail(code) {
   page.appendChild(approaches.length
     ? el('ul', { class: 'rows' }, approaches.map(approachRow))
     : emptyState('No approach in the portfolio is filed under this route.'));
+
+  /* --- what has happened on it ----------------------------------------------------- */
+
+  const timeline = routeTimeline(route);
+  page.appendChild(el('h2', { text: 'What has happened on this route' }));
+  page.appendChild(el('p', { class: 'note' },
+    'The durable records that touched it, newest first. These are why the search is '
+    + 'where it is; they are append-only, and a record that a later one supersedes is '
+    + 'kept and marked rather than removed.'));
+  page.appendChild(timeline.length
+    ? el('ul', { class: 'rows timeline' }, timeline.map(timelineRow))
+    : emptyState('No durable record names an approach of this route or a claim it is '
+      + 'built on.'));
   return page;
 }
 
@@ -2178,6 +2540,7 @@ const PAGES = [
   [/^\/audit\/evidence\/?$/, viewEvidence, 'audit'],
   [/^\/node\/(.+)$/, viewNode, 'audit'],
   [/^\/approach\/(.+)$/, viewApproach, 'audit'],
+  [/^\/record\/(.+)$/, viewRecord, 'audit'],
 ];
 
 /* The hashes this site published before the Explore layer existed.
@@ -2279,11 +2642,38 @@ function chrome() {
   }
 }
 
-fetch('data.json', { cache: 'no-cache' })
+/**
+ * Teach MathJax the manuscript's own macros, if this build was given them.
+ *
+ * Statements are copied out of modules/ as they are written, against the ~60 macros in
+ * preamble.tex. Generating that table from the preamble belongs to the HTML manuscript
+ * conversion, not here — so it arrives in data.json (scripts/site.py --macros) and this
+ * installs it. index.html holds MathJax's start until the table is in, because the TeX
+ * input jax reads its macro list once, at startup: installing afterwards would be a
+ * no-op that looked like it worked.
+ *
+ * With no table attached nothing here runs and the statement pages say so.
+ */
+function installMacros(macros) {
+  if (!macros) return;
+  const config = (window.MathJax && window.MathJax.config) || window.MathJax;
+  if (!config) return;
+  config.tex = config.tex || {};
+  config.tex.macros = Object.assign({}, config.tex.macros, macros);
+}
+
+const LOADED = fetch('data.json', { cache: 'no-cache' })
   .then((response) => {
     if (!response.ok) throw new Error(`data.json: ${response.status}`);
     return response.json();
-  })
+  });
+
+/* Read by index.html's MathJax `startup.ready`. It must always settle: a page whose
+   mathematics never typesets because data.json 404'd would be a second failure on top
+   of the first. */
+window.SITE_READY = LOADED.then((data) => installMacros(data.macros)).catch(() => {});
+
+LOADED
   .then((data) => {
     DATA = data;
     chrome();

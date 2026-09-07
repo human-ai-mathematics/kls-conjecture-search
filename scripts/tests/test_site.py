@@ -21,6 +21,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -28,6 +29,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from checks import ledger  # noqa: E402
 from fixtures import REPO, CheckerFixture, node  # noqa: E402
 
 # Loaded by path rather than by name. `import site` would return the standard library's
@@ -123,13 +125,17 @@ class ClaimExport(SiteFixture):
 
         The field is renamed on the way out so that no view can present it as canonical
         by accident, and the anchor travels with it so a reader can reach the real text.
+        The statement is exported *beside* it and never merged into it: the two are
+        different things, and a page that showed one under the other's name would be
+        making a claim about the manuscript that the manuscript did not make.
         """
         self.add_ledger("program", "test", [node("thm:a")])
 
         claim = self.data()["claims"]["thm:a"]
 
         self.assertIn("gloss", claim)
-        self.assertNotIn("statement", claim)
+        self.assertEqual(claim["gloss"], "fixture summary for thm:a")
+        self.assertNotIn(claim["gloss"], json.dumps(claim["statement"]))
         self.assertEqual(claim["source"]["file"], "modules/test.tex")
         self.assertIsInstance(claim["source"]["line"], int)
 
@@ -415,6 +421,420 @@ class DurableMemory(SiteFixture):
         self.assertEqual(len(runs), 1)
         self.assertEqual(runs[0]["target"], "fixture")
         self.assertNotIn("certifies", json.dumps(runs))
+
+
+class StatementExtraction(unittest.TestCase):
+    """Slicing the claim out of the manuscript, which is what makes a claim page useful.
+
+    A build-time projection of the canonical source, exactly as the gloss is — not a
+    second home for the statement (CLAUDE.md constraint 7). The bytes come out of
+    ``modules/`` on every build and are checked back against it before anything is
+    published.
+    """
+
+    def spans(self, source: str, label: str = "thm:a") -> tuple[int, int]:
+        return ledger.claim_bodies(source)[label]
+
+    def body(self, source: str, label: str = "thm:a") -> str:
+        start, end = self.spans(source, label)
+        return source[start:end]
+
+    def test_the_body_starts_after_the_title_and_stops_at_the_end(self):
+        source = ("prose before\n\\begin{theorem}[A named claim]\n\\label{thm:a}\n"
+                  "The statement.\n\\end{theorem}\nprose after\n")
+
+        self.assertEqual(self.body(source), "\n\\label{thm:a}\nThe statement.\n")
+
+    def test_an_untitled_claim_still_yields_its_body(self):
+        source = "\\begin{lemma}\\label{thm:a}Bare.\\end{lemma}"
+
+        self.assertEqual(self.body(source), "\\label{thm:a}Bare.")
+
+    def test_a_nested_environment_does_not_end_the_claim(self):
+        source = ("\\begin{theorem}\n\\label{thm:a}\nBefore.\n"
+                  "\\begin{enumerate}\\item one\\end{enumerate}\nAfter.\n\\end{theorem}")
+
+        self.assertIn("After.", self.body(source))
+
+    def test_a_structural_label_has_no_statement(self):
+        """A section anchor states nothing, and must not be handed one."""
+        self.assertEqual(ledger.claim_bodies("\\section{S}\\label{sec:a}"), {})
+
+    def test_an_equation_label_inside_a_claim_states_nothing_of_its_own(self):
+        """The equation names itself; the theorem around it is what holds a statement."""
+        source = ("\\begin{theorem}\\label{thm:a}\n"
+                  "\\begin{equation}\\label{eq:a}x=1\\end{equation}\n\\end{theorem}")
+
+        self.assertEqual(sorted(ledger.claim_bodies(source)), ["thm:a"])
+        self.assertIn("x=1", self.body(source))
+
+    def test_a_commented_out_claim_is_not_sliced_into_a_live_one(self):
+        """`strip_comments` preserves offsets, so slicing the original stays exact."""
+        source = ("% \\begin{theorem}\n\\begin{theorem}\\label{thm:a}Live."
+                  "\\end{theorem}\n")
+        stripped = ledger.strip_comments(source)
+        start, end = ledger.claim_bodies(stripped)["thm:a"]
+
+        self.assertEqual(source[start:end], "\\label{thm:a}Live.")
+
+    def test_the_statement_travels_with_the_label_from_disk(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "modules").mkdir()
+            (root / "modules/one.tex").write_text(
+                "\\begin{theorem}[Named]\n\\label{thm:a}\\klsstatus{thm:a}\n"
+                "If $x>0$ then $x^2>0$.\n\\end{theorem}\n", encoding="utf-8")
+
+            labels = ledger.manuscript_labels(root)
+
+        self.assertIn("If $x>0$ then $x^2>0$.", labels["thm:a"]["statement"])
+        self.assertEqual(labels["thm:a"]["statement_line"], 1)
+        self.assertNotIn("Named", labels["thm:a"]["statement"])
+
+
+class StatementRendering(unittest.TestCase):
+    """The LaTeX subset the manuscript's 138 statements actually use, and no more."""
+
+    def blocks(self, source: str, **kwargs) -> list[dict]:
+        return site_module.Prose(**kwargs).statement(source)
+
+    def kinds(self, source: str, **kwargs) -> list[str]:
+        return [block["type"] for block in self.blocks(source, **kwargs)]
+
+    def text(self, blocks: list[dict]) -> str:
+        return json.dumps(blocks, ensure_ascii=False)
+
+    def test_the_anchor_and_the_standing_badge_are_dropped(self):
+        """Both are already on the page in their own right; printing them again is noise."""
+        blocks = self.blocks("\\label{thm:a}\\klsstatus{thm:a}\nA claim.\n")
+
+        self.assertEqual(self.text(blocks).count("thm:a"), 0)
+        self.assertIn("A claim.", self.text(blocks))
+
+    def test_display_mathematics_is_normalized_to_what_the_page_declares(self):
+        """index.html declares `$$…$$` and nothing else."""
+        blocks = self.blocks("Before.\n\\[\n  x=1\n\\]\nAfter.\n")
+
+        self.assertEqual([block["type"] for block in blocks],
+                         ["paragraph", "math", "paragraph"])
+        self.assertEqual(blocks[1]["tex"], "$$x=1$$")
+
+    def test_an_equation_environment_becomes_display_mathematics(self):
+        blocks = self.blocks("\\begin{equation}\\label{eq:a}x=1\\end{equation}")
+
+        self.assertEqual(blocks[0]["tex"], "$$x=1$$")
+
+    def test_an_align_environment_keeps_its_alignment(self):
+        blocks = self.blocks("\\begin{align}a&=b\\\\c&=d\\end{align}")
+
+        self.assertTrue(blocks[0]["tex"].startswith("$$\\begin{aligned}"))
+
+    def test_inline_mathematics_is_carried_verbatim(self):
+        """MathJax may never load. The source has to be readable when it does not."""
+        spans = self.blocks("Let $\\mu$ be log-concave.")[0]["spans"]
+
+        self.assertIn({"t": "math", "v": "$\\mu$"}, spans)
+
+    def test_a_list_becomes_a_list(self):
+        blocks = self.blocks("\\begin{enumerate}[label=(\\roman*)]\n"
+                             "\\item first\n\\item second\n\\end{enumerate}")
+
+        self.assertEqual(blocks[0]["type"], "list")
+        self.assertTrue(blocks[0]["ordered"])
+        self.assertEqual(len(blocks[0]["items"]), 2)
+
+    def test_a_cross_reference_is_kept_as_an_address(self):
+        spans = self.blocks("See Theorem~\\ref{thm:b}.")[0]["spans"]
+
+        self.assertIn({"t": "ref", "v": "thm:b"}, spans)
+
+    def test_a_citation_survives_its_optional_argument(self):
+        spans = self.blocks("As in \\cite[Thm.~1.2]{Letwin2026}.")[0]["spans"]
+
+        self.assertIn({"t": "cite", "v": "Letwin2026"}, spans)
+
+    def test_text_mode_markup_becomes_markup(self):
+        spans = self.blocks("\\emph{any fixed} cut")[0]["spans"]
+
+        self.assertEqual(spans[0]["t"], "em")
+
+    def test_latex_spellings_become_the_characters_they_stand_for(self):
+        spans = self.blocks("Poincar\\'e--Wirtinger, 100\\% of it.")[0]["spans"]
+
+        self.assertIn("Poincaré–Wirtinger, 100% of it.", self.text(spans))
+
+    def test_an_identifier_in_a_statement_is_linked(self):
+        """Issue 18's site half: an id in derived prose is navigation, not a token."""
+        spans = self.blocks("Consequently def:qcts holds.",
+                            ids={"def:qcts"})[0]["spans"]
+
+        self.assertIn({"t": "id", "v": "def:qcts"}, spans)
+
+
+class StatementFreshness(SiteFixture):
+    """A copy of the manuscript is honest only while it is known to agree with it."""
+
+    def claims(self) -> dict:
+        self.add_ledger("program", "test", [node("thm:a")])
+        return self.data()["claims"]
+
+    def test_a_statement_is_exported_and_digested(self):
+        claim = self.claims()["thm:a"]
+
+        self.assertTrue(claim["statement"]["blocks"])
+        self.assertEqual(len(claim["statement"]["sha256"]), 64)
+
+    def test_a_copy_that_no_longer_matches_the_manuscript_is_caught(self):
+        claims = self.claims()
+        claims["thm:a"]["statement"]["sha256"] = "0" * 64
+
+        errors = site_module.statement_failures(self.root, claims)
+
+        self.assertEqual(len(errors), 1)
+        self.assertIn("does not match", errors[0])
+
+    def test_a_claim_whose_anchor_yields_nothing_is_caught(self):
+        claims = self.claims()
+        claims["thm:a"]["statement"] = None
+
+        errors = site_module.statement_failures(self.root, claims)
+
+        self.assertEqual(len(errors), 1)
+        self.assertIn("no statement", errors[0])
+
+    def test_a_structural_anchor_is_not_asked_for_a_statement(self):
+        claims = self.claims()
+        claims["thm:a"]["source"]["environment"] = None
+        claims["thm:a"]["statement"] = None
+
+        self.assertEqual(site_module.statement_failures(self.root, claims), [])
+
+    def test_a_stale_copy_refuses_the_whole_build(self):
+        """Publishing a wrong statement under a label saying it is the manuscript's is
+        worse than publishing none, so it is a build failure and nothing is written."""
+        self.add_ledger("program", "test", [node("thm:a")])
+        original = site_module.statement_failures
+        site_module.statement_failures = lambda root, claims: ["fixture staleness"]
+        try:
+            data, errors = self.publish()
+        finally:
+            site_module.statement_failures = original
+
+        self.assertEqual(errors, ["fixture staleness"])
+        self.assertEqual(data, {})
+        self.assertFalse(self.out.exists())
+
+
+class MarkdownRendering(unittest.TestCase):
+    """The Markdown subset the 92 durable records actually use, counted rather than
+    guessed: headings, paragraphs, `$$` display mathematics, lists, tables, fenced code,
+    block quotes, rules, and inline code, mathematics, emphasis and links."""
+
+    def blocks(self, source: str, **kwargs) -> list[dict]:
+        return site_module.Prose(**kwargs).markdown(source)
+
+    def kinds(self, source: str, **kwargs) -> list[str]:
+        return [block["type"] for block in self.blocks(source, **kwargs)]
+
+    def test_headings_paragraphs_and_rules(self):
+        self.assertEqual(self.kinds("# Title\n\ntext\n\n---\n"),
+                         ["heading", "paragraph", "rule"])
+
+    def test_a_paragraph_joins_its_wrapped_lines(self):
+        spans = self.blocks("one\ntwo\n")[0]["spans"]
+
+        self.assertEqual(spans[0]["v"], "one two")
+
+    def test_display_mathematics_on_its_own_lines(self):
+        blocks = self.blocks("before\n\n$$\n\\Var(X)\\le 1\n$$\n\nafter\n")
+
+        self.assertEqual([block["type"] for block in blocks],
+                         ["paragraph", "math", "paragraph"])
+        self.assertEqual(blocks[1]["tex"], "$$\\Var(X)\\le 1$$")
+
+    def test_a_fenced_code_block_keeps_its_language_and_its_text(self):
+        block = self.blocks("```yaml\n- id: x\n  kind: y\n```\n")[0]
+
+        self.assertEqual(block["type"], "code")
+        self.assertEqual(block["language"], "yaml")
+        self.assertEqual(block["text"], "- id: x\n  kind: y")
+
+    def test_a_list_inside_a_fence_is_code_and_not_a_list(self):
+        self.assertEqual(self.kinds("```\n- not a list\n```\n"), ["code"])
+
+    def test_nested_lists(self):
+        block = self.blocks("- outer\n  - inner\n- second\n")[0]
+
+        self.assertEqual(block["type"], "list")
+        self.assertFalse(block["ordered"])
+        self.assertEqual(len(block["items"]), 2)
+        self.assertEqual([inner["type"] for inner in block["items"][0]],
+                         ["paragraph", "list"])
+
+    def test_an_ordered_list_is_ordered(self):
+        block = self.blocks("1. first\n2. second\n")[0]
+
+        self.assertTrue(block["ordered"])
+
+    def test_a_table_keeps_its_header_and_its_alignment(self):
+        block = self.blocks("| a | b |\n|---|:-:|\n| 1 | 2 |\n")[0]
+
+        self.assertEqual(block["type"], "table")
+        self.assertEqual(block["align"], [None, "center"])
+        self.assertEqual(len(block["rows"]), 1)
+
+    def test_a_block_quote_holds_blocks(self):
+        block = self.blocks("> quoted\n")[0]
+
+        self.assertEqual(block["type"], "quote")
+        self.assertEqual(block["blocks"][0]["type"], "paragraph")
+
+    def test_inline_code_mathematics_and_emphasis(self):
+        spans = self.blocks("`code`, $x$, **bold**, *italic*.\n")[0]["spans"]
+        kinds = [span["t"] for span in spans]
+
+        self.assertEqual(kinds[:1], ["code"])
+        self.assertIn("math", kinds)
+        self.assertIn("strong", kinds)
+        self.assertIn("em", kinds)
+
+    def test_an_underscore_inside_mathematics_is_not_emphasis(self):
+        """One left-to-right pass, so nothing is matched across a token."""
+        spans = self.blocks("$x_1$ and $y_2$\n")[0]["spans"]
+
+        self.assertEqual([span["t"] for span in spans], ["math", "text", "math"])
+
+    def test_a_repository_identifier_is_linked_wherever_it_is_written(self):
+        spans = self.blocks("`q:upgrade` blocks q:upgrade.\n",
+                            ids={"q:upgrade"})[0]["spans"]
+
+        self.assertEqual([span for span in spans if span["t"] == "id"],
+                         [{"t": "id", "v": "q:upgrade"}] * 2)
+
+    def test_an_identifier_that_resolves_to_nothing_is_left_alone(self):
+        spans = self.blocks("`q:upgrade` here.\n")[0]["spans"]
+
+        self.assertEqual(spans[0], {"t": "code", "v": "q:upgrade"})
+
+    def test_a_link_to_another_record_becomes_navigation(self):
+        spans = self.blocks(
+            "see [that](2026-08-20-other.md)\n",
+            records={"research/explorations/2026-08-20-other.md": "2026-08-20-other"},
+        )[0]["spans"]
+        link = [span for span in spans if span["t"] == "link"][0]
+
+        self.assertEqual(link["record"], "2026-08-20-other")
+
+    def test_a_link_to_a_repository_file_becomes_a_source_link(self):
+        spans = self.blocks("see [a run](../runs/x.jsonl)\n")[0]["spans"]
+        link = [span for span in spans if span["t"] == "link"][0]
+
+        self.assertEqual(link["path"], "research/runs/x.jsonl")
+
+    def test_an_external_link_stays_external(self):
+        spans = self.blocks("see [it](https://arxiv.org/abs/1)\n")[0]["spans"]
+        link = [span for span in spans if span["t"] == "link"][0]
+
+        self.assertEqual(link["href"], "https://arxiv.org/abs/1")
+
+
+class RenderedRecords(SiteFixture):
+    """Durable records reach a reader as pages, not as raw Markdown on a code host.
+
+    Rendering is derivation and rewrites nothing, so ``research/explorations/`` stays
+    append-only (CLAUDE.md constraint 6).
+    """
+
+    def test_a_record_carries_a_slug_a_title_and_a_document(self):
+        self.add_ledger("program", "test", [node("thm:a")])
+        self.add_checkpoint("audit", nodes=("thm:a",),
+                            body="# A dated record\n\nWith a body.\n")
+
+        record = self.data()["memory"]["checkpoints"][0]
+
+        self.assertEqual(record["slug"], "2026-08-26-audit")
+        self.assertEqual(record["title"], "A dated record")
+        self.assertEqual(record["document"], "records/2026-08-26-audit.json")
+
+    def test_the_body_is_written_beside_the_data_and_not_inside_it(self):
+        """92 rendered records dwarf everything else the site knows, and a reader opening
+        the front page should not pay for all of them to read one."""
+        self.add_ledger("program", "test", [node("thm:a")])
+        self.add_checkpoint("audit", nodes=("thm:a",), body=(
+            "# A dated record\n\nAn opening paragraph long enough to be the excerpt.\n\n"
+            "## A later section\n\nA sentence nobody else holds.\n"))
+
+        data = self.data()
+        document = json.loads((self.out / "records/2026-08-26-audit.json")
+                              .read_text(encoding="utf-8"))
+
+        self.assertNotIn("A sentence nobody else holds.",
+                         (self.out / "data.json").read_text(encoding="utf-8"))
+        self.assertIn("A sentence nobody else holds.", json.dumps(document))
+        self.assertNotIn("records", data)
+
+    def test_the_opening_heading_becomes_the_title_and_not_a_second_heading(self):
+        self.add_ledger("program", "test", [node("thm:a")])
+        self.add_checkpoint("audit", nodes=("thm:a",), body="# Only once\n\nBody.\n")
+
+        self.data()
+        document = json.loads((self.out / "records/2026-08-26-audit.json")
+                              .read_text(encoding="utf-8"))
+
+        self.assertEqual(document["title"], "Only once")
+        self.assertNotIn("Only once", json.dumps(document["blocks"]))
+
+    def test_a_stale_record_page_is_removed_on_rebuild(self):
+        """A rebuild that only ever added would keep an unreachable page published."""
+        self.add_ledger("program", "test", [node("thm:a")])
+        self.add_checkpoint("audit", nodes=("thm:a",))
+        self.data()
+        orphan = self.out / "records/gone.json"
+        orphan.write_text("{}", encoding="utf-8")
+
+        self.data()
+
+        self.assertFalse(orphan.exists())
+
+    def test_the_excerpt_skips_a_metadata_opening_line(self):
+        self.add_ledger("program", "test", [node("thm:a")])
+        self.add_checkpoint("audit", nodes=("thm:a",), body=(
+            "# A record\n\nDate: 2026-08-26\n\n"
+            "The paragraph that actually says what happened and why it mattered.\n"))
+
+        record = self.data()["memory"]["checkpoints"][0]
+
+        self.assertTrue(record["excerpt"].startswith("The paragraph"))
+
+
+class MacroSeam(SiteFixture):
+    """Statements are LaTeX against `preamble.tex`; the macro table comes from outside.
+
+    Generating it from the preamble belongs to the HTML manuscript conversion. Building a
+    second extractor here would be the duplicate parser `site.py` exists to avoid, so
+    this file only carries the table and the frontend installs it.
+    """
+
+    def test_a_build_without_a_table_says_so_rather_than_inventing_one(self):
+        self.add_ledger("program", "test", [node("thm:a")])
+
+        self.assertIsNone(self.data()["macros"])
+
+    def test_an_attached_table_reaches_the_frontend(self):
+        self.add_ledger("program", "test", [node("thm:a")])
+
+        data = self.data(macros={"R": "\\mathbb{R}"})
+
+        self.assertEqual(data["macros"], {"R": "\\mathbb{R}"})
+
+    def test_a_table_that_is_not_a_table_is_refused_rather_than_ignored(self):
+        path = self.root / "macros.json"
+        path.write_text("[1, 2]", encoding="utf-8")
+
+        macros, errors = site_module.read_macros(path)
+
+        self.assertIsNone(macros)
+        self.assertTrue(errors)
 
 
 class Layout(SiteFixture):

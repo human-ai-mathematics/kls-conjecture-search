@@ -67,6 +67,14 @@ absolute.
 `check.py dossiers` is machine-readable for exactly this: it lists the dossiers an active
 `proofs[]` record names, so the site attaches what the ledger actually vouches for.
 
+A third optional attachment is the **MathJax macro table**, `--macros <file.json>`: an
+object mapping a macro name, without its backslash, to what `MathJax.tex.macros` accepts.
+Every claim page prints the statement copied out of `modules/`, written against
+`preamble.tex`'s own macros, and MathJax knows none of them until it is handed this. The
+table is generated with the HTML conversion, not by `site.py` — one parser of the
+preamble, not two — and a build without one says on the page that an unexpanded command
+is a missing input rather than a defect in the statement.
+
 ### Why the HTML build needs a config file
 
 [`../site/tex4ht.cfg`](../site/tex4ht.cfg) exists for one reason, and it is not
