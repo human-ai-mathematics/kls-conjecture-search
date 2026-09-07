@@ -34,12 +34,24 @@
   — offline, blocked, CDN down — the source stays visible and legible, which is the whole
   reason the raw text is placed in the DOM first and typeset afterwards rather than being
   replaced. Nothing on this page depends on it having loaded.
+
+  The script is deferred, so the first view has already rendered by the time MathJax
+  exists and the typeset call it made had nothing to call. `mathjax-ready` is the one
+  signal back: site.js keeps what it could not typeset and flushes it here. When the CDN
+  is blocked the event never fires and the source stays on screen, which is the point.
 -->
 <script>
   window.MathJax = {
     tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
     options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
-    startup: { typeset: false }
+    startup: {
+      typeset: false,
+      ready: () => {
+        window.MathJax.startup.defaultReady();
+        window.MathJax.startup.promise.then(
+          () => document.dispatchEvent(new Event('mathjax-ready')));
+      }
+    }
   };
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>

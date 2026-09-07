@@ -124,6 +124,17 @@ glosses and candidate statements. It is deliberately optional: the raw source is
 in the DOM first and typeset afterwards, so a blocked or missing CDN leaves the
 mathematics visible and readable rather than blank.
 
+That is also why typesetting is per row and on demand. MathJax lays out everything it is
+handed in one synchronous burst, so handing it a view containing 138 claim rows froze the
+tab for seconds before the first of them could be read, and every keystroke in the search
+box bought the whole burst again. Each `ul.rows` carries `mathjax_ignore` — MathJax's own
+opt-out class — so the whole-page pass stops at the list, and each row is handed over on
+its own as it is scrolled to. A row that is never reached is never typeset, which costs a
+reader nothing, because an untypeset row is exactly what a reader without MathJax sees:
+the source. The search box waits for a pause in the typing before redrawing, for the same
+reason. Optional typesetting is the invariant here; do not make a row's legibility wait
+on it.
+
 It only has something to do because the glosses are written in `$...$`. They were not
 always: 103 of 138 spelled their mathematics in ASCII, MathJax typeset two elements on
 the whole site, and a reader met `E[H Sigma^{-1} H] <= 4 Sigma` where the claim says
