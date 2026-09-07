@@ -41,6 +41,7 @@ absent contributes nothing, so an early repository pays for nothing it is not us
     python3 scripts/check.py checkpoints           # current heads of durable memory
     python3 scripts/check.py dossiers              # active dossiers, for the LaTeX build
     python3 scripts/check.py glosses               # every string a reader is shown
+    python3 scripts/check.py html [DIR]            # audit a built HTML conversion
 
 This command never writes. Scaffolding a brief, a portfolio, a checkpoint or a dossier is
 'python3 scripts/new.py'.
@@ -57,12 +58,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from checks import analyze, failures, views  # noqa: E402
+from checks import analyze, failures, mathjax, views  # noqa: E402
 from checks.common import LANES  # noqa: E402
 from checks.ledger import LEDGER_PATH  # noqa: E402
 
 VIEWS = ("ready", "publish-ready", "status", "node", "candidates", "portfolio",
-         "checkpoints", "dossiers", "glosses")
+         "checkpoints", "dossiers", "glosses", "html")
+
+#: The two commands that take the second positional, and what it means to each.
+ARGUMENT = {"node": "ledger node id", "html": "directory holding the built conversion"}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -71,14 +75,16 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("command", nargs="?", choices=("check", *VIEWS), default="check",
                         help="'check' (default) validates; the rest are derived views")
-    parser.add_argument("node_id", nargs="?", help="ledger node id")
+    parser.add_argument("node_id", nargs="?",
+                        help="ledger node id ('node'), or the built HTML directory "
+                             "('html', default build/html)")
     parser.add_argument("--lane", action="append", choices=LANES, dest="lanes",
                         help="restrict reporting to one lane; repeatable")
     parser.add_argument("--root", type=Path, default=None,
                         help="repository root to validate (default: this checker's own)")
     args = parser.parse_args(argv)
-    if args.command != "node" and args.node_id:
-        parser.error(f"{args.command} does not accept a node id")
+    if args.node_id and args.command not in ARGUMENT:
+        parser.error(f"{args.command} does not accept a second argument")
     report = analyze(root=args.root, configured_ledger=LEDGER_PATH)
     lanes = tuple(dict.fromkeys(args.lanes)) if args.lanes else LANES
     errors = failures(report, lanes)
@@ -92,6 +98,16 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if views.ready(report, args.root) else 1
     if args.command == "publish-ready":
         return 0 if views.publish_ready(report, args.root) else 1
+    if args.command == "html":
+        # Deliberately not part of the default 'check': this reads a build artifact, and
+        # a validator whose verdict depends on an untracked directory is one that fails
+        # for the wrong reason on a fresh clone. An unbuilt tree is reported as unbuilt
+        # and passes; scripts/check.sh turns that into a named skip.
+        root = args.root if args.root is not None else Path(__file__).resolve().parents[1]
+        html_dir = Path(args.node_id) if args.node_id else root / mathjax.DEFAULT_HTML_DIR
+        passed = mathjax.report(root, html_dir,
+                                ["main.tex", *views.dossier_paths(report)])
+        return 0 if passed else 1
     if args.command == "dossiers":
         views.dossiers(report)
     elif args.command == "status":

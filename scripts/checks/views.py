@@ -349,13 +349,12 @@ def checkpoints(report: dict) -> None:
         print(f"  superseded  {relative}\n      read instead: {', '.join(heirs)}")
 
 
-def dossiers(report: dict) -> None:
-    """Every dossier an active proof record names, one repo-relative path per line.
+def dossier_paths(report: dict) -> list[str]:
+    """Every dossier an active proof record names, sorted, repo-relative.
 
-    Machine-readable on purpose. ``scripts/check.sh`` consumes it to compile each dossier
-    standalone, which ``solutions/README.md`` makes part of the proof definition of done
-    and which no validator otherwise exercises: a dossier with a LaTeX syntax error used
-    to pass every check in the repository.
+    Split out from :func:`dossiers` because two callers want the list rather than the
+    printout: the standalone LaTeX build, and the audit of the HTML conversion, which has
+    to say which of these documents it did and did not find built.
     """
     found: list[str] = []
     for item in report["ledgers"]:
@@ -366,7 +365,18 @@ def dossiers(report: dict) -> None:
                 artifact = proof.get("artifact")
                 if isinstance(artifact, str) and artifact not in found:
                     found.append(artifact)
-    for path in sorted(found):
+    return sorted(found)
+
+
+def dossiers(report: dict) -> None:
+    """Every dossier an active proof record names, one repo-relative path per line.
+
+    Machine-readable on purpose. ``scripts/check.sh`` consumes it to compile each dossier
+    standalone, which ``solutions/README.md`` makes part of the proof definition of done
+    and which no validator otherwise exercises: a dossier with a LaTeX syntax error used
+    to pass every check in the repository.
+    """
+    for path in dossier_paths(report):
         print(path)
 
 

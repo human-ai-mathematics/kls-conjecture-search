@@ -14,8 +14,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from . import (checkpoints, docs, editorial, guide, ledger, numerics, portfolio, proofs,
-               roles)
+from . import (checkpoints, docs, editorial, guide, ledger, mathjax, numerics, portfolio,
+               proofs, roles)
 from .common import LANES
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -55,6 +55,10 @@ def analyze(root: Path | None = None, research: Path | None = None,
     editorial.check_titles(labels, errors["editorial"])
     editorial.check_prose(ledgers, live_portfolio, memory["candidates"],
                           errors["editorial"])
+    # Same lane and the same reason: a generated artifact that decides what a reader is
+    # shown. status.tex carries the badge into the PDF; the macro block in
+    # site/tex4ht.cfg carries the notation into the HTML.
+    mathjax.check(root, errors["editorial"])
 
     reader_guide = guide.load(root, errors["editorial"])
     guide.check(

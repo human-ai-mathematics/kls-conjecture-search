@@ -293,3 +293,18 @@ __marimo__/
 .mtc
 
 build/
+
+# TeX4ht intermediates. make4ht writes these beside the source even when -d sends
+# the conversion elsewhere, so a run of docs/PUBLISHING-THE-SITE.md section 2 would
+# otherwise leave a few hundred untracked files in the tree it just validated.
+*.4ct
+*.4tc
+*.idv
+*.lg
+*.xref
+*.tmp
+/main.css
+/main.html
+/main*.svg
+/solutions/*.css
+/solutions/*.html
