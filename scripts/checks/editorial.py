@@ -24,6 +24,12 @@ Two rules are the whole contract, and both are enforced below:
 Rule 2 exists because ``\\klsstatus`` takes the node id explicitly rather than reading
 the enclosing label --- LaTeX cannot do the latter reliably, and a silent mismatch would
 put one claim's standing on another claim's statement.
+
+The second half of this module is about the prose itself rather than the badge beside
+it: the four strings this repository derives as sentences for a reader --- a ledger
+gloss, a route objective, a family mechanism, a candidate statement --- and the two ways
+they stop being readable, mathematics spelled in ASCII and an id printed where a name
+belongs. See :func:`check_prose` and :data:`ENFORCED`.
 """
 from __future__ import annotations
 
@@ -32,6 +38,7 @@ import unicodedata
 from pathlib import Path
 
 from . import views
+from .checkpoints import EXPLORATIONS
 from .common import as_list
 from .ledger import (
     CLAIM_ENVIRONMENTS,
@@ -41,6 +48,7 @@ from .ledger import (
     applicability_blockers,
     strip_comments,
 )
+from .portfolio import PORTFOLIO_PATH
 
 #: The generated file, repo-relative. It sits beside ``preamble.tex`` because that is
 #: what inputs it, and outside ``modules/`` because everything under ``modules/`` is
@@ -432,33 +440,166 @@ def check_titles(labels: dict[str, dict], errors: list[str]) -> None:
             )
 
 
-def ascii_gloss_errors(ledgers: list[dict], errors: list[str]) -> None:
-    """Every gloss writes its mathematics in ``$...$``, not in ASCII.
+# --------------------------------------------------------------------------------------
+# Reader-facing prose: four surfaces, two rules
+# --------------------------------------------------------------------------------------
+#
+# The repository derives four strings that reach a reader as *sentences* rather than as
+# structure: a ledger gloss, a route objective, a family mechanism, and a candidate
+# statement. They come from three different domains and three different writers, and
+# nothing but this module was reading them as one thing --- which is how the guard that
+# blocks ASCII mathematics in a gloss came to leave the candidate statements alone, even
+# though a candidate is the only mathematics the site prints *in full* and, by CLAUDE.md
+# constraint 7, the only text with no properly typeset copy anywhere else.
+#
+# So the surface list is enumerated once here and both rules run over all of it. What is
+# *not* covered is deliberate: `blocker:` and `reopen_if:` name a `cand:` id or a node id
+# because constraint 11 tells them to, and a structural field that holds an address is
+# not prose.
 
-    A gloss is the one line a reader meets before deciding whether to open the claim, on
-    the website and in ``check.py status`` alike. Written in ASCII it reads
-    ``E[H Sigma^{-1} H] <= 4 Sigma``, which is not what the claim says so much as a
-    transcription of it, and the site loads MathJax precisely so that it does not have
-    to be read that way.
+SUMMARY, OBJECTIVE, MECHANISM, STATEMENT = "summary", "objective", "mechanism", "statement"
 
-    This was `check.py glosses`, advisory, until the 103 nodes it listed were rewritten;
-    it blocks now because the expensive part is done and the cheap part --- not
-    regressing --- is what a checker is for. What it does *not* demand is that a gloss
-    contain mathematics: a bridge or an obstruction is often better in plain words, and
-    only the ASCII spellings in ``views.ASCII_MATHS`` are errors.
+#: What a message calls each surface. A reader who is told "a gloss" and a reader who is
+#: told "a candidate statement" are being asked for different repairs.
+SURFACE_NOUNS = {
+    SUMMARY: "a gloss",
+    OBJECTIVE: "a route objective",
+    MECHANISM: "a family mechanism",
+    STATEMENT: "a candidate statement",
+}
+
+#: The two rules, named so that :data:`ENFORCED` can speak about them one at a time.
+ASCII, BARE_ID = "ascii", "bare-id"
+
+#: Id namespaces the ledger does not mint. The ledger's own (``thm``, ``lem``, …) are
+#: *derived* from the ids in the tree by :func:`namespaces`, because a program that
+#: starts minting ``defn:`` nodes must be guarded without anyone editing this file; these
+#: three are fixed by schema instead --- ``checkpoints.CANDIDATE_ID_RE``,
+#: ``common.APPROACH_ID_RE`` and ``portfolio.FAMILY_ID_RE`` --- so they are named here.
+SEARCH_NAMESPACES = ("cand", "ap", "fam")
+
+#: Where each rule blocks the editorial lane *today*, and the whole enforcement policy:
+#: a (rule, surface) pair blocks exactly when its violation list is empty, so a clean
+#: surface can never regress and a dirty one is listed by ``check.py glosses`` until the
+#: writer who owns it has repaired it. Pairs leave this set only in the direction of
+#: more enforcement.
+#:
+#: ``(ASCII, SUMMARY)`` was the first to arrive, after the 103 glosses it listed were
+#: rewritten. The rest of the ASCII rule joins it immediately because objectives and
+#: mechanisms were already typeset; ``(BARE_ID, MECHANISM)`` for the same reason. The
+#: four pairs that are absent have live violations and no writer this checker is allowed
+#: to be: the ledger is one orchestrator's (constraint 1), the portfolio is the
+#: synthesizer's (constraint 11), and a candidate statement lives in an append-only
+#: checkpoint (constraint 6).
+ENFORCED = frozenset({
+    (ASCII, SUMMARY),
+    (ASCII, OBJECTIVE),
+    (ASCII, MECHANISM),
+    (BARE_ID, MECHANISM),
+})
+
+
+def namespaces(ledgers: list[dict]) -> tuple[str, ...]:
+    """Every id namespace this tree actually uses, for the bare-id matcher.
+
+    Derived from the node ids rather than listed, so the vocabulary cannot drift from the
+    ledger. The search namespaces are added because an ``ap:`` route id in a gloss is the
+    same failure as a ``thm:`` node id: an address printed where a name belongs.
     """
-    for item in ledgers:
+    found = {nid.split(":", 1)[0] for item in ledgers for nid in item["nodes"]
+             if ":" in nid}
+    return tuple(sorted(found | set(SEARCH_NAMESPACES)))
+
+
+def prose(ledgers: list[dict], portfolio: dict | None = None,
+          candidates: list[dict] | None = None) -> list[dict]:
+    """Every reader-facing prose string in one tree, with where it lives.
+
+    Each entry is ``{"field", "id", "where", "text"}``. ``where`` is what a message and
+    the ``glosses`` view both print, and it names the file or program the string lives
+    in, so a repair is a lookup rather than a search.
+    """
+    items: list[dict] = []
+    for item in ledgers or ():
+        program = item.get("program")
         for nid, node in sorted(item["nodes"].items()):
-            gloss = node.get("summary")
-            if not isinstance(gloss, str) or not gloss:
+            text = node.get("summary")
+            if isinstance(text, str) and text:
+                items.append({"field": SUMMARY, "id": nid, "text": text,
+                              "where": f"[{program}] {nid}.{SUMMARY}"})
+
+    location = PORTFOLIO_PATH.as_posix()
+    for field, section in ((MECHANISM, "families"), (OBJECTIVE, "approaches")):
+        for entry_id, entry in sorted(((portfolio or {}).get(section) or {}).items()):
+            text = entry.get(field)
+            if isinstance(text, str) and text:
+                items.append({"field": field, "id": entry_id, "text": text,
+                              "where": f"{location} {entry_id}.{field}"})
+
+    for candidate in candidates or ():
+        text = candidate.get("statement")
+        if isinstance(text, str) and text:
+            source = candidate.get("source") or EXPLORATIONS
+            items.append({"field": STATEMENT, "id": candidate["id"], "text": text,
+                          "where": f"{source} {candidate['id']}.{STATEMENT}"})
+    return items
+
+
+def _message(item: dict, rule: str, tokens: list[str]) -> str:
+    noun = SURFACE_NOUNS[item["field"]]
+    if rule == ASCII:
+        return (f"{item['where']}: writes {', '.join(tokens)} outside $...$; "
+                f"{noun} is typeset, so its mathematics goes between dollars")
+    return (f"{item['where']}: names {', '.join(tokens)} by id; {noun} is prose, so "
+            "name the claim and leave the address to the edge that already carries it")
+
+
+def prose_findings(ledgers: list[dict], portfolio: dict | None = None,
+                   candidates: list[dict] | None = None) -> list[dict]:
+    """Both rules, over every surface, whether or not the pair blocks the lane.
+
+    Each finding is ``{"rule", "field", "id", "where", "tokens", "enforced", "message"}``.
+    The advisory ones are the point: they are what ``check.py glosses`` prints, and the
+    list is exact so that a repair is mechanical for whoever is allowed to make it.
+    """
+    vocabulary = namespaces(ledgers)
+    findings: list[dict] = []
+    for item in prose(ledgers, portfolio, candidates):
+        for rule, tokens in (
+            (ASCII, views.ascii_mathematics(item["text"])),
+            (BARE_ID, views.bare_ids(item["text"], vocabulary)),
+        ):
+            if not tokens:
                 continue
-            found = views.ascii_mathematics(gloss)
-            if found:
-                errors.append(
-                    f"[{item['program']}] {nid}.summary: writes {', '.join(found)} "
-                    "outside $...$; a gloss is typeset, so its mathematics goes "
-                    "between dollars"
-                )
+            findings.append({
+                "rule": rule, "field": item["field"], "id": item["id"],
+                "where": item["where"], "tokens": tokens,
+                "enforced": (rule, item["field"]) in ENFORCED,
+                "message": _message(item, rule, tokens),
+            })
+    return findings
+
+
+def check_prose(ledgers: list[dict], portfolio: dict | None,
+                candidates: list[dict] | None, errors: list[str]) -> None:
+    """Fail the editorial lane on every finding whose (rule, surface) pair is enforced.
+
+    Two rules, one reason. A gloss written ``E[H Sigma^{-1} H] <= 4 Sigma`` is a
+    transcription of a claim rather than the claim, and the site loads MathJax precisely
+    so nobody has to read it that way. A gloss written "prove ass:tight-prefix-carleson
+    by upgrading cor:per-direction" is an address rather than a name, and the reader who
+    could resolve it is the reader who did not need the gloss.
+
+    Neither rule demands anything positive: a gloss may be plain words --- a bridge or an
+    obstruction usually reads better that way --- and only the ASCII spellings in
+    ``views.ASCII_MATHS`` and the id namespaces this tree actually uses are errors. What
+    the rules cannot see is the third form of the same mistake, an id with its prefix
+    filed off: "Assumption all-cut-carleson" is an address wearing prose clothes, and no
+    regular expression can tell it from a name.
+    """
+    for finding in prose_findings(ledgers, portfolio, candidates):
+        if finding["enforced"]:
+            errors.append(finding["message"])
 
 
 def check(root: Path, ledgers: list[dict], errors: list[str]) -> None:

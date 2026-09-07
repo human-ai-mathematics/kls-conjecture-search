@@ -40,7 +40,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/00-overview.tex
-    summary: "Whether the centred sum-of-squares identity of prop:example still holds when the mean is replaced by a weighted mean with positive weights summing to one."
+    summary: "Whether the centred sum-of-squares identity still holds when the mean is replaced by a weighted mean with positive weights summing to one."
     heuristic_barriers: [obs:example]
 
   # ---------------------------------------------------------------------------
@@ -73,7 +73,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/00-overview.tex
-    summary: 'The sequence $(1,1)$ has centred sum of squares $0$ and half sum of squares $1$, so conj:example fails.'
+    summary: 'The sequence $(1,1)$ has centred sum of squares $0$ and half sum of squares $1$, so the half-of-sum-of-squares lower bound fails.'
     depends_on: [prop:example]
     proofs:
       - artifact: solutions/prop-example-refuter.tex

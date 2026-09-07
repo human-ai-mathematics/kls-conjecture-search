@@ -17,7 +17,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from checks import editorial, guide, ledger  # noqa: E402
+from checks import analyze, editorial, guide, ledger  # noqa: E402
 from fixtures import REPO, CheckerFixture, node  # noqa: E402
 
 
@@ -307,30 +307,59 @@ class GuideValidation(CheckerFixture):
         self.assertEqual(errors, [])
 
 
-class TypesetGlosses(unittest.TestCase):
-    """A gloss is typeset, so its mathematics is written between dollars.
+class ProseFixture(unittest.TestCase):
+    """One tiny tree carrying all four reader-facing surfaces, filled in per test."""
 
-    This was an advisory view (``check.py glosses``) until the 103 nodes it listed were
-    rewritten. It is a lane rule now, so what these tests protect is not the rewrite ---
-    that is done, and the last test here asserts it stayed done --- but the detector's
-    two edges: it must fire on real ASCII mathematics, and it must not fire on ordinary
-    English that happens to spell one of its tokens.
-    """
+    def tree(self, **texts) -> tuple[list[dict], dict, list[dict]]:
+        node = {"id": "thm:a"}
+        if "summary" in texts:
+            node["summary"] = texts["summary"]
+        nodes = {"thm:a": node}
+        for extra in texts.get("nodes", ()):
+            nodes[extra] = {"id": extra}
+        ledgers = [{"program": "p", "nodes": nodes}]
+        portfolio = {
+            "families": {"fam:one": {"id": "fam:one",
+                                     "mechanism": texts.get("mechanism")}},
+            "approaches": {"ap:one": {"id": "ap:one",
+                                      "objective": texts.get("objective"),
+                                      "blocker": texts.get("blocker"),
+                                      "reopen_if": texts.get("reopen_if")}},
+        }
+        candidates = [{"id": "cand:one", "statement": texts.get("statement"),
+                       "source": "research/explorations/2026-01-01-x.md"}]
+        return ledgers, portfolio, candidates
 
-    def errors(self, gloss: str) -> list[str]:
-        ledgers = [{"program": "p",
-                    "nodes": {"thm:a": {"id": "thm:a", "summary": gloss}}}]
+    def errors(self, **texts) -> list[str]:
+        """What fails the editorial lane."""
         found: list[str] = []
-        editorial.ascii_gloss_errors(ledgers, found)
+        editorial.check_prose(*self.tree(**texts), found)
         return found
 
+    def findings(self, rule: str | None = None, **texts) -> list[dict]:
+        """What is *detected*, enforced or not — what ``check.py glosses`` prints."""
+        found = editorial.prose_findings(*self.tree(**texts))
+        return [item for item in found if rule is None or item["rule"] == rule]
+
+
+class TypesetProse(ProseFixture):
+    """Reader-facing prose is typeset, so its mathematics is written between dollars.
+
+    This was an advisory view (``check.py glosses``) until the 103 glosses it listed were
+    rewritten, and it has blocked on glosses since. What these tests protect is not the
+    rewrite --- that is done, and two tests here assert it stayed done --- but the
+    detector's two edges (it must fire on real ASCII mathematics and never on ordinary
+    English), and the surface it used to skip: a candidate statement, which by CLAUDE.md
+    constraint 7 is the only copy of its text anywhere and which the site prints in full.
+    """
+
     def test_ascii_mathematics_is_an_error(self):
-        self.assertTrue(self.errors("The bound is E H^2 <= 4 Id in isotropic position."))
+        self.assertTrue(self.errors(summary="The bound is E H^2 <= 4 Id, isotropic."))
 
     def test_the_same_line_typeset_is_not(self):
         self.assertEqual(
             self.errors(
-                "The bound is $\\mathbb{E}H^2 \\le 4\\,\\mathrm{Id}$ in isotropic position."
+                summary="The bound is $\\mathbb{E}H^2 \\le 4\\,\\mathrm{Id}$, isotropic."
             ),
             [],
         )
@@ -344,37 +373,134 @@ class TypesetGlosses(unittest.TestCase):
         for word in ("constraint", "joint", "point", "print", "sprint"):
             with self.subTest(word=word):
                 self.assertEqual(
-                    self.errors(f"Minimized under the Euler {word} stated above."), []
+                    self.errors(summary=f"Minimized under the Euler {word} above."), []
                 )
 
     def test_mathematics_inside_dollars_is_never_read_as_prose(self):
         self.assertEqual(
-            self.errors("Every $a_i \\le 2$ and $\\sum_i a_i^2 \\ge 1$."), []
+            self.errors(summary="Every $a_i \\le 2$ and $\\sum_i a_i^2 \\ge 1$."), []
         )
 
     def test_a_gloss_of_plain_words_is_fine(self):
         self.assertEqual(
             self.errors(
-                "Numerical agreement over the instances tried constrains nothing."
+                summary="Numerical agreement over the instances tried constrains nothing."
             ),
             [],
         )
 
     def test_an_empty_or_absent_gloss_is_not_this_rule_s_business(self):
-        ledgers = [{"program": "p", "nodes": {"thm:a": {"id": "thm:a"}}}]
-        found: list[str] = []
-        editorial.ascii_gloss_errors(ledgers, found)
-        self.assertEqual(found, [])
+        self.assertEqual(self.errors(), [])
 
-    def test_this_repository_has_no_ascii_gloss_left(self):
-        """The rewrite, asserted rather than remembered."""
-        document = yaml.safe_load(
-            (REPO / "research/program/ledger.yaml").read_text(encoding="utf-8"))
-        ledgers = [{"program": "kls",
-                    "nodes": {item["id"]: item for item in document["nodes"]}}]
-        found: list[str] = []
-        editorial.ascii_gloss_errors(ledgers, found)
-        self.assertEqual(found, [])
+    def test_a_candidate_statement_is_read_like_every_other_surface(self):
+        """Issue #17: the least guarded text was the text the site prints in full."""
+        found = self.findings("ascii", statement="Let mu be a product with n >= 2.")
+
+        self.assertEqual(len(found), 1, found)
+        self.assertEqual(found[0]["field"], "statement")
+        self.assertIn("cand:one", found[0]["message"])
+        self.assertIn("≥", found[0]["message"])
+        self.assertIn("research/explorations/2026-01-01-x.md", found[0]["message"])
+
+    def test_a_candidate_statement_is_listed_rather_than_blocking_today(self):
+        """Its file is append-only (constraint 6), so the rule waits for its writer."""
+        self.assertEqual(self.errors(statement="Let mu be a product with n >= 2."), [])
+        self.assertFalse(
+            self.findings("ascii", statement="Let mu be a product with n >= 2.")[0]
+            ["enforced"])
+
+    def test_an_objective_and_a_mechanism_are_typeset_too(self):
+        self.assertTrue(self.errors(objective="Show the Rayleigh quotient is <= 4."))
+        self.assertTrue(self.errors(mechanism="Absorb the source when t >= 1."))
+
+    def test_the_length_budget_never_became_a_rule(self):
+        """Issue #17 is explicit: a candidate is legitimately far longer than a gloss."""
+        self.assertEqual(self.errors(statement="A precise statement. " * 200), [])
+        self.assertEqual(self.errors(summary="A long gloss. " * 200), [])
+
+
+class BareIdsInProse(ProseFixture):
+    """An id is an address; prose names a claim (issue #18).
+
+    The vocabulary is derived from the ids the tree actually mints, so these tests are as
+    much about what the rule *cannot* see --- a namespace no node uses, an id inside
+    mathematics, the ``lem:`` buried in "problem:" --- as about what it catches.
+    """
+
+    def test_an_id_in_a_gloss_is_found_and_named(self):
+        found = self.findings("bare-id",
+                              summary="Prove it by upgrading thm:a to trace scale.")
+
+        self.assertEqual(len(found), 1, found)
+        self.assertEqual(found[0]["tokens"], ["thm:a"])
+        self.assertIn("thm:a", found[0]["message"])
+
+    def test_the_namespaces_come_from_the_ledger_rather_than_a_list(self):
+        """A program that mints ``defn:`` nodes is guarded without editing the checker."""
+        self.assertEqual(self.findings("bare-id", summary="See defn:x for the shape."), [])
+        self.assertTrue(self.findings("bare-id", nodes=["defn:x"],
+                                      summary="See defn:x for the shape."))
+
+    def test_search_ids_are_addresses_too(self):
+        for token in ("cand:one", "ap:one", "fam:one"):
+            with self.subTest(token=token):
+                self.assertTrue(
+                    self.findings("bare-id", summary=f"Blocked on {token} for now."))
+
+    def test_an_id_inside_dollars_is_mathematics_and_not_inspected(self):
+        """One notion of prose for the whole lane: ``views.outside_math`` decides it."""
+        self.assertEqual(
+            self.findings("bare-id", summary="The set $\\{x : x \\ge 0\\}$ is convex."),
+            [],
+        )
+        self.assertEqual(self.findings("bare-id", summary="Recall $thm:a$ here."), [])
+
+    def test_an_id_lookalike_inside_a_word_or_a_path_is_not_an_id(self):
+        for text in ("The problem: the bound is not uniform.",
+                     "See https://example.org/thm:a for the write-up.",
+                     "Read research/explorations/2026-01-01-x.md first.",
+                     "A sub-thm:a-style slug is part of a longer token."):
+            with self.subTest(text=text):
+                self.assertEqual(self.findings("bare-id", summary=text), [])
+
+    def test_a_structural_field_holding_an_id_is_not_prose(self):
+        """Constraint 11 tells ``blocker`` and ``reopen_if`` to name a `cand:` id."""
+        self.assertEqual(
+            self.findings("bare-id", blocker="cand:one",
+                          reopen_if="cand:one is proved."),
+            [],
+        )
+
+    def test_a_mechanism_blocks_while_a_gloss_is_only_listed_today(self):
+        """The enforcement policy, made visible: a pair blocks once its list is empty."""
+        self.assertTrue(self.errors(mechanism="Follow the cut of thm:a under flow."))
+        self.assertEqual(self.errors(summary="Follow the cut of thm:a under flow."), [])
+        self.assertTrue(self.findings("bare-id", summary="Follow thm:a under flow."))
+
+
+class LiveProse(unittest.TestCase):
+    """What the two rules say about the trees this repository actually ships."""
+
+    def report(self, root: Path) -> list[dict]:
+        found = analyze(root=root)
+        return editorial.prose_findings(found["ledgers"], found["portfolio"],
+                                        found["candidates"])
+
+    def test_every_enforced_pair_has_an_empty_list_here(self):
+        """The whole enforcement policy: a pair blocks exactly when its list is empty.
+
+        If this fails, either a rule was enforced ahead of its data or a repair regressed
+        --- and either way ``python3 scripts/check.py`` is already saying so.
+        """
+        blocking = [finding["message"] for finding in self.report(REPO)
+                    if finding["enforced"]]
+
+        self.assertEqual(blocking, [])
+
+    def test_the_worked_example_is_clean_under_every_pair(self):
+        """The fixture is what a new program copies, so it models the finished state."""
+        self.assertEqual([finding["message"] for finding in self.report(REPO / "example")],
+                         [])
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -10,6 +10,7 @@ from __future__ import annotations
 import re
 import sys
 from collections import Counter
+from functools import lru_cache
 from pathlib import Path
 
 from .common import yaml  # noqa: F401
@@ -370,7 +371,7 @@ def dossiers(report: dict) -> None:
 
 
 # --------------------------------------------------------------------------------------
-# glosses: an advisory view, on its way to being a rule
+# glosses: the reader-facing prose view, and the two text-level detectors behind it
 # --------------------------------------------------------------------------------------
 
 #: A gloss helps a reader recognize a claim; the statement is the \label in modules/.
@@ -405,8 +406,14 @@ ASCII_MATH_RES = tuple(
 )
 
 
-def _outside_math(text: str) -> str:
-    """``text`` with every ``$...$`` span blanked, so only prose is inspected."""
+def outside_math(text: str) -> str:
+    """``text`` with every ``$...$`` span blanked, so only prose is inspected.
+
+    Both text-level detectors below read prose through this, and so does the surface
+    walk in :mod:`checks.editorial`: the editorial lane has exactly one notion of what
+    counts as prose, and mathematics is not it. Blanking rather than deleting keeps every
+    offset intact, so a match position still points into the original string.
+    """
     out, inside = [], False
     for part in text.split("$"):
         out.append(" " * len(part) if inside else part)
@@ -416,57 +423,115 @@ def _outside_math(text: str) -> str:
 
 def ascii_mathematics(gloss: str) -> list[str]:
     """The names of the ASCII spellings written outside ``$...$`` in ``gloss``."""
-    prose = _outside_math(gloss)
+    prose = outside_math(gloss)
     return sorted({name for pattern, name in ASCII_MATH_RES if pattern.search(prose)})
 
 
-def glosses(report: dict) -> None:
-    """Which ledger glosses are too long, or write mathematics in ASCII.
+#: What an id looks like once its namespace is known: ``ass:tight-prefix-carleson``,
+#: ``cand:cone-seam-capacity``. The lookbehind is the whole reason this is not a naive
+#: ``\w+:[\w-]+``: without it the ``lem:`` inside "problem: the bound" and the ``thm:``
+#: inside a URL path both fire, and a rule that flags ordinary English is a rule people
+#: learn to route around rather than satisfy.
+ID_TOKEN_TEMPLATE = r"(?<![0-9A-Za-z_/.\-])(?:{namespaces}):[0-9A-Za-z][0-9A-Za-z\-]*"
 
-    The ASCII half of this view is now enforced: every gloss was rewritten into
-    ``$...$`` and :func:`checks.editorial.ascii_gloss_errors` fails the editorial lane on
-    a regression, which is what this docstring used to say should happen once the list
-    was empty. What is printed here is the same projection, browsable, plus the length
-    advisory that stays advisory --- shortening a gloss is mathematical editing with no
-    mechanical right answer, and a budget that blocked would be met by deleting content.
 
-    Note what is *not* checked: that every gloss contains mathematics. Plenty are
-    legitimately prose --- a proof bridge, a methodological obstruction --- and demanding
-    a dollar sign in those would buy nothing and cost their readability.
+@lru_cache(maxsize=None)
+def id_pattern(namespaces: tuple[str, ...]) -> re.Pattern:
+    """A matcher for repository ids in exactly the given namespaces.
+
+    The namespaces are passed in rather than hardcoded because the set of them is data:
+    a program that mints a ``defn:`` node must be guarded without anyone remembering to
+    edit this file. Longest first, so ``conj`` is preferred over a hypothetical ``con``.
     """
-    long_ones: list[tuple[int, str]] = []
-    ascii_ones: list[tuple[str, list[str]]] = []
-    total = 0
-    for item in report["ledgers"]:
-        for nid, node in sorted(item["nodes"].items()):
-            gloss = node.get("summary")
-            if not isinstance(gloss, str) or not gloss:
-                continue
-            total += 1
-            if len(gloss) > GLOSS_BUDGET:
-                long_ones.append((len(gloss), nid))
-            found = ascii_mathematics(gloss)
-            if found:
-                ascii_ones.append((nid, found))
+    body = "|".join(re.escape(namespace)
+                    for namespace in sorted(set(namespaces), key=lambda n: (-len(n), n)))
+    return re.compile(ID_TOKEN_TEMPLATE.format(namespaces=body))
 
-    typeset = total - len(ascii_ones)
-    print(f"{total} gloss(es); {typeset} free of bare ASCII mathematics, "
-          f"{len(long_ones)} over {GLOSS_BUDGET} characters")
 
-    if ascii_ones:
-        print(f"\nmathematics written outside $...$ ({len(ascii_ones)}):")
-        for nid, found in ascii_ones:
-            print(f"  {nid:44s} {', '.join(found)}")
+def bare_ids(text: str, namespaces: tuple[str, ...]) -> list[str]:
+    """Every repository id written as prose in ``text``, outside ``$...$``.
+
+    An id is an address, not a name. In a sentence a reader meets --- a gloss, a route
+    objective, a candidate statement --- it is unreadable to anyone who has not memorized
+    the ledger, and the structural edge beside it (``depends_on``, ``blocker``) already
+    carries the address for the machine. Nothing here asks whether the id *resolves*: a
+    stale address in prose is worse than a live one, not better.
+    """
+    if not namespaces:
+        return []
+    return sorted({match.group(0)
+                   for match in id_pattern(tuple(namespaces)).finditer(outside_math(text))})
+
+
+#: The prose rules, in the order this view prints them, with the heading each list gets.
+RULE_HEADINGS = (
+    ("ascii", "mathematics written outside $...$"),
+    ("bare-id", "ids written where a name belongs"),
+)
+
+
+def glosses(report: dict) -> None:
+    """Every reader-facing string this repository derives, and how it reads.
+
+    Four surfaces --- ledger glosses, route objectives, family mechanisms, candidate
+    statements --- against two rules, plus the length budget on glosses. Each line says
+    whether it fails the editorial lane or is only listed: a (rule, surface) pair blocks
+    once its list here is empty, so this view is both the browsable projection and the
+    exact work list for whichever writer owns the file. See
+    :data:`checks.editorial.ENFORCED`.
+
+    The length budget is the one thing that never becomes a rule. Shortening a gloss is
+    mathematical editing with no mechanical right answer, a budget that blocked would be
+    met by deleting content, and a candidate statement is legitimately far longer than a
+    gloss --- so the budget is reported for glosses alone, and reported only.
+
+    Note what is *not* checked: that a gloss contains mathematics, or that it cites
+    anything. Plenty are legitimately plain words --- a proof bridge, a methodological
+    obstruction --- and demanding a dollar sign in those would buy nothing and cost their
+    readability.
+    """
+    from . import editorial  # deferred: editorial imports this module for its detectors
+
+    items = editorial.prose(report["ledgers"], report.get("portfolio"),
+                            report.get("candidates"))
+    findings = editorial.prose_findings(report["ledgers"], report.get("portfolio"),
+                                        report.get("candidates"))
+
+    counted = Counter(item["field"] for item in items)
+    clean = len(items) - len({finding["where"] for finding in findings})
+    print(f"{len(items)} reader-facing string(s) — "
+          + ", ".join(f"{counted[field]} {noun}"
+                      for field, noun in (("summary", "gloss(es)"),
+                                          ("objective", "objective(s)"),
+                                          ("mechanism", "mechanism(s)"),
+                                          ("statement", "candidate statement(s)")))
+          + f"; {clean} with nothing to report")
+
+    for rule, heading in RULE_HEADINGS:
+        listed = [finding for finding in findings if finding["rule"] == rule]
+        if not listed:
+            continue
+        blocking = sum(1 for finding in listed if finding["enforced"])
+        print(f"\n{heading} ({len(listed)}; {blocking} failing the editorial lane):")
+        for finding in listed:
+            mark = "FAIL" if finding["enforced"] else "    "
+            print(f"  {mark} {finding['where']:64s} {', '.join(finding['tokens'])}")
+
+    long_ones = sorted(((len(item["text"]), item["id"]) for item in items
+                        if item["field"] == "summary" and len(item["text"]) > GLOSS_BUDGET),
+                       reverse=True)
     if long_ones:
-        print(f"\nlonger than a gloss ({len(long_ones)}):")
-        for length, nid in sorted(long_ones, reverse=True):
-            print(f"  {nid:44s} {length} characters")
-    if not ascii_ones and not long_ones:
+        print(f"\nlonger than a gloss ({len(long_ones)}, advisory):")
+        for length, nid in long_ones:
+            print(f"       {nid:64s} {length} characters")
+
+    if not findings and not long_ones:
         print("\nNothing to report.")
-    elif ascii_ones:
-        print("\nThe ASCII list above fails the editorial lane. The length list does not:"
-              "\na gloss is a recognition aid, not the statement --- the canonical text is"
-              "\nthe \\label in modules/, and shortening one is editing, not formatting.")
-    else:
-        print("\nAdvisory: nothing above fails a lane. A gloss is a recognition aid, not"
-              "\nthe statement --- the canonical text is the \\label in modules/.")
+        return
+    advisory = sum(1 for finding in findings if not finding["enforced"])
+    if advisory:
+        print(f"\n{advisory} finding(s) above are listed, not enforced: the file that "
+              "holds each\nhas one writer, and the rule blocks once that writer has "
+              "emptied its list.")
+    print("A gloss is a recognition aid, not the statement — the canonical text is the"
+          "\n\\label in modules/, and shortening one is editing, not formatting.")

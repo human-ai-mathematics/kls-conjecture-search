@@ -18,8 +18,10 @@ One entry point, eight validation lanes:
 * ``docs`` — repository-relative Markdown links, so a navigation table cannot point at a
   file that is not there;
 * ``editorial`` — what a reader is shown: the generated ``status.tex`` badges, the
-  manuscript titles the site sets as headings, and the optional reading guide in
-  ``research/program/editorial.yaml``.
+  manuscript titles the site sets as headings, the optional reading guide in
+  ``research/program/editorial.yaml``, and the four surfaces of derived prose — glosses,
+  route objectives, family mechanisms, candidate statements — which are typeset and name
+  their claims rather than addressing them (``check.py glosses``).
 
 A lane is an implementation partition of this checker. It is not one of the three
 domains the repository is organized into (mathematical state, search state, durable
@@ -38,6 +40,7 @@ absent contributes nothing, so an early repository pays for nothing it is not us
     python3 scripts/check.py portfolio             # families, routes, blockers
     python3 scripts/check.py checkpoints           # current heads of durable memory
     python3 scripts/check.py dossiers              # active dossiers, for the LaTeX build
+    python3 scripts/check.py glosses               # every string a reader is shown
 
 This command never writes. Scaffolding a brief, a portfolio, a checkpoint or a dossier is
 'python3 scripts/new.py'.
