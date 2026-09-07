@@ -115,7 +115,8 @@ passage to arbitrary log-concave limits is certified conditionally by
 \texttt{q:cmh-approximation} under the separate open premise
 \texttt{ass:uniform-cmh-approximants}. The route's remaining open sub-targets split into a
 construction layer (\texttt{q:mm-invariant-lift}, \texttt{q:mm-square-root-commutator}) and a
-falsification layer (\texttt{conj:gate-zero}, \texttt{q:cmh-solenoidal-perturbation}).
+falsification layer (\texttt{conj:gate-zero}, its sharp form \texttt{conj:gate-zero-sharp}, and
+\texttt{q:cmh-solenoidal-perturbation}).
 
 Two cautions belong in this table rather than in the route brief, because they change how this
 target should be read. First, $\mathrm{CMH}(4)$ is \emph{not} a reformulation of
@@ -128,7 +129,16 @@ channel, but not a strict-separation theorem; equivalence at constant $4$ remain
 it asks $\lmax(\E H^2)\le4$ where Theorem~\ref{thm:chen-klartag-moment-hessian} supplies only the
 trace bound $\Tr(\E H^2)\le2n$. Target~2 therefore does not escape the average-versus-uniform
 pattern; it relocates it, and Proposition~\ref{prop:letwin-not-gate-zero} shows the relocation is
-not free.
+not free. Two further facts calibrate how hard that relocation is. The trace bound is attained,
+so the natural operator statement is the sharp form $\E H^2\preceq2\Id$
+(Conjecture~\ref{conj:gate-zero-sharp}), and its equality set already contains a non-product
+family, the exponential cones at $\beta=n$ (Proposition~\ref{prop:cone-linear-sector}). And the
+linear sector is exactly a third-moment statement plus a named remainder
+(Lemma~\ref{lem:linear-sector-third-moment}), so by
+Corollary~\ref{cor:gate-zero-third-moment} the sharp form implies $\kappa_n\le2$, sharper than
+the $\kappa_n\le2\sqrt2$ of Proposition~\ref{prop:letwin-kappa}: proving it is at least as hard
+as a sharp directional third-moment bound. Refuting it, on the other hand, decides nothing about
+$\mathrm{CMH}(4)$, which needs only the constant~$4$.
 
 \paragraph{Target 3 --- replace log-trace-exp by an effective-rank estimate.}
 By Remark~\ref{rem:log-is-entropy}, the remaining $\log n$ enters \emph{solely} because the soft

@@ -44,17 +44,18 @@
 
   \item[6. Failed variants and obstructions.]
   Proposition~\ref{prop:conditional-fiber-root-obstruction} kills the root frame outright: a
-  vertex-cap indicator drives the normalized Rayleigh quotient down. The dual attack is
-  currently \emph{blocked} rather than open: the exact degree-two floors of
-  \texttt{lem:fiber-root-degree-two} rule out every degree-two refuter, so a certificate must
-  have degree at least three. Proposition~\ref{prop:sasada-negative-exchange} fences a related
-  negative-exponent exchange.
+  vertex-cap indicator drives the normalized Rayleigh quotient down. The dual attack is open
+  but narrowed by a certified negative: the exact degree-two floors of
+  Lemma~\ref{lem:fiber-root-degree-two} rule out every degree-two refuter, so a certificate
+  must have degree at least three. Proposition~\ref{prop:sasada-negative-exchange} fences a
+  related negative-exponent exchange.
 
   \item[7. Completion or reopening criterion.] The route closes on a universal form gap for a
-  constructed frame. The refutation branch reopens when
-  \texttt{lem:fiber-root-degree-two} is independently certified, or when a certificate of
-  degree at least three is constructed --- the \texttt{reopen\_if} of
-  \texttt{ap:fiber-simplex-dual} in \texttt{research/program/portfolio.yaml}.
+  constructed frame. The refutation branch is no longer blocked: its blocker
+  Lemma~\ref{lem:fiber-root-degree-two} was discharged by certification, and what the branch
+  now needs is a dual certificate of polynomial degree at least three, which no live candidate
+  states --- the objective of \texttt{ap:fiber-simplex-dual} in
+  \texttt{research/program/portfolio.yaml}.
 
   \item[8. Technical reading guide.] Self-contained: this route uses none of
   Appendices~\ref{sec:notation}--\ref{sec:models} and no moment-map machinery. The one external

@@ -1,10 +1,12 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
-\section{Route C, exact cases: one dimension, products, and the log-concave Dirichlet family}
+\section{Route C, exact cases: one dimension, products, the log-concave Dirichlet family, and
+exponential cones}
 \label{sec:cmh-exact-cases}
 
 Section~\ref{sec:cmh-normalization} fixed the CMH estimate and proved that it dominates the
-affine Poincar\'e constant. This section computes it exactly in the three classes where it is
+affine Poincar\'e constant. This section computes it --- or, in the fourth class, its linear
+sector --- exactly, in the four classes where it is
 tractable. Two of them --- the line and products --- are the expected calibrations, and they
 already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is
 possible. The third is the first genuinely nonproduct family for which the route has a theorem
@@ -13,11 +15,25 @@ at all: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$
 variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the
 log-concavity hypothesis is consumed in the final scalar angular minimization.
 
+The fourth class is solvable in a weaker but more pointed sense. The exponential cones of
+\S\ref{subsec:cmh-cones} attach a Gamma radial variable to an arbitrary centered base, and
+their moment map is explicit in terms of the base's own
+(Proposition~\ref{prop:cone-moment-map}); unlike the first three classes they are not compactly
+supported and, for a general base, not affine images of products. What is computed exactly on
+them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so
+every cone with $\beta=n$ saturates sharp gate zero
+(Conjecture~\ref{conj:gate-zero-sharp}) in its axis direction
+(Proposition~\ref{prop:cone-linear-sector}), and over a cube base the entire gate matrix is a
+closed form bounded by $2$ (Corollary~\ref{cor:cube-cone-gate-zero}). They are the first
+non-product equality set the sharp linear sector has, which is what makes them a constraint on
+any argument for it.
+
 The section closes at the exact product endpoint: centered one-sided exponentials saturate
 $\mathrm{CMH}(4)$ with \emph{zero} slack. Whether a log-concave perturbation raises the full CMH
 Rayleigh quotient is a separate, open second-variation problem; changing its solenoidal term
 alone is not decisive (Corollary~\ref{rem:cmh-saturation-risk},
-Question~\ref{q:cmh-solenoidal-perturbation}).
+Question~\ref{q:cmh-solenoidal-perturbation}). The cone family bears on where to look for such a
+perturbation, and \S\ref{subsec:cmh-cones} records what the first exact sweep of it found.
 
 \subsection{The line}
 \label{subsec:cmh-1d}

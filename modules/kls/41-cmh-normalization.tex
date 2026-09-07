@@ -7,7 +7,7 @@ Section~\ref{sec:moment-map-cmh} posed Question~\ref{q:cmh-normalization}: fix e
 the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ and prove that the
 resulting statement implies a universal Poincar\'e bound. This section answers it. The estimate
 is named, its operator data are fixed, the reduction to the affine Poincar\'e inequality is
-proved, and two structural consequences are recorded that were not visible while the endpoint
+proved, and three structural consequences are recorded that were not visible while the endpoint
 was a schema:
 
 \begin{itemize}[leftmargin=1.4em]
@@ -19,6 +19,17 @@ was a schema:
         upgrade of exactly the kind catalogued in Remark~\ref{rem:trace-upgrade-unification},
         and which Theorem~\ref{thm:letwin-moment-map} provably does not supply by matrix algebra
         alone (Conjecture~\ref{conj:gate-zero}, Proposition~\ref{prop:letwin-not-gate-zero}).
+        Its natural sharp form, the operator version of the Chen--Klartag trace bound, is
+        Conjecture~\ref{conj:gate-zero-sharp}, and the constant~$4$ is not the natural one for
+        this sector;
+  \item an exact resolution of that sector. The gate matrix's quadratic form splits as one plus
+        a quarter of the squared directional third moment plus a named high-mode remainder
+        (Lemma~\ref{lem:linear-sector-third-moment}), so any gate-zero constant already contains
+        a directional third-moment bound (Corollary~\ref{cor:gate-zero-third-moment}) and the
+        sharp form is at least as strong as the sharp third-moment estimate. The spectral
+        resolution of the three gate matrices that the anisotropic-bootstrap route works from
+        is Lemma~\ref{lem:cmh-linear-spectral-resolution}. All three statements are certified
+        here.
 \end{itemize}
 
 Throughout, $\mu$ is centered, full-dimensional and log-concave with covariance
