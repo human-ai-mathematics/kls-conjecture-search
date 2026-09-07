@@ -84,10 +84,81 @@ function math(text) {
   return fragment;
 }
 
+/* Scopes and rows waiting to be handed to MathJax, and the frame that will hand them
+ * over. Batching matters: MathJax walks and lays out everything it is given in one
+ * synchronous burst, so one call per row is one long task per row, while one call for
+ * the rows that just came into view is one short task for all of them.
+ *
+ * Nothing in this queue is needed for legibility. The LaTeX source is already on screen
+ * — see math() — so a scope that is never flushed, because MathJax never loaded or the
+ * reader never scrolled to it, reads as source rather than as a gap.
+ */
+const PENDING_TYPESET = new Set();
+let typesetFrame = 0;
+
+function mathjaxReady() {
+  return !!(window.MathJax && typeof window.MathJax.typesetPromise === 'function');
+}
+
+function flushTypeset() {
+  typesetFrame = 0;
+  /* What the reader has navigated away from is never going to be typeset. Drop it here
+     rather than in the MathJax branch, so a reader whose MathJax never arrives does not
+     accumulate detached rows for the length of the session. */
+  for (const node of PENDING_TYPESET) if (!node.isConnected) PENDING_TYPESET.delete(node);
+  if (!mathjaxReady() || !PENDING_TYPESET.size) return; /* the ready event comes back */
+  const batch = [...PENDING_TYPESET];
+  PENDING_TYPESET.clear();
+  window.MathJax.typesetPromise(batch).catch(() => { /* source stays visible */ });
+}
+
 function typeset(scope) {
-  if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
-    window.MathJax.typesetPromise([scope]).catch(() => { /* source stays visible */ });
+  PENDING_TYPESET.add(scope);
+  if (!typesetFrame) typesetFrame = requestAnimationFrame(flushTypeset);
+}
+
+/* MathJax is loaded with `defer`, so on a cold load it is not there when the first view
+ * renders and every typeset() call before it arrives would otherwise be dropped. The
+ * shell fires this once startup finishes; if the CDN is blocked it never fires, and the
+ * source stays on screen, which is the arrangement index.html is built around. */
+document.addEventListener('mathjax-ready', flushTypeset);
+
+/* How far outside the viewport a row is typeset. Roughly a screenful, so scrolling at a
+ * normal speed never overtakes MathJax and reaches a row still showing its source. */
+const TYPESET_MARGIN = '800px';
+
+const ROW_WATCHERS = new WeakMap();
+
+/**
+ * Hand a long list to MathJax a row at a time, as the rows are scrolled to.
+ *
+ * `mathjax_ignore` is MathJax's own opt-out class: it stops the whole-page pass dead at
+ * the `<ul>`, so the 138 claims cost nothing at render time, and each `<li>` is then
+ * passed in on its own — which still typesets, because the ignore class is only
+ * consulted on the way down from whatever element MathJax was handed.
+ *
+ * Returns false when the browser has no IntersectionObserver, in which case the list is
+ * left for the caller's ordinary whole-scope typeset, exactly as before.
+ */
+function deferRows(list) {
+  if (typeof IntersectionObserver !== 'function') return false;
+  list.classList.add('mathjax_ignore');
+  let watcher = ROW_WATCHERS.get(list);
+  if (watcher) {
+    /* A redraw replaced the rows; the old ones are detached and must not be held. */
+    watcher.disconnect();
+  } else {
+    watcher = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        watcher.unobserve(entry.target);
+        typeset(entry.target);
+      }
+    }, { rootMargin: TYPESET_MARGIN });
+    ROW_WATCHERS.set(list, watcher);
   }
+  for (const row of list.children) watcher.observe(row);
+  return true;
 }
 
 /* ------------------------------------------------------------------- vocabulary ---- */
@@ -325,6 +396,9 @@ function glossBlock(claim) {
         : '. Nothing here can reach the statement, which is a build defect.'));
 }
 
+/* How long the search box waits for the typing to stop before redrawing, in ms. */
+const SEARCH_DELAY = 140;
+
 /**
  * A filter bar over a list, and the list it filters.
  *
@@ -377,7 +451,16 @@ function filteredList(rows, { facets, search, render, noun, orders }) {
       : `${shown.length} of ${rows.length} ${noun}; the rest are filtered out, not gone.`;
     if (!shown.length) list.appendChild(el('li', { class: 'tight' },
       el('span', { class: 'note', text: 'Nothing matches every filter at once.' })));
-    typeset(list);
+    if (!deferRows(list)) typeset(list);
+  };
+
+  /* A keystroke is a full redraw of the list, so a fast typist would otherwise pay for
+   * one redraw per character and see none of them. Waiting for a pause in the typing
+   * costs a reader nothing they can perceive and turns eight redraws into one. */
+  let pending = 0;
+  const redrawSoon = () => {
+    clearTimeout(pending);
+    pending = setTimeout(draw, SEARCH_DELAY);
   };
 
   const controls = el('div', { class: 'filters' });
@@ -417,7 +500,7 @@ function filteredList(rows, { facets, search, render, noun, orders }) {
     el('input', {
       type: 'search', placeholder: 'name, id or text…',
       'aria-label': `Search ${noun}`,
-      oninput: (event) => { query = event.target.value.trim().toLowerCase(); draw(); },
+      oninput: (event) => { query = event.target.value.trim().toLowerCase(); redrawSoon(); },
     })));
 
   draw();
@@ -2240,6 +2323,10 @@ function render(navigated) {
   }
   window.scrollTo(0, 0);
   if (navigated) main.focus();
+  /* Every list of rows is taken out of the whole-page pass first and typeset a row at a
+     time as it is scrolled to. A view is not allowed to cost a MathJax run over every
+     row it holds before it will paint — the claim list holds 138 of them. */
+  for (const list of main.querySelectorAll('ul.rows')) deferRows(list);
   typeset(main);
 }
 
