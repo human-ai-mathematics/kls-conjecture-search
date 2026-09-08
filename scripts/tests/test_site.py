@@ -1003,12 +1003,28 @@ class FrontendSyntax(unittest.TestCase):
 class PagesWorkflow(unittest.TestCase):
     """Pin the deployment details that otherwise fail only on GitHub's runner."""
 
-    def test_make4ht_comes_from_the_ubuntu_package_that_ships_it(self):
+    @staticmethod
+    def _apt_packages():
+        """The install list alone. A comment naming a binary is prose, not a package."""
         text = PAGES_WORKFLOW.read_text(encoding="utf-8")
-        install = text.split("sudo apt-get install", 1)[1].split("command -v make4ht", 1)[0]
+        install = text.split("sudo apt-get install", 1)[1].split("command -v", 1)[0]
 
-        self.assertIn("texlive-extra-utils", install)
-        self.assertNotRegex(install, r"(?:^|\s)make4ht(?:\s|$)")
+        return "\n".join(line for line in install.splitlines()
+                          if not line.lstrip().startswith("#"))
+
+    def test_make4ht_comes_from_the_ubuntu_package_that_ships_it(self):
+        packages = self._apt_packages()
+
+        self.assertIn("texlive-extra-utils", packages)
+        self.assertNotRegex(packages, r"(?:^|\s)make4ht(?:\s|$)")
+
+    def test_dvisvgm_is_installed_because_no_texlive_package_pulls_it_in(self):
+        # Every site run failed here before this was pinned: make4ht shells out to
+        # dvisvgm, dvisvgm is a Debian package of its own, and the failure surfaces
+        # a minute later as a missing main0x.svg that names neither.
+        packages = self._apt_packages()
+
+        self.assertRegex(packages, r"(?:^|\s)dvisvgm(?:\s|$)")
 
     def test_deployment_follows_the_configured_default_branch(self):
         text = PAGES_WORKFLOW.read_text(encoding="utf-8")
