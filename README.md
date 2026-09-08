@@ -23,6 +23,31 @@ latexmk -pdf -outdir=build main.tex          # the whole document → build/main
 Individual modules also compile standalone; unresolved cross-references to other modules are
 expected in standalone builds.
 
+## Read it locally
+
+The site is a derived view — it is built from the tree, committed nowhere, and refuses to build
+a revision that does not validate. Building and serving it is one command, which holds the
+terminal and stops on Ctrl-C:
+
+```bash
+python3 scripts/site.py --serve          # build, then serve http://127.0.0.1:8000/
+python3 scripts/site.py --serve 8080     # same, on another port
+```
+
+To keep the terminal, run it in the background and stop it by the port it holds:
+
+```bash
+python3 scripts/site.py --serve &        # launch
+kill $(lsof -t -i:8000)                  # stop
+```
+
+Stop it by port rather than by name: `pkill -f "site.py --serve"` also matches the very shell
+command carrying that pattern, so it kills the caller along with the server.
+
+The manuscript and the dossiers are attached separately, and a missing one is a missing link
+rather than a missing claim — [`docs/PUBLISHING-THE-SITE.md`](docs/PUBLISHING-THE-SITE.md) has
+that step and the deployment path.
+
 ## Repository map
 
 | content | source |
