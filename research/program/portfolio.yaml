@@ -132,10 +132,10 @@ approaches:
     family: fam:mm-cmh
     objective: >-
       Prove the anisotropic source-retention inequality that would bound the linear-test quotient
-      through the exact isotropic-coordinate matrices, working from the weak column equation of
-      lem:cmh-linear-spectral-resolution without assuming its strong operator-domain form, and
-      supplying the integrated corrector or nonlocal coercivity that matrix polarization alone
-      cannot.
+      through the exact isotropic-coordinate matrices, working from the weak column equation of the
+      linear-sector gate-matrix spectral resolution without assuming its strong operator-domain
+      form, and supplying the integrated corrector or nonlocal coercivity that matrix polarization
+      alone cannot.
     parent: ap:cmh-recovery-envelope
     state: queued
     related:
@@ -181,11 +181,10 @@ approaches:
   - id: ap:cmh-gate-zero
     family: fam:mm-cmh
     objective: >-
-      Decide the necessary linear moment-map inequality, first in its sharp form
-      conj:gate-zero-sharp and then at the CMH constant conj:gate-zero, by an independently
-      checked analytic argument or a genuine moment-map counterexample, using the certified
-      third-moment decomposition of the linear sector and the exact exponential-cone battery as
-      the equality set any argument must be tight on.
+      Decide the necessary linear moment-map inequality, first in the sharp form of gate zero and
+      then at the CMH constant itself, by an independently checked analytic argument or a genuine
+      moment-map counterexample, using the certified third-moment decomposition of the linear sector
+      and the exact exponential-cone battery as the equality set any argument must be tight on.
     state: active
     related:
       - to: ap:eldan-trace-upgrade
@@ -213,9 +212,9 @@ approaches:
   - id: ap:fiber-simplex-dual
     family: fam:conditional-fiber
     objective: >-
-      Refute the all-frame gate with an exact uniform-simplex dual certificate of polynomial
-      degree at least three whose objective tends to zero, the certified degree-two floors of
-      lem:fiber-root-degree-two having ruled out every degree-two refuter.
+      Refute the all-frame gate with an exact uniform-simplex dual certificate of polynomial degree
+      at least three whose objective tends to zero, the certified degree-two floors of the
+      root-frame degree-two pencil identity having ruled out every degree-two refuter.
     parent: ap:fiber-frame-construction
     state: queued
     checkpoints:

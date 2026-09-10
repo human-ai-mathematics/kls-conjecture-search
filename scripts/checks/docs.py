@@ -15,6 +15,14 @@ history correctly, not carrying a defect.
 
 ``templates/`` is exempt for a different reason: a scaffold's links are written for where the
 file is going, not where it sits.
+
+Nested checkouts are pruned entirely. The walker descends into ``.claude/`` on purpose --- role
+definitions live there and their links are ours to keep honest --- but a git worktree placed
+under it, as ``.claude/worktrees/`` when several agents run in parallel, is a *different*
+tree's working copy. Its Markdown is not this revision's documentation, its links resolve
+against its own checkout, and reporting them here makes ``check.py`` fail for the duration of
+anyone's parallel session. Any directory carrying its own ``.git`` is therefore skipped along
+with everything beneath it.
 """
 from __future__ import annotations
 
@@ -42,15 +50,29 @@ def _targets(text: str):
             yield target, path
 
 
+def _nested_checkouts(root: Path) -> tuple[str, ...]:
+    """Repository-relative directories below ``root`` that are their own git checkout."""
+    found = []
+    for marker in root.rglob(".git"):
+        try:
+            relative = marker.parent.relative_to(root).as_posix()
+        except ValueError:  # pragma: no cover - rglob cannot leave root
+            continue
+        if relative not in {"", "."}:
+            found.append(relative)
+    return tuple(sorted(found))
+
+
 def check(root: Path, errors: list[str]) -> int:
     """Validate every repository-relative Markdown link; return how many were checked."""
     checked = 0
+    skip = EXEMPT + _nested_checkouts(root)
     for path in sorted(root.rglob("*.md")):
         try:
             relative = path.relative_to(root).as_posix()
         except ValueError:  # pragma: no cover - rglob cannot leave root
             continue
-        if any(relative == item or relative.startswith(f"{item}/") for item in EXEMPT):
+        if any(relative == item or relative.startswith(f"{item}/") for item in skip):
             continue
         if any(part.startswith(".") and part not in {".claude", ".codex"}
                for part in Path(relative).parts):

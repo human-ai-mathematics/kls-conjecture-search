@@ -79,10 +79,15 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             texlive-latex-recommended texlive-latex-extra texlive-science \
             texlive-fonts-recommended texlive-extra-utils \
-            texlive-bibtex-extra biber latexmk
+            texlive-bibtex-extra biber latexmk dvisvgm
           # texlive-bibtex-extra is what provides biblatex.sty; preamble.tex loads
           # biblatex and biber is only its backend, so omitting it fails the build.
+          # dvisvgm is a package of its own, in no texlive-* metapackage: make4ht
+          # shells out to it for the display material it cannot render as markup,
+          # and without it the conversion dies on a missing main0x.svg rather than
+          # on anything to do with the TeX.
           command -v make4ht
+          command -v dvisvgm
 
       - name: Compile the manuscript
         run: latexmk -pdf -interaction=nonstopmode -outdir=build main.tex

@@ -213,13 +213,20 @@ python3 scripts/check.py portfolio    # the live search
 python3 scripts/check.py checkpoints  # current heads of durable memory
 python3 scripts/check.py candidates   # statements proposed but not yet nodes
 python3 scripts/check.py dossiers     # active dossiers, for the standalone LaTeX build
-python3 scripts/check.py glosses      # gloss lengths (advisory) and ASCII mathematics (editorial lane)
+python3 scripts/check.py glosses      # every string a reader is shown: ASCII mathematics, ids in prose, gloss length (advisory)
+python3 scripts/check.py html         # a built HTML conversion renders its own macros
 python3 scripts/check.py --root example   # the worked example, kept green as a fixture
 ```
 
 `check.py` never writes. Creation and generation belong to `python3 scripts/new.py`: its
-scaffolds never overwrite hand-authored files, while `new.py agents` deliberately replaces
-generated role frontmatter and adapters. It never touches the ledger (constraint 1).
+scaffolds never overwrite hand-authored files, while `new.py agents`, `new.py status` and
+`new.py mathjax` deliberately replace generated material — role frontmatter and adapters,
+the manuscript's standings, and the HTML conversion's macros. It never touches the ledger
+(constraint 1).
+
+`check.py html` is the one command that reads a *build* artifact rather than the tree, so
+it is not a lane and not part of the default run: it reports an unbuilt tree as unbuilt
+and passes, and `check.sh` records that as a named skip.
 
 `check` and `ready` answer different questions. A freshly cloned template passes `check` and
 fails `ready`, and both are correct: activation is structural, so an unopened optional gate is

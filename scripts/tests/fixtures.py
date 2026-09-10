@@ -34,7 +34,9 @@ def node(node_id: str, *, status: str = "proved", kind: str = "theorem", **field
         "status": status,
         "provenance": "internal",
         "file": "modules/test.tex",
-        "summary": f"fixture summary for {node_id}",
+        # The local part only. Embedding the whole id would make every fixture node
+        # trip the bare-id prose rule, which is enforced for summaries.
+        "summary": f"fixture summary for {node_id.split(':', 1)[-1]}",
     }
     result.update(fields)
     return result
@@ -217,7 +219,12 @@ class CheckerFixture(unittest.TestCase):
         document = dict(document)
         approaches = [dict(item) for item in document.get("approaches") or []]
         for item in approaches:
-            item.setdefault("objective", f"fixture objective for {item.get('id')}")
+            # The local part only: an objective is prose, and the bare-id rule is
+            # enforced for objectives, so the whole id here would fail every test
+            # that builds a portfolio.
+            item.setdefault(
+                "objective",
+                f"fixture objective for {str(item.get('id')).split(':', 1)[-1]}")
         if approaches:
             document["approaches"] = approaches
         path = self.root / "research/program/portfolio.yaml"

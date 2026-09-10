@@ -79,6 +79,17 @@ else
   skip "site frontend" "node not installed"
 fi
 
+# The HTML conversion is the one artifact where a correct manuscript can still reach a
+# reader wrong: make4ht hands mathematics to MathJax verbatim, so a macro preamble.tex
+# defines and site/tex4ht.cfg does not carry is printed as source. Auditing it needs a
+# *built* page, which a fresh clone has not got, so this is a named skip rather than a
+# lane of check.py — building it is docs/PUBLISHING-THE-SITE.md §2.
+if [ -n "$(find build/html -maxdepth 1 -name '*.html' -print -quit 2>/dev/null)" ]; then
+  run "html macros"   "${PY[@]}" scripts/check.py html
+else
+  skip "html macros" "build/html holds no conversion (docs/PUBLISHING-THE-SITE.md §2)"
+fi
+
 if command -v uv >/dev/null 2>&1; then
   run "numerics"      sh -c 'cd experiments && uv run pytest -q'
 else

@@ -29,17 +29,39 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.2 14.8 8 8 14.8 1.2 8Z' fill='%232b5f9e' fill-opacity='.18' stroke='%232b5f9e' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
 
 <!--
-  Optional typesetting. Glosses and candidate statements are written in LaTeX $...$
-  (CLAUDE.md, "Global convention"). MathJax renders them when it loads; when it does not
-  — offline, blocked, CDN down — the source stays visible and legible, which is the whole
-  reason the raw text is placed in the DOM first and typeset afterwards rather than being
-  replaced. Nothing on this page depends on it having loaded.
+  Optional typesetting. Glosses, candidate statements, the statements copied from the
+  manuscript and the durable records are all written in LaTeX $...$ (CLAUDE.md, "Global
+  convention"). MathJax renders them when it loads; when it does not — offline, blocked,
+  CDN down — the source stays visible and legible, which is the whole reason the raw text
+  is placed in the DOM first and typeset afterwards rather than being replaced. Nothing
+  on this page depends on it having loaded.
+
+  `startup.ready` waits for site.js to have read data.json, because a build may carry a
+  generated table of the manuscript preamble's own macros and the TeX input reads its
+  macro list once, at startup. `window.SITE_READY` always settles, so a missing or broken
+  data.json costs the page its data and not also its mathematics.
+
+  `MATHJAX_STARTED` is the one signal back, and it resolves on MathJax's own startup
+  promise rather than on the return of defaultReady, so it means started and not merely
+  asked to start. site.js flushes its typeset queue on it: the script is deferred and now
+  waits for data.json besides, so the first view is always drawn before MathJax exists
+  and every call it made would otherwise be dropped. The promise simply never settles
+  when the CDN is blocked — no typesetting then, and the LaTeX source stays on screen,
+  which is the intended degradation and not a failure.
 -->
 <script>
+  let mathjaxStarted;
+  window.MATHJAX_STARTED = new Promise((resolve) => { mathjaxStarted = resolve; });
   window.MathJax = {
     tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
     options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
-    startup: { typeset: false }
+    startup: {
+      typeset: false,
+      ready: () => (window.SITE_READY || Promise.resolve()).then(() => {
+        window.MathJax.startup.defaultReady();
+        window.MathJax.startup.promise.then(mathjaxStarted, mathjaxStarted);
+      })
+    }
   };
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>

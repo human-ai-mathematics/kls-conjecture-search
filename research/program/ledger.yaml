@@ -133,7 +133,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/12-riccati.tex
-    summary: 'The full Loewner dissipation estimate $\mathbb{E}\int_0^\infty (R_t^2 + s_t G_t^2)\,dt \le R_0$ holds before scalarization; discarding $R_t^2$ recovers cor:per-direction, while taking a trace can still cost $n$.'
+    summary: 'The full Loewner dissipation estimate $\mathbb{E}\int_0^\infty (R_t^2 + s_t G_t^2)\,dt \le R_0$ holds before scalarization; discarding $R_t^2$ recovers the unconditional per-direction Carleson estimate, while taking a trace can still cost $n$.'
     depends_on: ['lem:matrix-riccati']
     proofs:
       - artifact: solutions/cor-full-matrix-dissipation.tex
@@ -363,7 +363,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/13-stein-dictionary.tex
-    summary: 'Two-color Stein representation: $\int_E f_M\,d\nu = s\langle K,M\rangle$ and Stein norm $\mathcal{S}_\nu(E)=s^2\|K\|^2$. At balance $K=G$ and $\mathcal{S}/s$ equals the Riccati source $s\|G\|^2$; off balance lem:stein-vs-source supplies the conversion.'
+    summary: 'Two-color Stein representation: $\int_E f_M\,d\nu = s\langle K,M\rangle$ and Stein norm $\mathcal{S}_\nu(E)=s^2\|K\|^2$. At balance $K=G$ and $\mathcal{S}/s$ equals the Riccati source $s\|G\|^2$; off balance the tight-window conversion between Stein norm and Riccati source supplies it.'
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.tex
         mode: agent
@@ -533,7 +533,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: 'Under the near-worst hypotheses of thm:bootstrap, let $\widehat{\Xi}_{T,\eta}(\mu,E)=\int_0^T\mathbb{E}[X_s\mathbf{1}_{s<\tau_\eta}]\,ds$. Then $\int_0^T\mathbb{E}[\bar{e}_t(E)\mathbf{1}_{t<\tau_\eta}]\,dt \le Te_0+h_\mu[(\epsilon/2+\eta)T+T^2/(16\eta^2)+(T/(8\eta^2)+1/4)\widehat{\Xi}_{T,\eta}]$. For $T<1/8$, $\eta=T^{1/3}$, and $\epsilon\le T^{1/3}$, this is at most $Te_0+Ch_\mu(T^{4/3}+\widehat{\Xi}_{T,\eta})$.'
+    summary: 'Under the near-worst hypotheses of the bootstrap comparison, let $\widehat{\Xi}_{T,\eta}(\mu,E)=\int_0^T\mathbb{E}[X_s\mathbf{1}_{s<\tau_\eta}]\,ds$. Then $\int_0^T\mathbb{E}[\bar{e}_t(E)\mathbf{1}_{t<\tau_\eta}]\,dt \le Te_0+h_\mu[(\epsilon/2+\eta)T+T^2/(16\eta^2)+(T/(8\eta^2)+1/4)\widehat{\Xi}_{T,\eta}]$. For $T<1/8$, $\eta=T^{1/3}$, and $\epsilon\le T^{1/3}$, this is at most $Te_0+Ch_\mu(T^{4/3}+\widehat{\Xi}_{T,\eta})$.'
     depends_on: ['lem:half', 'lem:whitening', 'lem:perimeter-martingale']
     heuristic_barriers: ['obs:circularity', 'obs:relative-ceiling']
     proofs:
@@ -576,7 +576,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/25-bootstrap.tex
-    summary: 'Under hyp:KI and $t_1(n) \le T \le 1$, $\Xi_T \le C_1 t_1(n)+\log(T/t_1(n)) \le C(1+\log\log n)$; if also $T<1/8$ and $\epsilon\le T^{1/3}$, this gives supply $Te_0+Ch_\mu(T^{4/3}+1+\log\log n)$.'
+    summary: 'Under the known small-time operator-norm control and $t_1(n) \le T \le 1$, $\Xi_T \le C_1 t_1(n)+\log(T/t_1(n)) \le C(1+\log\log n)$; if also $T<1/8$ and $\epsilon\le T^{1/3}$, this gives supply $Te_0+Ch_\mu(T^{4/3}+1+\log\log n)$.'
     depends_on: ['thm:bootstrap', 'hyp:KI', 'cor:KI-discharged']
     proofs:
       - artifact: solutions/kls-bootstrap-interface.tex
@@ -748,7 +748,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/22-product-stress.tex
-    summary: 'Pathwise covariance bound on the source: conditional on Letwin, $S_t \le C(1+X_t^2)$ for all log-concave paths on the balanced window; the product case is unconditional via lem:product-qcts.'
+    summary: 'Pathwise covariance bound on the source: conditional on Letwin, $S_t \le C(1+X_t^2)$ for all log-concave paths on the balanced window; the product case is unconditional via quadratic chaos for non-isotropic products.'
     depends_on: ['cor:qcts-source', 'lem:product-qcts']
 
   - id: cor:V2-implies
@@ -781,7 +781,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/15-covariance-technology.tex
-    summary: 'For every fixed $p$, $\mathbb{E}\|A_t\|_{\mathrm{op}}^p \le C_p$ on $t \le c/\log n$, by Klartag--Lehec Corollary 5.4 and prop:letwin-kappa.'
+    summary: 'For every fixed $p$, $\mathbb{E}\|A_t\|_{\mathrm{op}}^p \le C_p$ on $t \le c/\log n$, by Klartag--Lehec Corollary 5.4 and Letwin''s third-moment bound.'
     depends_on: ['prop:letwin-kappa']
 
   - id: thm:V2-window
@@ -797,7 +797,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/15-covariance-technology.tex
-    summary: 'Published discharge of hyp:KI: thm:KL-window plus the BL cap gives C_2=2.'
+    summary: 'Published discharge of the known small-time operator-norm control: the Klartag--Lehec window plus the BL cap gives $C_2=2$.'
     depends_on: ['thm:KL-window']
     proofs:
       - artifact: solutions/kls-product-covariance.tex
@@ -809,7 +809,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/15-covariance-technology.tex
-    summary: Conditional Letwin-v1 sharpening of hyp:KI to C_2=1 via Klartag-Lehec Corollary 5.4.
+    summary: Conditional Letwin-v1 sharpening of the known small-time operator-norm control to $C_2=1$ via Klartag-Lehec Corollary 5.4.
     depends_on: ['cor:letwin-window']
 
   # ---------------------------------------------------------------------------
@@ -820,7 +820,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: 'Operator-to-trace upgrade: prove ass:tight-prefix-carleson by upgrading cor:per-direction from quadratic-form to trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero.'
+    summary: 'Operator-to-trace upgrade: prove the tight-prefix absorptive two-color Carleson estimate by upgrading the unconditional per-direction Carleson estimate from quadratic-form to trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero.'
     heuristic_barriers: ['obs:proj-ceiling', 'obs:two-tail', 'obs:relative-ceiling']
 
   - id: lem:time-weighted-source
@@ -849,7 +849,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: 'For every $C,T_0,\gamma>0$, $\eta\in(0,1/2)$, and $\delta>0$, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most $\delta$ but violates the q:weighted global-operator-norm rate at a time $T\le T_0$.'
+    summary: 'For every $C,T_0,\gamma>0$, $\eta\in(0,1/2)$, and $\delta>0$, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most $\delta$ but violates the refuted global-operator-norm weighted-excess rate at a time $T\le T_0$.'
     depends_on: ['prop:covariance-spike', 'lem:one-dimensional-density-variance', 'prop:products', 'lem:half']
     proofs:
       - artifact: solutions/prop-weighted-spectator-obstruction.tex
@@ -886,7 +886,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: 'Do universal $T_0,C_0,C_1,C_2>0$, $\beta\in[0,1/2)$, and $\eta\in(0,1/4]$ with $2\beta+64\eta^2<1$ exist such that every isotropic log-concave law and every finite-perimeter cut with $e_0\le1$ and $|p_0-1/2|\le\eta/2$ satisfy $\mathbb{E}\int_0^{T\wedge\tau_\eta}\mathcal{S}_{\mu_t}(E)/s_t\,dt \le C_0 T+C_1\mathbb{E}\int r_t\,dt+\beta\,\mathbb{E}\int D_t\,dt+C_2\mathbb{E}\int e_t(E)(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt$ for all $T\le T_0$? This is an independent analytic ingredient extracted from the refuted ass:weighted-package; the proposed mechanism is a localization-uniform Jacobi/Reilly almost-stability theorem, and no implication with q:upgrade or q:alignment is proved.'
+    summary: 'Do universal $T_0,C_0,C_1,C_2>0$, $\beta\in[0,1/2)$, and $\eta\in(0,1/4]$ with $2\beta+64\eta^2<1$ exist such that every isotropic log-concave law and every finite-perimeter cut with $e_0\le1$ and $|p_0-1/2|\le\eta/2$ satisfy $\mathbb{E}\int_0^{T\wedge\tau_\eta}\mathcal{S}_{\mu_t}(E)/s_t\,dt \le C_0 T+C_1\mathbb{E}\int r_t\,dt+\beta\,\mathbb{E}\int D_t\,dt+C_2\mathbb{E}\int e_t(E)(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt$ for all $T\le T_0$? This is an independent analytic ingredient extracted from the refuted literal weighted near-Cheeger package; the proposed mechanism is a localization-uniform Jacobi/Reilly almost-stability theorem, and no implication with the operator-to-trace upgrade or the adapted alignment problem for products is proved.'
     heuristic_barriers: ['obs:two-tail']
 
   - id: q:taming
@@ -925,7 +925,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/27-eldan-open-targets.tex
-    summary: 'Absolute-scale completion with a small constant gives $h^*_n \ge c/\log\log n$; full KLS additionally requires q:taming at the completion time or completion uniform over the supplied time.'
+    summary: 'Absolute-scale completion with a small constant gives $h^*_n \ge c/\log\log n$; full KLS additionally requires extremality to tame the covariance process at the completion time or completion uniform over the supplied time.'
     depends_on: ['thm:bootstrap', 'cor:loglog', 'hyp:absolute-geometric-completion']
 
   # ---------------------------------------------------------------------------
@@ -954,7 +954,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'If q:mm-spectral-occupation holds with universal $T_0,C_0,C_1$ uniformly through regularization, then with $M_*=(1+C_0T_0)\exp(C_1T_0)$ and $T_*=\min(T_0,1/(2M_*))$, every isotropic log-concave law satisfies $C_P\le2/T_*$; no strict damping surplus or eigenfunction convergence is required.'
+    summary: 'If fixed-eigenfunction full-damping occupation holds with universal $T_0,C_0,C_1$ uniformly through regularization, then with $M_*=(1+C_0T_0)\exp(C_1T_0)$ and $T_*=\min(T_0,1/(2M_*))$, every isotropic log-concave law satisfies $C_P\le2/T_*$; no strict damping surplus or eigenfunction convergence is required.'
     assumes: ['q:mm-spectral-occupation']
     implies: ['conj:kls']
     proofs:
@@ -978,7 +978,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'Conditional on thm:letwin-qcts: for every regular approximant, every fixed unit-variance test, every $L\ge1$ and $T>0$, with $\tau_L$ the first time $\|A_t\|_{\mathrm{op}}$ reaches $L$, $\mathbb{E}\int_0^{T\wedge\tau_L}\|H_t\|_{\mathrm{HS}}^2\,dt \le 8L^2T$, uniformly in dimension and regularization.'
+    summary: 'Conditional on Letwin''s quadratic Poincare inequality: for every regular approximant, every fixed unit-variance test, every $L\ge1$ and $T>0$, with $\tau_L$ the first time $\|A_t\|_{\mathrm{op}}$ reaches $L$, $\mathbb{E}\int_0^{T\wedge\tau_L}\|H_t\|_{\mathrm{HS}}^2\,dt \le 8L^2T$, uniformly in dimension and regularization.'
     assumes: ['thm:letwin-qcts']
     proofs:
       - artifact: solutions/lem-mm-stopped-window-source.tex
@@ -990,7 +990,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'For every a.s. positive stopping time $\sigma$ of the observation filtration on an $\epsilon$-regular approximant and every fixed $L^2$ test, $\mathbb{E}[\int_\sigma^\infty\|H_t\|_{\mathrm{HS}}^2\,dt \mid \mathcal{F}_\sigma] \le \mathrm{Var}_{\mu_\sigma}(f)/(\epsilon+\sigma) \le v_\sigma/\sigma$, by conditional application of lem:mm-time-weighted-fixed-source with $\kappa=\epsilon+\sigma$ after the strong-Markov restart of the localization.'
+    summary: 'For every a.s. positive stopping time $\sigma$ of the observation filtration on an $\epsilon$-regular approximant and every fixed $L^2$ test, $\mathbb{E}[\int_\sigma^\infty\|H_t\|_{\mathrm{HS}}^2\,dt \mid \mathcal{F}_\sigma] \le \mathrm{Var}_{\mu_\sigma}(f)/(\epsilon+\sigma) \le v_\sigma/\sigma$, by conditional application of the time-weighted fixed-function source budget with $\kappa=\epsilon+\sigma$ after the strong-Markov restart of the localization.'
     depends_on: ['lem:mm-time-weighted-fixed-source']
     proofs:
       - artifact: solutions/lem-mm-restart-deweighting.tex
@@ -1002,7 +1002,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'If every isotropic log-concave law in dimension $n$ satisfies $C_P \le K_n$ (thm:klartag-logn), then every normalized first eigenfunction of a regular isotropic approximant with $\lambda \le 3/(8K_n)$ satisfies $\mathbb{E}f^4 \le 2$, via $\lambda\,\mathbb{E}f^4 = 3\,\mathbb{E}f^2|\nabla f|^2$ and Poincare for $f^2$.'
+    summary: 'If every isotropic log-concave law in dimension $n$ satisfies $C_P \le K_n$ (Klartag''s isoperimetric $\log n$ frontier), then every normalized first eigenfunction of a regular isotropic approximant with $\lambda \le 3/(8K_n)$ satisfies $\mathbb{E}f^4 \le 2$, via $\lambda\,\mathbb{E}f^4 = 3\,\mathbb{E}f^2|\nabla f|^2$ and Poincare for $f^2$.'
     depends_on: ['thm:klartag-logn']
     proofs:
       - artifact: solutions/lem-mm-smallgap-fourth-moment.tex
@@ -1014,7 +1014,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/30-spectral-route.tex
-    summary: 'Conditional on thm:letwin-qcts: with $T_0(n)=\min(t_c, 1/(\bar{C}\log^2 n))$ from thm:KL-window, q:mm-spectral-occupation holds on $[0,T_0(n)]$ with $C_0=34$, $C_1=0$ for every first eigenfunction with $\lambda \le 3/(8K_n)$; combined with the certified bridge argument at fixed $n$ and the large-gap branch, every isotropic log-concave law ($n\ge2$) satisfies $C_P \le C\log^2 n$ conditional on thm:letwin-qcts.'
+    summary: 'Conditional on Letwin''s quadratic Poincare inequality: with $T_0(n)=\min(t_c, 1/(\bar{C}\log^2 n))$ from the Klartag--Lehec window, fixed-eigenfunction full-damping occupation holds on $[0,T_0(n)]$ with $C_0=34$, $C_1=0$ for every first eigenfunction with $\lambda \le 3/(8K_n)$; combined with the certified bridge argument at fixed $n$ and the large-gap branch, every isotropic log-concave law ($n\ge2$) satisfies $C_P \le C\log^2 n$ conditional on Letwin''s quadratic Poincare inequality.'
     depends_on: ['thm:KL-window', 'thm:klartag-logn', 'lem:mm-stopped-window-source', 'lem:mm-restart-deweighting', 'lem:mm-smallgap-fourth-moment', 'lem:mm-time-weighted-fixed-source']
     assumes: ['thm:letwin-qcts']
     proofs:
@@ -1037,7 +1037,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/40-moment-map-cmh.tex
-    summary: Under ass:uniform-cmh-approximants, the affine Poincare inequalities of the regular approximants pass with no loss to every centered log-concave limit, including affine-support degeneration.
+    summary: Under uniform CMH control on regular approximants, the affine Poincare inequalities of the regular approximants pass with no loss to every centered log-concave limit, including affine-support degeneration.
     depends_on: ['def:cmh', 'thm:cmh-implies-affine-poincare', 'thm:regular-moment-map-compact-target']
     assumes: ['ass:uniform-cmh-approximants']
     proofs:
@@ -1131,7 +1131,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: '$C_P^{\mathrm{aff}}(\mu) \le C_{\mathrm{CMH}}(\mu)$ for every centered log-concave $\mu$ in the regular moment-map class. Hence a universal bound $C_{\mathrm{CMH}} \le 4$ would prove conj:kls with affine Poincare constant $4$.'
+    summary: '$C_P^{\mathrm{aff}}(\mu) \le C_{\mathrm{CMH}}(\mu)$ for every centered log-concave $\mu$ in the regular moment-map class. Hence a universal bound $C_{\mathrm{CMH}} \le 4$ would prove the KLS conjecture with affine Poincare constant $4$.'
     depends_on: ['def:cmh']
     proofs:
       - artifact: solutions/thm-cmh-normalization.tex
@@ -1185,7 +1185,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Gate zero is an operator-to-trace upgrade with a factor-$2$ budget: Chen--Klartag give $\mathrm{Tr}(\mathbb{E}H^2) \le 2n$, so the average eigenvalue of $\mathbb{E}H^2$ is already at most $2$ in isotropic position, while conj:gate-zero asks the maximum to be at most $4$.'
+    summary: 'Gate zero is an operator-to-trace upgrade with a factor-$2$ budget: Chen--Klartag give $\mathrm{Tr}(\mathbb{E}H^2) \le 2n$, so the average eigenvalue of $\mathbb{E}H^2$ is already at most $2$ in isotropic position, while gate zero asks the maximum to be at most $4$.'
     depends_on: ['thm:chen-klartag-moment-hessian', 'prop:letwin-not-gate-zero']
 
   - id: lem:cmh-linear-spectral-resolution
@@ -1311,7 +1311,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: Products of centered one-sided exponentials attain C_CMH = 4 exactly, with zero slack, and prop:cmh-hodge decomposes the numerator into an affine Poincare channel plus a nonnegative solenoidal channel.
+    summary: Products of centered one-sided exponentials attain $C_{\mathrm{CMH}} = 4$ exactly, with zero slack, and the weighted Hodge identity decomposes the numerator into an affine Poincare channel plus a nonnegative solenoidal channel.
     depends_on: ['thm:cmh-product', 'prop:cmh-hodge']
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.tex
@@ -1323,7 +1323,7 @@ nodes:
     status: open
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'Perturb the saturating product moment potential $\psi_0(s,t) = \varphi(s) + t^2/2$, with $\varphi$ the one-sided exponential potential, by $\epsilon a(s)b(t)$ inside the smooth strictly convex class; compute the second variation of $C_{\mathrm{CMH}}$ at $\epsilon=0$, split through prop:cmh-hodge. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product.'
+    summary: 'Perturb the saturating product moment potential $\psi_0(s,t) = \varphi(s) + t^2/2$, with $\varphi$ the one-sided exponential potential, by $\epsilon a(s)b(t)$ inside the smooth strictly convex class; compute the second variation of $C_{\mathrm{CMH}}$ at $\epsilon=0$, split through the weighted Hodge identity. Either exhibit an admissible perturbation with strictly positive second variation, refuting CMH(4), or identify why the solenoidal part vanishes to second order at a saturating product.'
     depends_on: ['rem:cmh-saturation-risk']
 
   # ---------------------------------------------------------------------------
@@ -1393,7 +1393,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'For an isotropic log-concave $\mu$ that is the moment measure of a $C^2$ convex $\varphi$ with $\mathbb{E}_\nu\|D^2\varphi\|_{\mathrm{HS}}^2$ finite, and canonical Stein kernel $\tau$, each column decomposes orthogonally in $L^2(\mu;\mathbb{R}^n)$ as $\tau a = a + (1/2)T_3(a)X + v_a$ with $\mathbb{E}v_a = 0$ and $\mathbb{E}[v_a \otimes X] = 0$, where $T_3(a) = \mathbb{E}[\langle X,a\rangle X\otimes X]$; hence $\mathbb{E}|\tau a|^2 = |a|^2 + (1/4)\|T_3(a)\|_{\mathrm{HS}}^2 + \mathbb{E}|v_a|^2$. Equivalently $\mathbb{E}_\nu[\partial_{ij}\varphi\,\partial_k\varphi] = (1/2)\mathbb{E}_\mu[X_iX_jX_k]$; when $\varphi$ is $C^3$ with $D^3\varphi \in L^1(\nu)$ this identifies the gap-mode coefficient tensor $\mathbb{E}_\nu[\partial_{ijk}\varphi]$ of lem:cmh-linear-spectral-resolution with half the third-moment tensor.'
+    summary: 'For an isotropic log-concave $\mu$ that is the moment measure of a $C^2$ convex $\varphi$ with $\mathbb{E}_\nu\|D^2\varphi\|_{\mathrm{HS}}^2$ finite, and canonical Stein kernel $\tau$, each column decomposes orthogonally in $L^2(\mu;\mathbb{R}^n)$ as $\tau a = a + (1/2)T_3(a)X + v_a$ with $\mathbb{E}v_a = 0$ and $\mathbb{E}[v_a \otimes X] = 0$, where $T_3(a) = \mathbb{E}[\langle X,a\rangle X\otimes X]$; hence $\mathbb{E}|\tau a|^2 = |a|^2 + (1/4)\|T_3(a)\|_{\mathrm{HS}}^2 + \mathbb{E}|v_a|^2$. Equivalently $\mathbb{E}_\nu[\partial_{ij}\varphi\,\partial_k\varphi] = (1/2)\mathbb{E}_\mu[X_iX_jX_k]$; when $\varphi$ is $C^3$ with $D^3\varphi \in L^1(\nu)$ this identifies the gap-mode coefficient tensor $\mathbb{E}_\nu[\partial_{ijk}\varphi]$ of the linear-sector gate-matrix spectral resolution with half the third-moment tensor.'
     proofs:
       - artifact: solutions/lem-linear-sector-third-moment.tex
         mode: agent
@@ -1404,7 +1404,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/41-cmh-normalization.tex
-    summary: 'Under lem:linear-sector-third-moment, for every unit $a$: $\|T_3(a)\|_{\mathrm{HS}}^2 \le 4(a^T\mathbb{E}[\tau^2]a - 1) \le 4(\lambda_{\max}(\mathbb{E}\tau^2)-1)$. So $\mathbb{E}\tau^2 \le c\,\mathrm{Id}$ on a class forces every directional third moment there to be at most $2\sqrt{c-1}$: gate zero gives $2\sqrt{3}$, sharp gate zero gives the sharp $2$; and any isotropic law in the class with a directional third moment above $2\sqrt{3}$ refutes gate zero.'
+    summary: 'Under the linear-sector third-moment decomposition, for every unit $a$: $\|T_3(a)\|_{\mathrm{HS}}^2 \le 4(a^T\mathbb{E}[\tau^2]a - 1) \le 4(\lambda_{\max}(\mathbb{E}\tau^2)-1)$. So $\mathbb{E}\tau^2 \le c\,\mathrm{Id}$ on a class forces every directional third moment there to be at most $2\sqrt{c-1}$: gate zero gives $2\sqrt{3}$, sharp gate zero gives the sharp $2$; and any isotropic law in the class with a directional third moment above $2\sqrt{3}$ refutes gate zero.'
     depends_on: ['lem:linear-sector-third-moment']
     proofs:
       - artifact: solutions/lem-linear-sector-third-moment.tex
@@ -1435,7 +1435,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'For $\mu = \bar\mu_{K,\beta}$: (i) the field $x = \tau e_1$ has $\mathrm{Div}_\mu x = -\bar x_1$ with zero boundary flux and $x = \Sigma\nabla\psi$ with $\psi = x^T\Sigma^{-1}x/2$, so the first Stein column has no solenoidal part and the affine $H^{-1}$ norm of $\bar x_1$ is $\mathbb{E}[x^T\Sigma^{-1}x] = \beta+n$, attained at $\psi$; (ii) the normalized gate matrix in the axis direction equals $1+n/\beta \le 2$, with equality iff $\beta=n$, and this is the CMH Rayleigh quotient at $g=x_1$; (iii) in isotropic coordinates $T_3(e_1) = 2\beta^{-1/2}\mathrm{Id}$, $\tau_Z e_1 = e_1 + (1/2)T_3(e_1)Z$, so $\|T_3(e_1)\|_{\mathrm{HS}}^2 = 4n/\beta$ and the high-mode term $v_{e_1}$ of lem:linear-sector-third-moment vanishes for every base and every $\beta \ge n$. Every exponential cone with $\beta = n$ saturates conj:gate-zero-sharp in its axis direction and attains $\|T_3(e_1)\|_{\mathrm{HS}} = 2$.'
+    summary: 'For $\mu = \bar\mu_{K,\beta}$: (i) the field $x = \tau e_1$ has $\mathrm{Div}_\mu x = -\bar x_1$ with zero boundary flux and $x = \Sigma\nabla\psi$ with $\psi = x^T\Sigma^{-1}x/2$, so the first Stein column has no solenoidal part and the affine $H^{-1}$ norm of $\bar x_1$ is $\mathbb{E}[x^T\Sigma^{-1}x] = \beta+n$, attained at $\psi$; (ii) the normalized gate matrix in the axis direction equals $1+n/\beta \le 2$, with equality iff $\beta=n$, and this is the CMH Rayleigh quotient at $g=x_1$; (iii) in isotropic coordinates $T_3(e_1) = 2\beta^{-1/2}\mathrm{Id}$, $\tau_Z e_1 = e_1 + (1/2)T_3(e_1)Z$, so $\|T_3(e_1)\|_{\mathrm{HS}}^2 = 4n/\beta$ and the high-mode term $v_{e_1}$ of the linear-sector third-moment decomposition vanishes for every base and every $\beta \ge n$. Every exponential cone with $\beta = n$ saturates sharp gate zero in its axis direction and attains $\|T_3(e_1)\|_{\mathrm{HS}} = 2$.'
     depends_on: ['prop:cone-moment-map']
     proofs:
       - artifact: solutions/prop-cone-moment-map.tex
@@ -1447,7 +1447,7 @@ nodes:
     status: proved
     provenance: internal
     file: modules/kls/42-cmh-exact-cases.tex
-    summary: 'For $K = [-1,1]^{n-1}$, $\tau_K(u) = (1/2)\mathrm{diag}(1-u_j^2)$ and the normalized gate matrix of $\bar\mu_{K,\beta}$ is $(1+n/\beta) \oplus ((6\beta^2+11\beta+5n+4)/(5\beta(\beta+1)))\mathrm{Id}_{n-1}$. Both eigenvalues are at most $2$ for all $n \ge 2$ and $\beta \ge n$, so every cube cone satisfies conj:gate-zero-sharp; equality holds in the axis direction iff $\beta = n$ and in the transverse directions only for $n = \beta = 2$, the product of two centered exponentials.'
+    summary: 'For $K = [-1,1]^{n-1}$, $\tau_K(u) = (1/2)\mathrm{diag}(1-u_j^2)$ and the normalized gate matrix of $\bar\mu_{K,\beta}$ is $(1+n/\beta) \oplus ((6\beta^2+11\beta+5n+4)/(5\beta(\beta+1)))\mathrm{Id}_{n-1}$. Both eigenvalues are at most $2$ for all $n \ge 2$ and $\beta \ge n$, so every cube cone satisfies sharp gate zero; equality holds in the axis direction iff $\beta = n$ and in the transverse directions only for $n = \beta = 2$, the product of two centered exponentials.'
     depends_on: ['prop:cone-moment-map']
     proofs:
       - artifact: solutions/prop-cone-moment-map.tex

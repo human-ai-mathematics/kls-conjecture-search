@@ -72,11 +72,22 @@ def optional_title(text: str, position: int) -> str | None:
     ``editorial.title_display`` — this function only finds the bytes, so that the core
     lane keeps knowing about structure and nothing else.
     """
+    return optional_title_span(text, position)[0]
+
+
+def optional_title_span(text: str, position: int) -> tuple[str | None, int]:
+    """``optional_title``, plus the offset at which the claim's *body* begins.
+
+    Same scan, one more return value. A caller that only wants the heading uses
+    ``optional_title``; a caller slicing the statement itself needs to know where the
+    optional argument stopped, because the title is a heading and not part of what the
+    claim says. When there is no title the body begins at ``position``.
+    """
     index = position
     while index < len(text) and text[index] in " \t\r\n":
         index += 1
     if index >= len(text) or text[index] != "[":
-        return None
+        return None, position
     start = index + 1
     brackets, braces = 1, 0
     while index + 1 < len(text):
@@ -95,8 +106,10 @@ def optional_title(text: str, position: int) -> str | None:
             elif character == "]":
                 brackets -= 1
                 if brackets == 0:
-                    return text[start:index]
-    return None                  # unbalanced: treat as untitled rather than guess
+                    return text[start:index], index + 1
+    # Unbalanced: treat as untitled rather than guess, and leave the body where the
+    # environment name ended so a caller still slices something rather than nothing.
+    return None, position
 
 # One logical-status vocabulary. Mathematical form belongs in ``kind``;
 # speculative prose is not a ledger classification.
@@ -221,6 +234,64 @@ def _labels_with_environments(text: str) -> list[tuple[str, str | None, int, str
     return found
 
 
+def claim_bodies(text: str) -> dict[str, tuple[int, int]]:
+    """For every ``\\label``, the offsets of the claim body that contains it.
+
+    The span runs from just past the enclosing claim environment's ``\\begin{...}`` and
+    its optional ``[title]`` to just before the matching ``\\end{...}``: the statement
+    itself, without the heading a reader already has and without the delimiters. A label
+    with no claim environment above it — a section anchor, an equation tag — has no span
+    and does not appear in the result.
+
+    Deliberately a second scan rather than another element on
+    ``_labels_with_environments``. That function answers the *structural* question the
+    core lane asks of every module, and the offsets here are wanted by exactly one
+    caller: a derived view that wants to print the statement instead of pointing at it.
+    Keeping them apart means the invariant scan cannot be broken by a change made for a
+    display.
+
+    Offsets index the string handed in. Passing ``strip_comments(text)`` and slicing the
+    original is exact, because that function preserves every character position.
+    """
+    events = sorted(
+        [(match.start(), "env", match.group(1), match.group(2), match.end())
+         for match in ENVIRONMENT_RE.finditer(text)]
+        + [(match.start(), "label", match.group(1), None, match.end())
+           for match in LABEL_RE.finditer(text)]
+    )
+    # Each frame is [environment name, body start, labels claimed by this frame].
+    stack: list[list] = []
+    spans: dict[str, tuple[int, int]] = {}
+
+    def close(frames: list[list], at: int) -> None:
+        for name, body_start, claimed in frames:
+            if name in CLAIM_ENVIRONMENTS:
+                for label in claimed:
+                    spans[label] = (body_start, at)
+
+    for position, kind, first, second, end in events:
+        if kind == "env":
+            if first == "begin":
+                body_start = end
+                if second in CLAIM_ENVIRONMENTS:
+                    _title, body_start = optional_title_span(text, end)
+                stack.append([second, body_start, []])
+            else:
+                names = [frame[0] for frame in stack]
+                if second in names:
+                    index = names.index(second)
+                    close(stack[index:], position)
+                    del stack[index:]
+        else:
+            for frame in reversed(stack):
+                if frame[0] in SELF_LABELLING_ENVIRONMENTS:
+                    break  # the equation, figure or table owns this label
+                if frame[0] in CLAIM_ENVIRONMENTS:
+                    frame[2].append(first)
+                    break
+    return spans
+
+
 def manuscript_labels(root: Path, errors: list[str] | None = None) -> dict[str, dict]:
     """Every ``\\label`` under ``modules/``, with its environment and file.
 
@@ -229,10 +300,16 @@ def manuscript_labels(root: Path, errors: list[str] | None = None) -> dict[str, 
     structural label is not a node at all. Returned as a mapping so a duplicate is
     detectable — a set silently merged two anchors that disagree.
 
-    Each entry carries ``environment``, ``file``, the 1-based ``line`` of the ``\\label``
-    and the raw amsthm ``title`` of the enclosing claim. Neither the line nor the title is
-    stored anywhere, and no validation depends on either: they exist so a derived view can
-    point a reader at the statement itself, and name it in words rather than in an id.
+    Each entry carries ``environment``, ``file``, the 1-based ``line`` of the ``\\label``,
+    the raw amsthm ``title`` of the enclosing claim, and — for a label a claim
+    environment encloses — the verbatim ``statement`` that environment holds, with the
+    1-based ``statement_line`` it starts on. None of the four is stored anywhere and no
+    validation depends on any of them: they exist so a derived view can *show* the
+    statement rather than point at it, and name it in words rather than in an id.
+
+    The statement is a slice of the module on disk, taken fresh on every run. It is a
+    projection of the canonical source, in the sense CLAUDE.md constraint 7 permits and
+    the gloss already is — never a second place the text is written down.
     """
     labels: dict[str, dict] = {}
     modules = root / "modules"
@@ -246,17 +323,23 @@ def manuscript_labels(root: Path, errors: list[str] | None = None) -> dict[str, 
             if errors is not None:
                 errors.append(f"{relative}: cannot read manuscript module: {exc}")
             continue
-        for label, environment, line, title in _labels_with_environments(
-                strip_comments(text)):
+        stripped = strip_comments(text)
+        spans = claim_bodies(stripped)
+        for label, environment, line, title in _labels_with_environments(stripped):
             if label in labels and errors is not None:
                 errors.append(
                     f"{relative}: duplicate manuscript label '{label}', already at "
                     f"{labels[label]['file']}; one anchor, one place"
                 )
                 continue
+            span = spans.get(label) if environment is not None else None
             labels[label] = {
                 "environment": environment, "file": relative, "line": line,
                 "title": title,
+                # Sliced from the *original*, not from the comment-stripped copy: a
+                # reader of the site should meet the bytes the manuscript holds.
+                "statement": text[span[0]:span[1]] if span else None,
+                "statement_line": text.count("\n", 0, span[0]) + 1 if span else None,
             }
     return labels
 

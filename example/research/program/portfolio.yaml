@@ -33,8 +33,8 @@ approaches:
   - id: ap:example-finite-battery
     family: fam:example-numerical
     objective: >-
-      Run the available identity battery, decide whether it bears on conj:example, and
-      inspect its enumerated domain for candidate witnesses to the conjecture.
+      Run the available identity battery, decide whether it bears on the target
+      conjecture, and inspect its enumerated domain for candidate witnesses to it.
     state: completed
     checkpoints:
       - research/explorations/2026-09-02-example-exploration.md
@@ -58,7 +58,7 @@ approaches:
     family: fam:example-numerical
     objective: >-
       Widen the integer-vector enumeration already performed for the identity, hoping a
-      larger version of the same proxy will bear on conj:example.
+      larger version of the same proxy will bear on the target conjecture.
     state: duplicate
     related:
       - to: ap:example-finite-battery

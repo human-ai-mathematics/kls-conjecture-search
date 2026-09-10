@@ -57,6 +57,7 @@ python3 scripts/check.py dossiers | while read -r d; do
          "$(basename "$d")" "mathjax")
 done
 
+python3 scripts/check.py html
 python3 scripts/site.py --pdf-dir build --html-dir build/html
 ```
 
@@ -67,13 +68,24 @@ absolute.
 `check.py dossiers` is machine-readable for exactly this: it lists the dossiers an active
 `proofs[]` record names, so the site attaches what the ledger actually vouches for.
 
+A third optional attachment is the **MathJax macro table**, `--macros <file.json>`: an
+object mapping a macro name, without its backslash, to what `MathJax.tex.macros` accepts.
+Every claim page prints the statement copied out of `modules/`, written against
+`preamble.tex`'s own macros, and MathJax knows none of them until it is handed this. The
+table is generated with the HTML conversion, not by `site.py` — one parser of the
+preamble, not two — and a build without one says on the page that an unexpanded command
+is a missing input rather than a defect in the statement.
+
 ### Why the HTML build needs a config file
 
-[`../site/tex4ht.cfg`](../site/tex4ht.cfg) exists for one reason, and it is not
-cosmetic. A default TeX4ht conversion emits generated anchors — `x1-5001r3`, `QQ2-1-5` —
-and drops the `\label` names, so `main.html#conj:example` lands nowhere and the site
-would have to invent a second, web-specific id scheme for every claim. That is precisely
-the identifier the anchor invariant exists to avoid.
+[`../site/tex4ht.cfg`](../site/tex4ht.cfg) exists for two reasons, and neither is
+cosmetic. Both are the same defect wearing different clothes: TeX4ht converts the
+document faithfully and drops what makes it *this repository's* document.
+
+**The anchor invariant.** A default TeX4ht conversion emits generated anchors —
+`x1-5001r3`, `QQ2-1-5` — and drops the `\label` names, so `main.html#conj:example` lands
+nowhere and the site would have to invent a second, web-specific id scheme for every
+claim. That is precisely the identifier the anchor invariant exists to avoid.
 
 The config redefines `\label` so it also plants an HTML anchor of the same name. The
 LaTeX label keeps working and the PDF build is untouched — TeX4ht reads this file, and
@@ -84,6 +96,42 @@ and numbering; and mathematics comes out as `\(...\)` for MathJax.
 The same redefinition placed in `preamble.tex` silently does nothing — `\HCode` is not
 defined when the preamble is read, so the build stays green and the anchors stay
 missing, which is the worst of both.
+
+**The macro transport.** `make4ht`'s `mathjax` mode hands mathematics to MathJax verbatim
+and writes a config of its own carrying nothing but `tags: "ams"`. Every `\newcommand` in
+[`../preamble.tex`](../preamble.tex) therefore reached the reader as literal source
+mid-formula — `\Aop`, `\norm`, `\inner`, `\eps` — inside otherwise correctly typeset
+displays, while the PDF, which reads the same preamble, was right. No LaTeX build and no
+lane of `check.py` could see it, because nothing they read was wrong.
+
+The config carries those definitions into MathJax's `tex.macros`, in a block that is
+**derived** from the preamble rather than transcribed from it:
+
+```bash
+python3 scripts/new.py mathjax        # rewrite the block from preamble.tex
+```
+
+A hand-kept macro list would be a second source of truth, and the objection to one is not
+that it is ugly but that it drifts. So it is generated, and the drift is closed
+mechanically at both ends: `check.py --lane editorial` fails the tree whenever the block
+and the preamble disagree, and `check.py html` audits the built pages themselves —
+
+```bash
+python3 scripts/check.py html         # or: check.py html <dir>, default build/html
+```
+
+which is what the pipeline above runs before handing the conversion to `site.py`. It
+reads every page in the directory and fails if a control sequence the preamble defines
+appears in that page's mathematics without the page's own MathJax config carrying it, or
+if any backslash-prefixed token appears in the prose. It names the dossiers it did *not*
+find converted rather than passing them silently, and an unbuilt tree is reported as
+unbuilt and passes: `check.py` never depends on a build artifact, and `check.sh` records
+this as a named skip under "all *available* checks passed".
+
+What the audit does not do is own a copy of MathJax's own command dictionary, so a
+*standard* command MathJax happens not to support would still get past it. What it does
+decide completely is the defect it was written for: this manuscript's notation failing to
+reach the page.
 
 ## 3. Deploy it
 
@@ -186,5 +234,6 @@ home.
 ```bash
 python3 scripts/site.py --root example --serve    # the fully populated worked example
 python3 -m unittest discover -s scripts/tests -p 'test_site.py'
+python3 -m unittest discover -s scripts/tests -p 'test_mathjax.py'
 node --check site/site.js                         # a syntax error here is a blank page
 ```

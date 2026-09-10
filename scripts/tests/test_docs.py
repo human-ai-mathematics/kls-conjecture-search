@@ -69,6 +69,33 @@ class DocsTests(CheckerFixture):
 
         self.assertIn("is absolute", self.links()[0])
 
+    def test_a_nested_checkout_is_pruned(self):
+        """A git worktree under .claude/ is another tree's working copy, not our docs.
+
+        The walker descends into .claude/ on purpose, for the role definitions. Running
+        several agents in parallel puts whole checkouts under .claude/worktrees/, and
+        before this every one of their historical links was reported against the tree
+        that happened to be hosting them.
+        """
+        self.write(".claude/worktrees/agent-1/README.md", "[gone](old/path.md)\n")
+        (self.root / ".claude/worktrees/agent-1/.git").write_text("gitdir: elsewhere\n",
+                                                                  encoding="utf-8")
+
+        self.assertEqual(self.links(), [])
+
+    def test_a_nested_checkout_is_pruned_whatever_it_is_called(self):
+        """The rule is the .git marker, not the path -- a worktree may sit anywhere."""
+        self.write("vendor/other/docs/x.md", "[gone](old/path.md)\n")
+        (self.root / "vendor/other/.git").mkdir(parents=True)
+
+        self.assertEqual(self.links(), [])
+
+    def test_our_own_role_definitions_are_still_checked(self):
+        """Pruning nested checkouts must not stop the walker entering .claude/ at all."""
+        self.write(".claude/agents/README.md", "[gone](old/path.md)\n")
+
+        self.assertIn("link 'old/path.md' does not resolve", self.links()[0])
+
 
 if __name__ == "__main__":
     unittest.main()
