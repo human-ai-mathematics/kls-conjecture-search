@@ -5,9 +5,9 @@ authors:
 reviewer: /root/review_conditional_fiber_structure_w3
 fingerprints:
   solutions/conditional-fiber-frame-structure.md: 6c960a309afee30be04a30c3f4c6bf3a5b5de8b526771b18e7333ab5b60947a6
-  lem:conditional-fiber-form: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b
+  lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
-  prop:conditional-fiber-root-obstruction: e0a5f377615350c463031a1921a94c7ec6000a2e4e456454a91ede6be4f239e0
+  prop:conditional-fiber-root-obstruction: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f
 ---
 
 # Conditional-fiber form structure and simplex root obstruction — independent review

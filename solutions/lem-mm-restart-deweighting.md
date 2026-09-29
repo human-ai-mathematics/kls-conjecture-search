@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: restart deweighting at a stopping time'
+title: 'Solution: restart deweighting at a stopping time'
 label: sec:sol-lem-mm-restart-deweighting
 ledger-node: lem:mm-restart-deweighting
 numbering:

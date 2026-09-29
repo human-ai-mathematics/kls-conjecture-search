@@ -41,7 +41,7 @@ candidates:
       simplex base and 6/5 for a cube base. Reason to doubt it: the family is a finite
       polytopal slice of the log-concave cone, the claim quantifies over all beta and all
       block shapes, and every number is computed from eq:cone-stein-kernel, whose node
-      prop:cone-moment-map is still open.
+      prop:cone-moment-map was open when this was proposed and has since been proved.
 ---
 
 # Exponential cones: exact gate matrices, ball quadrature, and CMH Galerkin

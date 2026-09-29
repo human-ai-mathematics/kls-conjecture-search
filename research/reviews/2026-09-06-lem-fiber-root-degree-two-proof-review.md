@@ -6,8 +6,8 @@ reviewer: /w5/reviewer-fiber-root
 fingerprints:
   solutions/lem-fiber-root-degree-two.md: 7a84545d797f14dc11b40d269b923a40da35b642a01112f7c15c582cbd9bd556
   lem:fiber-root-degree-two: 90520f6c6b8600a7af6b68361ef0bba613c131e07c2dac7602855b26e4a59fed
-  lem:conditional-fiber-form: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b
-  prop:conditional-fiber-root-obstruction: e0a5f377615350c463031a1921a94c7ec6000a2e4e456454a91ede6be4f239e0
+  lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2
+  prop:conditional-fiber-root-obstruction: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f
 ---
 
 # Degree-two root-frame pencil identity — independent certification review

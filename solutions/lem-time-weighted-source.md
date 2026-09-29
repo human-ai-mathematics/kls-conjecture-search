@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: scale-weighted all-cut source budget'
+title: 'Solution: scale-weighted all-cut source budget'
 label: sec:sol-time-weighted-source
 ledger-node: lem:time-weighted-source
 numbering:

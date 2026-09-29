@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: the CMH recovery calculus'
+title: 'Solution: the CMH recovery calculus'
 label: sec:sol-cmh-recovery-calculus
 ledger-node: prop:cmh-recovery-calculus
 numbering:

@@ -5,7 +5,7 @@ authors:
 reviewer: /root/review_bootstrap_stopped_interface_w3
 fingerprints:
   solutions/thm-bootstrap-stopped-interface.md: 539ac67e15fb09004e4890afbde5228347bcff604a40958c1149f1df916855c6
-  thm:bootstrap-stopped-interface: d331e0c4c06392172de6909a681fb1989a8cf601963eb33fedced3232d12ad81
+  thm:bootstrap-stopped-interface: 85fea6d78309eac981ba260724387fb62f5d4b1b16cd38f13bb51d7721dd5ccf
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
   lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa

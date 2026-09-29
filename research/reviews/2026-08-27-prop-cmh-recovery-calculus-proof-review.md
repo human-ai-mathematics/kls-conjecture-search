@@ -4,7 +4,7 @@ authors:
   - /root/prove_cmh_recovery_calculus_w2
 reviewer: /root/review_cmh_recovery_calculus_w2
 fingerprints:
-  solutions/prop-cmh-recovery-calculus.md: 4dccf412f665c2cc1553d65bfa8203ce0e8d303dbf02258a1b36ab3566452cdf
+  solutions/prop-cmh-recovery-calculus.md: 56cea366c845a618355e4135236d0b72a1e814ef6c0fb5d086b28c8db8d5943a
   prop:cmh-recovery-calculus: 73a9c58294d2c13a9bce376e89511f13dbfc0faa2db486c5be8df1fb28a36ba0
   def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e

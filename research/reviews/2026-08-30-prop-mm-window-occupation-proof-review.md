@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r04
 fingerprints:
-  solutions/prop-mm-window-occupation.md: 596c2b5f3852a398cb31b013ab2a547e5e09e965050b6db4f03a70598f16bba2
+  solutions/prop-mm-window-occupation.md: 01607a7c457415d67a748b284d3af9c8fe1bed33b5e5ffbf144eb1176920df6e
   prop:mm-window-occupation: 9fdd6a832622d943cf07b8380f89196be51e45f1782ab0a77aac5475e5a13c14
   thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
   thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60

@@ -82,7 +82,7 @@ and, for $0<T<1/8$, the admissible choice $\eta=T^{1/3}<1/2$ together with $\eps
 
 *Proof.* Six steps: the perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event; and the remaining steps collect the error terms into the interface functional. The calculation is carried out in Appendix [](#sec:appendix-route-e).
 
-:::{prf:theorem} Stopped covariance-interface refinement, candidate
+:::{prf:theorem} Stopped covariance-interface refinement
 :label: thm:bootstrap-stopped-interface
 Under the hypotheses of [](#thm:bootstrap), define
 

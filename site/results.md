@@ -27,7 +27,7 @@ relies-on:
   prop:spectral-sufficiency: {status: proved, fingerprint: fd64938a59bc75857af5ea37fa1553ec3f448a47d6d24f506dbe4dff01507869}
   prop:mm-window-occupation: {status: proved, fingerprint: 9fdd6a832622d943cf07b8380f89196be51e45f1782ab0a77aac5475e5a13c14}
   thm:klartag-logn: {status: proved, fingerprint: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60}
-  lem:conditional-fiber-form: {status: proved, fingerprint: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b}
+  lem:conditional-fiber-form: {status: proved, fingerprint: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2}
   q:conditional-fiber-frame: {status: open, fingerprint: d73bceb7210a8fa4046d805a649bd44e5e86c16a33aab2f80d14080df3c30423}
   lem:fiber-root-degree-two: {status: proved, fingerprint: 90520f6c6b8600a7af6b68361ef0bba613c131e07c2dac7602855b26e4a59fed}
   thm:bootstrap: {status: proved, fingerprint: a34953a684610320af30438bc889bde07aeeb4a809dd2816c4215b94cb23589e}
@@ -40,7 +40,7 @@ relies-on:
   prop:spectator-excess-rate-obstruction: {status: proved, fingerprint: 01dde6249073cccf904b9b0fcfa59aebf330ffeff4880e5b9850d36349c30d2a}
   prop:letwin-not-gate-zero: {status: proved, fingerprint: d01d5a5df0ca378b977846fd59185615903c42ec4bf019d71ebb41b5bf8e7c3a}
   thm:letwin-moment-map: {status: open, fingerprint: fe8a88cbdf6b7c59609c16b77e7d8f8858792816ce38924fe4046b1950cc54b0}
-  prop:conditional-fiber-root-obstruction: {status: proved, fingerprint: e0a5f377615350c463031a1921a94c7ec6000a2e4e456454a91ede6be4f239e0}
+  prop:conditional-fiber-root-obstruction: {status: proved, fingerprint: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f}
 checked: 2026-09-29
 ---
 

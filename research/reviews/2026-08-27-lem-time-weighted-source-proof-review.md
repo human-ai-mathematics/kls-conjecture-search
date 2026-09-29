@@ -4,7 +4,7 @@ authors:
   - /root/prove_time_weighted_par_05
 reviewer: /root/review_time_weighted_cold_07
 fingerprints:
-  solutions/lem-time-weighted-source.md: 46b4ef9cbcc2399a3b02fbbe43d04a5cd911898d103e304559f9865accfef525
+  solutions/lem-time-weighted-source.md: a4039050ea3459d64fd60471d4ec9509a4da9c4db76c890f04590fcacb1440f5
   lem:time-weighted-source: 8212ac2d323fe4a02b1e6494170068c8fe4b224b1c3f528538ad12162531d5ab
   thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
 ---

@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: constant-preserving CMH approximation closure'
+title: 'Solution: constant-preserving CMH approximation closure'
 label: sec:sol-cmh-approximation
 ledger-node: q:cmh-approximation
 numbering:

@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: affine-Poincaré recovery and one-sequence CMH closure'
+title: 'Solution: affine-Poincaré recovery and one-sequence CMH closure'
 label: sec:sol-affine-poincare-w2-liminf
 ledger-node:
 - lem:affine-poincare-w2-liminf

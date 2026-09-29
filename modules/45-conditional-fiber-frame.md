@@ -62,7 +62,7 @@ For such a frame define
 
 Null fibers and fibers with zero denominator contribute zero. The maximal form domain is $\{f\in L^2(\mu):\mathcal D_{\mu,\rho}(f)<\infty\}$, using jointly measurable conditional versions.
 
-:::{prf:lemma} Conditional-fiber form and factor-$4$ bridge, candidate
+:::{prf:lemma} Conditional-fiber form and factor-$4$ bridge
 :label: lem:conditional-fiber-form
 For a full-dimensional probability with density and finite second moment, and an admissible frame, the quadratic form [](#eq:conditional-fiber-form) is densely defined, closed, symmetric, Markovian, and reversible. Its nonlocal self-adjoint generator is understood in form sense, and agrees with the conditional pair-jump formula on the natural sufficient Bochner domain even when pointwise total jump rates are infinite.
 
@@ -117,7 +117,7 @@ It satisfies $d\int\theta\theta^T\dd\rho_{\rm root}=I_{H_0}$. If $\Var_{ij}$ den
 \E\frac{\Var_{ij}(f)}{(P_i+P_j)^2}.
 ```
 
-:::{prf:proposition} Vertex-cap obstruction for the root frame, candidate
+:::{prf:proposition} Vertex-cap obstruction for the root frame
 :label: prop:conditional-fiber-root-obstruction
 For $m\ge2$ and $\varepsilon\in(0,1)$, let $\eta_i=mP_i$ and $A_{m,\varepsilon}=\{\eta_1>m-\varepsilon\}$. Then
 

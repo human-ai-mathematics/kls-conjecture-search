@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r02
 fingerprints:
-  solutions/lem-mm-restart-deweighting.md: aa8d92e36ac2b1dfe9f8f473f959befaad162bef96c50494a79de4fab80bf05e
+  solutions/lem-mm-restart-deweighting.md: 80d27c52a061cde9cd191ccdf42bec7cce0e5a8f4d684dcaab30c0a2d256d469
   lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20
   lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---

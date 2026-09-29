@@ -4,7 +4,7 @@ authors:
   - /root/prove_cmh_recovery
 reviewer: /root/review_cmh_recovery_w0
 fingerprints:
-  solutions/lem-affine-poincare-w2-liminf.md: 6d41ff470f035450b86476d75889a120035f204d2b73e8ebb228ca5fce1962e0
+  solutions/lem-affine-poincare-w2-liminf.md: 5afb3e3e3dc73100386f977a871b50a4595288d0ab1ab55a27ba2abcabf1557b
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   cor:cmh-recovery-sequence-suffices: 8be33a3b6d221250271a645a80ed03ba180282e864de5c95ef1f2375fec0f3af

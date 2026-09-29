@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r03
 fingerprints:
-  solutions/lem-mm-stopped-window-source.md: 0abfc3eee971e1242ec2cbccd93f0dbcb789d001df7a929337d8d49cd9cee636
+  solutions/lem-mm-stopped-window-source.md: 62b4ac70b308b28ebc313ff33ef960d68de9105d4b5159a4181079731bff14f4
   lem:mm-stopped-window-source: 89ef3541a93b0afbe6b5c307413663352d630c6a301f6f79799bf67c954f3795
   thm:letwin-qcts: 8e2ac0819f46db553fe83a6f3034436816565262316c2e6bde7d81baead1a082
 ---

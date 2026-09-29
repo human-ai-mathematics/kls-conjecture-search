@@ -5,7 +5,7 @@ authors:
   - /w5/researcher-cone-lift-repair
 reviewer: /w5/reviewer-cone-lift-second
 fingerprints:
-  solutions/prop-cone-moment-map.md: 56977ada78f78799ee00f7b102aa8c55d15aa1eea4b18a9e5800acabfd7ff828
+  solutions/prop-cone-moment-map.md: de0ac91919f85648a8a390e969c74849a6466a0c7160d7ecd3c38f9b2ad8aefe
   prop:cone-moment-map: 17a61295e07885d64d8d19a3ec6d3f93071bf610cd532bc7f3f5f9ca4463b2ed
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   prop:cone-linear-sector: bc33a40d8941c7c53233e874964ad29d13a1bf894ca15c94a734d449c475c942

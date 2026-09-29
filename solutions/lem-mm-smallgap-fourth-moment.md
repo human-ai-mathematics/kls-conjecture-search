@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: small-gap fourth-moment bootstrap from the published frontier'
+title: 'Solution: small-gap fourth-moment bootstrap from the published frontier'
 label: sec:sol-lem-mm-smallgap-fourth-moment
 ledger-node: lem:mm-smallgap-fourth-moment
 numbering:

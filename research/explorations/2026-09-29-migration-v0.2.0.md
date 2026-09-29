@@ -78,8 +78,8 @@ the aligned two-tail mode is proposed, or if a replacement carrying an explicit
 near-worst-measure premise is certified; `ap:e-screened-supply` is the live sub-route that
 pursues the first option.
 
-**Records.** Two exceptions to the append-only rule were made for this move and for no
-other purpose.
+**Records.** Exceptions to the append-only rule and to certification were made for this move and for
+no other purpose.
 
 1. The front matter of every checkpoint and review was rewritten to the v0.2 format; bodies
    are unchanged, except for a one-line *Follows up* mention where the dropped `follows_up`
@@ -107,6 +107,19 @@ other purpose.
 
    Any later edit of a dossier or of a statement lifts the certification in the ordinary
    way; the next review of a dossier is its first review of the MyST text.
+3. **Stale "candidate" wording removed**, at the owner's request, after the fingerprints
+   of item 2 were first recorded. The eleven dossiers titled "Solution candidate: …", all
+   named by proof records, are now "Solution: …"; the manuscript titles of
+   `thm:bootstrap-stopped-interface`, `lem:conditional-fiber-form` and
+   `prop:conditional-fiber-root-obstruction` lost their trailing "candidate"; in
+   `solutions/prop-mm-window-occupation.md` the three companion dossiers are no longer
+   called candidates and uncertified, and `thm:klartag-logn` no longer pending, since all
+   four were certified or accepted afterwards. The fingerprints of item 2 were recomputed
+   on these versions, under the same decision.
+4. **One candidate statement corrected in place.** In
+   `2026-09-06-numerics-cmh-cone-w5n01.md`, `cand:cone-transverse-equality-simplex` said
+   that `prop:cone-moment-map` "is still open"; it now says the node was open when the
+   candidate was proposed and has been proved since. Nothing else in the candidate changed.
 
 **Dossiers.** The 30 dossiers are `solutions/*.md` under their old basenames. Each now opens
 with an **Overview** written from the dossier by a separate agent; it adds no claim and
@@ -131,13 +144,6 @@ brief, with their old names, since earlier records cite them.
   settle which convention is meant.
 - The conversion of the nineteen statements listed above (the six obstructions kept their wording) was done during the migration, not
   by a reviewer; `q:cmh-approximation` is the only one with a proof record.
-- Twelve dossiers keep a v0.1 title "Solution candidate: …" although each is named by a
-  proof record, and the manuscript titles of `thm:bootstrap-stopped-interface`,
-  `lem:conditional-fiber-form` and `prop:conditional-fiber-root-obstruction` still say
-  "candidate". Retitling lifts the certification, so it waits for the next review of each.
-- The statement of `cand:cone-transverse-equality-simplex` says `prop:cone-moment-map` is
-  open; it is proved. The candidate's text is the only copy and stays as proposed; a
-  checkpoint that promotes or closes it should say so.
 - The site (`index`, `problem`, `results`, written by the `writer` at this milestone) says
   each proof was checked by an independent reviewer. That holds of the LaTeX versions; before
   publishing, the person who dispatches the site decides whether to wait for fresh `certify`

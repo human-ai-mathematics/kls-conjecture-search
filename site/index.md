@@ -9,7 +9,7 @@ relies-on:
   thm:cmh-dirichlet: {status: proved, fingerprint: 0950144e400e4a077e8ae82686d149d0a736b6ec651e7c588e4e867146a8db94}
   prop:spectral-sufficiency: {status: proved, fingerprint: fd64938a59bc75857af5ea37fa1553ec3f448a47d6d24f506dbe4dff01507869}
   q:mm-spectral-occupation: {status: open, fingerprint: fd459923a0b85e2a9af9179faa1e1e80bbe2357831a49d986221586cfd268249}
-  lem:conditional-fiber-form: {status: proved, fingerprint: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b}
+  lem:conditional-fiber-form: {status: proved, fingerprint: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2}
   q:conditional-fiber-frame: {status: open, fingerprint: d73bceb7210a8fa4046d805a649bd44e5e86c16a33aab2f80d14080df3c30423}
   conj:gate-zero-sharp: {status: open, fingerprint: df72819e702a79d3f42c81937662a671d552303846f945cee9c4ada07cce2946}
   prop:weighted-spectator-obstruction: {status: proved, fingerprint: 43186945070f01440b94ed29e452f474290ea070a94c9874921fbc1b8e3329ab}

@@ -1,5 +1,5 @@
 ---
-title: 'Solution candidate: stopped initial-layer source bound (conditional on the Letwin import)'
+title: 'Solution: stopped initial-layer source bound (conditional on the Letwin import)'
 label: sec:sol-lem-mm-stopped-window-source
 ledger-node: lem:mm-stopped-window-source
 numbering:

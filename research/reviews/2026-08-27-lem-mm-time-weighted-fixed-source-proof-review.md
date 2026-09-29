@@ -4,7 +4,7 @@ authors:
   - /root/prove_mm_weighted_source
 reviewer: /root/review_mm_weighted_source_w0
 fingerprints:
-  solutions/lem-mm-time-weighted-fixed-source.md: 6a4ca4838c412bac26190b664b0b516e7797e36eed3658ab3a24f448654d6281
+  solutions/lem-mm-time-weighted-fixed-source.md: 8e136c25c3e50af746db8fa57bc07f46a0f61bef5affb463674c5ceed0f176b8
   lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---
 
