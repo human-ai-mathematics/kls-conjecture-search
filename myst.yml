@@ -6,14 +6,13 @@
 #
 # `uv run scripts/check.py` builds the site content and reads its AST: every labelled
 # claim directive under modules/ is a ledger node with the same id.
-# Replace the title, subtitle and author placeholders below.
 version: 1
 project:
-  title: <Document title>
-  subtitle: <one-line subtitle naming the object and the question>
+  title: The Kannan–Lovász–Simonovits Frontier
+  subtitle: Routes toward a dimension-free Poincaré constant for isotropic log-concave measures
   authors:
     - name:
-        literal: <author>
+        literal: Nicolas Brosse
   # The shared bibliography. A literature node's `references:` keys must
   # exist here. It ships empty: MyST refuses a .bib holding only comments.
   bibliography:
@@ -31,7 +30,57 @@ project:
     '\norm': '\left\lVert #1\right\rVert'
     '\abs': '\left\lvert #1\right\rvert'
     '\inner': '\left\langle #1,#2\right\rangle'
-    # --- program macros
+    # --- program macros (from the LaTeX preamble of kls v0.1)
+    '\Aop': '\mathsf A'
+    '\calB': '\mathcal B'
+    '\calD': '\mathcal D'
+    '\calE': '\mathcal E'
+    '\calI': '\mathcal I'
+    '\calJ': '\mathcal J'
+    '\calK': '\mathcal K'
+    '\calL': '\mathcal L'
+    '\calM': '\mathcal M'
+    '\calQ': '\mathcal Q'
+    '\calR': '\mathcal R'
+    '\calS': '\mathcal S'
+    '\calT': '\mathcal T'
+    '\CLS': 'C_{\mathrm{LS}}'
+    '\CMH': 'C_{\mathrm{CMH}}'
+    '\Cov': '\operatorname{Cov}'
+    '\CP': 'C_{\mathrm P}'
+    '\CPaff': 'C_{\mathrm P}^{\mathrm{aff}}'
+    '\CTCI': 'C_{\mathrm{TCI}}'
+    '\diag': '\operatorname{diag}'
+    '\Dir': '\operatorname{Dir}'
+    '\dist': '\operatorname{dist}'
+    '\Div': '\operatorname{div}'
+    '\Dom': '\operatorname{Dom}'
+    '\Ent': '\operatorname{Ent}'
+    '\F': '\mathcal{F}'
+    '\GammaLaw': '\operatorname{Gamma}'
+    '\Hess': '\nabla^2'
+    '\HS': '\mathrm{HS}'
+    '\hstar': 'h^{\star}'
+    '\Id': '\mathrm{Id}'
+    '\Jsharp': '\calJ^{\sharp}'
+    '\KL': '\operatorname{KL}'
+    '\Lip': '\operatorname{Lip}'
+    '\lmax': '\lambda_{\max}'
+    '\lmin': '\lambda_{\min}'
+    '\op': '\mathrm{op}'
+    '\osc': '\operatorname{osc}'
+    '\Per': '\operatorname{Per}'
+    '\Proj': '\operatorname{Proj}'
+    '\PsiKLS': '\Psi'
+    '\Pstar': 'P'
+    '\qJac': '\mathsf q'
+    '\Sigmaz': '\Sigma_0'
+    '\supp': '\operatorname{supp}'
+    '\Tr': '\operatorname{Tr}'
+    '\Var': '\operatorname{Var}'
+    '\Vol': '\operatorname{Vol}'
+    '\WH': '\mathsf H'
+    '\Wtwo': 'W_2'
   # The reader's site comes first; the dossiers and the manuscript close the table of
   # contents. A pattern that matches nothing is an error, so each group's pattern also
   # matches its introduction page: '{site/proofs,solutions/*}.md' reads "site/proofs.md,
@@ -50,8 +99,49 @@ project:
         - pattern: '{site/proofs,solutions/*}.md'
     - title: Precise statements
       children:
-        - pattern: 'modules/!(README).md'
+        - file: modules/00-overview.md
+        - title: The landscape of methods and the route atlas
+          children:
+            - file: modules/01-family-needles.md
+            - file: modules/02-family-stochastic-localization.md
+            - file: modules/03-family-bochner-hminus1.md
+            - file: modules/04-family-moment-map.md
+            - file: modules/05-family-transport.md
+            - file: modules/06-frontier-atlas.md
+        - title: Routes through stochastic localization
+          children:
+            - file: modules/17-localization-prelude.md
+            - file: modules/14-qcts-obstruction.md
+            - file: modules/20-eldan-statements.md
+            - file: modules/21-carleson.md
+            - file: modules/22-product-stress.md
+            - file: modules/23-stein-route.md
+            - file: modules/24-excess-propagation.md
+            - file: modules/25-bootstrap.md
+            - file: modules/27-eldan-open-targets.md
+            - file: modules/30-spectral-route.md
+        - title: Deterministic and conditional routes
+          children:
+            - file: modules/40-moment-map-cmh.md
+            - file: modules/41-cmh-normalization.md
+            - file: modules/42-cmh-exact-cases.md
+            - file: modules/45-conditional-fiber-frame.md
+        - title: Synthesis
+          children:
+            - file: modules/50-synthesis.md
+            - file: modules/glossary.md
+        - title: "Appendices: technical foundations"
+          children:
+            - file: modules/10-notation.md
+            - file: modules/11-mass-martingale.md
+            - file: modules/12-riccati.md
+            - file: modules/13-stein-dictionary.md
+            - file: modules/15-covariance-technology.md
+            - file: modules/16-model-geometries.md
+            - file: modules/26-jacobi-splitting.md
+            - file: modules/60-appendix-route-e.md
+            - file: modules/61-appendix-moment-map.md
 site:
   template: book-theme
   options:
-    logo_text: <Document title>
+    logo_text: The KLS Frontier

@@ -1,0 +1,240 @@
+---
+numbering:
+  enumerator: "40.%s"
+---
+
+(sec:moment-map-cmh)=
+# Route C: the deterministic moment-map/Haar program, audited frontier
+
+## Route gateway
+
+**1. Thesis.** Bound one deterministic quantity, the canonical moment-Hessian constant $\CMH$, and pass it to an affine Poincaré inequality. No stochastic localization anywhere.
+
+**2. Bridge to KLS.** The strongest bridge of any route here, and the one place this document proves an implication *into* the neighbourhood of KLS rather than assuming one (the proved arrow is [](#thm:cmh-implies-affine-poincare)):
+
+$$
+\mathrm{CMH}(4)
+\ \xRightarrow[\ \text{proved}\ ]{}\
+\CPaff\le\CMH
+\ \xrightarrow[\ \texttt{ass:uniform-cmh-approximants}\ ]{\ \text{open premise}\ }\
+\text{all log-concave }\mu .
+$$
+
+Two cautions belong here rather than in a footnote, because they change how the diagram should be read. $\mathrm{CMH}(4)$ is *not* a reformulation of [](#conj:kls): by [](#prop:cmh-hodge) it additionally demands control of a solenoidal excess that vanishes identically in dimension one, so it may be strictly stronger — equivalence at constant $4$ is open ([](#rem:cmh-stronger-than-kls)). And the passage to arbitrary log-concave limits is certified only *conditionally*: [](#q:cmh-approximation) is proved under the separate open premise `ass:uniform-cmh-approximants`.
+
+**3. Established inputs.** From the literature: the fixed-matrix Hessian bound ([](#thm:letwin-moment-map)) and the moment-Hessian trace bound ([](#thm:chen-klartag-moment-hessian)); moment-potential regularity from [@BermanBerndtsson2013RealMA] and the Stein identity from [@Fathi2019SteinMomentMaps]. Certified here: the endpoint's operator data ([](#def:cmh)) and everything in Sections [](#sec:cmh-normalization)–[](#sec:cmh-exact-cases) that carries a *certified* standing.
+
+**4. Main advance so far.** The endpoint was made precise and then computed. It is given operator data rather than left as a slogan ([](#def:cmh)); it is proved to dominate the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)); its Hodge content is identified, separating an affine channel from a solenoidal excess ([](#prop:cmh-hodge)); and it is evaluated *exactly* on the line, on products, and on every log-concave Dirichlet law (Section [](#sec:cmh-exact-cases)). That last is a genuine theorem about a nontrivial family, not a consistency check. The linear sector is now resolved separately and exactly: it equals a directional third moment plus a named high-mode remainder ([](#lem:linear-sector-third-moment), [](#cor:gate-zero-third-moment)), and the exponential cones of §[](#subsec:cmh-cones) give it an explicit non-product equality set with an explicit moment map ([](#prop:cone-moment-map)–[](#prop:cone-linear-sector)).
+
+**5. Exact bottleneck.** The route splits, and the split is the point. A *construction* layer: `q:mm-invariant-lift`, deriving the target-flat Schur–Piola multiplier lift invariantly, and `q:mm-square-root-commutator`, controlling the full Haar sum of $[N^{1/2},K_M]$ errors without double-spending the positive reservoir. A *falsification* layer: gate zero ([](#conj:gate-zero)), its sharp form ([](#conj:gate-zero-sharp)), and the solenoidal perturbation test `q:cmh-solenoidal-perturbation`. The route can be closed by the first pair or killed by the second. The two gate statements are not interchangeable as falsifiers: refuting the sharp form at constant $2$ would leave $\mathrm{CMH}(4)$ untouched, since only the constant $4$ statement is what CMH needs on linear tests.
+
+**6. Failed variants and obstructions.** [](#prop:letwin-not-gate-zero) is the decisive negative result: no matrix-moment argument supplies gate zero, so the fixed-matrix estimate cannot be leveraged into the linear sector. Gate zero is itself an instance of the average-versus-uniform pattern of Section [](#sec:kls-remaining) — it asks $\lmax(\E H^2)\le4$ where only $\Tr(\E H^2)\le2n$ is known — so this route relocates that difficulty rather than escaping it, and [](#prop:letwin-not-gate-zero) shows the relocation is not free. A separate saturation risk is recorded in Section [](#sec:cmh-exact-cases).
+
+**7. Completion or reopening criterion.** The route closes if the construction layer is discharged *and* `ass:uniform-cmh-approximants` is proved, or replaced by the weaker recovery envelope `ap:c-recovery-envelope`. It is refuted if gate zero is false, or if the exact second variation through the Hodge split at the saturating one-sided-exponential product is negative. Both falsifiers are cheaper than the construction, which is why they are stated as gates.
+
+**8. Technical reading guide.** Read *out of order*: the normalization layer, Section [](#sec:cmh-normalization), is logically prior and should be read first, then the exact cases in Section [](#sec:cmh-exact-cases), then this construction layer. The moment-map family survey is Section [](#sec:family-moment-map). None of Appendices [](#sec:notation)–[](#sec:models) is used by this route.
+
+This section records a second, deterministic use of the moment map. Its aim is to extend [](#thm:letwin-moment-map) from constant matrices to multiplier fields selected by an arbitrary test function. The route is live but unproved. Displayed formal identities below are not proof-certified; current entry points are the approaches of `research/program/portfolio.yaml`, and each approach's `objective` states what closing it would deliver.
+
+Route C is organized in two layers. This section is the *construction* layer: Haar compression, Schur–Piola transport, and the square-root commutator that the programme must control. Sections [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) are the *normalization* layer, added later and logically prior: they fix the endpoint's operator data, prove that it implies the affine Poincaré inequality, compute it exactly on the line, on products, and on every log-concave Dirichlet law, and isolate the two falsification tests the route now admits. The two layers share the target $\mathrm{CMH}(4)$ and almost no machinery; a reader starting Route C should read §[](#sec:cmh-normalization) first.
+
+To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
+
+:::{prf:remark} Program — Deterministic CMH route
+:label: prog:cmh-route
+First make the CMH endpoint and its KLS reduction precise. Then derive the invariant multiplier lift, control the resulting square-root commutators with the full positive reservoir, and sum the complete Haar tree without nodewise positivity or duplicated slack.
+:::
+
+## Endpoint and first audit gate
+
+The originating exploration proposes a covariance–moment–Hessian estimate of the schematic form
+
+```{math}
+:label: eq:cmh4-schema
+\norm{\Sigma^{-1/2}H\nabla g}_2^2
+\le4\norm{-Lg}_2^2.
+```
+
+It reports that a divergence-duality argument would then give $\CP(\mu)\le4$, the sharp plausible constant because a standard centered one-sided exponential has Poincaré constant $4$.
+
+:::{prf:remark} CMH normalization and endpoint reduction
+:label: q:cmh-normalization
+Define $\Sigma$, $L$, the underlying $L^2$ space, the admissible class of $g$, and every inverse in [](#eq:cmh4-schema) for the regular moment-map class. Then prove that the resulting estimate $\CMH(\mu)\le C$ implies $\CPaff(\mu)\le C$ on that class.
+:::
+
+This regular-class question is logically prior to the commutator calculation, and it is now answered. [](#def:cmh) fixes $\Sigma$ as the covariance, $L$ as the Stein generator $\Div_\mu(H\nabla\,\cdot\,)$, the $L^2$ space as $L^2(\mu)$, the admissible class as $\Dom(\Aop)$, and every inverse as the pseudoinverse on $(\ker\Aop)^\perp$; [](#thm:cmh-implies-affine-poincare) then proves $\CPaff(\mu)\le\CMH(\mu)$ by a single Cauchy–Schwarz step, with a spectral truncation in place of an assumed gap.
+
+:::{prf:assumption} Uniform CMH control on regular approximants
+:label: ass:uniform-cmh-approximants
+There is a universal $C<\infty$ such that, for every centered log-concave law $\mu$, the centered Gaussian-convolution, Gaussian-tilt, and growing-ball regular moment-map approximants $\mu_k$ satisfy $\sup_k\CMH(\mu_k)\le C$.
+:::
+
+:::{prf:proposition} Approximation closure for CMH
+:label: q:cmh-approximation
+Under [](#ass:uniform-cmh-approximants), the affine Poincaré inequalities pass to $\mu$ through a closure argument, uniformly under isotropic normalization and affine-support degeneration.
+:::
+
+The approximation closure is now certified conditionally. Centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants converge in ambient $W_2$, and the affine Poincaré inequality passes with no loss on the intrinsic closed covariance-form domain, including proper affine-support degeneration. The uniform premise $\sup_k\CMH(\mu_k)\le C$ remains unresolved; no bound on $\CMH$ is supplied by the closure argument. Two consequences of the now-explicit normalization bear directly on the rest of this section.
+
+First, the reduction is not known to be an equivalence. [](#prop:cmh-hodge) splits the CMH numerator into an affine Poincaré part and a nonnegative solenoidal excess, which vanishes identically in dimension one under the no-flux convention. Thus CMH contains an additional channel that KLS does not directly control; no separating log-concave measure is currently known, so strict non-implication is not asserted ([](#rem:cmh-stronger-than-kls)). The programme below should be read as pursuing a sufficient condition of unknown truth value, not as a proved reformulation of the conjecture.
+
+Second, the endpoint now has a cheap necessary condition. Testing $\mathrm{CMH}(4)$ on linear functions gives gate zero, $\E[H\Sigma^{-1}H]\preceq4\Sigma$ ([](#conj:gate-zero)), and [](#prop:letwin-not-gate-zero) shows by an exact countermodel that [](#thm:letwin-moment-map) does not imply it through matrix algebra alone. The obstruction there is the *static* commutator [](#eq:static-commutator), $\Tr(B^2H^2)=\Tr(BHBH)+\tfrac12\norm{[B,H]}_{\HS}^2$ — the finite-dimensional shadow of the square-root commutator of [](#q:mm-square-root-commutator). A programme that controls $[N^{1/2},K_M]$ must in particular control $\E\norm{[B,H]}_{\HS}^2$; conversely, refuting gate zero would close this route without any Haar-tree analysis at all.
+
+## Haar compression and the commutator error
+
+On the mean-zero subspace, formally set
+
+$$
+N=D_\nu^*H^{-1}D,
+\qquad
+Q_M=D_\nu^*H^{-1/2}MH^{-1/2}D,
+$$
+
+and
+
+$$
+R=H^{-1/2}DN^{-1/2},
+\qquad K_M=R^*MR.
+$$
+
+On a common core, $R^*R=I$ and
+
+$$
+Q_M=N^{1/2}K_MN^{1/2}.
+$$
+
+For normalized Haar contrast multipliers $M_S$, the formal error is therefore
+
+```{math}
+:label: eq:mm-commutator-error
+e_S(u)=Q_{M_S}u-K_{M_S}Nu
+=[N^{1/2},K_{M_S}]N^{1/2}u.
+```
+
+The reported complete-tree Bessel deficit is
+
+```{math}
+:label: eq:mm-bessel-deficit
+\mathfrak B(h)
+=\left(1-\frac1n\right)\norm{h}^2-\sum_S\norm{K_{M_S}h}^2
+=\sum_S\norm{(I-RR^*)M_SRh}^2.
+```
+
+The originating exploration reports rotated examples with negative individual sibling deficits and Laguerre near-extremizers that consume nearly all descendant slack. Pending persisted witnesses, these are route-level retractions rather than ledger refutations; they rule out nodewise positivity and fixed fractional slack allocation within the originating analysis.
+
+## Schur–Piola transport and local algebra
+
+For a $1+d$ split write
+
+$$
+H=\begin{pmatrix}h&b^\top\\ b&C\end{pmatrix},\qquad
+v=C^{-1}b,\qquad s=h-b^\top C^{-1}b,\qquad \Delta=\det C,
+$$
+
+and $X=\partial_r-v\cdot\nabla_q$. Block algebra, Piola's identity, and Hessian compatibility formally give
+
+$$
+\operatorname{cof}H
+=\Delta\begin{pmatrix}1&-v^\top\\-v&vv^\top+sC^{-1}\end{pmatrix},
+\qquad
+\operatorname{div}(\Delta X)=0,
+$$
+
+$$
+Xv=C^{-1}\nabla_qs,
+\qquad XC=J^\top C=CJ,
+\qquad \Tr(C^{-1}XC)=\operatorname{div}_qv.
+$$
+
+If $z=\nabla_q\phi$ is the child target coordinate, then $Xz=0$; for $x=\nabla\phi$, $Xx_\perp=0$ and $Xx_0=s$. Hence $s^{-1}X$ is the pullback of $\partial_{x_0}$. In particular, the trace/conformal derivative is constrained by the Schur connection and is not a free scalar mode.
+
+At a Schur-normal $1+2$ point, let $T\in\operatorname{Sym}_2$, $a,g\in\R^2$, let $R_\perp e_1=e_2$ and $R_\perp e_2=-e_1$, and use $\operatorname{sym}(u\otimes v)=\tfrac12(u\otimes v+v\otimes u)$. Put
+
+$$
+B_i=\operatorname{sym}(g\otimes R_\perp^\top e_i).
+$$
+
+The fixed-target coordinate form expands exactly as
+
+$$
+\begin{aligned}
+Q(a,T,g)
+&=8|a|^2+\frac12\sum_i\norm{\{B_i,T\}}_{\HS}^2-4a\cdot R_\perp Tg\\
+&=8\left|a-\frac14R_\perp Tg\right|^2
++\frac32|Tg|^2+\frac14(\Tr T)^2|g|^2\ge0.
+\end{aligned}
+$$
+
+An independent coordinate expansion checked this identity. What remains open is the invariant identification of the tensorial lift actually generated by the global operator, and a reduction covering all higher-dimensional splits. Positivity in $1+2$, $1+3$, and $2+2$ alone would not be a dimension-free theorem.
+
+:::{prf:conjecture} Invariant lift and all-split reduction
+:label: q:mm-invariant-lift
+The multiplier transport can be derived in a target-flat Schur–Piola frame without choosing a moving-frame coefficient by hand, and the resulting Codazzi shape terms decompose, for arbitrary split dimensions, into controlled irreducible pieces, each negative component of which is matched by a retained Letwin/Monge–Ampère square.
+:::
+
+## Two solenoidal channels
+
+Let $S(z)=\E[C\mid z]$ be the inherited child block of the parent Stein kernel and let $K(z)$ be the canonical child moment-map Stein kernel. Both solve the same Stein equation, so
+
+$$
+\mathsf D=S-K,
+\qquad \partial_\beta(\rho\mathsf D_{\alpha\beta})=0.
+$$
+
+In a two-dimensional child, subject to topology and boundary conditions,
+
+$$
+\rho\mathsf D=R_\perp^\top D^2\lambda R_\perp
+$$
+
+is the Airy representation. For a parent datum $h$, the reported canonical flux residual has the form
+
+```{math}
+:label: eq:mm-hodge-residual
+r_h=r_{\mathrm{cond}}+(I-\Pi_K)\mathsf D\nabla v.
+```
+
+Thus a conditional-flux channel and a canonical-versus-inherited Stein-kernel channel must be controlled separately. The earlier guessed local conserved vector collapsed these two projections and was withdrawn.
+
+## The best identified global bottleneck
+
+The cubic symbol does not cancel in general. With $A_M=H^{-1/2}MH^{-1/2}$, the originating calculation gives
+
+$$
+C_3(\xi)=2\left[(H^{-1}\xi)^r(\partial_rA_M)(\xi,\xi)
+-(A_M\xi)^r(\partial_rH^{-1})(\xi,\xi)\right].
+$$
+
+It is proposed to equal
+
+$$
+2(H^{-1}\xi)^k\xi^\top H^{-1/2}[\Omega_k,M]H^{-1/2}\xi,
+\qquad
+\Omega_k=\frac12\left(H^{-1/2}\partial_kH^{1/2}
+-(\partial_kH^{1/2})H^{-1/2}\right),
+$$
+
+exhibiting eigenframe rotation rather than conformal variation. The square-root bridge is the standard resolvent formula
+
+$$
+[N^{1/2},K_M]
+=\frac1\pi\int_0^\infty t^{1/2}(N+t)^{-1}
+[N,K_M](N+t)^{-1}\dd t,
+$$
+
+provided all forms and domains are justified.
+
+:::{prf:conjecture} Global square-root commutator
+:label: q:mm-square-root-commutator
+There is a retained nonnegative remainder $\mathfrak R_{\mathrm{Letwin}}(u)$, containing every available variable-multiplier, Codazzi, Monge–Ampère, corrector, and descendant square, such that over the complete Haar tree
+
+$$
+2\sum_S\operatorname{Re}\langle K_{M_S}Nu,e_S(u)\rangle
++\sum_S\norm{e_S(u)}^2
+\le \mathfrak B(Nu)+\mathfrak R_{\mathrm{Letwin}}(u)
+$$
+
+with a dimension-free constant and stable operator domains; and the complete-tree estimate supplies the global analytic input required by the fully defined CMH target of [](#q:cmh-normalization).
+:::
+
+This is the best identified bottleneck, not yet the sole formal gap. The invariant lift, all-split reduction, Hodge boundary conditions, and one-edge flux identity must be closed alongside it; the endpoint duality is no longer among them, having been discharged by [](#thm:cmh-implies-affine-poincare). Note also that [](#prop:letwin-not-gate-zero) places a floor under the difficulty: even the constant-multiplier, static specialization of the estimate below is not available from [](#eq:letwin-matrix) by algebra, so no argument here may treat the commutator as a lower-order correction. The originating regression analysis indicates that no scalar, conformal-only, or nodewise shortcut survives its current models. Persisting those witnesses is still required, but the resulting proof design is necessarily global and matrix-coupled.
