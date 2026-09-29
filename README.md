@@ -1,74 +1,62 @@
 # The Kannan–Lovász–Simonovits frontier
 
-This repository contains a LaTeX manuscript on routes toward the Kannan–Lovász–Simonovits
-conjecture — the dimension-free Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for an
-arbitrary isotropic log-concave measure — together with the research harness used to track open
-claims, proofs, reviews, and numerical diagnostics.
+A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the
+dimension-free Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic
+log-concave measure — together with the harness of a **sustained conjecture search** on it:
+what is claimed, what the search is doing, and why. KLS itself is open, and nothing here
+proves it; four routes are developed (fixed-cut and fixed-eigenfunction stochastic
+localization, a deterministic moment-map programme, conditional-fiber frames), each with its
+certified advances and its exact open estimate. The ledger, not this file, is the source of
+truth for what is proved.
 
-The manuscript lives in [`modules/kls/`](modules/kls/) and is organized in eight groups: an
-orientation to the conjecture, the August 2026 frontier and the covariance-spike obstruction; a
-self-contained survey of the five strategy families in the literature; the shared localization
-machinery; then one block per live route — the fixed-cut Eldan program, the fixed-eigenfunction
-spectral program, the deterministic moment-map/CMH program, and conditional-fiber frames — and a
-synthesis mapping each named gap onto an open ledger node.
+The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
+[conjecture-search-template](https://github.com/numina-functional-inequalities/conjecture-search-template)
+v0.2.0. Start every session that edits the repository by reading it.
 
-## Build
+## Layout
 
-Requires a TeX Live install with `latexmk`, `biber`, `subfiles`, `biblatex`.
-
-```bash
-latexmk -pdf -outdir=build main.tex          # the whole document → build/main.pdf
-```
-
-Individual modules also compile standalone; unresolved cross-references to other modules are
-expected in standalone builds.
-
-## Read it locally
-
-The site is a derived view — it is built from the tree, committed nowhere, and refuses to build
-a revision that does not validate. Building and serving it is one command, which holds the
-terminal and stops on Ctrl-C:
-
-```bash
-python3 scripts/site.py --serve          # build, then serve http://127.0.0.1:8000/
-python3 scripts/site.py --serve 8080     # same, on another port
-```
-
-To keep the terminal, run it in the background and stop it by the port it holds:
-
-```bash
-python3 scripts/site.py --serve &        # launch
-kill $(lsof -t -i:8000)                  # stop
-```
-
-Stop it by port rather than by name: `pkill -f "site.py --serve"` also matches the very shell
-command carrying that pattern, so it kills the caller along with the server.
-
-The manuscript and the dossiers are attached separately, and a missing one is a missing link
-rather than a missing claim — [`docs/PUBLISHING-THE-SITE.md`](docs/PUBLISHING-THE-SITE.md) has
-that step and the deployment path.
-
-## Repository map
-
-| content | source |
+| path | holds |
 |---|---|
-| master document and bibliography | [`main.tex`](main.tex), [`references.bib`](references.bib) |
-| manuscript modules | [`modules/kls/`](modules/kls/) |
-| claim ledger, problem brief, search portfolio | [`research/program/`](research/program/) |
-| search checkpoints, reviews, run artifacts | [`research/`](research/) |
-| standalone proof dossiers | [`solutions/`](solutions/) |
-| numerical diagnostics | [`experiments/`](experiments/) |
-| repository contribution contract | [`CLAUDE.md`](CLAUDE.md) |
+| [`modules/`](modules/) | the manuscript: every claim, as a labelled `prf:` directive; reading order in [`myst.yml`](myst.yml) |
+| [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
+| [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
+| [`research/reviews/`](research/reviews/) | independent proof reviews |
+| [`research/runs/`](research/runs/) | run output (JSONL, provenance on the first line) |
+| [`research/lib/`](research/lib/) | the shared numerics package `numerics`, its tests and its instance registry |
+| [`solutions/`](solutions/) | standalone proof and refutation dossiers |
+| [`site/`](site/) | the reader's site: exposition for mathematicians, at milestones |
+| [`.claude/agents/`](.claude/agents/) | the three roles: `researcher`, `reviewer` and `writer` |
+| [`templates/`](templates/) | an empty copy of each file genre |
+| [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
-Current claim counts, the unresolved frontier and what the search is doing are all derived:
+The repository was migrated from its v0.1 LaTeX harness on 2026-09-29;
+[`research/explorations/2026-09-29-migration-v0.2.0.md`](research/explorations/2026-09-29-migration-v0.2.0.md)
+says what was converted and how.
+
+## Setup and verify
+
+Needs [uv](https://docs.astral.sh/uv/), which provisions Python and PyYAML from
+`pyproject.toml`, and Node.js 18+ for MyST (pinned in `package.json`):
 
 ```bash
-python3 scripts/check.py            # every lane; 0 errors is the invariant
-python3 scripts/check.py status     # the unresolved frontier
-python3 scripts/check.py portfolio  # families, routes, blockers
-python3 scripts/check.py node conj:kls
+npm ci
+./scripts/check.sh               # the checker, the worked example, the unit tests
+uv run scripts/check.py         # full check; 0 errors required before any status change
+uv run scripts/check.py --fast  # research state only, no MyST build
+uv run scripts/check.py --stamp site/results.md   # after rereading a site page
+uv run scripts/check.py --drafts                  # the draft dossiers, never published
+npx myst start                   # read the site, the dossiers and the manuscript in a browser
 ```
 
-The full verification matrix, including the numerical suite and the standalone dossier builds, is
-[`scripts/check.sh`](scripts/check.sh). The checker validates structure, not mathematical
-correctness ([`CLAUDE.md`](CLAUDE.md) constraint 4).
+The numerics package has its own environment:
+
+```bash
+cd research/lib
+uv run pytest                    # the fast lane; `uv run pytest -m slow` for the rest
+uv run python -m numerics list   # the run targets
+```
+
+A green check establishes structure only; whether a proof is correct is the reviewer's job.
+The `site` workflow publishes the HTML site to GitHub Pages when dispatched by hand: it
+leaves out the draft dossiers, and publishes only if no site page is stale or unfinished
+(`check.py --site-strict`).

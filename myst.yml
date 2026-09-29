@@ -9,6 +9,7 @@
 version: 1
 project:
   title: The Kannan–Lovász–Simonovits Frontier
+  github: https://github.com/numina-functional-inequalities/kls-conjecture-search
   subtitle: Routes toward a dimension-free Poincaré constant for isotropic log-concave measures
   authors:
     - name:

@@ -3,15 +3,12 @@ title: About
 numbering: false
 ---
 
-% From templates/site/about.md. Fill in the contact address; the repository link comes
-% from project.github in myst.yml.
-
 ## How to contribute
 
 A contribution can be a proof, a counterexample, a partial result, a reference we missed,
 or a correction. Each problem card says where to start.
 
-- **By e-mail:** `<contact email>`.
+- **In discussion:** ask a question or think out loud in the project's [GitHub Discussions](https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions).
 - **On GitHub:** open an issue on the project repository, choosing the form that fits:
   an idea on an open problem, a counterexample, or a correction. Name the problem by the
   identifier its card gives.

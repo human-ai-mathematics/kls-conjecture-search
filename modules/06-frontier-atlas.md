@@ -65,7 +65,7 @@ Negative results are the most reusable part of a search, and four of them constr
 
 - **The natural conditional-fiber root frame fails.** Route F's most obvious implementation is refuted outright in Section [](#sec:conditional-fiber-frame), which is why the route is stated in terms of an all-frame question instead.
 
-Two further cautions are advisory rather than proved, and the ledger records them as `heuristic_barriers` for exactly that reason: the two-tail obstruction ([](#obs:two-tail)) and the circularity warning of Section [](#sec:excess). They guide work; they do not fence a claim.
+Two further cautions are advisory rather than proved, and the ledger records them as open `bounded_by` fences for exactly that reason: the two-tail obstruction ([](#obs:two-tail)) and the circularity warning of Section [](#sec:excess). They guide work; they do not fence a claim.
 
 (subsec:atlas-assessment)=
 ## Assessment of priorities
@@ -74,4 +74,4 @@ Of the four routes, Route S is the one best aligned with the known obstruction: 
 
 Route C is conceptually deeper and may ultimately be cleaner, since its endpoint is a single inequality with no stochastic apparatus at all — but the repository's own experience is that its difficulty concentrates in a commutator sum that has so far resisted dimension-free control. Route E is the most narrowly technical and the most clearly delimited, and it is the one on which this repository has proved the most, including the negative results. Route F is the youngest; its natural implementation is refuted and what remains is a genuine open question rather than a programme.
 
-One caution belongs beside all four. Three of the four cross-route targets of Section [](#sec:kls-synthesis) take $\kappa_n=O(1)$ as their starting point, and that input is an unreviewed version-1 preprint. Should it not survive review, the targets do not become wrong, but their premise reverts to $\CP\lesssim\log n$ and the arithmetic of every “remaining gap” claim changes. The ledger enforces this through `import_class: preprint-unreviewed`, which cannot underlie a node marked `proved`.
+One caution belongs beside all four. Three of the four cross-route targets of Section [](#sec:kls-synthesis) take $\kappa_n=O(1)$ as their starting point, and that input is an unreviewed version-1 preprint. Should it not survive review, the targets do not become wrong, but their premise reverts to $\CP\lesssim\log n$ and the arithmetic of every “remaining gap” claim changes. The ledger enforces this: the preprint's result is `open`, and a node marked `proved` cannot depend on an open node.
