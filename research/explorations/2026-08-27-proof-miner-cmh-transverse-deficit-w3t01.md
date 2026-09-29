@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:cmh-gamma-completion
-  - thm:cmh-product
-  - cor:cmh-dirichlet-surplus
-  - def:cmh
 ---
 # Proof mining: CMH product deficits and Dirichlet aggregation surplus
 

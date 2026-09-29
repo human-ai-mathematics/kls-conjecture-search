@@ -1,16 +1,23 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_bootstrap_author
 reviewer: /root/review_bootstrap_sync_w0
-nodes:
-  - thm:bootstrap
-solutions:
-  - solutions/kls-bootstrap-interface.tex
-follows_up: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+fingerprints:
+  solutions/kls-bootstrap-interface.md: d6d28dffa0742e79a6a11db2f959c4c03e1bdec07666ffd2f37ce7b2cde7c4c1
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
+  thm:bootstrap: a34953a684610320af30438bc889bde07aeeb4a809dd2816c4215b94cb23589e
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
+  lem:crude: 4596fedb12dae4093deded196b84f7f3f624d96f97cc69158a7eca583e997a6f
+  cor:loglog: cdef145554e599813a8c26aa76ff42159ac6c2d8e955770fb9194c896f3dbf6e
+  hyp:KI: 19c8922790211e205d6eda530efc90f61707e276482b5179d2254928e394f7c4
+  cor:KI-discharged: 2411e9c586f6ecbbb44f141b7f0b3a7733942614025262b49fcebc385b3f58d5
+  prop:ceiling: c7e236675ff7d66fb1c5a49176dc3bbf67d6c775106f721568f6790b67d42b16
+  lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64
 ---
+
+*Follows up* `research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md`.
 
 # Bootstrap semantic repair — cold proof review
 

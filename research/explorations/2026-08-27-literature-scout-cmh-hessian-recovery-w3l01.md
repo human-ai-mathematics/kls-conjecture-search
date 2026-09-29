@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: directional
-nodes:
-  - conj:kls
 ---
 # CMH Hessian recovery: literature audit for the linear quotient
 

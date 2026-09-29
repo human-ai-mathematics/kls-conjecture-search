@@ -1,14 +1,12 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_time_weighted_par_05
 reviewer: /root/review_time_weighted_cold_07
-nodes:
-  - lem:time-weighted-source
-solutions:
-  - solutions/lem-time-weighted-source.tex
+fingerprints:
+  solutions/lem-time-weighted-source.md: 46b4ef9cbcc2399a3b02fbbe43d04a5cd911898d103e304559f9865accfef525
+  lem:time-weighted-source: 8212ac2d323fe4a02b1e6494170068c8fe4b224b1c3f528538ad12162531d5ab
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
 ---
 
 # Scale-weighted all-cut source budget — independent proof review

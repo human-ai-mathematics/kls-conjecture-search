@@ -1,15 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: candidate
-approach: ap:cmh-gate-zero
-nodes:
-  - conj:gate-zero-sharp
-  - conj:gate-zero
-  - cor:cube-cone-gate-zero
-  - prop:cone-linear-sector
-  - prop:cone-moment-map
-  - rem:cmh-saturation-risk
 artifacts:
   - research/runs/2026-09-06T175558.606924Z-cmh-cone.jsonl
   - research/runs/2026-09-06T175611.501834Z-cmh-cone.jsonl

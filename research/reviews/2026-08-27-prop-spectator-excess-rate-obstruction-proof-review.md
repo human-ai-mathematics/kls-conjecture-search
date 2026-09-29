@@ -1,14 +1,15 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_spectator_excess_rate_w2
 reviewer: /root/review_spectator_excess_rate_w2
-nodes:
-  - prop:spectator-excess-rate-obstruction
-solutions:
-  - solutions/prop-spectator-excess-rate-obstruction.tex
+fingerprints:
+  solutions/prop-spectator-excess-rate-obstruction.md: 9596ce5965ea49a577a2294f2814c6c18ba72fb3c570c7d695c71e784cb0dfb7
+  prop:spectator-excess-rate-obstruction: 01dde6249073cccf904b9b0fcfa59aebf330ffeff4880e5b9850d36349c30d2a
+  prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
+  lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
 ---
 
 # Spectator excess-rate obstruction — independent proof review

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-24"
-outcome: directional
-nodes:
-  - q:mm-spectral-occupation
 ---
 # 2026-08-24 — Part III restructure: groups, literature survey, Route S promotion
 

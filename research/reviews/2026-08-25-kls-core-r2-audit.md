@@ -1,26 +1,24 @@
 ---
-type: proof-review
-date: "2026-08-25"
 verdict: pass
 authors:
   - /root/kls_core_author
 reviewer: /root/kls_bootstrap_author
-nodes:
-  - lem:survival-implies-kls
-  - lem:matrix-riccati
-  - thm:scalar-riccati
-  - cor:per-direction
-  - cor:away-from-zero
-  - lem:pathwise-BL
-  - cor:tight-window-consumption
-  - prop:qcts-equivalence
-  - prop:stein-rep
-  - lem:stein-vs-source
-  - prop:two-tail
-  - lem:boundary-rep
-solutions:
-  - solutions/kls-localization-riccati-core.tex
-  - solutions/kls-qcts-stein-boundary-core.tex
+fingerprints:
+  solutions/kls-localization-riccati-core.md: 45d34f81bd2b04c5ec437bdee5b8dbba845d26206e918bc78f31d5c15ba9a60f
+  lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64
+  lem:matrix-riccati: b529c0f736b4dce32a7843e81f8edb6569491781941e3b8aecdc1be0ddf7a023
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
+  cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
+  cor:tight-window-consumption: 1ac62104b9592220332d0755282d9302ee00de2a1907a4fdc6bfbfbdefea98ef
+  lem:pathwise-BL: 5b8de97a90772764778ad79fc4a9f56642c732304f4792a95b6cc493c7a95d6a
+  prop:stein-rep: 8b2dcc21aa724ba4cab407fe25ca694bb859f2269dfa45a85b76ab33c4dd9ec7
+  cor:away-from-zero: d15055503849fa299724c5cb1640fab8f4b60ebc491621b6ffb1d34480e0dd95
+  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
+  solutions/kls-qcts-stein-boundary-core.md: 61ca993ab0b90b1a077993bd35fc62131f132b57c8c1ccbb67fe94d29ec0d417
+  prop:qcts-equivalence: a2120cd5d1d4968432ea232d734c8f07c4542570f23684fd94a105e065fe246e
+  def:qcts: 0f22746bfd781ed526102c33b699417cb07ef6d9df40f0fb4ce59158e6376b86
+  lem:boundary-rep: ff30662883be389e1b46850e59c69444e6a6c042773b6c070f19eecba03e8f25
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
 ---
 
 # KLS localization, Riccati, QCTS, Stein, and boundary core — independent R2 audit

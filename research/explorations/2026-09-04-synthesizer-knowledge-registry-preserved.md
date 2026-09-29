@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-09-04"
-outcome: directional
-nodes:
-  - conj:kls
-  - prop:letwin-not-gate-zero
-  - prop:split-screened-supply
 ---
 
 # Synthesizer: the reusable-facts registry, preserved at the harness migration

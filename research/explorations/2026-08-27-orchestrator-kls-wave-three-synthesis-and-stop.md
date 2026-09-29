@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:upgrade
-  - q:stein-weighted
 ---
 # KLS Wave 3 synthesis and stopping checkpoint
 

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:mm-spectral-occupation
 ---
 # Route-S probe: rank tails do not control the energy-weighted spectral residue
 

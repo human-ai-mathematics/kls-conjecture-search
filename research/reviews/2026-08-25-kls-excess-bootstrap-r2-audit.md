@@ -1,25 +1,28 @@
 ---
-type: proof-review
-date: "2026-08-25"
 verdict: pass
 authors:
   - /root/kls_bootstrap_author
 reviewer: /root/kls_core_author
-nodes:
-  - prop:intro-audit
-  - prop:trivial-excess
-  - lem:perimeter-martingale
-  - lem:excess-identity
-  - lem:inf-martingales
-  - lem:half
-  - lem:crude
-  - cor:loglog
-  - lem:whitening
-  - prop:ceiling
-  - thm:bootstrap
-solutions:
-  - solutions/kls-excess-audit.tex
-  - solutions/kls-bootstrap-interface.tex
+fingerprints:
+  solutions/kls-bootstrap-interface.md: d6d28dffa0742e79a6a11db2f959c4c03e1bdec07666ffd2f37ce7b2cde7c4c1
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
+  thm:bootstrap: a34953a684610320af30438bc889bde07aeeb4a809dd2816c4215b94cb23589e
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
+  lem:crude: 4596fedb12dae4093deded196b84f7f3f624d96f97cc69158a7eca583e997a6f
+  cor:loglog: cdef145554e599813a8c26aa76ff42159ac6c2d8e955770fb9194c896f3dbf6e
+  hyp:KI: 19c8922790211e205d6eda530efc90f61707e276482b5179d2254928e394f7c4
+  cor:KI-discharged: 2411e9c586f6ecbbb44f141b7f0b3a7733942614025262b49fcebc385b3f58d5
+  prop:ceiling: c7e236675ff7d66fb1c5a49176dc3bbf67d6c775106f721568f6790b67d42b16
+  lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64
+  solutions/kls-excess-audit.md: de112ea292c3cbd8585e427ea8914ea72a0d04f24e34ec2a7202a9a1b951a318
+  prop:intro-audit: 725e710614b53ac4033b72c3d62819665b30309c37bac865f7ec40e229addadb
+  prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
+  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
+  cor:tight-window-consumption: 1ac62104b9592220332d0755282d9302ee00de2a1907a4fdc6bfbfbdefea98ef
+  lem:excess-identity: f131066c290e6c26f2de7acbdbff70216e8fb3fceb81b4ab5a6fe42b1be7096d
+  lem:inf-martingales: 3a548b25863f6597c2c6a66b30d9a6684c865e0d7611ad0a74ad87f2a339b265
 ---
 
 # KLS excess and bootstrap interface — independent R2 audit

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - prop:split-screened-supply
 ---
 # Proof-checker: cold review of the split-class screened supply dossier
 

@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: candidate
-approach: ap:cmh-gate-zero
-nodes:
-  - conj:gate-zero-sharp
-  - prop:cone-moment-map
-  - lem:linear-sector-third-moment
 candidates:
   - id: cand:directional-h-minus-one-two
     statement: >-

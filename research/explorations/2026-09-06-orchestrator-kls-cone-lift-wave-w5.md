@@ -1,18 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: proposed
-nodes:
-  - conj:gate-zero-sharp
-  - lem:linear-sector-third-moment
-  - cor:gate-zero-third-moment
-  - def:exponential-cone
-  - prop:cone-moment-map
-  - prop:cone-linear-sector
-  - cor:cube-cone-gate-zero
-  - lem:cmh-linear-spectral-resolution
-  - lem:fiber-root-degree-two
-  - conj:gate-zero
 artifacts:
   - research/runs/2026-09-06T175558.606924Z-cmh-cone.jsonl
   - research/runs/2026-09-06T175611.501834Z-cmh-cone.jsonl

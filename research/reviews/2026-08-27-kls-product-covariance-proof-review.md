@@ -1,19 +1,20 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_proof_audit
   - /root/repair_product_dossier
 reviewer: /root/review_product_w0
-nodes:
-  - lem:block
-  - thm:budget
-  - cor:refutation
-  - lem:product-qcts
-  - cor:KI-discharged
-solutions:
-  - solutions/kls-product-covariance.tex
+fingerprints:
+  solutions/kls-product-covariance.md: 5c6ad1f7a7977833526828aadc086cd693b693db7e0c84f914761d930a8733c5
+  lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
+  thm:budget: 747881527155d39703c8dbb3a198afcd2c3686e5258ead72eb805f874e1bc196
+  cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  cor:refutation: a2c37c9af99364cba7d605fb2b24dc4f9425b04284f5bb964c54db6c6614e4a8
+  lem:product-qcts: 93f2e2a3230253762243cd991c55f11de59b986c8daf848ecd044256ef2302eb
+  cor:KI-discharged: 2411e9c586f6ecbbb44f141b7f0b3a7733942614025262b49fcebc385b3f58d5
+  thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
 ---
 
 # Product coordinate budgets and covariance window — independent proof review

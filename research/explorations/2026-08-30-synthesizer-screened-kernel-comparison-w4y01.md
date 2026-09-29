@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - ass:tight-prefix-carleson
-  - q:weighted
-  - q:upgrade
-  - q:stein-weighted
 ---
 # Synthesis: the aligned initial-layer kernel versus the tight-prefix Carleson estimate
 

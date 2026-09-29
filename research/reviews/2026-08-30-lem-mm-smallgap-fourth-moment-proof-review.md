@@ -1,14 +1,12 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - claude-prover-w4p02
-nodes:
-  - lem:mm-smallgap-fourth-moment
-solutions:
-  - solutions/lem-mm-smallgap-fourth-moment.tex
 reviewer: proof-checker-w4r03
+fingerprints:
+  solutions/lem-mm-smallgap-fourth-moment.md: 48f2df0ba2c9c3419e7b17e1d38a30324888e5cd3874d8c2c594ea28b08a55f3
+  lem:mm-smallgap-fourth-moment: f91a8ade308baed067fd9db6467be25055bb3924009dd295e766988dbc53b3d6
+  thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
 ---
 
 # Small-gap fourth-moment bootstrap — independent proof review

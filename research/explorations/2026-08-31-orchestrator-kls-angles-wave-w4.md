@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-31"
-outcome: proposed
-nodes:
-  - prop:mm-window-occupation
-  - thm:letwin-qcts
-  - lem:mm-stopped-window-source
-  - prop:split-screened-supply
 ---
 # Orchestrator: KLS angles-of-attack wave `w4` — outcomes, interruption, resume queue
 

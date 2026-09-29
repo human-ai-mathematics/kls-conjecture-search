@@ -1,6 +1,4 @@
 ---
-type: audit
-date: "2026-08-25"
 ---
 
 # Route C CMH normalization and exact cases — independent adversarial audit

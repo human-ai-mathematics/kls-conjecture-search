@@ -15,7 +15,7 @@ output guides exploration; it never changes a ledger status or certifies a proof
 - A finite battery can expose a bug or an obstruction. Passing it proves nothing universal.
 
 The canonical, human-reviewed instance registry is
-[`research/instances.md`](../research/instances.md). It is not executable
+[`instances.md`](instances.md). It is not executable
 configuration; target modules own their effective battery and record it in each artifact.
 
 ## Commands
@@ -66,8 +66,8 @@ files are never overwritten. The lines are:
 3. one `run-summary` record containing derived run-level outputs.
 
 An artifact converted from an older schema additionally carries `migrated_from.path` under
-`research/legacy-runs/` and the source file's SHA-256. The checker verifies both; the legacy source
-is immutable provenance rather than an active artifact.
+`research/legacy-runs/` and the source file's SHA-256. That directory was removed in the v0.2.0
+migration; the sources stay in git history (`git show 34b5fcd:research/legacy-runs/<file>`).
 
 Inputs never share a mapping with derived results. The current envelope version is
 `numerics.contract.ARTIFACT_SCHEMA_VERSION`. Historical artifacts are append-only and are not

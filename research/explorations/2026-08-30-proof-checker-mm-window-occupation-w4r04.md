@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - prop:mm-window-occupation
-  - thm:letwin-qcts
-  - thm:klartag-logn
-  - prop:covariance-spike
 ---
 # Cold proof review: prop:mm-window-occupation assembly dossier (w4r04)
 

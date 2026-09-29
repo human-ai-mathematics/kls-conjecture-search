@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: proposed
-approach: ap:cmh-gate-zero
-nodes:
-  - lem:linear-sector-third-moment
-  - cor:gate-zero-third-moment
 ---
 # Researcher (`prove`): dossier for `lem:linear-sector-third-moment` and `cor:gate-zero-third-moment`
 

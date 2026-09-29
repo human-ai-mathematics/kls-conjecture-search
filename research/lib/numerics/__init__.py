@@ -1,6 +1,6 @@
 """numerics — the numerical channel for the KLS program.
 
-Role (see ../research/README.md, complementary refinement and proof channels):
+Role (see SPECIFICATION.md, Formats → Run, complementary refinement and proof channels):
   * Refine KLS *sub-statements* and gate or refute proof *approaches*
     (research/program/portfolio.yaml): produce a provenance-stamped diagnostic artifact.
     Numerics NEVER promote a statement to proved.

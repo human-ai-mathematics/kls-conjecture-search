@@ -1,17 +1,28 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_ledger_audit
   - /root/repair_cmh_hodge_domain_w3
 reviewer: /root/review_cmh_gamma_dependency_w3
-nodes:
-  - lem:cmh-gamma-completion
-solutions:
-  - solutions/thm-cmh-dirichlet.tex
-follows_up: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+fingerprints:
+  solutions/thm-cmh-dirichlet.md: 00e9585188cbec4718447563f778bc889eaa0670b93c06aa38646db3f018530d
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
+  thm:cmh-product: 93367af0f91020a7189581ccf6821eafd93c5bb734d06bfb114187be354d08a7
+  cor:cmh-linear-images: 4a8e460a9f137e2c3bfcd012669e8a658f242d5dcd19ba480849ffc13abef452
+  lem:cmh-gamma-completion: 322e41a5312dc60bb984ccaa9e90cf3ba7598ef853f353546520666f45aa8a33
+  prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
+  lem:cmh-row-min: 3747422f61e31d367dbc910511a078a463c6440ae445f61324e00e45f812e05f
+  lem:cmh-angular-coefficient: b2dd0851b76505e3182d0b1472b8d5102a420f78b16abdb8ae23fde0456de475
+  thm:cmh-dirichlet: 0950144e400e4a077e8ae82686d149d0a736b6ec651e7c588e4e867146a8db94
+  cor:cmh-dirichlet-surplus: fdd4f0dcfccd11cb61eceeec922bc50c8ed87bb4a9faa496901201eef7ea9424
+  cor:cmh-dirichlet-poincare: 0295ebca6004666831c2db752ae739c062b86f6097e7b9f5152902d1765820c6
+  thm:cmh-implies-affine-poincare: 96fd21faf9d64d72f98fb884b57bd648952eba813b3c71eba4c32088571bb433
+  rem:cmh-saturation-risk: b351cc2eaaa19b5153b4057c701461e2ea5c0cdc8f1d4b8ab95b3b8c0aa05aa9
+  prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
 ---
+
+*Follows up* `research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md`.
 
 # CMH Gamma--Bochner provenance repair -- independent supplementary review
 

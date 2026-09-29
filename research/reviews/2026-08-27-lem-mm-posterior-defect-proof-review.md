@@ -1,14 +1,11 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_posterior_defect_par_06
 reviewer: /root/review_posterior_defect_cold_08
-nodes:
-  - lem:mm-posterior-defect
-solutions:
-  - solutions/lem-mm-posterior-defect.tex
+fingerprints:
+  solutions/lem-mm-posterior-defect.md: 26c20b59d333aae147e375d991c732d64ce0875d198743f9529cf4777b04d1d9
+  lem:mm-posterior-defect: 355e6dc85e241fe8049eab66d9647ed41cb8b0f48e9ce3292c439935a75acecd
 ---
 
 # Posterior eigenfunction-defect calculus — independent proof review

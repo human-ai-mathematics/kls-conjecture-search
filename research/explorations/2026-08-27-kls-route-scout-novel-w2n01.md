@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - conj:kls
 ---
 # KLS route scout W2-N01: intrinsic cone-boundary spectral gap
 

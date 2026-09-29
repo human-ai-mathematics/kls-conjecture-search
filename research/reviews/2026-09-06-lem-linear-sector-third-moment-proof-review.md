@@ -1,15 +1,12 @@
 ---
-type: proof-review
-date: "2026-09-06"
 verdict: pass
 authors:
   - /w5/researcher-third-moment
 reviewer: /w5/reviewer-third-moment
-nodes:
-  - lem:linear-sector-third-moment
-  - cor:gate-zero-third-moment
-solutions:
-  - solutions/lem-linear-sector-third-moment.tex
+fingerprints:
+  solutions/lem-linear-sector-third-moment.md: 801ac93f8d94a0f48efbaad9aa39e9a5cf3ccae28497cd45bd2e7e105f8f47ec
+  lem:linear-sector-third-moment: 122a338f320d18fff5277c8a6d115a887a3e34219e10bc02cfec6c07319c2db7
+  cor:gate-zero-third-moment: 8ce2b303350d3cb2ee258251dc5a644f3b518c5bce6efa2369d129b50ff389a2
 ---
 
 # The linear sector and the third moment — independent certification review

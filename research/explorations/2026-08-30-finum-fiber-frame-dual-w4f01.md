@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: directional
-nodes:
-  - q:conditional-fiber-frame
 ---
 # finum: fiber-frame-dual — all-frame simplex min-max library for `conditional-fiber-frame`
 

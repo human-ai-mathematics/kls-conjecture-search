@@ -1,17 +1,21 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_weighted_spectator_obstruction
   - /root/repair_weighted_spectator_w0r2
 reviewer: /root/review_weighted_spectator_w0r2
-nodes:
-  - prop:weighted-spectator-obstruction
-solutions:
-  - solutions/prop-weighted-spectator-obstruction.tex
-follows_up: research/reviews/2026-08-27-prop-weighted-spectator-obstruction-proof-review.md
+fingerprints:
+  solutions/prop-weighted-spectator-obstruction.md: cc9f7110c4e9d869472e4feee4bdd3e753e6f5a22aff99c0b262895b6aa1b261
+  prop:weighted-spectator-obstruction: 43186945070f01440b94ed29e452f474290ea070a94c9874921fbc1b8e3329ab
+  prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
+  lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  ass:weighted-package: f916708933f4ae70aafa69f26c84f8c0e7b52cb4a1558108d192fb80bcce2f95
+  q:weighted: 60cd33f3e512ec8005eea236cdb2dfe8198f8248c0f2236fdfcf0febf02f95fb
 ---
+
+*Follows up* `research/reviews/2026-08-27-prop-weighted-spectator-obstruction-proof-review.md`.
 
 # Exponential-spectator obstruction repair — independent proof review
 

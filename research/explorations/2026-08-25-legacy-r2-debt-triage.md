@@ -1,6 +1,4 @@
 ---
-type: audit
-date: "2026-08-25"
 ---
 
 # Legacy R2 debt — schema and mathematical triage

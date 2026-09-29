@@ -1,14 +1,13 @@
 ---
-type: proof-review
-date: "2026-09-06"
 verdict: pass
 authors:
   - "prover agent (Claude Fable 5), run id w4p04"
 reviewer: /w5/reviewer-fiber-root
-nodes:
-  - lem:fiber-root-degree-two
-solutions:
-  - solutions/lem-fiber-root-degree-two.tex
+fingerprints:
+  solutions/lem-fiber-root-degree-two.md: 7a84545d797f14dc11b40d269b923a40da35b642a01112f7c15c582cbd9bd556
+  lem:fiber-root-degree-two: 90520f6c6b8600a7af6b68361ef0bba613c131e07c2dac7602855b26e4a59fed
+  lem:conditional-fiber-form: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b
+  prop:conditional-fiber-root-obstruction: e0a5f377615350c463031a1921a94c7ec6000a2e4e456454a91ede6be4f239e0
 ---
 
 # Degree-two root-frame pencil identity — independent certification review

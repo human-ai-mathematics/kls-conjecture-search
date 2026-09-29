@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - thm:letwin-qcts
-  - q:mm-spectral-occupation
-  - thm:klartag-logn
-  - lem:mm-time-weighted-fixed-source
 ---
 # Prover: the Route-S window chain — four candidate dossiers (stopped source, restart deweighting, small-gap fourth moment, window occupation)
 

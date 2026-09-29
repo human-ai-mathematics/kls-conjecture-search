@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:conditional-fiber-form
-  - thm:cmh-1d
 ---
 # KLS route probe: conditional fiber frames
 

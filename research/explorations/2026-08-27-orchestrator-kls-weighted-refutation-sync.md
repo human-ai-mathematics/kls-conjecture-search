@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: directional
-nodes:
-  - prop:weighted-spectator-obstruction
 ---
 # KLS weighted-package refutation sync
 

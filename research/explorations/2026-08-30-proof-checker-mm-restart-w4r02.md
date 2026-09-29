@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - lem:mm-restart-deweighting
-  - lem:mm-time-weighted-fixed-source
 ---
 # Proof-checker: cold review of the restart-deweighting dossier (w4r02)
 

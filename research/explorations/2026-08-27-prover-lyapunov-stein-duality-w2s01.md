@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:lyapunov-stein-duality
 ---
 # Prover: cut-oriented Lyapunov--Stein duality (wave 2, S01)
 

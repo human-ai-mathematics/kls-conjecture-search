@@ -1,6 +1,4 @@
 ---
-type: audit
-date: "2026-08-24"
 ---
 
 # KLS route consolidation — independent audit

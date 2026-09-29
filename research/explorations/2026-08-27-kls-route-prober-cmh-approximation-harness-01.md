@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: dead-end
-nodes:
-  - q:cmh-approximation
 ---
 # KLS route probe: CMH approximation closure
 

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - prop:two-tail
 ---
 # Prover repair: cut-oriented Lyapunov--Stein duality (wave 2, S02)
 

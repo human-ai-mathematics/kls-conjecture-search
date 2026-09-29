@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-approach: ap:cmh-anisotropic-bootstrap
-outcome: proposed
-nodes:
-  - ass:cmh-recovery-envelope
 ---
 # KLS route probe: the anisotropic bootstrap $(\mathrm{AB})_{\rho,\beta}$ and the spectral resolution of $\mathsf N,\mathsf D,\mathsf R$
 

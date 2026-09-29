@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: proposed
-approach: ap:cmh-gate-zero
-nodes:
-  - prop:cone-moment-map
-  - prop:cone-linear-sector
-  - cor:cube-cone-gate-zero
 ---
 
 # Researcher (prove lens, repair round): the exponential-cone dossier after audit w5r04

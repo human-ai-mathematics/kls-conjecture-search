@@ -13,7 +13,7 @@ This calibrates the route-agnostic analytic facts stated in the manuscript:
     obstruction ``obs:rank-one-refuted``.
 The localization quantities (source occupation for q:upgrade, q:alignment, weighted Stein) live in the companion
 target `loc-engine` (`numerics.targets.kls.loc_engine`) on top of `numerics.localization` — see
-experiments/README.md.
+research/lib/README.md.
 """
 from __future__ import annotations
 
@@ -110,7 +110,7 @@ def run_records(seed: int = 0, d: int = 4):
                     "bridge_comparison": v_bridge.dict(),
                     "isotropic_lower_bound_comparison": v_refuter.dict(),
                     "companion": "localization quantities (q:upgrade source, q:alignment, weighted Stein) "
-                                 "=> target 'loc-engine' on numerics.localization; see experiments/README.md"})
+                                 "=> target 'loc-engine' on numerics.localization; see research/lib/README.md"})
     return RunResult(lift_observations(records), config={"d": d},
                      summary={"calibration_passed": cal_ok, "realized_K_max": K_max})
 

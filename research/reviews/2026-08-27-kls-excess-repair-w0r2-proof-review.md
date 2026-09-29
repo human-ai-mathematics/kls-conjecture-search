@@ -1,21 +1,23 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_bootstrap_author
   - /root/repair_excess_dossier
 reviewer: /root/review_excess_repair_w0r2
-nodes:
-  - prop:intro-audit
-  - prop:trivial-excess
-  - lem:perimeter-martingale
-  - lem:excess-identity
-  - lem:inf-martingales
-solutions:
-  - solutions/kls-excess-audit.tex
-follows_up: research/reviews/2026-08-27-kls-excess-repair-w0-audit.md
+fingerprints:
+  solutions/kls-excess-audit.md: de112ea292c3cbd8585e427ea8914ea72a0d04f24e34ec2a7202a9a1b951a318
+  prop:intro-audit: 725e710614b53ac4033b72c3d62819665b30309c37bac865f7ec40e229addadb
+  prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
+  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
+  cor:tight-window-consumption: 1ac62104b9592220332d0755282d9302ee00de2a1907a4fdc6bfbfbdefea98ef
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
+  lem:excess-identity: f131066c290e6c26f2de7acbdbff70216e8fb3fceb81b4ab5a6fe42b1be7096d
+  lem:inf-martingales: 3a548b25863f6597c2c6a66b30d9a6684c865e0d7611ad0a74ad87f2a339b265
 ---
+
+*Follows up* `research/reviews/2026-08-27-kls-excess-repair-w0-audit.md`.
 
 # KLS perimeter/excess repair W0R2 — cold proof review
 

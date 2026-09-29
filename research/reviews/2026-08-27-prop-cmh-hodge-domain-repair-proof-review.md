@@ -1,18 +1,21 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_proof_audit
   - /root/repair_cmh_hodge_domain_w3
 reviewer: /root/review_cmh_hodge_domain_w3
-nodes:
-  - prop:cmh-hodge
-  - rem:cmh-stronger-than-kls
-solutions:
-  - solutions/thm-cmh-normalization.tex
-follows_up: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+fingerprints:
+  solutions/thm-cmh-normalization.md: e46056f3b5044d2d4c8690907be9d6188b19d9093670e47c96c2691aa6fc28c5
+  prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
+  def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
+  thm:cmh-implies-affine-poincare: 96fd21faf9d64d72f98fb884b57bd648952eba813b3c71eba4c32088571bb433
+  prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
+  rem:cmh-stronger-than-kls: 4dbc77dbed1e4d03bd27114fefafe97135813504830f692d0aef4a581aecee11
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  prop:letwin-not-gate-zero: d01d5a5df0ca378b977846fd59185615903c42ec4bf019d71ebb41b5bf8e7c3a
 ---
+
+*Follows up* `research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`.
 
 # CMH Hodge operator-domain repair — independent supplementary review
 

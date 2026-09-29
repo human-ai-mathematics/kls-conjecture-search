@@ -1,13 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:block
-  - thm:budget
-  - cor:refutation
-  - lem:product-qcts
-  - cor:KI-discharged
 ---
 # Prover repair: product covariance dossier
 

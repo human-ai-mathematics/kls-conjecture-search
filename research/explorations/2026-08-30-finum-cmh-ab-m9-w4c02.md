@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: directional
-nodes:
-  - q:cmh-solenoidal-perturbation
 ---
 # finum: the CMH anisotropic bootstrap $(\mathsf N,\mathsf D,\mathsf R)$ and the M9 probe
 

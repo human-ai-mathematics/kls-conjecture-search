@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - q:weighted
 ---
 # KLS route probe: the source-screened weighted interface, audited and partially proved
 

@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:mm-time-weighted-fixed-source
-  - q:mm-spectral-occupation
 ---
 # Prover: time-weighted fixed-function source budget (wave 0, S02)
 

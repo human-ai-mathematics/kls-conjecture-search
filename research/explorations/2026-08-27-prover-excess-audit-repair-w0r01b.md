@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - prop:trivial-excess
-  - lem:perimeter-martingale
-  - prop:intro-audit
-  - lem:excess-identity
 ---
 # Excess-audit dossier repair W0R01b
 

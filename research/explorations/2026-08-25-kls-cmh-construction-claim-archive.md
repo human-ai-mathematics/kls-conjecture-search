@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - thm:cmh-1d
 ---
 # Archived CMH construction claim inventory
 

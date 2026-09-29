@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: directional
-nodes:
-  - q:weighted
 ---
 # finum: cut-local screened supply on the product tail-union model (`kls-screen`)
 

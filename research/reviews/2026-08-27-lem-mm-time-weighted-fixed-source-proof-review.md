@@ -1,14 +1,11 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_mm_weighted_source
 reviewer: /root/review_mm_weighted_source_w0
-nodes:
-  - lem:mm-time-weighted-fixed-source
-solutions:
-  - solutions/lem-mm-time-weighted-fixed-source.tex
+fingerprints:
+  solutions/lem-mm-time-weighted-fixed-source.md: 6a4ca4838c412bac26190b664b0b516e7797e36eed3658ab3a24f448654d6281
+  lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---
 
 # Time-weighted fixed-function source budget — independent proof review

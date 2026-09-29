@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - prop:split-screened-supply
 ---
 # Prover: dossier for the split-class screened weighted supply
 

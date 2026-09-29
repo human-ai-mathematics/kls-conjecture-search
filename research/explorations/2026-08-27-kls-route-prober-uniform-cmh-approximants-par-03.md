@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: dead-end
-nodes:
-  - ass:uniform-cmh-approximants
 ---
 # KLS route probe: uniform CMH on the certified approximants
 

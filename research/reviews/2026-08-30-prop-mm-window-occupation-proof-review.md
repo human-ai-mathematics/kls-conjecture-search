@@ -1,14 +1,18 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r04
-nodes:
-  - prop:mm-window-occupation
-solutions:
-  - solutions/prop-mm-window-occupation.tex
+fingerprints:
+  solutions/prop-mm-window-occupation.md: 596c2b5f3852a398cb31b013ab2a547e5e09e965050b6db4f03a70598f16bba2
+  prop:mm-window-occupation: 9fdd6a832622d943cf07b8380f89196be51e45f1782ab0a77aac5475e5a13c14
+  thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
+  thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
+  lem:mm-stopped-window-source: 89ef3541a93b0afbe6b5c307413663352d630c6a301f6f79799bf67c954f3795
+  lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20
+  lem:mm-smallgap-fourth-moment: f91a8ade308baed067fd9db6467be25055bb3924009dd295e766988dbc53b3d6
+  lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
+  thm:letwin-qcts: 8e2ac0819f46db553fe83a6f3034436816565262316c2e6bde7d81baead1a082
 ---
 
 # Window occupation and Route-S polylog reproduction — independent proof review

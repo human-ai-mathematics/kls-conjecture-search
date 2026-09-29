@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: dead-end
-nodes:
-  - thm:cmh-1d
 ---
 # Triage of the directional-quotient exploration: SC4, Dirichlet SC1, radial capacity, preferred-direction localization
 

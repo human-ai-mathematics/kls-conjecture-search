@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:cmh-approximation
-  - thm:regular-moment-map-compact-target
-  - thm:cmh-implies-affine-poincare
 ---
 # Literature audit: regular moment-map approximants for CMH closure
 

@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - ass:cmh-recovery-envelope
-  - cor:cmh-recovery-sequence-suffices
-  - def:cmh
-  - lem:affine-poincare-w2-liminf
 ---
 # CMH recovery sequence and affine-Poincaré $W_2$ lower semicontinuity
 

@@ -1,14 +1,12 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r02
-nodes:
-  - lem:mm-restart-deweighting
-solutions:
-  - solutions/lem-mm-restart-deweighting.tex
+fingerprints:
+  solutions/lem-mm-restart-deweighting.md: aa8d92e36ac2b1dfe9f8f473f959befaad162bef96c50494a79de4fab80bf05e
+  lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20
+  lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---
 
 # Restart deweighting at a stopping time — independent proof review

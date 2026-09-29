@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - thm:bootstrap-stopped-interface
 ---
 # Prover attempt: stopped bootstrap covariance interface
 

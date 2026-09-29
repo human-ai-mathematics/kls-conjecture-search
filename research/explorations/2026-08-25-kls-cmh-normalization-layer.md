@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - conj:gate-zero
-  - thm:cmh-dirichlet
-  - cor:cmh-dirichlet-surplus
-  - def:cmh
 ---
 # KLS Route C: the CMH normalization layer, its exact classes, and its two new failure modes
 

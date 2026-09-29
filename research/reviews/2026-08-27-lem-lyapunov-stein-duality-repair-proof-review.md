@@ -1,17 +1,17 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_lyapunov_stein_duality_w2
   - /root/repair_lyapunov_stein_duality_w2
 reviewer: /root/review_lyapunov_stein_duality_w2
-nodes:
-  - lem:lyapunov-stein-duality
-solutions:
-  - solutions/lem-lyapunov-stein-duality.tex
-follows_up: research/reviews/2026-08-27-lem-lyapunov-stein-duality-proof-review.md
+fingerprints:
+  solutions/lem-lyapunov-stein-duality.md: ae84f79fdf8592f8f30915efe881a59ff99cae41befb5a5bd2fcd0a6a80c68ff
+  lem:lyapunov-stein-duality: 053e29d7fe7f570d943da7b4c27630eed5d4519a07957ef9b8374692fd518213
+  lem:pathwise-BL: 5b8de97a90772764778ad79fc4a9f56642c732304f4792a95b6cc493c7a95d6a
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
 ---
+
+*Follows up* `research/reviews/2026-08-27-lem-lyapunov-stein-duality-proof-review.md`.
 
 # Cut-oriented Lyapunov--Stein duality — repaired proof review
 

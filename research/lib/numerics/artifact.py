@@ -34,7 +34,7 @@ def repo_root() -> Path:
         if (parent / "research").is_dir() and (parent / "modules").is_dir():
             return parent
     top = _git("rev-parse", "--show-toplevel")
-    return Path(top) if top else here.parents[2]
+    return Path(top) if top else here.parents[3]
 
 
 def runs_dir() -> Path:

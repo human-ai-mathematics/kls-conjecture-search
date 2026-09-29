@@ -1,14 +1,19 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - prover-w4p01
 reviewer: proof-checker-w4r01
-nodes:
-  - prop:split-screened-supply
-solutions:
-  - solutions/prop-split-screened-supply.tex
+fingerprints:
+  solutions/prop-split-screened-supply.md: 2591f4f57fd0030fc70b963d0f6575dbe669bd8f39b7d0f2f2c083dba69bb9c7
+  prop:split-screened-supply: dfd38fbdcb30173c9de73ef0548adaf29b6b6ebfc73ac5e32f7ca9d6083790cb
+  prop:stein-rep: 8b2dcc21aa724ba4cab407fe25ca694bb859f2269dfa45a85b76ab33c4dd9ec7
+  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
+  lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
+  cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
+  lem:lyapunov-stein-duality: 053e29d7fe7f570d943da7b4c27630eed5d4519a07957ef9b8374692fd518213
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
 ---
 
 # Split-class screened weighted supply — independent proof review

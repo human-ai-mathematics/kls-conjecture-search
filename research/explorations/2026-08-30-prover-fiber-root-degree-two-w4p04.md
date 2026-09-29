@@ -1,13 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-approach: ap:fiber-simplex-dual
-outcome: proposed
-nodes:
-  - prop:conditional-fiber-root-obstruction
-  - lem:conditional-fiber-form
-  - lem:fiber-root-degree-two
-  - q:conditional-fiber-frame
 ---
 # Prover: degree-two root-frame pencil identity (candidate node lem:fiber-root-degree-two)
 

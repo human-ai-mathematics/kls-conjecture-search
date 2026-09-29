@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-approach: ap:spectral-window-chain
-outcome: proposed
-nodes:
-  - q:mm-spectral-occupation
 ---
 # Route-S probe: the initial layer closes up to the covariance window; the residue is one post-spike charge
 

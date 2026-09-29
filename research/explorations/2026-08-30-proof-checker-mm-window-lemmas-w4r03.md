@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - thm:klartag-logn
-  - lem:mm-smallgap-fourth-moment
-  - lem:mm-stopped-window-source
-  - thm:letwin-qcts
 ---
 # Proof-checker: cold review of two Route-S window-chain dossiers (stopped source, small-gap fourth moment)
 

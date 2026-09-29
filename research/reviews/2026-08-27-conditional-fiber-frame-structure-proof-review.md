@@ -1,15 +1,13 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_conditional_fiber_structure_w3
 reviewer: /root/review_conditional_fiber_structure_w3
-nodes:
-  - lem:conditional-fiber-form
-  - prop:conditional-fiber-root-obstruction
-solutions:
-  - solutions/conditional-fiber-frame-structure.tex
+fingerprints:
+  solutions/conditional-fiber-frame-structure.md: 6c960a309afee30be04a30c3f4c6bf3a5b5de8b526771b18e7333ab5b60947a6
+  lem:conditional-fiber-form: 165238918db5e698e1b4b0515048915581b3d87aeb43c4b46bcdd41f468e878b
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  prop:conditional-fiber-root-obstruction: e0a5f377615350c463031a1921a94c7ec6000a2e4e456454a91ede6be4f239e0
 ---
 
 # Conditional-fiber form structure and simplex root obstruction — independent review

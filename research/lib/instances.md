@@ -3,7 +3,7 @@
 This is the canonical registry used to keep research diagnostics comparable. Calibration
 instances have an analytic oracle; stress instances expose a named failure mode. Passing either
 tier validates neither a claim nor a proof. The numerical-validity and provenance rules live in
-[`../experiments/README.md`](../experiments/README.md).
+[`README.md`](README.md).
 
 The `numerics` column gives `target / emitted instance id`. An em dash means that the mathematical
 instance is registered but has no backend. When a backend exists, its emitted id is canonical.
