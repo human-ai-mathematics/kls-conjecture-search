@@ -1,0 +1,311 @@
+---
+title: 'Solution candidate: restart deweighting at a stopping time'
+label: sec:sol-lem-mm-restart-deweighting
+ledger-node: lem:mm-restart-deweighting
+numbering:
+  enumerator: D15.%s
+---
+
+**Overview.** This dossier proves [](#lem:mm-restart-deweighting) as [](#thm:sol-lem-mm-restart-deweighting), unconditionally. For a regular approximant, a fixed test $f\in L^2(\mu)$ and a stopping time $\sigma>0$, the conditional unweighted source after $\sigma$ is at most $\Var_{\mu_\sigma}(f)/(\varepsilon+\sigma)\le v_\sigma/\sigma$ ([](#eq:sol-rdw-main)). The proof restarts the planted channel at $\sigma$ with the posterior as new prior and applies [](#lem:mm-time-weighted-fixed-source) with curvature $\kappa=\varepsilon+\sigma$, conditionally on $\mathcal F_\sigma$. No unweighted statement at time zero is made.
+
+1. The pathwise tilt kernel [](#eq:sol-rdw-kernel) is identified with the posterior at fixed times ([](#eq:sol-rdw-bayes)). By dyadic approximation it is also identified at optional times ([](#eq:sol-rdw-optional)), so $\mu_\sigma$ is a regular conditional distribution and $f\in L^2(\mu_\sigma)$.
+2. $\mu_\sigma$ is smooth and $(\varepsilon+\sigma)$-strongly log-concave, so it lies in the admissible class of the time-weighted lemma.
+3. The innovation process is an $(\mathcal F_t)$-Brownian motion with the strong Markov property [](#eq:sol-rdw-strong-markov).
+4. Exact restart algebra: $\mu_{\sigma+u}$ is the tilt of $\mu_\sigma$ by the shifted observation ([](#eq:sol-rdw-restart)).
+5. The observation equation [](#eq:sol-rdw-obs-equation) is well posed pathwise, by a Brascamp–Lieb Lipschitz bound and the Banach fixed-point theorem, and its solution map is measurable. This identifies the restarted path ([](#eq:sol-rdw-identification)).
+6. Steps 3–5 combine through freezing ([](#eq:sol-rdw-freezing)): the conditional source equals a functional of a channel with frozen prior $\mu_\sigma$ ([](#eq:sol-rdw-conditional-identity)). Applying [](#lem:mm-time-weighted-fixed-source) with $\kappa+u\ge\kappa$ bounds this functional and concludes.
+
+**Refined statement and standing.** This dossier is *unconditional*. It restarts the planted localization channel at a stopping time $\sigma$ of the observation filtration and applies the certified time-weighted source budget, [](#lem:mm-time-weighted-fixed-source) (certified dossier `lem-mm-time-weighted-fixed-source.md` in `solutions/`, `checked_by: agent`), conditionally on $\mathcal F_\sigma$ with curvature parameter $\kappa=\varepsilon+\sigma$. The output trades the vanishing weight of the certified lemma for the value of the elapsed time: after $\sigma$, the *unweighted* source is controlled by $v_\sigma/\sigma$. No unweighted statement at time zero, and no universal-time occupation claim, is made. The full restart construction — pathwise posterior kernel, optional-time posterior identification through regular conditional distributions, the innovation Brownian motion and its strong Markov property, the pathwise well-posedness of the observation equation, and the conditional transfer — is written out below.
+
+**Setting and conventions.** Throughout, $\mu$ is a *regular approximant* on $\R^n$:
+
+$$
+\dd\mu(x)=Z^{-1}e^{-V(x)}\dd x,
+\qquad V\in C^\infty(\R^n),\qquad \nabla^2V\succeq\varepsilon I_n,\ \varepsilon>0 .
+$$
+
+(Centering and isotropy hold in the regular class of Section [](#subsec:spectral-sde) but are not used in this lemma.) Strong log-concavity gives $\int e^{b\abs x}\dd\mu<\infty$ for every $b>0$. Fix $f\in L^2(\mu)$. Take $X\sim\mu$, an independent standard Brownian motion $B^{\mathrm{obs}}$, and the planted channel
+
+$$
+c_t=tX+B_t^{\mathrm{obs}} .
+$$
+
+Let $\mathcal F^0_t=\sigma(c_s:0\le s\le t)$ be the raw observation filtration, $\mathcal N$ the $\Prob$-null sets, and
+
+$$
+\mathcal F_t=\bigcap_{u>t}\sigma\bigl(\mathcal F^0_u\cup\mathcal N\bigr)
+$$
+
+its usual augmentation, which is right-continuous and complete. All stopping times below are $(\mathcal F_t)$-stopping times. Define the *pathwise posterior kernel* by the tilt formula
+
+```{math}
+:label: eq:sol-rdw-kernel
+\mu_t(\dd x)
+=\frac{\exp\bigl(c_t\cdot x-t\abs x^2/2\bigr)}
+{\int\exp\bigl(c_t\cdot y-t\abs y^2/2\bigr)\dd\mu(y)}\,\mu(\dd x),
+\qquad t\ge0,
+```
+
+a measurable function of the pair $(t,c_t)$ alone. At a stopping time $\sigma$ we set $\mu_\sigma:=\mu_t|_{t=\sigma,\,c_t=c_\sigma}$ on $\{\sigma<\infty\}$ (and, by convention, $\mu_\sigma:=\mu$ on $\{\sigma=\infty\}$; this value is never used). Write
+
+$$
+m_t=\textstyle\int f\dd\mu_t,\quad
+a_t=\int x\,\dd\mu_t,\quad
+v_t=\Var_{\mu_t}(f),\quad
+A_t=\Cov_{\mu_t}(X),
+$$
+
+and define the centered tensor functional, for a probability $\rho$ on $\R^n$,
+
+$$
+\mathsf H(\rho)
+=\int\Bigl(f-\textstyle\int f\dd\rho\Bigr)
+\Bigl(x-\textstyle\int y\,\dd\rho(y)\Bigr)^{\otimes2}\dd\rho(x)
+$$
+
+whenever every displayed integral converges absolutely, and $\mathsf H(\rho)=0$ otherwise. Set $H_t=\mathsf H(\mu_t)$ for every $t\ge0$; off a $\dd t\otimes\dd\Prob$-null set this is the absolutely convergent posterior tensor (as in Step 1 of the companion stopped-window dossier), so the convention alters no integral below.
+
+:::{prf:theorem} Restart deweighting; unconditional
+:label: thm:sol-lem-mm-restart-deweighting
+Let $\mu$ be a regular approximant, $f\in L^2(\mu)$ a fixed test, and $\sigma$ an $(\mathcal F_t)$-stopping time with $\sigma>0$ almost surely. Then $\mu_\sigma$ is a regular conditional distribution of $X$ given $\mathcal F_\sigma$ on $\{\sigma<\infty\}$, $f\in L^2(\mu_\sigma)$ almost surely on $\{\sigma<\infty\}$, and, almost surely on $\{\sigma<\infty\}$,
+
+```{math}
+:label: eq:sol-rdw-main
+\E\Bigl[\int_\sigma^\infty\norm{H_t}_{\HS}^2\dd t\ \Big|\ \mathcal F_\sigma\Bigr]
+\ \le\ \frac{\Var_{\mu_\sigma}(f)}{\varepsilon+\sigma}
+\ \le\ \frac{v_\sigma}{\sigma}.
+```
+
+The first inequality holds for every stopping time (positivity of $\sigma$ is used only for the second). No constant depends on $n$; the regularization enters only through the (favorable) shift $\varepsilon$ in the denominator.
+:::
+
+:::{prf:proof}
+The proof is organized in seven steps. Steps 1–4 build the filtering and stopping machinery; Step 5 is the exact restart algebra; Step 6 establishes pathwise well-posedness of the observation equation and the measurable solution map; Step 7 assembles the conditional transfer and applies the certified lemma.
+
+*Step 1: the posterior kernel, path regularity, and fixed-time identification.* Call $\phi:\R^n\to\R$ *admissible* if $\abs{\phi(x)}\le C_\phi(1+\abs x^2)e^{b_\phi\abs x}$ for some finite $C_\phi,b_\phi$. For admissible $\phi$ put $N^\phi_t=\int\phi\dd\mu_t$. On any compact time interval $[0,U]$ and along any fixed path, $\sup_{t\le U}\abs{c_t}=:R<\infty$, so the integrand of both the numerator and the denominator of [](#eq:sol-rdw-kernel), integrated against $\phi$ or against $1$, is dominated by $C_\phi(1+\abs x^2)e^{(b_\phi+R)\abs x} \in L^1(\mu)$; the denominator is strictly positive and continuous in $t$, the numerator continuous in $t$, both by dominated convergence. Hence $t\mapsto N^\phi_t$ has continuous paths, and it is adapted (a Borel function of $(t,c_t)$).
+
+Conditional on $X=x$, the path $(c_s)_{s\le t}$ is a Brownian motion with constant drift $x$; by the Cameron–Martin theorem its law has density $\exp(x\cdot c_t-t\abs x^2/2)$ with respect to Wiener measure on $[0,t]$. Bayes' rule for conditional laws therefore gives, for each fixed $t\ge0$ and every bounded measurable $\phi$,
+
+```{math}
+:label: eq:sol-rdw-bayes-raw
+N^\phi_t=\E\bigl[\phi(X)\mid\mathcal F^0_t\bigr]\quad\text{a.s.}
+```
+
+This transfers to the augmented filtration. Fix $t$ and take $u_k\downarrow t$. By the reverse martingale convergence theorem for the decreasing $\sigma$-fields $\sigma(\mathcal F^0_{u_k}\cup\mathcal N)$, $\E[\phi(X)\mid\mathcal F^0_{u_k}]\to\E[\phi(X)\mid\mathcal F_t]$ a.s. and in $L^1$, while $N^\phi_{u_k}\to N^\phi_t$ by path continuity; with [](#eq:sol-rdw-bayes-raw) at each $u_k$,
+
+```{math}
+:label: eq:sol-rdw-bayes
+N^\phi_t=\E\bigl[\phi(X)\mid\mathcal F_t\bigr]\quad\text{a.s., for every }t\ge0 .
+```
+
+Thus for bounded $\phi$, $N^\phi$ is a continuous, uniformly bounded $(\mathcal F_t)$-martingale, closed by $N^\phi_\infty:=\E[\phi(X)\mid\mathcal F_\infty]$, where $\mathcal F_\infty=\sigma(\bigcup_t\mathcal F_t)$. By monotone convergence, [](#eq:sol-rdw-bayes) extends to every $\phi\ge0$ with $\E\phi(X)<\infty$ (as an identity in $[0,\infty]$), and then by linearity to $\phi\in L^1(\mu)$; in particular $a_t=\E[X\mid\mathcal F_t]$ a.s. for each $t$, with $t\mapsto a_t$ continuous and $\E\abs{a_t}\le\E\abs X$.
+
+*Step 2: optional-time posterior identification.* Let $\sigma$ be any stopping time and $\phi$ bounded measurable. Set $\sigma_k=2^{-k}\lceil2^k\sigma\rceil$ on $\{\sigma<\infty\}$ and $\sigma_k=\infty$ otherwise; each $\sigma_k$ is a stopping time taking countably many values, $\sigma_k\downarrow\sigma$, and $\sigma_k\ge\sigma$. For a countably valued stopping time, optional sampling of the closed martingale $N^\phi$ is elementary: for $A\in\mathcal F_{\sigma_k}$ and each value $r$ of $\sigma_k$, $A\cap\{\sigma_k=r\}\in\mathcal F_r$, so $\int_{A\cap\{\sigma_k=r\}}N^\phi_\infty\dd\Prob =\int_{A\cap\{\sigma_k=r\}}N^\phi_r\dd\Prob$; summing over $r$ gives $\E[N^\phi_\infty\mid\mathcal F_{\sigma_k}]=N^\phi_{\sigma_k}$ a.s. As $k\to\infty$: the $\sigma$-fields $\mathcal F_{\sigma_k}$ decrease to $\bigcap_k\mathcal F_{\sigma_k}=\mathcal F_\sigma$ (right-continuity of the augmented filtration), so the left side converges a.s. and in $L^1$ to $\E[N^\phi_\infty\mid\mathcal F_\sigma]$ by reverse martingale convergence, while $N^\phi_{\sigma_k}\to N^\phi_\sigma$ on $\{\sigma<\infty\}$ by path continuity. With the tower property $\E[N^\phi_\infty\mid\mathcal F_\sigma] =\E[\phi(X)\mid\mathcal F_\sigma]$, we conclude: almost surely on $\{\sigma<\infty\}$,
+
+```{math}
+:label: eq:sol-rdw-optional
+\int\phi\dd\mu_\sigma=\E\bigl[\phi(X)\mid\mathcal F_\sigma\bigr] .
+```
+
+Since $(\sigma,c_\sigma)$ is $\mathcal F_\sigma$-measurable ($c$ is continuous and adapted), $\omega\mapsto\mu_\sigma(\omega,\cdot)$ is an $\mathcal F_\sigma$-measurable probability kernel, and [](#eq:sol-rdw-optional) for every bounded measurable $\phi$ says precisely that $\mu_\sigma$ is a regular conditional distribution of $X$ given $\mathcal F_\sigma$ on $\{\sigma<\infty\}$. By monotone convergence along $\phi\wedge k$, [](#eq:sol-rdw-optional) also holds, as an identity in $[0,\infty]$, for every measurable $\phi\ge0$; applied to $f^2$ and combined with the tower property, $\int f^2\dd\mu_\sigma<\infty$ a.s. on $\{\sigma<\infty\}$, i.e. $f\in L^2(\mu_\sigma)$ a.s., and $v_\sigma=\Var_{\mu_\sigma}(f)$ is a.s. finite there.
+
+*Step 3: $\mu_\sigma$ is a smooth $(\varepsilon+\sigma)$-strongly log-concave prior.* On $\{\sigma<\infty\}$, formula [](#eq:sol-rdw-kernel) exhibits $\mu_\sigma=Z_\sigma^{-1}e^{-V_\sigma}\dd x$ with
+
+$$
+V_\sigma(x)=V(x)-c_\sigma\cdot x+\frac\sigma2\abs x^2,
+\qquad
+\nabla^2V_\sigma=\nabla^2V+\sigma I_n\succeq(\varepsilon+\sigma)I_n,
+$$
+
+and $V_\sigma\in C^\infty(\R^n)$. Thus, for every fixed $\omega\in\{\sigma<\infty\}$, the measure $\mu_\sigma(\omega,\cdot)$ lies in the admissible class of the certified [](#lem:mm-time-weighted-fixed-source) with curvature parameter $\kappa=\varepsilon+\sigma(\omega)>0$, and (Step 2) the fixed test $f$ is square-integrable for it, for a.e. such $\omega$.
+
+*Step 4: the innovation Brownian motion and its strong Markov property.* Define $W_t=c_t-\int_0^ta_s\dd s$ (the integral is a.s. defined and continuous in $t$ because $s\mapsto a_s$ is continuous). We show $W$ is an $(\mathcal F_t)$-Brownian motion.
+
+*Martingale property.* Let $\mathcal G_u=\sigma\bigl(X,\,B^{\mathrm{obs}}_r:r\le u\bigr)$. For $s<t$ the increment $B^{\mathrm{obs}}_t-B^{\mathrm{obs}}_u$ is independent of $\mathcal G_u$ for every $u\in(s,t)$; letting $u\downarrow s$ along bounded continuous test functions and using path continuity shows that $B^{\mathrm{obs}}_t-B^{\mathrm{obs}}_s$ is independent of $\mathcal G_{s+}:=\bigcap_{u>s}\mathcal G_u$. Since $\mathcal F^0_{s+}\subseteq\mathcal G_{s+}$ and independence is unaffected by adjoining $\Prob$-null sets, $B^{\mathrm{obs}}_t-B^{\mathrm{obs}}_s$ is independent of $\mathcal F_s$; in particular $\E[B^{\mathrm{obs}}_t-B^{\mathrm{obs}}_s\mid\mathcal F_s]=0$. Also, by [](#eq:sol-rdw-bayes), the tower property, and Fubini's theorem (justified by $\E\abs{a_r}\le\E\abs X$),
+
+$$
+\E\Bigl[\int_s^ta_r\dd r\ \Big|\ \mathcal F_s\Bigr]
+=\int_s^t\E[a_r\mid\mathcal F_s]\dd r
+=\int_s^t\E\bigl[\E[X\mid\mathcal F_r]\mid\mathcal F_s\bigr]\dd r
+=(t-s)\,a_s .
+$$
+
+Hence $\E[W_t-W_s\mid\mathcal F_s] =(t-s)\E[X\mid\mathcal F_s]+0-(t-s)a_s=0$, and $W$ is an integrable continuous $(\mathcal F_t)$-martingale.
+
+*Quadratic covariation.* $c_t=tX+B^{\mathrm{obs}}_t$ differs from $B^{\mathrm{obs}}$ by a path of locally finite variation, as does $W$ from $c$; hence $[W^i,W^j]_t=[B^{\mathrm{obs},i},B^{\mathrm{obs},j}]_t=\delta_{ij}t$.
+
+By Lévy's characterization, $W$ is an $(\mathcal F_t)$-Brownian motion; in particular, for $s<t$, $W_t-W_s$ is independent of $\mathcal F_s$, and more generally any finite vector of post-$s$ increments is jointly Gaussian and independent of $\mathcal F_s$.
+
+*Strong Markov property.* Let $\sigma$ be a stopping time and define, on $\{\sigma<\infty\}$, the shifted path $W^{(\sigma)}_u=W_{\sigma+u}-W_\sigma$, $u\ge0$ (on $\{\sigma=\infty\}$ set $W^{(\sigma)}\equiv0$; never used). We claim: for every $A\in\mathcal F_\sigma$ with $A\subseteq\{\sigma<\infty\}$ and every bounded measurable $\Gamma$ on $C_0:=\{w\in C([0,\infty);\R^n):w_0=0\}$,
+
+```{math}
+:label: eq:sol-rdw-strong-markov
+\E\bigl[\one_A\,\Gamma(W^{(\sigma)})\bigr]
+=\Prob(A)\int_{C_0}\Gamma\,\dd\mathbb W,
+```
+
+where $\mathbb W$ is Wiener measure. Take the dyadic approximants $\sigma_k$ of Step 2. Fix times $0\le u_1<\dots<u_m$ and a bounded continuous $h:\R^{nm}\to\R$. For each dyadic value $r$ of $\sigma_k$, $A\cap\{\sigma_k=r\}\in\mathcal F_r$, and the increment vector $(W_{r+u_1}-W_r,\dots,W_{r+u_m}-W_r)$ is independent of $\mathcal F_r$ with the law of a Brownian increment vector; hence
+
+$$
+\E\bigl[\one_{A\cap\{\sigma_k=r\}}h\bigl(W^{(r)}_{u_1},\dots,W^{(r)}_{u_m}\bigr)\bigr]
+=\Prob\bigl(A\cap\{\sigma_k=r\}\bigr)\,\E\,h\bigl(B_{u_1},\dots,B_{u_m}\bigr).
+$$
+
+Summing over the countably many values $r$ gives the identity for $\sigma_k$. Since $\sigma_k\downarrow\sigma$ and $W$ has continuous paths, $W^{(\sigma_k)}_{u_i}\to W^{(\sigma)}_{u_i}$ pointwise on $\{\sigma<\infty\}$; dominated convergence gives the identity for $\sigma$ and all such $h$. Finite-dimensional cylinder sets form a $\pi$-system generating $\mathcal B(C_0)$, so the functional monotone class theorem upgrades this to [](#eq:sol-rdw-strong-markov) for all bounded measurable $\Gamma$, and by monotone convergence to all measurable $\Gamma\ge0$ (in $[0,\infty]$).
+
+*Step 5: exact restart algebra.* For a probability $\nu$ on $\R^n$ with all exponential moments and $(u,z)\in [0,\infty)\times\R^n$ define the tilted measure and its mean
+
+$$
+\Theta(\nu;u,z)(\dd x)
+=\frac{e^{z\cdot x-u\abs x^2/2}\,\nu(\dd x)}
+{\int e^{z\cdot y-u\abs y^2/2}\,\nu(\dd y)},
+\qquad
+\mathsf a(\nu;u,z)=\int x\,\Theta(\nu;u,z)(\dd x).
+$$
+
+On $\{\sigma<\infty\}$ put $\tilde c_u=c_{\sigma+u}-c_\sigma$. Then, pathwise and for every $u\ge0$,
+
+```{math}
+:label: eq:sol-rdw-restart
+\mu_{\sigma+u}=\Theta\bigl(\mu_\sigma;u,\tilde c_u\bigr),
+```
+
+because, by [](#eq:sol-rdw-kernel),
+
+$$
+e^{\tilde c_u\cdot x-u\abs x^2/2}\cdot e^{c_\sigma\cdot x-\sigma\abs x^2/2}
+=e^{c_{\sigma+u}\cdot x-(\sigma+u)\abs x^2/2},
+$$
+
+and both sides of [](#eq:sol-rdw-restart) are the corresponding normalized tilts of $\mu$. This is exact algebra; no probabilistic input is used. In particular $H_{\sigma+u}=\mathsf H\bigl(\Theta(\mu_\sigma;u,\tilde c_u)\bigr)$ for every $u\ge0$, and $a_{\sigma+u}=\mathsf a(\mu_\sigma;u,\tilde c_u)$.
+
+*Step 6: pathwise well-posedness of the observation equation.* Fix a smooth $\kappa$-strongly log-concave probability $\nu$ ($\kappa>0$). We record four properties of $\mathsf a(\nu;\cdot,\cdot)$.
+
+*(i) Joint continuity.* By dominated convergence, exactly as in Step 1, $(u,z)\mapsto\mathsf a(\nu;u,z)$ is continuous on $[0,\infty)\times\R^n$.
+
+*(ii) Uniform Lipschitz bound in $z$.* Differentiation under the integral sign (justified by exponential-moment domination) gives $\nabla_z\,\mathsf a(\nu;u,z)=\Cov\bigl(\Theta(\nu;u,z)\bigr)$. The potential of $\Theta(\nu;u,z)$ has Hessian $\succeq(\kappa+u)I_n$, so the Brascamp–Lieb inequality [@BrascampLieb1976] gives $\Cov(\Theta(\nu;u,z))\preceq(\kappa+u)^{-1}I_n\preceq\kappa^{-1}I_n$. Integrating along segments,
+
+$$
+\abs{\mathsf a(\nu;u,z)-\mathsf a(\nu;u,z')}\le\kappa^{-1}\abs{z-z'}
+\qquad\text{for all }u\ge0,\ z,z'\in\R^n .
+$$
+
+*(iii) Pathwise well-posedness.* For every $w\in C_0$ the integral equation
+
+```{math}
+:label: eq:sol-rdw-obs-equation
+\gamma_u=\int_0^u\mathsf a(\nu;s,\gamma_s)\dd s+w_u,\qquad u\ge0,
+```
+
+has exactly one continuous solution $\gamma=\mathsf S_\nu(w)$. Indeed, on $C([0,U];\R^n)$ with the complete metric $d(\gamma,\gamma')=\sup_{u\le U}e^{-2u/\kappa}\abs{\gamma_u-\gamma'_u}$, the map $(\mathcal T\gamma)_u=w_u+\int_0^u\mathsf a(\nu;s,\gamma_s)\dd s$ maps into continuous paths (by (i)) and satisfies, using (ii),
+
+$$
+\abs{(\mathcal T\gamma)_u-(\mathcal T\gamma')_u}
+\le\kappa^{-1}\int_0^u\abs{\gamma_s-\gamma'_s}\dd s
+\le\kappa^{-1}d(\gamma,\gamma')\int_0^ue^{2s/\kappa}\dd s
+\le\tfrac12\,e^{2u/\kappa}\,d(\gamma,\gamma'),
+$$
+
+so $\mathcal T$ is a $\tfrac12$-contraction; the Banach fixed point theorem gives existence and uniqueness on every $[0,U]$, and consistency under $U\uparrow\infty$ gives the global solution. Note this is entirely deterministic: the noise enters additively, so no stochastic integration is required. The Picard iterates $\mathsf S^0_\nu(w)=w$, $\mathsf S^{k+1}_\nu(w)=\mathcal T\mathsf S^k_\nu(w)$ converge to $\mathsf S_\nu(w)$ locally uniformly.
+
+*(iv) Measurable dependence.* Let $(\Omega',\mathcal G)$ be a measurable space and $\omega'\mapsto\nu_{\omega'}$ a kernel of smooth strongly log-concave measures with curvature $\kappa(\omega')\ge\kappa_0>0$, such that $(\omega',u,z)\mapsto\mathsf a(\nu_{\omega'};u,z)$ is $\mathcal G\otimes\mathcal B$-measurable. Then $(\omega',w)\mapsto\mathsf S_{\nu_{\omega'}}(w)$ is $\mathcal G\otimes\mathcal B(C_0)$-measurable: each Picard iterate is (by induction, using joint measurability of the integrand and measurability of the Riemann integrals in the parameters), and the pointwise limit of measurable maps into the Polish space $C_0$ (locally uniform topology, Borel $\sigma$-field generated by evaluations) is measurable. In our application $\Omega'=\{\sigma<\infty\}$ with the trace of $\mathcal F_\sigma$, $\nu_\omega=\mu_\sigma(\omega,\cdot)$, $\kappa(\omega)=\varepsilon+\sigma(\omega)\ge\varepsilon>0$, and $\mathsf a(\mu_\sigma;u,z)$ is an explicit ratio of $\mu$-integrals, jointly continuous in $(\sigma,c_\sigma,u,z)$ with $(\sigma,c_\sigma)$ $\mathcal F_\sigma$-measurable, so the joint measurability hypothesis holds.
+
+*Step 7: conditional transfer and the certified budget.* *(a) The restarted path solves [](#eq:sol-rdw-obs-equation).* Almost surely, $c_t=\int_0^ta_s\dd s+W_t$ for all $t$ simultaneously (definition of $W$). Hence, on $\{\sigma<\infty\}$, for all $u\ge0$,
+
+$$
+\tilde c_u=\int_\sigma^{\sigma+u}a_t\dd t+W_{\sigma+u}-W_\sigma
+=\int_0^u\mathsf a\bigl(\mu_\sigma;s,\tilde c_s\bigr)\dd s+W^{(\sigma)}_u,
+$$
+
+using $a_{\sigma+s}=\mathsf a(\mu_\sigma;s,\tilde c_s)$ from Step 5. Since $\tilde c$ is continuous with $\tilde c_0=0$, pathwise uniqueness (Step 6(iii), with $\kappa=\varepsilon+\sigma\ge\varepsilon$) gives
+
+```{math}
+:label: eq:sol-rdw-identification
+\tilde c=\mathsf S_{\mu_\sigma}\bigl(W^{(\sigma)}\bigr)
+\qquad\text{a.s.\ on }\{\sigma<\infty\}.
+```
+
+*(b) The frozen functional.* Define $G:\{\sigma<\infty\}\times C_0\to[0,\infty]$ by
+
+$$
+G(\omega,w)
+=\int_0^\infty
+\bigl\|\mathsf H\bigl(\Theta(\mu_\sigma(\omega);u,
+\mathsf S_{\mu_\sigma(\omega)}(w)_u)\bigr)\bigr\|_{\HS}^2\dd u .
+$$
+
+$G$ is $\mathcal F_\sigma\otimes\mathcal B(C_0)$-measurable: the tilted-moment integrands defining $\mathsf H\circ\Theta$ are, via monotone truncation of $f$, jointly measurable in $(\omega,u,z)$; composing with the measurable map $(\omega,w)\mapsto(\omega,u,\mathsf S_{\mu_\sigma(\omega)}(w)_u)$ of Step 6(iv) and integrating the nonnegative result in $u$ (Tonelli) preserves measurability. By Step 5, [](#eq:sol-rdw-identification), and the change of variable $t=\sigma+u$,
+
+```{math}
+:label: eq:sol-rdw-pathwise-identity
+\int_\sigma^\infty\norm{H_t}_{\HS}^2\dd t
+=G\bigl(\cdot\,,W^{(\sigma)}\bigr)
+\qquad\text{a.s.\ on }\{\sigma<\infty\}.
+```
+
+*(c) Freezing.* We claim: for every $A\in\mathcal F_\sigma$ with $A\subseteq\{\sigma<\infty\}$,
+
+```{math}
+:label: eq:sol-rdw-freezing
+\E\bigl[\one_A\,G(\cdot,W^{(\sigma)})\bigr]
+=\E\bigl[\one_A\,\gamma\bigr],
+\qquad
+\gamma(\omega):=\int_{C_0}G(\omega,w)\,\mathbb W(\dd w).
+```
+
+For product functions $G(\omega,w)=\one_B(\omega)\Gamma(w)$ with $B\in\mathcal F_\sigma$, $B\subseteq\{\sigma<\infty\}$, and bounded measurable $\Gamma$, [](#eq:sol-rdw-freezing) is exactly the strong Markov identity [](#eq:sol-rdw-strong-markov) applied to $A\cap B$. The class of nonnegative measurable $G$ satisfying [](#eq:sol-rdw-freezing) is closed under nonnegative linear combinations and increasing limits (monotone convergence on both sides), so the functional monotone class theorem extends it to every nonnegative $\mathcal F_\sigma\otimes\mathcal B(C_0)$-measurable $G$, including ours. Since $\gamma$ is $\mathcal F_\sigma$-measurable, [](#eq:sol-rdw-pathwise-identity) and [](#eq:sol-rdw-freezing) give
+
+```{math}
+:label: eq:sol-rdw-conditional-identity
+\E\Bigl[\int_\sigma^\infty\norm{H_t}_{\HS}^2\dd t\ \Big|\ \mathcal F_\sigma\Bigr]
+=\gamma
+\qquad\text{a.s.\ on }\{\sigma<\infty\}.
+```
+
+*(d) Evaluation of $\gamma$ at a frozen prior.* Fix $\omega\in\{\sigma<\infty\}$ outside the null sets of Steps 2 and 3, and abbreviate $\nu=\mu_\sigma(\omega,\cdot)$, $\kappa=\varepsilon+\sigma(\omega)$; thus $\nu$ is a fixed smooth $\kappa$-strongly log-concave probability with $f\in L^2(\nu)$. Run the planted channel with prior $\nu$ on an auxiliary space: $X'\sim\nu$, $B'$ an independent standard Brownian motion, $c'_u=uX'+B'_u$. Its pathwise posterior kernel is $\Theta(\nu;u,c'_u)$ (same Bayes computation as Step 1), and its posterior tensor agrees a.e. with $H'_u:=\mathsf H(\Theta(\nu;u,c'_u))$. By Steps 1 and 4 applied to this channel — their proofs used only the planted structure, the Bayes identification, and the exponential moments and finite first moment of the prior, all available for the strongly log-concave $\nu$ — $W'_u:=c'_u-\int_0^u\mathsf a(\nu;s,c'_s)\dd s$ is a standard Brownian motion, and $c'$ is a continuous solution of [](#eq:sol-rdw-obs-equation) with forcing $W'$; pathwise uniqueness gives $c'=\mathsf S_\nu(W')$. Since $W'\sim\mathbb W$,
+
+$$
+\gamma(\omega)
+=\int_{C_0}\int_0^\infty
+\bigl\|\mathsf H\bigl(\Theta(\nu;u,\mathsf S_\nu(w)_u)\bigr)\bigr\|^2_{\HS}
+\dd u\,\mathbb W(\dd w)
+=\E\int_0^\infty\norm{H'_u}_{\HS}^2\dd u .
+$$
+
+Now apply the certified [](#lem:mm-time-weighted-fixed-source) to the fixed prior $\nu$, the fixed test $f\in L^2(\nu)$, and the curvature parameter $\kappa$: for every $T>0$,
+
+$$
+\E\int_0^T(\kappa+u)\norm{H'_u}_{\HS}^2\dd u
+\le\Var_\nu(f)-\kappa\abs{g'_0}^2\le\Var_\nu(f),
+$$
+
+after discarding the second left-hand integrand, which the certified statement proves nonnegative. (The certified dossier performs all of its own localization and stopping-removal internally; only its final statement is consumed here.) Since $\kappa+u\ge\kappa$ and by monotone convergence in $T$,
+
+$$
+\gamma(\omega)=\E\int_0^\infty\norm{H'_u}_{\HS}^2\dd u
+\ \le\ \frac{\Var_\nu(f)}{\kappa}
+=\frac{\Var_{\mu_\sigma}(f)}{\varepsilon+\sigma}\bigg|_{\omega}.
+$$
+
+*(e) Conclusion.* Combining with [](#eq:sol-rdw-conditional-identity), almost surely on $\{\sigma<\infty\}$,
+
+$$
+\E\Bigl[\int_\sigma^\infty\norm{H_t}_{\HS}^2\dd t\ \Big|\ \mathcal F_\sigma\Bigr]
+\le\frac{\Var_{\mu_\sigma}(f)}{\varepsilon+\sigma}
+\le\frac{v_\sigma}{\sigma},
+$$
+
+the final step using $\varepsilon>0$ and $\sigma>0$ a.s. This proves [](#eq:sol-rdw-main).
+:::
+
+:::{prf:remark} Conventions, and what is not claimed
+:label: rem:sol-rdw-scope
+Stopping and removal conventions are inherited unchanged from the certified dossiers: the posterior kernel is the explicit tilt [](#eq:sol-rdw-kernel), conditional-law identifications are stated per test function, and all localization inside the time-weighted budget lives in the certified proof, not here. The theorem controls the source only *after* $\sigma$ and only through the factor $v_\sigma/\sigma$, which degenerates as $\sigma\downarrow0$; it makes no unweighted initial-layer assertion, no universal-time occupation claim, and no claim about [](#q:mm-spectral-occupation). The recorded dead end that optional sampling controls $\E v_\sigma$ but not $\E[v_\sigma/\sigma]$ is respected: this dossier supplies only the conditional bound; the joint control of $v_\sigma$ and $\sigma^{-1}$ on a window is the business of the assembly dossier and is not asserted here.
+:::
+
+:::{prf:remark} Hypotheses actually used
+:label: rem:sol-rdw-hypotheses
+The proof uses: the planted Gaussian channel; smoothness and $\varepsilon$-strong log-concavity of $\mu$ (for exponential moments, the smooth $(\varepsilon+\sigma)$-strongly log-concave restarted prior, and the uniform $\varepsilon^{-1}$ drift Lipschitz bound in Step 6); square-integrability of the fixed test; the classical Cameron–Martin, Lévy, reverse-martingale, Banach fixed point, and monotone class theorems; the Brascamp–Lieb covariance bound [@BrascampLieb1976]; and the certified, unconditional [](#lem:mm-time-weighted-fixed-source). No Letwin input, no eigenfunction equation, no isotropy, no numerical evidence, and no unresolved premise occurs: the result is unconditional.
+:::
+
+**Obstructions respected.** The candidate node carries no `bounded_by` edge; the registered route fences were checked individually. No cut, slice, or excess estimate occurs (`obs:two-tail`, `obs:circularity`, `obs:rank-one-refuted`); no radial or projection test is promoted to a tensor estimate (`obs:proj-ceiling`); no crude or relative covariance occupation integral appears (`obs:crude-insufficient`, `obs:relative-ceiling`). The covariance operator norm is never bounded along a universal time interval, so the covariance-spike warning and [](#prop:covariance-spike) are not engaged. The scalar-multiplier weight-removal no-go is respected, not contradicted: the weight is not removed at time zero; it is exchanged for the elapsed time $\sigma>0$, exactly as that fence permits.

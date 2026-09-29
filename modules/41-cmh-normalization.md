@@ -278,7 +278,7 @@ In particular, on any class of such measures with $\E\tau^2\preceq c\,\Id$, ever
 Summing the corollary over an orthonormal basis recovers $\norm{T_3(\mu)}_{\HS}^2\le4(\Tr\E\tau^2-n)\le4n$, the chain in the proof of Theorem 1.2 of [@ChenKlartag2026SharpThinShell]. [](#cor:gate-zero-third-moment) places gate zero relative to the literature input it does not use: gate zero at constant $c$ contains a directional third-moment bound at $2\sqrt{c-1}$, so any proof of [](#eq:gate-zero-sharp) proves a sharper constant than [](#thm:letwin-qcts) supplies, and any proof of [](#eq:gate-zero) must at least reproduce a bound of that type. The reverse channel is what makes the corollary a falsification tool: it is a lower bound on the gate matrix that needs no moment map, only third moments.
 
 :::{prf:remark} Relation to the shared trace-upgrade difficulty
-Gate zero belongs to the same difficulty family as `q:upgrade`, the high-rank part of `q:stein-weighted`, and `q:alignment`; no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the program. Only the first half is dispatchable, and `experiments/README.md` records the corresponding numerical channel.
+Gate zero belongs to the same difficulty family as `q:upgrade`, the high-rank part of `q:stein-weighted`, and `q:alignment`; no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the program. Only the first half is dispatchable, and `research/lib/README.md` records the corresponding numerical channel.
 :::
 
 (subsec:gate-zero-countermodel)=
@@ -315,9 +315,7 @@ $$
 
 The Schur complement of the upper-left entry is $c\,\Id_m\succ0$ because $c>0$, so $H\succeq0$; since $\E z=0$ and $\E zz^\top=\Id_m/m$ we get $\E H=1\oplus(c+d/m)\,\Id_m=\Id_{m+1}$.
 
-Write $B=
-
-\begin{psmallmatrix}a&r^\top r&D\end{psmallmatrix}$ with $D$ symmetric. Using $\E(z^\top Dz)^2=\bigl((\Tr D)^2+2\Tr(D^2)\bigr)/(m(m+2))$,
+Write $B=\left(\begin{smallmatrix}a&r^\top\\r&D\end{smallmatrix}\right)$ with $D$ symmetric. Using $\E(z^\top Dz)^2=\bigl((\Tr D)^2+2\Tr(D^2)\bigr)/(m(m+2))$,
 
 $$
 \begin{aligned}
