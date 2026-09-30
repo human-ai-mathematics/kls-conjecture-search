@@ -201,12 +201,12 @@ For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a non
 
 Both statements below are methodological constraints on the bootstrap input, stated as warnings rather than theorems; later sections use them as heuristic barriers.
 
-:::{prf:conjecture} The crude covariance integral cannot bootstrap
+:::{prf:remark} The crude covariance integral cannot bootstrap
 :label: obs:crude-insufficient
 The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:insufficiency), is too large to yield the required excess estimate at known KLS lower-bound scales. A viable bootstrap input must improve the logarithm; the available polylogarithmic technology reaches only the scale of [](#cor:loglog).
 :::
 
-:::{prf:conjecture} An all-measure relative bound already implies KLS
+:::{prf:remark} An all-measure relative bound already implies KLS
 :label: obs:relative-ceiling
 By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and an argument that aims at it has replaced the target by an equivalent-strength statement. [](#q:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
 :::

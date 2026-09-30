@@ -194,7 +194,7 @@ equivalently $\E H^2\preceq4\Id$ in isotropic position.
 
 This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole approach: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
 
-:::{prf:corollary} Gate zero is a trace-upgrade problem
+:::{prf:remark} Gate zero is a trace-upgrade problem
 :label: rem:gate-zero-trace-upgrade
 [](#thm:chen-klartag-moment-hessian) gives $\E_\nu\norm{H}_{\HS}^2\le2n$, that is $\Tr(\E H^2)\le2n$: the *average* eigenvalue of $\E H^2$ is already at most $2$ in isotropic position. Gate zero asks for the *largest* eigenvalue to be at most $4$. It is therefore an operator-to-trace upgrade carrying a factor-$2$ budget.
 :::

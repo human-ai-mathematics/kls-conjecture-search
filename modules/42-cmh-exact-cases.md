@@ -411,9 +411,15 @@ By [](#thm:cmh-1d) and [](#thm:cmh-product), a product of centered one-sided exp
 No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the explicit second-variation problem [](#q:cmh-solenoidal-perturbation); a positive answer would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
 :::
 
-:::{prf:conjecture} Second-order solenoidal excess at the product endpoint
+:::{prf:conjecture} Second variation of CMH at the product endpoint
 :label: q:cmh-solenoidal-perturbation
-Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$ within the smooth strictly convex class. Then the second variation of $\CMH$ at $\eps=0$ is nonpositive for every admissible perturbation: splitting the CMH numerator through [](#prop:cmh-hodge) into its gradient and solenoidal parts, the solenoidal part vanishes to second order at this saturating product. An admissible perturbation with strictly positive second variation would instead refute $\mathrm{CMH}(4)$ and force a constant larger than $4$ in the endpoint.
+Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$. Call the perturbation admissible if, for all sufficiently small $\abs\eps$, $\psi_\eps$ is smooth and strictly convex and its moment measure $\mu_\eps$ is log-concave and belongs to the regular moment-map class on which [](#def:cmh) is set. Then, for every admissible perturbation,
+
+$$
+\limsup_{\eps\to0}\frac{\CMH(\mu_\eps)+\CMH(\mu_{-\eps})-2\CMH(\mu_0)}{\eps^2}\le0,
+$$
+
+where $\CMH(\mu_0)=4$ by [](#rem:cmh-saturation-risk).
 :::
 
 [](#q:cmh-solenoidal-perturbation) is the sharpest available probe of the approach because it attacks the endpoint rather than the machinery, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#q:gate-zero) it forms the falsification layer of Approach C; [](#q:mm-invariant-lift) and [](#q:mm-square-root-commutator) form the construction layer.

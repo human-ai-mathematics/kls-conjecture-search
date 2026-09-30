@@ -4,32 +4,6 @@
 nodes:
 
   # ---------------------------------------------------------------------------
-  # OBSTRUCTIONS
-  # ---------------------------------------------------------------------------
-  - id: obs:two-tail
-    status: open
-    depends_on: [prop:two-tail]
-
-  - id: obs:proj-ceiling
-    status: open
-
-  - id: obs:crude-insufficient
-    status: open
-    depends_on: [lem:crude]
-
-  - id: obs:relative-ceiling
-    status: open
-    depends_on: [prop:ceiling]
-
-  - id: obs:circularity
-    status: open
-    depends_on: [lem:excess-identity, lem:inf-martingales]
-
-  - id: obs:rank-one-refuted
-    status: open
-    depends_on: [cor:refutation]
-
-  # ---------------------------------------------------------------------------
   # CORE STOCHASTIC LAYER
   # ---------------------------------------------------------------------------
 
@@ -47,7 +21,8 @@ nodes:
 
   - id: thm:centroid-implies-kls
     status: open
-    depends_on: [ass:stopped-centroid, lem:survival-implies-kls]
+    depends_on: [lem:survival-implies-kls]
+    assumes: [ass:stopped-centroid]
 
   - id: lem:matrix-riccati
     status: proved
@@ -78,15 +53,14 @@ nodes:
 
   - id: ass:all-cut-carleson
     status: open
-    bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
 
   - id: ass:tight-prefix-carleson
     status: open
-    bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
 
   - id: thm:carleson-implies-centroid
     status: open
-    depends_on: [ass:all-cut-carleson, thm:scalar-riccati, lem:survival-implies-kls]
+    depends_on: [thm:scalar-riccati, lem:survival-implies-kls]
+    assumes: [ass:all-cut-carleson]
 
   - id: cor:tight-window-consumption
     status: proved
@@ -97,7 +71,8 @@ nodes:
 
   - id: thm:intro-all-cut
     status: open
-    depends_on: [thm:carleson-implies-centroid]
+    depends_on: [cor:tight-window-consumption, lem:survival-implies-kls]
+    assumes: [ass:all-cut-carleson]
 
   - id: lem:pathwise-BL
     status: proved
@@ -184,7 +159,6 @@ nodes:
   - id: prop:qcts-equivalence
     status: proved
     depends_on: [def:qcts, prop:stein-rep]
-    bounded_by: [obs:proj-ceiling]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
         review: research/reviews/2026-08-25-kls-core-r2-audit.md
@@ -214,12 +188,12 @@ nodes:
 
   - id: ass:weighted-package
     status: refuted
-    bounded_by: [obs:two-tail]
     refuted_by: [prop:weighted-spectator-obstruction]
 
   - id: thm:intro-weighted
     status: open
-    depends_on: [ass:weighted-package, lem:stein-vs-source, cor:tight-window-consumption]
+    depends_on: [lem:stein-vs-source, cor:tight-window-consumption, lem:half]
+    assumes: [ass:weighted-package]
 
   - id: prop:intro-audit
     status: proved
@@ -288,7 +262,6 @@ nodes:
   - id: thm:bootstrap
     status: proved
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale]
-    bounded_by: [obs:circularity]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
         review: research/reviews/2026-08-27-thm-bootstrap-semantic-repair-proof-review.md
@@ -296,14 +269,12 @@ nodes:
   - id: thm:bootstrap-stopped-interface
     status: proved
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale]
-    bounded_by: [obs:circularity, obs:relative-ceiling]
     proofs:
       - artifact: solutions/thm-bootstrap-stopped-interface.md
         review: research/reviews/2026-08-27-thm-bootstrap-stopped-interface-proof-review.md
 
   - id: lem:crude
     status: proved
-    bounded_by: [obs:crude-insufficient]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
         review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
@@ -458,7 +429,6 @@ nodes:
 
   - id: q:upgrade
     status: open
-    bounded_by: [obs:proj-ceiling, obs:two-tail, obs:relative-ceiling]
 
   - id: lem:time-weighted-source
     status: proved
@@ -469,7 +439,6 @@ nodes:
 
   - id: q:weighted
     status: refuted
-    bounded_by: [obs:two-tail, obs:circularity]
     refuted_by: [prop:weighted-spectator-obstruction]
 
   - id: prop:weighted-spectator-obstruction
@@ -489,26 +458,21 @@ nodes:
   - id: prop:split-screened-supply
     status: proved
     depends_on: [prop:stein-rep, lem:stein-vs-source, lem:block, cor:per-direction, thm:scalar-riccati, lem:lyapunov-stein-duality, prop:products, lem:perimeter-martingale]
-    bounded_by: [obs:two-tail, obs:circularity]
     proofs:
       - artifact: solutions/prop-split-screened-supply.md
         review: research/reviews/2026-08-30-prop-split-screened-supply-proof-review.md
 
   - id: q:stein-weighted
     status: open
-    bounded_by: [obs:two-tail]
 
   - id: q:taming
     status: open
-    depends_on: [thm:bootstrap]
-    bounded_by: [obs:relative-ceiling]
 
   - id: q:splitting
     status: open
 
   - id: q:alignment
     status: open
-    bounded_by: [obs:rank-one-refuted]
 
   - id: hyp:absolute-geometric-completion
     status: open
@@ -617,7 +581,7 @@ nodes:
 
   - id: q:mm-square-root-commutator
     status: open
-    depends_on: [q:mm-invariant-lift]
+    depends_on: [q:mm-invariant-lift, def:cmh]
 
   # ---------------------------------------------------------------------------
   # CMH NORMALIZATION AND EXACT CASES
@@ -662,10 +626,6 @@ nodes:
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
         review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
-
-  - id: rem:gate-zero-trace-upgrade
-    status: open
-    depends_on: [thm:chen-klartag-moment-hessian, prop:letwin-not-gate-zero]
 
   - id: lem:cmh-linear-spectral-resolution
     status: proved
@@ -737,14 +697,14 @@ nodes:
 
   - id: rem:cmh-saturation-risk
     status: proved
-    depends_on: [thm:cmh-product, prop:cmh-hodge]
+    depends_on: [thm:cmh-1d, thm:cmh-product, prop:cmh-hodge]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
         review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
 
   - id: q:cmh-solenoidal-perturbation
     status: open
-    depends_on: [rem:cmh-saturation-risk]
+    depends_on: [rem:cmh-saturation-risk, def:cmh]
 
   # ---------------------------------------------------------------------------
   # CONDITIONAL-FIBER FRAME ROUTE

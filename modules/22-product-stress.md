@@ -196,7 +196,7 @@ S_t^H:=s_t\bigl(\norm{P_t^HG_tP_t^H}_\HS^2
 =S_t-s_t\norm{P_t^LG_tP_t^L}_\HS^2
 $$
 
-counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#prog:product-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) and eliminate Eldan–A's all-cut hypothesis, leaving Eldan–B as the surviving localization variant rather than constraining unrelated approaches.
+counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#prog:product-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) on products, which satisfy KLS, since $S_t^H\le S_t$; it would bear on [](#ass:tight-prefix-carleson) only if the violating intervals could be taken to be prefixes on the tight window, and it would constrain no approach outside the fixed-cut one.
 :::
 
 :::{prf:remark} Designated test family
@@ -215,7 +215,7 @@ It is permutation-symmetric but coordinate-selective, depends on all coordinates
 (subsec:product-fences)=
 ## Methodological constraints from this section
 
-:::{prf:conjecture} Single-coordinate product cuts self-extinguish
+:::{prf:remark} Single-coordinate product cuts self-extinguish
 :label: obs:rank-one-refuted
 For a product measure and a fixed balanced cut depending on one coordinate, $\E\int_0^\infty S_t\dd t\le1$ by [](#cor:refutation). Such a cut cannot sustain a covariance-inflation counterexample, so any surviving witness or proof must treat high-complexity cuts and occupation across many coordinates.
 :::

@@ -276,12 +276,12 @@ The two obstructions below name the proof shapes the computations of this sectio
 
 % Agent note: obs:two-tail and obs:proj-ceiling are open `bounded_by` fences in the ledger, not certified bounds.
 
-:::{prf:conjecture} Absolute-scale slice bounds fail
+:::{prf:remark} Absolute-scale slice bounds fail
 :label: obs:two-tail
 The anisotropic Gaussian two-tail cut of [](#prop:two-tail) rules out a slice-wise stable Stein estimate carrying an absolute-scale excess term. On that cut $r=D=0$ while the Stein source is of order $\Lambda^{2}$ and the excess of order $\Lambda^{-1/2}$, so a slice-wise excess estimate needs covariance weight at least $(1+\norm{A}_{\op})^{5/2}$. An unweighted proof must instead control the expected occupation of inflated configurations.
 :::
 
-:::{prf:conjecture} Projection tests lose a logarithm
+:::{prf:remark} Projection tests lose a logarithm
 :label: obs:proj-ceiling
 Radial and projection-only information yields at best $\Var(X^{T}MX)\lesssim\log n\,\norm{M}_{\HS}^{2}$, by [](#eq:qcts-log) and the adjacent operator construction. A proof requiring dimension-free quadratic-chaos control must therefore use tensor-aware information beyond projection tests.
 :::

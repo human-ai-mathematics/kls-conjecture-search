@@ -81,7 +81,7 @@ Consequently, a form gap $\Var_\mu(f)\le C\mathcal D_{\mu,\rho}(f)$ implies $C_P
 
 :::{prf:conjecture} Conditional-fiber frame
 :label: q:conditional-fiber-frame
-For every full-dimensional isotropic log-concave $\mu$ on $\R^d$, there exist an admissible frame $\rho_\mu$, chosen independently of $f$, and a universal $C$ such that
+There is a universal constant $C$ such that every full-dimensional isotropic log-concave $\mu$ on $\R^d$, in every dimension $d$, admits an admissible frame $\rho_\mu$, chosen independently of $f$, with
 
 ```{math}
 :label: eq:conditional-fiber-gap

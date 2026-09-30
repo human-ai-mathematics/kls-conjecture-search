@@ -79,7 +79,7 @@ There is a universal $C<\infty$ such that, for every centered log-concave law $\
 
 :::{prf:proposition} Approximation closure for CMH
 :label: q:cmh-approximation
-Under [](#ass:uniform-cmh-approximants), the affine Poincaré inequalities pass to $\mu$ through a closure argument, uniformly under isotropic normalization and affine-support degeneration.
+Under [](#ass:uniform-cmh-approximants), with its constant $C$, every centered log-concave probability $\mu$ satisfies $\CPaff(\mu)\le C$, with the same constant and including when $\mu$ is carried by a proper affine subspace; in particular the bound is uniform over isotropic normalizations.
 :::
 
 The approximation closure [](#q:cmh-approximation) is conditional on [](#ass:uniform-cmh-approximants). Centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants converge in ambient $W_2$, and the affine Poincaré inequality passes with no loss on the intrinsic closed covariance-form domain, including proper affine-support degeneration. The closure argument supplies no bound on $\CMH$: the uniform premise $\sup_k\CMH(\mu_k)\le C$ is exactly what it assumes. Two consequences of the explicit normalization bear directly on the rest of this section.
@@ -236,7 +236,7 @@ provided all forms and domains are justified.
 
 :::{prf:conjecture} Global square-root commutator
 :label: q:mm-square-root-commutator
-There is a retained nonnegative remainder $\mathfrak R_{\mathrm{Letwin}}(u)$, containing every available variable-multiplier, Codazzi, Monge–Ampère, corrector, and descendant square, such that over the complete Haar tree
+Let $\mathfrak R_{\mathrm{Letwin}}(u)$ be the retained nonnegative remainder made up of the available variable-multiplier, Codazzi, Monge–Ampère, corrector, and descendant squares, and of nothing else. Over the complete Haar tree
 
 $$
 2\sum_S\operatorname{Re}\langle K_{M_S}Nu,e_S(u)\rangle

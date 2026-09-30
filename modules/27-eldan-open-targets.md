@@ -10,8 +10,10 @@ What remains of the fixed-cut approach is a small set of precise problems, toget
 
 :::{prf:conjecture} Operator-to-trace upgrade; tight-prefix Carleson
 :label: q:upgrade
-[](#ass:tight-prefix-carleson) holds: the unconditional per-direction Carleson estimate ([](#cor:per-direction)) upgrades to the trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero, with damping coefficient $\alpha<1$. [](#cor:tight-window-consumption) makes this the exact sufficient consumer; the stronger every-interval [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Section [](#sec:qcts) remains a no-go for that proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. The dynamic upgrade must use cut-specific structure and covariance occupation. The first decision point is [](#prog:product-test).
+[](#ass:tight-prefix-carleson) holds: the unconditional per-direction Carleson estimate ([](#cor:per-direction)) upgrades to the trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero, with damping coefficient $\alpha<1$.
 :::
+
+[](#cor:tight-window-consumption) makes this the exact sufficient consumer; the stronger every-interval [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Section [](#sec:qcts) ([](#obs:proj-ceiling)) bears on that proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. The dynamic upgrade must use cut-specific structure and covariance occupation. Its restriction to products is examined in [](#prog:product-test); a family of product cuts violating the prefix form for every choice of constants would refute it.
 
 :::{prf:lemma} Scale-weighted all-cut source budget
 :label: lem:time-weighted-source
@@ -87,8 +89,10 @@ $$
 \ \le\ C\bigl(Te_0(E)+T^{1+\gamma}\bigr),\qquad T\le T_0 .
 $$
 
-This is exactly the weighted-excess component [](#eq:intro-weighted-excess) consumed by the literal package. [](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder counterexample with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted interface. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure premise.
+This is exactly the weighted-excess component [](#eq:intro-weighted-excess) of [](#ass:weighted-package).
 :::
+
+[](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder counterexample with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted interface. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure premise.
 
 A possible replacement interface, screened by the source, charges the weighted excess only on the aligned set $\mathcal A_{\kappa,t}=\{Q_t\ge\kappa\,e_tW_{\rm cut}\}$, where $Q_t=\calS_{\mu_t}(E)/s_t=s_t\norm{K_t}_{\HS}^2$ and $W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ with the cut-oriented scale of [](#lem:lyapunov-stein-duality). Its first positive result, [](#prop:split-screened-supply) below, concerns the regular split class; general split laws are covered only through their regular approximants, because the interchange of the screened indicator with the approximation limit is not carried out.
 
@@ -124,10 +128,10 @@ e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t .
 \end{aligned}
 $$
 
-This is exactly the stable Stein-trace clause of [](#ass:weighted-package), now considered as an independent analytic ingredient. It does not repair that package or imply KLS without a viable companion propagation statement.
-
-The intrinsic quadratic-chaos input is available from [](#thm:letwin-qcts), conditional on the version-1 preprint. The proposed mechanism of Section [](#sec:jacobi) still lacks a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled. [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#q:upgrade), and [](#q:alignment) is asserted.
+This is exactly the stable Stein-trace clause of [](#ass:weighted-package), considered as an independent analytic ingredient.
 :::
+
+It does not repair that package or imply KLS without a viable companion propagation statement. The intrinsic quadratic-chaos input is [](#thm:letwin-qcts). The mechanism of Section [](#sec:jacobi) needs in addition a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled ([](#rem:almost-stability-gap)). [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#q:upgrade), and [](#q:alignment) is asserted.
 
 :::{prf:remark} A shared dynamic occupation problem, and a missing geometric bridge
 :label: rem:trace-upgrade-unification
