@@ -400,5 +400,5 @@ A reader with an afternoon can read this overview and the comparison of Section 
 
 **How to contribute.** A contribution can be a proof, a counterexample, a partial result, a reference we missed, or a correction.
 
-- **In discussion:** ask a question or think out loud in the project's [GitHub Discussions](https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions).
-- **On GitHub:** open an issue on the [project repository](https://github.com/numina-functional-inequalities/kls-conjecture-search/issues), choosing the form that fits — an idea on an open problem, a counterexample, or a correction — and name the statement by its label, for instance `conj:gate-zero-sharp`.
+- **On a statement:** next to each statement's title are its label, for instance `conj:gate-zero-sharp`, and links that open a form on the [project repository](https://github.com/numina-functional-inequalities/kls-conjecture-search/issues) with that label already filled in — *Idea* or *Counterexample* on a statement not settled here, *Correction* on any other.
+- **In discussion:** ask a question (*Q&A*), think out loud (*Ideas*) or point at a reference (*Literature*) in the project's [GitHub Discussions](https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions); name a statement by its label.
