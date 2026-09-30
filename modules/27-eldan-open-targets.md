@@ -97,7 +97,7 @@ A possible replacement interface, screened by the source, charges the weighted e
 
 :::{prf:proposition} Split-class screened supply, total-budget form
 :label: prop:split-screened-supply
-Let $\mu$ be a product of isotropic one-dimensional log-concave laws in the regular (compact-smooth, product-preserving) split class of the certified dossier, and let $E$ be measurable with respect to a fixed coordinate set $J$ with $\abs J=k$ and $0<p_0<1$. Then for every $\eta\in(0,1/4]$, every $\kappa>0$, and every $T>0$,
+Let $\mu$ be a product of isotropic one-dimensional log-concave laws, each compactly supported with smooth density, and let $E=E_J\times\R^{J^c}$ for a fixed coordinate set $J$ with $\abs J=k$, where $E_J\subset\R^J$ has $C^2$ relative boundary with a tubular neighbourhood over the support, and $0<p_0<1$. Then for every $\eta\in(0,1/4]$, every $\kappa>0$, and every $T>0$,
 
 $$
 \E\int_0^{T\wedge\tau_\eta}

@@ -43,8 +43,13 @@ after a `sync` review checked that each rewording keeps the mathematics: titles 
 "Refuted literal weighted near-Cheeger package" lose "Refuted", sentences narrating a
 status ("The answer is negative", "is not itself certified", "no such implication is
 proved in this report") go, and "route", "fence", "certified", "repository" become
-mathematical words. 21 statements changed; exceptionally, as part of this migration, the
-23 entries of their fingerprints in 19 reviews were updated without a new review.
+mathematical words. In `prop:split-screened-supply`, "the split class of the certified
+dossier" pointed at convention (M2) of its dossier, which the statement did not state: it
+now writes the class out (compactly supported factors with smooth density, a cut
+$E_J\times\R^{J^c}$ with $C^2$ relative boundary and a tubular neighbourhood), so it says
+exactly what the dossier proves. 22 statements changed; exceptionally, as part of this
+migration, the 24 entries of their fingerprints in 20 reviews were updated without a new
+review.
 
 **Prose.** Four `writer` passes, on disjoint modules. `modules/00-overview.md` now carries
 what the site said: the question, examples by hand, the literature, the obstacle every
@@ -59,14 +64,12 @@ prose pass.
 
 ## What resists
 
-- **One rewording blocked.** In `prop:split-screened-supply`, "the split class of the
-  certified dossier" points at convention (M2) of `solutions/prop-split-screened-supply.md`,
-  which also requires the cut to have a $C^2$ relative boundary and a tubular
-  neighbourhood; the statement alone does not say so. Dropping the words would drop that
-  hypothesis. Either the class is written out in the statement, or the words stay: a
-  mathematical decision, left open.
-- **A sentence that may be out of date.** `prog:product-test` says the weighted
-  near-Cheeger approach is "forced"; its literal form, `ass:weighted-package`, is refuted.
+- **A conclusion that may be out of date.** `prog:product-test` says that if the all-cut
+  estimate fails on products, the weighted near-Cheeger approach is "forced"; the prose of
+  `modules/22-product-stress.md` says the same ("a failure would force the geometric
+  variant", "leaving Eldan–B as the surviving variant"). The literal form of that approach,
+  `ass:weighted-package`, is refuted, so only a repaired form such as `q:stein-weighted`
+  would remain. Saying so changes what the text claims, not its wording.
 - **Kinds and labels.** The `obs:` nodes are conjectures stated as methodological
   warnings; `q:cmh-normalization`, `q:literature-PsQs` and `q:gate-zero` are remarks and
   `q:cmh-approximation` a proposition under a `q:` prefix; `rem:gate-zero-trace-upgrade`,
@@ -88,6 +91,5 @@ prose pass.
 ## Proposed next step
 
 A `reviewer` with the `sync` lens on the nineteen statements converted in v0.2.0 and on the
-sign of `q:cmh-solenoidal-perturbation`; a decision on the class of
-`prop:split-screened-supply`. Fresh `certify` reviews would replace the fingerprints the
+sign of `q:cmh-solenoidal-perturbation`, and on the conclusion of `prog:product-test`. Fresh `certify` reviews would replace the fingerprints the
 two migrations recorded without a reading.
