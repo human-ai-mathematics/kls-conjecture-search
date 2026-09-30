@@ -90,7 +90,7 @@ project:
   # here for local reading; the pages workflow removes them before it publishes.
   toc:
     - file: modules/00-overview.md
-    - title: The landscape of methods and the route atlas
+    - title: The landscape of methods
       children:
         - file: modules/01-family-needles.md
         - file: modules/02-family-stochastic-localization.md
@@ -98,7 +98,7 @@ project:
         - file: modules/04-family-moment-map.md
         - file: modules/05-family-transport.md
         - file: modules/06-frontier-atlas.md
-    - title: Routes through stochastic localization
+    - title: Approaches through stochastic localization
       children:
         - file: modules/17-localization-prelude.md
         - file: modules/14-qcts-obstruction.md
@@ -110,7 +110,7 @@ project:
         - file: modules/25-bootstrap.md
         - file: modules/27-eldan-open-targets.md
         - file: modules/30-spectral-route.md
-    - title: Deterministic and conditional routes
+    - title: Deterministic and conditional approaches
       children:
         - file: modules/40-moment-map-cmh.md
         - file: modules/41-cmh-normalization.md

@@ -3,14 +3,19 @@ numbering:
   enumerator: "42.%s"
 ---
 
+% This heading keeps "Route": a statement links to this section, and the checker's
+% fingerprint includes a linked heading's text, so renaming it would lift certifications.
 (sec:cmh-exact-cases)=
 # Route C, exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
 
-Section [](#sec:cmh-normalization) fixed the CMH estimate and proved that it dominates the affine Poincaré constant. This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family for which the route has a theorem at all: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
+% Agent note (writer, v0.3.0): this heading keeps "Route C" because def:cmh links to this section and
+% check.py fingerprints a section link by its rendered heading text; renaming it changes def:cmh's fingerprint.
+
+Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
 
 The fourth class is solvable in a weaker but more pointed sense. The exponential cones of §[](#subsec:cmh-cones) attach a Gamma radial variable to an arbitrary centered base, and their moment map is explicit in terms of the base's own ([](#prop:cone-moment-map)); unlike the first three classes they are not compactly supported and, for a general base, not affine images of products. What is computed exactly on them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so every cone with $\beta=n$ saturates sharp gate zero ([](#conj:gate-zero-sharp)) in its axis direction ([](#prop:cone-linear-sector)), and over a cube base the entire gate matrix is a closed form bounded by $2$ ([](#cor:cube-cone-gate-zero)). They are the first non-product equality set the sharp linear sector has, which is what makes them a constraint on any argument for it.
 
-The section closes at the exact product endpoint: centered one-sided exponentials saturate $\mathrm{CMH}(4)$ with *zero* slack. Whether a log-concave perturbation raises the full CMH Rayleigh quotient is a separate, open second-variation problem; changing its solenoidal term alone is not decisive ([](#rem:cmh-saturation-risk), [](#q:cmh-solenoidal-perturbation)). The cone family bears on where to look for such a perturbation, and §[](#subsec:cmh-cones) records what the first exact sweep of it found.
+The section closes at the exact product endpoint: centered one-sided exponentials saturate $\mathrm{CMH}(4)$ with *zero* slack. Whether a log-concave perturbation raises the full CMH Rayleigh quotient is a separate second-variation problem, [](#q:cmh-solenoidal-perturbation); changing its solenoidal term alone is not decisive ([](#rem:cmh-saturation-risk)). The cone family bears on where to look for such a perturbation, and §[](#subsec:cmh-cones) reports what a first computation over it suggests.
 
 (subsec:cmh-1d)=
 ## The line
@@ -276,7 +281,7 @@ and $s_A\ge0$ for $A\ge3$.
 
 *Proof.* Minimize in $p$ first — the minimizer is interior only when $\sqrt z>a+1$ — and then check monotonicity in $a$ separately on the two branches $z\le4$ and $z\ge4$. The calculation is carried out in Appendix [](#sec:appendix-moment-map).
 
-*Proof.* Reduce $m=2$ to the line, then combine the Gamma completion, the row minimum and the integrated row bound: the total coefficient of $\E_P[u_i^2]$ is exactly $F_A(\alpha_i,P_i)$, and [](#lem:cmh-angular-coefficient) bounds that below. The calculation is carried out in Appendix [](#sec:appendix-moment-map).
+*Proof of [](#thm:cmh-dirichlet).* Reduce $m=2$ to the line, then combine the Gamma completion, the row minimum and the integrated row bound: the total coefficient of $\E_P[u_i^2]$ is exactly $F_A(\alpha_i,P_i)$, and [](#lem:cmh-angular-coefficient) bounds that below. The calculation is carried out in Appendix [](#sec:appendix-moment-map).
 
 :::{prf:corollary} Quantitative surplus
 :label: cor:cmh-dirichlet-surplus
@@ -313,7 +318,7 @@ The constant $4$ cannot be improved uniformly over the family. The face law $\ma
 (subsec:cmh-cones)=
 ## Exponential cones: a second solvable non-product family
 
-The Dirichlet family is solvable because the simplex lifts to independent Gamma variables. A lift in the opposite direction — attach a Gamma radial variable to a fixed base — produces measures on cones whose moment map is explicit in terms of the moment map of the base, and on which the linear sector of Route C is computed exactly. Unlike products and Dirichlet laws these measures are not compactly supported, and for a general base they are not invertible affine images of products.
+The Dirichlet family is solvable because the simplex lifts to independent Gamma variables. A lift in the opposite direction — attach a Gamma radial variable to a fixed base — produces measures on cones whose moment map is explicit in terms of the moment map of the base, and on which the linear sector of Approach C is computed exactly. Unlike products and Dirichlet laws these measures are not compactly supported, and for a general base they are not invertible affine images of products.
 
 :::{prf:definition} Exponential cone measures
 :label: def:exponential-cone
@@ -395,7 +400,9 @@ $$
 Both eigenvalues are at most $2$ for all $n\ge2$ and $\beta\ge n$: every cube cone satisfies [](#eq:gate-zero-sharp). Equality holds in the axis direction exactly when $\beta=n$, and in the transverse directions only for $n=\beta=2$, where the matrix is $2\,\Id_2$ and the measure is a product of two centered exponentials.
 :::
 
-The cube cones are the first non-product family in this document on which the sharp linear sector is saturated while every object entering $\CMH$ — the kernel, the generator, and all moments — is a rational function of independent Gamma and uniform variables. They are therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of [](#rem:cmh-saturation-risk): the perturbation that [](#q:cmh-solenoidal-perturbation) could not realise inside the log-concave class is realised here by the base, and any Galerkin quotient above $4$ on a cube cone would be a refutation candidate for $\mathrm{CMH}(4)$, subject to the certification channel of `solutions/README.md`. The first exact sweep of this family, recorded in `research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md`, is directional evidence in the other direction: on cube cones the polynomial Galerkin quotients sit strictly below the exponential-product values at equal degree, so a non-product base appears to dilute the one-dimensional exponential mechanism rather than add to it, and the pressure on $\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor.
+The cube cones are the first non-product family in this document on which the sharp linear sector is saturated while every object entering $\CMH$ — the kernel, the generator, and all moments — is a rational function of independent Gamma and uniform variables. They are therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of [](#rem:cmh-saturation-risk): the perturbation that [](#q:cmh-solenoidal-perturbation) could not realise inside the log-concave class is realised here by the base, and a Galerkin quotient above $4$ on a cube cone would point to a counterexample to $\mathrm{CMH}(4)$, which would still have to be verified by an exact argument. A first computation over this family points the other way: on cube cones the polynomial Galerkin quotients sit strictly below the exponential-product values at equal degree, so a non-product base appears to dilute the one-dimensional exponential mechanism rather than add to it, and the pressure on $\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor. This is numerical evidence at finite degree, not a proof.
+
+% Agent note: the computation is research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md; a refuting witness would go through solutions/README.md.
 
 (subsec:cmh-saturation)=
 ## The saturation risk and the decisive test
@@ -405,8 +412,8 @@ The cube cones are the first non-product family in this document on which the sh
 By [](#thm:cmh-1d) and [](#thm:cmh-product), a product of centered one-sided exponentials has $\CMH=4$ *exactly*. [](#prop:cmh-hodge) gives, for every admissible test function, the exact splitting of the CMH numerator into its affine Poincaré part and the nonnegative solenoidal term $\E\inner{w}{\Sigma^{-1}w}$.
 :::
 
-:::{prf:remark} Why saturation leaves an open perturbative test
-No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the explicit open second-variation problem in [](#q:cmh-solenoidal-perturbation); a positive answer would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
+:::{prf:remark} Why saturation leaves a perturbative test
+No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the explicit second-variation problem [](#q:cmh-solenoidal-perturbation); a positive answer would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
 :::
 
 :::{prf:conjecture} Second-order solenoidal excess at the product endpoint
@@ -414,4 +421,4 @@ No perturbative conclusion follows from those two facts alone. Under a perturbat
 Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$ within the smooth strictly convex class. Then the second variation of $\CMH$ at $\eps=0$ is nonpositive for every admissible perturbation: splitting the CMH numerator through [](#prop:cmh-hodge) into its gradient and solenoidal parts, the solenoidal part vanishes to second order at this saturating product. An admissible perturbation with strictly positive second variation would instead refute $\mathrm{CMH}(4)$ and force the route to a larger constant.
 :::
 
-[](#q:cmh-solenoidal-perturbation) is the sharpest available probe of the route because it attacks the endpoint rather than the machinery, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#q:gate-zero) it forms the falsification layer of Route C; [](#q:mm-invariant-lift) and [](#q:mm-square-root-commutator) remain the construction layer.
+[](#q:cmh-solenoidal-perturbation) is the sharpest available probe of the approach because it attacks the endpoint rather than the machinery, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#q:gate-zero) it forms the falsification layer of Approach C; [](#q:mm-invariant-lift) and [](#q:mm-square-root-commutator) form the construction layer.

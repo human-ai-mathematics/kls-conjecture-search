@@ -6,7 +6,7 @@ numbering:
 (sec:appendix-route-e)=
 # Product stress-test and bootstrap calculations
 
-The long computations of Route E. Their statements, what each one buys the route, and a summary of how each proof goes are Sections [](#sec:product-stress) and [](#sec:bootstrap); nothing is decided here that is not decided there.
+The long computations of Approach E. Their statements, what each one contributes, and a summary of how each proof goes are Sections [](#sec:product-stress) and [](#sec:bootstrap); nothing is decided here that is not decided there.
 
 :::{prf:proof} Proof of [](#thm:budget)
 (i) Since $\mu_t$ is a product pathwise and $E$ is $J$-measurable, [](#lem:block) applies to $(\mu_t,E)$ at every time: $G_t$ is supported on the $J\times J$ block, so

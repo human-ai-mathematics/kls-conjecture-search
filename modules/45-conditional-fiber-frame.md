@@ -4,35 +4,37 @@ numbering:
 ---
 
 (sec:conditional-fiber-frame)=
-# Route F: inverse-variance conditional-fiber frames
+# Approach F: inverse-variance conditional-fiber frames
 
-## Route gateway
+## Overview of the approach
 
-**1. Thesis.** Replace Euclidean directions by one isotropic frame of conditional line resamplings, chosen from the measure but not from the test function, and normalized by the conditional variances; then ask for a dimension-free spectral gap of the resulting form.
+**The idea.** Replace Euclidean directions by one isotropic frame of conditional line resamplings, chosen from the measure but not from the test function, and normalized by the conditional variances; then ask for a dimension-free spectral gap of the resulting form.
 
-**2. Bridge to KLS.** A *sufficient-condition* route, and the diagram must be read as such:
+**The link to KLS.** A *sufficient condition*, and the diagram must be read as such:
 
 $$
-\underbrace{\texttt{q:conditional-fiber-frame}}_{\text{open}}
+\text{conditional-fiber frame gap}
 \ \xRightarrow[\ \text{sufficient, not equivalent}\ ]{}\
-\text{KLS}.
+\text{KLS},
 $$
 
-The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A refutation of the frame question would therefore say nothing about KLS — which matters here more than on the other routes, because a refutation is what this route has so far produced.
+where the left-hand side is [](#q:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore say nothing about KLS. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
 
-**3. Established inputs.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Certified here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
+**What it builds on.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Set up here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
 
-**4. Main advance so far.** A precise question and one rigorous refutation. The frame formalism is set up with its isotropy constraint [](#eq:conditional-frame-isotropy) and its form [](#eq:conditional-fiber-form), and the most natural candidate — the $A_{m-1}$ root frame on the isotropic uniform simplex — is *refuted* by [](#prop:conditional-fiber-root-obstruction). Knowing which frame does not work, and why, is what turned this from a slogan into a question with a stated domain.
+**What it gives.** A precise question and one rigorous negative result. The frame formalism is set up with its isotropy constraint [](#eq:conditional-frame-isotropy) and its form [](#eq:conditional-fiber-form), and the most natural choice — the $A_{m-1}$ root frame on the isotropic uniform simplex — fails: by [](#prop:conditional-fiber-root-obstruction) its form gap is $O(m^{-2})$. Knowing which frame does not work, and why, is what turned this from a slogan into a question with a stated domain.
 
-**5. Exact bottleneck.** [](#q:conditional-fiber-frame): exhibit, for every isotropic log-concave $\mu$, one even test-independent admissible frame with a universal lower form gap on the maximal closed form domain — or decide the all-frame simplex dual against it.
+**What blocks it.** [](#q:conditional-fiber-frame): exhibit, for every isotropic log-concave $\mu$, one even test-independent admissible frame with a universal lower form gap on the maximal closed form domain — or decide the all-frame simplex dual against it.
 
-**6. Failed variants and obstructions.** [](#prop:conditional-fiber-root-obstruction) kills the root frame outright: a vertex-cap indicator drives the normalized Rayleigh quotient down. The dual attack is open but narrowed by a certified negative: the exact degree-two floors of [](#lem:fiber-root-degree-two) rule out every degree-two refuter, so a certificate must have degree at least three. [](#prop:sasada-negative-exchange) fences a related negative-exponent exchange.
+**What fails, and why.** [](#prop:conditional-fiber-root-obstruction) rules out the root frame outright: a vertex-cap indicator drives the normalized Rayleigh quotient down. The dual attack is narrowed by [](#lem:fiber-root-degree-two): its exact degree-two floor excludes every degree-two dual certificate, so a certificate must have degree at least three. [](#prop:sasada-negative-exchange) is the same vertex-cap mechanism for a related negative-exponent exchange model, from the literature.
 
-**7. Completion or reopening criterion.** The route closes on a universal form gap for a constructed frame. The refutation branch is no longer blocked: its blocker [](#lem:fiber-root-degree-two) was discharged by certification, and what the branch now needs is a dual certificate of polynomial degree at least three, which no live candidate states — the objective of `ap:f-simplex-dual` in `research/program/portfolio.yaml`.
+**What would settle it.** A universal form gap for a constructed frame would complete the approach. In the other direction, a counterexample on the simplex needs, by [](#lem:fiber-root-degree-two), an all-frame dual certificate of polynomial degree at least three whose objective tends to zero; none is known.
 
-**8. Technical reading guide.** Self-contained: this route uses none of Appendices [](#sec:notation)–[](#sec:models) and no moment-map machinery. The one external dependency is the sharp one-dimensional Poincaré inequality. Read Section [](#subsec:fiber-root-failure) for the refutation, which is the shortest complete argument in Part IV.
+% Agent note: this is the objective of ap:f-simplex-dual in research/program/portfolio.yaml.
 
-This route asks whether one can choose a single isotropic frame of directions, depending on the measure but not on the test function, so that normalized conditional line resampling has a dimension-free spectral gap. It is a sufficient-condition route rather than a reformulation of KLS. Its normalization is designed so that linear functions have exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality compares the form from above with the usual gradient form.
+**How to read it.** Self-contained: this approach uses none of Appendices [](#sec:notation)–[](#sec:models) and no moment-map machinery. The one external dependency is the sharp one-dimensional Poincaré inequality. Read Section [](#subsec:fiber-root-failure) for the root-frame obstruction, which is the shortest complete argument in Part IV.
+
+This approach asks whether one can choose a single isotropic frame of directions, depending on the measure but not on the test function, so that normalized conditional line resampling has a dimension-free spectral gap. It gives a sufficient condition rather than a reformulation of KLS. Its normalization is designed so that linear functions have exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality compares the form from above with the usual gradient form.
 
 Let $\mu$ be a full-dimensional probability on $\R^d$ with finite second moment. For $\theta\in S^{d-1}$, disintegrate along the affine lines parallel to $\theta$:
 
@@ -92,7 +94,7 @@ for every $f$ in the maximal closed form domain.
 An affirmative answer implies KLS by [](#eq:conditional-fiber-gradient-comparison). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
 
 (subsec:fiber-root-failure)=
-## The simplex root frame: a rigorous failed implementation
+## Why the simplex root frame fails
 
 Let $P$ be uniform on the simplex $\Delta_{m-1}$, put $H_0=\mathbf1^\perp$ and
 
@@ -140,7 +142,7 @@ and the centered cap indicator belongs to the maximal root-form domain and satis
 Consequently $\operatorname{gap}(\mathcal D_{\rm root})=O(m^{-2})$.
 :::
 
-The vertex-cap failure is an $L^2$ phenomenon and does not descend to fixed polynomial degree. The following statement, isolated by the 2026-08-30 exact frame battery and certified in a standalone dossier, pins the degree-two root-frame pencil exactly.
+The vertex-cap failure is an $L^2$ phenomenon and does not descend to fixed polynomial degree. At polynomial degree two the root-frame pencil can be computed exactly.
 
 :::{prf:lemma} Root-frame degree-two pencil identity
 :label: lem:fiber-root-degree-two
@@ -166,4 +168,4 @@ $$
 
 This is a published consequence of Sasada's vertex-cap argument [@Sasada2015EnergyExchange]. Caputo proves a dimension-free gap for the unweighted flat simplex heat bath, while Carlen–Posta–Tóth prove uniform gaps for nonnegative exponents $s\in[0,1]$ [@Caputo2008BinaryCollision; @CarlenPostaToth2025Exchange]. The inverse-variance root form lies at $s=-2$, outside those positive results.
 
-The root calculation does *not* refute [](#q:conditional-fiber-frame). A general permutation-invariant admissible frame may mix continuously many direction orbits, and no proof shows that the root orbit is optimal. The decisive simplex alternative is an exact all-frame dual certificate with objective tending to zero, or a uniform lower bound after optimizing over all admissible frames. Floating finite sweeps and root-only tests decide neither statement.
+The root calculation does *not* refute [](#q:conditional-fiber-frame). A general permutation-invariant admissible frame may mix continuously many direction orbits, and no proof shows that the root orbit is optimal. The decisive simplex alternative is an exact all-frame dual certificate with objective tending to zero, or a uniform lower bound after optimizing over all admissible frames. Floating-point computations over finitely many frames, and tests restricted to the root frame, decide neither alternative.

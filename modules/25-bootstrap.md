@@ -133,7 +133,7 @@ $\Tr A_t$ has drift $-\Tr A_t^2\le0$ by [](#eq:cov-sde), so $\E\lmax(A_t)\le\E\T
 
 :::{prf:remark} The crude evaluation is provably insufficient — by Klartag's theorem
 :label: rem:insufficiency
-For [](#eq:clean-form) to certify even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But, conditional on the July 2026 version-1 preprint of Letwin, $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ [@Letwin2026QuadraticKLS]; even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude certificate therefore never applies in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
+For [](#eq:clean-form) to yield even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But, conditional on the July 2026 version-1 preprint of Letwin, $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ [@Letwin2026QuadraticKLS]; even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude bound therefore never suffices in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
 :::
 
 The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Section [](#sec:covariance-tech) ([](#hyp:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).
@@ -182,24 +182,24 @@ $$
 :label: rem:supply
 Assembling this section and the previous one, the propagation estimates available at each scale are:
 
-| Scale of the excess bound | Status | Source |
+| Scale of the excess bound | Scope | Source |
 |---|---|---|
-| Absolute, $\le C(1+e_0)T$ | Unconditional, all $\mu$, all balanced $E$ | [](#prop:trivial-excess). |
+| Absolute, $\le C(1+e_0)T$ | No hypothesis: all $\mu$, all balanced $E$ | [](#prop:trivial-excess). |
 | Absolute with small constant, $\le Te_0+\kappa T$ | Holds for near-worst $\mu$ whenever $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass. [](#hyp:KI) | [](#cor:loglog); the universal-time near-worst extension is [](#q:taming). |
-| Relative, $\le\kappa\,h_\mu T$ | Requires, as bootstrap input, $\Xi_T\le c\kappa T$, which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; open whether near-extremality suffices for this stronger, unweighted covariance target | [](#prop:ceiling). |
+| Relative, $\le\kappa\,h_\mu T$ | Requires, as bootstrap input, $\Xi_T\le c\kappa T$, which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; whether near-extremal measures satisfy this stronger, unweighted covariance bound is a separate question from [](#q:taming), which asks only for the $h_\mu$-weighted form | [](#prop:ceiling). |
 
-On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the route, posed precisely in Section [](#sec:open).
+On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the approach, posed precisely in Section [](#sec:open).
 :::
 
 :::{prf:remark} Product measures: sanity check, and why the bootstrap is silent there
 :label: rem:products-bootstrap
-For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a nonnegative supermartingale (drift $-A^2$), so $\Prob(\sup_{s\le t}A^{(i)}_s\ge\lambda)\le1/\lambda$ by the maximal inequality. A more careful small-time analysis of the $n$ independent variance processes — which we do not carry out — suggests $\Xi_T\asymp\log\log n$ for products of two-sided exponentials, matching [](#cor:loglog) and consistent with the known observation that a single eigenvalue can reach order $\log n$, saturating the cap [](#eq:BL-cap) at $t\asymp1/\log n$ [@Chen2021; @KlartagLehec2022Polylog]. For products, however, $h_\mu\asymp1\gg\hstar_n$ in any hypothetical bad regime, so the near-worstness hypothesis fails and the bootstrap is vacuous — correctly so: products are not candidate counterexamples, and their excess propagation follows directly from $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization ([](#prop:products)).
+For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a nonnegative supermartingale (drift $-A^2$), so $\Prob(\sup_{s\le t}A^{(i)}_s\ge\lambda)\le1/\lambda$ by the maximal inequality. A more careful small-time analysis of the $n$ independent variance processes — which we do not carry out — suggests $\Xi_T\asymp\log\log n$ for products of two-sided exponentials, matching [](#cor:loglog) and consistent with the known observation that a single eigenvalue can reach order $\log n$, saturating the cap [](#eq:BL-cap) at $t\asymp1/\log n$ [@Chen2021; @KlartagLehec2022Polylog]. For products, however, $h_\mu\asymp1\gg\hstar_n$ in any hypothetical bad regime, so the near-worstness hypothesis fails and the bootstrap is vacuous — correctly so: products cannot be counterexamples, and their excess propagation follows directly from $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization ([](#prop:products)).
 :::
 
 (subsec:bootstrap-fences)=
-## Fences this section establishes
+## Methodological constraints from this section
 
-Both statements below are scoped methodological fences on the bootstrap input, not certified theorems; consumers carry them as heuristic barriers.
+Both statements below are methodological constraints on the bootstrap input, stated as warnings rather than theorems; later sections use them as heuristic barriers.
 
 :::{prf:conjecture} The crude covariance integral cannot bootstrap
 :label: obs:crude-insufficient

@@ -4,39 +4,43 @@ numbering:
 ---
 
 (sec:spectral-route)=
-# Route S: fixed-eigenfunction localization
+# Approach S: fixed-eigenfunction localization
 
-## Route gateway
+## The approach at a glance
 
-**1. Thesis.** Follow a fixed first eigenfunction, rather than a candidate cut, through stochastic localization, and keep its tensor orientation alive in the posterior covariance.
+**The idea.** Follow a fixed first eigenfunction, rather than a cut, through stochastic localization, and keep its tensor orientation alive in the posterior covariance.
 
-**2. Bridge to KLS.** One proved arrow, [](#prop:spectral-sufficiency), with one open antecedent:
+**How it would give KLS.** Through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#q:mm-spectral-occupation):
 
 $$
-\underbrace{\texttt{q:mm-spectral-occupation}}_{\text{open}}
-\ \xRightarrow[\ \text{proved}\ ]{}\
+\text{fixed-eigenfunction full-damping occupation}
+\ \Longrightarrow\
 \text{KLS}.
 $$
 
-[](#prop:spectral-sufficiency) is *proved* and its `assumes` list is non-empty, which is exactly the situation the ledger records as applicability-blocked: a theorem, and not progress on [](#conj:kls) until the antecedent is discharged. Its ledger node says so.
+The implication is a theorem about a hypothesis: it brings [](#conj:kls) no closer until [](#q:mm-spectral-occupation) itself is established.
 
-**3. Established inputs.** From the literature, and load-bearing: the sharp quadratic/third-moment input $\kappa_n=O(1)$ ([](#thm:letwin-qcts)), which is an *unreviewed version-1 preprint* and is recorded as `open`; and the published polylogarithmic covariance window. Certified here: the exact fixed-function SDE and the posterior-defect estimate ([](#lem:mm-posterior-defect)).
+% Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
+% applicability-blocked in the ledger; its ledger node says so.
 
-**4. Main advance so far.** The initial-layer window chain, [](#prop:mm-window-occupation): conditional on the same preprint input, the occupation estimate *does* close on the published polylogarithmic window. The route therefore fails only in the gap between a polylogarithmic time and a universal one, which is a sharper statement of the difficulty than the route began with. The supporting chain — the time-weighted fixed source, the stopped window source, and restart de-weighting ([](#lem:mm-time-weighted-fixed-source), [](#lem:mm-stopped-window-source), [](#lem:mm-restart-deweighting)) — is certified.
+**What it uses.** From the literature, and load-bearing: the sharp quadratic/third-moment input $\kappa_n=O(1)$ ([](#thm:letwin-qcts)), taken from an *unreviewed version-1 preprint*; and the published polylogarithmic covariance window. Developed here: the exact fixed-function SDE and the posterior-defect calculus ([](#lem:mm-posterior-defect)).
 
-**5. Exact bottleneck.** [](#q:mm-spectral-occupation): prove the *universal-time* full-damping source estimate uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The whole difficulty is the word universal; the polylogarithmic case is done.
+**What it gives.** The initial-layer window chain, [](#prop:mm-window-occupation): conditional on the same preprint input, the occupation estimate *does* hold on the published polylogarithmic window. The approach therefore meets its difficulty only in the gap between a polylogarithmic time and a universal one, which is a sharper statement of the difficulty than the one it started from. The supporting chain is the time-weighted fixed source, the stopped window source, and restart de-weighting ([](#lem:mm-time-weighted-fixed-source), [](#lem:mm-stopped-window-source), [](#lem:mm-restart-deweighting)).
 
-**6. Failed variants and obstructions.** No variant of this route has been refuted, which is a statement about its youth rather than its strength. The standing fence is external and decisive: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the route retains the eigenfunction's tensor rather than the covariance's top eigenvalue.
+**What blocks it.** [](#q:mm-spectral-occupation) at a *universal* time: the full-damping source estimate, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The whole difficulty is the word universal; the polylogarithmic window is the content of [](#prop:mm-window-occupation).
 
-**7. Completion or reopening criterion.** The route closes if [](#q:mm-spectral-occupation) is answered affirmatively at a universal time; it is decisively damaged if the unwhitening step is shown to lose alignment for a certified family. Note the premise risk: if [](#thm:letwin-qcts) does not survive review, the route does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
+**What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
-**8. Technical reading guide.** Conceptual prelude: Section [](#sec:localization-prelude) — Route S shares it entirely with Route E and differs only in the object followed. Moment-map control it consumes: Section [](#sec:family-moment-map). Apparatus: Appendices [](#sec:notation)–[](#sec:models).
+**What would settle it.** A positive answer to [](#q:mm-spectral-occupation) at a universal time settles it; a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
 
-**Thesis.** Follow a first eigenfunction — rather than a candidate cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: Appendices [](#sec:notation)–[](#sec:models).
 
-This route attacks the spectral object that *defines* KLS directly, and it retains the tensor/covariance orientation that a global operator-norm bound discards — the property Section [](#subsec:kls-spike-obstruction) showed to be necessary. It shares the localization backbone of Section [](#sec:localization-prelude) with Route E and differs only in the object it tracks.
+**The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
 
-The route is **live, secondary**. Its current entry points are the approaches of `research/program/portfolio.yaml`, and each approach's `objective` states what closing it would deliver.
+This approach attacks the spectral object that *defines* KLS directly, and it retains the tensor/covariance orientation that a global operator-norm bound discards — the property Section [](#subsec:kls-spike-obstruction) showed to be necessary. It shares the localization backbone of Section [](#sec:localization-prelude) with Approach E and differs only in the object it tracks.
+
+% Agent note: the approach is live, secondary. Its entry points are the approaches of
+% research/program/portfolio.yaml; each approach's `objective` states what closing it delivers.
 
 (subsec:spectral-sde)=
 ## Setup and the exact fixed-function SDE
@@ -75,7 +79,7 @@ Conditional on the version-1 preprint of [](#thm:letwin-qcts), the eigenfunction
 
 This is the exact analogue, for the fixed-eigenfunction object, of the static quadratic-chaos input that Section [](#sec:qcts) supplies for the fixed-cut object.
 
-Crude unwhitening of [](#eq:whitened-tensor) — multiplying back by $A_t^{1/2}$ on both sides — leaves a factor $\lmax(A_t)^2$, and hence exactly the universal-time dynamic alignment problem that Section [](#subsec:sl-where-the-log-lives) identified as the residual cost. So this route does not escape the difficulty by importing the preprint; it relocates it to an object with more structure.
+Crude unwhitening of [](#eq:whitened-tensor) — multiplying back by $A_t^{1/2}$ on both sides — leaves a factor $\lmax(A_t)^2$, and hence exactly the universal-time dynamic alignment problem that Section [](#subsec:sl-where-the-log-lives) identified as the residual cost. So this approach does not escape the difficulty by importing the preprint; it relocates it to an object with more structure.
 
 :::{prf:remark} The extra structure a cut does not have
 :label: rem:spectral-extra-structure
@@ -87,7 +91,7 @@ $$
 \E\norm{\Hess f}_{\HS}^2\le\lambda^2 .
 $$
 
-Exploiting these fixed energies inside the posterior channel is the possible advantage of this route over Route E. The route succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
+Exploiting these fixed energies inside the posterior channel is the possible advantage of this approach over Route E. It succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
 :::
 
 :::{prf:lemma} Posterior eigenfunction-defect calculus
@@ -142,7 +146,7 @@ These identities do not by themselves unwhiten the high-covariance part of $H_t$
 :::
 
 (subsec:spectral-headline)=
-## The headline open target
+## The central problem
 
 :::{prf:conjecture} Fixed-eigenfunction full-damping occupation
 :label: q:mm-spectral-occupation
@@ -186,10 +190,10 @@ $$
 \E\Var_{\mu_t}(f)=1-\int_0^tq(s)\dd s,
 $$
 
-the left side is at least $1/2$ at $t=T_*$. Posterior Brascamp–Lieb and the fixed-test tower property bound it above by $T_*^{-1}\E\abs{\nabla f}^2=\lambda/T_*$, so the first eigenvalue satisfies $\lambda\ge T_*/2$. Smooth strongly convex approximants, whitening, and passage of the uniform Poincaré inequality on fixed smooth tests give the same bound for every isotropic log-concave law, without convergence of eigenfunctions. The full domain and approximation argument is recorded in the certified standalone dossier.
+the left side is at least $1/2$ at $t=T_*$. Posterior Brascamp–Lieb and the fixed-test tower property bound it above by $T_*^{-1}\E\abs{\nabla f}^2=\lambda/T_*$, so the first eigenvalue satisfies $\lambda\ge T_*/2$. Smooth strongly convex approximants, whitening, and passage of the uniform Poincaré inequality on fixed smooth tests give the same bound for every isotropic log-concave law, without convergence of eigenfunctions. The full domain and approximation argument is in the full proof linked from the statement.
 :::
 
-The endpoint structure of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color route.
+The endpoint structure of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color setting of Approach E.
 
 :::{prf:lemma} Time-weighted fixed-function source budget
 :label: lem:mm-time-weighted-fixed-source
@@ -210,7 +214,9 @@ In particular, for $\kappa=0$, $\E\int_0^\infty t\norm{H_t}_{\HS}^2\dd t\le\Var_
 (subsec:spectral-window-chain)=
 ## The initial-layer window chain
 
-The following four candidate statements assemble the initial layer of [](#q:mm-spectral-occupation) completely up to the published covariance window. They were isolated in the 2026-08-30 initial-layer probe; their proofs are staged in standalone dossiers pending independent review, so each carries status *open* in the ledger. The first and last are conditional on the unreviewed quadratic-Poincaré import ([](#thm:letwin-qcts)); that conditionality is part of the statements.
+The following four statements assemble the initial layer of [](#q:mm-spectral-occupation) completely up to the published covariance window. The first and last are conditional on the quadratic-Poincaré input [](#thm:letwin-qcts), taken from an unreviewed preprint; that conditionality is part of the statements.
+
+% Agent note: isolated in the 2026-08-30 initial-layer probe.
 
 :::{prf:lemma} Stopped initial-layer source bound; conditional on [](#thm:letwin-qcts)
 :label: lem:mm-stopped-window-source
@@ -239,12 +245,14 @@ Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the certified bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
 :::
 
-[](#prop:mm-window-occupation) is a route-health certificate: it reproduces the polylogarithmic frontier through Route S machinery without improving it, and it does not decide [](#q:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The 2026-08-30 probe also shows the certified budgets are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from the certified budgets alone.
+[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through Approach S machinery without improving it, and it does not decide [](#q:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
+
+% Agent note: the saturation profile was found in the 2026-08-30 initial-layer probe.
 
 (subsec:spectral-kappa-form)=
 ## An equivalent sufficient reformulation
 
-There is a second, coarser way to state what this route needs. By [](#prop:letwin-kappa), $\kappa_n\le2\sqrt2$ conditional on the preprint. Hence *any* dimension-free comparison of the form
+There is a second, coarser way to state what this approach needs. By [](#prop:letwin-kappa), $\kappa_n\le2\sqrt2$ conditional on the preprint. Hence *any* dimension-free comparison of the form
 
 ```{math}
 :label: eq:spectral-kappa-sufficient
@@ -258,7 +266,9 @@ valid for every isotropic log-concave $\mu$ would prove KLS. Equivalently: it su
 
 (subsec:spectral-hminus1-endpoint)=
 
-An earlier formulation of this route's first lemma was an $H^{-1}$ residual bound. The cycle-1 audit reclassified it, and the reclassification is worth recording because it is exactly the kind of error the repository's soundness contract exists to catch.
+A natural first lemma for this approach is an $H^{-1}$ residual bound. It is worth recording why it is not one: it is itself of KLS strength, although it looks like a preliminary step.
+
+% Agent note: reclassified by the cycle-1 audit.
 
 With $b=\int\nabla f\dd\mu$, the proposed target was
 
@@ -276,16 +286,16 @@ It is still sufficient for KLS. But it is also quantitatively *implied* by KLS: 
 
 Its exact heat representation controls the short-time and high-frequency parts at the desired scale; the long-time low-spectrum tail is the complete KLS-strength residue. Accordingly [](#eq:spectral-residual) is retained as a *calibrated endpoint and diagnostic*, not advertised as a likely preliminary lemma.
 
-A second cycle-1 finding is recorded with it: a direct unweighting of the positive moment-map Stein form is *false* on truncated-exponential first eigenfunctions. That is a genuine refutation of a natural first attempt, and it is why [](#eq:whitened-tensor) is stated in whitened form.
+A second natural first attempt fails outright: a direct unweighting of the positive moment-map Stein form is *false* on truncated-exponential first eigenfunctions. This is why [](#eq:whitened-tensor) is stated in whitened form.
 
 (subsec:spectral-fences)=
-## Fences and comparison with the other routes
+## Which obstructions apply here, and comparison with the other approaches
 
 The obstructions proved elsewhere in this document are scoped, and it matters which of them bind here.
 
-- The projection ceiling of Section [](#sec:qcts) does *not* refute this route: the moment map uses information beyond radial and projection tests.
+- The projection ceiling of Section [](#sec:qcts) does *not* obstruct this approach: the moment map uses information beyond radial and projection tests.
 
-- The rank-one product-budget refutation of Section [](#sec:product-stress) is specific to a fixed-cut localization counterexample and imposes no no-go here.
+- The single-coordinate product-budget result of Section [](#sec:product-stress) ([](#cor:refutation)) is specific to a fixed-cut localization counterexample and imposes no no-go here.
 
 - A universal Lipschitz Gaussian transport is too strong for exponential tails ([](#rem:no-lipschitz-transport)); the weaker expected-Jacobian criterion [](#eq:brownian-derivative) is sufficient for KLS but currently reuses KLS-scale input, so it ranks below the target of this section.
 
@@ -293,7 +303,11 @@ The obstructions proved elsewhere in this document are scoped, and it matters wh
 
 :::{prf:remark} Relation to Route C
 :label: rem:spectral-vs-cmh
-Routes S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Route S keeps stochastic localization and makes the test dependence dynamic, while Route C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two open statements are equivalent, and no result merges them.
+Routes S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Route S keeps stochastic localization and makes the test dependence dynamic, while Route C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
 :::
 
-**Promotion gate.** The control plane promotes [](#q:mm-spectral-occupation), or admits further internal claims on this route, only when one of the following is established: the absorptive source/damping estimate [](#eq:spectral-occupation) uniformly on regular approximants together with a passage to arbitrary log-concave measures; or a route-fatal counterexample to every such function-aware occupation estimate.
+% Promotion gate (agent note). The control plane promotes q:mm-spectral-occupation, or admits
+% further internal claims on this route, only when one of the following is established: the
+% absorptive source/damping estimate eq:spectral-occupation uniformly on regular approximants
+% together with a passage to arbitrary log-concave measures; or a route-fatal counterexample to
+% every such function-aware occupation estimate.

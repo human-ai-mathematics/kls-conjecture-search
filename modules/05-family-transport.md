@@ -34,7 +34,7 @@ would give $\Var_\mu f\le C\Lip(f)^2$ for every Lipschitz $f$; Milman's equivale
 The corresponding *pathwise* statement is false, and cheaply so. A dimension-free Lipschitz map from a Gaussian to every log-concave $\mu$ would transfer the Gaussian logarithmic Sobolev inequality and Gaussian tail decay to $\mu$. Already the one-dimensional exponential law violates both. So [](#eq:brownian-derivative) must be read as an *averaged operator* estimate; the $\E$ and the order of the norm are not cosmetic.
 :::
 
-This is the reason the family has not yet produced an independent bound: current estimates on [](#eq:brownian-derivative) are polylogarithmic and largely inherit existing KLS-scale input rather than supplying it. The averaged operator derivative remains the plausible target.
+This is the reason the family has not yet produced an independent bound: current estimates on [](#eq:brownian-derivative) are polylogarithmic and largely inherit existing KLS-scale input rather than supplying it. The averaged operator derivative is the plausible target.
 
 (subsec:transport-entropic)=
 ## The entropic barrier
@@ -58,11 +58,12 @@ The gap is a matter of which contractions are controlled. Ordinary self-concorda
 
 **The precise missing estimate.** The dimension-free averaged bound [](#eq:brownian-derivative) on the expected operator norm of the transport derivative.
 
-**Why it stalls.** [](#rem:no-lipschitz-transport) rules out the pathwise route, so any argument must work in expectation — and an expected operator norm is not accessible by the pathwise convexity techniques that make Caffarelli's theorem work. Available derivative bounds either lose the alignment between the derivative and the test function, or reuse KLS-scale input and so cannot improve it.
+**Why it stalls.** [](#rem:no-lipschitz-transport) rules out the pathwise approach, so any argument must work in expectation — and an expected operator norm is not accessible by the pathwise convexity techniques that make Caffarelli's theorem work. Available derivative bounds either lose the alignment between the derivative and the test function, or reuse KLS-scale input and so cannot improve it.
 
 :::{prf:remark} Structured cases where KLS is known
 :label: rem:known-cases
 It is worth recording what is not open, since it delimits what a counterexample could look like. KLS holds for products by tensorization; for uniformly log-concave measures via Brascamp–Lieb/Bakry–Émery (Section [](#subsec:transport-caffarelli)); for $\ell_p$-balls; and for broad classes of generalized Orlicz balls [@KolesnikovMilman2016OrliczKLS]. It is *not* known for all unconditional convex bodies. These cases illustrate how additional structure can make the corresponding constant explicit; KLS asks for a universal bound when no such structure is available.
 :::
 
-**How this family feeds the live routes.** It feeds none of them, and the gap it leaves is recorded as such. Target 4 of Section [](#sec:kls-synthesis) — extending parallel coupling beyond linear tilts — has no corresponding node in this repository's route registry, and the synthesis says so rather than inventing one. Transport enters Parts III and IV only through the Brascamp–Lieb cap that stochastic localization uses.
+**Where this family enters the four approaches.** It enters none of them directly. Target 4 of Section [](#sec:kls-synthesis) — extending parallel coupling beyond linear tilts — is the natural transport question, and no labelled statement of this manuscript formulates it yet; the synthesis says so rather than inventing one. Transport enters Parts III and IV only through the Brascamp–Lieb cap that stochastic localization uses.
+% Agent note: target 4 has no ledger node and no approach in the portfolio.

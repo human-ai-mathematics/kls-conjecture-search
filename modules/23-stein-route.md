@@ -3,10 +3,12 @@ numbering:
   enumerator: "23.%s"
 ---
 
+% This heading keeps "Route": a statement links to this section, and the checker's
+% fingerprint includes a linked heading's text, so renaming it would lift certifications.
 (sec:stein)=
 # Route E–B: the failed literal weighted package and boundary Stein traces
 
-The geometric route trades the all-cut hypothesis for near-minimality. Its stochastic currency is the two-color covariance functional $\calS_\nu(E)=s^2\norm K_\HS^2$ of the Stein dictionary (Section [](#sec:stein-dictionary)); here we give its second exact form as a boundary flux and prove [](#thm:intro-weighted) given the results of Section [](#sec:excess). The conversion between the Stein functional and the Riccati source ([](#lem:stein-vs-source)) is lossless on the tight window and is recorded in the core.
+The geometric variant Eldan–B trades the all-cut hypothesis for near-minimality. Its stochastic currency is the two-color covariance functional $\calS_\nu(E)=s^2\norm K_\HS^2$ of the Stein dictionary (Section [](#sec:stein-dictionary)); here we give its second exact form as a boundary flux and give the argument for [](#thm:intro-weighted), using the results of Section [](#sec:excess). The conversion between the Stein functional and the Riccati source ([](#lem:stein-vs-source)) is lossless on the tight window and is recorded with the dictionary.
 
 ## The boundary representation and the trace estimate
 
@@ -49,11 +51,11 @@ $\int_E(f-\bar f)\dd\nu=Z^{-1}\int_E\operatorname{div}(e^{-V}\nabla u_f)dx$. The
 
 :::{prf:remark} What the stable Stein-trace estimate is
 :label: rem:what-stein-is
-Estimate [](#eq:intro-weighted-stein) is, through [](#eq:stein-norm-def)–[](#eq:trace-CS), a *trace estimate for Poisson solutions with quadratic data*, integrated along the localization and tested against near-minimal cuts: the boundary energy $\int_\Sigma\abs{\partial_nu_M}^2\dd\sigma_\nu$ must, after absorption of the damped modes, be controlled at the Carleson scale. The natural tool for converting boundary traces into interior energies is the weighted Reilly identity, and the natural geometric input for near-minimal $\Sigma$ is the second-variation stability of Section [](#sec:jacobi). The two warnings established in this report constrain any such proof: by [](#prop:two-tail) it cannot proceed one time-slice at a time with an absolute-scale excess term, and by the consumption audit ([](#prop:intro-audit)(b)) an absolute-scale excess term would carry no logical weight anyway. The covariance-weighted trace estimate [](#eq:intro-weighted-stein) remains a meaningful geometric target, but it is no longer by itself part of a corrected package: [](#prop:weighted-spectator-obstruction) refutes its paired global-operator-norm propagation clause, while [](#prop:spectator-excess-rate-obstruction) refutes the same uniform superlinear remainder even at weight one. Any replacement must first choose a cut-local or tensor-stable scale and a surviving remainder or near-worst premise, then re-audit the trace estimate against both.
+Estimate [](#eq:intro-weighted-stein) is, through [](#eq:stein-norm-def)–[](#eq:trace-CS), a *trace estimate for Poisson solutions with quadratic data*, integrated along the localization and tested against near-minimal cuts: the boundary energy $\int_\Sigma\abs{\partial_nu_M}^2\dd\sigma_\nu$ must, after absorption of the damped modes, be controlled at the Carleson scale. The natural tool for converting boundary traces into interior energies is the weighted Reilly identity, and the natural geometric input for near-minimal $\Sigma$ is the second-variation stability of Section [](#sec:jacobi). Two warnings constrain any such proof: by [](#prop:two-tail) it cannot proceed one time-slice at a time with an absolute-scale excess term, and by the consumption audit ([](#prop:intro-audit)(b)) an absolute-scale excess term would carry no logical weight anyway. The covariance-weighted trace estimate [](#eq:intro-weighted-stein) remains a meaningful geometric target, but it is not by itself part of a working package: [](#prop:weighted-spectator-obstruction) shows that its paired global-operator-norm propagation clause fails on spectator products, while [](#prop:spectator-excess-rate-obstruction) rules out the same uniform superlinear remainder even at weight one. Any replacement must first choose a cut-local or tensor-stable scale and a surviving remainder or near-worst premise, then re-audit the trace estimate against both.
 :::
 
 (subsec:consumption)=
-## Consumption: proof of [](#thm:intro-weighted)
+## Consumption: the argument for [](#thm:intro-weighted)
 
 :::{prf:proof} Proof of [](#thm:intro-weighted)
 Assume the weighted package ([](#ass:weighted-package)). Thus its fixed tight-window parameter satisfies $2\beta+64\eta^2<1$. Suppose, for contradiction, that KLS fails, and let $(\mu_k,E_k)$ be a sequence of isotropic log-concave measures and balanced near-Cheeger cuts with $\mu_k^+(E_k)\to0$ and $e_0(E_k)\le1$; this is the near-minimizer reduction in the remark following [](#thm:centroid-implies-kls). Choose once and for all $\alpha\in(2\beta+64\eta^2,1)$. In particular, the assumed value of $\eta$ is small enough for the tight-window conversion below; no stopping window is chosen after the two package estimates have been supplied.
@@ -76,5 +78,5 @@ where the additional $64\eta^2D$ comes from the conversion. By weighted excess p
 :::
 
 :::{prf:remark}
-The proof shows that the only place the excess enters the consumption is through the single scalar $\E\int e_t(1+\norm{A_t}_\op)^{5/2}\dd t$, and that any bound of size $O(T)$ for it, with universal constant, suffices. The stronger $T^{1+\gamma}$ remainder in [](#eq:intro-weighted-excess) is not needed for consumption, and the literal uniform premise is now refuted. The unweighted spectator obstruction proves that merely replacing the covariance weight does not rescue that remainder. A replacement may instead allow an $O(T)$ supply tied to a near-worst hypothesis, or use a remainder that vanishes with a genuinely cut-local source deficit; either choice requires a new consumption audit.
+The proof shows that the only place the excess enters the consumption is through the single scalar $\E\int e_t(1+\norm{A_t}_\op)^{5/2}\dd t$, and that any bound of size $O(T)$ for it, with universal constant, suffices. The stronger $T^{1+\gamma}$ remainder in [](#eq:intro-weighted-excess) is not needed for consumption, and the literal uniform premise fails on spectator products ([](#prop:weighted-spectator-obstruction)). The unweighted spectator obstruction ([](#prop:spectator-excess-rate-obstruction)) shows that merely replacing the covariance weight does not rescue that remainder. A replacement may instead allow an $O(T)$ supply tied to a near-worst hypothesis, or use a remainder that vanishes with a genuinely cut-local source deficit; either choice requires a new consumption audit.
 :::

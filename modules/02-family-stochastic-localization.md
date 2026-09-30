@@ -10,7 +10,7 @@ numbering:
 
 **What it buys.** Every general improvement of the KLS bound since 2012 has come from this construction. It replaces the needle dichotomy of Section [](#sec:family-needles) — “one dimension, no covariance” — by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of controlling it only in law.
 
-This section fixes the process and the three identities used by the stochastic routes of Part III, Routes E and S. The repository's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
+This section fixes the process and the three identities used by the two stochastic approaches of Part III, Approaches E and S. This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
 
 (subsec:sl-process)=
 ## The process
@@ -95,7 +95,7 @@ whose quadratic variation is controlled by $A_t$. Lee–Vempala's criterion is t
 \PsiKLS_{p_0}\lesssim T^{-1/2}.
 ```
 
-The mechanism has three steps, and it is worth separating them because Routes E and S modify exactly one of them each:
+The mechanism has three steps, and it is worth separating them because Approaches E and S modify exactly one of them each:
 
 (1) the covariance bound keeps $g_T$ away from $0$ and $1$ with positive probability — the cut is not identified too fast;
 
@@ -103,7 +103,7 @@ The mechanism has three steps, and it is worth separating them because Routes E 
 
 (3) averaging the boundary measure of $E$ under $p_T$ back to time zero, using the martingale property, transfers that expansion to $p_0$.
 
-So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. Route E replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); Route S replaces the set $E$ by a first eigenfunction (Section [](#sec:spectral-route)).
+So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. Approach E replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); Approach S replaces the set $E$ by a first eigenfunction (Section [](#sec:spectral-route)).
 
 (subsec:sl-third-moments)=
 ## Why third moments appear
@@ -179,4 +179,4 @@ The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution o
 
 **Why it stalls.** By [](#prop:covariance-spike), the naive strengthening — a uniform pathwise bound on $\norm{A_t}_\op$ — is false, even for measures that satisfy KLS. So the missing estimate cannot be obtained by sharpening the covariance bound; it has to come from a potential that recognizes when a covariance spike is harmless. Products of centered exponentials are the canonical instance of a harmless spike, which is why they recur as the stress test throughout Part III (Sections [](#sec:models) and [](#sec:product-stress)).
 
-**How this family feeds the live routes.** It is the engine of both routes of Part III, which differ only in what they refuse to average away. Route E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Route S (Section [](#sec:spectral-route)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.
+**Where this family enters the four approaches.** It is the engine of both approaches of Part III, which differ only in what they refuse to average away. Approach E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Approach S (Section [](#sec:spectral-route)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.

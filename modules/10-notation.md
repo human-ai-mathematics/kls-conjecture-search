@@ -151,7 +151,7 @@ The coarse balanced stopping time is
 \tau=\inf\{t:p_t\notin[1/3,2/3]\}.
 ```
 
-For the boundary route, it is useful to work with a tighter window. For $0<\eta<1/2$ set
+For the boundary approach, it is useful to work with a tighter window. For $0<\eta<1/2$ set
 
 ```{math}
 :label: eq:tau-tight
@@ -219,7 +219,7 @@ For full smooth support, $\mathfrak K_\Sigma=\int_\Sigma\qJac_\Sigma\dd\sigma_\n
 
 ## Regularity convention
 
-Each stochastic identity below is used only in the regularity class stated at its label or in its certified dossier. In particular, no blanket rough-set approximation is used to identify lower outer Minkowski perimeter with weighted reduced-boundary area.
+Each stochastic identity below is used only in the regularity class stated at its label or in its full proof. In particular, no blanket rough-set approximation is used to identify lower outer Minkowski perimeter with weighted reduced-boundary area.
 
 For every fixed Borel set $E$ with finite initial lower outer Minkowski perimeter, [](#lem:perimeter-martingale) proves the conditional supermartingale inequality and hence
 

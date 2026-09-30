@@ -25,7 +25,7 @@ Let $\mu=e^{-U}\dd x$ be a probability measure on $\R^n$ with $\Hess U\succeq tI
 ```
 :::
 
-This is imported, not proved here; the argument is short enough to record, because the shape of it explains where each factor in the bridge [](#eq:kls-bridge) comes from.
+This is Klartag's theorem, quoted from [@Klartag2023Logarithmic]; the argument is short enough to record, because the shape of it explains where each factor in the bridge [](#eq:kls-bridge) comes from.
 
 :::{prf:proof} Sketch, following {[@Klartag2023Logarithmic]}
 Let $-Lf=\lambda f$ with $f$ a normalized first nonconstant eigenfunction, so that $\int|\nabla f|^2\dd\mu=\lambda$ and $\lambda=\CP(\mu)^{-1}$. The integrated Bochner formula, combined with the Poincaré inequality applied to each partial derivative of $f$, gives
@@ -129,4 +129,4 @@ A suitable strengthening would remove some of the spectral-projection losses in 
 
 **Why it stalls.** Every step above is an averaging step. Bochner in [](#eq:bochner-step) keeps only $\int\nabla f\dd\mu$; [](#eq:barthe-klartag) keeps only the spectral masses of the $\partial_if$; [](#eq:spectral-monotonicity) is a statement about a single Rayleigh quotient. Trace, coordinate, or averaged spectral information does not bound every slow mode, and a near-extremizing eigenfunction of a general log-concave measure is exactly the object about which these averages say least.
 
-**How this family feeds the live routes.** Route S (Section [](#sec:spectral-route)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the route this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ endpoint audited in Section [](#subsec:spectral-h-minus-one) is where the two meet.
+**Where this family enters the four approaches.** Approach S (Section [](#sec:spectral-route)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the approach this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ endpoint audited in Section [](#subsec:spectral-h-minus-one) is where the two meet.

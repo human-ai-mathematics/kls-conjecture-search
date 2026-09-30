@@ -6,7 +6,7 @@ numbering:
 (sec:qcts)=
 # The static quadratic-chaos input and the two-tail obstruction
 
-The time-zero version of two-color covariance control is already a strong statement. A July 2026 preprint of Letwin now proves this intrinsic quadratic-chaos estimate with a universal constant [@Letwin2026QuadraticKLS]. This removes the static quadratic-chaos question from the frontier, but it does not remove the covariance-alignment problem created by unwhitening a localized posterior. The quantified two-tail configuration at the end of the section remains the static obstruction that both Eldan subroutes must respect: it fixes the covariance weight of Eldan–B and marks the boundary of what slice-wise verification can establish for Eldan–A.
+The time-zero version of two-color covariance control is already a strong statement. A July 2026 preprint of Letwin now proves this intrinsic quadratic-chaos estimate with a universal constant [@Letwin2026QuadraticKLS]. This removes the static quadratic-chaos question from the frontier, but it does not remove the covariance-alignment problem created by unwhitening a localized posterior. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of Eldan–B and marks the boundary of what slice-wise verification can establish for Eldan–A.
 
 Let $X\sim\nu$ be isotropic and log-concave, and put
 
@@ -216,7 +216,7 @@ Therefore $\inner{P}{TP}\le4r$, whereas $\norm T_{\op}=H_n\simeq\log n$. This is
 
 ## Static lesson
 
-A proof of KLS through this route still cannot rely only on radial information or on projection tests. [](#thm:letwin-qcts) supplies the full *intrinsic* quadratic-chaos estimate, but [](#cor:qcts-source) shows exactly what whitening loses: the Euclidean Riccati source may still be amplified by $\lmax(A_t)^2$. The remaining task is therefore dynamic or geometric control of the alignment with $A_t$, attached to the fixed cut $E$.
+A proof of KLS through this approach still cannot rely only on radial information or on projection tests. [](#thm:letwin-qcts) supplies the full *intrinsic* quadratic-chaos estimate, but [](#cor:qcts-source) shows exactly what whitening loses: the Euclidean Riccati source may still be amplified by $\lmax(A_t)^2$. The remaining task is therefore dynamic or geometric control of the alignment with $A_t$, attached to the fixed cut $E$.
 
 ## The quantified two-tail obstruction and the weight calibration
 
@@ -270,9 +270,11 @@ Three consequences.
 :::
 
 (subsec:qcts-fences)=
-## Fences this section establishes
+## What this section argues against
 
-The two obstructions below name the proof shapes this section rules out. Each is stated as a scoped methodological fence rather than a theorem about the KLS conjecture: it records what a proof may not do, and it is not itself certified, so consumers list it among their heuristic barriers rather than as a logical bound.
+The two obstructions below name the proof shapes the computations of this section argue against. Each is stated as a conjecture about proof methods rather than a theorem about KLS: it records what a proof should not try to do, and later sections cite it as a heuristic barrier, never as a step in a proof.
+
+% Agent note: obs:two-tail and obs:proj-ceiling are open `bounded_by` fences in the ledger, not certified bounds.
 
 :::{prf:conjecture} Absolute-scale slice bounds fail
 :label: obs:two-tail

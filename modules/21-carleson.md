@@ -4,11 +4,11 @@ numbering:
 ---
 
 (sec:carleson)=
-# Route E–A: the exact Carleson target
+# Approach E–A: the exact Carleson target
 
 ## Consuming the two-color Carleson estimate
 
-We now prove [](#thm:intro-all-cut).
+This section gives the argument for [](#thm:intro-all-cut).
 
 :::{prf:theorem} Two-color Carleson implies the stopped centroid estimate
 :label: thm:carleson-implies-centroid
@@ -56,7 +56,7 @@ This is the stopped centroid estimate. Combining it with [](#eq:qv-p) and Doob's
 
 The same Gronwall mechanism will be reused in Section [](#subsec:consumption) in a slightly generalized form: any estimate of the shape $\E\int\calS_{\mu_t}(E)/s_t\le C_0T+C_1\E\int r_t+\beta\E\int D_t+\mathfrak E(T)$ with an error functional $\mathfrak E(T)\le C_3T$ feeds into the same consumption chain.
 
-The boundary route consumes its Carleson estimate on the tight window $\tau_\eta$ rather than the coarse window $\tau$. The following records, once, that the consumption of [](#thm:carleson-implies-centroid) and [](#lem:survival-implies-kls) go through verbatim on $\tau_\eta$, with constants depending only on the fixed (universal) $\eta$.
+The near-Cheeger variant Eldan–B consumes its Carleson estimate on the tight window $\tau_\eta$ rather than the coarse window $\tau$. The following records, once, that the consumption of [](#thm:carleson-implies-centroid) and [](#lem:survival-implies-kls) go through verbatim on $\tau_\eta$, with constants depending only on the fixed (universal) $\eta$.
 
 :::{prf:corollary} Tight-window consumption
 :label: cor:tight-window-consumption
@@ -178,7 +178,7 @@ $$
 $$
 :::
 
-In an $A$-eigenbasis, $\lambda_{\rm cut}(A,K)$ is the $|K_{ij}|^2$-weighted harmonic mean of $(\lambda_i(A)+\lambda_j(A))/2$. Thus it equals the inflated variance in the anisotropic two-tail example while remaining unchanged under irrelevant direct sums. This is a calibrated tensor-stable replacement candidate for the global operator norm, not an initial-layer occupation estimate: [](#eq:cut-oriented-source-scale) still has a singular $t^{-1}$ factor.
+In an $A$-eigenbasis, $\lambda_{\rm cut}(A,K)$ is the $|K_{ij}|^2$-weighted harmonic mean of $(\lambda_i(A)+\lambda_j(A))/2$. Thus it equals the inflated variance in the anisotropic two-tail example while remaining unchanged under irrelevant direct sums. It is a calibrated, tensor-stable possible replacement for the global operator norm, not an initial-layer occupation estimate: [](#eq:cut-oriented-source-scale) still has a singular $t^{-1}$ factor.
 
 :::{prf:corollary} The source is pathwise controlled away from zero
 :label: cor:away-from-zero

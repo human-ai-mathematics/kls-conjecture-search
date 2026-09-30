@@ -4,15 +4,15 @@ numbering:
 ---
 
 (sec:cmh-normalization)=
-# Route C, normalization layer: CMH made precise, its Hodge content, and gate zero
+# Approach C, normalization layer: CMH made precise, its Hodge content, and gate zero
 
-Section [](#sec:moment-map-cmh) posed [](#q:cmh-normalization): fix every object in the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ and prove that the resulting statement implies a universal Poincaré bound. This section answers it. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is proved, and three structural consequences are recorded that were not visible while the endpoint was a schema:
+Section [](#sec:moment-map-cmh) posed [](#q:cmh-normalization): fix every object in the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ and prove that the resulting statement implies a universal Poincaré bound. This section answers it. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
 
-- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; whether that channel makes CMH genuinely stronger than KLS remains open ([](#prop:cmh-hodge), [](#rem:cmh-stronger-than-kls));
+- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#rem:cmh-stronger-than-kls));
 
-- a necessary linear-sector condition, *gate zero*, which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) provably does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
+- a necessary linear-sector condition, *gate zero*, which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
 
-- an exact resolution of that sector. The gate matrix's quadratic form splits as one plus a quarter of the squared directional third moment plus a named high-mode remainder ([](#lem:linear-sector-third-moment)), so any gate-zero constant already contains a directional third-moment bound ([](#cor:gate-zero-third-moment)) and the sharp form is at least as strong as the sharp third-moment estimate. The spectral resolution of the three gate matrices that the anisotropic-bootstrap route works from is [](#lem:cmh-linear-spectral-resolution). All three statements are certified here.
+- an exact resolution of that sector. The gate matrix's quadratic form splits as one plus a quarter of the squared directional third moment plus a named high-mode remainder ([](#lem:linear-sector-third-moment)), so any gate-zero constant already contains a directional third-moment bound ([](#cor:gate-zero-third-moment)) and the sharp form is at least as strong as the sharp third-moment estimate. The spectral resolution of the three gate matrices that the anisotropic-bootstrap approach works from is [](#lem:cmh-linear-spectral-resolution).
 
 Throughout, $\mu$ is centered, full-dimensional and log-concave with covariance $\Sigma=\Cov_\mu\succ0$, and $\varphi$, $\nu$, $H$ are the moment-map data of [](#eq:moment-measure)–[](#eq:MA) in Section [](#sec:family-moment-map), transported to target coordinates as in [](#eq:stein-kernel-def). Regularity is assumed only to justify pointwise calculation; Appendix-level conventions for the weighted divergence, the closed forms, and the affine covariance are collected in §[](#subsec:cmh-conventions).
 
@@ -170,7 +170,7 @@ In dimension at least two the divergence-free subspace is nontrivial, so the ide
 :::
 
 :::{prf:remark} What the Hodge identity does not prove
-The identity does *not* show that this channel is nonzero for a CMH extremizing sequence, nor does it exhibit a measure separating CMH from $\CPaff$. Thus $\mathrm{CMH}(4)$ is sufficient for KLS with constant $4$, while equivalence and strict nonimplication are both open. The ledger records $\mathrm{CMH}(4)$ as a route target, not as an established reformulation or a proved strict strengthening of KLS.
+The identity does *not* show that this channel is nonzero for a CMH extremizing sequence, nor does it exhibit a measure separating CMH from $\CPaff$. Thus $\mathrm{CMH}(4)$ is sufficient for KLS with constant $4$ ([](#thm:cmh-implies-affine-poincare)), and this manuscript establishes neither equivalence nor strict nonimplication. $\mathrm{CMH}(4)$ is the target of this approach, not an established reformulation of KLS or a strict strengthening of it.
 :::
 
 The product formula below shows that products of one-sided exponentials saturate $\mathrm{CMH}(4)$ with zero slack. [](#rem:cmh-saturation-risk) therefore turns the possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
@@ -192,7 +192,7 @@ Every centered log-concave moment measure satisfies
 equivalently $\E H^2\preceq4\Id$ in isotropic position.
 :::
 
-This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole route: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
+This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole approach: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
 
 :::{prf:corollary} Gate zero is a trace-upgrade problem
 :label: rem:gate-zero-trace-upgrade
@@ -215,7 +215,7 @@ equivalently $\E H^2\preceq2\,\Id$ in isotropic position.
 
 [](#conj:gate-zero-sharp) refines [](#conj:gate-zero) and implies it, and its trace is exactly [](#thm:chen-klartag-moment-hessian). Its equality set is not small: products of centered exponentials attain [](#eq:gate-zero-sharp) in every direction, and every exponential cone measure of Section [](#subsec:cmh-cones) attains it in its axis direction ([](#prop:cone-linear-sector)), with the constant strictly below $2$ on the same family as soon as the radial exponent moves off the cone value. The constant $2$ is half the CMH constant $4$: on the line, $\E\tau^2=2$ for the centered exponential while $\CMH=4$ by [](#thm:cmh-1d), so the linear sector saturates at half the full constant. By [](#cor:gate-zero-third-moment) below, the sharp form would improve the directional third-moment bound of [](#prop:letwin-kappa) from $\kappa_n\le2\sqrt2$ to the sharp $\kappa_n\le2$; it is therefore at least as strong as a sharp third-moment estimate, which calibrates its difficulty.
 
-The 2026-08-30 anisotropic-bootstrap probe resolved the linear sector's three gate matrices spectrally. In isotropic source coordinates write $Q_{\rm lin}(\mu):=\lmax(\mathsf N)$ for the linear CMH quotient, $\mathsf N=\int H^2\,d\eta$, and write $(\mathrm{AB})_{\rho,\beta}$ for the anisotropic-bootstrap inequality $\mathsf R\succeq\rho\mathsf N-\beta I$ with $\mathsf R=\mathsf N-\mathsf D$ as in the lemma below; its sharp form is $(\rho,\beta)=(\tfrac12,0)$, which is equivalent to [](#conj:gate-zero-sharp) together with the high-mode excess bound recorded in the lemma. In the lemma, $A=H\,(D^2V\circ\nabla\psi)\,H$ and $Q_{k\ell}=\Tr(H^{-1}\partial_kH\,H^{-1}\partial_\ell H)$ are the two nonnegative terms of [](#eq:differentiated-MA), and $\sum_bM_{ab}u_b$ abbreviates $\sum_b(M_a)_{\cdot b}u_b$. The following statement is certified in a standalone dossier.
+The linear sector's three gate matrices can be resolved spectrally. In isotropic source coordinates write $Q_{\rm lin}(\mu):=\lmax(\mathsf N)$ for the linear CMH quotient, $\mathsf N=\int H^2\,d\eta$, and write $(\mathrm{AB})_{\rho,\beta}$ for the anisotropic-bootstrap inequality $\mathsf R\succeq\rho\mathsf N-\beta I$ with $\mathsf R=\mathsf N-\mathsf D$ as in the lemma below; its sharp form is $(\rho,\beta)=(\tfrac12,0)$, which is equivalent to [](#conj:gate-zero-sharp) together with the high-mode excess bound recorded in the lemma. In the lemma, $A=H\,(D^2V\circ\nabla\psi)\,H$ and $Q_{k\ell}=\Tr(H^{-1}\partial_kH\,H^{-1}\partial_\ell H)$ are the two nonnegative terms of [](#eq:differentiated-MA), and $\sum_bM_{ab}u_b$ abbreviates $\sum_b(M_a)_{\cdot b}u_b$.
 
 :::{prf:lemma} Spectral resolution of the linear-sector gate matrices
 :label: lem:cmh-linear-spectral-resolution
@@ -278,8 +278,10 @@ In particular, on any class of such measures with $\E\tau^2\preceq c\,\Id$, ever
 Summing the corollary over an orthonormal basis recovers $\norm{T_3(\mu)}_{\HS}^2\le4(\Tr\E\tau^2-n)\le4n$, the chain in the proof of Theorem 1.2 of [@ChenKlartag2026SharpThinShell]. [](#cor:gate-zero-third-moment) places gate zero relative to the literature input it does not use: gate zero at constant $c$ contains a directional third-moment bound at $2\sqrt{c-1}$, so any proof of [](#eq:gate-zero-sharp) proves a sharper constant than [](#thm:letwin-qcts) supplies, and any proof of [](#eq:gate-zero) must at least reproduce a bound of that type. The reverse channel is what makes the corollary a falsification tool: it is a lower bound on the gate matrix that needs no moment map, only third moments.
 
 :::{prf:remark} Relation to the shared trace-upgrade difficulty
-Gate zero belongs to the same difficulty family as `q:upgrade`, the high-rank part of `q:stein-weighted`, and `q:alignment`; no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the program. Only the first half is dispatchable, and `research/lib/README.md` records the corresponding numerical channel.
+Gate zero belongs to the same difficulty family as [](#q:upgrade), the high-rank part of [](#q:stein-weighted), and [](#q:alignment); no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the programme.
 :::
+
+% Agent note: research/lib/README.md records the numerical channel for testing gate zero on models.
 
 (subsec:gate-zero-countermodel)=
 ## Why the constant-matrix estimate cannot supply gate zero
@@ -356,13 +358,13 @@ Decide [](#eq:gate-zero). Either prove $\E[H\Sigma^{-1}H]\preceq4\Sigma$ for eve
 
 **Affine covariance.** If $T$ is invertible and $Y=TX$, then $\Sigma_Y=T\Sigma_XT^\top$ and $H_Y(Tx)=TH_X(x)T^\top$; with $g_Y(y)=g_X(T^{-1}y)$ both the numerator and denominator of [](#eq:cmh-constant) are unchanged. Hence $\CMH$ is an invariant of the affine equivalence class, matching the affine invariance of $\CPaff$. For a *noninvertible* map the transported Stein kernel need not be the canonical moment-map kernel of the image, so only the Poincaré-level statement of [](#cor:cmh-linear-images) is available there.
 
-**Conditional closure for general log-concave measures.** [](#q:cmh-approximation) is certified at the Poincaré level as follows. For an arbitrary centered log-concave $\mu$, centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants $\mu_q$ belong to the published compact-target regular class of [](#thm:regular-moment-map-compact-target) and converge to $\mu$ in ambient $W_2$ with second moments, hence $\Sigma_q\to\Sigma$. If $\sup_q\CMH(\mu_q)\le C$, then for every smooth compactly supported $f$,
+**Conditional closure for general log-concave measures.** The argument behind [](#q:cmh-approximation) runs at the Poincaré level as follows. For an arbitrary centered log-concave $\mu$, centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants $\mu_q$ belong to the published compact-target regular class of [](#thm:regular-moment-map-compact-target) and converge to $\mu$ in ambient $W_2$ with second moments, hence $\Sigma_q\to\Sigma$. If $\sup_q\CMH(\mu_q)\le C$, then for every smooth compactly supported $f$,
 
 $$
 \Var_{\mu_q}f\le C\int\inner{\Sigma_q\nabla f}{\nabla f}\,d\mu_q.
 $$
 
-Both sides converge because $f$ and $\nabla f$ are bounded and continuous and the covariances converge. Intrinsic smooth-core density on $S=\operatorname{Ran}\Sigma$ extends the inequality to the closed covariance-form relaxation $H^1_\Sigma(\mu)$, while $\Sigma$ and $\Sigma^+$ annihilate ambient normal derivatives. This proves constant-preserving closure, including singular covariance. It does not prove the uniform premise and asserts no continuity of $\CMH$.
+Both sides converge because $f$ and $\nabla f$ are bounded and continuous and the covariances converge. Intrinsic smooth-core density on $S=\operatorname{Ran}\Sigma$ extends the inequality to the closed covariance-form relaxation $H^1_\Sigma(\mu)$, while $\Sigma$ and $\Sigma^+$ annihilate ambient normal derivatives. This gives constant-preserving closure, including singular covariance. It does not give the uniform premise and asserts no continuity of $\CMH$.
 
 :::{prf:lemma} Affine Poincaré lower semicontinuity along regular recovery
 :label: lem:affine-poincare-w2-liminf

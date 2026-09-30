@@ -30,7 +30,7 @@ Since $I_{\mu_t}\ge0$, $e_t\le\mu_t^+(E)$ pathwise. By the perimeter supermartin
 
 :::{prf:remark} Interpretation of the audit
 :label: rem:audit-interpretation
-Item (b) is not good news about excess propagation; it is a diagnosis of the previously stated package. An additive excess term whose integral is a priori $O(T)$ is inert next to the $C_0T$ term: it can be deleted without changing the strength of the assumption, so the unweighted Stein-trace estimate silently carried the entire logical weight of the route. Item (c) shows this weight cannot be discharged slice-wise. The weighted restatement ([](#ass:weighted-package)) was a proposed repair: it made the excess term non-inert and passed the static two-tail calibration. [](#prop:weighted-spectator-obstruction) now refutes its global-operator-norm propagation clause, because that weight responds to independent spectator coordinates. [](#prop:spectator-excess-rate-obstruction) further proves that a tensor-stable replacement weight alone is insufficient: the uniform superlinear remainder already fails with weight one. A viable replacement must also allow an $O(T)$ scale, use a genuinely source-tied remainder, or assume near-worstness. Other proof architectures need not use this decomposition.
+Item (b) is not good news about excess propagation; it is a diagnosis of the previously stated package. An additive excess term whose integral is a priori $O(T)$ is inert next to the $C_0T$ term: it can be deleted without changing the strength of the assumption, so the unweighted Stein-trace estimate silently carried the entire logical weight of the package. Item (c) shows this weight cannot be discharged slice-wise. The weighted restatement ([](#ass:weighted-package)) was a proposed repair: it made the excess term non-inert and passed the static two-tail calibration. [](#prop:weighted-spectator-obstruction) shows that its global-operator-norm propagation clause fails, because that weight responds to independent spectator coordinates. [](#prop:spectator-excess-rate-obstruction) further shows that a tensor-stable replacement weight alone is insufficient: the uniform superlinear remainder already fails with weight one. A viable replacement must also allow an $O(T)$ scale, use a genuinely source-tied remainder, or assume near-worstness. Other proof architectures need not use this decomposition.
 :::
 
 (subsec:circularity)=
@@ -129,7 +129,7 @@ Within the smooth compact-support class of [](#lem:excess-identity), excess prop
 :::
 
 (subsec:excess-fences)=
-## Fences this section establishes
+## Methodological constraints from this section
 
 :::{prf:conjecture} Localized profile insertion may assume the target
 :label: obs:circularity

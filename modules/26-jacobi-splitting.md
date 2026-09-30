@@ -6,7 +6,7 @@ numbering:
 (sec:jacobi)=
 # Reilly, Jacobi, and splitting formulas
 
-This section assembles the geometric mechanisms intended to prove the weighted Stein-trace estimate for near-minimal cuts. The second-variation and Reilly identities are imported with exact normal conventions from the cited sources; the locally proved statements are exact model statements, and the quantitative versions are posed as open targets in Section [](#sec:open). Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex support, and $\Sigma=\partial^*E$ with the notation of Section [](#sec:notation).
+This section assembles the geometric mechanisms intended to prove the weighted Stein-trace estimate for near-minimal cuts. The second-variation and Reilly identities are imported with exact normal conventions from the cited sources; the statements specific to this section are exact model statements, and their quantitative versions are among the problems of Section [](#sec:open). Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex support, and $\Sigma=\partial^*E$ with the notation of Section [](#sec:notation).
 
 ## Second variation and stability of near-minimizers
 
@@ -104,7 +104,7 @@ Grant smooth minimizers at almost every balanced volume. If $h_\nu\le1$, then
 For a concave profile with $I(0)=I(1)=0$, one has $\sup_{[1/3,2/3]}I\le C h_\nu$ and $\int_{1/3}^{2/3}(-I'')\dd p\le C h_\nu$ in the distributional sense. Combine these estimates with [](#eq:profile-bound).
 :::
 
-Thus, under the smooth-minimizer grant, many balanced volumes have small $\mathfrak K_{\Sigma_p}$ when $h_\nu$ is small. This averaged statement does not show that a selected near-Cheeger cut, or the same cut followed under localization, lies in that branch; transferring it to the tracked cut is an additional open step. It nevertheless identifies the small-curvature branch as one that a geometric route must address.
+Thus, under the smooth-minimizer grant, many balanced volumes have small $\mathfrak K_{\Sigma_p}$ when $h_\nu$ is small. This averaged statement does not show that a selected near-Cheeger cut, or the same cut followed under localization, lies in that branch; transferring it to the tracked cut is a further step, not taken here. It nevertheless identifies the small-curvature branch as one that a geometric approach must address.
 
 ## The weighted Reilly identity
 
@@ -144,7 +144,7 @@ Let $\nu=e^{-V}dx$ be log-concave with convex support $K$ under the smooth/free-
 On $\operatorname{int}K$, $\nabla^2V(\theta,\cdot)=0$ means $\partial_z\nabla V\equiv0$, so every $\partial_{x_j}V$ is independent of $z$; in particular $\partial_zV$ is independent of $z$, and since $\partial_{x_j}(\partial_zV)=0$ it is independent of $y$ as well, hence a constant $c$. Integrating on the cylinder $K_1\times J$ gives $V=V_1(y)+cz$, so $\nu=\nu_1\otimes\nu_2$ with $\nu_2\propto e^{-cz}$ on $J$, a finite measure only if $J\ne\R$ (a half-line when $c\ne0$, or a bounded interval). The converse statements are immediate from $II=0$ for a hyperplane and $\qJac_\Sigma=\abs{II}^2+\nabla^2V(n,n)=0$ on $\Sigma$. The support-boundary term also vanishes: the lateral boundary of the cylinder is flat in the $\theta$ direction, and the cut does not meet an endpoint of $J$.
 :::
 
-The two implications above have different hypotheses. In particular, no converse $\mathfrak K_\Sigma=0\Rightarrow$ global cylindrical or log-affine splitting is proved: the left-hand side is boundary-local data, whereas the first implication assumes global product geometry and Hessian flatness. That missing rigidity statement remains part of [](#q:splitting).
+The two implications above have different hypotheses. In particular, no converse $\mathfrak K_\Sigma=0\Rightarrow$ global cylindrical or log-affine splitting is available here: the left-hand side is boundary-local data, whereas the first implication assumes global product geometry and Hessian flatness. That rigidity statement is part of [](#q:splitting).
 
 :::{prf:proposition} Persistence of splitting under localization
 :label: prop:persistent-splitting

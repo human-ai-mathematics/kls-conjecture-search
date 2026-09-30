@@ -10,7 +10,7 @@ numbering:
 
 **What it buys.** This is where the July 2026 progress happened, and it is currently the cleanest new proof component in the subject. In moment-map coordinates the statement “$\mu$ is isotropic” becomes “$\E_\nu H=I$”, and the Monge–Ampère equation, differentiated twice, produces two manifestly positive semidefinite source terms. Exploiting that positivity yields a sharp bound on $\E\Tr(BHBH)$ for every *constant* symmetric matrix $B$ — from which the sharp thin-shell constant, the sharp third-moment tensor, and the all-quadratic Poincaré inequality all follow.
 
-This section presents the mechanism. The repository's formal statements of the two consequences it actually consumes are [](#thm:letwin-qcts) (Section [](#sec:qcts)) and [](#prop:letwin-kappa) (Section [](#sec:covariance-tech)); they are not restated here.
+This section presents the mechanism. This manuscript's formal statements of the two consequences it actually consumes are [](#thm:letwin-qcts) (Section [](#sec:qcts)) and [](#prop:letwin-kappa) (Section [](#sec:covariance-tech)); they are not restated here.
 
 (subsec:mm-coordinates)=
 ## Moment-map coordinates
@@ -256,7 +256,7 @@ while isotropy gives $\E\abs{\nabla\inner{MX}X}^2=4\Tr(M^2)$. Together these are
 
 The reduction from there to $\kappa_n\le2\sqrt2$ is short and purely algebraic; it is carried out as [](#prop:letwin-kappa). Substituting into the bridge [](#eq:kls-bridge) gives the current preprint record.
 
-The constant $2\sqrt2$ is not sharp, and Route C says exactly what would sharpen it. On the regular moment-map class, [](#cor:gate-zero-third-moment) turns any bound $\E[\tau^2]\preceq c\,\Id$ into the directional third-moment bound $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$, so sharp gate zero at $c=2$ ([](#conj:gate-zero-sharp)) would give the sharp $\kappa_n\le2$, attained by products of centered exponentials. The implication runs one way only: a sharp third-moment bound does not return sharp gate zero, because the high-mode remainder of [](#lem:linear-sector-third-moment) is not zero off the cone axis.
+The constant $2\sqrt2$ is not sharp, and Approach C says exactly what would sharpen it. On the regular moment-map class, [](#cor:gate-zero-third-moment) turns any bound $\E[\tau^2]\preceq c\,\Id$ into the directional third-moment bound $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$, so sharp gate zero at $c=2$ ([](#conj:gate-zero-sharp)) would give the sharp $\kappa_n\le2$, attained by products of centered exponentials. The implication runs one way only: a sharp third-moment bound does not return sharp gate zero, because the high-mode remainder of [](#lem:linear-sector-third-moment) is not zero off the cone axis.
 
 (subsec:mm-audit)=
 ## Audit and epistemic status
@@ -271,9 +271,9 @@ Letwin's paper is an arXiv version-1 preprint of 27 July 2026, not a peer-review
 
 (d) the extraction of $\CP\lesssim\kappa_n\sqrt{\log n}$, which the preprint obtains by *tracing* Klartag's estimates [@Klartag2023Logarithmic] rather than by quoting a theorem stated in that form.
 
-The preprint's appendix addresses each of (a)–(c). Point (d) is a concatenation of Klartag's variance-transfer result with a precise short-time covariance estimate, and is the step this repository re-derives for its own use in Section [](#sec:covariance-tech).
+The preprint's appendix addresses each of (a)–(c). Point (d) is a concatenation of Klartag's variance-transfer result with a precise short-time covariance estimate, and is the step this manuscript re-derives for its own use in Section [](#sec:covariance-tech).
 
-Accordingly, throughout Parts III this result is described as the best *current* bound and Klartag's as the best *published* bound. The ledger records it as `open`, and a node marked `proved` cannot depend on an open node. The same status distinction is drawn elsewhere in the literature; see [@Zhang2026HitAndRun], whose bibliographic metadata in this repository is itself flagged as unverified.
+Accordingly, throughout Part III this result is described as the best *current* bound and Klartag's as the best *published* bound. The statements that import it, [](#thm:letwin-moment-map), [](#thm:letwin-qcts) and [](#prop:letwin-kappa), each display their own status, and no statement proved here rests on a statement that is not settled here. The same distinction between the preprint and the published record is drawn elsewhere in the literature; see [@Zhang2026HitAndRun], whose bibliographic metadata has not been independently verified.
 
 **The precise missing estimate.** Control of $\E\inner{\tau_\mu(X)\nabla f(X)}{\nabla f(X)}$ for an arbitrary $f$, in place of $\E\Tr(BHBH)$ for a constant matrix $B$.
 
@@ -286,4 +286,4 @@ Accordingly, throughout Parts III this result is described as the best *current*
 
 so KLS would follow from $\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2$. The identity $\E\tau_\mu=I$ of [](#eq:mean-hessian-identity) is *not* sufficient for this, because $\tau_\mu(X)$ can correlate with $\nabla f(X)$. Letwin controls a deterministic $B$; the missing theorem must handle an $X$-dependent matrix or direction field.
 
-**How this family feeds the live routes.** It supplies two of them. Route C (Section [](#sec:moment-map-cmh)) attacks the gap above head-on, replacing constant multipliers by test-dependent Haar fields, and its endpoint $\CMH$ is defined in these coordinates. Route S consumes the family's quadratic control as the estimate it feeds its whitened posterior tensor to. The fixed-matrix bound ([](#thm:letwin-moment-map)) is therefore the single literature input both routes are trying to make adaptive.
+**Where this family enters the four approaches.** It supplies two of them. Approach C (Section [](#sec:moment-map-cmh)) attacks the gap above head-on, replacing constant multipliers by test-dependent Haar fields, and its endpoint $\CMH$ is defined in these coordinates. Approach S consumes the family's quadratic control as the estimate it feeds its whitened posterior tensor to. The fixed-matrix bound ([](#thm:letwin-moment-map)) is therefore the single literature input both approaches are trying to make adaptive.
