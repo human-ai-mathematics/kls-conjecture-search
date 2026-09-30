@@ -11,7 +11,7 @@ truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template](https://github.com/numina-functional-inequalities/conjecture-search-template)
-v0.3.0. Start every session that edits the repository by reading it.
+v0.4.0. Start every session that edits the repository by reading it.
 
 ## Layout
 
