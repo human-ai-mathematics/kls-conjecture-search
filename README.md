@@ -10,8 +10,8 @@ certified advances and its exact open estimate. The ledger, not this file, is th
 truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
-[conjecture-search-template](https://github.com/numina-functional-inequalities/conjecture-search-template)
-v0.4.0. Start every session that edits the repository by reading it.
+[conjecture-search-template v0.4.0](https://github.com/numina-functional-inequalities/conjecture-search-template/releases/tag/v0.4.0).
+Start every session that edits the repository by reading it.
 
 ## Layout
 
@@ -28,8 +28,8 @@ v0.4.0. Start every session that edits the repository by reading it.
 | [`templates/`](templates/) | an empty copy of each file genre |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
-The repository was migrated from its v0.1 LaTeX harness on 2026-09-29, then to v0.3.0 on
-2026-09-30;
+The repository was migrated from its v0.1 LaTeX harness on 2026-09-29, then to v0.3.0 and
+v0.4.0 on 2026-09-30 (v0.4.0 changed nothing in the program's content);
 [`research/explorations/2026-09-29-migration-v0.2.0.md`](research/explorations/2026-09-29-migration-v0.2.0.md)
 and
 [`research/explorations/2026-09-30-migration-v0.3.0.md`](research/explorations/2026-09-30-migration-v0.3.0.md)
