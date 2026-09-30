@@ -1,25 +1,28 @@
 ---
-type: proof-review
-date: "2026-08-25"
 verdict: pass
 authors:
   - /root/kls_bootstrap_author
 reviewer: /root/kls_core_author
-nodes:
-  - prop:intro-audit
-  - prop:trivial-excess
-  - lem:perimeter-martingale
-  - lem:excess-identity
-  - lem:inf-martingales
-  - lem:half
-  - lem:crude
-  - cor:loglog
-  - lem:whitening
-  - prop:ceiling
-  - thm:bootstrap
-solutions:
-  - solutions/kls-excess-audit.tex
-  - solutions/kls-bootstrap-interface.tex
+fingerprints:
+  solutions/kls-bootstrap-interface.md: 105a109687abac259b559ff611469e8347a73866f54119d26e66166ec8f05175
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
+  thm:bootstrap: c63a5b4f893d86e70e67812caeccaa0015e754febda8a6a832909f82b015492b
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
+  lem:crude: 4596fedb12dae4093deded196b84f7f3f624d96f97cc69158a7eca583e997a6f
+  cor:loglog: 993fe5733752c06b378ba37d27e4cfb44bd644aaf9810493cb1328bfd4bf7bc7
+  ass:KI: 19c8922790211e205d6eda530efc90f61707e276482b5179d2254928e394f7c4
+  cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
+  prop:ceiling: 0f7675a8caf88da1824c1bd76c2d2534a0d0ced9821774be7418b340413e1a20
+  lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64
+  solutions/kls-excess-audit.md: 4a87955fd2c105aa8e6e072e00d42c97a216349cfde817ac6376f3a6baef461c
+  prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73
+  prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
+  lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
+  cor:tight-window-consumption: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946
+  lem:excess-identity: f131066c290e6c26f2de7acbdbff70216e8fb3fceb81b4ab5a6fe42b1be7096d
+  lem:inf-martingales: 3a548b25863f6597c2c6a66b30d9a6684c865e0d7611ad0a74ad87f2a339b265
 ---
 
 # KLS excess and bootstrap interface — independent R2 audit
@@ -96,7 +99,7 @@ numerical evidence.
 - For `lem:crude`, localization of the covariance trace SDE followed by Fatou gives
   $\mathbb E\operatorname{Tr}A_t\leq n$, while Brascamp--Lieb gives $X_t\leq t^{-1}$.
   Integrating $\min(n,t^{-1})$ on $[0,T]$ gives exactly $1+\log(nT)$. This is used only as the
-  insufficient lower fence required by `obs:crude-insufficient`.
+  insufficient lower fence required by `rem:crude-insufficient`.
 - For `cor:loglog`, the imported small-time operator-norm window contributes $C_1t_1$ and the
   later Brascamp--Lieb interval contributes $\log(T/t_1)$. The published discharge is consumed
   as a dependency; no numerical result is substituted for it.
@@ -108,11 +111,11 @@ numerical evidence.
 
 ## Obstructions and corrections during review
 
-The bootstrap proof respects `obs:circularity` by using the external floor $\hstar_n$ together
+The bootstrap proof respects `rem:profile-circularity` by using the external floor $\hstar_n$ together
 with a near-worst starting measure, rather than assuming a lower bound for the random localized
-profile. The crude estimate is not used as a KLS route, respecting `obs:crude-insufficient`.
+profile. The crude estimate is not used as a KLS route, respecting `rem:crude-insufficient`.
 The ceiling proposition establishes precisely the sufficient condition that unlocks
-`obs:relative-ceiling`.
+`rem:relative-ceiling`.
 
 During review, the author corrected three malformed integral separators and one missing
 `\leq` in the bootstrap dossier. The author also strengthened the noncompact perimeter

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - ass:cmh-recovery-envelope
 ---
 # KLS route probe: the existential CMH recovery envelope
 
@@ -84,7 +79,7 @@ The certification artifacts read for these claims were
 `solutions/lem-affine-poincare-w2-liminf.tex` and
 `research/reviews/2026-08-27-lem-affine-poincare-w2-liminf-proof-review.md`,
 `solutions/q-cmh-approximation.tex` and
-`research/reviews/2026-08-27-q-cmh-approximation-proof-review.md`,
+`research/reviews/2026-08-27-prop-cmh-approximation-closure-proof-review.md`,
 `solutions/thm-cmh-normalization.tex` with
 `research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`, and
 `solutions/thm-cmh-dirichlet.tex` with
@@ -595,15 +590,15 @@ once an intrinsic bounded-CMH recovery is supplied.
 The ledger assigns no `bounded_by` edge to `ass:cmh-recovery-envelope`. The complete obstruction
 registry was nevertheless checked.
 
-- `obs:two-tail`: no fixed cut, boundary slice, excess, or covariance-weighted localization
+- `rem:two-tail-slice-bounds`: no fixed cut, boundary slice, excess, or covariance-weighted localization
   estimate is used.
-- `obs:proj-ceiling`: the failed reduction is stopped at a full canonical-Hessian matrix and a
+- `rem:projection-ceiling`: the failed reduction is stopped at a full canonical-Hessian matrix and a
   variable gradient field; no projection-only quadratic-chaos estimate is promoted.
-- `obs:crude-insufficient`: no stochastic covariance occupation integral or logarithmic
+- `rem:crude-insufficient`: no stochastic covariance occupation integral or logarithmic
   bootstrap appears.
-- `obs:relative-ceiling`: no all-measure relative localization estimate is inserted.
-- `obs:circularity`: no localized profile or evolving competitor family occurs.
-- `obs:rank-one-refuted`: product structure is used only for the exact stationary CMH product
+- `rem:relative-ceiling`: no all-measure relative localization estimate is inserted.
+- `rem:profile-circularity`: no localized profile or evolving competitor family occurs.
+- `rem:single-coordinate-cuts`: product structure is used only for the exact stationary CMH product
   formula, not for a stochastic product cut.
 
 The route-specific fences are also respected.
@@ -617,8 +612,8 @@ The route-specific fences are also respected.
 - The algebraic PSD matrix law is used only as a method fence, never as a moment-map
   counterexample.
 - The solenoidal channel is retained.
-- Equation (18) is not claimed equivalent to `conj:gate-zero`, `q:upgrade`, high-rank
-  `q:stein-weighted`, or `q:alignment`; no trace-cluster implication is asserted.
+- Equation (18) is not claimed equivalent to `conj:gate-zero`, `conj:trace-upgrade`, high-rank
+  `conj:stein-weighted`, or `conj:product-alignment`; no trace-cluster implication is asserted.
 
 ## Numerical disposition
 

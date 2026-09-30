@@ -1,19 +1,11 @@
 ---
-type: exploration
-date: "2026-08-20"
-outcome: directional
-nodes:
-  - q:taming
-  - q:alignment
-  - def:qcts
-  - prop:ceiling
 ---
 # KLS frontier audit: Letwin QCTS, route triage, and numerical retraction
 
 Date: 2026-08-20
 
-Targets: `def:qcts`, `q:upgrade`, `q:weighted`, `q:stein-weighted`, `q:taming`, `q:splitting`,
-`q:alignment`, and the logical/numerical gates surrounding them.
+Targets: `def:qcts`, `conj:trace-upgrade`, `conj:weighted-excess-rate`, `conj:stein-weighted`, `conj:taming`, `conj:splitting`,
+`conj:product-alignment`, and the logical/numerical gates surrounding them.
 
 Outcome: one important imported input, several elementary consequences, no proof of KLS, and a
 set of necessary status corrections. The strongest new source is a recent version-1 preprint;
@@ -106,13 +98,13 @@ Discharged, conditional on the preprint:
 
 Still open:
 
-- `q:upgrade`: universal-time, cut-aware operator-to-trace occupation;
-- `q:alignment`: whether a fixed high-complexity product cut can align many coordinate budgets
+- `conj:trace-upgrade`: universal-time, cut-aware operator-to-trace occupation;
+- `conj:product-alignment`: whether a fixed high-complexity product cut can align many coordinate budgets
   with random inflation excursions;
-- `q:weighted`: joint weighted excess/covariance occupation;
-- `q:stein-weighted`: the dynamic boundary trace, not its intrinsic quadratic input;
-- `q:taming`: a cut-free, near-worst-specific universal-time improvement;
-- `q:splitting`: even the zero-curvature rigidity direction, before quantitative stability.
+- `conj:weighted-excess-rate`: joint weighted excess/covariance occupation;
+- `conj:stein-weighted`: the dynamic boundary trace, not its intrinsic quadratic input;
+- `conj:taming`: a cut-free, near-worst-specific universal-time improvement;
+- `conj:splitting`: even the zero-curvature rigidity direction, before quantitative stability.
 
 No headline open node and no conditional KLS implication is proved by QCTS alone.
 
@@ -131,7 +123,7 @@ $$
 This proves that the all-measure relative input is KLS-sufficient. It does not prove a converse
 equivalence.
 
-The open target `q:taming` is deliberately weaker and different: it asks, only for near-worst
+The open target `conj:taming` is deliberately weaker and different: it asks, only for near-worst
 measures, for
 
 $$
@@ -176,7 +168,7 @@ More fundamentally, the fixed cut followed under localization is not automatical
 critical local minimizer. Nonnegative second variation is not quantitative coercivity (Gaussian
 halfspaces have tangential linear Jacobi zero modes), and Reilly leaves mixed boundary terms for
 the global Poisson solution. The geometric route first needs a localization-uniform
-almost-stability trace theorem modulo this kernel; `rem:almost-stability-gap` records it.
+almost-stability trace theorem modulo this kernel; `conj:almost-stability-gap` records it.
 
 ### Weight versus time rate
 
@@ -192,9 +184,9 @@ The append-only artifact `research/runs/2026-06-21-kls-loc.jsonl` called a flat/
 $\Xi_S/n$ sweep “supports taming.” That interpretation is withdrawn:
 
 - raw $\Xi_S\asymp n$ would make $\Xi_S/n$ flat while violating a dimension-free source bound;
-- the computed $\Xi_S$ is cut-specific, whereas `q:taming` concerns the cut-free
+- the computed $\Xi_S$ is cut-specific, whereas `conj:taming` concerns the cut-free
   $\Xi_T=\int\mathbb E(\lambda_{\max}(A_t)-1)_+dt$ for near-worst measures;
-- the target did not compute the masked `q:alignment` source, $r$, $D$, weighted excess, or a
+- the target did not compute the masked `conj:product-alignment` source, $r$, $D$, weighted excess, or a
   Stein trace;
 - default runs skipped the FFT/MC gate, calibration was omitted from eligibility, and there was
   no $dt$ refinement or along-path tilted-state convergence;
@@ -207,7 +199,7 @@ and `no-verdict` in all cases until the route observables and dynamic gates exis
 The older `research/runs/2026-06-20-kls.jsonl` artifact has the same unreconstructible
 provenance (dirty worktree at `c960281`, before the `experiments/` tree existed) and only probes
 static Poincare geometries, not the cut-specific dynamic rank-one theorem. Its former
-`evidence_run` link from `cor:refutation` has therefore been removed. In fact every artifact
+`evidence_run` link from `cor:single-coordinate-cuts` has therefore been removed. In fact every artifact
 currently stored under `research/runs/` records `git_dirty: true`; none should promote a proof
 node until regenerated from a clean, code-containing commit with complete parameters and gates.
 

@@ -1,25 +1,25 @@
 ---
-type: proof-review
-date: "2026-08-25"
 verdict: pass
 authors:
   - /root/kls_proof_audit
 reviewer: /root/kls_bootstrap_author
-nodes:
-  - lem:profile-bound
-  - cor:generic-degeneracy
-  - prop:exact-splitting
-  - prop:persistent-splitting
-  - prop:gaussian-model
-  - prop:products
-  - lem:product-qcts
-  - lem:block
-  - cor:refutation
-  - thm:budget
-  - cor:KI-discharged
-solutions:
-  - solutions/kls-geometry-models.tex
-  - solutions/kls-product-covariance.tex
+fingerprints:
+  solutions/kls-geometry-models.md: 51f2adca44f986ee352d1f7e98544442cdd4993adff9977847a5d5f268fcc811
+  lem:profile-bound: edaf5f0b76adaf78959e02db87ee943f5ff1a7a8b54831c0aa33bdfcf4d293d6
+  cor:generic-degeneracy: 1103100221b4bf047150e63ccddaa04ec4c2ec9fefad01135905132ef7d93252
+  prop:exact-splitting: 2e90beabe3769b62e46a73812a05ba17384dbd68c12acca434c8c621dac71b0d
+  prop:persistent-splitting: 5aa02982b1ba2c12bcd728b05e39ff5096e0bec02d5b22114480ba116cc2346c
+  prop:gaussian-model: 835dc58ac9d4cb324aea55003c87af159fe2427ee351779bf982b348abd92fa8
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  solutions/kls-product-covariance.md: a288e98ce106b7998a88685c6da2c20f161c9ba5387e88242337bffecb1723a4
+  lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
+  thm:budget: 747881527155d39703c8dbb3a198afcd2c3686e5258ead72eb805f874e1bc196
+  cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
+  cor:single-coordinate-cuts: 50f836a8a6885da08f837ec667d19b41a722b0e356f8c44acf5bd11b745a8a67
+  lem:product-qcts: 93f2e2a3230253762243cd991c55f11de59b986c8daf848ecd044256ef2302eb
+  cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
+  thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
 ---
 
 # KLS geometry, product, and covariance models — independent R2 audit
@@ -36,7 +36,7 @@ This report certifies exactly the following eleven KLS ledger nodes:
 6. `prop:products`
 7. `lem:block`
 8. `thm:budget`
-9. `cor:refutation`
+9. `cor:single-coordinate-cuts`
 10. `lem:product-qcts`
 11. `cor:KI-discharged`
 
@@ -138,7 +138,7 @@ $T_k=[2C_0(1+k)]^{-1}$ and using the deterministic-time perimeter supermartingal
 claimed $c(1+k)^{-1/2}\min(p_0,q_0)$ boundary bound.  The truncation, smoothing, and perimeter
 lower-semicontinuity passage preserves product and fixed-coordinate structure.
 
-For `cor:refutation`, setting $k=1$ gives the total source budget and boundary conclusion.
+For `cor:single-coordinate-cuts`, setting $k=1$ gives the total source budget and boundary conclusion.
 The pointwise indicator bound at a deterministic level gives expected occupation at most
 $2/L^2$.  The dossier explicitly restricts the result to a cut and coordinate chosen before
 localization.  It neither permits a pathwise adaptive choice nor claims the literal
@@ -173,7 +173,7 @@ At fixed time the bad event is contained in this sup event, and the Brascamp–L
 $\|A_t\|_{\mathrm{op}}\leq t^{-1}$.  Therefore
 $\mathbb E\|A_t\|_{\mathrm{op}}\leq2+t^{-1}e^{-1/(Ct)}$; with
 $u=(Ct)^{-1}$ the second term is $Cu e^{-u}\leq C/e$.  Together with $A_0=I$ and the harmless
-bounded-dimension adjustment, this is precisely `hyp:KI` with exponent $C_2=2$.  No fixed-time
+bounded-dimension adjustment, this is precisely `ass:KI` with exponent $C_2=2$.  No fixed-time
 substitute and no conditional Letwin input is used.
 
 ## Compilation and exclusions

@@ -1,14 +1,11 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_posterior_defect_par_06
 reviewer: /root/review_posterior_defect_cold_08
-nodes:
-  - lem:mm-posterior-defect
-solutions:
-  - solutions/lem-mm-posterior-defect.tex
+fingerprints:
+  solutions/lem-mm-posterior-defect.md: c76f3bfde5369eb94682bc89a61bd9f2e31c170944d9492482a39356c2849e59
+  lem:mm-posterior-defect: 355e6dc85e241fe8049eab66d9647ed41cb8b0f48e9ce3292c439935a75acecd
 ---
 
 # Posterior eigenfunction-defect calculus — independent proof review
@@ -203,10 +200,10 @@ $t\lambda^2+t^2\lambda$ bound.
 Although this node has no formal `bounded_by` edge, every live route fence was checked.
 
 - No cut or slice estimate, localized isoperimetric profile, product-cut counterexample, or crude
-  covariance integral is used.  Thus `obs:two-tail`, `obs:circularity`,
-  `obs:rank-one-refuted`, `obs:crude-insufficient`, and `obs:relative-ceiling` are not crossed.
+  covariance integral is used.  Thus `rem:two-tail-slice-bounds`, `rem:profile-circularity`,
+  `rem:single-coordinate-cuts`, `rem:crude-insufficient`, and `rem:relative-ceiling` are not crossed.
 - The arbitrary symmetric-matrix identity is exact integration by parts, not a dimension-free
-  quadratic-chaos theorem inferred from radial or projection tests, so `obs:proj-ceiling` is
+  quadratic-chaos theorem inferred from radial or projection tests, so `rem:projection-ceiling` is
   respected.
 - No posterior covariance operator norm is bounded.  No tensor is unwhitened, and no
   high-incidence occupation estimate is proved.  This respects `prop:covariance-spike` and the
@@ -214,7 +211,7 @@ Although this node has no formal `bounded_by` edge, every live route fence was c
 - The false truncated-exponential variable-weight Stein shortcut is not invoked.  Neither a
   transport nor a needle mechanism is used.
 - The dossier does not use `thm:letwin-qcts`, does not pass to arbitrary log-concave measures, and
-  does not prove or claim `q:mm-spectral-occupation`, `prop:spectral-sufficiency`, or KLS.
+  does not prove or claim `conj:mm-spectral-occupation`, `prop:spectral-sufficiency`, or KLS.
 
 ### Citation debt and mechanical validation
 

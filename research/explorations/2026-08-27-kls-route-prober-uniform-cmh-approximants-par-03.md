@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: dead-end
-nodes:
-  - ass:uniform-cmh-approximants
 ---
 # KLS route probe: uniform CMH on the certified approximants
 
@@ -15,7 +10,7 @@ Concurrency key: `kls-gate:ass:uniform-cmh-approximants`
 
 Target: `ass:uniform-cmh-approximants`
 
-This probe starts from the now-certified conditional node `q:cmh-approximation`. It does not
+This probe starts from the now-certified conditional node `prop:cmh-approximation-closure`. It does not
 repeat its constant-preserving $W_2$ passage, does not assert continuity of
 $C_{\mathrm{CMH}}$, and does not replace the exact centered
 Gaussian-convolution/Gaussian-tilt/growing-ball family by a more convenient family.
@@ -25,7 +20,7 @@ Gaussian-convolution/Gaussian-tilt/growing-ball family by a more convenient fami
 > Prove a universal $C$ such that the centered Gaussian-convolution, Gaussian-tilt, and
 > growing-ball regular moment-map approximants of every centered log-concave law satisfy
 > $\sup_k C_{\mathrm{CMH}}(\mu_k)\le C$. The certified conditional node
-> `q:cmh-approximation` then passes the affine Poincaré inequalities to the limit with no loss,
+> `prop:cmh-approximation-closure` then passes the affine Poincaré inequalities to the limit with no loss,
 > including proper affine-support degeneration; it asserts no continuity of
 > $C_{\mathrm{CMH}}$.
 
@@ -272,7 +267,7 @@ rank-one term leaves a commutator budget of $4$ in (8). No certified repository 
 first obstruction rather than advance the gate.
 
 This use of gate zero is only a diagnosis inside the present CMH gate. No equivalence or transfer
-to `q:upgrade`, `q:stein-weighted`, or `q:alignment` is asserted, and no parallel trace-cluster
+to `conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment` is asserted, and no parallel trace-cluster
 proof is opened.
 
 ## What the other CMH components actually imply
@@ -282,7 +277,7 @@ proof is opened.
 The construction archive contains a checked coordinate completion of squares at a
 Schur-normal $1+2$ point. It does not certify that this tensor is the multiplier produced by the
 global operator, and it has no arbitrary-dimensional split reduction. That is exactly the open
-node `q:mm-invariant-lift`. Consequently it currently supplies no inequality for
+node `conj:mm-invariant-lift`. Consequently it currently supplies no inequality for
 $\mathcal N_k$ or the commutator in (9).
 
 ### Square-root commutator and Haar tree
@@ -298,7 +293,7 @@ $$
 and the resolvent representation for $[N^{1/2},K_M]$ are formal on a common core. The Bessel
 deficit, retained Letwin/Codazzi/Monge--Ampère/corrector remainder, and complete-tree spending
 estimate have not been certified. The corresponding node
-`q:mm-square-root-commutator` depends on the invariant lift and remains open. A formal identity
+`conj:mm-square-root-commutator` depends on the invariant lift and remains open. A formal identity
 without the full Haar sum and domain estimate gives no bound on (UCMH), and the static
 countermodel forbids treating its commutator as a lower-order error.
 
@@ -359,20 +354,20 @@ calibration.
   canonical-CMH comparison under each of convolution, Gaussian reweighting, and ball truncation.
   None exists in the live graph, and the Poincaré-level closure cannot substitute for it.
 
-No residue belongs to the already-certified `q:cmh-approximation` limit passage.
+No residue belongs to the already-certified `prop:cmh-approximation-closure` limit passage.
 
 ## Fence-by-fence evasion check
 
 The ledger assigns no `bounded_by` obstruction to `ass:uniform-cmh-approximants`. The full
 obstruction registry was nevertheless checked.
 
-- `obs:two-tail`: no cut slice, localization source, or absolute excess estimate is used.
-- `obs:proj-ceiling`: the proposed target (UCMH) is tensor- and test-field-aware. The failed
+- `rem:two-tail-slice-bounds`: no cut slice, localization source, or absolute excess estimate is used.
+- `rem:projection-ceiling`: the proposed target (UCMH) is tensor- and test-field-aware. The failed
   constant/rank-one reduction is explicitly stopped rather than promoted to a proof.
-- `obs:crude-insufficient`: no covariance occupation integral or logarithmic bootstrap appears.
-- `obs:relative-ceiling`: no all-measure relative localization bound is inserted.
-- `obs:circularity`: no localized isoperimetric profile or changing competitor family appears.
-- `obs:rank-one-refuted`: no fixed product cut or stochastic incident-high witness is used.
+- `rem:crude-insufficient`: no covariance occupation integral or logarithmic bootstrap appears.
+- `rem:relative-ceiling`: no all-measure relative localization bound is inserted.
+- `rem:profile-circularity`: no localized isoperimetric profile or changing competitor family appears.
+- `rem:single-coordinate-cuts`: no fixed product cut or stochastic incident-high witness is used.
 
 The additional CMH guardrails are also respected: no continuity of $C_{\mathrm{CMH}}$ is
 asserted; no canonical kernel is pushed through a noninvertible map; the algebraic matrix law is
@@ -427,6 +422,6 @@ next_prompt: |
   unsupported step is the dimension-free genuine-moment-map linear-sector/static-commutator
   estimate; Chen--Klartag trace control and Letwin constant multipliers cannot supply any
   universal constant by matrix algebra. Do not dispatch `finum` from this report: the gate has
-  no fixed finite refuting threshold. Any comparison with `q:upgrade`, high-rank
-  `q:stein-weighted`, or `q:alignment` remains reserved to the trace-cluster synthesizer.
+  no fixed finite refuting threshold. Any comparison with `conj:trace-upgrade`, high-rank
+  `conj:stein-weighted`, or `conj:product-alignment` remains reserved to the trace-cluster synthesizer.
 ```

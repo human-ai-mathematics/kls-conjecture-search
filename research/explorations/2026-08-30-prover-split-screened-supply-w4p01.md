@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - prop:split-screened-supply
 ---
 # Prover: dossier for the split-class screened weighted supply
 
@@ -134,16 +129,16 @@ balance window that part (i) does not need.
 
 ## Fence check
 
-- `obs:two-tail`: time-integrated statement, not slice-wise; retains the calibrated
+- `rem:two-tail-slice-bounds`: time-integrated statement, not slice-wise; retains the calibrated
   $5/2$ weight (two-tail calibration $\lambda_{\rm cut}(A_\Lambda,K_\Lambda)=\Lambda$
   cited); the two-tail initial laws are outside the hypothesis class (non-isotropic
   factor); dynamically reached two-tail-type states stay chargeable and are paid via
   $Q_t/\kappa$. Not violated.
-- `obs:circularity`: the only profile fact used is the definitional upper bound
+- `rem:profile-circularity`: the only profile fact used is the definitional upper bound
   $I_{\mu_t}(p_t)\le P_t(E)$ (giving $e_t\ge0$); no lower bound on the moving profile, no
   use of the excess identity in the fenced direction. Not violated.
 - Constraint 6: explicit disclaimer in the dossier; no occupation estimate, comparison, or
-  equivalence involving `q:upgrade` / high-rank `q:stein-weighted` / `q:alignment` is
+  equivalence involving `conj:trace-upgrade` / high-rank `conj:stein-weighted` / `conj:product-alignment` is
   claimed.
 
 ## Status
@@ -207,7 +202,7 @@ next_prompt: |
      change, explicit a priori finiteness hypothesis, correct constants
      C_*=(1+c+C_0 T_0)e^{C_1 T_0} and T_* <= min(T_0, 4 eta^2/(9 C_*)); confirm it claims
      no companion estimate and draws no KLS conclusion.
-  8. Fences: obs:two-tail and obs:circularity per the dossier's closing audit; repository
+  8. Fences: rem:two-tail-slice-bounds and rem:profile-circularity per the dossier's closing audit; repository
      constraint 6 disclaimer present and respected.
 
   Author identity: prover-w4p01 (Claude Fable 5 prover session, 2026-08-30); your review

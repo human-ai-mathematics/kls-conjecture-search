@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - conj:gate-zero
-  - thm:cmh-dirichlet
-  - cor:cmh-dirichlet-surplus
-  - def:cmh
 ---
 # KLS Route C: the CMH normalization layer, its exact classes, and its two new failure modes
 
@@ -68,7 +60,7 @@ and the first term's operator norm in $h$ is **exactly** $C_P^{\mathrm{aff}}$.
 So CMH $=$ KLS $+$ solenoidal excess, and the excess vanishes only in dimension one. **This is the
 most consequential thing the normalization layer adds, and it is bad news for the route:**
 $\mathrm{CMH}(4)$ can be false while KLS is true. Nothing in the earlier route documents recorded
-this; `prog:cmh-route` was being pursued as though its headline were a reformulation of the
+this; `rem:cmh-program` was being pursued as though its headline were a reformulation of the
 conjecture. It is not.
 
 ### 3. Gate zero and the exact countermodel
@@ -118,7 +110,7 @@ elsewhere: **products of one-sided exponentials hit $C_{\mathrm{CMH}}=4$ exactly
 slack.**
 
 Combining that with the Hodge splitting gives the sharpest probe the route has ever had
-(**M9**, `q:cmh-solenoidal-perturbation`): perturb a saturating product and compute the second
+(**M9**, `conj:cmh-second-variation`): perturb a saturating product and compute the second
 variation of the solenoidal excess. A strictly positive second variation refutes
 $\mathrm{CMH}(4)$. Both ingredients are exact theorems, so this needs no Haar tree, no invariant
 lift, and no new operator domains. It should be attempted before M1--M8.
@@ -187,10 +179,10 @@ Promoted with dossiers and an independent review: `def:cmh`, `prop:cmh-bochner`,
 `lem:cmh-angular-coefficient`, `thm:cmh-dirichlet`, `cor:cmh-dirichlet-surplus`,
 `cor:cmh-dirichlet-poincare`.
 
-Opened: `conj:gate-zero`, `q:gate-zero`, `q:cmh-solenoidal-perturbation`,
-`rem:cmh-stronger-than-kls`, `rem:gate-zero-trace-upgrade`.
+Opened: `conj:gate-zero`, `rem:gate-zero-dichotomy`, `conj:cmh-second-variation`,
+`cor:cmh-hodge-comparison`, `rem:gate-zero-trace-upgrade`.
 
-`q:cmh-normalization` is marked discharged, with its two residues (uniformity through
+`rem:cmh-normalization` is marked discharged, with its two residues (uniformity through
 approximation; the one-way direction of the reduction) explicitly carried forward rather than
-closed. `prog:cmh-route` remains **open**: nothing here proves the headline, and §12 of
+closed. `rem:cmh-program` remains **open**: nothing here proves the headline, and §12 of
 `claims.md` now records that the headline may be false.

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - q:weighted
 ---
 # KLS route probe: the source-screened weighted interface, audited and partially proved
 
@@ -15,16 +10,16 @@ Run id: `w4w01`
 
 Concurrency key: `kls-gate:q:weighted`
 
-Scope: only the `q:weighted` replacement interface (Candidates A/B of the W3 probe). This probe
-does not open `q:upgrade`, `q:alignment`, or the geometric content of `q:stein-weighted`; the
-trace-companion algebra below is used strictly as the `q:weighted` consumer side, and the one
+Scope: only the `conj:weighted-excess-rate` replacement interface (Candidates A/B of the W3 probe). This probe
+does not open `conj:trace-upgrade`, `conj:product-alignment`, or the geometric content of `conj:stein-weighted`; the
+trace-companion algebra below is used strictly as the `conj:weighted-excess-rate` consumer side, and the one
 place where a comparison with the all-cut/tight-prefix Carleson problem arises is flagged for the
 `synthesizer` instead of being decided here (CLAUDE.md constraint 6). No numerics are run; a
 decision table for the parallel `finum` run `w4a01` is given at the end.
 
 ## Gate, quoted verbatim
 
-From `research/kls/gating.md`, `q:weighted`, current wave:
+From `research/kls/gating.md`, `conj:weighted-excess-rate`, current wave:
 
 > The candidate cut scale $\lambda_{\rm cut}(A,K)$ passes exact cylinder tensorization and the
 > aligned two-tail test, but is not perturbatively stable:
@@ -49,7 +44,7 @@ $\tau_\eta=\inf\{t:|p_t-1/2|>\eta\}$ and the conventions of
 | term | role in the screened package | certified control | residue |
 |---|---|---|---|
 | $Q_t$ | source currency of the trace companion (22) | $Q_t\le 4\lambda_{\rm cut}/t$ pathwise (`lem:lyapunov-stein-duality`); $Q_t\le 2S_t+64\eta^2D_t$ on the window (`lem:stein-vs-source`); $\mathbb E\int S_t\,dt\le\operatorname{Tr}R_0\le n$ (`cor:per-direction`); $\le k$ for $J$-cuts on products (`thm:budget`(i)) | no universal fixed-time or $O(T)$ bound |
-| $e_t=P_t-I_{\mu_t}(p_t)$ | screened supply factor | $\mathbb E\int_0^{T\wedge\tau}e_t\,dt\le(1+e_0)T$ for every cut and stopping time (`prop:trivial-excess`); exact identity $\mathbb E e_t=e_0+I_\mu(p_0)-\mathbb E I_{\mu_t}(p_t)$ in the compact-smooth class (`lem:excess-identity`) | identity usable only in the upper-bound direction (`obs:circularity`) |
+| $e_t=P_t-I_{\mu_t}(p_t)$ | screened supply factor | $\mathbb E\int_0^{T\wedge\tau}e_t\,dt\le(1+e_0)T$ for every cut and stopping time (`prop:trivial-excess`); exact identity $\mathbb E e_t=e_0+I_\mu(p_0)-\mathbb E I_{\mu_t}(p_t)$ in the compact-smooth class (`lem:excess-identity`) | identity usable only in the upper-bound direction (`rem:profile-circularity`) |
 | $W_{\rm cut}$ | cut-local weight | direct-sum invariance, harmonic-mean formula, two-tail calibration $\lambda_{\rm cut}(A_\Lambda,K_\Lambda)=\Lambda$ (all certified) | discontinuous at $K=0$; leakage identity (8) of W3 |
 | $r_t$, $D_t$ | damping and drift currency of the consumer | scalar Riccati $dr=dM+(S-D)dt$, $D\ge r^2$ (`thm:scalar-riccati`) | none new |
 | $\mathbf 1_{\mathcal A_{\kappa,t}}$ | screen | Borel in the state (W3, measurability section) | progressive-measurability convention needed (Section 6) |
@@ -275,13 +270,13 @@ Answer to the CRITICAL question, in three sharp parts:
    isotropic start, inside its own $\lambda^{-1}$ window) is strictly easier than, equivalent
    to, or incomparable with `ass:tight-prefix-carleson` is precisely a trace-cluster comparison;
    per constraint 6 I record the reduction and **hand the comparison to the synthesizer**. I do
-   not conclude "relabeling of `q:upgrade`" and I do not conclude the contrary.
+   not conclude "relabeling of `conj:trace-upgrade`" and I do not conclude the contrary.
 3. **Where the excess factor gives genuinely different room, exactly.** (a) The whole
    $t>t_*$ layer (see 2 above). (b) The pathwise pinning (c) above, which no unweighted source
    estimate has. (c) *Not* through the excess identity: improving
    $\mathbb E\int_{t_*}^{T}e_t\,dt$ beyond $(1+e_0)T$ via
    $\mathbb E e_t=e_0+I_\mu(p_0)-\mathbb E I_{\mu_t}(p_t)$ requires a lower bound on
-   $\mathbb E I_{\mu_t}(p_t)$ — that is the fenced direction of `obs:circularity` and is not
+   $\mathbb E I_{\mu_t}(p_t)$ — that is the fenced direction of `rem:profile-circularity` and is not
    available; the identity is usable only as the (already implied) upper bound.
 
 ### 3.3 The joint estimate actually needed, with quantifiers
@@ -310,7 +305,7 @@ $C_E=(1+1/t_*)^{5/2}(1+\varepsilon_Eh_\bullet)+C/\kappa$, and by Section 1 the p
 
 ## 4. Fence-by-fence stress test (task 4)
 
-**`obs:two-tail` — chargeability recomputed and confirmed.** For the certified two-tail state
+**`rem:two-tail-slice-bounds` — chargeability recomputed and confirmed.** For the certified two-tail state
 ($a=\Phi^{-1}(3/4)\approx0.67449$): $Q_\Lambda=16a^2\varphi(a)^2\Lambda^2\approx0.7350\Lambda^2$,
 $e_\Lambda=(2\varphi(a)-\varphi(0))\Lambda^{-1/2}\approx0.2366\Lambda^{-1/2}$,
 $\lambda_{\rm cut}=\Lambda$ (certified calibration), so for every $\Lambda\ge1$
@@ -347,22 +342,22 @@ certified refutation.
 **Gaussian halfspaces.** $e_t=0$ and $K_t=0$ at exact balance: $Q_t=0$, $W_{\rm cut}=1$, the
 screen reads $0\ge0$ (membership with zero charge under the $\ge$ convention). No false cost.
 
-**`obs:circularity`.** All uses of profile information in this probe are upper bounds
+**`rem:profile-circularity`.** All uses of profile information in this probe are upper bounds
 (`prop:trivial-excess` via the perimeter supermartingale; Bobkov–Chistyakov quantile competitors
 in fence checks). The single tempting violation — refining the $t>t_*$ layer through the excess
 identity — is identified in 3.2(3c) and *not* used. In the split class, a Bobkov–Houdré-type
 product profile lower bound would be an external published anchor of the kind the fence permits;
 it was not needed and is not imported.
 
-**`obs:relative-ceiling`.** The supply is an absolute-scale bound on a restricted class
+**`rem:relative-ceiling`.** The supply is an absolute-scale bound on a restricted class
 (near-worst in Candidate B general form; exact split class in Section 2). It is not an
 all-measure relative $\Xi_T$ bound; `prop:ceiling` is not triggered.
 
-**`obs:crude-insufficient`, `obs:proj-ceiling`.** Not used; the interface runs on the full
+**`rem:crude-insufficient`, `rem:projection-ceiling`.** Not used; the interface runs on the full
 tensor $K_t$ and the Lyapunov energy, and no $\log n$ bootstrap enters.
 
-**`obs:rank-one-refuted`.** Respected: the split-class theorem concerns fixed $J$-cuts with the
-certified budget; nothing is claimed about `q:alignment` or path-adapted cuts.
+**`rem:single-coordinate-cuts`.** Respected: the split-class theorem concerns fixed $J$-cuts with the
+certified budget; nothing is claimed about `conj:product-alignment` or path-adapted cuts.
 
 ## 5. Measurability debt, stated as the convention a dossier must adopt (task 5)
 
@@ -411,7 +406,7 @@ No numerics were run here. The following measured values decide directions:
    surviving core of Candidate B; and the one-dimensional posterior-variance tail question
    ($\mathbb E v_t^p\le C_p$, $p>3$) behind the unscreened split supply.
 4. **Fenced:** any refinement of the $t>t_*$ layer via a lower bound on
-   $\mathbb E I_{\mu_t}(p_t)$ (`obs:circularity`); any closure through the crude covariance
+   $\mathbb E I_{\mu_t}(p_t)$ (`rem:profile-circularity`); any closure through the crude covariance
    bootstrap or projection-only data; deciding whether the 3.3 kernel equals the tight-prefix
    trace Carleson (constraint 6 — synthesizer's comparison, not mine).
 5. **Candidate refuter, needs construction:** the in-$J$ zero-base-contrast leakage witness
@@ -454,11 +449,11 @@ dossier and a distinct cold review):
   file: modules/kls/27-eldan-open-targets.tex
   statement: "For a product of isotropic one-dimensional log-concave laws, a J-measurable cut with |J|=k and 0<p_0<1, every eta in (0,1/4], kappa>0, and every T>0, the screened weighted excess satisfies E int_0^{T wedge tau_eta} e_t (1+lambda_cut(A_t,K_t))^(5/2) 1{Q_t >= kappa e_t W_cut} dt <= (2k+64 eta^2 (1+k))/kappa, uniformly in the ambient dimension and in every spectator coordinate. Total-budget form, not proportional to T."
   depends_on: [lem:stein-vs-source, thm:budget, lem:block, thm:scalar-riccati, lem:lyapunov-stein-duality, prop:trivial-excess]
-  bounded_by: [obs:two-tail, obs:circularity]
+  bounded_by: [rem:two-tail-slice-bounds, rem:profile-circularity]
 ```
 
 No `proved`, `refuted`, `solution`, or `checked_by` field is proposed. No change to the status of
-`q:weighted` or to any trace-cluster node is proposed. The Section 1 audit and Section 3.2
+`conj:weighted-excess-rate` or to any trace-cluster node is proposed. The Section 1 audit and Section 3.2
 reduction are recorded here as reusable arguments; they can enter the ledger only inside the
 future dossier's body or as later candidates if the orchestrator prefers explicit nodes.
 
@@ -467,8 +462,8 @@ outcome: complete
 artifacts:
   - research/explorations/2026-08-30-kls-route-prober-weighted-screened-interface-w4w01.md
 proposed_deltas:
-  - "Add candidate node prop:split-screened-supply exactly as displayed in Section 9; do not change q:weighted status."
-  - "Update the q:weighted gate paragraph with the one-line text of Section 8 (route-control, orchestrator-owned)."
+  - "Add candidate node prop:split-screened-supply exactly as displayed in Section 9; do not change conj:weighted-excess-rate status."
+  - "Update the conj:weighted-excess-rate gate paragraph with the one-line text of Section 8 (route-control, orchestrator-owned)."
   - "Route the Section 3.2 collapse comparison (aligned initial-layer kernel vs ass:tight-prefix-carleson) to the synthesizer as a trace-cluster question; this probe deliberately does not decide it."
 next_role: prover
 next_prompt: |

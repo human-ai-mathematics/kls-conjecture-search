@@ -1,14 +1,13 @@
 ---
-type: proof-review
-date: "2026-09-06"
 verdict: pass
 authors:
   - "prover agent (Claude Fable 5), run id w4p04"
 reviewer: /w5/reviewer-fiber-root
-nodes:
-  - lem:fiber-root-degree-two
-solutions:
-  - solutions/lem-fiber-root-degree-two.tex
+fingerprints:
+  solutions/lem-fiber-root-degree-two.md: a3a1c477d045824928fcbcfd65e04f381551cdca076448e87acc7953783f10e3
+  lem:fiber-root-degree-two: a5c0cb72ddb6f073b7035b72173b2ba7d3652b6d33821866c122000b29870f0e
+  lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2
+  prop:conditional-fiber-root-obstruction: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f
 ---
 
 # Degree-two root-frame pencil identity — independent certification review
@@ -239,7 +238,7 @@ certificate must beat every direction; the root frame is one admissible frame). 
 
 `cd solutions && latexmk -pdf -interaction=nonstopmode -outdir=../build lem-fiber-root-degree-two.tex`
 exits 0 with zero TeX errors. The seven unresolved references are the manuscript labels
-`sec:conditional-fiber-frame`, `q:conditional-fiber-frame`, `eq:conditional-root-form`, the
+`sec:conditional-fiber-frame`, `conj:conditional-fiber-frame`, `eq:conditional-root-form`, the
 expected standalone behaviour permitted by `solutions/README.md`. `python3 scripts/check.py`
 reports 0 errors.
 
@@ -266,7 +265,7 @@ None required. Two editorial observations, neither affecting the proof:
 
 ## Exclusions
 
-This review does not certify `q:conditional-fiber-frame`, any statement about $\Lambda_{m,k}$
+This review does not certify `conj:conditional-fiber-frame`, any statement about $\Lambda_{m,k}$
 for $k\ge3$, any upper bound on $\Lambda_{m,2}$, any statement about the full $L^2$ root-frame
 gap beyond the already certified `prop:conditional-fiber-root-obstruction`, optimality of the
 root orbit among admissible frames, the ledger admission of the dual-certificate framework as

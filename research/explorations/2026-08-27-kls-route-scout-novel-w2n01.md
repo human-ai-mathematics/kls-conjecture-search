@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - conj:kls
 ---
 # KLS route scout W2-N01: intrinsic cone-boundary spectral gap
 
@@ -19,8 +14,8 @@ Candidate route slug: `cone-boundary-spectral`
 
 This report looks for a route outside all currently live or staged mechanisms. In
 particular, it proposes no edge to, no equivalence with, and no conclusion about
-the trace-upgrade cluster (`q:upgrade`, the high-rank part of
-`q:stein-weighted`, or `q:alignment`).
+the trace-upgrade cluster (`conj:trace-upgrade`, the high-rank part of
+`conj:stein-weighted`, or `conj:product-alignment`).
 
 The following repository sources were read in full before the proposal was
 formed:
@@ -407,12 +402,12 @@ cone and seam models are the relevant tail/anisotropy tests for this route.
 
 | Existing fence | Why it does not already kill this candidate |
 |---|---|
-| `obs:two-tail` | There is no localized cut, tilt parameter, or orientation-sensitive excess. The first tail-sensitive object is instead the fixed cone boundary form (5.2). |
-| `obs:proj-ceiling` | The target tests every boundary Sobolev function and uses the full tangential adjacency of boundary points; it does not claim that one-dimensional projection laws control higher chaos. |
-| `obs:crude-insufficient` | No covariance trace or time integral is estimated, crudely or otherwise. |
-| `obs:relative-ceiling` | The proposed inequality is openly a stronger KLS-sufficient hypothesis, not a relative-error bootstrap advertised as an absolute estimate. |
-| `obs:circularity` | The implication to KLS is the external published Hardy bridge (3.1). A proof of the new gate is required to use boundary geometry, not KLS, a thin-shell Poincare estimate, or a localized profile. The weak boundary variant is explicitly rejected as circular. |
-| `obs:rank-one-refuted` | There are no fixed product cuts. Products create a boundary seam-capacity problem, not a rank-one covariance statement. |
+| `rem:two-tail-slice-bounds` | There is no localized cut, tilt parameter, or orientation-sensitive excess. The first tail-sensitive object is instead the fixed cone boundary form (5.2). |
+| `rem:projection-ceiling` | The target tests every boundary Sobolev function and uses the full tangential adjacency of boundary points; it does not claim that one-dimensional projection laws control higher chaos. |
+| `rem:crude-insufficient` | No covariance trace or time integral is estimated, crudely or otherwise. |
+| `rem:relative-ceiling` | The proposed inequality is openly a stronger KLS-sufficient hypothesis, not a relative-error bootstrap advertised as an absolute estimate. |
+| `rem:profile-circularity` | The implication to KLS is the external published Hardy bridge (3.1). A proof of the new gate is required to use boundary geometry, not KLS, a thin-shell Poincare estimate, or a localized profile. The weak boundary variant is explicitly rejected as circular. |
+| `rem:single-coordinate-cuts` | There are no fixed product cuts. Products create a boundary seam-capacity problem, not a rank-one covariance statement. |
 
 The proposal neither merges nor compares the trace-upgrade nodes. No implication
 to that cluster is asserted.

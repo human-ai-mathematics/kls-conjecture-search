@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: dead-end
-nodes:
-  - q:cmh-approximation
 ---
 # KLS route probe: CMH approximation closure
 
@@ -13,7 +8,7 @@ Role: `kls-route-prober`
 
 Concurrency key: `kls-gate:q:cmh-approximation`
 
-Target: `q:cmh-approximation`
+Target: `prop:cmh-approximation-closure`
 
 This probe treats the uniform premise
 $\sup_k C_{\mathrm{CMH}}(\mu_k)\le C$ as a hypothesis. It does not try to prove universal
@@ -32,7 +27,7 @@ degeneration.
 
 ## Dependency and certification audit
 
-The complete dependency closure of `q:cmh-approximation` is:
+The complete dependency closure of `prop:cmh-approximation-closure` is:
 
 - `def:cmh`, which defines $C_{\mathrm{CMH}}$ using the closed Stein generator and the
   Moore--Penrose covariance inverse on the affine tangent space;
@@ -42,7 +37,7 @@ The complete dependency closure of `q:cmh-approximation` is:
 
 The theorem is certified by `solutions/thm-cmh-normalization.tex` and the distinct-agent review
 `research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`. The review explicitly
-excludes `q:cmh-approximation`. There are no further dependencies and the target has no
+excludes `prop:cmh-approximation-closure`. There are no further dependencies and the target has no
 `bounded_by` edge.
 
 ## What “lower semicontinuity” can mean here
@@ -339,7 +334,7 @@ This is the first unjustified step, and the attack stops there.
   rechecked. The repository's current preprint-summary sentence does not discharge this.
 - **Technical gap / control-plane choice — maximal versus relaxed Sobolev domain.** For the
   intrinsic closed relaxation defined in (4), density and constant-preserving closure are proved
-  above. If `q:cmh-approximation` intends a separately defined maximal distributional
+  above. If `prop:cmh-approximation-closure` intends a separately defined maximal distributional
   $W^{1,2}(\mu)$, the orchestrator must name that domain and import or prove its equality with the
   relaxed domain. This is not a failure of (3); it is missing target semantics.
 - **Fenced:** none.
@@ -352,16 +347,16 @@ $C_{\mathrm{CMH}}$.
 
 ## Fence-by-fence evasion check
 
-The ledger gives `q:cmh-approximation` no `bounded_by` edge. The full obstruction file was
+The ledger gives `prop:cmh-approximation-closure` no `bounded_by` edge. The full obstruction file was
 nevertheless checked:
 
-- `obs:two-tail`: no slice-wise excess, Stein source, or covariance weight is estimated.
-- `obs:proj-ceiling`: no radial/projection test or quadratic-chaos estimate is used.
-- `obs:crude-insufficient`: no stochastic covariance occupation integral or crude bootstrap is
+- `rem:two-tail-slice-bounds`: no slice-wise excess, Stein source, or covariance weight is estimated.
+- `rem:projection-ceiling`: no radial/projection test or quadratic-chaos estimate is used.
+- `rem:crude-insufficient`: no stochastic covariance occupation integral or crude bootstrap is
   used.
-- `obs:relative-ceiling`: no universal relative $\Xi_T$ bound is inserted.
-- `obs:circularity`: no localized isoperimetric profile or evolving competitor family appears.
-- `obs:rank-one-refuted`: no product-cut incident estimate or counterexample is proposed.
+- `rem:relative-ceiling`: no universal relative $\Xi_T$ bound is inserted.
+- `rem:profile-circularity`: no localized isoperimetric profile or evolving competitor family appears.
+- `rem:single-coordinate-cuts`: no product-cut incident estimate or counterexample is proposed.
 
 The noninvertible-image guardrail is respected: the proof never transports the canonical
 moment-map kernel through the limiting projection. The trace-upgrade cluster is not touched.
@@ -395,7 +390,7 @@ proposed_deltas:
   - none
 next_role: literature-scout
 next_prompt: |
-  Source-verify the one missing external input for `q:cmh-approximation`. Read
+  Source-verify the one missing external input for `prop:cmh-approximation-closure`. Read
   `research/explorations/2026-08-27-kls-route-prober-cmh-approximation-harness-01.md`,
   `modules/kls/04-family-moment-map.tex`, `modules/kls/40-moment-map-cmh.tex`,
   `modules/kls/41-cmh-normalization.tex`, and `solutions/thm-cmh-normalization.tex`.

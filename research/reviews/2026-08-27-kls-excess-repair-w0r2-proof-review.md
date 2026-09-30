@@ -1,21 +1,23 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_bootstrap_author
   - /root/repair_excess_dossier
 reviewer: /root/review_excess_repair_w0r2
-nodes:
-  - prop:intro-audit
-  - prop:trivial-excess
-  - lem:perimeter-martingale
-  - lem:excess-identity
-  - lem:inf-martingales
-solutions:
-  - solutions/kls-excess-audit.tex
-follows_up: research/reviews/2026-08-27-kls-excess-repair-w0-audit.md
+fingerprints:
+  solutions/kls-excess-audit.md: 4a87955fd2c105aa8e6e072e00d42c97a216349cfde817ac6376f3a6baef461c
+  prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73
+  prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
+  lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
+  cor:tight-window-consumption: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
+  lem:excess-identity: f131066c290e6c26f2de7acbdbff70216e8fb3fceb81b4ab5a6fe42b1be7096d
+  lem:inf-martingales: 3a548b25863f6597c2c6a66b30d9a6684c865e0d7611ad0a74ad87f2a339b265
 ---
+
+*Follows up* `research/reviews/2026-08-27-kls-excess-repair-w0-audit.md`.
 
 # KLS perimeter/excess repair W0R2 — cold proof review
 
@@ -277,9 +279,9 @@ stochastic Fubini were checked at their points of use rather than treated as num
 None of the five ledger nodes has a `bounded_by` edge.  The two relevant nearby fences are still
 respected:
 
-- `obs:circularity`: exact perimeter equality is confined to the smooth compact-support class, and
+- `rem:profile-circularity`: exact perimeter equality is confined to the smooth compact-support class, and
   no fixed-family supermartingale argument is transferred to the random mass-constrained profile.
-- `obs:two-tail`: the construction is used only against the universal slice-wise unweighted
+- `rem:two-tail-slice-bounds`: the construction is used only against the universal slice-wise unweighted
   inequality of the asserted form, not against a time-nonlocal proof or the weighted package.
 
 ## Corrections

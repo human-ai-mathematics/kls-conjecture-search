@@ -1,17 +1,21 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_weighted_spectator_obstruction
   - /root/repair_weighted_spectator_w0r2
 reviewer: /root/review_weighted_spectator_w0r2
-nodes:
-  - prop:weighted-spectator-obstruction
-solutions:
-  - solutions/prop-weighted-spectator-obstruction.tex
-follows_up: research/reviews/2026-08-27-prop-weighted-spectator-obstruction-proof-review.md
+fingerprints:
+  solutions/prop-weighted-spectator-obstruction.md: 9e52a87391e5b6b51bbf3b57657604d3a9cf802c0920c0b6de5a65dcd819b5b9
+  prop:weighted-spectator-obstruction: 3a65960d47cdc44c6a81fe7559223a79b7b491d7389ceb61251cc675cd573288
+  prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
+  lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
+  ass:weighted-package: 3532efe632a78732299519f2fe94aec60e99945eb186b7aba537603906d8e828
+  conj:weighted-excess-rate: 34c18fad26ca581aa69fa02ded48e117e33bff3828b6cf73516bf22ba755363a
 ---
+
+*Follows up* `research/reviews/2026-08-27-prop-weighted-spectator-obstruction-proof-review.md`.
 
 # Exponential-spectator obstruction repair — independent proof review
 
@@ -41,9 +45,9 @@ $$
 
 and a single $0<T\leq T_0$ for which the strict reverse of the proposed weighted rate holds.  The
 additional $e_0(E)\leq1$ conclusion puts the witness inside the exact quantified class of
-`q:weighted`.  Since the construction works for every $\eta\in(0,1/2)$, it covers every candidate
+`conj:weighted-excess-rate`.  Since the construction works for every $\eta\in(0,1/2)$, it covers every candidate
 $\eta\in(0,1/4]$ in that question.  Thus the certified proposition logically refutes the current
-literal all-measure, global-$\|A_t\|_{\mathrm{op}}$ formulation of `q:weighted`.
+literal all-measure, global-$\|A_t\|_{\mathrm{op}}$ formulation of `conj:weighted-excess-rate`.
 
 This consequence does not refute KLS.  All witnesses are products of isotropic one-dimensional
 log-concave laws, and the independently certified `prop:products` gives them a dimension-free
@@ -216,12 +220,12 @@ $$
 
 ### Fences, hypothesis accounting, dependencies, and citations
 
-The target has no formal `bounded_by` edge.  Its consumer `q:weighted` has two contextual fences,
+The target has no formal `bounded_by` edge.  Its consumer `conj:weighted-excess-rate` has two contextual fences,
 both respected:
 
-- `obs:two-tail`: the proof retains the calibrated exponent $5/2$ and demonstrates the tensor
+- `rem:two-tail-slice-bounds`: the proof retains the calibrated exponent $5/2$ and demonstrates the tensor
   instability of charging independent spectators through a global operator norm.
-- `obs:circularity`: the proof bounds the localized profile from above with an explicit
+- `rem:profile-circularity`: the proof bounds the localized profile from above with an explicit
   exact-mass spectator halfline and never inserts a moving-profile lower bound.
 
 No implication among the trace-upgrade questions is claimed.
@@ -296,7 +300,7 @@ to near-worst measures, an exact-minimizer-only formulation, the weighted Stein-
 `ass:weighted-package`, any implication in the trace-upgrade cluster, KLS itself, or any ledger
 node other than the proposition listed in the front matter.  In particular, the separately added
 `prop:spectator-excess-rate-obstruction` is a distinct candidate and is not reviewed or certified
-here.  The logically consequent refutation of `q:weighted` is a proposed orchestrator delta, not a
+here.  The logically consequent refutation of `conj:weighted-excess-rate` is a proposed orchestrator delta, not a
 second proof certification.  Dossier-header, ledger, manuscript, route, gating, bibliography, and
 prior-review edits remain outside this reviewer's write surface.
 
@@ -319,7 +323,7 @@ The target node may take unconditional `proved` status with:
     status: proved
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
-    statement: "For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but violates the q:weighted global-operator-norm rate at a time T<=T0."
+    statement: "For every C,T0,gamma>0, eta in (0,1/2), and delta>0, some balanced finite-perimeter cylinder in a centered one-sided-exponential product has additive and relative excess at most delta but violates the conj:weighted-excess-rate global-operator-norm rate at a time T<=T0."
     depends_on: [prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]
     solution: solutions/prop-weighted-spectator-obstruction.tex
     checked_by: agent
@@ -329,14 +333,14 @@ The target node may take unconditional `proved` status with:
 The direct logical consequence for the existing question is:
 
 ```yaml
-  - id: q:weighted
+  - id: conj:weighted-excess-rate
     kind: question
     status: refuted
     route: eldan-localization
     file: modules/kls/27-eldan-open-targets.tex
     statement: "Do universal C,T0,gamma>0 and eta in (0,1/4] exist such that every isotropic log-concave law and every balanced finite-perimeter cut with e0<=1 satisfy E int_0^{T wedge tau_eta} e_t(1+||A_t||_op)^(5/2) dt <= C(T e0+T^(1+gamma)) for all T<=T0?"
     depends_on: [prop:weighted-spectator-obstruction]
-    bounded_by: [obs:two-tail, obs:circularity]
+    bounded_by: [rem:two-tail-slice-bounds, rem:profile-circularity]
     refuted_by: [prop:weighted-spectator-obstruction]
 ```
 
@@ -347,7 +351,7 @@ artifacts:
 proposed_deltas:
   - "Update the dossier header to checked_by: agent, reviewer: /root/review_weighted_spectator_w0r2, and the new review path."
   - "Mark prop:weighted-spectator-obstruction proved with its solution, checked_by: agent, and the new review path."
-  - "Mark q:weighted refuted; add depends_on and refuted_by edges to prop:weighted-spectator-obstruction while retaining both bounded_by edges."
+  - "Mark conj:weighted-excess-rate refuted; add depends_on and refuted_by edges to prop:weighted-spectator-obstruction while retaining both bounded_by edges."
 next_role: orchestrator
 next_prompt: |
   Confirm that solutions/prop-weighted-spectator-obstruction.tex still has SHA-256

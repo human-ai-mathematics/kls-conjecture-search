@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: directional
-nodes:
-  - q:weighted
 ---
 # finum: cut-local screened supply on the product tail-union model (`kls-screen`)
 
@@ -15,7 +10,7 @@ Run id: `w4a01`
 
 Concurrency keys held: `finum-code`, `exploration:research/explorations/2026-08-30-finum-align-screened-supply-w4a01.md`
 
-Requested by the orchestrator to feed prober `w4w01` on `q:weighted`. Everything below is
+Requested by the orchestrator to feed prober `w4w01` on `conj:weighted-excess-rate`. Everything below is
 **directional research evidence**. No ledger status, dossier, manuscript statement, or proof step
 is affected. `CLAUDE.md` constraint 2 applies to every number here.
 
@@ -352,7 +347,7 @@ cut $E=E_0\times\mathbb R^m$: $P_\mu(E)=P_{\mu_0}(E_0)$ and $W_{\rm cut}(A,K)$ a
 $m$, while $I_\mu(p)$ is non-increasing in $m$ (cylinder extension of competitors); hence
 $e(E)=P-I$ is non-decreasing in $m$, and $eW_{\rm cut}$ is not spectator-blind even though
 $W_{\rm cut}$ is. The inflation is bounded: $0\le e\le P$ with $P$ spectator-independent.
-This sharpens the `q:weighted` gate prose from "ignores independent spectators" to "the *weight*
+This sharpens the `conj:weighted-excess-rate` gate prose from "ignores independent spectators" to "the *weight*
 ignores independent spectators; the *excess* does not, but only by a bounded factor".
 
 ## 9. Proposed adversarial instances (for the `synthesizer` only)
@@ -363,8 +358,8 @@ by `kls-screen`, and none for a cylinder cut. Two proposals:
 
 | proposed id | route | adversarial property | `finum` |
 |---|---|---|---|
-| `stress-tailunion-cut-scale` | localization / `q:weighted` | balanced tail-union cut in the isotropic Laplace product: exact perimeter $\frac{n\sqrt2}{2}(2^{1/n}-1)$ strictly below every coordinate half-space for $n\ge2$, and $\lambda_{\rm cut}$ within $0.74$–$0.93$ of $\lambda_{\max}$, so a cut-local scale gives no reduction on a cut aligned with all coordinates | `kls-screen / stress-tailunion-cut-scale` |
-| `stress-cylinder-spectator-excess` | localization / `q:weighted` | cylinder cut $E_0\times\mathbb R^{n-n_0}$: $\lambda_{\rm cut}$ is exactly spectator-blind while $e_t$ is monotone non-decreasing in the spectator dimension, so it separates weight stability from excess stability — the calibration the refuted global weight fails, plus the one the repaired weight still fails | `kls-screen / stress-cylinder-spectator-excess` |
+| `stress-tailunion-cut-scale` | localization / `conj:weighted-excess-rate` | balanced tail-union cut in the isotropic Laplace product: exact perimeter $\frac{n\sqrt2}{2}(2^{1/n}-1)$ strictly below every coordinate half-space for $n\ge2$, and $\lambda_{\rm cut}$ within $0.74$–$0.93$ of $\lambda_{\max}$, so a cut-local scale gives no reduction on a cut aligned with all coordinates | `kls-screen / stress-tailunion-cut-scale` |
+| `stress-cylinder-spectator-excess` | localization / `conj:weighted-excess-rate` | cylinder cut $E_0\times\mathbb R^{n-n_0}$: $\lambda_{\rm cut}$ is exactly spectator-blind while $e_t$ is monotone non-decreasing in the spectator dimension, so it separates weight stability from excess stability — the calibration the refuted global weight fails, plus the one the repaired weight still fails | `kls-screen / stress-cylinder-spectator-excess` |
 
 Neither is a happy-path instance: the first is the model on which the cut-local repair provably
 buys nothing, and the second is the model on which the repair is exactly correct for the weight
@@ -472,5 +467,5 @@ next_prompt: |
   P_0 = n*sqrt(2)*(2^{1/n}-1)/2 < 1/sqrt(2) for n >= 2, so coordinate half-spaces are an
   inadmissible profile surrogate for this cut) or E2 (cylinder spectator monotonicity of the
   excess) to a prover; both are elementary and neither changes any status by itself. Do not infer
-  any implication involving q:upgrade, q:stein-weighted, or q:alignment.
+  any implication involving conj:trace-upgrade, conj:stein-weighted, or conj:product-alignment.
 ```

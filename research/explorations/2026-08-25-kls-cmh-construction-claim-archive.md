@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - thm:cmh-1d
 ---
 # Archived CMH construction claim inventory
 
@@ -138,7 +133,7 @@ of reference measure.
 
 **Status ladder for the headline.** The reduction $C_P^{\mathrm{aff}}\le C_{\mathrm{CMH}}$ is
 proved on the regular moment-map class. The passage through approximation
-(`q:cmh-approximation`) and universal $\mathrm{CMH}(4)$ are open. The Hodge identity in §12
+(`prop:cmh-approximation-closure`) and universal $\mathrm{CMH}(4)$ are open. The Hodge identity in §12
 exhibits an additional nonnegative channel, but does not prove strict non-implication from KLS;
 §13 shows that the cheapest necessary consequence is not available from the external inputs by
 matrix algebra alone. Do not paraphrase the reduction as an equivalence.
@@ -592,7 +587,7 @@ matrix moments:
 Monge--Ampère or Codazzi compatibility is imposed. The proposition does **not** refute gate zero.
 What it proves is that any proof of gate zero must consume differential moment-map structure —
 equivalently, must bound $\mathbb E\lVert[B,H]\rVert_{\mathrm{HS}}^2$. It is the elementary,
-static, finite-dimensional shadow of `q:mm-square-root-commutator`, and it places a floor under
+static, finite-dimensional shadow of `conj:mm-square-root-commutator`, and it places a floor under
 that task's difficulty: the commutator may not be treated as a lower-order correction.
 
 **Placement warning.** In isotropic position gate zero asks $\lambda_{\max}(\mathbb EH^2)\le4$
@@ -653,7 +648,7 @@ $\mathrm{CMH}(4)$ with zero slack, and the CMH numerator splits into a gradient 
 solenoidal excess. This motivates a perturbative test, but increasing the solenoidal component
 alone does not control the Poincar\'e component, the denominator, or the optimizing direction.
 
-The open node `q:cmh-solenoidal-perturbation` therefore asks for the second variation of the
+The open node `conj:cmh-second-variation` therefore asks for the second variation of the
 *full CMH Rayleigh quotient*. A certified perturbation for which that quotient exceeds $4$ would
 refute universal CMH(4) without refuting KLS. See task **M9** in
 [`open-problems.md`](../kls/routes/moment-map-cmh/open-problems.md).

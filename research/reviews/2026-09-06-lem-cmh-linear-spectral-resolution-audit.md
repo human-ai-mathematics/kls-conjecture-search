@@ -1,6 +1,13 @@
 ---
-type: audit
-date: "2026-09-06"
+verdict: revise
+authors:
+- prover w4p03 (Claude agent, session 2026-08-30)
+reviewer: /w5/reviewer-clsr
+fingerprints:
+  solutions/lem-cmh-linear-spectral-resolution.md: 74580b1c5580b588a5d6c04ec035808e92544a722dfbfd1dc0c3e4ac520dbde5
+  lem:cmh-linear-spectral-resolution: 1acf8cd4ee1e8840de2a9816181ad28d515e592d55c5ab6f670587c83e2ba716
+  thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
 ---
 
 # `lem:cmh-linear-spectral-resolution` — cold certification review (lens `certify`), no certification

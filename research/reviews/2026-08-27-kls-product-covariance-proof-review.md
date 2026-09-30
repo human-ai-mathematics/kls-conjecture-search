@@ -1,19 +1,20 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_proof_audit
   - /root/repair_product_dossier
 reviewer: /root/review_product_w0
-nodes:
-  - lem:block
-  - thm:budget
-  - cor:refutation
-  - lem:product-qcts
-  - cor:KI-discharged
-solutions:
-  - solutions/kls-product-covariance.tex
+fingerprints:
+  solutions/kls-product-covariance.md: a288e98ce106b7998a88685c6da2c20f161c9ba5387e88242337bffecb1723a4
+  lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
+  thm:budget: 747881527155d39703c8dbb3a198afcd2c3686e5258ead72eb805f874e1bc196
+  cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
+  thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  cor:single-coordinate-cuts: 50f836a8a6885da08f837ec667d19b41a722b0e356f8c44acf5bd11b745a8a67
+  lem:product-qcts: 93f2e2a3230253762243cd991c55f11de59b986c8daf848ecd044256ef2302eb
+  cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
+  thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
 ---
 
 # Product coordinate budgets and covariance window — independent proof review
@@ -39,7 +40,7 @@ nodes.
   $\tau=\inf\{t:p_t\notin[1/3,2/3]\}$, matching the manuscript's coarse balanced exit time,
   and all three sources record the exact source budget, the stopped information-rate bound, and
   the boundary lower bound.
-- `cor:refutation` retains $p_0\in[2/5,3/5]$, a cut and one coordinate fixed before
+- `cor:single-coordinate-cuts` retains $p_0\in[2/5,3/5]$, a cut and one coordinate fixed before
   localization, and a deterministic threshold. Its boundary, total-budget, and deterministic-level
   occupation conclusions match the manuscript; the ledger is a faithful concise statement of the
   refutation scope and explicitly excludes path-adaptive choices.
@@ -48,8 +49,8 @@ nodes.
   The ledger's pathwise phrase is the immediate application to the centered product posterior
   recorded at the end of the proof.
 - `cor:KI-discharged` states precisely that the published sup-over-time covariance window and
-  the Brascamp--Lieb cap discharge `hyp:KI` with $C_2=2$. The dossier makes the inherited
-  range $n\ge3$ explicit; the manuscript anchor inherits exactly that range from `hyp:KI`.
+  the Brascamp--Lieb cap discharge `ass:KI` with $C_2=2$. The dossier makes the inherited
+  range $n\ge3$ explicit; the manuscript anchor inherits exactly that range from `ass:KI`.
 
 The recent source synchronization is therefore complete. No current theorem is being certified
 against the older, weaker statement bytes.
@@ -66,7 +67,7 @@ Every hypothesis used in the five proofs is stated.
    fixed $J$ supplies a deterministic set of columns to sum, and the nested balance interval gives
    the survival margin. Part (i) is indeed stronger than the packaged theorem and needs only a
    nontrivial cut, but the full theorem uses the displayed balance hypothesis in part (iii).
-3. For `cor:refutation`, the one-coordinate set and cut are fixed before the Brownian path and
+3. For `cor:single-coordinate-cuts`, the one-coordinate set and cut are fixed before the Brownian path and
    $L>0$ is deterministic. The balance hypothesis is inherited explicitly from the budget theorem.
 4. For `lem:product-qcts`, centering kills every mixed covariance, independence factors the
    surviving moments, log-concavity supplies the fourth-moment bound, and symmetry of $M$ combines
@@ -314,7 +315,7 @@ $$
 $$
 
 With $u=(Ct)^{-1}$, the second term is $Cu e^{-u}\le C/e$, uniformly over $t>0$.
-At $t=0$, $A_0=I$. Choosing $c_0\le C^{-1}$ proves `hyp:KI` on
+At $t=0$, $A_0=I$. Choosing $c_0\le C^{-1}$ proves `ass:KI` on
 $0\le t\le c_0(\log n)^{-2}$ for every $n\ge3$, exactly with exponent $C_2=2$.
 No Letwin theorem, version-1 preprint, quadratic Poincar\'e inequality, or $c/\log n$ window is
 used.
@@ -327,7 +328,7 @@ The dependency closure is unconditional.
   `thm:scalar-riccati`, and `prop:products`. The latter three are proved, agent-certified nodes;
   the Riccati nodes have the passing core review and `prop:products` has the passing geometry
   review. Their required statements were also rechecked here at the points of use.
-- `cor:refutation` depends only on `thm:budget`; the coupled certification is acyclic because the
+- `cor:single-coordinate-cuts` depends only on `thm:budget`; the coupled certification is acyclic because the
   budget proof does not use the corollary.
 - `cor:KI-discharged` depends only on the published imported node `thm:KL-window`.
 - `lem:block` has no dependency. `lem:product-qcts` has no ledger dependency; its only external
@@ -340,7 +341,7 @@ report.
 Every consumer named in the repair exploration was checked against the repaired hypotheses.
 
 - The fixed-coordinate corollary explicitly inherits $p_0\in[2/5,3/5]$.
-- The residual prose and `q:alignment` quantify over fixed balanced cuts and leave the
+- The residual prose and `conj:product-alignment` quantify over fixed balanced cuts and leave the
   high-complexity, high-rank incident-occupation problem open.
 - The trace-upgrade comparison says only that summing deterministic coordinate budgets gives the
   naive $\operatorname{Tr}R_0\le n$ bound. It expressly proves no equivalence across the
@@ -348,15 +349,15 @@ Every consumer named in the repair exploration was checked against the repaired 
 - The product clause of `thm:covariance-bound` now imports only the initial product-measure class.
   Its proof uses `lem:product-qcts` and the coarse posterior balance window, not `thm:budget` or
   its initial balance hypothesis.
-- `obs:rank-one-refuted` records exactly the fixed balanced one-coordinate obstruction, while
-  `q:alignment` is formally bounded by it and asks about high-complexity fixed cuts.
+- `rem:single-coordinate-cuts` records exactly the fixed balanced one-coordinate obstruction, while
+  `conj:product-alignment` is formally bounded by it and asks about high-complexity fixed cuts.
 - `thm:covariance-bound` consumes `lem:product-qcts`, and `cor:loglog` consumes the published
   $C_2=2$ discharge without importing the separate Letwin sharpening.
 
 None of the five reviewed nodes has a formal `bounded_by` edge. The nearby rank-one obstruction is
-downstream of `cor:refutation`, and its fixed-cut scope is respected. No reviewed result asserts
+downstream of `cor:single-coordinate-cuts`, and its fixed-cut scope is respected. No reviewed result asserts
 an adaptive choice, a high-rank occupation refutation, an all-cut Carleson estimate, or an
-equivalence among `q:upgrade`, the high-rank part of `q:stein-weighted`, and `q:alignment`.
+equivalence among `conj:trace-upgrade`, the high-rank part of `conj:stein-weighted`, and `conj:product-alignment`.
 
 ### Standalone build and structural validation
 
@@ -379,7 +380,7 @@ None.
 This review certifies only the five nodes and the dossier named in the front matter. It inspected
 the exact dependency statements needed for closure but does not recertify the rest of
 `solutions/kls-localization-riccati-core.tex` or `solutions/kls-geometry-models.tex`. It does not
-certify `thm:covariance-bound`, `thm:V2-window`, `cor:loglog`, `q:alignment`, any heuristic
+certify `thm:covariance-bound`, `thm:V2-window`, `cor:loglog`, `conj:product-alignment`, any heuristic
 covariance-sharpness claim, either new Klartag--Lehec rank-tail import in module 15, or any other
 consumer merely checked for scope compatibility. It certifies no Letwin-dependent result, no
 adaptive or high-rank occupation claim, no all-cut Carleson estimate, no KLS conclusion, and no

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:mm-spectral-occupation
 ---
 # Route-S probe: posterior defect and the surviving high-incidence block
 
@@ -24,7 +19,7 @@ From `research/kls/gating.md`:
 > Prove the universal-time absorptive source/damping estimate uniformly on regular approximants,
 > preserving tensor orientation under unwhitening.
 
-The effective manuscript statement is Question `q:mm-spectral-occupation`. On a smooth,
+The effective manuscript statement is Question `conj:mm-spectral-occupation`. On a smooth,
 strongly log-concave, isotropic approximant, let
 $$
 -Lf=\lambda f,\qquad \mathbb E_\mu f=0,\qquad \mathbb E_\mu f^2=1,
@@ -47,7 +42,7 @@ dimension, the approximant, and its strong-convexity parameter.
 
 ## Live graph and provenance audit
 
-`python3 research/check_ledger.py node q:mm-spectral-occupation` reports an open question with
+`python3 research/check_ledger.py node conj:mm-spectral-occupation` reports an open question with
 no `depends_on`, no `bounded_by`, and no ledger consumers. The adjacent
 `prop:spectral-sufficiency` names it in prose but is itself open. Thus there is no certified
 dependency closure to inherit.
@@ -478,16 +473,16 @@ previous global alignment wording.
 The live node has no formal `bounded_by` edge. For completeness, every obstruction in
 `research/kls/obstructions.md` was checked.
 
-- `obs:two-tail`: scoped to fixed cuts and absolute slice-wise Stein source bounds. No cut,
+- `rem:two-tail-slice-bounds`: scoped to fixed cuts and absolute slice-wise Stein source bounds. No cut,
   excess, or slice estimate is used. The analogous lesson is respected by retaining
   $\mathcal R_{t,L}$ rather than asserting an unweighted static bound.
-- `obs:proj-ceiling`: (2), (7), and (21) use all symmetric-matrix tests and full tensor blocks,
+- `rem:projection-ceiling`: (2), (7), and (21) use all symmetric-matrix tests and full tensor blocks,
   not radial or projection-only information.
-- `obs:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap is
+- `rem:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap is
   inserted.
-- `obs:relative-ceiling`: no universal relative $\Xi_{T_0}/T_0$ estimate is claimed.
-- `obs:circularity`: no localized isoperimetric profile or changing competitor family occurs.
-- `obs:rank-one-refuted`: this is a fixed-cut product obstruction. Equation (28) instead checks
+- `rem:relative-ceiling`: no universal relative $\Xi_{T_0}/T_0$ estimate is claimed.
+- `rem:profile-circularity`: no localized isoperimetric profile or changing competitor family occurs.
+- `rem:single-coordinate-cuts`: this is a fixed-cut product obstruction. Equation (28) instead checks
   exact spectral tensorization and makes no cut counterexample claim.
 
 Two route-specific warnings also bind the proof shape. Proposition `prop:covariance-spike` in the
@@ -495,7 +490,7 @@ manuscript rules out a pathwise global operator-norm proof; (7) evades it, while
 norm estimate above does not. The truncated-exponential Stein-unweighting counterexample rules
 out the earlier variable-weight shortcut; it is not used or generalized here.
 
-This probe does not touch `q:upgrade`, `q:stein-weighted`, or `q:alignment`, and asserts no
+This probe does not touch `conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment`, and asserts no
 transfer to the trace-upgrade cluster.
 
 ## Route viability and proposed gate update
@@ -541,7 +536,7 @@ outcome: blocked
 artifacts:
   - research/explorations/2026-08-27-kls-route-prober-mm-spectral-occupation-par-02.md
 proposed_deltas:
-  - Add candidate open node lem:mm-posterior-defect with the exact ledger statement displayed above, together with its manuscript anchor; do not change q:mm-spectral-occupation status.
+  - Add candidate open node lem:mm-posterior-defect with the exact ledger statement displayed above, together with its manuscript anchor; do not change conj:mm-spectral-occupation status.
 next_role: prover
 next_prompt: |
   Write a standalone dossier for candidate node lem:mm-posterior-defect only. Work on smooth,
@@ -554,6 +549,6 @@ next_prompt: |
   E int_0^t ||C_s||_HS^2 ds <= lambda-lambda^2|g_0|^2, and the averaged gradient-defect bound
   E E_t|grad R_t|^2 <= t lambda^2+t^2 lambda. State domains and stopping/removal explicitly.
   You may record the whitened K_t consequence only as conditional on imported
-  thm:letwin-qcts. Do not claim the high-incidence estimate, q:mm-spectral-occupation,
+  thm:letwin-qcts. Do not claim the high-incidence estimate, conj:mm-spectral-occupation,
   prop:spectral-sufficiency, or KLS. Compile the dossier and hand it to a distinct proof-checker.
 ```

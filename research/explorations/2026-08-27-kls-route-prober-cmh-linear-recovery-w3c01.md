@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - ass:cmh-recovery-envelope
 ---
 # KLS route probe: linear CMH recovery and the anisotropic Hessian bootstrap
 
@@ -547,14 +542,14 @@ No general bound or counterexample to (LR) is established.
 The ledger gives `ass:cmh-recovery-envelope` no `bounded_by` edge. The full obstruction registry
 was nevertheless checked.
 
-- `obs:two-tail`: no cut, boundary slice, excess, or covariance-weighted localization estimate
+- `rem:two-tail-slice-bounds`: no cut, boundary slice, excess, or covariance-weighted localization estimate
   is used.
-- `obs:proj-ceiling`: the live quantity is the full column energy $|Ha|^2$. Scalar projection
+- `rem:projection-ceiling`: the live quantity is the full column energy $|Ha|^2$. Scalar projection
   bounds are explicitly stopped at (4) and (6).
-- `obs:crude-insufficient`: no stochastic covariance integral or logarithmic bootstrap occurs.
-- `obs:relative-ceiling`: no all-measure relative localization bound is inserted.
-- `obs:circularity`: no localized isoperimetric profile or evolving competitor family occurs.
-- `obs:rank-one-refuted`: products are used only through exact stationary tensorization, not
+- `rem:crude-insufficient`: no stochastic covariance integral or logarithmic bootstrap occurs.
+- `rem:relative-ceiling`: no all-measure relative localization bound is inserted.
+- `rem:profile-circularity`: no localized isoperimetric profile or evolving competitor family occurs.
+- `rem:single-coordinate-cuts`: products are used only through exact stationary tensorization, not
   through a fixed product cut.
 
 The CMH-specific fences are also respected.
@@ -566,7 +561,7 @@ The CMH-specific fences are also respected.
   genuine moment-map counterexamples.
 - The solenoidal channel is retained as a downstream obligation.
 - The analysis of $\mathbb EH^2$ is confined to the linear recovery gate. No equivalence or
-  implication is asserted with `q:upgrade`, high-rank `q:stein-weighted`, or `q:alignment`.
+  implication is asserted with `conj:trace-upgrade`, high-rank `conj:stein-weighted`, or `conj:product-alignment`.
 
 ## Numerical disposition
 

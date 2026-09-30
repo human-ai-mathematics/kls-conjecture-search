@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: directional
-nodes:
-  - thm:bootstrap
 ---
 # KLS Wave 3: proof-surplus target staging
 
@@ -41,6 +36,6 @@ Te_0+C h_\mu\bigl(T^{4/3}+\widehat\Xi_{T,\eta}(\mu,E)\bigr).
 $$
 
 The node is staged as `open`, with the same certified dependencies as `thm:bootstrap` and fences
-`obs:circularity` and `obs:relative-ceiling`. It asserts no universal bound on the stopped
+`rem:profile-circularity` and `rem:relative-ceiling`. It asserts no universal bound on the stopped
 interface and makes no KLS status change. A standalone author and a distinct cold reviewer are
 required before promotion.

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: directional
-nodes:
-  - ass:all-cut-carleson
 ---
 # KLS Wave 3: exact tight-prefix trace gate
 
@@ -24,8 +19,8 @@ $$
 \qquad \alpha<1.
 $$
 
-This is now the target of `q:upgrade`. It remains `open`; no soft-projector result is wired to it.
-Its fences are `obs:two-tail`, `obs:relative-ceiling`, and `obs:proj-ceiling`.
+This is now the target of `conj:trace-upgrade`. It remains `open`; no soft-projector result is wired to it.
+Its fences are `rem:two-tail-slice-bounds`, `rem:relative-ceiling`, and `rem:projection-ceiling`.
 
 ## Exact next gate
 
@@ -72,7 +67,7 @@ control either contraction by themselves.
 ## Coordination rule
 
 This is the singleton active owner for the trace-upgrade cluster. No parallel probe is launched
-on high-rank `q:stein-weighted` or `q:alignment`, and no equivalence among those nodes is assumed.
+on high-rank `conj:stein-weighted` or `conj:product-alignment`, and no equivalence among those nodes is assumed.
 The assigned prober must first independently audit the exact Itô identity and constants, then
 attack or refute the two contractions. It may propose proof-ready sublemmas, but it may not edit
 the ledger, manuscript, route control, or claim a status change.

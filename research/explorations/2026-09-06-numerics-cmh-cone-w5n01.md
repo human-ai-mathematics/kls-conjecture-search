@@ -1,15 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: candidate
-approach: ap:cmh-gate-zero
-nodes:
-  - conj:gate-zero-sharp
-  - conj:gate-zero
-  - cor:cube-cone-gate-zero
-  - prop:cone-linear-sector
-  - prop:cone-moment-map
-  - rem:cmh-saturation-risk
 artifacts:
   - research/runs/2026-09-06T175558.606924Z-cmh-cone.jsonl
   - research/runs/2026-09-06T175611.501834Z-cmh-cone.jsonl
@@ -52,7 +41,7 @@ candidates:
       simplex base and 6/5 for a cube base. Reason to doubt it: the family is a finite
       polytopal slice of the log-concave cone, the claim quantifies over all beta and all
       block shapes, and every number is computed from eq:cone-stein-kernel, whose node
-      prop:cone-moment-map is still open.
+      prop:cone-moment-map was open when this was proposed and has since been proved.
 ---
 
 # Exponential cones: exact gate matrices, ball quadrature, and CMH Galerkin
@@ -160,8 +149,8 @@ Directional, consistent, no escalation. Concretely for the search:
   set inside this family is exactly the exponential products. The family therefore supplies
   no counterexample and no near miss — the maximum is *attained* at 2 and never exceeded.
 - The cube cones were proposed in `subsec:cmh-cones` as the natural place to test
-  $\mathrm{CMH}(4)$ beyond the product endpoint of `rem:cmh-saturation-risk`. On this
-  evidence they do **not** realise the perturbation `q:cmh-solenoidal-perturbation` asks
+  $\mathrm{CMH}(4)$ beyond the product endpoint of `cor:cmh-product-saturation`. On this
+  evidence they do **not** realise the perturbation `conj:cmh-second-variation` asks
   for: at equal polynomial degree they are strictly *below* the saturating product, and
   the gap grows with $n$ and with $\beta-n$. Route C's saturation risk is not resolved,
   but this particular perturbation direction looks flat-to-downhill.

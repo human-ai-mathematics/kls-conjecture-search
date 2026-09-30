@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:upgrade
 ---
 # KLS route probe: the tight-prefix soft-projector injection
 
@@ -13,7 +8,7 @@ Role: `kls-route-prober`
 
 Concurrency key: singleton `kls-gate:q:upgrade` ownership for this wave
 
-Target: `q:upgrade`, and only `q:upgrade`
+Target: `conj:trace-upgrade`, and only `conj:trace-upgrade`
 
 Artifact ownership: this file only. No ledger, manuscript, route-control, bibliography,
 solution, review, knowledge, or numerical file is changed.
@@ -51,17 +46,17 @@ one-dimensional exponential spectator at every sufficiently small fixed time. Co
 therefore grow linearly with the number of spectators, whereas the proposed right side remains
 unchanged. This refutes the raw prefix-injection estimate for every legitimate fixed cutoff.
 
-It does **not** refute `ass:tight-prefix-carleson`, `q:upgrade`, or KLS. In the same product the
+It does **not** refute `ass:tight-prefix-carleson`, `conj:trace-upgrade`, or KLS. In the same product the
 spectator source is zero, and the positive injection in (S1) cancels exactly against the terminal
 and deterministic terms that the proposed reduction discarded. The route remains viable only
 after replacing the raw contraction bound by a spectator-cancelling, cut-relative estimate.
 
-No equivalence or transfer involving high-rank `q:stein-weighted` or `q:alignment` is asserted or
+No equivalence or transfer involving high-rank `conj:stein-weighted` or `conj:product-alignment` is asserted or
 analyzed here.
 
 ## Gate, quoted verbatim
 
-The live `q:upgrade` gate in `research/kls/gating.md` is:
+The live `conj:trace-upgrade` gate in `research/kls/gating.md` is:
 
 > Produce the tight-prefix absorptive trace estimate `ass:tight-prefix-carleson`, with every source
 > and damping term matched to `thm:scalar-riccati`. For one fixed cutoff $\chi=0$ on
@@ -662,20 +657,20 @@ spectator subtraction.
 
 ## Fence-by-fence audit
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 No slice-wise absolute-scale source bound is asserted. The present product has zero spectator
 source and detects instead that the proposed auxiliary potential charges covariance motion in
 directions irrelevant to the cut. It neither contradicts nor bypasses the two-tail lower bound.
 A corrected gate must both ignore spectators and still dominate the aligned two-tail source.
 
-### `obs:proj-ceiling`
+### `rem:projection-ceiling`
 
 The refutation is an exact block-diagonal scalar It\^o calculation, not a projection-test
 estimate. The conditional implication audit uses the full matrix input (2.6) and explicitly
 retains its preprint status; it does not infer QCTS from radial or one-dimensional tests.
 
-### `obs:relative-ceiling`
+### `rem:relative-ceiling`
 
 No universal bound on $\Xi_T$ or on relative covariance occupation is inserted. The witnesses
 are products with dimension-free KLS. Their growing raw injection therefore refutes only an
@@ -683,14 +678,14 @@ overstrong auxiliary estimate, not KLS and not the tight-prefix source conclusio
 
 ### Other catalogued fences
 
-No crude covariance bootstrap is used (`obs:crude-insufficient`), no localized isoperimetric
-profile is inserted (`obs:circularity`), and no conclusion about a product incident-high gate is
-drawn from a one-coordinate cut (`obs:rank-one-refuted`). The one-coordinate cylinder is used
+No crude covariance bootstrap is used (`rem:crude-insufficient`), no localized isoperimetric
+profile is inserted (`rem:profile-circularity`), and no conclusion about a product incident-high gate is
+drawn from a one-coordinate cut (`rem:single-coordinate-cuts`). The one-coordinate cylinder is used
 only to separate the auxiliary injection from the actual source.
 
 ## Route verdict and proposed gate update
 
-`q:upgrade` remains viable and open, but the staged raw-contraction gate should be withdrawn. Its
+`conj:trace-upgrade` remains viable and open, but the staged raw-contraction gate should be withdrawn. Its
 failure is structural: it charges independent covariance spectators that cancel only when the
 terminal and favorable drift terms are retained. The next gate must be tensor-stable under
 direct sums before any occupation estimate is attempted.
@@ -733,7 +728,7 @@ Suggested candidate node, if the orchestrator wants the failed gate recorded for
   kind: proposition
   status: open
   route: eldan-localization
-  statement: "Every legitimate fixed soft cutoff has a Gaussian-base/exponential-spectator product-cylinder family for which the raw prefix D2chi/Dchi injection grows linearly in the spectator dimension while S, r, and D remain base-local; hence the raw injection bound staged for q:upgrade is not tensor-stable."
+  statement: "Every legitimate fixed soft cutoff has a Gaussian-base/exponential-spectator product-cylinder family for which the raw prefix D2chi/Dchi injection grows linearly in the spectator dimension while S, r, and D remain base-local; hence the raw injection bound staged for conj:trace-upgrade is not tensor-stable."
   depends_on: [lem:matrix-riccati, prop:covariance-spike]
 ```
 
@@ -751,7 +746,7 @@ artifacts:
   - research/explorations/2026-08-27-kls-route-prober-tight-prefix-soft-projector-w3p01.md
 proposed_deltas:
   - stage prop:soft-projector-spectator-obstruction as an open candidate only if the orchestrator wants formal provenance for the failed auxiliary gate
-  - replace the raw q:upgrade injection gate by the spectator-cancelling requirement quoted above; retain q:upgrade and ass:tight-prefix-carleson as open
+  - replace the raw conj:trace-upgrade injection gate by the spectator-cancelling requirement quoted above; retain conj:trace-upgrade and ass:tight-prefix-carleson as open
   - add 0 <= chi <= 1 and chi' >= 0 to any retained soft-projector implication statement
 next_role: prover
 next_prompt: |
@@ -762,7 +757,7 @@ next_prompt: |
   with s=1/T, and condition on the independent Gaussian-base stopping time to obtain (5.13).
   Bound r <= 1 and D <= 2, choose N after T, and negate every proposed raw-injection constant.
   State explicitly that the construction refutes only the auxiliary raw D2chi/Dchi estimate,
-  not ass:tight-prefix-carleson, q:upgrade, or KLS. Do not analyze or claim any relation to
-  q:stein-weighted or q:alignment. Compile the dossier and hand it to a distinct cold
+  not ass:tight-prefix-carleson, conj:trace-upgrade, or KLS. Do not analyze or claim any relation to
+  conj:stein-weighted or conj:product-alignment. Compile the dossier and hand it to a distinct cold
   proof-checker; do not edit the ledger, manuscript, route-control files, or this exploration.
 ```

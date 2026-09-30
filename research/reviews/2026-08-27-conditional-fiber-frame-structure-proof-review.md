@@ -1,15 +1,13 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_conditional_fiber_structure_w3
 reviewer: /root/review_conditional_fiber_structure_w3
-nodes:
-  - lem:conditional-fiber-form
-  - prop:conditional-fiber-root-obstruction
-solutions:
-  - solutions/conditional-fiber-frame-structure.tex
+fingerprints:
+  solutions/conditional-fiber-frame-structure.md: 43fb10ffa3b00861c76bb7b57764e68b6e1b924b295f7778dab3ac6f618ff49a
+  lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  prop:conditional-fiber-root-obstruction: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f
 ---
 
 # Conditional-fiber form structure and simplex root obstruction — independent review
@@ -234,7 +232,7 @@ above.
 
 ## Exclusions
 
-This review does not certify `q:conditional-fiber-frame`, which remains open. In particular it
+This review does not certify `conj:conditional-fiber-frame`, which remains open. In particular it
 does not prove an all-frame simplex obstruction, root-frame optimality, a failure of every
 permutation-invariant frame, an equivalence with KLS, or KLS itself. It does not review the
 imported Sasada proposition or its normalization. It certifies the closed-form generator and the

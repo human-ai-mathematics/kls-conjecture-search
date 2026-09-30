@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - prop:cmh-hodge
 ---
 # CMH Hodge operator-domain repair
 

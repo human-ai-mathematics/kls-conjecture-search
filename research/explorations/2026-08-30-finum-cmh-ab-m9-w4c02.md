@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: directional
-nodes:
-  - q:cmh-solenoidal-perturbation
 ---
 # finum: the CMH anisotropic bootstrap $(\mathsf N,\mathsf D,\mathsf R)$ and the M9 probe
 
@@ -238,7 +233,7 @@ against $-5.7\times10^{-15}$ at $\varepsilon=0$ where the truth is exactly zero.
 definitively not log-concave. Both tests are one-sided necessary conditions; the run now applies
 both, and reports both, and the candidate does not survive.
 
-**Consequence for `q:cmh-solenoidal-perturbation`.** The M9 design as specified — perturb the
+**Consequence for `conj:cmh-second-variation`.** The M9 design as specified — perturb the
 moment potential and take a two-sided second difference — is not available at the saturator,
 because the admissible cone there is one-sided at best and the tried dictionary is on the wrong
 side of it. An admissible M9 needs a *target-side* perturbation $V_\varepsilon=V_0+\varepsilon c$
@@ -307,7 +302,7 @@ For the `synthesizer` only; not added to the registry here (`CLAUDE.md` constrai
   the log-concave boundary rather than by numerics, and the resolution floor is $0.0038$.
 
 Nothing here changes `conj:gate-zero`, `ass:cmh-recovery-envelope`, `thm:cmh-dirichlet`,
-`q:cmh-solenoidal-perturbation`, `prog:cmh-route` or `conj:kls`.
+`conj:cmh-second-variation`, `rem:cmh-program` or `conj:kls`.
 
 ## 7. Proposed deltas
 

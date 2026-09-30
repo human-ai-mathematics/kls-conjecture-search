@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-20"
-outcome: directional
-nodes:
-  - q:alignment
 ---
 # KLS research program — cycle 1 synthesis
 
@@ -28,7 +23,7 @@ The cycle changes the route ranking without closing the conjecture.
 3. A natural attempt to unweight the positive moment-map Stein form is false, even in dimension
    one for genuine first eigenfunctions. A truncated-exponential family gives an explicit
    counterexample.
-4. The designated product tail-union stress test for `q:alignment` is now implemented. It finds a
+4. The designated product tail-union stress test for `conj:product-alignment` is now implemented. It finds a
    genuine high-dimensional alignment pulse, but does not find divergent required constants
    through \(n=1024\). A separate boundary-Poisson analysis predicts a bounded limiting pulse.
    Thus this family does not currently refute Route A; that route remains a useful secondary

@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-09-04"
-outcome: candidate
-approach: ap:cone-boundary-gap
-nodes:
-  - conj:kls
 candidates:
   - id: cand:cone-seam-capacity
     statement: >-

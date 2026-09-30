@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - thm:letwin-qcts
-  - q:mm-spectral-occupation
-  - thm:klartag-logn
-  - lem:mm-time-weighted-fixed-source
 ---
 # Prover: the Route-S window chain — four candidate dossiers (stopped source, restart deweighting, small-gap fourth moment, window occupation)
 
@@ -90,7 +82,7 @@ Four standalone dossiers, all `checked_by: none`, all headers carrying
    isotropic approximant ($n\ge2$), every first eigenfunction with
    $\lambda\le3/(8K_n)$, and every $T\le T_0(n)$,
    $\mathbb E\int_0^T\|H_s\|^2ds\le34\,T$; hence the occupation hypothesis of
-   `q:mm-spectral-occupation` holds on $[0,T_0(n)]$ with $C_0=34$, $C_1=0$, no damping
+   `conj:mm-spectral-occupation` holds on $[0,T_0(n)]$ with $C_0=34$, $C_1=0$, no damping
    consumed.  (b) Rerunning the certified `prop-spectral-sufficiency` bridge argument
    at fixed $n$ with the branch split at $3/(8K_n)$: conditional on `thm:letwin-qcts`,
    every isotropic log-concave law on $\mathbb R^n$ ($n\ge2$) has
@@ -194,17 +186,17 @@ dossier 4's only $n$-dependent inputs are the two published windows/frontiers.
 ## Fence-by-fence check (summary; full paragraphs in each dossier)
 
 The four candidate nodes carry no `bounded_by` edges; all registered obstructions were
-checked anyway, per dossier: no cut/slice/excess estimate (`obs:two-tail`,
-`obs:circularity`, `obs:rank-one-refuted`); the only tensor input is the full
+checked anyway, per dossier: no cut/slice/excess estimate (`rem:two-tail-slice-bounds`,
+`rem:profile-circularity`, `rem:single-coordinate-cuts`); the only tensor input is the full
 symmetric-matrix Letwin bound with its conditional standing displayed
-(`obs:proj-ceiling`); no crude covariance integral or relative occupation premise
-(`obs:crude-insufficient`, `obs:relative-ceiling` — the frontier input produces a
+(`rem:projection-ceiling`); no crude covariance integral or relative occupation premise
+(`rem:crude-insufficient`, `rem:relative-ceiling` — the frontier input produces a
 strictly weaker output); `prop:covariance-spike` respected constructively (all
 operator-norm usage is stopped; no beyond-window claim); the recorded
 marginal-independence, moving-projector, rank-entrance, and weight-removal dead ends
 are each avoided by construction and said so where relevant.  Constraint 6: only
-`q:mm-spectral-occupation` is touched; nothing crosses to `q:upgrade`,
-`q:stein-weighted`, or `q:alignment`.  Scope fences (not the gate, no universal time,
+`conj:mm-spectral-occupation` is touched; nothing crosses to `conj:trace-upgrade`,
+`conj:stein-weighted`, or `conj:product-alignment`.  Scope fences (not the gate, no universal time,
 no beyond-window, no frontier improvement, conditional standing) are stated up front
 in dossier 4 as required.
 
@@ -217,7 +209,7 @@ candidate nodes of the w4s01 proposed delta would receive
 a cold check; `lem:mm-restart-deweighting` and `lem:mm-smallgap-fourth-moment` could
 then be `proved`-eligible (the latter once `thm:klartag-logn` is an accepted import),
 while `lem:mm-stopped-window-source` and `prop:mm-window-occupation` remain at most
-`conditional` on `thm:letwin-qcts` (constraint 7).  `q:mm-spectral-occupation` is
+`conditional` on `thm:letwin-qcts` (constraint 7).  `conj:mm-spectral-occupation` is
 unaffected.  No numerics were used or requested.
 
 ```yaml
@@ -280,7 +272,7 @@ next_prompt: |
   also contingent on certification of (1)-(3)): (a) with Cbar >= 1 WLOG and
   T0(n) = min(t_c, 1/(Cbar log^2 n)), every regular isotropic approximant (n>=2) with
   lambda <= 3/(8K_n) satisfies E int_0^T ||H||^2 <= 34 T for all T <= T0(n), i.e. the
-  q:mm-spectral-occupation hypothesis with C0=34, C1=0, no damping consumed; (b) hence
+  conj:mm-spectral-occupation hypothesis with C0=34, C1=0, no damping consumed; (b) hence
   C_P <= C log^2 n for every isotropic log-concave law on R^n, n>=2, conditional on
   thm:letwin-qcts. Check especially: continuity of A_t, tau_2 a stopping time with
   tau_2 > 0 and {tau<=T} in F_tau; the law-identification lemma transferring
@@ -295,10 +287,10 @@ next_prompt: |
   q <= 1+34t with no Gronwall, terminal variance >= 1/2 at T_*(n), posterior
   Brascamp-Lieb, T_*(n) >= c1/log^2 n for n>=2, the large-gap branch, and the
   certified fixed-test approximation passage at fixed n). Verify the scope fences
-  stated in the dossier: not q:mm-spectral-occupation, no universal-time or
+  stated in the dossier: not conj:mm-spectral-occupation, no universal-time or
   beyond-window claim, no frontier improvement (the output log^2 n is strictly weaker
-  than the published log n input), nothing about q:upgrade/q:stein-weighted/
-  q:alignment, conditional standing under constraint 7.
+  than the published log n input), nothing about conj:trace-upgrade/conj:stein-weighted/
+  conj:product-alignment, conditional standing under constraint 7.
 
   For each dossier: write one review in research/reviews/ under the structured
   contract, verdict pass/revise, naming author claude-prover-w4p02 and yourself as a

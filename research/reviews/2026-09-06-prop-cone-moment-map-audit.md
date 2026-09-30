@@ -1,6 +1,14 @@
 ---
-type: audit
-date: "2026-09-06"
+verdict: revise
+authors:
+- /w5/researcher-cone-lift
+reviewer: /w5/reviewer-cone-lift
+fingerprints:
+  solutions/prop-cone-moment-map.md: de0ac91919f85648a8a390e969c74849a6466a0c7160d7ecd3c38f9b2ad8aefe
+  prop:cone-moment-map: f61cff79312c7ca8ecd34aea5e0eae226e23b605c81ffdd8e3bd5f2b742e0544
+  thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
+  prop:cone-linear-sector: f5efa7c2397ab64dbec91656d9d3c5d0f741785a53c82e58e65b627d976a590f
+  cor:cube-cone-gate-zero: 73f25581fe8d8569982bf101f60a60bf4c8fbac8cfa45cc260dfa197f95c773d
 ---
 
 # Exponential-cone dossier — cold certification audit (no certification)

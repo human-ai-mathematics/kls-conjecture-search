@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:block
-  - lem:perimeter-martingale
 ---
 # Wave-zero semantic repairs
 
@@ -82,13 +76,13 @@ the missing finite-moment/nontrivial-mass hypotheses to `lem:block`.  Manuscript
 certification will be integrated only after a fresh cold audit of the whole coupled artifact.
 
 The same synchronization makes the domain of `lem:block` explicit (finite second moment and a
-nontrivial $J$-measurable cut), replaces the informal word “balanced” in `cor:refutation` by
+nontrivial $J$-measurable cut), replaces the informal word “balanced” in `cor:single-coordinate-cuts` by
 $p_0\in[2/5,3/5]$, and prevents the product clause of `thm:covariance-bound` from accidentally
 importing that cut-balance hypothesis when it needs only the product measure class.
 
 The Klartag--Lehec covariance-spike attribution in the same module is corrected from two-sided
 to centered one-sided exponentials, which is the family in their Proposition 65.  The separate
-two-sided-exponential `q:alignment` question is left unchanged; the cited result does not supply
+two-sided-exponential `conj:product-alignment` question is left unchanged; the cited result does not supply
 its answer or a persistent path event.
 
 ## Certification discipline
@@ -125,7 +119,7 @@ is imported at its exact sharp constants.  The event is not described as persist
 the proposed weighted-excess obstruction must integrate deterministic-time estimates by
 Tonelli.
 
-The previously undefined phrase “near-Cheeger” in `ass:weighted-package` and `q:weighted` is now
+The previously undefined phrase “near-Cheeger” in `ass:weighted-package` and `conj:weighted-excess-rate` is now
 replaced by the exact additive condition $e_0\le1$ used in the certified consumption proof. A
 new open target, `prop:weighted-spectator-obstruction`, records the stronger proposed negation
 for arbitrarily small additive *and* relative excess. Its status remains open pending a

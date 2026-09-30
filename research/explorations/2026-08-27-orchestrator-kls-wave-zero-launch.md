@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: directional
-nodes:
-  - q:weighted
 ---
 # Orchestrator launch: KLS certification and refutation wave zero
 
@@ -42,7 +37,7 @@ a standalone dossier and cold review certify the constants and regularization li
 
 The same SDE and $A_t\preceq(\kappa+t)^{-1}I$ yield the proof-ready candidate
 `lem:mm-time-weighted-fixed-source`.  It retains a linear time weight and consequently does not
-claim the unweighted initial-layer estimate required by `q:mm-spectral-occupation`.
+claim the unweighted initial-layer estimate required by `conj:mm-spectral-occupation`.
 
 ## CMH recovery-envelope correction
 
@@ -57,7 +52,7 @@ The new open premise `ass:cmh-recovery-envelope` records this weaker gate.  The 
 
 ## Weighted gate and integrity work
 
-The exponential-spectator cylinder obstruction to the literal `q:weighted` statement is sent
+The exponential-spectator cylinder obstruction to the literal `conj:weighted-excess-rate` statement is sent
 first to a gate prober and source verifier, then to a prover only if the analytic sketch survives.
 No refutation node or status change is accepted at launch.  Existing dossier/manuscript defects
 identified by proof mining are sent through author and cold-review repair cycles rather than
@@ -67,7 +62,7 @@ silently patched into certified artifacts.
 
 1. Distinct provers author the spectral sufficiency, fixed-function source, and CMH recovery
    dossiers.
-2. A `q:weighted` prober and literature scout independently settle the spectator construction
+2. A `conj:weighted-excess-rate` prober and literature scout independently settle the spectator construction
    and its source normalization.
 3. Separate provers repair the excess, product, and persistent-splitting dossiers; manuscript-only
    synchronization patches remain with the orchestrator.

@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-approach: ap:cmh-anisotropic-bootstrap
-outcome: proposed
-nodes:
-  - ass:cmh-recovery-envelope
 ---
 # KLS route probe: the anisotropic bootstrap $(\mathrm{AB})_{\rho,\beta}$ and the spectral resolution of $\mathsf N,\mathsf D,\mathsf R$
 
@@ -22,8 +16,8 @@ proof-ready linear subgate of `ass:cmh-recovery-envelope`.
 This probe continues `research/explorations/2026-08-27-kls-route-prober-cmh-linear-recovery-w3c01.md`
 (cited below as **w3c01**). It works on one fixed regular isotropic compact-target moment map;
 recovery-sequence quantifiers are exactly as in w3c01 and are not re-litigated. No numerics are
-used. No node of the trace-upgrade cluster (`q:upgrade`, high-rank `q:stein-weighted`,
-`q:alignment`) is opened; one comparison observation is quarantined in a "for the synthesizer"
+used. No node of the trace-upgrade cluster (`conj:trace-upgrade`, high-rank `conj:stein-weighted`,
+`conj:product-alignment`) is opened; one comparison observation is quarantined in a "for the synthesizer"
 note.
 
 ## Gate, verbatim
@@ -406,7 +400,7 @@ Every remaining step toward $(\mathrm{AB})_{\rho,\beta}$ with universal constant
 5. **Technical gap — second variation at the extremal corner.** At products of exponentials the
    configuration is $T_a=0$, $\|M_a\|^2=1$, and both sharp inequalities are tight. The
    admissible isotropy-preserving perturbation family already prescribed for
-   `q:cmh-solenoidal-perturbation` (first covariance variation vanishing) can be re-used to
+   `conj:cmh-second-variation` (first covariance variation vanishing) can be re-used to
    compute the second variation of $a^T(\mathsf R-\mathsf D)a$ in the linear sector. A negative
    second variation would refute the sharp candidate (12) near the corner (not $(\mathrm{AB})$
    with slack constants); a nonnegative one would be corner rigidity. The machinery exists in
@@ -427,17 +421,17 @@ Every remaining step toward $(\mathrm{AB})_{\rho,\beta}$ with universal constant
 `ass:cmh-recovery-envelope` carries no ledger `bounded_by` edge; the full registry and the
 route guardrails were checked.
 
-- `obs:two-tail`: no localization cut, slice bound, or covariance weight appears; all
+- `rem:two-tail-slice-bounds`: no localization cut, slice bound, or covariance weight appears; all
   statements are stationary identities at one fixed map.
-- `obs:proj-ceiling`: the live quantities are full column energies $|Ha|^2$ and full slice
+- `rem:projection-ceiling`: the live quantities are full column energies $|Ha|^2$ and full slice
   norms $\|M_a\|_{\rm HS}$; scalar/projection bounds are used only where attributed (Letwin on
   $\sum_bM_{aab}^2$) and are explicitly flagged as insufficient for the full slice.
-- `obs:crude-insufficient`: no stochastic covariance integral or bootstrap occurs.
-- `obs:relative-ceiling`: no all-measure relative bound is inserted; (P6.1) is
+- `rem:crude-insufficient`: no stochastic covariance integral or bootstrap occurs.
+- `rem:relative-ceiling`: no all-measure relative bound is inserted; (P6.1) is
   dimension-dependent and is presented as such.
-- `obs:circularity`: no localized isoperimetric profile or evolving competitor family occurs;
+- `rem:profile-circularity`: no localized isoperimetric profile or evolving competitor family occurs;
   Brascamp–Lieb is a certified external input, not an assumed profile bound.
-- `obs:rank-one-refuted`: products enter only through exact stationary block-diagonalization
+- `rem:single-coordinate-cuts`: products enter only through exact stationary block-diagonalization
   (P7), never through a product-cut occupation claim.
 - CMH-specific guardrails: no pointwise Loewner promotion is asserted (P4 sharpens the jet
   into a kernel formula); no matrix-moment-only argument is used for any open claim

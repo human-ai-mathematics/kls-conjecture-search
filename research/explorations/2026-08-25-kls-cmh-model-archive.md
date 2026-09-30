@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - conj:gate-zero
 ---
 # Archived CMH construction regression models
 
@@ -37,7 +32,7 @@ analytic/reporting status only.
 | three-exponential projection | exact density/kernel compatibility audit | a genuine canonical-versus-inherited Stein mismatch | universal CMH without reconstructing $K$ |
 | **uniform simplex / symmetric Dirichlet** | **exact algebra; theorem** | **the first nonproduct class where CMH is computable; gate-zero anchor $2(m+1)/(m+3)$** | **universal CMH — the family is strictly inside the bound** |
 | **asymmetric log-concave Dirichlet $\alpha_i\ge1$** | **exact algebra; theorem** | **whether unequal parameters break the Gamma-row completion (they do not)** | **the nonproduct saturating direction, which is not in this family** |
-| **product of one-sided exponentials** | **exact; saturating** | **the endpoint: $C_{\mathrm{CMH}}=4$ with zero slack** | **whether a perturbation raises it — that is `q:cmh-solenoidal-perturbation`** |
+| **product of one-sided exponentials** | **exact; saturating** | **the endpoint: $C_{\mathrm{CMH}}=4$ with zero slack** | **whether a perturbation raises it — that is `conj:cmh-second-variation`** |
 | **algebraic $O(m)$ countermodel ($m\ge18$)** | **exact finite-dimensional algebra** | **that Letwin's constant-matrix bound does not imply gate zero; the static commutator is unconstrained by matrix moments** | **anything about genuine moment maps — it satisfies no Monge--Ampère condition** |
 
 ## Three-exponential projection

@@ -1,15 +1,16 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_cmh_recovery
 reviewer: /root/review_cmh_recovery_w0
-nodes:
-  - lem:affine-poincare-w2-liminf
-  - cor:cmh-recovery-sequence-suffices
-solutions:
-  - solutions/lem-affine-poincare-w2-liminf.tex
+fingerprints:
+  solutions/lem-affine-poincare-w2-liminf.md: 5afb3e3e3dc73100386f977a871b50a4595288d0ab1ab55a27ba2abcabf1557b
+  lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e
+  thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
+  cor:cmh-recovery-sequence-suffices: f9b55a151c8c485807235a4f7498fe1932a00d6544b4657d670989ae2c35845b
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
+  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  ass:cmh-recovery-envelope: 97413c87f6cb04227066c5ba42930acffd8f0f977af2603e5529125ff4c2bcc4
 ---
 
 # Affine-Poincaré $W_2$ lower semicontinuity and one-sequence CMH recovery

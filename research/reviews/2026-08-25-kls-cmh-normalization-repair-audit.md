@@ -1,22 +1,20 @@
 ---
-type: proof-review
-date: "2026-08-25"
 verdict: pass
 authors:
   - /root/kls_proof_audit
 reviewer: /root/kls_evidence_audit
-nodes:
-  - q:cmh-normalization
-  - def:cmh
-  - prop:cmh-bochner
-  - thm:cmh-implies-affine-poincare
-  - prop:cmh-hodge
-  - rem:cmh-stronger-than-kls
-  - prop:letwin-not-gate-zero
-solutions:
-  - solutions/thm-cmh-normalization.tex
-follows_up: research/reviews/2026-08-25-kls-cmh-normalization-audit.md
+fingerprints:
+  solutions/thm-cmh-normalization.md: d53de5d49ed9590d4e9e813ab04306c8222ede3398a9da56dd101dae35a9fc8f
+  prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
+  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
+  cor:cmh-hodge-comparison: 42676f87e102fd9313af73973dcf29ff5a7f17ccec197c3284254e7cf2c0e0cc
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  prop:letwin-not-gate-zero: d01d5a5df0ca378b977846fd59185615903c42ec4bf019d71ebb41b5bf8e7c3a
 ---
+
+*Follows up* `research/explorations/2026-08-25-kls-cmh-normalization-audit.md`.
 
 # Route C CMH normalization layer — independent repair audit
 
@@ -28,7 +26,7 @@ authored the certified repair. The audit also compared the dossier with
 
 This follow-up review certifies the repaired statements and proofs of exactly these seven nodes:
 
-1. `q:cmh-normalization` — every operator datum in the regular-class CMH endpoint is fixed, and
+1. `rem:cmh-normalization` — every operator datum in the regular-class CMH endpoint is fixed, and
    the endpoint reduction is proved on that class.
 2. `def:cmh` — the Hilbert space, closed Stein generator, admissible class, covariance inverse,
    and kernel pseudoinverse conventions are well posed and affine-covariant.
@@ -39,7 +37,7 @@ This follow-up review certifies the repaired statements and proofs of exactly th
    gap or boundedness of $H$.
 5. `prop:cmh-hodge` — the weighted orthogonal splitting and the exact affine-Poincar\'e operator
    norm are correct.
-6. `rem:cmh-stronger-than-kls` — only the proved nonnegative solenoidal channel and
+6. `cor:cmh-hodge-comparison` — only the proved nonnegative solenoidal channel and
    $\CMH\ge\CPaff$ are asserted; equivalence and strict nonimplication remain open.
 7. `prop:letwin-not-gate-zero` — the explicit random-matrix law satisfies the universal
    constant-matrix inequality but violates gate zero for every integer $m\ge18$.
@@ -198,7 +196,7 @@ $\sup_q\CMH(\mu_q)\le C$, and condition the final passage on limiting smooth-cor
 affine-support control. Under those hypotheses the displayed inequality for a fixed
 $C_c^\infty$ test function passes to the limit; no continuity of $\CMH$ is asserted.
 
-Accordingly, `q:cmh-approximation` remains `status: open` in the KLS ledger and is stated as a
+Accordingly, `prop:cmh-approximation-closure` remains `status: open` in the KLS ledger and is stated as a
 separate question in `modules/kls/40-moment-map-cmh.tex`. The certified endpoint theorem is the
 regular-class implication. Its route-level sentence that a universal CMH bound would prove KLS
 is a conditional consequence, not a claim that the universal bound or approximation closure has
@@ -217,15 +215,15 @@ strict nonimplication from KLS is proved.
   references, undefined citations, or TeX errors.
 - All seven certified manuscript labels occur exactly once.
 - Immediately before this report was added, `python3 research/check_ledger.py` reported exactly
-  seven errors: the missing certified solution link for `q:cmh-normalization` and the historical
+  seven errors: the missing certified solution link for `rem:cmh-normalization` and the historical
   partial-review verdict for each of the other six nodes. It reported no warning and no unrelated
   structural error. This report supplies the replacement proof-review artifact; provenance
   rewiring in the shared ledger and dossier header remains with the orchestrator.
 
 ## Explicit exclusions
 
-This audit does not certify `q:cmh-approximation`, universal $\mathrm{CMH}(4)$,
-`conj:gate-zero`, `q:gate-zero`, the construction-layer Haar/commutator questions, any universal
+This audit does not certify `prop:cmh-approximation-closure`, universal $\mathrm{CMH}(4)$,
+`conj:gate-zero`, `rem:gate-zero-dichotomy`, the construction-layer Haar/commutator questions, any universal
 KLS conclusion, the separate exact-case dossier, or any `finum` artifact. It certifies the
 regular-class normalization implication, its stated structural consequences, and the exact
 algebraic countermodel only. These exclusions do not qualify the verdict for any of the seven

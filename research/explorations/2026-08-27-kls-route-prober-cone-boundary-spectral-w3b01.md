@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - obs:circularity
 ---
 # KLS route probe W3-B01: rounded isotropic right-cone boundary gap
 
@@ -572,12 +567,12 @@ from weak Wasserstein closeness of the two components.
 
 | Fence | Check for this argument |
 |---|---|
-| `obs:two-tail` | No localized cut, posterior covariance, or absolute-scale source appears. Isotropy fixes the cone geometry, and the proof controls the full static boundary form. |
-| `obs:proj-ceiling` | Spherical harmonics and the two-piece seam are handled directly. No projection-law estimate is used to control quadratic chaos. |
-| `obs:crude-insufficient` | There is no covariance trace or time integral. |
-| `obs:relative-ceiling` | The boundary target is explicitly a stronger sufficient hypothesis for KLS, not a weak bootstrap sold as progress. This model test does not claim the all-body hypothesis. |
-| `obs:circularity` | The proof uses only beta Poincare, spherical Poincare, seam trace, and convex smoothing. The Kolesnikov--Milman result is used only after the intrinsic estimate. No interior KLS or localized isoperimetric profile is inserted. |
-| `obs:rank-one-refuted` | There is no cut or stochastic rank-one mode. |
+| `rem:two-tail-slice-bounds` | No localized cut, posterior covariance, or absolute-scale source appears. Isotropy fixes the cone geometry, and the proof controls the full static boundary form. |
+| `rem:projection-ceiling` | Spherical harmonics and the two-piece seam are handled directly. No projection-law estimate is used to control quadratic chaos. |
+| `rem:crude-insufficient` | There is no covariance trace or time integral. |
+| `rem:relative-ceiling` | The boundary target is explicitly a stronger sufficient hypothesis for KLS, not a weak bootstrap sold as progress. This model test does not claim the all-body hypothesis. |
+| `rem:profile-circularity` | The proof uses only beta Poincare, spherical Poincare, seam trace, and convex smoothing. The Kolesnikov--Milman result is used only after the intrinsic estimate. No interior KLS or localized isoperimetric profile is inserted. |
+| `rem:single-coordinate-cuts` | There is no cut or stochastic rank-one mode. |
 
 The scout's warning is preserved: replacing the intrinsic Sobolev form by variance control only
 for ambient Lipschitz restrictions would merely restate weak KLS up to constants and is not an

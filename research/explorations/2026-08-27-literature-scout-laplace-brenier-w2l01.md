@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - conj:kls
 ---
 # Literature scout: the Laplace--Brenier simplex gate
 

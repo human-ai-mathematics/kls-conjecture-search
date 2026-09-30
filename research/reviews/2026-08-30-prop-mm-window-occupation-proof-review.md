@@ -1,14 +1,18 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r04
-nodes:
-  - prop:mm-window-occupation
-solutions:
-  - solutions/prop-mm-window-occupation.tex
+fingerprints:
+  solutions/prop-mm-window-occupation.md: 153e4c63d6845ea3dbbec7726ed22c3577baaf3052e419f2d477cb8377e94985
+  prop:mm-window-occupation: bfdd16289838ae5b0c560e93b07c6b77ef818e8acac71a517a8cbbe28e74945e
+  thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
+  thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
+  lem:mm-stopped-window-source: c405064bb67767843b0c86c8266cc60e9693dc13df3968410792d1a5b3f6b5e1
+  lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20
+  lem:mm-smallgap-fourth-moment: 5efc054693b4557b794756da70c6b5a5ba03e38dc8bd743eca82855cc796d1df
+  lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
+  thm:letwin-qcts: 8e2ac0819f46db553fe83a6f3034436816565262316c2e6bde7d81baead1a082
 ---
 
 # Window occupation and Route-S polylog reproduction — independent proof review
@@ -206,16 +210,16 @@ $C_2\log^2n$, $C_2=\max\{8C_K/(3\log2),2/c_1\}$. All verified.
 ### 4. Fences (constraint 5) and constraint 6
 
 The ledger node carries no `bounded_by` edge; the dossier nevertheless checks the
-registered fences and I confirm: no cut/slice/excess estimate (`obs:two-tail`,
-`obs:circularity`, `obs:rank-one-refuted`); the only tensor input is the full
+registered fences and I confirm: no cut/slice/excess estimate (`rem:two-tail-slice-bounds`,
+`rem:profile-circularity`, `rem:single-coordinate-cuts`); the only tensor input is the full
 symmetric-matrix Letwin bound inside the companion, with conditional standing displayed
-(`obs:proj-ceiling`); no crude covariance integral $\Xi_T$ or bootstrap
-(`obs:crude-insufficient`); the a-priori input is the published frontier and the output
-strictly weaker (`obs:relative-ceiling`). `prop:covariance-spike` is respected
+(`rem:projection-ceiling`); no crude covariance integral $\Xi_T$ or bootstrap
+(`rem:crude-insufficient`); the a-priori input is the published frontier and the output
+strictly weaker (`rem:relative-ceiling`). `prop:covariance-spike` is respected
 constructively: no assertion for $t>T_0(n)$, and the dossier says so up front. Recorded
 dead ends respected: the post-exit charge is a joint Cauchy–Schwarz through the optional
 projection, not a product of marginals; no unstopped $\|A_t\|_\op$ moment. Constraint 6:
-no statement touches `q:upgrade`, `q:stein-weighted`, or `q:alignment`.
+no statement touches `conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment`.
 
 ### 5. Hypothesis accounting
 
@@ -262,7 +266,7 @@ the standard post-review update.)
 
 - The three companion dossiers are **not** certified by this review; each requires its
   own passing proof review at the hashed versions above before this node is wired.
-- `q:mm-spectral-occupation` itself remains open: $T_0(n)\to0$, so nothing universal is
+- `conj:mm-spectral-occupation` itself remains open: $T_0(n)\to0$, so nothing universal is
   certified, and no claim for $t>T_0(n)$ exists.
 - No unconditional statement of any kind: everything is conditional on
   `thm:letwin-qcts`, and the frontier reproduction $\CP\le C\log^2n$ is strictly weaker

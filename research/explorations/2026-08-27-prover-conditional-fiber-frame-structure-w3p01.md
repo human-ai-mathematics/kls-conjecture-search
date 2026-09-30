@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - thm:cmh-1d
-  - lem:conditional-fiber-form
-  - prop:conditional-fiber-root-obstruction
 ---
 # Prover: conditional-fiber form structure and simplex root obstruction
 
@@ -201,7 +194,7 @@ cd solutions && latexmk -pdf -outdir=../build conditional-fiber-frame-structure.
 
 Result: success, six pages. The log has no TeX error, undefined control sequence, overfull box,
 or underfull box. The only warnings are the expected standalone unresolved external references
-to `thm:cmh-1d` and `q:conditional-fiber-frame`.
+to `thm:cmh-1d` and `conj:conditional-fiber-frame`.
 
 ```yaml
 outcome: complete

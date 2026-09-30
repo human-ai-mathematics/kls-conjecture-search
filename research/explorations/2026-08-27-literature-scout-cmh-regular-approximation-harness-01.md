@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:cmh-approximation
-  - thm:regular-moment-map-compact-target
-  - thm:cmh-implies-affine-poincare
 ---
 # Literature audit: regular moment-map approximants for CMH closure
 
@@ -13,7 +6,7 @@ Date: 2026-08-27
 
 Role: `literature-scout`
 
-Upstream target: `q:cmh-approximation`
+Upstream target: `prop:cmh-approximation-closure`
 
 ## Exact statement searched for
 
@@ -399,12 +392,12 @@ proposed_deltas:
 next_role: orchestrator
 next_prompt: |
   Accept the source-verified compact-target replacement for the unresolved regularity input of
-  `q:cmh-approximation`. Add a manuscript anchor and imported node
+  `prop:cmh-approximation-closure`. Add a manuscript anchor and imported node
   `thm:regular-moment-map-compact-target` with `import_class: published` and references
   `BermanBerndtsson2013RealMA` and `Fathi2019SteinMomentMaps`, using the exact statement in this
   exploration. Add the proposed Berman--Berndtsson BibTeX record and correct the existing
   Cordero-Erausquin--Klartag and Klartag records. Then dispatch a prover to write a standalone
-  dossier for `q:cmh-approximation`: replace the untruncated approximants by the centered
+  dossier for `prop:cmh-approximation-closure`: replace the untruncated approximants by the centered
   Gaussian-convolution/Gaussian-tilt/growing-ball family (A); prove its ambient W2 convergence
   without whitening, including singular covariance; establish closability on the ambient
   smooth restriction core; invoke the imported regularity and Stein theorem; and combine this

@@ -1,6 +1,13 @@
 ---
-type: audit
-date: "2026-08-27"
+verdict: revise
+authors:
+- /root/prove_lyapunov_stein_duality_w2
+reviewer: /root/review_lyapunov_stein_duality_w2
+fingerprints:
+  solutions/lem-lyapunov-stein-duality.md: ae84f79fdf8592f8f30915efe881a59ff99cae41befb5a5bd2fcd0a6a80c68ff
+  lem:lyapunov-stein-duality: 053e29d7fe7f570d943da7b4c27630eed5d4519a07957ef9b8374692fd518213
+  lem:pathwise-BL: 5b8de97a90772764778ad79fc4a9f56642c732304f4792a95b6cc493c7a95d6a
+  prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
 ---
 
 # Cut-oriented Lyapunov--Stein duality — cold proof audit
@@ -283,7 +290,7 @@ numerical evidence enters this proof.
 ### Fences and initial-time exclusion
 
 The ledger node has no formal `bounded_by` edge. The relevant obstruction is nevertheless
-respected. `obs:two-tail` rules out a dimension-free absolute slice scale; the checked result
+respected. `rem:two-tail-slice-bounds` rules out a dimension-free absolute slice scale; the checked result
 instead gives $\lambda_{\rm cut}=\Lambda$ on that anisotropic family. The proof retains the full
 cut-oriented tensor and therefore does not infer tensor control from radial or projection-only
 data. Direct-sum invariance removes only blocks on which the cut tensor is exactly zero.

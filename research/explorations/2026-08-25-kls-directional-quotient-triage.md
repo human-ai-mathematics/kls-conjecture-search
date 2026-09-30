@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: dead-end
-nodes:
-  - thm:cmh-1d
 ---
 # Triage of the directional-quotient exploration: SC4, Dirichlet SC1, radial capacity, preferred-direction localization
 
@@ -33,7 +28,7 @@ into the **normalization layer**, not here. This note records the rest.
   potential $\psi_0(s,t)=\phi(s)+t^2/2$ perturbed by $\varepsilon a(s)b_R(t)$ with
   $a'(s)=g(\phi'(s))$, whose double limit realizes an arbitrary one-dimensional Poincaré quotient
   — is now the prescribed construction for task **M9**
-  (`q:cmh-solenoidal-perturbation`). Its delicate ingredient is that the **first covariance
+  (`conj:cmh-second-variation`). Its delicate ingredient is that the **first covariance
   variation vanishes**, so whitening is $I+O(\varepsilon^2)$ and does not move the quadratic
   coefficients; that is what makes it an admissible isotropic witness rather than a broken
   normalization.
@@ -148,16 +143,16 @@ $\lVert A_t\rVert_{\mathrm{op}}^2$, with the prospective estimate
 $\mathbb E\mathfrak a_t^{1/3}\lesssim1$ at $t\asymp C_P(\mu)^{-1}$, on the grounds that large
 exceptional covariance eigenvalues are harmless if the first eigenfunction avoids them.
 
-This is a sharpening of the `q:upgrade` / `q:stein-weighted` / `q:alignment` cluster, and
+This is a sharpening of the `conj:trace-upgrade` / `conj:stein-weighted` / `conj:product-alignment` cluster, and
 **hard constraint 6 forbids opening it as a parallel effort**. It is recorded here and referred to
-that cluster's owner. It is also close in spirit to `q:mm-spectral-occupation` on the
+that cluster's owner. It is also close in spirit to `conj:mm-spectral-occupation` on the
 `moment-map-spectral` route, which already follows a first eigenfunction; whoever takes it up
 should compare the two before adding a node, not after.
 
 Note also the summary's own observation that for product exponentials $T_k=2e_ke_k^\top$, so the
 maximum-direction effect persists even though KLS tensorizes perfectly. That is a real constraint
 on any proof requiring uniform operator-norm control, and it is consistent with
-`obs:rank-one-refuted` without being implied by it.
+`rem:single-coordinate-cuts` without being implied by it.
 
 ## Net assessment
 

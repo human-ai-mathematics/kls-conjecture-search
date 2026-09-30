@@ -1,10 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: proposed
-approach: ap:cmh-anisotropic-bootstrap
-nodes:
-  - lem:cmh-linear-spectral-resolution
 ---
 
 # Repair round on `solutions/lem-cmh-linear-spectral-resolution.tex` (run w5p03)

@@ -1,17 +1,16 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_full_matrix_dissipation_w2
   - /root/repair_full_matrix_dissipation_w2
 reviewer: /root/review_full_matrix_dissipation_w2
-nodes:
-  - cor:full-matrix-dissipation
-solutions:
-  - solutions/cor-full-matrix-dissipation.tex
-follows_up: research/reviews/2026-08-27-cor-full-matrix-dissipation-proof-review.md
+fingerprints:
+  solutions/cor-full-matrix-dissipation.md: ea87bfa39c766f4f0df537ed4d3bc944eee4c6049db04b401861e652963a2357
+  cor:full-matrix-dissipation: 67207edd4c5c4e8e6674ab24f20583a4a51374e514582fd7032b1120e7b0f0ce
+  lem:matrix-riccati: b529c0f736b4dce32a7843e81f8edb6569491781941e3b8aecdc1be0ddf7a023
 ---
+
+*Follows up* `research/reviews/2026-08-27-cor-full-matrix-dissipation-proof-review.md`.
 
 # Full matrix dissipation repair — independent proof review
 
@@ -71,7 +70,7 @@ $$
 $$
 
 It explicitly disclaims any dimension-free trace upgrade and asserts no implication among
-`q:upgrade`, the high-rank part of `q:stein-weighted`, `q:alignment`, or any other member of the
+`conj:trace-upgrade`, the high-rank part of `conj:stein-weighted`, `conj:product-alignment`, or any other member of the
 trace-upgrade cluster.
 
 ### Dependency closure and citation debt

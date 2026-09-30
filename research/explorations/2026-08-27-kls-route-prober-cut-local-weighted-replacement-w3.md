@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - q:weighted
 ---
 # KLS route probe: cut-local replacement for the refuted weighted gate
 
@@ -15,8 +10,8 @@ Run id: `w3`
 
 Concurrency key: `kls-gate:q:weighted`
 
-Scope: one non-trace gate, namely the replacement requested by `q:weighted`. This probe does
-not address `q:upgrade`, `q:stein-weighted`, or `q:alignment`, and it asserts no implication
+Scope: one non-trace gate, namely the replacement requested by `conj:weighted-excess-rate`. This probe does
+not address `conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment`, and it asserts no implication
 among members of the trace-upgrade cluster. It uses no numerical experiment.
 
 ## Gate, quoted verbatim
@@ -424,44 +419,44 @@ geometric target than replacing $\|A_t\|_{\rm op}$ by $\lambda_{\rm cut}$ syntac
 
 Candidate B is the recommended robust interface. It remains an open candidate: neither (21) nor
 (22) is derived in this probe. In particular, (22) is not claimed to follow from the current
-`q:stein-weighted` statement.
+`conj:stein-weighted` statement.
 
 ## Fence-by-fence audit
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 Evaded exactly. Equations (11)--(13) show that the full $5/2$ scale is retained on the aligned
 mode. The source screening can be chosen with $\kappa<\kappa_{\rm TT}$, so it does not discard
 the obstruction.
 
-### `obs:circularity`
+### `rem:profile-circularity`
 
 Not discharged and not violated. Neither candidate inserts a lower bound for the moving
 localized profile or asserts that it is a supermartingale. Candidate A or B still needs a new
 non-circular proof, plausibly using the externally anchored near-worst bootstrap plus genuinely
 cut-local information.
 
-### `obs:relative-ceiling`
+### `rem:relative-ceiling`
 
 Respected. The proposed supply is absolute $O(T)$, restricted to near-worst measures and
 near-minimizing cuts. It is not an all-measure relative bound for $\Xi_T$ and therefore does not
 smuggle in KLS through `prop:ceiling`.
 
-### `obs:crude-insufficient`
+### `rem:crude-insufficient`
 
 Respected. No use of the crude $\Xi_T\lesssim\log n$ estimate is made. The report explicitly
 identifies why the existing unweighted bootstrap cannot be multiplied by $W_{\rm cut}$.
 
-### `obs:proj-ceiling`
+### `rem:projection-ceiling`
 
 Evaded at the algebraic level. The scale uses the full matrix $K$ and Lyapunov energy, not radial
 or projection-only tests. No dimension-free trace conclusion is inferred from this fact.
 
-### `obs:rank-one-refuted`
+### `rem:single-coordinate-cuts`
 
 Respected. Fixed-coordinate product cuts have an exact active block and pass the spectator test;
 the coordinate budget remains valid. No rank-one counterexample or implication about
-`q:alignment` is proposed.
+`conj:product-alignment` is proposed.
 
 ## Viability verdict and exact residue
 
@@ -512,5 +507,5 @@ next_prompt: |
   and perturbative cross-block stability. If route-control prose is updated, record the exact
   leakage identity (8), retain only an O(T) or explicitly near-worst/source-screened supply,
   and state that neither propagation nor the matching trace estimate is proved. Do not infer
-  any implication involving q:upgrade, q:stein-weighted, or q:alignment.
+  any implication involving conj:trace-upgrade, conj:stein-weighted, or conj:product-alignment.
 ```

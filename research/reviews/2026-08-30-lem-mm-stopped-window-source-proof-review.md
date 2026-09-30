@@ -1,14 +1,12 @@
 ---
-type: proof-review
-date: "2026-08-30"
 verdict: pass
 authors:
   - claude-prover-w4p02
-nodes:
-  - lem:mm-stopped-window-source
-solutions:
-  - solutions/lem-mm-stopped-window-source.tex
 reviewer: proof-checker-w4r03
+fingerprints:
+  solutions/lem-mm-stopped-window-source.md: 6720200970a6602c89fb52b16fe1be8116f5996d647d824ef9aa678e3bb191b4
+  lem:mm-stopped-window-source: c405064bb67767843b0c86c8266cc60e9693dc13df3968410792d1a5b3f6b5e1
+  thm:letwin-qcts: 8e2ac0819f46db553fe83a6f3034436816565262316c2e6bde7d81baead1a082
 ---
 
 # Stopped initial-layer source bound — independent proof review
@@ -52,8 +50,8 @@ dossier proves, so this is an editorial remark, not a semantic mismatch.
 ### Conditional standing (constraint 7)
 
 The conditional standing is carried in **both** the statement (the theorem title and its
-first sentence "Assume Hypothesis~`hyp:sol-sws-letwin`") and the header (`conditional :
-thm:letwin-qcts`). Hypothesis `hyp:sol-sws-letwin` restates the imported bound
+first sentence "Assume Hypothesis~`ass:sol-sws-letwin`") and the header (`conditional :
+thm:letwin-qcts`). Hypothesis `ass:sol-sws-letwin` restates the imported bound
 $\Var(Y^TMY)\le8\norm M_{\HS}^2$ for isotropic log-concave $Y$ and symmetric $M$; this is
 verbatim the ledger statement of `thm:letwin-qcts` and the manuscript display
 `\eqref{eq:letwin-qcts}` in `modules/kls/14-qcts-obstruction.tex` (whose remark records the
@@ -85,7 +83,7 @@ zero-convention on the bad set is harmless for every integral in the proof. Chec
 
 **Step 2 (whitened duality).** At a fixed good pair, $Y=A_t^{-1/2}(X-a_t)$ is an
 invertible affine image of the log-concave $\mu_t$, hence log-concave, centered, with
-covariance $I$: isotropic log-concave, so Hypothesis `hyp:sol-sws-letwin` applies to its
+covariance $I$: isotropic log-concave, so Hypothesis `ass:sol-sws-letwin` applies to its
 law. The algebra
 $\langle M,\widehat H_t\rangle_{\HS}=\E_t[(f-m_t)Y^TMY]=\Cov_{\mu_t}(f,Y^TMY)$ is correct
 for symmetric $M$ (trace cyclicity; the interchange of $\E_t$ and trace is licensed by
@@ -140,7 +138,7 @@ Used: (i) the planted Gaussian channel and the fixed-time Bayes identification; 
 $V\in C^\infty$, $\nabla^2V\succeq\varepsilon I$, $\varepsilon>0$ — only for posterior
 positive-definite covariance, all posterior moments, and (in the reviewer-verified detail)
 Gaussian-tail domination; $\varepsilon$ enters no constant; (iii) $f\in L^2(\mu)$ with
-$\Var_\mu(f)=1$; (iv) Hypothesis `hyp:sol-sws-letwin` — the sole unresolved premise. Unused
+$\Var_\mu(f)=1$; (iv) Hypothesis `ass:sol-sws-letwin` — the sole unresolved premise. Unused
 but stated: $L\ge1$ (the proof is valid verbatim for every $L>0$; a sharpening
 opportunity, not a defect); centering/isotropy of $\mu$ and every other regular-class
 property (explicitly disclaimed in the dossier, deliberately so for the restart
@@ -165,17 +163,17 @@ independently of the dossier's own fence paragraph and concur:
   constructively — the estimate is confined strictly before the exit time $\tau_L$ and
   asserts nothing unstopped; the dossier's scope remark correctly disclaims any
   universal-time or unstopped occupation claim.
-- `obs:two-tail`, `obs:circularity`, `obs:rank-one-refuted`: no cut, slice, or excess
+- `rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts`: no cut, slice, or excess
   estimate occurs.
-- `obs:proj-ceiling`: the only tensor input is the full symmetric-matrix quadratic bound,
+- `rem:projection-ceiling`: the only tensor input is the full symmetric-matrix quadratic bound,
   imported conditionally; no projection/radial test is promoted.
-- `obs:crude-insufficient`, `obs:relative-ceiling`: no crude covariance integral or
+- `rem:crude-insufficient`, `rem:relative-ceiling`: no crude covariance integral or
   relative occupation premise appears.
 - The recorded marginal-independence fallacy is not engaged: the product
   $\E[v_t\norm{A_t}_\op^2]$ is never formed.
 
-Constraint 6 is untouched: nothing crosses to `q:upgrade`, `q:stein-weighted`, or
-`q:alignment`.
+Constraint 6 is untouched: nothing crosses to `conj:trace-upgrade`, `conj:stein-weighted`, or
+`conj:product-alignment`.
 
 ### Standalone build
 
@@ -183,7 +181,7 @@ From `solutions/`: `latexmk -g -pdf -outdir=../build lem-mm-stopped-window-sourc
 exits 0 and produces the PDF; the only warnings are the expected standalone `??`
 cross-module references (`thm:letwin-qcts`, `subsec:spectral-sde`,
 `lem:mm-time-weighted-fixed-source`, `lem:mm-posterior-defect`,
-`prop:covariance-spike`, `q:mm-spectral-occupation`). Before this report,
+`prop:covariance-spike`, `conj:mm-spectral-occupation`). Before this report,
 `python3 research/check_ledger.py` reported 0 errors (202 nodes).
 
 ## Corrections
@@ -199,7 +197,7 @@ yet been created" header comment.
 This review certifies only the conditional implication
 `thm:letwin-qcts` $\Rightarrow$ `lem:mm-stopped-window-source` in the immutable dossier
 scope above. It does not certify the Letwin preprint, any unstopped or universal-time
-source bound, any occupation statement toward `q:mm-spectral-occupation`, the companion
+source bound, any occupation statement toward `conj:mm-spectral-occupation`, the companion
 dossiers (`lem-mm-restart-deweighting`, `lem-mm-smallgap-fourth-moment`,
 `prop-mm-window-occupation`), any property of $\tau_L$ beyond measurability and the
 inf-implication (in particular not that it is a stopping time), or any claim for

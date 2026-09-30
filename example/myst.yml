@@ -1,0 +1,21 @@
+# The worked example's MyST project. Same shape as the root myst.yml; see that file.
+version: 1
+project:
+  title: Worked example
+  authors:
+    - name: Template author
+  math:
+    '\R': '\mathbb{R}'
+  # Each statement shows its status, read from the ledger, and its label: see
+  # scripts/status.mjs.
+  plugins:
+    - ../scripts/status.mjs
+  toc:
+    - pattern: 'modules/!(README).md'
+    - title: Full proofs
+      children:
+        - pattern: '{proofs,solutions/*}.md'
+site:
+  template: book-theme
+  options:
+    logo_text: Worked example

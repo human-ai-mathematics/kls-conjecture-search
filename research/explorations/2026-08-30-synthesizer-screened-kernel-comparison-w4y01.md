@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - ass:tight-prefix-carleson
-  - q:weighted
-  - q:upgrade
-  - q:stein-weighted
 ---
 # Synthesis: the aligned initial-layer kernel versus the tight-prefix Carleson estimate
 
@@ -28,18 +20,18 @@ Sources converged:
 - `research/explorations/2026-08-27-kls-route-prober-tight-prefix-soft-projector-w3p01.md`;
 - `research/explorations/2026-08-27-synthesizer-kls-first-wave-par-04.md` (discipline and
   directional table conventions);
-- `research/kls/ledger.yaml` (nodes `ass:tight-prefix-carleson`, `q:upgrade`,
-  `q:stein-weighted`, `q:weighted`, `ass:weighted-package`, `lem:stein-vs-source`,
+- `research/kls/ledger.yaml` (nodes `ass:tight-prefix-carleson`, `conj:trace-upgrade`,
+  `conj:stein-weighted`, `conj:weighted-excess-rate`, `ass:weighted-package`, `lem:stein-vs-source`,
   `lem:lyapunov-stein-duality`, `lem:pathwise-BL`, `cor:away-from-zero`, `cor:per-direction`,
   `thm:scalar-riccati`, `cor:tight-window-consumption`, `prop:trivial-excess`, `prop:two-tail`,
   `lem:time-weighted-source`), `routes.md`, `gating.md`, `obstructions.md`;
 - `modules/kls/20-eldan-statements.tex` (exact `ass:tight-prefix-carleson` statement),
-  `modules/kls/27-eldan-open-targets.tex` (`q:upgrade`, `q:stein-weighted`,
+  `modules/kls/27-eldan-open-targets.tex` (`conj:trace-upgrade`, `conj:stein-weighted`,
   `rem:trace-upgrade-unification`);
 - `research/knowledge/lemmas.md`.
 
-Live-state audit: `python3 research/check_ledger.py status` reports `q:upgrade`,
-`ass:tight-prefix-carleson`, `q:stein-weighted`, `q:alignment` all `open`; `q:weighted` and
+Live-state audit: `python3 research/check_ledger.py status` reports `conj:trace-upgrade`,
+`ass:tight-prefix-carleson`, `conj:stein-weighted`, `conj:product-alignment` all `open`; `conj:weighted-excess-rate` and
 `ass:weighted-package` `refuted`; `check_ledger.py` at 0 errors. No numerics are used. This
 synthesis changes no ledger, manuscript, route-control, dossier, review, or instance-registry
 entry; its only writes are this file and two promotions to `research/knowledge/lemmas.md`.
@@ -85,12 +77,12 @@ $$
 $$
 Unscreened, no excess variable at all, all-measure/all-balanced-cut, with $r$ and $D$ budgets.
 
-**SW** (`q:stein-weighted`, high-rank part). Universal $T_0,C_0,C_1,C_2>0$, $\beta\in[0,1/2)$,
+**SW** (`conj:stein-weighted`, high-rank part). Universal $T_0,C_0,C_1,C_2>0$, $\beta\in[0,1/2)$,
 $\eta\in(0,1/4]$ with $2\beta+64\eta^2<1$:
 $\mathbb E\int Q_t\,dt\le C_0T+C_1\mathbb E\int r_t+\beta\mathbb E\int D_t
 +C_2\mathbb E\int e_t(1+\|A_t\|_{\rm op})^{5/2}\,dt$, all-measure, $e_0\le1$. Unscreened,
 **global** operator-norm weight; its excess term is a supply with no theorem behind it (the
-matching $O(T)$ supply in that weight is exactly the refuted `q:weighted`).
+matching $O(T)$ supply in that weight is exactly the refuted `conj:weighted-excess-rate`).
 
 Certified calibration data used below (`prop:two-tail`, values recomputed and confirmed in
 `w4w01` Section 4): the two-tail state at inflation $\Lambda\ge1$ has $r=D=0$,
@@ -151,14 +143,14 @@ Status words follow the par-04 discipline: they concern the displayed direction 
 | TPC $\Rightarrow$ AIK$^{+}$ (constant-plus-linear) | open with a complete candidate one-way derivation | steps 1–6 above; every step certified plus arithmetic; prover-formalizable; no dossier exists, so no edge; consumption-sufficiency of AIK$^{+}$ additionally rests on the uncertified constant-supply Gronwall restatement |
 | AIK $\Rightarrow$ TPC | not even conjectured | AIK is supply-side only: it is silent on $\mathcal A_{\kappa,t}^c$, where the whole complement return ($\theta$-clause of the open companion (22)) lives; its class is near-worst with $e_0\le\varepsilon_Eh_\mu$, while TPC is all-measure with $e_0$ unrestricted; no transform from a screened $Q$-occupation bound to an unscreened $S$-estimate is stated anywhere |
 | AIK $\wedge$ (22) $\Rightarrow$ TPC restricted to AIK's class | open with a candidate conditional derivation | `w4w01` Section 1 Step 2 output is literally the TPC inequality shape with $\alpha=2\beta/(1-\theta)+64\eta^2<1$, fed by the reduction lemma; both premises (AIK and the screened companion (22)) are open, so this is doubly conditional and warrants no edge; it can never yield full TPC because the class restriction is inherited |
-| AIK $\Rightarrow$ SW | not even conjectured | same complement silence as above, and SW's right side carries the **global** weight $(1+\|A\|_{\rm op})^{5/2}\ge W_{\rm cut}$, so no domination in the useful direction exists; SW's weighted-excess supply has no theorem (its $O(T)$ rate form is the refuted `q:weighted`) |
+| AIK $\Rightarrow$ SW | not even conjectured | same complement silence as above, and SW's right side carries the **global** weight $(1+\|A\|_{\rm op})^{5/2}\ge W_{\rm cut}$, so no domination in the useful direction exists; SW's weighted-excess supply has no theorem (its $O(T)$ rate form is the refuted `conj:weighted-excess-rate`) |
 | SW $\Rightarrow$ AIK | not even conjectured | SW bounds $\mathbb E\int Q$ only against an uncontrolled weighted-excess supply; converting that supply to a numeric $O(T)$ (or constant) bound is exactly the refuted/open supply problem, and the screen gives no help in this direction |
-| TPC $\leftrightarrow$ SW, TPC $\leftrightarrow$ `q:alignment`, SW $\leftrightarrow$ `q:alignment` | unchanged from par-04 | all `not even conjectured` / `open` exactly as in the 2026-08-27 table; nothing in `w4w01` touches those directions |
+| TPC $\leftrightarrow$ SW, TPC $\leftrightarrow$ `conj:product-alignment`, SW $\leftrightarrow$ `conj:product-alignment` | unchanged from par-04 | all `not even conjectured` / `open` exactly as in the 2026-08-27 table; nothing in `w4w01` touches those directions |
 
 One coefficient-level consistency fact, which is arithmetic, not an implication between open
 statements: the audited screened absorption condition $2\beta/(1-\theta)+64\eta^2<1$ degenerates
 at $\theta=0$ to the certified-consumption condition $2\beta+64\eta^2<1$ of
-`ass:weighted-package`/`q:stein-weighted`. The screened algebra is therefore a strict
+`ass:weighted-package`/`conj:stein-weighted`. The screened algebra is therefore a strict
 generalization of the refuted package's consumption arithmetic, with the same
 `lem:stein-vs-source` constants; this was verified, not corrected, by `w4w01` Section 1
 (together with the two additions the gate text does not display: the a priori finiteness Step 0
@@ -205,7 +197,7 @@ common hard core.**
 
 Verdict for the cluster: AIK shares the cluster's high-rank aligned-occupation core through the
 certified two-tail calibration and is hereby recorded as compared; it is **not** identified with
-`q:upgrade`/TPC, with the high-rank part of `q:stein-weighted`, or with `q:alignment`, and it is
+`conj:trace-upgrade`/TPC, with the high-rank part of `conj:stein-weighted`, or with `conj:product-alignment`, and it is
 not a fourth equivalent formulation. The single-owner rule continues to apply to any future
 comparison involving it. Deciding AIK does not decide TPC, and deciding TPC decides only
 AIK$^{+}$, pending a dossier.
@@ -268,20 +260,20 @@ than re-deriving time-splitting), not a harness defect.
   dossier for TPC $\Rightarrow$ AIK$^{+}$ would be the first proved cross-formulation
   implication touching the cluster's orbit, and is only worth writing if the orchestrator wants
   the comparison hardened, since it is KLS-vacuous).
-- **Screened route (`q:weighted` replacement):** blocked by AIK itself (needs-new-idea) and by
+- **Screened route (`conj:weighted-excess-rate` replacement):** blocked by AIK itself (needs-new-idea) and by
   the open companion (22); the split-class supply dossier (`w4p01`) is in flight.
 
 ## Proposed ledger delta
 
 **None warranted.** No direction in the table is backed by a certified dossier. In particular,
-do not add any edge between `ass:tight-prefix-carleson` (or `q:upgrade`) and any screened-route
-object, and do not change the status of `q:upgrade`, `q:stein-weighted`, `q:alignment`, or
+do not add any edge between `ass:tight-prefix-carleson` (or `conj:trace-upgrade`) and any screened-route
+object, and do not change the status of `conj:trace-upgrade`, `conj:stein-weighted`, `conj:product-alignment`, or
 `ass:tight-prefix-carleson`. The only dossier-adjacent item is `prop:split-screened-supply`,
 already proposed by `w4w01` and owned by the in-flight prover `w4p01`.
 
 ## Proposed route-control language (draft only; `route-control` is orchestrator-owned)
 
-If the orchestrator adopts the `w4w01` Section 8 gate line for `q:weighted`, append to it:
+If the orchestrator adopts the `w4w01` Section 8 gate line for `conj:weighted-excess-rate`, append to it:
 
 > The aligned initial-layer kernel is formally incomparable with `ass:tight-prefix-carleson`
 > (synthesizer comparison, 2026-08-30): the tight-prefix estimate implies it only up to an
@@ -292,9 +284,9 @@ If the orchestrator adopts the `w4w01` Section 8 gate line for `q:weighted`, app
 > a method that fails on aligned zero-damping occupation. No equivalence is proved and no edge
 > exists (constraint 6).
 
-Optionally, one cross-reference sentence in the `q:upgrade` gate paragraph:
+Optionally, one cross-reference sentence in the `conj:trace-upgrade` gate paragraph:
 
-> The screened `q:weighted` interface reduces to an aligned initial-layer $Q$-occupation
+> The screened `conj:weighted-excess-rate` interface reduces to an aligned initial-layer $Q$-occupation
 > estimate that shares the zero-damping two-tail core of this gate but is formally incomparable
 > with `ass:tight-prefix-carleson`; the comparison is owned by the synthesizer and proves no
 > implication.
@@ -305,15 +297,15 @@ artifacts:
   - research/explorations/2026-08-30-synthesizer-screened-kernel-comparison-w4y01.md
   - research/knowledge/lemmas.md
 proposed_deltas:
-  - "No ledger delta: no direction in the comparison table is dossier-backed; no status or edge change to ass:tight-prefix-carleson, q:upgrade, q:stein-weighted, q:alignment, or any screened-route object."
-  - "Route-control (orchestrator-owned): if the w4w01 gate line for q:weighted is adopted, append the incomparability sentence drafted above; optionally add the one-line cross-reference to the q:upgrade gate paragraph."
+  - "No ledger delta: no direction in the comparison table is dossier-backed; no status or edge change to ass:tight-prefix-carleson, conj:trace-upgrade, conj:stein-weighted, conj:product-alignment, or any screened-route object."
+  - "Route-control (orchestrator-owned): if the w4w01 gate line for conj:weighted-excess-rate is adopted, append the incomparability sentence drafted above; optionally add the one-line cross-reference to the conj:trace-upgrade gate paragraph."
   - "Instance registry: no change; the mixed two-tail/spectator configuration is rejected for curation until a certified construction with a named oracle or failure mode exists."
 next_role: orchestrator
 next_prompt: |
   Review the screened-kernel comparison in
   research/explorations/2026-08-30-synthesizer-screened-kernel-comparison-w4y01.md. Apply no
   ledger delta: no implication in it is dossier-backed. Decide whether to adopt the two drafted
-  route-control sentences together with the w4w01 Section 8 gate line for q:weighted. Keep the
+  route-control sentences together with the w4w01 Section 8 gate line for conj:weighted-excess-rate. Keep the
   w4p01 prover (prop:split-screened-supply) and w4c01 CMH prober running undisturbed. If you
   want the one derivable comparison hardened, a prover may be dispatched later for the
   TPC-implies-relaxed-AIK chain (steps 1-6 of the synthesis record) as a standalone conditional

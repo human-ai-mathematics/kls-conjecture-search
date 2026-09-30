@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:time-weighted-source
 ---
 # Prover: scale-weighted all-cut source budget
 
@@ -106,16 +101,16 @@ the endpoint. No compact-support or smoothness assumption remains.
 Although `lem:time-weighted-source` has no `bounded_by` metadata, every fence relevant to the
 nearby operator-to-trace gate was checked.
 
-- `obs:proj-ceiling`: the proof makes no projection-to-tensor inference; it uses the exact scalar
+- `rem:projection-ceiling`: the proof makes no projection-to-tensor inference; it uses the exact scalar
   Riccati identity and the full covariance cap.
-- `obs:two-tail`: the conclusion permits source of scale $t^{-2}$ and retains the quadratic time
+- `rem:two-tail-slice-bounds`: the conclusion permits source of scale $t^{-2}$ and retains the quadratic time
   weight. It asserts no slice-wise absolute-scale control.
-- `obs:relative-ceiling`: no universal bound on $\Xi_T$ or relative-scale covariance occupation
+- `rem:relative-ceiling`: no universal bound on $\Xi_T$ or relative-scale covariance occupation
   is assumed.
-- `obs:crude-insufficient`, `obs:circularity`, and `obs:rank-one-refuted`: the proof uses neither
+- `rem:crude-insufficient`, `rem:profile-circularity`, and `rem:single-coordinate-cuts`: the proof uses neither
   the crude $\Xi_T$ estimate, a localized isoperimetric profile, nor a product-cut witness.
 
-No implication or comparison is made among `q:upgrade`, `q:stein-weighted`, and `q:alignment`.
+No implication or comparison is made among `conj:trace-upgrade`, `conj:stein-weighted`, and `conj:product-alignment`.
 The dossier proves no Carleson estimate and no KLS conclusion.
 
 ## Hypotheses, gaps, and status
@@ -173,7 +168,7 @@ next_prompt: |
   for occupation, the endpoint `epsilon down to 0`, and the regularization passage. Confirm the
   stopped-window consequence is obtained only by positivity. Audit all relevant fences despite
   the node having no `bounded_by` edge, and confirm the dossier does not remove the quadratic
-  weight or claim `q:upgrade`, `q:stein-weighted`, `q:alignment`, an all-cut Carleson estimate,
+  weight or claim `conj:trace-upgrade`, `conj:stein-weighted`, `conj:product-alignment`, an all-cut Carleson estimate,
   or KLS. Recompile standalone. If and only if every step passes, write a persisted proof review
   naming `/root/prove_time_weighted_par_05` as author and yourself as distinct reviewer, then
   return the exact atomic ledger/manuscript certification proposal to the orchestrator. Do not

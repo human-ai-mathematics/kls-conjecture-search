@@ -1,18 +1,21 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/kls_proof_audit
   - /root/repair_cmh_hodge_domain_w3
 reviewer: /root/review_cmh_hodge_domain_w3
-nodes:
-  - prop:cmh-hodge
-  - rem:cmh-stronger-than-kls
-solutions:
-  - solutions/thm-cmh-normalization.tex
-follows_up: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+fingerprints:
+  solutions/thm-cmh-normalization.md: d53de5d49ed9590d4e9e813ab04306c8222ede3398a9da56dd101dae35a9fc8f
+  prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
+  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
+  cor:cmh-hodge-comparison: 42676f87e102fd9313af73973dcf29ff5a7f17ccec197c3284254e7cf2c0e0cc
+  thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
+  prop:letwin-not-gate-zero: d01d5a5df0ca378b977846fd59185615903c42ec4bf019d71ebb41b5bf8e7c3a
 ---
+
+*Follows up* `research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md`.
 
 # CMH Hodge operator-domain repair — independent supplementary review
 
@@ -22,7 +25,7 @@ This is a cold supplementary review of
 `solutions/thm-cmh-normalization.tex` at SHA-256
 `1a241c1b1e1dfa2b417626661d9cc555f5cefeeb480b21b37695a56726826a38`.
 It reviews the repaired operator-domain proof of `prop:cmh-hodge` and the directly affected
-Hodge consequence `rem:cmh-stronger-than-kls`. The earlier five unaffected nodes in this
+Hodge consequence `cor:cmh-hodge-comparison`. The earlier five unaffected nodes in this
 dossier remain outside this report's front-matter scope.
 
 The review was reconstructed from the dossier, the statements at
@@ -228,7 +231,7 @@ but not by the abstract Hodge argument once $u,h,\Sigma$ are supplied; this is a
 generalization, not a defect or an unstated premise.
 
 `prop:cmh-hodge` depends only on the defined CMH operator setup `def:cmh`. The downstream
-`rem:cmh-stronger-than-kls` additionally names `thm:cmh-1d`, which is already proved and
+`cor:cmh-hodge-comparison` additionally names `thm:cmh-1d`, which is already proved and
 independently reviewed; this repair changes none of its proof bytes or hypotheses. There is no
 open or `preprint-unreviewed` premise in the reviewed implication.
 
@@ -256,15 +259,15 @@ None.
 ## Proposed ledger delta
 
 Both nodes may remain unconditional `status: proved`. For each of `prop:cmh-hodge` and
-`rem:cmh-stronger-than-kls`, retain
+`cor:cmh-hodge-comparison`, retain
 `solution: solutions/thm-cmh-normalization.tex`, retain/set `checked_by: agent`, and replace the
 active `review:` pointer by
 `research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md`.
 
 ## Exclusions
 
-This report does not re-review `q:cmh-normalization`, `def:cmh`, `prop:cmh-bochner`,
+This report does not re-review `rem:cmh-normalization`, `def:cmh`, `prop:cmh-bochner`,
 `thm:cmh-implies-affine-poincare`, or `prop:letwin-not-gate-zero`; their proof sections were not
 altered by the Hodge repair. It also does not certify the separate exact-case dossier,
-`rem:cmh-saturation-risk`, any CMH recovery or perturbation node, universal $\mathrm{CMH}(4)$,
+`cor:cmh-product-saturation`, any CMH recovery or perturbation node, universal $\mathrm{CMH}(4)$,
 gate zero, KLS itself, or any numerical artifact.

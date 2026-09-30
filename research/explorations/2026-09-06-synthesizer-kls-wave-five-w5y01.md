@@ -1,23 +1,4 @@
 ---
-type: exploration
-date: "2026-09-06"
-outcome: proposed
-approach: ap:cmh-gate-zero
-nodes:
-  - conj:kls
-  - conj:gate-zero-sharp
-  - conj:gate-zero
-  - lem:linear-sector-third-moment
-  - cor:gate-zero-third-moment
-  - def:exponential-cone
-  - prop:cone-moment-map
-  - prop:cone-linear-sector
-  - cor:cube-cone-gate-zero
-  - lem:cmh-linear-spectral-resolution
-  - lem:fiber-root-degree-two
-  - q:cmh-solenoidal-perturbation
-  - rem:cmh-saturation-risk
-  - rem:gate-zero-trace-upgrade
 artifacts:
   - research/runs/2026-09-06T175558.606924Z-cmh-cone.jsonl
   - research/runs/2026-09-06T175611.501834Z-cmh-cone.jsonl
@@ -92,7 +73,7 @@ tested, with the gap growing in $n$ and in $\beta-n$, and channel 2 finds the ga
 of every product base strictly below $2$ off the axis. Every quantity that touches $2$ or $4$
 in this family is the Gamma factor's. The objective now says "target-side, radial Gamma
 factor rather than the base". No checkpoint declares this approach, so none can be attached;
-the reasons are here. Nothing here resolves `q:cmh-solenoidal-perturbation`.
+the reasons are here. Nothing here resolves `conj:cmh-second-variation`.
 
 **Relations added.** `ap:cmh-gate-zero` `overlaps` `ap:cmh-anisotropic-bootstrap`: the
 certified `lem:cmh-linear-spectral-resolution` writes $a^\top\mathsf Na=1+|M_a|^2+|v|^2$ and
@@ -185,7 +166,7 @@ kernel, $G=\E[\tau^2]$ the gate matrix, $T_3(a)=\E[\langle X,a\rangle X\otimes X
 | `conj:gate-zero` | $\|T_3(a)\|_{\mathrm{HS}}\le2\sqrt3$ for every unit $a$, on the class | proved (same dossier) |
 | directional third-moment bound at $2$ | `conj:gate-zero-sharp` | open — not even conjectured as an equivalence: the remainder $\E|v_a|^2$ is nonzero off the cone axis |
 | `conj:gate-zero-sharp` | `cand:directional-h-minus-one-two` | open in this repository (no dossier; Letwin Lemma 2.9 is the cited route, preprint) |
-| `conj:gate-zero` or `conj:gate-zero-sharp` | `q:upgrade`, high-rank `q:stein-weighted`, `q:alignment` (either direction) | open; `rem:gate-zero-trace-upgrade` records the shape, no edge |
+| `conj:gate-zero` or `conj:gate-zero-sharp` | `conj:trace-upgrade`, high-rank `conj:stein-weighted`, `conj:product-alignment` (either direction) | open; `rem:gate-zero-trace-upgrade` records the shape, no edge |
 | $(\mathrm{AB})_{\rho,\beta}$ | linear-sector bound $Q_{\rm lin}\le(1+\beta)/\rho$ | proved (dossier `solutions/lem-cmh-linear-spectral-resolution.tex`, weak form) |
 | $\mathsf R_Q\succeq\mathsf D$ (integrated matrix cyclic square) | — | directionally false on `stress-cmh-ab-reservoir-split`; no node, no fence |
 
@@ -211,7 +192,7 @@ non-product family (cube cones) on which it is verified in closed form, and an e
 of 264 polytopal cones on which it is decided true with the maximum attained at $2$ and never
 exceeded. The literature has the trace of the sharp statement and nothing directional. On
 the CMH side, the base direction of the perturbation experiment is flat-to-downhill and the
-saturation question `q:cmh-solenoidal-perturbation` is untouched. `conj:kls` is untouched:
+saturation question `conj:cmh-second-variation` is untouched. `conj:kls` is untouched:
 every certified node is structural or exact-case, none has an `assumes`, and none is
 progress on the target (P2). No family is saturated, and the honest state remains
 "unresolved, with certified advances and exact remaining gaps", now with one more exact gap

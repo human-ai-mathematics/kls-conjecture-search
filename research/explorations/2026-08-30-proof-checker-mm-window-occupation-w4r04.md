@@ -1,12 +1,4 @@
 ---
-type: exploration
-date: "2026-08-30"
-outcome: proposed
-nodes:
-  - prop:mm-window-occupation
-  - thm:letwin-qcts
-  - thm:klartag-logn
-  - prop:covariance-spike
 ---
 # Cold proof review: prop:mm-window-occupation assembly dossier (w4r04)
 
@@ -25,7 +17,7 @@ nodes:
 ## What was reconstructed and checked
 
 Full artifact-only reconstruction: dossier, ledger, manuscript statements
-(`prop:mm-window-occupation`, `q:mm-spectral-occupation`, `eq:spectral-occupation`,
+(`prop:mm-window-occupation`, `conj:mm-spectral-occupation`, `eq:spectral-occupation`,
 `thm:KL-window`, `thm:klartag-logn`, `thm:letwin-qcts`, `subsec:sl-process`,
 `eq:sl-density`, `prop:covariance-spike`), the three companion candidate dossiers (as
 statement inputs, versions hashed in the review), and the certified dependency dossiers
@@ -63,7 +55,7 @@ Steps verified line by line (details in the review):
    `thm:klartag-logn`; certified fixed-test approximation passage at fixed $n$ with
    $j$-independent constant $C_2\log^2n$. Confirmed no rerun step uses
    dimension-freeness.
-8. Scope fences: not `q:mm-spectral-occupation` itself; no beyond-window claim
+8. Scope fences: not `conj:mm-spectral-occupation` itself; no beyond-window claim
    (`prop:covariance-spike` respected); output strictly weaker than the published
    $\log n$ input (route-health certificate only); nothing on the trace-upgrade cluster
    (constraint 6); conditional standing per constraint 7 carried in statement and

@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - lem:mm-posterior-defect
 ---
 # Prover: posterior eigenfunction-defect calculus
 
@@ -129,19 +124,19 @@ No analytic step remains unclosed in the stated regular class.
 
 There is no formal `bounded_by` edge. Every route warning was nevertheless checked:
 
-- `obs:two-tail`: no cut, slice, excess, or absolute Stein-source estimate occurs.
-- `obs:proj-ceiling`: the proof uses exact coordinate and arbitrary symmetric-matrix pairings; it
+- `rem:two-tail-slice-bounds`: no cut, slice, excess, or absolute Stein-source estimate occurs.
+- `rem:projection-ceiling`: the proof uses exact coordinate and arbitrary symmetric-matrix pairings; it
   claims no quadratic-chaos bound from radial or projection-only tests.
-- `obs:crude-insufficient`: no crude covariance integral $\Xi_T$ is used.
-- `obs:relative-ceiling`: no relative covariance occupation estimate is claimed.
-- `obs:circularity`: no localized isoperimetric profile or changing competitor family occurs.
-- `obs:rank-one-refuted`: no fixed-cut product counterexample or conclusion occurs.
+- `rem:crude-insufficient`: no crude covariance integral $\Xi_T$ is used.
+- `rem:relative-ceiling`: no relative covariance occupation estimate is claimed.
+- `rem:profile-circularity`: no localized isoperimetric profile or changing competitor family occurs.
+- `rem:single-coordinate-cuts`: no fixed-cut product counterexample or conclusion occurs.
 - `prop:covariance-spike` and the spectral unwhitening fence: no operator-norm covariance bound,
   Euclidean unwhitening, or high-incidence estimate is claimed.
 - The truncated-exponential variable-weight Stein shortcut is not used.
 - The transport and needle warnings are not engaged.
 
-The dossier expressly does not prove `q:mm-spectral-occupation`,
+The dossier expressly does not prove `conj:mm-spectral-occupation`,
 `prop:spectral-sufficiency`, an approximation passage, or KLS. It does not claim any implication
 for the trace-upgrade cluster.
 
@@ -206,7 +201,7 @@ next_prompt: |
   relative covariance occupation input, localized-profile insertion, product-cut conclusion,
   posterior operator-norm bound, tensor unwhitening, or truncated-exponential Stein shortcut.
   It must not use the unreviewed `thm:letwin-qcts` and must not claim high-incidence occupation,
-  `q:mm-spectral-occupation`, `prop:spectral-sufficiency`, an arbitrary-measure approximation
+  `conj:mm-spectral-occupation`, `prop:spectral-sufficiency`, an arbitrary-measure approximation
   limit, or KLS. The result is unconditional only within the stated regular class.
 
   Re-run `cd solutions && latexmk -pdf -outdir=../build lem-mm-posterior-defect.tex`; the author

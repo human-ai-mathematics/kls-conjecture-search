@@ -1,11 +1,4 @@
 ---
-type: exploration
-date: "2026-08-27"
-outcome: proposed
-nodes:
-  - prop:intro-audit
-  - prop:trivial-excess
-  - lem:perimeter-martingale
 ---
 # Excess-audit dossier repair W0R01
 
@@ -35,7 +28,7 @@ retained, but that review is not presented as certifying the repaired source.
 ## Contract and fences checked
 
 The exact ledger statements and their manuscript labels were read in full. None of these five
-nodes has a ledger `bounded_by` edge. The dossier nevertheless respects `obs:circularity`:
+nodes has a ledger `bounded_by` edge. The dossier nevertheless respects `rem:profile-circularity`:
 
 - the exact excess identity is restricted to compact support, where the fixed-cut perimeter is a
   true martingale;

@@ -1,14 +1,15 @@
 ---
-type: proof-review
-date: "2026-08-27"
 verdict: pass
 authors:
   - /root/prove_spectator_excess_rate_w2
 reviewer: /root/review_spectator_excess_rate_w2
-nodes:
-  - prop:spectator-excess-rate-obstruction
-solutions:
-  - solutions/prop-spectator-excess-rate-obstruction.tex
+fingerprints:
+  solutions/prop-spectator-excess-rate-obstruction.md: 9596ce5965ea49a577a2294f2814c6c18ba72fb3c570c7d695c71e784cb0dfb7
+  prop:spectator-excess-rate-obstruction: ded114d9fc83a2d3e7f4a24a6f32b61eabc685fd30a4fc4fe315f0904e1fe01b
+  prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
+  lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
+  prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
+  lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
 ---
 
 # Spectator excess-rate obstruction — independent proof review
@@ -310,15 +311,15 @@ empirical agreement supplies a proof step.
 The target node has no formal `bounded_by` edge.  The nearby contextual fences and interfaces are
 nevertheless respected.
 
-- `obs:circularity`: the proof upper-bounds $I_{\mu_t}(p_t)$ with an explicit exact-mass
+- `rem:profile-circularity`: the proof upper-bounds $I_{\mu_t}(p_t)$ with an explicit exact-mass
   spectator halfline.  It never assumes a lower isoperimetric bound for the moving posterior.
-- `obs:two-tail`: the anisotropic two-tail construction and its $5/2$ weight calibration are not
+- `rem:two-tail-slice-bounds`: the anisotropic two-tail construction and its $5/2$ weight calibration are not
   used or contradicted.  This is an independent unweighted rate obstruction.
 - Product stress context: the fixed cut lives in the base block while the competitor lives in an
   independent spectator coordinate.  No cut-aware Riccati source, single-coordinate source
-  budget, or persistent covariance occupation is inferred, so `cor:refutation` is untouched.
-- Trace-upgrade cluster: no implication among `q:upgrade`, the high-rank part of
-  `q:stein-weighted`, and `q:alignment` is asserted or used.
+  budget, or persistent covariance occupation is inferred, so `cor:single-coordinate-cuts` is untouched.
+- Trace-upgrade cluster: no implication among `conj:trace-upgrade`, the high-rank part of
+  `conj:stein-weighted`, and `conj:product-alignment` is asserted or used.
 
 There is no conflict with `prop:trivial-excess`.  That proposition gives the order-$T$ upper bound
 $(1+e_0)T$; this proof gives an order-$T$ lower bound with coefficient

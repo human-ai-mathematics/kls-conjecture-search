@@ -1,6 +1,12 @@
 ---
-type: audit
-date: "2026-08-27"
+verdict: revise
+authors:
+- /root/prove_full_matrix_dissipation_w2
+reviewer: /root/review_full_matrix_dissipation_w2
+fingerprints:
+  solutions/cor-full-matrix-dissipation.md: ea87bfa39c766f4f0df537ed4d3bc944eee4c6049db04b401861e652963a2357
+  cor:full-matrix-dissipation: 67207edd4c5c4e8e6674ab24f20583a4a51374e514582fd7032b1120e7b0f0ce
+  lem:matrix-riccati: b529c0f736b4dce32a7843e81f8edb6569491781941e3b8aecdc1be0ddf7a023
 ---
 
 # Full matrix dissipation — cold W2 audit
@@ -42,7 +48,7 @@ formal `bounded_by` edge.  The nearby operator-to-trace obstruction is neverthel
 semantic fence, and the dossier respects it: it derives only
 $\mathbb E\int_0^\infty(\|R_t\|_{\mathrm{HS}}^2+s_t\|G_t\|_{\mathrm{HS}}^2)dt
 \leq\operatorname{Tr}R_0\leq n$ and explicitly disclaims a dimension-free trace upgrade.  It does
-not assert an implication for `q:upgrade`, `q:stein-weighted`, `q:alignment`, or any other member
+not assert an implication for `conj:trace-upgrade`, `conj:stein-weighted`, `conj:product-alignment`, or any other member
 of the trace-upgrade cluster.
 
 The only declared mathematical dependency, `lem:matrix-riccati`, is `proved` and is covered by

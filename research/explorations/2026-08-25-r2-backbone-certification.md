@@ -1,9 +1,4 @@
 ---
-type: exploration
-date: "2026-08-25"
-outcome: directional
-nodes:
-  - def:qcts
 ---
 # R2 backbone certification and removal of the historical exception
 
@@ -31,7 +26,7 @@ The final classification is:
 - `prop:second-variation` and `prop:reilly`: reclassified as published imports after exact-source
   checks against Rosales (2014) and Ma--Du (2010), respectively;
 - `rem:kl-window-verified`: reclassified as a published import;
-- `rem:almost-stability-gap`: reclassified as open; and
+- `conj:almost-stability-gap`: reclassified as open; and
 - `rem:trace-upgrade-unification` and `rem:taming-type-mismatch`: reclassified as heuristic.
 
 Thus no proof status was retained merely because an inline manuscript argument existed.  The
