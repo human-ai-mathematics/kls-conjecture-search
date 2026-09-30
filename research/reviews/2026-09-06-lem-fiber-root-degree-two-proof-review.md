@@ -5,7 +5,7 @@ authors:
 reviewer: /w5/reviewer-fiber-root
 fingerprints:
   solutions/lem-fiber-root-degree-two.md: 7a84545d797f14dc11b40d269b923a40da35b642a01112f7c15c582cbd9bd556
-  lem:fiber-root-degree-two: 90520f6c6b8600a7af6b68361ef0bba613c131e07c2dac7602855b26e4a59fed
+  lem:fiber-root-degree-two: a5c0cb72ddb6f073b7035b72173b2ba7d3652b6d33821866c122000b29870f0e
   lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2
   prop:conditional-fiber-root-obstruction: 4879b9619c0db837d35837800889e002d0ca3ba085521cbccc7d0a671435f67f
 ---

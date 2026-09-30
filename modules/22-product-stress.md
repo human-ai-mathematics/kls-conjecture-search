@@ -41,7 +41,7 @@ $$
 
 *Proof.* The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate ([](#cor:per-direction)) can be applied one direction at a time and summed. The calculation is carried out in Appendix [](#sec:appendix-route-e).
 
-:::{prf:corollary} Refutation of the rank-one dynamic two-tail candidate
+:::{prf:corollary} Fixed single-coordinate cuts: bounded source and self-extinguishing two-tail spikes
 :label: cor:refutation
 Let $\mu$ be a product as above and let $E$ be *any fixed* cut with $p_0\in[2/5,3/5]$ depending on one fixed coordinate $i$, chosen before localization. This includes a fixed two-tail cut in a coordinate whose variance subsequently inflates, but not a pathwise choice of $E$ or $i$. Then
 
@@ -65,7 +65,7 @@ Thus a two-tail configuration of source height $S_t\asymp\Lambda^2$ ([](#prop:tw
 Immediate from [](#thm:budget) with $k=1$; the occupation bound is Markov's inequality at the deterministic level, $\E\int_0^\infty\one_{\{S_t\ge L^2/2\}}\dd t\le\frac2{L^2}\E\int_0^\infty S_t\dd t$, together with the total source budget $\E\int_0^\infty S_t\dd t\le1$ from [](#thm:budget)(i).
 :::
 
-:::{prf:remark} What the refutation does and does not say
+:::{prf:remark} What [](#cor:refutation) does and does not say
 :label: rem:refutation-scope
 [](#cor:refutation) verifies, for single-coordinate cuts, the *total stopped source bound* — which is what the Riccati–Gronwall consumption of [](#thm:carleson-implies-centroid) actually uses — not the literal interval form of [](#ass:all-cut-carleson); the distinction is immaterial for the program, since the consumption needs only $\E r_{t\wedge\tau}$ bounded, which (ii) provides directly. The corollary rules out the natural attack in which the cut and the inflating coordinate are fixed before localization. It says nothing about selecting the coordinate or cut after observing the path. The per-direction estimate is exactly the tool that disposes of the fixed-coordinate version. The point of the test — a proof of [](#ass:all-cut-carleson) cannot go through $\lmax(A_t)$ — is thus complemented on the counterexample side: *a counterexample cannot go through a single inflated coordinate either*. Both a proof and a counterexample are forced into genuinely high-dimensional, cut-specific territory; [](#thm:budget) localizes the entire remaining danger of the product model in cuts of unbounded coordinate complexity.
 :::
@@ -196,7 +196,7 @@ S_t^H:=s_t\bigl(\norm{P_t^HG_tP_t^H}_\HS^2
 =S_t-s_t\norm{P_t^LG_tP_t^L}_\HS^2
 $$
 
-counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#prog:product-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) and eliminate Eldan–A's all-cut hypothesis, leaving Eldan–B as the surviving localization sub-route rather than constraining unrelated approaches.
+counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#prog:product-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) and eliminate Eldan–A's all-cut hypothesis, leaving Eldan–B as the surviving localization variant rather than constraining unrelated approaches.
 :::
 
 :::{prf:remark} Designated test family
@@ -217,5 +217,5 @@ It is permutation-symmetric but coordinate-selective, depends on all coordinates
 
 :::{prf:conjecture} Single-coordinate product cuts self-extinguish
 :label: obs:rank-one-refuted
-For a product measure and a fixed balanced cut depending on one coordinate, $\E\int_0^\infty S_t\dd t\le1$ by [](#cor:refutation). Such a cut cannot sustain a covariance-inflation counterexample, so any surviving witness or proof must treat high-complexity cuts and occupation across many coordinates. The fence is methodological and is not itself certified.
+For a product measure and a fixed balanced cut depending on one coordinate, $\E\int_0^\infty S_t\dd t\le1$ by [](#cor:refutation). Such a cut cannot sustain a covariance-inflation counterexample, so any surviving witness or proof must treat high-complexity cuts and occupation across many coordinates.
 :::

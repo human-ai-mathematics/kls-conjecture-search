@@ -49,7 +49,7 @@ the 1995 entry of the history table in Section [](#subsec:kls-status).
 
 Klartag's needle decomposition, built from transport rays rather than from the bisection construction, is substantially more geometric and can be arranged so that a chosen mean-zero function remains mean-zero on almost every needle [@Klartag2014Needle]. That is a genuine strengthening — it is one preserved constraint chosen adaptively rather than arbitrarily — but it still does not deliver uniformly bounded conditional covariance on the needles.
 
-:::{prf:remark} What a deterministic route would have to supply
+:::{prf:remark} What a deterministic localization proof would have to supply
 :label: rem:needle-requirement
 A successful deterministic localization proof of KLS would need a genuinely new covariance-sensitive decomposition, not merely sharper one-dimensional inequalities. The one-dimensional theory in [](#eq:one-dim-isoperimetry) is already sharp; there is no slack left to extract there. This is the structural reason the field moved to the stochastic construction of Section [](#sec:family-sl), which preserves covariance information by construction — at the price of preserving it only in law, along a random path.
 :::

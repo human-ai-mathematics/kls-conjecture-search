@@ -111,7 +111,7 @@ $$
 \le Te_0+C h_\mu\bigl(T^{4/3}+\widehat\Xi_{T,\eta}(\mu,E)\bigr).
 $$
 
-This is a stopped refinement of the certified theorem, not a universal bound on the new interface.
+This is a stopped refinement of [](#thm:bootstrap), not a universal bound on the new interface.
 :::
 
 :::{prf:remark} Features
@@ -162,7 +162,7 @@ Fix $\kappa\in(0,1]$ and a universal $T_0>0$ satisfying
 9(1+\kappa)T_0\le\frac12.
 ```
 
-If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every isotropic log-concave $\mu$, the KLS conjecture would follow directly, with no geometric input. Consequently, a propagation estimate at relative scale — $\int_0^T\E\bar e_t\dd t\le\kappa h_\mu T$ with $\kappa$ small — cannot be expected from [](#thm:bootstrap) alone: certifying it through [](#eq:clean-form) would require $\Xi_T\le c\kappa T$ at a sufficiently small universal time, an input already sufficient for the conclusion of the whole program.
+If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every isotropic log-concave $\mu$, the KLS conjecture would follow directly, with no geometric input. Consequently, a propagation estimate at relative scale — $\int_0^T\E\bar e_t\dd t\le\kappa h_\mu T$ with $\kappa$ small — cannot be expected from [](#thm:bootstrap) alone: deriving it through [](#eq:clean-form) would require $\Xi_T\le c\kappa T$ at a sufficiently small universal time, an input already sufficient for the conclusion of the whole program.
 :::
 
 :::{prf:proof}
@@ -203,10 +203,10 @@ Both statements below are methodological constraints on the bootstrap input, sta
 
 :::{prf:conjecture} The crude covariance integral cannot bootstrap
 :label: obs:crude-insufficient
-The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:insufficiency), is too large to certify the required excess estimate at known KLS lower-bound scales. A viable bootstrap input must improve the logarithm; the available polylogarithmic technology reaches only the scale of [](#cor:loglog).
+The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:insufficiency), is too large to yield the required excess estimate at known KLS lower-bound scales. A viable bootstrap input must improve the logarithm; the available polylogarithmic technology reaches only the scale of [](#cor:loglog).
 :::
 
 :::{prf:conjecture} An all-measure relative bound already implies KLS
 :label: obs:relative-ceiling
-By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and a route that aims at it has replaced the target by an equivalent-strength statement. [](#q:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
+By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and an argument that aims at it has replaced the target by an equivalent-strength statement. [](#q:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
 :::

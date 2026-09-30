@@ -8,7 +8,7 @@ fingerprints:
   prop:cmh-recovery-calculus: 73a9c58294d2c13a9bce376e89511f13dbfc0faa2db486c5be8df1fb28a36ba0
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e
-  thm:cmh-implies-affine-poincare: 434bde8b4ccac59502b5c71180a4f20df98e1abc02f85826578bba9321480559
+  thm:cmh-implies-affine-poincare: 4ca4161533a8e140c1e3302d067c0ba1672754860e21a237009c1df910d1dbbc
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
   thm:cmh-product: 93367af0f91020a7189581ccf6821eafd93c5bb734d06bfb114187be354d08a7

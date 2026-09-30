@@ -148,7 +148,7 @@ This prefix-only statement is strictly weaker than [](#ass:all-cut-carleson). []
 
 The literal package consumed by the conditional theorem [](#thm:intro-weighted) is recorded below, so that both the implication and the premise it needs can be checked.
 
-:::{prf:assumption} Refuted literal weighted near-Cheeger package
+:::{prf:assumption} Literal weighted near-Cheeger package
 :label: ass:weighted-package
 There are universal constants $T_0,C_0,C_1,C_2$, $0\le\beta<\tfrac12$, $\gamma>0$, and $\eta\in(0,\tfrac14]$ satisfying
 

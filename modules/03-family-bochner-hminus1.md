@@ -122,7 +122,7 @@ $$
 P_sQ_s\succeq e^{sL} .
 $$
 
-A suitable strengthening would remove some of the spectral-projection losses in their argument. This is a question from the literature [@KlartagLehec2022Polylog], recorded here for orientation; it is not a repository target and carries no ledger node.
+A suitable strengthening would remove some of the spectral-projection losses in their argument. This is a question from the literature [@KlartagLehec2022Polylog], recorded here for orientation.
 :::
 
 **The precise missing estimate.** Uniform control of $\norm{\partial_if}_{H^{-1}}$ for the derivatives of an *arbitrary* test function, rather than for coordinates and for derivatives of quadratics.

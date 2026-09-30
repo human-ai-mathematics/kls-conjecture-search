@@ -48,7 +48,7 @@ Approach C is organized in two layers. This section is the *construction* layer:
 
 To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
 
-:::{prf:remark} Program — Deterministic CMH route
+:::{prf:remark} Program — Deterministic CMH approach
 :label: prog:cmh-route
 First make the CMH endpoint and its KLS reduction precise. Then derive the invariant multiplier lift, control the resulting square-root commutators with the full positive reservoir, and sum the complete Haar tree without nodewise positivity or duplicated slack.
 :::
@@ -67,7 +67,7 @@ A divergence-duality argument then gives $\CP(\mu)\le4$, the sharp plausible con
 
 :::{prf:remark} CMH normalization and endpoint reduction
 :label: q:cmh-normalization
-Define $\Sigma$, $L$, the underlying $L^2$ space, the admissible class of $g$, and every inverse in [](#eq:cmh4-schema) for the regular moment-map class. Then prove that the resulting estimate $\CMH(\mu)\le C$ implies $\CPaff(\mu)\le C$ on that class.
+Normalizing [](#eq:cmh4-schema) on the regular moment-map class means fixing $\Sigma$, $L$, the underlying $L^2$ space, the admissible class of $g$, and every inverse in it, so that the resulting estimate $\CMH(\mu)\le C$ implies $\CPaff(\mu)\le C$ on that class.
 :::
 
 This regular-class question is logically prior to the commutator calculation. [](#def:cmh) fixes $\Sigma$ as the covariance, $L$ as the Stein generator $\Div_\mu(H\nabla\,\cdot\,)$, the $L^2$ space as $L^2(\mu)$, the admissible class as $\Dom(\Aop)$, and every inverse as the pseudoinverse on $(\ker\Aop)^\perp$; [](#thm:cmh-implies-affine-poincare) is the reduction $\CPaff(\mu)\le\CMH(\mu)$, by a single Cauchy–Schwarz step, with a spectral truncation in place of an assumed gap.

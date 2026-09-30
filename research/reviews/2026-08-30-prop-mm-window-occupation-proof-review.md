@@ -5,7 +5,7 @@ authors:
 reviewer: proof-checker-w4r04
 fingerprints:
   solutions/prop-mm-window-occupation.md: 01607a7c457415d67a748b284d3af9c8fe1bed33b5e5ffbf144eb1176920df6e
-  prop:mm-window-occupation: bbd631e99eaca03ead444b48a8cc8a2f931eac2296797ef35aa65437c11aeab7
+  prop:mm-window-occupation: bfdd16289838ae5b0c560e93b07c6b77ef818e8acac71a517a8cbbe28e74945e
   thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
   thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
   lem:mm-stopped-window-source: c405064bb67767843b0c86c8266cc60e9693dc13df3968410792d1a5b3f6b5e1

@@ -55,7 +55,7 @@ e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t
 >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
 $$
 
-This proves that the global operator-norm weight is unstable under independent spectators and refutes the literal rate in [](#q:weighted). It does not refute KLS, since all witness measures are products.
+This proves that the global operator-norm weight is unstable under independent spectators and that the literal rate in [](#q:weighted) fails. All witness measures are products, which satisfy KLS by [](#prop:products).
 :::
 
 :::{prf:proposition} Spectator obstruction to a superlinear excess remainder
@@ -75,10 +75,10 @@ $$
 >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
 $$
 
-Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation gate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses do not refute KLS.
+Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation gate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses satisfy KLS by [](#prop:products).
 :::
 
-:::{prf:conjecture} Refuted global-operator-norm weighted excess rate
+:::{prf:conjecture} Global-operator-norm weighted excess rate
 :label: q:weighted
 There exist universal $C,T_0,\gamma>0$ and $\eta\in(0,1/4]$ such that, for every isotropic log-concave law and every balanced finite-perimeter cut with $e_0(E)\le1$,
 
@@ -87,7 +87,7 @@ $$
 \ \le\ C\bigl(Te_0(E)+T^{1+\gamma}\bigr),\qquad T\le T_0 .
 $$
 
-This is exactly the weighted-excess component [](#eq:intro-weighted-excess) consumed by the literal package. The answer is negative: [](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder counterexample with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted interface. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure premise.
+This is exactly the weighted-excess component [](#eq:intro-weighted-excess) consumed by the literal package. [](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder counterexample with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted interface. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure premise.
 :::
 
 A possible replacement interface, screened by the source, charges the weighted excess only on the aligned set $\mathcal A_{\kappa,t}=\{Q_t\ge\kappa\,e_tW_{\rm cut}\}$, where $Q_t=\calS_{\mu_t}(E)/s_t=s_t\norm{K_t}_{\HS}^2$ and $W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ with the cut-oriented scale of [](#lem:lyapunov-stein-duality). Its first positive result, [](#prop:split-screened-supply) below, concerns the regular split class; general split laws are covered only through their regular approximants, because the interchange of the screened indicator with the approximation limit is not carried out.
@@ -109,7 +109,7 @@ $$
 uniformly in the ambient dimension and in every spectator coordinate. The bound is a total budget, not of the form $C(k)\,T$, and asserts nothing about the trace-upgrade cluster.
 :::
 
-:::{prf:conjecture} Weighted stable Stein-trace ingredient extracted from the refuted package
+:::{prf:conjecture} Weighted stable Stein-trace ingredient extracted from the literal package
 :label: q:stein-weighted
 There exist universal constants $T_0,C_0,C_1,C_2>0$, $0\le\beta<\tfrac12$, and $\eta\in(0,\tfrac14]$ satisfying $2\beta+64\eta^2<1$ such that, for every isotropic log-concave law, every initial finite-perimeter cut $E$ with $e_0(E)\le1$ and $\abs{p_0-\tfrac12}\le\eta/2$, and every $0<T\le T_0$,
 
@@ -124,14 +124,14 @@ e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t .
 \end{aligned}
 $$
 
-This is exactly the stable Stein-trace clause of [](#ass:weighted-package), now considered as an independent analytic ingredient. It does not repair that refuted package or imply KLS without a viable companion propagation statement.
+This is exactly the stable Stein-trace clause of [](#ass:weighted-package), now considered as an independent analytic ingredient. It does not repair that package or imply KLS without a viable companion propagation statement.
 
-The intrinsic quadratic-chaos input is available from [](#thm:letwin-qcts), conditional on the version-1 preprint. The proposed mechanism of Section [](#sec:jacobi) still lacks a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled. [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#q:upgrade), and [](#q:alignment) has been proved.
+The intrinsic quadratic-chaos input is available from [](#thm:letwin-qcts), conditional on the version-1 preprint. The proposed mechanism of Section [](#sec:jacobi) still lacks a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled. [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#q:upgrade), and [](#q:alignment) is asserted.
 :::
 
 :::{prf:remark} A shared dynamic occupation problem, and a missing geometric bridge
 :label: rem:trace-upgrade-unification
-[](#q:upgrade) and [](#q:stein-weighted) (its high-rank, mean-zero part) and the adapted alignment problem [](#q:alignment) all confront a high-rank occupation difficulty, but their equivalence has not been proved. Analytically, the Eldan–A gap is exactly the trace of the occupation operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: [](#cor:per-direction) is the statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically, the proposed Reilly/Jacobi approach aims to control analogous high-rank boundary modes, but [](#rem:almost-stability-gap) records the missing trace bridge; its proposed constant-mode branch is [](#q:splitting). Combinatorially, summing the per-coordinate budgets of [](#thm:budget) over a product cut is again $\Tr R_0\le n$; this motivates the incident-high residue in [](#q:alignment) but does not identify it with the full trace problem. The product budget argument supplies only the naive trace bound of order $n$, while the dimension-dependent early-window estimate follows separately from covariance moments ([](#thm:V2-window), conditional on the cited preprint at the $c/\log n$ scale). This motivates — but does not prove — an *occupation-density* bound: the source-occupation measure on time$\,\times\,$direction should have bounded density on the early balanced window, so that only $O(1)$ directions are simultaneously active. This is the form in which [](#q:alignment) should be integrated against time.
+[](#q:upgrade) and [](#q:stein-weighted) (its high-rank, mean-zero part) and the adapted alignment problem [](#q:alignment) all confront a high-rank occupation difficulty, but no equivalence between them is asserted. Analytically, the Eldan–A gap is exactly the trace of the occupation operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: [](#cor:per-direction) is the statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically, the proposed Reilly/Jacobi approach aims to control analogous high-rank boundary modes, but [](#rem:almost-stability-gap) records the missing trace bridge; its proposed constant-mode branch is [](#q:splitting). Combinatorially, summing the per-coordinate budgets of [](#thm:budget) over a product cut is again $\Tr R_0\le n$; this motivates the incident-high residue in [](#q:alignment) but does not identify it with the full trace problem. The product budget argument supplies only the naive trace bound of order $n$, while the dimension-dependent early-window estimate follows separately from covariance moments ([](#thm:V2-window), conditional on the cited preprint at the $c/\log n$ scale). This motivates — but does not prove — an *occupation-density* bound: the source-occupation measure on time$\,\times\,$direction should have bounded density on the early balanced window, so that only $O(1)$ directions are simultaneously active. This is the form in which [](#q:alignment) should be integrated against time.
 :::
 
 :::{prf:conjecture} Extremality tames the covariance process
@@ -158,10 +158,10 @@ $$
 \le T_0e_0+\kappa T_0,
 $$
 
-then the remaining geometric trace and stochastic consumption steps yield $\mu^+(E)\ge c_g$. This is an explicit placeholder for an absolute-scale completion, weaker and logically distinct from [](#ass:weighted-package); no such implication is proved in this report.
+then the remaining geometric trace and stochastic consumption steps yield $\mu^+(E)\ge c_g$. This is an explicit placeholder for an absolute-scale completion, weaker and logically distinct from [](#ass:weighted-package).
 :::
 
-:::{prf:corollary} Residual dichotomy of the bootstrap route
+:::{prf:corollary} Residual dichotomy of the near-worst bootstrap
 :label: cor:dichotomy
 Under [](#hyp:absolute-geometric-completion), the published [](#cor:KI-discharged) discharges [](#hyp:KI), so by [](#cor:loglog), this supply is available for near-worst measures in every dimension with $\hstar_n\le c\kappa T_0/(1+\log\log n)$, and the resulting contradiction confines any failure of KLS to dimensions with $\hstar_n\ge c'/\log\log n$. Such a completion would therefore already yield
 

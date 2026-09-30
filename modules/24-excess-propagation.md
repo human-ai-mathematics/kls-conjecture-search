@@ -133,5 +133,5 @@ Within the smooth compact-support class of [](#lem:excess-identity), excess prop
 
 :::{prf:conjecture} Localized profile insertion may assume the target
 :label: obs:circularity
-Excess propagation requires a lower bound on the expected isoperimetric profile of the random posterior. The supermartingale statement available here, [](#lem:excess-identity) together with [](#lem:inf-martingales) and [](#rem:circularity), applies only to a *fixed* competitor family, whereas the balanced family changes with time. Directly inserting a lower bound for the time-dependent localized profile therefore risks assuming the Cheeger control the route is meant to prove; a proof must supply additional structure or an external non-circular anchor. The fence is methodological and is not itself certified.
+Excess propagation requires a lower bound on the expected isoperimetric profile of the random posterior. The supermartingale statement available here, [](#lem:excess-identity) together with [](#lem:inf-martingales) and [](#rem:circularity), applies only to a *fixed* competitor family, whereas the balanced family changes with time. Directly inserting a lower bound for the time-dependent localized profile therefore risks assuming the Cheeger control that excess propagation is meant to prove; a proof must supply additional structure or an external non-circular anchor.
 :::

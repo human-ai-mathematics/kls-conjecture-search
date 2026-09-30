@@ -152,7 +152,7 @@ $$
 \lambda_{\min}(K,G)=\frac{(m+2)(m+3)}{5m^2},
 $$
 
-attained exactly on the radial line $\R\,[\abs X^2-(m-1)]$. Consequently, granting the certified identification of $K$ with the conditional-fiber root pencil, every degree-two dual certificate in the all-frame min–max framework has objective at least $(m+2)(m+3)/(5m^2)>1/5$: no vanishing degree-two refuter sequence exists, any fixed-degree polynomial dual refuter requires degree at least three, and $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. No upper bound on $\Lambda_{m,2}$, no degree-three statement, and no claim about the full $L^2$ gap (where the vertex-cap obstruction stands) is asserted.
+attained exactly on the radial line $\R\,[\abs X^2-(m-1)]$. Consequently, granting the identification of $K$ with the conditional-fiber root pencil [](#eq:conditional-root-form), every degree-two dual certificate in the all-frame min–max framework has objective at least $(m+2)(m+3)/(5m^2)>1/5$: no sequence of degree-two dual certificates has objective tending to zero, any such fixed-degree polynomial sequence requires degree at least three, and $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. No upper bound on $\Lambda_{m,2}$, no degree-three statement, and no claim about the full $L^2$ gap (where the vertex-cap obstruction stands) is asserted.
 :::
 
 The same failure mechanism has published prior art in negative-rate energy-exchange models.

@@ -6,7 +6,7 @@ numbering:
 (sec:cmh-normalization)=
 # Approach C, normalization layer: CMH made precise, its Hodge content, and gate zero
 
-Section [](#sec:moment-map-cmh) posed [](#q:cmh-normalization): fix every object in the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ and prove that the resulting statement implies a universal Poincaré bound. This section answers it. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
+Section [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#q:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This section does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
 
 - an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#rem:cmh-stronger-than-kls));
 
@@ -88,7 +88,7 @@ This is the precise content of the schema [](#eq:cmh4-schema): $\Sigma$ is the c
 (subsec:cmh-implies)=
 ## CMH implies the affine Poincaré inequality
 
-:::{prf:theorem} Endpoint reduction; answers [](#q:cmh-normalization)
+:::{prf:theorem} Endpoint reduction for [](#q:cmh-normalization)
 :label: thm:cmh-implies-affine-poincare
 For every centered log-concave $\mu$ in the regular moment-map class described above,
 

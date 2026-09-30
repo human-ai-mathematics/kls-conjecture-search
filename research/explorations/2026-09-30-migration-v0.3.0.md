@@ -5,7 +5,7 @@
 
 This checkpoint records a harness change. It changes no mathematical status: the ledger
 holds the same 138 nodes with the same statuses (86 proved, 46 open, 4 defined,
-2 refuted), and no statement of the manuscript changed. It follows
+2 refuted). It follows
 `2026-09-29-migration-v0.2.0.md`, whose open items it carries forward.
 
 ## Question examined
@@ -32,6 +32,20 @@ reviews were updated to the v0.3.0 values; each value replaced was the v0.2.0 fi
 of the same, unchanged statement. No reviewer read anything anew. The reviews are those
 changed by commit `9b7502d` (`git show --stat 9b7502d -- research/reviews`).
 
+A second fix, taken from the template before its release (under `Unreleased` there): a
+statement that links to a section on another page no longer fingerprints the heading's
+text, so renaming a heading lifts nothing. Seven statements holding such a link got a new
+fingerprint with no change to their text; 15 entries in 15 reviews were updated the same
+way (commit `0bc5d06`).
+
+**Statements.** Statements that wrote their own status or harness words were reworded,
+after a `sync` review checked that each rewording keeps the mathematics: titles such as
+"Refuted literal weighted near-Cheeger package" lose "Refuted", sentences narrating a
+status ("The answer is negative", "is not itself certified", "no such implication is
+proved in this report") go, and "route", "fence", "certified", "repository" become
+mathematical words. 21 statements changed; exceptionally, as part of this migration, the
+23 entries of their fingerprints in 19 reviews were updated without a new review.
+
 **Prose.** Four `writer` passes, on disjoint modules. `modules/00-overview.md` now carries
 what the site said: the question, examples by hand, the literature, the obstacle every
 method meets, the main results with the idea of each proof, three problems for a newcomer
@@ -40,38 +54,25 @@ manuscript is organised, how results are checked and how to contribute. The site
 theorems became prose pointing at the manuscript's statements, not new directives. Every
 other module lost its hand-written statuses and its harness vocabulary; the eight-field
 route summaries read as prose; the lettered routes are "Approach E/S/C/F". The order of
-the modules did not change. `check.py --statements` is identical before and after.
+the modules did not change. `check.py --statements` is identical before and after the
+prose pass.
 
 ## What resists
 
-- *observed* **A linked heading enters the fingerprint.** When a statement links to a
-  section on another page, MyST resolves `[](#sec:…)` to a `link` node carrying the
-  heading's text, and `_statement()` in `scripts/checks/manuscript.py` keeps it
-  (`POINTERS` lists `crossReference`, `cite` and `footnoteReference`, not `link`).
-  Renaming such a heading changes the fingerprint and lifts certifications: it happened to
-  `ass:weighted-package` (through `sec:stein`) and `def:cmh` (through
-  `sec:cmh-exact-cases`), and both headings were restored with "Route". A template fix is
-  to treat a `link` with an `identifier` as a pointer.
-- **Statements that still write a status or harness words.** A writer does not change a
-  statement, so these are deltas for the orchestrator, to apply with a `sync` review, since
-  each edit lifts the certifications that checked the statement:
-  - titles: `ass:weighted-package` ("Refuted literal weighted near-Cheeger package"),
-    `q:weighted` ("Refuted global-operator-norm weighted excess rate"; its body also says
-    "The answer is negative"), `q:stein-weighted` ("…from the refuted package"),
-    `thm:cmh-implies-affine-poincare` ("…; answers [](#q:cmh-normalization)"),
-    `cor:dichotomy` ("…of the bootstrap route"), `cor:refutation`, `rem:needle-requirement`,
-    `prog:cmh-route`, `rem:spectral-vs-cmh` ("Relation to Route C");
-  - bodies saying "certified", "refuted", "route", "fence", "repository" or "ledger node":
-    `obs:rank-one-refuted`, `obs:circularity`, `obs:relative-ceiling`, `q:alignment`,
-    `hyp:absolute-geometric-completion`, `thm:bootstrap-stopped-interface`,
-    `prop:split-screened-supply`, `prop:mm-window-occupation`, `lem:fiber-root-degree-two`,
-    `q:literature-PsQs`, `rem:mm-two-preprints`, `rem:weight-explains-rate`,
-    `rem:almost-stability-gap`, `rem:obata`, `prop:stein-rep`, `prog:product-test`,
-    `q:cmh-solenoidal-perturbation`, `rem:history-table-caveats`;
-  - `q:cmh-normalization` is a labelled remark written as a task.
-- **Kinds and prefixes.** `obs:two-tail` and `obs:proj-ceiling` are conjectures stated as
-  heuristic barriers; `rem:cmh-saturation-risk` and `rem:cmh-stronger-than-kls` label
-  corollaries.
+- **One rewording blocked.** In `prop:split-screened-supply`, "the split class of the
+  certified dossier" points at convention (M2) of `solutions/prop-split-screened-supply.md`,
+  which also requires the cut to have a $C^2$ relative boundary and a tubular
+  neighbourhood; the statement alone does not say so. Dropping the words would drop that
+  hypothesis. Either the class is written out in the statement, or the words stay: a
+  mathematical decision, left open.
+- **A sentence that may be out of date.** `prog:product-test` says the weighted
+  near-Cheeger approach is "forced"; its literal form, `ass:weighted-package`, is refuted.
+- **Kinds and labels.** The `obs:` nodes are conjectures stated as methodological
+  warnings; `q:cmh-normalization`, `q:literature-PsQs` and `q:gate-zero` are remarks and
+  `q:cmh-approximation` a proposition under a `q:` prefix; `rem:gate-zero-trace-upgrade`,
+  `rem:cmh-saturation-risk` and `rem:cmh-stronger-than-kls` label corollaries; some labels
+  carry a harness word (`obs:rank-one-refuted`, `prog:cmh-route`,
+  `rem:covariance-route-dead`, `cor:refutation`).
 - **Ledger against prose.** `thm:intro-all-cut`, `thm:intro-weighted`,
   `thm:centroid-implies-kls` and `thm:carleson-implies-centroid` are `open` although the
   manuscript gives arguments for them; they display *Not settled here*, and the prose no
@@ -86,7 +87,7 @@ the modules did not change. `check.py --statements` is identical before and afte
 
 ## Proposed next step
 
-A `reviewer` with the `sync` lens on the statement deltas above, the nineteen converted
-statements and the sign of `q:cmh-solenoidal-perturbation`; the orchestrator applies the
-agreed statement edits and the certifications they lift go back through review. Upstream,
-the `link` fix in the template's fingerprint.
+A `reviewer` with the `sync` lens on the nineteen statements converted in v0.2.0 and on the
+sign of `q:cmh-solenoidal-perturbation`; a decision on the class of
+`prop:split-screened-supply`. Fresh `certify` reviews would replace the fingerprints the
+two migrations recorded without a reading.

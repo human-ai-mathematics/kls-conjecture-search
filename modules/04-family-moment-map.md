@@ -184,7 +184,7 @@ The preprint also proves sharper convex-body estimates with equality for the reg
 
 :::{prf:remark} What each preprint contributes
 :label: rem:mm-two-preprints
-[](#thm:letwin-moment-map)–[](#thm:chen-klartag-third-moment) are imported from contemporaneous version-1 preprints [@ChenKlartag2026SharpThinShell; @Letwin2026QuadraticKLS]; they are not promoted here as independently certified repository proofs. Letwin's $B=I$ case contains the shared moment-Hessian estimate, while Chen–Klartag's sharp third-tensor, cone, simplex, and equality analysis is additional. Conversely, Letwin controls every constant symmetric homogeneous quadratic form. Neither subsumes the other. Only Letwin's preprint supplies the claimed improvement of the general KLS bound.
+[](#thm:letwin-moment-map)–[](#thm:chen-klartag-third-moment) are imported from contemporaneous version-1 preprints [@ChenKlartag2026SharpThinShell; @Letwin2026QuadraticKLS]. Letwin's $B=I$ case contains the shared moment-Hessian estimate, while Chen–Klartag's sharp third-tensor, cone, simplex, and equality analysis is additional. Conversely, Letwin controls every constant symmetric homogeneous quadratic form. Neither subsumes the other. Only Letwin's preprint supplies the claimed improvement of the general KLS bound.
 :::
 
 (subsec:mm-stein)=

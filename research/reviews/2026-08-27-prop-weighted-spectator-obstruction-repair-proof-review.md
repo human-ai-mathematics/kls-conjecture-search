@@ -6,13 +6,13 @@ authors:
 reviewer: /root/review_weighted_spectator_w0r2
 fingerprints:
   solutions/prop-weighted-spectator-obstruction.md: cc9f7110c4e9d869472e4feee4bdd3e753e6f5a22aff99c0b262895b6aa1b261
-  prop:weighted-spectator-obstruction: 43186945070f01440b94ed29e452f474290ea070a94c9874921fbc1b8e3329ab
+  prop:weighted-spectator-obstruction: 41f54a097023867b895b5b57f385db284aaeb2a14a297896865c5061566249c0
   prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
   lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
-  ass:weighted-package: 40f652b69db11a0db9ac6b743f8e32ae6035c7befcb272e60fcf2791ed39b4d3
-  q:weighted: 40ee4d80f7dc31b49cd2cd25eb91816dfce7d539960ac0bef3721eeab86aa998
+  ass:weighted-package: 3532efe632a78732299519f2fe94aec60e99945eb186b7aba537603906d8e828
+  q:weighted: 9c714d8f4be19c4b63709e43e1ae4a1e5253f9b958b02baaa089df297068283d
 ---
 
 *Follows up* `research/reviews/2026-08-27-prop-weighted-spectator-obstruction-proof-review.md`.

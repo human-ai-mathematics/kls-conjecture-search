@@ -91,7 +91,7 @@ $$
 \E\norm{\Hess f}_{\HS}^2\le\lambda^2 .
 $$
 
-Exploiting these fixed energies inside the posterior channel is the possible advantage of this approach over Route E. It succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
+Exploiting these fixed energies inside the posterior channel is the possible advantage of this approach over Approach E. It succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
 :::
 
 :::{prf:lemma} Posterior eigenfunction-defect calculus
@@ -242,7 +242,7 @@ Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-
 
 :::{prf:proposition} Window occupation and frontier reproduction; conditional on [](#thm:letwin-qcts)
 :label: prop:mm-window-occupation
-With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the certified bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
+With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
 :::
 
 [](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through Approach S machinery without improving it, and it does not decide [](#q:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
@@ -301,9 +301,9 @@ The obstructions proved elsewhere in this document are scoped, and it matters wh
 
 - Classical needles do not preserve the isotropic covariance constraints (Section [](#sec:family-needles)); that is a structural warning, not a theorem excluding all needle arguments.
 
-:::{prf:remark} Relation to Route C
+:::{prf:remark} Relation to Approach C
 :label: rem:spectral-vs-cmh
-Routes S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Route S keeps stochastic localization and makes the test dependence dynamic, while Route C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
+Approaches S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Approach S keeps stochastic localization and makes the test dependence dynamic, while Approach C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
 :::
 
 % Promotion gate (agent note). The control plane promotes q:mm-spectral-occupation, or admits
