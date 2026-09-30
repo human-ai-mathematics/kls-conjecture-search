@@ -8,7 +8,7 @@ fingerprints:
   solutions/lem-cmh-linear-spectral-resolution.md: a870f5351dae6061153ae3523bb6f5d10cbf6f62f7b6e8f2de5cead9f0556c26
   lem:cmh-linear-spectral-resolution: 1acf8cd4ee1e8840de2a9816181ad28d515e592d55c5ab6f670587c83e2ba716
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
-  def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
 ---
 
 # `lem:cmh-linear-spectral-resolution` — cold certification review after repair (lens `certify`)

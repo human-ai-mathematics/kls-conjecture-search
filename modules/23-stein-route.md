@@ -3,10 +3,8 @@ numbering:
   enumerator: "23.%s"
 ---
 
-% This heading keeps "Route": a statement links to this section, and the checker's
-% fingerprint includes a linked heading's text, so renaming it would lift certifications.
 (sec:stein)=
-# Route E–B: the failed literal weighted package and boundary Stein traces
+# Approach E–B: the failed literal weighted package and boundary Stein traces
 
 The geometric variant Eldan–B trades the all-cut hypothesis for near-minimality. Its stochastic currency is the two-color covariance functional $\calS_\nu(E)=s^2\norm K_\HS^2$ of the Stein dictionary (Section [](#sec:stein-dictionary)); here we give its second exact form as a boundary flux and give the argument for [](#thm:intro-weighted), using the results of Section [](#sec:excess). The conversion between the Stein functional and the Riccati source ([](#lem:stein-vs-source)) is lossless on the tight window and is recorded with the dictionary.
 

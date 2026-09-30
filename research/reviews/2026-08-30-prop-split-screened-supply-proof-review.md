@@ -6,7 +6,7 @@ reviewer: proof-checker-w4r01
 fingerprints:
   solutions/prop-split-screened-supply.md: 2591f4f57fd0030fc70b963d0f6575dbe669bd8f39b7d0f2f2c083dba69bb9c7
   prop:split-screened-supply: dfd38fbdcb30173c9de73ef0548adaf29b6b6ebfc73ac5e32f7ca9d6083790cb
-  prop:stein-rep: 8b2dcc21aa724ba4cab407fe25ca694bb859f2269dfa45a85b76ab33c4dd9ec7
+  prop:stein-rep: 9099e7a4a738ecdfba0dfb17d987613878c496da02125eb85d2141fa3e86cfb3
   lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
   lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
   cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43

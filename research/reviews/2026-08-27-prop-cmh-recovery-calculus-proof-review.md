@@ -6,7 +6,7 @@ reviewer: /root/review_cmh_recovery_calculus_w2
 fingerprints:
   solutions/prop-cmh-recovery-calculus.md: 56cea366c845a618355e4135236d0b72a1e814ef6c0fb5d086b28c8db8d5943a
   prop:cmh-recovery-calculus: 73a9c58294d2c13a9bce376e89511f13dbfc0faa2db486c5be8df1fb28a36ba0
-  def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e
   thm:cmh-implies-affine-poincare: 434bde8b4ccac59502b5c71180a4f20df98e1abc02f85826578bba9321480559
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813

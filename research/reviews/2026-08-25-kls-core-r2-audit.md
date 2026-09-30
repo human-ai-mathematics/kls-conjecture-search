@@ -11,7 +11,7 @@ fingerprints:
   cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
   cor:tight-window-consumption: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946
   lem:pathwise-BL: 5b8de97a90772764778ad79fc4a9f56642c732304f4792a95b6cc493c7a95d6a
-  prop:stein-rep: 8b2dcc21aa724ba4cab407fe25ca694bb859f2269dfa45a85b76ab33c4dd9ec7
+  prop:stein-rep: 9099e7a4a738ecdfba0dfb17d987613878c496da02125eb85d2141fa3e86cfb3
   cor:away-from-zero: d15055503849fa299724c5cb1640fab8f4b60ebc491621b6ffb1d34480e0dd95
   lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
   solutions/kls-qcts-stein-boundary-core.md: 61ca993ab0b90b1a077993bd35fc62131f132b57c8c1ccbb67fe94d29ec0d417

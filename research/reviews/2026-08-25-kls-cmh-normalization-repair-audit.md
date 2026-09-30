@@ -6,7 +6,7 @@ reviewer: /root/kls_evidence_audit
 fingerprints:
   solutions/thm-cmh-normalization.md: e46056f3b5044d2d4c8690907be9d6188b19d9093670e47c96c2691aa6fc28c5
   prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
-  def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
+  def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
   thm:cmh-implies-affine-poincare: 434bde8b4ccac59502b5c71180a4f20df98e1abc02f85826578bba9321480559
   prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
   rem:cmh-stronger-than-kls: 42676f87e102fd9313af73973dcf29ff5a7f17ccec197c3284254e7cf2c0e0cc

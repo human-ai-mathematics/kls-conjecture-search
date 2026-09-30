@@ -3,10 +3,8 @@ numbering:
   enumerator: "42.%s"
 ---
 
-% This heading keeps "Route": a statement links to this section, and the checker's
-% fingerprint includes a linked heading's text, so renaming it would lift certifications.
 (sec:cmh-exact-cases)=
-# Route C, exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
+# Approach C, exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
 
 % Agent note (writer, v0.3.0): this heading keeps "Route C" because def:cmh links to this section and
 % check.py fingerprints a section link by its rendered heading text; renaming it changes def:cmh's fingerprint.

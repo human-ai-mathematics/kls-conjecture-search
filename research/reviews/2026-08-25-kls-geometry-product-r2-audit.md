@@ -7,7 +7,7 @@ fingerprints:
   solutions/kls-geometry-models.md: 51f2adca44f986ee352d1f7e98544442cdd4993adff9977847a5d5f268fcc811
   lem:profile-bound: edaf5f0b76adaf78959e02db87ee943f5ff1a7a8b54831c0aa33bdfcf4d293d6
   cor:generic-degeneracy: 1103100221b4bf047150e63ccddaa04ec4c2ec9fefad01135905132ef7d93252
-  prop:exact-splitting: 7a3cbda8f27037b4c8c2aba75fe4fcd19fd746f2e479e6a26e2a41298b3eb008
+  prop:exact-splitting: 2e90beabe3769b62e46a73812a05ba17384dbd68c12acca434c8c621dac71b0d
   prop:persistent-splitting: 5aa02982b1ba2c12bcd728b05e39ff5096e0bec02d5b22114480ba116cc2346c
   prop:gaussian-model: 835dc58ac9d4cb324aea55003c87af159fe2427ee351779bf982b348abd92fa8
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
