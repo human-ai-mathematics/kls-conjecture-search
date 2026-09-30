@@ -11,27 +11,29 @@ truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template](https://github.com/numina-functional-inequalities/conjecture-search-template)
-v0.2.0. Start every session that edits the repository by reading it.
+v0.3.0. Start every session that edits the repository by reading it.
 
 ## Layout
 
 | path | holds |
 |---|---|
-| [`modules/`](modules/) | the manuscript: every claim, as a labelled `prf:` directive; reading order in [`myst.yml`](myst.yml) |
+| [`modules/`](modules/) | the manuscript, the text a reader reads: every claim as a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
 | [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
 | [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
 | [`research/reviews/`](research/reviews/) | independent proof reviews |
 | [`research/runs/`](research/runs/) | run output (JSONL, provenance on the first line) |
 | [`research/lib/`](research/lib/) | the shared numerics package `numerics`, its tests and its instance registry |
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
-| [`site/`](site/) | the reader's site: exposition for mathematicians, at milestones |
 | [`.claude/agents/`](.claude/agents/) | the three roles: `researcher`, `reviewer` and `writer` |
 | [`templates/`](templates/) | an empty copy of each file genre |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
-The repository was migrated from its v0.1 LaTeX harness on 2026-09-29;
+The repository was migrated from its v0.1 LaTeX harness on 2026-09-29, then to v0.3.0 on
+2026-09-30;
 [`research/explorations/2026-09-29-migration-v0.2.0.md`](research/explorations/2026-09-29-migration-v0.2.0.md)
-says what was converted and how.
+and
+[`research/explorations/2026-09-30-migration-v0.3.0.md`](research/explorations/2026-09-30-migration-v0.3.0.md)
+say what was converted and how.
 
 ## Setup and verify
 
@@ -43,9 +45,9 @@ npm ci
 ./scripts/check.sh               # the checker, the worked example, the unit tests
 uv run scripts/check.py         # full check; 0 errors required before any status change
 uv run scripts/check.py --fast  # research state only, no MyST build
-uv run scripts/check.py --stamp site/results.md   # after rereading a site page
-uv run scripts/check.py --drafts                  # the draft dossiers, never published
-npx myst start                   # read the site, the dossiers and the manuscript in a browser
+uv run scripts/check.py --statements   # before and after a writer's pass: must not change
+uv run scripts/check.py --drafts       # the draft dossiers, never published
+npx myst start                   # read the manuscript and the proofs in a browser
 ```
 
 The numerics package has its own environment:
@@ -57,6 +59,7 @@ uv run python -m numerics list   # the run targets
 ```
 
 A green check establishes structure only; whether a proof is correct is the reviewer's job.
-The `site` workflow publishes the HTML site to GitHub Pages when dispatched by hand: it
-leaves out the draft dossiers, and publishes only if no site page is stale or unfinished
-(`check.py --site-strict`).
+Each statement shows its status, read from the ledger by
+[`scripts/status.mjs`](scripts/status.mjs). The `pages` workflow publishes the manuscript
+and the certified dossiers to GitHub Pages when dispatched by hand, after a person has
+read them.
