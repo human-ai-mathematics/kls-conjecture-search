@@ -6,7 +6,7 @@ numbering:
   enumerator: D26.%s
 ---
 
-**Overview.** This dossier proves [](#prop:weighted-spectator-obstruction) ([](#thm:sol-weighted-spectator-obstruction)). For all $C,T_0,\gamma,\eta,\delta$ there is a product of centered exponentials and a half-mass cylinder with arbitrarily small initial excess whose stopped excess, weighted by $(1+\norm{A_t}_\op)^{5/2}$, violates [](#eq:sol-spectator-violation). This refutes the literal global-operator-norm weighted gate of [](#q:weighted) in both its additive and relative readings. It does not refute KLS, because every witness is a product ([](#prop:products)). The mechanism is a near-optimal base cylinder with a stable perimeter, plus many exponential spectators whose covariance spikes both collapse the profile and inflate the weight.
+**Overview.** This dossier proves [](#prop:weighted-spectator-obstruction) ([](#thm:sol-weighted-spectator-obstruction)). For all $C,T_0,\gamma,\eta,\delta$ there is a product of centered exponentials and a half-mass cylinder with arbitrarily small initial excess whose stopped excess, weighted by $(1+\norm{A_t}_\op)^{5/2}$, violates [](#eq:sol-spectator-violation). This refutes the literal global-operator-norm weighted gate of [](#conj:weighted-excess-rate) in both its additive and relative readings. It does not refute KLS, because every witness is a product ([](#prop:products)). The mechanism is a near-optimal base cylinder with a stable perimeter, plus many exponential spectators whose covariance spikes both collapse the profile and inflate the weight.
 
 1. Regular exact-mass competitors and the exact density-change formula [](#eq:sol-spectator-density-change) for the exponential product ([](#lem:sol-spectator-regularization)).
 2. [](#prop:products) and [](#lem:half) give a positive floor on the half-profiles ([](#eq:sol-spectator-profile-floor)). A base $E_0$ then gives a cylinder whose excess bounds hold uniformly in the spectator dimension $N$ ([](#eq:sol-spectator-additive), [](#eq:sol-spectator-relative)).
@@ -47,7 +47,7 @@ e_t(E)\bigl(1+\norm{A_t}_\op\bigr)^{5/2}\dd t
 >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
 ```
 
-The construction can additionally be made with $e_0(E)\le1$. Hence it refutes the current literal global-operator-norm weighted gate in [](#q:weighted), including both the additive and relative approximate-minimizer readings. It does not refute KLS: every witness is a product measure and has a dimension-free KLS constant by [](#prop:products).
+The construction can additionally be made with $e_0(E)\le1$. Hence it refutes the current literal global-operator-norm weighted gate in [](#conj:weighted-excess-rate), including both the additive and relative approximate-minimizer readings. It does not refute KLS: every witness is a product measure and has a dimension-free KLS constant by [](#prop:products).
 :::
 
 We first isolate the regularization convention used to select the base cut. This also records why the later perimeter change-of-density formula is valid for the exact, noncompact one-sided-exponential law, rather than only for a compact surrogate.
@@ -443,4 +443,4 @@ and the near-minimality estimates [](#eq:sol-spectator-additive)– [](#eq:sol-s
 
 **Hypotheses and closure.** All four dependencies are proved or published imports in the current ledger, so the result is unconditional relative to the repository's accepted analytic inputs. Besides them, the proof uses only standard deterministic weighted-BV approximation and density change, elementary local exponential integrability of a finite exponential product, the planted Gaussian posterior, the Brownian reflection principle, and Tonelli's theorem. There is no numerical input. There is no unclosed analytic step in this dossier; `checked_by: none` records that a distinct cold reviewer has not yet audited it.
 
-**What is and is not refuted.** The construction refutes only the literal all-product, global-$\norm{A_t}_\op$ rate stated in [](#q:weighted). A replacement with an explicit near-worst-measure condition, or a cut-local tensor-stable covariance weight, is a different statement. Since the witnesses themselves satisfy dimension-free KLS, no counterexample to the KLS conjecture is claimed.
+**What is and is not refuted.** The construction refutes only the literal all-product, global-$\norm{A_t}_\op$ rate stated in [](#conj:weighted-excess-rate). A replacement with an explicit near-worst-measure condition, or a cut-local tensor-stable covariance weight, is a different statement. Since the witnesses themselves satisfy dimension-free KLS, no counterexample to the KLS conjecture is claimed.

@@ -269,17 +269,17 @@ Three consequences.
 *(c) What a $T^{1+\gamma}$ rate would require.* By the Brascamp–Lieb cap [](#eq:BL-cap) the weight is at most $(1+t^{-1})^{5/2}$ pathwise. If that cap were saturated deterministically, the pointwise condition $\E e_t\lesssim t^{5/2+\gamma}$ would be sufficient to produce a $T^{1+\gamma}$ integral; the formerly suggested $t^{3/2}$ rate would instead leave the nonintegrable factor $t^{-1}$. A realistic proof would more likely need a joint rare-event bound coupling excess to large $\norm{A_t}_\op$, rather than separate pointwise estimates. Thus the $T^{1+\gamma}$ term in [](#eq:intro-weighted-excess) is a deliberately strong requirement, not a consequence of the static power matching in part (b).
 :::
 
-(subsec:qcts-fences)=
+(subsec:qcts-barriers)=
 ## What this section argues against
 
 The two remarks below name the proof shapes the computations of this section argue against. Each records what a proof should not try to do, not a theorem about KLS; later sections cite them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} Absolute-scale slice bounds fail
-:label: obs:two-tail
+:label: rem:two-tail-slice-bounds
 The anisotropic Gaussian two-tail cut of [](#prop:two-tail) rules out a slice-wise stable Stein estimate carrying an absolute-scale excess term. On that cut $r=D=0$ while the Stein source is of order $\Lambda^{2}$ and the excess of order $\Lambda^{-1/2}$, so a slice-wise excess estimate needs covariance weight at least $(1+\norm{A}_{\op})^{5/2}$. An unweighted proof must instead control the expected occupation of inflated configurations.
 :::
 
 :::{prf:remark} Projection tests lose a logarithm
-:label: obs:proj-ceiling
+:label: rem:projection-ceiling
 Radial and projection-only information yields at best $\Var(X^{T}MX)\lesssim\log n\,\norm{M}_{\HS}^{2}$, by [](#eq:qcts-log) and the adjacent operator construction. A proof requiring dimension-free quadratic-chaos control must therefore use tensor-aware information beyond projection tests.
 :::

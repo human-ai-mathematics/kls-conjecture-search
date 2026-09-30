@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r03
 fingerprints:
-  solutions/lem-mm-smallgap-fourth-moment.md: dabf437e6f0e2c094130ccb42e8233b065cbbd82cb7dfa7014e0a07d4e2bf64c
+  solutions/lem-mm-smallgap-fourth-moment.md: e06ceebeb8e44119c9f6229074f155a1ca6490262e0040da5aa3030391bfbbb8
   lem:mm-smallgap-fourth-moment: 5efc054693b4557b794756da70c6b5a5ba03e38dc8bd743eca82855cc796d1df
   thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
 ---
@@ -108,7 +108,7 @@ elliptic regularity and the qualitative hypercontractive $L^4$ bound; (ii) cente
 isotropy of $\mu$ — only so the frontier hypothesis applies in Step 3; (iii) the
 eigenequation through the Friedrichs form pairing, with $\E f=0$, $\E f^2=1$; (iv) the
 Dirichlet-form normal-contraction and chain-rule property; (v) Hypothesis
-`hyp:sol-sfm-frontier`. No hypothesis is used silently; none of the stated hypotheses is
+`ass:sol-sfm-frontier`. No hypothesis is used silently; none of the stated hypotheses is
 idle. No stochastic localization, no Letwin input (`thm:letwin-qcts` is explicitly not
 used), and no numerical artifact appears anywhere.
 
@@ -133,10 +133,10 @@ orchestrator's discretion.
 
 The ledger node carries no `bounded_by` edge; I checked the registered obstructions
 independently and concur with the dossier's fence paragraph: the argument is static and
-cut-free (`obs:two-tail`, `obs:circularity`, `obs:rank-one-refuted` untouched); no
-projection or radial test is promoted to a tensor bound (`obs:proj-ceiling`); no
-covariance occupation functional or crude integral appears (`obs:crude-insufficient`,
-`obs:relative-ceiling` — the frontier constant is consumed as a calibrated external
+cut-free (`rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts` untouched); no
+projection or radial test is promoted to a tensor bound (`rem:projection-ceiling`); no
+covariance occupation functional or crude integral appears (`rem:crude-insufficient`,
+`rem:relative-ceiling` — the frontier constant is consumed as a calibrated external
 input toward a strictly weaker downstream output, not as a relative occupation premise);
 no localization occurs, so `prop:covariance-spike` is not engaged. Constraint 6 is
 untouched.

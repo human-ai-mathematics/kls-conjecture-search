@@ -33,7 +33,9 @@ The repository was migrated from its v0.1 LaTeX harness on 2026-09-29, then to v
 [`research/explorations/2026-09-29-migration-v0.2.0.md`](research/explorations/2026-09-29-migration-v0.2.0.md)
 and
 [`research/explorations/2026-09-30-migration-v0.3.0.md`](research/explorations/2026-09-30-migration-v0.3.0.md)
-say what was converted and how.
+say what was converted and how;
+[`research/explorations/2026-09-30-sync-after-migration.md`](research/explorations/2026-09-30-sync-after-migration.md)
+closes their open items and maps the ids renamed at that point.
 
 ## Setup and verify
 

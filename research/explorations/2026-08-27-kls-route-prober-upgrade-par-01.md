@@ -8,9 +8,9 @@ Role: `kls-route-prober`
 
 Concurrency key: `kls-gate:q:upgrade` plus the trace-upgrade `knowledge` reservation
 
-Target: `q:upgrade`
+Target: `conj:trace-upgrade`
 
-This probe owns only `q:upgrade`. It makes no transfer to `q:stein-weighted` or `q:alignment`
+This probe owns only `conj:trace-upgrade`. It makes no transfer to `conj:stein-weighted` or `conj:product-alignment`
 and proposes no edge among those nodes.
 
 ## Gate, verbatim
@@ -20,7 +20,7 @@ and proposes no edge among those nodes.
 > `thm:scalar-riccati`. The estimate must use cut-aware information and handle small-time
 > high-rank occupation.
 
-The live ledger statement of `q:upgrade` is:
+The live ledger statement of `conj:trace-upgrade` is:
 
 > Operator-to-trace upgrade: prove `ass:all-cut-carleson` by upgrading
 > `cor:per-direction` from quadratic-form to trace scale, uniformly over balanced cuts.
@@ -331,14 +331,14 @@ deweighting is exactly the missing cut-aware occupation input, not a remaining I
   spend their unit budgets sequentially, leaving the occupation operator bounded by $I$ but its
   trace of order $n$.
 - **Fenced — slice-wise high-state control.** Bounding $\mathcal H_{t,L}^K$ at each posterior by
-  an absolute-scale excess term is contradicted by `obs:two-tail`. Such states must be controlled
+  an absolute-scale excess term is contradicted by `rem:two-tail-slice-bounds`. Such states must be controlled
   through their expected occupation, not declared pointwise harmless.
 - **Fenced — cut-free covariance substitution.** Replacing (11) by a universal relative-scale
-  bound on $\int\lambda_{\max}(A_t)\,dt$ invokes the mechanism of `obs:relative-ceiling`, which
+  bound on $\int\lambda_{\max}(A_t)\,dt$ invokes the mechanism of `rem:relative-ceiling`, which
   is already KLS-sufficient and is not a weaker input to this gate.
 - **Technical/epistemic gap.** The clean low/high reduction (9)--(12) uses
   `thm:letwin-qcts`, currently an unreviewed preprint import. Without that import, the live
-  projection technology pays the logarithm fenced by `obs:proj-ceiling`. This does not affect
+  projection technology pays the logarithm fenced by `rem:projection-ceiling`. This does not affect
   the unconditional candidate lemma (13).
 
 The stopping convention, the $G$--$K$ correction, the low spectral block, the positive-time
@@ -346,14 +346,14 @@ domain, and the regularization limit leave no additional residue in the displaye
 
 ## Fence-by-fence evasion check
 
-### `obs:proj-ceiling`
+### `rem:projection-ceiling`
 
 The low block in (9) uses the full matrix quadratic-Poincare input (QCTS), not radial or
 projection tests. The random incident-high tensor is retained explicitly in (7) rather than
 estimated by a union of projections. The argument therefore respects the fence; it also shows
 exactly where the proof stops if the full tensor input is unavailable.
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 No slice-wise absolute-scale estimate is asserted. In the anisotropic two-tail configuration,
 $r=D=0$ and the large source lies in $\mathcal H_{t,L}^K$ once the long covariance direction
@@ -361,17 +361,17 @@ exceeds $L$, so (10) does not hide the obstruction in its baseline or damping. E
 allows a source of order $t^{-2}$ and only constrains its scale-weighted occupation, which is
 consistent with the fence.
 
-### `obs:relative-ceiling` on `ass:all-cut-carleson`
+### `rem:relative-ceiling` on `ass:all-cut-carleson`
 
 No all-measure bound on $\Xi_T$ or $\int\lambda_{\max}(A_t)\,dt$ is inserted. The unresolved
 quantity (7) is indexed by the fixed cut through $K_t$ and by the contemporaneous tensor
 orientation. Thus the reduction remains cut-aware and does not assume the route's conclusion in
 cut-free form.
 
-The remaining obstruction registry does not bind `q:upgrade` or `ass:all-cut-carleson`, but it
+The remaining obstruction registry does not bind `conj:trace-upgrade` or `ass:all-cut-carleson`, but it
 was checked for accidental use: no crude $\Xi_T\lesssim\log n$ bootstrap is used
-(`obs:crude-insufficient`), no localized profile is inserted (`obs:circularity`), and no
-single-coordinate product witness is claimed (`obs:rank-one-refuted`).
+(`rem:crude-insufficient`), no localized profile is inserted (`rem:profile-circularity`), and no
+single-coordinate product witness is claimed (`rem:single-coordinate-cuts`).
 
 ## Numerical disposition
 
@@ -414,7 +414,7 @@ dossier and a distinct `proof-checker` certifies it; this probe proposes no `sol
   depends_on: [thm:scalar-riccati]
 ```
 
-No status change or new relation is proposed for `q:upgrade`.
+No status change or new relation is proposed for `conj:trace-upgrade`.
 
 ```yaml
 outcome: blocked
@@ -422,7 +422,7 @@ artifacts:
   - research/explorations/2026-08-27-kls-route-prober-upgrade-par-01.md
 proposed_deltas:
   - add the open candidate node lem:time-weighted-source exactly as displayed above
-  - sharpen the q:upgrade route-control gate with the proposed incident-high statement; do not change its open status
+  - sharpen the conj:trace-upgrade route-control gate with the proposed incident-high statement; do not change its open status
 next_role: prover
 next_prompt: |
   Write a standalone dossier for the proposed node `lem:time-weighted-source` only. Prove for
@@ -432,8 +432,8 @@ next_prompt: |
   `lambda_max(B_t)=r_t`, and the posterior Brascamp--Lieb cap `A_t <= t^{-1}I`.
   Retain the bounded-stopping/Fatou and regularization passage explicitly. State the stopped
   source consequence only by positivity; do not claim that the quadratic time weight can be
-  removed, do not claim `q:upgrade`, and do not compare or transfer the result to
-  `q:stein-weighted` or `q:alignment`. Compile the dossier and hand it to a distinct
+  removed, do not claim `conj:trace-upgrade`, and do not compare or transfer the result to
+  `conj:stein-weighted` or `conj:product-alignment`. Compile the dossier and hand it to a distinct
   `proof-checker`; do not edit either ledger, the manuscript, route-control files, or this
   exploration.
 ```

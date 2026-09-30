@@ -4,7 +4,7 @@ authors:
   - /root/kls_ledger_audit
 reviewer: /root/cmh_exact_reviewer
 fingerprints:
-  solutions/thm-cmh-dirichlet.md: 00e9585188cbec4718447563f778bc889eaa0670b93c06aa38646db3f018530d
+  solutions/thm-cmh-dirichlet.md: a6fde7b910a21d73f2f4a4e56de2a660eda18f47ecab1b12ac44f34dea04661c
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
   thm:cmh-product: 93367af0f91020a7189581ccf6821eafd93c5bb734d06bfb114187be354d08a7
@@ -16,8 +16,8 @@ fingerprints:
   thm:cmh-dirichlet: 0950144e400e4a077e8ae82686d149d0a736b6ec651e7c588e4e867146a8db94
   cor:cmh-dirichlet-surplus: fdd4f0dcfccd11cb61eceeec922bc50c8ed87bb4a9faa496901201eef7ea9424
   cor:cmh-dirichlet-poincare: 0295ebca6004666831c2db752ae739c062b86f6097e7b9f5152902d1765820c6
-  thm:cmh-implies-affine-poincare: 4ca4161533a8e140c1e3302d067c0ba1672754860e21a237009c1df910d1dbbc
-  rem:cmh-saturation-risk: 2a3ba80b8cfea460f74c0dbcf122eeafdcf31576b42e60cf7d5507106f2332af
+  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  cor:cmh-product-saturation: 2a3ba80b8cfea460f74c0dbcf122eeafdcf31576b42e60cf7d5507106f2332af
   prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
 ---
 
@@ -49,7 +49,7 @@ This follow-up review certifies the repaired proofs and statements of exactly th
    the two-coordinate case.
 9. `cor:cmh-dirichlet-poincare` — the affine Poincaré consequences for Dirichlet laws and
    their products, linear images, and convolutions.
-10. `rem:cmh-saturation-risk` — exact product-exponential saturation together with the explicit
+10. `cor:cmh-product-saturation` — exact product-exponential saturation together with the explicit
     statement that perturbative instability of the full CMH quotient remains open.
 
 The dossier header enumerates exactly these ten ledger nodes. Each id occurs exactly once as a
@@ -195,7 +195,7 @@ priority assertion.
 Finally, products of centered one-sided exponentials have $\CMH=4$ exactly by the certified
 one-dimensional identity and product formula. The repaired saturation remark draws no
 perturbative inference from the nonnegative Hodge term alone: it records all quantities that
-vary and leaves the full second variation as `q:cmh-solenoidal-perturbation`. Thus exact product
+vary and leaves the full second variation as `conj:cmh-second-variation`. Thus exact product
 saturation is certified while perturbative instability and universal $\mathrm{CMH}(4)$ remain
 open.
 
@@ -219,7 +219,7 @@ open.
 This audit does not recertify the upstream normalization nodes `def:cmh`,
 `thm:cmh-implies-affine-poincare`, or `prop:cmh-hodge`; it uses their displayed statements as
 the declared dependencies of the exact-case dossier. It does not certify universal
-$\mathrm{CMH}(4)$, `conj:gate-zero`, `q:cmh-solenoidal-perturbation`, the separate Bessel-zero
+$\mathrm{CMH}(4)$, `conj:gate-zero`, `conj:cmh-second-variation`, the separate Bessel-zero
 formula in `rem:cmh-dirichlet-sharp`, or any numerical `finum` artifact. It checks the accuracy
 and restraint of the prior-art hedge, but makes no exhaustive novelty claim.
 

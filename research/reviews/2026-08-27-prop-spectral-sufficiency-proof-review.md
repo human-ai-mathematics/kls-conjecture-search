@@ -4,9 +4,9 @@ authors:
   - /root/prove_spectral_sufficiency
 reviewer: /root/review_spectral_sufficiency_w0
 fingerprints:
-  solutions/prop-spectral-sufficiency.md: b78f078d2552e65b822144cdf642b292312fdbc011952e1e41dbf37d2e7694e5
-  prop:spectral-sufficiency: 69252e69009d6241db5e13e54207163fed9c954bdf405ed279c37d3b18741349
-  q:mm-spectral-occupation: fd459923a0b85e2a9af9179faa1e1e80bbe2357831a49d986221586cfd268249
+  solutions/prop-spectral-sufficiency.md: 207df18978ce55cabb78bce26fbd9f5350791aab99cab8e6a7031217750c67bd
+  prop:spectral-sufficiency: ea0691f496347072983c1a888e0c8ecc4f03b28db8e8d27dcbb8ff0c486c1c0e
+  conj:mm-spectral-occupation: fd459923a0b85e2a9af9179faa1e1e80bbe2357831a49d986221586cfd268249
 ---
 
 # Full-damping spectral sufficiency — independent proof review
@@ -24,7 +24,7 @@ exploration record names only the prover as author.
 
 The dossier theorem, the ledger statement for `prop:spectral-sufficiency`, and the manuscript
 question at `\label{prop:spectral-sufficiency}` agree mathematically.  The manuscript asks whether
-the universal full-damping estimate in `q:mm-spectral-occupation`, uniform through regularization,
+the universal full-damping estimate in `conj:mm-spectral-occupation`, uniform through regularization,
 implies a universal spectral gap.  The ledger spells out the intended fixed-function SDE,
 posterior Brascamp--Lieb step, regularization limit, and the fact that no strict damping surplus is
 needed.  The dossier proves this implication and adds the explicit quantitative values
@@ -40,10 +40,10 @@ damping term $\mathbb E\int_0^t2g_s^TA_sg_s\,ds$; it assumes neither a strict su
 dimension- or regularization-dependent constant.
 
 The current ledger has exactly one `depends_on` edge,
-`q:mm-spectral-occupation`, and no `bounded_by`, `references`, or imported-result edge.  That
+`conj:mm-spectral-occupation`, and no `bounded_by`, `references`, or imported-result edge.  That
 dependency is still open and occurs verbatim as the dossier's displayed hypothesis.  The proof
 discharges every other step internally.  Certification therefore permits `status: conditional`
-only; it does not permit `proved`, does not discharge `q:mm-spectral-occupation`, and does not
+only; it does not permit `proved`, does not discharge `conj:mm-spectral-occupation`, and does not
 change `conj:kls` unconditionally.
 
 ### Hypothesis accounting
@@ -237,27 +237,27 @@ claimed Poincar\'e inequality on the full locally Lipschitz domain.
 The ledger node has no formal `bounded_by` edge.  Every registered obstruction and every adjacent
 spectral-route warning was nevertheless checked.
 
-- `obs:two-tail`: no cut, slice, excess, or slice-wise Stein estimate occurs.  The proof uses the
+- `rem:two-tail-slice-bounds`: no cut, slice, excess, or slice-wise Stein estimate occurs.  The proof uses the
   explicitly assumed function-aware occupation estimate.
-- `obs:proj-ceiling`: no tensor estimate is inferred from radial or projection-only tests.  The
+- `rem:projection-ceiling`: no tensor estimate is inferred from radial or projection-only tests.  The
   full oriented tensors $H_t$ and $A_t$ enter only through the assumed occupation inequality and
   the exact SDE.
-- `obs:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap is used.
-- `obs:relative-ceiling`: no all-measure relative covariance occupation bound is inserted as a
+- `rem:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap is used.
+- `rem:relative-ceiling`: no all-measure relative covariance occupation bound is inserted as a
   supposedly weaker premise.
-- `obs:circularity`: no localized isoperimetric profile, changing balanced competitor family, or
+- `rem:profile-circularity`: no localized isoperimetric profile, changing balanced competitor family, or
   Cheeger lower bound is used in the spectral argument.
-- `obs:rank-one-refuted`: no product-cut counterexample or fixed-coordinate source-budget claim is
+- `rem:single-coordinate-cuts`: no product-cut counterexample or fixed-coordinate source-budget claim is
   made.
 - The spectral route's main unwhitening fence is respected: the proof does not derive the
   occupation estimate by multiplying a whitened tensor estimate by covariance norms.  It consumes
-  the exact oriented damping $g_t^TA_tg_t$ and leaves `q:mm-spectral-occupation` open.
+  the exact oriented damping $g_t^TA_tg_t$ and leaves `conj:mm-spectral-occupation` open.
 - `prop:covariance-spike` is not contradicted.  No pathwise or expected operator-norm control of
   $A_t$ on a universal interval is claimed; terminal Brascamp--Lieb is applied only to the fixed
   eigenfunction and with its sharp $t^{-1}$ scale.
 - The false truncated-exponential direct-unweighting shortcut is not used.  Neither a universal
   Lipschitz Gaussian transport nor a covariance-preserving needle reduction appears.
-- No implication among `q:upgrade`, the high-rank part of `q:stein-weighted`, `q:alignment`, or
+- No implication among `conj:trace-upgrade`, the high-rank part of `conj:stein-weighted`, `conj:product-alignment`, or
   CMH gate zero is asserted.  The deterministic CMH route is outside the proof.
 - The dossier does not invoke the unreviewed Letwin QCTS preprint, any Klartag--Lehec preprint
   window, or any numerical artifact.
@@ -288,7 +288,7 @@ latexmk -g -pdf -outdir=../build prop-spectral-sufficiency.tex
 ```
 
 completed successfully and produced a four-page PDF.  The TeX log has only the five expected
-standalone unresolved manuscript references (`q:mm-spectral-occupation`,
+standalone unresolved manuscript references (`conj:mm-spectral-occupation`,
 `prop:spectral-sufficiency`, `subsec:spectral-sde`, and `conj:kls`, with the first occurring
 twice); there are no TeX errors, overfull boxes, underfull boxes, or package warnings.  Forced
 Biber execution reports only that the dossier contains no citations.  Before this review was
@@ -301,7 +301,7 @@ None.
 ## Exclusions
 
 This review certifies only the conditional full-damping sufficiency bridge and its explicit
-constant.  It does not prove or review `q:mm-spectral-occupation`, a whitened tensor estimate, an
+constant.  It does not prove or review `conj:mm-spectral-occupation`, a whitened tensor estimate, an
 unwhitening or high-incidence occupation mechanism, any Letwin or Klartag--Lehec preprint result,
 an operator-norm covariance bound, a trace-upgrade-cluster implication, a CMH statement, or an
 unconditional proof of KLS.  It certifies no convergence of eigenfunctions and no numerical

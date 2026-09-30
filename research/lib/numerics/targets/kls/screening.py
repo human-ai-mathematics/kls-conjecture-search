@@ -1,4 +1,4 @@
-"""Source-screened cut-local supply diagnostic for KLS ``q:weighted`` (target ``kls-screen``).
+"""Source-screened cut-local supply diagnostic for KLS ``conj:weighted-excess-rate`` (target ``kls-screen``).
 
 Sibling of ``kls-align``: it reuses the same isotropic product-Laplace tail-union localization
 engine and the same balanced stopping convention, but computes the objects parked as
@@ -41,7 +41,7 @@ from ...localization.screening import (
 from ...localization.tail_union import balanced_tail_radius, observe_tail_union
 
 
-TARGET = "q:weighted"
+TARGET = "conj:weighted-excess-rate"
 _MODEL = "isotropic-laplace-product/tail-union/cut-local-screened"
 
 #: Fixed before any run of this target; also emitted verbatim into the artifact.

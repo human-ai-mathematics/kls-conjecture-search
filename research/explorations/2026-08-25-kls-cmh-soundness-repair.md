@@ -42,9 +42,9 @@ Dead ends and corrections below supersede claims operationally without rewriting
   complement, and noninteracting $O(m)$ sectors; the scalar sector remains a two-dimensional
   block with deficit $(a-dt)^2$.
 
-The former all-measures normalization question was split. `q:cmh-normalization` is proved only
+The former all-measures normalization question was split. `rem:cmh-normalization` is proved only
 on the regular moment-map class. The limiting and affine-support problem is the separate open
-node `q:cmh-approximation`. The general-measure paragraph is a conditional template, not a
+node `prop:cmh-approximation-closure`. The general-measure paragraph is a conditional template, not a
 closure theorem.
 
 ### Exact cases
@@ -62,7 +62,7 @@ closure theorem.
   the load-bearing constraint in the angular minimization. The unused upper hypothesis
   $\alpha_i\le A-2$ remains removed.
 - Exact product-exponential saturation is proved, while perturbative growth of the full CMH
-  quotient remains `q:cmh-solenoidal-perturbation`. An increase in one Hodge channel alone is
+  quotient remains `conj:cmh-second-variation`. An increase in one Hodge channel alone is
   not a perturbation theorem.
 
 ## Numerical and provenance repair

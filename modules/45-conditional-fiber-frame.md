@@ -18,13 +18,13 @@ $$
 \text{KLS},
 $$
 
-where the left-hand side is [](#q:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore say nothing about KLS. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
+where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore say nothing about KLS. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
 
 **What it builds on.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Set up here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
 
 **What it gives.** A precise question and one rigorous negative result. The frame formalism is set up with its isotropy constraint [](#eq:conditional-frame-isotropy) and its form [](#eq:conditional-fiber-form), and the most natural choice — the $A_{m-1}$ root frame on the isotropic uniform simplex — fails: by [](#prop:conditional-fiber-root-obstruction) its form gap is $O(m^{-2})$. Knowing which frame does not work, and why, is what turned this from a slogan into a question with a stated domain.
 
-**What blocks it.** [](#q:conditional-fiber-frame): exhibit, for every isotropic log-concave $\mu$, one even test-independent admissible frame with a universal lower form gap on the maximal closed form domain — or decide the all-frame simplex dual against it.
+**What blocks it.** [](#conj:conditional-fiber-frame): exhibit, for every isotropic log-concave $\mu$, one even test-independent admissible frame with a universal lower form gap on the maximal closed form domain — or decide the all-frame simplex dual against it.
 
 **What fails, and why.** [](#prop:conditional-fiber-root-obstruction) rules out the root frame outright: a vertex-cap indicator drives the normalized Rayleigh quotient down. The dual attack is narrowed by [](#lem:fiber-root-degree-two): its exact degree-two floor excludes every degree-two dual certificate, so a certificate must have degree at least three. [](#prop:sasada-negative-exchange) is the same vertex-cap mechanism for a related negative-exponent exchange model, from the literature.
 
@@ -80,7 +80,7 @@ Consequently, a form gap $\Var_\mu(f)\le C\mathcal D_{\mu,\rho}(f)$ implies $C_P
 :::
 
 :::{prf:conjecture} Conditional-fiber frame
-:label: q:conditional-fiber-frame
+:label: conj:conditional-fiber-frame
 There is a universal constant $C$ such that every full-dimensional isotropic log-concave $\mu$ on $\R^d$, in every dimension $d$, admits an admissible frame $\rho_\mu$, chosen independently of $f$, with
 
 ```{math}
@@ -91,7 +91,7 @@ There is a universal constant $C$ such that every full-dimensional isotropic log
 for every $f$ in the maximal closed form domain.
 :::
 
-[](#q:conditional-fiber-frame) implies KLS, with $\CP\le4C$, by [](#lem:conditional-fiber-form) ([](#eq:conditional-fiber-gradient-comparison)). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
+[](#conj:conditional-fiber-frame) implies KLS, with $\CP\le4C$, by [](#lem:conditional-fiber-form) ([](#eq:conditional-fiber-gradient-comparison)). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
 
 (subsec:fiber-root-failure)=
 ## Why the simplex root frame fails
@@ -168,4 +168,4 @@ $$
 
 This is a published consequence of Sasada's vertex-cap argument [@Sasada2015EnergyExchange]. Caputo proves a dimension-free gap for the unweighted flat simplex heat bath, while Carlen–Posta–Tóth prove uniform gaps for nonnegative exponents $s\in[0,1]$ [@Caputo2008BinaryCollision; @CarlenPostaToth2025Exchange]. The inverse-variance root form lies at $s=-2$, outside those positive results.
 
-The root calculation does *not* refute [](#q:conditional-fiber-frame). A general permutation-invariant admissible frame may mix continuously many direction orbits, and no proof shows that the root orbit is optimal. The decisive simplex alternative is an exact all-frame dual certificate with objective tending to zero, or a uniform lower bound after optimizing over all admissible frames. Floating-point computations over finitely many frames, and tests restricted to the root frame, decide neither alternative.
+The root calculation does *not* refute [](#conj:conditional-fiber-frame). A general permutation-invariant admissible frame may mix continuously many direction orbits, and no proof shows that the root orbit is optimal. The decisive simplex alternative is an exact all-frame dual certificate with objective tending to zero, or a uniform lower bound after optimizing over all admissible frames. Floating-point computations over finitely many frames, and tests restricted to the root frame, decide neither alternative.

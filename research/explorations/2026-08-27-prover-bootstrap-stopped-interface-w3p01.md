@@ -103,9 +103,9 @@ The result is unconditional given its stated near-worst hypotheses and its alrea
 dependencies. It uses no smoothness, no numerical evidence, no near-minimality of the cut, and
 no unstated covariance estimate.
 
-- obs:circularity is respected: no supermartingale property or lower bound is asserted for the
+- rem:profile-circularity is respected: no supermartingale property or lower bound is asserted for the
   moving mass-constrained isoperimetric profile.
-- obs:relative-ceiling is respected: the result does not bound
+- rem:relative-ceiling is respected: the result does not bound
   $\widehat\Xi_{T,\eta}$ at a dimension-free relative scale and does not imply KLS. The
   dimension-dependent estimate $\widehat\Xi_{T,\eta}\le nT$ is used only to record
   integrability.
@@ -159,7 +159,7 @@ next_prompt: |
   1_{s<tau_eta}. Check Tonelli and the constants 1/16, 1/8, 1/4, as well as the T<1/8,
   eta=T^(1/3), epsilon<=T^(1/3) specialization (C=2). Audit measurability, integrability,
   infinite-perimeter handling, and exact dependence on lem:half, lem:whitening, and
-  lem:perimeter-martingale. Check both fences obs:circularity and obs:relative-ceiling: the
+  lem:perimeter-martingale. Check both fences rem:profile-circularity and rem:relative-ceiling: the
   dossier must not claim any universal bound on widehat Xi or any KLS conclusion. Compile the
   dossier standalone. Persist a structured review under research/reviews/ with author
   /root/prove_bootstrap_stopped_interface_w3 and a distinct reviewer identity. If and only if

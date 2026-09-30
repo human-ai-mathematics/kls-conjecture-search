@@ -27,7 +27,7 @@ e_t(E)(1+\lVert A_t\rVert_{\mathrm{op}})^{5/2}\,dt
 $$
 
 The result negates only the literal all-measure, global-operator-norm weighted-excess rate in
-`q:weighted`. It does not refute KLS, and it does not address a replacement gate restricted to
+`conj:weighted-excess-rate`. It does not refute KLS, and it does not address a replacement gate restricted to
 near-worst measures or using a cut-local tensor-stable weight.
 
 ## Corrections applied
@@ -64,7 +64,7 @@ The proof retains exactly the four declared dependencies:
 
 All four are proved or published imports in the current ledger. The node has no `bounded_by`
 edge. The neighbouring fences are respected: the argument retains the $5/2$ two-tail-calibrated
-weight, evades `obs:circularity` by using an explicit upper profile competitor, and asserts no
+weight, evades `rem:profile-circularity` by using an explicit upper profile competitor, and asserts no
 implication inside the trace-upgrade cluster. The proof also uses deterministic weighted-BV
 approximation and density change, local exponential integrability, the planted Gaussian posterior
 representation, the Brownian reflection principle, and nonnegative Tonelli. There is no numerical
@@ -116,6 +116,6 @@ next_prompt: |
   NEW append-only review rather than altering the prior non-certifying audit, and must compile the
   dossier standalone. If and only if every step passes, propose the exact dossier-header and
   ledger certification delta for prop:weighted-spectator-obstruction and the logically consequent
-  q:weighted refutation; do not edit the dossier, ledger, manuscript, routes, gating, bibliography,
+  conj:weighted-excess-rate refutation; do not edit the dossier, ledger, manuscript, routes, gating, bibliography,
   or any existing review.
 ```

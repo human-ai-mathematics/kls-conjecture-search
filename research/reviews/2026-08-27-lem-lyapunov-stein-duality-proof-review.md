@@ -290,7 +290,7 @@ numerical evidence enters this proof.
 ### Fences and initial-time exclusion
 
 The ledger node has no formal `bounded_by` edge. The relevant obstruction is nevertheless
-respected. `obs:two-tail` rules out a dimension-free absolute slice scale; the checked result
+respected. `rem:two-tail-slice-bounds` rules out a dimension-free absolute slice scale; the checked result
 instead gives $\lambda_{\rm cut}=\Lambda$ on that anisotropic family. The proof retains the full
 cut-oriented tensor and therefore does not infer tensor control from radial or projection-only
 data. Direct-sum invariance removes only blocks on which the cut tensor is exactly zero.

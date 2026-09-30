@@ -37,7 +37,7 @@ at some $T\le T_0$.
 The certification supports the following atomic interpretation.
 
 - `prop:weighted-spectator-obstruction` is `proved` and agent-checked.
-- `q:weighted` is `refuted` by that proposition.
+- `conj:weighted-excess-rate` is `refuted` by that proposition.
 - `ass:weighted-package` is `refuted`, because its first conjunct is exactly the false uniform
   global-operator-norm estimate.
 - `thm:intro-weighted` remains `conditional`: its proof is a valid implication from the explicit

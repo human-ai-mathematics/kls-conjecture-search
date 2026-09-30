@@ -11,12 +11,12 @@ ledger-node:
 - thm:cmh-dirichlet
 - cor:cmh-dirichlet-surplus
 - cor:cmh-dirichlet-poincare
-- rem:cmh-saturation-risk
+- cor:cmh-product-saturation
 numbering:
   enumerator: D29.%s
 ---
 
-**Overview.** This dossier proves $\mathrm{CMH}(4)$ in three classes where the constant of [](#def:cmh) can be computed: the line ([](#thm:cmh-1d)), products ([](#thm:cmh-product), [](#cor:cmh-linear-images)) and the log-concave Dirichlet family ([](#thm:cmh-dirichlet), with [](#lem:cmh-gamma-completion), [](#lem:cmh-row-min), [](#lem:cmh-angular-coefficient), [](#cor:cmh-dirichlet-surplus), [](#cor:cmh-dirichlet-poincare)). It also records [](#rem:cmh-saturation-risk). The Dirichlet case is proved by lifting to independent Gamma variables, completing a square in the Gamma Bochner identity, and using the Euler constraint of degree-$0$ homogeneity. Universal $\mathrm{CMH}(4)$ remains open. Products of centered one-sided exponentials saturate the constant $4$ exactly.
+**Overview.** This dossier proves $\mathrm{CMH}(4)$ in three classes where the constant of [](#def:cmh) can be computed: the line ([](#thm:cmh-1d)), products ([](#thm:cmh-product), [](#cor:cmh-linear-images)) and the log-concave Dirichlet family ([](#thm:cmh-dirichlet), with [](#lem:cmh-gamma-completion), [](#lem:cmh-row-min), [](#lem:cmh-angular-coefficient), [](#cor:cmh-dirichlet-surplus), [](#cor:cmh-dirichlet-poincare)). It also records [](#cor:cmh-product-saturation). The Dirichlet case is proved by lifting to independent Gamma variables, completing a square in the Gamma Bochner identity, and using the Euler constraint of degree-$0$ homogeneity. Universal $\mathrm{CMH}(4)$ remains open. Products of centered one-sided exponentials saturate the constant $4$ exactly.
 
 1. On the line, $\CMH=\CP/\Var$ exactly, the KLS bound gives $\CP\le4\Var$, and the centered exponential attains $4$ ([](#thm:sol-cmh-1d)).
 2. For products, the cross terms $\E[(L_ig)(L_jg)]$ are nonnegative, so $\CMH$ is the maximum over the factors ([](#thm:sol-cmh-product)). Affine Poincaré passes to linear images ([](#cor:sol-cmh-linear-images)).
@@ -25,7 +25,7 @@ numbering:
 5. Using $S\perp P$ and the inverse moments of $S$, step 4 becomes a pointwise coefficient $F_A(\alpha_i,P_i)$. A scalar minimization bounds it by $A-\tfrac12+s_A$ with $s_A\ge0$ ([](#lem:sol-angular)), which proves [](#thm:sol-cmh-dirichlet), with strict surplus for $A>3$.
 6. [](#thm:cmh-implies-affine-poincare) with step 2 gives $\CPaff\le4$ for Dirichlet laws, their products, linear images and convolutions.
 
-**Scope.** This dossier proves $\mathrm{CMH}(4)$ in the three classes where the constant of [](#def:cmh) is computable, the third being the first genuinely nonproduct family for which Route C has a theorem. Combined with [](#thm:cmh-implies-affine-poincare) (dossier `solutions/thm-cmh-normalization.md`) each result yields an affine Poincaré bound with the same constant. Nothing here bears on universal $\mathrm{CMH}(4)$, which remains open; [](#rem:cmh-saturation-risk) in the manuscript explains why the product case in particular is a warning rather than encouragement.
+**Scope.** This dossier proves $\mathrm{CMH}(4)$ in the three classes where the constant of [](#def:cmh) is computable, the third being the first genuinely nonproduct family for which Route C has a theorem. Combined with [](#thm:cmh-implies-affine-poincare) (dossier `solutions/thm-cmh-normalization.md`) each result yields an affine Poincaré bound with the same constant. Nothing here bears on universal $\mathrm{CMH}(4)$, which remains open; [](#cor:cmh-product-saturation) in the manuscript explains why the product case in particular is a warning rather than encouragement.
 
 Notation is that of §[](#subsec:cmh-definition): $H$ is the moment-map Stein kernel in target coordinates, $L_\mu=\Div_\mu(H\nabla\,\cdot\,)$, $\Aop=-L_\mu$, and $\CMH$ is [](#eq:cmh-constant).
 
@@ -301,15 +301,15 @@ Qualitative dimension-free KLS bounds for simplices and conservative Gamma model
 
 **Closure.** The argument is written for smooth $g$ with controlled boundary behavior. To close: take polynomials on the simplex, lift them after a radial cutoff $\{S\ge\eps\}$ so that all Gamma integrations by parts in [](#lem:sol-gamma-completion) are justified, and let $\eps\downarrow0$; the inverse moments $\E S^{-1},\E S^{-2}$ used in [](#eq:cmh-radial-relations) are finite because $A\ge3$ throughout the Gamma branch. Polynomials form a core for $L_\alpha$, so the closed forms extend the inequality to $\Dom(L_\alpha)$. Only the residual branch $m=2$, $A<3$ uses the one-dimensional no-flux closure of [](#thm:sol-cmh-1d) instead.
 
-**Obstructions respected.** No `bounded_by` edge applies: the obstruction nodes of `research/program/ledger.yaml` are scoped by their own statements to the fixed-cut Eldan program. The only one with method-level reach, `obs:proj-ceiling`, forbids deriving quadratic-chaos thin shell from radial or projection information alone; the Dirichlet proof uses the full Hessian row through the Euler constraint of [](#lem:sol-row-min), not projection tests, and makes no thin-shell claim. Consistency with the sharp external inputs holds: by [](#thm:cmh-1d), the boundary mechanism forcing the constant $4$ is the one-dimensional exponential, which is also the extremal case of [](#thm:letwin-moment-map).
+**Obstructions respected.** No `bounded_by` edge applies: the obstruction nodes of `research/program/ledger.yaml` are scoped by their own statements to the fixed-cut Eldan program. The only one with method-level reach, `rem:projection-ceiling`, forbids deriving quadratic-chaos thin shell from radial or projection information alone; the Dirichlet proof uses the full Hessian row through the Euler constraint of [](#lem:sol-row-min), not projection tests, and makes no thin-shell claim. Consistency with the sharp external inputs holds: by [](#thm:cmh-1d), the boundary mechanism forcing the constant $4$ is the one-dimensional exponential, which is also the extremal case of [](#thm:letwin-moment-map).
 
-:::{prf:corollary} = [](#rem:cmh-saturation-risk)
+:::{prf:corollary} = [](#cor:cmh-product-saturation)
 :label: rem:sol-cmh-saturation-risk
 [](#thm:sol-cmh-1d) and [](#thm:sol-cmh-product) prove that products of centered one-sided exponentials have $\CMH=4$ exactly. [](#prop:cmh-hodge) proves, for each admissible test function, the exact decomposition of the CMH numerator into the affine Poincaré contribution and a nonnegative solenoidal contribution.
 :::
 
 :::{prf:remark} Perturbative caveat
-It is an open question, not a consequence of this corollary, whether an admissible perturbation raises the full CMH Rayleigh quotient. The covariance, canonical Stein kernel, both numerator channels, denominator, and optimizer all vary, so increasing a solenoidal term in isolation is insufficient. The required full second-variation calculation is [](#q:cmh-solenoidal-perturbation).
+It is an open question, not a consequence of this corollary, whether an admissible perturbation raises the full CMH Rayleigh quotient. The covariance, canonical Stein kernel, both numerator channels, denominator, and optimizer all vary, so increasing a solenoidal term in isolation is insufficient. The required full second-variation calculation is [](#conj:cmh-second-variation).
 :::
 
 **What this does not show.** [](#thm:sol-cmh-dirichlet) is a family result, not evidence for universal $\mathrm{CMH}(4)$. By [](#cor:cmh-dirichlet-surplus) the Dirichlet family is strictly inside the bound, and by [](#thm:sol-cmh-product) the saturating cases are products of centered one-sided exponentials, where the slack is exactly zero. Whether that endpoint is perturbatively unstable is precisely the open issue just stated.

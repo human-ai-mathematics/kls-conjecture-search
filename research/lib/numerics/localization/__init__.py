@@ -69,7 +69,7 @@ __all__ = [
     "Observables", "PathIntegrals", "observe", "integrate_path", "ensemble_mean", "R0_diag",
     # gates
     "n_bins_convergence", "fft_vs_mc",
-    # product tail-union q:alignment diagnostic
+    # product tail-union conj:product-alignment diagnostic
     "SymmetricTruncationMoments", "TailUnionObservables", "balanced_tail_radius",
     "tilted_laplace_symmetric_truncation", "observe_tail_union",
     "FilteringTrajectory", "AlignmentPathIntegrals", "filtering_trajectory",

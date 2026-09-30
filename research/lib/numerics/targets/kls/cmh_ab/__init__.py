@@ -38,7 +38,7 @@ log-concavity; ``R_Q >= D`` is the anisotropic form of the Chen-Klartag cyclic s
 fenced off as having no pointwise Loewner promotion.  Splitting the two says which reservoir a
 proof has to spend.
 
-**Channel 2 -- the M9 second-variation probe (`q:cmh-solenoidal-perturbation`).**
+**Channel 2 -- the M9 second-variation probe (`conj:cmh-second-variation`).**
 `thm:cmh-product` puts ``C_CMH = 4`` exactly, with zero slack, at the product of the centred
 one-sided exponential and a standard Gaussian.  This channel perturbs its moment potential,
 ``psi_eps = phi(s) + t^2/2 + eps a(s) b(t)`` with ``phi(s) = e^s - s``, verifies convexity and
@@ -627,7 +627,7 @@ def _m9_records(couplings, epsilons, resolution, degree, enrichment_rates,
                     "analytic_note": "A negative or zero second difference is directional "
                                      "support for CMH(4) inside this dictionary only; it is not "
                                      "a second-variation theorem and resolves nothing about "
-                                     "q:cmh-solenoidal-perturbation. At shape a = 1 the target "
+                                     "conj:cmh-second-variation. At shape a = 1 the target "
                                      "potential is affine on its support, so D^2 V has a zero "
                                      "eigenvalue and a two-sided moment-potential perturbation "
                                      "generically LEAVES the log-concave class; those rows carry "

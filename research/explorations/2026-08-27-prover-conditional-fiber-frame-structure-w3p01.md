@@ -194,7 +194,7 @@ cd solutions && latexmk -pdf -outdir=../build conditional-fiber-frame-structure.
 
 Result: success, six pages. The log has no TeX error, undefined control sequence, overfull box,
 or underfull box. The only warnings are the expected standalone unresolved external references
-to `thm:cmh-1d` and `q:conditional-fiber-frame`.
+to `thm:cmh-1d` and `conj:conditional-fiber-frame`.
 
 ```yaml
 outcome: complete

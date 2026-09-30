@@ -29,7 +29,7 @@ Certified in scope:
 
 **Explicitly excluded.** This audit does **not** certify: $\mathrm{CMH}(4)$ in general;
 `conj:gate-zero`; anything in the Haar/Schur–Piola construction layer
-(`q:mm-invariant-lift`, `q:mm-square-root-commutator`); the Letwin and Chen–Klartag preprint
+(`conj:mm-invariant-lift`, `conj:mm-square-root-commutator`); the Letwin and Chen–Klartag preprint
 inputs themselves (`import_class: preprint-unreviewed`); the `cmh-gate-zero` `finum`
 artifact's code path (its *conclusions* were independently reproduced here, see §5, but the
 target implementation was not read); the closure/approximation arguments beyond the level of
@@ -170,9 +170,9 @@ applies verbatim to any positive symmetric Stein kernel" is correct **only** for
 ### D3 — **OVERCLAIM.** "CMH is strictly stronger than KLS" is not proved
 
 `cor:sol-cmh-strictly-stronger` asserts "$\mathrm{CMH}(C)$ implies, **and is not implied by**,
-$\CPaff\le C$"; `rem:cmh-stronger-than-kls` asserts "$\mathrm{CMH}(4)$ is a *strictly stronger*
+$\CPaff\le C$"; `cor:cmh-hodge-comparison` asserts "$\mathrm{CMH}(4)$ is a *strictly stronger*
 statement than KLS with constant 4"; the manuscript subsection is titled "CMH is strictly
-stronger than KLS"; and the ledger carries `rem:cmh-stronger-than-kls` at `status: proved`.
+stronger than KLS"; and the ledger carries `cor:cmh-hodge-comparison` at `status: proved`.
 
 What is actually proved: (i) the orthogonal splitting `eq:cmh-hodge`; (ii) that the
 $\Sigma\nabla\psi$ channel alone has operator norm exactly $\CPaff$; (iii) that the solenoidal
@@ -185,11 +185,11 @@ instance.
 
 The honest version — $\CMH\ge\CPaff$ always, the difference is the solenoidal excess, so
 $\mathrm{CMH}(4)$ is *not known to be* equivalent to KLS(4) and may fail while KLS holds — is
-fully supported and is what `q:cmh-normalization`'s note and `prog:cmh-route` already say.
+fully supported and is what `rem:cmh-normalization`'s note and `rem:cmh-program` already say.
 The dossier corollary's own heading ("The route's headline **may** be false") and the closing
 sentence are correctly hedged; the middle sentence is not.
 
-**Required:** demote `rem:cmh-stronger-than-kls` from `proved`, or restate it as the
+**Required:** demote `cor:cmh-hodge-comparison` from `proved`, or restate it as the
 supported claim. See §7.
 
 ### D4 — **GAP.** Domain/core hypothesis in the endpoint reduction is unstated
@@ -315,17 +315,17 @@ $-h-h$. The identity is correct; the notation is garbage.
 
 - **`bounded_by: none` is defensible.** `research/kls/obstructions.md` scopes all six entries to
   the fixed-cut Eldan program in its own header, and `obstructions.yaml`'s enforcement is by
-  declared `mechanism` tag. `obs:proj-ceiling` forbids the tags `projection-only` and
+  declared `mechanism` tag. `rem:projection-ceiling` forbids the tags `projection-only` and
   `radial-only`; neither dossier uses projection tests or radial information — the endpoint
   reduction is a duality argument, the countermodel is finite-dimensional matrix algebra, and
   the Dirichlet proof uses the **full Hessian row** through the Euler constraint. Neither makes
-  a thin-shell claim. **`obs:proj-ceiling` is genuinely not violated.**
+  a thin-shell claim. **`rem:projection-ceiling` is genuinely not violated.**
 - **Scope honesty on the Dirichlet result is good.** "What this does not show" states plainly
   that it is a family result, not evidence for universal $\mathrm{CMH}(4)$, and points at
   `cor:cmh-dirichlet-surplus` (strict interiority) and `thm:cmh-product` (the saturating
   direction lies elsewhere). The manuscript's "first genuinely nonproduct family for which
   **the route** has a theorem" is correctly route-scoped.
-- **The `q:upgrade`/`q:alignment` single-owner discipline (hard constraint 6) is respected**:
+- **The `conj:trace-upgrade`/`conj:product-alignment` single-owner discipline (hard constraint 6) is respected**:
   `rem:gate-zero-trace-upgrade` and both dossiers explicitly decline to assert equivalence.
 - **The machinery is not over-engineered.** I checked whether the cheap pointwise criterion
   $\CMH\le\operatorname*{ess\,sup}\lmax(\Sigma^{-1/2}H\Sigma^{-1/2})$ already settles the
@@ -526,7 +526,7 @@ $\Var|X|^2\le8n$, $\|T_3\|^2\le4n$) inputs were **not** re-verified here; they c
 | `prop:cmh-bochner` | **DO NOT PROMOTE** as currently written. Statement verified true; **both** offered proofs are invalid (D2). Promote once the index proof naming the total symmetry of $\varphi_{mk\ell}$ replaces them. |
 | `thm:cmh-implies-affine-poincare` | **HOLD, then PROMOTE.** The dossier's proof is correct and the specific repair I was asked to scrutinize does work. But the node's `file:` is the manuscript, whose printed proof contains a false step (D1). Fix D1, add the core/density sentence (D4), then promote. |
 | `prop:cmh-hodge` | **PROMOTE.** Fully verified, including that the operator norm is *exactly* $\CPaff$ and that a square-integrable divergence-free field with no flux vanishes in dimension one (and that the no-flux convention is genuinely needed there — a constant field on a compactly supported law is a counterexample without it). Fix the typo D8. |
-| `rem:cmh-stronger-than-kls` | **DO NOT PROMOTE.** Overclaim (D3): "strictly stronger" and "generically nonzero" are asserted, not proved, and no separating measure is exhibited. Demote to `heuristic`, or restate as "not known to be equivalent; may fail while `conj:kls` holds", which *is* proved. |
+| `cor:cmh-hodge-comparison` | **DO NOT PROMOTE.** Overclaim (D3): "strictly stronger" and "generically nonzero" are asserted, not proved, and no separating measure is exhibited. Demote to `heuristic`, or restate as "not known to be equivalent; may fail while `conj:kls` holds", which *is* proved. |
 | `prop:letwin-not-gate-zero` | **PROMOTE.** Fully verified by hand, symbolically and by exact superoperator diagonalization; the universal-$B$ quantifier is genuinely established; the scope corollary is honest. |
 
 `solutions/thm-cmh-dirichlet.tex`:
@@ -542,11 +542,11 @@ $\Var|X|^2\le8n$, $\|T_3\|^2\le4n$) inputs were **not** re-verified here; they c
 | `thm:cmh-dirichlet` | **PROMOTE.** The flagship. Every step (a)–(k) independently re-derived; 9h and 9j confirmed symbolically to be exact identities; end-to-end conclusion corroborated on 24 parameter vectors with no violation; the hypothesis $\alpha_i\ge1$ shown to be load-bearing by an explicit out-of-hypothesis violation. |
 | `cor:cmh-dirichlet-surplus` | **PROMOTE after D5.** True but not proved for $m=2$ by the printed argument; one sentence fixes it. |
 | `cor:cmh-dirichlet-poincare` | **PROMOTE the mathematics; REQUIRE the literature hedge.** The derivation is correct. But the statement is qualitatively prior art (Barthe–Wolff, §6(i)) and the manuscript corollary carries no citation. Add the citation and a one-line novelty statement before promotion, not after. |
-| `rem:cmh-saturation-risk` | **SPLIT.** The factual half — products of one-sided exponentials attain $\CMH=4$ exactly, and `prop:cmh-hodge` splits the numerator — is **proved** and may be promoted. The inference "Hence any perturbation … would push $\CMH$ above 4 and refute $\mathrm{CMH}(4)$" is **heuristic**: it inherits D3 and it presupposes the very second-order computation that `q:cmh-solenoidal-perturbation` explicitly leaves open. Do not certify that clause. |
+| `cor:cmh-product-saturation` | **SPLIT.** The factual half — products of one-sided exponentials attain $\CMH=4$ exactly, and `prop:cmh-hodge` splits the numerator — is **proved** and may be promoted. The inference "Hence any perturbation … would push $\CMH$ above 4 and refute $\mathrm{CMH}(4)$" is **heuristic**: it inherits D3 and it presupposes the very second-order computation that `conj:cmh-second-variation` explicitly leaves open. Do not certify that clause. |
 
-Unaffected by this review: `conj:gate-zero`, `q:gate-zero`, `q:cmh-solenoidal-perturbation`,
+Unaffected by this review: `conj:gate-zero`, `rem:gate-zero-dichotomy`, `conj:cmh-second-variation`,
 `rem:gate-zero-trace-upgrade` (all correctly `open`/`conditional`), and
-`q:cmh-normalization`, whose `status: proved` rests on `def:cmh` +
+`rem:cmh-normalization`, whose `status: proved` rests on `def:cmh` +
 `thm:cmh-implies-affine-poincare` and inherits the D1 hold.
 
 ## 8. Validation performed

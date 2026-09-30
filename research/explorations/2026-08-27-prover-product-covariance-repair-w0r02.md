@@ -22,7 +22,7 @@ The shared dossier covers exactly these ledger nodes:
 
 1. `lem:block`;
 2. `thm:budget`;
-3. `cor:refutation`;
+3. `cor:single-coordinate-cuts`;
 4. `lem:product-qcts`;
 5. `cor:KI-discharged`.
 
@@ -153,7 +153,7 @@ claim is immediate.
 
 ## Audit of the three collateral nodes
 
-### `cor:refutation`
+### `cor:single-coordinate-cuts`
 
 The corollary now explicitly inherits $p_0\in[2/5,3/5]$, a cut and coordinate chosen before
 localization, and a deterministic threshold $L$. Setting $k=1$ gives the budget and boundary
@@ -202,7 +202,7 @@ $$
 \le2+C/e.
 $$
 
-At $t=0$, $A_0=I$. Choosing $c_0\le C^{-1}$ gives exactly `hyp:KI` with $C_2=2$. No Letwin
+At $t=0$, $A_0=I$. Choosing $c_0\le C^{-1}$ gives exactly `ass:KI` with $C_2=2$. No Letwin
 preprint input is used and no mathematical change was needed.
 
 Because all five nodes share one dossier, changing its bytes invalidates the applicability of
@@ -216,16 +216,16 @@ The accepted dependency closure is unconditional:
 
 - `thm:budget` uses `lem:block`, `cor:per-direction`, `thm:scalar-riccati`, and
   `prop:products`, all currently proved and agent-certified;
-- `cor:refutation` uses `thm:budget`;
+- `cor:single-coordinate-cuts` uses `thm:budget`;
 - `cor:KI-discharged` uses the published imported `thm:KL-window` and the posterior
   Brascamp--Lieb cap;
 - `lem:block` and `lem:product-qcts` have no ledger dependencies.
 
 The consumers were checked one by one.
 
-- `cor:refutation` inherits the balance interval explicitly in the repaired dossier.
-- The residual paragraph leading to `q:alignment` already assumes a fixed balanced cut, and
-  `q:alignment` itself quantifies only over balanced cuts.
+- `cor:single-coordinate-cuts` inherits the balance interval explicitly in the repaired dossier.
+- The residual paragraph leading to `conj:product-alignment` already assumes a fixed balanced cut, and
+  `conj:product-alignment` itself quantifies only over balanced cuts.
 - The trace-upgrade comparison in `modules/kls/27-eldan-open-targets.tex` refers to the
   per-coordinate source budgets only inside that same product-cut setting; it makes no
   unbalanced boundary claim.
@@ -233,7 +233,7 @@ The consumers were checked one by one.
   the initial measure class. Its actual proof uses `lem:product-qcts` and is valid for every
   nontrivial cut on the coarse window; it does not consume the budget theorem or its balance
   hypothesis.
-- `obs:rank-one-refuted` consumes the explicitly fixed balanced-cut corollary.
+- `rem:single-coordinate-cuts` consumes the explicitly fixed balanced-cut corollary.
 - `thm:covariance-bound` consumes the unchanged `lem:product-qcts`, and `cor:loglog` consumes
   the unchanged `cor:KI-discharged`.
 
@@ -247,7 +247,7 @@ were not applied by this role.
    > and let $E$ be measurable with respect to the coordinates in
    > $J\subset\{1,\dots,n\}$. Assume $0<\nu(E)<1$.
 
-2. In manuscript `cor:refutation`, replace "any fixed balanced cut" by "any fixed cut with
+2. In manuscript `cor:single-coordinate-cuts`, replace "any fixed balanced cut" by "any fixed cut with
    $p_0\in[2/5,3/5]$".
 
 3. In the product clause of manuscript `thm:covariance-bound`, replace "when $\mu$ is a
@@ -263,7 +263,7 @@ were not applied by this role.
      $\mathbb E\int_0^\infty S_tdt\le k$,
      $\mathbb E r_{t\wedge\tau}\le1+k$ for the coarse balanced exit time, and
      $\mu^+(E)\ge c\min(p_0,q_0)/\sqrt{1+k}$."
-   - `cor:refutation`: "For a cut with $p_0\in[2/5,3/5]$ and one coordinate fixed before
+   - `cor:single-coordinate-cuts`: "For a cut with $p_0\in[2/5,3/5]$ and one coordinate fixed before
      localization, the rank-one dynamic two-tail candidate is refuted: total source budget is
      at most one and deterministic-level spikes self-extinguish at rate $O(\Lambda^{-2})$; no
      pathwise adaptive choice is covered."
@@ -273,9 +273,9 @@ No other consumer requires a hypothesis change.
 ## Fence check, gaps, and logical status
 
 There are no formal `bounded_by` edges on these five nodes. The nearby rank-one fence was
-checked explicitly: `cor:refutation` covers only fixed pre-localization choices and a
+checked explicitly: `cor:single-coordinate-cuts` covers only fixed pre-localization choices and a
 deterministic source level. It does not rule out the high-rank, path-adapted incidence problem
-in `q:alignment`. The proofs use no projection-to-tensor upgrade, no all-measure relative
+in `conj:product-alignment`. The proofs use no projection-to-tensor upgrade, no all-measure relative
 covariance bound, no changing isoperimetric profile, and no numerical evidence.
 
 Hypotheses actually used are all now stated in the dossier:
@@ -287,7 +287,7 @@ Hypotheses actually used are all now stated in the dossier:
 - centering, product independence, one-dimensional log-concavity, and symmetric $M$ for the
   quadratic-chaos lemma;
 - isotropic log-concavity, $n\ge3$, the published sup-time covariance window, and posterior
-  Brascamp--Lieb for the `hyp:KI` discharge.
+  Brascamp--Lieb for the `ass:KI` discharge.
 
 No analytic step remains unclosed in the repaired statements. All five results are
 unconditional relative to their already proved or published dependencies. The dossier itself
@@ -325,7 +325,7 @@ next_prompt: |
   Cold-review the current bytes of `solutions/kls-product-covariance.tex`, independently of
   original author `/root/kls_proof_audit` and repair author
   `/root/repair_product_dossier`. Audit all five nodes: `lem:block`, `thm:budget`,
-  `cor:refutation`, `lem:product-qcts`, and `cor:KI-discharged`. The old
+  `cor:single-coordinate-cuts`, `lem:product-qcts`, and `cor:KI-discharged`. The old
   `research/reviews/2026-08-25-kls-geometry-product-r2-audit.md` predates the repaired bytes and
   supplies no certification for this review.
 
@@ -340,7 +340,7 @@ next_prompt: |
   perimeter supermartingale/regularization passage. Confirm the packaged theorem assumes
   `p_0 in [2/5,3/5]`, although its source-budget subpart is stronger.
 
-  For `cor:refutation`, confirm it retains `p_0 in [2/5,3/5]`, a cut and coordinate chosen
+  For `cor:single-coordinate-cuts`, confirm it retains `p_0 in [2/5,3/5]`, a cut and coordinate chosen
   before localization, and a deterministic level; it must not claim an adaptive or
   interval-by-interval refutation. For `lem:product-qcts`, recompute every covariance in the
   diagonal/off-diagonal expansion and the coefficient
@@ -351,11 +351,11 @@ next_prompt: |
 
   Check the full dependency closure and every consumer described in
   `research/explorations/2026-08-27-prover-product-covariance-repair-w0r02.md`. In particular,
-  reconcile the budget theorem's balance hypothesis with `cor:refutation`, the residual
-  `q:alignment` prose, the trace-upgrade comparison, and the product clause of
+  reconcile the budget theorem's balance hypothesis with `cor:single-coordinate-cuts`, the residual
+  `conj:product-alignment` prose, the trace-upgrade comparison, and the product clause of
   `thm:covariance-bound`. Verify the exact proposed source clarifications before recommending
   them to the orchestrator. None of the five nodes has a formal `bounded_by` edge; nevertheless
-  check that the result respects the downstream `obs:rank-one-refuted` scope and asserts
+  check that the result respects the downstream `rem:single-coordinate-cuts` scope and asserts
   nothing about adaptive high-rank occupation.
 
   Re-run `cd solutions && latexmk -pdf -outdir=../build kls-product-covariance.tex`. If and only

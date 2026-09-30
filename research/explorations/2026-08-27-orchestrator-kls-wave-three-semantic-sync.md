@@ -11,14 +11,14 @@ Role: orchestrator
 A read-only comparison of the Wave 1--2 promotions against the manuscript, ledger, and proof
 dossiers found four semantic deltas.  This synchronization changes no KLS gate status.
 
-## Exact target restored for `q:stein-weighted`
+## Exact target restored for `conj:stein-weighted`
 
 The manuscript asked for the weighted stopped Stein-trace inequality, whereas the ledger had
 replaced that mathematical object by its proposed Jacobi--Reilly mechanism.  The question is now
 stated on both planes as the actual integral inequality, with
 $2\beta+64\eta^2<1$, and explicitly classified as an independent analytic ingredient extracted
 from the refuted weighted package.  It has no viable KLS consumer by itself.  In particular, no
-implication is asserted between `q:stein-weighted`, `q:upgrade`, and `q:alignment`.
+implication is asserted between `conj:stein-weighted`, `conj:trace-upgrade`, and `conj:product-alignment`.
 
 ## CMH domain and provenance repairs
 

@@ -6,30 +6,30 @@ numbering:
   enumerator: D16.%s
 ---
 
-**Overview.** This dossier proves [](#lem:mm-smallgap-fourth-moment) as [](#thm:sol-lem-mm-smallgap-fourth-moment). The result is an implication from a uniform Poincaré constant $K_n$ for isotropic log-concave laws ([](#hyp:sol-sfm-frontier)): a normalized first eigenfunction of a regular isotropic approximant with $\lambda\le3/(8K_n)$ satisfies $\E_\mu f^4\le2$. The intended instantiation $K_n=C_K\log n$ is the published import [](#thm:klartag-logn), which is cited, not proved. The dossier notes that ledger acceptance of this import is pending, and it does not use [](#thm:letwin-qcts). The proof bootstraps an eigenvalue–energy identity through the Poincaré inequality applied to $f^2$.
+**Overview.** This dossier proves [](#lem:mm-smallgap-fourth-moment) as [](#thm:sol-lem-mm-smallgap-fourth-moment). The result is an implication from a uniform Poincaré constant $K_n$ for isotropic log-concave laws ([](#ass:sol-sfm-frontier)): a normalized first eigenfunction of a regular isotropic approximant with $\lambda\le3/(8K_n)$ satisfies $\E_\mu f^4\le2$. The intended instantiation $K_n=C_K\log n$ is the published import [](#thm:klartag-logn), which is cited, not proved. The dossier notes that ledger acceptance of this import is pending, and it does not use [](#thm:letwin-qcts). The proof bootstraps an eigenvalue–energy identity through the Poincaré inequality applied to $f^2$.
 
 1. Hypercontractivity under strong log-concavity gives $\E_\mu f^4<\infty$. This bound depends on $\varepsilon$ and is used only for finiteness.
 2. Pairing the eigenequation with truncated cubes, and passing to the limit by monotone convergence, gives $\lambda\E_\mu f^4=3\E_\mu[f^2\abs{\nabla f}^2]$ ([](#eq:sol-sfm-identity)).
-3. [](#hyp:sol-sfm-frontier) applied to $h=f^2$ gives [](#eq:sol-sfm-poincare).
+3. [](#ass:sol-sfm-frontier) applied to $h=f^2$ gives [](#eq:sol-sfm-poincare).
 4. Substituting step 2 into step 3 under $\lambda\le3/(8K_n)$ gives $\E f^4-1\le\tfrac12\E f^4$. Finiteness from step 1 then yields [](#eq:sol-sfm-main).
 5. Remarks: the self-bootstrap with $K=1/\lambda$ never closes, so the external input is needed ([](#rem:sol-sfm-no-self-bootstrap)). The large-gap branch is left to the consuming assembly ([](#rem:sol-sfm-large-gap)).
 
 **Refined statement and standing.** The lemma is an *unconditional implication*: it assumes a uniform Poincaré constant $K_n$ for isotropic log-concave laws in dimension $n$ and bootstraps a dimension-free fourth moment for first eigenfunctions whose gap is small on the scale $1/K_n$. Its intended instantiation is the *published* frontier $K_n=C_K\log n$ ($n\ge2$): Klartag [@Klartag2023Logarithmic] proves the Cheeger constant bound $\psi_n\le C\sqrt{\log n}$, and Cheeger's inequality converts it into $\CP\le C_K\log n$ for every isotropic log-concave probability on $\R^n$. This instantiation is the import node `thm:klartag-logn` (published import; ledger acceptance pending as of this dossier's date); it is cited, not proved, here. No unreviewed preprint input occurs anywhere in this dossier; in particular [](#thm:letwin-qcts) is not used.
 
 :::{prf:assumption} Uniform frontier input in dimension $n$
-:label: hyp:sol-sfm-frontier
+:label: ass:sol-sfm-frontier
 $K_n>0$ is a constant such that every isotropic log-concave probability measure on $\R^n$ satisfies the Poincaré inequality with constant $K_n$: for every locally Lipschitz $h\in L^2$,
 
 $$
 \Var(h)\le K_n\,\E\abs{\nabla h}^2 .
 $$
 
-By the published import `thm:klartag-logn` [@Klartag2023Logarithmic], [](#hyp:sol-sfm-frontier) holds with $K_n=C_K\log n$ for $n\ge2$, with $C_K$ universal.
+By the published import `thm:klartag-logn` [@Klartag2023Logarithmic], [](#ass:sol-sfm-frontier) holds with $K_n=C_K\log n$ for $n\ge2$, with $C_K$ universal.
 :::
 
 :::{prf:theorem} Small-gap fourth moment
 :label: thm:sol-lem-mm-smallgap-fourth-moment
-Assume [](#hyp:sol-sfm-frontier). Let
+Assume [](#ass:sol-sfm-frontier). Let
 
 $$
 \dd\mu(x)=Z^{-1}e^{-V(x)}\dd x,
@@ -98,7 +98,7 @@ Both extreme members are monotone nondecreasing in $k$: $s\,\varphi_k(s)\ge0$ in
 
 By Step 1 the left side is finite, hence so is $\E_\mu[f^2\abs{\nabla f}^2]=\lambda\,\E_\mu f^4/3$ (recall $\lambda>0$: a first nonconstant eigenfunction has $\lambda=\E\abs{\nabla f}^2>0$).
 
-*Step 3: Poincaré applied to $f^2$.* The measure $\mu$ is isotropic and log-concave, so [](#hyp:sol-sfm-frontier) applies to it. The function $h=f^2$ is $C^1$ (hence locally Lipschitz), lies in $L^2(\mu)$ by Step 1, and has $\E\abs{\nabla h}^2=4\,\E[f^2\abs{\nabla f}^2]<\infty$ by Step 2. Therefore
+*Step 3: Poincaré applied to $f^2$.* The measure $\mu$ is isotropic and log-concave, so [](#ass:sol-sfm-frontier) applies to it. The function $h=f^2$ is $C^1$ (hence locally Lipschitz), lies in $L^2(\mu)$ by Step 1, and has $\E\abs{\nabla h}^2=4\,\E[f^2\abs{\nabla f}^2]<\infty$ by Step 2. Therefore
 
 ```{math}
 :label: eq:sol-sfm-poincare
@@ -131,7 +131,7 @@ Measures whose first eigenvalue violates the small-gap hypothesis satisfy $\CP=1
 
 :::{prf:remark} Hypotheses actually used
 :label: rem:sol-sfm-hypotheses
-The proof uses: smoothness and $\varepsilon$-strong log-concavity of $\mu$ (only for elliptic regularity and the qualitative hypercontractive $L^4$ bound of Step 1); centering and isotropy of $\mu$ (only so that [](#hyp:sol-sfm-frontier) applies to $\mu$ in Step 3); the eigenequation through the Friedrichs form pairing; the Dirichlet-form contraction and chain-rule property for Lipschitz post-composition; and [](#hyp:sol-sfm-frontier), discharged by the published import `thm:klartag-logn` [@Klartag2023Logarithmic]. No stochastic localization, no Letwin input, no numerical evidence, and no unreviewed premise is used. Modulo ledger acceptance of the published import node, the implication proved here is unconditional.
+The proof uses: smoothness and $\varepsilon$-strong log-concavity of $\mu$ (only for elliptic regularity and the qualitative hypercontractive $L^4$ bound of Step 1); centering and isotropy of $\mu$ (only so that [](#ass:sol-sfm-frontier) applies to $\mu$ in Step 3); the eigenequation through the Friedrichs form pairing; the Dirichlet-form contraction and chain-rule property for Lipschitz post-composition; and [](#ass:sol-sfm-frontier), discharged by the published import `thm:klartag-logn` [@Klartag2023Logarithmic]. No stochastic localization, no Letwin input, no numerical evidence, and no unreviewed premise is used. Modulo ledger acceptance of the published import node, the implication proved here is unconditional.
 :::
 
-**Obstructions respected.** The candidate node carries no `bounded_by` edge; the registered route fences were checked individually. The argument is static and cut-free: no slice, excess, or localized isoperimetric estimate occurs (`obs:two-tail`, `obs:circularity`, `obs:rank-one-refuted`); no projection or radial test is promoted to a tensor bound (`obs:proj-ceiling`); no covariance occupation functional appears (`obs:crude-insufficient`, `obs:relative-ceiling`). Regarding `obs:relative-ceiling` specifically: the a priori input here is the published frontier constant $K_n$, used to produce a strictly weaker downstream output, not an all-measure relative occupation premise. The covariance-spike fence is untouched (no localization occurs).
+**Obstructions respected.** The candidate node carries no `bounded_by` edge; the registered route fences were checked individually. The argument is static and cut-free: no slice, excess, or localized isoperimetric estimate occurs (`rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts`); no projection or radial test is promoted to a tensor bound (`rem:projection-ceiling`); no covariance occupation functional appears (`rem:crude-insufficient`, `rem:relative-ceiling`). Regarding `rem:relative-ceiling` specifically: the a priori input here is the published frontier constant $K_n$, used to produce a strictly weaker downstream output, not an all-measure relative occupation premise. The covariance-spike fence is untouched (no localization occurs).

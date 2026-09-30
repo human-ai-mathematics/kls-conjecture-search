@@ -12,13 +12,13 @@ numbering:
   enumerator: D3.%s
 ---
 
-**Overview.** This dossier proves [](#lem:half), [](#lem:whitening), [](#thm:bootstrap), [](#lem:crude), [](#cor:loglog) and [](#prop:ceiling). It uses two deterministic isoperimetric comparisons to bound the Cheeger-line excess of a near-worst measure along stochastic localization. The covariance overshoot $\Xi_T$ is the only interface quantity. It is then evaluated crudely, and polylogarithmically under [](#hyp:KI). Finally, the dossier shows that an all-measure relative-scale bound on $\Xi_T$ would already imply KLS.
+**Overview.** This dossier proves [](#lem:half), [](#lem:whitening), [](#thm:bootstrap), [](#lem:crude), [](#cor:loglog) and [](#prop:ceiling). It uses two deterministic isoperimetric comparisons to bound the Cheeger-line excess of a near-worst measure along stochastic localization. The covariance overshoot $\Xi_T$ is the only interface quantity. It is then evaluated crudely, and polylogarithmically under [](#ass:KI). Finally, the dossier shows that an all-measure relative-scale bound on $\Xi_T$ would already imply KLS.
 
 1. [](#lem:sol-half): concavity and symmetry of the profile give $h_\nu=2I_\nu(1/2)$.
 2. [](#lem:sol-whitening): whitening gives [](#eq:sol-whitening), and $\hstar_n$ is nonincreasing in $n$.
 3. [](#thm:sol-bootstrap): the perimeter supermartingale, Steps 1–2 and a two-case argument prove [](#eq:sol-bootstrap-main). The second case is needed because the lower bound can be negative. The $L^2$ maximal inequality with [](#eq:sol-mass-qv-bound) gives the exit bound [](#eq:sol-bootstrap-exit). Integration gives [](#eq:sol-bootstrap-integrated) and [](#eq:sol-bootstrap-clean).
 4. [](#lem:sol-crude): the trace SDE and the Brascamp–Lieb cap give $\Xi_T\le1+\log(nT)$. This is recorded only as an insufficient fence.
-5. [](#cor:sol-loglog): under [](#hyp:KI), which is discharged by [](#cor:KI-discharged), $\Xi_T\lesssim1+\log\log n$ [](#eq:sol-loglog-interface). Step 3 then gives [](#eq:sol-loglog-supply).
+5. [](#cor:sol-loglog): under [](#ass:KI), which is discharged by [](#cor:KI-discharged), $\Xi_T\lesssim1+\log\log n$ [](#eq:sol-loglog-interface). Step 3 then gives [](#eq:sol-loglog-supply).
 6. [](#prop:sol-ceiling): if [](#eq:sol-ceiling-assumption) held for all measures, balanced mass would survive, and [](#lem:survival-implies-kls) would give KLS. Only this sufficient implication is claimed.
 
 **Setup.** For a log-concave probability measure $\nu$, let
@@ -289,12 +289,12 @@ $$
 =1+\log(nT).
 $$
 
-This is only the crude upper fence. In accordance with `obs:crude-insufficient`, it is not used as a dimension-free KLS input.
+This is only the crude upper fence. In accordance with `rem:crude-insufficient`, it is not used as a dimension-free KLS input.
 :::
 
 :::{prf:corollary} Polylogarithmic evaluation; [](#cor:loglog)
 :label: cor:sol-loglog
-Under [](#hyp:KI), for $t_1(n)=c_0(\log n)^{-C_2}$, $\mathbb E\|A_t\|_{\mathrm{op}}\leq C_1$ on $[0,t_1(n)]$. If $t_1(n)\leq T\leq1$, then
+Under [](#ass:KI), for $t_1(n)=c_0(\log n)^{-C_2}$, $\mathbb E\|A_t\|_{\mathrm{op}}\leq C_1$ on $[0,t_1(n)]$. If $t_1(n)\leq T\leq1$, then
 
 ```{math}
 :label: eq:sol-loglog-interface
@@ -319,7 +319,7 @@ $$
 \log(T/t_1)\leq C_2\log\log n-\log c_0,
 $$
 
-and the fixed low-dimensional cases can be absorbed into the universal constant. This proves the second inequality. Substitution into [](#eq:sol-bootstrap-clean) proves [](#eq:sol-loglog-supply). The published discharge [](#cor:KI-discharged) establishes [](#hyp:KI) with $C_2=2$; no numerical evidence is used here.
+and the fixed low-dimensional cases can be absorbed into the universal constant. This proves the second inequality. Substitution into [](#eq:sol-bootstrap-clean) proves [](#eq:sol-loglog-supply). The published discharge [](#cor:KI-discharged) establishes [](#ass:KI) with $C_2=2$; no numerical evidence is used here.
 :::
 
 ## 4\. The all-measure relative-scale ceiling
@@ -362,4 +362,4 @@ where the second line is [](#eq:sol-mass-qv-bound) without the last replacement 
 Finally, [](#eq:sol-bootstrap-clean) bounds the bootstrap error by $C h_\mu(T^{4/3}+\Xi_T)$. Making this particular certificate no larger than $\kappa h_\mu T$ at a sufficiently small universal time asks, term by term, for $\Xi_T\lesssim\kappa T$ (as well as $T^{1/3}\lesssim\kappa$). The implication just proved shows why such an *all-measure* input is already KLS-strength. This is the precise method-specific meaning of the proposition's final sentence; it is not a logical necessity for every possible propagation proof.
 :::
 
-**Obstructions respected.** [](#thm:sol-bootstrap) respects `obs:circularity`: its profile lower bound comes from the external worst-case constant $\hstar_n$ and the explicit near-worst assumption $h_\mu\leq(1+\varepsilon)\hstar_n$, not from an assumed lower bound on the random localized profile. [](#lem:sol-crude) respects `obs:crude-insufficient` by proving and labeling the $\log n$ estimate only as an insufficient fence; the actual corollary uses the published small-time covariance input. [](#prop:sol-ceiling) proves only the sufficient implication that generates `obs:relative-ceiling`; it does not claim an equivalence and does not confuse the all-measure condition with the near-worst route.
+**Obstructions respected.** [](#thm:sol-bootstrap) respects `rem:profile-circularity`: its profile lower bound comes from the external worst-case constant $\hstar_n$ and the explicit near-worst assumption $h_\mu\leq(1+\varepsilon)\hstar_n$, not from an assumed lower bound on the random localized profile. [](#lem:sol-crude) respects `rem:crude-insufficient` by proving and labeling the $\log n$ estimate only as an insufficient fence; the actual corollary uses the published small-time covariance input. [](#prop:sol-ceiling) proves only the sufficient implication that generates `rem:relative-ceiling`; it does not claim an equivalence and does not confuse the all-measure condition with the near-worst route.

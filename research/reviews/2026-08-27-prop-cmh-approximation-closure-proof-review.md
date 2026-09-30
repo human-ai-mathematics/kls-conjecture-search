@@ -4,10 +4,10 @@ authors:
   - /root/prove_cmh_approximation
 reviewer: /root/review_cmh_approximation
 fingerprints:
-  solutions/q-cmh-approximation.md: bee592ea926fef6706f8474dca5cf22aeee226bd290732469b9d5faa81abe8de
-  q:cmh-approximation: 26f10be5269f1b56dacc81d75c0fe3d9a8d856c97931c58c01c4e4554b9fbbe0
+  solutions/prop-cmh-approximation-closure.md: 5b5d574c000439cb481541b3aa65cdee02e1463ddeca7ceb1eb0a6d45aca8664
+  prop:cmh-approximation-closure: d15c585bc0ea32fb10630a4b54e0ec4d60905b33e8e2893f4001f4ba9785412d
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
-  thm:cmh-implies-affine-poincare: 4ca4161533a8e140c1e3302d067c0ba1672754860e21a237009c1df910d1dbbc
+  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   ass:uniform-cmh-approximants: d189a08645627f605d95d8f161bed294d6e48fccf1ed050b43e39ee5f1e6af45
 ---
@@ -26,7 +26,7 @@ identities are distinct.
 
 The three statements agree mathematically.
 
-- `modules/kls/40-moment-map-cmh.tex`, at `\label{q:cmh-approximation}`, asks for hypotheses and
+- `modules/kls/40-moment-map-cmh.tex`, at `\label{prop:cmh-approximation-closure}`, asks for hypotheses and
   a constant-preserving passage from regular approximants satisfying
   $C_{\mathrm{CMH}}(\mu_k)\le C$ to the affine Poincar\'e inequality for an arbitrary centered
   log-concave limit, including isotropic normalization and affine-support degeneration.
@@ -209,7 +209,7 @@ limit.  No canonical kernel is transported through a noninvertible map.
 
 ### Fences
 
-The ledger gives `q:cmh-approximation` no `bounded_by` edge.  No fixed-cut obstruction, localization
+The ledger gives `prop:cmh-approximation-closure` no `bounded_by` edge.  No fixed-cut obstruction, localization
 occupation estimate, projection ceiling, relative trace upgrade, or trace-upgrade-cluster
 implication is invoked.  The spatial cutoff used only to prove density of a Dirichlet-form core
 is not a fixed-cut route argument.

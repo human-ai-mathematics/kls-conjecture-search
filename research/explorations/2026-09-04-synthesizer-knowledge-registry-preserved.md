@@ -110,7 +110,7 @@ $|Ha|^2=(a^THa)^2+\|[a\otimes a,H]\|_{\mathrm{HS}}^2/2$.
 **Guardrail.** The algebraic countermodel certifies only that positivity, $\mathbb EH=I$, and
 constant-matrix control do not bound the transverse term. It is not a moment-map counterexample.
 This static commutator is not the stochastic high-incidence block, a moving spectral-projector
-It\^o residue, or the square-root/Haar commutator of `q:mm-square-root-commutator`.
+It\^o residue, or the square-root/Haar commutator of `conj:mm-square-root-commutator`.
 
 ## Cut-oriented Lyapunov dual scale
 
@@ -163,7 +163,7 @@ before using the formula.
 
 **Source.** Section 1 of
 `research/explorations/2026-08-30-kls-route-prober-weighted-screened-interface-w4w01.md`
-(consumer algebra of the screened `q:weighted` interface), audited and routed through
+(consumer algebra of the screened `conj:weighted-excess-rate` interface), audited and routed through
 `research/explorations/2026-08-30-synthesizer-screened-kernel-comparison-w4y01.md`. Certified
 inputs: `lem:stein-vs-source`, `cor:per-direction`, `thm:scalar-riccati`,
 `cor:tight-window-consumption`.
@@ -188,7 +188,7 @@ inputs: `lem:stein-vs-source`, `cor:per-direction`, `thm:scalar-riccati`,
    $\propto T$) also suffices: Gronwall reads
    $u(T)\le(1+2C_2c_E/(1-\theta)+C_0'T)e^{C_1'T}$ and the survival time shrinks with $c_E$.
 4. At $\theta=0$ the condition degenerates to the $2\beta+64\eta^2<1$ arithmetic of
-   `ass:weighted-package`/`q:stein-weighted`; the screened algebra strictly generalizes it.
+   `ass:weighted-package`/`conj:stein-weighted`; the screened algebra strictly generalizes it.
 
 **Use.** Preconditions for any consumer-side (absorption/consumption) argument on the screened
 Eldan interface; prevents wasted probes at $\eta\in[1/8,1/6]$ and silent subtraction of a

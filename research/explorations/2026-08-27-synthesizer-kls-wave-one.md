@@ -61,7 +61,7 @@ Wave One does not prove KLS, but it materially changes the search tree.
    dimension-free near-full-stable-rank branch, but neither live stochastic gate.
 2. The minimal Eldan consumer needs only prefix estimates from time zero. Combining this
    certified fact with the soft-projector identity removes the positive interval-boundary term
-   from the next `q:upgrade` gate. The remaining obstruction is exactly the two
+   from the next `conj:trace-upgrade` gate. The remaining obstruction is exactly the two
    cut-dependent projector-motion contractions.
 3. Independent exponential spectators kill more than the global operator-norm weight. The same
    construction defeats every universal bound with a superlinear source-vanishing remainder,
@@ -114,8 +114,8 @@ The two stochastic streams instantiate (N1) with different carriers:
 
 | stream | $X$ | exact residue | damping budget |
 |---|---|---|---|
-| `q:upgrade` | $\sqrt{s_t}K_t$ | $\mathcal H^K_{t,L}=\mathcal I_L(\sqrt{s_t}K_t)$ | a strict fraction of $D_t$ after converting $K_t$ to the Riccati tensor $G_t$ |
-| `q:mm-spectral-occupation` | $H_t$ for one fixed eigenfunction | $\mathcal R_{t,L}=\mathcal I_L(H_t)$ | at most the complete exact damping $2g_t^TA_tg_t$ |
+| `conj:trace-upgrade` | $\sqrt{s_t}K_t$ | $\mathcal H^K_{t,L}=\mathcal I_L(\sqrt{s_t}K_t)$ | a strict fraction of $D_t$ after converting $K_t$ to the Riccati tensor $G_t$ |
+| `conj:mm-spectral-occupation` | $H_t$ for one fixed eigenfunction | $\mathcal R_{t,L}=\mathcal I_L(H_t)$ | at most the complete exact damping $2g_t^TA_tg_t$ |
 
 The Klartag--Lehec inputs bound the unweighted random rank
 $\operatorname{rank}P_{t,3}$ and integrals of ordered covariance eigenvalues. The gates require
@@ -256,7 +256,7 @@ unweighted corollary has no standalone dossier or cold review. The orchestrator 
 staged the distinct open node `prop:spectator-excess-rate-obstruction`; it must not be silently
 folded into the existing proposition.
 
-## The minimal prefix gate for `q:upgrade`
+## The minimal prefix gate for `conj:trace-upgrade`
 
 The live `ass:all-cut-carleson` asks for every time interval. The certified
 `cor:tight-window-consumption` needs only prefixes from zero: for one fixed universal
@@ -334,21 +334,21 @@ ledger edge.
 
 | direction | status | reason |
 |---|---|---|
-| Klartag--Lehec rank imports $\Rightarrow$ `q:upgrade` | open | the imports count covariance ranks but do not weight them by $K_t$ or control the two contractions in (P2) |
-| `q:upgrade` $\Rightarrow$ Klartag--Lehec rank imports | not even conjectured | the imported statements are cut-free covariance theorems with different quantifiers |
-| Klartag--Lehec rank imports $\Rightarrow$ `q:mm-spectral-occupation` | open | they do not control the fixed eigenfunction's energy weights, rotation, or mixed block |
-| `q:mm-spectral-occupation` $\Rightarrow$ the rank imports | not even conjectured | one eigenfunction source cannot recover a cut-free rank theorem |
-| `q:upgrade` $\Rightarrow$ the product incident-high conclusion of `q:alignment` | open | restriction to products and $S_t^H\le S_t$ is recorded only in a probe, not a dossier |
-| `q:alignment` $\Rightarrow$ `q:upgrade` | not even conjectured | the product statement is narrower in measures and fixes the covariance eigenbasis |
-| incident-$K$ occupation $\Rightarrow$ the numerical Stein-tensor part of `q:stein-weighted` | open | the tensors agree algebraically, but no dossier promotes the reduction |
-| incident-$K$ occupation $\Rightarrow$ the geometric Jacobi/Reilly statement in `q:stein-weighted` | not even conjectured | covariance projectors do not identify Jacobi modes or boundary terms |
-| `q:stein-weighted` $\Rightarrow$ `q:upgrade` | not even conjectured | its scope is near-Cheeger cuts and no boundary-to-all-cut transform exists |
-| `q:upgrade` $\Rightarrow$ `q:stein-weighted` | not even conjectured | all-cut Riccati control gives no almost-stability or Reilly theorem |
-| `q:mm-spectral-occupation` $\Rightarrow$ any trace-upgrade-cluster node | not even conjectured | $H_t$ belongs to one eigenfunction; $K_t,G_t$ belong to a fixed cut |
-| any trace-upgrade-cluster node $\Rightarrow$ `q:mm-spectral-occupation` | not even conjectured | no cut/eigenfunction reconstruction is stated |
+| Klartag--Lehec rank imports $\Rightarrow$ `conj:trace-upgrade` | open | the imports count covariance ranks but do not weight them by $K_t$ or control the two contractions in (P2) |
+| `conj:trace-upgrade` $\Rightarrow$ Klartag--Lehec rank imports | not even conjectured | the imported statements are cut-free covariance theorems with different quantifiers |
+| Klartag--Lehec rank imports $\Rightarrow$ `conj:mm-spectral-occupation` | open | they do not control the fixed eigenfunction's energy weights, rotation, or mixed block |
+| `conj:mm-spectral-occupation` $\Rightarrow$ the rank imports | not even conjectured | one eigenfunction source cannot recover a cut-free rank theorem |
+| `conj:trace-upgrade` $\Rightarrow$ the product incident-high conclusion of `conj:product-alignment` | open | restriction to products and $S_t^H\le S_t$ is recorded only in a probe, not a dossier |
+| `conj:product-alignment` $\Rightarrow$ `conj:trace-upgrade` | not even conjectured | the product statement is narrower in measures and fixes the covariance eigenbasis |
+| incident-$K$ occupation $\Rightarrow$ the numerical Stein-tensor part of `conj:stein-weighted` | open | the tensors agree algebraically, but no dossier promotes the reduction |
+| incident-$K$ occupation $\Rightarrow$ the geometric Jacobi/Reilly statement in `conj:stein-weighted` | not even conjectured | covariance projectors do not identify Jacobi modes or boundary terms |
+| `conj:stein-weighted` $\Rightarrow$ `conj:trace-upgrade` | not even conjectured | its scope is near-Cheeger cuts and no boundary-to-all-cut transform exists |
+| `conj:trace-upgrade` $\Rightarrow$ `conj:stein-weighted` | not even conjectured | all-cut Riccati control gives no almost-stability or Reilly theorem |
+| `conj:mm-spectral-occupation` $\Rightarrow$ any trace-upgrade-cluster node | not even conjectured | $H_t$ belongs to one eigenfunction; $K_t,G_t$ belong to a fixed cut |
+| any trace-upgrade-cluster node $\Rightarrow$ `conj:mm-spectral-occupation` | not even conjectured | no cut/eigenfunction reconstruction is stated |
 | tight-prefix estimate (P1) $\Rightarrow$ universal boundary lower bound for the cut | proved (dossier) | this is exactly agent-certified `cor:tight-window-consumption` |
 
-No equivalence among `q:upgrade`, high-rank `q:stein-weighted`, and `q:alignment` is asserted.
+No equivalence among `conj:trace-upgrade`, high-rank `conj:stein-weighted`, and `conj:product-alignment` is asserted.
 The CMH square-root commutator remains a related orientation problem, not a fourth equivalent
 member.
 
@@ -356,7 +356,7 @@ member.
 
 | direction | status | reason |
 |---|---|---|
-| certified `prop:weighted-spectator-obstruction` $\Rightarrow$ negation of literal `q:weighted` | open | the first audit is noncertifying; a repaired dossier needs a fresh cold review |
+| certified `prop:weighted-spectator-obstruction` $\Rightarrow$ negation of literal `conj:weighted-excess-rate` | open | the first audit is noncertifying; a repaired dossier needs a fresh cold review |
 | every universal $W\ge1$ superlinear-remainder rate of the form (E6) holds | known false | the spectator construction and (E5)--(E6) negate it by a direct analytic reuse of the same base event and Tonelli argument; a new dossier is still required for ledger provenance |
 | an $O(T)$ bound (E3) $\Rightarrow$ the weighted consumption step | proved (dossier) | `cor:tight-window-consumption` and the existing weighted-package consumption use no $T^{1+\gamma}$ gain |
 | replacing the global weight by any $W\ge1$ cut-local weight while keeping the same rate $\Rightarrow$ a viable gate | known false | (E5) remains after every such replacement |
@@ -656,14 +656,14 @@ registries or are too route-specific to justify another battery row now.
 Ordered by value and dependency:
 
 1. Finish the fresh proof cycle for `prop:weighted-spectator-obstruction`. Only a passing new
-   review can support the atomic proposition certification and literal `q:weighted` refutation.
+   review can support the atomic proposition certification and literal `conj:weighted-excess-rate` refutation.
 2. Continue the already staged `prop:spectator-excess-rate-obstruction` through a distinct
    prover/reviewer cycle. Do not silently strengthen the existing proposition. Once certified,
    rewrite the weighted gate so every replacement changes both the global weight and the
    superlinear rate, unless it explicitly assumes near-worstness.
-3. Replace or supplement the all-interval `q:upgrade` target by the exact tight-prefix assumption
+3. Replace or supplement the all-interval `conj:trace-upgrade` target by the exact tight-prefix assumption
    (P1), whose sufficiency is already certified. Then target (P3), not another eigenvalue tail.
-4. Keep `q:mm-spectral-occupation` open and do not wire either rank import to it. Its gate should
+4. Keep `conj:mm-spectral-occupation` open and do not wire either rank import to it. Its gate should
    state the local-growth/energy-weighted-rotation target and the factor-two mixed-block rule.
 5. Send the completed Lyapunov--Stein candidate dossier to a cold reviewer; continue the active
    CMH recovery-calculus and full-matrix-dissipation provers; and dispatch the conditional-fiber
@@ -671,10 +671,10 @@ Ordered by value and dependency:
    itself.
 6. Complete the bounded Laplace--Brenier simplex probe before editing route control. If it fails,
    archive the proposal; if it survives, return to the orchestrator for route admission.
-7. Send `q:stein-weighted` to semantic sync: the ledger currently describes a Jacobi/Reilly
+7. Send `conj:stein-weighted` to semantic sync: the ledger currently describes a Jacobi/Reilly
    mechanism while the manuscript's operative object is a weighted integral inequality. State
    both the exact demanded inequality and the proposed mechanism without treating them as
-   equivalent to `q:upgrade`.
+   equivalent to `conj:trace-upgrade`.
 8. Include the proof-miner's CMH semantic debt in that sync wave: make the inverse domain in
    `prop:cmh-hodge` explicit, add the direct Bochner dependency where the Gamma proof uses it,
    repair linear-image provenance, and remove stale `checked_by: none` prose from dossiers whose
@@ -688,7 +688,7 @@ The exact new assumption shell supported by the certified consumer is:
   status: open
   route: eldan-localization
   statement: "There exist universal eta in (0,1/6], T0,C0,C1 and alpha<1 such that every isotropic log-concave mu, every fixed cut with |mu(E)-1/2|<=eta/2, and every 0<T<=T0 satisfy E int_0^(T wedge tau_eta) S_t dt <= C0 T + C1 E int_0^(T wedge tau_eta) r_t dt + alpha E int_0^(T wedge tau_eta) D_t dt."
-  bounded_by: [obs:two-tail, obs:relative-ceiling, obs:proj-ceiling]
+  bounded_by: [rem:two-tail-slice-bounds, rem:relative-ceiling, rem:projection-ceiling]
 ```
 
 Its implication to a universal cut boundary lower bound is already the certified
@@ -717,25 +717,25 @@ artifacts:
 proposed_deltas:
   - "No immediate mathematical status, dependency, bridge, refutation, solution, or review delta."
   - "Optionally stage open ass:tight-prefix-carleson exactly as displayed; its sufficiency is already certified by cor:tight-window-consumption, but the soft-projector injection premise is not."
-  - "After fresh certification of prop:weighted-spectator-obstruction, apply its literal q:weighted refutation atomically; separately prove the stronger unweighted rate obstruction before changing that status or provenance."
+  - "After fresh certification of prop:weighted-spectator-obstruction, apply its literal conj:weighted-excess-rate refutation atomically; separately prove the stronger unweighted rate obstruction before changing that status or provenance."
 next_role: orchestrator
 next_prompt: |
   First finish the repaired prop:weighted-spectator-obstruction cold-review cycle. If and only if
-  the new report passes, certify that proposition and refute the literal q:weighted node in one
+  the new report passes, certify that proposition and refute the literal conj:weighted-excess-rate node in one
   synchronized manuscript/ledger/gating update, while leaving thm:intro-weighted conditional as
   an implication. Continue the staged open prop:spectator-excess-rate-obstruction through a
   prover and cold reviewer to formalize the c P0 T unweighted lower bound; do not fold it into
-  the already reviewed statement. Supplement q:upgrade with ass:tight-prefix-carleson exactly as displayed
+  the already reviewed statement. Supplement conj:trace-upgrade with ass:tight-prefix-carleson exactly as displayed
   and direct its next owner to prove the prefix soft-projector injection estimate (P3), with
   gamma<1/8 and only the Dchi/D2chi cut-dependent contractions retained. Keep both
-  Klartag--Lehec rank imports unwired to q:upgrade and q:mm-spectral-occupation, and assert no
-  equivalence across q:upgrade, high-rank q:stein-weighted, and q:alignment. Continue the active
+  Klartag--Lehec rank imports unwired to conj:trace-upgrade and conj:mm-spectral-occupation, and assert no
+  equivalence across conj:trace-upgrade, high-rank conj:stein-weighted, and conj:product-alignment. Continue the active
   lem:lyapunov-stein-duality review cycle and the prop:cmh-recovery-calculus and
   cor:full-matrix-dissipation proof cycles; under a distinct key,
   send the conditional-fiber structural lemma/root obstruction to a prover and then a cold
   reviewer. If that route receives a manuscript anchor, import only Sasada's published root-orbit
   obstruction, never an all-frame refutation. Complete the bounded Laplace--Brenier
   optimized-simplex probe before admitting that route. Finally ask latex-sync to reconcile the
-  q:stein-weighted ledger/manuscript object and the listed CMH provenance/domain debts without
+  conj:stein-weighted ledger/manuscript object and the listed CMH provenance/domain debts without
   changing status.
 ```

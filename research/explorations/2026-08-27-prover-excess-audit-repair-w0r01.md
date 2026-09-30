@@ -28,7 +28,7 @@ retained, but that review is not presented as certifying the repaired source.
 ## Contract and fences checked
 
 The exact ledger statements and their manuscript labels were read in full. None of these five
-nodes has a ledger `bounded_by` edge. The dossier nevertheless respects `obs:circularity`:
+nodes has a ledger `bounded_by` edge. The dossier nevertheless respects `rem:profile-circularity`:
 
 - the exact excess identity is restricted to compact support, where the fixed-cut perimeter is a
   true martingale;

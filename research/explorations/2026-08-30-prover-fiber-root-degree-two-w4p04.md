@@ -151,7 +151,7 @@ next_prompt: |
   a distinct agent and reconstruct the proof from repository artifacts, not from the
   author's account).  Standalone build is clean: latexmk -pdf -outdir=../build produced
   11 pages with 0 errors; the only warnings are 7 unresolved cross-module \ref targets
-  (sec:conditional-fiber-frame, q:conditional-fiber-frame, eq:conditional-root-form,
+  (sec:conditional-fiber-frame, conj:conditional-fiber-frame, eq:conditional-root-form,
   prop:conditional-fiber-root-obstruction), expected standalone.
 
   Claimed theorem (unconditional): for every m >= 3, on the degree-<=2 quotient V_{m,2} of
@@ -168,7 +168,7 @@ next_prompt: |
   Lambda_{m,2} >= (m+2)(m+3)/(5m^2).  The dossier explicitly does NOT claim: upper bounds on
   Lambda_{m,2}, anything at k >= 3, anything about non-polynomial tests or the full L^2 gap
   (the certified vertex-cap O(m^-2) obstruction stands), root-orbit optimality, the gate
-  q:conditional-fiber-frame, or KLS.
+  conj:conditional-fiber-frame, or KLS.
 
   Hypotheses actually used: theorem part - Dirichlet(1,...,1) monomial moments (proved in
   the dossier via the classical Gamma-Dirichlet factorization, the only imported classical

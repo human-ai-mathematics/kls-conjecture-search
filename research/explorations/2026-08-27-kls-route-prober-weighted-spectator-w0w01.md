@@ -10,8 +10,8 @@ Run id: `w0w01`
 
 Concurrency key: `kls-gate:q:weighted`
 
-Scope: the literal global-operator-norm rate in `q:weighted`. This probe does not address
-`q:upgrade`, `q:stein-weighted`, or `q:alignment`, and it asserts no implication among them.
+Scope: the literal global-operator-norm rate in `conj:weighted-excess-rate`. This probe does not address
+`conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment`, and it asserts no implication among them.
 
 ## Gate, quoted verbatim
 
@@ -21,7 +21,7 @@ The active gate in `research/kls/gating.md` is:
 > $(1+\|A_t\|)^{5/2}$ weight. The argument must not insert an unproved lower bound for the
 > localized isoperimetric profile.
 
-The manuscript statement at `q:weighted` is
+The manuscript statement at `conj:weighted-excess-rate` is
 $$
  \mathbb E\int_0^{T\wedge\tau_\eta}
  e_t(E)(1+\|A_t\|_{\mathrm{op}})^{5/2}\,dt
@@ -57,7 +57,7 @@ For a fixed cylinder cut $E$ under stochastic localization:
 |---|---|---|---|
 | $p_t=\mu_t(E)$ and $\tau_\eta$ | retain balance on the interval of integration | mass martingale and continuous paths are certified | made entirely base-measurable and kept in the window on a fixed positive-probability base event |
 | $P_t=\mu_t^+(E)$ | positive part of $e_t=P_t-I_{\mu_t}(p_t)$ | perimeter martingale is certified, but gives no pathwise lower bound | bounded below for all $t\le T_b$ on the same base event by continuity of a weighted finite-perimeter measure under a small tilt |
-| $I_{\mu_t}(p_t)$ | moving posterior profile | no usable lower bound because of `obs:circularity` | upper-bounded by an explicit spectator-coordinate $p_t$-quantile half-line |
+| $I_{\mu_t}(p_t)$ | moving posterior profile | no usable lower bound because of `rem:profile-circularity` | upper-bounded by an explicit spectator-coordinate $p_t$-quantile half-line |
 | $e_t(E)$ | absolute profile excess | nonnegative by definition | bounded below by a fixed fraction of the base perimeter when a spectator variance is large |
 | $\|A_t\|_{\mathrm{op}}^{5/2}$ | calibrated covariance weight | Brascamp--Lieb only gives the cap $t^{-5/2}$ | a centered-exponential spectator attains size $c\,t^{-5/2}$ with fixed probability |
 | $Te_0$ | transports initial near-minimality | harmless if $e_0$ is small | the cylinder has arbitrarily small additive and relative $e_0$, uniformly in every later spectator dimension |
@@ -398,7 +398,7 @@ Tonelli.
 
 ## Fence-by-fence check
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 Respected. The argument retains the required $5/2$ exponent. In fact that calibrated global
 weight is exactly what makes independent spectators fatal: the cut remains in the base block,
@@ -406,7 +406,7 @@ while an unrelated covariance spike contributes $t^{-5/2}$. The obstruction says
 two-tail mode needs this power; the present construction says the power cannot be charged through
 the global operator norm.
 
-### `obs:circularity`
+### `rem:profile-circularity`
 
 Evaded. No lower bound on the random posterior profile is inserted, and no moving-family
 supermartingale is claimed. Equation (15) is an upper bound supplied by an explicit posterior
@@ -414,14 +414,14 @@ spectator half-line of the exact random mass $p_t$.
 
 ### Other named fences
 
-`obs:proj-ceiling`, `obs:crude-insufficient`, `obs:relative-ceiling`, and
-`obs:rank-one-refuted` are not used or contradicted. The construction contains no projection-only
+`rem:projection-ceiling`, `rem:crude-insufficient`, `rem:relative-ceiling`, and
+`rem:single-coordinate-cuts` are not used or contradicted. The construction contains no projection-only
 quadratic-chaos step, no covariance bootstrap, no all-measure relative bound, and no claim about
 the trace-upgrade cluster.
 
 ## Route viability and proposed gate text
 
-The literal `q:weighted` rate is a refutation candidate, and the weighted package cannot retain
+The literal `conj:weighted-excess-rate` rate is a refutation candidate, and the weighted package cannot retain
 the global operator-norm weight unchanged. This does not kill the near-Cheeger geometric idea. It
 identifies a tensor-instability requirement for any replacement.
 
@@ -446,24 +446,24 @@ proof-checker passes it.
   status: open
   route: eldan-localization
   file: modules/kls/27-eldan-open-targets.tex
-  statement: "For every proposed universal weighted-excess constants and every additive or relative near-Cheeger tolerance, a balanced cylinder in a sufficiently high product of centered one-sided exponentials violates the q:weighted global-operator-norm rate; the lower bound is c P0 T^(-3/2) with the base chosen before T and N."
+  statement: "For every proposed universal weighted-excess constants and every additive or relative near-Cheeger tolerance, a balanced cylinder in a sufficiently high product of centered one-sided exponentials violates the conj:weighted-excess-rate global-operator-norm rate; the lower bound is c P0 T^(-3/2) with the base chosen before T and N."
   depends_on: [prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]
 ```
 
 No `proved`, `refuted`, `solution`, `checked_by`, or `refuted_by` delta is proposed at the probe
 stage. If the dossier and cold review pass, the orchestrator can then apply the atomic refutation
-transition to `q:weighted` under the sharpened additive/relative statement.
+transition to `conj:weighted-excess-rate` under the sharpened additive/relative statement.
 
 ```yaml
 outcome: complete
 artifacts:
   - research/explorations/2026-08-27-kls-route-prober-weighted-spectator-w0w01.md
 proposed_deltas:
-  - "Add candidate prop:weighted-spectator-obstruction with the exact statement and dependencies displayed above; do not change q:weighted status before proof and cold review."
-  - "Replace the q:weighted gate by the displayed tensor-stability/refutation text after resolving the near-Cheeger quantifier explicitly."
+  - "Add candidate prop:weighted-spectator-obstruction with the exact statement and dependencies displayed above; do not change conj:weighted-excess-rate status before proof and cold review."
+  - "Replace the conj:weighted-excess-rate gate by the displayed tensor-stability/refutation text after resolving the near-Cheeger quantifier explicitly."
 next_role: prover
 next_prompt: |
-  Write a standalone refutation dossier for the literal q:weighted global-operator-norm rate.
+  Write a standalone refutation dossier for the literal conj:weighted-excess-rate global-operator-norm rate.
   Prove the monotone convergence of a_d=I_{lambda^d}(1/2) for centered one-sided exponential
   products and use certified product KLS to keep its limit positive; choose the base near-minimizer
   before T and N. Prove product posterior independence and the finite-perimeter base event keeping

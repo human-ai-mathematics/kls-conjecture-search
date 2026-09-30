@@ -25,7 +25,7 @@ All 41 former KLS exceptions were located in the manuscript and classified:
   independent source audit matched the former to Rosales (2014), Lemma 4.1(ii) and (4.1), and the
   latter to Ma--Du (2010), Theorem 1. The audit caught and repaired an inner/outer-normal sign
   mismatch in the manuscript's Reilly statement;
-- `rem:almost-stability-gap` states a missing theorem and is open;
+- `conj:almost-stability-gap` states a missing theorem and is open;
 - `rem:kl-window-verified` records published-source attribution and is imported; and
 - `rem:trace-upgrade-unification` and `rem:taming-type-mismatch` are diagnostic syntheses whose
   unproved extrapolations are heuristic.

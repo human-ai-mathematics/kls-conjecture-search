@@ -1,4 +1,4 @@
-"""Filtering-path simulation and interval occupation for product ``q:alignment``.
+"""Filtering-path simulation and interval occupation for product ``conj:product-alignment``.
 
 If ``X`` has the initial law and ``B_t`` is an independent Brownian motion, then
 

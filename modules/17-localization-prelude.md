@@ -6,7 +6,7 @@ numbering:
 (sec:localization-prelude)=
 # Prelude: what stochastic localization does, and what it costs
 
-Approaches E and S share a language, and this section is that language, at the level of detail needed to follow either approach's argument and to see where it stops. It states no identity precisely and proves nothing. The exact process, the SDEs, the Itô calculations, the two-colour notation, the Riccati and Stein identities, the covariance estimates and the model geometries are Appendices [](#sec:notation)–[](#sec:models), and each is linked below at the point where it is first needed. A reader willing to take the mechanism on trust can go directly from here to Section [](#sec:introduction) or Section [](#sec:spectral-route).
+Approaches E and S share a language, and this section is that language, at the level of detail needed to follow either approach's argument and to see where it stops. It states no identity precisely and proves nothing. The exact process, the SDEs, the Itô calculations, the two-colour notation, the Riccati and Stein identities, the covariance estimates and the model geometries are Appendices [](#sec:notation)–[](#sec:models), and each is linked below at the point where it is first needed. A reader willing to take the mechanism on trust can go directly from here to Section [](#sec:introduction) or Section [](#sec:spectral-approach).
 
 (subsec:prelude-process)=
 ## The process, and why one would want it
@@ -45,7 +45,7 @@ a martingale increment plus a drift split into exactly one positive *source* $S_
 
 The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Appendix [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every fixed-cut argument in Part III is, in the end, an attempt to absorb the source into the damping for long enough.
 
-The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Appendix [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#q:upgrade) in Section [](#sec:open) is Approach E's version of it.
+The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Appendix [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Section [](#sec:open) is Approach E's version of it.
 
 (subsec:prelude-warning)=
 ## The warning that constrains both approaches
@@ -61,4 +61,4 @@ Product measures are the standing stress test for exactly this reason, and Appen
 (subsec:prelude-onward)=
 ## Where to go from here
 
-Section [](#sec:qcts) states the static input the fixed-cut approach consumes and the two-tail obstruction that limits what it can supply; it is in the main text rather than the appendices because it is an obstruction, not a tool. Section [](#sec:introduction) then opens Approach E and Section [](#sec:spectral-route) Approach S, each with a summary in the same format.
+Section [](#sec:qcts) states the static input the fixed-cut approach consumes and the two-tail obstruction that limits what it can supply; it is in the main text rather than the appendices because it is an obstruction, not a tool. Section [](#sec:introduction) then opens Approach E and Section [](#sec:spectral-approach) Approach S, each with a summary in the same format.

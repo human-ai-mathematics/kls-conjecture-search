@@ -1,4 +1,4 @@
-"""Cut-scale, perimeter, and source-screening observables for the KLS ``q:weighted`` probe.
+"""Cut-scale, perimeter, and source-screening observables for the KLS ``conj:weighted-excess-rate`` probe.
 
 This module implements, exactly and without sampling inside a state, the objects that the
 ``w3`` route probe

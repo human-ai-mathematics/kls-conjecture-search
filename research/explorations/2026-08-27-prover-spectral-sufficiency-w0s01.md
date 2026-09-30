@@ -19,7 +19,7 @@ applicable before an independent review.
 
 The accepted ledger node is `prop:spectral-sufficiency`, anchored at
 `prop:spectral-sufficiency` in `modules/kls/30-spectral-route.tex`. Its sole `depends_on` edge is
-the open node `q:mm-spectral-occupation`. It has no `bounded_by` edge.
+the open node `conj:mm-spectral-occupation`. It has no `bounded_by` edge.
 
 The refined premise is the full-damping estimate: for universal $T_0,C_0,C_1>0$, every normalized
 first eigenfunction on every regular centered isotropic log-concave approximant satisfies
@@ -115,18 +115,18 @@ The proof uses:
 
 There are no hypotheses used but omitted from the theorem and no unclosed analytic step in the
 conditional implication. The sole unresolved mathematical premise is
-`q:mm-spectral-occupation`. No numerical evidence is used.
+`conj:mm-spectral-occupation`. No numerical evidence is used.
 
 ## Fence-by-fence check
 
 There is no formal `bounded_by` edge. All live obstruction shapes were nevertheless checked:
 
-- `obs:two-tail`: no cut, slice, excess, or absolute fixed-cut source estimate occurs;
-- `obs:proj-ceiling`: no tensor bound is inferred from radial or projection-only tests;
-- `obs:crude-insufficient`: no crude covariance integral is used;
-- `obs:relative-ceiling`: no relative covariance occupation conclusion is claimed;
-- `obs:circularity`: no localized isoperimetric profile or changing competitor family appears;
-- `obs:rank-one-refuted`: no product-cut witness or conclusion appears;
+- `rem:two-tail-slice-bounds`: no cut, slice, excess, or absolute fixed-cut source estimate occurs;
+- `rem:projection-ceiling`: no tensor bound is inferred from radial or projection-only tests;
+- `rem:crude-insufficient`: no crude covariance integral is used;
+- `rem:relative-ceiling`: no relative covariance occupation conclusion is claimed;
+- `rem:profile-circularity`: no localized isoperimetric profile or changing competitor family appears;
+- `rem:single-coordinate-cuts`: no product-cut witness or conclusion appears;
 - the covariance-spike fence is respected because no pathwise operator-norm control of $A_t$ is
   used; posterior curvature is invoked only at the terminal time;
 - no truncated-exponential Stein shortcut, trace-upgrade implication, or CMH claim is made.
@@ -138,7 +138,7 @@ The deferred artifact candidate is `solutions/prop-spectral-sufficiency.tex`. It
 ledger delta**. Only a distinct cold proof-checker may certify it; after a passing persisted
 review, the orchestrator could atomically consider the future
 `solution: solutions/prop-spectral-sufficiency.tex` metadata while keeping the node conditional
-on `q:mm-spectral-occupation`.
+on `conj:mm-spectral-occupation`.
 
 ## Build and validation
 
@@ -155,7 +155,7 @@ The required command
 now exits with status 0 and produces "build/prop-spectral-sufficiency.pdf" (four pages). The final
 log contains no TeX error, overfull box, underfull box, or package warning. Its only LaTeX
 warnings are the five expected unresolved cross-module references in the standalone build:
-"q:mm-spectral-occupation", "prop:spectral-sufficiency", "subsec:spectral-sde", and "conj:kls"
+"conj:mm-spectral-occupation", "prop:spectral-sufficiency", "subsec:spectral-sde", and "conj:kls"
 (with the occupation reference occurring twice).
 
 "git diff --check" is clean for the two owned artifacts. The read-only structural check
@@ -208,7 +208,7 @@ next_prompt: |
   C_c-infinity tests and extend to every locally Lipschitz test by value truncation, spatial
   cutoff, and mollification. No convergence of first eigenfunctions may be assumed.
 
-  The sole dependency is the explicitly assumed open node q:mm-spectral-occupation; a passing
+  The sole dependency is the explicitly assumed open node conj:mm-spectral-occupation; a passing
   result therefore remains conditional and does not make KLS proved. The ledger node has no
   formal bounded_by edge. Check nonetheless that the dossier uses no cut/slice/excess or
   localized-profile estimate, projection-only tensor conclusion, crude or relative covariance

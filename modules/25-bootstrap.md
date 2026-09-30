@@ -80,7 +80,7 @@ and, for $0<T<1/8$, the admissible choice $\eta=T^{1/3}<1/2$ together with $\eps
 ```
 :::
 
-*Proof.* Six steps: the perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event; and the remaining steps collect the error terms into the interface functional. The calculation is carried out in Appendix [](#sec:appendix-route-e).
+*Proof.* Six steps: the perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event; and the remaining steps collect the error terms into the interface functional. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
 
 :::{prf:theorem} Stopped covariance-interface refinement
 :label: thm:bootstrap-stopped-interface
@@ -136,11 +136,11 @@ $\Tr A_t$ has drift $-\Tr A_t^2\le0$ by [](#eq:cov-sde), so $\E\lmax(A_t)\le\E\T
 For [](#eq:clean-form) to yield even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But, conditional on the July 2026 version-1 preprint of Letwin, $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ [@Letwin2026QuadraticKLS]; even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude bound therefore never suffices in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
 :::
 
-The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Section [](#sec:covariance-tech) ([](#hyp:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).
+The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Section [](#sec:covariance-tech) ([](#ass:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).
 
 :::{prf:corollary} Polylog evaluation
 :label: cor:loglog
-Under [](#hyp:KI), for $t_1(n)\le T\le1$, $\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$. Hence, when additionally $T<1/8$ and the near-worst parameter satisfies $\eps\le T^{1/3}$, every such $\mu$ and every balanced cut $E$ satisfy, by [](#eq:clean-form),
+Under [](#ass:KI), for $t_1(n)\le T\le1$, $\Xi_T(\mu)\le C_1t_1(n)+\log(T/t_1(n))\le C(1+\log\log n)$. Hence, when additionally $T<1/8$ and the near-worst parameter satisfies $\eps\le T^{1/3}$, every such $\mu$ and every balanced cut $E$ satisfy, by [](#eq:clean-form),
 
 ```{math}
 :label: eq:loglog-supply
@@ -185,8 +185,8 @@ Assembling this section and the previous one, the propagation estimates availabl
 | Scale of the excess bound | Scope | Source |
 |---|---|---|
 | Absolute, $\le C(1+e_0)T$ | No hypothesis: all $\mu$, all balanced $E$ | [](#prop:trivial-excess). |
-| Absolute with small constant, $\le Te_0+\kappa T$ | Holds for near-worst $\mu$ whenever $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass. [](#hyp:KI) | [](#cor:loglog); the universal-time near-worst extension is [](#q:taming). |
-| Relative, $\le\kappa\,h_\mu T$ | Requires, as bootstrap input, $\Xi_T\le c\kappa T$, which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; whether near-extremal measures satisfy this stronger, unweighted covariance bound is a separate question from [](#q:taming), which asks only for the $h_\mu$-weighted form | [](#prop:ceiling). |
+| Absolute with small constant, $\le Te_0+\kappa T$ | Holds for near-worst $\mu$ whenever $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass. [](#ass:KI) | [](#cor:loglog); the universal-time near-worst extension is [](#conj:taming). |
+| Relative, $\le\kappa\,h_\mu T$ | Requires, as bootstrap input, $\Xi_T\le c\kappa T$, which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; whether near-extremal measures satisfy this stronger, unweighted covariance bound is a separate question from [](#conj:taming), which asks only for the $h_\mu$-weighted form | [](#prop:ceiling). |
 
 On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the approach, posed precisely in Section [](#sec:open).
 :::
@@ -196,17 +196,17 @@ On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be 
 For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a nonnegative supermartingale (drift $-A^2$), so $\Prob(\sup_{s\le t}A^{(i)}_s\ge\lambda)\le1/\lambda$ by the maximal inequality. A more careful small-time analysis of the $n$ independent variance processes — which we do not carry out — suggests $\Xi_T\asymp\log\log n$ for products of two-sided exponentials, matching [](#cor:loglog) and consistent with the known observation that a single eigenvalue can reach order $\log n$, saturating the cap [](#eq:BL-cap) at $t\asymp1/\log n$ [@Chen2021; @KlartagLehec2022Polylog]. For products, however, $h_\mu\asymp1\gg\hstar_n$ in any hypothetical bad regime, so the near-worstness hypothesis fails and the bootstrap is vacuous — correctly so: products cannot be counterexamples, and their excess propagation follows directly from $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization ([](#prop:products)).
 :::
 
-(subsec:bootstrap-fences)=
+(subsec:bootstrap-barriers)=
 ## Methodological constraints from this section
 
 Both remarks below are methodological constraints on the bootstrap input, warnings rather than theorems; later sections use them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} The crude covariance integral cannot bootstrap
-:label: obs:crude-insufficient
+:label: rem:crude-insufficient
 The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:insufficiency), is too large to yield the required excess estimate at known KLS lower-bound scales. A viable bootstrap input must improve the logarithm; the available polylogarithmic technology reaches only the scale of [](#cor:loglog).
 :::
 
 :::{prf:remark} An all-measure relative bound already implies KLS
-:label: obs:relative-ceiling
-By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and an argument that aims at it has replaced the target by an equivalent-strength statement. [](#q:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
+:label: rem:relative-ceiling
+By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and an argument that aims at it has replaced the target by an equivalent-strength statement. [](#conj:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
 :::

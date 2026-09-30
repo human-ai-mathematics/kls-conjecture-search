@@ -8,7 +8,7 @@ Role: literature-scout
 
 Run id: `w0l01`
 
-Scope: source verification for the proposed exponential-spectator obstruction to `q:weighted`.
+Scope: source verification for the proposed exponential-spectator obstruction to `conj:weighted-excess-rate`.
 This record imports no refutation and changes no mathematical status.
 
 ## Exact statements sought
@@ -163,7 +163,7 @@ Bobkov--Chistyakov is the direct sharp primary source for (5).
 ## Collision and mismatch audit
 
 The two source inputs are valid, but they do not by themselves prove the proposed refutation of
-`q:weighted`.
+`conj:weighted-excess-rate`.
 
 1. **One-sided, not two-sided.** Proposition 65 uses $X_i=Y_i-1$ with $Y_i$ a one-sided
    exponential.  The description at `modules/kls/00-orientation.tex` is correct.  The sentence
@@ -178,7 +178,7 @@ The two source inputs are valid, but they do not by themselves prove the propose
    perimeter $P_t(E)$ of the tracked cylinder cut.
 4. **The cut still has to qualify, but the companion probe has an internal argument.** No
    external source found proves tensor-stability of a cylinder's near-Cheeger qualification.
-   The companion `q:weighted` prober reports the following additive-excess resolution: put
+   The companion `conj:weighted-excess-rate` prober reports the following additive-excess resolution: put
    $h_\infty=\lim_n h_n^\star$, choose a fixed base dimension $m$, law $\nu$, and balanced cut
    $E$ with $P_0(E)\leq h_\infty/2+\delta$; then for every number $N$ of spectators,
    $I_{\nu\otimes\mathrm{Exp}^{\otimes N}}(1/2)\geq h_{m+N}^\star/2\geq h_\infty/2$, so the
@@ -229,7 +229,7 @@ inline, add a manuscript anchor and the following imported node:
   statement: "For every one-dimensional log-concave probability density f of variance v>0, 1/12 <= v ||f||_infty^2 <= 1. In particular every p-quantile half-line has boundary density at most v^(-1/2)."
 ```
 
-No dependency edge to `q:weighted` or refutation status is justified until the companion
+No dependency edge to `conj:weighted-excess-rate` or refutation status is justified until the companion
 prober's additive near-Cheeger and base-stability arguments are persisted, authored as a
 standalone dossier, and independently reviewed.
 
@@ -308,13 +308,13 @@ proposed_deltas:
   - "Correct the unsupported two-sided-exponential attribution in modules/kls/22-product-stress.tex; Proposition 65 is one-sided."
 next_role: orchestrator
 next_prompt: |
-  Apply no q:weighted status change from this literature report alone. Import the event-level
+  Apply no conj:weighted-excess-rate status change from this literature report alone. Import the event-level
   centered-one-sided-exponential covariance-spike node and the sharp density-variance lemma only
   if their manuscript anchors and bibliography entries are added atomically with the displayed
-  published provenance. Reconcile this report with the q:weighted prober's persisted additive
+  published provenance. Reconcile this report with the conj:weighted-excess-rate prober's persisted additive
   near-Cheeger and base-stability arguments, and sharpen the undefined term `near-Cheeger` before
   assigning a refutation dossier. Require that dossier to use fixed-time Tonelli plus
   product-filtration independence, not an unsupported persistent spike event, and to correct
   every two-sided/one-sided attribution. Only a distinct cold review may then justify a
-  refutation node or q:weighted status change.
+  refutation node or conj:weighted-excess-rate status change.
 ```

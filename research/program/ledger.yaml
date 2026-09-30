@@ -279,7 +279,7 @@ nodes:
       - artifact: solutions/kls-bootstrap-interface.md
         review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
 
-  - id: hyp:KI
+  - id: ass:KI
     status: proved
     references: [KLnotes, KlartagLehec2022Polylog]
 
@@ -289,7 +289,7 @@ nodes:
 
   - id: cor:loglog
     status: proved
-    depends_on: [thm:bootstrap, hyp:KI, cor:KI-discharged]
+    depends_on: [thm:bootstrap, ass:KI, cor:KI-discharged]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
         review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
@@ -332,7 +332,7 @@ nodes:
       - artifact: solutions/kls-geometry-models.md
         review: research/reviews/2026-08-27-kls-geometry-models-repair-proof-review.md
 
-  - id: rem:almost-stability-gap
+  - id: conj:almost-stability-gap
     status: open
     depends_on: [prop:second-variation, prop:reilly, lem:boundary-rep]
 
@@ -375,7 +375,7 @@ nodes:
       - artifact: solutions/kls-product-covariance.md
         review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
-  - id: cor:refutation
+  - id: cor:single-coordinate-cuts
     status: proved
     depends_on: [thm:budget]
     proofs:
@@ -427,7 +427,7 @@ nodes:
   # ELDAN OPEN TARGETS
   # ---------------------------------------------------------------------------
 
-  - id: q:upgrade
+  - id: conj:trace-upgrade
     status: open
 
   - id: lem:time-weighted-source
@@ -437,7 +437,7 @@ nodes:
       - artifact: solutions/lem-time-weighted-source.md
         review: research/reviews/2026-08-27-lem-time-weighted-source-proof-review.md
 
-  - id: q:weighted
+  - id: conj:weighted-excess-rate
     status: refuted
     refuted_by: [prop:weighted-spectator-obstruction]
 
@@ -462,24 +462,24 @@ nodes:
       - artifact: solutions/prop-split-screened-supply.md
         review: research/reviews/2026-08-30-prop-split-screened-supply-proof-review.md
 
-  - id: q:stein-weighted
+  - id: conj:stein-weighted
     status: open
 
-  - id: q:taming
+  - id: conj:taming
     status: open
 
-  - id: q:splitting
+  - id: conj:splitting
     status: open
 
-  - id: q:alignment
+  - id: conj:product-alignment
     status: open
 
-  - id: hyp:absolute-geometric-completion
+  - id: ass:absolute-geometric-completion
     status: open
 
   - id: cor:dichotomy
     status: open
-    depends_on: [thm:bootstrap, cor:loglog, hyp:absolute-geometric-completion]
+    depends_on: [thm:bootstrap, cor:loglog, ass:absolute-geometric-completion]
 
   # ---------------------------------------------------------------------------
   # FIXED-EIGENFUNCTION MOMENT-MAP / SPECTRAL ROUTE
@@ -491,12 +491,12 @@ nodes:
       - artifact: solutions/lem-mm-posterior-defect.md
         review: research/reviews/2026-08-27-lem-mm-posterior-defect-proof-review.md
 
-  - id: q:mm-spectral-occupation
+  - id: conj:mm-spectral-occupation
     status: open
 
   - id: prop:spectral-sufficiency
     status: proved
-    assumes: [q:mm-spectral-occupation]
+    assumes: [conj:mm-spectral-occupation]
     proofs:
       - artifact: solutions/prop-spectral-sufficiency.md
         review: research/reviews/2026-08-27-prop-spectral-sufficiency-proof-review.md
@@ -543,13 +543,13 @@ nodes:
   - id: ass:uniform-cmh-approximants
     status: open
 
-  - id: q:cmh-approximation
+  - id: prop:cmh-approximation-closure
     status: proved
     depends_on: [def:cmh, thm:cmh-implies-affine-poincare, thm:regular-moment-map-compact-target]
     assumes: [ass:uniform-cmh-approximants]
     proofs:
-      - artifact: solutions/q-cmh-approximation.md
-        review: research/reviews/2026-08-27-q-cmh-approximation-proof-review.md
+      - artifact: solutions/prop-cmh-approximation-closure.md
+        review: research/reviews/2026-08-27-prop-cmh-approximation-closure-proof-review.md
 
   - id: lem:affine-poincare-w2-liminf
     status: proved
@@ -576,12 +576,12 @@ nodes:
       - artifact: solutions/lem-affine-poincare-w2-liminf.md
         review: research/reviews/2026-08-27-lem-affine-poincare-w2-liminf-proof-review.md
 
-  - id: q:mm-invariant-lift
+  - id: conj:mm-invariant-lift
     status: open
 
-  - id: q:mm-square-root-commutator
+  - id: conj:mm-square-root-commutator
     status: open
-    depends_on: [q:mm-invariant-lift, def:cmh]
+    depends_on: [conj:mm-invariant-lift, def:cmh]
 
   # ---------------------------------------------------------------------------
   # CMH NORMALIZATION AND EXACT CASES
@@ -611,7 +611,7 @@ nodes:
       - artifact: solutions/thm-cmh-normalization.md
         review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
 
-  - id: rem:cmh-stronger-than-kls
+  - id: cor:cmh-hodge-comparison
     status: proved
     depends_on: [prop:cmh-hodge, thm:cmh-1d]
     proofs:
@@ -695,16 +695,16 @@ nodes:
       - artifact: solutions/thm-cmh-dirichlet.md
         review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
 
-  - id: rem:cmh-saturation-risk
+  - id: cor:cmh-product-saturation
     status: proved
     depends_on: [thm:cmh-1d, thm:cmh-product, prop:cmh-hodge]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
         review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
 
-  - id: q:cmh-solenoidal-perturbation
+  - id: conj:cmh-second-variation
     status: open
-    depends_on: [rem:cmh-saturation-risk, def:cmh]
+    depends_on: [cor:cmh-product-saturation, def:cmh]
 
   # ---------------------------------------------------------------------------
   # CONDITIONAL-FIBER FRAME ROUTE
@@ -717,7 +717,7 @@ nodes:
       - artifact: solutions/conditional-fiber-frame-structure.md
         review: research/reviews/2026-08-27-conditional-fiber-frame-structure-proof-review.md
 
-  - id: q:conditional-fiber-frame
+  - id: conj:conditional-fiber-frame
     status: open
 
   - id: prop:conditional-fiber-root-obstruction

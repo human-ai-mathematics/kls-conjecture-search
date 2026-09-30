@@ -1,4 +1,4 @@
-"""Exact product-tail-union observables for the KLS ``q:alignment`` stress test.
+"""Exact product-tail-union observables for the KLS ``conj:product-alignment`` stress test.
 
 The base measure is the isotropic product Laplace law and the fixed cut is
 

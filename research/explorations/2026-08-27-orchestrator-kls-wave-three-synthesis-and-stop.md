@@ -75,10 +75,10 @@ normalization checked independently. See the
 
 ### Eldan localization
 
-The raw soft-projector contraction proposed for `q:upgrade` is analytically false. A Gaussian
+The raw soft-projector contraction proposed for `conj:trace-upgrade` is analytically false. A Gaussian
 halfspace cylinder with arbitrarily many independent one-sided-exponential spectators has zero
 spectator source but positive raw $D^2\chi/D\chi$ injection growing with dimension. This does
-not refute `ass:tight-prefix-carleson`, `q:upgrade`, or KLS: the omitted terminal and favorable
+not refute `ass:tight-prefix-carleson`, `conj:trace-upgrade`, or KLS: the omitted terminal and favorable
 drift terms cancel the spectators. The live gate is now a spectator-cancelling cut-relative or
 net-injection estimate with a strict damping surplus. See the
 [singleton trace-cluster probe](2026-08-27-kls-route-prober-tight-prefix-soft-projector-w3p01.md).
@@ -96,10 +96,10 @@ set $Q_t\ge\kappa e_tW_{\rm cut}$ and return an absorbable $\theta Q_t$ off that
 $2\beta/(1-\theta)+64\eta^2<1$. See the
 [weighted replacement probe](2026-08-27-kls-route-prober-cut-local-weighted-replacement-w3.md).
 
-`q:stein-weighted` is now stated as the actual stopped integral inequality, not as the proposed
+`conj:stein-weighted` is now stated as the actual stopped integral inequality, not as the proposed
 Jacobi--Reilly mechanism. It remains an independent open ingredient with no viable KLS consumer
-until a tensor-stable propagation package is supplied. No implication among `q:upgrade`, the
-high-rank part of `q:stein-weighted`, and `q:alignment` was added.
+until a tensor-stable propagation package is supplied. No implication among `conj:trace-upgrade`, the
+high-rank part of `conj:stein-weighted`, and `conj:product-alignment` was added.
 
 ### Deterministic moment-map / CMH
 

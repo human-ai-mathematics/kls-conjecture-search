@@ -195,7 +195,7 @@ def conditional_moments(
     the background sum law is gridded; the error is dominated by ``n_bins`` and
     converges ~linearly (vs an independent MC: ``n_bins=2^17`` gives ``p`` to
     ~5e-4, conditional covariances to MC noise). The default suffices for the
-    foundation oracles (small ``k``). The deferred large-``n`` ``q:alignment``
+    foundation oracles (small ``k``). The deferred large-``n`` ``conj:product-alignment``
     runs need a higher ``n_bins`` or a better background method -- see README.
     """
     if cut.k == 1:

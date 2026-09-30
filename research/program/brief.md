@@ -50,7 +50,7 @@ the node that currently instantiates it, so the list stays checkable:
 | does not complete the target | instantiated by |
 |---|---|
 | any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
-| an implication whose antecedent is open | `prop:spectral-sufficiency`, `q:cmh-approximation`, `cor:cmh-recovery-sequence-suffices`, `lem:mm-stopped-window-source`, `prop:mm-window-occupation` — all `proved` with a non-empty `assumes` |
+| an implication whose antecedent is open | `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices`, `lem:mm-stopped-window-source`, `prop:mm-window-occupation` — all `proved` with a non-empty `assumes` |
 | a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
 | a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so $\mathrm{CMH}(4)$ would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
 
@@ -60,8 +60,8 @@ the refuter is an ordinary `proved` node appearing in the target's `refuted_by` 
 an exact witness a run finds is a candidate until checked by hand in the dossier.
 
 **Refuting a route is not refuting the target, and this has already happened once.**
-`q:weighted` and `ass:weighted-package` are `refuted` by `prop:weighted-spectator-obstruction`,
-whose own witnesses satisfy a dimension-free KLS bound. Likewise `rem:cmh-stronger-than-kls`:
+`conj:weighted-excess-rate` and `ass:weighted-package` are `refuted` by `prop:weighted-spectator-obstruction`,
+whose own witnesses satisfy a dimension-free KLS bound. Likewise `cor:cmh-hodge-comparison`:
 refuting $\mathrm{CMH}(4)$ would close the CMH route without touching `conj:kls`.
 
 ## Edge cases and audit tests
@@ -70,7 +70,7 @@ The calibration and stress instances with an analytic oracle or a named failure 
 registered in [`research/lib/instances.md`](../lib/instances.md), next to the code that emits
 them; this section is the reasoning a new route needs before it runs anything.
 
-1. **Anisotropic Gaussian two-tail cut** (`obs:two-tail`, from `prop:two-tail`). $r=D=0$ while
+1. **Anisotropic Gaussian two-tail cut** (`rem:two-tail-slice-bounds`, from `prop:two-tail`). $r=D=0$ while
    the Stein source is order $\Lambda^2$ and the excess order $\Lambda^{-1/2}$. Any slice-wise
    absolute-scale estimate dies here, and covariance weight at least
    $(1+\lVert A\rVert_{\mathrm{op}})^{5/2}$ is forced.
@@ -82,8 +82,8 @@ them; this section is the reasoning a new route needs before it runs anything.
    $\varepsilon\ne0$. Exact cylinder and direct-sum tensorization is not evidence of stability;
    test cross-block leakage. The scale is singular at $t=0$ and uses the Moore–Penrose convention
    for singular $A$.
-4. **Single-coordinate balanced product cuts self-extinguish** (`obs:rank-one-refuted`, from
-   `cor:refutation`): total expected source budget at most $1$. An occupation counterexample must
+4. **Single-coordinate balanced product cuts self-extinguish** (`rem:single-coordinate-cuts`, from
+   `cor:single-coordinate-cuts`): total expected source budget at most $1$. An occupation counterexample must
    use high-complexity cuts.
 5. **Isotropic simplex with the $A_{m-1}$ root frame.** The root-frame gap is $O(m^{-2})$
    (`prop:conditional-fiber-root-obstruction`), while the exact degree-two dual floors give
@@ -109,17 +109,17 @@ them; this section is the reasoning a new route needs before it runs anything.
 
 ## Traps and circular reductions
 
-1. **Circularity** (`obs:circularity`). Excess propagation wants a lower bound on the expected
+1. **Circularity** (`rem:profile-circularity`). Excess propagation wants a lower bound on the expected
    isoperimetric profile of the random posterior; the available supermartingale covers a *fixed*
    competitor family while the balanced family moves with time. Inserting the bound directly
    assumes the Cheeger control being proved.
-2. **The equivalent-strength ceiling** (`obs:relative-ceiling`, from `prop:ceiling`). A universal
+2. **The equivalent-strength ceiling** (`rem:relative-ceiling`, from `prop:ceiling`). A universal
    $\Xi_{T_0}\le\kappa T_0$ at small fixed time *already implies KLS*. A route aiming at it has
    replaced the target by a restatement of it. This is the canonical shape to check a new route
    against.
-3. **Crude bootstrap** (`obs:crude-insufficient`). $\Xi_T\lesssim\log n$ is too large at known
+3. **Crude bootstrap** (`rem:crude-insufficient`). $\Xi_T\lesssim\log n$ is too large at known
    lower-bound scales; the available polylogarithmic technology reaches only `cor:loglog`.
-4. **Projection ceiling** (`obs:proj-ceiling`). Radial and projection-only tests lose a logarithm;
+4. **Projection ceiling** (`rem:projection-ceiling`). Radial and projection-only tests lose a logarithm;
    dimension-free quadratic-chaos control needs tensor-aware information.
 5. **Thin shell is not KLS.** `eq:kls-implies-thin-shell` runs one way; no dimension-free converse
    is known and none is disproved. A thin-shell improvement is not a partial proof of the target.
@@ -127,7 +127,7 @@ them; this section is the reasoning a new route needs before it runs anything.
    both carry certified bridges *into* KLS and none out of it.
 7. **Static algebra is not the stochastic residue.** The commutator split of
    `prop:letwin-not-gate-zero` is not the high-incidence block, not a moving-projector Itô
-   residue, and not the Haar commutator of `q:mm-square-root-commutator`.
+   residue, and not the Haar commutator of `conj:mm-square-root-commutator`.
 8. **An exact number is still a candidate.** Exact Loewner verdicts emitted by a run refute
    nothing until a reviewed dossier says so.
 9. **The sharp linear sector is not the CMH constant.** Gate zero at constant $4$ is what
@@ -141,8 +141,8 @@ them; this section is the reasoning a new route needs before it runs anything.
 Two rules are specific to this program. They were constraints P1 and P2 of the v0.1 harness,
 and earlier records cite them under those names.
 
-- **P1 — Do not fan out across the trace-upgrade cluster.** `q:upgrade`, the high-rank part of
-  `q:stein-weighted` and `q:alignment` share one high-rank occupation difficulty, but
+- **P1 — Do not fan out across the trace-upgrade cluster.** `conj:trace-upgrade`, the high-rank part of
+  `conj:stein-weighted` and `conj:product-alignment` share one high-rank occupation difficulty, but
   `rem:trace-upgrade-unification` proves no equivalence between them, and
   `rem:gate-zero-trace-upgrade` records that `conj:gate-zero` is related without being known
   equivalent. One owner — the orchestrator — holds the comparison and propagates only proved
@@ -155,17 +155,17 @@ and earlier records cite them under those names.
 
 ## Neighbourhood
 
-- `prop:spectral-sufficiency` — proved, with `q:mm-spectral-occupation` in `assumes`: the
+- `prop:spectral-sufficiency` — proved, with `conj:mm-spectral-occupation` in `assumes`: the
   fixed-eigenfunction occupation estimate implies `conj:kls`, so settling
-  `q:mm-spectral-occupation` settles the target on that side.
+  `conj:mm-spectral-occupation` settles the target on that side.
 - `thm:cmh-implies-affine-poincare` — proved: $\mathrm{CMH}(4)$ implies the affine Poincaré
-  bound, which with `q:cmh-approximation` and a discharged `ass:uniform-cmh-approximants` or
+  bound, which with `prop:cmh-approximation-closure` and a discharged `ass:uniform-cmh-approximants` or
   `ass:cmh-recovery-envelope` would close the target.
 - `conj:gate-zero` and `conj:gate-zero-sharp` — the cheapest necessary consequences of
   $\mathrm{CMH}(4)$ on linear tests; the sharp form refines the other, and either falsifies the
   CMH route without touching the target.
-- `q:upgrade` — the tight-prefix operator-to-trace upgrade that would carry the fixed-cut route.
-- `q:conditional-fiber-frame` — a universal form gap for one test-independent frame, which
+- `conj:trace-upgrade` — the tight-prefix operator-to-trace upgrade that would carry the fixed-cut route.
+- `conj:conditional-fiber-frame` — a universal form gap for one test-independent frame, which
   implies the target through `lem:conditional-fiber-form`.
 
 ## Budget policy

@@ -23,7 +23,7 @@ $C,T_0,\gamma>0$, $\eta\in(0,1/2)$, and $\delta>0$, a sufficiently high product 
 one-sided exponentials has a balanced finite-perimeter cylinder with both
 $e_0\le\delta$ and $e_0/I_\mu(1/2)\le\delta$ that violates the literal
 global-operator-norm weighted rate at some $T\le T_0$. The construction additionally has
-$e_0\le1$, so it lies in the explicit quantifier class of `q:weighted`.
+$e_0\le1$, so it lies in the explicit quantifier class of `conj:weighted-excess-rate`.
 
 The result attacks only the global weight used by the current gate. It does not attack KLS:
 the same product theorem used in the proof gives a dimension-free KLS bound for every witness.
@@ -102,8 +102,8 @@ until a distinct cold reviewer checks the complete argument.
 Dependencies are exactly
 `[prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]`.
 All are published imports or proved nodes, so the candidate is unconditional relative to the
-repository's accepted inputs. The node has no `bounded_by` entry. The nearby `obs:two-tail`
-calibration is respected because the proof retains exponent $5/2$; `obs:circularity` is evaded
+repository's accepted inputs. The node has no `bounded_by` entry. The nearby `rem:two-tail-slice-bounds`
+calibration is respected because the proof retains exponent $5/2$; `rem:profile-circularity` is evaded
 by the explicit profile competitor. No trace-upgrade claim is made.
 
 Additional standard analytic facts actually used are weighted-BV strict approximation and
@@ -126,7 +126,7 @@ used.
 
 There is no applicable ledger delta from an unreviewed dossier. If and only if a distinct
 proof-checker passes the proof, the deferred candidate solution is
-`solutions/prop-weighted-spectator-obstruction.tex`. Any resulting `q:weighted` refutation
+`solutions/prop-weighted-spectator-obstruction.tex`. Any resulting `conj:weighted-excess-rate` refutation
 transition belongs to the orchestrator and must name the certified proposition as its refuter;
 this prover changes neither node.
 
@@ -142,7 +142,7 @@ next_prompt: |
   Cold-review `solutions/prop-weighted-spectator-obstruction.tex` against the exact manuscript
   statement and ledger node `prop:weighted-spectator-obstruction`. Verify the theorem for every
   C,T0,gamma>0, eta in (0,1/2), and delta>0, including both e0<=delta and
-  e0/I_mu(1/2)<=delta and the additional e0<=1 needed to refute literal q:weighted. Check the
+  e0/I_mu(1/2)<=delta and the additional e0<=1 needed to refute literal conj:weighted-excess-rate. Check the
   monotonicity and positive limit of a_m=I_{lambda^m}(1/2) from prop:products plus lem:half;
   verify that the regular exact-mass base competitor is selected before T and N and that the
   weighted-BV, support-boundary, outer-Minkowski, and density-change conventions are valid for

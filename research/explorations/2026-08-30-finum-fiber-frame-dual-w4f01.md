@@ -8,7 +8,7 @@ Role: `finum`
 
 Run id: `w4f01`
 
-Gate served: `q:conditional-fiber-frame` (research/kls/gating.md). Quoting the gate: "A
+Gate served: `conj:conditional-fiber-frame` (research/kls/gating.md). Quoting the gate: "A
 root-frame-only argument or a floating finite computation does not decide the all-frame gate."
 **Nothing below changes any logical status.** Every number is directional research evidence;
 every exact rational certificate is a *candidate* requiring a prover and an independent

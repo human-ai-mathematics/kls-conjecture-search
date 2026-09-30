@@ -3,7 +3,7 @@ numbering:
   enumerator: "60.%s"
 ---
 
-(sec:appendix-route-e)=
+(sec:appendix-approach-e)=
 # Product stress-test and bootstrap calculations
 
 The long computations of Approach E. Their statements, what each one contributes, and a summary of how each proof goes are Sections [](#sec:product-stress) and [](#sec:bootstrap); nothing is decided here that is not decided there.

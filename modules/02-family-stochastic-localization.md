@@ -103,7 +103,7 @@ The mechanism has three steps, and it is worth separating them because Approache
 
 (3) averaging the boundary measure of $E$ under $p_T$ back to time zero, using the martingale property, transfers that expansion to $p_0$.
 
-So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. Approach E replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); Approach S replaces the set $E$ by a first eigenfunction (Section [](#sec:spectral-route)).
+So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. Approach E replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); Approach S replaces the set $E$ by a first eigenfunction (Section [](#sec:spectral-approach)).
 
 (subsec:sl-third-moments)=
 ## Why third moments appear
@@ -179,4 +179,4 @@ The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution o
 
 **Why it stalls.** By [](#prop:covariance-spike), the naive strengthening — a uniform pathwise bound on $\norm{A_t}_\op$ — is false, even for measures that satisfy KLS. So the missing estimate cannot be obtained by sharpening the covariance bound; it has to come from a potential that recognizes when a covariance spike is harmless. Products of centered exponentials are the canonical instance of a harmless spike, which is why they recur as the stress test throughout Part III (Sections [](#sec:models) and [](#sec:product-stress)).
 
-**Where this family enters the four approaches.** It is the engine of both approaches of Part III, which differ only in what they refuse to average away. Approach E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Approach S (Section [](#sec:spectral-route)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.
+**Where this family enters the four approaches.** It is the engine of both approaches of Part III, which differ only in what they refuse to average away. Approach E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Approach S (Section [](#sec:spectral-approach)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.

@@ -4,9 +4,9 @@ The SDE-free target ``kls`` gates the route-agnostic, Poincare-level facts. This
 the Eldan stochastic-localization engine (``numerics.localization``) on source-occupation diagnostics
 ``Xi_S(T) = E int_0^{T wedge tau} S dt``.  It does **not** yet compute either route observable:
 
-* ``q:alignment`` needs the occupation restricted to inflated coordinates together with the
+* ``conj:product-alignment`` needs the occupation restricted to inflated coordinates together with the
   absorptive ``r`` and ``D`` terms;
-* ``q:taming`` needs the cut-free covariance input ``h_mu Xi_T`` on near-worst measures,
+* ``conj:taming`` needs the cut-free covariance input ``h_mu Xi_T`` on near-worst measures,
   whereas this target uses product measures and a fixed cut.
 
 Accordingly every run reports an unavailable route assessment even when all numerical gates pass.
@@ -28,7 +28,7 @@ Diagnostic read off the occupation sweep:
   * proved fact (thm:budget): ``Xi_S <= k`` for a k-coordinate cut — a gross violation REFUTES
     the engine/assembly, not the conjecture;
   * the normalized budget ``Xi_S / n`` is reported only as an engine trend. It is not a
-    ``q:alignment`` or ``q:taming`` conclusion.
+    ``conj:product-alignment`` or ``conj:taming`` conclusion.
 """
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ from ...localization.observables import ensemble_mean, integrate_path
 from ...localization.sde import localization_path
 from ...localization.tilt1d import GAUSSIAN
 
-OBSTRUCTION = "obs:rank-one-refuted"  # the budget facts this channel exercises
+OBSTRUCTION = "rem:single-coordinate-cuts"  # the budget facts this channel exercises
 
 _COV_ORACLE_TOL = 1e-10  # absolute tol on |A_t - 1/(1+t)| (deterministic Gaussian model)
 _DT_REL_TOL = 0.20       # refinement tolerance, augmented by 3 combined standard errors
@@ -169,10 +169,10 @@ def run_records(seed: int = 0, ns=(2, 3, 4), T: float = 0.5, dt: float = 0.1,
                     "abs_tol": _COV_ORACLE_TOL, "status": "match" if cal_ok else "mismatch",
                     "gate": cal_gate})
 
-    # rank-one budget sanity: single-coordinate cut has E int_0^inf S dt <= 1 (cor:refutation).
+    # rank-one budget sanity: single-coordinate cut has E int_0^inf S dt <= 1 (cor:single-coordinate-cuts).
     rank_one = {"kind": "diagnostic", "instance": "rank-one", "obstruction": OBSTRUCTION,
                 "diagnostic_only": True, "gate_calibration": cal_gate,
-                "note": "single-coordinate cut: E int S dt <= 1 (cor:refutation)"}
+                "note": "single-coordinate cut: E int S dt <= 1 (cor:single-coordinate-cuts)"}
     if cal_ok:
         cut1 = single_coord(0, 0.0, psi=PSI_ID, side="ge")
         res1 = _occupation_xi_S(8, cut1, T=4.0, dt=0.04, seed=seed + 11,
@@ -256,7 +256,7 @@ def run_records(seed: int = 0, ns=(2, 3, 4), T: float = 0.5, dt: float = 0.1,
                     "budget_k": n, "normalized_budget": norm_budget,
                     "within_budget": bool(res.mean <= n + 1e-9),
                     "assessment": _unavailable_assessment(
-                        "all numerical gates passed, but q:alignment/q:taming observables are absent"
+                        "all numerical gates passed, but conj:product-alignment/conj:taming observables are absent"
                         if gates_passed else "required dt-refinement gate failed",
                         gates_passed=gates_passed,
                     )})
@@ -264,14 +264,14 @@ def run_records(seed: int = 0, ns=(2, 3, 4), T: float = 0.5, dt: float = 0.1,
             sweep.append((n, norm_budget))
         records.append(rec)
 
-    # Diagnostic summary only. Xi_S/n is neither the q:alignment nor the q:taming observable.
+    # Diagnostic summary only. Xi_S/n is neither the conj:product-alignment nor the conj:taming observable.
     records.append({
         "kind": "diagnostic-summary",
         "instance": "thinshell-source-occupation",
         "gated_normalized_budget_by_n": {str(n): b for n, b in sweep},
         "required_gates_passed_by_n": gate_summary,
         "assessment": _unavailable_assessment(
-            "Xi_S/n is an engine diagnostic; actual q:alignment and q:taming observables are not built",
+            "Xi_S/n is an engine diagnostic; actual conj:product-alignment and conj:taming observables are not built",
             gates_passed=bool(gate_summary) and all(gate_summary.values()),
         ),
     })

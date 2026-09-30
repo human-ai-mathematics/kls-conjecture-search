@@ -60,7 +60,7 @@ as candidates below still require a standalone dossier and cold review.
    near-extremizer that depends on that factor, plus a positive mixed-Hessian term.
 3. The Hodge identity is not used to prove (EG). It only interprets the CMH numerator after the
    fact. Consequently (EG) is not a second-variation theorem and does not resolve
-   `q:cmh-solenoidal-perturbation`.
+   `conj:cmh-second-variation`.
 4. The displayed conditional moment in the Dirichlet aggregation remark gives the exact identity
    $d_\beta(g\circ\pi)=d_\alpha(g)+D_\pi(g)$ with $D_\pi\ge0$. Applying the certified theorem to
    the fine law yields an additional, generally strict coarse-law deficit. For symmetric integer
@@ -284,7 +284,7 @@ This is a genuine transverse-rigidity statement, not just product tensorization.
 ### True bottleneck
 
 The identity itself has no unresolved algebraic step. Its use in
-`q:cmh-solenoidal-perturbation` is blocked by two facts.
+`conj:cmh-second-variation` is blocked by two facts.
 
 First, the endpoint exponential CMH constant is approached by a sequence rather than attained by
 an $L^2$ eigenfunction. Second, under an admissible nonproduct perturbation, the law, covariance,
@@ -630,7 +630,7 @@ Every item below is parked for later prioritization and, if admitted, must enter
 
 - **kind:** corollary
 - **route:** `moment-map-cmh`
-- **refines:** `rem:cmh-saturation-risk`
+- **refines:** `cor:cmh-product-saturation`
 - **exact statement:** For $\lambda\otimes\gamma_d$, with the closed operators and fields fixed in
   Section 1, identity (2.7) holds on $\operatorname{Dom}(\mathsf A)$. If
   $\mathcal D(g)=1$ and $\mathcal N(g)\ge4-\varepsilon$, then (2.9)--(2.10) hold.
@@ -679,12 +679,12 @@ empty proposals above also survive every repository obstruction.
 
 | fence | check |
 |---|---|
-| `obs:two-tail` | Concerns fixed-cut Eldan slice weights. These are stationary CMH identities with no cut, covariance weight, or excess estimate. |
-| `obs:proj-ceiling` | The product lemma keeps the full mixed Hessian and the Dirichlet lemma keeps the full tangent field and conditional block moments. Neither derives quadratic chaos from radial or projection tests. |
-| `obs:crude-insufficient` | No stochastic covariance integral or bootstrap input occurs. |
-| `obs:relative-ceiling` | No all-measure relative covariance bound is asserted. |
-| `obs:circularity` | No localized isoperimetric profile or posterior competitor family occurs. |
-| `obs:rank-one-refuted` | No product-cut occupation claim occurs. Product structure is used only for an exact stationary operator identity. |
+| `rem:two-tail-slice-bounds` | Concerns fixed-cut Eldan slice weights. These are stationary CMH identities with no cut, covariance weight, or excess estimate. |
+| `rem:projection-ceiling` | The product lemma keeps the full mixed Hessian and the Dirichlet lemma keeps the full tangent field and conditional block moments. Neither derives quadratic chaos from radial or projection tests. |
+| `rem:crude-insufficient` | No stochastic covariance integral or bootstrap input occurs. |
+| `rem:relative-ceiling` | No all-measure relative covariance bound is asserted. |
+| `rem:profile-circularity` | No localized isoperimetric profile or posterior competitor family occurs. |
+| `rem:single-coordinate-cuts` | No product-cut occupation claim occurs. Product structure is used only for an exact stationary operator identity. |
 | CMH gate-zero guardrail | The results concern products and Dirichlet aggregations already inside certified classes. They give no universal bound on $\mathbb E[H\Sigma^{-1}H]$. |
 | Hodge/perturbation guardrail | Static product transverse coercivity is not identified with the solenoidal second variation. |
 | Noninvertible-image guardrail | Candidate D is explicitly Dirichlet-specific; no general canonical-CMH monotonicity under singular maps is inferred. |

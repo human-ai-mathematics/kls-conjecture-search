@@ -4,7 +4,7 @@ authors:
   - /root/prove_bootstrap_stopped_interface_w3
 reviewer: /root/review_bootstrap_stopped_interface_w3
 fingerprints:
-  solutions/thm-bootstrap-stopped-interface.md: 539ac67e15fb09004e4890afbde5228347bcff604a40958c1149f1df916855c6
+  solutions/thm-bootstrap-stopped-interface.md: 7c7dcc9e96daa718b359532f193e319f0cb8759fe20140a3b6d89ebdf0fd922a
   thm:bootstrap-stopped-interface: 79e7d5d20e15142a7f56585b648283171f5c63a721accf1eedd14b7072d9efe8
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
@@ -189,10 +189,10 @@ deterministic consequences consumed here but does not recertify the dependency d
 
 Both `bounded_by` fences are respected:
 
-- `obs:circularity`: the proof never assigns supermartingale behavior to the random
+- `rem:profile-circularity`: the proof never assigns supermartingale behavior to the random
   mass-constrained profile.  It uses the external worst-case constant $h_n^\star$ through
   whitening and the explicit near-worst hypothesis at time zero.
-- `obs:relative-ceiling`: the cut-dependent stopped interface remains on the right-hand side.
+- `rem:relative-ceiling`: the cut-dependent stopped interface remains on the right-hand side.
   The proof supplies no dimension-free or relative-scale upper bound for it; the preliminary
   $\widehat\Xi_{T,\eta}\le nT$ bound is dimension dependent.  No KLS conclusion, converse, or
   equivalence is inferred.

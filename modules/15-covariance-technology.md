@@ -16,7 +16,7 @@ Both Eldan subroutes meter the danger of localization through the same cut-free 
 The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance technology. The exponent $C_2=2$ follows from the published sup-time estimate below; the sharper $C_2=1$ conclusion is conditional on the July 2026 version-1 preprint input.
 
 :::{prf:assumption} Known small-time operator-norm control; matched to {[@KlartagLehec2022Polylog; @Letwin2026QuadraticKLS]}
-:label: hyp:KI
+:label: ass:KI
 There are universal constants $c_0,C_1,C_2>0$ such that for every isotropic log-concave $\mu$ on $\R^n$, $n\ge3$,
 
 $$
@@ -73,7 +73,7 @@ $$
 $$
 :::
 
-Both results are imported from version 2 of an unreviewed preprint. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#q:upgrade), [](#q:mm-spectral-occupation), or the high-rank part of [](#q:stein-weighted).
+Both results are imported from version 2 of an unreviewed preprint. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#conj:trace-upgrade), [](#conj:mm-spectral-occupation), or the high-rank part of [](#conj:stein-weighted).
 
 :::{prf:proposition} Letwin's third-moment bound
 :label: prop:letwin-kappa
@@ -123,9 +123,9 @@ Klartag–Lehec [@KlartagLehec2022Polylog, Cor. 5.4] prove the displayed moment 
 [](#thm:KL-window) — *sup over time*, threshold $2$, clean window $t\le(C\log^2n)^{-1}$ with no thin-shell constant — is [@KLnotes, Thm. 61]. It should *not* be attributed to [@KlartagLehec2022Polylog, Lemma 5.2], which is the weaker *fixed-time* bound $\Prob(\norm{A_t}_\op\ge2)\le e^{-1/(Ct)}$ on the $\kappa_n$-dependent window $t\le(C\kappa_n^2\log n)^{-1}$. The second moment is moreover published in exactly the strength needed: [@KlartagLehec2022Polylog, Cor. 5.4] gives $\E\norm{A_t}_\op^p\le C_p$ for every $p\ge1$ on that window, so $\E X_t^2\le\E\norm{A_t}_\op^2\le C$ directly. [](#prop:letwin-kappa) now makes the latter window $c/\log n$, resolving the former intermediate-window question at the fixed-time moment level. These statement numbers have been verified against arXiv:2406.01324v2 (the version matching the published Bull. Amer. Math. Soc. **62** (2025), no. 4, article) for [@KLnotes], and against arXiv:2203.15551 for [@KlartagLehec2022Polylog].
 :::
 
-:::{prf:corollary} Discharge of [](#hyp:KI)
+:::{prf:corollary} Discharge of [](#ass:KI)
 :label: cor:KI-discharged
-The published [](#thm:KL-window), together with the Brascamp–Lieb cap, discharges [](#hyp:KI) with $C_2=2$.
+The published [](#thm:KL-window), together with the Brascamp–Lieb cap, discharges [](#ass:KI) with $C_2=2$.
 :::
 
 :::{prf:proof}
@@ -134,7 +134,7 @@ For $t\le c/\log^2n$, split according to $\norm{A_t}_\op<2$ and use [](#thm:KL-w
 
 :::{prf:corollary} Letwin-v1 sharpening of the covariance window
 :label: cor:KI-letwin
-Conditional on the preprint input of [](#thm:letwin-qcts), [](#hyp:KI) holds with $C_2=1$: there is a universal constant $c_0$ such that for every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-1}$,
+Conditional on the preprint input of [](#thm:letwin-qcts), [](#ass:KI) holds with $C_2=1$: there is a universal constant $c_0$ such that for every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-1}$,
 
 $$
 \E\,\norm{A_t}_\op\ \le\ C_1 .

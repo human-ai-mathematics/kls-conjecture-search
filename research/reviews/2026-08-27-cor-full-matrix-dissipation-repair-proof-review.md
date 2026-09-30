@@ -70,7 +70,7 @@ $$
 $$
 
 It explicitly disclaims any dimension-free trace upgrade and asserts no implication among
-`q:upgrade`, the high-rank part of `q:stein-weighted`, `q:alignment`, or any other member of the
+`conj:trace-upgrade`, the high-rank part of `conj:stein-weighted`, `conj:product-alignment`, or any other member of the
 trace-upgrade cluster.
 
 ### Dependency closure and citation debt

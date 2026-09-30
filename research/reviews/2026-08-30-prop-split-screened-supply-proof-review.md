@@ -4,7 +4,7 @@ authors:
   - prover-w4p01
 reviewer: proof-checker-w4r01
 fingerprints:
-  solutions/prop-split-screened-supply.md: 2591f4f57fd0030fc70b963d0f6575dbe669bd8f39b7d0f2f2c083dba69bb9c7
+  solutions/prop-split-screened-supply.md: c9aa1a2a9298eb01d649225f5613f4411284015d09de3438403c92983f723fe4
   prop:split-screened-supply: 2978c26605b7f1f0d555277fa000ad70a7d8ac1b45813c18547fe73d3a519684
   prop:stein-rep: 809545792ca08860114a8276ff5b61febda2930cfd2b8b0f3a1a5ca1a0d00e6a
   lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
@@ -208,21 +208,21 @@ argument) directly against the current bytes — but the janitor may want to rec
 
 ### 6. Fences
 
-- **`obs:two-tail`.** The theorem is a time-integrated expectation bound, not a
+- **`rem:two-tail-slice-bounds`.** The theorem is a time-integrated expectation bound, not a
   slice-wise absolute-scale Stein estimate; it retains the calibrated weight power $5/2$
   (two-tail calibration $\lambda_{\rm cut}(A_\Lambda,K_\Lambda)=\Lambda$, certified
   `eq:sol-cut-two-tail`); the two-tail initial laws $N(0,\diag(\Lambda,1,\dots,1))$,
   $\Lambda>1$, are outside the isotropic-factor hypothesis class; dynamically reached
   two-tail-type states remain chargeable and are paid through $Q_t/\kappa$. Respected.
-- **`obs:circularity`.** The only profile information used anywhere is the upper-bound
+- **`rem:profile-circularity`.** The only profile information used anywhere is the upper-bound
   direction $I_{\mu_t}(p_t)\le P_t(E)$ (Step 1, $e_t\ge0$); no lower bound on the moving
   profile enters, and the fenced excess-identity refinement is not used. Respected.
 
 ### 7. Repository constraint 6
 
-The dossier proves a supply estimate on the `q:weighted` screened-interface gate. Its
-Scope paragraph and `rem:sol-shape` explicitly assert nothing about `q:upgrade`, the
-high-rank part of `q:stein-weighted`, or `q:alignment`, and I confirmed no occupation
+The dossier proves a supply estimate on the `conj:weighted-excess-rate` screened-interface gate. Its
+Scope paragraph and `rem:sol-shape` explicitly assert nothing about `conj:trace-upgrade`, the
+high-rank part of `conj:stein-weighted`, or `conj:product-alignment`, and I confirmed no occupation
 estimate, equivalence, or comparison across that cluster is proved or implied by any
 step. The disclaimer is present and respected.
 
@@ -277,8 +277,8 @@ Not certified by this review:
 - Any fixed-time expected-source estimate or $C(k)\,T$-form upgrade (explicitly open).
 - The screened trace companion ((C)/(22) of the probe record), the general aligned
   initial-layer occupation candidate, and any KLS-type conclusion.
-- Anything in the trace-upgrade cluster (`q:upgrade`, high-rank `q:stein-weighted`,
-  `q:alignment`).
+- Anything in the trace-upgrade cluster (`conj:trace-upgrade`, high-rank `conj:stein-weighted`,
+  `conj:product-alignment`).
 - The interpretive `rem:sol-harmonic-mean` (checked for plausibility against the
   certified harmonic-mean identity, but it is used nowhere and carries no claim weight).
 - The status or content of any dependency dossier beyond the specific statements

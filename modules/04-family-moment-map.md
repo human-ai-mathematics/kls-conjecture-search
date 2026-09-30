@@ -65,7 +65,7 @@ $$
 is a smooth positive symmetric Stein kernel: $\Div_\mu\tau_\mu=-x$ distributionally, with weak zero boundary flux, and $\E_\mu\tau_\mu=\Cov(\mu)$.
 :::
 
-The moment-potential regularity and global gradient-image statement are Theorem 1.1 of [@BermanBerndtsson2013RealMA]; the target-coordinate Stein identity and weak zero-flux formulation are Theorem 2.3 of [@Fathi2019SteinMomentMaps]. This compact-target class is the published regularity input used by the approximation closure in [](#q:cmh-approximation).
+The moment-potential regularity and global gradient-image statement are Theorem 1.1 of [@BermanBerndtsson2013RealMA]; the target-coordinate Stein identity and weak zero-flux formulation are Theorem 2.3 of [@Fathi2019SteinMomentMaps]. This compact-target class is the published regularity input used by the approximation closure in [](#prop:cmh-approximation-closure).
 
 (subsec:mm-differentiated)=
 ## Differentiating Monge–Ampère

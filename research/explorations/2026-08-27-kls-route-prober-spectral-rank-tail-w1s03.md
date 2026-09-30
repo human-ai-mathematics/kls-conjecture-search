@@ -9,7 +9,7 @@ Role: `kls-route-prober`
 Concurrency key: `kls-gate:q:mm-spectral-occupation`
 
 Scope: the eigenfunction-oriented Route-S residue only. This report makes no assertion about
-`q:upgrade`, `q:stein-weighted`, `q:alignment`, or any implication among those nodes.
+`conj:trace-upgrade`, `conj:stein-weighted`, `conj:product-alignment`, or any implication among those nodes.
 
 Status: the gate is not closed. The new Klartag--Lehec rank inputs give genuine cut-free
 information about the eigenvalue profile of the covariance process, but they do not control the
@@ -75,7 +75,7 @@ $$
 
 The current control plane has the following exact state.
 
-1. `q:mm-spectral-occupation` is open, has no formal `bounded_by` edge, and is consumed only by
+1. `conj:mm-spectral-occupation` is open, has no formal `bounded_by` edge, and is consumed only by
    `prop:spectral-sufficiency`.
 2. `prop:spectral-sufficiency` is agent-certified and remains conditional on the open occupation
    node. Its dossier, `solutions/prop-spectral-sufficiency.tex`, proves that coefficient one in
@@ -671,16 +671,16 @@ rank information does not discharge, or genuinely weaken, the Route-S gate.
 
 The live node has no formal `bounded_by` edge. Every registered fence was nevertheless checked.
 
-- `obs:two-tail`: no cut, slice, or absolute-scale excess estimate is used. The analogous
+- `rem:two-tail-slice-bounds`: no cut, slice, or absolute-scale excess estimate is used. The analogous
   anisotropy lesson is respected by keeping the full tensor incidence (42).
-- `obs:proj-ceiling`: no quadratic-chaos theorem is inferred from radial or projection-only
+- `rem:projection-ceiling`: no quadratic-chaos theorem is inferred from radial or projection-only
   tests. The low block uses the full symmetric-matrix input (2), conditionally on its actual
   preprint standing. The failure of rank-only information is recorded rather than promoted.
-- `obs:crude-insufficient`: no crude covariance integral $\Xi_T$ is used to bootstrap the gate.
-- `obs:relative-ceiling`: no all-measure relative covariance occupation bound is inserted as a
+- `rem:crude-insufficient`: no crude covariance integral $\Xi_T$ is used to bootstrap the gate.
+- `rem:relative-ceiling`: no all-measure relative covariance occupation bound is inserted as a
   supposedly weaker premise.
-- `obs:circularity`: no localized isoperimetric profile or changing competitor family occurs.
-- `obs:rank-one-refuted`: that obstruction concerns fixed product cuts. This report makes no cut
+- `rem:profile-circularity`: no localized isoperimetric profile or changing competitor family occurs.
+- `rem:single-coordinate-cuts`: that obstruction concerns fixed product cuts. This report makes no cut
   assertion; rank-one eigenfunction tensors are used only as a calibration against an unjustified
   stable-rank assumption.
 - `prop:covariance-spike`: the product calculation explicitly respects spectator spikes and shows
@@ -727,10 +727,10 @@ outcome: blocked
 artifacts:
   - research/explorations/2026-08-27-kls-route-prober-spectral-rank-tail-w1s03.md
 proposed_deltas:
-  - none; do not wire the Klartag--Lehec rank imports to q:mm-spectral-occupation
+  - none; do not wire the Klartag--Lehec rank imports to conj:mm-spectral-occupation
 next_role: orchestrator
 next_prompt: |
-  Keep q:mm-spectral-occupation open and do not add dependency edges from the two imported
+  Keep conj:mm-spectral-occupation open and do not add dependency edges from the two imported
   Klartag--Lehec rank nodes. If updating the Route-S gate text, use the proposed one-line update
   verbatim: the coefficient-one high-residue estimate is quantitatively equivalent, up to the
   controlled low block, to local growth of q(T)=E|g_T|^2. Any next analytic owner must target a

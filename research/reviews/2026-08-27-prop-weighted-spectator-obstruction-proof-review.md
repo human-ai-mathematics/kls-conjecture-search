@@ -4,14 +4,14 @@ authors:
 - /root/prove_weighted_spectator_obstruction
 reviewer: /root/review_weighted_spectator_w0
 fingerprints:
-  solutions/prop-weighted-spectator-obstruction.md: cc9f7110c4e9d869472e4feee4bdd3e753e6f5a22aff99c0b262895b6aa1b261
-  prop:weighted-spectator-obstruction: 41f54a097023867b895b5b57f385db284aaeb2a14a297896865c5061566249c0
+  solutions/prop-weighted-spectator-obstruction.md: 9e52a87391e5b6b51bbf3b57657604d3a9cf802c0920c0b6de5a65dcd819b5b9
+  prop:weighted-spectator-obstruction: 3a65960d47cdc44c6a81fe7559223a79b7b491d7389ceb61251cc675cd573288
   prop:covariance-spike: 161bf636e00b06d616360d86e08e775faacc85e3ebd8f62c91289807a22bfbb5
   lem:one-dimensional-density-variance: d815a2b4dd127f6904303d7af11bdff816a4ca70c21541afd80ebd41506343a6
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   ass:weighted-package: 3532efe632a78732299519f2fe94aec60e99945eb186b7aba537603906d8e828
-  q:weighted: 9c714d8f4be19c4b63709e43e1ae4a1e5253f9b958b02baaa089df297068283d
+  conj:weighted-excess-rate: 34c18fad26ca581aa69fa02ded48e117e33bff3828b6cf73516bf22ba755363a
 ---
 
 # Exponential-spectator obstruction — cold proof audit
@@ -48,7 +48,7 @@ $$
 match both the additive and relative near-minimizer readings recorded in the candidate
 proposition.
 
-The current literal `q:weighted` at `modules/kls/27-eldan-open-targets.tex:64` and item (i-w) of
+The current literal `conj:weighted-excess-rate` at `modules/kls/27-eldan-open-targets.tex:64` and item (i-w) of
 `ass:weighted-package` at `modules/kls/20-eldan-statements.tex:117` quantify over every balanced
 finite-perimeter cut with $e_0(E)\leq1$, use a fixed
 $\eta\in(0,1/4]$, and demand the estimate for all $0<T\leq T_0$.  The intended theorem covers
@@ -164,11 +164,11 @@ The following steps were checked independently.
 
 ### Fences, hypotheses, and dependency closure
 
-The proposition itself has no `bounded_by` edge.  The two fences on `q:weighted` are respected.
-`obs:two-tail` is not contradicted: the proof retains the calibrated $5/2$ power and shows that
-charging it through a global operator norm is tensor-unstable.  `obs:circularity` is avoided by
+The proposition itself has no `bounded_by` edge.  The two fences on `conj:weighted-excess-rate` are respected.
+`rem:two-tail-slice-bounds` is not contradicted: the proof retains the calibrated $5/2$ power and shows that
+charging it through a global operator norm is tensor-unstable.  `rem:profile-circularity` is avoided by
 using an explicit upper profile competitor, not an unproved lower bound.  No implication among
-`q:upgrade`, `q:stein-weighted`, and `q:alignment` is asserted.
+`conj:trace-upgrade`, `conj:stein-weighted`, and `conj:product-alignment` is asserted.
 
 The ledger lists exactly four dependencies, and all are discharged:
 
@@ -236,7 +236,7 @@ clear the defects above: the generated PDF visibly prints
 
 No step remains mathematically unresolved after supplying the literal repairs above, but the
 audited artifact itself is not a complete human-checkable proof.  This audit certifies neither
-`prop:weighted-spectator-obstruction` nor a refutation of `q:weighted`.  It proposes no `solution`,
+`prop:weighted-spectator-obstruction` nor a refutation of `conj:weighted-excess-rate`.  It proposes no `solution`,
 `checked_by`, `review`, status, ledger, manuscript, route, or gating delta.
 
 It also does not check a replacement tensor-stable weight, an exact-minimizer-only gate, an

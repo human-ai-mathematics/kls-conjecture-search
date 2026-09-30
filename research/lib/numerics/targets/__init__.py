@@ -8,9 +8,9 @@ The KLS route-gating batteries live in ``targets.kls``:
   "kls"     SDE-free, sound bridge/Poincare-level signals (kls/bridge.py)
   "loc-engine" legacy localization SDE diagnostics; no route observable or claim conclusion
             observables are implemented (kls/loc_engine.py)
-  "kls-align" the product tail-union q:alignment stress test; model-diagnostic only
+  "kls-align" the product tail-union conj:product-alignment stress test; model-diagnostic only
               (kls/alignment.py)
-  "kls-screen" the cut-local screened-supply q:weighted diagnostic on the same tail-union
+  "kls-screen" the cut-local screened-supply conj:weighted-excess-rate diagnostic on the same tail-union
               localization engine: lambda_cut, W_cut, Q, the aligned set A_kappa, the
               screened supply, and the spectator-cylinder control (kls/screening.py). Its
               excess is a competitor-based SURROGATE that understates the true excess.
@@ -75,7 +75,7 @@ REGISTRY = {
         },
     ),
     "kls-screen": TargetSpec(
-        "kls-screen", screening, "cut-local screened-supply q:weighted diagnostic", True,
+        "kls-screen", screening, "cut-local screened-supply conj:weighted-excess-rate diagnostic", True,
         {
             # A uniform snapshot grid of spacing 0.05 or 0.02 fails this target's own
             # paired snapshot-refinement gate, because the surrogate excess has a steep

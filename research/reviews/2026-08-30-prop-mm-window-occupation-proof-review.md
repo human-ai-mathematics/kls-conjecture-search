@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r04
 fingerprints:
-  solutions/prop-mm-window-occupation.md: 01607a7c457415d67a748b284d3af9c8fe1bed33b5e5ffbf144eb1176920df6e
+  solutions/prop-mm-window-occupation.md: 153e4c63d6845ea3dbbec7726ed22c3577baaf3052e419f2d477cb8377e94985
   prop:mm-window-occupation: bfdd16289838ae5b0c560e93b07c6b77ef818e8acac71a517a8cbbe28e74945e
   thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
   thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
@@ -210,16 +210,16 @@ $C_2\log^2n$, $C_2=\max\{8C_K/(3\log2),2/c_1\}$. All verified.
 ### 4. Fences (constraint 5) and constraint 6
 
 The ledger node carries no `bounded_by` edge; the dossier nevertheless checks the
-registered fences and I confirm: no cut/slice/excess estimate (`obs:two-tail`,
-`obs:circularity`, `obs:rank-one-refuted`); the only tensor input is the full
+registered fences and I confirm: no cut/slice/excess estimate (`rem:two-tail-slice-bounds`,
+`rem:profile-circularity`, `rem:single-coordinate-cuts`); the only tensor input is the full
 symmetric-matrix Letwin bound inside the companion, with conditional standing displayed
-(`obs:proj-ceiling`); no crude covariance integral $\Xi_T$ or bootstrap
-(`obs:crude-insufficient`); the a-priori input is the published frontier and the output
-strictly weaker (`obs:relative-ceiling`). `prop:covariance-spike` is respected
+(`rem:projection-ceiling`); no crude covariance integral $\Xi_T$ or bootstrap
+(`rem:crude-insufficient`); the a-priori input is the published frontier and the output
+strictly weaker (`rem:relative-ceiling`). `prop:covariance-spike` is respected
 constructively: no assertion for $t>T_0(n)$, and the dossier says so up front. Recorded
 dead ends respected: the post-exit charge is a joint Cauchy–Schwarz through the optional
 projection, not a product of marginals; no unstopped $\|A_t\|_\op$ moment. Constraint 6:
-no statement touches `q:upgrade`, `q:stein-weighted`, or `q:alignment`.
+no statement touches `conj:trace-upgrade`, `conj:stein-weighted`, or `conj:product-alignment`.
 
 ### 5. Hypothesis accounting
 
@@ -266,7 +266,7 @@ the standard post-review update.)
 
 - The three companion dossiers are **not** certified by this review; each requires its
   own passing proof review at the hashed versions above before this node is wired.
-- `q:mm-spectral-occupation` itself remains open: $T_0(n)\to0$, so nothing universal is
+- `conj:mm-spectral-occupation` itself remains open: $T_0(n)\to0$, so nothing universal is
   certified, and no claim for $t>T_0(n)$ exists.
 - No unconditional statement of any kind: everything is conditional on
   `thm:letwin-qcts`, and the frontier reproduction $\CP\le C\log^2n$ is strictly weaker

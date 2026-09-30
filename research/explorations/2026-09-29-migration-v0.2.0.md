@@ -36,9 +36,9 @@ tooling for this one move, not part of the harness.
 
 | LaTeX | MyST | nodes |
 |---|---|---|
-| `question`, open or refuted | `prf:conjecture`, stated in the direction the search tries to establish | `q:alignment`, `q:cmh-solenoidal-perturbation`, `q:conditional-fiber-frame`, `q:mm-invariant-lift`, `q:mm-spectral-occupation`, `q:mm-square-root-commutator`, `q:splitting`, `q:stein-weighted`, `q:taming`, `q:upgrade`, `q:weighted` (refuted), `rem:almost-stability-gap` |
-| `question`, proved | `prf:proposition` | `q:cmh-approximation` |
-| `obstruction` (all open) | `prf:conjecture` | `obs:circularity`, `obs:crude-insufficient`, `obs:proj-ceiling`, `obs:rank-one-refuted`, `obs:relative-ceiling`, `obs:two-tail` |
+| `question`, open or refuted | `prf:conjecture`, stated in the direction the search tries to establish | `conj:product-alignment`, `conj:cmh-second-variation`, `conj:conditional-fiber-frame`, `conj:mm-invariant-lift`, `conj:mm-spectral-occupation`, `conj:mm-square-root-commutator`, `conj:splitting`, `conj:stein-weighted`, `conj:taming`, `conj:trace-upgrade`, `conj:weighted-excess-rate` (refuted), `conj:almost-stability-gap` |
+| `question`, proved | `prf:proposition` | `prop:cmh-approximation-closure` |
+| `obstruction` (all open) | `prf:conjecture` | `rem:profile-circularity`, `rem:crude-insufficient`, `rem:projection-ceiling`, `rem:single-coordinate-cuts`, `rem:relative-ceiling`, `rem:two-tail-slice-bounds` |
 | `hypothesis` (dossiers only) | `prf:assumption`, not a node | — |
 | `program`, `heuristic` | `prf:remark` titled "Program — …", "Heuristic — …" | — |
 | `warning` | `{warning}` admonition, same label | — |
@@ -46,14 +46,14 @@ tooling for this one move, not part of the harness.
 Ids did not change, so `q:`, `obs:`, `rem:` and `hyp:` prefixes remain on claims of other
 kinds. Rewording a question as an assertion changed its text only as far as the
 orientation required; the statements concerned are the eighteen open or refuted ones
-above plus `q:cmh-approximation`.
+above plus `prop:cmh-approximation-closure`.
 
 **Ledger.** `kind`, `file`, `summary`, `provenance`, `import_class`, `meta` and the
 `mode`/`id` of proof records are gone. The old `summary` glosses remain readable with
 `git show 34b5fcd:research/program/ledger.yaml`; a `writer` looking for a one-line gloss of
 a node starts there. `heuristic_barriers` became `bounded_by` edges to open nodes. Two
 edges have no v0.2 field and now live in the text: `prop:spectral-sufficiency` implies
-`conj:kls` (its antecedent `q:mm-spectral-occupation` stays in `assumes`, and the brief's
+`conj:kls` (its antecedent `conj:mm-spectral-occupation` stays in `assumes`, and the brief's
 neighbourhood says it), and `conj:gate-zero-sharp` refines `conj:gate-zero` (said at the
 statement in `modules/41-cmh-normalization.md`, in the glossary and in the brief).
 
@@ -137,18 +137,18 @@ brief, with their old names, since earlier records cite them.
 
 ## What resists
 
-- *observed* The sign in the falsification clause of `q:cmh-solenoidal-perturbation`
+- *observed* The sign in the falsification clause of `conj:cmh-second-variation`
   disagrees between two places of the v0.1 text: the statement says a *positive* second
   variation refutes $\mathrm{CMH}(4)$, the gateway of `modules/40-moment-map-cmh.md` says a
   *negative* one does. The oriented statement follows the former; a `sync` review should
   settle which convention is meant.
 - The conversion of the nineteen statements listed above (the six obstructions kept their wording) was done during the migration, not
-  by a reviewer; `q:cmh-approximation` is the only one with a proof record.
+  by a reviewer; `prop:cmh-approximation-closure` is the only one with a proof record.
 - The site (`index`, `problem`, `results`, written by the `writer` at this milestone) says
   each proof was checked by an independent reviewer. That holds of the LaTeX versions; before
   publishing, the person who dispatches the site decides whether to wait for fresh `certify`
-  reviews. The writer proposed cards for `q:mm-spectral-occupation`,
-  `conj:gate-zero-sharp` and `q:conditional-fiber-frame`.
+  reviews. The writer proposed cards for `conj:mm-spectral-occupation`,
+  `conj:gate-zero-sharp` and `conj:conditional-fiber-frame`.
 
 ## Proposed next step
 

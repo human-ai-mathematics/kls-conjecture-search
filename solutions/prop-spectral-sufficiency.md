@@ -6,7 +6,7 @@ numbering:
   enumerator: D24.%s
 ---
 
-**Overview.** This dossier proves a refined form of [](#prop:spectral-sufficiency) ([](#thm:sol-prop-spectral-sufficiency)). If the occupation estimate [](#eq:sol-spectral-occupation-hypothesis) of [](#q:mm-spectral-occupation) holds with dimension- and regularization-free constants and with damping coefficient one, then every isotropic log-concave law satisfies $\CP\le2/T_*$. So a uniform affirmative answer to that open question implies [](#conj:kls). The implication is conditional on that still-open estimate. The method follows the fixed first eigenfunction along stochastic localization, bounds how much of it is learned by time $T_*$, and compares this with posterior Brascamp–Lieb.
+**Overview.** This dossier proves a refined form of [](#prop:spectral-sufficiency) ([](#thm:sol-prop-spectral-sufficiency)). If the occupation estimate [](#eq:sol-spectral-occupation-hypothesis) of [](#conj:mm-spectral-occupation) holds with dimension- and regularization-free constants and with damping coefficient one, then every isotropic log-concave law satisfies $\CP\le2/T_*$. So a uniform affirmative answer to that open question implies [](#conj:kls). The implication is conditional on that still-open estimate. The method follows the fixed first eigenfunction along stochastic localization, bounds how much of it is learned by time $T_*$, and compares this with posterior Brascamp–Lieb.
 
 1. Fixed-function filtering along the planted observation channel gives $\dd g_t=H_t\dd W_t-A_tg_t\dd t$ ([](#eq:sol-spectral-fixed-function-sde)), hence the $q$-identity [](#eq:sol-spectral-q-identity).
 2. Bessel's inequality ([](#eq:sol-spectral-initial-bessel)) and the hypothesis cancel the full damping. Grönwall then gives $q\le M_*$ on $[0,T_0]$ ([](#eq:sol-spectral-gronwall)).
@@ -14,7 +14,7 @@ numbering:
 4. Gaussian smoothing, a quadratic tilt and isotropization give regular approximants with compact resolvent that converge to any isotropic log-concave $\nu$ in $W_2$ ([](#eq:sol-spectral-isotropization)). Step 3 applies to each of them.
 5. The uniform Poincaré inequality, not the eigenfunctions, passes to $\nu$ on fixed test functions by truncation, cutoff, mollification and lower semicontinuity. This gives [](#eq:sol-spectral-gap-conclusion).
 
-**Refined statement.** The following theorem gives constants for the endpoint form of [](#q:mm-spectral-occupation). In particular, the coefficient of the exact damping is one: no strict damping surplus is assumed.
+**Refined statement.** The following theorem gives constants for the endpoint form of [](#conj:mm-spectral-occupation). In particular, the coefficient of the exact damping is one: no strict damping surplus is assumed.
 
 :::{prf:theorem} Conditional full-damping sufficiency; refines [](#prop:spectral-sufficiency)
 :label: thm:sol-prop-spectral-sufficiency
@@ -75,7 +75,7 @@ Then every isotropic log-concave probability measure $\nu$ on every $\R^n$ satis
 \CP(\nu)\le \frac2{T_*}.
 ```
 
-Thus an affirmative, regularization-uniform answer to [](#q:mm-spectral-occupation) implies [](#conj:kls). The theorem is conditional on that still-open occupation estimate.
+Thus an affirmative, regularization-uniform answer to [](#conj:mm-spectral-occupation) implies [](#conj:kls). The theorem is conditional on that still-open occupation estimate.
 :::
 
 :::{prf:proof}
@@ -304,6 +304,6 @@ The same inequality holds for every locally Lipschitz $h$: first truncate its va
 At no point was an eigenfunction of $\nu_j$ required to converge. Only the uniform Poincaré inequality obtained on each approximant was passed to fixed test functions of the limiting law.
 :::
 
-**Obstructions respected.** The ledger assigns this node no formal `bounded_by` edge. The proof nevertheless respects every listed KLS fence. It contains no cut, slice, excess, or localized isoperimetric-profile estimate, so `obs:two-tail` and `obs:circularity` are not engaged. It derives no tensor estimate from radial or projection-only tests, uses no crude or relative covariance occupation integral, and makes no product-cut assertion. Thus the projection, crude-occupation, relative-occupation, and rank-one-product fences remain untouched. In particular, the argument never bounds $\norm{A_t}_\op$ along a universal time interval and does not contradict the covariance-spike obstruction. Posterior Brascamp–Lieb is used only at the single terminal time and only after the function-aware occupation hypothesis has controlled how much of the fixed eigenfunction was learned.
+**Obstructions respected.** The ledger assigns this node no formal `bounded_by` edge. The proof nevertheless respects every listed KLS fence. It contains no cut, slice, excess, or localized isoperimetric-profile estimate, so `rem:two-tail-slice-bounds` and `rem:profile-circularity` are not engaged. It derives no tensor estimate from radial or projection-only tests, uses no crude or relative covariance occupation integral, and makes no product-cut assertion. Thus the projection, crude-occupation, relative-occupation, and rank-one-product fences remain untouched. In particular, the argument never bounds $\norm{A_t}_\op$ along a universal time interval and does not contradict the covariance-spike obstruction. Posterior Brascamp–Lieb is used only at the single terminal time and only after the function-aware occupation hypothesis has controlled how much of the fixed eigenfunction was learned.
 
 **Status, dependencies, and exclusions.** The sole ledger dependency is the open spectral-occupation node. It appears here as the explicit hypothesis [](#eq:sol-spectral-occupation-hypothesis). The result is therefore a conditional implication, not an unconditional proof of KLS. The remaining inputs are the exact fixed-function filtering identities, classical Brascamp–Lieb, Grönwall's lemma, and the variational lower-semicontinuity passage above. No Letwin preprint input is used. The dossier does not prove the occupation estimate, an unweighted source bound, any member of the trace-upgrade cluster, or any assertion about the deterministic CMH route.

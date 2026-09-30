@@ -165,7 +165,7 @@ $$
 Taking the supremum over $M$ proves (i) with constant $C_2^2C$.
 :::
 
-**Obstruction audit for `obs:proj-ceiling`.** The converse does not infer QCTS from radial or projection tests. It assumes the full family of balanced measurable color tests and selects a cut adapted to each arbitrary symmetric matrix $M$; Carbery–Wright then upgrades an $L^1$ polynomial estimate to $L^2$. Thus the proof does not cross the projection-only ceiling recorded by `obs:proj-ceiling`.
+**Obstruction audit for `rem:projection-ceiling`.** The converse does not infer QCTS from radial or projection tests. It assumes the full family of balanced measurable color tests and selects a cut adapted to each arbitrary symmetric matrix $M$; Carbery–Wright then upgrades an $L^1$ polynomial estimate to $L^2$. Thus the proof does not cross the projection-only ceiling recorded by `rem:projection-ceiling`.
 
 ## 3\. Tight-window conversion
 

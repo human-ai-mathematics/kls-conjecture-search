@@ -34,7 +34,7 @@ statements that formula makes testable.
 for the gate pencil would contradict `conj:gate-zero-sharp`; above ``4`` it would
 contradict `conj:gate-zero` and hence ``CMH(4)``.  An exact Galerkin lower bound above
 ``4`` at ``n >= 3``, stable under one degree refinement, would be a refutation candidate
-for ``CMH(4)`` itself (`rem:cmh-saturation-risk`, `q:cmh-solenoidal-perturbation`).
+for ``CMH(4)`` itself (`cor:cmh-product-saturation`, `conj:cmh-second-variation`).
 
 **What this target cannot decide.**  Everything is computed *from* eq:cone-stein-kernel,
 whose ledger node `prop:cone-moment-map` is `open`: a disagreement is as likely to
@@ -418,7 +418,7 @@ def run_records(seed: int = 0, cube_ns=CUBE_NS, cube_beta_rules=CUBE_BETA_RULES,
             row["is_exponential_product"] = is_exponential_product(kind, parameter, beta, n)
             galerkin_rows.append(row)
             exact_comparison = _compare_exact_fraction(
-                f"cone CMH quotient <= {CMH_BOUND} (q:cmh-normalization / CMH(4))",
+                f"cone CMH quotient <= {CMH_BOUND} (rem:cmh-normalization / CMH(4))",
                 instance, CMH_BOUND, row["lower"], row["certificate"],
                 note="one explicit rational test function evaluated from exact moment "
                      "matrices; a lower bound for C_CMH provided the polynomial span lies "
@@ -440,7 +440,7 @@ def run_records(seed: int = 0, cube_ns=CUBE_NS, cube_beta_rules=CUBE_BETA_RULES,
                 "exponential_product_closed_form":
                     galerkin_mod.exponential_product_galerkin_value(degree)
                     if row["is_exponential_product"] else None,
-                "certificate": row["certificate"], "node": "q:cmh-normalization"})
+                "certificate": row["certificate"], "node": "rem:cmh-normalization"})
             records.append(record)
             if exact_comparison.outcome == "contradicts":
                 galerkin_exact_exceeded.append(instance)

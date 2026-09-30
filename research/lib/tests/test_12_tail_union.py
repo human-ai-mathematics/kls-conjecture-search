@@ -1,4 +1,4 @@
-"""Exact product tail-union moments and O(n) q:alignment observables."""
+"""Exact product tail-union moments and O(n) conj:product-alignment observables."""
 
 import numpy as np
 

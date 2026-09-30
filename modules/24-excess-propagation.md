@@ -128,10 +128,10 @@ Countability supplies measurability and one common null set for the fixed-cut in
 Within the smooth compact-support class of [](#lem:excess-identity), excess propagation is equivalent to a lower bound on $\E I_{\mu_t}(p_t)$. Such a lower bound is itself a Cheeger-type statement for the random posterior, so an argument that simply inserts a lower bound for the localized profile risks assuming the phenomenon the argument is meant to prove. [](#lem:inf-martingales) supplies no monotonicity for that profile, because the mass-constrained competitor family changes with time. Thus “direct propagation is circular” should be read as a proof-design warning, not a formal impossibility result: additional structure could conceivably control the moving infimum. The external worst-case constant $\hstar_n$ of [](#eq:hstar-def) provides one demonstrably non-circular anchor in a contradiction argument; the next section develops that bootstrap without claiming it is the only possible anchor.
 :::
 
-(subsec:excess-fences)=
+(subsec:excess-barriers)=
 ## Methodological constraints from this section
 
 :::{prf:remark} Localized profile insertion may assume the target
-:label: obs:circularity
+:label: rem:profile-circularity
 Excess propagation requires a lower bound on the expected isoperimetric profile of the random posterior. The supermartingale statement available here, [](#lem:excess-identity) together with [](#lem:inf-martingales) and [](#rem:circularity), applies only to a *fixed* competitor family, whereas the balanced family changes with time. Directly inserting a lower bound for the time-dependent localized profile therefore risks assuming the Cheeger control that excess propagation is meant to prove; a proof must supply additional structure or an external non-circular anchor.
 :::

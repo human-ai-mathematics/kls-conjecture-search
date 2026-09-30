@@ -14,7 +14,7 @@ fingerprints:
   prop:stein-rep: 809545792ca08860114a8276ff5b61febda2930cfd2b8b0f3a1a5ca1a0d00e6a
   cor:away-from-zero: d15055503849fa299724c5cb1640fab8f4b60ebc491621b6ffb1d34480e0dd95
   lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
-  solutions/kls-qcts-stein-boundary-core.md: 61ca993ab0b90b1a077993bd35fc62131f132b57c8c1ccbb67fe94d29ec0d417
+  solutions/kls-qcts-stein-boundary-core.md: 5dd84320451f2be204b9bb28963eed576a450b44011f8c427b40212d130ed6d1
   prop:qcts-equivalence: a2120cd5d1d4968432ea232d734c8f07c4542570f23684fd94a105e065fe246e
   def:qcts: 0f22746bfd781ed526102c33b699417cb07ef6d9df40f0fb4ce59158e6376b86
   lem:boundary-rep: ec5bb90e57459669bbd919a3edcac5720f3f22bda24693a1dbca6463219f6756
@@ -42,7 +42,7 @@ This report certifies exactly the following twelve ledger nodes.
 
 The dossier statements match the corresponding manuscript labels and current ledger statements.
 The applicable obstruction metadata is also respected: `prop:qcts-equivalence` uses the full
-family of matrix-adapted balanced cuts and therefore does not cross `obs:proj-ceiling`.
+family of matrix-adapted balanced cuts and therefore does not cross `rem:projection-ceiling`.
 
 ## Checks performed
 

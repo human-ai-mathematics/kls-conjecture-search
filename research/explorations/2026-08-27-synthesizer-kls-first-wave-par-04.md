@@ -25,11 +25,11 @@ entry.
 
 `python3 research/check_ledger.py status` reports the first-wave targets exactly as follows:
 
-- `q:upgrade`: `open`;
-- `q:mm-spectral-occupation`: `open`;
+- `conj:trace-upgrade`: `open`;
+- `conj:mm-spectral-occupation`: `open`;
 - `ass:uniform-cmh-approximants`: `open`;
-- `q:cmh-approximation`: `conditional`, with a certified dossier and independent review;
-- `q:mm-invariant-lift`, `q:mm-square-root-commutator`, `q:stein-weighted`, and `q:alignment`:
+- `prop:cmh-approximation-closure`: `conditional`, with a certified dossier and independent review;
+- `conj:mm-invariant-lift`, `conj:mm-square-root-commutator`, `conj:stein-weighted`, and `conj:product-alignment`:
   `open`.
 
 The intrinsic quadratic-Poincar\'e inputs `thm:letwin-qcts` and
@@ -66,11 +66,11 @@ $\mathcal I_L(X)$. No differentiation of $P_L$ occurs in (N1)--(N2).
 
 | stream | $X$ and intrinsic tensor $Z$ | low block | exact residue | budget that must absorb the residue |
 |---|---|---|---|---|
-| all-cut `q:upgrade` | $X_t=\sqrt{s_t}K_t$, $Z_t=\sqrt{s_t}A_t^{-1/2}K_tA_t^{-1/2}$ | $\le8L^2$, conditional on `thm:letwin-qcts` | $\mathcal H^K_{t,L}=\mathcal I_L(\sqrt{s_t}K_t)$ | interval density, $r_t$, and less than $D_t/12$ before the $G$--$K$ correction |
-| spectral `q:mm-spectral-occupation` | $X_t=H_t$, $Z_t=A_t^{-1/2}H_tA_t^{-1/2}$ | $\le8L^2v_t$, conditional on `thm:letwin-qcts` | $\mathcal R_{t,L}=\mathcal I_L(H_t)$ | $C_Ht$, $\int\mathbb E|g_t|^2$, and a strict fraction of the high damping $2g_t^TP_LA_tP_Lg_t$ |
-| product `q:alignment` | $X_t=\sqrt{s_t}G_t$ and $P_t^H$ is the coordinate mask $A_t^{(i)}\ge2$ | not supplied by (N2) in the node statement | $S_t^H$ has the same incident-block formula as (N1), with the node's $\ge2$ coordinate mask | the all-cut interval budget, but only for two-sided-exponential products |
+| all-cut `conj:trace-upgrade` | $X_t=\sqrt{s_t}K_t$, $Z_t=\sqrt{s_t}A_t^{-1/2}K_tA_t^{-1/2}$ | $\le8L^2$, conditional on `thm:letwin-qcts` | $\mathcal H^K_{t,L}=\mathcal I_L(\sqrt{s_t}K_t)$ | interval density, $r_t$, and less than $D_t/12$ before the $G$--$K$ correction |
+| spectral `conj:mm-spectral-occupation` | $X_t=H_t$, $Z_t=A_t^{-1/2}H_tA_t^{-1/2}$ | $\le8L^2v_t$, conditional on `thm:letwin-qcts` | $\mathcal R_{t,L}=\mathcal I_L(H_t)$ | $C_Ht$, $\int\mathbb E|g_t|^2$, and a strict fraction of the high damping $2g_t^TP_LA_tP_Lg_t$ |
+| product `conj:product-alignment` | $X_t=\sqrt{s_t}G_t$ and $P_t^H$ is the coordinate mask $A_t^{(i)}\ge2$ | not supplied by (N2) in the node statement | $S_t^H$ has the same incident-block formula as (N1), with the node's $\ge2$ coordinate mask | the all-cut interval budget, but only for two-sided-exponential products |
 | CMH linear sector | after global whitening $\Sigma_k=I$, test $H_k$ against a fixed $P_a=a\otimes a$ | the aligned scalar term $\mathbb E(a^TH_ka)^2$ is bounded by the constant-matrix input | $\frac12\mathbb E\|[P_a,H_k]\|_{\mathrm{HS}}^2$ | no stochastic-time budget exists; genuine Monge--Amp\`ere/Codazzi structure must give a static operator bound |
-| weighted Stein `q:stein-weighted` | a localized boundary/Jacobi trace, not an $A^{1/2}ZA^{1/2}$ tensor identified in either probe | no common low block has been proved | high-rank mean-zero boundary modes and Reilly terms | the covariance-weighted almost-stability estimate required by `ass:weighted-package` |
+| weighted Stein `conj:stein-weighted` | a localized boundary/Jacobi trace, not an $A^{1/2}ZA^{1/2}$ tensor identified in either probe | no common low block has been proved | high-rank mean-zero boundary modes and Reilly terms | the covariance-weighted almost-stability estimate required by `ass:weighted-package` |
 
 The first two rows instantiate the same deterministic block lemma, now promoted with guardrails
 to `research/knowledge/lemmas.md`. They do **not** instantiate the same stochastic process:
@@ -122,8 +122,8 @@ not a moment-map Hessian, so it is a method obstruction rather than a refutation
 ### Square-root/Haar commutator
 
 The formal error
-$[N^{1/2},K_M]N^{1/2}u$ in `q:mm-square-root-commutator` is an operator/core and complete-tree
-problem downstream of `q:mm-invariant-lift`. Equation (C2) is a static floor on orientation loss,
+$[N^{1/2},K_M]N^{1/2}u$ in `conj:mm-square-root-commutator` is an operator/core and complete-tree
+problem downstream of `conj:mm-invariant-lift`. Equation (C2) is a static floor on orientation loss,
 not a proof that this formal error equals, bounds, or is bounded by $[P_a,H_k]$. The two
 commutators are recorded separately in shared knowledge.
 
@@ -134,8 +134,8 @@ Write:
 - $E_K$ for the proposed all-measure incident-high $K$ occupation estimate in the upgrade probe;
 - $S_f$ for the proposed eigenfunction high-incidence estimate in the spectral probe;
 - $C_{\mathrm{stat}}$ for a genuine-moment-map uniform bound on the static commutator in (C2);
-- $W_J$ for the weighted Jacobi/Reilly statement of `q:stein-weighted`;
-- $A_{\mathrm{prod}}$ for the product-only $G$-tensor estimate of `q:alignment`.
+- $W_J$ for the weighted Jacobi/Reilly statement of `conj:stein-weighted`;
+- $A_{\mathrm{prod}}$ for the product-only $G$-tensor estimate of `conj:product-alignment`.
 
 The status words in this table concern the displayed direction, not similarity of proof shape.
 
@@ -169,9 +169,9 @@ Two within-stream implications should not be confused with the table:
 | implication | status | guardrail |
 |---|---|---|
 | a bound $\mathbb E\|[P_a,H_k]\|_{\mathrm{HS}}^2\le C_0$ plus the Letwin constant-matrix input gives $\mathbb E|H_ka|^2\le2+C_0/2$ | proved (dossier) | the algebra is certified in `solutions/thm-cmh-normalization.tex`; the numerical constant-matrix input remains an unreviewed import |
-| `ass:uniform-cmh-approximants` plus the certified approximation dossier gives the affine Poincar\'e limit with the same constant | proved (dossier) | this is the existing `conditional` node `q:cmh-approximation`; its premise remains open |
+| `ass:uniform-cmh-approximants` plus the certified approximation dossier gives the affine Poincar\'e limit with the same constant | proved (dossier) | this is the existing `conditional` node `prop:cmh-approximation-closure`; its premise remains open |
 | $E_K$ with $\beta<1/12$ gives `ass:all-cut-carleson` through (E1) and the low block | open | probe derivation only; low block is preprint-conditional and no dossier exists |
-| $S_f$ gives `q:mm-spectral-occupation` after the low-block extraction | open | probe derivation only; low block is preprint-conditional and no dossier exists |
+| $S_f$ gives `conj:mm-spectral-occupation` after the low-block extraction | open | probe derivation only; low block is preprint-conditional and no dossier exists |
 
 Only the first two rows are backed by existing certified dossiers, and both are already represented
 without a new cross-route edge. No new ledger edge is warranted.
@@ -204,8 +204,8 @@ The exact guardrails for a dossier are:
 - stopped-window consequences only by positivity;
 - no deweighting at zero: a scalar multiplier using only the Riccati identity and the same
   Brascamp--Lieb cap must vanish at least quadratically;
-- no use of `thm:letwin-qcts`, and no implication to `q:upgrade`, `q:alignment`, or
-  `q:stein-weighted`.
+- no use of `thm:letwin-qcts`, and no implication to `conj:trace-upgrade`, `conj:product-alignment`, or
+  `conj:stein-weighted`.
 
 It was not promoted to shared knowledge because its current reusable scope is the single
 two-color stochastic layer and its formal node, statement anchor, dossier, and review do not yet
@@ -308,7 +308,7 @@ is already curated as `fence-cmh-algebraic-countermodel`; no instance-registry e
 - **A1-bis $\leftrightarrow$ KLS:** untouched; no cross-program bridge or dependency edge was
   added.
 - **Trace-upgrade cluster:** still lacks one proved geometric/analytic bridge among
-  `q:upgrade`, high-rank `q:stein-weighted`, and `q:alignment`; only analogy is known.
+  `conj:trace-upgrade`, high-rank `conj:stein-weighted`, and `conj:product-alignment`; only analogy is known.
 - **Moment-map spectral:** still blocked by asymmetric, orientation-preserving unwhitening of the
   eigenfunction tensor on a universal time window.
 - **Moment-map CMH:** still blocked first by the genuine-Hessian static commutator/linear sector,
@@ -331,8 +331,8 @@ is already curated as `fence-cmh-algebraic-countermodel`; no instance-registry e
    No current gate status changes.
 5. After certification, the next exploration wave should use distinct gates: a Route-S prober
    consuming the posterior-defect lemma in an asymmetric high-incidence attack, a CMH prober on
-   `q:mm-invariant-lift`, and an Eldan prober on `q:weighted`. Do not simultaneously re-probe
-   `q:upgrade`, high-rank `q:stein-weighted`, and `q:alignment`; one owner must retain the shared
+   `conj:mm-invariant-lift`, and an Eldan prober on `conj:weighted-excess-rate`. Do not simultaneously re-probe
+   `conj:trace-upgrade`, high-rank `conj:stein-weighted`, and `conj:product-alignment`; one owner must retain the shared
    trace-upgrade comparison.
 
 ## Proposed ledger and route-control delta
@@ -340,7 +340,7 @@ is already curated as `fence-cmh-algebraic-countermodel`; no instance-registry e
 No status change, `depends_on` edge, bridge, or route-control replacement is warranted by this
 synthesis. The only certified implications found are already represented by
 `prop:letwin-not-gate-zero`/its dossier and the existing conditional node
-`q:cmh-approximation`.
+`prop:cmh-approximation-closure`.
 
 The two proposed lemma shells should be treated as orchestrator acceptance decisions before the
 proof transition, not as proved deltas. If accepted, they remain `open`, carry no `solution` or
@@ -362,7 +362,7 @@ next_prompt: |
   statement so it matches the requested dossier, and keep the whitened `K_t` corollary separate
   and conditional on `thm:letwin-qcts`. If accepted, dispatch two distinct provers in parallel,
   then distinct cold proof-checkers; do not mark either node proved before a passing persisted
-  review. Apply no cross-route edge and no status change to `q:upgrade`,
-  `q:mm-spectral-occupation`, `ass:uniform-cmh-approximants`, `q:stein-weighted`, or
-  `q:alignment`. Preserve the single-owner rule for any later work in the trace-upgrade cluster.
+  review. Apply no cross-route edge and no status change to `conj:trace-upgrade`,
+  `conj:mm-spectral-occupation`, `ass:uniform-cmh-approximants`, `conj:stein-weighted`, or
+  `conj:product-alignment`. Preserve the single-owner rule for any later work in the trace-upgrade cluster.
 ```

@@ -6,9 +6,9 @@ numbering:
 (sec:cmh-normalization)=
 # Approach C, normalization layer: CMH made precise, its Hodge content, and gate zero
 
-Section [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#q:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This section does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
+Section [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#rem:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This section does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
 
-- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#rem:cmh-stronger-than-kls));
+- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison));
 
 - a necessary linear-sector condition, *gate zero*, which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
 
@@ -88,7 +88,7 @@ This is the precise content of the schema [](#eq:cmh4-schema): $\Sigma$ is the c
 (subsec:cmh-implies)=
 ## CMH implies the affine Poincaré inequality
 
-:::{prf:theorem} Endpoint reduction for [](#q:cmh-normalization)
+:::{prf:theorem} Endpoint reduction for [](#rem:cmh-normalization)
 :label: thm:cmh-implies-affine-poincare
 For every centered log-concave $\mu$ in the regular moment-map class described above,
 
@@ -157,7 +157,7 @@ Weighted integration by parts gives $\E\inner{\Sigma\nabla\psi}{\Sigma^{-1}w}=\E
 :::
 
 :::{prf:corollary} The exact Hodge consequence
-:label: rem:cmh-stronger-than-kls
+:label: cor:cmh-hodge-comparison
 $\Sigma\nabla\psi$ is the least-$L^2(\Sigma^{-1})$ field with divergence $-h$, and by [](#prop:cmh-hodge) controlling it *is* the affine Poincaré inequality. CMH demands in addition that the solenoidal excess $w$ be paid for within the same budget.
 
 In dimension one a square-integrable divergence-free field with the no-flux convention of §[](#subsec:cmh-conventions) vanishes identically, so $w=0$ and CMH degenerates exactly to the Poincaré inverse-divergence problem — this is why [](#thm:cmh-1d) is an identity rather than an inequality. In every dimension the decomposition proves the exact comparison
@@ -173,7 +173,7 @@ In dimension at least two the divergence-free subspace is nontrivial, so the ide
 The identity does *not* show that this channel is nonzero for a CMH extremizing sequence, nor does it exhibit a measure separating CMH from $\CPaff$. Thus $\mathrm{CMH}(4)$ is sufficient for KLS with constant $4$ ([](#thm:cmh-implies-affine-poincare)), and this manuscript establishes neither equivalence nor strict nonimplication. $\mathrm{CMH}(4)$ is the target of this approach, not an established reformulation of KLS or a strict strengthening of it.
 :::
 
-The product formula below shows that products of one-sided exponentials saturate $\mathrm{CMH}(4)$ with zero slack. [](#rem:cmh-saturation-risk) therefore turns the possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
+The product formula below shows that products of one-sided exponentials saturate $\mathrm{CMH}(4)$ with zero slack. [](#cor:cmh-product-saturation) therefore turns the possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
 
 (subsec:gate-zero)=
 ## Gate zero: the necessary linear-sector condition
@@ -278,7 +278,7 @@ In particular, on any class of such measures with $\E\tau^2\preceq c\,\Id$, ever
 Summing the corollary over an orthonormal basis recovers $\norm{T_3(\mu)}_{\HS}^2\le4(\Tr\E\tau^2-n)\le4n$, the chain in the proof of Theorem 1.2 of [@ChenKlartag2026SharpThinShell]. [](#cor:gate-zero-third-moment) places gate zero relative to the literature input it does not use: gate zero at constant $c$ contains a directional third-moment bound at $2\sqrt{c-1}$, so any proof of [](#eq:gate-zero-sharp) proves a sharper constant than [](#thm:letwin-qcts) supplies, and any proof of [](#eq:gate-zero) must at least reproduce a bound of that type. The reverse channel is what makes the corollary a falsification tool: it is a lower bound on the gate matrix that needs no moment map, only third moments.
 
 :::{prf:remark} Relation to the shared trace-upgrade difficulty
-Gate zero belongs to the same difficulty family as [](#q:upgrade), the high-rank part of [](#q:stein-weighted), and [](#q:alignment); no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the programme.
+Gate zero belongs to the same difficulty family as [](#conj:trace-upgrade), the high-rank part of [](#conj:stein-weighted), and [](#conj:product-alignment); no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the programme.
 :::
 
 % Agent note: research/lib/README.md records the numerical channel for testing gate zero on models.
@@ -341,24 +341,24 @@ Finally $e_1^\top\E H^2e_1=1+d\abs z^2=1+d$, and $1+d>4$ is equivalent to $m^2>9
 
 :::{prf:remark} Scope of the countermodel
 :label: rem:countermodel-scope
-The matrices above are *not* claimed to be moment-map Hessians; no Monge–Ampère, Codazzi, or Hessian-compatibility condition is imposed. The proposition proves only that positivity, the normalization $\E H=\Id$, and the constant-matrix estimate [](#eq:letwin-matrix) do not imply gate zero by matrix algebra. Any proof of [](#eq:gate-zero) must therefore consume differential moment-map structure. Equivalently, by [](#eq:static-commutator), it must control $\E\norm{[B,H]}_{\HS}^2$, and [](#prop:letwin-not-gate-zero) exhibits an admissible law where that quantity is maximal on the scalar ray. This is the same obstruction as [](#q:mm-square-root-commutator) in its most elementary, static, finite-dimensional form.
+The matrices above are *not* claimed to be moment-map Hessians; no Monge–Ampère, Codazzi, or Hessian-compatibility condition is imposed. The proposition proves only that positivity, the normalization $\E H=\Id$, and the constant-matrix estimate [](#eq:letwin-matrix) do not imply gate zero by matrix algebra. Any proof of [](#eq:gate-zero) must therefore consume differential moment-map structure. Equivalently, by [](#eq:static-commutator), it must control $\E\norm{[B,H]}_{\HS}^2$, and [](#prop:letwin-not-gate-zero) exhibits an admissible law where that quantity is maximal on the scalar ray. This is the same obstruction as [](#conj:mm-square-root-commutator) in its most elementary, static, finite-dimensional form.
 :::
 
 :::{prf:remark} Gate zero on genuine moment maps
-:label: q:gate-zero
+:label: rem:gate-zero-dichotomy
 Decide [](#eq:gate-zero). Either prove $\E[H\Sigma^{-1}H]\preceq4\Sigma$ for every log-concave moment measure using differentiated Monge–Ampère structure — which by [](#rem:countermodel-scope) means a dimension-free bound on the static commutator $\E\norm{[B,H]}_{\HS}^2$ for the relevant multiplier class — or exhibit a genuine moment map with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$, which refutes $\mathrm{CMH}(4)$ without refuting [](#conj:kls).
 :::
 
 (subsec:cmh-conventions)=
 ## Conventions, domains, and affine covariance
 
-**Weighted divergence and boundary flux.** $\Div_\mu u=\rho^{-1}\Div(\rho u)$. All integrations by parts are justified first for compactly supported fields or fields with vanishing normal flux, and the closed forms are obtained by completion. The no-flux convention is essential in dimension one, where it is what rules out a nonzero constant divergence-free field and forces $w=0$ in [](#rem:cmh-stronger-than-kls).
+**Weighted divergence and boundary flux.** $\Div_\mu u=\rho^{-1}\Div(\rho u)$. All integrations by parts are justified first for compactly supported fields or fields with vanishing normal flux, and the closed forms are obtained by completion. The no-flux convention is essential in dimension one, where it is what rules out a nonzero constant divergence-free field and forces $w=0$ in [](#cor:cmh-hodge-comparison).
 
 **Closed operators.** $\calE_H(f,g)=\E_\mu\inner{H\nabla f}{\nabla g}$ is closable under the smooth moment-map hypotheses of §[](#subsec:mm-coordinates); $\Aop=-L_\mu$ is its nonnegative self-adjoint operator, and $\Aop^{-1}$ always means the pseudoinverse on $(\ker\Aop)^\perp$. The spectral truncation in the proof of [](#thm:cmh-implies-affine-poincare) avoids assuming a spectral gap.
 
 **Affine covariance.** If $T$ is invertible and $Y=TX$, then $\Sigma_Y=T\Sigma_XT^\top$ and $H_Y(Tx)=TH_X(x)T^\top$; with $g_Y(y)=g_X(T^{-1}y)$ both the numerator and denominator of [](#eq:cmh-constant) are unchanged. Hence $\CMH$ is an invariant of the affine equivalence class, matching the affine invariance of $\CPaff$. For a *noninvertible* map the transported Stein kernel need not be the canonical moment-map kernel of the image, so only the Poincaré-level statement of [](#cor:cmh-linear-images) is available there.
 
-**Conditional closure for general log-concave measures.** The argument behind [](#q:cmh-approximation) runs at the Poincaré level as follows. For an arbitrary centered log-concave $\mu$, centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants $\mu_q$ belong to the published compact-target regular class of [](#thm:regular-moment-map-compact-target) and converge to $\mu$ in ambient $W_2$ with second moments, hence $\Sigma_q\to\Sigma$. If $\sup_q\CMH(\mu_q)\le C$, then for every smooth compactly supported $f$,
+**Conditional closure for general log-concave measures.** The argument behind [](#prop:cmh-approximation-closure) runs at the Poincaré level as follows. For an arbitrary centered log-concave $\mu$, centered Gaussian-convolution, Gaussian-tilt, and growing-ball approximants $\mu_q$ belong to the published compact-target regular class of [](#thm:regular-moment-map-compact-target) and converge to $\mu$ in ambient $W_2$ with second moments, hence $\Sigma_q\to\Sigma$. If $\sup_q\CMH(\mu_q)\le C$, then for every smooth compactly supported $f$,
 
 $$
 \Var_{\mu_q}f\le C\int\inner{\Sigma_q\nabla f}{\nabla f}\,d\mu_q.

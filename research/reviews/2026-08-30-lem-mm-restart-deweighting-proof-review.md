@@ -4,7 +4,7 @@ authors:
   - claude-prover-w4p02
 reviewer: proof-checker-w4r02
 fingerprints:
-  solutions/lem-mm-restart-deweighting.md: 80d27c52a061cde9cd191ccdf42bec7cce0e5a8f4d684dcaab30c0a2d256d469
+  solutions/lem-mm-restart-deweighting.md: e02adbf1cbecb1adf3e0c1867ee8d74dd4709ce27d45703b7e88e782ec84f7cc
   lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20
   lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---
@@ -186,11 +186,11 @@ dossier's content but is not load-bearing here.
 The ledger node carries no `bounded_by` edge; the registered fences were checked individually
 against the actual argument:
 
-- `obs:two-tail`, `obs:circularity`, `obs:rank-one-refuted`: no cut, slice, or excess-profile
+- `rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts`: no cut, slice, or excess-profile
   estimate appears anywhere in the proof.
-- `obs:proj-ceiling`: no radial or projection-only test is promoted to a tensor bound; the
+- `rem:projection-ceiling`: no radial or projection-only test is promoted to a tensor bound; the
   tensor is controlled through the certified time-weighted budget only.
-- `obs:crude-insufficient`, `obs:relative-ceiling`: no covariance occupation integral
+- `rem:crude-insufficient`, `rem:relative-ceiling`: no covariance occupation integral
   ($\Xi$-type) occurs; $A_t$ enters only through the Brascamp–Lieb cap
   $\operatorname{Cov}(\Theta)\preceq(\kappa+u)^{-1}I$, a per-instance curvature bound.
 - `prop:covariance-spike`: $\|A_t\|_{\mathrm{op}}$ is never bounded along a universal time
@@ -199,7 +199,7 @@ against the actual argument:
   weight is not removed at time zero; it is exchanged for the elapsed time $\sigma>0$, which is
   exactly the trade the fence permits. No unweighted initial-layer or universal-time occupation
   claim is made, and the dossier explicitly disclaims any claim about
-  `q:mm-spectral-occupation`.
+  `conj:mm-spectral-occupation`.
 
 ### Hypothesis accounting
 
@@ -254,7 +254,7 @@ this review.
 
 Not certified here: `lem:mm-stopped-window-source`, `lem:mm-smallgap-fourth-moment`,
 `prop:mm-window-occupation` (separate reviews); any unweighted initial-layer bound; any
-universal-time occupation statement; `q:mm-spectral-occupation`; any joint control of
+universal-time occupation statement; `conj:mm-spectral-occupation`; any joint control of
 $v_\sigma$ and $\sigma^{-1}$ (the assembly dossier's business, explicitly disclaimed by the
 dossier); the manuscript prose surrounding the lemma. The companion dossiers' internal
 conventions were consulted only where this dossier points at them and were independently

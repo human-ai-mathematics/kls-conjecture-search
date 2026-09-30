@@ -115,14 +115,14 @@ convergence.
   $\int_0^1tF(t)dt$ for $F\ge0$ does not imply finiteness of $\int_0^1F(t)dt$; no deweighting or
   unweighted occupation estimate is claimed.
 - The result does not approximate the measure, cover singular/lower-dimensional limits, or
-  discharge `q:mm-spectral-occupation`.
+  discharge `conj:mm-spectral-occupation`.
 
 ## Fence check
 
 There is no formal `bounded_by` edge. The proof uses no cut, slice, radial, projection,
-near-extremal, or covariance-occupation argument, so it does not engage `obs:two-tail`,
-`obs:proj-ceiling`, `obs:crude-insufficient`, `obs:relative-ceiling`, `obs:circularity`, or
-`obs:rank-one-refuted`. The covariance cap is used only with the retained factor $\kappa+t$.
+near-extremal, or covariance-occupation argument, so it does not engage `rem:two-tail-slice-bounds`,
+`rem:projection-ceiling`, `rem:crude-insufficient`, `rem:relative-ceiling`, `rem:profile-circularity`, or
+`rem:single-coordinate-cuts`. The covariance cap is used only with the retained factor $\kappa+t$.
 
 ## Validation and status
 
@@ -134,7 +134,7 @@ cd solutions && latexmk -pdf -outdir=../build lem-mm-time-weighted-fixed-source.
 
 succeeded and produced `build/lem-mm-time-weighted-fixed-source.pdf`. The log contains only the
 expected unresolved cross-module references to `lem:mm-time-weighted-fixed-source` and
-`q:mm-spectral-occupation`; there are no internal undefined references, TeX errors, or box
+`conj:mm-spectral-occupation`; there are no internal undefined references, TeX errors, or box
 warnings. `python3 research/check_ledger.py` reports 0 errors across 180 nodes.
 
 The dossier remains `checked_by: none`. It is an unconditional candidate proof of this lemma,

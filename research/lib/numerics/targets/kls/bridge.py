@@ -10,8 +10,8 @@ This calibrates the route-agnostic analytic facts stated in the manuscript:
   * exact isotropic linear test: lambda_max(Cov) = 1 implies every universal KLS bound has K>=1;
   * K = O(1) across this small battery, including single-coordinate Gaussian inflation, is
     directional non-refutation of the bridge. It does not test the cut-specific dynamic
-    obstruction ``obs:rank-one-refuted``.
-The localization quantities (source occupation for q:upgrade, q:alignment, weighted Stein) live in the companion
+    obstruction ``rem:single-coordinate-cuts``.
+The localization quantities (source occupation for conj:trace-upgrade, conj:product-alignment, weighted Stein) live in the companion
 target `loc-engine` (`numerics.targets.kls.loc_engine`) on top of `numerics.localization` — see
 research/lib/README.md.
 """
@@ -109,7 +109,7 @@ def run_records(seed: int = 0, d: int = 4):
                         bool(v_bridge.outcome == "consistent"),
                     "bridge_comparison": v_bridge.dict(),
                     "isotropic_lower_bound_comparison": v_refuter.dict(),
-                    "companion": "localization quantities (q:upgrade source, q:alignment, weighted Stein) "
+                    "companion": "localization quantities (conj:trace-upgrade source, conj:product-alignment, weighted Stein) "
                                  "=> target 'loc-engine' on numerics.localization; see research/lib/README.md"})
     return RunResult(lift_observations(records), config={"d": d},
                      summary={"calibration_passed": cal_ok, "realized_K_max": K_max})

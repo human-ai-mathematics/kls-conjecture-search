@@ -34,7 +34,7 @@ every computed m); the radial quadratic F = |X|^2 - d has exact root quotient
 neutrality root formula (probe eq. 29) agrees EXACTLY with the independent chord/chamber
 integration machinery that is then trusted for the vertex orbit.
 
-**What this target cannot decide** (q:conditional-fiber-frame, and the objective of the
+**What this target cannot decide** (conj:conditional-fiber-frame, and the objective of the
 approach that carries it in research/program/portfolio.yaml): the
 all-frame gate.  Library lower bounds never bound Lambda from above; a decaying library gap
 is directional evidence only; even an exact certificate is a *candidate* requiring a prover
@@ -375,7 +375,7 @@ def run_records(seed: int = 0,
 
     summary = {
         "no_status_change": True,
-        "gate": "q:conditional-fiber-frame: library lower bounds "
+        "gate": "conj:conditional-fiber-frame: library lower bounds "
                 "and directional decay decide nothing; the all-frame gate needs an exact "
                 "dual certificate or a uniform lower bound, independently proved",
         "threshold_evaluation": {kk: vv for kk, vv in evaluation.items() if kk != "kind"},

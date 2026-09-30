@@ -1,7 +1,7 @@
 """Channel 2 (task M9): a second-variation probe of ``CMH(4)`` at the saturating product.
 
 `thm:cmh-product` and `thm:cmh-1d` give ``C_CMH = 4`` exactly for the centred one-sided
-exponential times a standard Gaussian, with zero slack.  `q:cmh-solenoidal-perturbation` asks
+exponential times a standard Gaussian, with zero slack.  `conj:cmh-second-variation` asks
 whether an admissible perturbation raises the quotient.  The certified caveat, restated in
 `2026-08-27-proof-miner-cmh-transverse-deficit-w3t01.md`, is that under a nonproduct perturbation
 the law, covariance, canonical kernel, generator, numerator, denominator and the (non-attained)

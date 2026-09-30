@@ -108,7 +108,7 @@ condition.
 
 The companion dossiers `lem-mm-restart-deweighting` and `prop-mm-window-occupation`
 (separate `review:` keys, other cold checkers); the Letwin preprint itself; the Klartag
-paper beyond its accepted import statement; `q:mm-spectral-occupation` and any
+paper beyond its accepted import statement; `conj:mm-spectral-occupation` and any
 occupation, universal-time, or unstopped claim; the pipeline non-circularity claim in
 dossier B's remark.
 

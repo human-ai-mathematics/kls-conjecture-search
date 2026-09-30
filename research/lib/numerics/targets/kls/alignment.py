@@ -1,4 +1,4 @@
-"""Product tail-union stress test for KLS ``q:alignment`` (target ``kls-align``).
+"""Product tail-union stress test for KLS ``conj:product-alignment`` (target ``kls-align``).
 
 This target computes the *actual* model observable
 
@@ -35,7 +35,7 @@ from ...localization.tail_union import (
 from ...localization.tilt1d import LAPLACE, tilted
 
 
-TARGET = "q:alignment"
+TARGET = "conj:product-alignment"
 _MODEL = "isotropic-laplace-product/tail-union"
 
 
@@ -280,7 +280,7 @@ def _scan_records(
                 / max(lengths[ratio_local] + mean_r[ratio_local], 1e-15)
             )
             # C0=1 normalized slack: positive means the sampled inequality is violated
-            # for this *candidate* triple (C0,C1,alpha), not for q:alignment itself.
+            # for this *candidate* triple (C0,C1,alpha), not for conj:product-alignment itself.
             candidate_excess = (
                 mean_SH[local] - lengths[local] - C1 * mean_r[local] - alpha * mean_D[local]
             )

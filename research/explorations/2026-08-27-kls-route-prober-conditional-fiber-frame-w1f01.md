@@ -933,7 +933,7 @@ audit publication metadata before any import.
 
 ## 8. Six-fence audit
 
-### `obs:two-tail` — evaded
+### `rem:two-tail-slice-bounds` — evaded
 
 The route asserts no slice-wise source/excess inequality and follows no anisotropic stochastic
 posterior.  Its normalization divides by the actual conditional line variance.  In particular,
@@ -941,7 +941,7 @@ an anisotropic Gaussian line variance cancels from the normalized linear quotien
 creating a $\Lambda^2$ source charged to an absolute excess.  The two-tail covariance weight is
 neither hidden nor consumed.
 
-### `obs:proj-ceiling` — evaded
+### `rem:projection-ceiling` — evaded
 
 Although each update uses a line direction, the datum is the full offset-dependent conditional
 fluctuation $f-P_\theta f$, not a marginal or radial projection statistic.  The Gaussian proof
@@ -949,25 +949,25 @@ fluctuation $f-P_\theta f$, not a marginal or radial projection statistic.  The 
 a matrix estimate by integrating projection bounds.  There is no Lorentz $\ell_{2,1}$ summation
 and no lost $\log d$.
 
-### `obs:crude-insufficient` — inapplicable and not used
+### `rem:crude-insufficient` — inapplicable and not used
 
 There is no stochastic localization time, covariance excess $\Xi_T$, or logarithmic bootstrap.
 No crude covariance integral is presented as a closing estimate.
 
-### `obs:relative-ceiling` — respected by classification
+### `rem:relative-ceiling` — respected by classification
 
 The headline frame inequality directly implies KLS by (13)--(15).  It is openly classified as a
 new sufficient-condition target, not sold as a weaker bootstrap premise.  Therefore it does not
 violate the fence; it accepts the full strength of what it asks.
 
-### `obs:circularity` — evaded
+### `rem:profile-circularity` — evaded
 
 No lower bound on a localized isoperimetric profile, moving competitor family, or perimeter
 supermartingale appears.  The only slice input is the independently known sharp
 one-dimensional Poincar\'e theorem.  The unresolved global form gap is stated as the target rather
 than inserted inside its proof.
 
-### `obs:rank-one-refuted` — evaded
+### `rem:single-coordinate-cuts` — evaded
 
 No fixed cut or covariance-inflation witness is used.  A single directional heat bath has a large
 kernel; the proposal relies on a complete test-independent tight frame.  The product calibration
@@ -1073,7 +1073,7 @@ Admission requires adding `conditional-fiber-frame` to `meta.route_policy.allowe
 manuscript file/label first.
 
 ```yaml
-- id: q:conditional-fiber-frame
+- id: conj:conditional-fiber-frame
   kind: question
   status: open
   route: conditional-fiber-frame

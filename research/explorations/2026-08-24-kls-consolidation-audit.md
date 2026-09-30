@@ -16,7 +16,7 @@ The audit covers:
 - the deterministic route in `modules/kls/15-moment-map-cmh.tex` and
   `research/kls/routes/moment-map-cmh/`;
 - the preserved fixed-eigenfunction route and its new headline node
-  `q:mm-spectral-occupation`;
+  `conj:mm-spectral-occupation`;
 - the move to the central `research/kls/ledger.yaml` and `obstructions.{md,yaml}`;
 - the terminal `conj:kls`, imported July 2026 nodes, CMH nodes, route/bridge semantics, and
   navigation changes; and

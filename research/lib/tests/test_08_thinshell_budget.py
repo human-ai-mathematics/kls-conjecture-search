@@ -1,4 +1,4 @@
-"""Oracle: the thin-shell (q:alignment) family respects the proved facts.
+"""Oracle: the thin-shell (conj:product-alignment) family respects the proved facts.
 
 Before trusting any DIRECTIONAL thin-shell run (runs/2026-06-18-thinshell-alignment.py)
 the machinery must reproduce settled facts on the permutation-symmetric thin-shell cut

@@ -2,7 +2,7 @@
 
 The foundation oracle suite (``tests/``) trusts the engine at small ``k``. Before
 reading any DIRECTIONAL number off a multi-coordinate thin-shell run (the
-``q:alignment`` family), two gates must pass first:
+``conj:product-alignment`` family), two gates must pass first:
 
   ``n_bins_convergence``  the gridded ``k>=2`` background converges -- report the
                           relative drift of the mass ``p`` and the source ``S`` as

@@ -8,7 +8,7 @@ Role: `prover`
 
 Concurrency key: `solution:q-cmh-approximation`
 
-Target: `q:cmh-approximation`
+Target: `prop:cmh-approximation-closure`
 
 Author: `/root/prove_cmh_approximation`
 
@@ -179,7 +179,7 @@ proposed_deltas:
 next_role: proof-checker
 next_prompt: |
   Cold-review `solutions/q-cmh-approximation.tex` as a candidate dossier for
-  `q:cmh-approximation`. Reconstruct it from repository artifacts rather than from the author's
+  `prop:cmh-approximation-closure`. Reconstruct it from repository artifacts rather than from the author's
   account. The theorem constructs, for every centered log-concave `mu` on `R^n`, centered
   full-dimensional compact-target regular moment-map approximants `mu_k` by Gaussian
   convolution, Gaussian tilt, growing-ball truncation, and centering, with an explicit ambient

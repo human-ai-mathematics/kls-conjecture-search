@@ -3,14 +3,14 @@ numbering:
   enumerator: "30.%s"
 ---
 
-(sec:spectral-route)=
+(sec:spectral-approach)=
 # Approach S: fixed-eigenfunction localization
 
 ## The approach at a glance
 
 **The idea.** Follow a fixed first eigenfunction, rather than a cut, through stochastic localization, and keep its tensor orientation alive in the posterior covariance.
 
-**How it would give KLS.** Through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#q:mm-spectral-occupation):
+**How it would give KLS.** Through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#conj:mm-spectral-occupation):
 
 $$
 \text{fixed-eigenfunction full-damping occupation}
@@ -18,7 +18,7 @@ $$
 \text{KLS}.
 $$
 
-The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#q:mm-spectral-occupation) does.
+The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#conj:mm-spectral-occupation) does.
 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.
@@ -27,11 +27,11 @@ The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly
 
 **What it gives.** The initial-layer window chain, [](#prop:mm-window-occupation): conditional on the same preprint input, the occupation estimate *does* hold on the published polylogarithmic window. The approach therefore meets its difficulty only in the gap between a polylogarithmic time and a universal one, which is a sharper statement of the difficulty than the one it started from. The supporting chain is the time-weighted fixed source, the stopped window source, and restart de-weighting ([](#lem:mm-time-weighted-fixed-source), [](#lem:mm-stopped-window-source), [](#lem:mm-restart-deweighting)).
 
-**What blocks it.** [](#q:mm-spectral-occupation) at a *universal* time: the full-damping source estimate, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The whole difficulty is the word universal; the polylogarithmic window is the content of [](#prop:mm-window-occupation).
+**What blocks it.** [](#conj:mm-spectral-occupation) at a *universal* time: the full-damping source estimate, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The whole difficulty is the word universal; the polylogarithmic window is the content of [](#prop:mm-window-occupation).
 
 **What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
-**What would settle it.** [](#q:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
+**What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
 
 **Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: Appendices [](#sec:notation)–[](#sec:models).
 
@@ -149,7 +149,7 @@ These identities do not by themselves unwhiten the high-covariance part of $H_t$
 ## The central problem
 
 :::{prf:conjecture} Fixed-eigenfunction full-damping occupation
-:label: q:mm-spectral-occupation
+:label: conj:mm-spectral-occupation
 On smooth strongly log-concave isotropic approximants, let $-Lf=\lambda f$ be a normalized first nonconstant eigenfunction and let $g_t,H_t,A_t$ be as in [](#eq:spectral-quantities). There exist universal constants $T_0,C_0,C_1>0$ such that, for every $t\le T_0$,
 
 ```{math}
@@ -164,7 +164,7 @@ uniformly through approximation.
 
 :::{prf:proposition} Full-damping sufficiency bridge
 :label: prop:spectral-sufficiency
-Suppose [](#q:mm-spectral-occupation) holds with constants $T_0,C_0,C_1>0$ uniformly through regularization. Set
+Suppose [](#conj:mm-spectral-occupation) holds with constants $T_0,C_0,C_1>0$ uniformly through regularization. Set
 
 $$
 M_*=(1+C_0T_0)e^{C_1T_0},
@@ -214,7 +214,7 @@ In particular, for $\kappa=0$, $\E\int_0^\infty t\norm{H_t}_{\HS}^2\dd t\le\Var_
 (subsec:spectral-window-chain)=
 ## The initial-layer window chain
 
-The following four statements assemble the initial layer of [](#q:mm-spectral-occupation) completely up to the published covariance window. The first and last are conditional on the quadratic-Poincaré input [](#thm:letwin-qcts), taken from an unreviewed preprint; that conditionality is part of the statements.
+The following four statements assemble the initial layer of [](#conj:mm-spectral-occupation) completely up to the published covariance window. The first and last are conditional on the quadratic-Poincaré input [](#thm:letwin-qcts), taken from an unreviewed preprint; that conditionality is part of the statements.
 
 % Agent note: isolated in the 2026-08-30 initial-layer probe.
 
@@ -245,7 +245,7 @@ Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
 :::
 
-[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through Approach S machinery without improving it, and it does not decide [](#q:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
+[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through Approach S machinery without improving it, and it does not decide [](#conj:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
 
 % Agent note: the saturation profile was found in the 2026-08-30 initial-layer probe.
 
@@ -259,7 +259,7 @@ There is a second, coarser way to state what this approach needs. By [](#prop:le
 \CP(\mu)\le C\bigl(1+\kappa_n^2\bigr)
 ```
 
-valid for every isotropic log-concave $\mu$ would prove KLS. Equivalently: it suffices to remove the residual $\sqrt{\log n}$ from the current spectral comparison [](#eq:kls-bridge) while retaining only a universal function of $\kappa_n$. Formulation [](#eq:spectral-kappa-sufficient) is useful as a target statement but supplies no mechanism; [](#q:mm-spectral-occupation) is the mechanism-bearing form.
+valid for every isotropic log-concave $\mu$ would prove KLS. Equivalently: it suffices to remove the residual $\sqrt{\log n}$ from the current spectral comparison [](#eq:kls-bridge) while retaining only a universal function of $\kappa_n$. Formulation [](#eq:spectral-kappa-sufficient) is useful as a target statement but supplies no mechanism; [](#conj:mm-spectral-occupation) is the mechanism-bearing form.
 
 (subsec:spectral-h-minus-one)=
 ## The audited $H^{-1}$ endpoint
@@ -288,14 +288,14 @@ Its exact heat representation controls the short-time and high-frequency parts a
 
 A second natural first attempt fails outright: a direct unweighting of the positive moment-map Stein form is *false* on truncated-exponential first eigenfunctions. This is why [](#eq:whitened-tensor) is stated in whitened form.
 
-(subsec:spectral-fences)=
+(subsec:spectral-barriers)=
 ## Which obstructions apply here, and comparison with the other approaches
 
 The obstructions proved elsewhere in this document are scoped, and it matters which of them bind here.
 
 - The projection ceiling of Section [](#sec:qcts) does *not* obstruct this approach: the moment map uses information beyond radial and projection tests.
 
-- The single-coordinate product-budget result of Section [](#sec:product-stress) ([](#cor:refutation)) is specific to a fixed-cut localization counterexample and imposes no no-go here.
+- The single-coordinate product-budget result of Section [](#sec:product-stress) ([](#cor:single-coordinate-cuts)) is specific to a fixed-cut localization counterexample and imposes no no-go here.
 
 - A universal Lipschitz Gaussian transport is too strong for exponential tails ([](#rem:no-lipschitz-transport)); the weaker expected-Jacobian criterion [](#eq:brownian-derivative) is sufficient for KLS but currently reuses KLS-scale input, so it ranks below the target of this section.
 
@@ -306,7 +306,7 @@ The obstructions proved elsewhere in this document are scoped, and it matters wh
 Approaches S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Approach S keeps stochastic localization and makes the test dependence dynamic, while Approach C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
 :::
 
-% Promotion gate (agent note). The control plane promotes q:mm-spectral-occupation, or admits
+% Promotion gate (agent note). The control plane promotes conj:mm-spectral-occupation, or admits
 % further internal claims on this route, only when one of the following is established: the
 % absorptive source/damping estimate eq:spectral-occupation uniformly on regular approximants
 % together with a passage to arbitrary log-concave measures; or a route-fatal counterexample to

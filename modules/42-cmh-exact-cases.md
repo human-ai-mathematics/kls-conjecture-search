@@ -10,7 +10,7 @@ Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dom
 
 The fourth class is solvable in a weaker but more pointed sense. The exponential cones of §[](#subsec:cmh-cones) attach a Gamma radial variable to an arbitrary centered base, and their moment map is explicit in terms of the base's own ([](#prop:cone-moment-map)); unlike the first three classes they are not compactly supported and, for a general base, not affine images of products. What is computed exactly on them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so every cone with $\beta=n$ saturates sharp gate zero ([](#conj:gate-zero-sharp)) in its axis direction ([](#prop:cone-linear-sector)), and over a cube base the entire gate matrix is a closed form bounded by $2$ ([](#cor:cube-cone-gate-zero)). They are the first non-product equality set the sharp linear sector has, which is what makes them a constraint on any argument for it.
 
-The section closes at the exact product endpoint: centered one-sided exponentials saturate $\mathrm{CMH}(4)$ with *zero* slack. Whether a log-concave perturbation raises the full CMH Rayleigh quotient is a separate second-variation problem, [](#q:cmh-solenoidal-perturbation); changing its solenoidal term alone is not decisive ([](#rem:cmh-saturation-risk)). The cone family bears on where to look for such a perturbation, and §[](#subsec:cmh-cones) reports what a first computation over it suggests.
+The section closes at the exact product endpoint: centered one-sided exponentials saturate $\mathrm{CMH}(4)$ with *zero* slack. Whether a log-concave perturbation raises the full CMH Rayleigh quotient is a separate second-variation problem, [](#conj:cmh-second-variation); changing its solenoidal term alone is not decisive ([](#cor:cmh-product-saturation)). The cone family bears on where to look for such a perturbation, and §[](#subsec:cmh-cones) reports what a first computation over it suggests.
 
 (subsec:cmh-1d)=
 ## The line
@@ -65,7 +65,7 @@ $$
 Thus $\CP(X)=4$ by the preceding upper bound, and [](#eq:cmh-1d-exact) gives $\CMH(X)=4$.
 :::
 
-[](#thm:cmh-1d) is an *identity*, not an inequality: on the line CMH carries exactly the information of the affine Poincaré inequality and nothing more. This is [](#rem:cmh-stronger-than-kls) seen from the other side — the solenoidal channel is empty in dimension one.
+[](#thm:cmh-1d) is an *identity*, not an inequality: on the line CMH carries exactly the information of the affine Poincaré inequality and nothing more. This is [](#cor:cmh-hodge-comparison) seen from the other side — the solenoidal channel is empty in dimension one.
 
 (subsec:cmh-product)=
 ## Products
@@ -395,7 +395,7 @@ $$
 Both eigenvalues are at most $2$ for all $n\ge2$ and $\beta\ge n$: every cube cone satisfies [](#eq:gate-zero-sharp). Equality holds in the axis direction exactly when $\beta=n$, and in the transverse directions only for $n=\beta=2$, where the matrix is $2\,\Id_2$ and the measure is a product of two centered exponentials.
 :::
 
-The cube cones are the first non-product family in this document on which the sharp linear sector is saturated while every object entering $\CMH$ — the kernel, the generator, and all moments — is a rational function of independent Gamma and uniform variables. They are therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of [](#rem:cmh-saturation-risk): numerical experiments suggest that the product-potential perturbations of [](#q:cmh-solenoidal-perturbation) leave the log-concave class for both signs of $\eps$, whereas here the base supplies a non-product perturbation inside it, and a Galerkin quotient above $4$ on a cube cone would point to a counterexample to $\mathrm{CMH}(4)$, which would still have to be verified by an exact argument. A first computation over this family points the other way: on cube cones the polynomial Galerkin quotients sit strictly below the exponential-product values at equal degree, so a non-product base appears to dilute the one-dimensional exponential mechanism rather than add to it, and the pressure on $\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor. This is numerical evidence at finite degree, not a proof.
+The cube cones are the first non-product family in this document on which the sharp linear sector is saturated while every object entering $\CMH$ — the kernel, the generator, and all moments — is a rational function of independent Gamma and uniform variables. They are therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of [](#cor:cmh-product-saturation): numerical experiments suggest that the product-potential perturbations of [](#conj:cmh-second-variation) leave the log-concave class for both signs of $\eps$, whereas here the base supplies a non-product perturbation inside it, and a Galerkin quotient above $4$ on a cube cone would point to a counterexample to $\mathrm{CMH}(4)$, which would still have to be verified by an exact argument. A first computation over this family points the other way: on cube cones the polynomial Galerkin quotients sit strictly below the exponential-product values at equal degree, so a non-product base appears to dilute the one-dimensional exponential mechanism rather than add to it, and the pressure on $\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor. This is numerical evidence at finite degree, not a proof.
 
 % Agent note: the computation is research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md; a refuting witness would go through solutions/README.md.
 
@@ -403,25 +403,25 @@ The cube cones are the first non-product family in this document on which the sh
 ## The saturation risk and the decisive test
 
 :::{prf:corollary} Exact product saturation and Hodge splitting
-:label: rem:cmh-saturation-risk
+:label: cor:cmh-product-saturation
 By [](#thm:cmh-1d) and [](#thm:cmh-product), a product of centered one-sided exponentials has $\CMH=4$ *exactly*. [](#prop:cmh-hodge) gives, for every admissible test function, the exact splitting of the CMH numerator into its affine Poincaré part and the nonnegative solenoidal term $\E\inner{w}{\Sigma^{-1}w}$.
 :::
 
 :::{prf:remark} Why saturation leaves a perturbative test
-No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the second-variation problem of [](#q:cmh-solenoidal-perturbation), which conjectures that none does to second order; a perturbation that does would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
+No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the second-variation problem of [](#conj:cmh-second-variation), which conjectures that none does to second order; a perturbation that does would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
 :::
 
 :::{prf:conjecture} Second variation of CMH at the product endpoint
-:label: q:cmh-solenoidal-perturbation
+:label: conj:cmh-second-variation
 Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$. Call the perturbation admissible if, for all sufficiently small $\abs\eps$, $\psi_\eps$ is smooth and strictly convex and its moment measure $\mu_\eps$ is log-concave and belongs to the regular moment-map class on which [](#def:cmh) is set. Then, for every admissible perturbation,
 
 $$
 \limsup_{\eps\to0}\frac{\CMH(\mu_\eps)+\CMH(\mu_{-\eps})-2\CMH(\mu_0)}{\eps^2}\le0,
 $$
 
-where $\CMH(\mu_0)=4$ by [](#rem:cmh-saturation-risk).
+where $\CMH(\mu_0)=4$ by [](#cor:cmh-product-saturation).
 :::
 
 Since $\CMH(\mu_0)=4$, a strictly positive value of this second variation for one admissible perturbation would give $\CMH(\mu_\eps)>4$ for some small $\eps$: a counterexample to $\mathrm{CMH}(4)$, forcing a constant larger than $4$ in the endpoint, though not by itself a counterexample to [](#conj:kls). The computation splits the CMH numerator through [](#prop:cmh-hodge) into its gradient and solenoidal parts; a vanishing of the solenoidal part to second order would not by itself decide the sign, since the gradient part, the denominator and the optimizing test function vary too.
 
-[](#q:cmh-solenoidal-perturbation) is the sharpest available probe of the approach because it attacks the endpoint rather than the machinery, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#q:gate-zero) it forms the falsification layer of Approach C; [](#q:mm-invariant-lift) and [](#q:mm-square-root-commutator) form the construction layer.
+[](#conj:cmh-second-variation) is the sharpest available probe of the approach because it attacks the endpoint rather than the machinery, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#rem:gate-zero-dichotomy) it forms the falsification layer of Approach C; [](#conj:mm-invariant-lift) and [](#conj:mm-square-root-commutator) form the construction layer.

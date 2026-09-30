@@ -115,7 +115,7 @@ Klartag and Putterman proved that the Rayleigh quotient of $Q_sg$ decreases unde
 with $E(g)$ the Rayleigh quotient of $g$. This converts covariance estimates into bounds on the low spectral mass of coordinate functions; integrating that mass against $1/\lambda$ as in [](#eq:hminus1-def) is how Klartag–Lehec obtained their polylogarithmic thin-shell and KLS bounds [@KlartagLehec2022Polylog].
 
 :::{prf:remark} An unresolved operator comparison
-:label: q:literature-PsQs
+:label: rem:literature-psqs
 Klartag–Lehec prove Rayleigh-quotient and spectral-trace inequalities related to, but weaker than, the operator inequality
 
 $$
@@ -129,4 +129,4 @@ A suitable strengthening would remove some of the spectral-projection losses in 
 
 **Why it stalls.** Every step above is an averaging step. Bochner in [](#eq:bochner-step) keeps only $\int\nabla f\dd\mu$; [](#eq:barthe-klartag) keeps only the spectral masses of the $\partial_if$; [](#eq:spectral-monotonicity) is a statement about a single Rayleigh quotient. Trace, coordinate, or averaged spectral information does not bound every slow mode, and a near-extremizing eigenfunction of a general log-concave measure is exactly the object about which these averages say least.
 
-**Where this family enters the four approaches.** Approach S (Section [](#sec:spectral-route)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the approach this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ endpoint audited in Section [](#subsec:spectral-h-minus-one) is where the two meet.
+**Where this family enters the four approaches.** Approach S (Section [](#sec:spectral-approach)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the approach this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ endpoint audited in Section [](#subsec:spectral-h-minus-one) is where the two meet.

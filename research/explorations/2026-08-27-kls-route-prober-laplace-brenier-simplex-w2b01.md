@@ -589,35 +589,35 @@ Proposed one-line pre-registration gate for the orchestrator:
 The proposed node is not in the ledger and therefore has no formal `bounded_by` list.  Every live
 KLS fence was nevertheless checked.
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 The argument makes no slice-wise unweighted Stein-source estimate and no covariance-weight claim.
 Its exponential reference is static, and the consumed object is the full transport Gram tensor
 (5).  The two-tail absolute-scale counterexample is therefore not contradicted.
 
-### `obs:proj-ceiling`
+### `rem:projection-ceiling`
 
 No collection of one-dimensional projection variances is used to infer (LB).  Equations
 (14), (16), and (23) are explicitly classified as scalar calibrations that do **not** control the
 top Hessian eigenvalue.  The missing estimate is tensor-valued, so the projection ceiling is
 respected.
 
-### `obs:crude-insufficient`
+### `rem:crude-insufficient`
 
 No crude covariance integral or localization bootstrap appears.  This fence is inapplicable.
 
-### `obs:relative-ceiling`
+### `rem:relative-ceiling`
 
 (LB) is openly a KLS-sufficient global hypothesis, not advertised as a weaker bootstrap input.
 Equation (6) displays the implication and its constant.  This is acceptable for a new sufficient
 route but means that proving (LB) is not progress by assumption alone.
 
-### `obs:circularity`
+### `rem:profile-circularity`
 
 No localized isoperimetric profile or moving family is inserted.  In particular, the known
 simplex Poincare/CMH result is not used to control its Brenier map.
 
-### `obs:rank-one-refuted`
+### `rem:single-coordinate-cuts`
 
 The product calibration in Section 3 verifies tensorization of a static transport.  It makes no
 claim about persistent single-coordinate cuts under stochastic localization, so it does not

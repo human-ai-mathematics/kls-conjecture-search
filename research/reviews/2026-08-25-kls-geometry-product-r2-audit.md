@@ -11,14 +11,14 @@ fingerprints:
   prop:persistent-splitting: 5aa02982b1ba2c12bcd728b05e39ff5096e0bec02d5b22114480ba116cc2346c
   prop:gaussian-model: 835dc58ac9d4cb324aea55003c87af159fe2427ee351779bf982b348abd92fa8
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
-  solutions/kls-product-covariance.md: 5c6ad1f7a7977833526828aadc086cd693b693db7e0c84f914761d930a8733c5
+  solutions/kls-product-covariance.md: a288e98ce106b7998a88685c6da2c20f161c9ba5387e88242337bffecb1723a4
   lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
   thm:budget: 747881527155d39703c8dbb3a198afcd2c3686e5258ead72eb805f874e1bc196
   cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
   thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
-  cor:refutation: 50f836a8a6885da08f837ec667d19b41a722b0e356f8c44acf5bd11b745a8a67
+  cor:single-coordinate-cuts: 50f836a8a6885da08f837ec667d19b41a722b0e356f8c44acf5bd11b745a8a67
   lem:product-qcts: 93f2e2a3230253762243cd991c55f11de59b986c8daf848ecd044256ef2302eb
-  cor:KI-discharged: 2411e9c586f6ecbbb44f141b7f0b3a7733942614025262b49fcebc385b3f58d5
+  cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
   thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7
 ---
 
@@ -36,7 +36,7 @@ This report certifies exactly the following eleven KLS ledger nodes:
 6. `prop:products`
 7. `lem:block`
 8. `thm:budget`
-9. `cor:refutation`
+9. `cor:single-coordinate-cuts`
 10. `lem:product-qcts`
 11. `cor:KI-discharged`
 
@@ -138,7 +138,7 @@ $T_k=[2C_0(1+k)]^{-1}$ and using the deterministic-time perimeter supermartingal
 claimed $c(1+k)^{-1/2}\min(p_0,q_0)$ boundary bound.  The truncation, smoothing, and perimeter
 lower-semicontinuity passage preserves product and fixed-coordinate structure.
 
-For `cor:refutation`, setting $k=1$ gives the total source budget and boundary conclusion.
+For `cor:single-coordinate-cuts`, setting $k=1$ gives the total source budget and boundary conclusion.
 The pointwise indicator bound at a deterministic level gives expected occupation at most
 $2/L^2$.  The dossier explicitly restricts the result to a cut and coordinate chosen before
 localization.  It neither permits a pathwise adaptive choice nor claims the literal
@@ -173,7 +173,7 @@ At fixed time the bad event is contained in this sup event, and the Brascamp–L
 $\|A_t\|_{\mathrm{op}}\leq t^{-1}$.  Therefore
 $\mathbb E\|A_t\|_{\mathrm{op}}\leq2+t^{-1}e^{-1/(Ct)}$; with
 $u=(Ct)^{-1}$ the second term is $Cu e^{-u}\leq C/e$.  Together with $A_0=I$ and the harmless
-bounded-dimension adjustment, this is precisely `hyp:KI` with exponent $C_2=2$.  No fixed-time
+bounded-dimension adjustment, this is precisely `ass:KI` with exponent $C_2=2$.  No fixed-time
 substitute and no conditional Letwin input is used.
 
 ## Compilation and exclusions

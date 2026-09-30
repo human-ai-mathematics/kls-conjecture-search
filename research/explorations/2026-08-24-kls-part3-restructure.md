@@ -31,7 +31,7 @@ same change; `check_ledger.py` validates their existence, and it returns 0 error
 **3. `00-strategy-map.tex` dissolved.** Its nine labels were rehomed rather than renamed:
 `conj:kls`, `eq:hstar-def`, `eq:kls-implies-thin-shell`, `sec:kls-strategy-map` →
 `00-orientation.tex`; the four imported July-2026 theorems → `04-family-moment-map.tex`;
-`q:mm-spectral-occupation` → `30-spectral-route.tex`. Verified by diffing the sorted label set
+`conj:mm-spectral-occupation` → `30-spectral-route.tex`. Verified by diffing the sorted label set
 before and after: **zero labels lost**, 114 added.
 
 **4. Group 0 (new), `00-orientation.tex`.** Conjecture in three forms (isotropic, affine,
@@ -53,15 +53,15 @@ trick; Caffarelli / Brownian transport / entropic barrier.
 
 **6. Route S promoted** from `research/kls/routes/moment-map-spectral/README.md` to
 `30-spectral-route.tex`: fixed-function SDE $dg_t=H_tdW_t-A_tg_t\,dt$, the whitened tensor
-estimate, `q:mm-spectral-occupation` with its sufficiency statement, the audited $H^{-1}$
+estimate, `conj:mm-spectral-occupation` with its sufficiency statement, the audited $H^{-1}$
 endpoint (kept explicitly as a *calibrated endpoint*, not a preliminary lemma, since it is
 quantitatively implied by KLS), and the fence comparison. The brief remains the control-plane
 status page and records the promotion.
 
 **7. Group 6 (new), `50-synthesis.tex`.** The residue table by family, and four next targets each
-mapped to a ledger node: function-adapted localization → `q:mm-spectral-occupation` /
-`q:upgrade`; nonlinear moment-map extension → `prog:cmh-route` and its three sub-targets;
-effective-rank replacement for log-trace-exp → `q:taming` and the interface functional $\Xi_T$;
+mapped to a ledger node: function-adapted localization → `conj:mm-spectral-occupation` /
+`conj:trace-upgrade`; nonlinear moment-map extension → `rem:cmh-program` and its three sub-targets;
+effective-rank replacement for log-trace-exp → `conj:taming` and the interface functional $\Xi_T$;
 parallel coupling beyond linear tilts → **no repository node** (recorded as a gap in the route
 registry).
 

@@ -1,4 +1,4 @@
-"""Filtering representation and stopped interval integration for q:alignment."""
+"""Filtering representation and stopped interval integration for conj:product-alignment."""
 
 import numpy as np
 

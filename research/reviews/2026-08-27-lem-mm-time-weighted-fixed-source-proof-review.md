@@ -4,7 +4,7 @@ authors:
   - /root/prove_mm_weighted_source
 reviewer: /root/review_mm_weighted_source_w0
 fingerprints:
-  solutions/lem-mm-time-weighted-fixed-source.md: 8e136c25c3e50af746db8fa57bc07f46a0f61bef5affb463674c5ceed0f176b8
+  solutions/lem-mm-time-weighted-fixed-source.md: 50465a9ec4e4cbe3fabcf21230d2277a454b28ad44fa888fee2605ae7d414b20
   lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46
 ---
 
@@ -306,18 +306,18 @@ $\int_0^\varepsilon\|H_t\|_{\mathrm{HS}}^2dt$ is inferred.
 There is no formal `bounded_by` edge.  The moment-map spectral route's main fence is nevertheless
 respected: the proof does not unwhiten $H_t$, replace its covariance orientation by a global
 operator norm, or close the initial high-incidence occupation problem.  It retains exactly the
-vanishing time weight that separates this lemma from `q:mm-spectral-occupation`.
+vanishing time weight that separates this lemma from `conj:mm-spectral-occupation`.
 
 The six recorded KLS obstruction shapes are also untouched.
 
-- `obs:two-tail`: no cut, slice-wise excess, or absolute-scale Stein estimate occurs.
-- `obs:proj-ceiling`: no radial or projection-only estimate is promoted to tensor control.
-- `obs:crude-insufficient`: no crude $\Xi_T$ estimate is used as a bootstrap input.
-- `obs:relative-ceiling`: no universal relative-scale covariance occupation bound is asserted.
-- `obs:circularity`: no localized isoperimetric profile or moving competitor family is inserted.
-- `obs:rank-one-refuted`: no product-cut witness or adaptive alignment assertion is made.
+- `rem:two-tail-slice-bounds`: no cut, slice-wise excess, or absolute-scale Stein estimate occurs.
+- `rem:projection-ceiling`: no radial or projection-only estimate is promoted to tensor control.
+- `rem:crude-insufficient`: no crude $\Xi_T$ estimate is used as a bootstrap input.
+- `rem:relative-ceiling`: no universal relative-scale covariance occupation bound is asserted.
+- `rem:profile-circularity`: no localized isoperimetric profile or moving competitor family is inserted.
+- `rem:single-coordinate-cuts`: no product-cut witness or adaptive alignment assertion is made.
 
-The dossier proves neither the unweighted source estimate in `q:mm-spectral-occupation` nor the
+The dossier proves neither the unweighted source estimate in `conj:mm-spectral-occupation` nor the
 conditional bridge `prop:spectral-sufficiency`.  It proves no covariance occupation theorem,
 regularization-uniform result for nonsmooth or lower-dimensional laws, spectral gap, Cheeger
 bound, or KLS conclusion.
@@ -332,7 +332,7 @@ latexmk -g -pdf -outdir=../build lem-mm-time-weighted-fixed-source.tex
 
 completed successfully and produced a four-page PDF.  The only TeX warnings are the expected
 standalone unresolved manuscript references to `lem:mm-time-weighted-fixed-source` (twice) and
-`q:mm-spectral-occupation`; all dossier-internal references resolve.  Before this report was
+`conj:mm-spectral-occupation`; all dossier-internal references resolve.  Before this report was
 added, `python3 research/check_ledger.py` reported 0 errors across 180 nodes.
 
 ## Corrections

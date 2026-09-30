@@ -1,4 +1,4 @@
-"""Soundness and schema checks for the product q:alignment CLI target."""
+"""Soundness and schema checks for the product conj:product-alignment CLI target."""
 
 import json
 
@@ -42,7 +42,7 @@ def test_kls_align_is_registered_and_remains_model_diagnostic():
     scan = next(r for r in records if r["kind"] == "alignment-window-scan")
     summary = records[-1]
 
-    assert config["target"] == "q:alignment"
+    assert config["target"] == "conj:product-alignment"
     assert {g["gate"] for g in config["gates"]} >= {
         "initial_balance",
         "dynamic_closed_form_vs_quadrature",

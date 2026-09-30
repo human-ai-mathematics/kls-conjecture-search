@@ -5,16 +5,16 @@ Each entry says what the object is and where it is fixed. Where a normalization 
 
 :::{glossary}
 Approaches E, S, C, F
-: The four approaches to [](#conj:kls) this manuscript develops, in the order they appear. **E** follows a fixed candidate bottleneck cut under stochastic localization (Section [](#sec:introduction)); **S** follows a fixed first eigenfunction instead of a cut (Section [](#sec:spectral-route)); **C** is deterministic and works in moment-map coordinates, with no localization at all (Section [](#sec:moment-map-cmh)); **F** replaces Euclidean directions by one test-independent isotropic frame of conditional line resamplings (Section [](#sec:conditional-fiber-frame)). The letters are a reading aid.
+: The four approaches to [](#conj:kls) this manuscript develops, in the order they appear. **E** follows a fixed candidate bottleneck cut under stochastic localization (Section [](#sec:introduction)); **S** follows a fixed first eigenfunction instead of a cut (Section [](#sec:spectral-approach)); **C** is deterministic and works in moment-map coordinates, with no localization at all (Section [](#sec:moment-map-cmh)); **F** replaces Euclidean directions by one test-independent isotropic frame of conditional line resamplings (Section [](#sec:conditional-fiber-frame)). The letters are a reading aid.
 
 Subroutes E–A and E–B
-: The two branches of {term}`Approach E <Approaches E, S, C, F>`: E–A is the all-cut Carleson estimate (Section [](#sec:carleson)), E–B the weighted near-Cheeger package (Section [](#sec:stein)). See Section [](#subsec:two-subroutes).
+: The two branches of {term}`Approach E <Approaches E, S, C, F>`: E–A is the all-cut Carleson estimate (Section [](#sec:carleson)), E–B the weighted near-Cheeger package (Section [](#sec:stein)). See Section [](#subsec:two-variants).
 
 CMH
 : The canonical moment-Hessian constant $\CMH$: the deterministic quantity {term}`Approach C <Approaches E, S, C, F>` is built on, fixed with its operator data in [](#def:cmh). It dominates the affine Poincaré constant $\CPaff$ by [](#thm:cmh-implies-affine-poincare), and it is *not* a reformulation of KLS: [](#prop:cmh-hodge) shows it additionally charges a solenoidal excess.
 
 QCTS
-: The quadratic-chaos two-tail statement: the static input isolated in [](#def:qcts), together with the two-tail obstruction ([](#obs:two-tail)) that limits what it can supply.
+: The quadratic-chaos two-tail statement: the static input isolated in [](#def:qcts), together with the two-tail obstruction ([](#rem:two-tail-slice-bounds)) that limits what it can supply.
 
 Two-colour notation
 : The two-colour covariance and its bookkeeping, which separate the contribution of the cut being followed from that of everything else, so that a source term can be told from a damping term. Fixed in Section [](#subsec:two-color-notation), used throughout Approaches E and S.

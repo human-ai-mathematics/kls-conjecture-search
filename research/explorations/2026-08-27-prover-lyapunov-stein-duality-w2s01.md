@@ -121,10 +121,10 @@ $\lambda_{\rm cut}(A_\Lambda,K_\Lambda)=\Lambda$ exactly.
 
 There is no formal `bounded_by` edge. The proof nevertheless respects the live obstructions:
 
-- On `obs:two-tail`, it returns $\lambda_{\rm cut}=\Lambda$ rather than an impossible absolute
+- On `rem:two-tail-slice-bounds`, it returns $\lambda_{\rm cut}=\Lambda$ rather than an impossible absolute
   constant.
 - It uses the complete matrix orientation and therefore does not infer tensor control from radial
-  or projection-only tests (`obs:proj-ceiling`).
+  or projection-only tests (`rem:projection-ceiling`).
 - Its exact spectator invariance removes no active block and proves no equivalence inside the
   trace-upgrade cluster.
 - The singular $t^{-1}$ factor is retained, so the dossier does not disguise the open small-time

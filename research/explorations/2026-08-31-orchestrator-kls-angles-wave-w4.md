@@ -32,7 +32,7 @@ Ranked list from the analysis phase; the ones actually attacked this wave:
   $(\mathrm{AB})_{\rho,\beta}$, $\mathsf R\succeq\rho\mathsf N-\beta I$, giving
   $Q_{\mathrm{lin}}\le(1+\beta)/\rho$. Split $\mathsf R=\mathsf R_A+\mathsf R_Q$ into the
   log-concavity (Monge–Ampère) reservoir and the cyclic-square part.
-- **(2.2) Spectral occupation.** Probes `w4w01`/`w4s01`: `q:mm-spectral-occupation` recast as
+- **(2.2) Spectral occupation.** Probes `w4w01`/`w4s01`: `conj:mm-spectral-occupation` recast as
   weight removal on the initial layer plus a Grönwall bound on $q(t)=\mathbb E|g_t|^2$,
   producing the four-statement **initial-layer window chain** (Lemmas A–D + Theorem E).
 - **(2.3) Screened weighted interface.** Cut scale $\lambda_{\mathrm{cut}}(A,K)$,
@@ -42,8 +42,8 @@ Ranked list from the analysis phase; the ones actually attacked this wave:
 - **(2.5) All-frame simplex dual.** $\Lambda_{m,k}$ and the root-frame degree-2 identity
   $\lambda^{\mathrm{root}}_{m,2}=(m+2)(m+3)/(5m^2)$.
 
-Not opened, deliberately: the trace-upgrade cluster (`q:upgrade`, high-rank
-`q:stein-weighted`, `q:alignment`, and the gate-zero proof half), per hard constraint 6. No
+Not opened, deliberately: the trace-upgrade cluster (`conj:trace-upgrade`, high-rank
+`conj:stein-weighted`, `conj:product-alignment`, and the gate-zero proof half), per hard constraint 6. No
 fan-out occurred across it and no comparison between its members was asserted.
 
 ## Outcome — five certifications

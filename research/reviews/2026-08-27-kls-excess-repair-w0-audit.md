@@ -5,7 +5,7 @@ authors:
 - /root/repair_excess_dossier
 reviewer: /root/review_excess_w0
 fingerprints:
-  solutions/kls-excess-audit.md: de112ea292c3cbd8585e427ea8914ea72a0d04f24e34ec2a7202a9a1b951a318
+  solutions/kls-excess-audit.md: 4a87955fd2c105aa8e6e072e00d42c97a216349cfde817ac6376f3a6baef461c
   prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73
   prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
   prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
@@ -225,7 +225,7 @@ unweighted estimate is the antecedent, not an unrecorded discharged assumption.
 None of the five reviewed nodes has a ledger `bounded_by` edge.  The dossier nevertheless respects
 the two nearby obstructions that matter.
 
-- `obs:circularity` is respected: exact perimeter equality is used only in the compact-support
+- `rem:profile-circularity` is respected: exact perimeter equality is used only in the compact-support
   identity, the fixed-family argument is not transferred to the moving mass-constrained family,
   and no lower bound for the localized profile is inserted as an input.
 - `prop:two-tail` is used only to reject the slice-wise unweighted estimate.  It is not promoted to

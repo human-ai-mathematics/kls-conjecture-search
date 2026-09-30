@@ -8,9 +8,9 @@ Role: `kls-route-prober`
 
 Concurrency key: singleton trace-upgrade-cluster ownership for this wave
 
-Primary target: `q:upgrade`
+Primary target: `conj:trace-upgrade`
 
-Comparison scope: only the high-rank residues of `q:stein-weighted` and `q:alignment`, under
+Comparison scope: only the high-rank residues of `conj:stein-weighted` and `conj:product-alignment`, under
 the single-owner rule of `CLAUDE.md` constraint 6.  No equivalence among the three nodes is
 asserted.
 
@@ -19,7 +19,7 @@ solution, review, knowledge, or numerical file is changed.
 
 ## Outcome
 
-The Klartag--Lehec rank-indexed stopping scheme gives a real new input to `q:upgrade`, but it
+The Klartag--Lehec rank-indexed stopping scheme gives a real new input to `conj:trace-upgrade`, but it
 does not close the gate.  Conditional on the intrinsic quadratic-chaos estimate, it improves
 the worst-oriented incident-high occupation from the naive order-$n$ trace budget to
 $O((1+\log n)^8)$.  More importantly, it gives a dimension-free **interval-density** bound if
@@ -60,18 +60,18 @@ The primary gate from `research/kls/gating.md` is:
 > `thm:scalar-riccati`. The estimate must use cut-aware information and handle small-time
 > high-rank occupation.
 
-The comparison gate for `q:stein-weighted` is:
+The comparison gate for `conj:stein-weighted` is:
 
 > Supply the exact weighted input required by `ass:weighted-package`: a
 > localization-uniform almost-stability trace theorem modulo Jacobi zero modes, with explicit
 > domains, boundary conventions, and controlled Reilly terms.
 
-The comparison gate for `q:alignment` is:
+The comparison gate for `conj:product-alignment` is:
 
 > Give either a uniform analytic incident-high bound for fixed balanced product cuts or a
 > certified counterexample. A finite tail-union diagnostic is not a universal conclusion.
 
-The exact ledger target consumed by `q:upgrade` is the all-cut interval estimate
+The exact ledger target consumed by `conj:trace-upgrade` is the all-cut interval estimate
 
 $$
 \mathbb E\int_{I\cap[0,\tau]}S_t\,dt
@@ -308,7 +308,7 @@ $$
 $$
 
 This is strictly better than $O(n)$, but it neither has a dimension-free constant nor an
-interval density.  It does not advance the logical status of `q:upgrade`.
+interval density.  It does not advance the logical status of `conj:trace-upgrade`.
 
 ## Second extraction: what pointwise effective rank would buy
 
@@ -340,7 +340,7 @@ $$
 $$
 
 In particular, the additional pointwise premise $r_{\mathrm{st}}(Z_t^K)\ge c n$ gives (8)
-with $C_r=0$ and $\beta=0$, and therefore closes `q:upgrade` conditional on its imported
+with $C_r=0$ and $\beta=0$, and therefore closes `conj:trace-upgrade` conditional on its imported
 inputs.
 
 #### Proof
@@ -436,7 +436,7 @@ following pointwise assertions is false:
 - absorption of the aligned slice by $r_t$ or $D_t$.
 
 This is a slice obstruction, not a stochastic-localization counterexample.  The certified
-`cor:refutation` proves that a fixed one-coordinate product cut self-extinguishes in total time.
+`cor:single-coordinate-cuts` proves that a fixed one-coordinate product cut self-extinguishes in total time.
 The correct lesson is that low effective rank must be treated **temporally**; it cannot be
 excluded pointwise.
 
@@ -489,7 +489,7 @@ constant while the trace occupation is $\asymp m$.  The eigenvalue data are unch
 smaller dimensions the same construction uses $\min\{n,m\}$ directions.)  This abstract variant
 shows why combining rank tails with fixed-direction budgets still needs a theorem controlling
 the **motion or selection** of the source direction.  It does not impose the full coupled
-covariance/two-color SDE and therefore is not a refutation of `q:upgrade`; that missing coupling
+covariance/two-color SDE and therefore is not a refutation of `conj:trace-upgrade`; that missing coupling
 is exactly what the next potential exposes.
 
 ## The exact moving-projector Riccati potential
@@ -783,7 +783,7 @@ Thus optional stopping does not turn a rank tail into a cut-aware Carleson embed
 
 ## Product alignment audit
 
-For the product node `q:alignment`, $A_t$ is diagonal in the fixed coordinate basis.  This
+For the product node `conj:product-alignment`, $A_t$ is diagonal in the fixed coordinate basis.  This
 removes eigenvector rotation, but not source selection.  With threshold $3$ (the bounded band
 $[2,3]$ can be assigned to the intrinsic low block), the imported theorem gives only
 
@@ -800,7 +800,7 @@ $$
 \tag{30}
 $$
 
-What `q:alignment` needs is the joint, source-weighted statement
+What `conj:product-alignment` needs is the joint, source-weighted statement
 
 $$
 \sum_i\mathbb E\int_{I\cap[0,\tau]}
@@ -816,18 +816,18 @@ moment or a reverse-Carleson estimate.
 
 The product structure makes (31) more approachable than the all-measure motion gate: the
 eigenvectors are fixed and the threshold motion is scalar.  It remains strictly narrower.
-The fixed-coordinate result `cor:refutation` handles one coordinate in total time, while an
+The fixed-coordinate result `cor:single-coordinate-cuts` handles one coordinate in total time, while an
 arbitrary balanced cut may select among unboundedly many independently inflating coordinates.
 No implication from (29) to (31) is established.
 
-A proof of the full all-cut estimate (AC) would imply the displayed `q:alignment` bound simply
+A proof of the full all-cut estimate (AC) would imply the displayed `conj:product-alignment` bound simply
 because $S_t^H\le S_t$ and products are a subclass.  The reverse implication is impossible on
 scope alone.  This is a proved one-way logical containment, not an equivalence and not a status
 change.
 
 ## Boundary/Stein high-rank audit
 
-At the algebraic source level, `q:stein-weighted` uses exactly the same cut tensor:
+At the algebraic source level, `conj:stein-weighted` uses exactly the same cut tensor:
 
 $$
 \frac{\mathcal S_{\mu_t}(E)}{s_t}=s_t\|K_t\|_{\mathrm{HS}}^2
@@ -876,13 +876,13 @@ Only the following directions have been established at the level stated here:
 3. The projector-injection estimate (28) $\Rightarrow$ `ass:all-cut-carleson`, conditional on
    the intrinsic low block, with exact damping coefficient $3/4+2\gamma<1$.
 4. `ass:all-cut-carleson` $\Rightarrow$ the product incident-high conclusion of
-   `q:alignment`, by restriction and $S_t^H\le S_t$.
+   `conj:product-alignment`, by restriction and $S_t^H\le S_t$.
 5. An incident-$K$ estimate of the strength (8) $\Rightarrow$ the numerical Stein-trace
    component of `ass:weighted-package` on the tighter window; it does not imply the geometric
-   theorem demanded by `q:stein-weighted` or the weighted-excess component.
+   theorem demanded by `conj:stein-weighted` or the weighted-excess component.
 
-No reverse direction is proved.  In particular, no relation among `q:upgrade`, the high-rank
-boundary mechanism of `q:stein-weighted`, and `q:alignment` is proposed as an equivalence.
+No reverse direction is proved.  In particular, no relation among `conj:trace-upgrade`, the high-rank
+boundary mechanism of `conj:stein-weighted`, and `conj:product-alignment` is proposed as an equivalence.
 
 ## Exact residue
 
@@ -904,9 +904,9 @@ boundary mechanism of `q:stein-weighted`, and `q:alignment` is proposed as an eq
 - **Needs new idea — interval locality.**  Even a total estimate from $Y_0=0$ is insufficient
   for (AC).  The positive part of the decrement $Y_a-Y_b$ must have a Carleson density on every
   subinterval, unless it is cancelled directly by the two motion terms in (24).
-- **Needs new idea — product conditional embedding.**  For `q:alignment`, combine (29) and (30)
+- **Needs new idea — product conditional embedding.**  For `conj:product-alignment`, combine (29) and (30)
   through a cut-aware conditional moment estimate; marginal rank rarity is not enough.
-- **Needs new idea — boundary intertwining.**  For `q:stein-weighted`, identify how ambient
+- **Needs new idea — boundary intertwining.**  For `conj:stein-weighted`, identify how ambient
   covariance-high quadratic data map into Jacobi mean-zero/zero-mode sectors and control every
   Reilly term.  No such map is supplied by rank-indexed covariance technology.
 - **Technical/epistemic gap.**  Both Klartag--Lehec results and the Letwin intrinsic estimate are
@@ -915,25 +915,25 @@ boundary mechanism of `q:stein-weighted`, and `q:alignment` is proposed as an eq
 
 ## Fence-by-fence evasion check
 
-### `obs:proj-ceiling`
+### `rem:projection-ceiling`
 
 The low block uses the full symmetric-matrix quadratic-chaos input, not projection tests.  The
 high block is retained entry by entry.  The failed attempt is explicitly identified: replacing
 the row weights by eigenvalue counts without a source-delocalization theorem is another
 projection/rank-only argument and cannot close the trace.
 
-### `obs:two-tail`
+### `rem:two-tail-slice-bounds`
 
 No slice-wise high-state bound is asserted.  The certified two-tail configuration is used to
 refute the pointwise effective-rank premise and to show why damping cannot absorb an aligned
 slice.  The proposed gate (28) is dynamic and cut-aware.
 
-### `obs:relative-ceiling`
+### `rem:relative-ceiling`
 
 No all-measure bound on $\Xi_T$ or on relative covariance occupation is inserted.  Both (8) and
 (28) retain the fixed cut through $K_t$, $R_t$, and $\Gamma_t$.
 
-### `obs:rank-one-refuted`
+### `rem:single-coordinate-cuts`
 
 The two-tail slice and the deterministic separation model are not claimed as product dynamic
 counterexamples.  The certified self-extinguishing theorem is respected.  The surviving product
@@ -941,8 +941,8 @@ question is explicitly the many-coordinate conditional embedding (31).
 
 ### Remaining catalogued fences
 
-No crude $\Xi_T\lesssim\log n$ bootstrap is used (`obs:crude-insufficient`), and no localized
-isoperimetric-profile lower bound or moving competitor is inserted (`obs:circularity`).  The
+No crude $\Xi_T\lesssim\log n$ bootstrap is used (`rem:crude-insufficient`), and no localized
+isoperimetric-profile lower bound or moving competitor is inserted (`rem:profile-circularity`).  The
 boundary comparison does not assume almost-stability of the transported cut.
 
 ## Route viability and proposed gate update
@@ -988,11 +988,11 @@ artifacts:
   - research/explorations/2026-08-27-kls-route-prober-rank-tail-orientation-w1r01.md
 proposed_deltas:
   - no ledger, manuscript, bibliography, route-control, or status delta
-  - consider replacing the q:upgrade gate text by the proposed one-line soft-projector injection target after independent review of Lemmas 1--3
+  - consider replacing the conj:trace-upgrade gate text by the proposed one-line soft-projector injection target after independent review of Lemmas 1--3
 next_role: orchestrator
 next_prompt: |
   Read the rank-tail orientation probe and preserve singleton ownership of the trace-upgrade
-  cluster.  Do not add an equivalence among q:upgrade, q:stein-weighted, and q:alignment.  The
+  cluster.  Do not add an equivalence among conj:trace-upgrade, conj:stein-weighted, and conj:product-alignment.  The
   imported rank tails yield only the conditional dimension-dependent bound (13), while the
   stable-rank branch (17) requires a false universal pointwise premise.  If promoting the new
   reduction, first accept a candidate lemma statement for the exact soft-projector identity

@@ -5,7 +5,7 @@ authors:
   - /root/repair_excess_dossier
 reviewer: /root/review_excess_repair_w0r2
 fingerprints:
-  solutions/kls-excess-audit.md: de112ea292c3cbd8585e427ea8914ea72a0d04f24e34ec2a7202a9a1b951a318
+  solutions/kls-excess-audit.md: 4a87955fd2c105aa8e6e072e00d42c97a216349cfde817ac6376f3a6baef461c
   prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73
   prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
   prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
@@ -279,9 +279,9 @@ stochastic Fubini were checked at their points of use rather than treated as num
 None of the five ledger nodes has a `bounded_by` edge.  The two relevant nearby fences are still
 respected:
 
-- `obs:circularity`: exact perimeter equality is confined to the smooth compact-support class, and
+- `rem:profile-circularity`: exact perimeter equality is confined to the smooth compact-support class, and
   no fixed-family supermartingale argument is transferred to the random mass-constrained profile.
-- `obs:two-tail`: the construction is used only against the universal slice-wise unweighted
+- `rem:two-tail-slice-bounds`: the construction is used only against the universal slice-wise unweighted
   inequality of the asserted form, not against a time-nonlocal proof or the weighted package.
 
 ## Corrections

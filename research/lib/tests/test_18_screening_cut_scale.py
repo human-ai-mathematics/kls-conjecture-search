@@ -2,7 +2,7 @@
 
 Every check here compares the new O(n) code against either a dense brute-force evaluation,
 the pre-existing scalar closed-form engine, or a closed form derived by hand.  Passing them
-establishes implementation correctness only; it proves nothing about ``q:weighted``.
+establishes implementation correctness only; it proves nothing about ``conj:weighted-excess-rate``.
 """
 
 import json
@@ -358,7 +358,7 @@ def test_kls_align_target_records_are_untouched_by_the_sibling():
         seed=4, ns=(8,), T=0.12, dt=0.02, n_paths=4, widths=(0.04,), alphas=(0.5,),
     ).records
     config = next(r for r in records if r["kind"] == "alignment-configuration")
-    assert config["target"] == "q:alignment"
+    assert config["target"] == "conj:product-alignment"
     assert {g["gate"] for g in config["gates"]} == {
         "initial_balance", "dynamic_closed_form_vs_quadrature", "mass_martingale",
         "pathwise_identities", "paired_dt_refinement",

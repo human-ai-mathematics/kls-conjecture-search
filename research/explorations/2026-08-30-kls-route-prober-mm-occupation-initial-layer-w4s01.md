@@ -26,7 +26,7 @@ From `research/kls/gating.md`:
 > preserving tensor orientation under unwhitening. The source may consume the entire exact
 > damping; a strict damping surplus is not required for the KLS bridge.
 
-Manuscript form (`q:mm-spectral-occupation`, `modules/kls/30-spectral-route.tex`): on smooth
+Manuscript form (`conj:mm-spectral-occupation`, `modules/kls/30-spectral-route.tex`): on smooth
 strongly log-concave centered isotropic regular approximants with normalized first eigenfunction
 $-Lf=\lambda f$, $\mathbb E_\mu f=0$, $\mathbb E_\mu f^2=1$, and localization quantities
 $$
@@ -82,7 +82,7 @@ $\widehat H_t=A_t^{-1/2}H_tA_t^{-1/2}$.
    `prop:covariance-spike` (published import): exponential products have
    $\|A_t\|_{\mathrm{op}}\gtrsim1/t$ with universal probability once $t\gtrsim1/\log n$.
 
-The node `q:mm-spectral-occupation` carries no formal `bounded_by` edge; the full obstruction
+The node `conj:mm-spectral-occupation` carries no formal `bounded_by` edge; the full obstruction
 registry is checked below anyway.
 
 ## Term-by-term decomposition of (G)
@@ -434,19 +434,19 @@ consistency model, not a log-concave localization path, and refutes only proof s
 
 The node has no formal `bounded_by` edge; all registered obstructions checked.
 
-- `obs:two-tail` (fixed cuts, absolute-scale slice bounds): no cut, slice, or excess estimate is
+- `rem:two-tail-slice-bounds` (fixed cuts, absolute-scale slice bounds): no cut, slice, or excess estimate is
   used; Lemma A is a stopped expectation bound, not a slice-wise absolute claim, and the
   post-spike regime is explicitly left to occupation form (N).
-- `obs:proj-ceiling`: the only tensor input is the full symmetric-matrix Letwin bound, used with
+- `rem:projection-ceiling`: the only tensor input is the full symmetric-matrix Letwin bound, used with
   its preprint-conditional standing displayed; no radial/projection test is promoted to a
   dimension-free chaos bound. Where Letwin is withheld nothing dimension-free is claimed.
-- `obs:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap
+- `rem:crude-insufficient`: no crude covariance integral $\Xi_T$ or logarithmic bootstrap
   appears; the window import is an exit-probability bound, not $\Xi_T$.
-- `obs:relative-ceiling`: no all-measure relative occupation bound is inserted as a premise. The
+- `rem:relative-ceiling`: no all-measure relative occupation bound is inserted as a premise. The
   a priori input is the published frontier $K_n$, whose use produces a strictly weaker output
   ($\log^2n$ from $\log n$) — it is a calibrated import, not a hidden KLS assumption.
-- `obs:circularity`: no localized isoperimetric profile or moving competitor family occurs.
-- `obs:rank-one-refuted`: no product-cut counterexample claim; products enter only through the
+- `rem:profile-circularity`: no localized isoperimetric profile or moving competitor family occurs.
+- `rem:single-coordinate-cuts`: no product-cut counterexample claim; products enter only through the
   exact eigenfunction tensorization identity.
 - `prop:covariance-spike` and the covariance-spike warning: respected constructively — it is the
   stated reason Lemma A's mechanism dies at the window edge and (N) is the residue.
@@ -455,10 +455,10 @@ The node has no formal `bounded_by` edge; all registered obstructions checked.
   probability, not rank tails, and only inside the window); no moving projector, no one-sided
   projector energy, no crude $\|A\|_{\mathrm{op}}^2$ unwhitening (the operator norm is used only
   where it is $\le2$ by stopping), no integrated-exponential rank bound.
-- Trace-upgrade cluster: this probe touches only `q:mm-spectral-occupation`. One transfer note
+- Trace-upgrade cluster: this probe touches only `conj:mm-spectral-occupation`. One transfer note
   for the `synthesizer`, without conclusion: the stopped-window/restart mechanism of Lemmas A–B
   is stated for a fixed test and may have a fixed-cut analogue; whether it interacts with
-  `q:upgrade`'s prefix estimate is for the cluster owner to assess, and nothing here asserts it.
+  `conj:trace-upgrade`'s prefix estimate is for the cluster owner to assess, and nothing here asserts it.
 
 ## Route viability and proposed gate update
 
@@ -524,11 +524,11 @@ independent review; no `proved`, `solution`, or `checked_by` metadata is propose
   status: open
   route: moment-map-spectral
   file: modules/kls/30-spectral-route.tex
-  statement: "Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, q:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law satisfies C_P <= C log^2 n conditional on thm:letwin-qcts."
+  statement: "Conditional on thm:letwin-qcts: with T0(n)=min(t_c, 1/(Cbar log^2 n)) from thm:KL-window, conj:mm-spectral-occupation holds on [0,T0(n)] with C0=34, C1=0 for every first eigenfunction with lambda <= 3/(8 K_n); combined with the certified bridge argument at fixed n and the large-gap branch, every isotropic log-concave law satisfies C_P <= C log^2 n conditional on thm:letwin-qcts."
   depends_on: [thm:letwin-qcts, thm:KL-window, thm:klartag-logn, lem:mm-stopped-window-source, lem:mm-restart-deweighting, lem:mm-smallgap-fourth-moment, lem:mm-time-weighted-fixed-source]
 ```
 
-`q:mm-spectral-occupation` remains `open`; no status change and no new `bounded_by` edge is
+`conj:mm-spectral-occupation` remains `open`; no status change and no new `bounded_by` edge is
 proposed for it.
 
 ## Numerical handoff
@@ -543,7 +543,7 @@ artifacts:
   - research/explorations/2026-08-30-kls-route-prober-mm-occupation-initial-layer-w4s01.md
 proposed_deltas:
   - Add the five candidate nodes displayed above (one published import, three open lemmas, one open conditional proposition); statuses exactly as displayed, no proof metadata.
-  - Route-control: replace the q:mm-spectral-occupation gate paragraph with the proposed one-line update quoted above (orchestrator-owned; drafted only).
+  - Route-control: replace the conj:mm-spectral-occupation gate paragraph with the proposed one-line update quoted above (orchestrator-owned; drafted only).
 next_role: prover
 next_prompt: |
   Write standalone dossiers for the Route-S window chain, in this order and under distinct
@@ -566,7 +566,7 @@ next_prompt: |
   thm:KL-window tail integral E[tau^{-2} 1_{tau<=T}] <= 5 max(Cbar^2,1) T^{-2} exp(-1/(Cbar T)),
   and a universal t_c; then rerun the prop:spectral-sufficiency bridge argument at fixed n with
   C0=34, C1=0 and the lambda-branch split at 3/(8 K_n), concluding C_P <= C log^2 n conditional
-  on thm:letwin-qcts. Do not claim q:mm-spectral-occupation, any universal-time statement, any
-  beyond-window bound, or anything about q:upgrade, q:stein-weighted, or q:alignment. Hand each
+  on thm:letwin-qcts. Do not claim conj:mm-spectral-occupation, any universal-time statement, any
+  beyond-window bound, or anything about conj:trace-upgrade, conj:stein-weighted, or conj:product-alignment. Hand each
   compiled dossier to a distinct cold proof-checker.
 ```

@@ -4,15 +4,15 @@ authors:
   - /root/kls_bootstrap_author
 reviewer: /root/review_bootstrap_sync_w0
 fingerprints:
-  solutions/kls-bootstrap-interface.md: d6d28dffa0742e79a6a11db2f959c4c03e1bdec07666ffd2f37ce7b2cde7c4c1
+  solutions/kls-bootstrap-interface.md: 105a109687abac259b559ff611469e8347a73866f54119d26e66166ec8f05175
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   lem:whitening: 3df7fc9dc6144b5c2ca23c0e9d21fc7a2132c0d494e03c75213cdc7ad7f72573
   thm:bootstrap: c63a5b4f893d86e70e67812caeccaa0015e754febda8a6a832909f82b015492b
   lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
   lem:crude: 4596fedb12dae4093deded196b84f7f3f624d96f97cc69158a7eca583e997a6f
-  cor:loglog: 035f1b7e266cba0c09dde33f9f0decf8f76e155da637c66068245423c77ef827
-  hyp:KI: 19c8922790211e205d6eda530efc90f61707e276482b5179d2254928e394f7c4
-  cor:KI-discharged: 2411e9c586f6ecbbb44f141b7f0b3a7733942614025262b49fcebc385b3f58d5
+  cor:loglog: 993fe5733752c06b378ba37d27e4cfb44bd644aaf9810493cb1328bfd4bf7bc7
+  ass:KI: 19c8922790211e205d6eda530efc90f61707e276482b5179d2254928e394f7c4
+  cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
   prop:ceiling: 0f7675a8caf88da1824c1bd76c2d2534a0d0ced9821774be7418b340413e1a20
   lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64
 ---
@@ -128,7 +128,7 @@ $D_{\mathrm{Che}}=2I(1/2)); no unreviewed preprint enters this theorem.  The sep
 bootstrap implication but permits only `status: conditional` until that dependency is freshly
 certified.  It does not inherit the stale historical certification of changed dependency bytes.
 
-The sole fence is `obs:circularity`.  It is respected: the proof does not claim a supermartingale
+The sole fence is `rem:profile-circularity`.  It is respected: the proof does not claim a supermartingale
 property for the random mass-constrained profile.  Its posterior Cheeger lower bound comes from
 whitening to the external worst-case constant $h_n^\star$ and comparing that constant to the
 explicitly near-worst starting measure; no dimension-free lower bound for $h_n^\star$ is assumed.

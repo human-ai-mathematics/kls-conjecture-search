@@ -1,12 +1,12 @@
 ---
 title: 'Solution: constant-preserving CMH approximation closure'
 label: sec:sol-cmh-approximation
-ledger-node: q:cmh-approximation
+ledger-node: prop:cmh-approximation-closure
 numbering:
   enumerator: D27.%s
 ---
 
-**Overview.** This dossier answers [](#q:cmh-approximation) ([](#thm:sol-cmh-approximation)). Every centered log-concave law, including one carried by a proper affine subspace, is a $\Wtwo$-limit of explicit regular compact-target approximants $\mu_k$ with $\CPaff(\mu)\le\liminf_k\CPaff(\mu_k)\le\liminf_k\CMH(\mu_k)$ ([](#eq:sol-cmh-approx-liminf)). A uniform CMH bound on these approximants ([](#eq:sol-cmh-approx-premise)) therefore gives the affine Poincaré inequality for $\mu$ with the same constant. That uniform bound is an explicit hypothesis: no universal $\mathrm{CMH}(4)$, no KLS and no continuity of $\CMH$ is claimed. Only the Poincaré inequality is passed to the limit, never the Stein kernels.
+**Overview.** This dossier answers [](#prop:cmh-approximation-closure) ([](#thm:sol-cmh-approximation)). Every centered log-concave law, including one carried by a proper affine subspace, is a $\Wtwo$-limit of explicit regular compact-target approximants $\mu_k$ with $\CPaff(\mu)\le\liminf_k\CPaff(\mu_k)\le\liminf_k\CMH(\mu_k)$ ([](#eq:sol-cmh-approx-liminf)). A uniform CMH bound on these approximants ([](#eq:sol-cmh-approx-premise)) therefore gives the affine Poincaré inequality for $\mu$ with the same constant. That uniform bound is an explicit hypothesis: no universal $\mathrm{CMH}(4)$, no KLS and no continuity of $\CMH$ is claimed. Only the Poincaré inequality is passed to the limit, never the Stein kernels.
 
 1. Gaussian smoothing, a quadratic tilt, restriction to a ball and centering give $\mu_k$ with $\Wtwo(\mu_k,\mu)<2/k+\sqrt n/k^2$ ([](#eq:sol-cmh-approx-diagonal-bound)). Their potentials are smooth and strictly convex ([](#eq:sol-cmh-approx-strict-target)).
 2. [](#thm:regular-moment-map-compact-target) and Fathi's Stein theorem supply the kernel $H_k$ with $\E_{\mu_k}H_k=\Sigma_k$ ([](#eq:sol-cmh-approx-mean-kernel)). The Stein form on the ambient core is closable with constant kernel ([](#lem:sol-cmh-approx-stein-closure)), so [](#thm:cmh-implies-affine-poincare) gives [](#eq:sol-cmh-approx-regular-endpoint).
@@ -14,7 +14,7 @@ numbering:
 4. Convergence of the covariances, variances and energies on the common core ([](#eq:sol-cmh-approx-covariance-convergence)–[](#eq:sol-cmh-approx-energy-convergence)) with the density of step 3 gives the lower semicontinuity of $\CPaff$. Combined with step 2 this gives [](#eq:sol-cmh-approx-liminf).
 5. Any whitening is applied only to individual approximants and undone before the limit, since whitening diverges in collapsing directions ([](#eq:sol-cmh-approx-eigenvalues)).
 
-**Scope.** This dossier answers [](#q:cmh-approximation) with the closed-form convention already used by [](#def:cmh) and [](#thm:cmh-implies-affine-poincare). It constructs regular compact-target approximants of every centered log-concave law, including a law carried by a proper affine subspace, and proves that a uniform CMH estimate on those approximants passes to the affine Poincaré inequality with no loss. The uniform CMH estimate is an explicit hypothesis: nothing below proves universal $\mathrm{CMH}(4)$ or [](#conj:kls), and no continuity of $\CMH$ is asserted.
+**Scope.** This dossier answers [](#prop:cmh-approximation-closure) with the closed-form convention already used by [](#def:cmh) and [](#thm:cmh-implies-affine-poincare). It constructs regular compact-target approximants of every centered log-concave law, including a law carried by a proper affine subspace, and proves that a uniform CMH estimate on those approximants passes to the affine Poincaré inequality with no loss. The uniform CMH estimate is an explicit hypothesis: nothing below proves universal $\mathrm{CMH}(4)$ or [](#conj:kls), and no continuity of $\CMH$ is asserted.
 
 ## 1\. Statement and the limiting closed form
 
@@ -417,6 +417,6 @@ No canonical moment-map kernel is pushed through a noninvertible limiting map. A
 The construction and the quantitative $\Wtwo$ convergence are proved in Section 2. The published compact-target theorem, the Stein identity, and the exact closed-form convention are verified in Sections 2–3, so the certified regular endpoint applies. Sections 4–5 prove the intrinsic affine-support convention, common-core density, and the constant-preserving liminf inequality. Section 6 verifies that optional whitening is undone before the singular limit. These facts prove all three assertions and the conditional consequence.
 :::
 
-**Obstructions respected.** The ledger gives `q:cmh-approximation` no `bounded_by` edge. The argument also does not enter the fixed-cut obstruction regime: it uses no tail split, projection-only test, localization occupation estimate, relative trace upgrade, evolving isoperimetric competitor, or rank-one product-cut assertion. In particular, affine-support collapse is handled at the Poincaré form level rather than by transporting a canonical Stein kernel through a noninvertible map.
+**Obstructions respected.** The ledger gives `prop:cmh-approximation-closure` no `bounded_by` edge. The argument also does not enter the fixed-cut obstruction regime: it uses no tail split, projection-only test, localization occupation estimate, relative trace upgrade, evolving isoperimetric competitor, or rank-one product-cut assertion. In particular, affine-support collapse is handled at the Poincaré form level rather than by transporting a canonical Stein kernel through a noninvertible map.
 
 **Conditional status and exclusions.** The approximation sequence exists unconditionally, and the closure theorem is analytic. The only unresolved premise in the route implication is [](#eq:sol-cmh-approx-premise). Thus this dossier can at most certify the conditional node “uniform CMH on the constructed regular approximants implies the affine Poincaré inequality for the limit.” CMH is used only as a sufficient condition. No converse, no universal $\mathrm{CMH}(4)$ estimate, and no proof of KLS appears here.

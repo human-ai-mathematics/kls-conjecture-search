@@ -48,7 +48,7 @@ formal `bounded_by` edge.  The nearby operator-to-trace obstruction is neverthel
 semantic fence, and the dossier respects it: it derives only
 $\mathbb E\int_0^\infty(\|R_t\|_{\mathrm{HS}}^2+s_t\|G_t\|_{\mathrm{HS}}^2)dt
 \leq\operatorname{Tr}R_0\leq n$ and explicitly disclaims a dimension-free trace upgrade.  It does
-not assert an implication for `q:upgrade`, `q:stein-weighted`, `q:alignment`, or any other member
+not assert an implication for `conj:trace-upgrade`, `conj:stein-weighted`, `conj:product-alignment`, or any other member
 of the trace-upgrade cluster.
 
 The only declared mathematical dependency, `lem:matrix-riccati`, is `proved` and is covered by

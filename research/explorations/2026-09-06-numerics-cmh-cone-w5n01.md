@@ -149,8 +149,8 @@ Directional, consistent, no escalation. Concretely for the search:
   set inside this family is exactly the exponential products. The family therefore supplies
   no counterexample and no near miss — the maximum is *attained* at 2 and never exceeded.
 - The cube cones were proposed in `subsec:cmh-cones` as the natural place to test
-  $\mathrm{CMH}(4)$ beyond the product endpoint of `rem:cmh-saturation-risk`. On this
-  evidence they do **not** realise the perturbation `q:cmh-solenoidal-perturbation` asks
+  $\mathrm{CMH}(4)$ beyond the product endpoint of `cor:cmh-product-saturation`. On this
+  evidence they do **not** realise the perturbation `conj:cmh-second-variation` asks
   for: at equal polynomial degree they are strictly *below* the saturating product, and
   the gap grows with $n$ and with $\beta-n$. Route C's saturation risk is not resolved,
   but this particular perturbation direction looks flat-to-downhill.

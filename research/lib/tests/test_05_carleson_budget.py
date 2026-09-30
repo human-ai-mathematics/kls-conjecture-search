@@ -29,7 +29,7 @@ def _occupation(cut, n, *, T, dt, seed, n_paths, direction=None):
 
 
 def test_rank_one_budget_below_one():
-    # cor:refutation: single-coordinate cut has E int_0^infty S dt <= 1.
+    # cor:single-coordinate-cuts: single-coordinate cut has E int_0^infty S dt <= 1.
     cut = cuts.single_coord(0, 0.0, psi=cuts.PSI_ID, side="ge")
     s_vals, _ = _occupation(cut, n=8, T=6.0, dt=0.03, seed=11, n_paths=48)
     mean = s_vals.mean()

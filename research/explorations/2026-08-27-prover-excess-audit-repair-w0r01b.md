@@ -246,7 +246,7 @@ No hidden open, conditional, refuted, or preprint-unreviewed premise enters thes
 
 ## Fences and status
 
-The five nodes have no ledger bounded_by edges. The proof nevertheless respects obs:circularity:
+The five nodes have no ledger bounded_by edges. The proof nevertheless respects rem:profile-circularity:
 it does not infer monotonicity for the random balanced-profile family and uses perimeter equality
 only in the explicit regular compact class. The two-tail input is used only to refute the
 one-time-slice unweighted estimate, not time-nonlocal or covariance-weighted approaches.

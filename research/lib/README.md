@@ -46,7 +46,7 @@ development lane. Full pytest includes the expensive localization Monte Carlo re
 | `kls` | SDE-free Poincaré/KLS bridge checks | `standard` |
 | `loc-engine` | legacy localization-engine regression; no route observable | `standard`, `full` |
 | `kls-align` | product-Laplace tail-union alignment diagnostic | `standard`, `high-n` |
-| `kls-screen` | cut-local screened-supply `q:weighted` diagnostic (surrogate excess) | `smoke`, `standard`, `high-n` |
+| `kls-screen` | cut-local screened-supply `conj:weighted-excess-rate` diagnostic (surrogate excess) | `smoke`, `standard`, `high-n` |
 | `cmh-gate-zero` | deterministic necessary-condition CMH battery | `standard` |
 | `cmh-ab` | CMH anisotropic-bootstrap (N, D, R) and M9 probe | `standard`, `exact-only`, `fast` |
 | `fiber-frame-dual` | conditional-fiber-frame all-frame simplex pencil library | `standard`, `deep` |

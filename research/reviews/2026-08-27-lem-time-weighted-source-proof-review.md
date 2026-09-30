@@ -4,7 +4,7 @@ authors:
   - /root/prove_time_weighted_par_05
 reviewer: /root/review_time_weighted_cold_07
 fingerprints:
-  solutions/lem-time-weighted-source.md: a4039050ea3459d64fd60471d4ec9509a4da9c4db76c890f04590fcacb1440f5
+  solutions/lem-time-weighted-source.md: 72f3d528794fe47764b7129dbe849bde7e27aa95c13c1236208ecbb524593c20
   lem:time-weighted-source: 8212ac2d323fe4a02b1e6494170068c8fe4b224b1c3f528538ad12162531d5ab
   thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
 ---
@@ -229,23 +229,23 @@ No numerical run or empirical agreement is used as evidence.
 The ledger gives `lem:time-weighted-source` no formal `bounded_by` edge. Every relevant
 Eldan-route obstruction was nevertheless checked.
 
-- `obs:two-tail` forbids an absolute-scale slice-wise source estimate. This proof is dynamic,
+- `rem:two-tail-slice-bounds` forbids an absolute-scale slice-wise source estimate. This proof is dynamic,
   expected, and retains $t^2$; it allows the source to be of order $t^{-2}$ and makes no
   unweighted assertion at the initial endpoint.
-- `obs:proj-ceiling` is not crossed because no radial or projection-only estimate is promoted to
+- `rem:projection-ceiling` is not crossed because no radial or projection-only estimate is promoted to
   tensor trace control.
-- `obs:crude-insufficient` and `obs:relative-ceiling` are not consumed: the proof never invokes
+- `rem:crude-insufficient` and `rem:relative-ceiling` are not consumed: the proof never invokes
   $\Xi_T$, never treats the crude logarithmic covariance integral as a closing input, and never
   asserts a universal relative-scale covariance bound.
-- `obs:circularity` is untouched because no localized isoperimetric profile or moving
+- `rem:profile-circularity` is untouched because no localized isoperimetric profile or moving
   near-minimizer is used.
-- `obs:rank-one-refuted` is untouched because the proof neither proposes nor rules out a product
+- `rem:single-coordinate-cuts` is untouched because the proof neither proposes nor rules out a product
   single-coordinate counterexample; its all-cut weighted budget is compatible with that
   obstruction.
 
 The dossier proves no unweighted source estimate, all-cut absorptive Carleson estimate,
-operator-to-trace upgrade `q:upgrade`, weighted Stein theorem `q:stein-weighted`, adapted product
-alignment result `q:alignment`, equivalence among the trace-upgrade cluster, balanced survival,
+operator-to-trace upgrade `conj:trace-upgrade`, weighted Stein theorem `conj:stein-weighted`, adapted product
+alignment result `conj:product-alignment`, equivalence among the trace-upgrade cluster, balanced survival,
 Cheeger bound, or KLS conclusion.
 
 ### Standalone build and archive validation

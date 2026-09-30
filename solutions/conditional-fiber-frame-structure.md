@@ -15,7 +15,7 @@ numbering:
 3. On the sufficient Bochner domain [](#eq:sol-fiber-bochner-domain), the generator formula [](#eq:sol-fiber-generator) and its pointwise resampling form [](#eq:sol-fiber-pointwise-generator).
 4. The one-dimensional estimate from [](#thm:cmh-1d), applied on each fiber and averaged with the frame identity [](#eq:sol-fiber-tight-frame), gives [](#eq:sol-fiber-gradient-comparison). Hence a form gap $1/C$ implies $C_P\le4C$.
 5. Calibration: linear functions satisfy [](#eq:sol-fiber-linear). Wiener chaos gives gap one for the Gaussian, and Efron–Stein gives gap one for products in the coordinate frame.
-6. For the simplex, Dirichlet neutrality gives the root-form formula [](#eq:sol-fiber-root-form). Vertex-cap indicators have finite energy and Rayleigh quotient [](#eq:sol-fiber-cap-rayleigh), which yields [](#eq:sol-fiber-root-gap). This refutes only the root frame on the simplex. It does not refute [](#q:conditional-fiber-frame) or KLS.
+6. For the simplex, Dirichlet neutrality gives the root-form formula [](#eq:sol-fiber-root-form). Vertex-cap indicators have finite energy and Rayleigh quotient [](#eq:sol-fiber-cap-rayleigh), which yields [](#eq:sol-fiber-root-gap). This refutes only the root frame on the simplex. It does not refute [](#conj:conditional-fiber-frame) or KLS.
 
 **Scope and refined statement.** We work in a $d$-dimensional Euclidean space, identified with $\R^d$ when coordinates are needed. Let $\mu$ be a full-dimensional probability with a Borel density $r$ and finite second moment. Let $\rho$ be an even Borel probability on $S^{d-1}$ satisfying
 
@@ -424,4 +424,4 @@ This proves directly that $\one_A-p_{m,\varepsilon}$ lies in the maximal form do
 
 **Fence and conclusion audit.** Neither ledger node has a `bounded_by` edge. The structural theorem uses the proved one-dimensional log-concave estimate in [](#thm:cmh-1d); it has no unresolved premise. The factor-$4$ inequality has the direction $\mathcal D\le4\int|\nabla f|^2$, so a lower spectral gap for one fixed frame is a sufficient condition for KLS, not a consequence of KLS and not an equivalent reformulation.
 
-[](#prop:sol-conditional-fiber-root-obstruction) refutes only the even $A_{m-1}$ root frame on the uniform simplex. It does not address the supremum over all admissible frames, does not show that the root frame is optimal even among permutation-invariant frames, and does not refute [](#q:conditional-fiber-frame) or KLS. No numerical evidence and no unpublished premise enters either proof.
+[](#prop:sol-conditional-fiber-root-obstruction) refutes only the even $A_{m-1}$ root frame on the uniform simplex. It does not address the supremum over all admissible frames, does not show that the root frame is optimal even among permutation-invariant frames, and does not refute [](#conj:conditional-fiber-frame) or KLS. No numerical evidence and no unpublished premise enters either proof.

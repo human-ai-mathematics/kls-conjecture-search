@@ -1,6 +1,6 @@
 """Focused soundness tests for the diagnostic-only ``loc-engine`` target.
 
-The target does not yet compute the observables in q:alignment or q:taming.  These tests pin the
+The target does not yet compute the observables in conj:product-alignment or conj:taming.  These tests pin the
 contract that missing/red numerical gates cannot accidentally turn its engine diagnostics into a
 route conclusion, and that even an all-green diagnostic remains unavailable.
 """

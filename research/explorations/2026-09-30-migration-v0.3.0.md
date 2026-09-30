@@ -54,7 +54,7 @@ review.
 **Prose.** Four `writer` passes, on disjoint modules. `modules/00-overview.md` now carries
 what the site said: the question, examples by hand, the literature, the obstacle every
 method meets, the main results with the idea of each proof, three problems for a newcomer
-(`q:mm-spectral-occupation`, `conj:gate-zero-sharp`, `q:conditional-fiber-frame`), how the
+(`conj:mm-spectral-occupation`, `conj:gate-zero-sharp`, `conj:conditional-fiber-frame`), how the
 manuscript is organised, how results are checked and how to contribute. The site's lettered
 theorems became prose pointing at the manuscript's statements, not new directives. Every
 other module lost its hand-written statuses and its harness vocabulary; the eight-field
@@ -64,25 +64,25 @@ prose pass.
 
 ## What resists
 
-- **A conclusion that may be out of date.** `prog:product-test` says that if the all-cut
+- **A conclusion that may be out of date.** `rem:product-stress-test` says that if the all-cut
   estimate fails on products, the weighted near-Cheeger approach is "forced"; the prose of
   `modules/22-product-stress.md` says the same ("a failure would force the geometric
   variant", "leaving Eldan–B as the surviving variant"). The literal form of that approach,
-  `ass:weighted-package`, is refuted, so only a repaired form such as `q:stein-weighted`
+  `ass:weighted-package`, is refuted, so only a repaired form such as `conj:stein-weighted`
   would remain. Saying so changes what the text claims, not its wording.
 - **Kinds and labels.** The `obs:` nodes are conjectures stated as methodological
-  warnings; `q:cmh-normalization`, `q:literature-PsQs` and `q:gate-zero` are remarks and
-  `q:cmh-approximation` a proposition under a `q:` prefix; `rem:gate-zero-trace-upgrade`,
-  `rem:cmh-saturation-risk` and `rem:cmh-stronger-than-kls` label corollaries; some labels
-  carry a harness word (`obs:rank-one-refuted`, `prog:cmh-route`,
-  `rem:covariance-route-dead`, `cor:refutation`).
+  warnings; `rem:cmh-normalization`, `rem:literature-psqs` and `rem:gate-zero-dichotomy` are remarks and
+  `prop:cmh-approximation-closure` a proposition under a `q:` prefix; `rem:gate-zero-trace-upgrade`,
+  `cor:cmh-product-saturation` and `cor:cmh-hodge-comparison` label corollaries; some labels
+  carry a harness word (`rem:single-coordinate-cuts`, `rem:cmh-program`,
+  `rem:covariance-only-saturates`, `cor:single-coordinate-cuts`).
 - **Ledger against prose.** `thm:intro-all-cut`, `thm:intro-weighted`,
   `thm:centroid-implies-kls` and `thm:carleson-implies-centroid` are `open` although the
   manuscript gives arguments for them; they display *Not settled here*, and the prose no
   longer calls them proved.
 - Carried from v0.2.0: the fingerprints of the v0.2.0 migration were recorded without a
   reading; the nineteen converted statements await a `sync` review; the sign in the
-  falsification clause of `q:cmh-solenoidal-perturbation` still disagrees with the
+  falsification clause of `conj:cmh-second-variation` still disagrees with the
   gateway of `modules/40-moment-map-cmh.md` (a *positive* second variation refutes
   $\mathrm{CMH}(4)$ in the statement, a *negative* one in the gateway), now flagged by a
   `%` comment there. Before the `pages` workflow is dispatched, a person reads the
@@ -91,5 +91,5 @@ prose pass.
 ## Proposed next step
 
 A `reviewer` with the `sync` lens on the nineteen statements converted in v0.2.0 and on the
-sign of `q:cmh-solenoidal-perturbation`, and on the conclusion of `prog:product-test`. Fresh `certify` reviews would replace the fingerprints the
+sign of `conj:cmh-second-variation`, and on the conclusion of `rem:product-stress-test`. Fresh `certify` reviews would replace the fingerprints the
 two migrations recorded without a reading.

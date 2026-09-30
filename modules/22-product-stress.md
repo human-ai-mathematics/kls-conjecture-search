@@ -6,7 +6,7 @@ numbering:
 (sec:product-stress)=
 # Product stress test of the all-cut Carleson estimate (Eldan–A)
 
-This section carries out [](#prog:product-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#prog:product-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
+This section carries out [](#rem:product-stress-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#rem:product-stress-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
 
 Three core tools are pointed at the product model. First, the per-direction Carleson estimate ([](#cor:per-direction)) is a budget: $\E\int_0^\infty s_t\abs{G_t\theta}^2\dd t\le\theta^TR_0\theta\le1$ for every fixed direction. Second, the Stein identity $\calS_\nu(E)=s^2\norm K_\HS^2$ ([](#prop:stein-rep)) makes the quadratic-chaos machinery of Section [](#sec:qcts) directly applicable to the Riccati source. Third, the covariance technology of Section [](#sec:covariance-tech) supplies the cut-free comparison quantities. Notation is that of this manuscript throughout: $\mu_t$ is Eldan stochastic localization [@Eldan2013ThinShell; @LeeVempala2024], $p_t,s_t,\delta_t,G_t,K_t,r_t,S_t,D_t,R_t$ are the two-color quantities, $\tau$ is the coarse balanced exit time, and $X_t=(\lmax(A_t)-1)_+$.
 
@@ -39,10 +39,10 @@ $$
 $$
 :::
 
-*Proof.* The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate ([](#cor:per-direction)) can be applied one direction at a time and summed. The calculation is carried out in Appendix [](#sec:appendix-route-e).
+*Proof.* The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate ([](#cor:per-direction)) can be applied one direction at a time and summed. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
 
 :::{prf:corollary} Fixed single-coordinate cuts: bounded source and self-extinguishing two-tail spikes
-:label: cor:refutation
+:label: cor:single-coordinate-cuts
 Let $\mu$ be a product as above and let $E$ be *any fixed* cut with $p_0\in[2/5,3/5]$ depending on one fixed coordinate $i$, chosen before localization. This includes a fixed two-tail cut in a coordinate whose variance subsequently inflates, but not a pathwise choice of $E$ or $i$. Then
 
 $$
@@ -65,9 +65,9 @@ Thus a two-tail configuration of source height $S_t\asymp\Lambda^2$ ([](#prop:tw
 Immediate from [](#thm:budget) with $k=1$; the occupation bound is Markov's inequality at the deterministic level, $\E\int_0^\infty\one_{\{S_t\ge L^2/2\}}\dd t\le\frac2{L^2}\E\int_0^\infty S_t\dd t$, together with the total source budget $\E\int_0^\infty S_t\dd t\le1$ from [](#thm:budget)(i).
 :::
 
-:::{prf:remark} What [](#cor:refutation) does and does not say
+:::{prf:remark} What [](#cor:single-coordinate-cuts) does and does not say
 :label: rem:refutation-scope
-[](#cor:refutation) verifies, for single-coordinate cuts, the *total stopped source bound* — which is what the Riccati–Gronwall consumption of [](#thm:carleson-implies-centroid) actually uses — not the literal interval form of [](#ass:all-cut-carleson); the distinction is immaterial for the argument, since the consumption needs only $\E r_{t\wedge\tau}$ bounded, which (ii) provides directly. The corollary rules out the natural attack in which the cut and the inflating coordinate are fixed before localization. It says nothing about selecting the coordinate or cut after observing the path. The per-direction estimate is exactly the tool that disposes of the fixed-coordinate version. The point of the test — a proof of [](#ass:all-cut-carleson) cannot go through $\lmax(A_t)$ — is thus complemented on the counterexample side: *a counterexample cannot go through a single inflated coordinate either*. Both a proof and a counterexample are forced into genuinely high-dimensional, cut-specific territory; [](#thm:budget) localizes the entire remaining danger of the product model in cuts of unbounded coordinate complexity.
+[](#cor:single-coordinate-cuts) verifies, for single-coordinate cuts, the *total stopped source bound* — which is what the Riccati–Gronwall consumption of [](#thm:carleson-implies-centroid) actually uses — not the literal interval form of [](#ass:all-cut-carleson); the distinction is immaterial for the argument, since the consumption needs only $\E r_{t\wedge\tau}$ bounded, which (ii) provides directly. The corollary rules out the natural attack in which the cut and the inflating coordinate are fixed before localization. It says nothing about selecting the coordinate or cut after observing the path. The per-direction estimate is exactly the tool that disposes of the fixed-coordinate version. The point of the test — a proof of [](#ass:all-cut-carleson) cannot go through $\lmax(A_t)$ — is thus complemented on the counterexample side: *a counterexample cannot go through a single inflated coordinate either*. Both a proof and a counterexample are forced into genuinely high-dimensional, cut-specific territory; [](#thm:budget) localizes the entire remaining danger of the product model in cuts of unbounded coordinate complexity.
 :::
 
 (sec:covariance-reduction)=
@@ -87,7 +87,7 @@ Let $\nu=\bigotimes_i\nu^{(i)}$ be a product of centered one-dimensional log-con
 with $C_*$ universal.
 :::
 
-*Proof.* Expand the quadratic form and use independence and centering to kill every cross-covariance, leaving a diagonal and an off-diagonal sum. The calculation is carried out in Appendix [](#sec:appendix-route-e).
+*Proof.* Expand the quadratic form and use independence and centering to kill every cross-covariance, leaving a diagonal and an off-diagonal sum. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
 
 [](#lem:product-qcts) remains a preprint-independent proof of the input on product paths. For general log-concave posteriors it is replaced by [](#cor:qcts-source).
 
@@ -150,14 +150,14 @@ $$
 Consequently, conditional on the preprint, [](#cor:V2-implies) gives the inequality [](#eq:all-cut-carleson), measure by measure, for every initial log-concave $\mu$ (including products) on this dimension-dependent window. For products the implication (V2)$\Rightarrow$[](#eq:all-cut-carleson) is preprint-independent, but the present $c/\log n$ verification of (V2) still uses the preprint. None of this establishes [](#ass:all-cut-carleson), whose time window must be universal in $n$. Without the preprint, [](#thm:KL-window) verifies (V2) for every measure on $[0,c_0(\log n)^{-2}]$; the all-cut conclusion then follows preprint-independently for products via the product case of [](#cor:V2-implies). For non-product measures that implication still uses [](#thm:letwin-qcts).
 :::
 
-*Proof.* On the short window the second-moment covariance bound is pointwise and integrates directly; the preprint-independent fallback instead splits on $\{\norm{A_t}_\op<2\}$ and pays the Brascamp–Lieb cap on the small complement. The calculation is carried out in Appendix [](#sec:appendix-route-e).
+*Proof.* On the short window the second-moment covariance bound is pointwise and integrates directly; the preprint-independent fallback instead splits on $\{\norm{A_t}_\op<2\}$ and pays the Brascamp–Lieb cap on the small complement. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
 
 ### The natural endpoint and the remaining universal-time gap
 
 The fixed-time moment window between $c/\log^2n$ and $c/\log n$ is covered by the combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen the distinct published *sup-over-time* statement of [](#thm:KL-window). The scale $1/\log n$ is also the natural endpoint for covariance-only control: the explicit product of centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order $1/\log n$ [@KLnotes, Remarks 62, 64 and Prop. 65]. Thus the remaining gap for $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal alignment must replace covariance-only control.
 
 :::{prf:remark} Heuristic — Expected failure of (V2) on universal windows for exponential products
-:label: heur:V2-fails
+:label: rem:v2-fails
 Let $\mu$ be the product of $n$ centered one-sided exponentials. Suppose, as the sharpness discussion of [@KLnotes, Remark 62] and [@KlartagChenNotes] indicates, that with probability bounded below some coordinate variance reaches the scale of the Brascamp–Lieb cap, $A_t^{(i)}\asymp1/t$, on a time window $[t_1,2t_1]$ with $t_1\asymp1/\log n$. Then on that window $\E X_t^2\gtrsim t^{-2}$, and
 
 $$
@@ -168,8 +168,8 @@ Hence on any *universal* window $[0,T_0]$, the condition (V2) is expected to fai
 :::
 
 :::{prf:remark} Consequence of the heuristic, stated conditionally
-:label: rem:covariance-route-dead
-If [](#heur:V2-fails) is correct, then the covariance-only argument of [](#cor:V2-implies) cannot prove [](#ass:all-cut-carleson) for products on a universal window — even though both the assumption's conclusion (KLS for products) and the per-cut estimates of [](#thm:budget) are true there. This is the precise product-model analogue of the crude-interface insufficiency of [](#rem:insufficiency): cut-free covariance information saturates at a logarithm. The stress test then confirms, in refined form, what it was designed to probe: any proof of [](#ass:all-cut-carleson) for products must be *cut-aware*, and [](#thm:budget) exhibits the prototype mechanism — fixed per-coordinate budgets paid from the within-class variance $R_0$ — while [](#cor:refutation) shows that the dual counterexample mechanism must likewise be cut-aware and high-complexity. The residue is a single question.
+:label: rem:covariance-only-saturates
+If [](#rem:v2-fails) is correct, then the covariance-only argument of [](#cor:V2-implies) cannot prove [](#ass:all-cut-carleson) for products on a universal window — even though both the assumption's conclusion (KLS for products) and the per-cut estimates of [](#thm:budget) are true there. This is the precise product-model analogue of the crude-interface insufficiency of [](#rem:insufficiency): cut-free covariance information saturates at a logarithm. The stress test then confirms, in refined form, what it was designed to probe: any proof of [](#ass:all-cut-carleson) for products must be *cut-aware*, and [](#thm:budget) exhibits the prototype mechanism — fixed per-coordinate budgets paid from the within-class variance $R_0$ — while [](#cor:single-coordinate-cuts) shows that the dual counterexample mechanism must likewise be cut-aware and high-complexity. The residue is a single question.
 :::
 
 (sec:residual)=
@@ -178,7 +178,7 @@ If [](#heur:V2-fails) is correct, then the covariance-only argument of [](#cor:V
 Combining [](#thm:budget) and [](#thm:covariance-bound), the anatomy of any counterexample to [](#ass:all-cut-carleson) within the product model is tightly constrained. To violate $\E\int_0^{T\wedge\tau}S_t\dd t\le MT$ for a given large $M$ and universal $T$, a fixed balanced cut $E$ must satisfy: (a) $E$ depends on at least $MT$ coordinates ([](#thm:budget)(i)); (b) at least of order $MT$ units of per-coordinate budget $\sum_i\E\int s\abs{Ge_i}^2$ — each coordinate contributing at most $1$ over *all* time — must be spent inside the common short window $[0,T]$; (c) the expenditure must be concentrated, by [](#thm:covariance-bound), at times when $X_t$ is large, i.e.\ aligned with the rare inflation excursions of the independent coordinate processes; and (d) throughout, the mass must remain balanced ($t<\tau$) and the source must not be matched by the damping $D_t$, which the Riccati identity subtracts for free. The cut is fixed before the Brownian path; the inflating coordinate indices and the conditional means $a_{t,i}$ around which a two-tail configuration would have to center are random. The decisive question is whether (b)–(d) are simultaneously achievable.
 
 :::{prf:conjecture} Adapted alignment problem for products
-:label: q:alignment
+:label: conj:product-alignment
 Let $\mu$ be a product of $n$ isotropic two-sided exponentials. There exist a universal $T_0$ and constants $C_0,C_1,\alpha<1$ such that for every $n$ and every balanced cut $E$, writing $P_t^H$ for the coordinate projection onto $H_t=\{i:A_t^{(i)}\ge2\}$ and $P_t^L=I-P_t^H$,
 
 $$
@@ -196,7 +196,7 @@ S_t^H:=s_t\bigl(\norm{P_t^HG_tP_t^H}_\HS^2
 =S_t-s_t\norm{P_t^LG_tP_t^L}_\HS^2
 $$
 
-counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#prog:product-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) on products, which satisfy KLS, since $S_t^H\le S_t$; it would bear on [](#ass:tight-prefix-carleson) only if the violating intervals could be taken to be prefixes on the tight window, and it would constrain no approach outside the fixed-cut one.
+counts every matrix entry incident to an inflated coordinate. This definition avoids an absorption loss: the simpler column mask counts each high–low entry only once, whereas the full source counts it twice. It also satisfies $S_t^H\le2s_t\sum_{i\in H_t}\abs{G_te_i}^2$. The negation says that a fixed cut can spend $\Omega(1)$-fractions of unboundedly many per-coordinate budgets inside the inflation excursions of those coordinates, within a common universal window, while staying balanced and underdamped. The displayed estimate, combined with [](#thm:V2-window) for the early $c/\log n$ window (conditional on the cited preprint) and a matching treatment of the non-inflated part at moderate times, would settle [](#rem:product-stress-test) positively. Its failure — an explicit high-complexity cut achieving the alignment — would refute [](#ass:all-cut-carleson) on products, which satisfy KLS, since $S_t^H\le S_t$; it would bear on [](#ass:tight-prefix-carleson) only if the violating intervals could be taken to be prefixes on the tight window, and it would constrain no approach outside the fixed-cut one.
 :::
 
 :::{prf:remark} Designated test family
@@ -209,13 +209,13 @@ E_n=\{\max_i\abs{x_i}\ge a_n\}
 \qquad \mu(E_n)=\frac12.
 $$
 
-It is permutation-symmetric but coordinate-selective, depends on all coordinates, and its complement is a product of one-dimensional truncated factors. Symmetry spreads the budget uniformly, while exchangeability lets a random inflating coordinate find the cut. A useful computation must measure the incident high-variance source $S_t^H$ in [](#q:alignment), together with $r_t$, $D_t$, balance survival, and interval sweeps past $c/\log n$. Such a computation would be evidence on a model in search of a counterexample, and would prove nothing about the all-cut estimate.
+It is permutation-symmetric but coordinate-selective, depends on all coordinates, and its complement is a product of one-dimensional truncated factors. Symmetry spreads the budget uniformly, while exchangeability lets a random inflating coordinate find the cut. A useful computation must measure the incident high-variance source $S_t^H$ in [](#conj:product-alignment), together with $r_t$, $D_t$, balance survival, and interval sweeps past $c/\log n$. Such a computation would be evidence on a model in search of a counterexample, and would prove nothing about the all-cut estimate.
 :::
 
-(subsec:product-fences)=
+(subsec:product-barriers)=
 ## Methodological constraints from this section
 
 :::{prf:remark} Single-coordinate product cuts self-extinguish
-:label: obs:rank-one-refuted
-For a product measure and a fixed balanced cut depending on one coordinate, $\E\int_0^\infty S_t\dd t\le1$ by [](#cor:refutation). Such a cut cannot sustain a covariance-inflation counterexample, so any witness or proof must treat high-complexity cuts and occupation across many coordinates.
+:label: rem:single-coordinate-cuts
+For a product measure and a fixed balanced cut depending on one coordinate, $\E\int_0^\infty S_t\dd t\le1$ by [](#cor:single-coordinate-cuts). Such a cut cannot sustain a covariance-inflation counterexample, so any witness or proof must treat high-complexity cuts and occupation across many coordinates.
 :::
