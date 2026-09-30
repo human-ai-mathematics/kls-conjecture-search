@@ -67,9 +67,7 @@ Negative results are the most reusable part of a search, and four of them constr
 
 - **The natural conditional-fiber root frame fails.** Approach F's most obvious implementation is ruled out by [](#prop:conditional-fiber-root-obstruction), which is why the approach is stated in terms of an all-frame question, [](#q:conditional-fiber-frame), instead.
 
-Two further cautions are advisory rather than established: the two-tail obstruction ([](#obs:two-tail)) and the circularity warning of Section [](#sec:excess). They are stated as conjectural obstructions for exactly that reason: they guide work, but no statement here is excluded on their strength.
-
-% Agent note: the ledger records these two as open `bounded_by` fences.
+Two further cautions are advisory rather than established: the two-tail obstruction ([](#obs:two-tail)) and the circularity warning of Section [](#sec:excess). They are recorded as remarks for exactly that reason: they guide work, but no statement here is excluded on their strength.
 
 (subsec:atlas-assessment)=
 ## Assessment of priorities

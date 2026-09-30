@@ -22,7 +22,7 @@ $$
 \text{KLS}.
 $$
 
-The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes, [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) does the same for the near-Cheeger variant Eldan–B. Establishing either hypothesis would give KLS; showing one of them false would not refute KLS.
+The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes ([](#cor:tight-window-consumption)); [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) derives it from the literal package of the near-Cheeger variant Eldan–B, whose propagation clause fails on the product witnesses of [](#prop:weighted-spectator-obstruction). A counterexample to any of these hypotheses would not refute KLS.
 
 **What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Appendix [](#sec:riccati)), the Stein dictionary (Appendix [](#sec:stein-dictionary)), and the covariance technology (Appendix [](#sec:covariance-tech)). Each statement below displays its own standing.
 
@@ -106,7 +106,7 @@ X_t=\bigl(\lmax(A_t)-1\bigr)_+,
 \Xi_T(\mu)=\int_0^T\E X_t\dd t .
 ```
 
-Let $\tau$ be the first time at which $p_t$ exits a fixed balanced interval, for instance $[1/3,2/3]$, and let $\tau_\eta$ be the tight window of [](#eq:tau-tight) below.
+Let $\tau$ be the coarse balanced exit time [](#eq:tau-coarse), the first time at which $p_t$ leaves $[1/3,2/3]$, and let $\tau_\eta$ be the tight window of [](#eq:tau-tight) below; balanced initial cuts are as in Section [](#sec:notation), $p_0\in[2/5,3/5]$ for the coarse window.
 
 ## Main conditional statements
 
@@ -128,7 +128,7 @@ C_0\abs I+C_1\E\int_{I\cap[0,\tau]}r_t\dd t
 [](#ass:all-cut-carleson) implies the KLS conjecture.
 :::
 
-The argument is in Sections [](#sec:mass-martingale)–[](#sec:carleson). It uses only stochastic localization, the two-color Riccati identity, and the fact that a $T$-uniformly log-concave posterior has a dimension-free Cheeger lower bound at scale $\sqrt T$.
+The argument is in Sections [](#sec:mass-martingale)–[](#sec:carleson). Taking $I=[0,T]$ and $\eta=1/6$, for which the tight window is the coarse one, the assumption gives the hypothesis of [](#cor:tight-window-consumption) for every cut of mass $1/2$; [](#lem:survival-implies-kls) then concludes. It uses only stochastic localization, the two-color Riccati identity, and the fact that a $T$-uniformly log-concave posterior has a dimension-free Cheeger lower bound at scale $\sqrt T$.
 
 The consumption step [](#cor:tight-window-consumption) needs less than the all-interval formulation above. Its exact premise is the following.
 
@@ -144,7 +144,7 @@ There exist universal constants $\eta\in(0,1/6]$, $T_0,C_0,C_1>0$, and $\alpha<1
 ```
 :::
 
-This prefix-only statement is strictly weaker than [](#ass:all-cut-carleson). [](#cor:tight-window-consumption) derives its boundary-lower-bound consequence for each cut; universal validity would therefore give KLS by the same balanced near-minimizer reduction. No argument is known that derives this assumption from the soft-projector calculations.
+This prefix-only statement is implied by [](#ass:all-cut-carleson): take $I=[0,T]$ and $\eta=1/6$, for which [](#eq:tau-tight) is [](#eq:tau-coarse); no converse is known. [](#cor:tight-window-consumption) derives its boundary-lower-bound consequence for each cut; universal validity would therefore give KLS by the same balanced near-minimizer reduction. No argument is known that derives this assumption from the soft-projector calculations.
 
 The literal package consumed by the conditional theorem [](#thm:intro-weighted) is recorded below, so that both the implication and the premise it needs can be checked.
 

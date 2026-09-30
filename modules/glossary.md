@@ -35,7 +35,7 @@ Covariance spike
 : The obstruction of [](#prop:covariance-spike): products of centered exponentials are dimension-free by tensorization, yet their conditional covariance spikes. It is why no uniform operator-norm bound on $\norm{A_t}_\op$ can exist, and it is the single sharpest constraint on what a correct argument may look like.
 
 Conditional theorem
-: A statement that holds under a hypothesis which is itself not settled here, such as [](#prop:spectral-sufficiency). Once proved it is a theorem, and still not progress on [](#conj:kls) until that hypothesis is: whether a statement is true and whether it applies are separate questions.
+: A statement that holds under a hypothesis which is itself not settled here, such as [](#prop:spectral-sufficiency). Once proved it is a theorem, and it brings [](#conj:kls) exactly as close as its hypothesis does: whether a statement is true and whether it applies are separate questions.
 :::
 
 % Agent notes. In the portfolio each approach keeps its route's letter in its id (`ap:e-…`, `ap:s-…`, `ap:c-…`, `ap:f-…`); the portfolio is search state and carries no truth value.

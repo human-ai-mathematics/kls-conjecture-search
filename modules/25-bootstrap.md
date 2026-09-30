@@ -199,7 +199,7 @@ For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a non
 (subsec:bootstrap-fences)=
 ## Methodological constraints from this section
 
-Both statements below are methodological constraints on the bootstrap input, stated as warnings rather than theorems; later sections use them as heuristic barriers.
+Both remarks below are methodological constraints on the bootstrap input, warnings rather than theorems; later sections use them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} The crude covariance integral cannot bootstrap
 :label: obs:crude-insufficient

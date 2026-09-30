@@ -91,7 +91,7 @@ There is a universal constant $C$ such that every full-dimensional isotropic log
 for every $f$ in the maximal closed form domain.
 :::
 
-An affirmative answer implies KLS by [](#eq:conditional-fiber-gradient-comparison). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
+[](#q:conditional-fiber-frame) implies KLS, with $\CP\le4C$, by [](#lem:conditional-fiber-form) ([](#eq:conditional-fiber-gradient-comparison)). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
 
 (subsec:fiber-root-failure)=
 ## Why the simplex root frame fails

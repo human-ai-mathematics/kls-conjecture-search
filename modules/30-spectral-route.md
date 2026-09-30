@@ -18,7 +18,7 @@ $$
 \text{KLS}.
 $$
 
-The implication is a theorem about a hypothesis: it brings [](#conj:kls) no closer until [](#q:mm-spectral-occupation) itself is established.
+The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#q:mm-spectral-occupation) does.
 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.
@@ -31,7 +31,7 @@ The implication is a theorem about a hypothesis: it brings [](#conj:kls) no clos
 
 **What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
-**What would settle it.** A positive answer to [](#q:mm-spectral-occupation) at a universal time settles it; a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
+**What would settle it.** [](#q:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
 
 **Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: Appendices [](#sec:notation)–[](#sec:models).
 

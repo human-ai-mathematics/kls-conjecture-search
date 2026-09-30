@@ -32,11 +32,7 @@ Two cautions belong here rather than in a footnote, because they change how the 
 
 **What fails, and why.** [](#prop:letwin-not-gate-zero) is the decisive negative result: no matrix-moment argument supplies gate zero, so the fixed-matrix estimate cannot be leveraged into the linear sector. Gate zero is itself an instance of the average-versus-uniform pattern of Section [](#sec:kls-remaining) — it asks $\lmax(\E H^2)\le4$ where only $\Tr(\E H^2)\le2n$ is known — so this approach relocates that difficulty rather than escaping it, and [](#prop:letwin-not-gate-zero) shows the relocation is not free. A separate saturation risk is discussed in Section [](#sec:cmh-exact-cases).
 
-**What would settle it.** The approach succeeds if the construction layer is carried out *and* [](#ass:uniform-cmh-approximants) is established, or replaced by the weaker recovery-envelope assumption [](#ass:cmh-recovery-envelope), which suffices by [](#cor:cmh-recovery-sequence-suffices). It fails if gate zero is false, or if the exact second variation through the Hodge split at the saturating one-sided-exponential product is negative. Both falsifiers are cheaper than the construction, which is why they are stated as gates.
-
-% NOTE for agents (writer, v0.3.0 migration): the sign in the previous sentence ("is negative")
-% disagrees with the statement q:cmh-solenoidal-perturbation ("strictly positive second variation
-% would instead refute CMH(4)"). Left unchanged pending the orchestrator's decision.
+**What would settle it.** The approach succeeds if the construction layer is carried out *and* [](#ass:uniform-cmh-approximants) is established, or replaced by the weaker recovery-envelope assumption [](#ass:cmh-recovery-envelope), which suffices by [](#cor:cmh-recovery-sequence-suffices). It fails if gate zero is false, or if some admissible log-concave perturbation of the saturating one-sided-exponential product has strictly positive second variation of $\CMH$ ([](#q:cmh-solenoidal-perturbation)), which would push $\CMH$ above $4$. Both falsifiers are cheaper than the construction, which is why they are stated as gates.
 
 **How to read it.** Read *out of order*: the normalization layer, Section [](#sec:cmh-normalization), is logically prior and should be read first, then the exact cases in Section [](#sec:cmh-exact-cases), then this construction layer. The moment-map family survey is Section [](#sec:family-moment-map). None of Appendices [](#sec:notation)–[](#sec:models) is used by this approach.
 

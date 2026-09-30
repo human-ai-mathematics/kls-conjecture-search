@@ -272,9 +272,7 @@ Three consequences.
 (subsec:qcts-fences)=
 ## What this section argues against
 
-The two obstructions below name the proof shapes the computations of this section argue against. Each is stated as a conjecture about proof methods rather than a theorem about KLS: it records what a proof should not try to do, and later sections cite it as a heuristic barrier, never as a step in a proof.
-
-% Agent note: obs:two-tail and obs:proj-ceiling are open `bounded_by` fences in the ledger, not certified bounds.
+The two remarks below name the proof shapes the computations of this section argue against. Each records what a proof should not try to do, not a theorem about KLS; later sections cite them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} Absolute-scale slice bounds fail
 :label: obs:two-tail
