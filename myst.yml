@@ -1,11 +1,10 @@
-# The MyST project: the reader's site (site/), the dossiers (solutions/) and the
-# manuscript (modules/).
+# The MyST project: the manuscript (modules/) and the full proofs (solutions/).
 #
 #   npx myst start           # read it locally, live
 #   npx myst build --html    # the static site, as pages.yml publishes it
 #
-# `uv run scripts/check.py` builds the site content and reads its AST: every labelled
-# claim directive under modules/ is a ledger node with the same id.
+# `uv run scripts/check.py` builds the project and reads its AST: every labelled claim
+# directive under modules/ is a ledger node with the same id.
 version: 1
 project:
   title: The Kannan–Lovász–Simonovits Frontier
@@ -82,66 +81,59 @@ project:
     '\Vol': '\operatorname{Vol}'
     '\WH': '\mathsf H'
     '\Wtwo': 'W_2'
-  # The reader's site comes first; the dossiers and the manuscript close the table of
-  # contents. A pattern that matches nothing is an error, so each group's pattern also
-  # matches its introduction page: '{site/proofs,solutions/*}.md' reads "site/proofs.md,
-  # then every dossier". Drafts are listed here for local reading; the site workflow
-  # removes them before it publishes. Add any other site/ page when it exists, not before.
+  # Each statement shows its status, read from the ledger: see scripts/status.mjs.
+  plugins:
+    - scripts/status.mjs
+  # The manuscript comes first, then the full proofs. A pattern that matches nothing is
+  # an error, so the proofs' pattern also matches their introduction page:
+  # '{proofs,solutions/*}.md' reads "proofs.md, then every dossier". Drafts are listed
+  # here for local reading; the pages workflow removes them before it publishes.
   toc:
-    - file: site/index.md
-    - file: site/problem.md
-    - file: site/results.md
-    - title: Open problems
+    - file: modules/00-overview.md
+    - title: The landscape of methods and the route atlas
       children:
-        - pattern: 'site/open{,/*}.md'
-    - file: site/about.md
+        - file: modules/01-family-needles.md
+        - file: modules/02-family-stochastic-localization.md
+        - file: modules/03-family-bochner-hminus1.md
+        - file: modules/04-family-moment-map.md
+        - file: modules/05-family-transport.md
+        - file: modules/06-frontier-atlas.md
+    - title: Routes through stochastic localization
+      children:
+        - file: modules/17-localization-prelude.md
+        - file: modules/14-qcts-obstruction.md
+        - file: modules/20-eldan-statements.md
+        - file: modules/21-carleson.md
+        - file: modules/22-product-stress.md
+        - file: modules/23-stein-route.md
+        - file: modules/24-excess-propagation.md
+        - file: modules/25-bootstrap.md
+        - file: modules/27-eldan-open-targets.md
+        - file: modules/30-spectral-route.md
+    - title: Deterministic and conditional routes
+      children:
+        - file: modules/40-moment-map-cmh.md
+        - file: modules/41-cmh-normalization.md
+        - file: modules/42-cmh-exact-cases.md
+        - file: modules/45-conditional-fiber-frame.md
+    - title: Synthesis
+      children:
+        - file: modules/50-synthesis.md
+        - file: modules/glossary.md
+    - title: "Appendices: technical foundations"
+      children:
+        - file: modules/10-notation.md
+        - file: modules/11-mass-martingale.md
+        - file: modules/12-riccati.md
+        - file: modules/13-stein-dictionary.md
+        - file: modules/15-covariance-technology.md
+        - file: modules/16-model-geometries.md
+        - file: modules/26-jacobi-splitting.md
+        - file: modules/60-appendix-route-e.md
+        - file: modules/61-appendix-moment-map.md
     - title: Full proofs
       children:
-        - pattern: '{site/proofs,solutions/*}.md'
-    - title: Precise statements
-      children:
-        - file: modules/00-overview.md
-        - title: The landscape of methods and the route atlas
-          children:
-            - file: modules/01-family-needles.md
-            - file: modules/02-family-stochastic-localization.md
-            - file: modules/03-family-bochner-hminus1.md
-            - file: modules/04-family-moment-map.md
-            - file: modules/05-family-transport.md
-            - file: modules/06-frontier-atlas.md
-        - title: Routes through stochastic localization
-          children:
-            - file: modules/17-localization-prelude.md
-            - file: modules/14-qcts-obstruction.md
-            - file: modules/20-eldan-statements.md
-            - file: modules/21-carleson.md
-            - file: modules/22-product-stress.md
-            - file: modules/23-stein-route.md
-            - file: modules/24-excess-propagation.md
-            - file: modules/25-bootstrap.md
-            - file: modules/27-eldan-open-targets.md
-            - file: modules/30-spectral-route.md
-        - title: Deterministic and conditional routes
-          children:
-            - file: modules/40-moment-map-cmh.md
-            - file: modules/41-cmh-normalization.md
-            - file: modules/42-cmh-exact-cases.md
-            - file: modules/45-conditional-fiber-frame.md
-        - title: Synthesis
-          children:
-            - file: modules/50-synthesis.md
-            - file: modules/glossary.md
-        - title: "Appendices: technical foundations"
-          children:
-            - file: modules/10-notation.md
-            - file: modules/11-mass-martingale.md
-            - file: modules/12-riccati.md
-            - file: modules/13-stein-dictionary.md
-            - file: modules/15-covariance-technology.md
-            - file: modules/16-model-geometries.md
-            - file: modules/26-jacobi-splitting.md
-            - file: modules/60-appendix-route-e.md
-            - file: modules/61-appendix-moment-map.md
+        - pattern: '{proofs,solutions/*}.md'
 site:
   template: book-theme
   options:

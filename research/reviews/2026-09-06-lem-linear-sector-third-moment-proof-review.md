@@ -5,7 +5,7 @@ authors:
 reviewer: /w5/reviewer-third-moment
 fingerprints:
   solutions/lem-linear-sector-third-moment.md: 801ac93f8d94a0f48efbaad9aa39e9a5cf3ccae28497cd45bd2e7e105f8f47ec
-  lem:linear-sector-third-moment: 122a338f320d18fff5277c8a6d115a887a3e34219e10bc02cfec6c07319c2db7
+  lem:linear-sector-third-moment: b81b78dc10877edb616430fbb41664c1604a377e19ae8c00c9dba509f890d647
   cor:gate-zero-third-moment: 8ce2b303350d3cb2ee258251dc5a644f3b518c5bce6efa2369d129b50ff389a2
 ---
 

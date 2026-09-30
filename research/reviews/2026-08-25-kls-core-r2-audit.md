@@ -9,15 +9,15 @@ fingerprints:
   lem:matrix-riccati: b529c0f736b4dce32a7843e81f8edb6569491781941e3b8aecdc1be0ddf7a023
   thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
   cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
-  cor:tight-window-consumption: 1ac62104b9592220332d0755282d9302ee00de2a1907a4fdc6bfbfbdefea98ef
+  cor:tight-window-consumption: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946
   lem:pathwise-BL: 5b8de97a90772764778ad79fc4a9f56642c732304f4792a95b6cc493c7a95d6a
   prop:stein-rep: 8b2dcc21aa724ba4cab407fe25ca694bb859f2269dfa45a85b76ab33c4dd9ec7
   cor:away-from-zero: d15055503849fa299724c5cb1640fab8f4b60ebc491621b6ffb1d34480e0dd95
-  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
+  lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
   solutions/kls-qcts-stein-boundary-core.md: 61ca993ab0b90b1a077993bd35fc62131f132b57c8c1ccbb67fe94d29ec0d417
   prop:qcts-equivalence: a2120cd5d1d4968432ea232d734c8f07c4542570f23684fd94a105e065fe246e
   def:qcts: 0f22746bfd781ed526102c33b699417cb07ef6d9df40f0fb4ce59158e6376b86
-  lem:boundary-rep: ff30662883be389e1b46850e59c69444e6a6c042773b6c070f19eecba03e8f25
+  lem:boundary-rep: ec5bb90e57459669bbd919a3edcac5720f3f22bda24693a1dbca6463219f6756
   prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
 ---
 

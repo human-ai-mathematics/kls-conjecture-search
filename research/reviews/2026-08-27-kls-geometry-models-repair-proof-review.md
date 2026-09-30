@@ -10,7 +10,7 @@ fingerprints:
   cor:generic-degeneracy: 1103100221b4bf047150e63ccddaa04ec4c2ec9fefad01135905132ef7d93252
   prop:exact-splitting: 7a3cbda8f27037b4c8c2aba75fe4fcd19fd746f2e479e6a26e2a41298b3eb008
   prop:persistent-splitting: 5aa02982b1ba2c12bcd728b05e39ff5096e0bec02d5b22114480ba116cc2346c
-  prop:gaussian-model: b36d81c4dcd6e7eff5e90fe7e95689cd454e8559454889d33b593beeafdfa213
+  prop:gaussian-model: 835dc58ac9d4cb324aea55003c87af159fe2427ee351779bf982b348abd92fa8
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
 ---
 

@@ -5,10 +5,10 @@ authors:
 reviewer: /w5/reviewer-cone-lift
 fingerprints:
   solutions/prop-cone-moment-map.md: de0ac91919f85648a8a390e969c74849a6466a0c7160d7ecd3c38f9b2ad8aefe
-  prop:cone-moment-map: 17a61295e07885d64d8d19a3ec6d3f93071bf610cd532bc7f3f5f9ca4463b2ed
+  prop:cone-moment-map: f61cff79312c7ca8ecd34aea5e0eae226e23b605c81ffdd8e3bd5f2b742e0544
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
-  prop:cone-linear-sector: bc33a40d8941c7c53233e874964ad29d13a1bf894ca15c94a734d449c475c942
-  cor:cube-cone-gate-zero: ed76f4e4e5e1d9438fd8c5529ee537ce4b8f3e08cc6982531753f726dace3637
+  prop:cone-linear-sector: f5efa7c2397ab64dbec91656d9d3c5d0f741785a53c82e58e65b627d976a590f
+  cor:cube-cone-gate-zero: 73f25581fe8d8569982bf101f60a60bf4c8fbac8cfa45cc260dfa197f95c773d
 ---
 
 # Exponential-cone dossier — cold certification audit (no certification)

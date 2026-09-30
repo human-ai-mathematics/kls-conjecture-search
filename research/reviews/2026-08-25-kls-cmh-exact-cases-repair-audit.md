@@ -16,8 +16,8 @@ fingerprints:
   thm:cmh-dirichlet: 0950144e400e4a077e8ae82686d149d0a736b6ec651e7c588e4e867146a8db94
   cor:cmh-dirichlet-surplus: fdd4f0dcfccd11cb61eceeec922bc50c8ed87bb4a9faa496901201eef7ea9424
   cor:cmh-dirichlet-poincare: 0295ebca6004666831c2db752ae739c062b86f6097e7b9f5152902d1765820c6
-  thm:cmh-implies-affine-poincare: 96fd21faf9d64d72f98fb884b57bd648952eba813b3c71eba4c32088571bb433
-  rem:cmh-saturation-risk: b351cc2eaaa19b5153b4057c701461e2ea5c0cdc8f1d4b8ab95b3b8c0aa05aa9
+  thm:cmh-implies-affine-poincare: 434bde8b4ccac59502b5c71180a4f20df98e1abc02f85826578bba9321480559
+  rem:cmh-saturation-risk: 2a3ba80b8cfea460f74c0dbcf122eeafdcf31576b42e60cf7d5507106f2332af
   prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
 ---
 

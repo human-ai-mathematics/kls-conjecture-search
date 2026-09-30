@@ -6,11 +6,11 @@ authors:
 reviewer: /root/review_excess_repair_w0r2
 fingerprints:
   solutions/kls-excess-audit.md: de112ea292c3cbd8585e427ea8914ea72a0d04f24e34ec2a7202a9a1b951a318
-  prop:intro-audit: 725e710614b53ac4033b72c3d62819665b30309c37bac865f7ec40e229addadb
+  prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73
   prop:trivial-excess: a48276dd038b07e29bdf15f7978fb1451dce76c2fd9754ca442124bb019c0c6f
   prop:two-tail: 85de1f26b16a82f85696ec5a655749365c0f036976c11265cee235f780c44d7b
-  lem:stein-vs-source: fe319f5210253f3af1e122d79680a10a8f6c491bd29c39e867ef8fa7dc154547
-  cor:tight-window-consumption: 1ac62104b9592220332d0755282d9302ee00de2a1907a4fdc6bfbfbdefea98ef
+  lem:stein-vs-source: 6bd84bc399d194fcb26d5a831feb198bcda29c1beaa21a9d1ebe64320eca30b5
+  cor:tight-window-consumption: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   lem:perimeter-martingale: c0e1c3539694fe07c6ebe7c767bafeeadef66ac4778e02f7d217b6c9d3ad3daa
   lem:excess-identity: f131066c290e6c26f2de7acbdbff70216e8fb3fceb81b4ab5a6fe42b1be7096d

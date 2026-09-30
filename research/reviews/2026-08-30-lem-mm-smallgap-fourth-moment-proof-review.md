@@ -5,7 +5,7 @@ authors:
 reviewer: proof-checker-w4r03
 fingerprints:
   solutions/lem-mm-smallgap-fourth-moment.md: dabf437e6f0e2c094130ccb42e8233b065cbbd82cb7dfa7014e0a07d4e2bf64c
-  lem:mm-smallgap-fourth-moment: f91a8ade308baed067fd9db6467be25055bb3924009dd295e766988dbc53b3d6
+  lem:mm-smallgap-fourth-moment: 5efc054693b4557b794756da70c6b5a5ba03e38dc8bd743eca82855cc796d1df
   thm:klartag-logn: 70dd5528111bc813bcfa6750d3afcfcdc31121dbf564fb0681db32265b576b60
 ---
 

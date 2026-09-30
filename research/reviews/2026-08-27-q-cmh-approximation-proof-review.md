@@ -7,7 +7,7 @@ fingerprints:
   solutions/q-cmh-approximation.md: bee592ea926fef6706f8474dca5cf22aeee226bd290732469b9d5faa81abe8de
   q:cmh-approximation: 26f10be5269f1b56dacc81d75c0fe3d9a8d856c97931c58c01c4e4554b9fbbe0
   def:cmh: 5093f7f871d8362c179b6ca901822ba370d6a14237ed9bb3fe076ab964ff9722
-  thm:cmh-implies-affine-poincare: 96fd21faf9d64d72f98fb884b57bd648952eba813b3c71eba4c32088571bb433
+  thm:cmh-implies-affine-poincare: 434bde8b4ccac59502b5c71180a4f20df98e1abc02f85826578bba9321480559
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   ass:uniform-cmh-approximants: d189a08645627f605d95d8f161bed294d6e48fccf1ed050b43e39ee5f1e6af45
 ---

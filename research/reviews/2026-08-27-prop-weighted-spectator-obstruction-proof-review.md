@@ -11,7 +11,7 @@ fingerprints:
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f
   ass:weighted-package: f916708933f4ae70aafa69f26c84f8c0e7b52cb4a1558108d192fb80bcce2f95
-  q:weighted: 60cd33f3e512ec8005eea236cdb2dfe8198f8248c0f2236fdfcf0febf02f95fb
+  q:weighted: 40ee4d80f7dc31b49cd2cd25eb91816dfce7d539960ac0bef3721eeab86aa998
 ---
 
 # Exponential-spectator obstruction — cold proof audit

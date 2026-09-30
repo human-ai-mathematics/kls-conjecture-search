@@ -5,7 +5,7 @@ authors:
 reviewer: /root/review_spectral_sufficiency_w0
 fingerprints:
   solutions/prop-spectral-sufficiency.md: b78f078d2552e65b822144cdf642b292312fdbc011952e1e41dbf37d2e7694e5
-  prop:spectral-sufficiency: fd64938a59bc75857af5ea37fa1553ec3f448a47d6d24f506dbe4dff01507869
+  prop:spectral-sufficiency: 69252e69009d6241db5e13e54207163fed9c954bdf405ed279c37d3b18741349
   q:mm-spectral-occupation: fd459923a0b85e2a9af9179faa1e1e80bbe2357831a49d986221586cfd268249
 ---
 
