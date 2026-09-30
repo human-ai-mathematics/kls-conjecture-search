@@ -206,9 +206,10 @@ Modern progress on KLS is a hybrid argument with four ingredients, no one of whi
 
 ::::{figure}
 :label: fig:kls-architecture
+:class: col-page
 
 ```{mermaid}
-flowchart LR
+flowchart TB
   sl["Stochastic localization"] --> curv["Gaussian curvature t"]
   sl --> cov["Covariance process A_t"]
   cov --> pot["Third moments, matrix potentials"]
