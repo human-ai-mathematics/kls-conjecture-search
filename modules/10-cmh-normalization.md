@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "41.%s"
+  enumerator: "10.%s"
 ---
 
 (sec:cmh-normalization)=

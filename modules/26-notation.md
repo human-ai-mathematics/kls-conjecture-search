@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "10.%s"
+  enumerator: "26.%s"
 ---
 
 (sec:notation)=

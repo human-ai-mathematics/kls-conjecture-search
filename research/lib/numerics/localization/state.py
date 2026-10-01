@@ -1,7 +1,7 @@
 """Product posterior state under Eldan stochastic localization.
 
 For a product base measure ``mu = ⊗_i mu^(i)`` the localized posterior ``mu_t``
-stays a product (``prop:products`` in ``modules/10-model-geometries.tex``): the
+stays a product (``prop:products`` in ``modules/30-model-geometries.md``): the
 tilt ``exp(c_t·x − t|x|²/2)`` factorizes, ``A_t`` is diagonal with entries
 ``A_t^(i) = Var(mu_t^(i))``, and the barycenter is ``a_t^(i) = mean(mu_t^(i))``.
 

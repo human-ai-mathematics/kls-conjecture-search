@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "42.%s"
+  enumerator: "11.%s"
 ---
 
 (sec:cmh-exact-cases)=

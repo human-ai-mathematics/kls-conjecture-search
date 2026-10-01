@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "23.%s"
+  enumerator: "16.%s"
 ---
 
 (sec:stein)=

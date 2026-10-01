@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "17.%s"
+  enumerator: "7.%s"
 ---
 
 (sec:localization-prelude)=

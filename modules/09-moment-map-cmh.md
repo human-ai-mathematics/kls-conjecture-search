@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "40.%s"
+  enumerator: "9.%s"
 ---
 
 (sec:moment-map-cmh)=

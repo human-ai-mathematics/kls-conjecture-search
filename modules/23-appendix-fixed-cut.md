@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "60.%s"
+  enumerator: "23.%s"
 ---
 
 (sec:appendix-fixed-cut)=

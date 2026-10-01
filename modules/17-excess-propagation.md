@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "24.%s"
+  enumerator: "17.%s"
 ---
 
 (sec:excess)=

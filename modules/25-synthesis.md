@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "50.%s"
+  enumerator: "25.%s"
 ---
 
 (sec:kls-synthesis)=

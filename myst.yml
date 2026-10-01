@@ -105,43 +105,43 @@ project:
     - title: The four approaches
       children:
         - file: modules/06-frontier-atlas.md
-        - file: modules/17-localization-prelude.md
+        - file: modules/07-localization-prelude.md
         - title: Fixed eigenfunction
           children:
-            - file: modules/30-spectral-approach.md
+            - file: modules/08-spectral-approach.md
         - title: Moment map
           children:
-            - file: modules/40-moment-map-cmh.md
-            - file: modules/41-cmh-normalization.md
-            - file: modules/42-cmh-exact-cases.md
-            - file: modules/61-appendix-moment-map.md
+            - file: modules/09-moment-map-cmh.md
+            - file: modules/10-cmh-normalization.md
+            - file: modules/11-cmh-exact-cases.md
+            - file: modules/12-appendix-moment-map.md
         - title: Fixed cut
           children:
-            - file: modules/20-eldan-statements.md
-            - file: modules/21-carleson.md
-            - file: modules/22-product-stress.md
-            - file: modules/23-stein-route.md
-            - file: modules/24-excess-propagation.md
-            - file: modules/25-bootstrap.md
-            - file: modules/27-eldan-open-targets.md
-            - file: modules/11-mass-martingale.md
-            - file: modules/13-stein-dictionary.md
-            - file: modules/26-jacobi-splitting.md
-            - file: modules/60-appendix-fixed-cut.md
+            - file: modules/13-eldan-statements.md
+            - file: modules/14-carleson.md
+            - file: modules/15-product-stress.md
+            - file: modules/16-stein-route.md
+            - file: modules/17-excess-propagation.md
+            - file: modules/18-bootstrap.md
+            - file: modules/19-eldan-open-targets.md
+            - file: modules/20-mass-martingale.md
+            - file: modules/21-stein-dictionary.md
+            - file: modules/22-jacobi-splitting.md
+            - file: modules/23-appendix-fixed-cut.md
         - title: Conditional fibers
           children:
-            - file: modules/45-conditional-fiber-frame.md
+            - file: modules/24-conditional-fiber-frame.md
     - title: Synthesis and perspectives
       children:
-        - file: modules/50-synthesis.md
+        - file: modules/25-synthesis.md
         - file: modules/glossary.md
     - title: Shared technical foundations
       children:
-        - file: modules/10-notation.md
-        - file: modules/12-riccati.md
-        - file: modules/14-qcts-obstruction.md
-        - file: modules/15-covariance-technology.md
-        - file: modules/16-model-geometries.md
+        - file: modules/26-notation.md
+        - file: modules/27-riccati.md
+        - file: modules/28-qcts-obstruction.md
+        - file: modules/29-covariance-technology.md
+        - file: modules/30-model-geometries.md
     - title: Full proofs
       children:
         - pattern: '{proofs,solutions/*}.md'
