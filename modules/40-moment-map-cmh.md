@@ -44,9 +44,9 @@ Approach C is organized in two layers. This section is the *construction* layer:
 
 To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
 
-:::{prf:remark} Program — Deterministic CMH approach
+:::{prf:remark} Program of the moment-map approach
 :label: rem:cmh-program
-First make the CMH endpoint and its KLS reduction precise. Then derive the invariant multiplier lift, control the resulting square-root commutators with the full positive reservoir, and sum the complete Haar tree without nodewise positivity or duplicated slack.
+First make the target inequality CMH and its reduction to KLS precise. Then derive the invariant multiplier lift, control the resulting square-root commutators with the full positive reservoir, and sum the complete Haar tree without nodewise positivity or duplicated slack.
 :::
 
 ## The endpoint and a first necessary condition
@@ -61,7 +61,7 @@ The starting point is a covariance–moment–Hessian estimate of the schematic 
 
 A divergence-duality argument then gives $\CP(\mu)\le4$, the sharp plausible constant because a standard centered one-sided exponential has Poincaré constant $4$.
 
-:::{prf:remark} CMH normalization and endpoint reduction
+:::{prf:remark} CMH normalization and the reduction to KLS
 :label: rem:cmh-normalization
 Normalizing [](#eq:cmh4-schema) on the regular moment-map class means fixing $\Sigma$, $L$, the underlying $L^2$ space, the admissible class of $g$, and every inverse in it, so that the resulting estimate $\CMH(\mu)\le C$ implies $\CPaff(\mu)\le C$ on that class.
 :::

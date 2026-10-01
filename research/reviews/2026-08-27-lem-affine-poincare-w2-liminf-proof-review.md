@@ -9,7 +9,7 @@ fingerprints:
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   cor:cmh-recovery-sequence-suffices: f9b55a151c8c485807235a4f7498fe1932a00d6544b4657d670989ae2c35845b
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
-  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  thm:cmh-implies-affine-poincare: 9210ad8934e1f76e3f1f621274c0be2dc1c9e5fa106146b66584871844acd5e0
   ass:cmh-recovery-envelope: 97413c87f6cb04227066c5ba42930acffd8f0f977af2603e5529125ff4c2bcc4
 ---
 

@@ -51,7 +51,7 @@ $$
 \mu^+(E)\ \ge\ c\,\min(p_0,q_0),
 $$
 
-with universal $c$. Consequently no such cut can witness a failure of the consumption chain of [](#ass:all-cut-carleson): the conclusion that the program derives from the Carleson estimate holds for these cuts unconditionally. Quantitatively, the source spends only a vanishing fraction of time at large height: for every *deterministic* level $L>0$,
+with universal $c$. Consequently no such cut can witness a failure of the consumption chain of [](#ass:all-cut-carleson): the conclusion that the fixed-cut approach derives from the Carleson estimate holds for these cuts unconditionally. Quantitatively, the source spends only a vanishing fraction of time at large height: for every *deterministic* level $L>0$,
 
 $$
 \E\,\bigl|\{t\ge0:\ S_t\ge\tfrac12L^2\}\bigr|

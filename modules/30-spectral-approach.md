@@ -148,7 +148,7 @@ These identities do not by themselves unwhiten the high-covariance part of $H_t$
 (subsec:spectral-headline)=
 ## The central problem
 
-:::{prf:conjecture} Fixed-eigenfunction full-damping occupation
+:::{prf:conjecture} Occupation bound for a fixed eigenfunction, against the full damping
 :label: conj:mm-spectral-occupation
 On smooth strongly log-concave isotropic approximants, let $-Lf=\lambda f$ be a normalized first nonconstant eigenfunction and let $g_t,H_t,A_t$ be as in [](#eq:spectral-quantities). There exist universal constants $T_0,C_0,C_1>0$ such that, for every $t\le T_0$,
 

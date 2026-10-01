@@ -411,7 +411,7 @@ By [](#thm:cmh-1d) and [](#thm:cmh-product), a product of centered one-sided exp
 No perturbative conclusion follows from those two facts alone. Under a perturbation the covariance and its inverse, the canonical Stein kernel, both numerator channels, the denominator, and the optimizing test function may all vary. In particular, an increase of the solenoidal term for one test function does not by itself imply an increase of the full CMH Rayleigh quotient. Whether an admissible perturbation raises $\CMH$ above $4$ is the second-variation problem of [](#conj:cmh-second-variation), which conjectures that none does to second order; a perturbation that does would refute $\mathrm{CMH}(4)$ but would not by itself refute [](#conj:kls).
 :::
 
-:::{prf:conjecture} Second variation of CMH at the product endpoint
+:::{prf:conjecture} Second variation of CMH at products, where it equals 4
 :label: conj:cmh-second-variation
 Take the product moment potential $\psi_0(s,t)=\phi(s)+t^2/2$ with $\phi$ the one-sided exponential moment potential, and perturb it by $\psi_\eps=\psi_0+\eps\,a(s)b(t)$. Call the perturbation admissible if, for all sufficiently small $\abs\eps$, $\psi_\eps$ is smooth and strictly convex and its moment measure $\mu_\eps$ is log-concave and belongs to the regular moment-map class on which [](#def:cmh) is set. Then, for every admissible perturbation,
 

@@ -88,7 +88,7 @@ This is the precise content of the schema [](#eq:cmh4-schema): $\Sigma$ is the c
 (subsec:cmh-implies)=
 ## CMH implies the affine Poincaré inequality
 
-:::{prf:theorem} Endpoint reduction for [](#rem:cmh-normalization)
+:::{prf:theorem} CMH bounds the affine Poincaré constant, normalized as in [](#rem:cmh-normalization)
 :label: thm:cmh-implies-affine-poincare
 For every centered log-concave $\mu$ in the regular moment-map class described above,
 
