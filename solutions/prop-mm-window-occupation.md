@@ -6,7 +6,7 @@ numbering:
   enumerator: D22.%s
 ---
 
-**Overview.** Conditional on the unreviewed preprint input [](#thm:letwin-qcts), this dossier proves for [](#prop:mm-window-occupation) that the occupation hypothesis of [](#conj:mm-spectral-occupation) holds on the shrinking window $[0,T_0(n)]$, $T_0(n)=\min\{t_c,1/(\bar C\log^2n)\}$, with $C_0=34$, $C_1=0$ and no damping consumed, on the small-gap branch $\lambda\le3/(8K_n)$ ([](#thm:sol-prop-mm-window-occupation)). Rerunning the bridge argument at fixed $n$ then gives $\CP\le C\log^2n$ ([](#thm:sol-mwo-frontier)), which is weaker than the published $C_K\log n$ bound it uses as an input; the question itself stays open. The assembly also depends on three companion dossiers, [(I4)](#inp:stopped)–[(I6)](#inp:fourth).
+**Overview.** This dossier gives the occupation implication [](#thm:sol-prop-mm-window-occupation) with constants $C_0=34$, $C_1=0$ on $[0,T_0(n)]$, under the small-gap hypothesis $\lambda\le3/(8K_n)$. With the stated input [](#thm:klartag-logn), this hypothesis has no admissible measure: $\lambda=1/\CP(\mu)\ge1/K_n>3/(8K_n)$. The implication therefore supplies no nonempty case of [](#conj:mm-spectral-occupation). The bound $\CP\le C\log^2n$ in [](#thm:sol-mwo-frontier) already follows from the stronger published input. Separately, [](#lem:mm-stopped-window-source) bounds the source before covariance exit for fixed unit-variance tests without the small-gap restriction. The calculations below record the stopping, restart, optional-projection and fixed-dimensional bridge estimates with their constants.
 
 1. The exit time $\tau=\tau_2$ of $\norm{A_t}_\op$ from level $2$ is an a.s. positive stopping time ([](#lem:sol-mwo-exit)), and the imported window bound [](#thm:KL-window) transfers to the planted realization ([](#lem:sol-mwo-law)).
 2. Optional projection bounds $\E[v_\sigma^2\one_E]$ by $\E_\mu f^4$ ([](#lem:sol-mwo-optional-projection)); a tail integral bounds $\E[\tau^{-2}\one_{\{\tau\le T\}}]$ using step 1 ([](#lem:sol-mwo-tail)), which fixes the universal cap $t_c$ ([](#def:sol-mwo-tc)).
@@ -14,14 +14,13 @@ numbering:
 4. On regular approximants, the fixed-$n$ bridge ($q$-identity, terminal variance, posterior Brascamp–Lieb) with step 3 gives $\lambda\ge T_*(n)/2$ on the small-gap branch; the large-gap branch is immediate. This yields [](#eq:sol-mwo-approximant-bound).
 5. The certified approximation passage at fixed dimension carries the bound to every isotropic log-concave law.
 
-**Refined statement and standing.** Conditional on the imported, unreviewed preprint input [](#thm:letwin-qcts) [@Letwin2026QuadraticKLS, Thm. 1.2], this dossier proves that the occupation hypothesis of [](#conj:mm-spectral-occupation) holds on the covariance window $[0,T_0(n)]$, $T_0(n)=\min\{t_c,1/(\bar C\log^2n)\}$, with constants $C_0=34$ and $C_1=0$ and *no damping consumed*, for every first eigenfunction on the small-gap branch $\lambda\le3/(8K_n)$; and that, combined with the certified bridge argument of `solutions/prop-spectral-sufficiency.md` rerun at fixed $n$ and the trivial large-gap branch, every isotropic log-concave probability on $\R^n$ ($n\ge2$) satisfies
+**Refined statement.** Using [](#thm:letwin-qcts) as a proved dependency, this dossier proves that the occupation hypothesis of [](#conj:mm-spectral-occupation) holds on the covariance window $[0,T_0(n)]$, $T_0(n)=\min\{t_c,1/(\bar C\log^2n)\}$, with constants $C_0=34$ and $C_1=0$ and *no damping consumed*, for every first eigenfunction on the small-gap branch $\lambda\le3/(8K_n)$; and that, combined with the certified bridge argument of `solutions/prop-spectral-sufficiency.md` rerun at fixed $n$ and the trivial large-gap branch, every isotropic log-concave probability on $\R^n$ ($n\ge2$) satisfies
 
 $$
 \CP\ \le\ C\log^2n,
-\qquad\text{conditional on the preprint input},
 $$
 
-with $C$ universal; the conditional input is [](#thm:letwin-qcts).
+with $C$ universal.
 
 **Scope fences (stated up front).** This dossier does *not* claim, and must not be read as claiming:
 
@@ -29,11 +28,9 @@ with $C$ universal; the conditional input is [](#thm:letwin-qcts).
 
 - **No universal-time statement and no beyond-window bound.** Nothing is asserted for $t>T_0(n)$. By the imported [](#prop:covariance-spike), the exit event $\{\tau_2\le t\}$ ceases to be rare past times of order $1/\log n$, so the rarity mechanism used here provably cannot be extended; this dossier does not attempt it.
 
-- **No improvement of the published frontier.** The conclusion $\CP\le C\log^2n$ is strictly *weaker* than the published unconditional bound $\CP\le C_K\log n$ [@Klartag2023Logarithmic], which is itself an input here. The result is a *route-health certificate*: Route S, on certified repository lemmas, two published imports, and the Letwin preprint, reproduces a polylog frontier. It adds no new knowledge about $\CP$ itself.
+- **Empty small-gap branch and redundant frontier consequence.** The published input [](#thm:klartag-logn) gives $\CP(\mu)\le K_n$, hence $\lambda\ge1/K_n>3/(8K_n)$ for every regular isotropic approximant. Thus the small-gap occupation implication has an empty admissible class. Every actual law falls in the large-gap branch, and the conclusion $\CP\le C\log^2n$ is weaker than the input $\CP\le C_K\log n$. These calculations provide no evidence that the occupation estimate holds for any admissible eigenfunction. The separate stopped-source estimate [](#lem:mm-stopped-window-source) does not impose the small-gap restriction.
 
-- **Nothing about the trace-upgrade cluster.** No statement is made or implied about [](#conj:trace-upgrade), [](#conj:stein-weighted), or `conj:product-alignment` (repository constraint 6).
-
-- **Conditional standing.** The occupation estimate and the frontier reproduction are conditional on the version-1, unreviewed preprint import [](#thm:letwin-qcts); by repository constraint 7 the corresponding node can be at most `conditional`.
+- **Nothing about the trace-upgrade cluster.** No statement is made or implied about [](#conj:trace-upgrade), [](#conj:stein-weighted), or `conj:product-alignment` (the brief's trace-upgrade comparison constraint).
 
 **Setting.** Throughout, $\mu$ is a *regular isotropic approximant* on $\R^n$, $n\ge2$, in the class of Section [](#subsec:spectral-sde): $\dd\mu=Z^{-1}e^{-V}\dd x$ with $V\in C^\infty$, $\nabla^2V\succeq\varepsilon I_n$ for some $\varepsilon>0$, centered and isotropic, with Friedrichs generator $L=\Delta-\nabla V\cdot\nabla$ of compact resolvent, and $f$ a normalized first nonconstant eigenfunction, $-Lf=\lambda f$, $\E_\mu f=0$, $\E_\mu f^2=1$. The localization is realized by the planted channel $c_t=tX+B_t^{\mathrm{obs}}$ with $X\sim\mu$ and $B^{\mathrm{obs}}$ an independent Brownian motion; $(\mathcal F_t)$ is the usual augmentation of the observation filtration, and the pathwise posterior kernel $\mu_t$, the quantities $m_t,a_t,v_t,A_t,g_t,H_t$, and the zero-convention for $H_t$ are exactly as in the companion restart dossier ([](#thm:sol-lem-mm-restart-deweighting)). Write $S_t=\norm{H_t}_{\HS}^2$, $q(t)=\E\abs{g_t}^2$, $D_t=g_t^TA_tg_t\ge0$, and
 
@@ -44,16 +41,16 @@ $$
 **Inputs and their exact standing.**
 
 (inp:letwin)=
-(I1) [](#thm:letwin-qcts) [@Letwin2026QuadraticKLS, Thm. 1.2]: $\Var(Y^TMY)\le8\norm M_{\HS}^2$ for isotropic log-concave $Y$ and symmetric $M$. *Imported, preprint-unreviewed; the conditional hypothesis of this dossier.*
+(I1) [](#thm:letwin-qcts) [@Letwin2026QuadraticKLS, Thm. 1.2]: $\Var(Y^TMY)\le8\norm M_{\HS}^2$ for isotropic log-concave $Y$ and symmetric $M$. This proved dependency applies to all isotropic log-concave laws, including every whitened posterior used in [(I4)](#inp:stopped), without an extra bounded-support restriction.
 
 (inp:window)=
 (I2) [](#thm:KL-window) [@KLnotes, Thm. 61]: there is a universal $\bar C$ such that for every isotropic log-concave $\mu$ on $\R^n$ and every $t\le t_1(n):=1/(\bar C\log^2n)$, $\Prob(\exists s\le t:\norm{A_s}_\op\ge2)\le e^{-1/(\bar Ct)}$. *Imported, published.* Without loss of generality $\bar C\ge1$: enlarging $\bar C$ shrinks the window and weakens the bound, so the statement with any $\bar C$ implies the statement with $\max\{\bar C,1\}$.
 
 (inp:klartag)=
-(I3) `thm:klartag-logn` [@Klartag2023Logarithmic] (published import; ledger acceptance pending): every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\CP\le K_n:=C_K\log n$ with $C_K$ universal, via the Cheeger bound $\psi_n\le C\sqrt{\log n}$ and Cheeger's inequality. *Cited as an import; not proved here.*
+(I3) [](#thm:klartag-logn) [@Klartag2023Logarithmic] (published import): every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\CP\le K_n:=C_K\log n$ with $C_K$ universal, via the Cheeger bound $\psi_n\le C\sqrt{\log n}$ and Cheeger's inequality. *Cited as an import; not proved here.*
 
 (inp:stopped)=
-(I4) Companion dossier `lem-mm-stopped-window-source.md` in `solutions/` ([](#thm:sol-lem-mm-stopped-window-source); conditional on [(I1)](#inp:letwin)): for every regular approximant, fixed unit-variance $f\in L^2(\mu)$, $L\ge1$, $T>0$: $\E\int_0^{T\wedge\tau_L}S_t\dd t\le8L^2T$.
+(I4) Companion dossier `lem-mm-stopped-window-source.md` in `solutions/` ([](#thm:sol-lem-mm-stopped-window-source); uses the certified [(I1)](#inp:letwin)): for every regular approximant, fixed unit-variance $f\in L^2(\mu)$, $L\ge1$, $T>0$: $\E\int_0^{T\wedge\tau_L}S_t\dd t\le8L^2T$.
 
 (inp:restart)=
 (I5) Companion dossier `lem-mm-restart-deweighting.md` in `solutions/` ([](#thm:sol-lem-mm-restart-deweighting); unconditional): for every a.s.\ positive stopping time $\sigma$, a.s. on $\{\sigma<\infty\}$, $\E[\int_\sigma^\infty S_t\dd t\mid\mathcal F_\sigma] \le\Var_{\mu_\sigma}(f)/(\varepsilon+\sigma)\le v_\sigma/\sigma$, together with the optional-time identification $\int\phi\dd\mu_\sigma=\E[\phi(X)\mid\mathcal F_\sigma]$ a.s. on $\{\sigma<\infty\}$ for every measurable $\phi\ge0$, and the deterministic solution map $\mathsf S_\mu$ of the observation equation with its pathwise uniqueness.
@@ -64,7 +61,7 @@ $$
 (inp:certified)=
 (I7) Certified nodes: [](#lem:mm-time-weighted-fixed-source) (consumed inside [(I5)](#inp:restart)) and the certified bridge dossier for [](#prop:spectral-sufficiency), namely the file `prop-spectral-sufficiency.md` in `solutions/`, whose internal steps ($q$-identity, Bessel bound, terminal-variance identity, posterior Brascamp–Lieb, and the fixed-test approximation passage) are rerun here at fixed $n$; the certified theorem itself is *not* invoked as a black box, because its hypothesis requires dimension-free constants.
 
-Inputs [(I4)](#inp:stopped)–[(I6)](#inp:fourth) are companion *candidate* dossiers with `checked_by: none`; any certification of the present dossier is contingent on their independent certification. This dossier's own contribution is the assembly: the exit-time bookkeeping, the optional projection step, the tail integral, the constant audit, and the fixed-$n$ rerun of the bridge.
+Inputs [(I4)](#inp:stopped)–[(I6)](#inp:fourth) are the companion results [](#lem:mm-stopped-window-source), [](#lem:mm-restart-deweighting), and [](#lem:mm-smallgap-fourth-moment). Their detailed dossiers provide the stated forms; the stopped-source result now uses the certified quadratic theorem as a proof dependency. This dossier's own contribution is the assembly: the exit-time bookkeeping, the optional projection step, the tail integral, the constant audit, and the fixed-$n$ rerun of the bridge.
 
 ## Preliminary lemmas
 
@@ -172,9 +169,9 @@ By monotonicity and continuity, $h(t)\le1$ for every $t\in(0,t_c]$, and $t_c\le1
 
 ## The window occupation estimate
 
-:::{prf:theorem} Window occupation with $C_0=34$, $C_1=0$; conditional on [](#thm:letwin-qcts)
+:::{prf:theorem} Window occupation with $C_0=34$, $C_1=0$
 :label: thm:sol-prop-mm-window-occupation
-Assume [](#thm:letwin-qcts). Set
+Set
 
 $$
 T_0(n)=\min\Bigl\{t_c,\ \frac1{\bar C\log^2n}\Bigr\} .
@@ -265,9 +262,9 @@ which is [](#eq:sol-mwo-occupation). Since $q(t)\ge0$ and $D_t\ge0$, the form []
 
 ## The fixed-$n$ bridge and the frontier reproduction
 
-:::{prf:theorem} Route-S polylog reproduction; conditional on [](#thm:letwin-qcts)
+:::{prf:theorem} Route-S polylog reproduction
 :label: thm:sol-mwo-frontier
-Assume [](#thm:letwin-qcts). There is a universal constant $C$ such that every isotropic log-concave probability measure $\nu$ on $\R^n$, $n\ge2$, satisfies
+There is a universal constant $C$ such that every isotropic log-concave probability measure $\nu$ on $\R^n$, $n\ge2$, satisfies
 
 $$
 \CP(\nu)\ \le\ C\log^2n .
@@ -343,17 +340,17 @@ for every locally Lipschitz $h$, i.e. $\CP(\nu)\le C_2\log^2n$. Taking $C=C_2$ c
 
 :::{prf:remark} Constant audit
 :label: rem:sol-mwo-constants
-The probe's proposed constants are confirmed by this audit: pre-exit budget $8L^2T=32T$ at $L=2$; post-exit budget $\sqrt2\cdot\sqrt{5}\,\bar C\,T^{-1}e^{-1/(2\bar CT)}\le\sqrt2\,T$ on $(0,t_c]$; total $32+\sqrt2\le34$; tail integral constant $5\max\{\bar C^2,1\}=5\bar C^2$ under the loss-free normalization $\bar C\ge1$, valid for $T\le\min\{1,t_1(n)\}$; $t_c$ as in [](#def:sol-mwo-tc) is well defined because $h$ is increasing on $(0,1/(4\bar C)]$ and vanishes at $0^+$. No constant required correction.
+The constants in the proof are: pre-exit budget $8L^2T=32T$ at $L=2$; post-exit budget $\sqrt2\cdot\sqrt{5}\,\bar C\,T^{-1}e^{-1/(2\bar CT)}\le\sqrt2\,T$ on $(0,t_c]$; total $32+\sqrt2\le34$; tail integral constant $5\max\{\bar C^2,1\}=5\bar C^2$ under the loss-free normalization $\bar C\ge1$, valid for $T\le\min\{1,t_1(n)\}$; $t_c$ as in [](#def:sol-mwo-tc) is well defined because $h$ is increasing on $(0,1/(4\bar C)]$ and vanishes at $0^+$. All constants are independent of the regularization.
 :::
 
 :::{prf:remark} Where each dimension dependence enters
 :label: rem:sol-mwo-dimension
-Exactly two inputs carry the dimension: the window length $t_1(n)=1/(\bar C\log^2n)$ of the published import [(I2)](#inp:window), and the frontier constant $K_n=C_K\log n$ of the published import [(I3)](#inp:klartag) (which sets the branch point $3/(8K_n)$ and, through the small-gap branch, contributes only inside $T_*(n)$ via universal constants). All other constants ($8L^2$, $34$, $\sqrt2$, $M_*$, $t_c$) are universal and $\varepsilon$-free. The regularization $\varepsilon$ appears only in finiteness-only bounds and in the favorable denominator shift of the restart lemma; it enters no final constant, so the estimate is uniform through approximation as [](#conj:mm-spectral-occupation) requires on its window.
+Exactly two inputs carry the dimension: the window length $t_1(n)=1/(\bar C\log^2n)$ of the published import [(I2)](#inp:window), and the frontier constant $K_n=C_K\log n$ of the published import [(I3)](#inp:klartag) (which sets the branch point $3/(8K_n)$ and, through the small-gap branch, contributes only inside $T_*(n)$ via universal constants). All other constants ($8L^2$, $34$, $\sqrt2$, $M_*$, $t_c$) are universal and $\varepsilon$-free. The regularization $\varepsilon$ appears only in finiteness bounds and in the favorable denominator shift of the restart lemma; it enters no final constant. This uniformity concerns the displayed implications and the redundant Poincaré consequence; the small-gap implication still has an empty admissible class.
 :::
 
-:::{prf:remark} Unclosed steps: none within scope; external standings restated
+:::{prf:remark} Dependency scope
 :label: rem:sol-mwo-gaps
-Within its declared scope the argument has no unclosed analytic step. Its standing is nonetheless bounded by four external facts, restated for the reviewer: (i) conditionality on the unreviewed import [(I1)](#inp:letwin); (ii) dependence on the three companion dossiers [(I4)](#inp:stopped)–[(I6)](#inp:fourth), each certified since by its own review; (iii) the published import node `thm:klartag-logn`, accepted in the ledger since; (iv) the law identification of [](#lem:sol-mwo-law), which relies on the manuscript's definition of the localization by the tilt equation of Section [](#subsec:sl-process) — the same convention used by the certified dossiers — and on the pathwise solution map; a reviewer should confirm that the imported [@KLnotes, Thm. 61] indeed concerns that process, as the manuscript's Section [](#sec:covariance-tech) records.
+The argument uses the all-law quadratic theorem [(I1)](#inp:letwin), the companion results [(I4)](#inp:stopped)–[(I6)](#inp:fourth), and the published imports [(I2)](#inp:window)–[(I3)](#inp:klartag). The law identification in [](#lem:sol-mwo-law) matches the manuscript's localization convention to the planted realization through the companion restart proof. The internal identities and approximation passage from the spectral-sufficiency dossier are rerun at fixed dimension; its conditional final theorem is not invoked. No unresolved antecedent is used in these steps, and the shrinking-window restriction remains in force.
 :::
 
-**Obstructions respected.** The candidate node carries no `bounded_by` edge; the registered fences were checked one by one. *`rem:two-tail-slice-bounds`*: no cut, slice, or absolute-scale excess estimate occurs; the estimate is a stopped expectation bound plus a rare-event charge. *`rem:projection-ceiling`*: the only tensor input is the full symmetric-matrix Letwin bound, consumed inside the companion dossier with its conditional standing displayed; no projection test is promoted. *`rem:crude-insufficient`*: no crude covariance integral $\Xi_T$ and no logarithmic bootstrap appears; the window import is an exit-probability bound. *`rem:relative-ceiling`*: no all-measure relative occupation premise is inserted; the a priori input is the published frontier $K_n$, and the output is strictly weaker than that input. *`rem:profile-circularity`*: no localized isoperimetric profile or moving competitor family occurs. *`rem:single-coordinate-cuts`*: no product-cut claim is made. *Covariance spike ([](#prop:covariance-spike))*: respected constructively — it is the stated reason the mechanism stops at the window edge and no beyond-window claim is made. *Recorded dead ends*: the marginal-probability independence step is avoided (the post-exit charge is a joint Cauchy–Schwarz through [](#lem:sol-mwo-optional-projection), not a product of marginals); no unstopped $\norm{A_t}_\op$ moment, no moving projector, and no rank-tail entrance loss occurs. *Constraint 6*: only `conj:mm-spectral-occupation` is touched; no assertion crosses to the trace-upgrade cluster.
+**Obstructions respected.** The node carries no `bounded_by` edge; the registered fences were checked one by one. *`rem:two-tail-slice-bounds`*: no cut, slice, or absolute-scale excess estimate occurs; the estimate is a stopped expectation bound plus a rare-event charge. *`rem:projection-ceiling`*: the only tensor input is the full symmetric-matrix Letwin bound, consumed inside the companion dossier in its certified all-law form; no projection test is promoted. *`rem:crude-insufficient`*: no crude covariance integral $\Xi_T$ and no logarithmic bootstrap appears; the window import is an exit-probability bound. *`rem:relative-ceiling`*: no all-measure relative occupation premise is inserted; the a priori input is the published frontier $K_n$, and the output is strictly weaker than that input. *`rem:profile-circularity`*: no localized isoperimetric profile or moving competitor family occurs. *`rem:single-coordinate-cuts`*: no product-cut claim is made. *Covariance spike ([](#prop:covariance-spike))*: respected constructively — it is the stated reason the mechanism stops at the window edge and no beyond-window claim is made. *Recorded dead ends*: the marginal-probability independence step is avoided (the post-exit charge is a joint Cauchy–Schwarz through [](#lem:sol-mwo-optional-projection), not a product of marginals); no unstopped $\norm{A_t}_\op$ moment, no moving projector, and no rank-tail entrance loss occurs. *Trace-upgrade comparison constraint*: only `conj:mm-spectral-occupation` is touched; no assertion crosses to the trace-upgrade cluster.

@@ -6,7 +6,7 @@ numbering:
 (sec:qcts)=
 # The static quadratic-chaos input and the two-tail obstruction
 
-The time-zero version of two-color covariance control is already a strong statement. A July 2026 preprint of Letwin now proves this intrinsic quadratic-chaos estimate with a universal constant [@Letwin2026QuadraticKLS]. This removes the static quadratic-chaos question from the frontier, but it does not remove the covariance-alignment problem created by unwhitening a localized posterior. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of the near-Cheeger variant and marks the boundary of what slice-wise verification can establish for the all-cut variant.
+The time-zero version of two-color covariance control is already a strong statement. The intrinsic estimate used here is [](#thm:letwin-qcts), from Letwin's July 2026 version-1 preprint [@Letwin2026QuadraticKLS]. Its application to a localized posterior separates intrinsic quadratic control from the covariance-alignment problem created by unwhitening. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of the near-Cheeger variant and marks the boundary of what slice-wise verification can establish for the all-cut variant.
 
 Let $X\sim\nu$ be isotropic and log-concave, and put
 
@@ -64,7 +64,7 @@ Consequently $\calQ(\nu)\le8$ in [](#def:qcts).
 
 :::{prf:remark} Epistemic status
 :label: rem:letwin-status
-[](#thm:letwin-qcts) is imported from [@Letwin2026QuadraticKLS, Thm. 1.2], currently arXiv version 1 rather than a peer-reviewed publication. Its proof uses the moment measure of $\nu$, the associated positive symmetric Stein kernel, and an $H^{-1}$ inequality. All consequences below are elementary deductions from the displayed estimate; they should be read with the same preprint caveat.
+The source of [](#thm:letwin-qcts) is [@Letwin2026QuadraticKLS, Thm. 1.2], pinned to arXiv:2607.24164v1. This identifies the preprint version; the statement's badge and proof link separately record its verification here. The proof uses the moment measure of $\nu$, its positive symmetric Stein kernel, congruence, and an $H^{-1}$ inequality (Section [](#subsec:mm-noncommutativity)). The deductions below use this quadratic statement, not source Theorem 1.1 on general KLS.
 :::
 
 :::{prf:corollary} Whitened two-color control and its exact alignment loss

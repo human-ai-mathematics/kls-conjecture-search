@@ -49,8 +49,8 @@ the node that currently instantiates it, so the list stays checkable:
 
 | does not complete the target | instantiated by |
 |---|---|
-| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
-| an implication whose antecedent is open | `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices`, `lem:mm-stopped-window-source`, `prop:mm-window-occupation` — all `proved` with a non-empty `assumes` |
+| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `thm:letwin-kls`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
+| an implication whose antecedent is open | `cor:dichotomy`, `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices` — all `proved` with a non-empty `assumes` |
 | a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
 | a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so $\mathrm{CMH}(4)$ would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
 

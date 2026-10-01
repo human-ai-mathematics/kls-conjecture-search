@@ -120,7 +120,7 @@ Concavity of the isoperimetric profile converts the universal balanced-cut bound
 
 :::{prf:assumption} Stopped centroid estimate
 :label: ass:stopped-centroid
-There exist universal constants $T_0,C$ such that for every isotropic log-concave $\mu$ and every measurable set $E$ with $p_0\in[2/5,3/5]$,
+There exist universal constants $T_0>0$ and $C\ge0$ such that for every isotropic log-concave $\mu$ and every measurable set $E$ with $p_0\in[2/5,3/5]$,
 
 ```{math}
 :label: eq:stopped-centroid

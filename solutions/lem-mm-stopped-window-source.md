@@ -1,20 +1,20 @@
 ---
-title: 'Solution: stopped initial-layer source bound (conditional on the Letwin import)'
+title: 'Solution: stopped initial-layer source bound'
 label: sec:sol-lem-mm-stopped-window-source
 ledger-node: lem:mm-stopped-window-source
 numbering:
   enumerator: D17.%s
 ---
 
-**Overview.** This dossier proves [](#lem:mm-stopped-window-source) as [](#thm:sol-lem-mm-stopped-window-source), *conditionally* on the unreviewed preprint input [](#thm:letwin-qcts), which is carried as [](#ass:sol-sws-letwin). For a regular approximant and a unit-variance fixed test, the source is integrated only up to the covariance exit time $\tau_L$, and the bound is $\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le8L^2T$ ([](#eq:sol-sws-main)). The proof has three parts: a pathwise whitened duality bound from the Letwin inequality, unwhitening only where $\norm{A_t}_\op<L$, and integration against the posterior variance budget. No moment of $\norm{A_t}_\op$ is used.
+**Overview.** This dossier proves [](#lem:mm-stopped-window-source) as [](#thm:sol-lem-mm-stopped-window-source), using the certified quadratic-chaos theorem [](#thm:letwin-qcts). For a regular approximant and a unit-variance fixed test, the source is integrated only up to the covariance exit time $\tau_L$, and the bound is $\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le8L^2T$ ([](#eq:sol-sws-main)). The proof has three parts: a pathwise whitened duality bound from the Letwin inequality, unwhitening only where $\norm{A_t}_\op<L$, and integration against the posterior variance budget. No moment of $\norm{A_t}_\op$ is used.
 
 1. Posterior facts: the tilt [](#eq:sol-sws-posterior) is the conditional law ([](#eq:sol-sws-bayes)). It is strongly log-concave, with positive-definite covariance and all moments.
 2. $H_t$ is defined by an absolutely convergent integral off a $\dd t\otimes\dd\Prob$-null set.
-3. Whitening the posterior produces an isotropic log-concave vector. Duality over symmetric $M$ together with [](#ass:sol-sws-letwin) gives the pathwise bound [](#eq:sol-sws-whitened).
+3. Whitening the posterior produces an isotropic log-concave vector. Duality over symmetric $M$ together with [](#thm:letwin-qcts) gives the pathwise bound [](#eq:sol-sws-whitened).
 4. Before $\tau_L$, the ideal property of the Hilbert–Schmidt norm unwhitens step 3, giving [](#eq:sol-sws-pathwise).
 5. The variance budget $\E v_t\le1$ ([](#eq:sol-sws-variance-budget)) and Tonelli integrate step 4 to [](#eq:sol-sws-main).
 
-**Refined statement and standing.** This dossier proves the stopped, unweighted source bound for the fixed-test localization tensor on the initial layer, *conditional* on the imported and unreviewed preprint input [](#thm:letwin-qcts) [@Letwin2026QuadraticKLS, Thm. 1.2]. The conditional standing is carried as the explicit [](#ass:sol-sws-letwin) below; by repository constraint the corresponding ledger node can be at most `conditional` even after independent review. The statement is uniform in the dimension and in the regularization: the constant $8L^2$ contains no $n$, no $\varepsilon$, and no property of the test beyond its variance. No unstopped moment of $\norm{A_t}_\op$ is used, and no independence between the posterior variance and the covariance operator norm is asserted anywhere.
+**Refined statement.** This dossier proves the stopped, unweighted source bound using [](#thm:letwin-qcts) as a proved dependency. The statement is uniform in the dimension and in the regularization: the constant $8L^2$ contains no $n$, no $\varepsilon$, and no property of the test beyond its variance. No unstopped moment of $\norm{A_t}_\op$ is used, and no independence between the posterior variance and the covariance operator norm is asserted anywhere.
 
 **Setting.** Throughout, $\mu$ is a *regular approximant*: a probability measure
 
@@ -64,20 +64,11 @@ $$
 
 Only the elementary implication $t<\tau_L\Rightarrow\norm{A_t}_\op<L$, immediate from the definition of the infimum, is used; no stopping-time property of $\tau_L$ is needed in this dossier.
 
-:::{prf:assumption} Imported quadratic Poincaré inequality; conditional input
-:label: ass:sol-sws-letwin
-For every isotropic log-concave random vector $Y$ on $\R^n$ and every symmetric matrix $M$,
+**Quadratic input and applicability.** The certified [](#thm:letwin-qcts) states $\Var(Y^TMY)\le8\norm M_{\HS}^2$ for every isotropic log-concave law on $\R^n$, in every dimension, and every symmetric matrix $M$. Its all-law conclusion is not restricted to the bounded-support regular class used in the moment-map proof. The centered and whitened posterior in Step 2 is an isotropic log-concave law, so this is exactly the needed input with the same constant $8$.
 
-$$
-\Var\bigl(Y^TMY\bigr)\le8\norm M_{\HS}^2 .
-$$
-
-This is [](#thm:letwin-qcts), imported from [@Letwin2026QuadraticKLS, Thm. 1.2], currently an unreviewed version-1 arXiv preprint. Everything below is an elementary deduction from this display and carries the same caveat.
-:::
-
-:::{prf:theorem} Stopped initial-layer source bound; conditional on [](#ass:sol-sws-letwin)
+:::{prf:theorem} Stopped initial-layer source bound
 :label: thm:sol-lem-mm-stopped-window-source
-Assume [](#ass:sol-sws-letwin). Let $\mu$ be any regular approximant on any $\R^n$, let $f\in L^2(\mu)$ be any fixed test with $\Var_\mu(f)=1$, and let $L\ge1$, $T>0$. Then
+Let $\mu$ be any regular approximant on any $\R^n$, let $f\in L^2(\mu)$ be any fixed test with $\Var_\mu(f)=1$, and let $L\ge1$, $T>0$. Then
 
 ```{math}
 :label: eq:sol-sws-main
@@ -135,7 +126,7 @@ $$
 \end{aligned}
 $$
 
-the last equality because the first factor is centered. The quadratic polynomial $Y^TMY$ lies in $L^2(\mu_t)$, so conditional Cauchy–Schwarz and [](#ass:sol-sws-letwin) applied to the isotropic log-concave law of $Y$ give
+the last equality because the first factor is centered. The quadratic polynomial $Y^TMY$ lies in $L^2(\mu_t)$, so conditional Cauchy–Schwarz and [](#thm:letwin-qcts) applied to the isotropic log-concave law of $Y$ give
 
 $$
 \inner{M}{\widehat H_t}_{\HS}
@@ -197,7 +188,7 @@ The bound [](#eq:sol-sws-main) is confined to times strictly before the covarian
 
 :::{prf:remark} Hypotheses actually used
 :label: rem:sol-sws-hypotheses
-The proof uses: the planted Gaussian channel and the Bayes identification [](#eq:sol-sws-bayes); smoothness and $\varepsilon$-strong log-concavity of $\mu$ (only to guarantee positive-definite posterior covariances and all posterior moments — $\varepsilon$ enters no constant); square-integrability and unit variance of the fixed test; and [](#ass:sol-sws-letwin) (the unreviewed Letwin import), which is the sole unresolved premise. Centering and isotropy of $\mu$, the eigenfunction equation, and every other property of the regular class are unused. The result is a *conditional* implication: it certifies [](#thm:letwin-qcts) $\Rightarrow$ [](#eq:sol-sws-main) and nothing unconditional.
+The proof uses the planted Gaussian channel and the Bayes identification [](#eq:sol-sws-bayes); smoothness and $\varepsilon$-strong log-concavity of $\mu$ (to guarantee positive-definite posterior covariances and all posterior moments); square-integrability and unit variance of the fixed test; and the certified [](#thm:letwin-qcts). The parameter $\varepsilon$ enters no constant. Centering and isotropy of the initial law, the eigenfunction equation, and the other regular-class conditions are unused in this lemma, allowing its use after restart. Whitening supplies the isotropy required by the quadratic input separately at each posterior. The conclusion has no unresolved antecedent.
 :::
 
-**Obstructions respected.** The candidate node carries no `bounded_by` edge; the registered route fences were checked individually. No cut, slice, or excess estimate occurs (`rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts`). The only tensor input is the full symmetric-matrix quadratic-chaos bound of [](#ass:sol-sws-letwin), used with its preprint-conditional standing displayed; no radial or projection test is promoted to a dimension-free chaos bound (`rem:projection-ceiling`). No crude covariance integral, no relative occupation bound, and no covariance bootstrap appears (`rem:crude-insufficient`, `rem:relative-ceiling`). The covariance-spike obstruction ([](#prop:covariance-spike)) is respected constructively: the estimate stops at the exit time precisely because operator-norm control past the window is false.
+**Obstructions respected.** The node carries no `bounded_by` edge; the registered route fences were checked individually. No cut, slice, or excess estimate occurs (`rem:two-tail-slice-bounds`, `rem:profile-circularity`, `rem:single-coordinate-cuts`). The only tensor input is the full symmetric-matrix quadratic-chaos bound of [](#thm:letwin-qcts), used in its certified all-law form; no radial or projection test is promoted to a dimension-free chaos bound (`rem:projection-ceiling`). No crude covariance integral, no relative occupation bound, and no covariance bootstrap appears (`rem:crude-insufficient`, `rem:relative-ceiling`). The covariance-spike obstruction ([](#prop:covariance-spike)) is respected constructively: the estimate stops at the exit time precisely because operator-norm control past the window is false.

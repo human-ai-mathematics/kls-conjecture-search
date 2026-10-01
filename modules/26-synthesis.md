@@ -6,7 +6,7 @@ numbering:
 (sec:kls-synthesis)=
 # Synthesis: what a proof of KLS now needs
 
-The July 2026 preprints changed the shape of the problem: conditional on [@Letwin2026QuadraticKLS], the remaining difficulty is no longer quadratic forms or third moments, but the promotion of fixed-matrix or averaged information to uniform control of every nonlinear test function (Section [](#sec:kls-remaining)). Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing; this section says what a proof must therefore look like, and names four concrete next targets, each mapped to the labelled statement of this manuscript that carries it, where one exists.
+The July 2026 inputs [](#thm:letwin-moment-map), [](#thm:letwin-qcts), and [](#prop:letwin-kappa) isolate fixed-matrix, quadratic, and directional third-moment estimates. The general bound [](#thm:letwin-kls) combines these inputs with localization and retains a factor $\sqrt{\log n}$ in the Poincaré constant. The difficulty addressed here is their promotion to uniform control of every nonlinear test function (Section [](#sec:kls-remaining)). Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing; this section says what a proof must therefore look like, and names four concrete next targets, each mapped to the labelled statement of this manuscript that carries it, where one exists.
 
 (subsec:synthesis-constraint)=
 ## The constraint any proposal must satisfy
@@ -16,7 +16,7 @@ The covariance spike ([](#prop:covariance-spike), explained in Section [](#subse
 (subsec:synthesis-targets)=
 ## The four concrete next targets
 
-The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4, coupling, has no chapter here yet; and the conditional fibers, whose open estimate is the frame construction of Section [](#sec:conditional-fiber-frame), have no target of their own.
+The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4, coupling, has no chapter here yet; and the conditional fibers, whose frame estimate is [](#conj:conditional-fiber-frame), have no target of their own.
 
 **Target 1 — function-adapted stochastic localization.** For a fixed test function set $M_t(f)=\E_{p_t}f$, so that
 
@@ -72,8 +72,10 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 The order of priority among targets 1, 2 and 3 is the order of the approaches argued in Section [](#subsec:atlas-assessment): target 1 first, because it is the only one that never asks for a uniform top-covariance bound. Target 4 has no approach behind it yet.
 
 (subsec:synthesis-caution)=
-## A caution on the premise
+## Scope of the inputs
 
-Three of the four targets take $\kappa_n=O(1)$ as their starting point, and that input is an unrefereed version-1 preprint (Section [](#subsec:mm-audit)). Should it not survive review, targets 1–3 do not become wrong, but their premise reverts to $\CP\lesssim\log n$ and the arithmetic of every “remaining gap” claim in this section changes. This is why the preprint's result enters only through statements that name it in their own text, such as [](#thm:letwin-qcts) and [](#prop:letwin-kappa), each displaying its own status.
+The starting point for targets 1–3 is the quadratic estimate [](#thm:letwin-qcts) and its directional consequence [](#prop:letwin-kappa). Their source is the pinned version-1 preprint described in Section [](#subsec:mm-audit); the badges on the statements record internal verification separately from that publication history. The Chen–Klartag imports concern the moment Hessian, radial variance, and full third tensor, rather than a dimension-free directional bound or control of arbitrary nonlinear tests.
 
-% Agent note: per SPECIFICATION.md (Imported results), a result of an unrefereed preprint stays `open` in the ledger (thm:letwin-qcts, prop:letwin-kappa) until it has its own dossier and an independent review; statements using it list it in `depends_on` or `assumes`, so the displayed statuses, not this prose, carry the distinction. The former `import_class` field no longer exists.
+The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, orientation control, or an adaptive matrix estimate. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls), and [](#thm:intro-all-cut) retain their Carleson or centroid premises. The source's general KLS theorem, Letwin Theorem 1.1, is [](#thm:letwin-kls). Its minimum-time argument is explained in Section [](#sec:family-moment-map). It gives a dimension-dependent bound for all tests, without extending the covariance window to universal time or supplying gate zero.
+
+% Agent note: source versions describe provenance; badges and proof links carry verification status. Preserve explicit antecedents and dimension-dependent windows when updating this synthesis. Theorem 1.1 has its own proof link; its time-restricted bridge is separate from the matrix, quadratic, and covariance imports.

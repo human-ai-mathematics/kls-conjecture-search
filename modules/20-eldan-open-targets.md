@@ -135,7 +135,7 @@ Taken alone, this clause neither repairs that package nor implies KLS: it needs 
 
 :::{prf:remark} A shared dynamic occupation problem, and a missing geometric bridge
 :label: rem:trace-upgrade-unification
-[](#conj:trace-upgrade) and [](#conj:stein-weighted) (its high-rank, mean-zero part) and the adapted alignment problem [](#conj:product-alignment) all confront a high-rank occupation difficulty, but no equivalence between them is asserted. Analytically, the gap of the all-cut variant is exactly the trace of the occupation operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: [](#cor:per-direction) is the statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically, the proposed Reilly/Jacobi approach aims to control analogous high-rank boundary modes, but [](#conj:almost-stability-gap) records the missing trace bridge; its proposed constant-mode branch is [](#conj:splitting). Combinatorially, summing the per-coordinate budgets of [](#thm:budget) over a product cut is again $\Tr R_0\le n$; this motivates the incident-high residue in [](#conj:product-alignment) but does not identify it with the full trace problem. The product budget argument supplies only the naive trace bound of order $n$, while the dimension-dependent early-window estimate follows separately from covariance moments ([](#thm:V2-window), conditional on the cited preprint at the $c/\log n$ scale). This motivates — but does not prove — an *occupation-density* bound: the source-occupation measure on time$\,\times\,$direction should have bounded density on the early balanced window, so that only $O(1)$ directions are simultaneously active. This is the form in which [](#conj:product-alignment) should be integrated against time.
+[](#conj:trace-upgrade) and [](#conj:stein-weighted) (its high-rank, mean-zero part) and the adapted alignment problem [](#conj:product-alignment) all confront a high-rank occupation difficulty, but no equivalence between them is asserted. Analytically, the gap of the all-cut variant is exactly the trace of the occupation operator $M:=\E\int_0^\infty s_t G_t^2\dd t$: [](#cor:per-direction) is the statement $M\preceq R_0\preceq I$ (the diagonal/quadratic-form level), and the trace target is $\Tr(M)$, whose naive bound $\sum_i(R_0)_{ii}=\Tr R_0\le n$ is the obstruction. Geometrically, the proposed Reilly/Jacobi approach aims to control analogous high-rank boundary modes, but [](#conj:almost-stability-gap) records the missing trace bridge; its proposed constant-mode branch is [](#conj:splitting). Combinatorially, summing the per-coordinate budgets of [](#thm:budget) over a product cut is again $\Tr R_0\le n$; this motivates the incident-high residue in [](#conj:product-alignment) but does not identify it with the full trace problem. The product budget argument supplies only the naive trace bound of order $n$, while the dimension-dependent early-window estimate follows separately from covariance moments ([](#thm:V2-window), at the $c/\log n$ scale). This motivates — but does not prove — an *occupation-density* bound: the source-occupation measure on time$\,\times\,$direction should have bounded density on the early balanced window, so that only $O(1)$ directions are simultaneously active. This is the form in which [](#conj:product-alignment) should be integrated against time.
 :::
 
 :::{prf:conjecture} Extremality tames the covariance process
@@ -155,31 +155,60 @@ The conjectural principle of [](#rem:obata) holds, first as a rigidity theorem a
 
 :::{prf:assumption} Absolute-scale geometric completion
 :label: ass:absolute-geometric-completion
-There exist universal $T_0\in(0,1/8)$ and $\kappa,c_g,\eps_g>0$ such that the following interface implication holds. For any isotropic log-concave measure satisfying $h_\mu\le(1+\eps_g)\hstar_n$ and any balanced near-Cheeger cut $E$, if
+There exist universal constants $T_0\in(0,1/8)$ and $\kappa,c_g,\eps_g,\delta_g>0$ with the following property. Set $\eta=T_0^{1/3}$. For every integer $n\ge2$, every isotropic log-concave probability measure $\mu$ on $\R^n$ satisfying $h_\mu\le(1+\eps_g)\hstar_n$, and every measurable cut $E$ with $\mu(E)=1/2$ and
 
 $$
-\int_0^{T_0}\E\bigl[\bar e_t\one_{\{t<\tau_\eta\}}\bigr]\dd t
-\le T_0e_0+\kappa T_0,
+0\le e_0(E)=\mu^+(E)-I_\mu(1/2)\le\delta_g,
 $$
 
-then the remaining geometric trace and stochastic consumption steps yield $\mu^+(E)\ge c_g$. This is an explicit placeholder for an absolute-scale completion, weaker and logically distinct from [](#ass:weighted-package).
+the supply estimate
+
+$$
+\int_0^{T_0}\E\bigl[\bar e_t(E)\one_{\{t<\tau_\eta\}}\bigr]\dd t
+\le T_0e_0(E)+\kappa T_0
+$$
+
+implies $\mu^+(E)\ge c_g$.
 :::
 
 :::{prf:corollary} Residual dichotomy of the near-worst bootstrap
 :label: cor:dichotomy
-Under [](#ass:absolute-geometric-completion), the published [](#cor:KI-discharged) discharges [](#ass:KI), so by [](#cor:loglog), this supply is available for near-worst measures in every dimension with $\hstar_n\le c\kappa T_0/(1+\log\log n)$, and the resulting contradiction confines any failure of KLS to dimensions with $\hstar_n\ge c'/\log\log n$. Such a completion would therefore already yield
+Under [](#ass:absolute-geometric-completion), there exist constants $a>0$ and an integer $N\ge3$, depending only on its universal constants and those in [](#cor:loglog) and [](#cor:KI-discharged), such that
 
 $$
-\hstar_n\ \ge\ \frac{c'(\kappa)}{\log\log n}
-\qquad\text{for all large }n,
+\hstar_n\ge\frac{a}{1+\log\log n}\qquad(n\ge N).
 $$
 
-an asymptotic improvement over the version-1 preprint bound $\hstar_n\ge c(\log n)^{-1/4}$ [@Letwin2026QuadraticKLS]. Full KLS would additionally follow if [](#conj:taming) supplied its estimate at the same universal time consumed by [](#ass:absolute-geometric-completion) (or if that completion were uniform over the time supplied); the two existential times are not automatically equal.
+In particular, $\hstar_n\ge a/(2\log\log n)$ for all sufficiently large $n$.
 :::
+
+The gain in [](#cor:dichotomy) is conditional on the geometric completion: it would replace the inverse-Cheeger bound $\PsiKLS_n\lesssim(\log n)^{1/4}$ of [](#thm:letwin-kls) by $\PsiKLS_n\lesssim1+\log\log n$ in sufficiently large dimensions. Equivalently, the two-sided Cheeger comparison would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. These are asymptotically smaller bounds, but still allow growth with dimension. The completion supplies the geometric step converting a small accumulated excess into a perimeter lower bound.
 
 :::{prf:proof}
-Choose the numerical constant $c$ in the hypothesis small enough, depending only on the constants in [](#cor:loglog) and on the completed argument. If $\hstar_n\le c\kappa T_0/(1+\log\log n)$, choose $0<\eps\le\min\{\eps_g,T_0^{1/3}\}$ and an isotropic log-concave $\mu$ in dimension $n$ with $h_\mu\le(1+\eps)\hstar_n$ and a balanced near-minimizer $E$ satisfying $\mu^+(E)\le I_\mu(\tfrac12)+o(1)=\tfrac12h_\mu+o(1)$, where the $o(1)$ is along the near-minimizing sequence. [](#cor:loglog) gives the supply $\int_0^{T_0}\E[\bar e_t\one_{t<\tau_\eta}]\dd t\le T_0e_0+\kappa T_0$ after reducing $c$. Running the completed argument on this near-minimizing sequence yields a universal lower bound $\mu^+(E)\ge c''>0$. Letting the near-minimizer error tend to zero gives $h_\mu\ge2c''$, which contradicts $h_\mu\le(1+\eps_g)\hstar_n$ once $n$ is in the asserted small-$\hstar_n$ regime. Hence any failure of KLS must lie in the complementary regime $\hstar_n\gtrsim1/\log\log n$.
+Fix the completion constants and use exactly $\eta=T_0^{1/3}$, with
+$\eps=\tfrac12\min\{1,\eps_g,T_0^{1/3}\}$.
+Choose $N\ge3$ so that the covariance cutoff $t_1(n)=c_0(\log n)^{-2}$ from [](#cor:KI-discharged) is at most $T_0$ and $L_n:=1+\log\log n\ge1$ for all $n\ge N$.
+If $C_L$ is the constant in [](#eq:loglog-supply), set $a=\min\{\kappa T_0/(4C_L),c_g/2\}$.
+Suppose $\hstar_n\le a/L_n$. Its positivity ([](#thm:klartag-logn)) and finiteness allow a near-worst measure with $h_\mu\le(1+\eps)\hstar_n\le2\hstar_n$.
+Choose balanced cuts $E_j$ whose excesses satisfy $0\le e_j<\min\{\delta_g,j^{-1}\}$; this uses the infimum defining $I_\mu(1/2)$, not an exactly minimizing cut.
+For each fixed cut and its own stopping time, [](#cor:loglog) gives
+$$
+\int_0^{T_0}\E[\bar e_t(E_j)\one_{\{t<\tau_\eta(E_j)\}}]\dd t
+\le T_0e_j+C_Lh_\mu(T_0^{4/3}+L_n)
+\le T_0e_j+4C_L\hstar_nL_n
+\le T_0e_j+\kappa T_0.
+$$
+The completion therefore gives $\mu^+(E_j)\ge c_g$ for every $j$.
+Letting only the scalar perimeter values tend to $I_\mu(1/2)=h_\mu/2$ yields $h_\mu\ge2c_g$, whereas $h_\mu\le2a/L_n\le c_g$, a contradiction.
+Finally $L_n\le2\log\log n$ for sufficiently large $n$.
 :::
+
+A dimension-free conclusion needs a further estimate at the completion's *same* time $T_0$. More precisely, let $C_B$ be the constant in [](#eq:clean-form). If some universal $\eps_t>0$ ensures
+$$
+h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)
+\le\frac{\kappa}{C_B}T_0
+$$
+for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)\hstar_n$, then the clean bootstrap supplies the completion's premise. The balanced near-minimizer argument above gives $h_\mu\ge2c_g$ for arbitrarily accurate near-worst measures; taking their near-worst error to zero gives $\hstar_n\ge2c_g$. Monotonicity in [](#lem:whitening) covers dimension one, yielding the Cheeger formulation of [](#conj:kls). In [](#conj:taming), however, the time is chosen after the requested error level. Its existential quantifier does not identify that time with the completion time. The extra estimate displayed here is thus a sufficient condition beyond the implication in [](#cor:dichotomy).
 
 ## Where to start
 
@@ -188,12 +217,14 @@ Choose the numerical constant $c$ in the hypothesis small enough, depending only
 | [](#rem:product-stress-test) | One-dimensional log-concave analysis; explicit variance dynamics | Decides whether the every-interval estimate [](#ass:all-cut-carleson) can hold on products. A proof models the cut-aware argument that [](#conj:trace-upgrade) needs; a counterexample bears on [](#conj:trace-upgrade) only if it also violates the prefix form, and does not favour the near-Cheeger variant. |
 | Replacement for [](#conj:weighted-excess-rate) | A cut-local or tensor-stable covariance scale, plus a near-worst or source-deficit remainder that survives spectator products | A statement replacing the global-operator-norm rate; not yet formulated. |
 | [](#conj:stein-weighted) | Letwin quadratic chaos; a new almost-stability trace lemma; Reilly boundary terms and zero modes; constant mode via [](#conj:splitting) | An analytic ingredient taken from [](#ass:weighted-package); it yields nothing toward KLS until a matching tensor-stable propagation statement is formulated. |
-| [](#conj:taming) | Coupling of splitting structure to the covariance SDE | Absolute-scale bootstrap supply for near-worst measures; with the separate geometric completion in [](#cor:dichotomy), a path to full KLS at the matched time. |
+| [](#conj:taming) | Coupling of splitting structure to the covariance SDE | Absolute-scale bootstrap supply for near-worst measures; full KLS additionally requires the estimate at the completion time with the quantitative threshold displayed above. |
 
 ## Summary
 
-No new bound on $\hstar_n$ comes out of this approach: the bound it uses is Letwin's version-1 bound, and every use of it is marked conditional on that preprint. What does not depend on the preprint: the exact stochastic layer (Sections [](#sec:mass-martingale)–[](#sec:carleson)); the two-color Stein dictionary and the operator-to-trace gap (Section [](#sec:stein-dictionary)); the quadratic-chaos dictionary, the projection-method no-go, and the quantified two-tail configuration (Section [](#sec:qcts)); the published covariance technology (Section [](#sec:covariance-tech)); the consumption audit, the perimeter-martingale and excess identities, and the circularity warning (Section [](#sec:excess)); the bootstrap comparison theorem with its interface evaluation and ceiling (Section [](#sec:bootstrap)); the explicit sufficient model statements for splitting (Section [](#sec:jacobi)); and the model geometries (Section [](#sec:models)). What depends on it: dimension-free quadratic chaos and the $c/\log n$ covariance-moment window.
+The quantitative comparison is between [](#thm:letwin-kls), giving $C_{\mathrm P,n}\lesssim\sqrt{\log n}$, and [](#cor:dichotomy), whose geometric antecedent would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. The latter uses the published covariance window of [](#cor:KI-discharged); it does not need the longer $c/\log n$ window. Letwin's dimension-free quadratic-chaos estimate and the longer covariance window enter through [](#thm:letwin-qcts) and [](#thm:V2-window), respectively.
+
+The fixed-cut analysis separates the stochastic identities (Sections [](#sec:mass-martingale)–[](#sec:carleson)), the Stein dictionary and its operator-to-trace gap (Section [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Section [](#sec:excess)). The near-worst bootstrap in Section [](#sec:bootstrap) connects these quantities to the covariance estimates of Section [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Sections [](#sec:jacobi) and [](#sec:models).
 
 The all-cut estimate ([](#ass:all-cut-carleson)) and the absolute-scale completion ([](#ass:absolute-geometric-completion)) are hypotheses, and are stated as such. The spectator products of [](#prop:weighted-spectator-obstruction) violate the literal weighted package ([](#ass:weighted-package)) and [](#conj:weighted-excess-rate); the unweighted spectator products of [](#prop:spectator-excess-rate-obstruction) separately rule out the package's uniform superlinear remainder. The conditional implication from that package to KLS ([](#thm:intro-weighted)) is kept so that a reader can see what the package would have given. The problems this approach turns on are [](#conj:trace-upgrade), the trace and bootstrap statements [](#conj:stein-weighted)–[](#conj:splitting), and the formulation of a tensor-stable replacement.
 
-The picture rests on three structural points: unweighted excess propagation is true as consumed and therefore inert; static two-tail calibration alone does not produce a tensor-stable weight or a viable uniform remainder; and the available near-worst propagation mechanism is compressed into the single scalar interface $h_\mu\,\Xi_T$, evaluated to within a $\log\log n$ factor of what the approach requires.
+The picture rests on three structural points: the consumption audit [](#prop:intro-audit) identifies an unweighted excess term that can be absorbed into the existing $O(T)$ allowance; static two-tail calibration alone does not produce a tensor-stable weight or a viable uniform remainder; and the available near-worst propagation mechanism is compressed into the single scalar interface $h_\mu\,\Xi_T$, evaluated to within a $\log\log n$ factor of what the approach requires.

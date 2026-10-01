@@ -16,31 +16,35 @@ This section gives the argument for [](#thm:intro-all-cut).
 :::
 
 :::{prf:proof}
-By the regularity convention, local martingales may be localized and then limits taken. Define
+First establish finiteness without using the Carleson premise. Summing [](#cor:per-direction) over the fixed coordinate vectors and applying Tonelli gives
 
 $$
-\widetilde u(t)=\E r_{t\wedge\tau}.
+\E\int_0^\infty S_t\dd t\le\Tr R_0\le n.
 $$
 
-Integrating [](#eq:scalar-riccati) from $a\wedge\tau$ to $b\wedge\tau$ and taking expectations,
+Put $\widetilde u(T)=\E r_{T\wedge\tau}$. Localize [](#eq:scalar-riccati) at increasing times that also bound $r$, the martingale, and the accumulated source and damping. At each localized horizon the martingale has zero expectation. Remove these auxiliary stops using continuity and Fatou for the nonnegative terminal and damping terms, and monotone convergence for the source. Since $B_0\preceq I$ has rank at most one, this yields
 
 $$
-\widetilde u(b)-\widetilde u(a)
-=\E\int_{[a,b]\cap[0,\tau]}(S_t-D_t)\dd t .
+\widetilde u(T)+\E\int_0^{T\wedge\tau}D_t\dd t
+\le r_0+\E\int_0^{T\wedge\tau}S_t\dd t\le1+n.
 $$
 
-Use [](#ass:all-cut-carleson) on $I=[a,b]$ and discard the nonnegative damping part $(1-\alpha)\E\int D_t\dd t$:
+Thus $\widetilde u$ is measurable and locally integrable, and Tonelli gives
+$\E\int_0^{T\wedge\tau}r_t\dd t\le\int_0^T\widetilde u(t)\dd t<\infty$.
+The dimension-dependent budget is used only for finiteness.
+
+Now apply [](#ass:all-cut-carleson) to each deterministic prefix $I=[0,T]$, after the auxiliary stops have been removed. All terms are finite, so absorption gives
 
 $$
-\widetilde u(b)-\widetilde u(a)
-\le C_0(b-a)+C_1\int_a^b\widetilde u(t)\dd t .
+\widetilde u(T)+(1-\alpha)\E\int_0^{T\wedge\tau}D_t\dd t
+\le1+C_0T+C_1\int_0^T\widetilde u(t)\dd t.
 $$
 
-At time zero, $B_0\preceq A_0=I$ and $B_0$ has rank one, so $r_0\le1$. Gronwall's inequality gives
+Discarding the nonnegative damping term and applying integral Gronwall gives the dimension-free bound
 
 $$
-\widetilde u(t)\le (1+C_0t)e^{C_1t}\le C_*,
-\qquad 0\le t\le T_0 .
+\widetilde u(t)\le(1+C_0t)e^{C_1t}\le C_*:=(1+C_0T_0)e^{C_1T_0},
+\qquad 0\le t\le T_0.
 $$
 
 On $\{t<\tau\}$, $s_t\ge2/9$, hence
@@ -73,7 +77,9 @@ Then the conclusion of [](#lem:survival-implies-kls) holds for $(\mu,E)$, with t
 :::
 
 :::{prf:proof}
-Write $\widetilde u(T)=\E r_{T\wedge\tau_\eta}$. Integrating the scalar Riccati identity [](#eq:scalar-riccati) to $T\wedge\tau_\eta$ gives $\widetilde u(T)=r_0+\E\int_0^{T\wedge\tau_\eta}(S_t-D_t)\dd t$. With [](#eq:tight-carleson), $r_0\le1$ (rank-one $B_0\preceq A_0=I$), and discarding $(1-\alpha)\E\int D_t\dd t\ge0$,
+Write $\widetilde u(T)=\E r_{T\wedge\tau_\eta}$. The same coordinate source budget and localization–Fatou argument, with $\tau_\eta$ in place of $\tau$, give
+$\widetilde u(T)+\E\int_0^{T\wedge\tau_\eta}D_t\dd t\le r_0+\E\int_0^{T\wedge\tau_\eta}S_t\dd t\le1+n$.
+Thus all occupation terms are finite before [](#eq:tight-carleson) is used on deterministic prefixes. With $r_0\le1$ (rank at most one and $B_0\preceq I$), discard $(1-\alpha)\E\int D_t\dd t\ge0$ to obtain
 
 $$
 \widetilde u(T)\le 1+C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
@@ -217,7 +223,7 @@ This shows that no pointwise pathwise improvement is possible in general: the re
 
 ## A non-alignment formulation
 
-The whitened posterior $Y=A_t^{-1/2}(X-a_t)$ has covariance $I$ on the support. A hypothetical quadratic-chaos estimate for $Y$ controls the intrinsic quantity
+The whitened posterior $Y=A_t^{-1/2}(X-a_t)$ has covariance $I$ on the support. The quadratic-chaos input [](#thm:letwin-qcts), applied as in [](#cor:qcts-source), controls the intrinsic quantity
 
 $$
 s_t\Tr(\WH_t^2),
@@ -256,5 +262,5 @@ C t^{\eps-1}\left(1+\E[\one_{\{t<\tau_\eta\}}r_t]\right)
 for some universal $\eps>0$. Unlike an $A_t$-weighted estimate such as $\Tr(K_tA_tK_t)$, [](#eq:interpolated-source) directly controls the Euclidean source $S_t$ and therefore integrates to the Carleson estimate near zero. This is a sharp stochastic formulation of the non-alignment problem.
 
 :::{prf:remark} Relation with logarithmic-scale results
-The projection/thin-shell technology and covariance-tail estimates of Guan type explain the earlier logarithmic losses [@Klartag2023Logarithmic; @Guan2025Tail]. Letwin's version-1 preprint now removes the intrinsic quadratic-chaos loss and gives the whitened source bound of [](#cor:qcts-source), but unwhitening still weights the source by $\lmax(A_t)^2$. The KLS-strength improvement would be precisely the replacement of that dynamic spectral-alignment loss by [](#eq:interpolated-source) or by the geometric Stein-trace package of Sections [](#sec:stein)–[](#sec:excess). This paragraph is orientation only; the conditional proof of [](#thm:carleson-implies-centroid) uses [](#ass:all-cut-carleson) directly.
+The projection/thin-shell technology and covariance-tail estimates of Guan type explain the earlier logarithmic losses [@Klartag2023Logarithmic; @Guan2025Tail]. The quadratic estimate [](#thm:letwin-qcts), from Letwin's version-1 preprint, gives the whitened source bound of [](#cor:qcts-source), but unwhitening still weights the source by $\lmax(A_t)^2$. The KLS-strength improvement would be precisely the replacement of that dynamic spectral-alignment loss by [](#eq:interpolated-source) or by the geometric Stein-trace package of Sections [](#sec:stein)–[](#sec:excess). This paragraph is orientation only; the conditional proof of [](#thm:carleson-implies-centroid) uses [](#ass:all-cut-carleson) directly.
 :::

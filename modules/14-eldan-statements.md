@@ -22,7 +22,7 @@ $$
 \text{KLS}.
 $$
 
-The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes ([](#cor:tight-window-consumption)); [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) derives it from the literal package of the near-Cheeger variant, whose propagation clause fails on the product witnesses of [](#prop:weighted-spectator-obstruction). A counterexample to any of these hypotheses would not refute KLS.
+The survival-to-boundary step is [](#lem:survival-implies-kls). To obtain survival, [](#thm:carleson-implies-centroid) converts the all-cut Carleson premise into stopped centroid control, and [](#thm:centroid-implies-kls) uses the mass martingale. The weaker deterministic-prefix premise [](#ass:tight-prefix-carleson) is the input consumed by [](#cor:tight-window-consumption); [](#thm:intro-all-cut) records the consequence of the stronger all-cut formulation. The separate weighted implication is formulated in [](#thm:intro-weighted), with the product witnesses of [](#prop:weighted-spectator-obstruction) testing its propagation premise. None of these implications supplies its own Carleson or centroid hypothesis, and a counterexample to such a hypothesis would not refute KLS.
 
 **What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Section [](#sec:riccati)), the Stein dictionary (Section [](#sec:stein-dictionary)), and the covariance technology (Section [](#sec:covariance-tech)). Each statement below displays its own standing.
 
@@ -112,7 +112,7 @@ Let $\tau$ be the coarse balanced exit time [](#eq:tau-coarse), the first time a
 
 :::{prf:assumption} All-cut absorptive two-color Carleson estimate
 :label: ass:all-cut-carleson
-There exist universal constants $T_0,C_0,C_1$ and $\alpha<1$ such that for every isotropic log-concave $\mu$, every balanced measurable set $E$, and every interval $I\subset[0,T_0]$,
+There exist universal constants $T_0>0$, $C_0,C_1\ge0$ and $\alpha<1$ such that for every isotropic log-concave $\mu$, every balanced measurable set $E$, and every interval $I\subset[0,T_0]$,
 
 ```{math}
 :label: eq:all-cut-carleson
@@ -150,7 +150,7 @@ The literal package consumed by the conditional theorem [](#thm:intro-weighted) 
 
 :::{prf:assumption} Literal weighted near-Cheeger package
 :label: ass:weighted-package
-There are universal constants $T_0,C_0,C_1,C_2$, $0\le\beta<\tfrac12$, $\gamma>0$, and $\eta\in(0,\tfrac14]$ satisfying
+There are universal constants $T_0>0$, $C_0,C_1,C_2\ge0$, $0\le\beta<\tfrac12$, $\gamma>0$, and $\eta\in(0,\tfrac14]$ satisfying
 
 ```{math}
 :label: eq:weighted-absorption-margin

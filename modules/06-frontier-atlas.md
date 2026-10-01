@@ -47,7 +47,7 @@ The table above says what each approach *tries*; this one says where each has go
 
 | Approach | What it gives | What blocks it |
 |---|---|---|
-| Fixed eigenfunction | The exact fixed-function equation, and the occupation estimate on the published polylogarithmic covariance window ([](#prop:mm-window-occupation)) | The same estimate for a *universal* time, [](#conj:mm-spectral-occupation) |
+| Fixed eigenfunction | The exact fixed-function equation and the stopped source estimate [](#lem:mm-stopped-window-source); the small-gap implication [](#prop:mm-window-occupation) has an empty admissible class | Source occupation on a universal time interval, [](#conj:mm-spectral-occupation) |
 | Moment map | The target inequality given precise operator data ([](#def:cmh)) and compared with the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)); exact values on the line, on products and on every log-concave Dirichlet law; the linear sector resolved into a directional third moment ([](#lem:linear-sector-third-moment)), with the exponential cones as its first non-product equality set | Constructing the proof: the invariant multiplier lift ([](#conj:mm-invariant-lift)) — how a multiplier defined on one block of a Schur split acts on the whole space — and the global square-root commutator ([](#conj:mm-square-root-commutator)). Testing it: gate zero ([](#conj:gate-zero), sharp form [](#conj:gate-zero-sharp)) and the second variation at the product ([](#conj:cmh-second-variation)) |
 | Fixed cut | The bootstrap comparison and its interface functional ([](#thm:bootstrap)), the insufficiency of the crude evaluation ([](#rem:crude-insufficient)) and the ceiling [](#prop:ceiling); the coordinate budgets of the product stress test (Section [](#sec:product-stress)) | For the all-cut variant, the operator-to-trace upgrade [](#conj:trace-upgrade); for the near-Cheeger variant, a tensor-stable replacement for the weighted package that [](#prop:weighted-spectator-obstruction) rules out |
 | Conditional fibers | The resampling form, closed and compared with the gradient ([](#lem:conditional-fiber-form)); the natural simplex frame ruled out ([](#prop:conditional-fiber-root-obstruction)) | A universal form gap, [](#conj:conditional-fiber-frame), or a decision on the all-frame simplex dual, whose certificates must have degree at least three ([](#lem:fiber-root-degree-two)) |
@@ -59,7 +59,7 @@ Negative results are the most reusable part of a search, and four of them constr
 
 - **No uniform operator-norm covariance bound.** [](#prop:covariance-spike): the statement a direct “bound $\norm{A_t}_\op$ better” program would need is false, for a measure that satisfies KLS (Section [](#subsec:kls-spike-obstruction)).
 
-- **The global weighted package fails.** [](#prop:weighted-spectator-obstruction) rules out the global operator-norm covariance weight of the near-Cheeger variant of the fixed cut; its status is displayed at [](#conj:weighted-excess-rate).
+- **Independent spectators and global covariance weights.** [](#prop:weighted-spectator-obstruction) supplies the product-cylinder witnesses relevant to [](#ass:weighted-package) and [](#conj:weighted-excess-rate).
 
 - **No matrix-moment argument supplies gate zero.** Gate zero is the moment-Hessian inequality tested on linear functions only, the cheapest test any proof of it must pass. [](#prop:letwin-not-gate-zero): the fixed-matrix estimate does not supply it, so the moment-map approach relocates the average-versus-uniform difficulty rather than escaping it.
 

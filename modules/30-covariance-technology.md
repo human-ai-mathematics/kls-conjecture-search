@@ -13,7 +13,7 @@ Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter 
 \Xi^{(2)}_T(\mu)=\int_0^T\E X_t^2\dd t .
 ```
 
-The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance technology. The exponent $C_2=2$ follows from the published sup-time estimate below; the sharper $C_2=1$ conclusion is conditional on the July 2026 version-1 preprint input.
+The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance technology. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
 
 :::{prf:assumption} Known small-time operator-norm control; matched to {[@KlartagLehec2022Polylog; @Letwin2026QuadraticKLS]}
 :label: ass:KI
@@ -41,9 +41,9 @@ $$
 There is a universal constant $C$ such that every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\hstar_n\ge C^{-1}(\log n)^{-1/2}$; by Cheeger's inequality, every such law has $\CP\le C\log n$.
 :::
 
-This published frontier enters the fixed-eigenfunction approach only as an external branch-splitting input (Section [](#subsec:spectral-window-chain)); no statement below sharpens it.
+This published bound makes the small-gap branch in Section [](#subsec:spectral-window-chain) empty. The separate argument for [](#thm:letwin-kls) sharpens the dimension dependence without using this bound; no covariance statement below by itself gives a universal time window.
 
-The newer parallel-coupling preprint contains rank-sensitive information that is stronger than an operator-norm window but still cut-free. We record it for reference; nothing below depends on it.
+The newer parallel-coupling preprint contains rank-sensitive information that is stronger than an operator-norm window but still cut-free. The integrated rank estimate below uses the stopped rank estimate; the subsequent third-moment and covariance-window arguments use separate inputs.
 
 :::{prf:theorem} Stopped rank tails; [@KlartagLehec2025ThinShell]
 :label: thm:kl-stopped-rank-tail
@@ -73,7 +73,7 @@ $$
 $$
 :::
 
-Both results are imported from version 2 of an unreviewed preprint. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#conj:trace-upgrade), [](#conj:mm-spectral-occupation), or the high-rank part of [](#conj:stein-weighted).
+Both statements refer to the pinned version 2 of [@KlartagLehec2025ThinShell]; their badges carry the verification information for each import. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#conj:trace-upgrade), [](#conj:mm-spectral-occupation), or the high-rank part of [](#conj:stein-weighted).
 
 :::{prf:proposition} Letwin's third-moment bound
 :label: prop:letwin-kappa
@@ -105,7 +105,7 @@ Cauchy–Schwarz and [](#thm:letwin-qcts) therefore imply $\norm M_{\HS}^4\le8\n
 
 :::{prf:corollary} The quadratic-chaos covariance window
 :label: cor:letwin-window
-For every fixed $p\ge1$ there are universal constants $c,C_p>0$ such that, for every isotropic log-concave initial measure and
+For every fixed $p\ge1$ there are universal constants $c,C_p>0$ such that, for every isotropic log-concave initial measure on $\R^n$, $n\ge2$, and
 
 $$
 0\le t\le \frac{c}{\log n},
@@ -115,7 +115,7 @@ $$
 :::
 
 :::{prf:proof}
-Klartag–Lehec [@KlartagLehec2022Polylog, Cor. 5.4] prove the displayed moment bound on $t\le(C\kappa_n^2\log n)^{-1}$. Apply [](#prop:letwin-kappa).
+Klartag–Lehec [@KlartagLehec2022Polylog, Cor. 5.4] give the fixed-time moment bound on $t\le(C\kappa_n^2\log n)^{-1}$. Substituting [](#prop:letwin-kappa), using [](#thm:letwin-qcts), gives the stated window. The time constant is independent of $p$, while $C_p$ may depend on it. To remove the source's smooth-density convention, smooth and isotropically normalize the initial law. At each fixed positive time the Gaussian likelihood makes its tilted moments continuous under this approximation; coupling the Gaussian observations gives posterior covariance convergence, and Fatou transfers the moment bound. At $t=0$, $A_0=I$. This passage concerns fixed-time moments and makes no assertion about a time supremum.
 :::
 
 :::{prf:remark} Attribution and the 2026 window upgrade
@@ -134,7 +134,7 @@ For $t\le c/\log^2n$, split according to $\norm{A_t}_\op<2$ and use [](#thm:KL-w
 
 :::{prf:corollary} Letwin-v1 sharpening of the covariance window
 :label: cor:KI-letwin
-Conditional on the preprint input of [](#thm:letwin-qcts), [](#ass:KI) holds with $C_2=1$: there is a universal constant $c_0$ such that for every isotropic log-concave $\mu$ and every $t\le c_0(\log n)^{-1}$,
+Conditional on the preprint input of [](#thm:letwin-qcts), [](#ass:KI) holds with $C_2=1$: there is a universal constant $c_0>0$ such that for every isotropic log-concave $\mu$ on $\R^n$, $n\ge3$, and every $0\le t\le c_0(\log n)^{-1}$,
 
 $$
 \E\,\norm{A_t}_\op\ \le\ C_1 .

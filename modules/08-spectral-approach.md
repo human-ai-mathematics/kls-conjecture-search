@@ -23,15 +23,15 @@ In words: as localization proceeds, the eigenfunction feeds a *source* into its 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.
 
-**What it uses.** From the literature, and load-bearing: the sharp quadratic/third-moment input $\kappa_n=O(1)$ ([](#thm:letwin-qcts)), taken from an *unreviewed version-1 preprint*; and the published polylogarithmic covariance window. Developed here: the exact fixed-function SDE and the posterior-defect calculus ([](#lem:mm-posterior-defect)).
+**What it uses.** From the literature, and load-bearing: the quadratic input [](#thm:letwin-qcts) and its directional third-moment consequence [](#prop:letwin-kappa), from the pinned version-1 preprint; and the published polylogarithmic covariance window. Developed here: the exact fixed-function SDE and the posterior-defect calculus ([](#lem:mm-posterior-defect)).
 
-**What it gives.** The initial-layer window chain, [](#prop:mm-window-occupation): conditional on the same preprint input, the occupation estimate *does* hold on the published polylogarithmic window. The approach therefore meets its difficulty only in the gap between a polylogarithmic time and a universal one, which is a sharper statement of the difficulty than the one it started from. The supporting chain is the time-weighted fixed source, the stopped window source, and restart de-weighting ([](#lem:mm-time-weighted-fixed-source), [](#lem:mm-stopped-window-source), [](#lem:mm-restart-deweighting)).
+**What it gives.** The stopped source estimate [](#lem:mm-stopped-window-source) controls the accumulated source before a covariance exit, using [](#thm:letwin-qcts). Together with the time-weighted source and restart estimates, it describes how a post-exit charge could be bounded. The occupation implication [](#prop:mm-window-occupation) has an empty small-gap range under its stated published input; Section [](#subsec:spectral-window-chain) explains this limitation.
 
-**What blocks it.** [](#conj:mm-spectral-occupation) at a *universal* time: the full-damping source estimate, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The whole difficulty is the word universal; the polylogarithmic window is the content of [](#prop:mm-window-occupation).
+**What blocks it.** [](#conj:mm-spectral-occupation) asks for the full-damping source estimate on a universal time interval, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The stopped estimate alone does not control the source after covariance exits.
 
 **What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
-**What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$ (Section [](#subsec:synthesis-caution)).
+**What would settle it.** [](#conj:mm-spectral-occupation) gives KLS through [](#prop:spectral-sufficiency); a family of measures on which unwhitening necessarily loses alignment would test the limits of this mechanism. The stopped-source argument uses [](#thm:letwin-qcts); Section [](#subsec:synthesis-caution) describes the scope of that input.
 
 **Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — this approach shares it entirely with the fixed cut and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
 
@@ -70,7 +70,7 @@ So $\norm{H_t}_{\HS}^2$ is the *source* for $\abs{g_t}^2$ and $2g_t^TA_tg_t$ is 
 (subsec:spectral-whitened)=
 ## What the July 2026 input gives, and what it leaves
 
-Conditional on the version-1 preprint of [](#thm:letwin-qcts), the eigenfunction tensor satisfies the optimal *intrinsic* static estimate in whitened coordinates,
+By [](#thm:letwin-qcts), the eigenfunction tensor satisfies the optimal *intrinsic* static estimate in whitened coordinates,
 
 ```{math}
 :label: eq:whitened-tensor
@@ -214,14 +214,16 @@ In particular, for $\kappa=0$, $\E\int_0^\infty t\norm{H_t}_{\HS}^2\dd t\le\Var_
 (subsec:spectral-window-chain)=
 ## The initial-layer window chain
 
-The following four statements assemble the initial layer of [](#conj:mm-spectral-occupation) completely up to the published covariance window. The first and last are conditional on the quadratic-Poincaré input [](#thm:letwin-qcts), taken from an unreviewed preprint; that conditionality is part of the statements.
+The next statements separate control before a covariance exit from the cost of restarting afterwards. The stopped source uses [](#thm:letwin-qcts) without an additional premise. The small-gap hypothesis in the last two statements, however, is incompatible with the bound defining $K_n$: $\lambda=1/\CP(\mu)\ge1/K_n>3/(8K_n)$. Thus those implications do not supply an initial time interval on which [](#conj:mm-spectral-occupation) holds for an admissible measure.
 
 % Agent note: isolated in the 2026-08-30 initial-layer probe.
 
-:::{prf:lemma} Stopped initial-layer source bound; conditional on [](#thm:letwin-qcts)
+:::{prf:lemma} Stopped initial-layer source bound
 :label: lem:mm-stopped-window-source
 For every regular approximant, every fixed unit-variance test $f$, every $L\ge1$ and $T>0$, let $\tau_L=\inf\{t:\norm{A_t}_\op\ge L\}$. Then $\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le 8L^2T$, uniformly in the dimension and in the regularization.
 :::
+
+The mechanism is quadratic duality at each posterior. Center and whiten the posterior, pair its source tensor with a fixed symmetric matrix, and apply [](#thm:letwin-qcts) followed by Cauchy–Schwarz. Hilbert–Schmidt duality gives [](#eq:whitened-tensor). Returning to the original coordinates costs at most $\norm{A_t}_{\op}^2$, hence at most $L^2$ before the exit. Finally, total variance gives $\E\Var_{\mu_t}(f)\le1$; integrating yields $8L^2T$. This argument needs a fixed square-integrable test, not its eigenfunction equation.
 
 :::{prf:lemma} Restart deweighting at a stopping time
 :label: lem:mm-restart-deweighting
@@ -240,19 +242,19 @@ by conditional application of [](#lem:mm-time-weighted-fixed-source) with $\kapp
 Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-concave law in dimension $n$ satisfies $\CP\le K_n$. Then every normalized first eigenfunction of a regular isotropic approximant with $\lambda\le 3/(8K_n)$ satisfies $\E f^4\le2$, via the eigen-identity $\lambda\,\E f^4=3\,\E f^2\abs{\nabla f}^2$ and the Poincaré inequality applied to $f^2$.
 :::
 
-:::{prf:proposition} Window occupation and frontier reproduction; conditional on [](#thm:letwin-qcts)
+:::{prf:proposition} Window occupation and frontier reproduction
 :label: prop:mm-window-occupation
-With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
+With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$.
 :::
 
-[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through the fixed-eigenfunction machinery without improving it, and it does not decide [](#conj:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
+The scope of [](#prop:mm-window-occupation) is limited further by its gap hypothesis. Since [](#thm:klartag-logn) gives $C_P(\mu)\le K_n$, every first nonconstant eigenvalue satisfies $\lambda\ge1/K_n>3/(8K_n)$. Its small-gap occupation implication therefore has no admissible measure with this choice of $K_n$. The stopped estimate [](#lem:mm-stopped-window-source) applies without that restriction. The reproduced $C\log^2 n$ bound is weaker than the published input, and supplies no nonempty case of [](#conj:mm-spectral-occupation).
 
 % Agent note: the saturation profile was found in the 2026-08-30 initial-layer probe.
 
 (subsec:spectral-kappa-form)=
 ## An equivalent sufficient reformulation
 
-There is a second, coarser way to state what this approach needs. By [](#prop:letwin-kappa), $\kappa_n\le2\sqrt2$ conditional on the preprint. Hence *any* dimension-free comparison of the form
+There is a second, coarser way to state what this approach needs. Combining [](#prop:letwin-kappa) with its quadratic input [](#thm:letwin-qcts) gives $\kappa_n\le2\sqrt2$. Hence *any* dimension-free comparison of the form
 
 ```{math}
 :label: eq:spectral-kappa-sufficient

@@ -73,7 +73,7 @@ Immediate from [](#thm:budget) with $k=1$; the occupation bound is Markov's ineq
 (sec:covariance-reduction)=
 ## Theorem C: the covariance reduction and its general quadratic-chaos input
 
-For cuts of unbounded complexity the block structure is unavailable. Product structure gives an elementary pathwise quadratic-chaos bound at every time. [](#thm:letwin-qcts) now gives the same intrinsic input for every log-concave posterior, conditional on its version-1 preprint status; the unwhitening loss remains exactly the cut-free covariance factor.
+For cuts of unbounded complexity the block structure is unavailable. Product structure gives an elementary pathwise quadratic-chaos bound at every time. For general log-concave posteriors, the corresponding input is [](#thm:letwin-qcts), used through [](#cor:qcts-source). The general-measure implications below retain that explicit antecedent; the unwhitening loss remains the cut-free covariance factor.
 
 :::{prf:lemma} Quadratic chaos for non-isotropic products
 :label: lem:product-qcts
@@ -140,7 +140,7 @@ The required covariance input is the fixed-time operator-norm moment control of 
 
 :::{prf:theorem} Letwin-enhanced second-moment interface window
 :label: thm:V2-window
-Conditional on [](#thm:letwin-qcts), there are universal constants $c_0,K_0$ such that for every isotropic log-concave $\mu$ on $\R^n$ and every $t\le t_1(n):=c_0(\log n)^{-1}$,
+Conditional on [](#thm:letwin-qcts), there are universal constants $c_0,K_0>0$ such that for every isotropic log-concave $\mu$ on $\R^n$, $n\ge2$, and every $0\le t\le t_1(n):=c_0(\log n)^{-1}$,
 
 $$
 \E\,X_t^2\ \le\ K_0 ,
@@ -154,7 +154,7 @@ Consequently, conditional on the preprint, [](#cor:V2-implies) gives the inequal
 
 ### The natural endpoint and the remaining universal-time gap
 
-The fixed-time moment window between $c/\log^2n$ and $c/\log n$ is covered by the combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen the distinct published *sup-over-time* statement of [](#thm:KL-window). The scale $1/\log n$ is also the natural endpoint for covariance-only control, that is, the largest time scale such control can reach: the explicit product of centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order $1/\log n$ [@KLnotes, Remarks 62, 64 and Prop. 65]. Thus the remaining gap for $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal alignment must replace covariance-only control.
+The fixed-time moment window between $c/\log^2n$ and $c/\log n$ is the consequence recorded in [](#thm:V2-window), with its explicit quadratic-chaos input. This does not silently strengthen the distinct published *sup-over-time* statement of [](#thm:KL-window). The scale $1/\log n$ is also the natural endpoint for covariance-only control, that is, the largest time scale such control can reach: the explicit product of centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order $1/\log n$ [@KLnotes, Remarks 62, 64 and Prop. 65]. Thus the remaining gap for $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal alignment must replace covariance-only control.
 
 :::{prf:remark} Heuristic — Expected failure of (V2) on universal windows for exponential products
 :label: rem:v2-fails
