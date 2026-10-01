@@ -10,7 +10,7 @@ numbering:
 
 **What it buys.** Every general improvement of the KLS bound since 2012 has come from this construction. It replaces the needle dichotomy of Section [](#sec:family-needles) — “one dimension, no covariance” — by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of controlling it only in law.
 
-This section fixes the process and the three identities used by the two stochastic approaches of Part III, Approaches E and S. This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
+This section fixes the process and the three identities used by the two stochastic-localization approaches of this manuscript, Approaches E and S. This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
 
 (subsec:sl-process)=
 ## The process
@@ -177,6 +177,6 @@ The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution o
 
 **The precise missing estimate.** Control of $\lmax(A_t)$ along the whole path at a universal time, without paying the $\log n$ of [](#eq:logtraceexp).
 
-**Why it stalls.** By [](#prop:covariance-spike), the naive strengthening — a uniform pathwise bound on $\norm{A_t}_\op$ — is false, even for measures that satisfy KLS. So the missing estimate cannot be obtained by sharpening the covariance bound; it has to come from a potential that recognizes when a covariance spike is harmless. Products of centered exponentials are the canonical instance of a harmless spike, which is why they recur as the stress test throughout Part III (Sections [](#sec:models) and [](#sec:product-stress)).
+**Why it stalls.** By [](#prop:covariance-spike), the naive strengthening — a uniform pathwise bound on $\norm{A_t}_\op$ — is false, even for measures that satisfy KLS. So the missing estimate cannot be obtained by sharpening the covariance bound; it has to come from a potential that recognizes when a covariance spike is harmless. Products of centered exponentials are the canonical instance of a harmless spike, which is why they recur as the stress test throughout Approaches E and S (Sections [](#sec:models) and [](#sec:product-stress)).
 
-**Where this family enters the four approaches.** It is the engine of both approaches of Part III, which differ only in what they refuse to average away. Approach E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Approach S (Section [](#sec:spectral-approach)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.
+**Where this family enters the four approaches.** It is the engine of both stochastic-localization approaches, which differ only in what they refuse to average away. Approach E (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance; Approach S (Section [](#sec:spectral-approach)) keeps one fixed eigenfunction and its covariance tensor. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the appendices.

@@ -8,7 +8,7 @@ numbering:
 
 ## The approach at a glance
 
-Each approach in Parts III and IV opens with the same short summary — the idea, how it would give KLS, what it uses, what it gives, what blocks it, what rules out its obvious variants, and what would settle it — so that the approaches can be compared without reading any of them in full. Section [](#sec:frontier-atlas) sets the four side by side.
+Each of the four approaches opens with the same short summary — the idea, how it would give KLS, what it uses, what it gives, what blocks it, what rules out its obvious variants, and what would settle it — so that the approaches can be compared without reading any of them in full. Section [](#sec:frontier-atlas) sets the four side by side.
 
 **The idea.** Follow one *fixed* would-be bottleneck cut $E$ under stochastic localization, and show that it cannot be identified too quickly.
 

@@ -6,7 +6,7 @@ numbering:
 (sec:frontier-atlas)=
 # The frontier at a glance
 
-This section is the shortest complete answer to the questions a reader is most likely to arrive with: what is being tried, what has actually been established, what blocks each attempt, which natural variants are already dead, and which attempt currently looks best aligned with what is known. It is deliberately placed before any approach is developed. Everything in it is a pointer; the statements themselves live in Parts III and IV, each with its status displayed next to its title, and the detailed synthesis that revisits them after the approaches have been read is Section [](#sec:kls-synthesis).
+This section is the shortest complete answer to the questions a reader is most likely to arrive with: what is being tried, what has actually been established, what blocks each attempt, which natural variants are already dead, and which attempt currently looks best aligned with what is known. It is deliberately placed before any approach is developed. Everything in it is a pointer; the statements themselves live in the sections that develop the four approaches, each with its status displayed next to its title, and the detailed synthesis that revisits them after the approaches have been read is Section [](#sec:kls-synthesis).
 
 (subsec:kls-reading-map)=
 ## The five families, side by side
@@ -26,7 +26,7 @@ Sections [](#sec:family-needles)–[](#sec:family-transport) above survey the fi
 (subsec:atlas-approaches)=
 ## The four approaches, side by side
 
-Parts III and IV are this manuscript's own work. Each approach, named by a letter (Approach E, S, C or F), is a response to Section [](#sec:kls-remaining), and each is reduced to an exactly stated estimate that is not settled here.
+The four approaches are this manuscript's own work. Each, named by a letter (Approach E, S, C or F), is a response to Section [](#sec:kls-remaining), and each is reduced to an exactly stated estimate that is not settled here.
 
 % Agent note: each approach is tracked in research/program/portfolio.yaml by ids carrying its letter; the portfolio is search state and carries no truth value.
 
@@ -74,6 +74,6 @@ Two further cautions are advisory rather than established: the two-tail obstruct
 
 Of the four approaches, Approach S is the one best aligned with the known obstruction: it is the only one that avoids asking for a uniform top-covariance statement, and by Section [](#subsec:kls-spike-obstruction) such a statement is false for tensorized exponentials. That is a structural argument for its priority, not a preference.
 
-Approach C is conceptually deeper and may ultimately be cleaner, since its endpoint is a single inequality with no stochastic apparatus at all — but the work of Part IV shows its difficulty concentrating in a commutator sum, [](#conj:mm-square-root-commutator), for which no dimension-free control is known. Approach E is the most narrowly technical and the most clearly delimited, and it is the one on which this manuscript establishes the most, including the negative results. Approach F is the youngest; its natural implementation fails ([](#prop:conditional-fiber-root-obstruction)), and what remains is a single question, [](#conj:conditional-fiber-frame), rather than a programme.
+Approach C is conceptually deeper and may ultimately be cleaner, since its endpoint is a single inequality with no stochastic apparatus at all — but the work on it here shows its difficulty concentrating in a commutator sum, [](#conj:mm-square-root-commutator), for which no dimension-free control is known. Approach E is the most narrowly technical and the most clearly delimited, and it is the one on which this manuscript establishes the most, including the negative results. Approach F is the youngest; its natural implementation fails ([](#prop:conditional-fiber-root-obstruction)), and what remains is a single question, [](#conj:conditional-fiber-frame), rather than a programme.
 
 One caution belongs beside all four. Three of the four targets of Section [](#sec:kls-synthesis) take $\kappa_n=O(1)$ as their starting point, and that input is an unreviewed version-1 preprint. Should it not survive review, the targets do not become wrong, but their premise reverts to $\CP\lesssim\log n$ and the arithmetic of every “remaining gap” claim changes. This is why the preprint's result enters only through statements such as [](#prop:letwin-kappa) that display their own status, and why no statement proved here rests on it.

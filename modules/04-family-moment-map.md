@@ -273,7 +273,7 @@ Letwin's paper is an arXiv version-1 preprint of 27 July 2026, not a peer-review
 
 The preprint's appendix addresses each of (a)–(c). Point (d) is a concatenation of Klartag's variance-transfer result with a precise short-time covariance estimate, and is the step this manuscript re-derives for its own use in Section [](#sec:covariance-tech).
 
-Accordingly, throughout Part III this result is described as the best *current* bound and Klartag's as the best *published* bound. The statements that import it, [](#thm:letwin-moment-map), [](#thm:letwin-qcts) and [](#prop:letwin-kappa), each display their own status, and no statement proved here rests on a statement that is not settled here. The same distinction between the preprint and the published record is drawn elsewhere in the literature; see [@Zhang2026HitAndRun], whose bibliographic metadata has not been independently verified.
+Accordingly, throughout this manuscript this result is described as the best *current* bound and Klartag's as the best *published* bound. The statements that import it, [](#thm:letwin-moment-map), [](#thm:letwin-qcts) and [](#prop:letwin-kappa), each display their own status, and no statement proved here rests on a statement that is not settled here. The same distinction between the preprint and the published record is drawn elsewhere in the literature; see [@Zhang2026HitAndRun], whose bibliographic metadata has not been independently verified.
 
 **The precise missing estimate.** Control of $\E\inner{\tau_\mu(X)\nabla f(X)}{\nabla f(X)}$ for an arbitrary $f$, in place of $\E\Tr(BHBH)$ for a constant matrix $B$.
 

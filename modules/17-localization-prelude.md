@@ -19,7 +19,7 @@ One runs a measure-valued process $p_t$, started at $\mu$, in which the density 
 
 (2) **The measure is preserved on average.** $p_t$ is a martingale in the measure: $\E p_t=\mu$ for every $t$. Nothing is lost by running the process; the information is redistributed, not destroyed. This is what makes step (3) legitimate.
 
-(3) **The covariance moves, and can move badly.** The conditional covariance $A_t=\Cov(p_t)$ obeys its own SDE, [](#eq:cov-sde), whose drift is not sign-definite. This is the only place a cost is incurred, and the whole of Part III is about paying it.
+(3) **The covariance moves, and can move badly.** The conditional covariance $A_t=\Cov(p_t)$ obeys its own SDE, [](#eq:cov-sde), whose drift is not sign-definite. This is the only place a cost is incurred, and the whole of Approaches E and S is about paying it.
 
 (subsec:prelude-transfer)=
 ## Transferring an isoperimetric statement back
@@ -35,7 +35,7 @@ Approach S changes one object and nothing else: it follows $M_t(f)=\E_{p_t}f$ fo
 (subsec:prelude-riccati)=
 ## Source against damping: how to read the Riccati equation
 
-Everything technical in Part III is a contest between two terms, and it is worth naming them before meeting them. Along the process, the scalar quantity the argument actually tracks obeys an equation of the form
+Everything technical in Approaches E and S is a contest between two terms, and it is worth naming them before meeting them. Along the process, the scalar quantity the argument actually tracks obeys an equation of the form
 
 $$
 \dd r_t=\dd M_t+(S_t-D_t)\dd t ,
@@ -43,18 +43,18 @@ $$
 
 a martingale increment plus a drift split into exactly one positive *source* $S_t$ and one coercive *damping* $D_t$. This is [](#thm:scalar-riccati); the matrix identity behind it is [](#lem:matrix-riccati), and both are derived in Appendix [](#sec:riccati).
 
-The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Appendix [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every fixed-cut argument in Part III is, in the end, an attempt to absorb the source into the damping for long enough.
+The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Appendix [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every fixed-cut argument in Approaches E and S is, in the end, an attempt to absorb the source into the damping for long enough.
 
 The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Appendix [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Section [](#sec:open) is Approach E's version of it.
 
 (subsec:prelude-warning)=
 ## The warning that constrains both approaches
 
-One thing must be carried into Part III from Section [](#sec:kls-remaining), because it rules out the argument a reader is most likely to try to construct.
+One thing must be carried into Approaches E and S from Section [](#sec:kls-remaining), because it rules out the argument a reader is most likely to try to construct.
 
 > *There is no uniform bound on $\norm{A_t}_\op$ along the path, even for measures that satisfy KLS.* [](#prop:covariance-spike) exhibits the counterexample, and it is a product of centered exponentials — a measure that is dimension-free by tensorization.
 
-So an argument may not simply bound the covariance better. It must either follow an object that notices when a spike is harmless — Approach E follows one cut, Approach S one eigenfunction, and both retain structure that $\norm{A_t}_\op$ has thrown away — or leave the method entirely, which is what Approaches C and F do in Part IV. The covariance technology of Appendix [](#sec:covariance-tech) is correspondingly a *small-time* theory: it controls the covariance for a short while, not forever, and Approaches E and S are built to need only that.
+So an argument may not simply bound the covariance better. It must either follow an object that notices when a spike is harmless — Approach E follows one cut, Approach S one eigenfunction, and both retain structure that $\norm{A_t}_\op$ has thrown away — or leave the method entirely, which is what Approaches C and F do. The covariance technology of Appendix [](#sec:covariance-tech) is correspondingly a *small-time* theory: it controls the covariance for a short while, not forever, and Approaches E and S are built to need only that.
 
 Product measures are the standing stress test for exactly this reason, and Appendix [](#sec:models) collects them alongside the Gaussian model, where the covariance is deterministic, damping is active and the excess vanishes identically. The two models bracket the problem: whatever a proposal does, it must be right on both.
 
