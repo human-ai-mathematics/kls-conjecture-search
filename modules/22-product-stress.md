@@ -39,7 +39,7 @@ $$
 $$
 :::
 
-*Proof.* The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate ([](#cor:per-direction)) can be applied one direction at a time and summed. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
+*Proof.* The pathwise product structure confines $G_t$ to the $J\times J$ block, so the source splits coordinatewise and the per-direction Carleson estimate ([](#cor:per-direction)) can be applied one direction at a time and summed. The calculation is carried out in Appendix [](#sec:appendix-fixed-cut).
 
 :::{prf:corollary} Fixed single-coordinate cuts: bounded source and self-extinguishing two-tail spikes
 :label: cor:single-coordinate-cuts
@@ -87,7 +87,7 @@ Let $\nu=\bigotimes_i\nu^{(i)}$ be a product of centered one-dimensional log-con
 with $C_*$ universal.
 :::
 
-*Proof.* Expand the quadratic form and use independence and centering to kill every cross-covariance, leaving a diagonal and an off-diagonal sum. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
+*Proof.* Expand the quadratic form and use independence and centering to kill every cross-covariance, leaving a diagonal and an off-diagonal sum. The calculation is carried out in Appendix [](#sec:appendix-fixed-cut).
 
 [](#lem:product-qcts) remains a preprint-independent proof of the input on product paths. For general log-concave posteriors it is replaced by [](#cor:qcts-source).
 
@@ -150,7 +150,7 @@ $$
 Consequently, conditional on the preprint, [](#cor:V2-implies) gives the inequality [](#eq:all-cut-carleson), measure by measure, for every initial log-concave $\mu$ (including products) on this dimension-dependent window. For products the implication (V2)$\Rightarrow$[](#eq:all-cut-carleson) is preprint-independent, but the present $c/\log n$ verification of (V2) still uses the preprint. None of this establishes [](#ass:all-cut-carleson), whose time window must be universal in $n$. Without the preprint, [](#thm:KL-window) verifies (V2) for every measure on $[0,c_0(\log n)^{-2}]$; the all-cut conclusion then follows preprint-independently for products via the product case of [](#cor:V2-implies). For non-product measures that implication still uses [](#thm:letwin-qcts).
 :::
 
-*Proof.* On the short window the second-moment covariance bound is pointwise and integrates directly; the preprint-independent fallback instead splits on $\{\norm{A_t}_\op<2\}$ and pays the Brascamp–Lieb cap on the small complement. The calculation is carried out in Appendix [](#sec:appendix-approach-e).
+*Proof.* On the short window the second-moment covariance bound is pointwise and integrates directly; the preprint-independent fallback instead splits on $\{\norm{A_t}_\op<2\}$ and pays the Brascamp–Lieb cap on the small complement. The calculation is carried out in Appendix [](#sec:appendix-fixed-cut).
 
 ### The natural endpoint and the remaining universal-time gap
 

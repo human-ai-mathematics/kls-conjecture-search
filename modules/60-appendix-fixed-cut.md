@@ -3,7 +3,7 @@ numbering:
   enumerator: "60.%s"
 ---
 
-(sec:appendix-approach-e)=
+(sec:appendix-fixed-cut)=
 # Product stress-test and bootstrap calculations
 
 The long computations of the fixed-cut approach. Their statements, what each one contributes, and a summary of how each proof goes are Sections [](#sec:product-stress) and [](#sec:bootstrap); nothing is decided here that is not decided there.

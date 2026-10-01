@@ -127,7 +127,7 @@ project:
             - file: modules/11-mass-martingale.md
             - file: modules/13-stein-dictionary.md
             - file: modules/26-jacobi-splitting.md
-            - file: modules/60-appendix-approach-e.md
+            - file: modules/60-appendix-fixed-cut.md
         - title: Conditional fibers
           children:
             - file: modules/45-conditional-fiber-frame.md
