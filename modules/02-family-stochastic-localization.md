@@ -10,7 +10,7 @@ numbering:
 
 **What it buys.** Every general improvement of the KLS bound since 2012 has come from this construction. It replaces the needle dichotomy of Section [](#sec:family-needles) — “one dimension, no covariance” — by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of controlling it only in law.
 
-This section fixes the process and the three identities used by the two stochastic-localization approaches of this manuscript, Approaches E and S. This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
+This section fixes the process and the three identities used by the two stochastic-localization approaches of this manuscript, the fixed cut and the fixed eigenfunction (Approaches E and S). This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
 
 (subsec:sl-process)=
 ## The process

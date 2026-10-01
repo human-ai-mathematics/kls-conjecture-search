@@ -56,7 +56,7 @@ This is the stopped centroid estimate. Combining it with [](#eq:qv-p) and Doob's
 
 The same Gronwall mechanism will be reused in Section [](#subsec:consumption) in a slightly generalized form: any estimate of the shape $\E\int\calS_{\mu_t}(E)/s_t\le C_0T+C_1\E\int r_t+\beta\E\int D_t+\mathfrak E(T)$ with an error functional $\mathfrak E(T)\le C_3T$ feeds into the same consumption chain.
 
-The near-Cheeger variant Eldan–B consumes its Carleson estimate on the tight window $\tau_\eta$ rather than the coarse window $\tau$. The following records, once, that the consumption of [](#thm:carleson-implies-centroid) and [](#lem:survival-implies-kls) go through verbatim on $\tau_\eta$, with constants depending only on the fixed (universal) $\eta$.
+The near-Cheeger variant E–B consumes its Carleson estimate on the tight window $\tau_\eta$ rather than the coarse window $\tau$. The following records, once, that the consumption of [](#thm:carleson-implies-centroid) and [](#lem:survival-implies-kls) go through verbatim on $\tau_\eta$, with constants depending only on the fixed (universal) $\eta$.
 
 :::{prf:corollary} Tight-window consumption
 :label: cor:tight-window-consumption

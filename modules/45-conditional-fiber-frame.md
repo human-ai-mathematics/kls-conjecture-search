@@ -32,9 +32,9 @@ where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [
 
 % Agent note: this is the objective of ap:f-simplex-dual in research/program/portfolio.yaml.
 
-**How to read it.** Self-contained: this approach uses none of the localization apparatus and no moment-map machinery. The one external dependency is the sharp one-dimensional Poincaré inequality. Read Section [](#subsec:fiber-root-failure) for the root-frame obstruction, which is the shortest complete argument among Approaches C and F.
+**How to read it.** Self-contained: this approach uses none of the localization apparatus and no moment-map machinery. The one external dependency is the sharp one-dimensional Poincaré inequality. Read Section [](#subsec:fiber-root-failure) for the root-frame obstruction, which is the shortest complete argument among the moment-map and conditional-fiber approaches.
 
-This approach asks whether one can choose a single isotropic frame of directions, depending on the measure but not on the test function, so that normalized conditional line resampling has a dimension-free spectral gap. It gives a sufficient condition rather than a reformulation of KLS. Its normalization is designed so that linear functions have exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality compares the form from above with the usual gradient form.
+The construction is as follows.
 
 Let $\mu$ be a full-dimensional probability on $\R^d$ with finite second moment. For $\theta\in S^{d-1}$, disintegrate along the affine lines parallel to $\theta$:
 

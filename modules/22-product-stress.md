@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:product-stress)=
-# Product stress test of the all-cut Carleson estimate (Eldan–A)
+# Product stress test of the all-cut Carleson estimate (variant E–A)
 
 This section carries out [](#rem:product-stress-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#rem:product-stress-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
 
@@ -128,7 +128,7 @@ $\E\int_{I\cap[0,\tau]}S_t\dd t\le C\int_I(1+\E X_t^2)\dd t\le C(1+K)\abs I$ by 
 :::
 
 :::{prf:remark}
-This is the precise sense in which the product model isolates the covariance content of Eldan–A: a cut-free second-moment bound suffices. Note the consistency with the discipline warning of [](#eq:trivial-lambda): (V2) concerns the *excess* $X=(\lmax-1)_+$ in square, not $\E\int\lmax\le CT$ for all measures (which would already imply KLS and is not available); for products, (V2) is not circular — KLS for products is known independently — it is a concrete, decidable question about explicit one-dimensional SDEs. The next section decides it on the dimension-dependent early window and assesses it beyond.
+This is the precise sense in which the product model isolates the covariance content of variant E–A: a cut-free second-moment bound suffices. Note the consistency with the discipline warning of [](#eq:trivial-lambda): (V2) concerns the *excess* $X=(\lmax-1)_+$ in square, not $\E\int\lmax\le CT$ for all measures (which would already imply KLS and is not available); for products, (V2) is not circular — KLS for products is known independently — it is a concrete, decidable question about explicit one-dimensional SDEs. The next section decides it on the dimension-dependent early window and assesses it beyond.
 :::
 
 (sec:window)=
@@ -154,7 +154,7 @@ Consequently, conditional on the preprint, [](#cor:V2-implies) gives the inequal
 
 ### The natural endpoint and the remaining universal-time gap
 
-The fixed-time moment window between $c/\log^2n$ and $c/\log n$ is covered by the combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen the distinct published *sup-over-time* statement of [](#thm:KL-window). The scale $1/\log n$ is also the natural endpoint for covariance-only control: the explicit product of centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order $1/\log n$ [@KLnotes, Remarks 62, 64 and Prop. 65]. Thus the remaining gap for $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal alignment must replace covariance-only control.
+The fixed-time moment window between $c/\log^2n$ and $c/\log n$ is covered by the combination above, conditional on Letwin's version-1 preprint. This does not silently strengthen the distinct published *sup-over-time* statement of [](#thm:KL-window). The scale $1/\log n$ is also the natural endpoint for covariance-only control, that is, the largest time scale such control can reach: the explicit product of centered one-sided exponentials has an eigenvalue that can reach order $\log n$ at times of order $1/\log n$ [@KLnotes, Remarks 62, 64 and Prop. 65]. Thus the remaining gap for $\Xi_T^{(2)}$ is no longer an intermediate polylogarithmic interval; it is the passage from the sharp dimension-dependent early window to a universal time, precisely where cut-aware temporal alignment must replace covariance-only control.
 
 :::{prf:remark} Heuristic — Expected failure of (V2) on universal windows for exponential products
 :label: rem:v2-fails

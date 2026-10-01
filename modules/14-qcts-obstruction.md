@@ -6,7 +6,7 @@ numbering:
 (sec:qcts)=
 # The static quadratic-chaos input and the two-tail obstruction
 
-The time-zero version of two-color covariance control is already a strong statement. A July 2026 preprint of Letwin now proves this intrinsic quadratic-chaos estimate with a universal constant [@Letwin2026QuadraticKLS]. This removes the static quadratic-chaos question from the frontier, but it does not remove the covariance-alignment problem created by unwhitening a localized posterior. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of Eldan–B and marks the boundary of what slice-wise verification can establish for Eldan–A.
+The time-zero version of two-color covariance control is already a strong statement. A July 2026 preprint of Letwin now proves this intrinsic quadratic-chaos estimate with a universal constant [@Letwin2026QuadraticKLS]. This removes the static quadratic-chaos question from the frontier, but it does not remove the covariance-alignment problem created by unwhitening a localized posterior. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of variant E–B and marks the boundary of what slice-wise verification can establish for variant E–A.
 
 Let $X\sim\nu$ be isotropic and log-concave, and put
 
@@ -220,7 +220,7 @@ A proof of KLS through this approach still cannot rely only on radial informatio
 
 ## The quantified two-tail obstruction and the weight calibration
 
-The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction consumed in covariance-weighted form by Eldan–B (Section [](#sec:stein)) and the configuration whose dynamical occupation Eldan–A must control (Section [](#sec:carleson)).
+The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction consumed in covariance-weighted form by variant E–B (Section [](#sec:stein)) and the configuration whose dynamical occupation variant E–A must control (Section [](#sec:carleson)).
 
 :::{prf:proposition} Quantified two-tail configuration
 :label: prop:two-tail

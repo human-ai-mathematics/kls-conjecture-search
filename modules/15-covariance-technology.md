@@ -6,7 +6,7 @@ numbering:
 (sec:covariance-tech)=
 # Covariance technology: small-time operator-norm control
 
-Both Eldan subroutes meter the danger of localization through the same cut-free covariance functional. Recall from [](#eq:interface-def) the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
+Both variants of the fixed cut, E–A and E–B, meter the danger of localization through the same cut-free covariance functional. Recall from [](#eq:interface-def) the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
 
 ```{math}
 :label: eq:Xi2-def
@@ -25,7 +25,7 @@ $$
 $$
 :::
 
-This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's lectures. The older argument through the then-known Cheeger bound supplied $C_2=2$. Letwin's dimension-free quadratic Poincaré inequality ([](#thm:letwin-qcts)) instead bounds the third-moment parameter $\kappa_n$ universally; inserted into the precise Klartag–Lehec moment window, it gives $C_2=1$. The standard two-sided-exponential product example suggests that $1/\log n$ is the natural endpoint for covariance-only control.
+This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's lectures. The older argument through the then-known Cheeger bound supplied $C_2=2$. Letwin's dimension-free quadratic Poincaré inequality ([](#thm:letwin-qcts)) instead bounds the third-moment parameter $\kappa_n$ universally; inserted into the precise Klartag–Lehec moment window, it gives $C_2=1$. The standard two-sided-exponential product example suggests that $1/\log n$ is the natural endpoint for covariance-only control: the largest time scale it can reach, since the top covariance eigenvalue of that product reaches order $\log n$ at times of order $1/\log n$.
 
 :::{prf:theorem} Klartag–Lehec; the sup-over-time form is [@KLnotes, Thm. 61]
 :label: thm:KL-window
@@ -41,7 +41,7 @@ $$
 There is a universal constant $C$ such that every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\hstar_n\ge C^{-1}(\log n)^{-1/2}$; by Cheeger's inequality, every such law has $\CP\le C\log n$.
 :::
 
-This published frontier enters the spectral approach only as an external branch-splitting input (Section [](#subsec:spectral-window-chain)); no statement below sharpens it.
+This published frontier enters the fixed-eigenfunction approach only as an external branch-splitting input (Section [](#subsec:spectral-window-chain)); no statement below sharpens it.
 
 The newer parallel-coupling preprint contains rank-sensitive information that is stronger than an operator-norm window but still cut-free. We record it for reference; nothing below depends on it.
 

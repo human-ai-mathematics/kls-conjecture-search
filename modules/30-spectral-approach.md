@@ -18,7 +18,7 @@ $$
 \text{KLS}.
 $$
 
-The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#conj:mm-spectral-occupation) does.
+In words: as localization proceeds, the eigenfunction feeds a *source* into its covariance with the coordinates and the covariance of the localized measure *damps* it. The *occupation* is the source accumulated over time, $\E\int_0^t\norm{H_s}_{\HS}^2\dd s$, and *full damping* means that the estimate may charge it against the whole damping term, with coefficient one, rather than against a fraction of it as the fixed cut must. The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#conj:mm-spectral-occupation) does.
 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.
@@ -31,13 +31,13 @@ The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly
 
 **What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
-**What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
+**What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$ (Section [](#subsec:synthesis-caution)).
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — this approach shares it entirely with the fixed cut (Approach E) and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
 
 **The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
 
-This approach attacks the spectral object that *defines* KLS directly, and it retains the tensor/covariance orientation that a global operator-norm bound discards — the property Section [](#subsec:kls-spike-obstruction) showed to be necessary. It shares the localization backbone of Section [](#sec:localization-prelude) with Approach E and differs only in the object it tracks.
+This approach attacks directly the spectral object that *defines* KLS, and keeps the tensor orientation that a global operator-norm bound discards (see *What rules out the obvious variants* above).
 
 % Agent note: the approach is live, secondary. Its entry points are the approaches of
 % research/program/portfolio.yaml; each approach's `objective` states what closing it delivers.
@@ -193,7 +193,7 @@ $$
 the left side is at least $1/2$ at $t=T_*$. Posterior Brascamp–Lieb and the fixed-test tower property bound it above by $T_*^{-1}\E\abs{\nabla f}^2=\lambda/T_*$, so the first eigenvalue satisfies $\lambda\ge T_*/2$. Smooth strongly convex approximants, whitening, and passage of the uniform Poincaré inequality on fixed smooth tests give the same bound for every isotropic log-concave law, without convergence of eigenfunctions. The full domain and approximation argument is in the full proof linked from the statement.
 :::
 
-The endpoint structure of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color setting of Approach E.
+The form of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color setting of Approach E.
 
 :::{prf:lemma} Time-weighted fixed-function source budget
 :label: lem:mm-time-weighted-fixed-source
@@ -266,7 +266,7 @@ valid for every isotropic log-concave $\mu$ would prove KLS. Equivalently: it su
 
 (subsec:spectral-hminus1-endpoint)=
 
-A natural first lemma for this approach is an $H^{-1}$ residual bound. It is worth recording why it is not one: it is itself of KLS strength, although it looks like a preliminary step.
+A natural first lemma for this approach is an $H^{-1}$ residual bound. It is worth recording why it is not one: it is an *endpoint* rather than a step — a statement of the same strength as KLS, usable as a final target but not as a preliminary lemma, although it looks like one.
 
 % Agent note: reclassified by the cycle-1 audit.
 
