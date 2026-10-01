@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "25.%s"
+  enumerator: "26.%s"
 ---
 
 (sec:kls-synthesis)=
@@ -15,6 +15,8 @@ The covariance spike ([](#prop:covariance-spike), explained in Section [](#subse
 
 (subsec:synthesis-targets)=
 ## The four concrete next targets
+
+The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4, coupling, has no chapter here yet; and the conditional fibers, whose open estimate is the frame construction of Section [](#sec:conditional-fiber-frame), have no target of their own.
 
 **Target 1 — function-adapted stochastic localization.** For a fixed test function set $M_t(f)=\E_{p_t}f$, so that
 
@@ -67,7 +69,7 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 (subsec:synthesis-assessment)=
 ## Which target first
 
-Targets 1, 2 and 3 are the perspectives of the fixed eigenfunction, the moment map and the fixed cut respectively, and their order of priority is the order of the approaches argued in Section [](#subsec:atlas-assessment): target 1 first, because it is the only one that never asks for a uniform top-covariance bound. Target 4 has no approach behind it yet.
+The order of priority among targets 1, 2 and 3 is the order of the approaches argued in Section [](#subsec:atlas-assessment): target 1 first, because it is the only one that never asks for a uniform top-covariance bound. Target 4 has no approach behind it yet.
 
 (subsec:synthesis-caution)=
 ## A caution on the premise

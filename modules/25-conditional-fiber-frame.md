@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "24.%s"
+  enumerator: "25.%s"
 ---
 
 (sec:conditional-fiber-frame)=

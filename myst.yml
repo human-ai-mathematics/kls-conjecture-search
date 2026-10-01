@@ -114,34 +114,35 @@ project:
             - file: modules/09-moment-map-cmh.md
             - file: modules/10-cmh-normalization.md
             - file: modules/11-cmh-exact-cases.md
-            - file: modules/12-appendix-moment-map.md
+            - file: modules/12-moment-map-construction.md
+            - file: modules/13-appendix-moment-map.md
         - title: Fixed cut
           children:
-            - file: modules/13-eldan-statements.md
-            - file: modules/14-carleson.md
-            - file: modules/15-product-stress.md
-            - file: modules/16-stein-route.md
-            - file: modules/17-excess-propagation.md
-            - file: modules/18-bootstrap.md
-            - file: modules/19-eldan-open-targets.md
-            - file: modules/20-mass-martingale.md
-            - file: modules/21-stein-dictionary.md
-            - file: modules/22-jacobi-splitting.md
-            - file: modules/23-appendix-fixed-cut.md
+            - file: modules/14-eldan-statements.md
+            - file: modules/15-carleson.md
+            - file: modules/16-product-stress.md
+            - file: modules/17-stein-route.md
+            - file: modules/18-excess-propagation.md
+            - file: modules/19-bootstrap.md
+            - file: modules/20-eldan-open-targets.md
+            - file: modules/21-mass-martingale.md
+            - file: modules/22-stein-dictionary.md
+            - file: modules/23-jacobi-splitting.md
+            - file: modules/24-appendix-fixed-cut.md
         - title: Conditional fibers
           children:
-            - file: modules/24-conditional-fiber-frame.md
+            - file: modules/25-conditional-fiber-frame.md
     - title: Synthesis and perspectives
       children:
-        - file: modules/25-synthesis.md
+        - file: modules/26-synthesis.md
         - file: modules/glossary.md
     - title: Shared technical foundations
       children:
-        - file: modules/26-notation.md
-        - file: modules/27-riccati.md
-        - file: modules/28-qcts-obstruction.md
-        - file: modules/29-covariance-technology.md
-        - file: modules/30-model-geometries.md
+        - file: modules/27-notation.md
+        - file: modules/28-riccati.md
+        - file: modules/29-qcts-obstruction.md
+        - file: modules/30-covariance-technology.md
+        - file: modules/31-model-geometries.md
     - title: Full proofs
       children:
         - pattern: '{proofs,solutions/*}.md'

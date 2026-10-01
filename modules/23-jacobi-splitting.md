@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "22.%s"
+  enumerator: "23.%s"
 ---
 
 (sec:jacobi)=

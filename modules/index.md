@@ -8,16 +8,16 @@ numbering: false
 
 The Kannan–Lovász–Simonovits (KLS) conjecture, [](#conj:kls), asks whether every isotropic log-concave measure satisfies a Poincaré inequality with a constant independent of the dimension — equivalently, whether convex bodies have no bottlenecks beyond those a hyperplane already sees. The best published bound grows like $\log n$, and the question is a central open problem of high-dimensional convex geometry.
 
-## What this manuscript contributes
+(sec:reading-paths)=
+## Where to start
 
-- An inequality for the Hessian of the moment map, the canonical moment-Hessian constant of [](#def:cmh), which by [](#thm:cmh-implies-affine-poincare) bounds the affine Poincaré constant with no loss.
-- Exact values of that constant on the line ([](#thm:cmh-1d)), on products ([](#thm:cmh-product)) and on every log-concave Dirichlet law ([](#thm:cmh-dirichlet)), the first non-product family, with the Poincaré consequence [](#cor:cmh-dirichlet-poincare).
-- An identity, [](#lem:linear-sector-third-moment), reducing the linear test of that inequality to a third-moment tensor, and a countermodel, [](#prop:letwin-not-gate-zero), saying that matrix inequalities over fixed matrices cannot supply it.
-- A reduction of KLS to an occupation estimate for one eigenfunction followed through stochastic localization, [](#prop:spectral-sufficiency).
-- A reduction of KLS to a spectral gap for resampling along conditional lines, [](#lem:conditional-fiber-form), and an obstruction for the most natural frame of lines on the simplex, [](#prop:conditional-fiber-root-obstruction).
-- For the oldest localization argument, which follows one cut: a bootstrap, [](#thm:bootstrap), its ceiling, [](#prop:ceiling), and a product counterexample to a natural weighted estimate, [](#prop:weighted-spectator-obstruction).
+Three ways in, depending on what you came for:
 
-The overview explains each with the idea of its proof (Section [](#sec:overview-results)).
+- **Discover.** The overview, Section [](#sec:overview), then the comparison of approaches, Section [](#sec:frontier-atlas).
+- **Read the results.** The four entry chapters listed below, each opening with the same summary, then the synthesis, Section [](#sec:kls-synthesis).
+- **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
+
+After the overview come *the literature*, one chapter per family of methods; *the four approaches*, opened by their comparison and a prelude on stochastic localization; *synthesis and perspectives*; and *shared technical foundations*, best read where first linked. The full proofs come last.
 
 ## The four approaches
 
@@ -30,14 +30,16 @@ Each approach responds to the same obstacle, explained in Section [](#sec:kls-re
 
 Section [](#sec:frontier-atlas) compares them side by side: what each gives, and what blocks it.
 
-(sec:reading-paths)=
-## How the manuscript is organised
+## What this manuscript contributes
 
-After the overview come *the literature*, one chapter per family of methods; *the four approaches*, opened by their comparison and a prelude on stochastic localization; *synthesis and perspectives*; and *shared technical foundations*, best read where first linked. The full proofs come last. Three paths:
+- An inequality for the Hessian of the moment map, the canonical moment-Hessian constant of [](#def:cmh), which by [](#thm:cmh-implies-affine-poincare) bounds the affine Poincaré constant with no loss.
+- Exact values of that constant on the line ([](#thm:cmh-1d)), on products ([](#thm:cmh-product)) and on every log-concave Dirichlet law ([](#thm:cmh-dirichlet)), the first non-product family, with the Poincaré consequence [](#cor:cmh-dirichlet-poincare).
+- An identity, [](#lem:linear-sector-third-moment), reducing the linear test of that inequality to a third-moment tensor, and a countermodel, [](#prop:letwin-not-gate-zero), saying that matrix inequalities over fixed matrices cannot supply it.
+- A reduction of KLS to an occupation estimate for one eigenfunction followed through stochastic localization, [](#prop:spectral-sufficiency).
+- A reduction of KLS to a spectral gap for resampling along conditional lines, [](#lem:conditional-fiber-form), and an obstruction for the most natural frame of lines on the simplex, [](#prop:conditional-fiber-root-obstruction).
+- For the oldest localization argument, which follows one cut: a bootstrap, [](#thm:bootstrap), its ceiling, [](#prop:ceiling), and a product counterexample to a natural weighted estimate, [](#prop:weighted-spectator-obstruction).
 
-- **Discover.** The overview, Section [](#sec:overview), then the comparison of approaches, Section [](#sec:frontier-atlas).
-- **Read the results.** The four entry chapters above, each opening with the same summary, then the synthesis, Section [](#sec:kls-synthesis).
-- **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
+The overview explains each with the idea of its proof (Section [](#sec:overview-results)).
 
 (sec:overview-checking)=
 ## How results are checked, and how to contribute

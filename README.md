@@ -1,5 +1,7 @@
 # The Kannan–Lovász–Simonovits frontier
 
+**[Read the manuscript](https://numina-functional-inequalities.github.io/kls-conjecture-search/)**: the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md)); the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
+
 A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the
 dimension-free Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic
 log-concave measure — together with the harness of a **sustained conjecture search** on it:

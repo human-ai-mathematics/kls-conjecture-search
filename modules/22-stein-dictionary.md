@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "21.%s"
+  enumerator: "22.%s"
 ---
 
 (sec:stein-dictionary)=
