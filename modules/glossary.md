@@ -20,7 +20,7 @@ Two-colour notation
 : The two-colour covariance and its bookkeeping, which separate the contribution of the cut being followed from that of everything else, so that a source term can be told from a damping term. Fixed in Section [](#subsec:two-color-notation), used throughout Approaches E and S.
 
 Stein source and damping
-: In the scalar Riccati equation $\dd r_t=\dd M_t+(S_t-D_t)\dd t$ of [](#thm:scalar-riccati), $S_t$ is the only positive source and $D_t$ the coercive damping. “Absorbing the source into the damping” is what every fixed-cut argument is trying to do; Appendix [](#sec:stein-dictionary) gives the Stein representation of the source.
+: In the scalar Riccati equation $\dd r_t=\dd M_t+(S_t-D_t)\dd t$ of [](#thm:scalar-riccati), $S_t$ is the only positive source and $D_t$ the coercive damping. “Absorbing the source into the damping” is what every fixed-cut argument is trying to do; Section [](#sec:stein-dictionary) gives the Stein representation of the source.
 
 Interface functional
 : The bridge object $\Xi_T(\mu)$ of the bootstrap comparison, defined at [](#eq:interface-def) and evaluated in Section [](#sec:bootstrap). It is this manuscript's version of “replace $\log$-trace-exp by an effective rank”; why the crude evaluation cannot suffice is [](#rem:insufficiency).

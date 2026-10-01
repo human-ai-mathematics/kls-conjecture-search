@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:moment-map-cmh)=
-# Approach C: the deterministic moment-map/Haar programme
+# The moment map (Approach C): the deterministic moment-map/Haar programme
 
 ## Overview of the approach
 
@@ -34,7 +34,7 @@ Two cautions belong here rather than in a footnote, because they change how the 
 
 **What would settle it.** The approach succeeds if the construction layer is carried out *and* [](#ass:uniform-cmh-approximants) is established, or replaced by the weaker recovery-envelope assumption [](#ass:cmh-recovery-envelope), which suffices by [](#cor:cmh-recovery-sequence-suffices). It fails if gate zero is false, or if some admissible log-concave perturbation of the saturating one-sided-exponential product has strictly positive second variation of $\CMH$ ([](#conj:cmh-second-variation)), which would push $\CMH$ above $4$. Both falsifiers are cheaper than the construction, which is why they are stated as gates.
 
-**How to read it.** Read *out of order*: the normalization layer, Section [](#sec:cmh-normalization), is logically prior and should be read first, then the exact cases in Section [](#sec:cmh-exact-cases), then this construction layer. The moment-map family survey is Section [](#sec:family-moment-map). None of Appendices [](#sec:notation)–[](#sec:models) is used by this approach.
+**How to read it.** Read *out of order*: the normalization layer, Section [](#sec:cmh-normalization), is logically prior and should be read first, then the exact cases in Section [](#sec:cmh-exact-cases), then this construction layer. The moment-map family survey is Section [](#sec:family-moment-map). None of the localization apparatus of the shared technical foundations is used by this approach; its longer calculations are in Appendix [](#sec:appendix-moment-map).
 
 This section records a second, deterministic use of the moment map. Its aim is to extend [](#thm:letwin-moment-map) from constant matrices to multiplier fields selected by an arbitrary test function. Its conclusion is not established here: the identities displayed in this section outside labelled statements are formal calculations, not proofs, and the labelled problems below say what closing each gap would deliver.
 

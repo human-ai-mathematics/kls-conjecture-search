@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:carleson)=
-# Approach E–A: the exact Carleson target
+# The fixed cut, variant E–A: the exact Carleson target
 
 ## Consuming the two-color Carleson estimate
 

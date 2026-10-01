@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:open)=
-# Approach E: the remaining problems
+# The fixed cut (Approach E): the remaining problems
 
 What remains of the fixed-cut approach is a small set of precise problems, together with the obstructions that shaped them. We state the problems in decreasing order of strength.
 

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:spectral-approach)=
-# Approach S: fixed-eigenfunction localization
+# The fixed eigenfunction (Approach S): following one eigenfunction through localization
 
 ## The approach at a glance
 
@@ -33,7 +33,7 @@ The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly
 
 **What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$.
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: Appendices [](#sec:notation)–[](#sec:models).
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — Approach S shares it entirely with Approach E and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
 
 **The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
 

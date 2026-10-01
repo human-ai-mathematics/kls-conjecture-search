@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:cmh-exact-cases)=
-# Approach C, exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
+# The moment map (Approach C), exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
 
 Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
 

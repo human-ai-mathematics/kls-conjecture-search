@@ -12,7 +12,7 @@ The Kannan–Lovász–Simonovits conjecture asks whether linear functions detec
 
 +++
 
-This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), isolates the obstacle every method meets (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), presents three problems for someone who might take them up (Section [](#sec:overview-open)), and ends with how the rest of the manuscript is organised and how its results are checked (Sections [](#sec:reading-paths) and [](#sec:overview-checking)).
+This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), isolates the obstacle every method meets (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
 
 (sec:kls-orientation)=
 ## The question
@@ -367,38 +367,9 @@ Three problems are presented here for a reader who wants to start. Each is state
 
 **A conditional-fiber frame, [](#conj:conditional-fiber-frame).** It asks whether every isotropic log-concave measure admits one frame of directions, chosen before the test function, for which the resampling form of [](#lem:conditional-fiber-form) has a dimension-free gap. *Why it matters:* it implies KLS with constant $4C$, and it uses nothing beyond one-dimensional log-concave inequalities and a choice of directions. *What failed:* the root frame of the simplex ([](#prop:conditional-fiber-root-obstruction)). *Where to start:* the simplex itself is a self-contained test case, whose Poincaré constant is dimension-free, so the question there bears only on the frame idea. Either find an isotropic frame with a dimension-free gap on the simplex, or show that none exists; by [](#lem:fiber-root-degree-two), a polynomial certificate of the second alternative must have degree at least three. Section [](#subsec:fiber-root-failure) contains the shortest complete argument in the manuscript and is the place to begin.
 
+From here, the [reading paths](#sec:reading-paths) of the welcome page lead on: to the comparison of the four approaches in Section [](#sec:frontier-atlas), to the entry chapter of one approach, or to how results are checked before one contributes.
+
 % Agents: the brief's neighbourhood also lists conj:trace-upgrade (unlabelled here, Section sec:open) and
 % ass:uniform-cmh-approximants; they are not presented as entry problems because conj:trace-upgrade has no
 % labelled statement and uniform CMH(4) is at least as hard as KLS with no smaller entry point
 % beyond conj:gate-zero-sharp.
-
-(sec:reading-paths)=
-## How the manuscript is organised
-
-After this overview, the chapters fall into five groups, followed by the full proofs.
-
-**The landscape of methods.** Five chapters, one per family of the literature, in a common format: classical needle localization (Section [](#sec:family-needles)), stochastic localization (Section [](#sec:family-sl)), Bochner, heat flow and the $H^{-1}$ calculus (Section [](#sec:family-bochner)), moment maps, Monge–Ampère and Stein kernels (Section [](#sec:family-moment-map)), and transport (Section [](#sec:family-transport)). Section [](#sec:frontier-atlas) then compares the four approaches of this manuscript side by side, with the main result and the exact bottleneck of each. The survey can be read on its own.
-
-**Approaches through stochastic localization.** A prelude on what localization does and what it costs (Section [](#sec:localization-prelude)); the static quadratic-chaos input (Section [](#sec:qcts)); the fixed-cut approach, from its conditional statements (Section [](#sec:introduction)) through the Carleson target, the product stress test, the Stein traces, the excess propagation and the bootstrap, to its remaining targets (Section [](#sec:open)); and the fixed-eigenfunction approach (Section [](#sec:spectral-approach)).
-
-**Deterministic and conditional approaches.** The moment-map programme (Section [](#sec:moment-map-cmh)), the moment-Hessian inequality made precise with its Hodge content and gate zero (Section [](#sec:cmh-normalization)), the cases where it is computed exactly (Section [](#sec:cmh-exact-cases)), and conditional-fiber frames (Section [](#sec:conditional-fiber-frame)). None of these uses stochastic localization.
-
-**Synthesis.** What a proof of KLS now needs, in four cross-cutting targets (Section [](#sec:kls-synthesis)), and a glossary (Section [](#sec:glossary)).
-
-**Technical appendices.** Notation and the two-colour localization setup (Section [](#sec:notation)) through the model geometries (Section [](#sec:models)), the Jacobi splitting formulas (Section [](#sec:jacobi)), and the longer calculations of the fixed-cut and moment-map chapters (Sections [](#sec:appendix-approach-e) and [](#sec:appendix-moment-map)). They are best read at the point they are first linked.
-
-**Full proofs.** The complete written proofs, each linked from the status shown next to the statement it proves.
-
-A reader with an afternoon can read this overview and the comparison of Section [](#sec:frontier-atlas); a reader interested in one approach can go straight to its chapter, which opens with its mechanism, its link to KLS, its main result and its exact bottleneck.
-
-(sec:overview-checking)=
-## How results are checked, and how to contribute
-
-**Statements and their status.** Every labelled statement — theorem, lemma, proposition, corollary, conjecture, assumption, definition — is fixed text, and its status is shown next to its title from a record kept apart from the prose: *Not settled here*, *Proved* (linking to its full proof), or *Refuted by* the statement that refutes it. *Not settled here* says only that this manuscript does not settle the statement; it says nothing of the literature. A theorem imported from a preprint that has not been refereed shows *Not settled here* however plausible it is, and every statement that uses one names it in its own text. An implication whose hypothesis is not settled can be proved as an implication without being progress on the conjecture; its statement says so.
-
-**What counts as proved.** A statement counts as proved only once a reviewer other than the author of its proof has checked the complete written proof against the statement, and the check is recorded. A proof still being written or checked is not published. If a statement is edited afterwards, its proof counts as unchecked until it is reviewed again. The prose around the statements is an exposition and may simplify; the statements are what count. Computations can suggest where to look, but they never count as proof, and where the text reports one it says so.
-
-**How to contribute.** A contribution can be a proof, a counterexample, a partial result, a reference we missed, or a correction.
-
-- **On a statement:** next to each statement's title are its label, for instance `conj:gate-zero-sharp`, and links that open a form on the [project repository](https://github.com/numina-functional-inequalities/kls-conjecture-search/issues) with that label already filled in — *Idea* or *Counterexample* on a statement not settled here, *Correction* on any other.
-- **In discussion:** ask a question (*Q&A*), think out loud (*Ideas*) or point at a reference (*Literature*) in the project's [GitHub Discussions](https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions); name a statement by its label.

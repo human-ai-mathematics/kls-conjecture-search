@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:introduction)=
-# Approach E: the fixed-cut program and its main conditional statements
+# The fixed cut (Approach E): the program and its main conditional statements
 
 ## The approach at a glance
 
@@ -24,7 +24,7 @@ $$
 
 The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes ([](#cor:tight-window-consumption)); [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) derives it from the literal package of the near-Cheeger variant Eldan–B, whose propagation clause fails on the product witnesses of [](#prop:weighted-spectator-obstruction). A counterexample to any of these hypotheses would not refute KLS.
 
-**What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Appendix [](#sec:riccati)), the Stein dictionary (Appendix [](#sec:stein-dictionary)), and the covariance technology (Appendix [](#sec:covariance-tech)). Each statement below displays its own standing.
+**What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Section [](#sec:riccati)), the Stein dictionary (Section [](#sec:stein-dictionary)), and the covariance technology (Section [](#sec:covariance-tech)). Each statement below displays its own standing.
 
 **What it gives.** Three results. The bootstrap comparison theorem and the interface functional $\Xi_T$ (Section [](#sec:bootstrap)), together with the fact that the crude evaluation of $\Xi_T$ *cannot* suffice ([](#rem:insufficiency)) — a negative result that says exactly which input the bootstrap needs. The scale-weighted all-cut source budget, [](#lem:time-weighted-source). And the coordinate budgets and covariance reduction of the product stress test (Section [](#sec:product-stress)), where the approach is tested against the measure that defeats naive covariance control.
 
@@ -37,7 +37,7 @@ The two implications are [](#lem:survival-implies-kls) and its stopped form [](#
 % Agent note: the approach ap:e-weighted-excess of research/program/portfolio.yaml is closed on
 % the spectator obstruction; the checkpoints that name it record the reopening condition above.
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude). The static quadratic-chaos input and its limits: Section [](#sec:qcts). The approach proper: this section for the conditional statements, then Sections [](#sec:carleson)–[](#sec:open). Full apparatus: Appendices [](#sec:notation)–[](#sec:models). Full proofs are linked from the status shown next to each statement.
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude). The static quadratic-chaos input and its limits: Section [](#sec:qcts). The approach proper: this section for the conditional statements, then Sections [](#sec:carleson)–[](#sec:open). Full apparatus: the shared technical foundations (Sections [](#sec:notation), [](#sec:riccati), [](#sec:qcts), [](#sec:covariance-tech) and [](#sec:models)), with the mass martingale (Section [](#sec:mass-martingale)), the Stein dictionary (Section [](#sec:stein-dictionary)) and the Jacobi splitting formulas (Section [](#sec:jacobi)) among this approach's chapters. Full proofs are linked from the status shown next to each statement.
 
 **The idea, in one line.**
 
@@ -55,7 +55,7 @@ $$
 
 and $h_\mu$, $\PsiKLS_\mu=h_\mu^{-1}$, $\hstar_n$ are as fixed in Section [](#subsec:kls-conjecture) and [](#eq:hstar-def); recall in particular [](#rem:psi-convention) on the $\psi$ convention. The conjecture itself and the literature frontier are in Section [](#sec:kls-orientation); the sharp radial and homogeneous-quadratic results recorded there remove major static obstructions, but they do not by themselves control a fixed bottleneck set under localization.
 
-The shared localization machinery — notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the static obstruction, the covariance technology, and the model geometries — is deferred to Appendices [](#sec:notation)–[](#sec:models); the conceptual summary needed to follow this approach is the prelude, Section [](#sec:localization-prelude). The present section states the conditional results; Sections [](#sec:carleson)–[](#sec:open) carry out the arguments.
+The shared localization machinery — notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the static obstruction, the covariance technology, and the model geometries — is deferred to the shared technical foundations and to the supporting chapters of this approach; the conceptual summary needed to follow this approach is the prelude, Section [](#sec:localization-prelude). The present section states the conditional results; Sections [](#sec:carleson)–[](#sec:open) carry out the arguments.
 
 (subsec:two-variants)=
 ## The two Eldan subroutes
@@ -215,7 +215,7 @@ Finally, Section [](#sec:bootstrap) provides the available propagation mechanism
 | Ingredient | Role | Where |
 |---|---|---|
 | Mass martingale and stopped centroid reduction | Reduces KLS to survival of a balanced cut for universal time | [](#lem:survival-implies-kls), [](#thm:centroid-implies-kls) |
-| Matrix and scalar two-color Riccati identities | Isolate the source $S_t$ and damping $D_t$ exactly | [](#thm:scalar-riccati), Appendix [](#sec:riccati) (formal, with standard approximation conventions) |
+| Matrix and scalar two-color Riccati identities | Isolate the source $S_t$ and damping $D_t$ exactly | [](#thm:scalar-riccati), Section [](#sec:riccati) (formal, with standard approximation conventions) |
 | Per-direction Carleson estimate | Shows that $s_tG_t^2$ has dimension-free occupation in every fixed direction | [](#cor:per-direction), from the matrix Riccati identity |
 | Operator-to-trace upgrade | The true stochastic missing estimate | [](#conj:trace-upgrade) |
 | Quadratic-chaos thin shell | Static time-zero form of two-color covariance control | [](#thm:letwin-qcts), imported with constant $8$ from a July 2026 version-1 preprint; whitening still leaves dynamic covariance alignment |
