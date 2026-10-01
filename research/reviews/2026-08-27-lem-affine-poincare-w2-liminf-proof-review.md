@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_cmh_recovery
-reviewer: /root/review_cmh_recovery_w0
+  - prove_cmh_recovery, unknown, 2026-08-27
+reviewer: review_cmh_recovery_w0, unknown, 2026-08-27
 fingerprints:
   solutions/lem-affine-poincare-w2-liminf.md: 5afb3e3e3dc73100386f977a871b50a4595288d0ab1ab55a27ba2abcabf1557b
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e

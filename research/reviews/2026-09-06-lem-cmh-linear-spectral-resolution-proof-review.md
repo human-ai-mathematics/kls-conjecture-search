@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - "prover w4p03 (Claude agent, session 2026-08-30)"
-  - /w5/researcher-clsr-repair
-reviewer: /w5/reviewer-clsr-second
+  - prover w4p03, unknown, 2026-08-30
+  - researcher-clsr-repair, unknown, 2026-09-06
+reviewer: reviewer-clsr-second, unknown, 2026-09-06
 fingerprints:
   solutions/lem-cmh-linear-spectral-resolution.md: 74580b1c5580b588a5d6c04ec035808e92544a722dfbfd1dc0c3e4ac520dbde5
   lem:cmh-linear-spectral-resolution: 1acf8cd4ee1e8840de2a9816181ad28d515e592d55c5ab6f670587c83e2ba716

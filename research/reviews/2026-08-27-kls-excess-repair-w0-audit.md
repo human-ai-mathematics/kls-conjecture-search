@@ -1,9 +1,9 @@
 ---
 verdict: revise
 authors:
-- /root/kls_bootstrap_author
-- /root/repair_excess_dossier
-reviewer: /root/review_excess_w0
+  - kls_bootstrap_author, unknown, 2026-08-27
+  - repair_excess_dossier, unknown, 2026-08-27
+reviewer: review_excess_w0, unknown, 2026-08-27
 fingerprints:
   solutions/kls-excess-audit.md: 4a87955fd2c105aa8e6e072e00d42c97a216349cfde817ac6376f3a6baef461c
   prop:intro-audit: 8dbbea111a4c607be2501cbef1b2fd914e0a188ff8b97b9631156b63ff018d73

@@ -1,8 +1,8 @@
 ---
 verdict: revise
 authors:
-- /root/prove_lyapunov_stein_duality_w2
-reviewer: /root/review_lyapunov_stein_duality_w2
+  - prove_lyapunov_stein_duality_w2, unknown, 2026-08-27
+reviewer: review_lyapunov_stein_duality_w2, unknown, 2026-08-27
 fingerprints:
   solutions/lem-lyapunov-stein-duality.md: ae84f79fdf8592f8f30915efe881a59ff99cae41befb5a5bd2fcd0a6a80c68ff
   lem:lyapunov-stein-duality: 053e29d7fe7f570d943da7b4c27630eed5d4519a07957ef9b8374692fd518213

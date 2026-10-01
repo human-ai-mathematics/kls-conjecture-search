@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-  - /root/repair_product_dossier
-reviewer: /root/review_product_w0
+  - kls_proof_audit, unknown, 2026-08-27
+  - repair_product_dossier, unknown, 2026-08-27
+reviewer: review_product_w0, unknown, 2026-08-27
 fingerprints:
   solutions/kls-product-covariance.md: a288e98ce106b7998a88685c6da2c20f161c9ba5387e88242337bffecb1723a4
   lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e

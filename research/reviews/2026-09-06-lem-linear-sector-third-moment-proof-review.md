@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /w5/researcher-third-moment
-reviewer: /w5/reviewer-third-moment
+  - researcher-third-moment, unknown, 2026-09-06
+reviewer: reviewer-third-moment, unknown, 2026-09-06
 fingerprints:
   solutions/lem-linear-sector-third-moment.md: 1c0bb4d62d7a4dc0d5ddd11603618bb3a872316f9b2197fd44ede13f4884e4bd
   lem:linear-sector-third-moment: b81b78dc10877edb616430fbb41664c1604a377e19ae8c00c9dba509f890d647

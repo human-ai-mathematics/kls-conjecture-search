@@ -1,8 +1,8 @@
 ---
 verdict: revise
 authors:
-- /w5/researcher-cone-lift
-reviewer: /w5/reviewer-cone-lift
+  - researcher-cone-lift, unknown, 2026-09-06
+reviewer: reviewer-cone-lift, unknown, 2026-09-06
 fingerprints:
   solutions/prop-cone-moment-map.md: de0ac91919f85648a8a390e969c74849a6466a0c7160d7ecd3c38f9b2ad8aefe
   prop:cone-moment-map: f61cff79312c7ca8ecd34aea5e0eae226e23b605c81ffdd8e3bd5f2b742e0544

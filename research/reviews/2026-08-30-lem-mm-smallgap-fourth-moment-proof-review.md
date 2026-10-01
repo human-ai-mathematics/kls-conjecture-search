@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - claude-prover-w4p02
-reviewer: proof-checker-w4r03
+  - claude-prover-w4p02, unknown, 2026-08-30
+reviewer: proof-checker-w4r03, unknown, 2026-08-30
 fingerprints:
   solutions/lem-mm-smallgap-fourth-moment.md: e06ceebeb8e44119c9f6229074f155a1ca6490262e0040da5aa3030391bfbbb8
   lem:mm-smallgap-fourth-moment: 5efc054693b4557b794756da70c6b5a5ba03e38dc8bd743eca82855cc796d1df

@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_cmh_approximation
-reviewer: /root/review_cmh_approximation
+  - prove_cmh_approximation, unknown, 2026-08-27
+reviewer: review_cmh_approximation, unknown, 2026-08-27
 fingerprints:
   solutions/prop-cmh-approximation-closure.md: 5b5d574c000439cb481541b3aa65cdee02e1463ddeca7ceb1eb0a6d45aca8664
   prop:cmh-approximation-closure: d15c585bc0ea32fb10630a4b54e0ec4d60905b33e8e2893f4001f4ba9785412d

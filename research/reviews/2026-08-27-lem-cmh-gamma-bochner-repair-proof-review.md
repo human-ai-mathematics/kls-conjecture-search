@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_ledger_audit
-  - /root/repair_cmh_hodge_domain_w3
-reviewer: /root/review_cmh_gamma_dependency_w3
+  - kls_ledger_audit, unknown, 2026-08-27
+  - repair_cmh_hodge_domain_w3, unknown, 2026-08-27
+reviewer: review_cmh_gamma_dependency_w3, unknown, 2026-08-27
 fingerprints:
   solutions/thm-cmh-dirichlet.md: a6fde7b910a21d73f2f4a4e56de2a660eda18f47ecab1b12ac44f34dea04661c
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904

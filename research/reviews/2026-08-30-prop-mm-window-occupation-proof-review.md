@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - claude-prover-w4p02
-reviewer: proof-checker-w4r04
+  - claude-prover-w4p02, unknown, 2026-08-30
+reviewer: proof-checker-w4r04, unknown, 2026-08-30
 fingerprints:
   solutions/prop-mm-window-occupation.md: 153e4c63d6845ea3dbbec7726ed22c3577baaf3052e419f2d477cb8377e94985
   prop:mm-window-occupation: bfdd16289838ae5b0c560e93b07c6b77ef818e8acac71a517a8cbbe28e74945e

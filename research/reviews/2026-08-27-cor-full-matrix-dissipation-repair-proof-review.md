@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_full_matrix_dissipation_w2
-  - /root/repair_full_matrix_dissipation_w2
-reviewer: /root/review_full_matrix_dissipation_w2
+  - prove_full_matrix_dissipation_w2, unknown, 2026-08-27
+  - repair_full_matrix_dissipation_w2, unknown, 2026-08-27
+reviewer: review_full_matrix_dissipation_w2, unknown, 2026-08-27
 fingerprints:
   solutions/cor-full-matrix-dissipation.md: ea87bfa39c766f4f0df537ed4d3bc944eee4c6049db04b401861e652963a2357
   cor:full-matrix-dissipation: 67207edd4c5c4e8e6674ab24f20583a4a51374e514582fd7032b1120e7b0f0ce

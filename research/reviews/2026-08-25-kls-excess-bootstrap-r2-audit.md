@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_bootstrap_author
-reviewer: /root/kls_core_author
+  - kls_bootstrap_author, unknown, 2026-08-25
+reviewer: kls_core_author, unknown, 2026-08-25
 fingerprints:
   solutions/kls-bootstrap-interface.md: 105a109687abac259b559ff611469e8347a73866f54119d26e66166ec8f05175
   lem:half: 1d4daf2283e1a1022580a067533d1cc3aae4194fa319d223aa00e4112d031a2f

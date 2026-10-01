@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_cmh_recovery_calculus_w2
-reviewer: /root/review_cmh_recovery_calculus_w2
+  - prove_cmh_recovery_calculus_w2, unknown, 2026-08-27
+reviewer: review_cmh_recovery_calculus_w2, unknown, 2026-08-27
 fingerprints:
   solutions/prop-cmh-recovery-calculus.md: 56cea366c845a618355e4135236d0b72a1e814ef6c0fb5d086b28c8db8d5943a
   prop:cmh-recovery-calculus: 73a9c58294d2c13a9bce376e89511f13dbfc0faa2db486c5be8df1fb28a36ba0

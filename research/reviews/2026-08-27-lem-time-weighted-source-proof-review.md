@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_time_weighted_par_05
-reviewer: /root/review_time_weighted_cold_07
+  - prove_time_weighted_par_05, unknown, 2026-08-27
+reviewer: review_time_weighted_cold_07, unknown, 2026-08-27
 fingerprints:
   solutions/lem-time-weighted-source.md: 72f3d528794fe47764b7129dbe849bde7e27aa95c13c1236208ecbb524593c20
   lem:time-weighted-source: 8212ac2d323fe4a02b1e6494170068c8fe4b224b1c3f528538ad12162531d5ab

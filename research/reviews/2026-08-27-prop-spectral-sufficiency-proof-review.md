@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_spectral_sufficiency
-reviewer: /root/review_spectral_sufficiency_w0
+  - prove_spectral_sufficiency, unknown, 2026-08-27
+reviewer: review_spectral_sufficiency_w0, unknown, 2026-08-27
 fingerprints:
   solutions/prop-spectral-sufficiency.md: 207df18978ce55cabb78bce26fbd9f5350791aab99cab8e6a7031217750c67bd
   prop:spectral-sufficiency: ea0691f496347072983c1a888e0c8ecc4f03b28db8e8d27dcbb8ff0c486c1c0e

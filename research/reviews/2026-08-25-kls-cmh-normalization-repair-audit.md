@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-reviewer: /root/kls_evidence_audit
+  - kls_proof_audit, unknown, 2026-08-25
+reviewer: kls_evidence_audit, unknown, 2026-08-25
 fingerprints:
   solutions/thm-cmh-normalization.md: d53de5d49ed9590d4e9e813ab04306c8222ede3398a9da56dd101dae35a9fc8f
   prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c

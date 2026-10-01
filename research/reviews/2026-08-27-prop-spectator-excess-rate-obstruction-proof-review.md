@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_spectator_excess_rate_w2
-reviewer: /root/review_spectator_excess_rate_w2
+  - prove_spectator_excess_rate_w2, unknown, 2026-08-27
+reviewer: review_spectator_excess_rate_w2, unknown, 2026-08-27
 fingerprints:
   solutions/prop-spectator-excess-rate-obstruction.md: 9596ce5965ea49a577a2294f2814c6c18ba72fb3c570c7d695c71e784cb0dfb7
   prop:spectator-excess-rate-obstruction: ded114d9fc83a2d3e7f4a24a6f32b61eabc685fd30a4fc4fe315f0904e1fe01b

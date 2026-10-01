@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - prover-w4p01
-reviewer: proof-checker-w4r01
+  - prover-w4p01, unknown, 2026-08-30
+reviewer: proof-checker-w4r01, unknown, 2026-08-30
 fingerprints:
   solutions/prop-split-screened-supply.md: c9aa1a2a9298eb01d649225f5613f4411284015d09de3438403c92983f723fe4
   prop:split-screened-supply: 2978c26605b7f1f0d555277fa000ad70a7d8ac1b45813c18547fe73d3a519684

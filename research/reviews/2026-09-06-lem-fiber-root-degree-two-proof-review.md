@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - "prover agent (Claude Fable 5), run id w4p04"
-reviewer: /w5/reviewer-fiber-root
+  - prover w4p04, claude-fable-5, 2026-08-30
+reviewer: reviewer-fiber-root, unknown, 2026-09-06
 fingerprints:
   solutions/lem-fiber-root-degree-two.md: a3a1c477d045824928fcbcfd65e04f381551cdca076448e87acc7953783f10e3
   lem:fiber-root-degree-two: a5c0cb72ddb6f073b7035b72173b2ba7d3652b6d33821866c122000b29870f0e

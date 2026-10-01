@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-  - /root/repair_cmh_hodge_domain_w3
-reviewer: /root/review_cmh_hodge_domain_w3
+  - kls_proof_audit, unknown, 2026-08-27
+  - repair_cmh_hodge_domain_w3, unknown, 2026-08-27
+reviewer: review_cmh_hodge_domain_w3, unknown, 2026-08-27
 fingerprints:
   solutions/thm-cmh-normalization.md: d53de5d49ed9590d4e9e813ab04306c8222ede3398a9da56dd101dae35a9fc8f
   prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c

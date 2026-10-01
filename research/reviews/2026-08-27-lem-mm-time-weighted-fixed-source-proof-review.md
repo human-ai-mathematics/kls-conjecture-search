@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_mm_weighted_source
-reviewer: /root/review_mm_weighted_source_w0
+  - prove_mm_weighted_source, unknown, 2026-08-27
+reviewer: review_mm_weighted_source_w0, unknown, 2026-08-27
 fingerprints:
   solutions/lem-mm-time-weighted-fixed-source.md: 50465a9ec4e4cbe3fabcf21230d2277a454b28ad44fa888fee2605ae7d414b20
   lem:mm-time-weighted-fixed-source: 661b4f05678efc9391f1738433880ef1c5188f8b10291ebbe2b7f9aa5cedeb46

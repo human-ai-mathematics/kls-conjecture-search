@@ -1,8 +1,8 @@
 ---
 verdict: revise
 authors:
-- /root/prove_weighted_spectator_obstruction
-reviewer: /root/review_weighted_spectator_w0
+  - prove_weighted_spectator_obstruction, unknown, 2026-08-27
+reviewer: review_weighted_spectator_w0, unknown, 2026-08-27
 fingerprints:
   solutions/prop-weighted-spectator-obstruction.md: 9e52a87391e5b6b51bbf3b57657604d3a9cf802c0920c0b6de5a65dcd819b5b9
   prop:weighted-spectator-obstruction: 3a65960d47cdc44c6a81fe7559223a79b7b491d7389ceb61251cc675cd573288
