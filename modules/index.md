@@ -23,10 +23,10 @@ The overview explains each with the idea of its proof (Section [](#sec:overview-
 
 Each approach responds to the same obstacle, explained in Section [](#sec:kls-remaining): known methods control a fixed or averaged object, while the conjecture needs control of one that adapts.
 
-- **Fixed eigenfunction (S)** — follow a first eigenfunction through stochastic localization: Section [](#sec:spectral-approach).
-- **Moment map (C)** — a deterministic second-order inequality for the Hessian of the moment map: Section [](#sec:moment-map-cmh).
-- **Fixed cut (E)** — follow one would-be bottleneck set through stochastic localization: Section [](#sec:introduction).
-- **Conditional fibers (F)** — a spectral gap for resampling along lines chosen from the measure: Section [](#sec:conditional-fiber-frame).
+- **Fixed eigenfunction** — follow a first eigenfunction through stochastic localization: Section [](#sec:spectral-approach).
+- **Moment map** — a deterministic second-order inequality for the Hessian of the moment map: Section [](#sec:moment-map-cmh).
+- **Fixed cut** — follow one would-be bottleneck set through stochastic localization: Section [](#sec:introduction).
+- **Conditional fibers** — a spectral gap for resampling along lines chosen from the measure: Section [](#sec:conditional-fiber-frame).
 
 Section [](#sec:frontier-atlas) compares them side by side: what each gives, and what blocks it.
 

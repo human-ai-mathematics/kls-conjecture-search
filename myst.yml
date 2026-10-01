@@ -106,16 +106,16 @@ project:
       children:
         - file: modules/06-frontier-atlas.md
         - file: modules/17-localization-prelude.md
-        - title: Fixed eigenfunction (S)
+        - title: Fixed eigenfunction
           children:
             - file: modules/30-spectral-approach.md
-        - title: Moment map (C)
+        - title: Moment map
           children:
             - file: modules/40-moment-map-cmh.md
             - file: modules/41-cmh-normalization.md
             - file: modules/42-cmh-exact-cases.md
             - file: modules/61-appendix-moment-map.md
-        - title: Fixed cut (E)
+        - title: Fixed cut
           children:
             - file: modules/20-eldan-statements.md
             - file: modules/21-carleson.md
@@ -128,7 +128,7 @@ project:
             - file: modules/13-stein-dictionary.md
             - file: modules/26-jacobi-splitting.md
             - file: modules/60-appendix-approach-e.md
-        - title: Conditional fibers (F)
+        - title: Conditional fibers
           children:
             - file: modules/45-conditional-fiber-frame.md
     - title: Synthesis and perspectives

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:cmh-exact-cases)=
-# The moment map (Approach C), exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
+# The moment map, exact cases: one dimension, products, the log-concave Dirichlet family, and exponential cones
 
 Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables — a function on the simplex is rewritten as a function of independent Gamma variables, homogeneous of degree zero, where the generator is that of a product — followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
 
@@ -313,7 +313,7 @@ The constant $4$ cannot be improved uniformly over the family. The face law $\ma
 (subsec:cmh-cones)=
 ## Exponential cones: a second solvable non-product family
 
-The Dirichlet family is solvable because the simplex lifts to independent Gamma variables. A lift in the opposite direction — attach a Gamma radial variable to a fixed base — produces measures on cones whose moment map is explicit in terms of the moment map of the base, and on which the linear sector of Approach C is computed exactly. Unlike products and Dirichlet laws these measures are not compactly supported, and for a general base they are not invertible affine images of products.
+The Dirichlet family is solvable because the simplex lifts to independent Gamma variables. A lift in the opposite direction — attach a Gamma radial variable to a fixed base — produces measures on cones whose moment map is explicit in terms of the moment map of the base, and on which the linear sector of the moment-map inequality is computed exactly. Unlike products and Dirichlet laws these measures are not compactly supported, and for a general base they are not invertible affine images of products.
 
 :::{prf:definition} Exponential cone measures
 :label: def:exponential-cone

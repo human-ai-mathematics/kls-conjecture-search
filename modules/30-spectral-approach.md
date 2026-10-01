@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:spectral-approach)=
-# The fixed eigenfunction (Approach S): following one eigenfunction through localization
+# The fixed eigenfunction: following one eigenfunction through localization
 
 ## The approach at a glance
 
@@ -33,7 +33,7 @@ In words: as localization proceeds, the eigenfunction feeds a *source* into its 
 
 **What would settle it.** [](#conj:mm-spectral-occupation) settles it through [](#prop:spectral-sufficiency); a family of measures on which the unwhitening step provably loses alignment would badly damage it. It also rests on a premise: if [](#thm:letwin-qcts) does not survive review, the approach does not become wrong, but its arithmetic reverts to $\CP\lesssim\log n$ (Section [](#subsec:synthesis-caution)).
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — this approach shares it entirely with the fixed cut (Approach E) and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — this approach shares it entirely with the fixed cut and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
 
 **The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
 
@@ -91,7 +91,7 @@ $$
 \E\norm{\Hess f}_{\HS}^2\le\lambda^2 .
 $$
 
-Exploiting these fixed energies inside the posterior channel is the possible advantage of this approach over Approach E. It succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
+Exploiting these fixed energies inside the posterior channel is the possible advantage of this approach over the fixed cut. It succeeds only if it controls the tensor's incidence in inflated covariance spaces, or consumes the exact damping in [](#eq:spectral-sde). Another global covariance-norm estimate is not enough, and by [](#prop:covariance-spike) could not be.
 :::
 
 :::{prf:lemma} Posterior eigenfunction-defect calculus
@@ -193,7 +193,7 @@ $$
 the left side is at least $1/2$ at $t=T_*$. Posterior Brascamp–Lieb and the fixed-test tower property bound it above by $T_*^{-1}\E\abs{\nabla f}^2=\lambda/T_*$, so the first eigenvalue satisfies $\lambda\ge T_*/2$. Smooth strongly convex approximants, whitening, and passage of the uniform Poincaré inequality on fixed smooth tests give the same bound for every isotropic log-concave law, without convergence of eigenfunctions. The full domain and approximation argument is in the full proof linked from the statement.
 :::
 
-The form of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color setting of Approach E.
+The form of [](#eq:spectral-occupation) is worth emphasizing. Here the source may be charged against the *full* exact damping. In the evolution of $\E|g_t|^2$ those two terms then cancel, leaving a closed Grönwall inequality from the linear budget and the lower-order term. A strict damping surplus would be useful but is not required for the KLS sufficiency bridge; this differs from the absorption margins required in the two-color setting of the fixed cut.
 
 :::{prf:lemma} Time-weighted fixed-function source budget
 :label: lem:mm-time-weighted-fixed-source
@@ -245,7 +245,7 @@ Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$, conditional on [](#thm:letwin-qcts).
 :::
 
-[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through Approach S machinery without improving it, and it does not decide [](#conj:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
+[](#prop:mm-window-occupation) is a consistency check on the approach: it reproduces the polylogarithmic frontier through the fixed-eigenfunction machinery without improving it, and it does not decide [](#conj:mm-spectral-occupation), whose remaining content is exactly the post-spike charge beyond the covariance window. The budgets above are exactly saturated by the profile $q(t)=\lambda/t^2$ ($t\ge\lambda$), so the small-gap branch admits no shortcut from those budgets alone.
 
 % Agent note: the saturation profile was found in the 2026-08-30 initial-layer probe.
 
@@ -301,9 +301,9 @@ The obstructions proved elsewhere in this document are scoped, and it matters wh
 
 - Classical needles do not preserve the isotropic covariance constraints (Section [](#sec:family-needles)); that is a structural warning, not a theorem excluding all needle arguments.
 
-:::{prf:remark} Relation to Approach C
+:::{prf:remark} Relation to the moment-map approach
 :label: rem:spectral-vs-cmh
-Approaches S and C both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: Approach S keeps stochastic localization and makes the test dependence dynamic, while Approach C (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
+The fixed-eigenfunction and moment-map approaches both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: the fixed eigenfunction keeps stochastic localization and makes the test dependence dynamic, while the moment map (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
 :::
 
 % Promotion gate (agent note). The control plane promotes conj:mm-spectral-occupation, or admits

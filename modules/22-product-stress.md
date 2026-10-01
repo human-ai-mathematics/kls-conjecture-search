@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:product-stress)=
-# Product stress test of the all-cut Carleson estimate (variant E–A)
+# Product stress test of the all-cut Carleson estimate
 
 This section carries out [](#rem:product-stress-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#rem:product-stress-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
 
@@ -128,7 +128,7 @@ $\E\int_{I\cap[0,\tau]}S_t\dd t\le C\int_I(1+\E X_t^2)\dd t\le C(1+K)\abs I$ by 
 :::
 
 :::{prf:remark}
-This is the precise sense in which the product model isolates the covariance content of variant E–A: a cut-free second-moment bound suffices. Note the consistency with the discipline warning of [](#eq:trivial-lambda): (V2) concerns the *excess* $X=(\lmax-1)_+$ in square, not $\E\int\lmax\le CT$ for all measures (which would already imply KLS and is not available); for products, (V2) is not circular — KLS for products is known independently — it is a concrete, decidable question about explicit one-dimensional SDEs. The next section decides it on the dimension-dependent early window and assesses it beyond.
+This is the precise sense in which the product model isolates the covariance content of the all-cut variant: a cut-free second-moment bound suffices. Note the consistency with the discipline warning of [](#eq:trivial-lambda): (V2) concerns the *excess* $X=(\lmax-1)_+$ in square, not $\E\int\lmax\le CT$ for all measures (which would already imply KLS and is not available); for products, (V2) is not circular — KLS for products is known independently — it is a concrete, decidable question about explicit one-dimensional SDEs. The next section decides it on the dimension-dependent early window and assesses it beyond.
 :::
 
 (sec:window)=

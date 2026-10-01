@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:moment-map-cmh)=
-# The moment map (Approach C): a deterministic inequality for the moment-map Hessian
+# The moment map: a deterministic inequality for the moment-map Hessian
 
 ## Overview of the approach
 
@@ -40,7 +40,7 @@ This section records a second, deterministic use of the moment map. Its aim is t
 
 % Agent entry points for this approach: the approaches of research/program/portfolio.yaml.
 
-Approach C is organized in two layers. This section is the *construction* layer: Haar compression, Schur–Piola transport, and the square-root commutator that the program must control. Sections [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) are the *normalization* layer, logically prior: they fix the endpoint's operator data, show that it implies the affine Poincaré inequality, compute it exactly on the line, on products, and on every log-concave Dirichlet law, and isolate the two falsification tests the approach admits. The two layers share the target $\mathrm{CMH}(4)$ and almost no machinery; a reader starting here should read §[](#sec:cmh-normalization) first.
+The moment-map approach is organized in two layers. This section is the *construction* layer: Haar compression, Schur–Piola transport, and the square-root commutator that the program must control. Sections [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) are the *normalization* layer, logically prior: they fix the endpoint's operator data, show that it implies the affine Poincaré inequality, compute it exactly on the line, on products, and on every log-concave Dirichlet law, and isolate the two falsification tests the approach admits. The two layers share the target $\mathrm{CMH}(4)$ and almost no machinery; a reader starting here should read §[](#sec:cmh-normalization) first.
 
 To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
 

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:conditional-fiber-frame)=
-# Conditional fibers (Approach F): inverse-variance frames of line resamplings
+# Conditional fibers: inverse-variance frames of line resamplings
 
 ## Overview of the approach
 

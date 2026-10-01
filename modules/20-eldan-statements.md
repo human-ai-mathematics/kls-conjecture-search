@@ -4,13 +4,13 @@ numbering:
 ---
 
 (sec:introduction)=
-# The fixed cut (Approach E): the approach and its main conditional statements
+# The fixed cut: the approach and its main conditional statements
 
 ## The approach at a glance
 
 Each of the four approaches opens with the same short summary — the idea, how it would give KLS, what it uses, what it gives, what blocks it, what rules out its obvious variants, and what would settle it — so that the approaches can be compared without reading any of them in full. Section [](#sec:frontier-atlas) sets the four side by side.
 
-**The idea.** Follow one *fixed* would-be bottleneck cut $E$ under stochastic localization, and show that it cannot be identified too quickly.
+**The idea.** Follow one *fixed* would-be bottleneck cut $E$ under Eldan's stochastic localization, and show that it cannot be identified too quickly.
 
 **How it would give KLS.** Through a chain of two implications, conditional at exactly one place:
 
@@ -22,17 +22,17 @@ $$
 \text{KLS}.
 $$
 
-The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes ([](#cor:tight-window-consumption)); [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) derives it from the literal package of the near-Cheeger variant E–B, whose propagation clause fails on the product witnesses of [](#prop:weighted-spectator-obstruction). A counterexample to any of these hypotheses would not refute KLS.
+The two implications are [](#lem:survival-implies-kls) and its stopped form [](#thm:centroid-implies-kls). The first link is a hypothesis, not a theorem: [](#ass:tight-prefix-carleson) is the form of it that the argument consumes ([](#cor:tight-window-consumption)); [](#thm:intro-all-cut) derives KLS from the stronger all-cut Carleson estimate, and [](#thm:intro-weighted) derives it from the literal package of the near-Cheeger variant, whose propagation clause fails on the product witnesses of [](#prop:weighted-spectator-obstruction). A counterexample to any of these hypotheses would not refute KLS.
 
 **What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Section [](#sec:riccati)), the Stein dictionary (Section [](#sec:stein-dictionary)), and the covariance technology (Section [](#sec:covariance-tech)). Each statement below displays its own standing.
 
 **What it gives.** Three results. The bootstrap comparison theorem and the interface functional $\Xi_T$ (Section [](#sec:bootstrap)), together with the fact that the crude evaluation of $\Xi_T$ *cannot* suffice ([](#rem:insufficiency)) — a negative result that says exactly which input the bootstrap needs. The scale-weighted all-cut source budget, [](#lem:time-weighted-source). And the coordinate budgets and covariance reduction of the product stress test (Section [](#sec:product-stress)), where the approach is tested against the measure that defeats naive covariance control.
 
-**What blocks it.** For variant E–A, the operator-to-trace upgrade [](#conj:trace-upgrade): obtain [](#ass:tight-prefix-carleson) by lifting [](#cor:per-direction) from quadratic-form scale to trace scale, uniformly over fixed initial data (Section [](#sec:open)). For variant E–B, the trace estimate [](#conj:stein-weighted) lacks a companion: a tensor-stable propagation statement to replace the literal package [](#ass:weighted-package), together with a localization-uniform almost-stability trace theorem.
+**What blocks it.** For the all-cut variant, the operator-to-trace upgrade [](#conj:trace-upgrade): obtain [](#ass:tight-prefix-carleson) by lifting [](#cor:per-direction) from quadratic-form scale to trace scale, uniformly over fixed initial data (Section [](#sec:open)). For the near-Cheeger variant, the trace estimate [](#conj:stein-weighted) lacks a companion: a tensor-stable propagation statement to replace the literal package [](#ass:weighted-package), together with a localization-uniform almost-stability trace theorem.
 
 **What rules out the obvious variants.** Two obstructions, which are the most reusable output of this approach. A global operator-norm covariance weight, as in [](#ass:weighted-package) and [](#conj:weighted-excess-rate), charges independent spectator coordinates that contribute nothing, and a balanced cylinder in a product of one-sided exponentials makes the overcharge unbounded ([](#prop:weighted-spectator-obstruction)). The same spectators rule out a uniform superlinear remainder even with weight one ([](#prop:spectator-excess-rate-obstruction)). Separately, a single inflated coordinate cannot carry a counterexample ([](#cor:single-coordinate-cuts), Section [](#sec:budgets)). Two further constraints are methodological warnings rather than theorems: the two-tail obstruction ([](#rem:two-tail-slice-bounds)) and the circularity warning of Section [](#sec:excess).
 
-**What would settle it.** Variant E–A is settled positively by [](#conj:trace-upgrade) with universal constants, and negatively by a family of balanced cuts on which the trace-scale statement fails. Variant E–B first needs a new formulation: a cut-local, tensor-stable covariance weight that ignores independent spectators while still dominating the aligned two-tail mode, or a replacement carrying an explicit near-worst-measure premise.
+**What would settle it.** The all-cut variant is settled positively by [](#conj:trace-upgrade) with universal constants, and negatively by a family of balanced cuts on which the trace-scale statement fails. The near-Cheeger variant first needs a new formulation: a cut-local, tensor-stable covariance weight that ignores independent spectators while still dominating the aligned two-tail mode, or a replacement carrying an explicit near-worst-measure premise.
 
 % Agent note: the approach ap:e-weighted-excess of research/program/portfolio.yaml is closed on
 % the spectator obstruction; the checkpoints that name it record the reopening condition above.
@@ -58,15 +58,15 @@ and $h_\mu$, $\PsiKLS_\mu=h_\mu^{-1}$, $\hstar_n$ are as fixed in Section [](#su
 The shared localization machinery — notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the static obstruction, the covariance technology, and the model geometries — is deferred to the shared technical foundations and to the supporting chapters of this approach; the conceptual summary needed to follow this approach is the prelude, Section [](#sec:localization-prelude). The present section states the conditional results; Sections [](#sec:carleson)–[](#sec:open) carry out the arguments.
 
 (subsec:two-variants)=
-## The two variants E–A and E–B
+## The all-cut and near-Cheeger variants
 
-The fixed-cut approach splits into two variants, E–A and E–B (the E is for Eldan, whose stochastic localization both run on). They differ in which cuts they must control.
+Both variants run on the same stochastic localization; they differ in which cuts they must control, and are named accordingly.
 
-**E–A: the all-cut stochastic variant.** Prove an absorptive two-color Carleson estimate for every balanced cut. This immediately yields KLS.
+**The all-cut variant.** Prove an absorptive two-color Carleson estimate for every balanced cut. This immediately yields KLS.
 
-**E–B: the near-Cheeger geometric variant.** Work only with near-minimizers of the isoperimetric profile. The conditional architecture below couples weighted excess propagation under localization to a weighted stable Stein-trace estimate. Its literal form fails on the product cylinders described under *What rules out the obvious variants* above. A workable replacement must use a cut-local or tensor-stable covariance scale and also permit an $O(T)$ supply, use a genuinely source-tied remainder, or impose an explicit near-worst-measure hypothesis.
+**The near-Cheeger variant.** Work only with near-minimizers of the isoperimetric profile. The conditional architecture below couples weighted excess propagation under localization to a weighted stable Stein-trace estimate. Its literal form fails on the product cylinders described under *What rules out the obvious variants* above. A workable replacement must use a cut-local or tensor-stable covariance scale and also permit an $O(T)$ supply, use a genuinely source-tied remainder, or impose an explicit near-worst-measure hypothesis.
 
-Variant E–B is the natural home for the boundary/Jacobi ideas. It should not be advertised as an all-cut estimate: arbitrary balanced sets can have enormous two-color covariance contrast even when their perimeter is small in an anisotropic posterior.
+The near-Cheeger variant is the natural home for the boundary/Jacobi ideas. It should not be advertised as an all-cut estimate: arbitrary balanced sets can have enormous two-color covariance contrast even when their perimeter is small in an anisotropic posterior.
 
 ## Main stochastic quantities
 

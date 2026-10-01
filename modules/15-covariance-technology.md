@@ -6,7 +6,7 @@ numbering:
 (sec:covariance-tech)=
 # Covariance technology: small-time operator-norm control
 
-Both variants of the fixed cut, E–A and E–B, meter the danger of localization through the same cut-free covariance functional. Recall from [](#eq:interface-def) the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
+Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter the danger of localization through the same cut-free covariance functional. Recall from [](#eq:interface-def) the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
 
 ```{math}
 :label: eq:Xi2-def

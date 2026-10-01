@@ -6,7 +6,7 @@ numbering:
 (sec:stein-dictionary)=
 # The two-colour Stein dictionary and the operator-to-trace gap
 
-Both variants of the fixed cut, E–A and E–B, consume the same covariance contrast of a cut, in two normalizations. This short core section records the exact algebraic dictionary relating that contrast to the Riccati source of Section [](#sec:riccati), and isolates — once — the exact gap of variant E–A and the covariance contrast that the proposed geometric approach also seeks to control. No argument in this manuscript yet connects Jacobi/Reilly boundary modes to this trace ([](#conj:almost-stability-gap)).
+Both variants of the fixed cut, the all-cut and the near-Cheeger variant, consume the same covariance contrast of a cut, in two normalizations. This short core section records the exact algebraic dictionary relating that contrast to the Riccati source of Section [](#sec:riccati), and isolates — once — the exact gap of the all-cut variant and the covariance contrast that the proposed geometric approach also seeks to control. No argument in this manuscript yet connects Jacobi/Reilly boundary modes to this trace ([](#conj:almost-stability-gap)).
 
 (subsec:one-gap)=
 ## The operator-to-trace gap
@@ -17,7 +17,7 @@ $$
 \calM:=\E\int_0^\infty s_tG_t^2\dd t,
 $$
 
-estimate [](#eq:loewner-carleson) reads $\calM\preceq R_0\preceq I_n$, a dimension-free bound at the level of quadratic forms. The KLS-strength statement of variant E–A is the *trace* $\Tr(\calM)$, whose only a priori bound is $\Tr R_0\le n$. The entire difficulty of the all-cut approach is this operator-to-trace upgrade. In the product model, [](#conj:product-alignment) isolates its incident-high residue; it is not an equivalent reformulation of the full trace target. The weighted Stein-trace estimate of variant E–B ([](#conj:stein-weighted)) faces analogous high-rank boundary modes, but the claimed identification with this occupation operator awaits the almost-stability trace bridge of [](#conj:almost-stability-gap). The available product argument does not prove a static effective-rank bound: summing its coordinate budgets loses a factor $n$, whereas the dimension-dependent early-window estimate follows independently from covariance moments. This motivates an occupation-density bound forcing only $O(1)$ directions to be simultaneously active on the early balanced window; it does not yet prove such temporal sparsity. This is the content of [](#rem:trace-upgrade-unification). The dictionary below is the change of variables tying the exact Riccati and Stein formulations together and supplying the common covariance currency for the proposed geometric approach.
+estimate [](#eq:loewner-carleson) reads $\calM\preceq R_0\preceq I_n$, a dimension-free bound at the level of quadratic forms. The KLS-strength statement of the all-cut variant is the *trace* $\Tr(\calM)$, whose only a priori bound is $\Tr R_0\le n$. The entire difficulty of the all-cut approach is this operator-to-trace upgrade. In the product model, [](#conj:product-alignment) isolates its incident-high residue; it is not an equivalent reformulation of the full trace target. The weighted Stein-trace estimate of the near-Cheeger variant ([](#conj:stein-weighted)) faces analogous high-rank boundary modes, but the claimed identification with this occupation operator awaits the almost-stability trace bridge of [](#conj:almost-stability-gap). The available product argument does not prove a static effective-rank bound: summing its coordinate budgets loses a factor $n$, whereas the dimension-dependent early-window estimate follows independently from covariance moments. This motivates an occupation-density bound forcing only $O(1)$ directions to be simultaneously active on the early balanced window; it does not yet prove such temporal sparsity. This is the content of [](#rem:trace-upgrade-unification). The dictionary below is the change of variables tying the exact Riccati and Stein formulations together and supplying the common covariance currency for the proposed geometric approach.
 
 ## The two-color Stein representation
 
@@ -70,7 +70,7 @@ where we used $pq^2-p^2q=pq(q-p)$. The supremum over $\norm M_\HS\le1$ of the li
 :::
 
 :::{prf:remark}
-The identity $\calS_\nu(E)=s^2\norm K_\HS^2$ is a small but clarifying consolidation. The “Stein” functional is the squared norm of the translation-invariant contrast $K$, whereas the Riccati source uses $G$. They coincide at balance; away from balance their difference is the explicit damping term $(q-p)\delta\delta^T$. Thus the two variants E–A and E–B exchange comparable, not identical, currency on the tight window, with the universal conversion constants below.
+The identity $\calS_\nu(E)=s^2\norm K_\HS^2$ is a small but clarifying consolidation. The “Stein” functional is the squared norm of the translation-invariant contrast $K$, whereas the Riccati source uses $G$. They coincide at balance; away from balance their difference is the explicit damping term $(q-p)\delta\delta^T$. Thus the all-cut and near-Cheeger variants exchange comparable, not identical, currency on the tight window, with the universal conversion constants below.
 :::
 
 :::{prf:lemma} Conversion between Stein norm and Riccati source on the tight window

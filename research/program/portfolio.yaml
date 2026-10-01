@@ -1,6 +1,14 @@
 # What the search is doing — as against research/program/ledger.yaml, which records
 # what is mathematically claimed. SPECIFICATION.md, Formats → Portfolio. The route
 # letter (E, S, C, F) is kept in each id; parked probes carry none.
+#
+# The letters are internal shorthand, the initials of the routes' first working names, and
+# follow no common rule: E = Eldan (fixed-cut stochastic localization), S = spectral (fixed
+# eigenfunction), C = CMH (the canonical moment-Hessian constant of the moment map),
+# F = fibers (conditional fibers). The manuscript never shows them: a reader meets the
+# descriptive names, the fixed cut, the fixed eigenfunction, the moment map and
+# conditional fibers, and the fixed cut's two variants as the all-cut variant (formerly
+# E-A) and the near-Cheeger variant (formerly E-B).
 
 approaches:
   # --- Route E, fixed-cut stochastic localization
