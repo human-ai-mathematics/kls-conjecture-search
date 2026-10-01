@@ -24,7 +24,7 @@ Start every session that edits the repository by reading it.
 | [`research/runs/`](research/runs/) | run output (JSONL, provenance on the first line) |
 | [`research/lib/`](research/lib/) | the shared numerics package `numerics`, its tests and its instance registry |
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
-| [`.claude/agents/`](.claude/agents/) | the three roles: `researcher`, `reviewer` and `writer` |
+| [`.claude/agents/`](.claude/agents/), [`.codex/agents/`](.codex/agents/) | the three roles: `researcher`, `reviewer` and `writer`, for Claude Code and for Codex |
 | [`templates/`](templates/) | an empty copy of each file genre |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
