@@ -50,26 +50,8 @@ approaches:
       Admit a KLS route only after a precise recovery estimate addresses that condition
       and the independent degree/depth thresholds.
 
-  # --- Priority 2 -- discriminating tests. The fixed cut's is a review of
-  # lem:survival-implies-kls, not a route (2026-10-04 strategy checkpoint).
-  - id: ap:c-solenoidal-perturbation
-    objective: >-
-      Compute the exact second variation through the Hodge split at an admissible target-side
-      perturbation of the saturating one-sided-exponential product, aimed at the radial Gamma
-      factor rather than at the base of an exponential cone.
-    state: active
-    next: >-
-      Resolve admissibility for a nontrivial source-linear perturbation in
-      conj:cmh-second-variation, including both parameter signs and its regularity class.
-      The 2026-10-04 even radial retest verifies log-concavity of beta=2+eps^2 and reports
-      strictly negative optimized degree-one through degree-four variation by exact
-      symbolic calculation; do not repeat that completed boundary calibration. Its family
-      gate and matrix identities remain uncertified. A separate regular-kernel convergence
-      estimate is needed before cone calculations transfer to compact-target restrictions;
-      moment convergence alone does not control CMH or derivatives. Any future positive
-      finite-degree coefficient still needs remainder and deficit control at an admissible
-      parameter before it can yield a refutation.
-
+  # --- Priority 2 -- discriminating tests. The fixed cut's review of its bridge is done
+  # (2026-10-04 grouped review synthesis); ap:c-solenoidal-perturbation moved to priority 3.
   - id: ap:c-gate-zero
     objective: >-
       Decide the necessary linear moment-map inequality, first in the sharp form of gate zero
@@ -185,6 +167,24 @@ approaches:
       tests do drive it to zero, no symmetric frame of either family survives and the
       construction must break symmetry. If they do not, the vertex frame is the first frame
       candidate for the simplex, and ap:f-simplex-dual must beat it.
+
+  - id: ap:c-solenoidal-perturbation
+    objective: >-
+      Compute the exact second variation through the Hodge split at an admissible target-side
+      perturbation of the saturating one-sided-exponential product, aimed at the radial Gamma
+      factor rather than at the base of an exponential cone.
+    state: active
+    next: >-
+      Resolve admissibility for a nontrivial source-linear perturbation in
+      conj:cmh-second-variation, including both parameter signs and its regularity class.
+      The 2026-10-04 even radial retest verifies log-concavity of beta=2+eps^2 and reports
+      strictly negative optimized degree-one through degree-four variation by exact
+      symbolic calculation; do not repeat that completed boundary calibration. Its family
+      gate and matrix identities remain uncertified. A separate regular-kernel convergence
+      estimate is needed before cone calculations transfer to compact-target restrictions;
+      moment convergence alone does not control CMH or derivatives. Any future positive
+      finite-degree coefficient still needs remainder and deficit control at an admissible
+      parameter before it can yield a refutation.
 
   # --- Blocked, and parked probes.
   - id: ap:c-recovery-envelope
