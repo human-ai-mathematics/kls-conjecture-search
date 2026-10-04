@@ -8,7 +8,7 @@ numbering:
 
 Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables — a function on the simplex is rewritten as a function of independent Gamma variables, homogeneous of degree zero, where the generator is that of a product — followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
 
-The fourth class is solvable in a weaker but more pointed sense. The exponential cones of §[](#subsec:cmh-cones) attach a Gamma radial variable to an arbitrary centered base, and their moment map is explicit in terms of the base's own ([](#prop:cone-moment-map)); unlike the first three classes they are not compactly supported and, for a general base, not affine images of products. What is computed exactly on them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so every cone with $\beta=n$ saturates sharp gate zero ([](#conj:gate-zero-sharp)) in its axis direction ([](#prop:cone-linear-sector)), and over a cube base the entire gate matrix is a closed form bounded by $2$ ([](#cor:cube-cone-gate-zero)). They are the first non-product equality set the sharp linear sector has, which is what makes them a constraint on any argument for it.
+The fourth class is solvable in a weaker but more pointed sense. The exponential cones of §[](#subsec:cmh-cones) attach a Gamma radial variable to an arbitrary centered base, and their moment map is explicit in terms of the base's own ([](#prop:cone-moment-map)); unlike the first three classes they are not compactly supported and, for a general base, not affine images of products. What is computed exactly on them is the linear sector rather than the full constant: the axis gate value is $1+n/\beta$, so every cone with $\beta=n$ saturates sharp gate zero ([](#conj:gate-zero-sharp)) in its axis direction ([](#prop:cone-linear-sector)), and over any product of simplices the entire gate matrix is a closed form bounded by $2$ ([](#prop:product-simplex-cone-gate)). They are the first non-product equality set the sharp linear sector has, which is what makes them a constraint on any argument for it.
 
 The section closes at the exact product endpoint, the extreme case where the inequality holds with equality: centered one-sided exponentials saturate $\mathrm{CMH}(4)$ with *zero* slack. Whether a log-concave perturbation raises the full CMH Rayleigh quotient is a separate second-variation problem, [](#conj:cmh-second-variation); changing its solenoidal term alone is not decisive ([](#cor:cmh-product-saturation)). The cone family bears on where to look for such a perturbation, and §[](#subsec:cmh-cones) reports what a first computation over it suggests.
 
@@ -395,7 +395,47 @@ $$
 Both eigenvalues are at most $2$ for all $n\ge2$ and $\beta\ge n$: every cube cone satisfies [](#eq:gate-zero-sharp). Equality holds in the axis direction exactly when $\beta=n$, and in the transverse directions only for $n=\beta=2$, where the matrix is $2\,\Id_2$ and the measure is a product of two centered exponentials.
 :::
 
-The cube cones are the first non-product family in this document on which the sharp linear sector is saturated while every object entering $\CMH$ — the kernel, the generator, and all moments — is a rational function of independent Gamma and uniform variables. They are therefore the natural place to test $\mathrm{CMH}(4)$ itself beyond the product endpoint of [](#cor:cmh-product-saturation): numerical experiments suggest that the product-potential perturbations of [](#conj:cmh-second-variation) leave the log-concave class for both signs of $\eps$, whereas here the base supplies a non-product perturbation inside it, and a Galerkin quotient above $4$ on a cube cone would point to a counterexample to $\mathrm{CMH}(4)$, which would still have to be verified by an exact argument. A first computation over this family points the other way: on cube cones the polynomial Galerkin quotients sit strictly below the exponential-product values at equal degree, so a non-product base appears to dilute the one-dimensional exponential mechanism rather than add to it, and the pressure on $\mathrm{CMH}(4)$ within this family, if any, lies in the radial factor. This is numerical evidence at finite degree, not a proof.
+For an interval base, the smallest case is $n=\beta=2$: the gate is $2I_2$, as expected for an affine image of two independent exponentials. A square base behaves differently. At $n=\beta=3$, its axis value is $2$ while each transverse value is $53/30$. The following result explains this distinction for every product of simplices, with intervals counted as one-dimensional simplices.
+
+:::{prf:proposition} Product-simplex cone gate
+:label: prop:product-simplex-cone-gate
+Let $q\ge1$, let $k_1,\ldots,k_q\ge1$ be integers, let
+$n=1+\sum_{j=1}^q k_j$, and let $\beta\ge n$ be real. In
+[](#def:exponential-cone), take the centered base $K$ to be a Cartesian product
+of simplices of dimensions $k_1,\ldots,k_q$. Let $\Sigma$ and $\tau$ be the
+covariance and canonical Stein kernel of $\bar\mu_{K,\beta}$, and put
+$G=\Sigma^{-1/2}\mathbb E[\tau\Sigma^{-1}\tau]\Sigma^{-1/2}$.
+Then $G$ has axis eigenvalue $1+n/\beta$ and, on each transverse factor of
+dimension $k$, the eigenvalue
+
+$$
+\lambda_k(n,\beta)=
+\frac{a_k\beta^2+(1+2b_k)\beta+n-k+c_k}{\beta(\beta+1)},
+\quad
+a_k=\frac{2(k+2)}{k+4},\qquad
+b_k=\frac{2(k+1)(k+2)}{(k+3)(k+4)},\qquad
+c_k=\frac{(k+2)(k^2+9k+2)}{(k+3)(k+4)}.
+$$
+
+In particular $G\preceq2I$. If $\beta>n$, then $G\prec2I$.
+If $\beta=n$ and $q=1$, then $G=2I$. If $\beta=n$ and $q>1$,
+then the eigenspace at $2$ is exactly the cone axis. Thus a nonzero transverse
+equality direction exists exactly when $q=1$ and $\beta=n$.
+The same spectral and inequality conclusions hold after any invertible linear
+change of coordinates, with equality subspaces transported in covariance-normalized
+coordinates.
+:::
+
+The proof uses the independent vertex-permutation symmetries of the simplex factors. They kill mixed blocks and make each transverse block scalar. Three moments of the canonical simplex kernel, evaluated by the elementary simplex integral, give $a_k,b_k,c_k$. Substituting these in the cone kernel of [](#prop:cone-moment-map) yields the displayed spectrum. To see both the inequality and its equality cases, put $t=\beta-n$ and $d=n-k-1$. Multiplication of $2-\lambda_k$ by the positive denominator $(k+3)(k+4)\beta(\beta+1)$ gives
+
+$$
+4(k+3)t^2+[5k^2+27k+28+8(k+3)d]t
++4d[(k+3)n+k+1].
+$$
+
+For $t,d\ge0$ this vanishes exactly at $t=d=0$: the radial parameter is at its endpoint and there is just one factor. With several positive-dimensional factors, only the axis attains equality. This determines the linear sector for the family, without deciding the universal gate inequality or nonlinear CMH.
+
+The explicit cone kernels also permit polynomial tests of the full CMH quotient. In the finite-degree computations on cube cones, those quotients lie below the exponential-product values at equal degree. This is numerical evidence, not an upper bound on CMH. A strict quotient above $4$ would instead require exact verification and a justification that the boundary model transfers to the regular class.
 
 % Agent note: the computation is research/explorations/2026-09-06-numerics-cmh-cone-w5n01.md; a refuting witness would go through solutions/README.md.
 
@@ -423,5 +463,9 @@ where $\CMH(\mu_0)=4$ by [](#cor:cmh-product-saturation).
 :::
 
 Since $\CMH(\mu_0)=4$, a strictly positive value of this second variation for one admissible perturbation would give $\CMH(\mu_\eps)>4$ for some small $\eps$: a counterexample to $\mathrm{CMH}(4)$, forcing a constant larger than $4$ in the endpoint, though not by itself a counterexample to [](#conj:kls). The computation splits the CMH numerator through [](#prop:cmh-hodge) into its gradient and solenoidal parts; a vanishing of the solenoidal part to second order would not by itself decide the sign, since the gradient part, the denominator and the optimizing test function vary too.
+
+The first task is admissibility. The conjecture perturbs the *source moment potential* linearly and uses an exponential times a Gaussian as its base. A linear perturbation of the *target density potential* is a different family: the change of variables through the moment map generally introduces higher-order terms in the parameter. Tests of two-sided convexity for a target-linear family therefore do not decide admissibility, or vacuity, of the displayed conjecture. Nor does an exponential times exponential calculation automatically test its stated ansatz. A nonlinear cone path can probe $\mathrm{CMH}(4)$ separately, provided its regularity and limiting passage are justified.
+
+A positive second derivative of a fixed-degree quotient is also insufficient by itself. If that quotient starts below $4$, the perturbation must overcome its initial deficit with a controlled remainder. Passing a scalar Poincaré bound to approximants does not supply continuity of CMH or its second variation.
 
 [](#conj:cmh-second-variation) is the sharpest available probe of the approach because it attacks the target inequality $\mathrm{CMH}(4)$ itself rather than the machinery built to prove it, and because both ingredients are already exact: the saturation value comes from [](#thm:cmh-product) and the splitting from [](#prop:cmh-hodge). Together with [](#rem:gate-zero-dichotomy) it forms the falsification layer of the moment-map approach; [](#conj:mm-invariant-lift) and [](#conj:mm-square-root-commutator) form the construction layer.

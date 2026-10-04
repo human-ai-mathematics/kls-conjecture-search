@@ -102,20 +102,19 @@ then $\mu^+(E)\ge c\,c_0b_0\sqrt{T_0}$. Consequently, if $T_0,c_0,b_0$ are unive
 :::
 
 :::{prf:proof}
-The posterior $\mu_{T_0}$ is $T_0$-uniformly log-concave, so Bakry–Emery/Lichnerowicz and Gaussian isoperimetric comparison give [@BakryGentilLedoux2014; @Bobkov1999LogConcave; @Milman2009Isoperimetric]
+Keep the actual measurable set $E$ when taking its neighborhoods $E^r$: changing a null subset can change lower outer Minkowski content. For each fixed $r>0$, the posterior mass of $E^r\setminus E$ is a bounded conditional-expectation martingale. Choose deterministic radii realizing the original lower limit. Nonnegativity and Fatou then give
 
 $$
-\mu_{T_0}^+(E)\ge c\sqrt{T_0}\min(p_{T_0},q_{T_0}).
+\mathbb E\mu_{T_0}^+(E)\le
+\liminf_{j\to\infty}\mathbb E\frac{\mu_{T_0}(E^{r_j}\setminus E)}{r_j}
+=\mu^+(E).
 $$
 
-The perimeter supermartingale inequality therefore yields
-
-$$
-\mu^+(E)\ge\E\mu_{T_0}^+(E)
-\ge c c_0b_0\sqrt{T_0}.
-$$
-
-Concavity of the isoperimetric profile converts the universal balanced-cut bound into a dimension-free Cheeger lower bound.
+The posterior potential has curvature at least $T_0$, even when its convex support has a boundary. Gaussian isoperimetric comparison therefore gives
+$\mu_{T_0}^+(E)\ge c\sqrt{T_0}\min(p_{T_0},q_{T_0})$.
+For nonsmooth potentials, the proof first approximates the convex part while retaining this quadratic curvature, passes the functional comparison for bounded Lipschitz tests, and only then takes distance cutoffs of $E$. It does not assume continuity of set perimeters under approximation. Averaging the comparison on the survival event yields
+$\mu^+(E)\ge c c_0b_0\sqrt{T_0}$.
+Finally, concavity and symmetry of the original log-concave law's isoperimetric profile turn the uniform bound at mass $1/2$ into a Cheeger bound. The argument establishes the implication; the uniform survival premise remains to be proved.
 :::
 
 :::{prf:assumption} Stopped centroid estimate

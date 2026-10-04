@@ -87,8 +87,10 @@ them; this section is the reasoning a new route needs before it runs anything.
    use high-complexity cuts.
 5. **Isotropic simplex with the $A_{m-1}$ root frame.** The root-frame gap is $O(m^{-2})$
    (`prop:conditional-fiber-root-obstruction`), while the exact degree-two dual floors give
-   $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. No degree-two certificate can refute the all-frame gate;
-   a fixed-degree refuter needs degree at least three.
+   $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. More generally, `lem:fiber-polynomial-floor` gives
+   $\Lambda_{m,k}\ge3/[k(k+1)^2(k+2)]$ for every fixed degree $k$ and every $m\ge2$.
+   No fixed-degree polynomial upper certificate can refute the all-frame gate asymptotically;
+   degree must grow with dimension, or tests must be nonpolynomial.
 6. **Conventions that must be stated or the estimate is not a statement.** $0\le\chi\le1$ and
    $\chi'\ge0$ for any retained cutoff; affine-support degeneration in the approximation limit;
    the regular class boundary, with non-smooth laws admissible only as boundary calibrations.
@@ -99,8 +101,9 @@ them; this section is the reasoning a new route needs before it runs anything.
    $\beta=n$, with the directional third moment attaining $\lVert T_3(e_1)\rVert_{\mathrm{HS}}=2$.
    They are the non-product equality cases of the sharp gate. Any gate-zero or CMH argument
    must survive them; any sharp-constant claim must be tight on them. The cube-cone kernel is
-   fully explicit, and the first exact sweep found no violation and no $\mathrm{CMH}(4)$ pressure
-   from the base.
+   fully explicit. `prop:product-simplex-cone-gate` now proves the sharp linear bound on
+   all product-simplex bases (intervals included), with the complete equality set.
+   This does not control nonlinear CMH tests or arbitrary convex bases.
 8. **The five failure lenses a refutation attempt should sweep**, one per attempt and blind to
    the others: remote curvature loss and saturating likelihood (tail); separated scales and
    operator-versus-trace gaps (anisotropy); polynomial tails where Poincaré survives but stronger
@@ -198,8 +201,10 @@ and earlier records cite them under those names.
   bound, which with `prop:cmh-approximation-closure` and a discharged `ass:uniform-cmh-approximants` or
   `ass:cmh-recovery-envelope` would close the target.
 - `conj:gate-zero` and `conj:gate-zero-sharp` — the cheapest necessary consequences of
-  $\mathrm{CMH}(4)$ on linear tests; the sharp form refines the other, and either falsifies the
-  CMH route without touching the target.
+  the moment-map programme on linear tests. The constant-four gate is necessary for
+  $\mathrm{CMH}(4)$; the sharp form at two is stronger. Refuting the constant-four gate
+  falsifies that CMH target without touching KLS, whereas refuting the sharp form alone
+  does not.
 - `conj:trace-upgrade` — the tight-prefix operator-to-trace upgrade that would carry the fixed-cut route.
 - `conj:conditional-fiber-frame` — a universal form gap for one test-independent frame, which
   implies the target through `lem:conditional-fiber-form`.

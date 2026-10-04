@@ -37,3 +37,10 @@ The separate [exponential coefficient criterion](solutions/prop-sz-exponential-c
 uses the comparison to characterize exactly the coefficient growth equivalent to KLS.
 The polynomial and curvature chapter, Section [](#sec:polynomial-curvature),
 explains how these arguments fit together and where dimension dependence remains.
+
+The [balanced-survival proof](solutions/lem-survival-implies-kls.md) treats arbitrary
+measurable cuts and nonsmooth log-concave posteriors directly. For the other
+approaches, the [product-simplex cone calculation](solutions/prop-product-simplex-cone-gate.md)
+determines the sharp linear gate and its equality directions, while the
+[polynomial fiber bound](solutions/lem-fiber-polynomial-floor.md) excludes
+asymptotically vanishing simplex certificates at every fixed polynomial degree.

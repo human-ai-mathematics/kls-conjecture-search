@@ -13,8 +13,8 @@ nodes:
   - id: lem:survival-implies-kls
     status: proved
     proofs:
-      - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+      - artifact: solutions/lem-survival-implies-kls.md
+        review: research/reviews/2026-10-04-wave-a-survival-repair-review.md
 
   - id: ass:stopped-centroid
     status: open
@@ -910,3 +910,17 @@ nodes:
     proofs:
       - artifact: solutions/prop-cone-moment-map.md
         review: research/reviews/2026-09-06-prop-cone-moment-map-proof-review.md
+
+  - id: prop:product-simplex-cone-gate
+    status: proved
+    depends_on: [def:exponential-cone, prop:cone-moment-map]
+    proofs:
+      - artifact: solutions/prop-product-simplex-cone-gate.md
+        review: research/reviews/2026-10-04-wave-a-cone-gate-review.md
+
+  - id: lem:fiber-polynomial-floor
+    status: proved
+    depends_on: [lem:conditional-fiber-form, cor:cmh-dirichlet-poincare]
+    proofs:
+      - artifact: solutions/lem-fiber-polynomial-floor.md
+        review: research/reviews/2026-10-04-wave-a-fiber-floor-review.md
