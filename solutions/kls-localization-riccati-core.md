@@ -2,7 +2,6 @@
 title: 'Solution: the localization, Riccati, and tight-window core'
 label: sec:sol-kls-localization-riccati-core
 ledger-node:
-- lem:survival-implies-kls
 - lem:matrix-riccati
 - thm:scalar-riccati
 - cor:per-direction
@@ -13,24 +12,18 @@ numbering:
   enumerator: D6.%s
 ---
 
-**Overview.** This dossier proves [](#lem:survival-implies-kls), [](#lem:matrix-riccati), [](#thm:scalar-riccati), [](#cor:per-direction), [](#cor:tight-window-consumption), [](#lem:pathwise-BL) and [](#cor:away-from-zero). Under Eldan localization of a two-color cut, it derives exact Itô equations for the between-color covariance $B_t$, the within-color covariance $R_t$ and the separation $r_t=\Tr B_t$. A tight-window Carleson bound on the source $S_t$ then keeps the cut balanced, which yields a boundary lower bound. Proofs are made in a smooth compact class with bounded stopping, then passed to the limit by Fatou.
+**Overview.** This dossier proves [](#lem:matrix-riccati), [](#thm:scalar-riccati), [](#cor:per-direction), [](#cor:tight-window-consumption), [](#lem:pathwise-BL) and [](#cor:away-from-zero). Under Eldan localization of a two-color cut, it derives exact Itô equations for the between-color covariance $B_t$, the within-color covariance $R_t$ and the separation $r_t=\Tr B_t$. A tight-window Carleson bound on the source $S_t$ then keeps the cut balanced. The boundary conclusion uses the separate canonical bridge [](#lem:survival-implies-kls).
 
-1. [](#lem:sol-survival-implies-kls): if the cut stays balanced with positive probability at time $T_0$, uniform log-concavity of $\mu_{T_0}$ and the perimeter supermartingale [](#eq:sol-core-perimeter-supermartingale) give $\mu^+(E)\gtrsim\sqrt{T_0}$.
-2. [](#lem:sol-matrix-riccati): Itô calculus on $v_t=s_t\delta_t$ and $s_t$ gives [](#eq:sol-dB), and subtraction from the covariance SDE gives [](#eq:sol-dR).
-3. [](#thm:sol-scalar-riccati): the trace of [](#eq:sol-dB) gives drift $S_t-D_t$, with $D_t\ge r_t^2$.
-4. [](#cor:sol-per-direction): the drift of [](#eq:sol-dR) is nonpositive, so stopping and Fatou bound the directional dissipation by $\theta^TR_0\theta\le1$.
-5. [](#cor:sol-tight-window-consumption): Step 3, the Carleson hypothesis [](#eq:sol-tight-carleson) and Gronwall bound $\E r$ [](#eq:sol-u-bound). Doob's inequality with [](#eq:sol-p-qv) then gives survival in the window, and Step 1 applies.
-6. [](#lem:sol-pathwise-BL): the identity [](#eq:sol-color-quadratic) and Brascamp–Lieb give $s_t\norm{K_t}_\HS^2\le4/t^2$.
-7. [](#cor:sol-away-from-zero): Step 6 and $r^2\le D$ give $S_t\le8/t^2+\tfrac12D_t$ in a tight window.
+1. [](#lem:sol-matrix-riccati): Itô calculus on $v_t=s_t\delta_t$ and $s_t$ gives [](#eq:sol-dB), and subtraction from the covariance SDE gives [](#eq:sol-dR).
+2. [](#thm:sol-scalar-riccati): the trace of [](#eq:sol-dB) gives drift $S_t-D_t$, with $D_t\ge r_t^2$.
+3. [](#cor:sol-per-direction): the drift of [](#eq:sol-dR) is nonpositive, so stopping and Fatou bound the directional dissipation by $\theta^TR_0\theta\le1$.
+4. [](#cor:sol-tight-window-consumption): Step 3 supplies a finite source budget before the Carleson hypothesis [](#eq:sol-tight-carleson) is applied. Step 2 and Gronwall then bound $\E r$ in [](#eq:sol-u-bound). The maximal inequality with [](#eq:sol-p-qv) gives survival, and [](#lem:survival-implies-kls) supplies the boundary conclusion.
+5. [](#lem:sol-pathwise-BL): the identity [](#eq:sol-color-quadratic) and Brascamp–Lieb give $s_t\norm{K_t}_\HS^2\le4/t^2$.
+6. [](#cor:sol-away-from-zero): Step 5 and $r^2\le D$ give $S_t\le8/t^2+\tfrac12D_t$ in a tight window.
 
-**Scope and regularity.** This dossier proves exactly the seven results listed in the header. We first work with a smooth, compactly supported, full-dimensional log-concave probability measure and a smooth approximation of the cut. On every bounded time interval all stochastic integrals below are then true martingales after the usual bounded stopping. Every identity is local and every estimate has constants independent of the regularization. Truncating the measure, smoothing the density and the cut, putting the approximation in isotropic position, and then using Fatou's lemma for the nonnegative occupation terms gives the stated general versions. The only perimeter statement needed without compact support is the supermartingale inequality
+**Scope and regularity.** This dossier proves the six results listed in the header on the exact original posterior, with the original measurable cut. A full-dimensional log-concave probability has an exponential moment in a neighborhood of the origin. Since $c_t\to0$ as $t\downarrow0$, its posterior polynomial moments are continuous near zero by an exponential majorant. On each compact positive-time interval, bounded $c_t$ and the Gaussian factor give a common majorant for every polynomial moment. The positive normalizing factor is continuous, as are the moments restricted to the fixed cut. Finite-time posterior equivalence preserves $p_t,q_t>0$ when $p_0\in(0,1)$.
 
-```{math}
-:label: eq:sol-core-perimeter-supermartingale
-\E\mu_t^+(E)\le \mu^+(E).
-```
-
-It follows directly by integrating, over the reduced boundary of the fixed cut, the nonnegative local-martingale density of stochastic localization. Thus no optional-stopping argument below presupposes unproved uniform integrability at an infinite endpoint.
+Consequently, localizing the time, posterior moments, reciprocals of $p_t,q_t$, and martingale quadratic variations gives increasing stopping times tending almost surely to infinity. All Itô calculations below hold before these stops, where the stochastic integrals are true martingales. No spatial derivative of the cut indicator occurs: it is a bounded multiplier of polynomial tests, so no smoothing of a rough cut is needed. Removal of stops uses the specific nonnegative budgets proved below, not a general approximation assertion about perimeters. The Brascamp–Lieb form inequality is applied directly to the uniformly log-concave positive-time posterior and its polynomial tests.
 
 ## 1\. Setup and elementary decompositions
 
@@ -117,42 +110,11 @@ Then
 \qquad \dd[p]_t=\abs{v_t}^2\dd t=s_t^2\abs{\delta_t}^2\dd t.
 ```
 
-## 2\. Balanced posterior survival gives boundary and KLS
+## 2\. The separate survival bridge
 
-:::{prf:lemma} = [](#lem:survival-implies-kls)
-:label: lem:sol-survival-implies-kls
-Suppose that for some $T_0,c_0,b_0>0$,
+The boundary and KLS implication used here is the canonical [](#lem:survival-implies-kls), proved in the active [standalone survival dossier](lem-survival-implies-kls.md). That proof treats the lower outer Minkowski content of actual measurable sets using neighborhood increments and conditional expectation. It does not identify general outer Minkowski content with a reduced-boundary integral. The former internal survival argument is superseded; survival is not one of this dossier's six claims.
 
-$$
-\Prob\{\min(p_{T_0},q_{T_0})\ge b_0\}\ge c_0.
-$$
-
-Then
-
-$$
-\mu^+(E)\ge c\,c_0b_0\sqrt{T_0}
-$$
-
-for a numerical $c>0$. Consequently, if $T_0,c_0,b_0$ are universal and the event holds for every balanced cut of every isotropic log-concave measure, then the KLS Cheeger constant is bounded below universally.
-:::
-
-:::{prf:proof}
-The potential of $\mu_{T_0}$ has Hessian bounded below by $T_0I$. The standard Bakry–Emery/Bobkov isoperimetric consequence for a $T_0$-uniformly log-concave law is
-
-$$
-\mu_{T_0}^+(E)\ge c\sqrt{T_0}\min(p_{T_0},q_{T_0});
-$$
-
-see [@BakryGentilLedoux2014; @Bobkov1999LogConcave; @Milman2009Isoperimetric]. Therefore [](#eq:sol-core-perimeter-supermartingale) and the assumed event give
-
-$$
-\mu^+(E)\ge\E\mu_{T_0}^+(E)
-\ge c\sqrt{T_0}\E\min(p_{T_0},q_{T_0})
-\ge c\,c_0b_0\sqrt{T_0}.
-$$
-
-The isoperimetric profile of a log-concave measure is concave, symmetric under $p\leftrightarrow1-p$, and vanishes at the endpoints. Hence a common positive lower bound for $I_\mu(1/2)$, equivalently for every balanced cut by approximation of the profile infimum, gives $I_\mu(p)\ge c'\min(p,1-p)$ for all $p$. This is the dimension-free Cheeger form of KLS.
-:::
+In Section 4 we apply this bridge to the original posterior at the deterministic positive time $T_*$, with $b_0=1/3$ and $c_0=1/2$. The bridge assumes no Riccati or source-occupation estimate.
 
 ## 3\. The matrix and scalar Riccati identities
 
@@ -314,11 +276,34 @@ $$
 \Prob\{\min(p_{T_*},q_{T_*})\ge1/3\}\ge1/2.
 $$
 
-Hence [](#lem:sol-survival-implies-kls) gives a boundary lower bound whose constant has the same dependence. In particular, universal input constants give a universal bound.
+Hence [](#lem:survival-implies-kls) gives a boundary lower bound whose constant has the same dependence. In particular, universal input constants give a universal bound.
 :::
 
 :::{prf:proof}
-Let $u(T)=\E r_{T\wedge\tau_\eta}$. Stop once more at bounded coefficient/martingale levels, integrate [](#thm:sol-scalar-riccati), and then remove that auxiliary stopping. The nonnegative terms and the regularization convention justify Fatou where equality is not needed. Using [](#eq:sol-tight-carleson), $r_0\le1$, and $1-\alpha>0$ gives
+Let $u(T)=\E r_{T\wedge\tau_\eta}$. First sum [](#cor:per-direction) over a fixed orthonormal basis $(e_i)_{i=1}^n$. Since $\sum_i|G_te_i|^2=\norm{G_t}_\HS^2$, this gives, without using the Carleson premise,
+
+$$
+\E\int_0^T S_t\dd t\le\Tr R_0\le n.
+$$
+
+Choose increasing auxiliary localizing times $\sigma_k\uparrow\infty$ for the scalar identity. Its stopped expectation reads
+
+$$
+\E r_{T\wedge\tau_\eta\wedge\sigma_k}
++\E\int_0^{T\wedge\tau_\eta\wedge\sigma_k}D_t\dd t
+=r_0+\E\int_0^{T\wedge\tau_\eta\wedge\sigma_k}S_t\dd t.
+$$
+
+The source on the right has the integrable bound just proved and converges by monotone convergence. Fatou for the nonnegative terminal and dissipation terms on the left yields
+
+$$
+u(T)+\E\int_0^{T\wedge\tau_\eta}D_t\dd t
+\le r_0+\E\int_0^{T\wedge\tau_\eta}S_t\dd t\le1+n.
+$$
+
+Here $r_0\le1$ because $B_0$ has rank at most one and $B_0\preceq I_n$. In particular $u$ is finite and locally integrable, and Tonelli gives
+$\E\int_0^{T\wedge\tau_\eta}r_t\dd t\le\int_0^Tu(t)\dd t<\infty$.
+All terms are therefore finite before absorption. Only now apply [](#eq:sol-tight-carleson), on its original deterministic prefix, without an auxiliary stop. Subtracting $\alpha\E\int D_t\dd t$ and discarding the nonnegative remainder with coefficient $1-\alpha>0$ gives
 
 $$
 u(T)\le1+C_0T+C_1\E\int_0^{T\wedge\tau_\eta}r_t\dd t
@@ -421,4 +406,4 @@ $$
 The first term is at most $8/t^2$ by [](#lem:sol-pathwise-BL); the second is at most $(128/3)\eta^2D$ because $r^2\le D$. Taking, for example, $\eta_0=\min\{1/4,\sqrt3/16\}$ makes this coefficient at most $1/2$. Integration on an interval bounded away from zero gives the final display.
 :::
 
-**Endpoint audit.** Every expectation of a stochastic identity above is taken first at a bounded localizing stopping time. Finite-horizon estimates survive its removal by Fatou and the nonnegativity of $R,S,D$ in the places used. The only infinite-horizon assertion is obtained from the already proved finite-horizon occupation inequality by monotone convergence. The survival step uses the perimeter supermartingale direction, which is valid without compact support. Thus no claim depends on silently declaring a local martingale to be uniformly integrable at time $\infty$.
+**Endpoint audit.** Every expectation of a stochastic identity above is taken first at a bounded localizing stopping time. Finite-horizon estimates survive its removal by Fatou and the nonnegativity of $R,S,D$ in the places used. The only infinite-horizon assertion is obtained from the already proved finite-horizon occupation inequality by monotone convergence. For tight-window absorption, the per-direction source budget first gives finite terminal and integrated dissipation bounds. The boundary conclusion uses the separate canonical survival bridge, valid without compact support. Thus no claim depends on silently declaring a local martingale to be uniformly integrable at time $\infty$.

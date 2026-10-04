@@ -116,10 +116,11 @@ them; this section is the reasoning a new route needs before it runs anything.
    isoperimetric profile of the random posterior; the available supermartingale covers a *fixed*
    competitor family while the balanced family moves with time. Inserting the bound directly
    assumes the Cheeger control being proved.
-2. **The equivalent-strength ceiling** (`rem:relative-ceiling`, from `prop:ceiling`). A universal
-   $\Xi_{T_0}\le\kappa T_0$ at small fixed time *already implies KLS*. A route aiming at it has
-   replaced the target by a restatement of it. This is the canonical shape to check a new route
-   against.
+2. **A KLS-sufficient covariance input** (`rem:relative-ceiling`, from `prop:ceiling`). A universal
+   all-measure $\Xi_{T_0}\le\kappa T_0$ bound at sufficiently small fixed time implies KLS.
+   No converse or equivalence is established. Proving this bound would be a sufficient-condition
+   route; its failure would not refute KLS. Distinguish it from near-worst weighted propagation
+   and from the actual excess controlled by the bootstrap.
 3. **Crude bootstrap** (`rem:crude-insufficient`). $\Xi_T\lesssim\log n$ is too large at known
    lower-bound scales; the available polylogarithmic technology reaches only `cor:loglog`.
 4. **Projection ceiling** (`rem:projection-ceiling`). Radial and projection-only tests lose a logarithm;
@@ -225,7 +226,8 @@ and earlier records cite them under those names.
 - **What a new route owes before it enters the portfolio.** A thesis — the mechanism, in one
   sentence; a first precise target, written so it could be a ledger node today; its boundary
   against the obstruction set, fence by fence; an explicit statement of whether it is
-  *sufficient* or *equivalent* — a route that lands on an equivalent-strength statement has
-  renamed the problem (trap 2); and the fastest way to kill it. The classical needles,
+  *sufficient* or *equivalent* — a sufficient condition has no claimed converse without proof
+  (trap 2), and an actual equivalence still needs a distinct mechanism (trap 11); and the
+  fastest way to kill it. The classical needles,
   transport and Bochner/$H^{-1}$ approaches surveyed in `modules/01`–`05` are the landscape this
   program works against, not routes.

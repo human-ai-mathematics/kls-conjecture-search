@@ -59,16 +59,16 @@ approaches:
       factor rather than at the base of an exponential cone.
     state: active
     next: >-
-      The Wave A admissibility audit rules out nonproduct two-sided target-linear directions
-      on the fixed exponential-product support. Test instead the boundary density proportional
-      to (x+y)^(beta-2) exp(-x-y) on the positive orthant with beta=2+eps^2. Using
-      prop:cone-moment-map, compute the right beta derivative of the full degree-d quotient
-      at beta=2 for d=1..4, including covariance and both Hodge channels. Separately justify
-      transfer of any strict finite-test violation to regular compact-target approximants;
-      moment convergence alone does not control CMH. This tests CMH(4), not automatically
-      the source-linear exponential-Gaussian ansatz of conj:cmh-second-variation.
-      A positive coefficient is only directional evidence: control the remainder and an
-      admissible parameter that overcome the finite-degree deficit below four.
+      Resolve admissibility for a nontrivial source-linear perturbation in
+      conj:cmh-second-variation, including both parameter signs and its regularity class.
+      The 2026-10-04 even radial retest verifies log-concavity of beta=2+eps^2 and reports
+      strictly negative optimized degree-one through degree-four variation by exact
+      symbolic calculation; do not repeat that completed boundary calibration. Its family
+      gate and matrix identities remain uncertified. A separate regular-kernel convergence
+      estimate is needed before cone calculations transfer to compact-target restrictions;
+      moment convergence alone does not control CMH or derivatives. Any future positive
+      finite-degree coefficient still needs remainder and deficit control at an admissible
+      parameter before it can yield a refutation.
 
   - id: ap:c-gate-zero
     objective: >-

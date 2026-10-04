@@ -20,7 +20,17 @@ and for any $E$ with $\nu(E)=\tfrac12$ the Cheeger excess $\bar e_0(E):=\nu^+(E)
 :::
 
 :::{prf:proof}
-The profile is symmetric ($\nu^+(E)=\nu^+(E^c)$) and concave with $I(0^+)=0$, so for $p\le\tfrac12$, $I(p)/p$ is nonincreasing and minimized at $p=\tfrac12$; the case $p>\tfrac12$ is symmetric. Hence $h_\nu=\inf_pI(p)/\min(p,q)=2I(\tfrac12)$, and at $p=\tfrac12$, $h_\nu\min(p,q)=I(\tfrac12)$.
+Milman's Theorem 1.8 and Corollaries 6.5 and 6.12 [@Milman2009Isoperimetric] give symmetry and concavity of the profile on $(0,1)$, including for nonsmooth log-concave laws in dimension one. The assigned endpoint value $I(0)=0$ need not equal $I(0^+)$: the uniform law on an interval of length $L$ has $I(p)=1/L$ for $0<p<1$.
+
+For $0<\delta<p<1/2$, interior concavity and nonnegativity give
+
+$$
+I(p)\ge\frac{1/2-p}{1/2-\delta}I(\delta)
+       +\frac{p-\delta}{1/2-\delta}I(1/2)
+\ge\frac{p-\delta}{1/2-\delta}I(1/2).
+$$
+
+Letting $\delta\downarrow0$ yields $I(p)\ge2pI(1/2)$; symmetry handles $p>1/2$. Equality of the infimum follows by taking $p=1/2$, so $h_\nu=\inf_{0<p<1}I(p)/\min(p,1-p)=2I(1/2)$. For proper affine support, apply this argument in the affine hull; a Dirac law has no nontrivial-mass competitors. At mass $1/2$, the Cheeger line equals the profile, giving the excess identity. No endpoint continuity or profile minimizer is needed.
 :::
 
 :::{prf:definition} Cheeger excess
@@ -186,7 +196,7 @@ Assembling this section and the previous one, the propagation estimates availabl
 |---|---|---|
 | Absolute, $\le C(1+e_0)T$ | No hypothesis: all $\mu$, all balanced $E$ | [](#prop:trivial-excess). |
 | Absolute with small constant, $\le Te_0+\kappa T$ | Holds for near-worst $\mu$ whenever $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass. [](#ass:KI) | [](#cor:loglog); the universal-time near-worst extension is [](#conj:taming). |
-| Relative, $\le\kappa\,h_\mu T$ | Requires, as bootstrap input, $\Xi_T\le c\kappa T$, which at a sufficiently small universal time is already KLS-sufficient for all $\mu$; whether near-extremal measures satisfy this stronger, unweighted covariance bound is a separate question from [](#conj:taming), which asks only for the $h_\mu$-weighted form | [](#prop:ceiling). |
+| Relative, $\le\kappa\,h_\mu T$ | Making the upper bound in [](#eq:clean-form) small term by term requires $\Xi_T\le c\kappa T$, alongside control of $e_0$ and $T^{1/3}$. If proved for every isotropic log-concave $\mu$ at a sufficiently small universal time, this covariance bound would imply KLS. A large upper bound gives no lower bound on the actual excess. [](#conj:taming) asks instead for near-worst, $h_\mu$-weighted control. | [](#prop:ceiling). |
 
 On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the approach, posed precisely in Section [](#sec:open).
 :::
@@ -208,5 +218,5 @@ The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:in
 
 :::{prf:remark} An all-measure relative bound already implies KLS
 :label: rem:relative-ceiling
-By [](#prop:ceiling), a universal bound $\Xi_{T_0}(\mu)\le\kappa T_0$ at a sufficiently small fixed time already closes KLS. It is therefore not a weaker bootstrap input, and an argument that aims at it has replaced the target by an equivalent-strength statement. [](#conj:taming) must instead use near-worst structure and the $h_\mu$-weighted absolute scale.
+By [](#prop:ceiling), a bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for every isotropic log-concave measure at a sufficiently small universal time is sufficient for KLS. No converse is established here. The proposition explains the strength of that particular covariance input; it does not rule out proving it or obtaining propagation by another argument. [](#conj:taming) instead asks for a near-worst, $h_\mu$-weighted bound.
 :::

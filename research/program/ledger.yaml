@@ -31,21 +31,21 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:scalar-riccati
     status: proved
     depends_on: [lem:matrix-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: cor:per-direction
     status: proved
     depends_on: [lem:matrix-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: cor:full-matrix-dissipation
     status: proved
@@ -70,10 +70,10 @@ nodes:
 
   - id: cor:tight-window-consumption
     status: proved
-    depends_on: [thm:scalar-riccati, lem:survival-implies-kls]
+    depends_on: [thm:scalar-riccati, cor:per-direction, lem:survival-implies-kls]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:intro-all-cut
     status: proved
@@ -88,7 +88,7 @@ nodes:
     depends_on: [prop:stein-rep]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: lem:lyapunov-stein-duality
     status: proved
@@ -102,7 +102,7 @@ nodes:
     depends_on: [lem:pathwise-BL, lem:stein-vs-source, thm:scalar-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   # ---------------------------------------------------------------------------
   # ROUTE-AGNOSTIC MOMENT-MAP INPUTS
@@ -267,7 +267,7 @@ nodes:
     depends_on: [def:qcts, prop:stein-rep]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   # ---------------------------------------------------------------------------
   # STEIN-TRACE LAYER (Eldan-B currency)
@@ -277,20 +277,20 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:stein-vs-source
     status: proved
     depends_on: [prop:stein-rep, thm:scalar-riccati]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:boundary-rep
     status: proved
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: ass:weighted-package
     status: refuted
@@ -327,7 +327,7 @@ nodes:
     depends_on: [prop:stein-rep]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:perimeter-martingale
     status: proved
@@ -357,7 +357,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: def:cheeger-excess
     status: defined
@@ -366,14 +366,14 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:bootstrap
     status: proved
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-27-thm-bootstrap-semantic-repair-proof-review.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:bootstrap-stopped-interface
     status: proved
@@ -386,7 +386,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: ass:KI
     status: proved
@@ -401,14 +401,14 @@ nodes:
     depends_on: [thm:bootstrap, ass:KI, cor:KI-discharged]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: prop:ceiling
     status: proved
-    depends_on: [lem:survival-implies-kls]
+    depends_on: [lem:survival-implies-kls, thm:bootstrap]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   # ---------------------------------------------------------------------------
   # GEOMETRY: second variation, Reilly, splitting (model statements; quant. open)
