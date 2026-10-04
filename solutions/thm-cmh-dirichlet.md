@@ -39,15 +39,106 @@ $\CMH(\mu)=\CP(\mu)/\Var(\mu)$. Every one-dimensional log-concave law satisfies 
 :::
 
 :::{prf:proof}
-$L_\mu f=\tau f''-xf'=\rho^{-1}(\tau\rho f')'$, so for $h=-L_\mu f$ the field $u=\tau f'$ satisfies $D_\mu^*u=h$ with vanishing flux at $\ell$, where $D=\dd/\dd x$ and $D_\mu^*u=-\rho^{-1}(\rho u)'$. If $v=(D_\mu^*D)^{-1}h$, then $Dv$ solves the same equation with the same boundary flux and hence equals $u$. Thus
+We use the natural no-flux realizations of §[](#subsec:cmh-conventions).
+Let $D$ be the closed maximal derivative in $L^2(\mu)$, with domain
+$H^1(\mu)$, and let $\Aop$ be the operator of the natural weighted form
+$\mathcal E_\tau(f,q)=\int\tau f'q'\,d\mu$. Constants and bounded
+locally absolutely continuous functions whose derivative has compact interior
+support belong to these form domains when their displayed energies are finite.
+The local density regularity is that of the differential-operator setup
+(in particular, locally positive continuous densities suffice, using weak
+derivatives); no endpoint regularity, log-concavity, or spectral gap is used.
+Both constants in the asserted identity are allowed to be infinite, and the
+CMH numerator is understood as an extended nonnegative integral.
+
+Put $p=\tau\rho$. Centering and nonzero finite variance give $p>0$ in the
+interior. The following graph core encodes the adjoint's no-flux condition:
 
 $$
-\norm u_2^2=\norm{Dv}_2^2
-=\inner{v}{D_\mu^*Dv}
-=\inner{h}{(D_\mu^*D)^{-1}h},
+\mathscr U=\{u=\phi/\rho:\phi\in C_c^\infty((\ell,r))\},
+\qquad D_\mu^*u=-\phi'/\rho.
 $$
 
-so $\sup_{h\perp1}\norm u_2^2/\norm h_2^2=\norm{(D_\mu^*D)^{-1}}=\CP(\mu)$, the last equality because $D_\mu^*D$ is the nonnegative Langevin operator of $\mu$. In one dimension $H=\tau$ and $\Sigma=\sigma^2$, so the CMH numerator is $\norm u_2^2/\sigma^2$ and the denominator is $\norm h_2^2$; taking the supremum gives $\CMH=\CP/\sigma^2$.
+To verify the core assertion, define $B_0$ by this expression on $\mathscr U$.
+Its domain is dense: compact localization and smooth approximation of the
+flux $\rho u$ are dense in $L^2(\rho^{-1}dx)$. The adjoint condition,
+tested against $\phi$, is precisely that a scalar function have a
+distributional derivative in $L^2(\mu)$. Thus $B_0^*=D$, with no
+boundary restriction on the scalar function, and
+$\overline{B_0}=D_\mu^*$. Also $\ker D$ is exactly the constants.
+
+Every field of this core is attained by an actual CMH test. Fix an interior
+$x_0$ and set
+
+$$
+f_\phi(x)=\int_{x_0}^x\frac{\phi(t)}{p(t)}\,dt,
+\qquad h_\phi=-\frac{\phi'}\rho.
+$$
+
+Then $f_\phi$ is bounded and constant near the endpoints, and
+$\mathcal E_\tau(f_\phi,f_\phi)=\int\phi^2/p\,dx<\infty$.
+For every weighted-form test $q$, compactly supported integration by parts gives
+
+$$
+\mathcal E_\tau(f_\phi,q)=\int\phi q'\,dx
+=-\int\phi' q\,dx=\inner{h_\phi}{q}.
+$$
+
+Since $h_\phi\in L^2(\mu)$, the operator-domain criterion gives
+$f_\phi\in\Dom(\Aop)$, $\Aop f_\phi=h_\phi$, and
+$\tau f_\phi'=u$. Moreover $h_\phi$ is centered. No replacement of
+$\operatorname{Ran}\Aop$ by all of centered $L^2$ has been made.
+
+**Lower bound, including the infinite case.** Put $M=\sigma^2\CMH(\mu)$.
+If $M<\infty$, these attained tests give
+$\norm u_2^2\le M\norm{D_\mu^*u}_2^2$ on $\mathscr U$, and graph-core
+closure extends it to all of $\Dom(D_\mu^*)$. This bound and closedness
+make $\operatorname{Ran}D_\mu^*$ closed: if $D_\mu^*u_j$ converges,
+then $u_j$ is Cauchy and the closed graph supplies its limiting preimage.
+Since the closure of this range is $(\ker D)^\perp=L^2_0(\mu)$, the
+range equals $L^2_0(\mu)$. For any centered $v\in\Dom D$, choose
+$u$ with $D_\mu^*u=v$. Then
+
+$$
+\norm v_2^2=\inner{Dv}{u}
+\le\sqrt M\norm{Dv}_2\norm v_2.
+$$
+
+Thus $\CP\le M$. If $M=\infty$ that inequality is automatic; in
+particular $\CP=\infty$ forces $\CMH=\infty$.
+
+**Upper bound when $\CP<\infty$.** Given $f\in\Dom(\Aop)$, put
+$h=\Aop f$. Constants belong to $\ker\Aop$, so $h$ is centered.
+Poincaré gives, for every $q\in\Dom D$,
+
+$$
+|\inner hq|\le\sqrt{\CP}\norm h_2\norm{Dq}_2.
+$$
+
+Apply Riesz representation to the bounded functional
+$Dq\mapsto\inner hq$ on the closure of $\operatorname{Ran}D$.
+There exists $w\in L^2(\mu)$ such that
+
+$$
+\inner w{Dq}=\inner hq\quad(q\in\Dom D),
+\qquad \norm w_2\le\sqrt{\CP}\norm h_2.
+$$
+
+For $\eta\in C_c^\infty((\ell,r))$, its bounded primitive
+$q(x)=\int_{x_0}^x\eta(t)\,dt$ belongs to both scalar form domains.
+The defining weak identity for $\Aop f=h$ therefore yields
+
+$$
+\int\tau f'\eta\,d\mu=\inner hq=\int w\eta\,d\mu.
+$$
+
+The left integrand is locally integrable by weighted Cauchy--Schwarz.
+Arbitrariness of $\eta$ proves $\tau f'=w$ almost everywhere, without
+assuming square integrability of $\tau f'$ in advance. Consequently
+$\norm{\tau f'}_2^2\le\CP\norm{\Aop f}_2^2$ for every CMH test.
+Since $H=\tau$ and $\Sigma=\sigma^2$, this proves
+$\sigma^2\CMH\le\CP$ in the finite case. In the infinite case equality
+was already forced by the lower bound. No operator inverse is used.
 
 The one-dimensional specialization of the Kannan–Lovász–Simonovits bound [@KannanLovaszSimonovits1995], recorded for example in [@cattiaux2018poincare, Eq. (2.25)] with that attribution, is $\CP(\mu)\le4\Var(\mu)$.
 
@@ -97,7 +188,7 @@ $$
 \le\CMH(\mu_i)\,\E(L_i g)^2.
 $$
 
-Summing and using the previous display gives “$\le$”. Testing on $g$ depending on one block gives “$\ge$”. The one-dimensional formula follows from [](#thm:sol-cmh-1d); the affine-image consequence uses the invertible affine covariance of $\CMH$ from §[](#subsec:cmh-conventions).
+Summing and using the previous display gives “$\le$”. Testing on $g$ depending on one block gives “$\ge$”. The one-dimensional formula, including factors with infinite Poincaré or CMH constant, follows from the extended-constant identity [](#thm:sol-cmh-1d); the affine-image consequence uses the invertible affine covariance of $\CMH$ from §[](#subsec:cmh-conventions).
 :::
 
 :::{prf:corollary} = [](#cor:cmh-linear-images)

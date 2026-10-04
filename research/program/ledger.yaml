@@ -729,28 +729,28 @@ nodes:
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: thm:cmh-implies-affine-poincare
     status: proved
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: prop:cmh-hodge
     status: proved
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: cor:cmh-hodge-comparison
     status: proved
     depends_on: [prop:cmh-hodge, thm:cmh-1d]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: conj:gate-zero
     status: open
@@ -759,7 +759,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: lem:cmh-linear-spectral-resolution
     status: proved
@@ -773,68 +773,68 @@ nodes:
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: thm:cmh-product
     status: proved
     depends_on: [def:cmh, thm:cmh-1d]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-linear-images
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-gamma-completion
     status: proved
     depends_on: [prop:cmh-bochner]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-27-lem-cmh-gamma-bochner-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-row-min
     status: proved
     depends_on: [lem:cmh-gamma-completion]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-angular-coefficient
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: thm:cmh-dirichlet
     status: proved
     depends_on: [def:cmh, thm:cmh-1d, lem:cmh-gamma-completion, lem:cmh-row-min, lem:cmh-angular-coefficient]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-dirichlet-surplus
     status: proved
     depends_on: [thm:cmh-dirichlet, lem:cmh-angular-coefficient]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-dirichlet-poincare
     status: proved
     depends_on: [thm:cmh-dirichlet, thm:cmh-implies-affine-poincare, cor:cmh-linear-images]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-product-saturation
     status: proved
     depends_on: [thm:cmh-1d, thm:cmh-product, prop:cmh-hodge]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: conj:cmh-second-variation
     status: open

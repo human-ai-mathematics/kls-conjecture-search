@@ -25,13 +25,13 @@ approaches:
       approach.
     state: active
     next: >-
-      Derive the conditional low-degree bound directly from the regular-law hypothesis
-      H_r(Gamma), Gamma >= G, starting from the exact terminal-transfer expression (9) of
-      the iteration dossier for 2 <= d < D_r. Keep the actual adjacent-degree ratio and the
-      top Appell derivative instead of replacing them by (C3). Decide whether the factor
-      (d+1)^4/d^4 can be removed or paid from degree-dependent slack uniformly in r. Success
-      must initialize the whole moving range, not each fixed degree separately; failure of
-      this particular bound is a local obstruction, not a refutation of the candidate.
+      Under H_r(Gamma) and the all-law lower-degree induction hypothesis, estimate the
+      actual averaged derivative energy in condition (T) of the conditional-initialization
+      test checkpoint, beginning with d=r. Seek posterior-uniform top Appell slack
+      satisfying (N), or a direct saving from the cross terms in (A). Do not repeat
+      optimization of eta with saturated coefficients: (E)-(F) exclude that certificate.
+      A time-zero saving for one law is insufficient; success must cover the whole moving
+      degree range. Failure of a particular estimate does not refute the candidate.
 
   - id: ap:sz-recovery-probe
     objective: >-

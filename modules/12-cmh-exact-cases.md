@@ -42,17 +42,20 @@ In particular every one-dimensional log-concave law satisfies $\mathrm{CMH}(4)$,
 :::
 
 :::{prf:proof}
-On the centered subspace let $D=\dd/\dd x$ and let $D_\mu^*u=-\rho^{-1}(\rho u)'$ be its weighted adjoint, so that the inverse norm of the nonnegative Langevin operator $D_\mu^*D$ is $\CP(\mu)$. If $v=(D_\mu^*D)^{-1}h$, then $Dv$ is the zero-boundary-flux solution of $D_\mu^*u=h$; by [](#eq:cmh-1d-flux) it is the field $u=\tau f'$. Therefore
+Let $D$ be the closed maximal derivative on $L^2(\mu)$ and $D_\mu^*$ its no-flux adjoint, and let $\Aop=-L_\mu$ be defined by the natural weighted form $\int\tau f'q'\,d\mu$. We compare the two constants by duality, allowing either to be infinite. The CMH numerator is the extended integral $\norm{\tau f'}_2^2/\sigma^2$.
+
+The compact flux fields $u=\phi/\rho$, with $\phi\in C_c^\infty((\ell,r))$, form a graph core for $D_\mu^*$: the adjoint of $u\mapsto-\phi'/\rho$ on these fields is precisely the maximal derivative $D$. Each field is attained by the bounded test
 
 $$
-\norm u_2^2=\norm{Dv}_2^2
-=\inner{v}{D_\mu^*Dv}
-=\inner{h}{(D_\mu^*D)^{-1}h},
-\qquad
-\sup_{h\perp1}\frac{\norm u_2^2}{\norm h_2^2}=\CP(\mu).
+f_\phi(x)=\int_{x_0}^x\frac{\phi(t)}{\tau(t)\rho(t)}\,dt,
+\qquad \tau f_\phi'=u,\qquad \Aop f_\phi=D_\mu^*u=-\frac{\phi'}\rho.
 $$
 
-The CMH numerator is $\norm u_2^2/\sigma^2$ and its denominator is $\norm h_2^2$, which gives [](#eq:cmh-1d-exact). The one-dimensional specialization of the Kannan–Lovász–Simonovits bound [@KannanLovaszSimonovits1995], recorded for example in [@cattiaux2018poincare, Eq. (2.25)] with that attribution, is $\CP(\mu)\le4\Var(\mu)$ and hence gives $\mathrm{CMH}(4)$.
+Indeed, compactly supported integration by parts gives the weighted-form identity against every form test, proving $f_\phi\in\Dom(\Aop)$. Thus, if $M=\sigma^2\CMH(\mu)<\infty$, the bound $\norm u_2^2\le M\norm{D_\mu^*u}_2^2$ extends from this core to the whole adjoint domain. Its range is then closed and, since $\ker D$ consists of constants, equals $L^2_0(\mu)$. For centered $v\in\Dom D$, choose $D_\mu^*u=v$; the identity $\norm v_2^2=\inner{Dv}{u}$ gives $\norm v_2\le\sqrt M\norm{Dv}_2$. Hence $\CP\le M$, and in particular $\CP=\infty$ forces $\CMH=\infty$.
+
+Conversely, suppose $\CP<\infty$ and put $h=\Aop f$ for any $f\in\Dom(\Aop)$. Poincaré bounds the functional $Dq\mapsto\inner hq$ by $\sqrt{\CP}\norm h_2\norm{Dq}_2$. Riesz representation gives $w\in L^2(\mu)$ with $\inner w{Dq}=\inner hq$ and $\norm w_2\le\sqrt{\CP}\norm h_2$. Test this identity and the weighted-form identity with bounded primitives of smooth compactly supported functions. Their derivatives are arbitrary interior tests, so $w=\tau f'$ almost everywhere. This establishes square integrability of the flux as well as $\norm{\tau f'}_2^2\le\CP\norm{\Aop f}_2^2$. Together the two bounds prove [](#eq:cmh-1d-exact), including infinite constants.
+
+The one-dimensional specialization of the Kannan–Lovász–Simonovits bound [@KannanLovaszSimonovits1995], recorded for example in [@cattiaux2018poincare, Eq. (2.25)] with that attribution, is $\CP(\mu)\le4\Var(\mu)$ and hence gives $\mathrm{CMH}(4)$.
 
 For sharpness, let $X=Y-1$ with $Y\sim\mathrm{Exp}(1)$, so that $X$ is centered, has density $e^{-(x+1)}\one_{x\ge-1}\dd x$, and has variance $1$. For $0<a<\tfrac12$, the test function $f_a(x)=e^{a(x+1)}$ satisfies
 
