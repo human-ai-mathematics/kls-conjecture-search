@@ -43,6 +43,17 @@ approaches:
       the tight-prefix absorptive trace estimate with every source and damping term matched to
       the scalar Riccati bound.
     state: active
+    next: >-
+      Single owner of the trace-upgrade cluster (P1), now also of conj:product-alignment and of
+      the high-rank part of conj:stein-weighted. On the product of n isotropic two-sided
+      exponentials, decide the incident-high occupation of conj:product-alignment in prefix
+      form, on intervals [0, T wedge tau_eta] from time zero, with the balance and stopping
+      conventions of ass:tight-prefix-carleson. Produce either a bound uniform in n for every
+      fixed balanced cut, or a cut of unbounded coordinate complexity whose prefix source
+      exceeds C0*T + C1*E int r + alpha*E int D by a factor growing in n. A prefix violation
+      refutes ass:tight-prefix-carleson on measures that satisfy KLS, closing the route but not
+      touching conj:kls. A uniform bound exhibits the cut-aware mechanism the general estimate
+      needs (rem:product-stress-test).
 
   - id: ap:e-weighted-excess
     objective: >-
@@ -52,28 +63,46 @@ approaches:
 
   - id: ap:e-screened-supply
     objective: >-
-      Sub-route of ap:e-weighted-excess. Charge the weighted excess only on the aligned screen
-      where the trace term dominates, and return at most an absorbable fraction on its
-      complement.
+      Replace the refuted global-weight propagation of ass:weighted-package by a cut-local,
+      spectator-inert one: charge the weighted excess only on the aligned screen where the
+      trace term dominates (the aligned initial-layer kernel of the 2026-08-30 screened-kernel
+      comparison), and return at most an absorbable fraction on its complement.
     state: active
+    next: >-
+      Extend prop:split-screened-supply beyond the split class, whose total budget
+      (2k+64*eta^2*(1+k))/kappa grows with the number k of cut coordinates. On the product of n
+      isotropic two-sided exponentials (smoothed and compactly supported as in that
+      proposition), bound the screened supply of the spread halfspace {sum_i x_i <= 0}, for
+      which k = n, as a function of n. A bound uniform in n shows the screen is stable under
+      coordinate complexity on the cluster's hard model and earns a general attempt at the
+      aligned kernel. Growth of order k shows the screen buys no such stability, and the route
+      closes on that family.
 
   - id: ap:e-stein-weighted
     objective: >-
       Specify the tensor-stable replacement for the refuted weighted package and supply the
       matching localization-uniform almost-stability trace theorem modulo Jacobi zero modes.
-    state: active
+    state: closed
 
   - id: ap:e-taming-splitting
     objective: >-
       Define one bridge object carrying both the cut-free covariance index and the cut-indexed
       boundary geometry, and prove the covariance-taming or almost-splitting estimate from it.
     state: active
+    next: >-
+      Decide the non-quantitative rigidity half of conj:splitting in dimension two. For a smooth
+      regular log-concave density on R^2 and a smooth balanced cut that minimizes perimeter
+      among balanced cuts and has vanishing constant-mode curvature, prove that the measure
+      splits along the cut normal with a flat boundary (the converse of prop:exact-splitting),
+      or exhibit a non-split example. A non-split example removes the splitting heuristic behind
+      conj:taming. A proof fixes the zero-mode structure against which
+      ass:absolute-geometric-completion and the matched-time covariance estimate must be stated.
 
   - id: ap:e-alignment
     objective: >-
       Decide the incident-high product-cut model with a uniform analytic bound for fixed
       balanced product cuts, or a certified counterexample.
-    state: active
+    state: closed
 
   # --- Route S, fixed-eigenfunction spectral localization
   - id: ap:s-occupation
@@ -81,6 +110,17 @@ approaches:
       Prove the universal-time full-damping source estimate uniformly on regular approximants,
       preserving tensor orientation under unwhitening.
     state: active
+    next: >-
+      Mine lem:mm-stopped-window-source and prop:mm-window-occupation for every place where the
+      operator-norm window of thm:KL-window enters. Decide whether that stopping can be replaced
+      by one that holds at a universal time on products of n smoothed two-sided exponentials.
+      There the operator norm of A_t reaches order log n, yet for the spread first
+      eigenfunction n^{-1/2} sum_i phi(x_i) every term of eq:spectral-occupation equals its
+      one-dimensional value. A replacement isolates the post-spike charge as the only
+      universal-time obstruction. Impossibility shows the proof must use the tensor orientation
+      of H_t rather than the operator norm of A_t. Do not substitute a longer
+      dimension-dependent window: through prop:spectral-sufficiency it only reproduces the bound
+      that produced it.
 
   - id: ap:s-window-chain
     objective: >-
@@ -92,8 +132,20 @@ approaches:
   - id: ap:c-recovery-envelope
     objective: >-
       Construct, for every centered log-concave law, one regular compact-target moment-map
-      recovery sequence with a universal bound on the CMH liminf.
+      recovery sequence with a universal bound on the CMH liminf. The sequence must first pass
+      the linear-sector quotient bound (estimate (18) of the 2026-08-27 recovery-envelope
+      probe), then the variable-field and solenoidal estimate. This route absorbs the strictly
+      stronger premise of the closed ap:c-uniform-approximants.
     state: active
+    next: >-
+      conj:gate-zero already implies the linear stage on every sequence, so the route's own
+      resource is the choice of sequence. Test whether that choice can matter. On the
+      exponential cube cone of cor:cube-cone-gate-zero, whose linear-sector value is known
+      exactly, compare liminf Q_lin along two explicit regular compact-target recoveries
+      (truncation then smoothing, and Gaussian convolution then truncation). Equal limits mean
+      the linear stage belongs to ap:c-gate-zero, and this route should be blocked on
+      conj:gate-zero. Different limits make the choice a genuine resource and give the route a
+      mechanism of its own.
 
   - id: ap:c-anisotropic-bootstrap
     objective: >-
@@ -103,25 +155,48 @@ approaches:
       spectral resolution without assuming its strong operator-domain form, and supplying the
       integrated corrector or nonlocal coercivity that matrix polarization alone cannot.
     state: active
+    next: >-
+      Compute N, D, R = N - D and the reservoir split R = R_A + R_Q exactly on the exponential
+      cone battery at beta = n (cube and simplex bases, through prop:cone-moment-map). These are
+      the non-product equality cases of conj:gate-zero-sharp; the 2026-08-30 reservoir runs
+      never covered them. Decide the sharp form R >= N/2 there, and whether R_A is still needed.
+      Failure on one cone shows (AB) at sharp constants cannot prove conj:gate-zero-sharp.
+      Success extends the reservoir evidence to non-product equality cases. Cones lie outside
+      the compact-target class and serve as boundary calibrations only.
 
   - id: ap:c-uniform-approximants
     objective: >-
       Bound the CMH constant uniformly along the certified regular approximant families, a
       stronger premise than the recovery envelope and not needed if that one is discharged.
-    state: active
+    state: closed
 
   - id: ap:c-invariant-lift
     objective: >-
       Derive the target-flat multiplier invariantly and reduce arbitrary split dimensions to
       controlled Codazzi components paired with named positive squares.
-    state: active
+    state: blocked
+    blocker: conj:gate-zero
+    reopen_if: >-
+      A lift is proposed whose retained squares are shown to control the linear-sector quotient,
+      that is, a candidate mechanism for conj:gate-zero inside the lift. A refutation of
+      conj:gate-zero closes this route instead of reopening it.
+    next: >-
+      On reopening, specialize the multiplier transport to linear test functions first. Check
+      that its Codazzi terms reproduce the third-moment split of lem:linear-sector-third-moment
+      with nonnegative retained squares, without the static matrix algebra that
+      prop:letwin-not-gate-zero fences off.
 
   - id: ap:c-square-root-commutator
     objective: >-
       Sub-route of ap:c-invariant-lift. Control the complete Haar sum of square-root
       commutators on a common core, accounting for every retained positive and error term
       without double spending.
-    state: active
+    state: blocked
+    blocker: conj:mm-invariant-lift
+    next: >-
+      On reopening, test the complete-Haar inequality of conj:mm-square-root-commutator at depth
+      two on the product saturator, where CMH equals 4 and every retained square is explicit,
+      before any operator-domain argument.
 
   - id: ap:c-solenoidal-perturbation
     objective: >-
@@ -129,6 +204,15 @@ approaches:
       perturbation of the saturating one-sided-exponential product, aimed at the radial Gamma
       factor rather than at the base of an exponential cone.
     state: active
+    next: >-
+      For the two-dimensional saturating product, perturb the one-sided-exponential factor by
+      eps*a(s) with a chosen so that log-concavity and regularity hold for both signs of eps.
+      Compute the second variation of the degree-d CMH Galerkin quotient exactly for d = 1..4.
+      The Galerkin quotient at the saturator is 4 - pi^2/(d+1)^2 + O(d^-4)
+      (cand:cmh-exponential-galerkin-rate), so the test is conclusive only if the
+      second-variation coefficient is stable in d and exceeds the degree deficit. A stable
+      positive coefficient is a candidate refutation of conj:cmh-second-variation, hence of
+      CMH(4); this closes the CMH routes but does not touch conj:kls.
 
   - id: ap:c-gate-zero
     objective: >-
@@ -138,6 +222,14 @@ approaches:
       linear sector and the exact exponential-cone battery as the equality set any argument
       must be tight on.
     state: active
+    next: >-
+      Decide cand:cone-transverse-equality-simplex by exact algebra. For product bases of
+      simplices and intervals, the transverse block of the gate matrix is assembled from the
+      blocks' kernels, which are the Dirichlet closed forms of thm:cmh-dirichlet, so the
+      question is a finite computation in (k_1..k_r, s, beta). A proof gives
+      conj:gate-zero-sharp on every product-base exponential cone, the first non-product family
+      beyond cube cones, with its exact equality set. A counterexample adds equality cases that
+      any proof must be tight on.
 
   # --- Route F, conditional-fiber frames
   - id: ap:f-frame-construction
@@ -145,6 +237,13 @@ approaches:
       Construct one test-independent isotropic frame with a universal L2 gap on the maximal
       closed form domain.
     state: active
+    next: >-
+      Decide whether the vertex-cap tests of prop:conditional-fiber-root-obstruction also drive
+      the full L2 gap of the vertex frame to zero on the isotropic simplex. The vertex frame is
+      the best degree-two and degree-three frame in the 2026-08-30 fiber-frame-dual run. If the
+      tests do drive it to zero, no symmetric frame of either family survives and the
+      construction must break symmetry. If they do not, the vertex frame is the first frame
+      candidate for the simplex, and ap:f-simplex-dual must beat it.
 
   - id: ap:f-simplex-dual
     objective: >-
@@ -153,6 +252,14 @@ approaches:
       tends to zero, the certified degree-two floors of the root-frame degree-two pencil
       identity having ruled out every degree-two refuter.
     state: active
+    next: >-
+      Compute the exact all-frame min-max Lambda_{m,3} for m = 3..8 in a committed, seeded run.
+      Preregister the criterion: a monotone decay by a total factor of at least 3 with the last
+      value below 0.1 counts as directional evidence against the route. The 2026-08-30 run gives
+      only per-frame degree-three values (vertex about 0.76 down to 0.34, root about 0.57 down
+      to 0.21), not Lambda_{m,3}. A decaying exact floor is the first concrete threat to
+      conj:conditional-fiber-frame and calls for a degree-three dual certificate. A floor bounded
+      below forces degree at least four.
 
   # --- Parked probe, not yet a route
   - id: ap:cone-boundary-gap
@@ -161,6 +268,12 @@ approaches:
       published Hardy boundary bridge.
     state: blocked
     blocker: cand:cone-seam-capacity
+    next: >-
+      Decide cand:cone-seam-capacity on the two first models: the facet-mean graph Poincare
+      constant, with conductances given by the exact codimension-one seam traces, for the
+      isotropic cube (cross-polytope adjacency) and the regular simplex (complete adjacency),
+      uniformly in n. Then do the same for the two-piece product decomposition of a product body.
+      Growth in n on either model refutes the candidate and closes the probe.
 
   - id: ap:laplace-brenier-simplex
     objective: >-
@@ -168,3 +281,10 @@ approaches:
       Laplace-Brenier route.
     state: blocked
     blocker: cand:brenier-simplex-hessian
+    next: >-
+      Directional test of cand:brenier-simplex-hessian: in a committed, seeded run, compute the
+      semi-discrete optimal map from the product-Laplace source to the isotropic regular
+      simplex in the Helmert frame for d = 2..6, and track its Lipschitz constant (the
+      operator norm of the Hessian of the potential) near the coordinate walls. Steady growth
+      makes the candidate doubtful before any wall-to-bulk PDE estimate is attempted. Only an
+      analytic proof or disproof of gate (37) of the 2026-08-27 probe settles it.
