@@ -13,7 +13,7 @@ truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template v0.4.0](https://github.com/numina-functional-inequalities/conjecture-search-template/releases/tag/v0.4.0)
-and its unreleased changes up to template commit `1950c6f` (re-reviews, editorial notes,
+and its unreleased changes up to template commit `54f52c3` (re-reviews, editorial notes, labels in records,
 `--impact` and `--diff`).
 Start every session that edits the repository by reading it.
 

@@ -11,7 +11,7 @@ which disguises a dead route wears. It owns none of the mathematics — the stat
 
 ## The target
 
-`conj:kls`, stated at `:label: conj:kls` in `modules/00-overview.md` — read it there; this
+`conj:kls`, stated at `:label: conj:kls` in the overview — read it there; this
 file never copies it.
 
 Three formulations are used interchangeably, and the manuscript fixes their equivalence: the

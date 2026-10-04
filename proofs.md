@@ -35,5 +35,5 @@ For the polynomial and curvature argument, read the proofs in this order:
 
 The separate [exponential coefficient criterion](solutions/prop-sz-exponential-coefficients-equivalence.md)
 uses the comparison to characterize exactly the coefficient growth equivalent to KLS.
-The [polynomial and curvature chapter](modules/06-polynomial-curvature.md)
+The polynomial and curvature chapter, Section [](#sec:polynomial-curvature),
 explains how these arguments fit together and where dimension dependence remains.
