@@ -143,6 +143,67 @@ nodes:
       - artifact: solutions/thm-letwin-imports.md
         review: research/reviews/2026-10-01-letwin-imports-r2-review.md
 
+  - id: thm:song-zhang-kls
+    status: proved
+    depends_on: [thm:sz-curvature-transfer, thm:sz-iterated-curvature]
+    references: [SongZhang2026IteratedLogKLS, KLnotes]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: lem:sz-analytic-foundations
+    status: proved
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-polynomial-variance.md
+        review: research/reviews/2026-10-03-sz-polynomial-review.md
+
+  - id: thm:sz-polynomial-variance
+    status: proved
+    depends_on: [thm:letwin-qcts]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-polynomial-variance.md
+        review: research/reviews/2026-10-03-sz-polynomial-review.md
+
+  - id: thm:sz-curvature-comparison
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-curvature-comparison.md
+        review: research/reviews/2026-10-03-sz-curvature-review.md
+
+  - id: thm:sz-iterated-curvature
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-iterated-curvature.md
+        review: research/reviews/2026-10-03-sz-iteration-review.md
+
+  - id: cor:sz-affine-poincare
+    status: proved
+    depends_on: [thm:song-zhang-kls]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: thm:sz-curvature-transfer
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:letwin-qcts]
+    references: [SongZhang2026IteratedLogKLS, KLnotes]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: prop:sz-exponential-coefficients-equivalence
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison]
+    proofs:
+      - artifact: solutions/prop-sz-exponential-coefficients-equivalence.md
+        review: research/reviews/2026-10-03-sz-exponential-equivalence-review.md
+
   - id: thm:letwin-kls
     status: proved
     depends_on: [prop:letwin-kappa, thm:letwin-qcts, thm:improved-lichnerowicz]

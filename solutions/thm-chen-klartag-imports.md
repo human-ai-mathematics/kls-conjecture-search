@@ -28,7 +28,7 @@ exact exponential and simplex calculations check the constants.
 
 ## Statements and normalization
 
-The three manuscript directives in `modules/04-family-moment-map.md` read as follows
+The three manuscript directives in Section [](#sec:family-moment-map) read as follows
 (the mathematical content is transcribed; bibliography and cross-reference rendering
 are immaterial):
 

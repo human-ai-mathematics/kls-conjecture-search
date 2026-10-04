@@ -7,8 +7,8 @@ numbering: false
 % lives here, not in solutions/, where every page is read as a dossier.
 
 Each proved statement links to its complete written proof, listed below. A proof counts
-only once a reviewer other than its author has checked it against the precise statement,
-and the check is recorded; a proof still being written or checked is not published.
+once an independent reviewer has checked it against the precise statement or a named
+human explicitly accepts it, including their own proof. That certification is recorded; a proof still being written or checked is not published.
 
 Next to *Proved*, each statement says who checked its proof, and when:
 
@@ -17,11 +17,23 @@ Next to *Proved*, each statement says who checked its proof, and when:
   report.
 - *reviewed by* a name: a person checked it the same way, and wrote the report.
 - *accepted by* a name: a person read the proof and vouches for it, without a written
-  report.
+  report; the person may also be the proof's author.
 
 A statement marked *Established in the literature* is an established result of the field,
 cited where it is stated, and not reproved here. A statement marked *Preprint, not yet
 checked here* is a result a recent source announces: it is used as that source states it,
 but neither the field nor this project has checked its proof yet, and every statement
 resting on it says so. Once this project has checked it, with a written proof and a
-review like any other, it shows *Proved (from a preprint)* followed by who checked it.
+review or human acceptance, it shows *Proved (from a preprint)* followed by who checked it.
+
+For the polynomial and curvature argument, read the proofs in this order:
+
+1. [Analytic foundations and Appell variance estimates](solutions/thm-sz-polynomial-variance.md).
+2. [The comparison from polynomial coefficients to curvature](solutions/thm-sz-curvature-comparison.md).
+3. [The iteration of curvature profiles](solutions/thm-sz-iterated-curvature.md).
+4. [Gaussian transfer, the all-depth bound and its affine form](solutions/thm-song-zhang-kls.md).
+
+The separate [exponential coefficient criterion](solutions/prop-sz-exponential-coefficients-equivalence.md)
+uses the comparison to characterize exactly the coefficient growth equivalent to KLS.
+The [polynomial and curvature chapter](modules/06-polynomial-curvature.md)
+explains how these arguments fit together and where dimension dependence remains.

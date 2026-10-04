@@ -43,6 +43,12 @@ Exponential cone measure
 Covariance spike
 : The obstruction of [](#prop:covariance-spike): products of centered exponentials are dimension-free by tensorization, yet their conditional covariance spikes. It is why no uniform operator-norm bound on $\norm{A_t}_\op$ can exist, and it is the single sharpest constraint on what a correct argument may look like.
 
+Appell coefficients
+: For a regular measure $\nu$, $c_k(\nu)=\sqrt{K_k(\nu)}/k!$, where $K_k(\nu)$ is the largest variance of a degree-$k$ Appell polynomial $\langle T,\mathcal A_k^\nu\rangle$ with $\|T\|_{\mathrm{HS}}=1$. Defined in Section [](#sec:sz-notation); KLS is equivalent to $c_k\le A^k$ with one universal $A$ ([](#prop:sz-exponential-coefficients-equivalence)).
+
+Curvature profile
+: A function $F$ with $\CP(\nu)\le F(a)$ for every regular isotropic measure of curvature $a$ ($aI\preceq D^2W$), in every dimension. Bakry–Émery gives $F(a)=1/a$; [](#thm:sz-iterated-curvature) gives iterated logarithms, and [](#thm:sz-curvature-transfer) turns any profile into a general bound. Section [](#sec:sz-notation).
+
 Conditional theorem
 : A statement that holds under a hypothesis which is itself not settled here, such as [](#prop:spectral-sufficiency). Once proved it is a theorem, and it brings [](#conj:kls) exactly as close as its hypothesis does: whether a statement is true and whether it applies are separate questions.
 :::

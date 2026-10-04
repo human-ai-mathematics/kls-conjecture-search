@@ -33,7 +33,7 @@ identified explicitly. Availability and attribution do not certify the argument.
 ## Exact target statements and conventions
 
 The bodies of the following statements reproduce the two manuscript directives
-in `modules/30-covariance-technology.md`.
+in Section [](#sec:covariance-tech).
 
 :::{prf:theorem} Stopped rank tails
 :label: thm:sol-kl-rank-stopped

@@ -49,7 +49,7 @@ the node that currently instantiates it, so the list stays checkable:
 
 | does not complete the target | instantiated by |
 |---|---|
-| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `thm:letwin-kls`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
+| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `thm:letwin-kls`, `thm:song-zhang-kls`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
 | an implication whose antecedent is open | `cor:dichotomy`, `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices` — all `proved` with a non-empty `assumes` |
 | a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
 | a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so $\mathrm{CMH}(4)$ would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
@@ -138,6 +138,26 @@ them; this section is the reasoning a new route needs before it runs anything.
    therefore at least as hard as a sharp third-moment estimate, and refuting it leaves
    $\mathrm{CMH}(4)$ untouched.
 
+10. **Summable losses require uniform admissibility.** Before using a bounded-product
+    improvement of the Song–Zhang iteration, discharge its small-degree initialization
+    and curvature-comparison thresholds uniformly in the depth. Merely removing the
+    factor four leaves growing thresholds that bounded profile constants cannot meet.
+    The exact obstruction and audit tasks are in
+    [`2026-10-03-song-zhang-audit-targets.md`](../explorations/2026-10-03-song-zhang-audit-targets.md).
+    The conclusion `thm:song-zhang-kls` is not a discharge of CMH, occupation,
+    or adaptive trace estimates.
+
+11. **Uniform exponential coefficients already have the strength of KLS.**
+    `prop:sz-exponential-coefficients-equivalence` is a certified equivalence,
+    not a proof of either assertion without its premise. Its one coefficient
+    constant must work simultaneously for every degree, dimension and regular
+    isotropic law. Separate constants at each degree or logarithmic depth do
+    not meet it. The converse takes the degree limit at one fixed regular
+    measure before passing a uniform scalar inequality to approximants.
+    Equivalence does not disqualify a proof approach: a distinct mechanism
+    and a discriminating intermediate estimate can make a reformulation
+    useful. The equivalence alone supplies neither of those.
+
 Two rules are specific to this program. They were constraints P1 and P2 of the v0.1 harness,
 and earlier records cite them under those names.
 
@@ -155,6 +175,22 @@ and earlier records cite them under those names.
 
 ## Neighbourhood
 
+- `prop:sz-exponential-coefficients-equivalence` — an exact quantitative
+  reformulation of the target in the full Appell hierarchy. It identifies the
+  required improvement over `thm:sz-polynomial-variance`; it does not establish
+  the uniform coefficient premise or justify a new independent route.
+- `thm:song-zhang-kls` — reconstructed from the pinned v1 source and certified
+  through independent agent reviews, together with its analytic, polynomial,
+  curvature-comparison and iterated-profile dependencies. The affine consequence
+  is `cor:sz-affine-poincare`. This is internal proof verification, not a change
+  to the source's publication status. No existing CMH, occupation or trace
+  antecedent is discharged. See the
+  [completed proof-wave checkpoint](../explorations/2026-10-03-sz-wrap-up.md).
+- `thm:sz-curvature-transfer` — the reusable interface for applying any improved
+  uniform regular curvature profile to general isotropic laws. Its profile is
+  evaluated at one deterministic argument; approximation needs no continuity
+  or monotonicity of that profile. Improving the input remains a mathematical
+  task, not an automatic consequence of the interface.
 - `prop:spectral-sufficiency` — proved, with `conj:mm-spectral-occupation` in `assumes`: the
   fixed-eigenfunction occupation estimate implies `conj:kls`, so settling
   `conj:mm-spectral-occupation` settles the target on that side.

@@ -1,7 +1,7 @@
 """Two-color observables and occupation integrals along a localization path.
 
 Assembles, from a ``ProductState`` and a fixed cut ``E``, the Riccati-level
-quantities (``modules/27-notation.md``, ``modules/28-riccati.md``):
+quantities (``modules/28-notation.md``, ``modules/29-riccati.md``):
 
     p = mu_t(E), q = 1-p, s = p q,
     delta_i = m^E_i - m^F_i        (centroid gap; supported on J),
