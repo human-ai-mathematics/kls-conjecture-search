@@ -16,7 +16,7 @@ project:
     code: MIT
   authors:
     - name:
-        literal: Collaboration
+        literal: Collaboration Numina
   # The shared bibliography. A literature node's `references:` keys must
   # exist here. It ships empty: MyST refuses a .bib holding only comments.
   bibliography:
