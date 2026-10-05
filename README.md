@@ -28,7 +28,6 @@ Start every session that edits the repository by reading it.
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
 | [`.claude/agents/`](.claude/agents/), [`.codex/agents/`](.codex/agents/) | the three roles: `researcher`, `reviewer` and `writer`, for Claude Code and for Codex |
 | [`templates/`](templates/) | an empty copy of each file genre |
-| [`AGENTS.md`](AGENTS.md) | instructions specific to this program, read by Codex and, through `CLAUDE.md`, by Claude Code |
 | [`HISTORY.md`](HISTORY.md) | the milestones of the search, newest first |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
