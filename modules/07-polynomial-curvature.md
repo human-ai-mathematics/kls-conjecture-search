@@ -1,22 +1,24 @@
 ---
 numbering:
-  enumerator: "6.%s"
+  enumerator: "7.%s"
 ---
 
 (sec:polynomial-curvature)=
-# Family 6: polynomial estimates and curvature
+# The current frontier: polynomial estimates and curvature
+
+This chapter is not a seventh family. It presents one recent argument, Song and Zhang's [@SongZhang2026IteratedLogKLS], which gives the slowest dimension dependence known for the Poincaré constant, $16^{\log^*(n+2)}$, and does so for every test function. It is set apart from the survey because it differs from the six families in kind: they control restricted objects sharply and lose on the rest (Section [](#subsec:kls-adaptive-residue)), while this argument already reaches every function and loses only a factor that grows with the dimension. Reducing that loss is the first of the two ways forward of Section [](#subsec:kls-adaptive-residue); the four approaches of this manuscript take the second. The argument is reconstructed and checked here, and the chapter follows the same plan as the family chapters, so that the two can be compared.
 
 **Object followed.** The Appell polynomials of the measure — in each degree, the polynomials adapted to its moments — and a first eigenfunction, followed through repeated centred gradients and inverse square roots of the diffusion operator.
 
-**What it buys.** A conversion that reaches every test function. Bounds on the Appell polynomials of all degrees give a spectral gap for strongly log-concave measures, and stochastic localization turns a spectral gap back into better polynomial bounds [@SongZhang2026IteratedLogKLS, Sections 3–7]. Unlike the quadratic and third-moment estimates of Families 2–4, the output is a Poincaré inequality for arbitrary functions; what is left to improve is the loss incurred each time the two conversions are composed.
+**What it buys.** A conversion that reaches every test function. Bounds on the Appell polynomials of all degrees give a spectral gap for strongly log-concave measures, and stochastic localization turns a spectral gap back into better polynomial bounds [@SongZhang2026IteratedLogKLS, Sections 3–7]. Unlike the quadratic and third-moment estimates of Families 2–4 (Sections [](#sec:family-sl)–[](#sec:family-moment-map)), the output is a Poincaré inequality for arbitrary functions; what is left to improve is the loss incurred each time the two conversions are composed.
 
-**Sharpest result.** The iterated-logarithm bound [](#thm:song-zhang-kls), $\CP(\mu)\lesssim16^{\log^*(n+2)}$ for every isotropic log-concave $\mu$ on $\R^n$, from Song–Zhang's October 2026 preprint.
+**Sharpest result.** The iterated-logarithm bound [](#thm:song-zhang-kls), $\CP(\mu)\lesssim16^{\log^*(n+2)}$ for every isotropic log-concave $\mu$ on $\R^n$, from Song and Zhang's preprint.
 
 **The precise missing estimate.** One exponential base for the whole Appell hierarchy: $c_k(\nu)\le A^k$, with the same $A$ for every degree $k$, every dimension and every regular isotropic measure $\nu$. By [](#prop:sz-exponential-coefficients-equivalence) this is equivalent to KLS.
 
 **Why it stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ and cannot be kept bounded (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
 
-**Where this family enters the four approaches.** It is a step of none of them. It shares the first eigenfunction with the fixed-eigenfunction approach and Letwin's quadratic estimate with the moment map, and it changes the standard against which each approach is measured; Section [](#subsec:atlas-assessment) says, approach by approach, what it changes and what still needs its own estimate.
+**Where this argument enters the four approaches.** It is a step of none of them. It shares the first eigenfunction with the fixed-eigenfunction approach and Letwin's quadratic estimate with the moment map, and it changes the standard against which each approach is measured; Section [](#subsec:atlas-assessment) says, approach by approach, what it changes and what still needs its own estimate.
 
 (sec:sz-notation)=
 ## Notation and the smallest cases

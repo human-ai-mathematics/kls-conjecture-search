@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "21.%s"
+  enumerator: "18.%s"
 ---
 
 (sec:open)=
@@ -223,7 +223,7 @@ for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)
 
 The quantitative comparison is between [](#thm:letwin-kls), giving $C_{\mathrm P,n}\lesssim\sqrt{\log n}$, and [](#cor:dichotomy), whose geometric antecedent would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. The latter uses the published covariance window of [](#cor:KI-discharged); it does not need the longer $c/\log n$ window. Letwin's dimension-free quadratic-chaos estimate and the longer covariance window enter through [](#thm:letwin-qcts) and [](#thm:V2-window), respectively.
 
-The fixed-cut analysis separates the stochastic identities (Sections [](#sec:mass-martingale)–[](#sec:carleson)), the Stein dictionary and its operator-to-trace gap (Section [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Section [](#sec:excess)). The near-worst bootstrap in Section [](#sec:bootstrap) connects these quantities to the covariance estimates of Section [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Sections [](#sec:jacobi) and [](#sec:models).
+The fixed-cut analysis separates the stochastic identities (Sections [](#sec:carleson) and [](#sec:mass-martingale)), the Stein dictionary and its operator-to-trace gap (Section [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Section [](#sec:excess)). The near-worst bootstrap in Section [](#sec:bootstrap) connects these quantities to the covariance estimates of Section [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Sections [](#sec:jacobi) and [](#sec:models).
 
 The all-cut estimate ([](#ass:all-cut-carleson)) and the absolute-scale completion ([](#ass:absolute-geometric-completion)) are hypotheses, and are stated as such. The spectator products of [](#prop:weighted-spectator-obstruction) violate the literal weighted package ([](#ass:weighted-package)) and [](#conj:weighted-excess-rate); the unweighted spectator products of [](#prop:spectator-excess-rate-obstruction) separately rule out the package's uniform superlinear remainder. The conditional implication from that package to KLS ([](#thm:intro-weighted)) is kept so that a reader can see what the package would have given. The problems this approach turns on are [](#conj:trace-upgrade), the trace and bootstrap statements [](#conj:stein-weighted)–[](#conj:splitting), and the formulation of a tensor-stable replacement.
 

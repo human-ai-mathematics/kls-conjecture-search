@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "25.%s"
+  enumerator: "33.%s"
 ---
 
 (sec:appendix-fixed-cut)=
 # Product stress-test and bootstrap calculations
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 The long computations of the fixed-cut approach. Their statements, what each one contributes, and a summary of how each proof goes are Sections [](#sec:product-stress) and [](#sec:bootstrap); nothing is decided here that is not decided there.
 

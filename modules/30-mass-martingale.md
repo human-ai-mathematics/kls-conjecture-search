@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "22.%s"
+  enumerator: "30.%s"
 ---
 
 (sec:mass-martingale)=
 # The mass martingale, Itô calculations, and the stopped centroid reduction
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 ## Quadratic variation and information rate
 

@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "31.%s"
+  enumerator: "23.%s"
 ---
 
 (sec:covariance-tech)=

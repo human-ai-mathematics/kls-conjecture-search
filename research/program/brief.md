@@ -229,5 +229,6 @@ and earlier records cite them under those names.
   *sufficient* or *equivalent* — a sufficient condition has no claimed converse without proof
   (trap 2), and an actual equivalence still needs a distinct mechanism (trap 11); and the
   fastest way to kill it. The classical needles,
-  transport and Bochner/$H^{-1}$ approaches surveyed in `modules/01`–`05` are the landscape this
-  program works against, not routes.
+  transport, Bochner/$H^{-1}$ and parallel-coupling approaches surveyed in `sec:family-needles`–`sec:family-coupling` are the landscape this program
+  works against, not routes; the polynomial–curvature frontier of `sec:polynomial-curvature` is
+  not a fifth approach, but its loss is worked on by the `ap:sz-*` routes.

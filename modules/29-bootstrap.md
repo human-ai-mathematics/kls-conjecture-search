@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "20.%s"
+  enumerator: "29.%s"
 ---
 
 (sec:bootstrap)=
 # The bootstrap comparison theorem and the interface functional
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 ## Two elementary lemmas
 

@@ -89,9 +89,12 @@ project:
   # an error, so the proofs' pattern also matches their introduction page:
   # '{proofs,solutions/*}.md' reads "proofs.md, then every dossier". Drafts are listed
   # here for local reading; the pages workflow removes them before it publishes.
-  # A short welcome page, then the introduction, then the four approaches as peers, in
-  # the order of the atlas's assessment of priorities. An appendix used by one approach
-  # sits inside it; the shared foundations come after the synthesis.
+  # A short welcome page, then the introduction; the literature (six families), then the
+  # current frontier, which is one recent argument and not a family. The four approaches
+  # follow in the order of what each has established -- the moment map, the fixed
+  # eigenfunction, conditional fibers, the fixed cut -- not of their research priority,
+  # which the atlas states separately. An appendix used by one approach sits inside it,
+  # except the fixed cut's technical chapters, which form the last part before the proofs.
   toc:
     - file: modules/index.md
     - file: modules/00-overview.md
@@ -102,48 +105,53 @@ project:
         - file: modules/03-family-bochner-hminus1.md
         - file: modules/04-family-moment-map.md
         - file: modules/05-family-transport.md
-        - file: modules/06-polynomial-curvature.md
+        - file: modules/06-family-parallel-coupling.md
+    - title: The current frontier
+      children:
+        - file: modules/07-polynomial-curvature.md
     - title: The four approaches
       children:
-        - file: modules/07-frontier-atlas.md
-        - file: modules/08-localization-prelude.md
-        - title: Fixed eigenfunction
-          children:
-            - file: modules/09-spectral-approach.md
+        - file: modules/08-frontier-atlas.md
         - title: Moment map
           children:
-            - file: modules/10-moment-map-cmh.md
-            - file: modules/11-cmh-normalization.md
-            - file: modules/12-cmh-exact-cases.md
-            - file: modules/13-moment-map-construction.md
-            - file: modules/14-appendix-moment-map.md
-        - title: Fixed cut
+            - file: modules/09-moment-map-cmh.md
+            - file: modules/10-cmh-normalization.md
+            - file: modules/11-cmh-exact-cases.md
+            - file: modules/12-moment-map-construction.md
+            - file: modules/13-appendix-moment-map.md
+        - file: modules/14-localization-prelude.md
+        - title: Fixed eigenfunction
           children:
-            - file: modules/15-eldan-statements.md
-            - file: modules/16-carleson.md
-            - file: modules/17-product-stress.md
-            - file: modules/18-stein-route.md
-            - file: modules/19-excess-propagation.md
-            - file: modules/20-bootstrap.md
-            - file: modules/21-eldan-open-targets.md
-            - file: modules/22-mass-martingale.md
-            - file: modules/23-stein-dictionary.md
-            - file: modules/24-jacobi-splitting.md
-            - file: modules/25-appendix-fixed-cut.md
+            - file: modules/15-spectral-approach.md
         - title: Conditional fibers
           children:
-            - file: modules/26-conditional-fiber-frame.md
+            - file: modules/16-conditional-fiber-frame.md
+        - title: Fixed cut
+          children:
+            - file: modules/17-fixed-cut.md
+            - file: modules/18-fixed-cut-open-problems.md
     - title: Synthesis and perspectives
       children:
-        - file: modules/27-synthesis.md
+        - file: modules/19-synthesis.md
         - file: modules/glossary.md
     - title: Shared technical foundations
       children:
-        - file: modules/28-notation.md
-        - file: modules/29-riccati.md
-        - file: modules/30-qcts-obstruction.md
-        - file: modules/31-covariance-technology.md
-        - file: modules/32-model-geometries.md
+        - file: modules/20-notation.md
+        - file: modules/21-riccati.md
+        - file: modules/22-qcts-obstruction.md
+        - file: modules/23-covariance-technology.md
+        - file: modules/24-model-geometries.md
+    - title: "Appendix: the fixed cut in detail"
+      children:
+        - file: modules/25-carleson.md
+        - file: modules/26-product-stress.md
+        - file: modules/27-stein-route.md
+        - file: modules/28-excess-propagation.md
+        - file: modules/29-bootstrap.md
+        - file: modules/30-mass-martingale.md
+        - file: modules/31-stein-dictionary.md
+        - file: modules/32-jacobi-splitting.md
+        - file: modules/33-fixed-cut-calculations.md
     - title: Full proofs
       children:
         - pattern: '{proofs,solutions/*}.md'

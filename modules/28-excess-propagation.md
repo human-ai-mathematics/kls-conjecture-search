@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "19.%s"
+  enumerator: "28.%s"
 ---
 
 (sec:excess)=
 # Excess propagation: audit and a circularity warning
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 This section proves [](#prop:intro-audit) — the consumption audit showing the unweighted excess term is inert — and explains why a direct propagation argument can merely restate a localized isoperimetric lower bound, motivating the bootstrap mechanism of Section [](#sec:bootstrap). This is a methodological warning, not a no-go theorem. The static obstruction that forces the covariance weight ([](#prop:two-tail)) is established in Section [](#sec:qcts).
 

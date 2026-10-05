@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "13.%s"
+  enumerator: "12.%s"
 ---
 
 (sec:mm-construction)=

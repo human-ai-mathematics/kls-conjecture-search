@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "24.%s"
+  enumerator: "32.%s"
 ---
 
 (sec:jacobi)=
 # Reilly, Jacobi, and splitting formulas
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 This section assembles the geometric mechanisms intended to prove the weighted Stein-trace estimate for near-minimal cuts. The second-variation and Reilly identities are imported with exact normal conventions from the cited sources; the statements specific to this section are exact model statements, and their quantitative versions are among the problems of Section [](#sec:open). Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex support, and $\Sigma=\partial^*E$ with the notation of Section [](#sec:notation).
 

@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "17.%s"
+  enumerator: "26.%s"
 ---
 
 (sec:product-stress)=
 # Product stress test of the all-cut Carleson estimate
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 This section carries out [](#rem:product-stress-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#rem:product-stress-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
 

@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "18.%s"
+  enumerator: "27.%s"
 ---
 
 (sec:stein)=
 # The fixed cut, near-Cheeger variant: the failed literal weighted package and boundary Stein traces
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 The near-Cheeger variant trades the all-cut hypothesis for near-minimality. Its stochastic currency is the two-color covariance functional $\calS_\nu(E)=s^2\norm K_\HS^2$ of the Stein dictionary (Section [](#sec:stein-dictionary)); here we give its second exact form as a boundary flux and give the argument for [](#thm:intro-weighted), using the results of Section [](#sec:excess). The conversion between the Stein functional and the Riccati source ([](#lem:stein-vs-source)) is lossless on the tight window and is recorded with the dictionary.
 

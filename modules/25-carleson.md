@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "16.%s"
+  enumerator: "25.%s"
 ---
 
 (sec:carleson)=
 # The fixed cut, all-cut variant: the exact Carleson target
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 ## Consuming the two-color Carleson estimate
 

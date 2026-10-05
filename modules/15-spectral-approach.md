@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "9.%s"
+  enumerator: "15.%s"
 ---
 
 (sec:spectral-approach)=
@@ -25,9 +25,9 @@ In words: as localization proceeds, the eigenfunction feeds a *source* into its 
 
 **What it uses.** From the literature, and load-bearing: the quadratic input [](#thm:letwin-qcts) and its directional third-moment consequence [](#prop:letwin-kappa), from the pinned version-1 preprint; and the published polylogarithmic covariance window. Developed here: the exact fixed-function SDE and the posterior-defect calculus ([](#lem:mm-posterior-defect)).
 
-**What it gives.** The stopped source estimate [](#lem:mm-stopped-window-source) controls the accumulated source before a covariance exit, using [](#thm:letwin-qcts). Together with the time-weighted source and restart estimates, it describes how a post-exit charge could be bounded. The occupation implication [](#prop:mm-window-occupation) has an empty small-gap range under its stated published input; Section [](#subsec:spectral-window-chain) explains this limitation.
+**What it gives.** The stopped source estimate [](#lem:mm-stopped-window-source) controls the accumulated source before a covariance exit, using [](#thm:letwin-qcts). Together with the time-weighted source and restart estimates, it describes how a post-exit charge could be bounded.
 
-**What blocks it.** [](#conj:mm-spectral-occupation) asks for the full-damping source estimate on a universal time interval, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The stopped estimate alone does not control the source after covariance exits.
+**What blocks it.** [](#conj:mm-spectral-occupation) asks for the full-damping source estimate on a universal time interval, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The stopped estimate alone does not control the source after covariance exits. Nor does the window implication [](#prop:mm-window-occupation): its small-gap hypothesis $\lambda\le3/(8K_n)$ is met by no measure, since [](#thm:klartag-logn) gives $\lambda\ge1/K_n$, and its remaining conclusion, $\CP\le C\log^2n$, is weaker than the published bound (Section [](#subsec:spectral-window-chain)).
 
 **What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 

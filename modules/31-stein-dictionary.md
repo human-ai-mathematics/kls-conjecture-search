@@ -1,10 +1,12 @@
 ---
 numbering:
-  enumerator: "23.%s"
+  enumerator: "31.%s"
 ---
 
 (sec:stein-dictionary)=
 # The two-colour Stein dictionary and the operator-to-trace gap
+
+*Appendix to the fixed cut, Section [](#sec:introduction).*
 
 Both variants of the fixed cut, the all-cut and the near-Cheeger variant, consume the same covariance contrast of a cut, in two normalizations. This short core section records the exact algebraic dictionary relating that contrast to the Riccati source of Section [](#sec:riccati), and isolates — once — the exact gap of the all-cut variant and the covariance contrast that the proposed geometric approach also seeks to control. No argument in this manuscript yet connects Jacobi/Reilly boundary modes to this trace ([](#conj:almost-stability-gap)).
 

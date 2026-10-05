@@ -1,12 +1,12 @@
 ---
 numbering:
-  enumerator: "27.%s"
+  enumerator: "19.%s"
 ---
 
 (sec:kls-synthesis)=
 # Synthesis: what a proof of KLS now needs
 
-The July 2026 inputs [](#thm:letwin-moment-map), [](#thm:letwin-qcts), and [](#prop:letwin-kappa) isolate fixed-matrix, quadratic, and directional third-moment estimates. The general bound [](#thm:letwin-kls) combines these inputs with localization and retains a factor $\sqrt{\log n}$ in the Poincaré constant. Song–Zhang's October preprint gives the sharper [](#thm:song-zhang-kls), through the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature). Both conclusions cover general test functions; the remaining demand is a bound independent of dimension (Section [](#sec:kls-remaining)). Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing; this section turns that into five targets, each pointing to the labelled statement that carries it, where one exists.
+Letwin's inputs [](#thm:letwin-moment-map), [](#thm:letwin-qcts), and [](#prop:letwin-kappa) isolate fixed-matrix, quadratic, and directional third-moment estimates. The general bound [](#thm:letwin-kls) combines these inputs with localization and retains a factor $\sqrt{\log n}$ in the Poincaré constant. Song and Zhang's preprint gives the sharper [](#thm:song-zhang-kls), through the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature). Both conclusions cover general test functions; the remaining demand is a bound independent of dimension (Section [](#sec:kls-remaining)). Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing; this section turns that into five targets, each pointing to the labelled statement that carries it, where one exists.
 
 (subsec:synthesis-constraint)=
 ## The constraint any proposal must satisfy
@@ -62,7 +62,7 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 
 **Target 4 — extend parallel coupling beyond linear tilts.** Present parallel coupling controls the finite-dimensional family $e^{\inner\theta x}\mu(\dd x)$. A coupling for perturbations $(1+\eps f)\mu$ with cost controlled by $\int\abs{\nabla f}^2\dd\mu$ would address arbitrary spectral directions directly, rather than one linear family.
 
-*In this manuscript:* no labelled statement formulates it yet. This is a gap in the approaches developed here, not in the literature survey, and it is recorded as such.
+*In this manuscript:* the coupling and the reason it stops at linear tilts are described in Chapter [](#sec:family-coupling); no labelled statement formulates the extension, and none of the four approaches carries it.
 
 % Agent note: target 4 has no ledger node and no portfolio approach.
 
@@ -79,7 +79,7 @@ The end point of this target has an exact form. By [](#prop:sz-exponential-coeff
 (subsec:synthesis-assessment)=
 ## Which target first
 
-The most immediate is target 5. It works on the argument that reaches every test function with the slowest dimension dependence, $16^{\log^*(n+2)}$; its losses are located, and its exact end point is a statement, [](#prop:sz-exponential-coefficients-equivalence). Among the targets carried by this manuscript's own approaches, target 1 is the best structurally motivated: the function-adapted occupation [](#eq:function-adapted-occupation) passes the tensorization test, where a bound on the top covariance eigenvalue does not. That is a judgement of motivation, not a ranking by difficulty; targets 2 and 3, and the conditional fibers, are not excluded by it. Target 4 remains exploratory, with no precise statement here. Section [](#subsec:atlas-assessment) sets out, approach by approach, what the polynomial–curvature argument changes and what still needs its own estimate.
+Section [](#subsec:atlas-assessment) sets the priorities and gives the reasons; in terms of the targets above they read as follows. Target 5 comes first: it works on the argument that reaches every test function with the slowest dimension dependence, and its losses are located, though its end point [](#prop:sz-exponential-coefficients-equivalence) is as hard as KLS. Then the decisive tests carried by target 2 (sharp gate zero) and by the conditional fibers. Then target 1, the best structurally motivated of the targets carried by this manuscript's approaches, whose first step is a comparison with the eigenfunction construction of target 5. Target 3 follows; target 4 remains exploratory, with no precise statement here.
 
 (subsec:synthesis-caution)=
 ## Scope of the inputs

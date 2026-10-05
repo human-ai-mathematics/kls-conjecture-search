@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "32.%s"
+  enumerator: "24.%s"
 ---
 
 (sec:models)=

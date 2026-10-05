@@ -8,11 +8,11 @@ numbering:
 
 +++ {"part": "abstract"}
 
-The Kannan–Lovász–Simonovits conjecture asks whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure: $\CP(\mu)\le C\norm{\Cov\mu}_\op$ in every dimension. The published bound [](#thm:klartag-logn) replaces $C$ by $C\log n$; [](#thm:letwin-kls), from Letwin's July 2026 preprint, gives $C\sqrt{\log n}$. Song–Zhang's October 2026 preprint gives the iterated-logarithm bound [](#thm:song-zhang-kls), with a factor $16^{\log^*(n+2)}$. These bounds hold for every test function, and what they still lose is a factor growing with the dimension; the sharper estimates of the methods behind them control fixed or averaged objects, where the conjecture needs uniform control of objects adapted to the measure or to its extremal function. This manuscript develops four approaches to that second gap: following one cut, or one eigenfunction, along stochastic localization; a deterministic second-order inequality for the Hessian of the moment map; and a spectral gap for resampling along conditional lines. Its results are of three kinds: an inequality that implies the conjecture, with the first non-product families on which it holds; reductions of the conjecture to explicit estimates; and counterexamples to natural intermediate estimates, none of which is a counterexample to the conjecture. Each statement shows next to its title whether it is settled here.
+The Kannan–Lovász–Simonovits conjecture asks whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure: $\CP(\mu)\le C\norm{\Cov\mu}_\op$ in every dimension. The published bound [](#thm:klartag-logn) replaces $C$ by $C\log n$; [](#thm:letwin-kls), from Letwin's preprint, gives $C\sqrt{\log n}$. Song and Zhang's preprint gives the iterated-logarithm bound [](#thm:song-zhang-kls), with a factor $16^{\log^*(n+2)}$. These bounds hold for every test function, and what they still lose is a factor growing with the dimension; the sharper estimates of the methods behind them control fixed or averaged objects, where the conjecture needs uniform control of objects adapted to the measure or to its extremal function. This manuscript develops four approaches to that second gap: a deterministic second-order inequality for the Hessian of the moment map; following one eigenfunction along stochastic localization; a spectral gap for resampling along conditional lines; and following one cut along stochastic localization. Its results are of three kinds: an inequality that implies the conjecture, with the first non-product families on which it holds; reductions of the conjecture to explicit estimates; and counterexamples to natural intermediate estimates, none of which is a counterexample to the conjecture. Each statement shows next to its title whether it is settled here.
 
 +++
 
-This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), isolates the obstacle every method meets (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
+This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)) and the two arguments behind the newest bounds (Section [](#sec:kls-conversions)), isolates the obstacle every method meets and the two ways forward it leaves (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
 
 (sec:kls-orientation)=
 ## The question
@@ -132,7 +132,7 @@ No family of log-concave measures is known for which the ratio in [](#eq:kls-aff
 (sec:kls-known)=
 ## What was known
 
-This section records the quantitative frontier, with the idea behind its newest bound, [](#thm:song-zhang-kls); the two neighbouring conjectures that have been settled, and why settling them did not settle KLS; and the localization–Lichnerowicz argument behind [](#thm:letwin-kls), with the place where its logarithm enters.
+This section records the quantitative frontier and the two neighbouring conjectures that have been settled, with why settling them did not settle KLS. The two arguments behind the newest bounds are the subject of the next section.
 
 (subsec:kls-status)=
 ### The quantitative history
@@ -162,9 +162,6 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 | July 2026, preprint | $O((\log n)^{1/4})$ | $O(\sqrt{\log n})$ | [](#thm:letwin-kls): quadratic Poincaré, $\kappa_n=O(1)$, and the time-restricted spectral bridge [@Letwin2026QuadraticKLS]. |
 | October 2026, preprint | $O(4^{\log^*(n+2)})$ | $O(16^{\log^*(n+2)})$ | [](#thm:song-zhang-kls): polynomial estimates fed into curvature estimates and back [@SongZhang2026IteratedLogKLS]. |
 
-(subsec:song-zhang-mechanism)=
-**The polynomial–curvature feedback.** The last row of the table is [](#thm:song-zhang-kls). Its proof alternates two conversions: bounds on the polynomials of every degree adapted to the measure give a spectral gap for strongly log-concave measures, and stochastic localization turns that gap back into better polynomial bounds, each round replacing a logarithm by its logarithm. Chapter [](#sec:polynomial-curvature) states the steps (Figure [](#fig:sz-loop)) and isolates the exponential growth of the polynomial coefficients that would remove the remaining dimension dependence.
-
 :::{prf:remark} Reading the table
 :label: rem:history-table-caveats
 Two entries deserve care. The 2016/2024 row is one result: the Lee–Vempala preprint of 2016 appeared in final form in the Annals in 2024, and the bibliography records both. The $O(n^{5/12})$ entry summarizes a sequence of thin-shell improvements rather than a single paper, and is quoted here only to mark the pre-localization ceiling. Separately, the bibliography contains [@vempala2016kls], a 2016 announcement of a proof of the full conjecture; it is not a milestone in this table, and it is listed in the bibliography for completeness of the record only.
@@ -184,7 +181,7 @@ and no reverse implication is known in a dimension-free form. Both of the weaker
 
 **Slicing.** Bourgain's slicing conjecture asks whether the isotropic constants $L_n$ are universally bounded. Guan proved $L_n\lesssim\log\log n$ and, in the process, obtained the stochastic-localization trace estimate that turned out to be decisive [@Guan2024]. Klartag and Lehec combined that estimate with $M$-ellipsoids and Shannon–Stam stability to prove $\sup_nL_n<\infty$, published in 2025 [@KlartagLehec2025Slicing]; Bizeul subsequently gave an alternative proof through small-ball estimates [@Bizeul2025SmallBallSlicing]. Slicing controls determinant and volume information, not the bottom of the full spectrum.
 
-**Thin shell.** For isotropic log-concave $X$ the thin-shell conjecture asks for $\Var(|X|^2)\le Cn$, equivalently $\E(|X|-\sqrt n)^2\le C$. Klartag and Lehec gave a proof via parallel couplings of exponential tilts, nonlinear filtering, optimal transport, $H^{-1}$ estimates, and Guan-type covariance control [@KlartagLehec2025ThinShell]. A July 2026 first-version preprint of Chen and Klartag sharpens it to the optimal $\Var(|X|^2)\le8n$, with equality for products of centered exponentials, together with a sharp third-moment-tensor bound [@ChenKlartag2026SharpThinShell]; both statements are recorded as [](#thm:chen-klartag-thin-shell) and [](#thm:chen-klartag-third-moment).
+**Thin shell.** For isotropic log-concave $X$ the thin-shell conjecture asks for $\Var(|X|^2)\le Cn$, equivalently $\E(|X|-\sqrt n)^2\le C$. Klartag and Lehec gave a proof via parallel couplings of exponential tilts, nonlinear filtering, optimal transport, $H^{-1}$ estimates, and Guan-type covariance control [@KlartagLehec2025ThinShell]; Chapter [](#sec:family-coupling) describes the coupling and what it does not reach. A July 2026 first-version preprint of Chen and Klartag sharpens it to the optimal $\Var(|X|^2)\le8n$, with equality for products of centered exponentials, together with a sharp third-moment-tensor bound [@ChenKlartag2026SharpThinShell]; both statements are recorded as [](#thm:chen-klartag-thin-shell) and [](#thm:chen-klartag-third-moment).
 
 **Why this does not close the gap.** Eldan's reverse estimate bounds the inverse Cheeger scale by a weighted average of thin-shell parameters $\sigma_k$ [@Eldan2013ThinShell],
 
@@ -195,10 +192,15 @@ and no reverse implication is known in a dimension-free form. Both of the weaker
 
 Even with $\sigma_k=O(1)$ the harmonic sum contributes a $\log n$, and [](#eq:eldan-reverse) yields only $\PsiKLS_n\lesssim\log n$, not $O(1)$. Radial concentration constrains one observable, $|x|^2$; KLS quantifies over every function and every measurable cut. The same asymmetry recurs, in sharper form, for Letwin's preprint: it eliminates every *quadratic* witness, and the first eigenfunction of a general log-concave diffusion need not be quadratic.
 
-(subsec:kls-architecture)=
-### The localization–Lichnerowicz architecture
+(sec:kls-conversions)=
+## Two conversions that reach every test function
 
-The argument behind the July 2026 bound [](#thm:letwin-kls) combines four ingredients, no one of which replaces another (Figure [](#fig:kls-architecture)). The October argument for [](#thm:song-zhang-kls) keeps stochastic localization and the quadratic estimate but converts curvature into a spectral gap differently: not by improved Lichnerowicz, but through control of polynomials of every degree (Chapter [](#sec:polynomial-curvature)).
+Two arguments bound the Poincaré constant of every isotropic log-concave measure with a factor that grows only slowly with the dimension: Letwin's [](#thm:letwin-kls), $\CP\lesssim\sqrt{\log n}$, and Song and Zhang's [](#thm:song-zhang-kls), $\CP\lesssim16^{\log^*(n+2)}$. Both run stochastic localization up to a time $t$ of order $1/\log n$, where the localized measure is $t$-strongly log-concave, and both start from Letwin's quadratic estimate [](#thm:letwin-qcts). They differ in one step: how curvature $t$ is converted into a spectral gap. Each conversion loses something that grows with $n$, and the two losses are the starting point of Section [](#sec:kls-remaining).
+
+(subsec:kls-architecture)=
+### Localization and improved Lichnerowicz
+
+Letwin's argument combines four ingredients, no one of which replaces another (Figure [](#fig:kls-architecture)).
 
 - **Stochastic localization creates Gaussian curvature.** One observes $X\sim\mu$ through Gaussian noise of decreasing size and follows the conditional law $\mu_t$; the tilt $e^{-t|x|^2/2}$ makes $\mu_t$ $t$-strongly log-concave, and on average $\mu_t$ is $\mu$ (Section [](#sec:family-sl)).
 
@@ -228,10 +230,10 @@ flowchart TB
   classDef res fill:#f2f2f2
 ```
 
-The architecture of [](#thm:letwin-kls). Boxed in colour: the July 2026 preprint contribution. It does not replace stochastic localization; it discharges a crucial input to the localization–Lichnerowicz pipeline.
+The architecture of [](#thm:letwin-kls). Boxed in colour: the contribution of Letwin's preprint. It does not replace stochastic localization; it discharges a crucial input to the localization–Lichnerowicz pipeline.
 ::::
 
-**The exact bridge, and where the logarithm lives.** Define the directional third-moment parameter
+**The bridge.** Define the directional third-moment parameter
 
 ```{math}
 :label: eq:kappa-def
@@ -245,17 +247,20 @@ the supremum over isotropic log-concave $\mu$ on $\R^n$ and $\theta\in S^{n-1}$.
 \boxed{\ C_{\mathrm P,n}\lesssim\kappa_n\sqrt{\log n}\ }
 ```
 
-(Section [](#subsec:sl-where-the-log-lives)), and Letwin's $\kappa_n\le2\sqrt2$ ([](#prop:letwin-kappa)) is what turns [](#eq:kls-bridge) into [](#thm:letwin-kls). The proof in Section [](#sec:family-moment-map) chooses the minimum of the covariance-window time and the initial spectral gap, so it needs no prior quantitative bound on that gap.
+and Letwin's $\kappa_n\le2\sqrt2$ ([](#prop:letwin-kappa)) is what turns [](#eq:kls-bridge) into [](#thm:letwin-kls). The proof in Section [](#sec:family-moment-map) chooses the minimum of the covariance-window time and the initial spectral gap, so it needs no prior quantitative bound on that gap.
 
-The $\sqrt{\log n}$ in this particular bound is not hidden in the moment-map calculation. Klartag–Lehec smooth the maximum covariance eigenvalue by log-trace-exp,
+**Where its logarithm lives.** Not in the moment-map calculation. To keep $\norm{A_t}_\op$ bounded along the path, Klartag and Lehec follow a smooth surrogate of the top eigenvalue, $\frac1\beta\log\Tr e^{\beta A_t}$, which approximates it within a constant only if $\beta\asymp\log n$. Its Itô drift is then of order $\kappa_n^2\log n$, covariance control survives until $t_*\asymp1/(\kappa_n^2\log n)$, and improved Lichnerowicz turns that time into $\CP\lesssim t_*^{-1/2}\lesssim\kappa_n\sqrt{\log n}$. The logarithm is the *entropy cost of replacing a matrix maximum by a soft maximum over $n$ directions* ([](#rem:log-is-entropy); the computation is Section [](#subsec:sl-where-the-log-lives)). That diagnosis is what makes target 3 of Section [](#sec:kls-synthesis) concrete.
 
-$$
-\Phi_t=\frac1\beta\log\Tr\bigl(e^{\beta A_t}\bigr),
-\qquad
-\norm{A_t}_\op\le\Phi_t\le\norm{A_t}_\op+\frac{\log n}\beta ,
-$$
+(subsec:song-zhang-mechanism)=
+### Polynomial estimates and curvature
 
-and approximating $\lmax$ to within a constant forces $\beta\asymp\log n$. The Itô drift is then of size $O(\kappa_n^2\log n)$, so covariance control survives only until $t_*\asymp1/(\kappa_n^2\log n)$, and improved Lichnerowicz converts that time into $\CP\lesssim t_*^{-1/2}\lesssim\kappa_n\sqrt{\log n}$. The logarithm is the *entropy cost of replacing a matrix maximum by a soft maximum over $n$ directions*. That diagnosis is what makes target 3 of Section [](#sec:kls-synthesis) concrete.
+Song and Zhang keep the localization and the quadratic estimate, and replace improved Lichnerowicz by a conversion through polynomials of every degree (Chapter [](#sec:polynomial-curvature), Figure [](#fig:sz-loop)). The polynomials are the Appell polynomials of the measure, adapted to its moments in each degree, and their growth is measured by coefficients $c_k$; for the standard Gaussian they are the Hermite polynomials and $c_k=1/\sqrt{k!}$.
+
+- **Coefficients give curvature profiles.** For a measure of curvature $a$, bounds on the $c_k$ give a Poincaré constant much smaller than the Bakry–Émery bound $1/a$ ([](#thm:sz-curvature-comparison)).
+- **Localization improves the coefficients.** Feeding that profile back through localization improves the coefficient bounds, and the comparison can be run again. Each round replaces a logarithm by its logarithm: at depth $r$ the profile is $\CP\le\Gamma_r^2\ell_r(1/a)^2$, with $\ell_r$ the $r$-fold iterated logarithm and $\Gamma_r\le C4^r$ ([](#thm:sz-iterated-curvature)).
+- **Transfer to every measure.** Localizing an arbitrary isotropic log-concave measure to curvature $c/\log(en)$ transfers any such profile to it ([](#thm:sz-curvature-transfer)), so $\CP\lesssim16^r\ell_r(\log en)^2$ for every $r$; taking $r\approx\log^*(n+2)$ gives [](#thm:song-zhang-kls).
+
+**Where its loss lives.** In the factor $4$ per round, and in admissibility thresholds that grow with the depth, while the depth must grow, very slowly, with $n$ (Section [](#sec:sz-profile-iteration)). The end point is exact: KLS is equivalent to a single exponential bound $c_k\le A^k$ on the coefficients, uniform in the degree, the dimension and the measure ([](#prop:sz-exponential-coefficients-equivalence)). That is a reformulation of KLS, not an easier statement, but it says where to look.
 
 (sec:kls-remaining)=
 ## The obstacle every method meets
@@ -267,7 +272,12 @@ By [](#thm:letwin-qcts) and [](#prop:letwin-kappa), $\kappa_n=O(1)$ and every qu
 
 Every method in the literature controls something. Needles control one-dimensional conditional measures sharply; stochastic localization controls short-time covariance and directional third moments; heat-flow and $H^{-1}$ arguments control coordinate and quadratic spectral mass; moment maps control fixed deterministic matrix energies $\E\Tr(BHBH)$; parallel coupling controls linear exponential tilts; Brownian transport controls averaged derivatives to within a polylogarithm. Section [](#subsec:kls-reading-map) tabulates these one by one.
 
-What none of them controls is the same object when it is allowed to *adapt*. In every row of that table the estimate holds for a fixed matrix, a fixed direction, a fixed tilt, or on average along a path, and KLS needs it uniformly, for an object that may depend on the measure or on the extremizing function. Two arguments do reach every test function, [](#thm:letwin-kls) and [](#thm:song-zhang-kls), and what they lose is a factor growing with the dimension: in the first, the entropy of a soft maximum over $n$ directions (Section [](#subsec:kls-architecture)); in the second, the losses of an iteration whose depth grows with $n$ (Section [](#sec:sz-profile-iteration)). So there are two ways forward: reduce the loss of a conversion that already reaches every test function, or make a restricted estimate adaptive. Each of the four approaches of this manuscript — the fixed eigenfunction, the moment map, the fixed cut and conditional fibers — is a way of doing the second.
+What none of them controls is the same object when it is allowed to *adapt*. In every row of that table the estimate holds for a fixed matrix, a fixed direction, a fixed tilt, or on average along a path, and KLS needs it uniformly, for an object that may depend on the measure or on the extremizing function. Two arguments do reach every test function, [](#thm:letwin-kls) and [](#thm:song-zhang-kls), and what they lose is a factor growing with the dimension: in the first, the entropy of a soft maximum over $n$ directions (Section [](#subsec:kls-architecture)); in the second, the losses of an iteration whose depth grows with $n$ (Section [](#subsec:song-zhang-mechanism)). So there are two ways forward, and the manuscript is organised around them.
+
+- **Reduce the loss** of a conversion that already reaches every test function. This is the current frontier, Song and Zhang's polynomial–curvature iteration (Chapter [](#sec:polynomial-curvature)), whose loss is located and whose end point has an exact form ([](#prop:sz-exponential-coefficients-equivalence)); an equivalent form of KLS, it should be said, and not an easier one.
+- **Make a restricted estimate adaptive.** Each of the four approaches of this manuscript is a way of doing this: the moment map replaces fixed matrices by the Hessian field of the moment map; the fixed eigenfunction and the fixed cut follow, along stochastic localization, the one object a small spectral gap or a small Cheeger constant would select; conditional fibers choose a frame of directions from the measure before the test function. They are presented in that order, the order of what each has established (Section [](#sec:frontier-atlas)).
+
+The two ways are not exclusive: the frontier argument already uses a first eigenfunction, and its losses are the place where an adaptive estimate would have to enter.
 
 (subsec:kls-spike-obstruction)=
 ### The covariance spike, and why the direct repair fails

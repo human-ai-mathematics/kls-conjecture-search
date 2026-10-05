@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "29.%s"
+  enumerator: "21.%s"
 ---
 
 (sec:riccati)=

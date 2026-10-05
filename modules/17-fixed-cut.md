@@ -1,10 +1,10 @@
 ---
 numbering:
-  enumerator: "15.%s"
+  enumerator: "17.%s"
 ---
 
 (sec:introduction)=
-# The fixed cut: the approach and its main conditional statements
+# The fixed cut: the approach, its conditional statements, and what it has taught
 
 ## The approach at a glance
 
@@ -26,7 +26,11 @@ The survival-to-boundary step is [](#lem:survival-implies-kls). To obtain surviv
 
 **What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Section [](#sec:riccati)), the Stein dictionary (Section [](#sec:stein-dictionary)), and the covariance technology (Section [](#sec:covariance-tech)). Each statement below displays its own standing.
 
-**What it gives.** Three results. The bootstrap comparison theorem and the interface functional $\Xi_T$ (Section [](#sec:bootstrap)), together with the fact that the crude evaluation of $\Xi_T$ *cannot* suffice ([](#rem:insufficiency)) — a negative result that says exactly which input the bootstrap needs. The scale-weighted all-cut source budget, [](#lem:time-weighted-source). And the coordinate budgets and covariance reduction of the product stress test (Section [](#sec:product-stress)), where the approach is tested against the measure that defeats naive covariance control.
+**What it gives.** Its implications towards KLS are conditional, and its most reusable results are negative; this chapter states both, and its technical chapters form the appendix (Sections [](#sec:carleson)–[](#sec:appendix-fixed-cut)).
+
+- *A bootstrap, and the one quantity it needs.* [](#thm:bootstrap) says that for a measure whose Cheeger constant is within a factor $1+\varepsilon$ of the smallest in its dimension, the excess of every balanced cut propagates along localization with a single interface, $\Xi_T(\mu)=\int_0^T\E(\lmax(A_t)-1)_+\dd t$. The idea: the isoperimetric profile of a log-concave measure is concave and symmetric, so its Cheeger constant is read at mass $\tfrac12$; whitening a localized measure of covariance $A_t$ loses at most $\lmax(A_t)^{1/2}$ against the worst isotropic measure of the same dimension; near-worstness compares the localized Cheeger constant with that of $\mu$, and every loss is charged to $(\lmax(A_t)-1)_+$.
+- *How far it gets.* The crude evaluation $\Xi_T\lesssim\log n$ never suffices in high dimension ([](#rem:insufficiency), [](#rem:crude-insufficient)); the polylogarithmic covariance technology improves it to $\Xi_T\le C(1+\log\log n)$ for $t_1(n)\le T\le1$ ([](#cor:loglog)), which still falls short of the $O(T)$ the bootstrap needs. A relative bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for all measures at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)): this measures the input the bootstrap needs, without excluding other propagation arguments.
+- *Budgets.* The scale-weighted all-cut source budget [](#lem:time-weighted-source), and the coordinate budgets and covariance reduction of the product stress test (Section [](#sec:product-stress)), where the approach meets the measure that defeats naive covariance control: no fixed balanced cut of a product depending on a single coordinate can witness a failure of the consumption chain of the all-cut estimate: its conclusion holds for such cuts unconditionally ([](#cor:single-coordinate-cuts)).
 
 **What blocks it.** For the all-cut variant, the operator-to-trace upgrade [](#conj:trace-upgrade): obtain [](#ass:tight-prefix-carleson) by lifting [](#cor:per-direction) from quadratic-form scale to trace scale, uniformly over fixed initial data (Section [](#sec:open)). For the near-Cheeger variant, the trace estimate [](#conj:stein-weighted) lacks a companion: a tensor-stable propagation statement to replace the literal package [](#ass:weighted-package), together with a localization-uniform almost-stability trace theorem.
 
@@ -37,7 +41,7 @@ The survival-to-boundary step is [](#lem:survival-implies-kls). To obtain surviv
 % Agent note: the approach ap:e-weighted-excess of research/program/portfolio.yaml is closed on
 % the spectator obstruction; the checkpoints that name it record the reopening condition above.
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude). The static quadratic-chaos input and its limits: Section [](#sec:qcts). The approach proper: this section for the conditional statements, then Sections [](#sec:carleson)–[](#sec:open). Full apparatus: the shared technical foundations (Sections [](#sec:notation), [](#sec:riccati), [](#sec:qcts), [](#sec:covariance-tech) and [](#sec:models)), with the mass martingale (Section [](#sec:mass-martingale)), the Stein dictionary (Section [](#sec:stein-dictionary)) and the Jacobi splitting formulas (Section [](#sec:jacobi)) among this approach's chapters. Full proofs are linked from the status shown next to each statement.
+**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude). The static quadratic-chaos input and its limits: Section [](#sec:qcts). The approach proper: this section for the conditional statements and what they teach, Section [](#sec:open) for the remaining problems, and the appendix (Sections [](#sec:carleson)–[](#sec:appendix-fixed-cut)) for the arguments. Full apparatus: the shared technical foundations (Sections [](#sec:notation), [](#sec:riccati), [](#sec:qcts), [](#sec:covariance-tech) and [](#sec:models)), with the mass martingale (Section [](#sec:mass-martingale)), the Stein dictionary (Section [](#sec:stein-dictionary)) and the Jacobi splitting formulas (Section [](#sec:jacobi)) in the appendix. Full proofs are linked from the status shown next to each statement.
 
 **The idea, in one line.**
 
@@ -55,7 +59,7 @@ $$
 
 and $h_\mu$, $\PsiKLS_\mu=h_\mu^{-1}$, $\hstar_n$ are as fixed in Section [](#subsec:kls-conjecture) and [](#eq:hstar-def); recall in particular [](#rem:psi-convention) on the $\psi$ convention. The conjecture itself and the literature frontier are in Section [](#sec:kls-orientation); the sharp radial and homogeneous-quadratic results recorded there remove major static obstructions, but they do not by themselves control a fixed bottleneck set under localization.
 
-The shared localization machinery — notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the static obstruction, the covariance technology, and the model geometries — is deferred to the shared technical foundations and to the supporting chapters of this approach; the conceptual summary needed to follow this approach is the prelude, Section [](#sec:localization-prelude). The present section states the conditional results; Sections [](#sec:carleson)–[](#sec:open) carry out the arguments.
+The shared localization machinery — notation, the mass martingale, the two-color Riccati identities and Stein dictionary, the static obstruction, the covariance technology, and the model geometries — is deferred to the shared technical foundations and to the appendix; the conceptual summary needed to follow this approach is the prelude, Section [](#sec:localization-prelude). The present section states the conditional results; the appendix, Sections [](#sec:carleson)–[](#sec:appendix-fixed-cut), carries out the arguments.
 
 (subsec:two-variants)=
 ## The all-cut and near-Cheeger variants
@@ -128,7 +132,7 @@ C_0\abs I+C_1\E\int_{I\cap[0,\tau]}r_t\dd t
 [](#ass:all-cut-carleson) implies the KLS conjecture.
 :::
 
-The argument is in Sections [](#sec:mass-martingale)–[](#sec:carleson). Taking $I=[0,T]$ and $\eta=1/6$, for which the tight window is the coarse one, the assumption gives the hypothesis of [](#cor:tight-window-consumption) for every cut of mass $1/2$; [](#lem:survival-implies-kls) then concludes. It uses only stochastic localization, the two-color Riccati identity, and the fact that a $T$-uniformly log-concave posterior has a dimension-free Cheeger lower bound at scale $\sqrt T$.
+The argument is in Sections [](#sec:carleson) and [](#sec:mass-martingale) of the appendix. Taking $I=[0,T]$ and $\eta=1/6$, for which the tight window is the coarse one, the assumption gives the hypothesis of [](#cor:tight-window-consumption) for every cut of mass $1/2$; [](#lem:survival-implies-kls) then concludes. It uses only stochastic localization, the two-color Riccati identity, and the fact that a $T$-uniformly log-concave posterior has a dimension-free Cheeger lower bound at scale $\sqrt T$.
 
 The consumption step [](#cor:tight-window-consumption) needs less than the all-interval formulation above. Its exact premise is the following.
 
@@ -218,7 +222,7 @@ Finally, Section [](#sec:bootstrap) provides the available propagation mechanism
 | Matrix and scalar two-color Riccati identities | Isolate the source $S_t$ and damping $D_t$ exactly | [](#thm:scalar-riccati), Section [](#sec:riccati) (formal, with standard approximation conventions) |
 | Per-direction Carleson estimate | Shows that $s_tG_t^2$ has dimension-free occupation in every fixed direction | [](#cor:per-direction), from the matrix Riccati identity |
 | Operator-to-trace upgrade | The true stochastic missing estimate | [](#conj:trace-upgrade) |
-| Quadratic-chaos thin shell | Static time-zero form of two-color covariance control | [](#thm:letwin-qcts), imported with constant $8$ from a July 2026 version-1 preprint; whitening still leaves dynamic covariance alignment |
+| Quadratic-chaos thin shell | Static time-zero form of two-color covariance control | [](#thm:letwin-qcts), imported with constant $8$ from Letwin's version-1 preprint; whitening still leaves dynamic covariance alignment |
 | Consumption audit of the excess term | Shows the unweighted excess term is inert and the unweighted Stein-trace estimate alone implies KLS | [](#prop:intro-audit), Section [](#sec:excess) |
 | Two-tail calibration and spectator obstructions | The static aligned mode forces at least the $5/2$ pure-power scale, while independent spectators rule out both the resulting global-norm rate and every uniform superlinear remainder even at weight one | [](#prop:two-tail), [](#prop:weighted-spectator-obstruction), [](#prop:spectator-excess-rate-obstruction) |
 | Perimeter martingale and exact excess identity | Reduces propagation to the localized profile floor; exposes a circularity risk without proving a no-go theorem | [](#lem:perimeter-martingale), [](#lem:excess-identity) |
