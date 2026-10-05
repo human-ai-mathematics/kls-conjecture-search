@@ -91,6 +91,13 @@ updates and responses to the user; no fixed wait duration is part of the reposit
 contract. Start a new session when it helps keep context focused, not automatically after
 each task. The recommended scientific workflow is in *Workflow* in `SPECIFICATION.md`.
 
+At the end of a wave or a session that changed the picture (a result certified or
+withdrawn, a refutation, an approach opened or closed, a preprint integrated, a
+restructuring, a migration), the orchestrator adds a dated entry at the top of
+[`HISTORY.md`](HISTORY.md): a few lines in plain prose, statements named by label, the
+checkpoint holding the detail. Past entries are never rewritten, and the ledger stays the
+source of truth for statuses.
+
 ## Licence
 
 The text (manuscript, proofs and research records) is under
