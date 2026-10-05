@@ -23,7 +23,7 @@ interchangeable.
 Where the statement is vulnerable is in its conventions, the most common source of an apparent
 contradiction with a quoted result. `rem:psi-convention` fixes the $\psi$/$h$ normalization — an
 exponent quoted from the literature is meaningless without it. `def:qcts` and `def:cmh` fix the
-quadratic-chaos and canonical-moment-Hessian quantities that two of the four routes are stated
+quadratic-chaos and canonical-moment-Hessian quantities that two of the four approaches are stated
 in.
 
 ## The exact negation
@@ -231,4 +231,4 @@ and earlier records cite them under those names.
   fastest way to kill it. The classical needles,
   transport, Bochner/$H^{-1}$ and parallel-coupling approaches surveyed in `sec:family-needles`–`sec:family-coupling` are the landscape this program
   works against, not routes; the polynomial–curvature frontier of `sec:polynomial-curvature` is
-  not a fifth approach, but its loss is worked on by the `ap:sz-*` routes.
+  not a fifth approach; the routes on its loss live in the portfolio.

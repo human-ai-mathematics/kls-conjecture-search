@@ -145,7 +145,7 @@ $\Tr A_t$ has drift $-\Tr A_t^2\le0$ by [](#eq:cov-sde), so $\E\lmax(A_t)\le\E\T
 
 :::{prf:remark} The crude evaluation is provably insufficient — by Klartag's theorem
 :label: rem:insufficiency
-For [](#eq:clean-form) to yield even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But, conditional on the July 2026 version-1 preprint of Letwin, $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ [@Letwin2026QuadraticKLS]; even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude bound therefore never suffices in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
+For [](#eq:clean-form) to yield even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ by [](#thm:letwin-kls); even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude bound therefore never suffices in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
 :::
 
 The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Section [](#sec:covariance-tech) ([](#ass:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).

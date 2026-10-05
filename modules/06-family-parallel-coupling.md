@@ -34,4 +34,4 @@ so, to first order, the tilts probe the correlation of a test function with *lin
 **Where this family enters the four approaches.** Through its rank estimates only ([](#thm:kl-stopped-rank-tail), [](#thm:kl-integrated-rank-covariance)), which bear on the covariance windows of the fixed-eigenfunction and fixed-cut approaches but discharge none of their open estimates. Extending the coupling itself beyond linear tilts is target 4 of Section [](#sec:kls-synthesis); none of the four approaches carries it, and this manuscript formulates no statement for it.
 
 % Agent note: target 4 has no ledger node and no approach in the portfolio. The two rank theorems
-% are imported from version 2 of the preprint and live in modules/23-covariance-technology.md.
+% are imported from version 2 of the preprint and live in `sec:covariance-tech`.
