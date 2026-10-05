@@ -95,3 +95,8 @@ status polling. Choose a timeout within the client's limits that still allows pr
 updates and responses to the user; no fixed wait duration is part of the repository
 contract. Start a new session when it helps keep context focused, not automatically after
 each task. The recommended scientific workflow is in *Workflow* in `SPECIFICATION.md`.
+
+## Licence
+
+The text (manuscript, proofs and research records) is under
+[CC BY 4.0](LICENSE-CC-BY-4.0.txt), the code under MIT; [`LICENSE`](LICENSE) says which is which.
