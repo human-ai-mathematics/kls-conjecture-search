@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-  - /root/repair_product_dossier
-reviewer: /root/review_product_w0
+  - kls_proof_audit, unknown, 2026-08-27
+  - repair_product_dossier, unknown, 2026-08-27
+reviewer: review_product_w0, unknown, 2026-08-27
 fingerprints:
   solutions/kls-product-covariance.md: a288e98ce106b7998a88685c6da2c20f161c9ba5387e88242337bffecb1723a4
   lem:block: 8a8c2e99fae755f4beed8f10c667b71bc1b5067bbf1fbe5ca6cfaed191e1555e
@@ -11,7 +11,7 @@ fingerprints:
   cor:per-direction: 41aeb34aa0f748e931a100d435bb6cbba97772f149ce25c2e089fc77974c1e43
   thm:scalar-riccati: 83fdb94d00721fdfab219b0a417b1ac815c170925d051a187929c3635241286d
   prop:products: 85b9ec9b7b81c783e52dce9f3edce41396f581da4f7a425bd3df9031860a6c8c
-  cor:single-coordinate-cuts: 50f836a8a6885da08f837ec667d19b41a722b0e356f8c44acf5bd11b745a8a67
+  cor:single-coordinate-cuts: 2bcff88762d7f2da4e2f52f0181f2fbdc0c5ded77931063daf7352b5bab575ae
   lem:product-qcts: 93f2e2a3230253762243cd991c55f11de59b986c8daf848ecd044256ef2302eb
   cor:KI-discharged: 5ddd85d0e5ca16534f2e52aadb8a2a8b139979e5b19edb727c861d88a43243b7
   thm:KL-window: c8805f6f7be529a3a27f935a273c4a3253861fe59ebc6b52dc416a68cdd915f7

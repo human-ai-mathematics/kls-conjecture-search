@@ -1,0 +1,90 @@
+# Publish a restricted preview of the site to Cloudflare Pages, on manual dispatch only,
+# for a small circle of readers before the public site. Every page asks for a shared
+# password (.github/preview/functions/_middleware.js); the site is not indexed.
+#
+# Any branch can be previewed: Actions → preview → Run workflow → pick the branch.
+# Repository secrets:
+#   CLOUDFLARE_API_TOKEN   an API token with the single permission Account → Cloudflare Pages → Edit
+#   CLOUDFLARE_ACCOUNT_ID  the Cloudflare account id
+#   PREVIEW_PASSWORD       the password given to the readers; change it to revoke access
+#
+# The public site is pages.yml; this workflow does not touch it.
+
+name: preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview
+  cancel-in-progress: false
+
+env:
+  PROJECT: kls-preview
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install MyST
+        run: npm ci
+
+      - name: Require the secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PREVIEW_PASSWORD: ${{ secrets.PREVIEW_PASSWORD }}
+        run: |
+          for s in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PREVIEW_PASSWORD; do
+            [ -n "${!s}" ] || { echo "::error::secret $s is not set"; exit 1; }
+          done
+
+      # As in pages.yml: the draft dossiers are left out, then the checker runs.
+      - name: Leave out the draft dossiers
+        run: |
+          set -o pipefail
+          uv run scripts/check.py --drafts | xargs -r rm -v --
+
+      - name: Validate the repository
+        run: uv run scripts/check.py
+
+      # Served at the root of its own domain: no BASE_URL.
+      - name: Build the site
+        run: npx myst build --html
+
+      # The password is set before the first deployment, so the site is never served open.
+      - name: Create the project and set the password
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PREVIEW_PASSWORD: ${{ secrets.PREVIEW_PASSWORD }}
+        run: |
+          npx --yes wrangler@4 pages project list | grep -qw "$PROJECT" \
+            || npx --yes wrangler@4 pages project create "$PROJECT" --production-branch main
+          printf '%s' "$PREVIEW_PASSWORD" \
+            | npx --yes wrangler@4 pages secret put PREVIEW_PASSWORD --project-name "$PROJECT"
+
+      # Wrangler compiles the functions/ directory of its working directory.
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/preview"
+          cp -r .github/preview/functions "$RUNNER_TEMP/preview/"
+          cd "$RUNNER_TEMP/preview"
+          npx --yes wrangler@4 pages deploy "$GITHUB_WORKSPACE/_build/html" \
+            --project-name "$PROJECT" --branch main --commit-dirty=true
+          echo "Preview: https://$PROJECT.pages.dev" >> "$GITHUB_STEP_SUMMARY"

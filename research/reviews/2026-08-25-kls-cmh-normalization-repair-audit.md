@@ -1,13 +1,13 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-reviewer: /root/kls_evidence_audit
+  - kls_proof_audit, unknown, 2026-08-25
+reviewer: kls_evidence_audit, unknown, 2026-08-25
 fingerprints:
   solutions/thm-cmh-normalization.md: d53de5d49ed9590d4e9e813ab04306c8222ede3398a9da56dd101dae35a9fc8f
   prop:cmh-bochner: 237164772a03afb3fb5bfb7a896dbd45f8487332637efa548b827454d8f8ea6c
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
-  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  thm:cmh-implies-affine-poincare: 9210ad8934e1f76e3f1f621274c0be2dc1c9e5fa106146b66584871844acd5e0
   prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
   cor:cmh-hodge-comparison: 42676f87e102fd9313af73973dcf29ff5a7f17ccec197c3284254e7cf2c0e0cc
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904

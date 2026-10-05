@@ -11,7 +11,7 @@ which disguises a dead route wears. It owns none of the mathematics — the stat
 
 ## The target
 
-`conj:kls`, stated at `:label: conj:kls` in `modules/00-overview.md` — read it there; this
+`conj:kls`, stated at `:label: conj:kls` in the overview — read it there; this
 file never copies it.
 
 Three formulations are used interchangeably, and the manuscript fixes their equivalence: the
@@ -23,7 +23,7 @@ interchangeable.
 Where the statement is vulnerable is in its conventions, the most common source of an apparent
 contradiction with a quoted result. `rem:psi-convention` fixes the $\psi$/$h$ normalization — an
 exponent quoted from the literature is meaningless without it. `def:qcts` and `def:cmh` fix the
-quadratic-chaos and canonical-moment-Hessian quantities that two of the four routes are stated
+quadratic-chaos and canonical-moment-Hessian quantities that two of the four approaches are stated
 in.
 
 ## The exact negation
@@ -49,8 +49,8 @@ the node that currently instantiates it, so the list stays checkable:
 
 | does not complete the target | instantiated by |
 |---|---|
-| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
-| an implication whose antecedent is open | `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices`, `lem:mm-stopped-window-source`, `prop:mm-window-occupation` — all `proved` with a non-empty `assumes` |
+| any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `thm:letwin-kls`, `thm:song-zhang-kls`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
+| an implication whose antecedent is open | `cor:dichotomy`, `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices` — all `proved` with a non-empty `assumes` |
 | a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
 | a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so $\mathrm{CMH}(4)$ would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
 
@@ -87,8 +87,10 @@ them; this section is the reasoning a new route needs before it runs anything.
    use high-complexity cuts.
 5. **Isotropic simplex with the $A_{m-1}$ root frame.** The root-frame gap is $O(m^{-2})$
    (`prop:conditional-fiber-root-obstruction`), while the exact degree-two dual floors give
-   $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. No degree-two certificate can refute the all-frame gate;
-   a fixed-degree refuter needs degree at least three.
+   $\Lambda_{m,2}\ge(m+2)(m+3)/(5m^2)$. More generally, `lem:fiber-polynomial-floor` gives
+   $\Lambda_{m,k}\ge3/[k(k+1)^2(k+2)]$ for every fixed degree $k$ and every $m\ge2$.
+   No fixed-degree polynomial upper certificate can refute the all-frame gate asymptotically;
+   degree must grow with dimension, or tests must be nonpolynomial.
 6. **Conventions that must be stated or the estimate is not a statement.** $0\le\chi\le1$ and
    $\chi'\ge0$ for any retained cutoff; affine-support degeneration in the approximation limit;
    the regular class boundary, with non-smooth laws admissible only as boundary calibrations.
@@ -99,8 +101,9 @@ them; this section is the reasoning a new route needs before it runs anything.
    $\beta=n$, with the directional third moment attaining $\lVert T_3(e_1)\rVert_{\mathrm{HS}}=2$.
    They are the non-product equality cases of the sharp gate. Any gate-zero or CMH argument
    must survive them; any sharp-constant claim must be tight on them. The cube-cone kernel is
-   fully explicit, and the first exact sweep found no violation and no $\mathrm{CMH}(4)$ pressure
-   from the base.
+   fully explicit. `prop:product-simplex-cone-gate` now proves the sharp linear bound on
+   all product-simplex bases (intervals included), with the complete equality set.
+   This does not control nonlinear CMH tests or arbitrary convex bases.
 8. **The five failure lenses a refutation attempt should sweep**, one per attempt and blind to
    the others: remote curvature loss and saturating likelihood (tail); separated scales and
    operator-versus-trace gaps (anisotropy); polynomial tails where Poincaré survives but stronger
@@ -113,10 +116,11 @@ them; this section is the reasoning a new route needs before it runs anything.
    isoperimetric profile of the random posterior; the available supermartingale covers a *fixed*
    competitor family while the balanced family moves with time. Inserting the bound directly
    assumes the Cheeger control being proved.
-2. **The equivalent-strength ceiling** (`rem:relative-ceiling`, from `prop:ceiling`). A universal
-   $\Xi_{T_0}\le\kappa T_0$ at small fixed time *already implies KLS*. A route aiming at it has
-   replaced the target by a restatement of it. This is the canonical shape to check a new route
-   against.
+2. **A KLS-sufficient covariance input** (`rem:relative-ceiling`, from `prop:ceiling`). A universal
+   all-measure $\Xi_{T_0}\le\kappa T_0$ bound at sufficiently small fixed time implies KLS.
+   No converse or equivalence is established. Proving this bound would be a sufficient-condition
+   route; its failure would not refute KLS. Distinguish it from near-worst weighted propagation
+   and from the actual excess controlled by the bootstrap.
 3. **Crude bootstrap** (`rem:crude-insufficient`). $\Xi_T\lesssim\log n$ is too large at known
    lower-bound scales; the available polylogarithmic technology reaches only `cor:loglog`.
 4. **Projection ceiling** (`rem:projection-ceiling`). Radial and projection-only tests lose a logarithm;
@@ -138,6 +142,26 @@ them; this section is the reasoning a new route needs before it runs anything.
    therefore at least as hard as a sharp third-moment estimate, and refuting it leaves
    $\mathrm{CMH}(4)$ untouched.
 
+10. **Summable losses require uniform admissibility.** Before using a bounded-product
+    improvement of the Song–Zhang iteration, discharge its small-degree initialization
+    and curvature-comparison thresholds uniformly in the depth. Merely removing the
+    factor four leaves growing thresholds that bounded profile constants cannot meet.
+    The exact obstruction and audit tasks are in
+    [`2026-10-03-song-zhang-audit-targets.md`](../explorations/2026-10-03-song-zhang-audit-targets.md).
+    The conclusion `thm:song-zhang-kls` is not a discharge of CMH, occupation,
+    or adaptive trace estimates.
+
+11. **Uniform exponential coefficients already have the strength of KLS.**
+    `prop:sz-exponential-coefficients-equivalence` is a certified equivalence,
+    not a proof of either assertion without its premise. Its one coefficient
+    constant must work simultaneously for every degree, dimension and regular
+    isotropic law. Separate constants at each degree or logarithmic depth do
+    not meet it. The converse takes the degree limit at one fixed regular
+    measure before passing a uniform scalar inequality to approximants.
+    Equivalence does not disqualify a proof approach: a distinct mechanism
+    and a discriminating intermediate estimate can make a reformulation
+    useful. The equivalence alone supplies neither of those.
+
 Two rules are specific to this program. They were constraints P1 and P2 of the v0.1 harness,
 and earlier records cite them under those names.
 
@@ -155,6 +179,22 @@ and earlier records cite them under those names.
 
 ## Neighbourhood
 
+- `prop:sz-exponential-coefficients-equivalence` — an exact quantitative
+  reformulation of the target in the full Appell hierarchy. It identifies the
+  required improvement over `thm:sz-polynomial-variance`; it does not establish
+  the uniform coefficient premise or justify a new independent route.
+- `thm:song-zhang-kls` — reconstructed from the pinned v1 source and certified
+  through independent agent reviews, together with its analytic, polynomial,
+  curvature-comparison and iterated-profile dependencies. The affine consequence
+  is `cor:sz-affine-poincare`. This is internal proof verification, not a change
+  to the source's publication status. No existing CMH, occupation or trace
+  antecedent is discharged. See the
+  [completed proof-wave checkpoint](../explorations/2026-10-03-sz-wrap-up.md).
+- `thm:sz-curvature-transfer` — the reusable interface for applying any improved
+  uniform regular curvature profile to general isotropic laws. Its profile is
+  evaluated at one deterministic argument; approximation needs no continuity
+  or monotonicity of that profile. Improving the input remains a mathematical
+  task, not an automatic consequence of the interface.
 - `prop:spectral-sufficiency` — proved, with `conj:mm-spectral-occupation` in `assumes`: the
   fixed-eigenfunction occupation estimate implies `conj:kls`, so settling
   `conj:mm-spectral-occupation` settles the target on that side.
@@ -162,8 +202,10 @@ and earlier records cite them under those names.
   bound, which with `prop:cmh-approximation-closure` and a discharged `ass:uniform-cmh-approximants` or
   `ass:cmh-recovery-envelope` would close the target.
 - `conj:gate-zero` and `conj:gate-zero-sharp` — the cheapest necessary consequences of
-  $\mathrm{CMH}(4)$ on linear tests; the sharp form refines the other, and either falsifies the
-  CMH route without touching the target.
+  the moment-map programme on linear tests. The constant-four gate is necessary for
+  $\mathrm{CMH}(4)$; the sharp form at two is stronger. Refuting the constant-four gate
+  falsifies that CMH target without touching KLS, whereas refuting the sharp form alone
+  does not.
 - `conj:trace-upgrade` — the tight-prefix operator-to-trace upgrade that would carry the fixed-cut route.
 - `conj:conditional-fiber-frame` — a universal form gap for one test-independent frame, which
   implies the target through `lem:conditional-fiber-form`.
@@ -184,7 +226,9 @@ and earlier records cite them under those names.
 - **What a new route owes before it enters the portfolio.** A thesis — the mechanism, in one
   sentence; a first precise target, written so it could be a ledger node today; its boundary
   against the obstruction set, fence by fence; an explicit statement of whether it is
-  *sufficient* or *equivalent* — a route that lands on an equivalent-strength statement has
-  renamed the problem (trap 2); and the fastest way to kill it. The classical needles,
-  transport and Bochner/$H^{-1}$ approaches surveyed in `modules/01`–`05` are the landscape this
-  program works against, not routes.
+  *sufficient* or *equivalent* — a sufficient condition has no claimed converse without proof
+  (trap 2), and an actual equivalence still needs a distinct mechanism (trap 11); and the
+  fastest way to kill it. The classical needles,
+  transport, Bochner/$H^{-1}$ and parallel-coupling approaches surveyed in `sec:family-needles`–`sec:family-coupling` are the landscape this program
+  works against, not routes; the polynomial–curvature frontier of `sec:polynomial-curvature` is
+  not a fifth approach; the routes on its loss live in the portfolio.

@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_proof_audit
-  - /root/repair_splitting_dossier
-reviewer: /root/review_splitting_w0
+  - kls_proof_audit, unknown, 2026-08-27
+  - repair_splitting_dossier, unknown, 2026-08-27
+reviewer: review_splitting_w0, unknown, 2026-08-27
 fingerprints:
   solutions/kls-geometry-models.md: 51f2adca44f986ee352d1f7e98544442cdd4993adff9977847a5d5f268fcc811
   lem:profile-bound: edaf5f0b76adaf78959e02db87ee943f5ff1a7a8b54831c0aa33bdfcf4d293d6

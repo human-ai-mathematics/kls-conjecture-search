@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - claude-prover-w4p02
-reviewer: proof-checker-w4r02
+  - claude-prover-w4p02, unknown, 2026-08-30
+reviewer: proof-checker-w4r02, unknown, 2026-08-30
 fingerprints:
   solutions/lem-mm-restart-deweighting.md: e02adbf1cbecb1adf3e0c1867ee8d74dd4709ce27d45703b7e88e782ec84f7cc
   lem:mm-restart-deweighting: ec93efcb1ac959a52ffa4388970b9434e653605ff400c9a1093346afda979f20

@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_bootstrap_stopped_interface_w3
-reviewer: /root/review_bootstrap_stopped_interface_w3
+  - prove_bootstrap_stopped_interface_w3, unknown, 2026-08-27
+reviewer: review_bootstrap_stopped_interface_w3, unknown, 2026-08-27
 fingerprints:
   solutions/thm-bootstrap-stopped-interface.md: 7c7dcc9e96daa718b359532f193e319f0cb8759fe20140a3b6d89ebdf0fd922a
   thm:bootstrap-stopped-interface: 79e7d5d20e15142a7f56585b648283171f5c63a721accf1eedd14b7072d9efe8

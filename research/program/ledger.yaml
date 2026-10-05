@@ -13,36 +13,39 @@ nodes:
   - id: lem:survival-implies-kls
     status: proved
     proofs:
-      - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+      - artifact: solutions/lem-survival-implies-kls.md
+        review: research/reviews/2026-10-04-wave-a-survival-repair-review.md
 
   - id: ass:stopped-centroid
     status: open
 
   - id: thm:centroid-implies-kls
-    status: open
+    status: proved
     depends_on: [lem:survival-implies-kls]
     assumes: [ass:stopped-centroid]
+    proofs:
+      - artifact: solutions/thm-centroid-implies-kls.md
+        review: research/reviews/2026-10-01-conditional-bridges-review.md
 
   - id: lem:matrix-riccati
     status: proved
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:scalar-riccati
     status: proved
     depends_on: [lem:matrix-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: cor:per-direction
     status: proved
     depends_on: [lem:matrix-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: cor:full-matrix-dissipation
     status: proved
@@ -58,28 +61,34 @@ nodes:
     status: open
 
   - id: thm:carleson-implies-centroid
-    status: open
-    depends_on: [thm:scalar-riccati, lem:survival-implies-kls]
+    status: proved
+    depends_on: [thm:scalar-riccati, cor:per-direction, lem:survival-implies-kls]
     assumes: [ass:all-cut-carleson]
+    proofs:
+      - artifact: solutions/thm-carleson-implies-centroid.md
+        review: research/reviews/2026-10-01-carleson-centroid-review.md
 
   - id: cor:tight-window-consumption
     status: proved
-    depends_on: [thm:scalar-riccati, lem:survival-implies-kls]
+    depends_on: [thm:scalar-riccati, cor:per-direction, lem:survival-implies-kls]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:intro-all-cut
-    status: open
+    status: proved
     depends_on: [cor:tight-window-consumption, lem:survival-implies-kls]
     assumes: [ass:all-cut-carleson]
+    proofs:
+      - artifact: solutions/thm-centroid-implies-kls.md
+        review: research/reviews/2026-10-01-conditional-bridges-review.md
 
   - id: lem:pathwise-BL
     status: proved
     depends_on: [prop:stein-rep]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: lem:lyapunov-stein-duality
     status: proved
@@ -93,7 +102,7 @@ nodes:
     depends_on: [lem:pathwise-BL, lem:stein-vs-source, thm:scalar-riccati]
     proofs:
       - artifact: solutions/kls-localization-riccati-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   # ---------------------------------------------------------------------------
   # ROUTE-AGNOSTIC MOMENT-MAP INPUTS
@@ -104,30 +113,120 @@ nodes:
     references: [BermanBerndtsson2013RealMA, Fathi2019SteinMomentMaps]
 
   - id: thm:chen-klartag-moment-hessian
-    status: open
+    status: proved
     references: [ChenKlartag2026SharpThinShell]
+    proofs:
+      - artifact: solutions/thm-chen-klartag-imports.md
+        review: research/reviews/2026-10-01-chen-klartag-imports-review.md
 
   - id: thm:chen-klartag-thin-shell
-    status: open
+    status: proved
     depends_on: [thm:chen-klartag-moment-hessian]
     references: [ChenKlartag2026SharpThinShell]
+    proofs:
+      - artifact: solutions/thm-chen-klartag-imports.md
+        review: research/reviews/2026-10-01-chen-klartag-imports-review.md
 
   - id: thm:chen-klartag-third-moment
-    status: open
+    status: proved
     depends_on: [thm:chen-klartag-moment-hessian]
     references: [ChenKlartag2026SharpThinShell]
+    proofs:
+      - artifact: solutions/thm-chen-klartag-imports.md
+        review: research/reviews/2026-10-01-chen-klartag-imports-review.md
 
   - id: thm:letwin-moment-map
-    status: open
+    status: proved
+    depends_on: [thm:regular-moment-map-compact-target]
     references: [Letwin2026QuadraticKLS]
+    proofs:
+      - artifact: solutions/thm-letwin-imports.md
+        review: research/reviews/2026-10-01-letwin-imports-r2-review.md
+
+  - id: thm:song-zhang-kls
+    status: proved
+    depends_on: [thm:sz-curvature-transfer, thm:sz-iterated-curvature]
+    references: [SongZhang2026IteratedLogKLS, KLnotes]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: lem:sz-analytic-foundations
+    status: proved
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-polynomial-variance.md
+        review: research/reviews/2026-10-03-sz-polynomial-review.md
+
+  - id: thm:sz-polynomial-variance
+    status: proved
+    depends_on: [thm:letwin-qcts]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-polynomial-variance.md
+        review: research/reviews/2026-10-03-sz-polynomial-review.md
+
+  - id: thm:sz-curvature-comparison
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-curvature-comparison.md
+        review: research/reviews/2026-10-03-sz-curvature-review.md
+
+  - id: thm:sz-iterated-curvature
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison]
+    references: [SongZhang2026IteratedLogKLS]
+    proofs:
+      - artifact: solutions/thm-sz-iterated-curvature.md
+        review: research/reviews/2026-10-03-sz-iteration-review.md
+
+  - id: cor:sz-affine-poincare
+    status: proved
+    depends_on: [thm:song-zhang-kls]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: thm:sz-curvature-transfer
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:letwin-qcts]
+    references: [SongZhang2026IteratedLogKLS, KLnotes]
+    proofs:
+      - artifact: solutions/thm-song-zhang-kls.md
+        review: research/reviews/2026-10-03-sz-main-review.md
+
+  - id: prop:sz-exponential-coefficients-equivalence
+    status: proved
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison]
+    proofs:
+      - artifact: solutions/prop-sz-exponential-coefficients-equivalence.md
+        review: research/reviews/2026-10-03-sz-exponential-equivalence-review.md
+
+  - id: thm:letwin-kls
+    status: proved
+    depends_on: [prop:letwin-kappa, thm:letwin-qcts, thm:improved-lichnerowicz]
+    references: [Letwin2026QuadraticKLS, Klartag2023Logarithmic, KlartagLehec2022Polylog, Milman2009Isoperimetric, Bobkov1999LogConcave]
+    proofs:
+      - artifact: solutions/thm-letwin-kls.md
+        review: research/reviews/2026-10-01-letwin-kls-review.md
 
   - id: thm:kl-stopped-rank-tail
-    status: open
+    status: proved
+    depends_on: [thm:improved-lichnerowicz]
     references: [KlartagLehec2025ThinShell]
+    proofs:
+      - artifact: solutions/thm-kl-rank-imports.md
+        review: research/reviews/2026-10-01-kl-rank-imports-review.md
 
   - id: thm:kl-integrated-rank-covariance
-    status: open
+    status: proved
+    depends_on: [thm:kl-stopped-rank-tail]
     references: [KlartagLehec2025ThinShell]
+    proofs:
+      - artifact: solutions/thm-kl-rank-imports.md
+        review: research/reviews/2026-10-01-kl-rank-imports-review.md
 
   - id: thm:improved-lichnerowicz
     status: proved
@@ -149,19 +248,26 @@ nodes:
     status: defined
 
   - id: thm:letwin-qcts
-    status: open
+    status: proved
+    depends_on: [thm:letwin-moment-map, def:qcts]
     references: [Letwin2026QuadraticKLS]
+    proofs:
+      - artifact: solutions/thm-letwin-imports.md
+        review: research/reviews/2026-10-01-letwin-imports-r2-review.md
 
   - id: cor:qcts-source
-    status: open
+    status: proved
     depends_on: [thm:letwin-qcts, prop:stein-rep]
+    proofs:
+      - artifact: solutions/letwin-source-consequences.md
+        review: research/reviews/2026-10-01-letwin-source-consequences-review.md
 
   - id: prop:qcts-equivalence
     status: proved
     depends_on: [def:qcts, prop:stein-rep]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   # ---------------------------------------------------------------------------
   # STEIN-TRACE LAYER (Eldan-B currency)
@@ -171,29 +277,32 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:stein-vs-source
     status: proved
     depends_on: [prop:stein-rep, thm:scalar-riccati]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:boundary-rep
     status: proved
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: ass:weighted-package
     status: refuted
     refuted_by: [prop:weighted-spectator-obstruction]
 
   - id: thm:intro-weighted
-    status: open
+    status: proved
     depends_on: [lem:stein-vs-source, cor:tight-window-consumption, lem:half]
     assumes: [ass:weighted-package]
+    proofs:
+      - artifact: solutions/thm-intro-weighted.md
+        review: research/reviews/2026-10-01-weighted-implication-review.md
 
   - id: prop:intro-audit
     status: proved
@@ -218,7 +327,7 @@ nodes:
     depends_on: [prop:stein-rep]
     proofs:
       - artifact: solutions/kls-qcts-stein-boundary-core.md
-        review: research/reviews/2026-08-25-kls-core-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-grouped-pass.md
 
   - id: lem:perimeter-martingale
     status: proved
@@ -248,7 +357,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: def:cheeger-excess
     status: defined
@@ -257,14 +366,14 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:bootstrap
     status: proved
     depends_on: [lem:half, lem:whitening, lem:perimeter-martingale]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-27-thm-bootstrap-semantic-repair-proof-review.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: thm:bootstrap-stopped-interface
     status: proved
@@ -277,7 +386,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: ass:KI
     status: proved
@@ -292,14 +401,14 @@ nodes:
     depends_on: [thm:bootstrap, ass:KI, cor:KI-discharged]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   - id: prop:ceiling
     status: proved
-    depends_on: [lem:survival-implies-kls]
+    depends_on: [lem:survival-implies-kls, thm:bootstrap]
     proofs:
       - artifact: solutions/kls-bootstrap-interface.md
-        review: research/reviews/2026-08-25-kls-excess-bootstrap-r2-audit.md
+        review: research/reviews/2026-10-04-aug25-repaired-review.md
 
   # ---------------------------------------------------------------------------
   # GEOMETRY: second variation, Reilly, splitting (model statements; quant. open)
@@ -389,28 +498,46 @@ nodes:
         review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: thm:covariance-bound
-    status: open
+    status: proved
     depends_on: [cor:qcts-source, lem:product-qcts]
+    assumes: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-source-consequences.md
+        review: research/reviews/2026-10-01-letwin-source-consequences-review.md
 
   - id: cor:V2-implies
-    status: open
+    status: proved
     depends_on: [thm:covariance-bound]
+    assumes: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-source-consequences.md
+        review: research/reviews/2026-10-01-letwin-source-consequences-review.md
 
   - id: thm:KL-window
     status: proved
     references: [KLnotes, KlartagLehec2022Polylog]
 
   - id: prop:letwin-kappa
-    status: open
-    depends_on: [thm:letwin-qcts]
+    status: proved
+    assumes: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-covariance-windows.md
+        review: research/reviews/2026-10-01-letwin-covariance-windows-review.md
 
   - id: cor:letwin-window
-    status: open
-    depends_on: [prop:letwin-kappa]
+    status: proved
+    depends_on: [prop:letwin-kappa, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-covariance-windows.md
+        review: research/reviews/2026-10-01-letwin-covariance-windows-review.md
 
   - id: thm:V2-window
-    status: open
+    status: proved
     depends_on: [cor:letwin-window, thm:KL-window, cor:V2-implies]
+    assumes: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-covariance-windows.md
+        review: research/reviews/2026-10-01-letwin-covariance-windows-review.md
 
   - id: cor:KI-discharged
     status: proved
@@ -420,8 +547,12 @@ nodes:
         review: research/reviews/2026-08-27-kls-product-covariance-proof-review.md
 
   - id: cor:KI-letwin
-    status: open
+    status: proved
     depends_on: [cor:letwin-window]
+    assumes: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/letwin-covariance-windows.md
+        review: research/reviews/2026-10-01-letwin-covariance-windows-review.md
 
   # ---------------------------------------------------------------------------
   # ELDAN OPEN TARGETS
@@ -446,7 +577,7 @@ nodes:
     depends_on: [prop:covariance-spike, lem:one-dimensional-density-variance, prop:products, lem:half]
     proofs:
       - artifact: solutions/prop-weighted-spectator-obstruction.md
-        review: research/reviews/2026-08-27-prop-weighted-spectator-obstruction-repair-proof-review.md
+        review: research/reviews/2026-10-01-weighted-refuter-horizon-review.md
 
   - id: prop:spectator-excess-rate-obstruction
     status: proved
@@ -478,8 +609,12 @@ nodes:
     status: open
 
   - id: cor:dichotomy
-    status: open
-    depends_on: [thm:bootstrap, cor:loglog, ass:absolute-geometric-completion]
+    status: proved
+    depends_on: [thm:bootstrap, cor:loglog, cor:KI-discharged, lem:half, lem:whitening, thm:klartag-logn, def:cheeger-excess]
+    assumes: [ass:absolute-geometric-completion]
+    proofs:
+      - artifact: solutions/cor-dichotomy.md
+        review: research/reviews/2026-10-01-cor-dichotomy-certification.md
 
   # ---------------------------------------------------------------------------
   # FIXED-EIGENFUNCTION MOMENT-MAP / SPECTRAL ROUTE
@@ -509,10 +644,10 @@ nodes:
 
   - id: lem:mm-stopped-window-source
     status: proved
-    assumes: [thm:letwin-qcts]
+    depends_on: [thm:letwin-qcts]
     proofs:
       - artifact: solutions/lem-mm-stopped-window-source.md
-        review: research/reviews/2026-08-30-lem-mm-stopped-window-source-proof-review.md
+        review: research/reviews/2026-10-01-spectral-window-letwin-discharge-review.md
 
   - id: lem:mm-restart-deweighting
     status: proved
@@ -530,11 +665,10 @@ nodes:
 
   - id: prop:mm-window-occupation
     status: proved
-    depends_on: [thm:KL-window, thm:klartag-logn, lem:mm-stopped-window-source, lem:mm-restart-deweighting, lem:mm-smallgap-fourth-moment, lem:mm-time-weighted-fixed-source]
-    assumes: [thm:letwin-qcts]
+    depends_on: [thm:KL-window, thm:klartag-logn, lem:mm-stopped-window-source, lem:mm-restart-deweighting, lem:mm-smallgap-fourth-moment, lem:mm-time-weighted-fixed-source, thm:letwin-qcts]
     proofs:
       - artifact: solutions/prop-mm-window-occupation.md
-        review: research/reviews/2026-08-30-prop-mm-window-occupation-proof-review.md
+        review: research/reviews/2026-10-01-window-occupation-empty-branch-review.md
 
   # ---------------------------------------------------------------------------
   # DETERMINISTIC MOMENT-MAP / CMH ROUTE
@@ -595,28 +729,28 @@ nodes:
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: thm:cmh-implies-affine-poincare
     status: proved
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: prop:cmh-hodge
     status: proved
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: cor:cmh-hodge-comparison
     status: proved
     depends_on: [prop:cmh-hodge, thm:cmh-1d]
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-27-prop-cmh-hodge-domain-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: conj:gate-zero
     status: open
@@ -625,7 +759,7 @@ nodes:
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-normalization.md
-        review: research/reviews/2026-08-25-kls-cmh-normalization-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-aug25-grouped-normalization-pass.md
 
   - id: lem:cmh-linear-spectral-resolution
     status: proved
@@ -639,68 +773,68 @@ nodes:
     depends_on: [def:cmh]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: thm:cmh-product
     status: proved
     depends_on: [def:cmh, thm:cmh-1d]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-linear-images
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-gamma-completion
     status: proved
     depends_on: [prop:cmh-bochner]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-27-lem-cmh-gamma-bochner-repair-proof-review.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-row-min
     status: proved
     depends_on: [lem:cmh-gamma-completion]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: lem:cmh-angular-coefficient
     status: proved
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: thm:cmh-dirichlet
     status: proved
     depends_on: [def:cmh, thm:cmh-1d, lem:cmh-gamma-completion, lem:cmh-row-min, lem:cmh-angular-coefficient]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-dirichlet-surplus
     status: proved
     depends_on: [thm:cmh-dirichlet, lem:cmh-angular-coefficient]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-dirichlet-poincare
     status: proved
     depends_on: [thm:cmh-dirichlet, thm:cmh-implies-affine-poincare, cor:cmh-linear-images]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: cor:cmh-product-saturation
     status: proved
     depends_on: [thm:cmh-1d, thm:cmh-product, prop:cmh-hodge]
     proofs:
       - artifact: solutions/thm-cmh-dirichlet.md
-        review: research/reviews/2026-08-25-kls-cmh-exact-cases-repair-audit.md
+        review: research/reviews/2026-10-04-cmh-exact-cases-repaired-review.md
 
   - id: conj:cmh-second-variation
     status: open
@@ -776,3 +910,17 @@ nodes:
     proofs:
       - artifact: solutions/prop-cone-moment-map.md
         review: research/reviews/2026-09-06-prop-cone-moment-map-proof-review.md
+
+  - id: prop:product-simplex-cone-gate
+    status: proved
+    depends_on: [def:exponential-cone, prop:cone-moment-map]
+    proofs:
+      - artifact: solutions/prop-product-simplex-cone-gate.md
+        review: research/reviews/2026-10-04-wave-a-cone-gate-review.md
+
+  - id: lem:fiber-polynomial-floor
+    status: proved
+    depends_on: [lem:conditional-fiber-form, cor:cmh-dirichlet-poincare]
+    proofs:
+      - artifact: solutions/lem-fiber-polynomial-floor.md
+        review: research/reviews/2026-10-04-wave-a-fiber-floor-review.md

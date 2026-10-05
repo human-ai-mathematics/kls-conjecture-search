@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_conditional_fiber_structure_w3
-reviewer: /root/review_conditional_fiber_structure_w3
+  - prove_conditional_fiber_structure_w3, unknown, 2026-08-27
+reviewer: review_conditional_fiber_structure_w3, unknown, 2026-08-27
 fingerprints:
   solutions/conditional-fiber-frame-structure.md: 43fb10ffa3b00861c76bb7b57764e68b6e1b924b295f7778dab3ac6f618ff49a
   lem:conditional-fiber-form: f2110f8c5c36056fda52257a3ad145a50f7c460b5bdc6b9ec4146e907db3cec2

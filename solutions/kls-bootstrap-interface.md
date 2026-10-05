@@ -71,13 +71,21 @@ $$
 :::
 
 :::{prf:proof}
-The generalized isoperimetric profile of a log-concave measure is symmetric, $I_\nu(p)=I_\nu(1-p)$, is concave on $(0,1)$ in the standard generalized sense, and has $I_\nu(0+)=0$ [@Bobkov1999LogConcave; @Milman2009Isoperimetric]. Concavity at the origin implies that $p\mapsto I_\nu(p)/p$ is nonincreasing on $(0,1/2]$: if $0<p<q\leq1/2$, then $I_\nu(p)\geq(p/q)I_\nu(q)$. Therefore
+Work in the affine hull of $\nu$. In positive affine dimension the log-concave law is absolutely continuous there. Its profile is nonnegative and concave on $(0,1)$ and is symmetric under $p\leftrightarrow1-p$; see Corollaries 6.5 and 6.12, with Theorem 1.8 and the Section 6 extension, in [@Milman2009Isoperimetric]. These conclusions include nonsmooth convex supports and dimension one. For $0<\varepsilon<p<q\le1/2$, interior concavity and nonnegativity give
+
+$$
+I_\nu(p)\ge\frac{p-\varepsilon}{q-\varepsilon}I_\nu(q)
++\frac{q-p}{q-\varepsilon}I_\nu(\varepsilon)
+\ge\frac{p-\varepsilon}{q-\varepsilon}I_\nu(q).
+$$
+
+Letting $\varepsilon\downarrow0$ gives $I_\nu(p)\ge(p/q)I_\nu(q)$, so $p\mapsto I_\nu(p)/p$ is nonincreasing on $(0,1/2]$. Assigning $I_\nu(0)=0$ using the empty set does not assert $I_\nu(0+)=0$: that one-sided limit can be positive. No endpoint continuity or profile minimizer is used. Therefore
 
 $$
 \inf_{0<p\leq1/2}\frac{I_\nu(p)}p=2I_\nu(1/2).
 $$
 
-Symmetry gives the same infimum on $[1/2,1)$ after division by $1-p$, proving the first identity. The second is immediate because $\min(1/2,1/2)=1/2$.
+Symmetry gives the same infimum on $[1/2,1)$ after division by $1-p$, proving the first identity. The second is immediate because $\min(1/2,1/2)=1/2$. For a Dirac law there are no nontrivial-mass competitors: with the empty-infimum convention both $h_\nu$ and $I_\nu(1/2)$ are $+\infty$, and the assertion about balanced sets is vacuous.
 :::
 
 :::{prf:lemma} Whitening comparison; [](#lem:whitening)
@@ -333,7 +341,7 @@ Fix $\kappa\in(0,1]$ and a universal $T_0>0$ such that $9(1+\kappa)T_0\leq1/2$. 
 \Xi_{T_0}(\mu)\leq\kappa T_0
 ```
 
-held for every isotropic log-concave $\mu$, then KLS would follow directly, with no geometric input. Thus using the clean bootstrap upper bound to certify a relative-scale propagation estimate would demand an all-measure covariance input already sufficient for KLS; no converse or equivalence is asserted.
+held for every isotropic log-concave $\mu$, then KLS would follow directly, with no geometric input. The certificate-specific consequence concerns making the covariance error in the clean bootstrap upper bound small term by term: an all-measure bound of the displayed form at a sufficiently small universal time is already sufficient for KLS. No converse, equivalence, or impossibility of another propagation argument is asserted.
 :::
 
 :::{prf:proof}
@@ -359,7 +367,7 @@ $$
 
 where the second line is [](#eq:sol-mass-qv-bound) without the last replacement by $X_t$, and the third is [](#eq:sol-ceiling-lambda). Therefore, with probability at least $1/2$, $\min(p_{T_0},q_{T_0})\geq1/3$. The balanced-survival lemma ([](#lem:survival-implies-kls)) now supplies a universal lower bound for the perimeter of every balanced cut and hence proves KLS.
 
-Finally, [](#eq:sol-bootstrap-clean) bounds the bootstrap error by $C h_\mu(T^{4/3}+\Xi_T)$. Making this particular certificate no larger than $\kappa h_\mu T$ at a sufficiently small universal time asks, term by term, for $\Xi_T\lesssim\kappa T$ (as well as $T^{1/3}\lesssim\kappa$). The implication just proved shows why such an *all-measure* input is already KLS-strength. This is the precise method-specific meaning of the proposition's final sentence; it is not a logical necessity for every possible propagation proof.
+Finally, [](#eq:sol-bootstrap-clean) bounds the bootstrap error by $C h_\mu(T^{4/3}+\Xi_T)$. Making this particular certificate no larger than $\kappa h_\mu T$ at a sufficiently small universal time asks, term by term, for $\Xi_T\lesssim\kappa T$ (as well as $T^{1/3}\lesssim\kappa$). The implication just proved shows that such an *all-measure* input, with constants and time satisfying its smallness condition, is sufficient for KLS. The bootstrap itself applies to near-worst measures; it does not require an all-measure estimate as a logical necessity. A large value of this upper certificate gives no lower bound on the actual excess. This is the precise certificate-specific meaning of the proposition's final sentence: neither a converse nor a general propagation impossibility follows, and seeking a proof of the sufficient covariance bound is not automatically circular. The term $Te_0$ is separate and must also be controlled when the desired estimate concerns the total integrated excess.
 :::
 
 **Obstructions respected.** [](#thm:sol-bootstrap) respects `rem:profile-circularity`: its profile lower bound comes from the external worst-case constant $\hstar_n$ and the explicit near-worst assumption $h_\mu\leq(1+\varepsilon)\hstar_n$, not from an assumed lower bound on the random localized profile. [](#lem:sol-crude) respects `rem:crude-insufficient` by proving and labeling the $\log n$ estimate only as an insufficient fence; the actual corollary uses the published small-time covariance input. [](#prop:sol-ceiling) proves only the sufficient implication that generates `rem:relative-ceiling`; it does not claim an equivalence and does not confuse the all-measure condition with the near-worst route.

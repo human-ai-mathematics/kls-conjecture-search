@@ -1,12 +1,12 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_spectral_sufficiency
-reviewer: /root/review_spectral_sufficiency_w0
+  - prove_spectral_sufficiency, unknown, 2026-08-27
+reviewer: review_spectral_sufficiency_w0, unknown, 2026-08-27
 fingerprints:
   solutions/prop-spectral-sufficiency.md: 207df18978ce55cabb78bce26fbd9f5350791aab99cab8e6a7031217750c67bd
   prop:spectral-sufficiency: ea0691f496347072983c1a888e0c8ecc4f03b28db8e8d27dcbb8ff0c486c1c0e
-  conj:mm-spectral-occupation: fd459923a0b85e2a9af9179faa1e1e80bbe2357831a49d986221586cfd268249
+  conj:mm-spectral-occupation: faf6c8299eb2e6ec3ac6c1489b1b6541ae018312780e3afe1fd47b43d0448ee3
 ---
 
 # Full-damping spectral sufficiency — independent proof review

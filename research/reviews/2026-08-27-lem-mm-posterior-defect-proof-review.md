@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_posterior_defect_par_06
-reviewer: /root/review_posterior_defect_cold_08
+  - prove_posterior_defect_par_06, unknown, 2026-08-27
+reviewer: review_posterior_defect_cold_08, unknown, 2026-08-27
 fingerprints:
   solutions/lem-mm-posterior-defect.md: c76f3bfde5369eb94682bc89a61bd9f2e31c170944d9492482a39356c2849e59
   lem:mm-posterior-defect: 355e6dc85e241fe8049eab66d9647ed41cb8b0f48e9ce3292c439935a75acecd

@@ -1,13 +1,13 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_cmh_approximation
-reviewer: /root/review_cmh_approximation
+  - prove_cmh_approximation, unknown, 2026-08-27
+reviewer: review_cmh_approximation, unknown, 2026-08-27
 fingerprints:
   solutions/prop-cmh-approximation-closure.md: 5b5d574c000439cb481541b3aa65cdee02e1463ddeca7ceb1eb0a6d45aca8664
   prop:cmh-approximation-closure: d15c585bc0ea32fb10630a4b54e0ec4d60905b33e8e2893f4001f4ba9785412d
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
-  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  thm:cmh-implies-affine-poincare: 9210ad8934e1f76e3f1f621274c0be2dc1c9e5fa106146b66584871844acd5e0
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   ass:uniform-cmh-approximants: d189a08645627f605d95d8f161bed294d6e48fccf1ed050b43e39ee5f1e6af45
 ---

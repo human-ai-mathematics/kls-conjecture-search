@@ -16,7 +16,8 @@ a label, a cross-reference, a citation or a certification.
 
 The old harness was replaced by the template tree, and the kls content was converted into
 it. Anything not converted left with the old harness: `CLAUDE.md` and `AGENTS.md` (the
-contract is now `SPECIFICATION.md`), `.codex/`, `docs/`, `packs/`, the lenses, the roles
+contract is now `SPECIFICATION.md`), the old `.codex/` (the three current roles have since
+been mirrored for Codex in `.codex/agents/`), `docs/`, `packs/`, the lenses, the roles
 other than `researcher`, `reviewer` and `writer`, the ledger and portfolio schemas,
 `editorial.yaml`, the glosses, `status.tex`, the tex4ht site and `research/legacy-runs/`.
 All of it stays readable in git history at `34b5fcd`.

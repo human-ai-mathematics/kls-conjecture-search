@@ -1,14 +1,14 @@
 ---
 verdict: pass
 authors:
-  - /root/prove_cmh_recovery_calculus_w2
-reviewer: /root/review_cmh_recovery_calculus_w2
+  - prove_cmh_recovery_calculus_w2, unknown, 2026-08-27
+reviewer: review_cmh_recovery_calculus_w2, unknown, 2026-08-27
 fingerprints:
   solutions/prop-cmh-recovery-calculus.md: 56cea366c845a618355e4135236d0b72a1e814ef6c0fb5d086b28c8db8d5943a
   prop:cmh-recovery-calculus: 73a9c58294d2c13a9bce376e89511f13dbfc0faa2db486c5be8df1fb28a36ba0
   def:cmh: 5971e940e93fa8179ce6c80c9817d3b3a88ac7db2ffe56897f1957c02431f9e7
   lem:affine-poincare-w2-liminf: 9b3e2cf72b9adab7eb84ee54baff7e3ebe92d5341b02734938f2285f5a45cc3e
-  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  thm:cmh-implies-affine-poincare: 9210ad8934e1f76e3f1f621274c0be2dc1c9e5fa106146b66584871844acd5e0
   thm:regular-moment-map-compact-target: 6c5fc0b83ba7ee921113bb0cac813d6c92fd41e9b1a9dda5247df865f76eb813
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
   thm:cmh-product: 93367af0f91020a7189581ccf6821eafd93c5bb734d06bfb114187be354d08a7

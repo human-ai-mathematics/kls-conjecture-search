@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_core_author
-reviewer: /root/kls_bootstrap_author
+  - kls_core_author, unknown, 2026-08-25
+reviewer: kls_bootstrap_author, unknown, 2026-08-25
 fingerprints:
   solutions/kls-localization-riccati-core.md: 45d34f81bd2b04c5ec437bdee5b8dbba845d26206e918bc78f31d5c15ba9a60f
   lem:survival-implies-kls: fcc0ff284f00b4f7d903900409e37db884463ad15f1f7cbb2c48ecb254e4cc64

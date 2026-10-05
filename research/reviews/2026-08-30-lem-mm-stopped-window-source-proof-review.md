@@ -1,8 +1,8 @@
 ---
 verdict: pass
 authors:
-  - claude-prover-w4p02
-reviewer: proof-checker-w4r03
+  - claude-prover-w4p02, unknown, 2026-08-30
+reviewer: proof-checker-w4r03, unknown, 2026-08-30
 fingerprints:
   solutions/lem-mm-stopped-window-source.md: 6720200970a6602c89fb52b16fe1be8116f5996d647d824ef9aa678e3bb191b4
   lem:mm-stopped-window-source: c405064bb67767843b0c86c8266cc60e9693dc13df3968410792d1a5b3f6b5e1

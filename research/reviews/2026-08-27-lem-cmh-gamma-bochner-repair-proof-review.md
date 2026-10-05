@@ -1,9 +1,9 @@
 ---
 verdict: pass
 authors:
-  - /root/kls_ledger_audit
-  - /root/repair_cmh_hodge_domain_w3
-reviewer: /root/review_cmh_gamma_dependency_w3
+  - kls_ledger_audit, unknown, 2026-08-27
+  - repair_cmh_hodge_domain_w3, unknown, 2026-08-27
+reviewer: review_cmh_gamma_dependency_w3, unknown, 2026-08-27
 fingerprints:
   solutions/thm-cmh-dirichlet.md: a6fde7b910a21d73f2f4a4e56de2a660eda18f47ecab1b12ac44f34dea04661c
   thm:cmh-1d: 20ca97481f8d3f33bab114618adc59596740cec2d34e37ad9c5c8ec1b9fa9904
@@ -17,7 +17,7 @@ fingerprints:
   thm:cmh-dirichlet: 0950144e400e4a077e8ae82686d149d0a736b6ec651e7c588e4e867146a8db94
   cor:cmh-dirichlet-surplus: fdd4f0dcfccd11cb61eceeec922bc50c8ed87bb4a9faa496901201eef7ea9424
   cor:cmh-dirichlet-poincare: 0295ebca6004666831c2db752ae739c062b86f6097e7b9f5152902d1765820c6
-  thm:cmh-implies-affine-poincare: a977e03d84125ce8a015dfb75d67908808162ecd70b71221781d8a750ec5d9c4
+  thm:cmh-implies-affine-poincare: 9210ad8934e1f76e3f1f621274c0be2dc1c9e5fa106146b66584871844acd5e0
   cor:cmh-product-saturation: 2a3ba80b8cfea460f74c0dbcf122eeafdcf31576b42e60cf7d5507106f2332af
   prop:cmh-hodge: e53f8f0d21ff4afad0be69fb034e09db1f7daaa882338a1d927af40c3117410e
 ---
