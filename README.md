@@ -28,16 +28,11 @@ Start every session that edits the repository by reading it.
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
 | [`.claude/agents/`](.claude/agents/), [`.codex/agents/`](.codex/agents/) | the three roles: `researcher`, `reviewer` and `writer`, for Claude Code and for Codex |
 | [`templates/`](templates/) | an empty copy of each file genre |
+| [`HISTORY.md`](HISTORY.md) | the milestones of the search, newest first |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
 
-The repository was migrated from its v0.1 LaTeX harness on 2026-09-29, then to v0.3.0 and
-v0.4.0 on 2026-09-30 (v0.4.0 changed nothing in the program's content), then to v0.5.0 in October;
-[`research/explorations/2026-09-29-migration-v0.2.0.md`](research/explorations/2026-09-29-migration-v0.2.0.md)
-and
-[`research/explorations/2026-09-30-migration-v0.3.0.md`](research/explorations/2026-09-30-migration-v0.3.0.md)
-say what was converted and how;
-[`research/explorations/2026-09-30-sync-after-migration.md`](research/explorations/2026-09-30-sync-after-migration.md)
-closes their open items and maps the ids renamed at that point.
+The milestones of the search — results certified, refutations, approaches opened or
+closed, migrations of the harness — are in [`HISTORY.md`](HISTORY.md), newest first.
 
 ## Setup and verify
 
