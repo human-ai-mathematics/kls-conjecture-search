@@ -1,15 +1,16 @@
 # The Kannan–Lovász–Simonovits frontier
 
-**[Read the manuscript](https://numina-functional-inequalities.github.io/kls-conjecture-search/)**: the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md)); the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
+**[Read the manuscript](https://numina-functional-inequalities.github.io/kls-conjecture-search/)**:
+the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md));
+the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
-A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the
-dimension-free Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic
-log-concave measure — together with the harness of a **sustained conjecture search** on it:
-what is claimed, what the search is doing, and why. KLS itself is open, and nothing here
-proves it; four routes are developed (fixed-cut and fixed-eigenfunction stochastic
-localization, a deterministic moment-map programme, conditional-fiber frames), each with its
-certified advances and its exact open estimate. The ledger, not this file, is the source of
-truth for what is proved.
+A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the dimension-free
+Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic log-concave measure —
+together with the harness of a **sustained conjecture search** on it: what is claimed, what the
+search is doing, and why. KLS itself is open, and nothing here proves it; four routes are developed
+(fixed-cut and fixed-eigenfunction stochastic localization, a deterministic moment-map programme,
+conditional-fiber frames), each with its certified advances and its exact open estimate. The ledger,
+not this file, is the source of truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template v0.5.0](https://github.com/numina-functional-inequalities/conjecture-search-template/releases/tag/v0.5.0).
