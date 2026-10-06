@@ -1,17 +1,16 @@
 ---
 numbering:
-  enumerator: "7B.%s"
+  enumerator: "7C.%s"
 ---
 
 (sec:bkl-proof)=
 # Cumulants, suspension and the BKL proof
 
-Bizeul, Klartag and Lehec give a proof of KLS in their preprint of
+Bizeul, Klartag and Lehec (BKL) give a proof of KLS in their preprint of
 4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]. This chapter explains
-its mechanism. The reconstructed proof of [](#conj:kls), including the analytic
-criterion, cumulant induction and suspension, has passed independent agent
-reviews here. Each statement displays its local verification status; agent
-review is separate from refereed publication.
+its mechanism: the analytic criterion, the cumulant induction and suspension.
+Each statement displays its status; how it was checked is explained on the
+[welcome page](#sec:overview-checking).
 
 The decisive change is to estimate cumulants of every order and then encode
 an arbitrary test function in an additional coordinate of a log-concave
@@ -20,11 +19,12 @@ same cumulant bound. The resulting estimate is exactly the exponential
 Appell coefficient bound identified in [](#prop:sz-exponential-coefficients-equivalence).
 Identifying that end point did not provide the mechanism that establishes it.
 
-SZ v2, deposited the same day, develops a different closing argument through
-repeated refinement, reconstructed and checked by separate reviewer agents
-in Chapter [](#sec:sz-v2-proof). BKL cites SZ v1 and uses
-its spectral mechanism; the two proofs share that foundation. The BKL
-reconstruction here does not depend on the new v2 estimates.
+The second version of Song–Zhang, deposited the same day and presented in
+the preceding chapter, [](#sec:sz-v2-proof), closes the argument differently,
+through repeated refinement. BKL cite the first
+version of Song–Zhang and use its spectral mechanism; the two proofs share
+that foundation. The reconstruction here does not depend on the estimates of
+the second version.
 
 ## A one-dimensional calibration
 
@@ -312,15 +312,14 @@ defined by their ambient Laplace transform.
 
 Combining [](#thm:bkl-tilt-bound) with [](#thm:bkl-tilt-criterion) gives the
 KLS conclusion [](#conj:kls), first for regular measures and then
-by scalar Poincaré stability. This is the BKL argument, with its source and
-local verification status kept distinct.
+by scalar Poincaré stability. This is the BKL argument.
 
 ## Consequences for the earlier questions
 
 The exponential estimate also supplies the initialization bound used in the
 older polynomial iteration, without a curvature-profile premise. The consequence
-[](#cor:bkl-uniform-conditional-initialization) has also passed independent agent
-review. Its BKL provenance matters: deriving coefficients from BKL and then recovering KLS
+[](#cor:bkl-uniform-conditional-initialization) keeps its BKL provenance, and
+that matters: deriving coefficients from BKL and then recovering KLS
 does not give an independent proof.
 
 :::{prf:corollary} Uniform conditional initialization from BKL

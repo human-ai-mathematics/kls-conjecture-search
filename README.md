@@ -1,28 +1,22 @@
-# The Kannan–Lovász–Simonovits frontier
+# The KLS theorem and its methods
 
 **[Read the manuscript](https://human-ai-mathematics.github.io/kls-conjecture-search/)**:
 the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md));
 the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
-> Bizeul–Klartag–Lehec announced a proof of KLS on 4 October 2026
-> ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)). Its proof has now
-> been reconstructed and checked here through independent agent reviews.
-> This local certification is distinct from journal refereeing.
->
-> Song–Zhang's [version 2](https://arxiv.org/abs/2610.01447v2), submitted later
-> on the same day, gives another proof through repeated polynomial–curvature
-> refinement. Its reconstruction has also passed independent agent reviews
-> here. The two closing arguments share earlier spectral foundations.
-> Song–Zhang v1 and v2 retain separate, version-pinned references and proofs.
-
-A MyST manuscript on proofs of the Kannan–Lovász–Simonovits bound, alternative
-approaches and structural inequalities for log-concave measures, together with the
-record of a **sustained conjecture search**: what is claimed, what the search is
-doing, and why. The BKL and Song–Zhang reconstructions join four approaches (fixed-cut and
-fixed-eigenfunction stochastic localization, a deterministic moment-map programme,
-and conditional-fiber frames). Their open estimates remain research questions even
-when another argument proves KLS. The ledger, not this file, is the source of truth
-for what has been certified here.
+The Kannan–Lovász–Simonovits conjecture — the dimension-free Poincaré bound
+$C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — was proved twice on
+4 October 2026: by Song–Zhang, in the
+[second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
+[first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound, and by
+Bizeul–Klartag–Lehec ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)). This
+repository is a MyST manuscript that reconstructs, checks and compares the two proofs, surveys
+the methods that led to them, and develops four approaches whose questions remain open after
+KLS (a deterministic moment-map inequality, fixed-eigenfunction and fixed-cut stochastic
+localization, conditional-fiber frames). It also holds the record of the **sustained
+conjecture search** that produced it. Proofs here are checked by independent agent reviews,
+which is distinct from journal refereeing; the ledger, not this file, is the source of truth
+for what has been certified.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).

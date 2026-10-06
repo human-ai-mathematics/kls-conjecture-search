@@ -10,7 +10,7 @@ numbering:
 
 **The idea.** Follow a fixed first eigenfunction, rather than a cut, through stochastic localization, and keep its tensor orientation alive in the posterior covariance.
 
-**How it would give KLS.** Through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#conj:mm-spectral-occupation):
+**What it would add.** A localization mechanism that ignores covariance spikes: the object followed is one eigenfunction, which does not see spikes in directions it does not use, so the obstruction [](#prop:covariance-spike) does not apply to it. It would give KLS through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#conj:mm-spectral-occupation):
 
 $$
 \text{fixed-eigenfunction full-damping occupation}
@@ -18,7 +18,7 @@ $$
 \text{KLS}.
 $$
 
-In words: as localization proceeds, the eigenfunction feeds a *source* into its covariance with the coordinates and the covariance of the localized measure *damps* it. The *occupation* is the source accumulated over time, $\E\int_0^t\norm{H_s}_{\HS}^2\dd s$, and *full damping* means that the estimate may charge it against the whole damping term, with coefficient one, rather than against a fraction of it as the fixed cut must. The implication is a theorem about a hypothesis: it brings [](#conj:kls) exactly as close as [](#conj:mm-spectral-occupation) does.
+In words: as localization proceeds, the eigenfunction feeds a *source* into its covariance with the coordinates and the covariance of the localized measure *damps* it. The *occupation* is the source accumulated over time, $\E\int_0^t\norm{H_s}_{\HS}^2\dd s$, and *full damping* means that the estimate may charge it against the whole damping term, with coefficient one, rather than against a fraction of it as the fixed cut must. The implication is a theorem about a hypothesis; the hypothesis [](#conj:mm-spectral-occupation) is not established here, and KLS itself is proved by other means (Chapters [](#sec:sz-v2-proof) and [](#sec:bkl-proof)).
 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.

@@ -24,7 +24,7 @@ One runs a measure-valued process $p_t$, started at $\mu$, in which the density 
 (subsec:prelude-transfer)=
 ## Transferring an isoperimetric statement back
 
-The reason (2) is worth having is that isoperimetry transfers. Fix a candidate bottleneck set $E$ and follow its mass $m_t=p_t(E)$. Because $p_t$ is a measure martingale, $m_t$ is a bounded martingale, so it converges; and its quadratic variation is exactly an integral of the correlation between $\one_E$ and the localization direction. Two readings of the same fact drive the two approaches.
+The reason (2) is worth having is that isoperimetry transfers. Fix a would-be bottleneck set $E$ and follow its mass $m_t=p_t(E)$. Because $p_t$ is a measure martingale, $m_t$ is a bounded martingale, so it converges; and its quadratic variation is exactly an integral of the correlation between $\one_E$ and the localization direction. Two readings of the same fact drive the two approaches.
 
 *If the mass stays balanced for a while*, then at that time the localized measure is both $t$-strongly log-concave and still genuinely cut by $E$, and a strongly log-concave measure with a balanced cut has boundary. Integrating that back through the martingale gives a lower bound on $\mu^+(E)$, which is a Cheeger statement about $\mu$ itself. This is [](#lem:survival-implies-kls), and its stopped form, [](#thm:centroid-implies-kls), is the exact bridge the fixed-cut approach consumes.
 

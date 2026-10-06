@@ -6,12 +6,7 @@ numbering:
 (sec:kls-synthesis)=
 # Synthesis: two proof mechanisms and structural questions
 
-The BKL preprint gives a proof of KLS through dimension-free cumulant bounds and suspension, followed by the Song–Zhang spectral criterion [@BizeulKlartagLehec2026KLS]. Chapter [](#sec:bkl-proof) explains the argument and its local verification status. The reconstructed proof of [](#conj:kls) has passed independent agent reviews here; this does not assert refereed publication.
-
-Song–Zhang v2 gives a second proof by repeated refinement with summable
-losses [@SongZhang2026ConstantKLS]. Its reconstruction has also passed independent agent reviews, as explained
-in [](#sec:sz-v2-proof). Both proofs use the
-polynomial spectral foundation, but their closing estimates differ.
+The polynomial method of Song and Zhang reached its first form in the first version of their preprint, an iterated-logarithm bound (Chapter [](#sec:polynomial-curvature)) [@SongZhang2026IteratedLogKLS]. Its second version proves KLS by repeated refinement with summable losses (Chapter [](#sec:sz-v2-proof)) [@SongZhang2026ConstantKLS]. Bizeul, Klartag and Lehec (BKL) prove it through dimension-free cumulant bounds and suspension, followed by the spectral criterion of the first version (Chapter [](#sec:bkl-proof)) [@BizeulKlartagLehec2026KLS]. Both proofs use the polynomial spectral foundation, but their closing estimates differ. Each reconstructed statement displays its status; how it was checked is explained on the [welcome page](#sec:overview-checking).
 
 The question for the approaches below is what distinct mechanism or stronger property they can establish. Truth of KLS does not prove a sufficient condition for it. In particular the moment-Hessian, occupation and conditional-frame questions retain their own content. The five targets below describe that content and possible alternative proofs; the two proofs of KLS retain their separate provenance.
 
@@ -59,7 +54,7 @@ for a near-extremizing eigenfunction would avoid the top-eigenvalue entropy cost
 
 The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate with $\nabla f(X)$. Letwin's fixed-matrix inequality controls a deterministic $B$; this proposed extension would need to handle an $X$-dependent direction or matrix field.
 
-*In this manuscript:* the moment-map approach (Section [](#sec:moment-map-cmh)), whose target inequality $\mathrm{CMH}(4)$ ([](#def:cmh)) bounds the affine Poincaré constant by [](#thm:cmh-implies-affine-poincare). Two facts, both developed in that chapter, change how this target should be read. $\mathrm{CMH}(4)$ is not known to be a reformulation of [](#eq:nonlinear-moment-map) or of [](#conj:kls): it also charges a solenoidal excess ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison)). And its cheapest necessary consequence, gate zero — the inequality tested on linear functions only ([](#conj:gate-zero)) — is itself an average-versus-uniform statement, which [](#prop:letwin-not-gate-zero) shows no fixed-matrix argument supplies: Target 2 relocates the difficulty rather than escaping it. How hard even the linear test is, [](#cor:gate-zero-third-moment) calibrates: the sharp form of gate zero implies $\kappa_n\le2$, so proving it is at least as hard as a sharp directional third-moment bound.
+*In this manuscript:* the moment-map approach (Section [](#sec:moment-map-cmh)), whose target inequality $\mathrm{CMH}(4)$ ([](#def:cmh)) bounds the affine Poincaré constant by [](#thm:cmh-implies-affine-poincare). Two facts, both developed in that chapter, change how this target should be read. $\mathrm{CMH}(4)$ is not known to be a reformulation of [](#eq:nonlinear-moment-map) or of [](#conj:kls): it also charges a solenoidal excess ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison)). And its cheapest necessary consequence, the linear test — the inequality tested on linear functions only ([](#conj:gate-zero)) — is itself an average-versus-uniform statement, which [](#prop:letwin-not-gate-zero) shows no fixed-matrix argument supplies: Target 2 relocates the difficulty rather than escaping it. How hard even the linear test is, [](#cor:gate-zero-third-moment) calibrates: its sharp form implies $\kappa_n\le2$, so proving it is at least as hard as a sharp directional third-moment bound.
 
 % Agent note: Route C is tracked by the `ap:c-…` approaches of research/program/portfolio.yaml.
 
@@ -74,23 +69,22 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 % Agent note: target 4 has no ledger node and no portfolio approach.
 
 **Target 5 — compare the repeated-refinement estimates with the earlier questions.**
-The factor $16^r$ and growing admissibility thresholds of the v1 iteration
+The factor $16^r$ and growing admissibility thresholds of the first-version iteration
 are limitations of those estimates, not unresolved requirements in the
-literature after SZ v2. Chapter [](#sec:sz-v2-proof) explains the source's
+literature after the second version. Chapter [](#sec:sz-v2-proof) explains the source's
 replacement: polynomial depth cost, a common coefficient radius, repeated
 height reduction, and finally a summable cost for the repetitions.
 
 The finite-chain construction [](#prop:sz-v2-finite-chain-blocks) controls
 centering losses, normalization and energy for one inverse-gradient
 family, uniformly in the number of retained coefficient bounds. The
-outer profiles, summable costs and final composition have also passed
-independent agent reviews. BKL's coefficient theorem is not an input to this
-separate argument.
+outer profiles, summable costs and final composition complete the
+argument. BKL's coefficient theorem is not an input to it.
 
 The older conditional-startup and near-unit-comparison questions retain
-their exact normalization. SZ v2 refines a common coefficient radius and
+their exact normalization. The second version refines a common coefficient radius and
 pays its fixed spectral conversion once, after all refinements. It does
-not need a near-unit multiplier for the v1 comparison at each repetition.
+not need a near-unit multiplier for the first-version comparison at each repetition.
 Comparing the coefficient transfers must also account for their different
 degree exponents and the older denominator $(d+1)^2$.
 
@@ -105,17 +99,15 @@ proposed interface literally.
 (subsec:synthesis-assessment)=
 ## Which target first
 
-With both reconstructions checked by independent agent reviews, further work concerns comparison of their estimates, alternative proofs and structural inequalities. Section [](#subsec:atlas-assessment) distinguishes the exact polynomial comparison questions from structural tests: sharp gate zero, conditional frames on the simplex, occupation of a fixed eigenfunction and cut-dependent estimates. The BKL proof does not discharge their sufficient conditions. Parallel coupling beyond linear tilts remains exploratory, without a precise statement here.
+With both proofs reconstructed, further work concerns comparison of their estimates, alternative proofs and structural inequalities. Section [](#subsec:atlas-assessment) distinguishes the exact polynomial comparison questions from structural tests: the sharp linear test of the moment-Hessian inequality, conditional frames on the simplex, occupation of a fixed eigenfunction and cut-dependent estimates. Neither proof discharges their sufficient conditions. Parallel coupling beyond linear tilts remains exploratory, without a precise statement here.
 
 (subsec:synthesis-caution)=
 ## Scope of the inputs
 
-For both BKL and Song–Zhang, the source announcement, local independent agent review and refereed publication are separate facts. The badges beside their statements record the second; a complete written reconstruction alone does not establish it.
-
 The starting point for targets 1–3 is the quadratic estimate [](#thm:letwin-qcts) and its directional consequence [](#prop:letwin-kappa). Their source is the pinned version-1 preprint described in Section [](#subsec:mm-audit); the badges on the statements record internal verification separately from that publication history. The Chen–Klartag imports concern the moment Hessian, radial variance, and full third tensor, rather than a dimension-free directional bound or control of arbitrary nonlinear tests.
 
-The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, orientation control, or an adaptive matrix estimate. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls), and [](#thm:intro-all-cut) retain their Carleson or centroid premises. The source's general KLS theorem, Letwin Theorem 1.1, is [](#thm:letwin-kls). Its minimum-time argument is explained in Section [](#sec:family-moment-map). It gives a dimension-dependent bound for all tests, without extending the covariance window to universal time or supplying gate zero.
+The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, orientation control, or an adaptive matrix estimate. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls), and [](#thm:intro-all-cut) retain their Carleson or centroid premises. The source's general KLS theorem, Letwin Theorem 1.1, is [](#thm:letwin-kls). Its minimum-time argument is explained in Section [](#sec:family-moment-map). It gives a dimension-dependent bound for all tests, without extending the covariance window to universal time or supplying the linear test of the moment-Hessian inequality.
 
-Song–Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of target 5. Neither their general bound nor its inverse-operator construction supplies the canonical moment-Hessian inequality, sharp gate zero, or the universal-time occupation estimate [](#conj:mm-spectral-occupation). The Carleson, centroid and approximation premises remain necessary in the implications that use them.
+Song–Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of target 5. Neither their general bound nor its inverse-operator construction supplies the canonical moment-Hessian inequality, its sharp linear test, or the universal-time occupation estimate [](#conj:mm-spectral-occupation). The Carleson, centroid and approximation premises remain necessary in the implications that use them.
 
 % Agent note: source versions describe provenance; badges and proof links carry verification status. Preserve explicit antecedents and dimension-dependent windows when updating this synthesis. Theorem 1.1 has its own proof link; its time-restricted bridge is separate from the matrix, quadratic, and covariance imports.

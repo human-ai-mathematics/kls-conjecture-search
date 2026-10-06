@@ -265,7 +265,7 @@ Variance therefore passes to the limit. Finally, Gaussian smoothing, convex trun
 
 The reduction from there to $\kappa_n\le2\sqrt2$ is short and purely algebraic; it is carried out as [](#prop:letwin-kappa). The further bridge [](#eq:kls-bridge) gives the general bound [](#thm:letwin-kls), corresponding to source Theorem 1.1.
 
-The constant $2\sqrt2$ is not sharp, and the moment-map approach says exactly what would sharpen it. On the regular moment-map class, [](#cor:gate-zero-third-moment) turns any bound $\E[\tau^2]\preceq c\,\Id$ into the directional third-moment bound $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$, so sharp gate zero at $c=2$ ([](#conj:gate-zero-sharp)) would give the sharp $\kappa_n\le2$, attained by products of centered exponentials. The implication runs one way only: a sharp third-moment bound does not return sharp gate zero, because the high-mode remainder of [](#lem:linear-sector-third-moment) is not zero off the cone axis.
+The constant $2\sqrt2$ is not sharp, and the moment-map approach says exactly what would sharpen it. On the regular moment-map class, [](#cor:gate-zero-third-moment) turns any bound $\E[\tau^2]\preceq c\,\Id$ into the directional third-moment bound $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$, so the sharp linear test of the moment-Hessian inequality, $c=2$ ([](#conj:gate-zero-sharp)), would give the sharp $\kappa_n\le2$, attained by products of centered exponentials. The implication runs one way only: a sharp third-moment bound does not return that sharp linear test, because the high-mode remainder of [](#lem:linear-sector-third-moment) is not zero off the cone axis.
 
 :::{prf:theorem} Letwin's general KLS bound
 :label: thm:letwin-kls
@@ -297,7 +297,7 @@ For Letwin, [](#thm:letwin-moment-map) corresponds to source Theorem 2.5 and [](
 
 For Chen–Klartag, the three imports correspond to source Theorems 1.5, 1.1 and 1.2, with the convex-body clause supplied by Corollary 1.3. From the Hessian estimate, orthogonal projection of the centered Hessian entries onto the coordinate functions gives the third-tensor bound by Bessel's inequality. The Stein identity and the negative-Sobolev inequality give the radial variance bound. Approximation transfers these polynomial moment conclusions; it does not assert convergence of the Hessian itself. The full third-tensor norm here is distinct from the directional parameter in [](#prop:letwin-kappa).
 
-The bibliography distinguishes these preprint sources from the published bound [@Klartag2023Logarithmic]. Verification of the imported statements does not change that publication distinction or extend their scope to adaptive matrices, gate zero, or dimension-free control of arbitrary nonlinear tests.
+The bibliography distinguishes these preprint sources from the published bound [@Klartag2023Logarithmic]. Verification of the imported statements does not change that publication distinction or extend their scope to adaptive matrices, the linear test of the moment-Hessian inequality, or dimension-free control of arbitrary nonlinear tests.
 
 **The precise missing estimate.** Control of $\E\inner{\tau_\mu(X)\nabla f(X)}{\nabla f(X)}$ for an arbitrary $f$, in place of $\E\Tr(BHBH)$ for a constant matrix $B$.
 

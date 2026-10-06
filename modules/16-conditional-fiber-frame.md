@@ -10,7 +10,7 @@ numbering:
 
 **The idea.** Replace Euclidean directions by one isotropic frame of conditional line resamplings, chosen from the measure but not from the test function, and normalized by the conditional variances; then ask for a dimension-free spectral gap of the resulting form.
 
-**The link to KLS.** A *sufficient condition*, and the diagram must be read as such:
+**What it would add.** An elementary mechanism for the Poincaré bound, with constant $4C$, resting only on one-dimensional log-concave inequalities and a choice of directions — none of the localization or polynomial machinery of the two proofs. Its link to KLS is a *sufficient condition*, and the diagram must be read as such:
 
 $$
 \text{conditional-fiber frame gap}
@@ -18,7 +18,7 @@ $$
 \text{KLS},
 $$
 
-where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore say nothing about KLS. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
+where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore leave KLS, which is proved, untouched. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
 
 **What it builds on.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Set up here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
 
@@ -91,7 +91,7 @@ There is a universal constant $C$ such that every full-dimensional isotropic log
 for every $f$ in the maximal closed form domain.
 :::
 
-[](#conj:conditional-fiber-frame) implies KLS, with $\CP\le4C$, by [](#lem:conditional-fiber-form) ([](#eq:conditional-fiber-gradient-comparison)). The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
+[](#conj:conditional-fiber-frame) implies KLS, with $\CP\le4C$, by [](#lem:conditional-fiber-form) ([](#eq:conditional-fiber-gradient-comparison)); what it would add to the existing proofs is that the only analytic input is one-dimensional. The order of quantifiers is essential: $\rho_\mu$ may depend on $\mu$, but it must be fixed before the test $f$ is chosen.
 
 (subsec:fiber-root-failure)=
 ## Why the simplex root frame fails

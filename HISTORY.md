@@ -12,6 +12,20 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-06: The manuscript repositioned after the proof of KLS
+
+- The site is retitled *The KLS theorem and its methods* and presents itself as a
+  reader's companion to the two proofs of `conj:kls`, the methods that led to them, and
+  the questions that remain open after KLS.
+- The proofs are presented as Song–Zhang v1, Song–Zhang v2, then BKL, along the
+  development of the polynomial method (BKL was deposited first). The verification
+  caveat is stated once; the four approaches are motivated by what they would add beyond
+  KLS; the entry problems open with `conj:gate-zero-sharp`.
+- One novelty claim on `thm:cmh-dirichlet` is withdrawn. The AI use declared by the
+  authors of both proofs is quoted on the welcome page.
+- No statement changed (`check.py --statements` identical).
+- Source: `research/explorations/2026-10-06-editorial-post-kls.md`.
+
 ## 2026-10-06: Song–Zhang v2 reconstructed; a second KLS proof recorded
 
 - Twelve new proof dossiers and independent agent reviews establish the SZ v2

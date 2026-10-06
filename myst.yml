@@ -7,9 +7,9 @@
 # directive under modules/ is a ledger node with the same id.
 version: 1
 project:
-  title: The Kannan–Lovász–Simonovits Frontier
+  title: The KLS theorem and its methods
   github: https://github.com/human-ai-mathematics/kls-conjecture-search
-  subtitle: Proofs, alternative approaches and structural inequalities for log-concave measures
+  subtitle: Two proofs of the Kannan–Lovász–Simonovits bound, checked and compared, and the methods around them
   # Text under CC BY 4.0, code under MIT: see LICENSE.
   license:
     content: CC-BY-4.0
@@ -94,7 +94,9 @@ project:
   # '{proofs,solutions/*}.md' reads "proofs.md, then every dossier". Drafts are listed
   # here for local reading; the pages workflow removes them before it publishes.
   # A short welcome page, then the introduction; the literature (six families), then the
-  # current frontier, which is one recent argument and not a family. The four approaches
+  # polynomial methods and the two proofs of KLS along the development of the polynomial
+  # method (Song--Zhang v1, Song--Zhang v2, Bizeul--Klartag--Lehec; BKL was deposited first
+  # on 4 October), arguments and not families. The four approaches
   # follow in the order of what each has established -- the moment map, the fixed
   # eigenfunction, conditional fibers, the fixed cut -- not of their research priority,
   # which the atlas states separately. An appendix used by one approach sits inside it,
@@ -113,8 +115,8 @@ project:
     - title: Polynomial methods and two proofs of KLS
       children:
         - file: modules/07-polynomial-curvature.md
-        - file: modules/07c-song-zhang-v2.md
-        - file: modules/07b-cumulants-suspension.md
+        - file: modules/07b-song-zhang-v2.md
+        - file: modules/07c-bkl-cumulants-suspension.md
     - title: The four approaches
       children:
         - file: modules/08-frontier-atlas.md
@@ -164,4 +166,4 @@ project:
 site:
   template: book-theme
   options:
-    logo_text: The KLS Frontier
+    logo_text: The KLS theorem

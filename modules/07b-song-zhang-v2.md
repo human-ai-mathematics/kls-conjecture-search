@@ -1,7 +1,7 @@
 ---
 title: Song–Zhang's repeated refinement
 numbering:
-  enumerator: "7C.%s"
+  enumerator: "7B.%s"
 ---
 
 (sec:sz-v2-proof)=
@@ -9,15 +9,12 @@ numbering:
 
 Song and Zhang's second version, *An O(1) Bound for the KLS Constant*
 [@SongZhang2026ConstantKLS], develops a second proof of KLS from the
-polynomial–curvature iteration. It is a new version of the same preprint.
-The preceding chapter concerns the pinned first version
-[@SongZhang2026IteratedLogKLS]. The new statements below record results
-from v2; their displayed statuses distinguish the source's assertions from
-what has been checked here. The reconstructed proof of [](#thm:sz-v2-kls)
-has passed independent agent reviews, including the finite-block estimates,
-outer profiles and final approximation. Its proof authors and reviewer
-agents are distinct; these checks do not assert journal peer review or
-human acceptance.
+polynomial–curvature iteration. It is a new version of the same preprint;
+the preceding chapter concerns the first version
+[@SongZhang2026IteratedLogKLS], and the next chapter the proof of
+Bizeul, Klartag and Lehec (BKL). The statements below record results of the
+second version; each displays its status, and how it was checked is
+explained on the [welcome page](#sec:overview-checking).
 
 The simplest distinction is already scalar. A fixed cost $C_*>1$ per
 repetition gives a factor $C_*^m$ after $m$ repetitions, however slowly $m$
@@ -30,15 +27,14 @@ and its operator estimates must concern the same functions.
 
 | Submitted (UTC) | Source | Conclusion and role |
 |---|---|---|
-| 1 October 2026, 10:43:04 | SZ v1 [@SongZhang2026IteratedLogKLS] | Iterated-logarithm bound, reconstructed in the preceding chapter |
-| 4 October 2026, 19:30:34 | BKL v1 [@BizeulKlartagLehec2026KLS] | Universal bound through cumulants and suspension, citing SZ v1 |
-| 4 October 2026, 21:21:03 | SZ v2 [@SongZhang2026ConstantKLS] | Universal bound through repeated refinement and summable losses |
+| 1 October 2026, 10:43:04 | Song–Zhang, first version [@SongZhang2026IteratedLogKLS] | Iterated-logarithm bound, reconstructed in the preceding chapter |
+| 4 October 2026, 19:30:34 | BKL, first version [@BizeulKlartagLehec2026KLS] | Universal bound through cumulants and suspension, citing the first version of Song–Zhang; next chapter |
+| 4 October 2026, 21:21:03 | Song–Zhang, second version [@SongZhang2026ConstantKLS] | Universal bound through repeated refinement and summable losses; this chapter |
 
 These are two distinct closing mechanisms with a shared spectral foundation.
-BKL estimate the exponential coefficient end point directly; SZ v2 improve
-the iteration producing those coefficients. The BKL reconstruction is
-independently checked here, as explained in [](#sec:bkl-proof). The SZ v2
-reconstruction excludes BKL, its coefficient consequences, and the already
+The second version improves the iteration producing the coefficients; BKL
+estimate the exponential coefficient end point directly
+([](#sec:bkl-proof)). The reconstruction in this chapter excludes BKL, its coefficient consequences, and the already
 proved KLS conclusion as inputs.
 
 ## The argument in outline
@@ -109,7 +105,7 @@ not accumulate with the number of refinements.
 
 ## Polynomial cost in the logarithmic depth
 
-Section 6 of the source replaces the exponential depth cost of v1 by a
+Section 6 of the source replaces the exponential depth cost of the first version by a
 polynomial cost. Its inverse-gradient blocks retain centering and symmetry
 information over many steps instead of charging a fixed loss at each step.
 
@@ -219,8 +215,6 @@ admissible. Earlier coefficient estimates are retained on the degree
 ranges where they are stronger; the [finite-chain estimate](#prop:sz-v2-finite-chain-blocks)
 has constants independent of how many such estimates are kept.
 The following two statements express the resulting profile improvement.
-Their full proofs have been checked by separate reviewer agents, as
-recorded beside the statements.
 
 :::{prf:lemma} Outer round with a retained profile
 :label: lem:sz-v2-profile-refinement
@@ -893,7 +887,7 @@ First apply the fixed-power estimate to $C(16\cdot2^i)^p$, then the contraction 
 (sec:sz-v2-methodological-comparison)=
 ## What the earlier obstruction analysis identified
 
-Our analysis of v1 separated an algebraic requirement from the estimates
+Our analysis of the first version separated an algebraic requirement from the estimates
 needed to realize it. Summable logarithmic losses would keep the total
 cost bounded, but small-degree initialization and admissible starting
 depths also required control. It identified the uniform exponential
@@ -902,11 +896,11 @@ coefficient assertion as equivalent to KLS in
 provided an estimate establishing that assertion.
 
 BKL supply a cumulant and suspension mechanism for the coefficient end
-point; SZ v2 develop finite blocks, retained coefficient caps and depth
-control. In v2 the iterated quantity is the common coefficient radius.
+point; the second version of Song–Zhang develops finite blocks, retained coefficient caps and depth
+control. In the second version the iterated quantity is the common coefficient radius.
 The fixed numerical factor converting that radius to $C_P$ is paid once,
-after every refinement. Thus v2 does not require a near-unit replacement
-of the v1 spectral comparison at every repetition.
+after every refinement. Thus the second version does not require a near-unit replacement
+of the first-version spectral comparison at every repetition.
 
 The coefficient transfer also has a different normalization: its exponent
 is $d-1$, whereas the earlier conditional-startup question used an exponent
@@ -921,4 +915,4 @@ These comparisons explain which missing estimates matter without claiming
 priority for either proof mechanism. Identifying a sufficient condition
 and proving it are different achievements. The BKL initialization
 consequence [](#cor:bkl-uniform-conditional-initialization) retains its
-BKL provenance and is not an input to the separate SZ v2 argument.
+BKL provenance and is not an input to the separate argument of the second version.

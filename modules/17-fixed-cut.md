@@ -8,11 +8,11 @@ numbering:
 
 ## The approach at a glance
 
-Each of the four approaches opens with the same short summary — the idea, how it would give KLS, what it uses, what it gives, what blocks it, what rules out its obvious variants, and what would settle it — so that the approaches can be compared without reading any of them in full. Section [](#sec:frontier-atlas) sets the four side by side.
+Each of the four approaches opens with the same short summary — the idea, what it would add, what it uses, what it gives, what blocks it, what rules out its obvious variants, and what would settle it — so that the approaches can be compared without reading any of them in full. Section [](#sec:frontier-atlas) sets the four side by side.
 
 **The idea.** Follow one *fixed* would-be bottleneck cut $E$ under Eldan's stochastic localization, and show that it cannot be identified too quickly.
 
-**How it would give KLS.** Through a chain of two implications, conditional at exactly one place:
+**What it would add.** The fixed cut is kept as the record of a method: its obstructions and its ceiling are its results, and they say what any argument that follows a single cut through localization has to overcome. Were its hypotheses established, it would give KLS through a chain of two implications, conditional at exactly one place, through a bottleneck set that cannot be identified too quickly:
 
 $$
 \text{a balanced cut survives to a universal time}
@@ -26,7 +26,7 @@ The survival-to-boundary step is [](#lem:survival-implies-kls). To obtain surviv
 
 **What it uses.** From the literature: the localization process and its covariance SDE, and the improved Lichnerowicz estimate ([](#thm:improved-lichnerowicz)). Developed in this manuscript: the two-colour Riccati identities ([](#thm:scalar-riccati), Section [](#sec:riccati)), the Stein dictionary (Section [](#sec:stein-dictionary)), and the covariance technology (Section [](#sec:covariance-tech)). Each statement below displays its own standing.
 
-**What it gives.** Its implications towards KLS are conditional, and its most reusable results are negative; this chapter states both, and its technical chapters form the appendix (Sections [](#sec:carleson)–[](#sec:appendix-fixed-cut)).
+**What it gives.** Its implications towards KLS are conditional, and its results are its obstructions and its ceiling; this chapter states both, and its technical chapters form the appendix (Sections [](#sec:carleson)–[](#sec:appendix-fixed-cut)).
 
 - *A bootstrap, and the one quantity it needs.* [](#thm:bootstrap) says that for a measure whose Cheeger constant is within a factor $1+\varepsilon$ of the smallest in its dimension, the excess of every balanced cut propagates along localization with a single interface, $\Xi_T(\mu)=\int_0^T\E(\lmax(A_t)-1)_+\dd t$. The idea: the isoperimetric profile of a log-concave measure is concave and symmetric, so its Cheeger constant is read at mass $\tfrac12$; whitening a localized measure of covariance $A_t$ loses at most $\lmax(A_t)^{1/2}$ against the worst isotropic measure of the same dimension; near-worstness compares the localized Cheeger constant with that of $\mu$, and every loss is charged to $(\lmax(A_t)-1)_+$.
 - *How far it gets.* The crude evaluation $\Xi_T\lesssim\log n$ never suffices in high dimension ([](#rem:insufficiency), [](#rem:crude-insufficient)); the polylogarithmic covariance technology improves it to $\Xi_T\le C(1+\log\log n)$ for $t_1(n)\le T\le1$ ([](#cor:loglog)), which still falls short of the $O(T)$ the bootstrap needs. A relative bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for all measures at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)): this measures the input the bootstrap needs, without excluding other propagation arguments.
