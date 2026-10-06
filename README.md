@@ -11,8 +11,9 @@ $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — was pr
 [second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
 [first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound and the
 spectral criterion both proofs use. This repository is a MyST manuscript that surveys the
-methods that led to KLS; reconstructs and checks the first version of Song–Zhang, then the two
-proofs, and compares them; says what the theorem gives and what remains of the question of its
+methods that led to KLS; reconstructs and checks the first version of Song–Zhang, then the BKL and SZ v2
+proofs; reconstructs and checks the compatible-integration proof of
+[Balasubramanian–Kasiviswanathan](https://github.com/kriznakumar/paper/blob/4837c33649ba2271f43c9684e9350ecbdd725f95/KLS.pdf), including its explicit constant; compares all three; says what the theorem gives and what remains of the question of its
 constant; and develops three alternative mechanisms for the Poincaré bound whose questions
 remain open after KLS (a deterministic moment-map inequality, a fixed eigenfunction followed
 through stochastic localization, conditional-fiber frames), with the fixed-cut localization
@@ -29,7 +30,7 @@ Start every session that edits the repository by reading it.
 
 | path | holds |
 |---|---|
-| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the two proofs and their comparison (`07`–`11`), KLS after its proofs and the map of alternative mechanisms (`12`–`13`), the three alternative mechanisms (`14`–`21`), shared technical foundations and glossary (`22`–`26`), the fixed-cut archive (`27`–`37`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
+| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the three checked proofs and their comparison (`07`–`12`), KLS after its proofs and the map of alternative mechanisms (`13`–`14`), the three alternative mechanisms (`15`–`22`), shared technical foundations and glossary (`23`–`27`), the fixed-cut archive (`28`–`38`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
 | [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
 | [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
 | [`research/reviews/`](research/reviews/) | independent proof reviews |

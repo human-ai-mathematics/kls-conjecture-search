@@ -43,7 +43,7 @@ These are two distinct closing mechanisms with a shared spectral foundation.
 The second version improves the iteration producing the coefficients; BKL
 estimate the exponential coefficient end point directly
 ([](#sec:bkl-proof)). The reconstruction in this chapter uses nothing from
-BKL; Chapter [](#sec:kls-synthesis) compares the two proofs.
+BKL; Chapter [](#sec:kls-synthesis) compares these with the BK proof.
 
 ## The argument in outline
 

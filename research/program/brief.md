@@ -14,15 +14,17 @@ which disguises a dead route wears. It owns none of the mathematics — the stat
 Bizeul–Klartag–Lehec's proof in arXiv:2610.05474v1 (4 October 2026)
 has been reconstructed and certified through independent agent reviews.
 `conj:kls` is now proved here, through `thm:bkl-tilt-criterion`,
-`thm:bkl-cumulant-bound` and `thm:bkl-tilt-bound`. The composition review is
-`research/reviews/2026-10-06-bkl-kls-second-proof-review.md`. This is local
+`thm:bkl-cumulant-bound` and `thm:bkl-tilt-bound`. The current composition review is
+`research/reviews/2026-10-06-kls-proof-dependency-extension-review.md`;
+the earlier `2026-10-06-bkl-kls-second-proof-review.md` is retained as history. This is local
 agent certification, distinct from refereed publication. The remaining
 programme concerns alternative proofs and structural inequalities.
 
 Song–Zhang arXiv:2610.01447v2 (4 October 2026) supplies a second source
 proof, reconstructed and independently checked as `thm:sz-v2-kls`.
-Its separate composition into `conj:kls` is recorded in
-`research/reviews/2026-10-06-sz-v2-kls-composition-review.md`; the final
+Its separate composition into `conj:kls` is currently recorded in
+`research/reviews/2026-10-06-kls-proof-dependency-extension-review.md`;
+the original `2026-10-06-sz-v2-kls-composition-review.md` remains in the history. The final
 profile estimates are checked in
 `research/reviews/2026-10-06-sz-v2-profile-review.md`. The two proofs share
 earlier spectral foundations but use distinct closing mechanisms. The v1
@@ -32,6 +34,18 @@ chain uses neither `conj:kls`, BKL nodes, nor their consequences as inputs. In p
 SZ v2 proof. Common analytic and polynomial foundations can be reused after
 checking exact hypotheses. Pointwise finiteness of the coefficient radius
 in `prop:sz-v2-common-radius` must not be confused with a uniform bound.
+
+Balasubramanian–Kasiviswanathan supplies a third source proof, reconstructed
+and independently reviewed as `thm:bk-explicit-poincare`, with explicit
+constant $1+2\cdot10^{16}$. Its separate composition into `conj:kls` is recorded
+in `research/reviews/2026-10-06-bk-kls-composition-review.md`. The source commit
+and PDF hash are pinned in the BK integration checkpoint. The reconstruction
+uses no KLS, BKL, SZ v2 or their consequences as inputs; it shares Appell
+conventions and the certified quadratic inequality of Letwin. Its Hodge
+estimate on compatible tensors and common integration-power prefactor are
+distinct from the existing CMH Hodge analysis. No existing alternative
+mechanism is settled by this integration. This is local independent agent
+review, not journal refereeing.
 
 `conj:kls`, stated at `:label: conj:kls` in the overview — read it there; this
 file never copies it.

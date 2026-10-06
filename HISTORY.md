@@ -12,6 +12,20 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-06: BK compatible integration certified as a third KLS proof
+
+- Added the pinned Balasubramanian–Kasiviswanathan source and reconstructed its
+  compatible-tensor Hodge estimate, uniform integration powers, covariance-normalized
+  localization, reverse transfer and direct degree induction in nine dossiers.
+- Twelve assertions independently reviewed, including `thm:bk-appell-bound` and
+  `thm:bk-explicit-poincare` with constant $1+2\cdot10^{16}$. A separate composition
+  adds a third proof record to `conj:kls`; previous proof records received an
+  independent dependency-extension review without changing their actual premises.
+- The BK chapter sits before the comparison; later chapters shift by one, with stable
+  labels. All 178 preexisting statements are unchanged. Alternative mechanisms retain
+  their objectives; no claim of priority or journal refereeing is made.
+- Source and detail: `research/explorations/2026-10-06-bk-certified.md`.
+
 ## 2026-10-06: The manuscript restructured around the two proofs
 
 - The proofs part reads Song–Zhang v1, BKL, Song–Zhang v2 (its technical estimates in a

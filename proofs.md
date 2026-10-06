@@ -82,3 +82,23 @@ For the other approaches, the [product-simplex cone calculation](solutions/prop-
 determines the sharp linear gate and its equality directions, while the
 [polynomial fiber bound](solutions/lem-fiber-polynomial-floor.md) excludes
 asymptotically vanishing simplex certificates at every fixed polynomial degree.
+
+The proof of Balasubramanian–Kasiviswanathan is reconstructed and independently
+checked in Chapter [](#sec:bk-proof), with the following reading order:
+
+1. [Approximation with covariance and curvature control](solutions/lem-bk-regular-approximation.md).
+2. [Compatible-tensor Hodge estimates and domains](solutions/lem-bk-compatible-hodge.md),
+   then [integration and Appell observations](solutions/prop-bk-integration-calculus.md).
+3. [Uniform operator powers and the quadratic seed](solutions/lem-bk-uniform-power-bound.md).
+4. [Covariance-normalized localization and moving Appell variance](solutions/lem-bk-localization-covariance.md),
+   then [reverse coefficient transfer](solutions/prop-bk-reverse-transfer.md).
+5. [The explicit degree induction](solutions/thm-bk-appell-bound.md),
+   [the Poincaré and Cheeger constants](solutions/thm-bk-explicit-poincare.md),
+   and [the composition with KLS](solutions/bk-kls-composition.md).
+
+The BK reconstruction uses Letwin's quadratic inequality and the same Appell
+normalization as the earlier proofs, but no BKL or SZ v2 conclusion and no
+previously proved KLS theorem. The constant $1+2\cdot10^{16}$ follows from its
+own integration estimate and approximation, not from the older qualitative
+exponential criterion. As with the other proofs, the checks are independent
+agent reviews of the pinned preprint, distinct from journal refereeing.

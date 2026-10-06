@@ -14,6 +14,17 @@
 # checkpoint from the 2026-10-04 strategy. The order carries no truth value.
 
 approaches:
+  - id: ap:bk-reconstruction
+    objective: >-
+      Reconstruct the pinned Balasubramanian–Kasiviswanathan proof, including its
+      explicit constant, and independently review its composition into conj:kls.
+      Exclude KLS, BKL, SZ v2 and their consequences as inputs.
+    state: closed
+    next: >-
+      Accomplished: compatible Hodge and integration, powers, localization,
+      reverse transfer, degree induction, explicit constant and KLS composition
+      are independently reviewed. See the BK certification checkpoint.
+
   - id: ap:sz-v2-reconstruction
     objective: >-
       Reconstruct Song–Zhang arXiv:2610.01447v2, independently review its improved

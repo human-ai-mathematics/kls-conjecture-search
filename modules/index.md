@@ -6,7 +6,7 @@ numbering: false
 % The site's welcome page: no statement lives here. The mathematical introduction is
 % modules/00-overview.md; this page only says what there is and where to go.
 
-This site is a reader's companion to the two proofs of the Kannan–Lovász–Simonovits (KLS) theorem — reconstructed, checked and compared here — to the methods that led to them, and to the questions that remain open after KLS.
+This site is a reader's companion to three proofs of the Kannan–Lovász–Simonovits (KLS) theorem — reconstructed, checked and compared here — to the methods that led to them, and to the questions that remain open after KLS.
 
 :::{note} How the proofs here are checked
 Proofs reconstructed here by agents are checked by separate reviewer agents. This is distinct from journal peer review or human acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
@@ -14,12 +14,19 @@ Proofs reconstructed here by agents are checked by separate reviewer agents. Thi
 
 The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Two preprints deposited on 4 October 2026 answer it: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS], and the second version of Song–Zhang, through repeated refinement with summable losses [@SongZhang2026ConstantKLS].
 
-:::{note} The use of AI in the two proofs
+:::{note} The use of AI in the BKL and Song–Zhang proofs
 Both sets of authors declare their use of AI.
 
 - BKL write that "most proofs and mathematical ideas in this paper were found by ChatGPT; a notable exception is the idea to use suspension which was suggested by the authors. The role of the authors has been mostly to understand these proofs and improve their exposition" (Acknowledgements, p. 5 of [@BizeulKlartagLehec2026KLS]).
 - Song and Zhang write that "the AI tools used in this work were GPT-6 Astra, GPT-5.6 Sol, Claude Fable 5, and Fable 5.1", and that their effort since 28 July 2026 "involved exploring more than 100 approaches in collaboration with AI tools", "with the authors deciding which ones to prioritize" (Acknowledgements and AI Disclosure, pp. 138–139 of [@SongZhang2026ConstantKLS]).
 :::
+
+Balasubramanian–Kasiviswanathan (BK) gives a third proof through compatible
+tensor integration and a direct induction on Appell coefficients
+(Chapter [](#sec:bk-proof)) [@BalasubramanianKasiviswanathan2026KLS]. Its
+explicit bound is $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)).
+This argument, including its numerical constant and composition into KLS,
+has also been reconstructed and independently checked here.
 
 Besides these proofs, the manuscript develops three alternative mechanisms for the Poincaré bound, which would give KLS by other means or with stronger conclusions. Their exact moment-Hessian calculations, conditional reductions and counterexamples keep their meaning now that KLS is proved.
 
@@ -29,15 +36,15 @@ Besides these proofs, the manuscript develops three alternative mechanisms for t
 Four ways in, depending on what you came for:
 
 - **Discover.** The overview, Chapter [](#sec:overview); what the theorem gives and the question of its constant, Chapter [](#sec:kls-after-proofs); then the map of alternative mechanisms, Chapter [](#sec:frontier-atlas).
-- **Read the proofs.** The first version of Song–Zhang, whose spectral criterion both proofs use, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter argument from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); then their comparison, Chapter [](#sec:kls-synthesis).
+- **Read the proofs.** The first version of Song–Zhang, whose spectral criterion underlies BKL and SZ v2, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter argument from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); the BK integration argument, Chapter [](#sec:bk-proof); then their comparison, Chapter [](#sec:kls-synthesis).
 - **Read the alternative mechanisms.** The three entry chapters listed below.
 - **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
 
-After the overview come *the literature*, one chapter for each of six families of methods; *two proofs of KLS*: the first version of Song–Zhang, Bizeul–Klartag–Lehec, the second version of Song–Zhang, then their comparison; *after KLS*, what the theorem gives and the question of its constant, then the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
+After the overview come *the literature*, one chapter for each of six families of methods; *the proof chapters*: the first version of Song–Zhang as preparation, then the three proofs of Bizeul–Klartag–Lehec, Song–Zhang v2 and BK, followed by their comparison; *after KLS*, what the theorem gives and the question of its constant, then the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
 
 ## Three alternative mechanisms, and an archive
 
-Each mechanism needs an argument of its own: neither proof of KLS gives its sufficient condition.
+Each mechanism needs an argument of its own: none of these proofs gives its sufficient condition.
 
 - **Moment map** — a deterministic inequality for the Hessian of the moment map, which implies KLS and is not known to be equivalent to it, and which would give the Poincaré bound with constant $4$ and no stochastic localization: Chapter [](#sec:moment-map-cmh).
 - **Fixed eigenfunction** — a localization mechanism that follows a first eigenfunction and so ignores covariance spikes in directions it does not use: Chapter [](#sec:spectral-approach).
@@ -54,7 +61,8 @@ Chapter [](#sec:frontier-atlas) compares the three mechanisms side by side — w
 - A reconstruction of the first version of Song–Zhang's polynomial–curvature mechanism, Chapter [](#sec:polynomial-curvature), with its reusable profile transfer [](#thm:sz-curvature-transfer), affine bound [](#cor:sz-affine-poincare), and exponential coefficient characterization of KLS [](#prop:sz-exponential-coefficients-equivalence).
 - A reconstruction of the Bizeul–Klartag–Lehec cumulant and suspension argument, Chapter [](#sec:bkl-proof), including its exact comparison with Appell coefficients.
 - A reconstruction of the universal bound of the second version of Song–Zhang, [](#thm:sz-v2-kls), with the finite-block estimates and summable-cost argument explained in Chapters [](#sec:sz-v2-proof) and [](#sec:sz-v2-blocks).
-- A comparison of the two proofs, Chapter [](#sec:kls-synthesis), and an account of what the theorem gives and of the question of its constant, Chapter [](#sec:kls-after-proofs).
+- A reconstruction of BK’s compatible-integration proof and its explicit constant, Chapter [](#sec:bk-proof).
+- A comparison of the three proofs, Chapter [](#sec:kls-synthesis), and an account of what the theorem gives and of the question of its constant, Chapter [](#sec:kls-after-proofs).
 
 **Results proved here.**
 

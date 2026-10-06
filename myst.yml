@@ -9,7 +9,7 @@ version: 1
 project:
   title: The KLS theorem and its methods
   github: https://github.com/human-ai-mathematics/kls-conjecture-search
-  subtitle: Two proofs of the Kannan–Lovász–Simonovits bound, checked and compared, and the methods around them
+  subtitle: Three proofs of the Kannan–Lovász–Simonovits bound, checked and compared, and the methods around them
   # Text under CC BY 4.0, code under MIT: see LICENSE.
   license:
     content: CC-BY-4.0
@@ -115,54 +115,55 @@ project:
         - file: modules/04-family-moment-map.md
         - file: modules/05-family-transport.md
         - file: modules/06-family-parallel-coupling.md
-    - title: Two proofs of KLS
+    - title: Three proofs of KLS
       children:
         - file: modules/07-polynomial-curvature.md
         - file: modules/08-bkl-cumulants-suspension.md
         - file: modules/09-song-zhang-v2.md
         - file: modules/10-sz-v2-technical.md
-        - file: modules/11-proofs-compared.md
+        - file: modules/11-bk-compatible-integration.md
+        - file: modules/12-proofs-compared.md
     - title: After KLS
       children:
-        - file: modules/12-kls-after-proofs.md
-        - file: modules/13-alternative-mechanisms.md
+        - file: modules/13-kls-after-proofs.md
+        - file: modules/14-alternative-mechanisms.md
     - title: Alternative mechanisms
       children:
         - title: Moment map
           children:
-            - file: modules/14-moment-map-cmh.md
-            - file: modules/15-cmh-normalization.md
-            - file: modules/16-cmh-exact-cases.md
-            - file: modules/17-moment-map-construction.md
-            - file: modules/18-appendix-moment-map.md
-        - file: modules/19-localization-prelude.md
+            - file: modules/15-moment-map-cmh.md
+            - file: modules/16-cmh-normalization.md
+            - file: modules/17-cmh-exact-cases.md
+            - file: modules/18-moment-map-construction.md
+            - file: modules/19-appendix-moment-map.md
+        - file: modules/20-localization-prelude.md
         - title: Fixed eigenfunction
           children:
-            - file: modules/20-spectral-approach.md
+            - file: modules/21-spectral-approach.md
         - title: Conditional fibers
           children:
-            - file: modules/21-conditional-fiber-frame.md
+            - file: modules/22-conditional-fiber-frame.md
     - title: Shared technical foundations
       children:
-        - file: modules/22-notation.md
-        - file: modules/23-riccati.md
-        - file: modules/24-qcts-obstruction.md
-        - file: modules/25-covariance-technology.md
-        - file: modules/26-model-geometries.md
+        - file: modules/23-notation.md
+        - file: modules/24-riccati.md
+        - file: modules/25-qcts-obstruction.md
+        - file: modules/26-covariance-technology.md
+        - file: modules/27-model-geometries.md
         - file: modules/glossary.md
     - title: "Archive: the fixed cut"
       children:
-        - file: modules/27-fixed-cut.md
-        - file: modules/28-fixed-cut-open-problems.md
-        - file: modules/29-carleson.md
-        - file: modules/30-product-stress.md
-        - file: modules/31-stein-route.md
-        - file: modules/32-excess-propagation.md
-        - file: modules/33-bootstrap.md
-        - file: modules/34-mass-martingale.md
-        - file: modules/35-stein-dictionary.md
-        - file: modules/36-jacobi-splitting.md
-        - file: modules/37-fixed-cut-calculations.md
+        - file: modules/28-fixed-cut.md
+        - file: modules/29-fixed-cut-open-problems.md
+        - file: modules/30-carleson.md
+        - file: modules/31-product-stress.md
+        - file: modules/32-stein-route.md
+        - file: modules/33-excess-propagation.md
+        - file: modules/34-bootstrap.md
+        - file: modules/35-mass-martingale.md
+        - file: modules/36-stein-dictionary.md
+        - file: modules/37-jacobi-splitting.md
+        - file: modules/38-fixed-cut-calculations.md
     - title: Full proofs
       children:
         - pattern: '{proofs,solutions/*}.md'

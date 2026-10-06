@@ -5,7 +5,7 @@ Each entry says what the object is and where it is fixed. Where a normalization 
 
 :::{glossary}
 Alternative mechanisms
-: The three mechanisms for the Poincaré bound this manuscript develops besides the two proofs of [](#conj:kls), each named by the object it keeps, each offering a different mechanism or a stronger conclusion. **The moment map** is deterministic and asks for one inequality for the Hessian of the moment map, with no localization at all (Chapter [](#sec:moment-map-cmh)); **the fixed eigenfunction** follows a first eigenfunction under Eldan's stochastic localization (Chapter [](#sec:spectral-approach)); **conditional fibers** replace Euclidean directions by one test-independent isotropic frame of conditional line resamplings (Chapter [](#sec:conditional-fiber-frame)). They are compared in Chapter [](#sec:frontier-atlas). **The fixed cut**, which follows one would-be bottleneck set under localization, is kept as an archive for its obstructions and counterexamples (Chapter [](#sec:introduction)).
+: The three mechanisms for the Poincaré bound this manuscript develops besides the three proofs of [](#conj:kls), each named by the object it keeps, each offering a different mechanism or a stronger conclusion. **The moment map** is deterministic and asks for one inequality for the Hessian of the moment map, with no localization at all (Chapter [](#sec:moment-map-cmh)); **the fixed eigenfunction** follows a first eigenfunction under Eldan's stochastic localization (Chapter [](#sec:spectral-approach)); **conditional fibers** replace Euclidean directions by one test-independent isotropic frame of conditional line resamplings (Chapter [](#sec:conditional-fiber-frame)). They are compared in Chapter [](#sec:frontier-atlas). **The fixed cut**, which follows one would-be bottleneck set under localization, is kept as an archive for its obstructions and counterexamples (Chapter [](#sec:introduction)).
 
 All-cut and near-Cheeger variants
 : The two variants of the {term}`fixed cut <Alternative mechanisms>`: the all-cut variant asks for the all-cut Carleson estimate for every balanced set (Chapter [](#sec:carleson)), the near-Cheeger variant only for near-minimizers of the isoperimetric profile, through the weighted near-Cheeger package (Chapter [](#sec:stein)). See Section [](#subsec:two-variants).
@@ -45,6 +45,12 @@ Covariance spike
 
 Appell coefficients
 : For a regular measure $\nu$, $c_k(\nu)=\sqrt{K_k(\nu)}/k!$, where $K_k(\nu)$ is the largest variance of a degree-$k$ Appell polynomial $\langle T,\mathcal A_k^\nu\rangle$ with $\|T\|_{\mathrm{HS}}=1$. Defined in Section [](#sec:sz-notation); KLS is equivalent to $c_k\le A^k$ with one universal $A$ ([](#prop:sz-exponential-coefficients-equivalence)).
+
+Compatible tensor field
+: A symmetric tensor field whose distributional derivative is fully symmetric, so that its entries satisfy the curl-free relations in [](#def:bk-compatible-calculus). BK's argument integrates these fields repeatedly after choosing centered primitives. Its Hodge estimate controls the loss when weighted divergence is projected back onto compatible fields ([](#lem:bk-compatible-hodge)); it is distinct from the moment-Hessian comparison [](#cor:cmh-hodge-comparison).
+
+Common integration prefactor
+: The factor $Q_D(B)$ in [](#lem:bk-uniform-power-bound), independent of the power $k$ in $\|R^k\|^2\le B^kQ_D(B)$. The BK proof uses finitely many polynomial observations to obtain this bound simultaneously for all powers. Replacing it by separate bounds on each integration would multiply the prefactor repeatedly and discard the gain.
 
 Curvature profile
 : A function $F$ with $\CP(\nu)\le F(a)$ for every regular isotropic measure of curvature $a$ ($aI\preceq D^2W$), in every dimension. Bakry–Émery gives $F(a)=1/a$; [](#thm:sz-iterated-curvature) gives iterated logarithms, and [](#thm:sz-curvature-transfer) turns any profile into a general bound. Section [](#sec:sz-notation).

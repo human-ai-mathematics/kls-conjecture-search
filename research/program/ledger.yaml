@@ -2,6 +2,107 @@
 # read from the manuscript (modules/); see SPECIFICATION.md, Formats → Ledger.
 
 nodes:
+  - id: lem:bk-localization-covariance
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/lem-bk-localization-covariance.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: lem:bk-moving-appell-variance
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, lem:bk-localization-covariance]
+    proofs:
+      - artifact: solutions/lem-bk-localization-covariance.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: prop:bk-reverse-transfer
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-regular-approximation, lem:bk-localization-covariance, lem:bk-moving-appell-variance]
+    proofs:
+      - artifact: solutions/prop-bk-reverse-transfer.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: thm:bk-explicit-poincare
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients, lem:bk-regular-approximation, prop:bk-integration-calculus, cor:bk-integration-powers, thm:bk-appell-bound]
+    proofs:
+      - artifact: solutions/thm-bk-explicit-poincare.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
+
+  - id: cor:bk-cheeger
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS, Milman2009Isoperimetric, Klartag2023Logarithmic]
+    depends_on: [thm:bk-explicit-poincare]
+    proofs:
+      - artifact: solutions/thm-bk-explicit-poincare.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
+
+  # BK: pinned source, reconstructed and independently reviewed.
+  - id: def:bk-uniform-appell-coefficients
+    status: defined
+
+  - id: def:bk-compatible-calculus
+    status: defined
+
+  - id: lem:bk-regular-approximation
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients]
+    proofs:
+      - artifact: solutions/lem-bk-regular-approximation.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: lem:bk-compatible-hodge
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus]
+    proofs:
+      - artifact: solutions/lem-bk-compatible-hodge.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: prop:bk-integration-calculus
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients, lem:bk-compatible-hodge]
+    proofs:
+      - artifact: solutions/prop-bk-integration-calculus.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: lem:bk-uniform-power-bound
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: cor:bk-integration-powers
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-uniform-power-bound]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: cor:bk-quadratic-seed
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-uniform-power-bound, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: thm:bk-appell-bound
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, prop:bk-reverse-transfer, lem:bk-uniform-power-bound, cor:bk-quadratic-seed]
+    proofs:
+      - artifact: solutions/thm-bk-appell-bound.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
 
   # SZ v2: source assertions remain open until independently checked here.
   - id: def:sz-v2-common-radius
@@ -215,13 +316,15 @@ nodes:
 
   - id: conj:kls
     status: proved
-    references: [BizeulKlartagLehec2026KLS, SongZhang2026ConstantKLS]
-    depends_on: [thm:bkl-tilt-bound, thm:bkl-tilt-criterion, lem:bkl-analytic-foundations, thm:sz-v2-kls]
+    references: [BizeulKlartagLehec2026KLS, SongZhang2026ConstantKLS, BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [thm:bkl-tilt-bound, thm:bkl-tilt-criterion, lem:bkl-analytic-foundations, thm:sz-v2-kls, thm:bk-explicit-poincare]
     proofs:
       - artifact: solutions/bkl-suspension-kls.md
-        review: research/reviews/2026-10-06-bkl-kls-second-proof-review.md
+        review: research/reviews/2026-10-06-kls-proof-dependency-extension-review.md
       - artifact: solutions/sz-v2-kls-composition.md
-        review: research/reviews/2026-10-06-sz-v2-kls-composition-review.md
+        review: research/reviews/2026-10-06-kls-proof-dependency-extension-review.md
+      - artifact: solutions/bk-kls-composition.md
+        review: research/reviews/2026-10-06-bk-kls-composition-review.md
 
   # BKL v1 reconstruction: statuses follow independent proof reviews.
 
