@@ -7,6 +7,14 @@ numbering:
 (sec:sz-v2-proof)=
 # Repeated refinement and a bounded total loss
 
+**What to retain.** Instead of the Poincaré constant, the second version
+of Song–Zhang iterates one number per measure, a common radius for the
+Appell coefficients of every degree, which controls the Poincaré constant
+up to a fixed factor paid once. Each refinement of that radius passes
+through curvature profiles and localization, as in the first version, but
+with margins $\alpha_i=2^{-i}/16$ whose costs have a bounded product, so
+infinitely many refinements leave a universal bound.
+
 Song and Zhang's second version, *An O(1) Bound for the KLS Constant*
 [@SongZhang2026ConstantKLS], develops a second proof of KLS from the
 polynomial–curvature iteration. It is a new version of the same preprint;
@@ -34,10 +42,8 @@ and its operator estimates must concern the same functions.
 These are two distinct closing mechanisms with a shared spectral foundation.
 The second version improves the iteration producing the coefficients; BKL
 estimate the exponential coefficient end point directly
-([](#sec:bkl-proof)). The reconstruction in this chapter takes neither BKL's
-estimates nor the KLS conclusion as inputs; the note on provenance of
-Section [](#subsec:proofs-provenance) states this precisely, and Chapter
-[](#sec:kls-synthesis) compares the two proofs.
+([](#sec:bkl-proof)). The reconstruction in this chapter uses nothing from
+BKL; Chapter [](#sec:kls-synthesis) compares the two proofs.
 
 ## The argument in outline
 

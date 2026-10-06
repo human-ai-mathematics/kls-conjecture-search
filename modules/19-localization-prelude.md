@@ -6,7 +6,7 @@ numbering:
 (sec:localization-prelude)=
 # Prelude: what stochastic localization does, and what it costs
 
-The fixed cut and the fixed eigenfunction share a language, and this section is that language, at the level of detail needed to follow either approach's argument and to see where it stops. It states no identity precisely and proves nothing. The exact process, the SDEs, the Itô calculations, the two-colour notation, the Riccati and Stein identities, the covariance estimates and the model geometries are in the shared technical foundations (Sections [](#sec:notation), [](#sec:riccati), [](#sec:covariance-tech) and [](#sec:models)) and, for the mass martingale and the Stein dictionary, among the fixed-cut chapters (Sections [](#sec:mass-martingale) and [](#sec:stein-dictionary)); each is linked below at the point where it is first needed. A reader willing to take the mechanism on trust can go directly from here to Section [](#sec:spectral-approach) or Section [](#sec:introduction).
+The fixed eigenfunction, and the fixed cut kept in the archive, share a language, and this chapter is that language, at the level of detail needed to follow either argument and to see where it stops. It states no identity precisely and proves nothing. The exact process, the SDEs, the Itô calculations, the two-colour notation, the Riccati and Stein identities, the covariance estimates and the model geometries are in the shared technical foundations (Chapters [](#sec:notation), [](#sec:riccati), [](#sec:covariance-tech) and [](#sec:models)) and, for the mass martingale and the Stein dictionary, among the fixed-cut chapters (Chapters [](#sec:mass-martingale) and [](#sec:stein-dictionary)); each is linked below at the point where it is first needed. A reader willing to take the mechanism on trust can go directly from here to Chapter [](#sec:spectral-approach) or Chapter [](#sec:introduction).
 
 (subsec:prelude-process)=
 ## The process, and why one would want it
@@ -41,11 +41,11 @@ $$
 \dd r_t=\dd M_t+(S_t-D_t)\dd t ,
 $$
 
-a martingale increment plus a drift split into exactly one positive *source* $S_t$ and one coercive *damping* $D_t$. This is [](#thm:scalar-riccati); the matrix identity behind it is [](#lem:matrix-riccati), and both are derived in Section [](#sec:riccati).
+a martingale increment plus a drift split into exactly one positive *source* $S_t$ and one coercive *damping* $D_t$. This is [](#thm:scalar-riccati); the matrix identity behind it is [](#lem:matrix-riccati), and both are derived in Chapter [](#sec:riccati).
 
-The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Section [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every argument in either approach is, in the end, an attempt to absorb the source into the damping for long enough.
+The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Chapter [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every argument in either approach is, in the end, an attempt to absorb the source into the damping for long enough.
 
-The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Section [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Section [](#sec:open) is the fixed cut's version of it.
+The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Chapter [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Chapter [](#sec:open) is the fixed cut's version of it.
 
 (subsec:prelude-warning)=
 ## The warning that constrains both approaches
@@ -54,11 +54,11 @@ One thing must be carried into both approaches from Section [](#sec:kls-remainin
 
 > *There is no uniform bound on $\norm{A_t}_\op$ along the path, even for measures that satisfy KLS.* [](#prop:covariance-spike) exhibits the counterexample, and it is a product of centered exponentials — a measure that is dimension-free by tensorization.
 
-So an argument may not simply bound the covariance better. It must either follow an object that notices when a spike is harmless — the fixed cut follows one cut, the fixed eigenfunction one eigenfunction, and both retain structure that $\norm{A_t}_\op$ has thrown away — or leave the method entirely, which is what the moment-map and conditional-fiber approaches do. The covariance technology of Section [](#sec:covariance-tech) is correspondingly a *small-time* theory: it controls the covariance for a short while, not forever, and the two localization approaches are built to need only that.
+So an argument may not simply bound the covariance better. It must either follow an object that notices when a spike is harmless — the fixed cut follows one cut, the fixed eigenfunction one eigenfunction, and both retain structure that $\norm{A_t}_\op$ has thrown away — or leave the method entirely, which is what the moment map and conditional fibers do. The covariance technology of Chapter [](#sec:covariance-tech) is correspondingly a *small-time* theory: it controls the covariance for a short while, not forever, and the two localization arguments are built to need only that.
 
-Product measures are the standing stress test for exactly this reason, and Section [](#sec:models) collects them alongside the Gaussian model, where the covariance is deterministic, damping is active and the excess vanishes identically. The two models bracket the problem: whatever a proposal does, it must be right on both.
+Product measures are the standing stress test for exactly this reason, and Chapter [](#sec:models) collects them alongside the Gaussian model, where the covariance is deterministic, damping is active and the excess vanishes identically. The two models bracket the problem: whatever a proposal does, it must be right on both.
 
 (subsec:prelude-onward)=
 ## Where to go from here
 
-Section [](#sec:qcts) states the static input the fixed-cut approach consumes and the two-tail obstruction that limits what it can supply; it sits among the shared foundations but is worth reading before the fixed-cut chapters, because it is an obstruction, not a tool. Section [](#sec:spectral-approach) then opens the fixed-eigenfunction approach and Section [](#sec:introduction) the fixed-cut approach, each with a summary in the same format.
+Chapter [](#sec:qcts) states the static input the fixed-cut approach consumes and the two-tail obstruction that limits what it can supply; it sits among the shared foundations but is worth reading before the fixed-cut chapters, because it is an obstruction, not a tool. Chapter [](#sec:spectral-approach) then opens the fixed eigenfunction, and Chapter [](#sec:introduction) the fixed-cut archive, each with a summary in the same format.

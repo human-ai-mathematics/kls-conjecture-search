@@ -12,6 +12,20 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-06: The manuscript restructured around the two proofs
+
+- The proofs part reads Song–Zhang v1, BKL, Song–Zhang v2 (its technical estimates in a
+  chapter of their own), then a new comparison of the two proofs; the overview now
+  explains both ("How KLS was proved").
+- New prose chapter *KLS after its proofs*: equivalent forms, consequences, the constants
+  of the two proofs and the question of the best constant. No new statement.
+- The synthesis is dissolved into the comparison and the map of alternative mechanisms;
+  three living mechanisms (moment map, fixed eigenfunction, conditional fibers); the fixed
+  cut becomes a final archive part.
+- No statement changed (`check.py --statements` identical). Legacy statement titles are
+  deferred to a separate pass (`TODO-EDITORIAL-POST-KLS.md` §9).
+- Source: `research/explorations/2026-10-06-editorial-restructure.md`.
+
 ## 2026-10-06: The manuscript repositioned after the proof of KLS
 
 - The site is retitled *The KLS theorem and its methods* and presents itself as a

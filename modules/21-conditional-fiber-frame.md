@@ -6,7 +6,7 @@ numbering:
 (sec:conditional-fiber-frame)=
 # Conditional fibers: inverse-variance frames of line resamplings
 
-## Overview of the approach
+## Overview of the mechanism
 
 **The idea.** Replace Euclidean directions by one isotropic frame of conditional line resamplings, chosen from the measure but not from the test function, and normalized by the conditional variances; then ask for a dimension-free spectral gap of the resulting form.
 
@@ -18,7 +18,7 @@ $$
 \text{KLS},
 $$
 
-where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would therefore leave KLS, which is proved, untouched. This matters here more than for the other approaches, because the sharpest result of this one is negative ([](#prop:conditional-fiber-root-obstruction)).
+where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would leave KLS untouched; it would rule out this mechanism, whose sharpest result so far is negative ([](#prop:conditional-fiber-root-obstruction)).
 
 **What it builds on.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Set up here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
 
@@ -28,11 +28,11 @@ where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [
 
 **What fails, and why.** [](#prop:conditional-fiber-root-obstruction) rules out the root frame outright: a vertex-cap indicator drives the normalized Rayleigh quotient down. The stronger obstruction [](#lem:fiber-polynomial-floor) excludes asymptotically vanishing all-frame upper certificates at every fixed polynomial degree. Its reverse inequality on each chord explains why fixed-degree tests miss the small cap. [](#prop:sasada-negative-exchange) is the same vertex-cap mechanism for a related negative-exponent exchange model, from the literature.
 
-**What would settle it.** A universal form gap for a constructed frame would complete the approach. In the other direction, an asymptotically vanishing all-frame upper certificate on the simplex must use polynomial degrees growing with dimension or nonpolynomial tests, by [](#lem:fiber-polynomial-floor). No such certificate or uniform full-domain gap is established here.
+**What would settle it.** A universal form gap for a constructed frame would complete the argument. In the other direction, an asymptotically vanishing all-frame upper certificate on the simplex must use polynomial degrees growing with dimension or nonpolynomial tests, by [](#lem:fiber-polynomial-floor).
 
 % Agent note: this is the objective of ap:f-simplex-dual in research/program/portfolio.yaml.
 
-**How to read it.** The form construction and root-frame obstruction use the sharp one-dimensional Poincaré inequality and no localization apparatus. The fixed-degree floor also uses the simplex Poincaré bound from [](#cor:cmh-dirichlet-poincare); its moment-map proof need not be read to follow the chord argument here. Read Section [](#subsec:fiber-root-failure) for the root-frame obstruction, which is the shortest complete argument among the moment-map and conditional-fiber approaches.
+**How to read it.** The form construction and root-frame obstruction use the sharp one-dimensional Poincaré inequality and no localization apparatus. The fixed-degree floor also uses the simplex Poincaré bound from [](#cor:cmh-dirichlet-poincare); its moment-map proof need not be read to follow the chord argument here. Read Section [](#subsec:fiber-root-failure) for the root-frame obstruction, which is the shortest complete argument among the alternative mechanisms.
 
 The construction is as follows.
 

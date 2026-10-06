@@ -6,7 +6,7 @@ numbering:
 (sec:bootstrap)=
 # The bootstrap comparison theorem and the interface functional
 
-*Appendix to the fixed cut, Section [](#sec:introduction).*
+*Appendix to the fixed cut, Chapter [](#sec:introduction).*
 
 ## Two elementary lemmas
 
@@ -148,7 +148,7 @@ $\Tr A_t$ has drift $-\Tr A_t^2\le0$ by [](#eq:cov-sde), so $\E\lmax(A_t)\le\E\T
 For [](#eq:clean-form) to yield even an $O(T)$ excess bound with a small constant one needs $h_\mu\Xi_T\le CT$, which under [](#lem:crude) requires $h_\mu\le CT/\log n$. But $h_\mu\ge\hstar_n\ge c(\log n)^{-1/4}$ by [](#thm:letwin-kls); even the earlier published bound $c(\log n)^{-1/2}$ [@Klartag2023Logarithmic] exceeds $CT/\log n$ for all large $n$. The crude bound therefore never suffices in high dimension: known lower bounds for KLS are themselves an obstruction to the naive bootstrap. Any useful evaluation of $\Xi_T$ must beat $\log n$.
 :::
 
-The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Section [](#sec:covariance-tech) ([](#ass:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).
+The polylogarithmic covariance technology does beat it. The required input is the small-time operator-norm control imported in Chapter [](#sec:covariance-tech) ([](#ass:KI)), discharged there on the published $c/\log^2 n$ window and, conditional on the version-1 input of [](#thm:letwin-qcts), on the larger $c/\log n$ window ([](#cor:KI-discharged) and [](#cor:KI-letwin)).
 
 :::{prf:corollary} Polylog evaluation
 :label: cor:loglog
@@ -200,12 +200,12 @@ Assembling this section and the previous one, the propagation estimates availabl
 | Absolute with small constant, $\le Te_0+\kappa T$ | Holds for near-worst $\mu$ whenever $h_\mu(1+\log\log n)\le c\kappa T$; conditional on Ass. [](#ass:KI) | [](#cor:loglog); the universal-time near-worst extension is [](#conj:taming). |
 | Relative, $\le\kappa\,h_\mu T$ | Making the upper bound in [](#eq:clean-form) small term by term requires $\Xi_T\le c\kappa T$, alongside control of $e_0$ and $T^{1/3}$. If proved for every isotropic log-concave $\mu$ at a sufficiently small universal time, this covariance bound would imply KLS. A large upper bound gives no lower bound on the actual excess. [](#conj:taming) asks instead for near-worst, $h_\mu$-weighted control. | [](#prop:ceiling). |
 
-On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the approach, posed precisely in Section [](#sec:open).
+On the demand side, [](#prop:two-tail) shows the Stein-trace estimate cannot be satisfied slice-wise with absolute-scale excess. The corridor between what can be supplied and what must be demanded is the residual content of the approach, posed precisely in Chapter [](#sec:open).
 :::
 
 :::{prf:remark} Product measures: sanity check, and why the bootstrap is silent there
 :label: rem:products-bootstrap
-For product $\mu$ (Section [](#sec:models)), $A_t$ is diagonal, each entry a nonnegative supermartingale (drift $-A^2$), so $\Prob(\sup_{s\le t}A^{(i)}_s\ge\lambda)\le1/\lambda$ by the maximal inequality. A more careful small-time analysis of the $n$ independent variance processes — which we do not carry out — suggests $\Xi_T\asymp\log\log n$ for products of two-sided exponentials, matching [](#cor:loglog) and consistent with the known observation that a single eigenvalue can reach order $\log n$, saturating the cap [](#eq:BL-cap) at $t\asymp1/\log n$ [@Chen2021; @KlartagLehec2022Polylog]. For products, however, $h_\mu\asymp1\gg\hstar_n$ in any hypothetical bad regime, so the near-worstness hypothesis fails and the bootstrap is vacuous — correctly so: products cannot be counterexamples, and their excess propagation follows directly from $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization ([](#prop:products)).
+For product $\mu$ (Chapter [](#sec:models)), $A_t$ is diagonal, each entry a nonnegative supermartingale (drift $-A^2$), so $\Prob(\sup_{s\le t}A^{(i)}_s\ge\lambda)\le1/\lambda$ by the maximal inequality. A more careful small-time analysis of the $n$ independent variance processes — which we do not carry out — suggests $\Xi_T\asymp\log\log n$ for products of two-sided exponentials, matching [](#cor:loglog) and consistent with the known observation that a single eigenvalue can reach order $\log n$, saturating the cap [](#eq:BL-cap) at $t\asymp1/\log n$ [@Chen2021; @KlartagLehec2022Polylog]. For products, however, $h_\mu\asymp1\gg\hstar_n$ in any hypothetical bad regime, so the near-worstness hypothesis fails and the bootstrap is vacuous — correctly so: products cannot be counterexamples, and their excess propagation follows directly from $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ by tensorization ([](#prop:products)).
 :::
 
 (subsec:bootstrap-barriers)=
@@ -218,7 +218,7 @@ Both remarks below are methodological constraints on the bootstrap input, warnin
 The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:insufficiency), is too large to yield the required excess estimate at known KLS lower-bound scales. A viable bootstrap input must improve the logarithm; the available polylogarithmic technology reaches only the scale of [](#cor:loglog).
 :::
 
-:::{prf:remark} An all-measure relative bound already implies KLS
+:::{prf:remark} An all-measure relative bound would suffice
 :label: rem:relative-ceiling
-By [](#prop:ceiling), a bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for every isotropic log-concave measure at a sufficiently small universal time is sufficient for KLS. No converse is established here. The proposition explains the strength of that particular covariance input; it does not rule out proving it or obtaining propagation by another argument. [](#conj:taming) instead asks for a near-worst, $h_\mu$-weighted bound.
+By [](#prop:ceiling), a bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for every isotropic log-concave measure at a sufficiently small universal time is sufficient for KLS. The proposition measures how strong that covariance input is; it does not rule out obtaining it, or propagation by another argument. [](#conj:taming) instead asks for a near-worst, $h_\mu$-weighted bound.
 :::

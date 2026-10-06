@@ -10,7 +10,7 @@ numbering:
 
 **What it buys.** The July 2026 moment-map estimates isolate a useful static component of the problem. In moment-map coordinates the statement “$\mu$ is isotropic” becomes “$\E_\nu H=I$”, and the Monge–Ampère equation, differentiated twice, produces two manifestly positive semidefinite source terms. Exploiting that positivity yields a sharp bound on $\E\Tr(BHBH)$ for every *constant* symmetric matrix $B$ — from which the sharp thin-shell constant, the sharp third-moment tensor, and the all-quadratic Poincaré inequality all follow.
 
-This section presents the mechanism. This manuscript's formal statements of the two consequences it actually consumes are [](#thm:letwin-qcts) (Section [](#sec:qcts)) and [](#prop:letwin-kappa) (Section [](#sec:covariance-tech)); they are not restated here.
+This section presents the mechanism. This manuscript's formal statements of the two consequences it actually consumes are [](#thm:letwin-qcts) (Chapter [](#sec:qcts)) and [](#prop:letwin-kappa) (Chapter [](#sec:covariance-tech)); they are not restated here.
 
 (subsec:mm-coordinates)=
 ## Moment-map coordinates
@@ -46,7 +46,7 @@ If $Y\sim\nu$ and $X=\nabla\varphi(Y)$, then $X\sim\mu$, and integration by part
 \E_\nu H(Y)=\E_\nu\bigl[\nabla\varphi(Y)\otimes\nabla\varphi(Y)\bigr]=\Cov\mu=I
 ```
 
-when $\mu$ is isotropic. So *“average Hessian equals identity” replaces isotropy* in moment-map coordinates. This is the structural payoff: isotropy, which Section [](#sec:family-needles) showed is not inherited by needles, becomes a single linear identity for the object being estimated.
+when $\mu$ is isotropic. So *“average Hessian equals identity” replaces isotropy* in moment-map coordinates. This is the structural payoff: isotropy, which Chapter [](#sec:family-needles) showed is not inherited by needles, becomes a single linear identity for the object being estimated.
 
 :::{prf:theorem} Compact-target regular moment map
 :label: thm:regular-moment-map-compact-target
@@ -293,7 +293,7 @@ The factor $2+tP$ prevents using the whole covariance window without checking th
 
 The imports use the pinned version-1 preprints [@Letwin2026QuadraticKLS] (arXiv:2607.24164v1) and [@ChenKlartag2026SharpThinShell] (arXiv:2607.23307v1). Source version and publication history are distinct from verification of an individual statement in this manuscript; the displayed badges and their proof links record the latter.
 
-For Letwin, [](#thm:letwin-moment-map) corresponds to source Theorem 2.5 and [](#thm:letwin-qcts) to Theorem 1.2. The proof must transform the third tensor and the fixed matrix together, justify integration on the noncompact source before separating positive terms, and pass from regular targets to general laws through polynomial moments. These are the analytic steps behind the outline above. The additional variance-transfer argument above extracts source Theorem 1.1 as [](#thm:letwin-kls), with its time restriction made explicit. Section [](#sec:covariance-tech) develops the separate consequence for fixed-time covariance moments on a dimension-dependent window.
+For Letwin, [](#thm:letwin-moment-map) corresponds to source Theorem 2.5 and [](#thm:letwin-qcts) to Theorem 1.2. The proof must transform the third tensor and the fixed matrix together, justify integration on the noncompact source before separating positive terms, and pass from regular targets to general laws through polynomial moments. These are the analytic steps behind the outline above. The additional variance-transfer argument above extracts source Theorem 1.1 as [](#thm:letwin-kls), with its time restriction made explicit. Chapter [](#sec:covariance-tech) develops the separate consequence for fixed-time covariance moments on a dimension-dependent window.
 
 For Chen–Klartag, the three imports correspond to source Theorems 1.5, 1.1 and 1.2, with the convex-body clause supplied by Corollary 1.3. From the Hessian estimate, orthogonal projection of the centered Hessian entries onto the coordinate functions gives the third-tensor bound by Bessel's inequality. The Stein identity and the negative-Sobolev inequality give the radial variance bound. Approximation transfers these polynomial moment conclusions; it does not assert convergence of the Hessian itself. The full third-tensor norm here is distinct from the directional parameter in [](#prop:letwin-kappa).
 
@@ -310,4 +310,4 @@ The bibliography distinguishes these preprint sources from the published bound [
 
 so KLS would follow from $\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2$. The identity $\E\tau_\mu=I$ of [](#eq:mean-hessian-identity) is *not* sufficient for this, because $\tau_\mu(X)$ can correlate with $\nabla f(X)$. Letwin controls a deterministic $B$; the missing theorem must handle an $X$-dependent matrix or direction field.
 
-**Where this family enters the four approaches.** It supplies two of them. The moment-map approach (Section [](#sec:moment-map-cmh)) attacks the gap above head-on, replacing constant multipliers by test-dependent Haar fields, and its endpoint — the target inequality $\mathrm{CMH}(4)$ for the constant $\CMH$, which everything in that approach serves to prove — is defined in these coordinates. The fixed-eigenfunction approach consumes the family's quadratic control as the estimate it feeds its whitened posterior tensor to. The fixed-matrix bound ([](#thm:letwin-moment-map)) is therefore the single literature input both approaches are trying to make adaptive.
+**Where this family meets the alternative mechanisms.** It supplies two of them. The moment map (Chapter [](#sec:moment-map-cmh)) attacks the gap above head-on, replacing constant multipliers by test-dependent Haar fields, and its endpoint — the target inequality $\mathrm{CMH}(4)$ for the constant $\CMH$, which everything in that mechanism serves to prove — is defined in these coordinates. The fixed eigenfunction consumes the family's quadratic control as the estimate it feeds its whitened posterior tensor to. The fixed-matrix bound ([](#thm:letwin-moment-map)) is therefore the single literature input both mechanisms are trying to make adaptive.

@@ -6,14 +6,17 @@ the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.
 
 The Kannan–Lovász–Simonovits conjecture — the dimension-free Poincaré bound
 $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — was proved twice on
-4 October 2026: by Song–Zhang, in the
+4 October 2026: by Bizeul–Klartag–Lehec
+([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)), and by Song–Zhang, in the
 [second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
-[first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound, and by
-Bizeul–Klartag–Lehec ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)). This
-repository is a MyST manuscript that reconstructs, checks and compares the two proofs, surveys
-the methods that led to them, and develops four approaches whose questions remain open after
-KLS (a deterministic moment-map inequality, fixed-eigenfunction and fixed-cut stochastic
-localization, conditional-fiber frames). It also holds the record of the **sustained
+[first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound and the
+spectral criterion both proofs use. This repository is a MyST manuscript that surveys the
+methods that led to KLS; reconstructs and checks the first version of Song–Zhang, then the two
+proofs, and compares them; says what the theorem gives and what remains of the question of its
+constant; and develops three alternative mechanisms for the Poincaré bound whose questions
+remain open after KLS (a deterministic moment-map inequality, a fixed eigenfunction followed
+through stochastic localization, conditional-fiber frames), with the fixed-cut localization
+argument kept as an archive of its obstructions and counterexamples. It also holds the record of the **sustained
 conjecture search** that produced it. Proofs here are checked by independent agent reviews,
 which is distinct from journal refereeing; the ledger, not this file, is the source of truth
 for what has been certified.
@@ -26,7 +29,7 @@ Start every session that edits the repository by reading it.
 
 | path | holds |
 |---|---|
-| [`modules/`](modules/) | the manuscript, the text a reader reads: every claim as a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
+| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the two proofs and their comparison (`07`–`11`), KLS after its proofs and the map of alternative mechanisms (`12`–`13`), the three alternative mechanisms (`14`–`21`), shared technical foundations and glossary (`22`–`26`), the fixed-cut archive (`27`–`37`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
 | [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
 | [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
 | [`research/reviews/`](research/reviews/) | independent proof reviews |

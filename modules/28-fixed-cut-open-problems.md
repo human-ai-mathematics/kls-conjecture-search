@@ -6,14 +6,14 @@ numbering:
 (sec:open)=
 # The fixed cut: the remaining problems
 
-What remains of the fixed-cut approach is a small set of precise problems, together with the obstructions that shaped them. We state the problems in decreasing order of strength.
+What remains of the fixed-cut argument is a small set of precise problems, together with the obstructions that shaped them. They belong to the archive: none is needed for KLS, now proved, and they are stated for the difficulty each isolates. The operator-to-trace upgrade below has a counterpart among the alternative mechanisms — the linear test of the moment map asks for an operator bound where only a trace bound is known (Section [](#subsec:gate-zero)) — and the counterexamples of this chapter, [](#prop:weighted-spectator-obstruction) first, constrain any argument that follows a set through localization. We state the problems in decreasing order of strength.
 
 :::{prf:conjecture} Operator-to-trace upgrade; tight-prefix Carleson
 :label: conj:trace-upgrade
 [](#ass:tight-prefix-carleson) holds: the unconditional per-direction Carleson estimate ([](#cor:per-direction)) upgrades to the trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero, with damping coefficient $\alpha<1$.
 :::
 
-By [](#cor:tight-window-consumption), this prefix form on the tight window is exactly what the argument consumes; the stronger every-interval estimate [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Section [](#sec:qcts) ([](#rem:projection-ceiling)) bears on the obvious proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. A proof of the dynamic upgrade must therefore use cut-specific structure and covariance occupation. Its restriction to products is examined in [](#rem:product-stress-test); a family of product cuts violating the prefix form for every choice of constants would refute it.
+By [](#cor:tight-window-consumption), this prefix form on the tight window is exactly what the argument consumes; the stronger every-interval estimate [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Chapter [](#sec:qcts) ([](#rem:projection-ceiling)) bears on the obvious proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. A proof of the dynamic upgrade must therefore use cut-specific structure and covariance occupation. Its restriction to products is examined in [](#rem:product-stress-test); a family of product cuts violating the prefix form for every choice of constants would refute it.
 
 :::{prf:lemma} Scale-weighted all-cut source budget
 :label: lem:time-weighted-source
@@ -131,7 +131,7 @@ $$
 This is exactly the stable Stein-trace clause of [](#ass:weighted-package), considered as an independent analytic ingredient.
 :::
 
-Taken alone, this clause neither repairs that package nor implies KLS: it needs a companion propagation statement that survives the spectator products. The intrinsic quadratic-chaos input is [](#thm:letwin-qcts). The mechanism of Section [](#sec:jacobi) needs in addition a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled ([](#conj:almost-stability-gap)). [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#conj:trace-upgrade), and [](#conj:product-alignment) is asserted.
+Taken alone, this clause neither repairs that package nor implies KLS: it needs a companion propagation statement that survives the spectator products. The intrinsic quadratic-chaos input is [](#thm:letwin-qcts). The mechanism of Chapter [](#sec:jacobi) needs in addition a localization-uniform quantitative almost-stability trace theorem for the fixed cut, modulo tangential Jacobi zero modes and with all Reilly boundary terms controlled ([](#conj:almost-stability-gap)). [](#prop:two-tail) rules out a slice-wise shortcut. No implication between this statement, [](#conj:trace-upgrade), and [](#conj:product-alignment) is asserted.
 
 :::{prf:remark} A shared dynamic occupation problem, and a missing geometric bridge
 :label: rem:trace-upgrade-unification
@@ -213,7 +213,7 @@ for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)
 (subsec:effective-rank)=
 ## An effective rank in place of the soft maximum
 
-In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — would convert $\kappa_n=O(1)$ directly into $\CP=O(1)$. The interface functional $\Xi_T(\mu)$ of [](#eq:interface-def), evaluated in Section [](#sec:bootstrap), is the fixed cut's version of this question, and [](#conj:taming) is the corresponding statement. Section [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).
+In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — would convert $\kappa_n=O(1)$ directly into $\CP=O(1)$. The interface functional $\Xi_T(\mu)$ of [](#eq:interface-def), evaluated in Chapter [](#sec:bootstrap), is the fixed cut's version of this question, and [](#conj:taming) is the corresponding statement. Chapter [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).
 
 ## Where to start
 
@@ -228,7 +228,7 @@ In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes 
 
 The quantitative comparison is between [](#thm:letwin-kls), giving $C_{\mathrm P,n}\lesssim\sqrt{\log n}$, and [](#cor:dichotomy), whose geometric antecedent would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. The latter uses the published covariance window of [](#cor:KI-discharged); it does not need the longer $c/\log n$ window. Letwin's dimension-free quadratic-chaos estimate and the longer covariance window enter through [](#thm:letwin-qcts) and [](#thm:V2-window), respectively.
 
-The fixed-cut analysis separates the stochastic identities (Sections [](#sec:carleson) and [](#sec:mass-martingale)), the Stein dictionary and its operator-to-trace gap (Section [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Section [](#sec:excess)). The near-worst bootstrap in Section [](#sec:bootstrap) connects these quantities to the covariance estimates of Section [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Sections [](#sec:jacobi) and [](#sec:models).
+The fixed-cut analysis separates the stochastic identities (Chapters [](#sec:carleson) and [](#sec:mass-martingale)), the Stein dictionary and its operator-to-trace gap (Chapter [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Chapter [](#sec:excess)). The near-worst bootstrap in Chapter [](#sec:bootstrap) connects these quantities to the covariance estimates of Chapter [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Chapters [](#sec:jacobi) and [](#sec:models).
 
 The all-cut estimate ([](#ass:all-cut-carleson)) and the absolute-scale completion ([](#ass:absolute-geometric-completion)) are hypotheses, and are stated as such. The spectator products of [](#prop:weighted-spectator-obstruction) violate the literal weighted package ([](#ass:weighted-package)) and [](#conj:weighted-excess-rate); the unweighted spectator products of [](#prop:spectator-excess-rate-obstruction) separately rule out the package's uniform superlinear remainder. The conditional implication from that package to KLS ([](#thm:intro-weighted)) is kept so that a reader can see what the package would have given. The problems this approach turns on are [](#conj:trace-upgrade), the trace and bootstrap statements [](#conj:stein-weighted)–[](#conj:splitting), and the formulation of a tensor-stable replacement.
 

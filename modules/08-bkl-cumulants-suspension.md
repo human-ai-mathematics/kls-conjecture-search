@@ -6,6 +6,16 @@ numbering:
 (sec:bkl-proof)=
 # Cumulants, suspension and the BKL proof
 
+**What to retain.** The cumulants of an isotropic log-concave law — the
+Taylor coefficients of the logarithm of its Laplace transform — satisfy
+$\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ with
+$K$ independent of the dimension: up to a geometric factor, the factorial
+growth already forced by the exponential law on the line. Suspension then encodes an arbitrary test
+function as an extra coordinate of a larger log-concave law, so the bound
+on linear observables becomes the exponential Appell coefficient bound for
+every function, which by the spectral criterion of the first version of
+Song–Zhang is KLS.
+
 Bizeul, Klartag and Lehec (BKL) give a proof of KLS in their preprint of
 4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]. This chapter explains
 its mechanism: the analytic criterion, the cumulant induction and suspension.
@@ -16,16 +26,13 @@ The decisive change is to estimate cumulants of every order and then encode
 an arbitrary test function in an additional coordinate of a log-concave
 measure. Uniformity in dimension allows this enlarged measure to use the
 same cumulant bound. The resulting estimate is exactly the exponential
-Appell coefficient bound identified in [](#prop:sz-exponential-coefficients-equivalence).
-Identifying that end point did not provide the mechanism that establishes it.
+Appell coefficient bound of [](#prop:sz-exponential-coefficients-equivalence).
 
 The second version of Song–Zhang, deposited the same day and presented in
 the next chapter, [](#sec:sz-v2-proof), closes the argument differently,
-through repeated refinement. BKL cite the first
-version of Song–Zhang and use its spectral mechanism; the two proofs share
-that foundation. What each reconstruction uses and excludes is collected in
-the note on provenance of Section [](#subsec:proofs-provenance), and the two
-proofs are compared in Chapter [](#sec:kls-synthesis).
+through repeated refinement from the same spectral foundation. The two proofs
+are compared, and what each reconstruction uses is listed, in Chapter
+[](#sec:kls-synthesis).
 
 ## A one-dimensional calibration
 
@@ -318,10 +325,9 @@ by scalar Poincaré stability. This is the BKL argument.
 ## Consequences for the earlier questions
 
 The exponential estimate also supplies the initialization bound used in the
-older polynomial iteration, without a curvature-profile premise. The consequence
-[](#cor:bkl-uniform-conditional-initialization) keeps its BKL provenance:
-recovering KLS from it through that iteration is not an independent proof
-(Section [](#subsec:proofs-provenance)).
+first-version iteration of Chapter [](#sec:polynomial-curvature), without a
+curvature-profile premise. Since that bound is already of KLS strength, feeding
+it back into the iteration gives no second proof.
 
 :::{prf:corollary} Uniform conditional initialization from BKL
 :label: cor:bkl-uniform-conditional-initialization

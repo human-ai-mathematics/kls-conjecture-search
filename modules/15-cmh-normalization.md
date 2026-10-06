@@ -4,17 +4,17 @@ numbering:
 ---
 
 (sec:cmh-normalization)=
-# The moment map, normalization layer: CMH made precise, its Hodge content, and gate zero
+# The moment map, normalization layer: CMH made precise, its Hodge content, and the linear test
 
-Section [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#rem:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This section does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
+Chapter [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#rem:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This chapter does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
 
 - an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison));
 
-- a necessary linear-sector condition, *gate zero*, which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
+- a necessary condition, the *linear test* — the inequality tested on linear functions only, called *gate zero* in the statements of [](#cor:gate-zero-third-moment) and [](#prop:cone-linear-sector) — which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
 
-- an exact resolution of that sector. The gate matrix's quadratic form splits as one plus a quarter of the squared directional third moment plus a named high-mode remainder ([](#lem:linear-sector-third-moment)), so any gate-zero constant already contains a directional third-moment bound ([](#cor:gate-zero-third-moment)) and the sharp form is at least as strong as the sharp third-moment estimate. The spectral resolution of the three gate matrices that the anisotropic-bootstrap approach works from is [](#lem:cmh-linear-spectral-resolution).
+- an exact resolution of that sector. The gate matrix's quadratic form splits as one plus a quarter of the squared directional third moment plus a named high-mode remainder ([](#lem:linear-sector-third-moment)), so any constant in the linear test already contains a directional third-moment bound ([](#cor:gate-zero-third-moment)) and the sharp form is at least as strong as the sharp third-moment estimate. The spectral resolution of the three gate matrices that the anisotropic-bootstrap approach works from is [](#lem:cmh-linear-spectral-resolution).
 
-Throughout, $\mu$ is centered, full-dimensional and log-concave with covariance $\Sigma=\Cov_\mu\succ0$, and $\varphi$, $\nu$, $H$ are the moment-map data of [](#eq:moment-measure)–[](#eq:MA) in Section [](#sec:family-moment-map), transported to target coordinates as in [](#eq:stein-kernel-def). Regularity is assumed only to justify pointwise calculation; Appendix-level conventions for the weighted divergence, the closed forms, and the affine covariance are collected in §[](#subsec:cmh-conventions).
+Throughout, $\mu$ is centered, full-dimensional and log-concave with covariance $\Sigma=\Cov_\mu\succ0$, and $\varphi$, $\nu$, $H$ are the moment-map data of [](#eq:moment-measure)–[](#eq:MA) in Chapter [](#sec:family-moment-map), transported to target coordinates as in [](#eq:stein-kernel-def). Regularity is assumed only to justify pointwise calculation; Appendix-level conventions for the weighted divergence, the closed forms, and the affine covariance are collected in §[](#subsec:cmh-conventions).
 
 (subsec:cmh-definition)=
 ## The Stein generator and the CMH constant
@@ -176,7 +176,7 @@ The identity does *not* show that this channel is nonzero for a CMH extremizing 
 The product formula below shows that products of one-sided exponentials saturate $\mathrm{CMH}(4)$ with zero slack. [](#cor:cmh-product-saturation) therefore turns the possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
 
 (subsec:gate-zero)=
-## Gate zero: the necessary linear-sector condition
+## The linear test: the necessary linear-sector condition
 
 Take $g(p)=a\cdot p$ in [](#eq:cmh-constant). Then $D^2g=0$, $L_\mu g=-a\cdot p$, so $\E(L_\mu g)^2=a^\top\Sigma a$ while the numerator is $a^\top\E[H\Sigma^{-1}H]a$. Hence:
 
@@ -192,11 +192,11 @@ Every centered log-concave moment measure satisfies
 equivalently $\E H^2\preceq4\Id$ in isotropic position.
 :::
 
-This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole approach: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
+This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole mechanism: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
 
-:::{prf:remark} Gate zero is a trace-upgrade problem
+:::{prf:remark} The linear test is a trace-upgrade problem
 :label: rem:gate-zero-trace-upgrade
-[](#thm:chen-klartag-moment-hessian) gives $\E_\nu\norm{H}_{\HS}^2\le2n$, that is $\Tr(\E H^2)\le2n$: the *average* eigenvalue of $\E H^2$ is already at most $2$ in isotropic position. Gate zero asks for the *largest* eigenvalue to be at most $4$. It is therefore an operator-to-trace upgrade carrying a factor-$2$ budget.
+[](#thm:chen-klartag-moment-hessian) gives $\E_\nu\norm{H}_{\HS}^2\le2n$, that is $\Tr(\E H^2)\le2n$: the *average* eigenvalue of $\E H^2$ is already at most $2$ in isotropic position. The linear test asks for the *largest* eigenvalue to be at most $4$. It is therefore an operator-to-trace upgrade carrying a factor-$2$ budget.
 :::
 
 The trace bound is sharp — products of centered exponentials give $\Tr(\E H^2)=2n$ exactly — so the constant $4$ in [](#eq:gate-zero) is not the natural one for the linear sector. The natural statement is the operator form of the Chen–Klartag inequality.
@@ -260,7 +260,7 @@ and consequently
 Equivalently, $\E_\nu[\partial_{ij}\varphi\,\partial_k\varphi]=\tfrac12\,\E_\mu[X_iX_jX_k]$; when moreover $\varphi\in C^3$ with $D^3\varphi\in L^1(\nu)$, this says that the gap-mode coefficient tensor $\E_\nu[\partial_{ijk}\varphi]$ of [](#lem:cmh-linear-spectral-resolution) is one half of the third-moment tensor.
 :::
 
-The identity $\E_\nu[\partial_{ijk}\varphi]=\tfrac12\E_\mu[X_iX_jX_k]$ is Lemma 3.7 of [@ChenKlartag2026SharpThinShell], and the orthogonal decomposition above is the exact form of the Bessel step in the proof of their Theorem 1.2; what is added here is the directional statement with the remainder $v_a$ named. The compact-target regular class of [](#thm:regular-moment-map-compact-target) satisfies the hypothesis, since its Hessian is bounded [@Klartag2013MomentMeasures]; so does every exponential cone measure of Section [](#subsec:cmh-cones), whose kernel [](#eq:cone-stein-kernel) is the Gamma radial variable times a matrix bounded by the same result applied to the base. For a symmetric $\mu$ the third moment vanishes and the entire gate-zero content is the high-mode term $\E\abs{v_a}^2$; for a product of centered exponentials the high-mode term vanishes and the entire content is the third moment.
+The identity $\E_\nu[\partial_{ijk}\varphi]=\tfrac12\E_\mu[X_iX_jX_k]$ is Lemma 3.7 of [@ChenKlartag2026SharpThinShell], and the orthogonal decomposition above is the exact form of the Bessel step in the proof of their Theorem 1.2; what is added here is the directional statement with the remainder $v_a$ named. The compact-target regular class of [](#thm:regular-moment-map-compact-target) satisfies the hypothesis, since its Hessian is bounded [@Klartag2013MomentMeasures]; so does every exponential cone measure of Section [](#subsec:cmh-cones), whose kernel [](#eq:cone-stein-kernel) is the Gamma radial variable times a matrix bounded by the same result applied to the base. For a symmetric $\mu$ the third moment vanishes and the entire content of the linear test is the high-mode term $\E\abs{v_a}^2$; for a product of centered exponentials the high-mode term vanishes and the entire content is the third moment.
 
 :::{prf:corollary} The linear test controls the directional third moment
 :label: cor:gate-zero-third-moment
@@ -275,18 +275,18 @@ $$
 In particular, on any class of such measures with $\E\tau^2\preceq c\,\Id$, every directional third moment satisfies $\norm{T_3(a)}_{\HS}\le2\sqrt{c-1}$: gate zero [](#eq:gate-zero) gives $2\sqrt3$ and the sharp form [](#eq:gate-zero-sharp) gives $2$, which products of centered exponentials attain. Conversely, any isotropic law in the class with $\norm{T_3(a)}_{\HS}>2\sqrt3$ for some unit $a$ refutes gate zero.
 :::
 
-Summing the corollary over an orthonormal basis recovers $\norm{T_3(\mu)}_{\HS}^2\le4(\Tr\E\tau^2-n)\le4n$, the chain in the proof of Theorem 1.2 of [@ChenKlartag2026SharpThinShell]. [](#cor:gate-zero-third-moment) places gate zero relative to the literature input it does not use: gate zero at constant $c$ contains a directional third-moment bound at $2\sqrt{c-1}$, so any proof of [](#eq:gate-zero-sharp) proves a sharper constant than [](#thm:letwin-qcts) supplies, and any proof of [](#eq:gate-zero) must at least reproduce a bound of that type. The reverse channel is what makes the corollary a falsification tool: it is a lower bound on the gate matrix that needs no moment map, only third moments.
+Summing the corollary over an orthonormal basis recovers $\norm{T_3(\mu)}_{\HS}^2\le4(\Tr\E\tau^2-n)\le4n$, the chain in the proof of Theorem 1.2 of [@ChenKlartag2026SharpThinShell]. [](#cor:gate-zero-third-moment) places the linear test relative to the literature input it does not use: the linear test at constant $c$ contains a directional third-moment bound at $2\sqrt{c-1}$, so any proof of [](#eq:gate-zero-sharp) proves a sharper constant than [](#thm:letwin-qcts) supplies, and any proof of [](#eq:gate-zero) must at least reproduce a bound of that type. The reverse channel is what makes the corollary a falsification tool: it is a lower bound on the gate matrix that needs no moment map, only third moments.
 
 :::{prf:remark} Relation to the shared trace-upgrade difficulty
-Gate zero belongs to the same difficulty family as [](#conj:trace-upgrade), the high-rank part of [](#conj:stein-weighted), and [](#conj:product-alignment); no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: gate zero is cheap to *test* on a model and is expected to be as hard to *prove* as the rest of the program.
+The linear test belongs to the same difficulty family as [](#conj:trace-upgrade), the high-rank part of [](#conj:stein-weighted), and [](#conj:product-alignment); no equivalence is asserted, exactly as in [](#rem:trace-upgrade-unification). The practical consequence is a split verdict: the linear test is cheap to *check* on a model and is expected to be as hard to *prove* as the rest of the moment-map argument.
 :::
 
 % Agent note: research/lib/README.md records the numerical channel for testing gate zero on models.
 
 (subsec:gate-zero-countermodel)=
-## Why the constant-matrix estimate cannot supply gate zero
+## Why the constant-matrix estimate cannot supply the linear test
 
-In isotropic position define the positive self-adjoint superoperator $\calT(B)=\E[HBH]$ on symmetric matrices with the Hilbert–Schmidt inner product. [](#thm:letwin-moment-map) says $\calT\preceq2\,\Id$; gate zero asks instead for $\calT(\Id)=\E H^2\preceq4\,\Id$. The two differ by the order of the noncommuting factors, and the gap is exactly one commutator:
+In isotropic position define the positive self-adjoint superoperator $\calT(B)=\E[HBH]$ on symmetric matrices with the Hilbert–Schmidt inner product. [](#thm:letwin-moment-map) says $\calT\preceq2\,\Id$; the linear test asks instead for $\calT(\Id)=\E H^2\preceq4\,\Id$. The two differ by the order of the noncommuting factors, and the gap is exactly one commutator:
 
 ```{math}
 :label: eq:static-commutator
@@ -341,10 +341,10 @@ Finally $e_1^\top\E H^2e_1=1+d\abs z^2=1+d$, and $1+d>4$ is equivalent to $m^2>9
 
 :::{prf:remark} Scope of the countermodel
 :label: rem:countermodel-scope
-The matrices above are *not* claimed to be moment-map Hessians; no Monge–Ampère, Codazzi, or Hessian-compatibility condition is imposed. The proposition proves only that positivity, the normalization $\E H=\Id$, and the constant-matrix estimate [](#eq:letwin-matrix) do not imply gate zero by matrix algebra. Any proof of [](#eq:gate-zero) must therefore consume differential moment-map structure. Equivalently, by [](#eq:static-commutator), it must control $\E\norm{[B,H]}_{\HS}^2$, and [](#prop:letwin-not-gate-zero) exhibits an admissible law where that quantity is maximal on the scalar ray. This is the same obstruction as [](#conj:mm-square-root-commutator) in its most elementary, static, finite-dimensional form.
+The matrices above are *not* claimed to be moment-map Hessians; no Monge–Ampère, Codazzi, or Hessian-compatibility condition is imposed. The proposition proves only that positivity, the normalization $\E H=\Id$, and the constant-matrix estimate [](#eq:letwin-matrix) do not imply the linear test by matrix algebra. Any proof of [](#eq:gate-zero) must therefore consume differential moment-map structure. Equivalently, by [](#eq:static-commutator), it must control $\E\norm{[B,H]}_{\HS}^2$, and [](#prop:letwin-not-gate-zero) exhibits an admissible law where that quantity is maximal on the scalar ray. This is the same obstruction as [](#conj:mm-square-root-commutator) in its most elementary, static, finite-dimensional form.
 :::
 
-:::{prf:remark} Gate zero on genuine moment maps
+:::{prf:remark} The linear test on genuine moment maps
 :label: rem:gate-zero-dichotomy
 Decide [](#eq:gate-zero). Either prove $\E[H\Sigma^{-1}H]\preceq4\Sigma$ for every log-concave moment measure using differentiated Monge–Ampère structure — which by [](#rem:countermodel-scope) means a dimension-free bound on the static commutator $\E\norm{[B,H]}_{\HS}^2$ for the relevant multiplier class — or exhibit a genuine moment map with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$, which refutes $\mathrm{CMH}(4)$ without refuting [](#conj:kls).
 :::

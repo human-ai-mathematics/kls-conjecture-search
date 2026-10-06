@@ -6,11 +6,11 @@ numbering:
 (sec:spectral-approach)=
 # The fixed eigenfunction: following one eigenfunction through localization
 
-## The approach at a glance
+## The mechanism at a glance
 
 **The idea.** Follow a fixed first eigenfunction, rather than a cut, through stochastic localization, and keep its tensor orientation alive in the posterior covariance.
 
-**What it would add.** A localization mechanism that ignores covariance spikes: the object followed is one eigenfunction, which does not see spikes in directions it does not use, so the obstruction [](#prop:covariance-spike) does not apply to it. It would give KLS through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#conj:mm-spectral-occupation):
+**What it would add.** A localization mechanism that ignores covariance spikes: the object followed is one eigenfunction, which does not see spikes in directions it does not use, so the obstruction [](#prop:covariance-spike) does not apply to it. The mechanism reaches the Poincaré bound through one implication, [](#prop:spectral-sufficiency), whose hypothesis is the occupation estimate [](#conj:mm-spectral-occupation):
 
 $$
 \text{fixed-eigenfunction full-damping occupation}
@@ -18,7 +18,7 @@ $$
 \text{KLS}.
 $$
 
-In words: as localization proceeds, the eigenfunction feeds a *source* into its covariance with the coordinates and the covariance of the localized measure *damps* it. The *occupation* is the source accumulated over time, $\E\int_0^t\norm{H_s}_{\HS}^2\dd s$, and *full damping* means that the estimate may charge it against the whole damping term, with coefficient one, rather than against a fraction of it as the fixed cut must. The implication is a theorem about a hypothesis; the hypothesis [](#conj:mm-spectral-occupation) is not established here, and KLS itself is proved by other means (Chapters [](#sec:sz-v2-proof) and [](#sec:bkl-proof)).
+In words: as localization proceeds, the eigenfunction feeds a *source* into its covariance with the coordinates and the covariance of the localized measure *damps* it. The *occupation* is the source accumulated over time, $\E\int_0^t\norm{H_s}_{\HS}^2\dd s$, and *full damping* means that the estimate may charge it against the whole damping term, with coefficient one, rather than against a fraction of it as the fixed cut must. The implication is proved; its hypothesis [](#conj:mm-spectral-occupation) is not settled here.
 
 % Agent note: prop:spectral-sufficiency is proved with a non-empty `assumes` list, i.e.
 % applicability-blocked in the ledger; its ledger node says so.
@@ -29,15 +29,15 @@ In words: as localization proceeds, the eigenfunction feeds a *source* into its 
 
 **What blocks it.** [](#conj:mm-spectral-occupation) asks for the full-damping source estimate on a universal time interval, uniformly on regular approximants, without losing tensor/covariance alignment under unwhitening. The stopped estimate alone does not control the source after covariance exits. Nor does the window implication [](#prop:mm-window-occupation): its small-gap hypothesis $\lambda\le3/(8K_n)$ is met by no measure, since [](#thm:klartag-logn) gives $\lambda\ge1/K_n$, and its remaining conclusion, $\CP\le C\log^2n$, is weaker than the published bound (Section [](#subsec:spectral-window-chain)).
 
-**What rules out the obvious variants.** No variant of this approach is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the approach keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
+**What rules out the obvious variants.** No variant of this mechanism is known to fail, which reflects how little it has been explored rather than its strength. The binding constraint is external: [](#prop:covariance-spike) forbids the uniform operator-norm bound that a coarser version of this argument would want, which is precisely why the mechanism keeps the eigenfunction's tensor rather than the covariance's top eigenvalue.
 
 **What would settle it.** [](#conj:mm-spectral-occupation) gives KLS through [](#prop:spectral-sufficiency); a family of measures on which unwhitening necessarily loses alignment would test the limits of this mechanism. The stopped-source argument uses [](#thm:letwin-qcts); Section [](#subsec:synthesis-caution) describes the scope of that input.
 
-**Where to read.** Conceptual prelude: Section [](#sec:localization-prelude) — this approach shares it entirely with the fixed cut and differs only in the object followed. Moment-map control it uses: Section [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Section [](#sec:notation) on.
+**Where to read.** Conceptual prelude: Chapter [](#sec:localization-prelude) — this mechanism shares it entirely with the fixed cut and differs only in the object followed. Moment-map control it uses: Chapter [](#sec:family-moment-map). Apparatus: the shared technical foundations, from Chapter [](#sec:notation) on.
 
-**The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Section [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
+**The idea, in more detail.** Follow a first eigenfunction — rather than a cut — through stochastic localization, and apply the moment-map quadratic control of Chapter [](#sec:family-moment-map) to its whitened posterior covariance tensor. The target is an absorptive, function-aware source/damping estimate over a universal amount of localization time.
 
-This approach attacks directly the spectral object that *defines* KLS, and keeps the tensor orientation that a global operator-norm bound discards (see *What rules out the obvious variants* above).
+This mechanism attacks directly the spectral object that *defines* KLS, and keeps the tensor orientation that a global operator-norm bound discards (see *What rules out the obvious variants* above).
 
 % Agent note: the approach is live, secondary. Its entry points are the approaches of
 % research/program/portfolio.yaml; each approach's `objective` states what closing it delivers.
@@ -65,7 +65,7 @@ The exact evolution is
 \dd g_t=H_t\dd W_t-A_tg_t\dd t .
 ```
 
-So $\norm{H_t}_{\HS}^2$ is the *source* for $\abs{g_t}^2$ and $2g_t^TA_tg_t$ is its *exact damping*. This is the fixed-function analogue of the two-color Riccati identity of Section [](#sec:riccati): source and damping are separated exactly, with no inequality spent.
+So $\norm{H_t}_{\HS}^2$ is the *source* for $\abs{g_t}^2$ and $2g_t^TA_tg_t$ is its *exact damping*. This is the fixed-function analogue of the two-color Riccati identity of Chapter [](#sec:riccati): source and damping are separated exactly, with no inequality spent.
 
 (subsec:spectral-whitened)=
 ## What the July 2026 input gives, and what it leaves
@@ -77,7 +77,7 @@ By [](#thm:letwin-qcts), the eigenfunction tensor satisfies the optimal *intrins
 \norm{A_t^{-1/2}H_tA_t^{-1/2}}_{\HS}^2\le8\,\Var_{\mu_t}(f).
 ```
 
-This is the exact analogue, for the fixed-eigenfunction object, of the static quadratic-chaos input that Section [](#sec:qcts) supplies for the fixed-cut object.
+This is the exact analogue, for the fixed-eigenfunction object, of the static quadratic-chaos input that Chapter [](#sec:qcts) supplies for the fixed-cut object.
 
 Crude unwhitening of [](#eq:whitened-tensor) — multiplying back by $A_t^{1/2}$ on both sides — leaves a factor $\lmax(A_t)^2$, and hence exactly the universal-time dynamic alignment problem that Section [](#subsec:sl-where-the-log-lives) identified as the residual cost. So this approach does not escape the difficulty by importing the preprint; it relocates it to an object with more structure.
 
@@ -295,17 +295,17 @@ A second natural first attempt fails outright: a direct unweighting of the posit
 
 The obstructions proved elsewhere in this document are scoped, and it matters which of them bind here.
 
-- The projection ceiling of Section [](#sec:qcts) does *not* obstruct this approach: the moment map uses information beyond radial and projection tests.
+- The projection ceiling of Chapter [](#sec:qcts) does *not* obstruct this approach: the moment map uses information beyond radial and projection tests.
 
-- The single-coordinate product-budget result of Section [](#sec:product-stress) ([](#cor:single-coordinate-cuts)) is specific to a fixed-cut localization counterexample and imposes no no-go here.
+- The single-coordinate product-budget result of Chapter [](#sec:product-stress) ([](#cor:single-coordinate-cuts)) is specific to a fixed-cut localization counterexample and imposes no no-go here.
 
 - A universal Lipschitz Gaussian transport is too strong for exponential tails ([](#rem:no-lipschitz-transport)); the weaker expected-Jacobian criterion [](#eq:brownian-derivative) is sufficient for KLS but currently reuses KLS-scale input, so it ranks below the target of this section.
 
-- Classical needles do not preserve the isotropic covariance constraints (Section [](#sec:family-needles)); that is a structural warning, not a theorem excluding all needle arguments.
+- Classical needles do not preserve the isotropic covariance constraints (Chapter [](#sec:family-needles)); that is a structural warning, not a theorem excluding all needle arguments.
 
 :::{prf:remark} Relation to the moment-map approach
 :label: rem:spectral-vs-cmh
-The fixed-eigenfunction and moment-map approaches both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: the fixed eigenfunction keeps stochastic localization and makes the test dependence dynamic, while the moment map (Section [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
+The fixed-eigenfunction and moment-map approaches both consume moment-map information and both must ultimately handle a test-dependent object rather than a constant matrix, which is the shared lesson of Section [](#subsec:mm-audit). They are nonetheless different programs: the fixed eigenfunction keeps stochastic localization and makes the test dependence dynamic, while the moment map (Chapter [](#sec:moment-map-cmh)) is deterministic and makes it geometric, through Haar fields on Schur fibers. Similarity of the residual loss is *not* evidence that the two target statements are equivalent, and no result merges them.
 :::
 
 % Promotion gate (agent note). The control plane promotes conj:mm-spectral-occupation, or admits
