@@ -180,7 +180,7 @@ The product formula below shows that products of one-sided exponentials saturate
 
 Take $g(p)=a\cdot p$ in [](#eq:cmh-constant). Then $D^2g=0$, $L_\mu g=-a\cdot p$, so $\E(L_\mu g)^2=a^\top\Sigma a$ while the numerator is $a^\top\E[H\Sigma^{-1}H]a$. Hence:
 
-:::{prf:conjecture} Gate zero
+:::{prf:conjecture} Linear test of the moment-Hessian inequality
 :label: conj:gate-zero
 Every centered log-concave moment measure satisfies
 
@@ -201,7 +201,7 @@ This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence
 
 The trace bound is sharp — products of centered exponentials give $\Tr(\E H^2)=2n$ exactly — so the constant $4$ in [](#eq:gate-zero) is not the natural one for the linear sector. The natural statement is the operator form of the Chen–Klartag inequality.
 
-:::{prf:conjecture} Sharp gate zero
+:::{prf:conjecture} Sharp linear test of the moment-Hessian inequality
 :label: conj:gate-zero-sharp
 Every centered log-concave moment measure satisfies
 
@@ -262,7 +262,7 @@ Equivalently, $\E_\nu[\partial_{ij}\varphi\,\partial_k\varphi]=\tfrac12\,\E_\mu[
 
 The identity $\E_\nu[\partial_{ijk}\varphi]=\tfrac12\E_\mu[X_iX_jX_k]$ is Lemma 3.7 of [@ChenKlartag2026SharpThinShell], and the orthogonal decomposition above is the exact form of the Bessel step in the proof of their Theorem 1.2; what is added here is the directional statement with the remainder $v_a$ named. The compact-target regular class of [](#thm:regular-moment-map-compact-target) satisfies the hypothesis, since its Hessian is bounded [@Klartag2013MomentMeasures]; so does every exponential cone measure of Section [](#subsec:cmh-cones), whose kernel [](#eq:cone-stein-kernel) is the Gamma radial variable times a matrix bounded by the same result applied to the base. For a symmetric $\mu$ the third moment vanishes and the entire gate-zero content is the high-mode term $\E\abs{v_a}^2$; for a product of centered exponentials the high-mode term vanishes and the entire content is the third moment.
 
-:::{prf:corollary} Gate zero controls the directional third moment
+:::{prf:corollary} The linear test controls the directional third moment
 :label: cor:gate-zero-third-moment
 Under the hypotheses of [](#lem:linear-sector-third-moment), for every unit vector $a$,
 

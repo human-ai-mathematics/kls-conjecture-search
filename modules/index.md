@@ -30,7 +30,7 @@ After the overview come *the literature*, one chapter for each of six families o
 
 ## The four approaches
 
-The approaches below are alternative mechanisms for the Poincaré bound, and each targets a property stronger than KLS. Neither proof of KLS establishes their sufficient conditions: moment-Hessian, occupation and conditional-frame bounds each need their own argument.
+The approaches below are alternative mechanisms for the Poincaré bound. The moment map targets a property stronger than KLS, a deterministic inequality with constant $4$; the fixed eigenfunction and conditional fibers would give KLS by mechanisms different from the two proofs; the fixed cut is kept for what its obstructions teach. Neither proof of KLS establishes their sufficient conditions: moment-Hessian, occupation and conditional-frame bounds each need their own argument.
 
 - **Moment map** — a deterministic second-order inequality for the Hessian of the moment map, which would give KLS with constant $4$ and no stochastic localization: Section [](#sec:moment-map-cmh).
 - **Fixed eigenfunction** — a localization mechanism that follows a first eigenfunction and so ignores covariance spikes in directions it does not use: Section [](#sec:spectral-approach).

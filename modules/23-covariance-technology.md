@@ -36,7 +36,7 @@ $$
 $$
 :::
 
-:::{prf:theorem} Isoperimetric $\log n$ frontier; [@Klartag2023Logarithmic]
+:::{prf:theorem} Isoperimetric $\log n$ bound; [@Klartag2023Logarithmic]
 :label: thm:klartag-logn
 There is a universal constant $C$ such that every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\hstar_n\ge C^{-1}(\log n)^{-1/2}$; by Cheeger's inequality, every such law has $\CP\le C\log n$.
 :::

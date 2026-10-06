@@ -237,12 +237,12 @@ $$
 by conditional application of [](#lem:mm-time-weighted-fixed-source) with $\kappa=\eps+\sigma$ after the strong-Markov restart of the planted localization channel.
 :::
 
-:::{prf:lemma} Small-gap fourth moment from the published frontier
+:::{prf:lemma} Small-gap fourth moment from the published logarithmic bound
 :label: lem:mm-smallgap-fourth-moment
 Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-concave law in dimension $n$ satisfies $\CP\le K_n$. Then every normalized first eigenfunction of a regular isotropic approximant with $\lambda\le 3/(8K_n)$ satisfies $\E f^4\le2$, via the eigen-identity $\lambda\,\E f^4=3\,\E f^2\abs{\nabla f}^2$ and the Poincaré inequality applied to $f^2$.
 :::
 
-:::{prf:proposition} Window occupation and frontier reproduction
+:::{prf:proposition} Window occupation and recovery of the published bound
 :label: prop:mm-window-occupation
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$.
 :::
