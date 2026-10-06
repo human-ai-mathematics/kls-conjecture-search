@@ -6,7 +6,7 @@ numbering:
 (sec:frontier-atlas)=
 # Alternative mechanisms after KLS
 
-The two proofs of KLS (Chapter [](#sec:kls-synthesis)) give a universal constant that neither evaluates, through estimates on polynomials of every degree. This chapter maps three further mechanisms for the Poincaré bound, each developed in its own chapter, by what each would *add* to those proofs: a constant, an object, or a kind of argument that they do not provide. Each would prove KLS again, but none is a way to KLS any more; each is a statement of its own, and the truth of KLS does not prove it. A fourth method, the fixed cut, is kept as an archive for what its obstructions teach.
+The two proofs of KLS (Chapter [](#sec:kls-synthesis)) give a universal constant that neither evaluates, through estimates on polynomials of every degree. This chapter maps three further mechanisms for the Poincaré bound, each developed in its own chapter, by what each would *add* to those proofs: a constant, an object, or a kind of argument that they do not provide. Each would prove KLS again, but none is a way to KLS any more; each is a statement of its own, and no implication known here derives it from KLS. A fourth method, the fixed cut, is kept as an archive for what its obstructions teach.
 
 Everything here is a pointer. The obstacles are explained once, in the overview (Section [](#sec:kls-remaining)); the full development of each mechanism is in its entry chapter; and each statement displays its status where it is stated.
 

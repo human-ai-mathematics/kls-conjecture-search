@@ -8,7 +8,7 @@ numbering:
 
 +++ {"part": "abstract"}
 
-The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure. It is now a theorem, [](#conj:kls): the second version of Song–Zhang proves it through repeated refinement with summable losses, and Bizeul–Klartag–Lehec (BKL) through all-order cumulants, a suspension construction and the spectral criterion of the first version of Song–Zhang, both in preprints of 4 October 2026. This manuscript is a reader's companion to these two proofs, reconstructed, checked and compared here, to the methods that led to them, and to the questions that remain open after KLS; this overview explains the idea of each proof. Besides the proofs, it develops alternative mechanisms that would give KLS by other means or with stronger conclusions: three living ones — the canonical moment-Hessian inequality of the moment map, occupation of a fixed eigenfunction, and resampling along conditional lines — and the localization of a fixed cut, kept as an archive. Their sufficient conditions do not follow from KLS. Every statement displays its status; how it is checked is on the [welcome page](#sec:overview-checking).
+The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure. It is now a theorem, [](#conj:kls): the second version of Song–Zhang proves it through repeated refinement with summable losses, and Bizeul–Klartag–Lehec (BKL) through all-order cumulants, a suspension construction and the spectral criterion of the first version of Song–Zhang, which they prove again in exponential form, both in preprints of 4 October 2026. This manuscript is a reader's companion to these two proofs, reconstructed, checked and compared here, to the methods that led to them, and to the questions that remain open after KLS; this overview explains the idea of each proof. Besides the proofs, it develops alternative mechanisms that would give KLS by other means or with stronger conclusions: three living ones — the canonical moment-Hessian inequality of the moment map, occupation of a fixed eigenfunction, and resampling along conditional lines — and the localization of a fixed cut, kept as an archive. Their sufficient conditions are not known to follow from KLS. Every statement displays its status; how it is checked is on the [welcome page](#sec:overview-checking).
 
 
 +++
@@ -128,7 +128,7 @@ Hence $\CP(\mu)\ge4\Var(\mu)$. This is the worst case on the line: every one-dim
 
 **Products.** The Poincaré constant of a product is the largest Poincaré constant of its factors (tensorization), so a product of $n$ isotropic one-dimensional log-concave laws has $\CP\le4$ in every dimension; [](#prop:products) records the corresponding fact for the Cheeger constant. The cube $[0,1]^n$ and the product of $n$ exponentials are therefore harmless. The conjecture is about everything that is not a product: simplices, cones, balls of non-Euclidean norms, and log-concave measures with no symmetry at all.
 
-No family of log-concave measures is known for which the ratio in [](#eq:kls-affine) grows with $n$. The historical gap was entirely in the upper bound; the two proofs close it with a dimension-free bound.
+By the theorem, no family of log-concave measures has the ratio in [](#eq:kls-affine) growing with $n$, and none had been found before. The historical gap was entirely in the upper bound; the two proofs close it with a dimension-free bound.
 
 (sec:kls-known)=
 ## What was known
@@ -162,8 +162,8 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 | 2023 | $O(\sqrt{\log n})$ | $O(\log n)$ | Improved Lichnerowicz plus short-time covariance control [@Klartag2023Logarithmic]. |
 | July 2026, preprint | $O((\log n)^{1/4})$ | $O(\sqrt{\log n})$ | [](#thm:letwin-kls): quadratic Poincaré, $\kappa_n=O(1)$, and the time-restricted spectral bridge [@Letwin2026QuadraticKLS]. |
 | 1 October 2026, preprint (v1) | $O(4^{\log^*(n+2)})$ | $O(16^{\log^*(n+2)})$ | [](#thm:song-zhang-kls): polynomial estimates fed into curvature estimates and back [@SongZhang2026IteratedLogKLS]. |
-| 4 October 2026, preprint (v2) | $O(1)$ | $O(1)$ | The second version of Song–Zhang proves KLS by repeated refinement with summable losses; Chapter [](#sec:sz-v2-proof) [@SongZhang2026ConstantKLS]. |
 | 4 October 2026, preprint | $O(1)$ | $O(1)$ | BKL prove KLS through cumulants and suspension; Chapter [](#sec:bkl-proof) [@BizeulKlartagLehec2026KLS]. |
+| 4 October 2026, preprint (v2) | $O(1)$ | $O(1)$ | The second version of Song–Zhang proves KLS by repeated refinement with summable losses; Chapter [](#sec:sz-v2-proof) [@SongZhang2026ConstantKLS]. |
 
 The authors of both proofs declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:reading-paths).
 
@@ -286,7 +286,7 @@ The two proofs are compared step by step, with what each one gives beyond KLS, i
 (sec:kls-remaining)=
 ## Obstacles for alternative arguments
 
-KLS is proved, and the questions of this section concern other arguments: a proof by a different mechanism — deterministic, or with a sharp constant — or a proof of a property stronger than KLS, such as the moment-Hessian inequality or the occupation estimate of Section [](#sec:overview-results). Three obstacles constrain any such attempt: a pattern that every classical family meets (Section [](#subsec:kls-adaptive-residue)), a counterexample to the most natural repair (Section [](#subsec:kls-spike-obstruction)), and a cheap test that any proposal should pass (Section [](#subsec:kls-tensorization-test)). The quadratic and third-moment bounds of [](#thm:letwin-qcts) and [](#prop:letwin-kappa) are common inputs, but they do not by themselves supply dimension-free estimates.
+KLS is proved, and the questions of this section concern other arguments: a proof by a different mechanism — deterministic, or with a sharp constant — or a proof of a property that implies KLS, such as the moment-Hessian inequality or the occupation estimate of Section [](#sec:overview-results). Three obstacles constrain any such attempt: a pattern that every classical family meets (Section [](#subsec:kls-adaptive-residue)), a counterexample to the most natural repair (Section [](#subsec:kls-spike-obstruction)), and a cheap test that any proposal should pass (Section [](#subsec:kls-tensorization-test)). The quadratic and third-moment bounds of [](#thm:letwin-qcts) and [](#prop:letwin-kappa) are common inputs, but they do not by themselves supply dimension-free estimates.
 
 (subsec:kls-adaptive-residue)=
 ### Fixed and averaged, against adaptive and uniform
@@ -357,7 +357,7 @@ A proposal that fails it is not merely inefficient; it is false at scale, and th
 (sec:overview-results)=
 ## The main results in short
 
-The results fall into three groups: a deterministic inequality, stronger than KLS, and the families where it holds; two further alternative mechanisms for the Poincaré bound, each through an object of its own; and, from the fixed-cut archive, the limits of following a single cut, with the counterexamples that fix them. The idea of each proof is given here; the statements themselves are in the chapters that follow, where each one's status links to its full proof.
+The results fall into three groups: a deterministic inequality that implies KLS, and the families where it holds; two further alternative mechanisms for the Poincaré bound, each through an object of its own; and, from the fixed-cut archive, the limits of following a single cut, with the counterexamples that fix them. The idea of each proof is given here; the statements themselves are in the chapters that follow, where each one's status links to its full proof.
 
 (subsec:overview-cmh)=
 ### A deterministic inequality, sharp on products and Dirichlet laws

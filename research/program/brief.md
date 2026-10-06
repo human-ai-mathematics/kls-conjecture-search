@@ -45,8 +45,8 @@ interchangeable.
 Where the statement is vulnerable is in its conventions, the most common source of an apparent
 contradiction with a quoted result. `rem:psi-convention` fixes the $\psi$/$h$ normalization — an
 exponent quoted from the literature is meaningless without it. `def:qcts` and `def:cmh` fix the
-quadratic-chaos and canonical-moment-Hessian quantities that two of the four approaches are stated
-in.
+quadratic-chaos and canonical-moment-Hessian quantities in which the fixed-cut archive and the
+moment-map mechanism are stated.
 
 ## The exact negation
 

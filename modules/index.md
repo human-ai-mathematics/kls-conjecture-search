@@ -12,7 +12,7 @@ This site is a reader's companion to the two proofs of the Kannan–Lovász–Si
 Proofs reconstructed here by agents are checked by separate reviewer agents. This is distinct from journal peer review or human acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
 :::
 
-The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Two preprints deposited on 4 October 2026 answer it: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and a spectral criterion from the first version of Song–Zhang [@BizeulKlartagLehec2026KLS], and the second version of Song–Zhang, through repeated refinement with summable losses [@SongZhang2026ConstantKLS].
+The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Two preprints deposited on 4 October 2026 answer it: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS], and the second version of Song–Zhang, through repeated refinement with summable losses [@SongZhang2026ConstantKLS].
 
 :::{note} The use of AI in the two proofs
 Both sets of authors declare their use of AI.
@@ -39,7 +39,7 @@ After the overview come *the literature*, one chapter for each of six families o
 
 Each mechanism needs an argument of its own: neither proof of KLS gives its sufficient condition.
 
-- **Moment map** — a deterministic inequality for the Hessian of the moment map, stronger than KLS, which would give the Poincaré bound with constant $4$ and no stochastic localization: Chapter [](#sec:moment-map-cmh).
+- **Moment map** — a deterministic inequality for the Hessian of the moment map, which implies KLS and is not known to be equivalent to it, and which would give the Poincaré bound with constant $4$ and no stochastic localization: Chapter [](#sec:moment-map-cmh).
 - **Fixed eigenfunction** — a localization mechanism that follows a first eigenfunction and so ignores covariance spikes in directions it does not use: Chapter [](#sec:spectral-approach).
 - **Conditional fibers** — an elementary mechanism, a spectral gap for resampling along lines chosen from the measure, resting only on one-dimensional inequalities: Chapter [](#sec:conditional-fiber-frame).
 
