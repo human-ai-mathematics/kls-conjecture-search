@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "9.%s"
+  enumerator: "8.%s"
 ---
 
 (sec:bkl-proof)=
@@ -20,7 +20,7 @@ Appell coefficient bound identified in [](#prop:sz-exponential-coefficients-equi
 Identifying that end point did not provide the mechanism that establishes it.
 
 The second version of Song–Zhang, deposited the same day and presented in
-the preceding chapter, [](#sec:sz-v2-proof), closes the argument differently,
+the next chapter, [](#sec:sz-v2-proof), closes the argument differently,
 through repeated refinement. BKL cite the first
 version of Song–Zhang and use its spectral mechanism; the two proofs share
 that foundation. The reconstruction here does not depend on the estimates of

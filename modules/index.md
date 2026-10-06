@@ -22,11 +22,11 @@ Besides these proofs, the manuscript develops four approaches that would give KL
 Four ways in, depending on what you came for:
 
 - **Discover.** The overview, Section [](#sec:overview), then the comparison of approaches, Section [](#sec:frontier-atlas).
-- **Read the proofs.** Along the development of the polynomial method: the first version of Song–Zhang, polynomial estimates and curvature, Section [](#sec:polynomial-curvature); the second version of Song–Zhang, Section [](#sec:sz-v2-proof); Bizeul–Klartag–Lehec, which builds on the spectral criterion of the first version, Section [](#sec:bkl-proof); then their comparison in the synthesis, Section [](#sec:kls-synthesis).
+- **Read the proofs.** The first version of Song–Zhang, whose spectral criterion both proofs use, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter route from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); then their comparison, Chapter [](#sec:kls-synthesis).
 - **Read the other methods.** The four entry chapters listed below, for this manuscript's own approaches.
 - **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
 
-After the overview come *the literature*, one chapter for each of six families of methods; *polynomial methods and two proofs of KLS*: the first version of Song–Zhang, its second version, then Bizeul–Klartag–Lehec; *the four approaches*, opened by their comparison; *synthesis and perspectives*; *shared technical foundations*, best read where first linked; and an *appendix* holding the technical chapters of the fixed cut. The full proofs come last.
+After the overview come *the literature*, one chapter for each of six families of methods; *two proofs of KLS*: the first version of Song–Zhang, Bizeul–Klartag–Lehec, the second version of Song–Zhang, then their comparison; *after KLS*, the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
 
 ## The four approaches
 
