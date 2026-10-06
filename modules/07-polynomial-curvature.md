@@ -6,7 +6,7 @@ numbering:
 (sec:polynomial-curvature)=
 # Polynomial estimates and curvature
 
-**What to retain.** Bounds on the Appell polynomials of a measure — in each degree, the polynomials adapted to its moments — control its spectral gap, through a first eigenfunction followed by repeated centred gradients; stochastic localization turns a spectral gap back into better polynomial bounds. Composing the two conversions gives $\CP\lesssim16^{\log^*(n+2)}$, and its end point, one exponential base for the coefficients of every degree, is equivalent to KLS ([](#prop:sz-exponential-coefficients-equivalence)). Both proofs of KLS start from this spectral criterion.
+**What to retain.** Bounds on the Appell polynomials of a measure — in each degree, the polynomials adapted to its moments — control its spectral gap, through a first eigenfunction followed by repeated centred gradients; stochastic localization turns a spectral gap back into better polynomial bounds. Composing the two conversions gives $\CP\lesssim16^{\log^*(n+2)}$, and its end point, one exponential base for the coefficients of every degree, is equivalent to KLS ([](#prop:sz-exponential-coefficients-equivalence)). The BKL and Song–Zhang v2 proofs start from this spectral criterion; the BK proof shares its Appell normalization but reaches the spectral gap through its own integration calculus (Chapter [](#sec:bk-proof)).
 
 Song and Zhang’s first-version polynomial–curvature argument [@SongZhang2026IteratedLogKLS] gives the dimension-dependent bound $16^{\log^*(n+2)}$ for every test function. This chapter reconstructs the iteration and locates its losses; Chapter [](#sec:bkl-proof) explains how cumulants and suspension reach its exponential end point by a different argument.
 
@@ -18,7 +18,7 @@ Song and Zhang’s first-version polynomial–curvature argument [@SongZhang2026
 
 **The exponential end point.** One exponential base for the whole Appell hierarchy: $c_k(\nu)\le A^k$, with the same $A$ for every degree $k$, every dimension and every regular isotropic measure $\nu$. By [](#prop:sz-exponential-coefficients-equivalence) this is equivalent to KLS.
 
-**What came next.** Bizeul, Klartag and Lehec (BKL) prove the exponential end point itself, through [](#thm:bkl-tilt-bound) (Chapter [](#sec:bkl-proof)); the second version of the preprint proves KLS by repeated refinement with summable losses (Chapter [](#sec:sz-v2-proof)) [@SongZhang2026ConstantKLS]. The estimates and limitations in this chapter are those of the first version.
+**What came next.** Bizeul, Klartag and Lehec (BKL) prove the exponential end point itself, through [](#thm:bkl-tilt-bound) (Chapter [](#sec:bkl-proof)); the second version of the preprint proves KLS by repeated refinement with summable losses (Chapter [](#sec:sz-v2-proof)) [@SongZhang2026ConstantKLS]; Balasubramanian and Kasiviswanathan (BK) give a third proof, through compatible tensor integration and a direct induction on Appell coefficients (Chapter [](#sec:bk-proof)) [@BalasubramanianKasiviswanathan2026KLS]. The estimates and limitations in this chapter are those of the first version.
 
 **Why the first-version iteration stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ and cannot be kept bounded (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
 

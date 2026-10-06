@@ -5,12 +5,14 @@ the site opens on a short welcome page with reading paths ([`modules/index.md`](
 the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
 The Kannan–Lovász–Simonovits conjecture — the dimension-free Poincaré bound
-$C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — was proved twice on
-4 October 2026: by Bizeul–Klartag–Lehec
+$C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — is now a theorem, with
+three proofs. Two were deposited on arXiv on 4 October 2026: by Bizeul–Klartag–Lehec
 ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)), and by Song–Zhang, in the
 [second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
 [first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound and the
-spectral criterion both proofs use. This repository is a MyST manuscript that surveys the
+spectral criterion these two proofs use. The third, by Balasubramanian–Kasiviswanathan, is a
+preprint distributed as a PDF on GitHub (version consulted on 6 October 2026), with the
+explicit bound $C_P \le 1+2\cdot10^{16}$. This repository is a MyST manuscript that surveys the
 methods that led to KLS; reconstructs and checks the first version of Song–Zhang, then the BKL and SZ v2
 proofs; reconstructs and checks the compatible-integration proof of
 [Balasubramanian–Kasiviswanathan](https://github.com/kriznakumar/paper/blob/4837c33649ba2271f43c9684e9350ecbdd725f95/KLS.pdf), including its explicit constant; compares all three; says what the theorem gives and what remains of the question of its

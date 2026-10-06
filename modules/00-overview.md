@@ -180,19 +180,15 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 | 1 October 2026, preprint (v1) | $O(4^{\log^*(n+2)})$ | $O(16^{\log^*(n+2)})$ | [](#thm:song-zhang-kls): polynomial estimates fed into curvature estimates and back [@SongZhang2026IteratedLogKLS]. |
 | 4 October 2026, preprint | $O(1)$ | $O(1)$ | BKL prove KLS through cumulants and suspension; Chapter [](#sec:bkl-proof) [@BizeulKlartagLehec2026KLS]. |
 | 4 October 2026, preprint (v2) | $O(1)$ | $O(1)$ | The second version of Song–Zhang proves KLS by repeated refinement with summable losses; Chapter [](#sec:sz-v2-proof) [@SongZhang2026ConstantKLS]. |
+| 6 October 2026 (version consulted), preprint (GitHub) | $O(1)$ | $O(1)$ | BK prove KLS through compatible integration and a direct Appell induction, with $C_P\le1+2\cdot10^{16}$; Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. |
 
-The BK proof also gives a numerical universal upper bound,
-$C_P\le1+2\cdot10^{16}$ and
-$\Psi\le\sqrt{\pi(1+2\cdot10^{16})}$
-([](#thm:bk-explicit-poincare), [](#cor:bk-cheeger)). The source version is
-pinned in [@BalasubramanianKasiviswanathan2026KLS]; no priority claim is
-needed for this comparison.
+Through Buser–Ledoux, BK's Poincaré bound also gives an explicit Cheeger bound, $\Psi\le\sqrt{\pi(1+2\cdot10^{16})}$ ([](#cor:bk-cheeger)). The BK source has no arXiv number; the bibliography entry [@BalasubramanianKasiviswanathan2026KLS] pins the version read here by its Git commit and checksum.
 
-The BKL and Song–Zhang authors declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:reading-paths).
+The authors of all three proofs declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:reading-paths).
 
 :::{prf:remark} Reading the table
 :label: rem:history-table-caveats
-Two entries deserve care. The 2016/2024 row is one result: the Lee–Vempala preprint of 2016 appeared in final form in the Annals in 2024, and the bibliography records both. The $O(n^{5/12})$ entry summarizes a sequence of thin-shell improvements rather than a single paper, and is quoted here only to mark the pre-localization ceiling. Separately, the bibliography contains [@vempala2016kls], a 2016 announcement of a proof of the full conjecture; it is not a milestone in this table, and it is listed in the bibliography for completeness of the record only.
+Two entries deserve care. The 2016/2024 row is one result: the Lee–Vempala preprint of 2016 appeared in final form in the Annals in 2024, and the bibliography records both. The $O(n^{5/12})$ entry summarizes a sequence of thin-shell improvements rather than a single paper, and is quoted here only to mark the pre-localization ceiling. Separately, the bibliography contains [@vempala2016kls], a 2016 announcement of a proof of the full conjecture; it is not a milestone in this table, and it is listed in the bibliography for completeness of the record only. The BK row refers to a version distributed on GitHub and pinned by its Git commit, not to an arXiv deposit; its date is that of the version consulted.
 :::
 
 (subsec:kls-solved-neighbours)=
@@ -223,7 +219,7 @@ Even with $\sigma_k=O(1)$ the harmonic sum contributes a $\log n$, and [](#eq:el
 (sec:kls-conversions)=
 ## How KLS was proved
 
-Stochastic localization and the quadratic estimate control linear and quadratic functions; the first eigenfunction of a general log-concave measure is neither. Every argument below is a way to reach *every* test function. Two dimension-dependent conversions came first, both starting from Letwin's quadratic estimate [](#thm:letwin-qcts): Letwin's own, through improved Lichnerowicz, which gives $\CP\lesssim\sqrt{\log n}$ (Section [](#subsec:kls-architecture)), and the first version of Song–Zhang, through polynomials of every degree, which gives $\CP\lesssim16^{\log^*(n+2)}$ (Section [](#subsec:song-zhang-mechanism)). The second also isolated a spectral criterion: a first eigenfunction followed through polynomial tests of every degree, which turns coefficient bounds into a Poincaré bound, and whose exponential form is equivalent to KLS. The two proofs of 4 October 2026 both start from that criterion and close it differently. Bizeul, Klartag and Lehec prove the exponential coefficient bound directly, from cumulants of every order and a suspension construction (Section [](#subsec:kls-bkl-idea)); the second version of Song–Zhang keeps the iteration of the first and makes its losses summable (Section [](#subsec:kls-sz-v2-idea)).
+Stochastic localization and the quadratic estimate control linear and quadratic functions; the first eigenfunction of a general log-concave measure is neither. Every argument below is a way to reach *every* test function. Two dimension-dependent conversions came first, both starting from Letwin's quadratic estimate [](#thm:letwin-qcts): Letwin's own, through improved Lichnerowicz, which gives $\CP\lesssim\sqrt{\log n}$ (Section [](#subsec:kls-architecture)), and the first version of Song–Zhang, through polynomials of every degree, which gives $\CP\lesssim16^{\log^*(n+2)}$ (Section [](#subsec:song-zhang-mechanism)). The second also isolated a spectral criterion: a first eigenfunction followed through polynomial tests of every degree, which turns coefficient bounds into a Poincaré bound, and whose exponential form is equivalent to KLS. Three proofs followed. Two of them start from that criterion and close it differently: Bizeul, Klartag and Lehec prove the exponential coefficient bound directly, from cumulants of every order and a suspension construction (Section [](#subsec:kls-bkl-idea)); the second version of Song–Zhang keeps the iteration of the first and makes its losses summable (Section [](#subsec:kls-sz-v2-idea)). The third, by Balasubramanian and Kasiviswanathan, keeps the Appell normalization and Letwin's quadratic estimate but obtains its spectral conversion from its own integration calculus (Section [](#subsec:kls-bk-idea)).
 
 (subsec:kls-architecture)=
 ### Letwin: localization and improved Lichnerowicz

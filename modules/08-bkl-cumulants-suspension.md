@@ -30,9 +30,10 @@ Appell coefficient bound of [](#prop:sz-exponential-coefficients-equivalence).
 
 The second version of Song–Zhang, deposited the same day and presented in
 the next chapter, [](#sec:sz-v2-proof), closes the argument differently,
-through repeated refinement from the same spectral foundation. The two proofs
-are compared, and what each reconstruction uses is listed, in Chapter
-[](#sec:kls-synthesis).
+through repeated refinement from the same spectral foundation. These two
+proofs and the third, by Balasubramanian and Kasiviswanathan
+(Chapter [](#sec:bk-proof)), are compared, and what each reconstruction uses
+is listed, in Chapter [](#sec:kls-synthesis).
 
 ## A one-dimensional calibration
 

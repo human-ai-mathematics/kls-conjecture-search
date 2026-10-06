@@ -12,21 +12,15 @@ This site is a reader's companion to three proofs of the Kannan–Lovász–Simo
 Proofs reconstructed here by agents are checked by separate reviewer agents. This is distinct from journal peer review or human acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
 :::
 
-The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Two preprints deposited on 4 October 2026 answer it: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS], and the second version of Song–Zhang, through repeated refinement with summable losses [@SongZhang2026ConstantKLS].
+The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Three preprints answer it. Two were deposited on arXiv on 4 October 2026: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS]; and the second version of Song–Zhang (SZ v2), through repeated refinement with summable losses [@SongZhang2026ConstantKLS]. The third, by Balasubramanian–Kasiviswanathan (BK), is distributed as a PDF on GitHub with no arXiv number, in a version consulted on 6 October 2026: it proves the theorem through compatible tensor integration and a direct induction on Appell coefficients, with the explicit bound $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)), Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. All three arguments, BK's numerical constant included, are reconstructed and checked here.
 
-:::{note} The use of AI in the BKL and Song–Zhang proofs
-Both sets of authors declare their use of AI.
+:::{note} The use of AI in the three proofs
+All three sets of authors declare their use of AI.
 
 - BKL write that "most proofs and mathematical ideas in this paper were found by ChatGPT; a notable exception is the idea to use suspension which was suggested by the authors. The role of the authors has been mostly to understand these proofs and improve their exposition" (Acknowledgements, p. 5 of [@BizeulKlartagLehec2026KLS]).
 - Song and Zhang write that "the AI tools used in this work were GPT-6 Astra, GPT-5.6 Sol, Claude Fable 5, and Fable 5.1", and that their effort since 28 July 2026 "involved exploring more than 100 approaches in collaboration with AI tools", "with the authors deciding which ones to prioritize" (Acknowledgements and AI Disclosure, pp. 138–139 of [@SongZhang2026ConstantKLS]).
+- Balasubramanian and Kasiviswanathan write: "We developed this proof with substantial assistance from several frontier AI models." "The AI identified the need for estimates uniform in tensor rank and formulated a weighted Hodge comparison for symmetric tensor fields." "The AI proposed Appell coefficient norms to measure repeated centered integration of constant tensors." "We have carefully verified all arguments developed with the assistance of AI and take full responsibility for the content of this work." (§1.2, p. 5 of [@BalasubramanianKasiviswanathan2026KLS]).
 :::
-
-Balasubramanian–Kasiviswanathan (BK) gives a third proof through compatible
-tensor integration and a direct induction on Appell coefficients
-(Chapter [](#sec:bk-proof)) [@BalasubramanianKasiviswanathan2026KLS]. Its
-explicit bound is $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)).
-This argument, including its numerical constant and composition into KLS,
-has also been reconstructed and independently checked here.
 
 Besides these proofs, the manuscript develops three alternative mechanisms for the Poincaré bound, which would give KLS by other means or with stronger conclusions. Their exact moment-Hessian calculations, conditional reductions and counterexamples keep their meaning now that KLS is proved.
 

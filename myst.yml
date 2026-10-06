@@ -93,11 +93,13 @@ project:
   # an error, so the proofs' pattern also matches their introduction page:
   # '{proofs,solutions/*}.md' reads "proofs.md, then every dossier". Drafts are listed
   # here for local reading; the pages workflow removes them before it publishes.
-  # A short welcome page, then the introduction; the literature (six families); the two
-  # proofs of KLS: the first version of Song--Zhang (the spectral criterion both proofs
-  # use), then Bizeul--Klartag--Lehec, the shorter route from that criterion (and the
+  # A short welcome page, then the introduction; the literature (six families); the three
+  # proofs of KLS: the first version of Song--Zhang (the spectral criterion that BKL and
+  # SZ v2 use), then Bizeul--Klartag--Lehec, the shorter route from that criterion (and the
   # first deposited, on 4 October), then the second version of Song--Zhang with its
-  # technical estimates in a chapter of their own, and the comparison of the two proofs.
+  # technical estimates in a chapter of their own, then Balasubramanian--Kasiviswanathan
+  # (compatible integration, version consulted on 6 October), and the comparison of the
+  # three proofs.
   # Then KLS after its proofs (equivalent forms, consequences, the question of the
   # constant; prose only) and the map of alternative mechanisms; the three living
   # mechanisms -- the moment map, the fixed eigenfunction, conditional fibers -- in the
