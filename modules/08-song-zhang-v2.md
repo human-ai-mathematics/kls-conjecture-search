@@ -1,7 +1,7 @@
 ---
 title: Song–Zhang's repeated refinement
 numbering:
-  enumerator: "7B.%s"
+  enumerator: "8.%s"
 ---
 
 (sec:sz-v2-proof)=

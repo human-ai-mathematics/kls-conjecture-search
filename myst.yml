@@ -115,51 +115,51 @@ project:
     - title: Polynomial methods and two proofs of KLS
       children:
         - file: modules/07-polynomial-curvature.md
-        - file: modules/07b-song-zhang-v2.md
-        - file: modules/07c-bkl-cumulants-suspension.md
+        - file: modules/08-song-zhang-v2.md
+        - file: modules/09-bkl-cumulants-suspension.md
     - title: The four approaches
       children:
-        - file: modules/08-frontier-atlas.md
+        - file: modules/10-methods-atlas.md
         - title: Moment map
           children:
-            - file: modules/09-moment-map-cmh.md
-            - file: modules/10-cmh-normalization.md
-            - file: modules/11-cmh-exact-cases.md
-            - file: modules/12-moment-map-construction.md
-            - file: modules/13-appendix-moment-map.md
-        - file: modules/14-localization-prelude.md
+            - file: modules/11-moment-map-cmh.md
+            - file: modules/12-cmh-normalization.md
+            - file: modules/13-cmh-exact-cases.md
+            - file: modules/14-moment-map-construction.md
+            - file: modules/15-appendix-moment-map.md
+        - file: modules/16-localization-prelude.md
         - title: Fixed eigenfunction
           children:
-            - file: modules/15-spectral-approach.md
+            - file: modules/17-spectral-approach.md
         - title: Conditional fibers
           children:
-            - file: modules/16-conditional-fiber-frame.md
+            - file: modules/18-conditional-fiber-frame.md
         - title: Fixed cut
           children:
-            - file: modules/17-fixed-cut.md
-            - file: modules/18-fixed-cut-open-problems.md
+            - file: modules/19-fixed-cut.md
+            - file: modules/20-fixed-cut-open-problems.md
     - title: Synthesis and perspectives
       children:
-        - file: modules/19-synthesis.md
+        - file: modules/21-synthesis.md
         - file: modules/glossary.md
     - title: Shared technical foundations
       children:
-        - file: modules/20-notation.md
-        - file: modules/21-riccati.md
-        - file: modules/22-qcts-obstruction.md
-        - file: modules/23-covariance-technology.md
-        - file: modules/24-model-geometries.md
+        - file: modules/22-notation.md
+        - file: modules/23-riccati.md
+        - file: modules/24-qcts-obstruction.md
+        - file: modules/25-covariance-technology.md
+        - file: modules/26-model-geometries.md
     - title: "Appendix: the fixed cut in detail"
       children:
-        - file: modules/25-carleson.md
-        - file: modules/26-product-stress.md
-        - file: modules/27-stein-route.md
-        - file: modules/28-excess-propagation.md
-        - file: modules/29-bootstrap.md
-        - file: modules/30-mass-martingale.md
-        - file: modules/31-stein-dictionary.md
-        - file: modules/32-jacobi-splitting.md
-        - file: modules/33-fixed-cut-calculations.md
+        - file: modules/27-carleson.md
+        - file: modules/28-product-stress.md
+        - file: modules/29-stein-route.md
+        - file: modules/30-excess-propagation.md
+        - file: modules/31-bootstrap.md
+        - file: modules/32-mass-martingale.md
+        - file: modules/33-stein-dictionary.md
+        - file: modules/34-jacobi-splitting.md
+        - file: modules/35-fixed-cut-calculations.md
     - title: Full proofs
       children:
         - pattern: '{proofs,solutions/*}.md'

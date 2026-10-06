@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "26.%s"
+  enumerator: "28.%s"
 ---
 
 (sec:product-stress)=

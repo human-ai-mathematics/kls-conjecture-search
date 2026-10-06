@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "7C.%s"
+  enumerator: "9.%s"
 ---
 
 (sec:bkl-proof)=

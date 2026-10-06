@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "15.%s"
+  enumerator: "17.%s"
 ---
 
 (sec:spectral-approach)=

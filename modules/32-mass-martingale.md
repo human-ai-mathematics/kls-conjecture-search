@@ -1,6 +1,6 @@
 ---
 numbering:
-  enumerator: "30.%s"
+  enumerator: "32.%s"
 ---
 
 (sec:mass-martingale)=
