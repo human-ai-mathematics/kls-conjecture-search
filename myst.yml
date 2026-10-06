@@ -98,7 +98,8 @@ project:
   # use), then Bizeul--Klartag--Lehec, the shorter route from that criterion (and the
   # first deposited, on 4 October), then the second version of Song--Zhang with its
   # technical estimates in a chapter of their own, and the comparison of the two proofs.
-  # Then KLS after its proofs and the map of alternative mechanisms; the three living
+  # Then KLS after its proofs (equivalent forms, consequences, the question of the
+  # constant; prose only) and the map of alternative mechanisms; the three living
   # mechanisms -- the moment map, the fixed eigenfunction, conditional fibers -- in the
   # order of what each has established; the shared technical foundations; and, last
   # before the proofs, the fixed cut as an archive, with its technical chapters.
@@ -123,6 +124,7 @@ project:
         - file: modules/11-proofs-compared.md
     - title: After KLS
       children:
+        - file: modules/12-kls-after-proofs.md
         - file: modules/13-alternative-mechanisms.md
     - title: Alternative mechanisms
       children:

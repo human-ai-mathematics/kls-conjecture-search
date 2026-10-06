@@ -144,7 +144,7 @@ Controlling this noise term *while retaining information about $\lmax(A_t)$* is 
 (subsec:sl-where-the-log-lives)=
 ## Where the surviving logarithm lives
 
-This subsection makes precise the claim of Section [](#subsec:kls-architecture), because it is what target 3 of the synthesis acts on.
+This subsection makes precise the claim of Section [](#subsec:kls-architecture), because it is what an effective-rank potential would have to remove (Section [](#subsec:effective-rank)).
 
 To use [](#eq:lv-criterion) one needs a potential that both dominates $\lmax(A_t)$ and admits an Itô calculus. Klartag–Lehec use log-trace-exp,
 

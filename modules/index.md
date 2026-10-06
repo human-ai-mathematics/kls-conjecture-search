@@ -21,12 +21,12 @@ Besides these proofs, the manuscript develops four approaches that would give KL
 
 Four ways in, depending on what you came for:
 
-- **Discover.** The overview, Section [](#sec:overview), then the comparison of approaches, Section [](#sec:frontier-atlas).
+- **Discover.** The overview, Section [](#sec:overview); what the theorem gives and the question of its constant, Chapter [](#sec:kls-after-proofs); then the map of alternative mechanisms, Chapter [](#sec:frontier-atlas).
 - **Read the proofs.** The first version of Song–Zhang, whose spectral criterion both proofs use, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter route from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); then their comparison, Chapter [](#sec:kls-synthesis).
 - **Read the other methods.** The four entry chapters listed below, for this manuscript's own approaches.
 - **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
 
-After the overview come *the literature*, one chapter for each of six families of methods; *two proofs of KLS*: the first version of Song–Zhang, Bizeul–Klartag–Lehec, the second version of Song–Zhang, then their comparison; *after KLS*, the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
+After the overview come *the literature*, one chapter for each of six families of methods; *two proofs of KLS*: the first version of Song–Zhang, Bizeul–Klartag–Lehec, the second version of Song–Zhang, then their comparison; *after KLS*, what the theorem gives and the question of its constant, then the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
 
 ## The four approaches
 
@@ -37,7 +37,7 @@ The approaches below are alternative mechanisms for the Poincaré bound. The mom
 - **Conditional fibers** — an elementary mechanism, a spectral gap for resampling along lines chosen from the measure, resting only on one-dimensional inequalities: Section [](#sec:conditional-fiber-frame).
 - **Fixed cut** — the record of a method that follows one would-be bottleneck set through stochastic localization; its obstructions and its ceiling are its results: Section [](#sec:introduction).
 
-They are listed in the order of what each has established. Section [](#sec:frontier-atlas) compares them side by side — what each gives, and what blocks it.
+They are listed in the order of what each has established. Chapter [](#sec:frontier-atlas) compares them side by side — what each gives, and what blocks it.
 
 ## What this manuscript contributes
 
@@ -46,7 +46,7 @@ They are listed in the order of what each has established. Section [](#sec:front
 - A reconstruction of the first version of Song–Zhang's polynomial–curvature mechanism, with its reusable profile transfer [](#thm:sz-curvature-transfer), affine bound [](#cor:sz-affine-poincare), and exponential coefficient characterization of KLS [](#prop:sz-exponential-coefficients-equivalence).
 - A reconstruction of the universal bound of the second version of Song–Zhang, [](#thm:sz-v2-kls), with the finite-block estimates and summable-cost argument explained in Chapter [](#sec:sz-v2-proof).
 - A reconstruction of the Bizeul–Klartag–Lehec cumulant and suspension argument, Chapter [](#sec:bkl-proof), including its exact comparison with Appell coefficients.
-- A comparison of the two proofs, Section [](#sec:kls-synthesis).
+- A comparison of the two proofs, Chapter [](#sec:kls-synthesis).
 
 **Results proved here.**
 

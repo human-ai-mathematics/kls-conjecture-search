@@ -210,6 +210,11 @@ h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)
 $$
 for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)\hstar_n$, then the clean bootstrap supplies the completion's premise. The balanced near-minimizer argument above gives $h_\mu\ge2c_g$ for arbitrarily accurate near-worst measures; taking their near-worst error to zero gives $\hstar_n\ge2c_g$. Monotonicity in [](#lem:whitening) covers dimension one, yielding the Cheeger formulation of [](#conj:kls). In [](#conj:taming), however, the time is chosen after the requested error level. Its existential quantifier does not identify that time with the completion time. The extra estimate displayed here is thus a sufficient condition beyond the implication in [](#cor:dichotomy).
 
+(subsec:effective-rank)=
+## An effective rank in place of the soft maximum
+
+In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — would convert $\kappa_n=O(1)$ directly into $\CP=O(1)$. The interface functional $\Xi_T(\mu)$ of [](#eq:interface-def), evaluated in Section [](#sec:bootstrap), is the fixed cut's version of this question, and [](#conj:taming) is the corresponding statement. Section [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).
+
 ## Where to start
 
 | Step | Input | Output |

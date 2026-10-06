@@ -34,8 +34,10 @@ and its operator estimates must concern the same functions.
 These are two distinct closing mechanisms with a shared spectral foundation.
 The second version improves the iteration producing the coefficients; BKL
 estimate the exponential coefficient end point directly
-([](#sec:bkl-proof)). The reconstruction in this chapter excludes BKL, its coefficient consequences, and the already
-proved KLS conclusion as inputs.
+([](#sec:bkl-proof)). The reconstruction in this chapter takes neither BKL's
+estimates nor the KLS conclusion as inputs; the note on provenance of
+Section [](#subsec:proofs-provenance) states this precisely, and Chapter
+[](#sec:kls-synthesis) compares the two proofs.
 
 ## The argument in outline
 
@@ -359,36 +361,3 @@ Pass this scalar inequality to regular approximants using
 [](#lem:sz-analytic-foundations); no supremum over degrees passes through
 weak convergence. Clipping and truncation give both $L^2$ integrability
 and the finite-energy formulation above.
-
-(sec:sz-v2-methodological-comparison)=
-## What the earlier obstruction analysis identified
-
-Our analysis of the first version separated an algebraic requirement from the estimates
-needed to realize it. Summable logarithmic losses would keep the total
-cost bounded, but small-degree initialization and admissible starting
-depths also required control. It identified the uniform exponential
-coefficient assertion as equivalent to KLS in
-[](#prop:sz-exponential-coefficients-equivalence). Neither observation
-provided an estimate establishing that assertion.
-
-BKL supply a cumulant and suspension mechanism for the coefficient end
-point; the second version of Song–Zhang develops finite blocks, retained coefficient caps and depth
-control. In the second version the iterated quantity is the common coefficient radius.
-The fixed numerical factor converting that radius to $C_P$ is paid once,
-after every refinement. Thus the second version does not require a near-unit replacement
-of the first-version spectral comparison at every repetition.
-
-The coefficient transfer also has a different normalization: its exponent
-is $d-1$, whereas the earlier conditional-startup question used an exponent
-$d$ and a denominator $(d+1)^2$. Identifying the two requires estimates
-for those factors throughout the moving degree range. Neither a common
-end point nor summable-loss arithmetic proves such an identification.
-Likewise the earlier obstruction to a retained positive error majorant
-concerns those particular estimates; the new joint-frame and orbit-window
-estimates change what is controlled.
-
-These comparisons explain which missing estimates matter without claiming
-priority for either proof mechanism. Identifying a sufficient condition
-and proving it are different achievements. The BKL initialization
-consequence [](#cor:bkl-uniform-conditional-initialization) retains its
-BKL provenance and is not an input to the separate argument of the second version.

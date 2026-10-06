@@ -4,110 +4,50 @@ numbering:
 ---
 
 (sec:kls-synthesis)=
-# Synthesis: two proof mechanisms and structural questions
+# Two proofs of KLS compared
 
-The polynomial method of Song and Zhang reached its first form in the first version of their preprint, an iterated-logarithm bound (Chapter [](#sec:polynomial-curvature)) [@SongZhang2026IteratedLogKLS]. Its second version proves KLS by repeated refinement with summable losses (Chapter [](#sec:sz-v2-proof)) [@SongZhang2026ConstantKLS]. Bizeul, Klartag and Lehec (BKL) prove it through dimension-free cumulant bounds and suspension, followed by the spectral criterion of the first version (Chapter [](#sec:bkl-proof)) [@BizeulKlartagLehec2026KLS]. Both proofs use the polynomial spectral foundation, but their closing estimates differ. Each reconstructed statement displays its status; how it was checked is explained on the [welcome page](#sec:overview-checking).
+Two arguments now prove [](#conj:kls): Bizeul, Klartag and Lehec (BKL), through cumulants of every order and suspension (Chapter [](#sec:bkl-proof)) [@BizeulKlartagLehec2026KLS], and the second version of Song and Zhang, through repeated refinement with summable losses (Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks)) [@SongZhang2026ConstantKLS]. Both start from the spectral criterion of the first version of Song–Zhang (Chapter [](#sec:polynomial-curvature)) [@SongZhang2026IteratedLogKLS]. This chapter sets them side by side: what each estimates, where each spends uniformity in the dimension, what each inherits, and what each leaves behind as a tool. Each statement cited displays its status; how it was checked is explained on the [welcome page](#sec:overview-checking).
 
-The question for the approaches below is what distinct mechanism or stronger property they can establish. Truth of KLS does not prove a sufficient condition for it. In particular the moment-Hessian, occupation and conditional-frame questions retain their own content. The five targets below describe that content and possible alternative proofs; the two proofs of KLS retain their separate provenance.
+(subsec:proofs-compared-table)=
+## The two proofs side by side
 
-(subsec:synthesis-constraint)=
-## The constraint any proposal must satisfy
+| | Bizeul–Klartag–Lehec | Song–Zhang, second version |
+|---|---|---|
+| **Object estimated or iterated** | Cumulant tensors $\kappa_m^\mu$ of every order, with one slot fixed, for every isotropic log-concave law; then the tilt coefficients $\mathcal T_d^\mu f$ of an arbitrary test function | One number per measure: the common coefficient radius $\mathcal A(\mu)=\max\{1,\sup_{d\ge2}c_d(\mu)^{2/(d-1)}\}$ of the Appell hierarchy ([](#def:sz-v2-common-radius)), refined round after round through curvature profiles |
+| **Decisive estimate** | The dimension-free cumulant bound $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ ([](#thm:bkl-cumulant-bound)), proved by induction on the order along a localization rescaled by the inverse covariance | Refinements with summable costs ([](#prop:sz-v2-summable-budgets)): margins $\alpha_i=2^{-i}/16$, multiplicative costs $e^{C\alpha_i}$ and additive costs of order $2^{-i}$, with every starting depth kept admissible |
+| **Where uniformity in dimension is used** | In suspension ([](#prop:bkl-suspension)): a test function on $\R^n$ becomes a coordinate of a log-concave law on $\R^{nN+1}$ with $N\to\infty$, and the cumulant bound must hold there with the same constant | In the passage between curvature profiles and coefficient bounds by Gaussian localization ([](#thm:sz-curvature-transfer)) and in the coefficient caps, which are valid for every centred log-concave law of covariance at most $I$ in every dimension, so that a cap obtained in one round applies to the localized laws of the next |
+| **What it inherits from the first version** | The spectral criterion only, in its exponential form ([](#thm:bkl-tilt-criterion)), identified exactly with the Appell coefficients by [](#prop:bkl-tilt-appell-duality); no curvature profile and no iteration | The whole polynomial–curvature apparatus: Appell coefficient bounds ([](#thm:sz-polynomial-variance)), the curvature comparison ([](#thm:sz-curvature-comparison)), the transfer ([](#thm:sz-curvature-transfer)) and the analytic setting ([](#lem:sz-analytic-foundations)); it replaces the iteration [](#thm:sz-iterated-curvature) |
+| **Constant obtained** | $\CP\le 2CK$, with $C$ the constant of the criterion and $K$ that of the cumulant bound; both are universal and neither is evaluated numerically in the reconstruction here | $\CP\le2^{85}\mathcal A$ ([](#prop:sz-v2-common-radius)), with $\mathcal A$ bounded by a universal constant through [](#prop:sz-v2-summable-budgets); the constants of the refinement are not evaluated numerically here, so only the final conversion factor is explicit |
+| **Structure** | Three independent parts — an analytic criterion, a cumulant induction, a suspension — and one composition; eleven statements in Chapter [](#sec:bkl-proof) | A nested sequence of refinements, each resting on finite blocks of inverse-gradient iterates; ten statements in Chapter [](#sec:sz-v2-proof) and fifteen in Chapter [](#sec:sz-v2-blocks) |
+| **Reusable tools** | The inverse-covariance localization and its cumulant dynamics ([](#lem:bkl-cumulant-dynamics)); dimension-free cumulant bounds at every order; suspension, which turns a statement about linear observables into one about all test functions | The common radius and its single spectral conversion; finite chains of inverse-gradient iterates with matched centering and energy losses ([](#prop:sz-v2-finite-chain-blocks)); refinement with summable margins and retained coefficient caps |
 
-The covariance spike ([](#prop:covariance-spike), explained in Section [](#subsec:kls-spike-obstruction)) cuts in two directions. A direct “bound $\norm{A_t}_\op$ better” program cannot work, since the statement it needs is false; and rare spikes can be harmless, so a successful potential must recognize them rather than charge the full top eigenvalue whenever one occurs. The working criterion is the tensorization test of Section [](#subsec:kls-tensorization-test), the first thing to check on each target below.
+(subsec:proofs-compared-shared)=
+## The shared foundation
 
-(subsec:synthesis-targets)=
-## Five directions for further work
+Both proofs reduce the Poincaré constant to the growth of the Appell coefficients $c_d(\mu)$, the normalized sizes of the polynomials adapted to the moments of $\mu$ in each degree (Section [](#sec:sz-notation)). The reduction is the spectral criterion of the first version: follow a first eigenfunction through repeated centered gradients and inverse operators; a small spectral gap makes the resulting tensors large, while the centering removes mass that the polynomial tests measure, and the two cannot both happen if the coefficients are small. At its end point the criterion is exact: KLS is equivalent to one exponential bound $c_d\le A^d$, uniform in degree, dimension and measure ([](#prop:sz-exponential-coefficients-equivalence)).
 
-The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4 extends the coupling discussed in Chapter [](#sec:family-coupling), but has no precise extension statement here; target 5 works on the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature), which is not one of this manuscript's approaches; and the conditional fibers, whose frame estimate is [](#conj:conditional-fiber-frame), have no target of their own.
+Both proofs end by establishing such a bound. BKL state it as a bound on tilt averages, and [](#prop:bkl-tilt-appell-duality) shows that the operator norm of $\mathcal T_d^\mu$ on $L^2(\mu)$ is exactly $c_d(\mu)$: the tilt-average criterion [](#thm:bkl-tilt-criterion) is the first-version criterion in exponential form. The second version of Song–Zhang bounds $\mathcal A(\mu)$, and $c_d\le\mathcal A^{(d-1)/2}$ in every degree is again an exponential bound. The first version had identified this end point; neither identification supplied an estimate establishing it.
 
-**Target 1 — function-adapted stochastic localization.** For a fixed test function set $M_t(f)=\E_{p_t}f$, so that
+(subsec:proofs-compared-differences)=
+## What separates them
 
-```{math}
-:label: eq:function-adapted-sde
-\dd M_t(f)=\Cov_{p_t}(X,f)\cdot\dd W_t .
-```
+**Direct estimate against fixed point.** BKL obtain the exponential bound in one step, from cumulants: the growth $(m-1)!$ forced by the exponential on the line is, up to a geometric factor, also sufficient, and suspension carries this from linear observables to every test function. The second version of Song–Zhang never estimates cumulants. It obtains the bound as the limit of a sequence of improvements of the curvature profile, each feeding the next through localization, and its work lies in proving that the losses of all rounds have a bounded product.
 
-A covariance-based estimate bounds the integrand by the worst case,
+**Two different localizations.** BKL run a localization whose noise is rescaled by the inverse square root of the current covariance, so that the covariance decays on average like $e^{-t}I$ and every cumulant is measured in a moving metric ([](#lem:bkl-cumulant-dynamics)). The second version uses the Gaussian localization of the first version to pass between curvature profiles and coefficient bounds, and to transfer a profile to an arbitrary isotropic measure; the gain in each round comes from deterministic operator estimates on finite blocks of inverse-gradient iterates.
 
-```{math}
-:label: eq:worst-case-step
-\abs{\Cov_{p_t}(X,f)}^2\le\norm{A_t}_\op\Var_{p_t}f ,
-```
+**Where the fixed spectral factor is paid.** In the first version the spectral comparison is paid at every round, which is the source of the factor $16^r$ in [](#thm:sz-iterated-curvature). The second version refines the radius $\mathcal A$ rather than the Poincaré constant and pays the conversion $\CP\le2^{85}\mathcal A$ once, after all refinements; it does not need a comparison with multiplier close to one at each round. BKL pay the criterion once as well, but they never iterate.
 
-which discards essentially all information about $f$. A direct estimate of
+**Two coefficient normalizations.** The second version measures degree $d$ by $c_d\le\mathcal A^{(d-1)/2}$, an exponent $d-1$. The initialization bound of the first-version iteration, which BKL's estimate also supplies ([](#cor:bkl-uniform-conditional-initialization)), uses an exponent $d$ and a denominator $(d+1)^2$. The two normalizations agree at the exponential end point, but passing from one to the other in a moving range of degrees requires estimates of its own; neither proof supplies them, and neither needs them.
 
-```{math}
-:label: eq:function-adapted-occupation
-\int\frac{\abs{\Cov_{p_t}(X,f)}^2}{\Var_{p_t}f}\dd t
-```
+**How the fixed-versus-adaptive difficulty is met.** The classical families control objects fixed in advance or averaged, while a small spectral gap is carried by an object that the measure or an extremal function selects (Section [](#subsec:kls-adaptive-residue)). Both proofs answer with polynomial tests of every degree, which reach every test function once their coefficients are controlled. BKL go beyond the third moment to cumulants of every order, then encode an arbitrary function in an extra coordinate; the second version controls the centering losses of the eigenfunction iteration degree by degree, uniformly in the number of rounds.
 
-for a near-extremizing eigenfunction would avoid the top-eigenvalue entropy cost of [](#eq:logtraceexp) and would respect tensorization, since [](#eq:function-adapted-occupation) factorizes over independent blocks in a way that $\norm{A_t}_\op$ does not.
+(subsec:proofs-provenance)=
+:::{note} Provenance and dependencies
+- **BKL.** The reconstruction of Chapter [](#sec:bkl-proof) uses the spectral criterion of the first version of Song–Zhang and no estimate of the second version. No KLS estimate enters the cumulant induction.
+- **Song–Zhang, second version.** The reconstruction of Chapters [](#sec:sz-v2-proof) and [](#sec:sz-v2-blocks) uses no BKL input: not the cumulant bound, not the tilt bound, not their consequence [](#cor:bkl-uniform-conditional-initialization), and not the KLS conclusion itself.
+- **The BKL initialization bound.** [](#cor:bkl-uniform-conditional-initialization) is derived from BKL's tilt bound [](#thm:bkl-tilt-bound) and keeps that provenance. Feeding it into the first-version iteration and recovering KLS would not be an independent proof: the coefficient bound it supplies is already of KLS strength, by [](#prop:sz-exponential-coefficients-equivalence).
+- **Versions.** The two preprints were deposited on the same day; their versions and times are listed at the start of Chapter [](#sec:sz-v2-proof). The statements reconstructed here follow the versions cited.
+- **Beyond KLS.** Neither proof establishes, by any implication proved here, the sufficient conditions of the alternative mechanisms — the moment-Hessian inequality, the occupation estimate, the conditional frame. What each mechanism still needs is in Section [](#subsec:atlas-assessment).
+:::
 
-*In this manuscript:* this is exactly [](#conj:mm-spectral-occupation), the central problem of the fixed-eigenfunction approach (Section [](#sec:spectral-approach)); the fixed-cut analogue is [](#conj:trace-upgrade), the operator-to-trace upgrade of Section [](#sec:open).
-
-**Target 2 — a nonlinear extension of the moment-map estimate.** Brascamp–Lieb in moment-map coordinates already gives [](#eq:mm-brascamp-lieb), so KLS would follow from
-
-```{math}
-:label: eq:nonlinear-moment-map
-\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2 .
-```
-
-The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate with $\nabla f(X)$. Letwin's fixed-matrix inequality controls a deterministic $B$; this proposed extension would need to handle an $X$-dependent direction or matrix field.
-
-*In this manuscript:* the moment-map approach (Section [](#sec:moment-map-cmh)), whose target inequality $\mathrm{CMH}(4)$ ([](#def:cmh)) bounds the affine Poincaré constant by [](#thm:cmh-implies-affine-poincare). Two facts, both developed in that chapter, change how this target should be read. $\mathrm{CMH}(4)$ is not known to be a reformulation of [](#eq:nonlinear-moment-map) or of [](#conj:kls): it also charges a solenoidal excess ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison)). And its cheapest necessary consequence, the linear test — the inequality tested on linear functions only ([](#conj:gate-zero)) — is itself an average-versus-uniform statement, which [](#prop:letwin-not-gate-zero) shows no fixed-matrix argument supplies: Target 2 relocates the difficulty rather than escaping it. How hard even the linear test is, [](#cor:gate-zero-third-moment) calibrates: its sharp form implies $\kappa_n\le2$, so proving it is at least as hard as a sharp directional third-moment bound.
-
-% Agent note: Route C is tracked by the `ap:c-…` approaches of research/program/portfolio.yaml.
-
-**Target 3 — replace log-trace-exp by an effective-rank estimate.** In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — would convert $\kappa_n=O(1)$ directly into $\CP=O(1)$.
-
-*In this manuscript:* the interface functional $\Xi_T(\mu)$ of the fixed-cut approach, [](#eq:interface-def), and its evaluation in Section [](#sec:bootstrap) are this manuscript's version of the question, and [](#conj:taming) is the corresponding statement. Section [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).
-
-**Target 4 — extend parallel coupling beyond linear tilts.** Present parallel coupling controls the finite-dimensional family $e^{\inner\theta x}\mu(\dd x)$. A coupling for perturbations $(1+\eps f)\mu$ with cost controlled by $\int\abs{\nabla f}^2\dd\mu$ would address arbitrary spectral directions directly, rather than one linear family.
-
-*In this manuscript:* the coupling and the reason it stops at linear tilts are described in Chapter [](#sec:family-coupling); no labelled statement formulates the extension, and none of the four approaches carries it.
-
-% Agent note: target 4 has no ledger node and no portfolio approach.
-
-**Target 5 — compare the repeated-refinement estimates with the earlier questions.**
-The factor $16^r$ and growing admissibility thresholds of the first-version iteration
-are limitations of those estimates, not unresolved requirements in the
-literature after the second version. Chapter [](#sec:sz-v2-proof) explains the source's
-replacement: polynomial depth cost, a common coefficient radius, repeated
-height reduction, and finally a summable cost for the repetitions.
-
-The finite-chain construction [](#prop:sz-v2-finite-chain-blocks) controls
-centering losses, normalization and energy for one inverse-gradient
-family, uniformly in the number of retained coefficient bounds. The
-outer profiles, summable costs and final composition complete the
-argument. BKL's coefficient theorem is not an input to it.
-
-The older conditional-startup and near-unit-comparison questions retain
-their exact normalization. The second version refines a common coefficient radius and
-pays its fixed spectral conversion once, after all refinements. It does
-not need a near-unit multiplier for the first-version comparison at each repetition.
-Comparing the coefficient transfers must also account for their different
-degree exponents and the older denominator $(d+1)^2$.
-
-The earlier analysis correctly distinguished summable-loss arithmetic from
-its missing estimates and identified the exponential coefficient end point
-as KLS-strength in [](#prop:sz-exponential-coefficients-equivalence). It did
-not supply either new proof mechanism. Section
-[](#sec:sz-v2-methodological-comparison) records this comparison without a
-claim of priority or a claim that the source satisfies every earlier
-proposed interface literally.
-
-(subsec:synthesis-assessment)=
-## Which target first
-
-With both proofs reconstructed, further work concerns comparison of their estimates, alternative proofs and structural inequalities. Section [](#subsec:atlas-assessment) distinguishes the exact polynomial comparison questions from structural tests: the sharp linear test of the moment-Hessian inequality, conditional frames on the simplex, occupation of a fixed eigenfunction and cut-dependent estimates. Neither proof discharges their sufficient conditions. Parallel coupling beyond linear tilts remains exploratory, without a precise statement here.
-
-(subsec:synthesis-caution)=
-## Scope of the inputs
-
-The starting point for targets 1–3 is the quadratic estimate [](#thm:letwin-qcts) and its directional consequence [](#prop:letwin-kappa). Their source is the pinned version-1 preprint described in Section [](#subsec:mm-audit); the badges on the statements record internal verification separately from that publication history. The Chen–Klartag imports concern the moment Hessian, radial variance, and full third tensor, rather than a dimension-free directional bound or control of arbitrary nonlinear tests.
-
-The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, orientation control, or an adaptive matrix estimate. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls), and [](#thm:intro-all-cut) retain their Carleson or centroid premises. The source's general KLS theorem, Letwin Theorem 1.1, is [](#thm:letwin-kls). Its minimum-time argument is explained in Section [](#sec:family-moment-map). It gives a dimension-dependent bound for all tests, without extending the covariance window to universal time or supplying the linear test of the moment-Hessian inequality.
-
-Song–Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of target 5. Neither their general bound nor its inverse-operator construction supplies the canonical moment-Hessian inequality, its sharp linear test, or the universal-time occupation estimate [](#conj:mm-spectral-occupation). The Carleson, centroid and approximation premises remain necessary in the implications that use them.
-
-% Agent note: source versions describe provenance; badges and proof links carry verification status. Preserve explicit antecedents and dimension-dependent windows when updating this synthesis. Theorem 1.1 has its own proof link; its time-restricted bridge is separate from the matrix, quadratic, and covariance imports.
+What the theorem now gives, and the question of its constant, are the subject of Chapter [](#sec:kls-after-proofs).

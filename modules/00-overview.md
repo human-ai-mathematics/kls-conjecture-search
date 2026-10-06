@@ -8,12 +8,12 @@ numbering:
 
 +++ {"part": "abstract"}
 
-The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure. It is now a theorem, [](#conj:kls): the second version of Song–Zhang proves it through repeated refinement with summable losses, and Bizeul–Klartag–Lehec (BKL) through all-order cumulants, a suspension construction and the spectral criterion of the first version of Song–Zhang, both in preprints of 4 October 2026. This manuscript is a reader's companion to these two proofs, reconstructed, checked and compared here, to the methods that led to them, and to the questions that remain open after KLS. Besides the proofs, it develops four approaches that would give KLS by other mechanisms or with stronger conclusions: the canonical moment-Hessian inequality, occupation of a fixed eigenfunction, resampling along conditional lines and localization of a fixed cut. Their sufficient conditions do not follow from KLS. Every statement displays its status; how it is checked is on the [welcome page](#sec:overview-checking).
+The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure. It is now a theorem, [](#conj:kls): the second version of Song–Zhang proves it through repeated refinement with summable losses, and Bizeul–Klartag–Lehec (BKL) through all-order cumulants, a suspension construction and the spectral criterion of the first version of Song–Zhang, both in preprints of 4 October 2026. This manuscript is a reader's companion to these two proofs, reconstructed, checked and compared here, to the methods that led to them, and to the questions that remain open after KLS; this overview explains the idea of each proof. Besides the proofs, it develops alternative mechanisms that would give KLS by other means or with stronger conclusions: three living ones — the canonical moment-Hessian inequality of the moment map, occupation of a fixed eigenfunction, and resampling along conditional lines — and the localization of a fixed cut, kept as an archive. Their sufficient conditions do not follow from KLS. Every statement displays its status; how it is checked is on the [welcome page](#sec:overview-checking).
 
 
 +++
 
-This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)) and the two dimension-dependent arguments preceding the two proofs (Section [](#sec:kls-conversions)), explains the obstacles that alternative arguments meet (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
+This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), explains how KLS was proved — the two dimension-dependent conversions that came first, then the idea of each of the two proofs (Section [](#sec:kls-conversions)) — sets out the obstacles that alternative mechanisms meet (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
 
 (sec:kls-orientation)=
 ## The question
@@ -133,7 +133,7 @@ No family of log-concave measures is known for which the ratio in [](#eq:kls-aff
 (sec:kls-known)=
 ## What was known
 
-This section records the quantitative history and the two neighbouring conjectures that have been settled, with why settling them did not settle KLS. The dimension-dependent arguments preceding the two proofs are the subject of the next section.
+This section records the quantitative history and the two neighbouring conjectures that have been settled, with why settling them did not settle KLS. How KLS was proved, from the dimension-dependent arguments that preceded the two proofs to the proofs themselves, is the subject of the next section.
 
 (subsec:kls-status)=
 ### The quantitative history
@@ -198,22 +198,14 @@ and the arguments resolving the two weaker conjectures did not supply a dimensio
 Even with $\sigma_k=O(1)$ the harmonic sum contributes a $\log n$, and [](#eq:eldan-reverse) yields only $\PsiKLS_n\lesssim\log n$, not $O(1)$. Radial concentration constrains one observable, $|x|^2$; KLS quantifies over every function and every measurable cut. The same asymmetry recurs, in sharper form, for Letwin's preprint: it eliminates every *quadratic* witness, and the first eigenfunction of a general log-concave diffusion need not be quadratic.
 
 (sec:kls-conversions)=
-## Two conversions that reach every test function
+## How KLS was proved
 
-Two arguments bound the Poincaré constant of every isotropic log-concave measure with a factor that grows only slowly with the dimension: Letwin's [](#thm:letwin-kls), $\CP\lesssim\sqrt{\log n}$, and Song and Zhang's [](#thm:song-zhang-kls), $\CP\lesssim16^{\log^*(n+2)}$. Both run stochastic localization up to a time $t$ of order $1/\log n$, where the localized measure is $t$-strongly log-concave, and both start from Letwin's quadratic estimate [](#thm:letwin-qcts). They differ in one step: how curvature $t$ is converted into a spectral gap. Each conversion loses something that grows with $n$, and the two losses are the starting point of Section [](#sec:kls-remaining).
+Stochastic localization and the quadratic estimate control linear and quadratic functions; the first eigenfunction of a general log-concave measure is neither. Every argument below is a way to reach *every* test function. Two dimension-dependent conversions came first, both starting from Letwin's quadratic estimate [](#thm:letwin-qcts): Letwin's own, through improved Lichnerowicz, which gives $\CP\lesssim\sqrt{\log n}$ (Section [](#subsec:kls-architecture)), and the first version of Song–Zhang, through polynomials of every degree, which gives $\CP\lesssim16^{\log^*(n+2)}$ (Section [](#subsec:song-zhang-mechanism)). The second also isolated a spectral criterion: a first eigenfunction followed through polynomial tests of every degree, which turns coefficient bounds into a Poincaré bound, and whose exponential form is equivalent to KLS. The two proofs of 4 October 2026 both start from that criterion and close it differently. Bizeul, Klartag and Lehec prove the exponential coefficient bound directly, from cumulants of every order and a suspension construction (Section [](#subsec:kls-bkl-idea)); the second version of Song–Zhang keeps the iteration of the first and makes its losses summable (Section [](#subsec:kls-sz-v2-idea)).
 
 (subsec:kls-architecture)=
-### Localization and improved Lichnerowicz
+### Letwin: localization and improved Lichnerowicz
 
-Letwin's argument combines four ingredients, no one of which replaces another (Figure [](#fig:kls-architecture)).
-
-- **Stochastic localization creates Gaussian curvature.** One observes $X\sim\mu$ through Gaussian noise of decreasing size and follows the conditional law $\mu_t$; the tilt $e^{-t|x|^2/2}$ makes $\mu_t$ $t$-strongly log-concave, and on average $\mu_t$ is $\mu$ (Section [](#sec:family-sl)).
-
-- **Matrix martingale estimates control how much covariance survives.** The covariance process $A_t=\Cov(\mu_t)$ obeys an exact Riccati SDE whose noise is the third-moment tensor.
-
-- **Bochner/Lichnerowicz converts curvature plus covariance into a spectral gap.** Klartag's improved comparison $\CP\le\sqrt{\norm{\Cov}_\op/t}$ ([](#thm:improved-lichnerowicz)) is what makes short-time curvature usable.
-
-- **Directional third moments from quadratic control.** [](#prop:letwin-kappa) derives $\kappa_n\le2\sqrt2$ from [](#thm:letwin-qcts), through the moment-map and Stein-kernel mechanism of Section [](#sec:family-moment-map).
+Letwin's [](#thm:letwin-kls) combines four ingredients (Figure [](#fig:kls-architecture)). Stochastic localization observes $X\sim\mu$ through Gaussian noise of decreasing size and follows the conditional law $\mu_t$, which is $t$-strongly log-concave and is $\mu$ on average (Section [](#sec:family-sl)). The covariance process $A_t=\Cov(\mu_t)$ obeys an exact Riccati SDE whose noise is the third-moment tensor. Klartag's improved Lichnerowicz inequality $\CP\le\sqrt{\norm{\Cov}_\op/t}$ ([](#thm:improved-lichnerowicz)) converts curvature $t$ into a spectral gap. The new input bounds directional third moments by the quadratic estimate ([](#prop:letwin-kappa)), through the moment-map and Stein-kernel mechanism of Section [](#sec:family-moment-map).
 
 ::::{figure}
 :label: fig:kls-architecture
@@ -235,7 +227,7 @@ flowchart TB
   classDef res fill:#f2f2f2
 ```
 
-The architecture of [](#thm:letwin-kls). Boxed in colour: the contribution of Letwin's preprint. It does not replace stochastic localization; it discharges a crucial input to the localization–Lichnerowicz pipeline.
+The architecture of [](#thm:letwin-kls). Boxed in colour: the contribution of Letwin's preprint, an input to the localization–Lichnerowicz pipeline rather than a replacement for it.
 ::::
 
 **The bridge.** Define the directional third-moment parameter
@@ -252,37 +244,75 @@ the supremum over isotropic log-concave $\mu$ on $\R^n$ and $\theta\in S^{n-1}$.
 \boxed{\ C_{\mathrm P,n}\lesssim\kappa_n\sqrt{\log n}\ }
 ```
 
-and Letwin's $\kappa_n\le2\sqrt2$ ([](#prop:letwin-kappa)) is what turns [](#eq:kls-bridge) into [](#thm:letwin-kls). The proof in Section [](#sec:family-moment-map) chooses the minimum of the covariance-window time and the initial spectral gap, so it needs no prior quantitative bound on that gap.
+and Letwin's $\kappa_n\le2\sqrt2$ turns [](#eq:kls-bridge) into [](#thm:letwin-kls).
 
-**Where its logarithm lives.** Not in the moment-map calculation. To keep $\norm{A_t}_\op$ bounded along the path, Klartag and Lehec follow a smooth surrogate of the top eigenvalue, $\frac1\beta\log\Tr e^{\beta A_t}$, which approximates it within a constant only if $\beta\asymp\log n$. Its Itô drift is then of order $\kappa_n^2\log n$, covariance control survives until $t_*\asymp1/(\kappa_n^2\log n)$, and improved Lichnerowicz turns that time into $\CP\lesssim t_*^{-1/2}\lesssim\kappa_n\sqrt{\log n}$. The logarithm is the *entropy cost of replacing a matrix maximum by a soft maximum over $n$ directions* ([](#rem:log-is-entropy); the computation is Section [](#subsec:sl-where-the-log-lives)). That diagnosis is what makes target 3 of Section [](#sec:kls-synthesis) concrete.
+**Where its logarithm lives.** Not in the moment-map calculation. To keep $\norm{A_t}_\op$ bounded along the path, one follows a smooth surrogate of the top eigenvalue, $\frac1\beta\log\Tr e^{\beta A_t}$, which approximates it within a constant only if $\beta\asymp\log n$. Its Itô drift is then of order $\kappa_n^2\log n$, covariance control survives until $t_*\asymp1/(\kappa_n^2\log n)$, and improved Lichnerowicz turns that time into $\CP\lesssim t_*^{-1/2}\lesssim\kappa_n\sqrt{\log n}$. The logarithm is the *entropy cost of replacing a matrix maximum by a soft maximum over $n$ directions* ([](#rem:log-is-entropy); the computation is Section [](#subsec:sl-where-the-log-lives)). Section [](#subsec:kls-spike-obstruction) explains why a better pathwise bound on $\norm{A_t}_\op$ cannot remove it.
 
 (subsec:song-zhang-mechanism)=
-### Polynomial estimates and curvature
+### Song–Zhang, first version: polynomial estimates and curvature
 
 Song and Zhang keep the localization and the quadratic estimate, and replace improved Lichnerowicz by a conversion through polynomials of every degree (Chapter [](#sec:polynomial-curvature), Figure [](#fig:sz-loop)). The polynomials are the Appell polynomials of the measure, adapted to its moments in each degree, and their growth is measured by coefficients $c_k$; for the standard Gaussian they are the Hermite polynomials and $c_k=1/\sqrt{k!}$.
 
-- **Coefficients give curvature profiles.** For a measure of curvature $a$, bounds on the $c_k$ give a Poincaré constant much smaller than the Bakry–Émery bound $1/a$ ([](#thm:sz-curvature-comparison)).
-- **Localization improves the coefficients.** Feeding that profile back through localization improves the coefficient bounds, and the comparison can be run again. Each round replaces a logarithm by its logarithm: at depth $r$ the profile is $\CP\le\Gamma_r^2\ell_r(1/a)^2$, with $\ell_r$ the $r$-fold iterated logarithm and $\Gamma_r\le C4^r$ ([](#thm:sz-iterated-curvature)).
-- **Transfer to every measure.** Localizing an arbitrary isotropic log-concave measure to curvature $c/\log(en)$ transfers any such profile to it ([](#thm:sz-curvature-transfer)), so $\CP\lesssim16^r\ell_r(\log en)^2$ for every $r$; taking $r\approx\log^*(n+2)$ gives [](#thm:song-zhang-kls).
+**The spectral criterion.** For a measure of curvature $a$, bounds $c_k\le R^k\ell(k)^k/(k+1)^2$ give $\CP\lesssim R^2\ell(d)^2\max\{1,a^{-1/(d+1)}\}$, much better than the Bakry–Émery bound $1/a$ ([](#thm:sz-curvature-comparison)). The proof follows a first eigenfunction through repeated centered gradients and inverse square roots of the diffusion operator. Curvature consumes energy at each step, while centering removes mass that the polynomial tests measure; if the gap were too small, too much mass would survive for the energy available. With $\ell=1$ the comparison is exact at the end point: KLS is equivalent to one exponential bound $c_k\le A^k$, uniform in the degree, the dimension and the measure ([](#prop:sz-exponential-coefficients-equivalence)).
 
-**Where its loss lives.** In the factor $4$ per round, and in admissibility thresholds that grow with the depth, while the depth must grow, very slowly, with $n$ (Section [](#sec:sz-profile-iteration)). The end point is exact: KLS is equivalent to a single exponential bound $c_k\le A^k$ on the coefficients, uniform in the degree, the dimension and the measure ([](#prop:sz-exponential-coefficients-equivalence)). The second version of Song–Zhang gets past this loss by making the refinement costs summable (Chapter [](#sec:sz-v2-proof)); BKL prove the exponential end point itself through cumulants and suspension (Chapter [](#sec:bkl-proof)). The limitation described here belongs to the estimates of the first version.
+**The iteration.** Feeding the curvature profile back through localization improves the coefficient bounds, and the comparison can be run again. Each round replaces a logarithm by its logarithm: at depth $r$ the profile is $\CP\le\Gamma_r^2\ell_r(1/a)^2$, with $\ell_r$ the $r$-fold iterated logarithm and $\Gamma_r\le C4^r$ ([](#thm:sz-iterated-curvature)). Localizing an arbitrary isotropic log-concave measure to curvature $c/\log(en)$ transfers the profile to it ([](#thm:sz-curvature-transfer)), and $r\approx\log^*(n+2)$ gives [](#thm:song-zhang-kls).
+
+**Where its loss lives.** The comparison is paid again at every round, at a fixed factor $4$ in $\Gamma_r$, with admissibility thresholds that grow with the depth, while the depth must grow, very slowly, with $n$ (Section [](#sec:sz-profile-iteration)). The two proofs remove that loss in two different ways: one proves the exponential end point outright, the other makes the per-round costs summable.
+
+(subsec:kls-bkl-idea)=
+### Bizeul–Klartag–Lehec: cumulants and suspension
+
+**The calibration on the line.** The cumulants of a law are the Taylor coefficients of the logarithm of its Laplace transform. For the standard Gaussian that logarithm is $z^2/2$: the second cumulant is $1$ and every higher one vanishes. For the centred exponential $X=E-1$ it is $-z-\log(1-z)=\sum_{m\ge2}z^m/m$, so the $m$-th cumulant is $(m-1)!$. A bound on cumulants of every order, uniform over log-concave laws, must therefore allow factorial growth. In dimension $n$ the cumulant $\kappa_m^\mu$ is a tensor, and the quantity to bound is the full tensor with one slot fixed, $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}$, with every remaining entry summed and no factor of $n$.
+
+**The criterion in terms of tilts.** For a test function $f$, let $F_f(z)$ be its average under $\mu$ reweighted by $e^{\inner zx}$, and $\mathcal T_df$ the $d$-th Taylor tensor of $F_f$ at $0$, normalized by $1/d!$ ([](#def:bkl-tilt-cumulants)). Since $e^{\inner zx-\Lambda_\mu(z)}$ is the generating function of the Appell polynomials, the operator norm of $\mathcal T_d$ on $L^2(\mu)$ is exactly the coefficient $c_d$ of the first version ([](#prop:bkl-tilt-appell-duality)). The tilt-average criterion [](#thm:bkl-tilt-criterion) — if $\abs{\mathcal T_df}\le R^d\norm f_2$ for every $d$ and $f$, then $\CP\le CR^2$ — is the spectral criterion above in its exponential form, proved by the same eigenfunction argument with a two-block tensor symmetrization ([](#lem:bkl-tensor-symmetrization)).
+
+**Cumulants of every order, free of dimension.** [](#thm:bkl-cumulant-bound) gives $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ for every isotropic log-concave $\mu$, in every dimension: by the exponential, factorial growth is necessary, and up to a geometric factor it suffices. The proof runs a stochastic localization whose noise is rescaled by the inverse square root of the current covariance, so that the covariance decays on average like $e^{-t}I$ and every cumulant is measured in the inverse-covariance metric ([](#lem:bkl-cumulant-dynamics)). Along it, the $m$-th cumulant has the $(m+1)$-th as its noise and products of lower cumulants in its drift. The noise supplies positive energy at the next order, so a static bound at order $m$ and an integrated bound at order $m+1$ are proved together ([](#lem:bkl-cumulant-energy)), starting from the third-moment estimate. The binomial number of ways to split indices is cancelled by the factorials, and the remaining polynomial cost is absorbed into $K$. No KLS estimate enters.
+
+**Suspension.** A cumulant bound concerns linear observables; the criterion needs every $f$. BKL put $f$ into a coordinate. Take $N$ independent copies $X_1,\dots,X_N$ of an isotropic regular law, a smooth $f$ orthogonal to affine functions, $F_N=N^{-1/2}\sum_if(X_i)$, and adjoin the coordinate $S=(F_N+\eta)/\sqrt{1+2/\beta^2}$ with an independent centred Laplace variable $\eta$ of rate $\beta$. The joint law on $\R^{nN+1}$ is isotropic and, for $N$ large, log-concave: each copy of $f$ enters with weight $N^{-1/2}$, so its Hessian is absorbed by the curvature of the original law. A cumulant of this enlarged law with one slot in $S$ and $d$ slots in one copy of $X$ is the tilt derivative of $f$ divided by $\sqrt{N(1+2/\beta^2)}$, and the $N$ disjoint blocks cancel the factor $N^{-1}$ in the squared norm ([](#prop:bkl-suspension)). The dimension has grown from $n$ to $nN+1$ with $N\to\infty$: a cumulant bound depending on the dimension would be useless here, and the uniform one applies unchanged. The factor $(d!)^2$ of the cumulant of order $d+1$ cancels the $1/d!$ in $\mathcal T_d$, which leaves [](#thm:bkl-tilt-bound), $\abs{\mathcal T_df}\le(2K)^{d/2}\norm f_2$ for every centred log-concave $\mu$ with $\Cov\mu\preceq I$. This is the exponential end point of [](#prop:sz-exponential-coefficients-equivalence); with the tilt-average criterion it gives [](#conj:kls), first for regular measures, then by approximation. The full argument is Chapter [](#sec:bkl-proof).
+
+(subsec:kls-sz-v2-idea)=
+### Song–Zhang, second version: summable losses
+
+**The calibration in one line.** A fixed cost $C_*>1$ per repetition gives a factor $C_*^m$ after $m$ repetitions, however slowly $m$ grows with $n$; this is the loss of the first version. Costs $e^{C\alpha_i}$ with $\alpha_i=2^{-i}/16$ have product at most $e^{C/8}$, since $\sum_i\alpha_i=1/8$. The arithmetic proves nothing by itself: each repetition must remain admissible at its starting depth, and its estimates must concern the same functions. The second version of Song–Zhang supplies these estimates (Chapter [](#sec:sz-v2-proof)).
+
+**One radius for all degrees.** Instead of the Poincaré constant, the proof iterates a single coefficient radius, $\mathcal A(\mu)=\max\{1,\sup_{d\ge2}c_d(\mu)^{2/(d-1)}\}$, so that $c_d\le\mathcal A^{(d-1)/2}$ in every degree; for the standard Gaussian $\mathcal A=1$ ([](#def:sz-v2-common-radius)). The spectral conversion is $\CP\le2^{85}\mathcal A$ ([](#prop:sz-v2-common-radius)). Because the radius, not $\CP$, is refined, this fixed factor is paid once, at the end, rather than at every round as in the first version.
+
+**Four improvements.** First, polynomial cost in the logarithmic depth: [](#thm:sz-v2-iterated-curvature) replaces $16^r$ by $(r+1)^{1/3}$, because blocks of inverse-gradient iterates retain centering and symmetry information over many steps instead of charging a loss at each one (Chapter [](#sec:sz-v2-blocks)); via the transfer, $\CP\lesssim(1+\log^*(n+2))^{1/3}$ ([](#thm:sz-v2-dimension-bound)). Second, height reduction: repeating the improvement replaces $\log^*$ by $\log^*\circ\log^*$ and so on, at a fixed cost $C_*$ per repetition ([](#prop:sz-v2-height-reduction)), which still grows with the number of repetitions. Third, multipliers close to one: with a margin $\delta$, $m$ refinements cost $e^{C\delta m}$ ([](#prop:sz-v2-small-loss)), at the price of a degree cutoff of order $\delta^{-2}$ and a starting depth of order $\delta^{-12}$; earlier coefficient bounds are kept on the degree ranges where they are stronger. Fourth, summable costs: the margins $\alpha_i=2^{-i}/16$ give a multiplicative cost at most $e^{C_A/8}$ and, once the growing starting depths are absorbed into the improving height profile, an additive cost of order $2^{-i}$ ([](#prop:sz-v2-summable-budgets)).
+
+**The end.** For a fixed regular measure of curvature $a$, finitely many refinements bring the height profile at $\max\{1,a^{-1}\}$ down to its floor, the profile gives a radius bound independent of the measure, and $\CP\le2^{85}\mathcal A$ converts it once; approximation then gives [](#thm:sz-v2-kls). The reconstruction uses neither the BKL estimates nor their consequences.
+
+The two proofs are compared step by step, with what each one gives beyond KLS, in Chapter [](#sec:kls-synthesis).
 
 (sec:kls-remaining)=
 ## Obstacles for alternative arguments
 
-The two proofs, Chapters [](#sec:sz-v2-proof) and [](#sec:bkl-proof), change the role of the questions below. They concern distinct ways to obtain dimension-free estimates and stronger structural information. The quadratic and third-moment bounds of [](#thm:letwin-qcts) and [](#prop:letwin-kappa) are common inputs, but they do not by themselves supply these estimates.
+KLS is proved, and the questions of this section concern other arguments: a proof by a different mechanism — deterministic, or with a sharp constant — or a proof of a property stronger than KLS, such as the moment-Hessian inequality or the occupation estimate of Section [](#sec:overview-results). Three obstacles constrain any such attempt: a pattern that every classical family meets (Section [](#subsec:kls-adaptive-residue)), a counterexample to the most natural repair (Section [](#subsec:kls-spike-obstruction)), and a cheap test that any proposal should pass (Section [](#subsec:kls-tensorization-test)). The quadratic and third-moment bounds of [](#thm:letwin-qcts) and [](#prop:letwin-kappa) are common inputs, but they do not by themselves supply dimension-free estimates.
 
 (subsec:kls-adaptive-residue)=
 ### Fixed and averaged, against adaptive and uniform
 
-Needles control one-dimensional conditional laws; stochastic localization controls covariance and directional third moments; moment maps control fixed matrix energies; parallel coupling controls linear exponential tilts. Section [](#subsec:kls-reading-map) records the limitations of those estimates. BKL pass beyond the third moment to all cumulants, then encode a general function in an extra coordinate. Uniformity in dimension makes that suspension possible.
+Needles control one-dimensional conditional laws; stochastic localization controls covariance and directional third moments; moment maps control fixed matrix energies; parallel coupling controls linear exponential tilts. Each estimate is fixed in advance or averaged, while a small spectral gap is carried by an object that the measure, or an extremal function, selects. The table of Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing. Both proofs get past this through polynomial tests of every degree. BKL pass beyond the third moment to all cumulants, then encode a general function in an extra coordinate, which uniformity in dimension makes possible. The second version of Song–Zhang controls the centering losses of an eigenfunction iteration degree by degree.
 
 Two directions remain meaningful for a different proof:
 
 - **Improve the polynomial comparison by another mechanism.** The exponential Appell criterion [](#prop:sz-exponential-coefficients-equivalence) identifies the end point. BKL prove it through [](#thm:bkl-tilt-bound); an independent derivation must supply different estimates, including control of centering losses.
-- **Establish an adapted structural estimate.** The moment map uses a Hessian field; the fixed-eigenfunction argument follows the function selected by a small spectral gap; conditional fibers select directions from the measure; the fixed-cut argument retains a potential bottleneck. Their sufficient conditions are not consequences of KLS by any converse proved here.
+- **Establish an adapted structural estimate.** The moment map uses a Hessian field; the fixed-eigenfunction argument follows the function selected by a small spectral gap; conditional fibers select directions from the measure; the fixed-cut argument, kept as an archive, retains a potential bottleneck. Their sufficient conditions are not consequences of KLS by any converse proved here.
 
-These are questions about mechanisms and stronger properties, not reasons to describe the BKL conclusion as absent from the literature.
+(subsec:kls-reading-map)=
+### The six families side by side
+
+(sec:kls-strategy-map)=
+
+Chapters [](#sec:family-needles)–[](#sec:family-coupling) survey six families of methods, from classical needles to the parallel coupling behind the thin-shell theorem. The table collects what each controls and the estimate it does not supply by itself.
+
+| Family | What is controlled | The missing estimate | Section |
+|---|---|---|---|
+| Classical needles | One-dimensional conditional measures, sharply | A decomposition inheriting *operator* covariance: global isotropy is not inherited needle by needle | [](#sec:family-needles) |
+| Stochastic localization | Short-time covariance and the directional third-moment estimate [](#prop:letwin-kappa) | Control of $\lmax(A_t)$ along the whole path without the $\log n$ cost of a soft maximum; see [](#prop:covariance-spike) | [](#sec:family-sl) |
+| Bochner, $H^{-1}$, heat flow | Coordinate and quadratic spectral mass of the first eigenspace | Uniform estimates for the derivatives of an arbitrary $f$: trace, coordinate or averaged spectral information does not bound every slow mode | [](#sec:family-bochner) |
+| Moment maps and Stein kernels | Fixed deterministic matrix energies $\E\Tr(BHBH)$; and, exactly, $\CMH$ on the line, on products and on every log-concave Dirichlet law ([](#sec:cmh-exact-cases)) | Control when the matrix or direction depends on $X$ or on $f$, that is, the correlation of the random Stein kernel with an arbitrary $\nabla f$. Even the linear sector is missing: $\lmax(\E H^2)\le4$ does not follow from $\Tr(\E H^2)\le2n$ ([](#prop:letwin-not-gate-zero)) | [](#sec:family-moment-map) |
+| Transport (Caffarelli, Föllmer, entropic barrier) | Polylogarithmic averaged derivative bounds | A dimension-free expected operator derivative | [](#sec:family-transport) |
+| Parallel coupling | Linear exponential tilts $e^{\inner\theta x}\mu$ | Couplings for arbitrary functional perturbations | [](#sec:family-coupling) |
 
 (subsec:kls-spike-obstruction)=
 ### The covariance spike, and why the direct repair fails
@@ -386,7 +416,7 @@ Three problems are presented here for a reader who wants to start. Each is state
 
 **The occupation estimate for one eigenfunction, [](#conj:mm-spectral-occupation).** *Why it matters:* it would give a localization mechanism that ignores covariance spikes: it asks for control of an object — the tensor $H_t$ of one fixed eigenfunction — that does not see spikes in directions the eigenfunction does not use, so it is not ruled out by [](#prop:covariance-spike); by [](#prop:spectral-sufficiency) it implies KLS. *What there is:* the time-weighted budget [](#lem:mm-time-weighted-fixed-source) and the stopped source bound [](#lem:mm-stopped-window-source). The small-gap occupation implication in [](#prop:mm-window-occupation) has an empty admissible class. *Where to start:* Section [](#subsec:spectral-window-chain). What is missing is control of the source after covariance exits on a time interval of universal length; the time-weighted and stopped budgets do not supply that control.
 
-From here, the [reading paths](#sec:reading-paths) of the welcome page lead on: to the comparison of the four approaches in Section [](#sec:frontier-atlas), to the entry chapter of one approach, or to how results are checked before one contributes.
+From here, the [reading paths](#sec:reading-paths) of the welcome page lead on: to the map of the alternative mechanisms in Section [](#sec:frontier-atlas), to the entry chapter of one approach, or to how results are checked before one contributes.
 
 % Agents: the brief's neighbourhood also lists conj:trace-upgrade (unlabelled here, Section sec:open) and
 % ass:uniform-cmh-approximants; they are not presented as entry problems because conj:trace-upgrade has no

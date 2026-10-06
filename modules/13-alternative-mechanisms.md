@@ -4,58 +4,91 @@ numbering:
 ---
 
 (sec:frontier-atlas)=
-# The methods at a glance
+# Alternative mechanisms after KLS
 
-This section is the comparative map: what each family of methods controls and what it misses, what each of the four approaches tries, what it has established and what blocks it, which natural variants are already dead, and where to start. It is deliberately placed before any approach is developed. Everything in it is a pointer: the reasons are given where the overview explains the obstacle (Section [](#sec:kls-remaining)), the full development of each approach is in its entry chapter, and the questions that remain after the two proofs of KLS are in Section [](#sec:kls-synthesis).
+The two proofs of KLS (Chapter [](#sec:kls-synthesis)) give a universal constant that neither evaluates, through estimates on polynomials of every degree. This chapter maps three further mechanisms for the Poincaré bound, each developed in its own chapter, by what each would *add* to those proofs: a constant, an object, or a kind of argument that they do not provide. Each would prove KLS again, but none is a way to KLS any more; each is a statement of its own, and the truth of KLS does not prove it. A fourth method, the fixed cut, is kept as an archive for what its obstructions teach.
 
-(subsec:kls-reading-map)=
-## The families of methods, side by side
-
-(sec:kls-strategy-map)=
-
-Sections [](#sec:family-needles)–[](#sec:family-coupling) survey six families of methods, from classical needles to the parallel coupling behind the thin-shell theorem. The table collects what each controls and the estimate still missing; its last rows give the first and second versions of Song–Zhang and the proof of Bizeul–Klartag–Lehec (BKL), each an argument rather than a family:
-
-| Family | What is now controlled | The missing estimate | Section |
-|---|---|---|---|
-| Classical needles | One-dimensional conditional measures, sharply | A decomposition inheriting *operator* covariance: global isotropy is not inherited needle by needle | [](#sec:family-needles) |
-| Stochastic localization | Short-time covariance and the directional third-moment estimate [](#prop:letwin-kappa) | Control of $\lmax(A_t)$ along the whole path without the $\log n$ cost of a soft maximum; see [](#prop:covariance-spike) | [](#sec:family-sl) |
-| Bochner, $H^{-1}$, heat flow | Coordinate and quadratic spectral mass of the first eigenspace | Uniform estimates for the derivatives of an arbitrary $f$: trace, coordinate or averaged spectral information does not bound every slow mode | [](#sec:family-bochner) |
-| Moment maps and Stein kernels | Fixed deterministic matrix energies $\E\Tr(BHBH)$; and, exactly, $\CMH$ on the line, on products and on every log-concave Dirichlet law ([](#sec:cmh-exact-cases)) | Control when the matrix or direction depends on $X$ or on $f$, that is, the correlation of the random Stein kernel with an arbitrary $\nabla f$. Even the linear sector is missing: $\lmax(\E H^2)\le4$ does not follow from $\Tr(\E H^2)\le2n$ ([](#prop:letwin-not-gate-zero)) | [](#sec:family-moment-map) |
-| Transport (Caffarelli, Föllmer, entropic barrier) | Polylogarithmic averaged derivative bounds | A dimension-free expected operator derivative | [](#sec:family-transport) |
-| Parallel coupling | Linear exponential tilts $e^{\inner\theta x}\mu$ | Couplings for arbitrary functional perturbations | [](#sec:family-coupling) |
-| Song–Zhang, first version: polynomial estimates and curvature | An iterated-logarithm bound for all test functions | An independent improvement requires control of depth-dependent comparison losses | [](#sec:polynomial-curvature) |
-| Song–Zhang, second version: repeated refinement | Universal bound through summable losses | Compare the exact replacement estimates with the earlier conditional-startup and comparison questions | [](#sec:sz-v2-proof) |
-| BKL cumulants and suspension | Dimension-free KLS bound and uniform exponential tilt coefficients | This argument supplies none of the additional structural premises below | [](#sec:bkl-proof) |
-
-The six families repeatedly meet the difference between fixed or averaged control and control of an object selected by the measure or an extremal function (Section [](#subsec:kls-adaptive-residue)). The polynomial arguments get around it in three steps. The first version of Song–Zhang, through the comparison [](#thm:sz-curvature-comparison), reaches every test function by controlling the centering and symmetry errors of an eigenfunction iteration, at a cost that grows with the depth of the iteration ([](#thm:sz-iterated-curvature)). The second version of Song–Zhang removes that growth by repeated refinement whose losses are summable, so that the total cost is a universal constant (Chapter [](#sec:sz-v2-proof)). BKL bypass the iteration: they estimate cumulants of every order and, by suspension — encoding an arbitrary test function in an additional coordinate of a log-concave measure — obtain directly the exponential coefficient bound that the first version identified as the end point ([](#prop:sz-exponential-coefficients-equivalence); Chapter [](#sec:bkl-proof)).
+Everything here is a pointer. The obstacles are explained once, in the overview (Section [](#sec:kls-remaining)); the full development of each mechanism is in its entry chapter; and each statement displays its status where it is stated.
 
 (subsec:atlas-approaches)=
-## The four approaches, side by side
+## The mechanisms, side by side
 
-The four approaches are this manuscript's own work. Each is named by the object it retains — the moment map, the fixed eigenfunction, conditional fibers and the fixed cut — and each responds to the obstacle of Section [](#sec:kls-remaining).
+**What each would add.** The moment map has an implication towards KLS that loses no constant, and exact values on products and Dirichlet laws; it would give a deterministic proof, with no stochastic localization, and the constant $4$, which the exponential on the line attains (Section [](#subsec:after-constant-question)). The fixed eigenfunction would give a localization mechanism that ignores covariance spikes in directions the eigenfunction does not use. Conditional fibers would give an elementary mechanism whose only analytic input is one-dimensional. The order is that of what each has established; it is not a forecast.
 
-**How they are ordered.** By what each has established, and by what each would add to the two proofs. The moment map has an implication towards KLS that loses no constant and exact values on products and Dirichlet laws; it would give a deterministic proof with the constant $4$. The fixed eigenfunction and conditional fibers each reduce KLS to one explicit estimate; the first would give a localization mechanism that ignores covariance spikes, the second an elementary mechanism resting on one-dimensional inequalities. The fixed cut is the record of a method whose results are its obstructions and its ceiling: a conditional bridge, a ceiling on what its bootstrap can deliver, and counterexamples to its natural intermediate estimates. The order is not a forecast. Which questions to work on first is a separate judgement, given in Section [](#subsec:atlas-assessment).
+| Mechanism | Object retained | The idea in one line | What it would add to the two proofs | Chapter |
+|---|---|---|---|---|
+| Moment map | Hessian metric of the moment map, Haar fields, Schur fibers | Prove one deterministic inequality for the moment-map Hessian, $\mathrm{CMH}(4)$, which bounds the affine Poincaré constant with no loss ([](#thm:cmh-implies-affine-poincare)) | A deterministic proof with the constant $4$; its linear test has a sharp form with constant $2$, [](#conj:gate-zero-sharp) | [](#sec:moment-map-cmh) |
+| Fixed eigenfunction | Covariance tensor of a first spectral mode | Follow a first eigenfunction through stochastic localization; one occupation estimate, [](#conj:mm-spectral-occupation), then gives KLS ([](#prop:spectral-sufficiency)) | A localization mechanism blind to covariance spikes that the eigenfunction does not see | [](#sec:spectral-approach) |
+| Conditional fibers | One isotropic frame of line resamplings, chosen from the measure before the test function | A dimension-free gap for the resampling form, [](#conj:conditional-fiber-frame), gives KLS with constant $4C$ ([](#lem:conditional-fiber-form)) | A mechanism using only one-dimensional log-concave inequalities and a choice of directions | [](#sec:conditional-fiber-frame) |
+| Fixed cut (archive) | Mass and two-colour covariance of one prospective bottleneck set | Follow one balanced set through stochastic localization; KLS follows if it cannot be identified before a universal time ([](#lem:survival-implies-kls)) | Kept for its results, which are obstructions and a ceiling | [](#sec:introduction) |
 
-% Agent note: each approach is tracked in research/program/portfolio.yaml by ids carrying its letter; the portfolio is search state and carries no truth value.
+(subsec:synthesis-constraint)=
+## The constraint every mechanism must meet
 
-| Approach | Object retained | The idea in one line | Section |
-|---|---|---|---|
-| Moment map | Hessian metric of the moment map, Haar fields, Schur fibers | Prove one deterministic inequality for the moment-map Hessian, $\mathrm{CMH}(4)$, which bounds the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)) | [](#sec:moment-map-cmh) |
-| Fixed eigenfunction | Covariance tensor of a first spectral mode | Follow a first eigenfunction through stochastic localization; one occupation estimate then gives KLS ([](#prop:spectral-sufficiency)) | [](#sec:spectral-approach) |
-| Conditional fibers | One isotropic frame of line resamplings, chosen from the measure before the test function | A dimension-free gap for the resampling form gives KLS with constant $4C$ ([](#lem:conditional-fiber-form)) | [](#sec:conditional-fiber-frame) |
-| Fixed cut | Mass and two-colour covariance of one prospective bottleneck set | Follow one balanced set through stochastic localization; KLS follows if it cannot be identified before a universal time ([](#lem:survival-implies-kls)) | [](#sec:introduction) |
+The covariance spike ([](#prop:covariance-spike), explained in Section [](#subsec:kls-spike-obstruction)) cuts in two directions. A direct “bound $\norm{A_t}_\op$ better” program cannot work, since the statement it needs is false; and rare spikes can be harmless, so a successful potential must recognize them rather than charge the full top eigenvalue whenever one occurs. The working criterion is the tensorization test of Section [](#subsec:kls-tensorization-test): evaluate the proposed quantity on a product of independent copies, and reject it if it charges $n$ independent coordinates $n$ times. It is the first thing to check on each direction below.
 
 (subsec:atlas-state)=
-## What each approach gives, and what blocks it
+## What each mechanism gives, and what blocks it
 
-The table above says what each approach *tries*; this one says where each has got to. The middle column is the approach's own contribution, the right column the statement whose absence stops it; the full account of both is the opening summary of each entry chapter, and each statement displays its status where it is stated.
+The table above says what each mechanism *tries*; this one says where each has got to. The middle column is the mechanism's own contribution, the right column the statement whose absence stops it; the full account of both is the opening summary of each entry chapter.
 
-| Approach | What it gives | What blocks it |
+| Mechanism | What it gives | What blocks it |
 |---|---|---|
 | Moment map | The target inequality given precise operator data ([](#def:cmh)) and compared with the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)); exact values on the line, on products and on every log-concave Dirichlet law; the linear sector resolved into a directional third moment ([](#lem:linear-sector-third-moment)), with the exponential cones as its first non-product equality set | Constructing the proof: the invariant multiplier lift ([](#conj:mm-invariant-lift)) — how a multiplier defined on one block of a Schur split acts on the whole space — and the global square-root commutator ([](#conj:mm-square-root-commutator)). Testing it: the linear test ([](#conj:gate-zero), sharp form [](#conj:gate-zero-sharp)) and the second variation at the product ([](#conj:cmh-second-variation)) |
 | Fixed eigenfunction | The exact fixed-function equation and the stopped source estimate [](#lem:mm-stopped-window-source) | Source occupation on a universal time interval, [](#conj:mm-spectral-occupation); the small-gap hypothesis of the window implication [](#prop:mm-window-occupation) is met by no measure, so it does not shorten the way |
 | Conditional fibers | The resampling form, closed and compared with the gradient ([](#lem:conditional-fiber-form)); the natural simplex frame ruled out ([](#prop:conditional-fiber-root-obstruction)) | A universal form gap, [](#conj:conditional-fiber-frame), or a decision on the all-frame simplex problem using growing-degree or nonpolynomial tests; every fixed polynomial degree has a uniform positive floor ([](#lem:fiber-polynomial-floor)) |
-| Fixed cut | The bootstrap comparison and its interface functional ([](#thm:bootstrap)), the insufficiency of the crude evaluation ([](#rem:crude-insufficient)) and the ceiling [](#prop:ceiling); the coordinate budgets of the product stress test (Section [](#sec:product-stress)) | For the all-cut variant, the operator-to-trace upgrade [](#conj:trace-upgrade); for the near-Cheeger variant, a tensor-stable replacement for the weighted package that [](#prop:weighted-spectator-obstruction) rules out |
+| Fixed cut (archive) | The bootstrap comparison and its interface functional ([](#thm:bootstrap)), the insufficiency of the crude evaluation ([](#rem:crude-insufficient)) and the ceiling [](#prop:ceiling); the coordinate budgets of the product stress test (Section [](#sec:product-stress)) | For the all-cut variant, the operator-to-trace upgrade [](#conj:trace-upgrade); for the near-Cheeger variant, a tensor-stable replacement for the weighted package that [](#prop:weighted-spectator-obstruction) rules out |
+
+(subsec:atlas-moment-map-direction)=
+## The moment map: from fixed matrices to a nonlinear estimate
+
+Brascamp–Lieb in moment-map coordinates already gives [](#eq:mm-brascamp-lieb), so KLS would follow from
+
+```{math}
+:label: eq:nonlinear-moment-map
+\E\inner{\tau_\mu\nabla f}{\nabla f}\lesssim\E\abs{\nabla f}^2 .
+```
+
+The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate with $\nabla f(X)$. Letwin's fixed-matrix inequality controls a deterministic matrix $B$; an extension of this kind would need to handle an $X$-dependent direction or matrix field.
+
+The moment-map chapters (Chapter [](#sec:moment-map-cmh)) pursue a precise form of this idea: the inequality $\mathrm{CMH}(4)$ ([](#def:cmh)), which bounds the affine Poincaré constant by [](#thm:cmh-implies-affine-poincare). Two facts developed there change how the extension should be read. $\mathrm{CMH}(4)$ is not known to be a reformulation of [](#eq:nonlinear-moment-map) or of [](#conj:kls): it also charges a solenoidal excess ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison)). And its cheapest necessary consequence, the linear test — the inequality tested on linear functions only ([](#conj:gate-zero)) — is itself an average-versus-uniform statement, which [](#prop:letwin-not-gate-zero) shows no fixed-matrix argument supplies: the moment map relocates the difficulty rather than escaping it. How hard even the linear test is, [](#cor:gate-zero-third-moment) calibrates: its sharp form implies $\kappa_n\le2$, so proving it is at least as hard as a sharp directional third-moment bound.
+
+% Agent note: Route C is tracked by the `ap:c-…` approaches of research/program/portfolio.yaml.
+
+(subsec:atlas-function-adapted)=
+## The fixed eigenfunction: localization adapted to one function
+
+For a fixed test function set $M_t(f)=\E_{p_t}f$, so that
+
+```{math}
+:label: eq:function-adapted-sde
+\dd M_t(f)=\Cov_{p_t}(X,f)\cdot\dd W_t .
+```
+
+A covariance-based estimate bounds the integrand by the worst case,
+
+```{math}
+:label: eq:worst-case-step
+\abs{\Cov_{p_t}(X,f)}^2\le\norm{A_t}_\op\Var_{p_t}f ,
+```
+
+which discards essentially all information about $f$. A direct estimate of
+
+```{math}
+:label: eq:function-adapted-occupation
+\int\frac{\abs{\Cov_{p_t}(X,f)}^2}{\Var_{p_t}f}\dd t
+```
+
+for a near-extremizing eigenfunction would avoid the top-eigenvalue entropy cost of [](#eq:logtraceexp) and would respect tensorization, since [](#eq:function-adapted-occupation) factorizes over independent blocks in a way that $\norm{A_t}_\op$ does not.
+
+This is exactly [](#conj:mm-spectral-occupation), the central problem of the fixed-eigenfunction chapter (Chapter [](#sec:spectral-approach)). Its analogue for a fixed cut is [](#conj:trace-upgrade), the operator-to-trace upgrade of Chapter [](#sec:open).
+
+(subsec:atlas-coupling-beyond-tilts)=
+## A further direction: parallel coupling beyond linear tilts
+
+Parallel coupling, the tool behind the thin-shell theorem, controls the finite-dimensional family of exponential tilts $e^{\inner\theta x}\mu(\dd x)$ (Chapter [](#sec:family-coupling)). A coupling for perturbations $(1+\eps f)\mu$, with cost controlled by $\int\abs{\nabla f}^2\dd\mu$, would address arbitrary spectral directions directly rather than one linear family. No statement of this manuscript formulates such an extension, and none of the mechanisms above carries it.
+
+% Agent note: this direction has no ledger node and no portfolio approach.
 
 (subsec:atlas-barriers)=
 ## What is already ruled out
@@ -66,29 +99,35 @@ Negative results are the most reusable part of a search, and four of them constr
 
 - **Independent spectators and global covariance weights.** [](#prop:weighted-spectator-obstruction) supplies the product-cylinder witnesses relevant to [](#ass:weighted-package) and [](#conj:weighted-excess-rate).
 
-- **No matrix-moment argument supplies the linear test.** The linear test is the moment-Hessian inequality tested on linear functions only, the cheapest test any proof of it must pass. [](#prop:letwin-not-gate-zero): the fixed-matrix estimate does not supply it, so the moment-map approach relocates the average-versus-uniform difficulty rather than escaping it.
+- **No matrix-moment argument supplies the linear test.** The linear test is the moment-Hessian inequality tested on linear functions only, the cheapest test any proof of it must pass. [](#prop:letwin-not-gate-zero): the fixed-matrix estimate does not supply it, so the moment-map mechanism relocates the average-versus-uniform difficulty rather than escaping it.
 
-- **The natural conditional-fiber root frame fails.** The most obvious implementation of the conditional-fiber approach is ruled out by [](#prop:conditional-fiber-root-obstruction), which is why the approach is stated as an all-frame question, [](#conj:conditional-fiber-frame).
+- **The natural conditional-fiber root frame fails.** The most obvious implementation of the conditional-fiber mechanism is ruled out by [](#prop:conditional-fiber-root-obstruction), which is why the question is stated for all frames, [](#conj:conditional-fiber-frame).
 
 Two further cautions are advisory rather than established: the two-tail obstruction ([](#rem:two-tail-slice-bounds)) and the circularity warning of Section [](#sec:excess). They are recorded as remarks for exactly that reason: they guide work, but no statement here is excluded on their strength.
 
 (subsec:atlas-assessment)=
-## Research priorities
+## What the two proofs do not give
 
-The second version of Song–Zhang and BKL close the argument differently on shared spectral foundations. The four approaches remain relevant for alternative proofs and structural questions; a proof of KLS does not establish their sufficient conditions. The following work retains that distinction.
+A proof of KLS proves none of the sufficient conditions above, by any implication established here; conversely, each of them, once proved, would give a further proof of KLS with the property listed in the first table. For each mechanism, the table records what the two proofs contribute and what is still needed.
 
-1. **Compare the polynomial estimates.** The second version of Song–Zhang supplies a repeated-refinement proof distinct from BKL, described in [](#sec:sz-v2-proof). The common finite-block estimates, outer profiles, summable costs and final composition have been checked here. No BKL coefficient bound enters this argument. The remaining comparison concerns the exact older conditional-startup and near-unit-comparison formulations, which differ from the new common-radius construction. The exponential characterization [](#prop:sz-exponential-coefficients-equivalence) identifies the end point but does not prove the required estimates. Target 5 of Section [](#subsec:synthesis-targets) explains this comparison.
-
-The polynomial–curvature argument also changes what each approach is measured against:
-
-| Approach | What the polynomial–curvature argument changes | What still needs its own estimate |
+| Mechanism | What the two proofs contribute | What still needs its own argument |
 |---|---|---|
-| Moment map | The quadratic input feeds a higher-degree argument that reaches all functions without the moment-Hessian inequality | The linear test [](#conj:gate-zero) and the commutator [](#conj:mm-square-root-commutator), which this argument does not establish |
-| Fixed eigenfunction | A second way to use an extremal eigenfunction: polynomial control of centering losses instead of a universal-time source occupation | [](#conj:mm-spectral-occupation); the spectral comparison does not estimate the stochastic source |
-| Conditional fibers | An all-function comparison through polynomial tensors, to set beside what a resampling form retains | [](#conj:conditional-fiber-frame); the polynomial comparison constructs no frame, and the root-frame obstruction still applies |
-| Fixed cut | A sharper general bound against which improved cut estimates are measured | [](#conj:trace-upgrade) and a spectator-inert replacement for the weighted package; [](#prop:weighted-spectator-obstruction) still applies |
+| Moment map | KLS with a universal constant, not evaluated; nothing on the moment-map Hessian. The linear test [](#conj:gate-zero) is not a known consequence of KLS | The value $4$: universal $\mathrm{CMH}(4)$, its sharp linear test [](#conj:gate-zero-sharp), and the commutator [](#conj:mm-square-root-commutator) |
+| Fixed eigenfunction | A first eigenfunction followed through deterministic spectral comparisons, with polynomial control of centering losses instead of a source estimate along localization | [](#conj:mm-spectral-occupation): the polynomial comparisons do not estimate the stochastic source |
+| Conditional fibers | An all-function comparison through polynomial tensors | [](#conj:conditional-fiber-frame): the polynomial comparison constructs no frame, and the root-frame obstruction still applies |
 
-BKL does not supply the moment-Hessian, occupation or conditional-frame premises by any implication established here. Several inputs above come from the preprints discussed in Section [](#subsec:synthesis-caution); the conditional implications of the four approaches keep their premises.
+For the archived fixed cut, KLS likewise supplies neither [](#conj:trace-upgrade) nor a spectator-inert replacement for the weighted package; [](#prop:weighted-spectator-obstruction) still applies.
+
+(subsec:synthesis-caution)=
+## Scope of the quadratic input
+
+Several mechanisms start from Letwin's quadratic estimate [](#thm:letwin-qcts) and its directional consequence [](#prop:letwin-kappa). Their source is the first-version preprint described in Section [](#subsec:mm-audit); the status shown on each statement records the verification here, separately from that publication history. The imports from Chen and Klartag concern the moment Hessian, the radial variance and the full third tensor, not a dimension-free directional bound or control of arbitrary nonlinear tests.
+
+The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to time $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, control of orientation, or an adaptive matrix estimate. Letwin's general bound [](#thm:letwin-kls), whose minimum-time argument is explained in Chapter [](#sec:family-moment-map), is dimension-dependent: it does not extend the covariance window to universal time and does not supply the linear test of the moment-Hessian inequality. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls) and [](#thm:intro-all-cut) keep their Carleson or centroid premises.
+
+Song and Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature). Neither their bounds nor the inverse-operator constructions behind them supply the moment-Hessian inequality, its sharp linear test, or the universal-time occupation estimate [](#conj:mm-spectral-occupation).
+
+% Agent note: source versions describe provenance; badges and proof links carry verification status. Preserve explicit antecedents and dimension-dependent windows when updating this section. Theorem 1.1 has its own proof link; its time-restricted bridge is separate from the matrix, quadratic, and covariance imports.
 
 (subsec:atlas-external-reading)=
 ## Suggested external reading order

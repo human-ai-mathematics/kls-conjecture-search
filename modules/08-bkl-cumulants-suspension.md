@@ -23,8 +23,9 @@ The second version of Song–Zhang, deposited the same day and presented in
 the next chapter, [](#sec:sz-v2-proof), closes the argument differently,
 through repeated refinement. BKL cite the first
 version of Song–Zhang and use its spectral mechanism; the two proofs share
-that foundation. The reconstruction here does not depend on the estimates of
-the second version.
+that foundation. What each reconstruction uses and excludes is collected in
+the note on provenance of Section [](#subsec:proofs-provenance), and the two
+proofs are compared in Chapter [](#sec:kls-synthesis).
 
 ## A one-dimensional calibration
 
@@ -318,9 +319,9 @@ by scalar Poincaré stability. This is the BKL argument.
 
 The exponential estimate also supplies the initialization bound used in the
 older polynomial iteration, without a curvature-profile premise. The consequence
-[](#cor:bkl-uniform-conditional-initialization) keeps its BKL provenance, and
-that matters: deriving coefficients from BKL and then recovering KLS
-does not give an independent proof.
+[](#cor:bkl-uniform-conditional-initialization) keeps its BKL provenance:
+recovering KLS from it through that iteration is not an independent proof
+(Section [](#subsec:proofs-provenance)).
 
 :::{prf:corollary} Uniform conditional initialization from BKL
 :label: cor:bkl-uniform-conditional-initialization
@@ -339,7 +340,5 @@ affine subspace. One may take $G=\max\{1,4\sqrt{2K}\}$ for $K$ as in
 Indeed $(d+1)^2\le4^d$ and $\ell_r(d)\ge1$, so enlarging the exponential
 base absorbs the denominator uniformly in degree and depth. This does not
 estimate the accumulated centering losses of a different spectral comparison.
-Nor does any implication established here deduce the canonical moment-Hessian
-inequality, the proposed occupation estimates or the proposed conditional
-frame from KLS. Those questions remain in Chapters [](#sec:moment-map-cmh),
-[](#sec:spectral-approach), [](#sec:conditional-fiber-frame) and [](#sec:introduction).
+What KLS does not give for the alternative mechanisms is in Section
+[](#subsec:atlas-assessment).
