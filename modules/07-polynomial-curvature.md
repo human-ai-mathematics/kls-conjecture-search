@@ -4,19 +4,21 @@ numbering:
 ---
 
 (sec:polynomial-curvature)=
-# The current frontier: polynomial estimates and curvature
+# Polynomial estimates and curvature
 
-This chapter is not a seventh family. It presents one recent argument, Song and Zhang's [@SongZhang2026IteratedLogKLS], which gives the slowest dimension dependence known for the Poincaré constant, $16^{\log^*(n+2)}$, and does so for every test function. It is set apart from the survey because it differs from the six families in kind: they control restricted objects sharply and lose on the rest (Section [](#subsec:kls-adaptive-residue)), while this argument already reaches every function and loses only a factor that grows with the dimension. Reducing that loss is the first of the two ways forward of Section [](#subsec:kls-adaptive-residue); the four approaches of this manuscript take the second. The argument is reconstructed and checked here, and the chapter follows the same plan as the family chapters, so that the two can be compared.
+Song and Zhang’s first-version polynomial–curvature argument [@SongZhang2026IteratedLogKLS] gives the dimension-dependent bound $16^{\log^*(n+2)}$ for every test function. It precedes the BKL announcement and supplies the spectral mechanism used there. This chapter reconstructs the original iteration and locates its losses; Chapter [](#sec:bkl-proof) explains how cumulants and suspension supply its exponential coefficient end point by a different argument.
 
 **Object followed.** The Appell polynomials of the measure — in each degree, the polynomials adapted to its moments — and a first eigenfunction, followed through repeated centred gradients and inverse square roots of the diffusion operator.
 
 **What it buys.** A conversion that reaches every test function. Bounds on the Appell polynomials of all degrees give a spectral gap for strongly log-concave measures, and stochastic localization turns a spectral gap back into better polynomial bounds [@SongZhang2026IteratedLogKLS, Sections 3–7]. Unlike the quadratic and third-moment estimates of Families 2–4 (Sections [](#sec:family-sl)–[](#sec:family-moment-map)), the output is a Poincaré inequality for arbitrary functions; what is left to improve is the loss incurred each time the two conversions are composed.
 
-**Sharpest result.** The iterated-logarithm bound [](#thm:song-zhang-kls), $\CP(\mu)\lesssim16^{\log^*(n+2)}$ for every isotropic log-concave $\mu$ on $\R^n$, from Song and Zhang's preprint.
+**Result of this iteration.** The iterated-logarithm bound [](#thm:song-zhang-kls), $\CP(\mu)\lesssim16^{\log^*(n+2)}$ for every isotropic log-concave $\mu$ on $\R^n$, from Song and Zhang's preprint.
 
-**The precise missing estimate.** One exponential base for the whole Appell hierarchy: $c_k(\nu)\le A^k$, with the same $A$ for every degree $k$, every dimension and every regular isotropic measure $\nu$. By [](#prop:sz-exponential-coefficients-equivalence) this is equivalent to KLS.
+**The exponential end point.** One exponential base for the whole Appell hierarchy: $c_k(\nu)\le A^k$, with the same $A$ for every degree $k$, every dimension and every regular isotropic measure $\nu$. By [](#prop:sz-exponential-coefficients-equivalence) this is equivalent to KLS. BKL prove this coefficient bound via [](#thm:bkl-tilt-bound); local verification is recorded there.
 
-**Why it stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ and cannot be kept bounded (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
+Chapter [](#sec:sz-v2-proof) presents the repeated-refinement proof from v2 [@SongZhang2026ConstantKLS], with its local verification status. The estimates and limitations in this chapter belong to v1.
+
+**Why the v1 iteration stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ and cannot be kept bounded (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
 
 **Where this argument enters the four approaches.** It is a step of none of them. It shares the first eigenfunction with the fixed-eigenfunction approach and Letwin's quadratic estimate with the moment map, and it changes the standard against which each approach is measured; Section [](#subsec:atlas-assessment) says, approach by approach, what it changes and what still needs its own estimate.
 
@@ -191,12 +193,12 @@ above one fixed initial depth. The summability of $r^{-2}$ gives one envelope $C
 
 **Why optimizing the multiplier alone does not give a bounded profile.** With $\epsilon=r^{-2}$ and $R=(1+r^{-2})\Gamma_r$, the comparison requires $R\ge2^{40}r^4$. Initializing the improved coefficient induction also requires $\Gamma_r\ge Kr^2$ for a universal $K$. Exponentially growing constants can meet both thresholds simultaneously; a bounded sequence cannot. Replacing the factor $4$ by a fixed number greater than one still gives an unbounded product, and replacing it by one does not remove these growing admissibility costs. Within this iteration, a bounded profile needs both a smaller multiplier and a replacement for these growing thresholds. These are obstructions to retaining the existing estimates, not lower bounds on every possible comparison argument.
 
-The two thresholds pay different bills. The coefficient induction uses the factorial bound below degree $\lceil32r^2\rceil$; the nearly lossless hierarchy starts above that degree. The comparison must also absorb centering losses along the whole inverse-gradient sequence, including its initial terms. Improving only the final tensor estimate or only the high-degree tail leaves these earlier costs in place. A useful replacement would supply low-degree coefficient control conditional on the current curvature profile, together with a comparison whose multipliers have bounded cumulative product and whose admissibility is uniform in depth. Neither replacement is established here. Identifying their role clarifies the existing proof without improving its KLS bound.
+The two thresholds pay different bills. The coefficient induction uses the factorial bound below degree $\lceil32r^2\rceil$; the nearly lossless hierarchy starts above that degree. The comparison must also absorb centering losses along the whole inverse-gradient sequence, including its initial terms. Improving only the final tensor estimate or only the high-degree tail leaves these earlier costs in place. A useful replacement would supply low-degree coefficient control conditional on the current curvature profile, together with a comparison whose multipliers have bounded cumulative product and whose admissibility is uniform in depth. The BKL consequence [](#cor:bkl-uniform-conditional-initialization) supplies the initialization bound by its own mechanism, with verification recorded there. The comparison with uniform admissibility remains a separate question for this v1 formulation. SZ v2 changes the iterated quantity to a common coefficient radius and pays the fixed spectral conversion only once; it does not require this literal replacement of the v1 comparison. Section [](#sec:sz-v2-methodological-comparison) compares the two coefficient normalizations. Using BKL for initialization would not yield an independent proof.
 
 (sec:sz-exponential-criterion)=
 ## The exact coefficient growth demanded by KLS
 
-The coefficient hierarchy also gives an exact reformulation of the dimension-free question. The two assertions below have the same strength, so the second says exactly which coefficient growth a proof of KLS must reach.
+The coefficient hierarchy gives an exact reformulation of the dimension-free bound, now obtained by BKL. The two assertions below have the same strength; the second identifies the coefficient growth established by [](#thm:bkl-tilt-bound).
 
 :::{prf:proposition} KLS and exponential Appell coefficient growth
 :label: prop:sz-exponential-coefficients-equivalence
@@ -273,7 +275,7 @@ where $\log^*x$ is the least number of successive natural logarithms needed to
 bring $x$ to at most one. The source is [@SongZhang2026IteratedLogKLS, Theorem 7.1].
 :::
 
-Insert the profile of [](#thm:sz-iterated-curvature) into [](#thm:sz-curvature-transfer), absorbing the universal rescaling of its argument into the outer constant, and pass to the Cheeger scale by [](#eq:cheeger-two-sided). Uniformity in the depth $r$ is essential, because the depth is chosen depending on $n$: near $\log^*(n+2)$, the iterated logarithm $\ell_r(\log(en))$ is universally bounded and only the factor $16^r$ remains. That factor is all the dimension dependence left, and reducing it is target 5 of Section [](#subsec:synthesis-targets).
+Insert the profile of [](#thm:sz-iterated-curvature) into [](#thm:sz-curvature-transfer), absorbing the universal rescaling of its argument into the outer constant, and pass to the Cheeger scale by [](#eq:cheeger-two-sided). Uniformity in the depth $r$ is essential, because the depth is chosen depending on $n$: near $\log^*(n+2)$, the iterated logarithm $\ell_r(\log(en))$ is universally bounded and only the factor $16^r$ remains. That factor is all the dimension dependence left in this particular iteration. Target 5 of Section [](#subsec:synthesis-targets) concerns improving this argument independently of BKL.
 
 :::{prf:corollary} Affine iterated-logarithm Poincaré bound
 :label: cor:sz-affine-poincare

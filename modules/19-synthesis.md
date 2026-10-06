@@ -4,9 +4,16 @@ numbering:
 ---
 
 (sec:kls-synthesis)=
-# Synthesis: what a proof of KLS now needs
+# Synthesis: two proof mechanisms and structural questions
 
-Letwin's inputs [](#thm:letwin-moment-map), [](#thm:letwin-qcts), and [](#prop:letwin-kappa) isolate fixed-matrix, quadratic, and directional third-moment estimates. The general bound [](#thm:letwin-kls) combines these inputs with localization and retains a factor $\sqrt{\log n}$ in the Poincaré constant. Song and Zhang's preprint gives the sharper [](#thm:song-zhang-kls), through the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature). Both conclusions cover general test functions; the remaining demand is a bound independent of dimension (Section [](#sec:kls-remaining)). Section [](#subsec:kls-reading-map) records, family by family, what is controlled and what is missing; this section turns that into five targets, each pointing to the labelled statement that carries it, where one exists.
+The BKL preprint gives a proof of KLS through dimension-free cumulant bounds and suspension, followed by the Song–Zhang spectral criterion [@BizeulKlartagLehec2026KLS]. Chapter [](#sec:bkl-proof) explains the argument and its local verification status. The reconstructed proof of [](#conj:kls) has passed independent agent reviews here; this does not assert refereed publication.
+
+Song–Zhang v2 gives a second proof by repeated refinement with summable
+losses [@SongZhang2026ConstantKLS]. Its reconstruction has also passed independent agent reviews, as explained
+in [](#sec:sz-v2-proof). Both proofs use the
+polynomial spectral foundation, but their closing estimates differ.
+
+The question for the approaches below is what distinct mechanism or stronger property they can establish. Truth of KLS does not prove a sufficient condition for it. In particular the moment-Hessian, occupation and conditional-frame questions retain their own content. The five targets below describe that content and possible alternative proofs; the two proofs of KLS retain their separate provenance.
 
 (subsec:synthesis-constraint)=
 ## The constraint any proposal must satisfy
@@ -14,9 +21,9 @@ Letwin's inputs [](#thm:letwin-moment-map), [](#thm:letwin-qcts), and [](#prop:l
 The covariance spike ([](#prop:covariance-spike), explained in Section [](#subsec:kls-spike-obstruction)) cuts in two directions. A direct “bound $\norm{A_t}_\op$ better” program cannot work, since the statement it needs is false; and rare spikes can be harmless, so a successful potential must recognize them rather than charge the full top eigenvalue whenever one occurs. The working criterion is the tensorization test of Section [](#subsec:kls-tensorization-test), the first thing to check on each target below.
 
 (subsec:synthesis-targets)=
-## The five concrete next targets
+## Five directions for further work
 
-The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4, coupling, has no chapter here yet; target 5 works on the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature), which is not one of this manuscript's approaches; and the conditional fibers, whose frame estimate is [](#conj:conditional-fiber-frame), have no target of their own.
+The targets are cross-cutting perspectives, not one per approach. Targets 1, 2 and 3 are the next steps of the fixed eigenfunction, the moment map and the fixed cut, and some of them bear on more than one approach; target 4 extends the coupling discussed in Chapter [](#sec:family-coupling), but has no precise extension statement here; target 5 works on the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature), which is not one of this manuscript's approaches; and the conditional fibers, whose frame estimate is [](#conj:conditional-fiber-frame), have no target of their own.
 
 **Target 1 — function-adapted stochastic localization.** For a fixed test function set $M_t(f)=\E_{p_t}f$, so that
 
@@ -66,23 +73,44 @@ The identity $\E\tau_\mu=I$ is insufficient, because $\tau_\mu(X)$ may correlate
 
 % Agent note: target 4 has no ledger node and no portfolio approach.
 
-**Target 5 — reduce the losses of the polynomial–curvature loop.** In [](#thm:sz-iterated-curvature) each depth multiplies the profile constant by about $4$, which becomes $16^r$ in the Poincaré bound, and the depth must grow like $\log^*n$. The loss has three sources: tensor recovery (iterated derivative tensors are only approximately symmetric), which, through the centering losses it controls, sets the multiplier $4$; normalization, whose factors tend to one; and the initialization of low degrees, which imposes thresholds growing with the depth. The task is to tell which of these losses are necessary and which are artifacts of the comparison, and to reduce them while the admissibility thresholds stay uniform in the depth; reducing the multiplier alone while retaining those thresholds does not suffice (Section [](#sec:sz-profile-iteration)). The obstruction concerns the existing estimates: it does not exclude a different comparison with bounded cumulative multipliers. The missing ingredients are uniform conditional low-degree initialization and uniform control of the actual centering losses, including the start of the inverse-gradient sequence. Identifying those requirements supplies no new bound for KLS.
+**Target 5 — compare the repeated-refinement estimates with the earlier questions.**
+The factor $16^r$ and growing admissibility thresholds of the v1 iteration
+are limitations of those estimates, not unresolved requirements in the
+literature after SZ v2. Chapter [](#sec:sz-v2-proof) explains the source's
+replacement: polynomial depth cost, a common coefficient radius, repeated
+height reduction, and finally a summable cost for the repetitions.
 
-A first test is whether tensor recovery improves on the long sequences actually generated from a first eigenfunction, while their cumulative centering loss stays small. A loss necessary for arbitrary tensors need not be necessary on this class; conversely, a favourable one-step calculation does not control a long sequence. Products can be too symmetric to show the defect, so a calibration should couple coordinates and track both losses along the whole sequence.
+The finite-chain construction [](#prop:sz-v2-finite-chain-blocks) controls
+centering losses, normalization and energy for one inverse-gradient
+family, uniformly in the number of retained coefficient bounds. The
+outer profiles, summable costs and final composition have also passed
+independent agent reviews. BKL's coefficient theorem is not an input to this
+separate argument.
 
-The end point of this target has an exact form. By [](#prop:sz-exponential-coefficients-equivalence), KLS is equivalent to one exponential bound $c_k(\nu)\le A^k$ on the Appell coefficients of all regular isotropic log-concave measures. The order of quantifiers is the content: $A$ may depend neither on the degree, nor on the dimension, nor on the measure or its curvature bounds, so neither the factorial bound of [](#thm:sz-polynomial-variance) nor a base chosen afresh at each depth meets it. The Appell derivative identities and their tensor structure may give estimates that are less visible in the Poincaré inequality itself. Section [](#sec:sz-exponential-criterion) gives both directions with their constants.
+The older conditional-startup and near-unit-comparison questions retain
+their exact normalization. SZ v2 refines a common coefficient radius and
+pays its fixed spectral conversion once, after all refinements. It does
+not need a near-unit multiplier for the v1 comparison at each repetition.
+Comparing the coefficient transfers must also account for their different
+degree exponents and the older denominator $(d+1)^2$.
 
-*In this manuscript:* Chapter [](#sec:polynomial-curvature), whose final section shows where an improved curvature profile enters ([](#thm:sz-curvature-transfer)). No labelled statement formulates a reduced loss yet.
-
-% Agent note: target 5 is tracked by ap:sz-recovery-probe in research/program/portfolio.yaml; it has no ledger node.
+The earlier analysis correctly distinguished summable-loss arithmetic from
+its missing estimates and identified the exponential coefficient end point
+as KLS-strength in [](#prop:sz-exponential-coefficients-equivalence). It did
+not supply either new proof mechanism. Section
+[](#sec:sz-v2-methodological-comparison) records this comparison without a
+claim of priority or a claim that the source satisfies every earlier
+proposed interface literally.
 
 (subsec:synthesis-assessment)=
 ## Which target first
 
-Section [](#subsec:atlas-assessment) sets the priorities and gives the reasons; in terms of the targets above they read as follows. Target 5 comes first: it works on the argument that reaches every test function with the slowest dimension dependence, and its losses are located, though its end point [](#prop:sz-exponential-coefficients-equivalence) is as hard as KLS. Then the decisive tests carried by target 2 (sharp gate zero) and by the conditional fibers. Then target 1, the best structurally motivated of the targets carried by this manuscript's approaches, whose first step is a comparison with the eigenfunction construction of target 5. Then the fixed cut: the fixed-cut analogue of target 1, [](#conj:trace-upgrade), and target 3. Target 4 remains exploratory, with no precise statement here.
+With both reconstructions checked by independent agent reviews, further work concerns comparison of their estimates, alternative proofs and structural inequalities. Section [](#subsec:atlas-assessment) distinguishes the exact polynomial comparison questions from structural tests: sharp gate zero, conditional frames on the simplex, occupation of a fixed eigenfunction and cut-dependent estimates. The BKL proof does not discharge their sufficient conditions. Parallel coupling beyond linear tilts remains exploratory, without a precise statement here.
 
 (subsec:synthesis-caution)=
 ## Scope of the inputs
+
+For both BKL and Song–Zhang, the source announcement, local independent agent review and refereed publication are separate facts. The badges beside their statements record the second; a complete written reconstruction alone does not establish it.
 
 The starting point for targets 1–3 is the quadratic estimate [](#thm:letwin-qcts) and its directional consequence [](#prop:letwin-kappa). Their source is the pinned version-1 preprint described in Section [](#subsec:mm-audit); the badges on the statements record internal verification separately from that publication history. The Chen–Klartag imports concern the moment Hessian, radial variance, and full third tensor, rather than a dimension-free directional bound or control of arbitrary nonlinear tests.
 

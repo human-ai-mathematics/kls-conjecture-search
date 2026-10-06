@@ -54,7 +54,7 @@ Then
 
 where $p_\theta\propto e^{\inner\theta x}\one_K$, and $D^3\Lambda(\theta)$ is the third-moment tensor of the same exponential tilt [@BubeckEldan2014EntropicBarrier]. The entropic barrier therefore packages exactly the covariance and third-moment geometry that stochastic localization manipulates — [](#eq:entropic-hessian) and [](#eq:sl-covariance-sde) are two descriptions of one object, one indexed by a tilt parameter and one by a time.
 
-The gap is a matter of which contractions are controlled. Ordinary self-concordance controls *scalar* contractions of $D^3\Lambda$, of the form $D^3\Lambda[u,u,u]$. Localization needs *matrix* or Hilbert–Schmidt contractions — precisely the parameter $\kappa_n$ of [](#eq:kappa-def). Letwin's theorem now supplies the latter ([](#prop:letwin-kappa)), which closes this particular mismatch; what it does not supply is the all-functions spectral step, and that remains as it was.
+The gap is a matter of which contractions are controlled. Ordinary self-concordance controls *scalar* contractions of $D^3\Lambda$, of the form $D^3\Lambda[u,u,u]$. Localization needs *matrix* or Hilbert–Schmidt contractions — precisely the parameter $\kappa_n$ of [](#eq:kappa-def). Letwin's theorem now supplies the latter ([](#prop:letwin-kappa)), which closes this particular mismatch; that estimate alone does not supply the all-functions spectral step. The BKL argument adds all-order cumulants and suspension (Chapter [](#sec:bkl-proof)).
 
 **The precise missing estimate.** The dimension-free averaged bound [](#eq:brownian-derivative) on the expected operator norm of the transport derivative.
 
@@ -62,7 +62,7 @@ The gap is a matter of which contractions are controlled. Ordinary self-concorda
 
 :::{prf:remark} Structured cases where KLS is known
 :label: rem:known-cases
-It is worth recording what is not open, since it delimits what a counterexample could look like. KLS holds for products by tensorization; for uniformly log-concave measures via Brascamp–Lieb/Bakry–Émery (Section [](#subsec:transport-caffarelli)); for $\ell_p$-balls; and for broad classes of generalized Orlicz balls [@KolesnikovMilman2016OrliczKLS]. It is *not* known for all unconditional convex bodies. These cases illustrate how additional structure can make the corresponding constant explicit; KLS asks for a universal bound when no such structure is available.
+Before the general BKL theorem, several structured classes already admitted direct arguments. KLS holds for products by tensorization; for uniformly log-concave measures via Brascamp–Lieb/Bakry–Émery (Section [](#subsec:transport-caffarelli)); for $\ell_p$-balls; and for broad classes of generalized Orlicz balls [@KolesnikovMilman2016OrliczKLS]. The general BKL result [](#conj:kls), explained in Chapter [](#sec:bkl-proof), also covers every unconditional convex body. These earlier cases remain useful for understanding how additional structure can make the constant explicit.
 :::
 
 **Where this family enters the four approaches.** It enters none of them directly. The nearest open question is the coupling one of the next family, Chapter [](#sec:family-coupling), whose extension beyond linear tilts is target 4 of Section [](#sec:kls-synthesis); no labelled statement of this manuscript formulates it. Transport enters the four approaches only through the Brascamp–Lieb cap that stochastic localization uses.

@@ -9,7 +9,7 @@ version: 1
 project:
   title: The Kannan–Lovász–Simonovits Frontier
   github: https://github.com/human-ai-mathematics/kls-conjecture-search
-  subtitle: Approaches toward a dimension-free Poincaré constant for isotropic log-concave measures
+  subtitle: Proofs, alternative approaches and structural inequalities for log-concave measures
   # Text under CC BY 4.0, code under MIT: see LICENSE.
   license:
     content: CC-BY-4.0
@@ -110,9 +110,11 @@ project:
         - file: modules/04-family-moment-map.md
         - file: modules/05-family-transport.md
         - file: modules/06-family-parallel-coupling.md
-    - title: The current frontier
+    - title: Polynomial methods and two proofs of KLS
       children:
         - file: modules/07-polynomial-curvature.md
+        - file: modules/07c-song-zhang-v2.md
+        - file: modules/07b-cumulants-suspension.md
     - title: The four approaches
       children:
         - file: modules/08-frontier-atlas.md

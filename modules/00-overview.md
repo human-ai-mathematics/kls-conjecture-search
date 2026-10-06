@@ -8,11 +8,24 @@ numbering:
 
 +++ {"part": "abstract"}
 
-The Kannan–Lovász–Simonovits conjecture asks whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure: $\CP(\mu)\le C\norm{\Cov\mu}_\op$ in every dimension. The published bound [](#thm:klartag-logn) replaces $C$ by $C\log n$; [](#thm:letwin-kls), from Letwin's preprint, gives $C\sqrt{\log n}$. Song and Zhang's preprint gives the iterated-logarithm bound [](#thm:song-zhang-kls), with a factor $16^{\log^*(n+2)}$. These bounds hold for every test function, and what they still lose is a factor growing with the dimension; the sharper estimates of the methods behind them control fixed or averaged objects, where the conjecture needs uniform control of objects adapted to the measure or to its extremal function. This manuscript develops four approaches to that second gap: a deterministic second-order inequality for the Hessian of the moment map; following one eigenfunction along stochastic localization; a spectral gap for resampling along conditional lines; and following one cut along stochastic localization. Its results are of three kinds: an inequality that implies the conjecture, with the first non-product families on which it holds; reductions of the conjecture to explicit estimates; and counterexamples to natural intermediate estimates, none of which is a counterexample to the conjecture. Each statement shows next to its title whether it is settled here.
+The Kannan–Lovász–Simonovits conjecture asks whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure. Bizeul–Klartag–Lehec prove the dimension-free bound in their preprint of 4 October 2026, reconstructed here as [](#conj:kls). Their mechanism combines all-order cumulants, a suspension construction and the Song–Zhang spectral criterion; its reconstruction here has passed independent agent reviews. Song–Zhang v2 gives another proof through repeated refinement and summable losses; that reconstruction has also passed independent agent reviews. We explain the two mechanisms and their relation to the preceding dimension-dependent bounds and to four approaches: the canonical moment-Hessian inequality, occupation of a fixed eigenfunction, resampling along conditional lines and localization of a fixed cut. These approaches retain structural questions and possible alternative proofs. Their sufficient conditions do not follow merely from KLS. Every statement displays its local verification status.
+
 
 +++
 
-This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)) and the two arguments behind the newest bounds (Section [](#sec:kls-conversions)), isolates the obstacle every method meets and the two ways forward it leaves (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
+:::{note} Two reconstructed proofs and their verification
+Bizeul–Klartag–Lehec v1 and Song–Zhang v2, both deposited on
+4 October 2026, give two proofs of the universal KLS bound
+[@BizeulKlartagLehec2026KLS; @SongZhang2026ConstantKLS]. Both have been
+reconstructed here by agents and checked by separate reviewer agents.
+This local verification is distinct from journal peer review and human
+acceptance. The proof and review information appears beside each statement.
+BKL close the argument through cumulants and suspension
+([](#sec:bkl-proof)); SZ v2 use repeated refinement with summable costs
+([](#sec:sz-v2-proof)). The two mechanisms share spectral foundations.
+:::
+
+This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)) and the two dimension-dependent arguments preceding BKL (Section [](#sec:kls-conversions)), explains the obstacles that motivate alternative arguments (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
 
 (sec:kls-orientation)=
 ## The question
@@ -102,7 +115,7 @@ Applying Poincaré to $f(x)=|x|^2$ in isotropic position gives
 \Var(|X|^2)\le4n\,\CP(\mu),
 ```
 
-the implication “KLS $\Rightarrow$ thin shell” discussed in Section [](#subsec:kls-solved-neighbours). No dimension-free converse from this one radial estimate to KLS is known, and none has been disproved within the log-concave class.
+the implication “KLS $\Rightarrow$ thin shell” discussed in Section [](#subsec:kls-solved-neighbours). This radial estimate alone did not furnish a dimension-free proof of KLS in the arguments preceding BKL.
 
 (sec:kls-examples)=
 ## Examples by hand
@@ -127,12 +140,12 @@ Hence $\CP(\mu)\ge4\Var(\mu)$. This is the worst case on the line: every one-dim
 
 **Products.** The Poincaré constant of a product is the largest Poincaré constant of its factors (tensorization), so a product of $n$ isotropic one-dimensional log-concave laws has $\CP\le4$ in every dimension; [](#prop:products) records the corresponding fact for the Cheeger constant. The cube $[0,1]^n$ and the product of $n$ exponentials are therefore harmless. The conjecture is about everything that is not a product: simplices, cones, balls of non-Euclidean norms, and log-concave measures with no symmetry at all.
 
-No family of log-concave measures is known for which the ratio in [](#eq:kls-affine) grows with $n$. The whole gap is in the upper bound; it is not a gap between competing upper and lower power laws.
+No family of log-concave measures is known for which the ratio in [](#eq:kls-affine) grows with $n$. The historical gap was entirely in the upper bound; BKL’s proof gives its dimension-free closure.
 
 (sec:kls-known)=
 ## What was known
 
-This section records the quantitative frontier and the two neighbouring conjectures that have been settled, with why settling them did not settle KLS. The two arguments behind the newest bounds are the subject of the next section.
+This section records the quantitative frontier and the two neighbouring conjectures that have been settled, with why settling them did not settle KLS. The dimension-dependent arguments preceding BKL are the subject of the next section.
 
 (subsec:kls-status)=
 ### The quantitative history
@@ -161,6 +174,8 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 | 2023 | $O(\sqrt{\log n})$ | $O(\log n)$ | Improved Lichnerowicz plus short-time covariance control [@Klartag2023Logarithmic]. |
 | July 2026, preprint | $O((\log n)^{1/4})$ | $O(\sqrt{\log n})$ | [](#thm:letwin-kls): quadratic Poincaré, $\kappa_n=O(1)$, and the time-restricted spectral bridge [@Letwin2026QuadraticKLS]. |
 | October 2026, preprint | $O(4^{\log^*(n+2)})$ | $O(16^{\log^*(n+2)})$ | [](#thm:song-zhang-kls): polynomial estimates fed into curvature estimates and back [@SongZhang2026IteratedLogKLS]. |
+| 4 October 2026, preprint | $O(1)$ | $O(1)$ | BKL prove KLS through cumulants and suspension; Chapter [](#sec:bkl-proof) records the verification here [@BizeulKlartagLehec2026KLS]. |
+| 4 October 2026, preprint | $O(1)$ | $O(1)$ | SZ v2 gives a second proof by repeated refinement; its reconstruction has passed independent agent reviews in Chapter [](#sec:sz-v2-proof) [@SongZhang2026ConstantKLS]. |
 
 :::{prf:remark} Reading the table
 :label: rem:history-table-caveats
@@ -177,13 +192,13 @@ The classical implication structure is
 \mathrm{KLS}\ \Longrightarrow\ \text{thin shell}\ \Longrightarrow\ \text{slicing},
 ```
 
-and no reverse implication is known in a dimension-free form. Both of the weaker conjectures have now moved decisively. Neither resolution proves KLS, and it is worth being precise about why.
+and the arguments resolving the two weaker conjectures did not supply a dimension-free proof of KLS. BKL’s later announcement uses an additional all-order mechanism. The losses in the earlier comparison explain why that addition matters.
 
 **Slicing.** Bourgain's slicing conjecture asks whether the isotropic constants $L_n$ are universally bounded. Guan proved $L_n\lesssim\log\log n$ and, in the process, obtained the stochastic-localization trace estimate that turned out to be decisive [@Guan2024]. Klartag and Lehec combined that estimate with $M$-ellipsoids and Shannon–Stam stability to prove $\sup_nL_n<\infty$, published in 2025 [@KlartagLehec2025Slicing]; Bizeul subsequently gave an alternative proof through small-ball estimates [@Bizeul2025SmallBallSlicing]. Slicing controls determinant and volume information, not the bottom of the full spectrum.
 
 **Thin shell.** For isotropic log-concave $X$ the thin-shell conjecture asks for $\Var(|X|^2)\le Cn$, equivalently $\E(|X|-\sqrt n)^2\le C$. Klartag and Lehec gave a proof via parallel couplings of exponential tilts, nonlinear filtering, optimal transport, $H^{-1}$ estimates, and Guan-type covariance control [@KlartagLehec2025ThinShell]; Chapter [](#sec:family-coupling) describes the coupling and what it does not reach. A July 2026 first-version preprint of Chen and Klartag sharpens it to the optimal $\Var(|X|^2)\le8n$, with equality for products of centered exponentials, together with a sharp third-moment-tensor bound [@ChenKlartag2026SharpThinShell]; both statements are recorded as [](#thm:chen-klartag-thin-shell) and [](#thm:chen-klartag-third-moment).
 
-**Why this does not close the gap.** Eldan's reverse estimate bounds the inverse Cheeger scale by a weighted average of thin-shell parameters $\sigma_k$ [@Eldan2013ThinShell],
+**Why the earlier comparison retained a loss.** Eldan's reverse estimate bounds the inverse Cheeger scale by a weighted average of thin-shell parameters $\sigma_k$ [@Eldan2013ThinShell],
 
 ```{math}
 :label: eq:eldan-reverse
@@ -260,24 +275,24 @@ Song and Zhang keep the localization and the quadratic estimate, and replace imp
 - **Localization improves the coefficients.** Feeding that profile back through localization improves the coefficient bounds, and the comparison can be run again. Each round replaces a logarithm by its logarithm: at depth $r$ the profile is $\CP\le\Gamma_r^2\ell_r(1/a)^2$, with $\ell_r$ the $r$-fold iterated logarithm and $\Gamma_r\le C4^r$ ([](#thm:sz-iterated-curvature)).
 - **Transfer to every measure.** Localizing an arbitrary isotropic log-concave measure to curvature $c/\log(en)$ transfers any such profile to it ([](#thm:sz-curvature-transfer)), so $\CP\lesssim16^r\ell_r(\log en)^2$ for every $r$; taking $r\approx\log^*(n+2)$ gives [](#thm:song-zhang-kls).
 
-**Where its loss lives.** In the factor $4$ per round, and in admissibility thresholds that grow with the depth, while the depth must grow, very slowly, with $n$ (Section [](#sec:sz-profile-iteration)). The end point is exact: KLS is equivalent to a single exponential bound $c_k\le A^k$ on the coefficients, uniform in the degree, the dimension and the measure ([](#prop:sz-exponential-coefficients-equivalence)). That is a reformulation of KLS, not an easier statement, but it says where to look.
+**Where its loss lives.** In the factor $4$ per round, and in admissibility thresholds that grow with the depth, while the depth must grow, very slowly, with $n$ (Section [](#sec:sz-profile-iteration)). The end point is exact: KLS is equivalent to a single exponential bound $c_k\le A^k$ on the coefficients, uniform in the degree, the dimension and the measure ([](#prop:sz-exponential-coefficients-equivalence)). BKL prove this end point through cumulants and suspension (Chapter [](#sec:bkl-proof)). SZ v2 instead controls the repeated refinement cost (Chapter [](#sec:sz-v2-proof)); the limitation described here belongs to the pinned v1 estimates.
 
 (sec:kls-remaining)=
-## The obstacle every method meets
+## Obstacles for alternative arguments
 
-By [](#thm:letwin-qcts) and [](#prop:letwin-kappa), $\kappa_n=O(1)$ and every quadratic witness is eliminated: the remaining difficulty is no longer quadratic forms or third moments. What survives is a difficulty of a different type, and this section states it in the two forms every approach in this manuscript must answer.
+The BKL mechanism in Chapter [](#sec:bkl-proof) changes the role of the questions below. They concern distinct ways to obtain dimension-free estimates and stronger structural information. The quadratic and third-moment bounds of [](#thm:letwin-qcts) and [](#prop:letwin-kappa) are common inputs, but they do not by themselves supply these estimates.
 
 (subsec:kls-adaptive-residue)=
 ### Fixed and averaged, against adaptive and uniform
 
-Every method in the literature controls something. Needles control one-dimensional conditional measures sharply; stochastic localization controls short-time covariance and directional third moments; heat-flow and $H^{-1}$ arguments control coordinate and quadratic spectral mass; moment maps control fixed deterministic matrix energies $\E\Tr(BHBH)$; parallel coupling controls linear exponential tilts; Brownian transport controls averaged derivatives to within a polylogarithm. Section [](#subsec:kls-reading-map) tabulates these one by one.
+Needles control one-dimensional conditional laws; stochastic localization controls covariance and directional third moments; moment maps control fixed matrix energies; parallel coupling controls linear exponential tilts. Section [](#subsec:kls-reading-map) records the limitations of those estimates. BKL pass beyond the third moment to all cumulants, then encode a general function in an extra coordinate. Uniformity in dimension makes that suspension possible.
 
-What none of them controls is the same object when it is allowed to *adapt*. In every row of that table the estimate holds for a fixed matrix, a fixed direction, a fixed tilt, or on average along a path, and KLS needs it uniformly, for an object that may depend on the measure or on the extremizing function. Two arguments do reach every test function, [](#thm:letwin-kls) and [](#thm:song-zhang-kls), and what they lose is a factor growing with the dimension: in the first, the entropy of a soft maximum over $n$ directions (Section [](#subsec:kls-architecture)); in the second, the losses of an iteration whose depth grows with $n$ (Section [](#subsec:song-zhang-mechanism)). So there are two ways forward, and the manuscript is organised around them.
+Two directions remain meaningful for a different proof:
 
-- **Reduce the loss** of a conversion that already reaches every test function. This is the current frontier, Song and Zhang's polynomial–curvature iteration (Chapter [](#sec:polynomial-curvature)), whose loss is located and whose end point has an exact form ([](#prop:sz-exponential-coefficients-equivalence)); an equivalent form of KLS, it should be said, and not an easier one.
-- **Make a restricted estimate adaptive.** Each of the four approaches of this manuscript is a way of doing this: the moment map replaces fixed matrices by the Hessian field of the moment map; the fixed eigenfunction follows, along stochastic localization, the one object a small spectral gap would select; conditional fibers choose a frame of directions from the measure before the test function; and the fixed cut follows, along stochastic localization, the one set a small Cheeger constant would select. They are presented in that order, the order of what each has established (Section [](#subsec:atlas-approaches)).
+- **Improve the polynomial comparison by another mechanism.** The exponential Appell criterion [](#prop:sz-exponential-coefficients-equivalence) identifies the end point. BKL prove it through [](#thm:bkl-tilt-bound); an independent derivation must supply different estimates, including control of centering losses.
+- **Establish an adapted structural estimate.** The moment map uses a Hessian field; the fixed-eigenfunction argument follows the function selected by a small spectral gap; conditional fibers select directions from the measure; the fixed-cut argument retains a potential bottleneck. Their sufficient conditions are not consequences of KLS by any converse proved here.
 
-The two ways are not exclusive: the frontier argument already uses a first eigenfunction, and its losses are the place where an adaptive estimate would have to enter.
+These are questions about mechanisms and stronger properties, not reasons to describe the BKL conclusion as absent from the literature.
 
 (subsec:kls-spike-obstruction)=
 ### The covariance spike, and why the direct repair fails
@@ -373,11 +388,11 @@ The oldest approach through localization, the fixed-cut approach, follows one cu
 (sec:overview-open)=
 ## Problems for someone who might take them up
 
-Three problems are presented here for a reader who wants to start. Each is stated precisely in its chapter, and none of the three has an answer in the literature that we are aware of. The first and third imply KLS, so they are research problems at least as hard as the conjecture itself; the second does not imply KLS and is a research problem in its own right, with a concrete equality set to test against.
+Three problems are presented here for a reader who wants to start. Each is stated precisely in its chapter, and none of the three has an answer in the literature that we are aware of. The first and third are sufficient conditions for KLS, with no converse established here; BKL’s conclusion alone does not decide them. The second asks for a sharp structural estimate with a concrete equality set to test against.
 
 **The occupation estimate for one eigenfunction, [](#conj:mm-spectral-occupation).** *Why it matters:* by [](#prop:spectral-sufficiency) it implies KLS, and it asks for control of an object — the tensor $H_t$ of one fixed eigenfunction — that ignores covariance spikes in directions the eigenfunction does not use, so it is not ruled out by [](#prop:covariance-spike). *What there is:* the time-weighted budget [](#lem:mm-time-weighted-fixed-source) and the stopped source bound [](#lem:mm-stopped-window-source). The small-gap occupation implication in [](#prop:mm-window-occupation) has an empty admissible class. *Where to start:* Section [](#subsec:spectral-window-chain). What is missing is control of the source after covariance exits on a time interval of universal length; the time-weighted and stopped budgets do not supply that control.
 
-**Sharp gate zero, [](#conj:gate-zero-sharp).** *Gate zero* is the moment-Hessian inequality tested on linear functions only: the cheapest test it must pass, and so the first gate that any proof of it, or any counterexample, goes through. The sharp form asks whether $\E H^2\preceq2\,\Id$ for the Stein kernel of the moment map of every isotropic log-concave measure. *Why it matters:* it is the operator form of the Chen–Klartag trace inequality $\Tr\E H^2\le2n$ ([](#thm:chen-klartag-moment-hessian)); by [](#cor:gate-zero-third-moment) it contains the sharp directional third-moment bound $\kappa_n\le2$, where the preprint literature reaches $2\sqrt2$ ([](#prop:letwin-kappa)); and it refines [](#conj:gate-zero), the linear shadow of the moment-Hessian inequality. It does not imply KLS, and a counterexample to it would leave KLS untouched. *What there is:* products of centred exponentials attain it in every direction, and every exponential cone with $\beta=n$ attains it in its axis direction, whatever the base ([](#prop:cone-linear-sector)); every product-simplex cone satisfies it, with transverse equality exactly when the base is a single simplex and $\beta=n$ ([](#prop:product-simplex-cone-gate)). An interval counts as a one-dimensional simplex. Any argument must be tight on these, and by [](#prop:letwin-not-gate-zero) no argument through fixed-matrix energies alone can succeed. *Where to start:* Section [](#subsec:gate-zero), and the spectral resolution of the linear sector in [](#lem:cmh-linear-spectral-resolution).
+**Sharp gate zero, [](#conj:gate-zero-sharp).** *Gate zero* is the moment-Hessian inequality tested on linear functions only: the cheapest test it must pass, and so the first gate that any proof of it, or any counterexample, goes through. The sharp form asks whether $\E H^2\preceq2\,\Id$ for the Stein kernel of the moment map of every isotropic log-concave measure. *Why it matters:* it is the operator form of the Chen–Klartag trace inequality $\Tr\E H^2\le2n$ ([](#thm:chen-klartag-moment-hessian)); by [](#cor:gate-zero-third-moment) it contains the sharp directional third-moment bound $\kappa_n\le2$, where the preprint literature reaches $2\sqrt2$ ([](#prop:letwin-kappa)); and it refines [](#conj:gate-zero), the linear shadow of the moment-Hessian inequality. No proof of KLS from sharp gate zero alone is established here, and a counterexample to it would leave KLS untouched. *What there is:* products of centred exponentials attain it in every direction, and every exponential cone with $\beta=n$ attains it in its axis direction, whatever the base ([](#prop:cone-linear-sector)); every product-simplex cone satisfies it, with transverse equality exactly when the base is a single simplex and $\beta=n$ ([](#prop:product-simplex-cone-gate)). An interval counts as a one-dimensional simplex. Any argument must be tight on these, and by [](#prop:letwin-not-gate-zero) no argument through fixed-matrix energies alone can succeed. *Where to start:* Section [](#subsec:gate-zero), and the spectral resolution of the linear sector in [](#lem:cmh-linear-spectral-resolution).
 
 **A conditional-fiber frame, [](#conj:conditional-fiber-frame).** It asks whether every isotropic log-concave measure admits one frame of directions, chosen before the test function, for which the resampling form of [](#lem:conditional-fiber-form) has a dimension-free gap. *Why it matters:* it implies KLS with constant $4C$, and it uses nothing beyond one-dimensional log-concave inequalities and a choice of directions. *What failed:* the root frame of the simplex ([](#prop:conditional-fiber-root-obstruction)). *Where to start:* the simplex itself is a self-contained test case, whose Poincaré constant is dimension-free, so the question there bears only on the frame idea. Either find an isotropic frame with a dimension-free gap on the simplex, or show that none exists; by [](#lem:fiber-polynomial-floor), polynomial certificates of the second alternative must have degrees growing with dimension: every fixed degree has a positive uniform floor, for every admissible frame. Section [](#subsec:fiber-root-failure) contains one of the shortest complete arguments in the manuscript and is the place to begin.
 

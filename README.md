@@ -4,13 +4,25 @@
 the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md));
 the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
-A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the dimension-free
-Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic log-concave measure —
-together with the harness of a **sustained conjecture search** on it: what is claimed, what the
-search is doing, and why. KLS itself is open, and nothing here proves it; four routes are developed
-(fixed-cut and fixed-eigenfunction stochastic localization, a deterministic moment-map programme,
-conditional-fiber frames), each with its certified advances and its exact open estimate. The ledger,
-not this file, is the source of truth for what is proved.
+> Bizeul–Klartag–Lehec announced a proof of KLS on 4 October 2026
+> ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)). Its proof has now
+> been reconstructed and checked here through independent agent reviews.
+> This local certification is distinct from journal refereeing.
+>
+> Song–Zhang's [version 2](https://arxiv.org/abs/2610.01447v2), submitted later
+> on the same day, gives another proof through repeated polynomial–curvature
+> refinement. Its reconstruction has also passed independent agent reviews
+> here. The two closing arguments share earlier spectral foundations.
+> Song–Zhang v1 and v2 retain separate, version-pinned references and proofs.
+
+A MyST manuscript on proofs of the Kannan–Lovász–Simonovits bound, alternative
+approaches and structural inequalities for log-concave measures, together with the
+record of a **sustained conjecture search**: what is claimed, what the search is
+doing, and why. The BKL and Song–Zhang reconstructions join four approaches (fixed-cut and
+fixed-eigenfunction stochastic localization, a deterministic moment-map programme,
+and conditional-fiber frames). Their open estimates remain research questions even
+when another argument proves KLS. The ledger, not this file, is the source of truth
+for what has been certified here.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).

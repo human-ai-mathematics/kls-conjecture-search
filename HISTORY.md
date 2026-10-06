@@ -12,6 +12,46 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-06: Song–Zhang v2 reconstructed; a second KLS proof recorded
+
+- Twelve new proof dossiers and independent agent reviews establish the SZ v2
+  chain, including the finite-block estimates, summable losses and final
+  composition. `conj:kls` retains its statement and now has two proof records.
+- The SZ chain uses no BKL conclusion or previously proved KLS theorem. The
+  two closing mechanisms share earlier spectral foundations; their actual
+  inputs are recorded separately from the combined dependency graph.
+- SZ v1 and v2 have distinct bibliography entries. Earlier dossiers and reviews
+  remain unchanged. The BKL composition has a new scoped review covering the
+  enlarged dependency union, without changing its mathematical inputs.
+- The SZ import route is accomplished. Other route states are preserved, with
+  exact comparison tests for the older startup and recovery questions. The
+  methodological assessment claims no priority for either proof mechanism.
+- Source: `research/explorations/2026-10-06-sz-v2-certified.md`.
+
+## 2026-10-06: BKL reconstructed and certified; KLS proved locally
+
+- Seven proof dossiers and independent agent reviews establish the BKL chain,
+  its composition into `conj:kls`, and the unconditional initialization corollary.
+  This is local agent certification of BKL v1, distinct from journal refereeing.
+- `cand:sz-uniform-conditional-initialization` is promoted to the stronger
+  `cor:bkl-uniform-conditional-initialization`. Its research route remains active
+  with an explicit independent-proof objective.
+- The import route is accomplished. All ten pre-existing active routes and six
+  blocked routes retain their states; no open method is closed because KLS is proved.
+- Source: `research/explorations/2026-10-06-bkl-certified.md`.
+
+## 2026-10-06: BKL reconstruction opened; alternative proofs remain research objectives
+
+- Bizeul–Klartag–Lehec arXiv:2610.05474v1 announces a proof of KLS. Its
+  sections 2–7 are being reconstructed, including the tilt criterion,
+  inverse-covariance cumulant dynamics and suspension. The announcement alone
+  changes no mathematical status.
+- The framework now allows active alternative-proof routes after a target is
+  proved. Refuted targets and resolved blockers retain their existing checks.
+  All existing active and blocked routes keep their states at this import stage.
+- Sources: `research/explorations/2026-10-06-bkl-integration.md` and
+  `research/explorations/2026-10-06-post-proof-framework.md`.
+
 ## 2026-10-05: The manuscript reorganised by what it has established
 
 - The survey now has six families of methods. A new chapter on the parallel coupling of

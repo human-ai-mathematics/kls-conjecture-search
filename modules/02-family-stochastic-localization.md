@@ -139,7 +139,7 @@ Controlling this noise term *while retaining information about $\lmax(A_t)$* is 
 | Klartag–Lehec [@KlartagLehec2022Polylog] | Heat-flow duality, spectral projections, $H^{-1}$, covariance growth | $(\log n)^5$ |
 | Jambulapati–Lee–Vempala [@JambulapatiLeeVempala2022KLS] | Two localization representations and spiked-spectrum estimates | $(\log n)^{3.2226}$ |
 | Klartag [@Klartag2023Logarithmic] | Improved Lichnerowicz plus short-time covariance control | $\sqrt{\log n}$ (published record) |
-| Letwin, v1 [@Letwin2026QuadraticKLS] | Sharp quadratic Poincaré $\Rightarrow\kappa_n=O(1)$, inserted into Klartag's bridge | $(\log n)^{1/4}$ (preprint record) |
+| Letwin, v1 [@Letwin2026QuadraticKLS] | Sharp quadratic Poincaré $\Rightarrow\kappa_n=O(1)$, inserted into Klartag's bridge | $(\log n)^{1/4}$ (July 2026 preprint) |
 
 (subsec:sl-where-the-log-lives)=
 ## Where the surviving logarithm lives
@@ -172,7 +172,7 @@ which is the bridge [](#eq:kls-bridge).
 
 :::{prf:remark} The logarithm is an entropy cost, not a moment cost
 :label: rem:log-is-entropy
-The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution on $n$ directions: it is what one pays to replace a maximum over $n$ eigenvalues by a smooth surrogate, and it would be present even if $\kappa_n$ were known exactly and equal to $1$. Since $\kappa_n=O(1)$ is now available ([](#prop:letwin-kappa)), this term is the *entire* remaining gap between the preprint record and the conjecture. A potential that depends only on the directions actually relevant to a near-extremizer, or on an effective rank rather than the ambient dimension $n$, would convert $\kappa_n=O(1)$ into $\CP=O(1)$.
+The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution on $n$ directions: it is what one pays to replace a maximum over $n$ eigenvalues by a smooth surrogate, and it would be present even if $\kappa_n$ were known exactly and equal to $1$. Since $\kappa_n=O(1)$ is now available ([](#prop:letwin-kappa)), this term accounts for the remaining dimension dependence in Letwin’s use of this bridge. The later Song–Zhang and BKL arguments use different conversions, described in Chapters [](#sec:polynomial-curvature) and [](#sec:bkl-proof). A potential that depends only on the directions actually relevant to a near-extremizer, or on an effective rank rather than the ambient dimension $n$, would convert $\kappa_n=O(1)$ into $\CP=O(1)$.
 :::
 
 **The precise missing estimate.** Control of $\lmax(A_t)$ along the whole path at a universal time, without paying the $\log n$ of [](#eq:logtraceexp).

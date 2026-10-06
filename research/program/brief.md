@@ -11,6 +11,28 @@ which disguises a dead route wears. It owns none of the mathematics — the stat
 
 ## The target
 
+Bizeul–Klartag–Lehec's proof in arXiv:2610.05474v1 (4 October 2026)
+has been reconstructed and certified through independent agent reviews.
+`conj:kls` is now proved here, through `thm:bkl-tilt-criterion`,
+`thm:bkl-cumulant-bound` and `thm:bkl-tilt-bound`. The composition review is
+`research/reviews/2026-10-06-bkl-kls-second-proof-review.md`. This is local
+agent certification, distinct from refereed publication. The remaining
+programme concerns alternative proofs and structural inequalities.
+
+Song–Zhang arXiv:2610.01447v2 (4 October 2026) supplies a second source
+proof, reconstructed and independently checked as `thm:sz-v2-kls`.
+Its separate composition into `conj:kls` is recorded in
+`research/reviews/2026-10-06-sz-v2-kls-composition-review.md`; the final
+profile estimates are checked in
+`research/reviews/2026-10-06-sz-v2-profile-review.md`. The two proofs share
+earlier spectral foundations but use distinct closing mechanisms. The v1
+citation and certified statements retain their original meanings. The SZ v2
+chain uses neither `conj:kls`, BKL nodes, nor their consequences as inputs. In particular the proved
+`cor:bkl-uniform-conditional-initialization` cannot initialize an independent
+SZ v2 proof. Common analytic and polynomial foundations can be reused after
+checking exact hypotheses. Pointwise finiteness of the coefficient radius
+in `prop:sz-v2-common-radius` must not be confused with a uniform bound.
+
 `conj:kls`, stated at `:label: conj:kls` in the overview — read it there; this
 file never copies it.
 
@@ -37,11 +59,16 @@ Equivalently $\sup_n C_{\mathrm P,n}=\infty$, equivalently $\inf_n h^*_n=0$.
 constant is universally quantified in front. So a single measure, a single test function, or any
 finite battery refutes nothing whatever the numbers say. A refutation requires a **certified
 family** $(\mu_n)$ with the ratio in `eq:kls-affine` shown to diverge (`SPECIFICATION.md`,
-*Refutation*). A lower bound on $C_P(\mu)$ at fixed $n$ is not a divergence. The manuscript
-records that no family is known which forces that ratio to grow, and that the entire remaining
-gap is in the upper bound.
+*Refutation*). A lower bound on $C_P(\mu)$ at fixed $n$ is not a divergence. The certified BKL proof rules out such a divergent family. This negation remains
+an audit tool for checking conventions and purported counterexamples.
 
 ## What counts as complete
+
+Certifying the target and completing the research programme are distinct.
+After `conj:kls` is proved, alternative proofs and structural inequalities may
+remain active objectives. A sufficient condition is not automatically established
+by the truth of its conclusion. No CMH, occupation, or conditional-fiber premise
+is discharged by the BKL announcement alone.
 
 **A complete proof** establishes `conj:kls`, or equivalently the affine form for every
 log-concave measure. The following are real advances and are *not* completion; each is named by
@@ -52,7 +79,7 @@ the node that currently instantiates it, so the list stays checkable:
 | any dimension-dependent bound | `cor:loglog`, `thm:klartag-logn`, `thm:letwin-kls`, `thm:song-zhang-kls`, `prop:mm-window-occupation` ($C_P\le C\log^2 n$) |
 | an implication whose antecedent is open | `cor:dichotomy`, `prop:spectral-sufficiency`, `prop:cmh-approximation-closure`, `cor:cmh-recovery-sequence-suffices` — all `proved` with a non-empty `assumes` |
 | a restricted subclass | `thm:cmh-1d`, `thm:cmh-product`, `thm:cmh-dirichlet`, the exponential cones of `cor:cube-cone-gate-zero` (linear sector only), the regular-approximant class, the regular split class of `prop:split-screened-supply`, the strongly log-concave case |
-| a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so $\mathrm{CMH}(4)$ would close the target; the fiber route's bridge is `lem:conditional-fiber-form` |
+| a sufficient-condition surrogate proved without its bridge | CMH — its bridge `thm:cmh-implies-affine-poincare` *is* certified, so an independent proof of $\mathrm{CMH}(4)$ would yield another proof of the target; the fiber route's bridge is `lem:conditional-fiber-form` |
 
 **A complete refutation** negates the exact quantified statement through a certified dossier:
 the refuter is an ordinary `proved` node appearing in the target's `refuted_by` and never in its
@@ -125,8 +152,10 @@ them; this section is the reasoning a new route needs before it runs anything.
    lower-bound scales; the available polylogarithmic technology reaches only `cor:loglog`.
 4. **Projection ceiling** (`rem:projection-ceiling`). Radial and projection-only tests lose a logarithm;
    dimension-free quadratic-chaos control needs tensor-aware information.
-5. **Thin shell is not KLS.** `eq:kls-implies-thin-shell` runs one way; no dimension-free converse
-   is known and none is disproved. A thin-shell improvement is not a partial proof of the target.
+5. **Keep the mechanism of a reduction explicit.** `eq:kls-implies-thin-shell`
+   records the direct KLS-to-thin-shell argument. BKL now proves KLS independently
+   of an assumed thin-shell conclusion; citing that theorem is not a new mechanism
+   converting the radial variance bound alone into a spectral estimate.
 6. **Sufficient-condition routes prove but cannot refute.** CMH and the conditional-fiber frame
    both carry certified bridges *into* KLS and none out of it.
 7. **Static algebra is not the stochastic residue.** The commutator split of
@@ -153,7 +182,8 @@ them; this section is the reasoning a new route needs before it runs anything.
 
 11. **Uniform exponential coefficients already have the strength of KLS.**
     `prop:sz-exponential-coefficients-equivalence` is a certified equivalence,
-    not a proof of either assertion without its premise. Its one coefficient
+    not by itself a proof of either assertion without its premise. BKL now
+    establishes the coefficient assertion by a separate mechanism. Its one coefficient
     constant must work simultaneously for every degree, dimension and regular
     isotropic law. Separate constants at each degree or logarithmic depth do
     not meet it. The converse takes the degree limit at one fixed regular
@@ -179,10 +209,24 @@ and earlier records cite them under those names.
 
 ## Neighbourhood
 
+- `thm:bkl-cumulant-bound`, `prop:bkl-suspension`, `thm:bkl-tilt-bound` and
+  `thm:bkl-tilt-criterion` — the certified BKL import, with explicit analytic
+  foundations and inverse-covariance dynamics. Its proof records identify the
+  independently checked scope; the source and its version remain explicit.
+- `prop:bkl-tilt-appell-duality` — the precise comparison with the existing
+  Appell coefficients, separating identification of the endpoint from the
+  mechanism that establishes it.
+- `cor:bkl-uniform-conditional-initialization` — the certified unconditional
+  consequence for all degrees. Its BKL provenance must remain visible: using
+  it to obtain KLS is not an independent alternative to BKL. Neither this
+  consequence nor the coefficient bound supplies every comparison estimate
+  in the older iteration.
+
 - `prop:sz-exponential-coefficients-equivalence` — an exact quantitative
   reformulation of the target in the full Appell hierarchy. It identifies the
   required improvement over `thm:sz-polynomial-variance`; it does not establish
-  the uniform coefficient premise or justify a new independent route.
+  the uniform coefficient premise by itself. BKL now establishes that premise;
+  an independent route still needs its own mechanism.
 - `thm:song-zhang-kls` — reconstructed from the pinned v1 source and certified
   through independent agent reviews, together with its analytic, polynomial,
   curvature-comparison and iterated-profile dependencies. The affine consequence
@@ -212,11 +256,14 @@ and earlier records cite them under those names.
 
 ## Budget policy
 
-- **Terminate on saturation, never on a clock.** A route closes in a checkpoint that records the
-  obstacle and what would reopen it; saturation is a judgment, never inferred from attempt counts
-  or elapsed time.
-- **The honest terminal state is "unresolved, with certified advances and exact remaining gaps".**
-  That is the current state, and it is a result, not a failure.
+- **Preserve viable alternatives.** In this programme an existing open route is
+  not closed because another proof succeeds or because its priority decreases.
+  Record accomplished objectives separately from certified obstructions to a
+  particular attempt. Repeated failures and elapsed time prove no impossibility.
+- **Truth and provenance, not a prescribed outcome.** An unresolved reconstruction
+  records the exact gap; a certified proof records its source and dependencies.
+  A proved target need not end research on alternative proofs or stronger
+  properties. A lack of priority never certifies impossibility.
 - **Waves.** Work is organized in waves: no route runs without a stated gate, and a wave ends in a
   synthesis checkpoint plus the route changes it justifies.
 - **An interruption is a harness event, not a mathematical outcome.** A rate limit or a crash
