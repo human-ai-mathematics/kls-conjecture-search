@@ -6,19 +6,19 @@ numbering:
 (sec:bk-proof)=
 # Balasubramanian–Kasiviswanathan: compatible integration
 
-Balasubramanian and Kasiviswanathan (BK) prove a dimension-free Poincaré bound through **compatible integration**: undo differentiation on symmetric tensor fields, control arbitrarily many integrations from finitely many polynomial estimates, and use stochastic localization to recover the next polynomial estimate. Their source is the 53-page preprint [@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026, read in an identical PDF first distributed on GitHub. The argument and its composition into [](#conj:kls) have been reconstructed in this manuscript and checked by separate reviewer agents.
+**What to retain.** Balasubramanian and Kasiviswanathan (BK) bound every power of an integration operator on compatible symmetric tensor fields with one common prefactor, from finitely many polynomial observations. Localization transfers these bounds back to the next Appell coefficient, which closes an induction $c_d\le10^{8d}/(d+1)^4$ ([](#thm:bk-appell-bound)); letting the number of observations tend to infinity gives $\CP\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)).
 
-The quantitative conclusion is $\CP\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The large constant comes from an explicit induction proving $c_d\le10^{8d}/(d+1)^4$ simultaneously in degree, dimension and measure ([](#thm:bk-appell-bound)). The qualitative exponential criterion already appears in [](#prop:sz-exponential-coefficients-equivalence). BK establish its coefficient premise without importing KLS or a coefficient bound from the other proofs, then use their integration estimate to obtain the Poincaré constant directly. They retain the earlier Appell normalization and Letwin's quadratic variance bound as shared inputs.
+This chapter works through the BK preprint [@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026; the bibliography entry identifies the text read, and how the statements here were checked is explained on the [welcome page](#sec:overview-checking). BK start, like the first version of Song–Zhang (SZ v1, Chapter [](#sec:polynomial-curvature)), from the Appell normalization and Letwin's quadratic variance bound. The exponential criterion [](#prop:sz-exponential-coefficients-equivalence) describes what they prove, but they obtain its coefficient hypothesis without any coefficient bound from the proofs of Bizeul–Klartag–Lehec (BKL) or of the second version of Song–Zhang (SZ v2), and reach the Poincaré constant through their integration estimate rather than through that criterion.
 
 ## A Gaussian calculation and the proof's design
 
-For the standard Gaussian on the line, the first Appell polynomials are $A_1(x)=x$, $A_2(x)=x^2-1$ and $A_3(x)=x^3-3x$. Centered integration sends $x$ to $(x^2-1)/2$, then to $(x^3-3x)/6$. More generally it sends $A_d/d!$ to $A_{d+1}/(d+1)!$. Since $\mathbb E A_d^2=d!$, the coefficients are $c_d=1/\sqrt{d!}$. Thus powers of an integration operator really do measure the same normalized polynomials as the earlier chapters.
+For the standard Gaussian on the line, centered integration sends $x$ to $(x^2-1)/2$, then to $(x^3-3x)/6$, and in general $A_d/d!$ to $A_{d+1}/(d+1)!$; the coefficients $c_d=1/\sqrt{d!}$ are the norms of its successive powers applied to $1$ (Section [](#subsec:kls-bk-idea)).
 
 For a general measure there are three separate difficulties. Weighted divergence need not preserve the tensor fields that can be integrated; the Hodge estimate controls the projection needed to restore this property. A bound for one integration repeated naively pays its loss at every step; the operator estimate instead retains one common factor for every power. Finally, polynomial norms change with the measure; covariance-normalized localization transfers the curved integration estimate back to the original law. The induction closes only if all three estimates have compatible constants. These are the successive parts of this chapter.
 
 ## Appell normalization and regular approximation
 
-The coefficient convention agrees exactly with that of Song–Zhang. The supremum over covariance at most identity is useful because localization and subsequent linear changes of variables need not produce an isotropic law at every intermediate step.
+The coefficient convention agrees exactly with that of SZ v1. The supremum over covariance at most identity is useful because localization and subsequent linear changes of variables need not produce an isotropic law at every intermediate step.
 
 :::{prf:definition} Uniform Appell coefficient conventions
 :label: def:bk-uniform-appell-coefficients
@@ -53,7 +53,7 @@ For a centered law $\mu(dx)=Z^{-1}e^{-V(x)}dx$ on $\mathbb R^n$ with $V\in C^\in
 
 Take $F=D^2\psi$ on $\mathbb R^2$, with $\psi$ smooth and compactly supported, and let $Y_i=\sum_j(-\partial_j+\partial_jV)F_{ij}$ be its weighted divergence. At a point where $D^2V$ is diagonal with eigenvalues $\kappa_1,\kappa_2$, direct differentiation gives
 $$\partial_1Y_2-\partial_2Y_1=(\kappa_1-\kappa_2)F_{12}.$$
-Thus even a Hessian can acquire curl under weighted divergence. The Hodge projection estimate in the source bounds the squared norm of the discarded part by
+Thus even a Hessian can acquire curl under weighted divergence. The Hodge projection estimate of the preprint bounds the squared norm of the discarded part by
 $$\mathbb E\frac{(\kappa_1-\kappa_2)^2}{\kappa_1+\kappa_2}F_{12}^2.$$
 The mixed entry initially contributes $(\kappa_1+\kappa_2)F_{12}^2$ to the curvature energy. After subtracting this loss, its remaining contribution is
 $$
@@ -63,7 +63,7 @@ $$
 $$
 The factor $2F_{12}^2$ is exactly the ordered-index norm of the mixed symmetric component. Its remaining weight is the harmonic mean, at least $a$ when both curvatures are at least $a$. Equal curvatures produce no projection loss. The higher-rank estimate below retains this same lower bound without deterioration as more tensor slots are added.
 
-This Hodge comparison concerns the potential $V$ of the original measure and compatible derivative fields. The moment-Hessian comparison in [](#cor:cmh-hodge-comparison) concerns the canonical moment-map Hessian and a different energy. The shared word “Hodge” supplies no implication between their hypotheses.
+This Hodge estimate concerns the potential $V$ of the original measure; it is not the moment-Hessian comparison [](#cor:cmh-hodge-comparison) (Section [](#subsec:overview-cmh)).
 
 :::{prf:lemma} Compatible-tensor Hodge estimate and operator domains
 :label: lem:bk-compatible-hodge
@@ -107,7 +107,7 @@ $$\|R^k\|^2\le B^kQ_D(B),\qquad Q_D(B)=1+\sum_{j=1}^{D-2}\frac{j\gamma_{j+1}^2}{
 The sum is empty for $D=2$.
 :::
 
-The source uses the concavity and monotonicity of $g(u)=u/(1+au)$ to compare successive operator powers. The observed terms $R^{j-1}L$ control the boundary contributions, while the strict inequality $aB^{D+1}>\gamma_D^2$ absorbs the last one. Retaining the finite sum $Q_D(B)$ avoids multiplying a separate prefactor for every integration. At $D=2$ the sum is empty and the prefactor is exactly one; this is also what makes a degree-two estimate sufficient to start the argument.
+The preprint uses the concavity and monotonicity of $g(u)=u/(1+au)$ to compare successive operator powers. The observed terms $R^{j-1}L$ control the boundary contributions, while the strict inequality $aB^{D+1}>\gamma_D^2$ absorbs the last one. Retaining the finite sum $Q_D(B)$ avoids multiplying a separate prefactor for every integration. At $D=2$ the sum is empty and the prefactor is exactly one; this is also what makes a degree-two estimate sufficient to start the argument.
 
 :::{prf:corollary} Uniform integration powers
 :label: cor:bk-integration-powers
@@ -200,7 +200,7 @@ The transfer uses time $t=\eta/d^2$. Its curvature parameter $\delta=\eta^2/d^2$
 
 ## Closing the induction and extracting the constant
 
-The source chooses the summable majorant $\beta_d=R_*^d/(d+1)^4$. Its convolution has enough decay to absorb the moving-polynomial error. A finite initial range is supplied by the quadratic seed; for larger degrees the integration length is $q=\lfloor d/2\rfloor$, of order $d$, and the observation degree is $D=\lfloor\sqrt d\rfloor$, of order $\sqrt d$. Both are below $d$. The strict margin in the operator bound leaves room for the transfer factors. The explicit choices in Appendix E of the source lead to the following value. The numerical induction has been checked separately from the qualitative exponential criterion.
+The preprint chooses the summable majorant $\beta_d=R_*^d/(d+1)^4$. Its convolution has enough decay to absorb the moving-polynomial error. A finite initial range is supplied by the quadratic seed; for larger degrees the integration length is $q=\lfloor d/2\rfloor$, of order $d$, and the observation degree is $D=\lfloor\sqrt d\rfloor$, of order $\sqrt d$. Both are below $d$. The strict margin in the operator bound leaves room for the transfer factors. The explicit choices in Appendix E of the preprint lead to the following value.
 
 :::{prf:theorem} Uniform Appell coefficient growth
 :label: thm:bk-appell-bound
@@ -227,4 +227,4 @@ $$h(\mu)^{-1}\le\sqrt{\pi(1+2\cdot10^{16})}.$$
 Here $h$ has the normalization of [](#eq:hstar-def) and the comparison of [](#eq:cheeger-two-sided).
 :::
 
-The BK proof therefore shares the Appell quantities and Letwin's quadratic input with the polynomial literature, while its new mechanism is the combination of a rank-independent Hodge estimate, a common bound for every integration power, and reverse transfer. It uses neither the BKL cumulant-and-suspension conclusion nor the SZ v2 summable-refinement conclusion as an input. This construction gives another proof of KLS; it does not establish the moment-Hessian, fixed-eigenfunction occupation or conditional-frame hypotheses. Their separate questions remain those of Chapter [](#sec:frontier-atlas).
+The new mechanism of BK is the combination of a rank-independent Hodge estimate, a common bound for every integration power, and reverse transfer. It is compared with BKL and SZ v2 in Chapter [](#sec:kls-synthesis).

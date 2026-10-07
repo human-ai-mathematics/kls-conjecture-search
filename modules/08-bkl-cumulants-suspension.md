@@ -6,17 +6,13 @@ numbering:
 (sec:bkl-proof)=
 # Bizeul–Klartag–Lehec: cumulants and suspension
 
-**What to retain.** The cumulants of an isotropic log-concave law — the Taylor coefficients of the logarithm of its Laplace transform — satisfy $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ with $K$ independent of the dimension: up to a geometric factor, the factorial growth already forced by the exponential law on the line. Suspension then encodes an arbitrary test function as an extra coordinate of a larger log-concave law, so the bound on linear observables becomes the exponential Appell coefficient bound for every function, which by the spectral criterion of the first version of Song–Zhang is KLS.
+**What to retain.** The cumulants of an isotropic log-concave law satisfy $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ with $K$ independent of the dimension: up to a geometric factor, the factorial growth already forced by the exponential law on the line. Suspension encodes an arbitrary test function as an extra coordinate of a larger log-concave law, so this bound on linear observables becomes the exponential Appell coefficient bound for every function, which is KLS.
 
-Bizeul, Klartag and Lehec (BKL) give a proof of KLS in their preprint of 4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]. This chapter explains its mechanism: the analytic criterion, the cumulant induction and suspension. Each statement displays its status; how it was checked is explained on the [welcome page](#sec:overview-checking).
-
-The decisive change is to estimate cumulants of every order and then encode an arbitrary test function in an additional coordinate of a log-concave measure. Uniformity in dimension allows this enlarged measure to use the same cumulant bound. The resulting estimate is exactly the exponential Appell coefficient bound of [](#prop:sz-exponential-coefficients-equivalence).
-
-The second version of Song–Zhang, deposited the same day and presented in the next chapter, [](#sec:sz-v2-proof), closes the argument differently, through repeated refinement from the same spectral foundation. These two proofs and the third, by Balasubramanian and Kasiviswanathan (Chapter [](#sec:bk-proof)), are compared, and what each reconstruction uses is listed, in Chapter [](#sec:kls-synthesis).
+This chapter works through the proof of Bizeul, Klartag and Lehec (BKL) in their preprint of 4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]: the analytic criterion, the cumulant induction and suspension. The criterion is the spectral criterion of the first version of Song–Zhang (SZ v1, Chapter [](#sec:polynomial-curvature)) in exponential form. The second version of Song–Zhang (SZ v2, Chapter [](#sec:sz-v2-proof)) closes the same criterion differently, and the proof of Balasubramanian and Kasiviswanathan (BK, Chapter [](#sec:bk-proof)) does without it; the three are compared in Chapter [](#sec:kls-synthesis).
 
 ## A one-dimensional calibration
 
-For a standard Gaussian, the logarithm of the Laplace transform is $z^2/2$: the second cumulant is one and every higher cumulant vanishes. For the centered mean-one exponential $X=E-1$, it is $-z-\log(1-z)=\sum_{m\ge2}z^m/m$, so the $m$th cumulant is $(m-1)!$. Factorial growth is therefore already necessary on the line. In higher dimension the issue is to bound the full tensor with one argument fixed, summing the squares of all remaining entries without a dimension factor.
+The exponential law forces factorial growth of cumulants, $(m-1)!$ at order $m$ (Section [](#subsec:kls-bkl-idea)). In higher dimension the issue is to bound the full tensor with one argument fixed, summing the squares of all remaining entries without a dimension factor.
 
 A tilted average is the expectation of a test function after reweighting the law by $e^{\langle z,x\rangle}$. Its first derivative at zero is $\operatorname{Cov}(X,f)$; its higher derivatives retain the response to all small exponential tilts. We use the following conventions.
 
@@ -87,7 +83,7 @@ $$
 $$
 :::
 
-This is the Song–Zhang component of the BKL argument. One coefficient bound at all orders replaces successive curvature profiles with increasing constants.
+This is the SZ v1 component of the BKL argument. One coefficient bound at all orders replaces successive curvature profiles with increasing constants.
 
 :::{prf:theorem} The tilt-average criterion
 :label: thm:bkl-tilt-criterion
@@ -216,7 +212,7 @@ $$
 $$
 :::
 
-A cumulant with one slot in the new coordinate and the others in one copy of $X$ equals the tilt derivative divided by $\sqrt{N(1+2/\beta^2)}$. The $N$ disjoint tensor blocks cancel the factor $N^{-1}$ in their squared norms. Increasing $\beta$ removes the added variance. Decomposing a test into constant, linear and affine-orthogonal parts, then using density, extends the estimate to $L^2$. The suspension needs only its cumulant premise.
+A cumulant with one slot in the new coordinate and the others in one copy of $X$ equals the tilt derivative divided by $\sqrt{N(1+2/\beta^2)}$. The $N$ disjoint tensor blocks cancel the factor $N^{-1}$ in their squared norms. Increasing $\beta$ removes the added variance. Decomposing a test into constant, linear and affine-orthogonal parts, then using density, extends the estimate to $L^2$. The suspension needs only its cumulant hypothesis.
 
 Substitution of the all-order bound gives one exponential base. Approximation passes the Appell polynomial moment inequalities to arbitrary laws; linear contraction includes singular covariances.
 
@@ -237,7 +233,7 @@ Combining [](#thm:bkl-tilt-bound) with [](#thm:bkl-tilt-criterion) gives the KLS
 
 ## Consequences for the earlier questions
 
-The exponential estimate also supplies the initialization bound used in the first-version iteration of Chapter [](#sec:polynomial-curvature), without a curvature-profile premise. Since that bound is already of KLS strength, feeding it back into the iteration gives no second proof.
+The exponential estimate also supplies the initialization bound used in the first-version iteration of Chapter [](#sec:polynomial-curvature), without a curvature-profile hypothesis. Since that bound is already of KLS strength, feeding it back into the iteration gives no second proof.
 
 :::{prf:corollary} Uniform conditional initialization from BKL
 :label: cor:bkl-uniform-conditional-initialization

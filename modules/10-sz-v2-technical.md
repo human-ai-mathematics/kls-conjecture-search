@@ -412,6 +412,58 @@ upper bound, independent of $Q$ and the finite terminal depth $R$.
 
 Each additional logarithm contracts a multiplicative perturbation of the argument. After a number of logarithms comparable to $\log^*M$, the remaining distortion decays geometrically. Applied to the terminal polynomial degree, this compares its logarithms with those of inverse curvature. The products of these distortions and the static-transfer factors stay bounded independently of the terminal depth.
 
+## The outer round with retained caps
+
+The finite-chain estimate above, with the terminal-degree distortion, gives one outer round of the refinement used in Chapter [](#sec:sz-v2-proof): a radius bound yields a coefficient cap, and the cap, together with earlier ones kept on their own degree ranges, yields an improved radius bound.
+
+:::{prf:lemma} Outer round with a retained profile
+:label: lem:sz-v2-profile-refinement
+Fix a universal valid coefficient seed $G_*$ satisfying the seed conditions
+of [](#prop:sz-v2-finite-chain-blocks), with its fixed cutoff constants.
+Use the functions in [](#def:sz-v2-height-profiles), and set
+$\widehat W_{m,\delta}(x)=\max\{W_m(x),\bar t(\delta^{-1})\}$.
+All radius bounds below are uniform over every dimension and every measure
+in [](#def:sz-v2-common-radius), for every admissible lower curvature $a>0$.
+There are universal $A_0,C_R,C_Q,C_b,C_b',C_r,D_r\ge1$ such that the following holds for every finite $S_*\ge1$ (the additional allowance $b_*$ may depend on $S_*$). For each integer $m\ge0$ and $0<\delta\le1/16$, suppose $V=W_m$ or $V=\widehat W_{m,\delta}$, $1\le S\le S_*$,
+$A\ge A_0$, $R_\delta=\lceil C_R\delta^{-12}\rceil$, and
+$$
+ \mathcal A\le A[V(r)+S]^{1/3}\mathcal L_r(a^{-1})^2
+ \qquad(r\ge R_\delta).                          
+$$
+Then the following function is a valid coefficient cap, meaning
+$c_k\le H(k)^{k-1}$ for every centered log-concave covariance contraction:
+$$
+ H(x)^2=\min\{G_*(x)^2,e^{3\delta}A[V(r_\delta(x))+S]^{1/3}\},
+ \quad r_\delta(x)=\max\{R_\delta,\lceil C_rt(x)\rceil+
+                                      \lceil D_r/\delta\rceil\}.
+$$
+Optionally retain earlier caps, with margins $\delta=\alpha_{N-1}\le\cdots\le\alpha_0\le1/16$,
+where $N\ge1$ is finite and the newest cap is $H_{N-1}=H$. For every
+$0<\epsilon\le\delta$, put $\alpha_N=\epsilon$,
+$K_l=\lceil C_{\rm cut}\alpha_l^{-2}\rceil$ and
+$\Xi_l=\lceil4C_{\rm deg}\alpha_l^{-1}K_{l+1}\rceil$. Require
+$(1+\alpha_l)H_l(\Xi_l)^2\le A(4+S)^{1/3}$ for $l<N-1$, and
+$\max\{C_0G_*(16K_0)^2,C_0\}\le A(4+S)^{1/3}$.
+All $H_l$ are nondecreasing valid coefficient majorants between $1$ and
+$G_*$ for every centered log-concave covariance contraction. With a fixed sufficiently large
+$b_*$ with $b_*\le C\log(e+S_*)$ for one universal $C$, put
+$$
+ D_*=V(\epsilon^{-1})+S+b_*4^{-m},\qquad0<\epsilon\le\delta.
+$$
+Then, for every $j\ge1$, odd $Q\ge \min\{q\ge C_Q\epsilon^{-4}:q\text{ odd}\}$, and
+$r\ge r_0(Q):=\max\{R_\delta,\lceil C_bt(Q)\rceil+
+\lceil C_b'/\epsilon\rceil\}$,
+$$
+ \mathcal A\le e^{16\delta+24\epsilon j}A
+       \max\{t_j(Q),D_*\}^{1/3}(r+1)^{1/Q}\mathcal L_r(a^{-1})^2.
+                                                               
+$$
+For the one-cap case, the original-seed floor can instead be bounded
+by $e^{4\delta}A D_*^{1/3}$. The same conclusion holds.
+:::
+
+The radius bound first gives a coefficient cap through static transfer. One then divides degrees among retained caps and applies the finite-block construction with the corresponding margins. Terminal-degree distortion controls the logarithms introduced by localization. The factors $e^{16\delta}$ and $e^{24\epsilon j}$ record distinct costs: forming the new cap and repeating the inner improvement. Their explicit dependence on both margins is what permits a later summable choice.
+
 ## Scalar control of changing starting depths
 
 :::{prf:lemma} Scalar calculus of the contracted height profiles

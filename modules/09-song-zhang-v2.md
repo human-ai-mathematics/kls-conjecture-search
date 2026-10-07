@@ -7,25 +7,28 @@ numbering:
 (sec:sz-v2-proof)=
 # Song–Zhang, second version: repeated refinement with summable losses
 
-**What to retain.** Instead of the Poincaré constant, the second version of Song–Zhang iterates one number per measure, a common radius for the Appell coefficients of every degree, which controls the Poincaré constant up to a fixed factor paid once. Each refinement of that radius passes through curvature profiles and localization, as in the first version, but with margins $\alpha_i=2^{-i}/16$ whose costs have a bounded product, so infinitely many refinements leave a universal bound.
+**What to retain.** Instead of the Poincaré constant, the second version of Song–Zhang (SZ v2) iterates one number per measure, a common radius for the Appell coefficients of every degree, which controls the Poincaré constant up to a fixed factor paid once. Each refinement of that radius passes through curvature profiles and localization, as in the first version (SZ v1), but with margins $\alpha_i=2^{-i}/16$ whose costs have a bounded product, so infinitely many refinements leave a universal bound.
 
-Song and Zhang's second version, *An O(1) Bound for the KLS Constant* [@SongZhang2026ConstantKLS], develops a second proof of KLS from the polynomial–curvature iteration. It is a new version of the same preprint; Chapter [](#sec:polynomial-curvature) concerns the first version [@SongZhang2026IteratedLogKLS], and the preceding chapter the proof of Bizeul, Klartag and Lehec (BKL). The statements below record results of the second version; each displays its status, and how it was checked is explained on the [welcome page](#sec:overview-checking).
-
-The simplest distinction is already scalar. A fixed cost $C_*>1$ per repetition gives a factor $C_*^m$ after $m$ repetitions, however slowly $m$ grows. Costs $e^{C\alpha_i}$ with $\alpha_i=2^{-i}/16$ instead have product at most $e^{C/8}$. This arithmetic does not prove a refinement estimate: every repetition must still be admissible at its chosen starting depth, and its operator estimates must concern the same functions.
+This chapter works through the second version of Song and Zhang's preprint, *An O(1) Bound for the KLS Constant* [@SongZhang2026ConstantKLS]; Chapter [](#sec:polynomial-curvature) concerns SZ v1 [@SongZhang2026IteratedLogKLS], and the preceding chapter the proof of Bizeul, Klartag and Lehec (BKL). Why bounded costs per repetition do not suffice, and summable ones may, is the calibration of Section [](#subsec:kls-sz-v2-idea).
 
 ## Versions and the two closing mechanisms
 
-| Submitted (UTC) | Source | Conclusion and role |
+| Date | Preprint | Conclusion and role |
 |---|---|---|
-| 1 October 2026, 10:43:04 | Song–Zhang, first version [@SongZhang2026IteratedLogKLS] | Iterated-logarithm bound, reconstructed in Chapter [](#sec:polynomial-curvature) |
-| 4 October 2026, 19:30:34 | BKL, first version [@BizeulKlartagLehec2026KLS] | Universal bound through cumulants and suspension, citing the first version of Song–Zhang; preceding chapter |
-| 4 October 2026, 21:21:03 | Song–Zhang, second version [@SongZhang2026ConstantKLS] | Universal bound through repeated refinement and summable losses; this chapter |
+| 1 October 2026 | Song–Zhang, first version [@SongZhang2026IteratedLogKLS] | Iterated-logarithm bound, Chapter [](#sec:polynomial-curvature) |
+| 4 October 2026 | BKL, first version [@BizeulKlartagLehec2026KLS] | Universal bound through cumulants and suspension, citing SZ v1; preceding chapter |
+| 4 October 2026 | Song–Zhang, second version [@SongZhang2026ConstantKLS] | Universal bound through repeated refinement and summable losses; this chapter |
 
-These are two distinct closing mechanisms with a shared spectral foundation. The second version improves the iteration producing the coefficients; BKL estimate the exponential coefficient end point directly ([](#sec:bkl-proof)). The reconstruction in this chapter uses nothing from BKL; Chapter [](#sec:kls-synthesis) compares these with the BK proof.
+SZ v2 and BKL are two distinct closing mechanisms on a shared spectral foundation. SZ v2 improves the iteration producing the coefficients; BKL estimate the exponential coefficient end point directly (Chapter [](#sec:bkl-proof)). The argument of this chapter uses nothing from BKL; Chapter [](#sec:kls-synthesis) compares both with the proof of Balasubramanian and Kasiviswanathan (BK).
 
 ## The argument in outline
 
-The quantity improved throughout the proof is a single radius for the whole coefficient hierarchy. The first improvement replaces exponential cost in the logarithmic depth by polynomial cost. Repeating this improvement reduces the number of logarithms itself, initially at a fixed cost per repetition. The last improvement makes these costs arbitrarily close to one, while retaining earlier coefficient bounds to control the larger degree ranges that appear.
+The quantity improved throughout the proof is a single radius for the whole coefficient hierarchy, and four improvements bring it to a universal bound.
+
+1. **Polynomial cost in the logarithmic depth.** [](#thm:sz-v2-iterated-curvature) replaces the factor $16^r$ of SZ v1 by $(r+1)^{1/3}$, because blocks of inverse-gradient iterates retain centering and symmetry information over many steps instead of charging a loss at each one; via the transfer, $\CP\lesssim(1+\log^*(n+2))^{1/3}$ ([](#thm:sz-v2-dimension-bound)).
+2. **Height reduction.** Repeating the improvement replaces $\log^*$ by $\log^*\circ\log^*$, and so on, at a fixed cost $C_*$ per repetition ([](#prop:sz-v2-height-reduction)), which still grows with the number of repetitions.
+3. **Multipliers close to one.** With a margin $\delta$, $m$ refinements cost $e^{C\delta m}$ ([](#prop:sz-v2-small-loss)), at the price of a degree cutoff of order $\delta^{-2}$ and a starting depth of order $\delta^{-12}$; earlier coefficient bounds are kept on the degree ranges where they are stronger.
+4. **Summable costs.** The margins $\alpha_i=2^{-i}/16$ give a multiplicative cost at most $e^{C_A/8}$ and, once the growing starting depths are absorbed into the improving height profile, an additive cost of order $2^{-i}$ ([](#prop:sz-v2-summable-budgets)).
 
 The main estimates appear first, ending with the universal bound. The [technical part](#sec:sz-v2-blocks) then explains how one family of inverse-gradient iterates supplies the centering, symmetry and energy estimates needed throughout. Full proofs are linked beside the statements.
 
@@ -71,7 +74,7 @@ The operator $\mathcal T$ differentiates after solving the diffusion Poisson equ
 
 ## Polynomial cost in the logarithmic depth
 
-Section 6 of the source replaces the exponential depth cost of the first version by a polynomial cost. Its inverse-gradient blocks retain centering and symmetry information over many steps instead of charging a fixed loss at each step.
+Section 6 of the preprint replaces the exponential depth cost of SZ v1 by a polynomial cost. Its inverse-gradient blocks retain centering and symmetry information over many steps instead of charging a fixed loss at each step.
 
 :::{prf:theorem} Polynomial cost for logarithmic curvature refinement
 :label: thm:sz-v2-iterated-curvature
@@ -151,55 +154,7 @@ The proof keeps a static coefficient bound throughout all inner depths. Finite o
 
 ## Refinements with a multiplier close to one
 
-The source's final refinement uses a degree cutoff of order $\delta^{-2}$ and a starting depth of order $\delta^{-12}$. The smaller multiplier is useful only if those growing thresholds remain admissible. Earlier coefficient estimates are retained on the degree ranges where they are stronger; the [finite-chain estimate](#prop:sz-v2-finite-chain-blocks) has constants independent of how many such estimates are kept. The following two statements express the resulting profile improvement.
-
-:::{prf:lemma} Outer round with a retained profile
-:label: lem:sz-v2-profile-refinement
-Fix a universal valid coefficient seed $G_*$ satisfying the seed conditions
-of [](#prop:sz-v2-finite-chain-blocks), with its fixed cutoff constants.
-Use the functions in [](#def:sz-v2-height-profiles), and set
-$\widehat W_{m,\delta}(x)=\max\{W_m(x),\bar t(\delta^{-1})\}$.
-All radius bounds below are uniform over every dimension and every measure
-in [](#def:sz-v2-common-radius), for every admissible lower curvature $a>0$.
-There are universal $A_0,C_R,C_Q,C_b,C_b',C_r,D_r\ge1$ such that the following holds for every finite $S_*\ge1$ (the additional allowance $b_*$ may depend on $S_*$). For each integer $m\ge0$ and $0<\delta\le1/16$, suppose $V=W_m$ or $V=\widehat W_{m,\delta}$, $1\le S\le S_*$,
-$A\ge A_0$, $R_\delta=\lceil C_R\delta^{-12}\rceil$, and
-$$
- \mathcal A\le A[V(r)+S]^{1/3}\mathcal L_r(a^{-1})^2
- \qquad(r\ge R_\delta).                          
-$$
-Then the following function is a valid coefficient cap, meaning
-$c_k\le H(k)^{k-1}$ for every centered log-concave covariance contraction:
-$$
- H(x)^2=\min\{G_*(x)^2,e^{3\delta}A[V(r_\delta(x))+S]^{1/3}\},
- \quad r_\delta(x)=\max\{R_\delta,\lceil C_rt(x)\rceil+
-                                      \lceil D_r/\delta\rceil\}.
-$$
-Optionally retain earlier caps, with margins $\delta=\alpha_{N-1}\le\cdots\le\alpha_0\le1/16$,
-where $N\ge1$ is finite and the newest cap is $H_{N-1}=H$. For every
-$0<\epsilon\le\delta$, put $\alpha_N=\epsilon$,
-$K_l=\lceil C_{\rm cut}\alpha_l^{-2}\rceil$ and
-$\Xi_l=\lceil4C_{\rm deg}\alpha_l^{-1}K_{l+1}\rceil$. Require
-$(1+\alpha_l)H_l(\Xi_l)^2\le A(4+S)^{1/3}$ for $l<N-1$, and
-$\max\{C_0G_*(16K_0)^2,C_0\}\le A(4+S)^{1/3}$.
-All $H_l$ are nondecreasing valid coefficient majorants between $1$ and
-$G_*$ for every centered log-concave covariance contraction. With a fixed sufficiently large
-$b_*$ with $b_*\le C\log(e+S_*)$ for one universal $C$, put
-$$
- D_*=V(\epsilon^{-1})+S+b_*4^{-m},\qquad0<\epsilon\le\delta.
-$$
-Then, for every $j\ge1$, odd $Q\ge \min\{q\ge C_Q\epsilon^{-4}:q\text{ odd}\}$, and
-$r\ge r_0(Q):=\max\{R_\delta,\lceil C_bt(Q)\rceil+
-\lceil C_b'/\epsilon\rceil\}$,
-$$
- \mathcal A\le e^{16\delta+24\epsilon j}A
-       \max\{t_j(Q),D_*\}^{1/3}(r+1)^{1/Q}\mathcal L_r(a^{-1})^2.
-                                                               
-$$
-For the one-cap case, the original-seed floor can instead be bounded
-by $e^{4\delta}A D_*^{1/3}$. The same conclusion holds.
-:::
-
-The radius bound first gives a coefficient cap through static transfer. One then divides degrees among retained caps and applies the finite-block construction with the corresponding margins. Terminal-degree distortion controls the logarithms introduced by localization. The factors $e^{16\delta}$ and $e^{24\epsilon j}$ record distinct costs: forming the new cap and repeating the inner improvement. Their explicit dependence on both margins is what permits a later summable choice.
+The final refinement of the preprint uses a degree cutoff of order $\delta^{-2}$ and a starting depth of order $\delta^{-12}$. The smaller multiplier is useful only if those growing thresholds remain admissible. Earlier coefficient estimates are retained on the degree ranges where they are stronger; the [finite-chain estimate](#prop:sz-v2-finite-chain-blocks) has constants independent of how many such estimates are kept. One outer round turns a radius bound into a new coefficient cap and then into an improved radius bound, with a cost $e^{16\delta}$ for forming the new cap and $e^{24\epsilon j}$ for repeating the inner improvement; this is [](#lem:sz-v2-profile-refinement), stated with the technical estimates in Chapter [](#sec:sz-v2-blocks). Its explicit dependence on both margins gives the following profile improvement.
 
 :::{prf:proposition} Prescribed-depth profiles with a small multiplicative loss
 :label: prop:sz-v2-small-loss
