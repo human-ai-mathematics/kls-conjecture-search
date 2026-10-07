@@ -9,6 +9,8 @@ numbering:
   enumerator: D21.%s
 ---
 
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-exact-cases); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
+
 **Overview.** This dossier proves [](#prop:cone-moment-map), [](#prop:cone-linear-sector) and [](#cor:cube-cone-gate-zero) for the exponential cone measures of [](#def:exponential-cone). It lifts the moment potential of the uniform law on the base $K$ to an explicit moment potential of the centered cone measure, reads off the canonical Stein kernel, and then computes the linear sector and the cube-cone gate matrix exactly. The outside inputs are [](#thm:regular-moment-map-compact-target) for the base, the uniqueness-up-to-translation theorem of Cordero-Erausquin–Klartag ([](#thm:sol-cone-cek)), and Gamma moments; [](#prop:cmh-hodge) and [](#lem:linear-sector-third-moment) are not used.
 
 1. Structure of $\mu_{K,\beta}$ as the law of $S(1,U)$ with $S$ Gamma and $U$ uniform on $K$, with its covariance ([](#lem:sol-cone-structure)); base potential and its rescaling ([](#lem:sol-cone-base)).

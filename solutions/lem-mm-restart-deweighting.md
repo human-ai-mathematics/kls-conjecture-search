@@ -6,6 +6,8 @@ numbering:
   enumerator: D15.%s
 ---
 
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
+
 **Overview.** This dossier proves [](#lem:mm-restart-deweighting) as [](#thm:sol-lem-mm-restart-deweighting), unconditionally. For a regular approximant, a fixed test $f\in L^2(\mu)$ and a stopping time $\sigma>0$, the conditional unweighted source after $\sigma$ is at most $\Var_{\mu_\sigma}(f)/(\varepsilon+\sigma)\le v_\sigma/\sigma$ ([](#eq:sol-rdw-main)). The proof restarts the planted channel at $\sigma$ with the posterior as new prior and applies [](#lem:mm-time-weighted-fixed-source) with curvature $\kappa=\varepsilon+\sigma$, conditionally on $\mathcal F_\sigma$. No unweighted statement at time zero is made.
 
 1. The pathwise tilt kernel [](#eq:sol-rdw-kernel) is identified with the posterior at fixed times ([](#eq:sol-rdw-bayes)). By dyadic approximation it is also identified at optional times ([](#eq:sol-rdw-optional)), so $\mu_\sigma$ is a regular conditional distribution and $f\in L^2(\mu_\sigma)$.

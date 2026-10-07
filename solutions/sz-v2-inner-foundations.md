@@ -8,6 +8,8 @@ numbering:
   enumerator: "144.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This reconstruction concerns Section 6 of
 [@SongZhang2026ConstantKLS]. It separates a coefficient transfer that works
 with any static coefficient cap from the operator blocks needed to construct

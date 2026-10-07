@@ -12,6 +12,8 @@ numbering:
   enumerator: D5.%s
 ---
 
+*Part of the shared technical foundations and the fixed-cut archive, Chapters [](#sec:models) and [](#sec:jacobi); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:profile-bound), [](#cor:generic-degeneracy), [](#prop:exact-splitting), [](#prop:persistent-splitting), [](#prop:gaussian-model) and [](#prop:products). A second variation along a smooth minimizing branch bounds the constant-mode curvature $\mathfrak K$ by the profile's second derivative, and an average of this bound over volumes controls $\mathfrak K$ by $h_\nu^3$. Both statements are conditional on the granted smooth minimizers. The rest of the dossier treats exactly split laws and the Gaussian and product models, whose localization posteriors are computed explicitly.
 
 1. [](#lem:sol-profile-bound): first and second variation of a normal flow give a competitor branch $\Psi$ with $\Psi''(p)=-\mathfrak K/P^2$, and $I\le\Psi$ gives the bound.

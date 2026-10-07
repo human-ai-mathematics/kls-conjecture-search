@@ -11,6 +11,8 @@ numbering:
   enumerator: D4.%s
 ---
 
+*Part of the fixed-cut archive, Chapters [](#sec:introduction) and [](#sec:stein); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:perimeter-martingale), [](#prop:trivial-excess), [](#lem:excess-identity), [](#lem:inf-martingales) and [](#prop:intro-audit). Under stochastic localization, the lower Minkowski perimeter of a fixed cut is a supermartingale in general and a true martingale in the compact-support smooth class. The resulting excess bounds are then used to audit what an unweighted Stein-trace estimate would consume.
 
 1. [](#lem:sol-perimeter-martingale): countable infima of bounded boundary-layer mass martingales increase to $P_t(E)$, which gives [](#eq:sol-perimeter-supermartingale). In the compact smooth class, the surface representation [](#eq:sol-perimeter-representation), the $L^2$ density bound [](#eq:sol-density-L2) and stochastic Fubini give the martingale SDE [](#eq:sol-perimeter-sde).

@@ -5,6 +5,8 @@ numbering:
   enumerator: '136.%s'
 ---
 
+*Part of the Bizeul–Klartag–Lehec proof, Chapter [](#sec:bkl-proof); the reading order is on the [full proofs](#sec:proofs-bkl) page.*
+
 **Author.** `bkl_suspension_author, gpt-6-astra, 2026-10-06` (researcher).
 
 **Overview.** The full BKL coefficient bound supplies a stronger,

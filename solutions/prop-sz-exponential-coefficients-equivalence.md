@@ -5,6 +5,8 @@ numbering:
   enumerator: '124.%s'
 ---
 
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
+
 **Overview.** The polynomial–curvature comparison identifies an exact growth condition
 on the full Appell hierarchy that is equivalent to KLS. A Poincaré bound gives the
 condition by a derivative recursion. In the converse direction, the coefficient profile

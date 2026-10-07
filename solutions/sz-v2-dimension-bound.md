@@ -5,6 +5,8 @@ numbering:
   enumerator: "138.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** The new input is the improved curvature profile of
 [](#thm:sz-v2-iterated-curvature). The Gaussian localization transfer already
 proved in [](#thm:sz-curvature-transfer) accepts exactly this input. This

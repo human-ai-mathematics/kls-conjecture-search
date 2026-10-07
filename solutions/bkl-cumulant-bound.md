@@ -5,6 +5,8 @@ numbering:
   enumerator: "134.%s"
 ---
 
+*Part of the Bizeul–Klartag–Lehec proof, Chapter [](#sec:bkl-proof); the reading order is on the [full proofs](#sec:proofs-bkl) page.*
+
 **Overview.** This dossier reconstructs Theorem 4.1 and Section 6 of
 [@BizeulKlartagLehec2026KLS, version 1]. The induction proves a static bound and
 an integrated next-order bound together. In a split cumulant contraction the

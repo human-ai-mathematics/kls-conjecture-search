@@ -8,6 +8,8 @@ numbering:
   enumerator: "153.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** The operator comparison first bounds the spectral radius. A recurrence
 along each adjoint orbit then puts its largest normalized squared norm among the
 first finitely many iterates. Summing second differences gives one prefactor for

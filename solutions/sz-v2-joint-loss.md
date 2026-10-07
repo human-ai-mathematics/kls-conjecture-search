@@ -7,6 +7,8 @@ numbering:
   enumerator: "146.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This reconstructs the joint raw-orbit estimate and its normalized
 hierarchy version from source Sections 8.3–8.4 of
 [@SongZhang2026ConstantKLS]. The two claims are independent of any height

@@ -6,6 +6,8 @@ numbering:
   enumerator: D13.%s
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:lyapunov-stein-duality) as [](#lem:sol-lyapunov-stein-duality). At every time $t>0$, $s_t\inner{K_t}{\mathscr L_{A_t}^{-1}K_t}\le4/t$; the lemma also gives the cut-oriented source scale and direct-sum invariance of $\lambda_{\rm cut}$. The proof combines the anisotropic Brascamp–Lieb quadratic-form estimate from [](#lem:pathwise-BL) with finite-dimensional Hilbert-space duality for the Lyapunov operator. The proof is unconditional for $t>0$ and asserts nothing at $t=0$.
 
 1. Support convention: $K_t$ lives on the range of $A_t$ ([](#eq:sol-K-on-support)). There the support inverse coincides with the pseudoinverse [](#eq:sol-lyapunov-pseudoinverse).

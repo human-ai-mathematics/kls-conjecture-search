@@ -8,6 +8,8 @@ numbering:
   enumerator: "145.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This proves the generic mechanisms of
 [](#lem:sz-v2-orbit-green-restart), [](#lem:sz-v2-block-extension), and
 [](#lem:sz-v2-block-propagation). The starting assumptions of each lemma

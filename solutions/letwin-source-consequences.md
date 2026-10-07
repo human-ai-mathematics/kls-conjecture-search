@@ -8,6 +8,8 @@ numbering:
   enumerator: "106.%s"
 ---
 
+*Part of the shared technical foundations, Chapters [](#sec:qcts) and [](#sec:product-stress); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** Whitening and duality convert the quadratic-chaos theorem into
 a bound on the two-color contrast. Unwhitening costs exactly the square of
 the largest covariance eigenvalue; removing the off-balance correction

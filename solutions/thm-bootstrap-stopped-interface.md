@@ -6,6 +6,8 @@ numbering:
   enumerator: D28.%s
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:bootstrap); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#thm:bootstrap-stopped-interface) ([](#thm:sol-bootstrap-stopped-interface)). For a near-worst isotropic log-concave law and a balanced cut, the stopped Cheeger excess is bounded by $Te_0$ plus $h_\mu$ times window, exit and covariance terms ([](#eq:sol-bootstrap-stopped-interface)). In that bound the covariance interface enters only through the cut-stopped quantity $\widehat\Xi_{T,\eta}$ of [](#eq:sol-stopped-interface-definition). With $\eta=T^{1/3}$ it becomes $Te_0+2h_\mu(T^{4/3}+\widehat\Xi_{T,\eta})$ ([](#eq:sol-bootstrap-stopped-interface-clean)). The result is only a comparison: no dimension-free bound on $\widehat\Xi_{T,\eta}$ is proved and KLS is not inferred.
 
 1. At each deterministic time, [](#lem:perimeter-martingale) and [](#lem:half) bound the expected stopped perimeter by $h_\mu/2+e_0$ ([](#eq:sol-stopped-interface-perimeter)).

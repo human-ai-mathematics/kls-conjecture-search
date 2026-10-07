@@ -5,6 +5,8 @@ numbering:
   enumerator: "156.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** A convolution estimate controls the lowering drift. For bounded
 initial degrees the quadratic integration seed and a small localization time
 close the induction. In larger degrees, finitely many lower coefficients feed

@@ -7,6 +7,8 @@ numbering:
   enumerator: "141.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This develops the finite-chain argument for
 [](#prop:sz-v2-summable-budgets), corresponding to Propositions 9.23–9.25
 of [@SongZhang2026ConstantKLS]. The scalar threshold and degree-sum

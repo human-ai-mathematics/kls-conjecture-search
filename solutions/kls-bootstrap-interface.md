@@ -12,6 +12,8 @@ numbering:
   enumerator: D3.%s
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:bootstrap); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:half), [](#lem:whitening), [](#thm:bootstrap), [](#lem:crude), [](#cor:loglog) and [](#prop:ceiling). It uses two deterministic isoperimetric comparisons to bound the Cheeger-line excess of a near-worst measure along stochastic localization. The covariance overshoot $\Xi_T$ is the only interface quantity. It is then evaluated crudely, and polylogarithmically under [](#ass:KI). Finally, the dossier shows that an all-measure relative-scale bound on $\Xi_T$ would already imply KLS.
 
 1. [](#lem:sol-half): concavity and symmetry of the profile give $h_\nu=2I_\nu(1/2)$.

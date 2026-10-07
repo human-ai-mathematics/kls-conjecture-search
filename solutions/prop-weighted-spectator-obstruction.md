@@ -6,6 +6,8 @@ numbering:
   enumerator: D26.%s
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:open); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#prop:weighted-spectator-obstruction) ([](#thm:sol-weighted-spectator-obstruction)). For all $C,T_0,\gamma,\eta,\delta$ there is a product of centered exponentials and a half-mass cylinder with arbitrarily small initial excess whose stopped excess, weighted by $(1+\norm{A_t}_\op)^{5/2}$, violates [](#eq:sol-spectator-violation). This refutes the literal global-operator-norm weighted gate of [](#conj:weighted-excess-rate) in both its additive and relative readings. It does not refute KLS, because every witness is a product ([](#prop:products)). The mechanism is a near-optimal base cylinder with a stable perimeter, plus many exponential spectators whose covariance spikes both collapse the profile and inflate the weight.
 
 1. Regular exact-mass competitors and the exact density-change formula [](#eq:sol-spectator-density-change) for the exponential product ([](#lem:sol-spectator-regularization)).

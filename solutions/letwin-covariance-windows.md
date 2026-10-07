@@ -9,6 +9,8 @@ numbering:
   enumerator: "107.%s"
 ---
 
+*Part of the results of the literature written out here, Chapter [](#sec:covariance-tech); the reading order is on the [full proofs](#sec:proofs-literature) page.*
+
 **Overview.** A quadratic-variance bound controls the directional third-moment
 tensor by duality. Substitution into the published Klartag--Lehec fixed-time
 moment theorem gives a covariance window of order $1/\log n$. Taking its

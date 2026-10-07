@@ -5,6 +5,8 @@ numbering:
   enumerator: "151.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** We reconstruct Lemma 3.1 and Appendices A–B of
 [@BalasubramanianKasiviswanathan2026KLS], at Git commit
 `4837c33649ba2271f43c9684e9350ecbdd725f95`. The first part proves existence of

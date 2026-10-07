@@ -7,6 +7,8 @@ numbering:
   enumerator: '130.%s'
 ---
 
+*Part of the Bizeul–Klartag–Lehec proof, Chapter [](#sec:bkl-proof); the reading order is on the [full proofs](#sec:proofs-bkl) page.*
+
 **Overview.** This reconstructs the analytic interfaces of Section 2 of
 [@BizeulKlartagLehec2026KLS], version
 [arXiv:2610.05474v1](https://arxiv.org/html/2610.05474v1).

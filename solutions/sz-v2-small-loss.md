@@ -8,6 +8,8 @@ numbering:
   enumerator: "140.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** The aim is [](#prop:sz-v2-small-loss), from Section 9 of
 [@SongZhang2026ConstantKLS]. The proof combines scalar height estimates, the independently reconstructed
 finite-chain block theorem, a near-unit terminal-depth induction, and exact

@@ -5,6 +5,8 @@ numbering:
   enumerator: "109.%s"
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:open); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#cor:dichotomy), conditional on the quantified completion in [](#ass:absolute-geometric-completion). The completion remains an antecedent throughout.
 
 1. Match the stopping width and the near-worst parameter to the bootstrap, and choose a dimension threshold on which the published covariance window reaches the fixed completion time.

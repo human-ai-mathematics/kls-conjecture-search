@@ -5,6 +5,8 @@ numbering:
   enumerator: "139.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** The coefficient radius is one scalar assigned to a fixed measure,
 independent of polynomial degree, block length, and block order. Its finiteness
 follows from the bounded inverse diffusion operator. Polynomial testing relates

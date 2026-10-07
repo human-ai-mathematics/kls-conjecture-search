@@ -5,6 +5,8 @@ numbering:
   enumerator: "142.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** The last composition in the Song–Zhang v2 argument is short
 once the bounded-amplitude profiles are available. This text gives that
 composition with the order of quantifiers and the approximation step

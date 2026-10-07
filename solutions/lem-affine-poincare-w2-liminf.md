@@ -8,6 +8,8 @@ numbering:
   enumerator: D9.%s
 ---
 
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-normalization); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
+
 **Overview.** This dossier proves [](#lem:affine-poincare-w2-liminf) and, conditional on the unresolved [](#ass:cmh-recovery-envelope), [](#cor:cmh-recovery-sequence-suffices). It works with the intrinsic covariance form on the affine support, which makes the affine Poincaré constant $\CPaff$ lower semicontinuous along every centered log-concave $W_2$-convergent sequence. Regular compact-target approximants come from smoothing, tilting and truncation, together with the published moment-map theorem [](#thm:regular-moment-map-compact-target). No bound on $\CMH$ and no semicontinuity of $\CMH$ is claimed.
 
 1. [](#lem:sol-cmh-recovery-common-core): the covariance pre-form [](#eq:sol-cmh-recovery-preform) is closable and its kernel is the constants. The class $\R+C_c^\infty$ is a common intrinsic and ambient core, and [](#eq:sol-cmh-recovery-normal-annihilation) makes the energy independent of the extension.

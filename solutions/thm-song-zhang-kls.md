@@ -8,6 +8,8 @@ numbering:
   enumerator: "123.%s"
 ---
 
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
+
 **Overview.** We reconstruct Section 7 of [@SongZhang2026IteratedLogKLS],
 including the bounded test function used to transfer a curvature estimate to an
 arbitrary isotropic law. Gaussian observations produce a regular posterior;

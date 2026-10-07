@@ -6,6 +6,8 @@ numbering:
   enumerator: D18.%s
 ---
 
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
+
 **Overview.** This dossier proves [](#lem:mm-time-weighted-fixed-source) as [](#thm:sol-lem-mm-time-weighted-fixed-source). The setting is a smooth log-concave law with $\nabla^2V\succeq\kappa I_n$, $\kappa\ge0$, an arbitrary fixed test $f\in L^2(\mu)$ and the planted channel. The time-weighted source $\E\int_0^T(\kappa+t)\norm{H_t}_{\HS}^2\dd t$, plus a nonnegative remainder, is bounded by $\Var_\mu(f)-\kappa\abs{g_0}^2$ ([](#eq:sol-mm-time-weighted-fixed-source)); for $\kappa=0$ this gives [](#eq:sol-mm-time-weighted-infinite). The proof applies Itô's formula to $(\kappa+t)\abs{g_t}^2$ and pays the terms with the posterior variance budget. It then closes from $C_c^\infty$ tests to $L^2(\mu)$. The weight is kept, and no unweighted initial-layer claim is made.
 
 1. The posterior equations and the Brascamp–Lieb cap [](#eq:sol-mm-weighted-covariance-cap) make the remainder nonnegative ([](#eq:sol-mm-weighted-remainder)) and give the terminal cap [](#eq:sol-mm-weighted-terminal-cap).

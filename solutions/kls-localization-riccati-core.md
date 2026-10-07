@@ -12,6 +12,8 @@ numbering:
   enumerator: D6.%s
 ---
 
+*Part of the shared technical foundations, Chapters [](#sec:riccati) and [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:matrix-riccati), [](#thm:scalar-riccati), [](#cor:per-direction), [](#cor:tight-window-consumption), [](#lem:pathwise-BL) and [](#cor:away-from-zero). Under Eldan localization of a two-color cut, it derives exact Itô equations for the between-color covariance $B_t$, the within-color covariance $R_t$ and the separation $r_t=\Tr B_t$. A tight-window Carleson bound on the source $S_t$ then keeps the cut balanced. The boundary conclusion uses the separate canonical bridge [](#lem:survival-implies-kls).
 
 1. [](#lem:sol-matrix-riccati): Itô calculus on $v_t=s_t\delta_t$ and $s_t$ gives [](#eq:sol-dB), and subtraction from the covariance SDE gives [](#eq:sol-dR).

@@ -5,6 +5,8 @@ numbering:
   enumerator: "132.%s"
 ---
 
+*Part of the Bizeul–Klartag–Lehec proof, Chapter [](#sec:bkl-proof); the reading order is on the [full proofs](#sec:proofs-bkl) page.*
+
 **Overview.** This dossier reconstructs Section 4 of
 [@BizeulKlartagLehec2026KLS, version 1, equations (67)–(79)]. It derives the
 inverse-covariance localization equations and proves that their solution is global

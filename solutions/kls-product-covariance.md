@@ -11,6 +11,8 @@ numbering:
   enumerator: D7.%s
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:product-stress); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#lem:block), [](#thm:budget), [](#cor:single-coordinate-cuts), [](#lem:product-qcts) and [](#cor:KI-discharged). For product measures and cuts depending on $k$ coordinates, it bounds the total source budget by summing the per-direction estimate [](#cor:per-direction) over the $k$ supported columns. The scalar Riccati identity [](#thm:scalar-riccati) and balanced survival then give a boundary bound of order $(1+k)^{-1/2}$. Separately, it proves a quadratic-chaos variance bound on products and discharges [](#ass:KI) from the published Klartag–Lehec window.
 
 1. [](#lem:sol-block): conditional independence confines $\delta$, $G$ and $K$ to the coordinates in $J$.

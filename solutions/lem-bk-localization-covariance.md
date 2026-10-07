@@ -5,6 +5,8 @@ numbering:
   enumerator: "154.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** We reconstruct Sections 6 and Appendix D of
 [@BalasubramanianKasiviswanathan2026KLS] at commit
 `4837c33649ba2271f43c9684e9350ecbdd725f95`. Quadratic variance bounds control

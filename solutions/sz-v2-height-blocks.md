@@ -7,6 +7,8 @@ numbering:
   enumerator: "143.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This reconstructs the fixed-cost height reduction in Section 8
 of [@SongZhang2026ConstantKLS]. Polynomial testing and a joint tensor frame
 give delayed loss estimates. Actual norm-attaining orbits then produce

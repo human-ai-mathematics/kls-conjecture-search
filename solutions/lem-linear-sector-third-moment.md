@@ -8,6 +8,8 @@ numbering:
   enumerator: D12.%s
 ---
 
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-normalization); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
+
 **Overview.** This dossier proves [](#lem:linear-sector-third-moment) and [](#cor:gate-zero-third-moment) as [](#thm:sol-lstm-main) and [](#cor:sol-lstm-gate), under hypotheses $(\mathrm H)$ of [](#def:sol-lstm-hyp), which the manuscript hypotheses imply. The Stein identity for quadratic tests shows that the mixed tensor $\E_\mu[\tau_{ij}X_k]$ is half the third-moment tensor. Projecting each column $\tau a$ onto the span of $\mathbf 1,X_1,\dots,X_n$ then gives a Pythagorean decomposition, from which the corollary follows. The third-derivative form (c) is proved only under one additional stated hypothesis.
 
 1. [](#lem:sol-lstm-logconcave), via [](#lem:sol-lstm-linear-growth), shows that the manuscript hypotheses imply $(\mathrm H)$.
@@ -43,7 +45,7 @@ Let $\mu$ be an isotropic log-concave probability measure on $\R^n$ which is the
 :::
 
 :::{prf:proof}
-$(\mathrm H1)$ and $(\mathrm H3)$ are the hypotheses. In the convention of Section [](#sec:notation), a log-concave measure has a density $e^{-V}$ on its convex support $K$ with $V$ convex; extending $V$ by $+\infty$ off $K$ gives a convex $V:\R^n\to(-\infty,+\infty]$ with $\int e^{-V}=1$. So $\mu\ll\mathrm{Leb}$, and [](#lem:sol-lstm-linear-growth) below gives $\E_\mu\abs X^3<\infty$. Isotropy is the hypothesis.
+$(\mathrm H1)$ and $(\mathrm H3)$ are the hypotheses. In the convention of Chapter [](#sec:notation), a log-concave measure has a density $e^{-V}$ on its convex support $K$ with $V$ convex; extending $V$ by $+\infty$ off $K$ gives a convex $V:\R^n\to(-\infty,+\infty]$ with $\int e^{-V}=1$. So $\mu\ll\mathrm{Leb}$, and [](#lem:sol-lstm-linear-growth) below gives $\E_\mu\abs X^3<\infty$. Isotropy is the hypothesis.
 :::
 
 :::{prf:definition} Third-moment tensor

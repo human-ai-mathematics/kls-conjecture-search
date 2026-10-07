@@ -5,6 +5,8 @@ numbering:
   enumerator: "133.%s"
 ---
 
+*Part of the Bizeul–Klartag–Lehec proof, Chapter [](#sec:bkl-proof); the reading order is on the [full proofs](#sec:proofs-bkl) page.*
+
 **Overview.** This dossier reconstructs Section 5 of
 [@BizeulKlartagLehec2026KLS, version 1]. An Itô computation in the inverse
 covariance metric produces a positive next-order energy. The moving metric costs

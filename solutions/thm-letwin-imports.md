@@ -7,6 +7,8 @@ numbering:
   enumerator: '103.%s'
 ---
 
+*Part of the results of the literature written out here, Chapter [](#sec:family-moment-map); the reading order is on the [full proofs](#sec:proofs-literature) page.*
+
 **Overview.** This dossier gives a proof of the precise matrix and quadratic estimates
 imported as [](#thm:letwin-moment-map) and [](#thm:letwin-qcts). It follows the mechanism
 of [@Letwin2026QuadraticKLS], pinned to

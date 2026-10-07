@@ -5,6 +5,8 @@ numbering:
   enumerator: "148.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-blocks); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This reconstructs the analytic finite-chain construction
 behind Proposition 9.23 of [@SongZhang2026ConstantKLS], including its
 one-inherited-floor specialization. It proves

@@ -12,6 +12,29 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: Editorial pass on the whole site
+
+- Each proof is told once in detail, in its chapter (8, 9, 11); the overview keeps a
+  calibration and one paragraph of idea per proof (about 20% shorter). Redundant
+  summaries, scope caveats and internal vocabulary ("consume", "premise", "pinned",
+  "badge", "the source") removed from the prose; obstacles explained once and linked.
+- The family chapters (1–6) now say that KLS is proved and what each family does not
+  reach alone; the history table of Chapter 2 runs to the three proofs; Chapter 21
+  follows the template of the other mechanisms; the glossary's QCTS entry is corrected
+  ("quadratic-chaos thin shell").
+- Table of contents: "The proofs of KLS"; the map of mechanisms (Chapter 14) opens the
+  alternative mechanisms; the fixed-cut archive merged from 11 chapters into 7
+  (Chapters 28–34), every former chapter label kept as a section label. The dossiers are
+  grouped under *Full proofs* as in `proofs.md`, which now lists all of them in the
+  order of the manuscript; the versions table of Chapter 9 keeps dates only.
+- Every dossier opens with a line naming its part and chapter; raw `research/` paths
+  removed from five dossiers; seven statements reworded ("KLS" for "the KLS conjecture",
+  two titles without process vocabulary). A fresh reviewer found no mathematical change:
+  `research/reviews/2026-10-07-editorial-site-pass.md`,
+  `research/reviews/2026-10-07-editorial-site-pass-window-occupation.md` and, after a
+  `sync` audit whose corrections were applied,
+  `research/reviews/2026-10-07-editorial-sync-audit.md` carry the certifications over.
+
 ## 2026-10-07: Editorial harmonization of the site
 
 - One source per topic: the welcome page says what the site adds and defines

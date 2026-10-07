@@ -7,6 +7,8 @@ numbering:
   enumerator: '120.%s'
 ---
 
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
+
 **Overview.** This reconstructs the polynomial estimate of Song–Zhang,
 [@SongZhang2026IteratedLogKLS, Sections 3–4], with the quadratic estimate
 [](#thm:letwin-qcts) as its nonclassical input. All tensor norms sum over ordered

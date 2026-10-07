@@ -6,6 +6,8 @@ numbering:
   enumerator: D11.%s
 ---
 
+*Part of the conditional-fiber mechanism, Chapter [](#sec:conditional-fiber-frame); the reading order is on the [full proofs](#sec:proofs-fibers) page.*
+
 **Overview.** This dossier proves [](#lem:fiber-root-degree-two) as [](#thm:sol-fiber-root-degree-two): for every $m\ge3$, the root-frame pencil on the degree-two quotient $V_{m,2}$ of the uniform simplex has $\lmin(K,G)=(m+2)(m+3)/(5m^2)$, attained exactly on the radial quadratic. The proof splits $V_{m,2}$ into $S_m$-isotypic sectors, reduces the pencil on each to a small Gram matrix, and evaluates these exactly with Dirichlet moments. The corollary is conditional on the identification [](#eq:sol-frd2-root-identification) and lives inside the candidate degree-$k$ dual-certificate framework. It rules out degree-two dual refuters and says nothing about degrees $k\ge3$, non-polynomial tests or KLS.
 
 1. Exact Dirichlet moments ([](#lem:sol-frd2-moments)) and the pair-fiber decomposition ([](#lem:sol-frd2-pair)). On each pair fiber, $\delta/s$ is uniform on $[-1,1]$, which gives the pair-energy formula [](#eq:sol-frd2-pair-energy); hence $K$ is finite and positive semidefinite on $V_{m,2}$.
@@ -71,7 +73,7 @@ For every $m\ge3$,
 and the minimum is attained exactly on the one-dimensional line $\R\cdot\bigl[\textstyle\sum_i p_i^2\bigr] =\R\cdot\bigl[\abs{X}^2-(m-1)\bigr]$ spanned by the radial quadratic. In particular $\lmin(K,G)|_{V_{m,2}}>\tfrac15$ for every $m\ge3$, and $\lmin(K,G)|_{V_{m,2}}\to\tfrac15$ as $m\to\infty$.
 :::
 
-The corollary below lives inside the candidate degree-$k$ dual-certificate framework for the simplex falsification channel of [](#conj:conditional-fiber-frame) (the all-frame min–max $\Lambda_{m,k}$ and its exact dual certificates, recorded in `research/explorations/2026-08-27-kls-route-prober-conditional-fiber-frame-w1f01.md`, eqs. (42)–(49); that framework is itself a candidate object whose ledger admission is pending). We restate the needed objects to be self-contained. Write $S(H_0)$ for the unit sphere of $H_0$. For $\theta\in S(H_0)$ and $f$ a polynomial, let
+The corollary below lives inside the candidate degree-$k$ dual-certificate framework for the simplex falsification channel of [](#conj:conditional-fiber-frame) (the all-frame min–max $\Lambda_{m,k}$ and its exact dual certificates; an exploratory framework, not a statement of the manuscript). We restate the needed objects to be self-contained. Write $S(H_0)$ for the unit sphere of $H_0$. For $\theta\in S(H_0)$ and $f$ a polynomial, let
 
 ```{math}
 :label: eq:sol-frd2-qtheta
@@ -652,7 +654,7 @@ $$
 
 :::{prf:remark} agreement with the recorded exact rational artifacts
 :label: rem:sol-frd2-artifacts
-The provenance-stamped run artifacts `research/runs/2026-08-30T172853.262299Z-fiber-frame-dual.jsonl` and `research/runs/2026-08-30T173244.394413Z-fiber-frame-dual.jsonl` record, in exact rational arithmetic, the degree-two root-frame pencil minimum at $m=3,4,5$ as $2/3$, $21/40$, $56/125$ respectively, and record the radial quotient anchor $(m+2)(m+3)/(5m^2)$ exactly for every computed $m\le15$. These values agree with the closed form [](#eq:sol-frd2-main): $(5\cdot6)/45=2/3$, $(6\cdot7)/80=21/40$, $(7\cdot8)/125=56/125$. Per repository constraint, these artifacts are directional research evidence only; no step of the proofs above uses them, and this agreement certifies nothing.
+Two exact computations in rational arithmetic, kept in the project's run records, give the degree-two root-frame pencil minimum at $m=3,4,5$ as $2/3$, $21/40$, $56/125$ respectively, and record the radial quotient anchor $(m+2)(m+3)/(5m^2)$ exactly for every computed $m\le15$. These values agree with the closed form [](#eq:sol-frd2-main): $(5\cdot6)/45=2/3$, $(6\cdot7)/80=21/40$, $(7\cdot8)/125=56/125$. Per repository constraint, these artifacts are directional research evidence only; no step of the proofs above uses them, and this agreement certifies nothing.
 :::
 
 :::{prf:remark} unclosed steps

@@ -7,6 +7,8 @@ numbering:
   enumerator: "157.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** Fix a regular measure and let the number of observed Appell
 degrees tend to infinity. The integration-power bound loses its curvature
 dependence. Approximation then preserves the resulting scalar Poincaré

@@ -11,6 +11,8 @@ numbering:
   enumerator: D8.%s
 ---
 
+*Part of the shared technical foundations, Chapters [](#sec:qcts) and [](#sec:stein); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves [](#prop:stein-rep), [](#prop:qcts-equivalence), [](#lem:stein-vs-source), [](#lem:boundary-rep) and [](#prop:two-tail). The organizing identity is that testing a two-color cut against a centered quadratic gives $s\inner{K}{M}$. As a result, bounded quadratic-chaos variance is equivalent, up to constants, to a uniform bound on balanced two-color covariance contrasts. The same identity links the Stein quantity to the Riccati source and to boundary flux. An exact Gaussian two-tail example then rules out a universal one-slice Stein bound by absolute excess.
 
 1. [](#prop:sol-stein-rep): the covariance decomposition [](#eq:sol-stein-cov-decomp) gives [](#eq:sol-stein-rep), and duality gives [](#eq:sol-stein-norm).

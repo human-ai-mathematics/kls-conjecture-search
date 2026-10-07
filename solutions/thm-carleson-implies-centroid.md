@@ -5,6 +5,8 @@ numbering:
   enumerator: "101.%s"
 ---
 
+*Part of the fixed-cut archive, Chapter [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** We first use the certified directional dissipation estimate to
 obtain a finite, dimension-dependent total source budget. Localizing the
 scalar Riccati identity and using Fatou then establishes all the finiteness

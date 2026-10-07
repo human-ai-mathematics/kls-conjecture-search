@@ -5,6 +5,8 @@ numbering:
   enumerator: 128.%s
 ---
 
+*Part of the conditional-fiber mechanism, Chapter [](#sec:conditional-fiber-frame); the reading order is on the [full proofs](#sec:proofs-fibers) page.*
+
 **Overview.** A polynomial on a uniform interval satisfies a reverse Poincaré
 inequality with a constant depending only on its degree. Applying it on every
 chord and averaging with the frame identity bounds the fiber form below by

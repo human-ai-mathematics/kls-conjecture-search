@@ -5,6 +5,8 @@ numbering:
   enumerator: "150.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** Gaussian convolution preserves a quantitative lower curvature
 bound while supplying an upper bound. A small quadratic tilt followed by
 whitening produces regular isotropic approximants. Moment convergence controls

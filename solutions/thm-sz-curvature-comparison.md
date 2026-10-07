@@ -5,6 +5,8 @@ numbering:
   enumerator: "121.%s"
 ---
 
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
+
 **Overview.** This reconstructs Section 5 of the version-pinned
 [@SongZhang2026IteratedLogKLS]. The argument starts from a first eigenfunction,
 iterates a normalized inverse square root followed by differentiation, and bounds

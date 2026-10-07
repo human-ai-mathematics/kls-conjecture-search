@@ -5,6 +5,8 @@ numbering:
   enumerator: "122.%s"
 ---
 
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
+
 **Overview.** This reconstructs Section 6 of [@SongZhang2026IteratedLogKLS].
 First a curvature bound is extended to affine normalizations of possibly
 nonsmooth localization posteriors. Next the derivative hierarchy gives new

@@ -9,6 +9,8 @@ numbering:
   enumerator: "137.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This dossier reconstructs the operator argument of Section 6
 of [@SongZhang2026ConstantKLS]. A restricted inverse operator gives a
 low-energy gradient. Normalization pays for its skew linear moment. Averaging

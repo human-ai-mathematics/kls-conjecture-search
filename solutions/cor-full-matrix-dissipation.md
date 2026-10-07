@@ -6,6 +6,8 @@ numbering:
   enumerator: D2.%s
 ---
 
+*Part of the shared technical foundations, Chapter [](#sec:riccati); the reading order is on the [full proofs](#sec:proofs-archive) page.*
+
 **Overview.** This dossier proves a refined form of [](#cor:full-matrix-dissipation): under Eldan localization of an isotropic log-concave $\mu$ with a nontrivial cut $E$, the full matrix dissipation $\E\int_0^\infty(R_t^2+s_tG_t^2)\dd t$ is bounded by $R_0\preceq I_n$ in Loewner order, with no balance or stopping hypothesis. The proof feeds the certified matrix Riccati identity into a general positive-drift lemma for matrix semimartingales.
 
 1. [](#lem:sol-positive-matrix-drift): a positive semidefinite process with local-martingale part and positive drift $Q$ satisfies [](#eq:sol-abstract-finite) and [](#eq:sol-abstract-infinite). The proof scalarizes along each direction, then uses localization, optional sampling, Fatou and monotone convergence. Positive semidefiniteness gives integrability of the off-diagonal entries.

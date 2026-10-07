@@ -6,6 +6,8 @@ numbering:
   enumerator: D22.%s
 ---
 
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
+
 **Overview.** This dossier gives the occupation implication [](#thm:sol-prop-mm-window-occupation) with constants $C_0=34$, $C_1=0$ on $[0,T_0(n)]$, under the small-gap hypothesis $\lambda\le3/(8K_n)$. With the stated input [](#thm:klartag-logn), this hypothesis has no admissible measure: $\lambda=1/\CP(\mu)\ge1/K_n>3/(8K_n)$. The implication therefore supplies no nonempty case of [](#conj:mm-spectral-occupation). The bound $\CP\le C\log^2n$ in [](#thm:sol-mwo-frontier) already follows from the stronger published input. Separately, [](#lem:mm-stopped-window-source) bounds the source before covariance exit for fixed unit-variance tests without the small-gap restriction. The calculations below record the stopping, restart, optional-projection and fixed-dimensional bridge estimates with their constants.
 
 1. The exit time $\tau=\tau_2$ of $\norm{A_t}_\op$ from level $2$ is an a.s. positive stopping time ([](#lem:sol-mwo-exit)), and the imported window bound [](#thm:KL-window) transfers to the planted realization ([](#lem:sol-mwo-law)).

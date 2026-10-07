@@ -5,6 +5,8 @@ numbering:
   enumerator: "108.%s"
 ---
 
+*Part of the results of the literature written out here, Chapter [](#sec:family-moment-map); the reading order is on the [full proofs](#sec:proofs-literature) page.*
+
 **Overview.** The third-moment bound gives a fixed-time covariance window.
 A Gaussian observation transfers the variance of each Lipschitz test to
 its posterior. The improved Lichnerowicz inequality bounds the posterior

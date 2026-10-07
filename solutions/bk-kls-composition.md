@@ -5,6 +5,8 @@ numbering:
   enumerator: "158.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** The explicit BK Poincaré estimate implies the unchanged
 canonical KLS statement. The sole domain extension is to locally Lipschitz
 functions with infinite Dirichlet integral; the equivalent Cheeger assertion

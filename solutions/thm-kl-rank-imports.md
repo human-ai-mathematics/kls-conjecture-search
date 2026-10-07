@@ -7,6 +7,8 @@ numbering:
   enumerator: "105.%s"
 ---
 
+*Part of the results of the literature written out here, Chapter [](#sec:covariance-tech); the reading order is on the [full proofs](#sec:proofs-literature) page.*
+
 **Author:** researcher_kl_rank, gpt-6-astra, 2026-10-01.
 
 **Overview.** This is an uncertified author dossier for
@@ -33,7 +35,7 @@ identified explicitly. Availability and attribution do not certify the argument.
 ## Exact target statements and conventions
 
 The bodies of the following statements reproduce the two manuscript directives
-in Section [](#sec:covariance-tech).
+in Chapter [](#sec:covariance-tech).
 
 :::{prf:theorem} Stopped rank tails
 :label: thm:sol-kl-rank-stopped

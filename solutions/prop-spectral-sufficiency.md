@@ -6,6 +6,8 @@ numbering:
   enumerator: D24.%s
 ---
 
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
+
 **Overview.** This dossier proves a refined form of [](#prop:spectral-sufficiency) ([](#thm:sol-prop-spectral-sufficiency)). If the occupation estimate [](#eq:sol-spectral-occupation-hypothesis) of [](#conj:mm-spectral-occupation) holds with dimension- and regularization-free constants and with damping coefficient one, then every isotropic log-concave law satisfies $\CP\le2/T_*$. So a uniform affirmative answer to that open question implies [](#conj:kls). The implication is conditional on that still-open estimate. The method follows the fixed first eigenfunction along stochastic localization, bounds how much of it is learned by time $T_*$, and compares this with posterior Brascamp–Lieb.
 
 1. Fixed-function filtering along the planted observation channel gives $\dd g_t=H_t\dd W_t-A_tg_t\dd t$ ([](#eq:sol-spectral-fixed-function-sde)), hence the $q$-identity [](#eq:sol-spectral-q-identity).

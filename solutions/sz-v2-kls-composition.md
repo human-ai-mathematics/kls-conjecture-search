@@ -5,6 +5,8 @@ numbering:
   enumerator: "147.%s"
 ---
 
+*Part of the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof); the reading order is on the [full proofs](#sec:proofs-sz-v2) page.*
+
 **Overview.** This dossier composes [](#thm:sz-v2-kls) with the unchanged
 canonical target [](#conj:kls). The only domain adjustment is to interpret
 the Poincaré inequality for locally Lipschitz functions whose Dirichlet

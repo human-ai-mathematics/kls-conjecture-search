@@ -5,6 +5,8 @@ numbering:
   enumerator: "155.%s"
 ---
 
+*Part of the Balasubramanian–Kasiviswanathan proof, Chapter [](#sec:bk-proof); the reading order is on the [full proofs](#sec:proofs-bk) page.*
+
 **Overview.** This reconstructs Proposition 7.1 of
 [@BalasubramanianKasiviswanathan2026KLS], at commit
 `4837c33649ba2271f43c9684e9350ecbdd725f95`. A terminal Appell polynomial is
