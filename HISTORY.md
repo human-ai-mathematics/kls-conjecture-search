@@ -12,6 +12,13 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: The harness follows conjecture-search-template v0.6.0
+
+- The template released as v0.6.0 the harness changes made here: routes may stay active
+  after the target is proved (commit `be78db3`), a dossier names the results it uses, and
+  dossier titles drop the "Solution:" prefix. Nothing to migrate; the comment of
+  `templates/solution.md` now matches the template's.
+
 ## 2026-10-07: Dossier titles and the last process vocabulary
 
 - The 76 dossier titles, shown in the *Full proofs* sidebar, now match the entries of

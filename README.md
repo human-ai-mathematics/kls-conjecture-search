@@ -27,7 +27,7 @@ here are checked by independent agent reviews, which is distinct from journal re
 the ledger, not this file, is the source of truth for what has been certified.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
-[conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).
+[conjecture-search-template v0.6.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.6.0).
 Start every session that edits the repository by reading it.
 
 ## Layout
