@@ -180,9 +180,9 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 | 1 October 2026, preprint (v1) | $O(4^{\log^*(n+2)})$ | $O(16^{\log^*(n+2)})$ | [](#thm:song-zhang-kls): polynomial estimates fed into curvature estimates and back [@SongZhang2026IteratedLogKLS]. |
 | 4 October 2026, preprint | $O(1)$ | $O(1)$ | BKL prove KLS through cumulants and suspension; Chapter [](#sec:bkl-proof) [@BizeulKlartagLehec2026KLS]. |
 | 4 October 2026, preprint (v2) | $O(1)$ | $O(1)$ | The second version of Song–Zhang proves KLS by repeated refinement with summable losses; Chapter [](#sec:sz-v2-proof) [@SongZhang2026ConstantKLS]. |
-| 6 October 2026 (version consulted), preprint (GitHub) | $O(1)$ | $O(1)$ | BK prove KLS through compatible integration and a direct Appell induction, with $C_P\le1+2\cdot10^{16}$; Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. |
+| 6 October 2026, preprint | $O(1)$ | $O(1)$ | BK prove KLS through compatible integration and a direct Appell induction, with $C_P\le1+2\cdot10^{16}$; Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. |
 
-Through Buser–Ledoux, BK's Poincaré bound also gives an explicit Cheeger bound, $\Psi\le\sqrt{\pi(1+2\cdot10^{16})}$ ([](#cor:bk-cheeger)). The BK source has no arXiv number; the bibliography entry [@BalasubramanianKasiviswanathan2026KLS] pins the version read here by its Git commit and checksum.
+Through Buser–Ledoux, BK's Poincaré bound also gives an explicit Cheeger bound, $\Psi\le\sqrt{\pi(1+2\cdot10^{16})}$ ([](#cor:bk-cheeger)). The BK source was read in the PDF first distributed on GitHub, whose text is identical to arXiv v1; the bibliography entry [@BalasubramanianKasiviswanathan2026KLS] records both, with the Git commit and checksum of the version read.
 
 The authors of all three proofs declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:reading-paths).
 

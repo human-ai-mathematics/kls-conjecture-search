@@ -117,8 +117,8 @@ Reusing the BKL initialization to recover KLS would keep BKL's provenance;
 it would not supply another argument establishing exponential growth.
 
 The versions and deposit times of BKL and SZ v2 are given in Chapter
-[](#sec:sz-v2-proof). The BK source is pinned by its Git commit and PDF
-hash in [@BalasubramanianKasiviswanathan2026KLS]. These bibliographic facts
+[](#sec:sz-v2-proof). The BK source is arXiv v1, read in an identical
+earlier PDF whose Git commit and hash [@BalasubramanianKasiviswanathan2026KLS] records. These bibliographic facts
 identify the texts reconstructed here without asserting priority.
 
 None of the three proofs establishes, by an implication proved here, the

@@ -11,8 +11,8 @@ bound through **compatible integration**: undo differentiation on symmetric
 tensor fields, control arbitrarily many integrations from finitely many
 polynomial estimates, and use stochastic localization to recover the next
 polynomial estimate. Their source is the 53-page preprint
-[@BalasubramanianKasiviswanathan2026KLS], pinned to the version consulted on
-6 October 2026. The argument and its composition into [](#conj:kls) have
+[@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026, read in
+an identical PDF first distributed on GitHub. The argument and its composition into [](#conj:kls) have
 been reconstructed and independently checked here by reviewer agents;
 this is distinct from journal peer review or human acceptance.
 

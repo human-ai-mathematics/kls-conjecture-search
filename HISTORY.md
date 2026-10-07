@@ -12,6 +12,15 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: BK on arXiv; the unconditional case cited
+
+- Balasubramanian–Kasiviswanathan is now arXiv:2610.07728v1 (6 October 2026). Its text
+  is identical to the GitHub PDF reconstructed here, apart from the arXiv stamp, so the
+  BK certifications are unaffected; the bibliography records both versions.
+- Cited Mikulincer–Zadik arXiv:2609.38295v1, a dimension-free bound for unconditional
+  log-concave measures through a Dunkl–Langevin operator, in the chapter on structured
+  classes. No statement changed.
+
 ## 2026-10-06: BK compatible integration certified as a third KLS proof
 
 - Added the pinned Balasubramanian–Kasiviswanathan source and reconstructed its
