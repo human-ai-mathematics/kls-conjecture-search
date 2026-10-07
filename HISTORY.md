@@ -12,6 +12,21 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: Editorial harmonization of the site
+
+- One source per topic: the welcome page says what the site adds and defines
+  *reconstructed* (every step a complete statement with a complete proof, checked by a
+  separate reviewer agent, not yet reviewed by a person); each proof is summarized once
+  (Chapter 0) and compared once (Chapter 12); the standing of the alternative mechanisms
+  with respect to KLS is stated once (Chapter 14).
+- Proof chapters titled "Authors: mechanism"; moment-map and fixed-cut titles shortened;
+  internal vocabulary ("gate matrices", "covariance technology", "layer") removed from the
+  prose; the localization prelude opens the fixed-eigenfunction part.
+- US spelling and the `\CP` macro throughout the prose. The stale remark on the BK source
+  now records its arXiv deposit.
+- No statement changed (`check.py --statements` identical). Statement texts that keep the
+  old vocabulary are listed for the statement-renaming pass.
+
 ## 2026-10-07: BK on arXiv; the unconditional case cited
 
 - Balasubramanian–Kasiviswanathan is now arXiv:2610.07728v1 (6 October 2026). Its text
