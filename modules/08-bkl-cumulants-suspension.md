@@ -4,51 +4,21 @@ numbering:
 ---
 
 (sec:bkl-proof)=
-# Cumulants, suspension and the BKL proof
+# Bizeul–Klartag–Lehec: cumulants and suspension
 
-**What to retain.** The cumulants of an isotropic log-concave law — the
-Taylor coefficients of the logarithm of its Laplace transform — satisfy
-$\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ with
-$K$ independent of the dimension: up to a geometric factor, the factorial
-growth already forced by the exponential law on the line. Suspension then encodes an arbitrary test
-function as an extra coordinate of a larger log-concave law, so the bound
-on linear observables becomes the exponential Appell coefficient bound for
-every function, which by the spectral criterion of the first version of
-Song–Zhang is KLS.
+**What to retain.** The cumulants of an isotropic log-concave law — the Taylor coefficients of the logarithm of its Laplace transform — satisfy $\abs{\kappa_m^\mu(u,\cdot,\dots,\cdot)}^2\le K^{m-1}((m-1)!)^2\abs u^2$ with $K$ independent of the dimension: up to a geometric factor, the factorial growth already forced by the exponential law on the line. Suspension then encodes an arbitrary test function as an extra coordinate of a larger log-concave law, so the bound on linear observables becomes the exponential Appell coefficient bound for every function, which by the spectral criterion of the first version of Song–Zhang is KLS.
 
-Bizeul, Klartag and Lehec (BKL) give a proof of KLS in their preprint of
-4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]. This chapter explains
-its mechanism: the analytic criterion, the cumulant induction and suspension.
-Each statement displays its status; how it was checked is explained on the
-[welcome page](#sec:overview-checking).
+Bizeul, Klartag and Lehec (BKL) give a proof of KLS in their preprint of 4 October 2026 [@BizeulKlartagLehec2026KLS, version 1]. This chapter explains its mechanism: the analytic criterion, the cumulant induction and suspension. Each statement displays its status; how it was checked is explained on the [welcome page](#sec:overview-checking).
 
-The decisive change is to estimate cumulants of every order and then encode
-an arbitrary test function in an additional coordinate of a log-concave
-measure. Uniformity in dimension allows this enlarged measure to use the
-same cumulant bound. The resulting estimate is exactly the exponential
-Appell coefficient bound of [](#prop:sz-exponential-coefficients-equivalence).
+The decisive change is to estimate cumulants of every order and then encode an arbitrary test function in an additional coordinate of a log-concave measure. Uniformity in dimension allows this enlarged measure to use the same cumulant bound. The resulting estimate is exactly the exponential Appell coefficient bound of [](#prop:sz-exponential-coefficients-equivalence).
 
-The second version of Song–Zhang, deposited the same day and presented in
-the next chapter, [](#sec:sz-v2-proof), closes the argument differently,
-through repeated refinement from the same spectral foundation. These two
-proofs and the third, by Balasubramanian and Kasiviswanathan
-(Chapter [](#sec:bk-proof)), are compared, and what each reconstruction uses
-is listed, in Chapter [](#sec:kls-synthesis).
+The second version of Song–Zhang, deposited the same day and presented in the next chapter, [](#sec:sz-v2-proof), closes the argument differently, through repeated refinement from the same spectral foundation. These two proofs and the third, by Balasubramanian and Kasiviswanathan (Chapter [](#sec:bk-proof)), are compared, and what each reconstruction uses is listed, in Chapter [](#sec:kls-synthesis).
 
 ## A one-dimensional calibration
 
-For a standard Gaussian, the logarithm of the Laplace transform is $z^2/2$:
-the second cumulant is one and every higher cumulant vanishes. For the centered
-mean-one exponential $X=E-1$, it is
-$-z-\log(1-z)=\sum_{m\ge2}z^m/m$, so the $m$th cumulant is $(m-1)!$.
-Factorial growth is therefore already necessary on the line. In higher
-dimension the issue is to bound the full tensor with one argument fixed,
-summing the squares of all remaining entries without a dimension factor.
+For a standard Gaussian, the logarithm of the Laplace transform is $z^2/2$: the second cumulant is one and every higher cumulant vanishes. For the centered mean-one exponential $X=E-1$, it is $-z-\log(1-z)=\sum_{m\ge2}z^m/m$, so the $m$th cumulant is $(m-1)!$. Factorial growth is therefore already necessary on the line. In higher dimension the issue is to bound the full tensor with one argument fixed, summing the squares of all remaining entries without a dimension factor.
 
-A tilted average is the expectation of a test function after reweighting the
-law by $e^{\langle z,x\rangle}$. Its first derivative at zero is
-$\operatorname{Cov}(X,f)$; its higher derivatives retain the response to all
-small exponential tilts. We use the following conventions.
+A tilted average is the expectation of a test function after reweighting the law by $e^{\langle z,x\rangle}$. Its first derivative at zero is $\operatorname{Cov}(X,f)$; its higher derivatives retain the response to all small exponential tilts. We use the following conventions.
 
 
 :::{prf:definition} Tilt averages, cumulants and regular measures
@@ -79,10 +49,7 @@ $\nabla_0g=\nabla g-\int\nabla g\,d\mu$.
 
 ## From tilt averages to a spectral gap
 
-The analytic part works first with smooth measures whose curvature is bounded
-above and below. The lower bound supplies a spectral gap at each fixed measure;
-it is not assumed uniform across measures. Approximation is used only after
-a bound independent of that curvature has been obtained.
+The analytic part works first with smooth measures whose curvature is bounded above and below. The lower bound supplies a spectral gap at each fixed measure; it is not assumed uniform across measures. Approximation is used only after a bound independent of that curvature has been obtained.
 
 :::{prf:lemma} Analytic foundations for the tilt criterion
 :label: lem:bkl-analytic-foundations
@@ -108,10 +75,7 @@ BKL-regular measures, with convergence of every polynomial moment. A common
 Poincaré bound for these approximants passes to the limit.
 :::
 
-The integration identities permit repeated inversion of the diffusion operator
-and centered differentiation of a first eigenfunction. The next estimate
-recovers a tensor from partial symmetrization. Its exponential cost is
-absorbed in the finite dyadic estimates used by the spectral argument.
+The integration identities permit repeated inversion of the diffusion operator and centered differentiation of a first eigenfunction. The next estimate recovers a tensor from partial symmetrization. Its exponential cost is absorbed in the finite dyadic estimates used by the spectral argument.
 
 :::{prf:lemma} Two-block tensor symmetrization
 :label: lem:bkl-tensor-symmetrization
@@ -123,8 +87,7 @@ $$
 $$
 :::
 
-This is the Song–Zhang component of the BKL argument. One coefficient bound
-at all orders replaces successive curvature profiles with increasing constants.
+This is the Song–Zhang component of the BKL argument. One coefficient bound at all orders replaces successive curvature profiles with increasing constants.
 
 :::{prf:theorem} The tilt-average criterion
 :label: thm:bkl-tilt-criterion
@@ -138,17 +101,9 @@ $$
 then $C_P(\mu)\le CR^2$.
 :::
 
-The mechanism follows a first eigenfunction through centered gradients and
-inverse operators. A small spectral gap makes the resulting tensors large;
-the means removed by centering are expressed through tilted averages.
-Partial symmetrization compares these tensors with symmetric Taylor tensors.
-A single exponential bound controls the centering terms at every order.
-Summing the resulting estimates over finitely many dyadic orders up to an
-exit index forces a lower spectral gap. The analytic and
-tensor estimates above are separate inputs to this comparison.
+The mechanism follows a first eigenfunction through centered gradients and inverse operators. A small spectral gap makes the resulting tensors large; the means removed by centering are expressed through tilted averages. Partial symmetrization compares these tensors with symmetric Taylor tensors. A single exponential bound controls the centering terms at every order. Summing the resulting estimates over finitely many dyadic orders up to an exit index forces a lower spectral gap. The analytic and tensor estimates above are separate inputs to this comparison.
 
-The relation to the preceding chapter is exact, including the factorial:
-both constructions differentiate the same normalized exponential.
+The relation to the preceding chapter is exact, including the factorial: both constructions differentiate the same normalized exponential.
 
 :::{prf:proposition} Duality between tilt derivatives and Appell coefficients
 :label: prop:bkl-tilt-appell-duality
@@ -165,19 +120,11 @@ $$
 $$
 :::
 
-The Appell generating function is
-$e^{\langle z,x\rangle-\Lambda_\mu(z)}$. Differentiating its integral
-against $f$ gives the pairing. Positive-degree Appell polynomials have mean
-zero, so their $L^2$ norms equal the square roots of their variances.
-Taking the two Hilbert-space operator norms gives the coefficient identity.
-It identifies the common end point; it does not improve the older bound.
+The Appell generating function is $e^{\langle z,x\rangle-\Lambda_\mu(z)}$. Differentiating its integral against $f$ gives the pairing. Positive-degree Appell polynomials have mean zero, so their $L^2$ norms equal the square roots of their variances. Taking the two Hilbert-space operator norms gives the coefficient identity. It identifies the common end point; it does not improve the older bound.
 
 ## The cumulant induction
 
-The stochastic part rescales its noise by the inverse square root of the
-current covariance. The deterministic covariance decay is then exponential.
-Higher cumulants are measured in the inverse covariance metric, keeping each
-index at its current variance scale.
+The stochastic part rescales its noise by the inverse square root of the current covariance. The deterministic covariance decay is then exponential. Higher cumulants are measured in the inverse covariance metric, keeping each index at its current variance scale.
 
 :::{prf:lemma} Inverse-covariance localization and cumulant dynamics
 :label: lem:bkl-cumulant-dynamics
@@ -221,12 +168,7 @@ martingale part of each $\mathcal E_m$ is a square-integrable martingale on
 every bounded time interval.
 :::
 
-Differentiating the logarithmic Laplace transform along this localization
-produces a next-order cumulant in the noise and products of lower-order
-cumulants in the drift. The third-moment estimate controls covariance noise
-in its own metric. Positive definiteness at finite times and integrability
-after stopping justify use of that metric. These are mathematical inputs,
-not a convention for interpreting a singular inverse.
+Differentiating the logarithmic Laplace transform along this localization produces a next-order cumulant in the noise and products of lower-order cumulants in the drift. The third-moment estimate controls covariance noise in its own metric. Positive definiteness at finite times and integrability after stopping justify use of that metric. These are mathematical inputs, not a convention for interpreting a singular inverse.
 
 :::{prf:lemma} Differential and integrated cumulant energy estimates
 :label: lem:bkl-cumulant-energy
@@ -244,12 +186,7 @@ $$
 $$
 :::
 
-The energy computation retains the variation of the inverse covariance and
-its cross variation with the cumulant. Noise supplies a positive next-order
-energy. The moving metric costs a quadratic factor in the order, and the
-remaining term is a product of lower-order cumulants. To integrate, finite
-total energy supplies terminal times at which the expected boundary term
-tends to zero. The induction must supply the stated integrability hypotheses.
+The energy computation retains the variation of the inverse covariance and its cross variation with the cumulant. Noise supplies a positive next-order energy. The moving metric costs a quadratic factor in the order, and the remaining term is a product of lower-order cumulants. To integrate, finite total energy supplies terminal times at which the expected boundary term tends to zero. The induction must supply the stated integrability hypotheses.
 
 :::{prf:theorem} Dimension-free cumulant bounds at every order
 :label: thm:bkl-cumulant-bound
@@ -262,27 +199,11 @@ $$
 $$
 :::
 
-The induction proves a static bound and an integrated next-order bound
-together. In each product of cumulants, the factor containing the fixed
-vector uses the integrated estimate; the other uses the static estimate
-for the whitened law. The number of index splittings is a binomial
-coefficient, canceled exactly by the two factorials. A polynomial cost
-in the order remains and is absorbed by one large exponential base $K$.
-Conditioning on expanding balls and convergence of moments remove compact
-support. No KLS estimate enters this induction.
+The induction proves a static bound and an integrated next-order bound together. In each product of cumulants, the factor containing the fixed vector uses the integrated estimate; the other uses the static estimate for the whitened law. The number of index splittings is a binomial coefficient, canceled exactly by the two factorials. A polynomial cost in the order remains and is absorbed by one large exponential base $K$. Conditioning on expanding balls and convergence of moments remove compact support. No KLS estimate enters this induction.
 
 ## Suspension: putting a function into a coordinate
 
-For an isotropic BKL-regular law, take a smooth test $f$ with bounded Hessian,
-unit $L^2$ norm and orthogonal to affine functions. Let $X_1,\ldots,X_N$ be
-independent copies from this law and put
-$F_N=N^{-1/2}\sum_i f(X_i)$. Adjoin
-$S=(F_N+\eta_\beta)/\sqrt{1+2/\beta^2}$, with an independent centered
-Laplace variable $\eta_\beta$ of rate $\beta$. The joint law is isotropic.
-For large $N$ it is log-concave: the Hessian cost of each copy of $f$ is
-reduced by $N^{-1/2}$ and absorbed by the original positive curvature.
-The dimension has increased, which is precisely why the cumulant estimate
-must hold in every dimension with the same constant.
+For an isotropic BKL-regular law, take a smooth test $f$ with bounded Hessian, unit $L^2$ norm and orthogonal to affine functions. Let $X_1,\ldots,X_N$ be independent copies from this law and put $F_N=N^{-1/2}\sum_i f(X_i)$. Adjoin $S=(F_N+\eta_\beta)/\sqrt{1+2/\beta^2}$, with an independent centered Laplace variable $\eta_\beta$ of rate $\beta$. The joint law is isotropic. For large $N$ it is log-concave: the Hessian cost of each copy of $f$ is reduced by $N^{-1/2}$ and absorbed by the original positive curvature. The dimension has increased, which is precisely why the cumulant estimate must hold in every dimension with the same constant.
 
 :::{prf:proposition} Suspension converts cumulants into tilt bounds
 :label: prop:bkl-suspension
@@ -295,16 +216,9 @@ $$
 $$
 :::
 
-A cumulant with one slot in the new coordinate and the others in one copy
-of $X$ equals the tilt derivative divided by $\sqrt{N(1+2/\beta^2)}$.
-The $N$ disjoint tensor blocks cancel the factor $N^{-1}$ in their squared
-norms. Increasing $\beta$ removes the added variance. Decomposing a test
-into constant, linear and affine-orthogonal parts, then using density,
-extends the estimate to $L^2$. The suspension needs only its cumulant premise.
+A cumulant with one slot in the new coordinate and the others in one copy of $X$ equals the tilt derivative divided by $\sqrt{N(1+2/\beta^2)}$. The $N$ disjoint tensor blocks cancel the factor $N^{-1}$ in their squared norms. Increasing $\beta$ removes the added variance. Decomposing a test into constant, linear and affine-orthogonal parts, then using density, extends the estimate to $L^2$. The suspension needs only its cumulant premise.
 
-Substitution of the all-order bound gives one exponential base. Approximation
-passes the Appell polynomial moment inequalities to arbitrary laws; linear
-contraction includes singular covariances.
+Substitution of the all-order bound gives one exponential base. Approximation passes the Appell polynomial moment inequalities to arbitrary laws; linear contraction includes singular covariances.
 
 :::{prf:theorem} Uniform exponential tilt coefficients
 :label: thm:bkl-tilt-bound
@@ -319,16 +233,11 @@ Measures supported on a proper affine subspace are included, with derivatives
 defined by their ambient Laplace transform.
 :::
 
-Combining [](#thm:bkl-tilt-bound) with [](#thm:bkl-tilt-criterion) gives the
-KLS conclusion [](#conj:kls), first for regular measures and then
-by scalar Poincaré stability. This is the BKL argument.
+Combining [](#thm:bkl-tilt-bound) with [](#thm:bkl-tilt-criterion) gives the KLS conclusion [](#conj:kls), first for regular measures and then by scalar Poincaré stability. This is the BKL argument.
 
 ## Consequences for the earlier questions
 
-The exponential estimate also supplies the initialization bound used in the
-first-version iteration of Chapter [](#sec:polynomial-curvature), without a
-curvature-profile premise. Since that bound is already of KLS strength, feeding
-it back into the iteration gives no second proof.
+The exponential estimate also supplies the initialization bound used in the first-version iteration of Chapter [](#sec:polynomial-curvature), without a curvature-profile premise. Since that bound is already of KLS strength, feeding it back into the iteration gives no second proof.
 
 :::{prf:corollary} Uniform conditional initialization from BKL
 :label: cor:bkl-uniform-conditional-initialization
@@ -344,8 +253,4 @@ affine subspace. One may take $G=\max\{1,4\sqrt{2K}\}$ for $K$ as in
 [](#thm:bkl-tilt-bound). No curvature-profile assumption is needed.
 :::
 
-Indeed $(d+1)^2\le4^d$ and $\ell_r(d)\ge1$, so enlarging the exponential
-base absorbs the denominator uniformly in degree and depth. This does not
-estimate the accumulated centering losses of a different spectral comparison.
-What KLS does not give for the alternative mechanisms is in Section
-[](#subsec:atlas-assessment).
+Indeed $(d+1)^2\le4^d$ and $\ell_r(d)\ge1$, so enlarging the exponential base absorbs the denominator uniformly in degree and depth. This does not estimate the accumulated centering losses of a different spectral comparison. What the three proofs contribute to each alternative mechanism is in Section [](#subsec:atlas-assessment).

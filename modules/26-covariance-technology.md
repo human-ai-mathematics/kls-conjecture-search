@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:covariance-tech)=
-# Covariance technology: small-time operator-norm control
+# Small-time operator-norm control of the covariance
 
 Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter the danger of localization through the same cut-free covariance functional. Recall from [](#eq:interface-def) the covariance excess $X_t=(\lmax(A_t)-1)_+$ and the interface functional $\Xi_T(\mu)=\int_0^T\E X_t\dd t$; its second-moment companion is
 
@@ -13,7 +13,7 @@ Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter 
 \Xi^{(2)}_T(\mu)=\int_0^T\E X_t^2\dd t .
 ```
 
-The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance technology. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
+The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance estimates. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
 
 :::{prf:assumption} Known small-time operator-norm control; matched to {[@KlartagLehec2022Polylog; @Letwin2026QuadraticKLS]}
 :label: ass:KI

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:stein)=
-# The fixed cut, near-Cheeger variant: the failed literal weighted package and boundary Stein traces
+# The fixed cut: the near-Cheeger variant
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

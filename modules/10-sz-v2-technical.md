@@ -1,24 +1,17 @@
 ---
-title: "Song–Zhang v2: technical estimates"
+title: "Song–Zhang, second version: technical estimates"
 numbering:
   enumerator: "10.%s"
 ---
 
 (sec:sz-v2-blocks)=
-# Song–Zhang v2: technical estimates
+# Song–Zhang, second version: technical estimates
 
-The estimates in this chapter explain how the bounds of Chapter [](#sec:sz-v2-proof) are realized by
-actual functions. Three issues recur: removing means loses norm,
-normalization changes energy, and the derivative tensors are only partly
-symmetric. These losses must be controlled for the same family of
-functions. Separate estimates achieved by unrelated functions would not
-supply the iteration.
+The estimates in this chapter explain how the bounds of Chapter [](#sec:sz-v2-proof) are realized by actual functions. Three issues recur: removing means loses norm, normalization changes energy, and the derivative tensors are only partly symmetric. These losses must be controlled for the same family of functions. Separate estimates achieved by unrelated functions would not supply the iteration.
 
 ## Static transfer and tensor symmetries
 
-Localization transfers a coefficient cap valid simultaneously in every
-degree to a better cap. The starting threshold below is independent of
-the size of that cap, which is essential when the cap is improved repeatedly.
+Localization transfers a coefficient cap valid simultaneously in every degree to a better cap. The starting threshold below is independent of the size of that cap, which is essential when the cap is improved repeatedly.
 
 :::{prf:proposition} Transfer of a static coefficient cap
 :label: prop:sz-v2-static-coefficient-transfer
@@ -39,12 +32,7 @@ $$
 The threshold $r_*$ is independent of $\Gamma$, the dimension range and the law.
 :::
 
-The factor $1+r^{-2}$ is summable over the inner depths. The transfer
-retains the exponent $d-1$ from the common-radius normalization and
-passes to general log-concave laws only after obtaining a uniform
-regular-law estimate. The next algebraic estimate controls a tensor by
-one symmetric component and its failures of symmetry on successively
-larger groups of slots.
+The factor $1+r^{-2}$ is summable over the inner depths. The transfer retains the exponent $d-1$ from the common-radius normalization and passes to general log-concave laws only after obtaining a uniform regular-law estimate. The next algebraic estimate controls a tensor by one symmetric component and its failures of symmetry on successively larger groups of slots.
 
 :::{prf:lemma} Joint partial symmetrization
 :label: lem:sz-v2-joint-frame
@@ -62,11 +50,7 @@ $$
 This includes tensor-slot permutations with arbitrary finite output direct sums.
 :::
 
-The dyadic groups let the proof charge an error to the scale where
-symmetry first fails. Finite output direct sums are included, so the same
-estimate applies to windows of several inverse-gradient iterates.
-Normalization supplies a second useful cancellation: an antisymmetric
-covariance term is paid by a deficit between two spectral energies.
+The dyadic groups let the proof charge an error to the scale where symmetry first fails. Finite output direct sums are included, so the same estimate applies to windows of several inverse-gradient iterates. Normalization supplies a second useful cancellation: an antisymmetric covariance term is paid by a deficit between two spectral energies.
 
 :::{prf:lemma} Skew loss paid by normalization
 :label: lem:sz-v2-skew-credit
@@ -87,10 +71,7 @@ $$
 $$
 :::
 
-The nonnegative difference $1-\beta/e$ measures the slack in the
-comparison between direct and inverse spectral energies. Using it to
-pay the skew term avoids charging normalization and antisymmetry
-independently. This cancellation enters the compensated restart below.
+The nonnegative difference $1-\beta/e$ measures the slack in the comparison between direct and inverse spectral energies. Using it to pay the skew term avoids charging normalization and antisymmetry independently. This cancellation enters the compensated restart below.
 
 ## Exact operator identities and normalized losses
 
@@ -126,12 +107,7 @@ and rescaling to unit norm produces a family of energy at most
 $[e^{-1}-\|\operatorname{Sym}(LU)\|^2]^{-1}$.
 :::
 
-The restricted operator identifies the energy scale after means are
-removed. Its orbit defect satisfies a discrete second-difference
-inequality, while swapping adjacent derivative slots costs the square
-root of that defect. The final normalization identity uses the skew
-credit to retain only the symmetric covariance loss. These identities
-connect the operator norm, tensor symmetry and energy on the same orbit.
+The restricted operator identifies the energy scale after means are removed. Its orbit defect satisfies a discrete second-difference inequality, while swapping adjacent derivative slots costs the square root of that defect. The final normalization identity uses the skew credit to retain only the symmetric covariance loss. These identities connect the operator norm, tensor symmetry and energy on the same orbit.
 
 :::{prf:lemma} Normalized hierarchy and exact orbit-window losses
 :label: lem:sz-v2-normalized-hierarchy
@@ -164,12 +140,7 @@ $C_k=\sum_{j=k}^{m+k-1}\|Lw_j\|^2$, then
 $$p_k/v_k=C_k/(zS_{k+1}+C_k).$$
 :::
 
-Here $P_N$ records lost mass and $X_N$ records the normalization deficit.
-The identity $v_N=1-P_N$ makes their role explicit: a hierarchy survives
-as long as its accumulated centering loss stays small. For an orbit
-window the ratio $p_k/v_k$ is exact, not a separate upper estimate.
-It permits an averaged window with small covariance loss to restart
-an actual normalized hierarchy.
+Here $P_N$ records lost mass and $X_N$ records the normalization deficit. The identity $v_N=1-P_N$ makes their role explicit: a hierarchy survives as long as its accumulated centering loss stays small. For an orbit window the ratio $p_k/v_k$ is exact, not a separate upper estimate. It permits an averaged window with small covariance loss to restart an actual normalized hierarchy.
 
 :::{prf:lemma} Mesoscopic restricted-operator powers
 :label: lem:sz-v2-mesoscopic-powers
@@ -182,10 +153,7 @@ R-C_*/R\le\|\mathcal T^m\|^{2/m}\le R
 $$
 :::
 
-On the initial range of powers, the squared operator scale stays within
-$C_*/R$ of $R$. This starts the construction without a bound derived
-from KLS. Longer blocks require the joint symmetry and loss estimates,
-which we state next.
+On the initial range of powers, the squared operator scale stays within $C_*/R$ of $R$. This starts the construction without a bound derived from KLS. Longer blocks require the joint symmetry and loss estimates, which we state next.
 
 ## From symmetry to delayed centering losses
 
@@ -211,11 +179,7 @@ $E^2(3k)^{2\alpha}$ in its $k$ summand.
 
 :::
 
-The symmetric term is controlled by the degree-$d$ coefficient; the
-remaining terms are orbit defects at smaller dyadic degrees. A bound on
-operator powers propagates each defect to the required position.
-The versions with exponential or polynomial propagation make explicit
-which power estimate is available at each stage of the construction.
+The symmetric term is controlled by the degree-$d$ coefficient; the remaining terms are orbit defects at smaller dyadic degrees. A bound on operator powers propagates each defect to the required position. The versions with exponential or polynomial propagation make explicit which power estimate is available at each stage of the construction.
 
 :::{prf:lemma} Delayed losses under polynomial propagation
 :label: lem:sz-v2-propagated-joint-loss
@@ -239,12 +203,7 @@ $$P_N\le\Delta+N\tau+(\theta/\lambda)X_{\max\{N-2,0\}}. \tag{B2}$$
 For a prefix shorter than $J$, its retained actual losses suffice.
 :::
 
-Summing the raw estimate along the normalized hierarchy separates three
-contributions: actual initial losses $\Delta$, a terminal-degree cost
-$N\tau$, and delayed normalization deficits. The delay matters because
-a first-crossing argument may use only estimates justified before the
-crossing. Short prefixes keep their actual losses rather than being
-silently discarded.
+Summing the raw estimate along the normalized hierarchy separates three contributions: actual initial losses $\Delta$, a terminal-degree cost $N\tau$, and delayed normalization deficits. The delay matters because a first-crossing argument may use only estimates justified before the crossing. Short prefixes keep their actual losses rather than being silently discarded.
 
 ## Restarting and extending finite blocks
 
@@ -316,12 +275,7 @@ $$
 $$
 :::
 
-The discrete Green estimate turns small forcing and controlled orbit
-defects into bounds on every shifted window. Averaging these windows
-provides one family with small centering losses. The compensated
-normalization then gives that family's energy bound. The matched
-inequality for $aV_N+X_N$ is retained at every later length, so the
-restart can be used in the next block without changing the family.
+The discrete Green estimate turns small forcing and controlled orbit defects into bounds on every shifted window. Averaging these windows provides one family with small centering losses. The compensated normalization then gives that family's energy bound. The matched inequality for $aV_N+X_N$ is retained at every later length, so the restart can be used in the next block without changing the family.
 
 :::{prf:lemma} Finite block extension
 :label: lem:sz-v2-block-extension
@@ -351,12 +305,7 @@ $$
 $$
 :::
 
-Assume that the centering loss first reaches $p_*$. Before that time,
-the delayed estimate is valid and the matched energy budget controls
-its normalization term. The resulting bound is below $p_*/2$, a
-contradiction. Thus the hierarchy retains mass to length $T_*$,
-and its survival gives a lower bound on every operator power up to
-that length.
+Assume that the centering loss first reaches $p_*$. Before that time, the delayed estimate is valid and the matched energy budget controls its normalization term. The resulting bound is below $p_*/2$, a contradiction. Thus the hierarchy retains mass to length $T_*$, and its survival gives a lower bound on every operator power up to that length.
 
 :::{prf:lemma} Propagation from exact finite block norms
 :label: lem:sz-v2-block-propagation
@@ -377,11 +326,7 @@ $$
 $$
 :::
 
-Exact norms at a sequence of increasing block lengths control arbitrary
-powers by decomposing the length among those blocks. Geometric growth
-of the lengths and geometric decay of the scale losses prevent a cost
-proportional to the full length. This gives the polynomial propagation
-needed when the construction returns to the joint-frame estimate.
+Exact norms at a sequence of increasing block lengths control arbitrary powers by decomposing the length among those blocks. Geometric growth of the lengths and geometric decay of the scale losses prevent a cost proportional to the full length. This gives the polynomial propagation needed when the construction returns to the joint-frame estimate.
 
 ## Retaining coefficient caps and controlling terminal degrees
 
@@ -440,14 +385,7 @@ Set $J_p=4e_p$. Constants are independent of $N$, the margins, majorants
 and order. The assertion about an actual family is made only above the floor.
 :::
 
-The coefficient caps cover separate degree ranges, chosen by the margins
-$\alpha_l$. Their contributions enter the common floor $F^2$ through
-a maximum, rather than a sum over all retained caps. Above that floor,
-repeated restarts and block extensions produce one actual family with
-the stated energy, centering and propagation bounds. Below the floor,
-the coefficient-radius estimate is already sufficient; no such family
-is asserted there. Uniformity in the number of caps is the feature
-needed by the summable-cost induction.
+The coefficient caps cover separate degree ranges, chosen by the margins $\alpha_l$. Their contributions enter the common floor $F^2$ through a maximum, rather than a sum over all retained caps. Above that floor, repeated restarts and block extensions produce one actual family with the stated energy, centering and propagation bounds. Below the floor, the coefficient-radius estimate is already sufficient; no such family is asserted there. Uniformity in the number of caps is the feature needed by the summable-cost induction.
 
 :::{prf:lemma} Terminal-degree logarithmic distortion
 :label: lem:sz-v2-terminal-distortion
@@ -472,12 +410,7 @@ The products $\prod_{r=r_Q}^R(1+r^{-2})^2\zeta_r^2$ have a universal
 upper bound, independent of $Q$ and the finite terminal depth $R$.
 :::
 
-Each additional logarithm contracts a multiplicative perturbation of
-the argument. After a number of logarithms comparable to $\log^*M$,
-the remaining distortion decays geometrically. Applied to the terminal
-polynomial degree, this compares its logarithms with those of inverse
-curvature. The products of these distortions and the static-transfer
-factors stay bounded independently of the terminal depth.
+Each additional logarithm contracts a multiplicative perturbation of the argument. After a number of logarithms comparable to $\log^*M$, the remaining distortion decays geometrically. Applied to the terminal polynomial degree, this compares its logarithms with those of inverse curvature. The products of these distortions and the static-transfer factors stay bounded independently of the terminal depth.
 
 ## Scalar control of changing starting depths
 

@@ -103,8 +103,11 @@ project:
   # Then KLS after its proofs (equivalent forms, consequences, the question of the
   # constant; prose only) and the map of alternative mechanisms; the three living
   # mechanisms -- the moment map, the fixed eigenfunction, conditional fibers -- in the
-  # order of what each has established; the shared technical foundations; and, last
+  # order of what each has established, the localization prelude (chapter 20) opening the
+  # fixed eigenfunction, the first living mechanism to use stochastic localization (the
+  # fixed-cut archive links back to it); the shared technical foundations; and, last
   # before the proofs, the fixed cut as an archive, with its technical chapters.
+  # Proof chapters are titled "Authors: mechanism" (owner's decision, 2026-10-07).
   # Owner's decisions of 2026-10-06: research/explorations/2026-10-06-editorial-restructure.md.
   toc:
     - file: modules/index.md
@@ -138,9 +141,9 @@ project:
             - file: modules/17-cmh-exact-cases.md
             - file: modules/18-moment-map-construction.md
             - file: modules/19-appendix-moment-map.md
-        - file: modules/20-localization-prelude.md
         - title: Fixed eigenfunction
           children:
+            - file: modules/20-localization-prelude.md
             - file: modules/21-spectral-approach.md
         - title: Conditional fibers
           children:

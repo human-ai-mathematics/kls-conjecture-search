@@ -4,13 +4,13 @@ numbering:
 ---
 
 (sec:product-stress)=
-# Product stress test of the all-cut Carleson estimate
+# The fixed cut: product stress test
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 
 This section carries out [](#rem:product-stress-test): it stress-tests the all-cut absorptive Carleson estimate ([](#ass:all-cut-carleson)) on product measures, where (i) localization preserves product structure, (ii) KLS is known ([](#prop:products)), and (iii) the operator norm of $A_t$ genuinely reaches $\log n$, so a proof cannot go through $\lmax$-control. What a failure would decide is said in [](#rem:product-stress-test): it concerns the every-interval form, reaches the prefix form [](#ass:tight-prefix-carleson) only if the same cuts violate it, and does not select the near-Cheeger variant, whose literal package the product witnesses of [](#prop:weighted-spectator-obstruction) already violate.
 
-Three core tools are pointed at the product model. First, the per-direction Carleson estimate ([](#cor:per-direction)) is a budget: $\E\int_0^\infty s_t\abs{G_t\theta}^2\dd t\le\theta^TR_0\theta\le1$ for every fixed direction. Second, the Stein identity $\calS_\nu(E)=s^2\norm K_\HS^2$ ([](#prop:stein-rep)) makes the quadratic-chaos machinery of Section [](#sec:qcts) directly applicable to the Riccati source. Third, the covariance technology of Section [](#sec:covariance-tech) supplies the cut-free comparison quantities. Notation is that of this manuscript throughout: $\mu_t$ is Eldan stochastic localization [@Eldan2013ThinShell; @LeeVempala2024], $p_t,s_t,\delta_t,G_t,K_t,r_t,S_t,D_t,R_t$ are the two-color quantities, $\tau$ is the coarse balanced exit time, and $X_t=(\lmax(A_t)-1)_+$.
+Three core tools are pointed at the product model. First, the per-direction Carleson estimate ([](#cor:per-direction)) is a budget: $\E\int_0^\infty s_t\abs{G_t\theta}^2\dd t\le\theta^TR_0\theta\le1$ for every fixed direction. Second, the Stein identity $\calS_\nu(E)=s^2\norm K_\HS^2$ ([](#prop:stein-rep)) makes the quadratic-chaos machinery of Section [](#sec:qcts) directly applicable to the Riccati source. Third, the small-time covariance control of Section [](#sec:covariance-tech) supplies the cut-free comparison quantities. Notation is that of this manuscript throughout: $\mu_t$ is Eldan stochastic localization [@Eldan2013ThinShell; @LeeVempala2024], $p_t,s_t,\delta_t,G_t,K_t,r_t,S_t,D_t,R_t$ are the two-color quantities, $\tau$ is the coarse balanced exit time, and $X_t=(\lmax(A_t)-1)_+$.
 
 We also record the structural facts about products from [](#prop:products): if $\mu=\bigotimes_{i=1}^n\mu^{(i)}$ with isotropic one-dimensional log-concave factors, then $\mu_t$ is a product pathwise (the tilt factorizes), $A_t=\diag(A_t^{(1)},\dots,A_t^{(n)})$ with each $A^{(i)}$ a one-dimensional variance process of drift $-(A^{(i)})^2$, and $h_{\mu_t}\ge c\,\lmax(A_t)^{-1/2}$ pathwise, so that KLS for products is not in question; the question is whether the *estimate under test* holds there.
 

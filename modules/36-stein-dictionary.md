@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:stein-dictionary)=
-# The two-colour Stein dictionary and the operator-to-trace gap
+# The fixed cut: the Stein dictionary
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

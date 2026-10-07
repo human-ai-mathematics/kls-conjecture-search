@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:carleson)=
-# The fixed cut, all-cut variant: the exact Carleson target
+# The fixed cut: the Carleson target
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

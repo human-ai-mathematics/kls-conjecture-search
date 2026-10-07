@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:appendix-fixed-cut)=
-# Product stress-test and bootstrap calculations
+# The fixed cut: calculations
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

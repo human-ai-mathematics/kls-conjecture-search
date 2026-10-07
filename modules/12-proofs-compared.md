@@ -6,18 +6,7 @@ numbering:
 (sec:kls-synthesis)=
 # The proofs of KLS compared
 
-Three source proofs of [](#conj:kls) are reconstructed and checked here:
-Bizeul–Klartag–Lehec (BKL), through cumulants and suspension (Chapter
-[](#sec:bkl-proof)) [@BizeulKlartagLehec2026KLS]; Song–Zhang, second version,
-through refinement with summable losses (Chapters [](#sec:sz-v2-proof) and
-[](#sec:sz-v2-blocks)) [@SongZhang2026ConstantKLS]; and
-Balasubramanian–Kasiviswanathan (BK), through compatible integration and a
-direct recurrence in polynomial degree (Chapter [](#sec:bk-proof))
-[@BalasubramanianKasiviswanathan2026KLS]. All three control the exponential
-growth of Appell coefficients, but their closing estimates and spectral
-conversions differ. Each statement shows its status and the independent
-reviewer-agent check behind it; this does not mean journal peer review
-([how results are checked](#sec:overview-checking)).
+This chapter compares the three proofs of [](#conj:kls): Bizeul–Klartag–Lehec (BKL), Chapter [](#sec:bkl-proof) [@BizeulKlartagLehec2026KLS]; Song–Zhang, second version (SZ v2), Chapters [](#sec:sz-v2-proof) and [](#sec:sz-v2-blocks) [@SongZhang2026ConstantKLS]; and Balasubramanian–Kasiviswanathan (BK), Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. Their ideas are sketched in Section [](#sec:kls-conversions). All three control the exponential growth of Appell coefficients; they differ in the closing estimate, the spectral conversion and the constant obtained, and the table below is the reference for these differences.
 
 (subsec:proofs-compared-table)=
 ## The three proofs side by side
@@ -36,94 +25,31 @@ reviewer-agent check behind it; this does not mean journal peer review
 (subsec:proofs-compared-shared)=
 ## Shared coefficients, distinct spectral reductions
 
-The Appell coefficients $c_d(\mu)$ are the normalized sizes of the
-polynomials adapted to the moments of $\mu$ (Section [](#sec:sz-notation)).
-The convention is identical in all three arguments. An exponential bound
-$c_d\le A^d$, uniform in degree, dimension and measure, is equivalent to
-KLS ([](#prop:sz-exponential-coefficients-equivalence)). This identifies the
-common conclusion to seek; it does not establish it.
+The Appell coefficients $c_d(\mu)$ are the normalized sizes of the polynomials adapted to the moments of $\mu$ (Section [](#sec:sz-notation)). The convention is identical in all three arguments. An exponential bound $c_d\le A^d$, uniform in degree, dimension and measure, is equivalent to KLS ([](#prop:sz-exponential-coefficients-equivalence)). This identifies the common conclusion to seek; it does not establish it.
 
-BKL use the spectral criterion isolated by the first version of Song–Zhang,
-in the exponential form they prove from their own analytic foundations.
-The norm of their tilt-average operator is exactly $c_d$
-([](#prop:bkl-tilt-appell-duality)). Their cumulant estimate and suspension
-therefore supply the premise of [](#thm:bkl-tilt-criterion).
-Song–Zhang v2 retains the polynomial–curvature apparatus of v1, but refines
-$\mathcal A$ and pays its spectral conversion only once, after all rounds.
-The earlier curvature transfer [](#thm:sz-curvature-transfer) serves its
-intermediate dimension-dependent bound, not this last conversion.
+BKL use the spectral criterion isolated by the first version of Song–Zhang, in the exponential form they prove from their own analytic foundations. The norm of their tilt-average operator is exactly $c_d$ ([](#prop:bkl-tilt-appell-duality)). Their cumulant estimate and suspension therefore supply the premise of [](#thm:bkl-tilt-criterion). Song–Zhang v2 retains the polynomial–curvature apparatus of v1, but refines $\mathcal A$ and pays its spectral conversion only once, after all rounds. The earlier curvature transfer [](#thm:sz-curvature-transfer) serves its intermediate dimension-dependent bound, not this last conversion.
 
-BK also obtains exponential coefficients, with a summable degree weight
-$(d+1)^{-4}$, but its final conversion follows from the compatible
-integration calculus. For one fixed regular measure of curvature $a>0$,
-let the observation degree $D$ tend to infinity in
-[](#cor:bk-integration-powers). The factor $a^{-1/(D+1)}$ tends to one,
-so $C_P\le1+2R_*^2$, with $R_*=10^8$. Approximation then removes regularity.
-Thus the common exponential criterion describes what all three achieve;
-it is not the identical last lemma in each proof.
+BK also obtains exponential coefficients, with a summable degree weight $(d+1)^{-4}$, but its final conversion follows from the compatible integration calculus. For one fixed regular measure of curvature $a>0$, let the observation degree $D$ tend to infinity in [](#cor:bk-integration-powers). The factor $a^{-1/(D+1)}$ tends to one, so $C_P\le1+2R_*^2$, with $R_*=10^8$. Approximation then removes regularity. Thus the common exponential criterion describes what all three achieve; it is not the identical last lemma in each proof.
 
 (subsec:proofs-compared-differences)=
 ## What separates the arguments
 
-**Cumulants, refinement, or a degree recurrence.** BKL estimate cumulants
-inductively and use suspension to reach general functions. Song–Zhang v2
-instead improves a curvature profile repeatedly, controlling every round's
-admissibility and making the losses summable. BK closes an induction
-straight on $c_d$: lower degrees control integrations under curved laws,
-and localization transfers those integration bounds to degree $d$.
-For its large-degree step the integration length is
-$q=\lfloor d/2\rfloor$, while the observation degree is
-$D=\lfloor\sqrt d\rfloor$. Keeping one prefactor for the whole integration
-chain is essential; multiplying separate one-step bounds discards the gain.
+**Cumulants, refinement, or a degree recurrence.** BKL estimate cumulants inductively and use suspension to reach general functions. Song–Zhang v2 instead improves a curvature profile repeatedly, controlling every round's admissibility and making the losses summable. BK closes an induction straight on $c_d$: lower degrees control integrations under curved laws, and localization transfers those integration bounds to degree $d$. For its large-degree step the integration length is $q=\lfloor d/2\rfloor$, while the observation degree is $D=\lfloor\sqrt d\rfloor$. Keeping one prefactor for the whole integration chain is essential; multiplying separate one-step bounds discards the gain.
 
-**What localization transports.** BKL and BK both normalize the noise by
-the inverse covariance. BKL follows cumulants in a moving metric; BK
-controls covariance tensor products and the variance of a polynomial
-whose Appell normalization changes with the law. Song–Zhang uses Gaussian
-localization to convert curvature profiles to coefficient bounds. A shared
-noise normalization does not make the objects or estimates interchangeable.
+**What localization transports.** BKL and BK both normalize the noise by the inverse covariance. BKL follows cumulants in a moving metric; BK controls covariance tensor products and the variance of a polynomial whose Appell normalization changes with the law. Song–Zhang uses Gaussian localization to convert curvature profiles to coefficient bounds. A shared noise normalization does not make the objects or estimates interchangeable.
 
-**Where the constants are spent.** The v1 spectral comparison incurred a
-fixed cost at every round. Song–Zhang v2 makes the radius-refinement costs
-summable and spends the final conversion once. BKL avoids that refinement
-altogether. BK's finite observation bound supplies a factor independent of
-the number of integrations, allowing a direct recurrence with a numerical
-majorant. The resulting constant is explicit but far from the lower bound
-$4$ supplied by the exponential law (Chapter [](#sec:kls-after-proofs)).
+**Where the constants are spent.** The v1 spectral comparison incurred a fixed cost at every round. Song–Zhang v2 makes the radius-refinement costs summable and spends the final conversion once. BKL avoids that refinement altogether. BK's finite observation bound supplies a factor independent of the number of integrations, allowing a direct recurrence with a numerical majorant. The resulting constant is explicit but far from the lower bound $4$ supplied by the exponential law (Chapter [](#sec:kls-after-proofs)).
 
 (subsec:proofs-compared-bk)=
-**Two different Hodge comparisons.** BK projects weighted divergence onto
-compatible symmetric tensor fields for the potential of the original
-measure. The matrix example in Chapter [](#sec:bk-proof) shows the
-harmonic-mean curvature left after this projection. The moment-Hessian
-comparison [](#cor:cmh-hodge-comparison) uses the canonical moment-map
-Hessian and a different energy. Neither statement identifies the other's
-hypotheses, so the BK estimate does not settle the moment-Hessian inequality.
+**Two different Hodge comparisons.** BK projects weighted divergence onto compatible symmetric tensor fields for the potential of the original measure. The matrix example in Chapter [](#sec:bk-proof) shows the harmonic-mean curvature left after this projection. The moment-Hessian comparison [](#cor:cmh-hodge-comparison) uses the canonical moment-map Hessian and a different energy. Neither statement identifies the other's hypotheses, so the BK estimate does not settle the moment-Hessian inequality.
 
 (subsec:proofs-provenance)=
 ## Provenance and dependencies
 
-The three arguments share earlier polynomial and localization ideas. BK's
-quadratic initialization explicitly uses Letwin's [](#thm:letwin-qcts),
-and its Appell convention agrees with [](#thm:sz-polynomial-variance).
-Distinct proofs here means distinct closing arguments, not independence
-from the earlier literature.
+The three arguments share earlier polynomial and localization ideas. BK's quadratic initialization explicitly uses Letwin's [](#thm:letwin-qcts), and its Appell convention agrees with [](#thm:sz-polynomial-variance). Distinct proofs here means distinct closing arguments, not independence from the earlier literature.
 
-The reconstructed BKL argument uses no SZ v2 estimate or KLS conclusion
-as an input. The SZ v2 reconstruction uses no BKL cumulant or tilt bound,
-including their consequence [](#cor:bkl-uniform-conditional-initialization).
-The BK induction uses neither of those proofs' conclusions nor KLS itself.
-Reusing the BKL initialization to recover KLS would keep BKL's provenance;
-it would not supply another argument establishing exponential growth.
+The reconstructed BKL argument uses no SZ v2 estimate or KLS conclusion as an input. The SZ v2 reconstruction uses no BKL cumulant or tilt bound, including their consequence [](#cor:bkl-uniform-conditional-initialization). The BK induction uses neither of those proofs' conclusions nor KLS itself. Reusing the BKL initialization to recover KLS would keep BKL's provenance; it would not supply another argument establishing exponential growth.
 
-The versions and deposit times of BKL and SZ v2 are given in Chapter
-[](#sec:sz-v2-proof). The BK source is arXiv v1, read in an identical
-earlier PDF whose Git commit and hash [@BalasubramanianKasiviswanathan2026KLS] records. These bibliographic facts
-identify the texts reconstructed here without asserting priority.
+The versions and deposit times of BKL and SZ v2 are given in Chapter [](#sec:sz-v2-proof). The BK source is arXiv v1, read in an identical earlier PDF whose Git commit and hash [@BalasubramanianKasiviswanathan2026KLS] records. These bibliographic facts identify the texts reconstructed here without asserting priority.
 
-None of the three proofs establishes, by an implication proved here, the
-sufficient conditions of the alternative mechanisms: the moment-Hessian
-inequality, fixed-eigenfunction occupation, or a conditional frame. Their
-remaining tasks are in Section [](#subsec:atlas-assessment). What KLS itself
-gives, and the question of its best constant, follow in Chapter
-[](#sec:kls-after-proofs).
+What KLS itself gives, and the question of its best constant, follow in Chapter [](#sec:kls-after-proofs); what the alternative mechanisms would add to these proofs is in Chapter [](#sec:frontier-atlas).

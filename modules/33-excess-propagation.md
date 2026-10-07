@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:excess)=
-# Excess propagation: audit and a circularity warning
+# The fixed cut: excess propagation
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

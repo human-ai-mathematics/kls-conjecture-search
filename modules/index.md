@@ -4,15 +4,17 @@ numbering: false
 ---
 
 % The site's welcome page: no statement lives here. The mathematical introduction is
-% modules/00-overview.md; this page only says what there is and where to go.
+% modules/00-overview.md; this page only says what there is and where to go. It is the
+% single place for the site's organization and for how results are checked; the list of
+% results here is short and without commentary, the full account is Section sec:overview-results.
 
-This site is a reader's companion to three proofs of the Kannan–Lovász–Simonovits (KLS) theorem — reconstructed, checked and compared here — to the methods that led to them, and to the questions that remain open after KLS.
+The Kannan–Lovász–Simonovits (KLS) conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant bounded independently of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. It is now a theorem: three preprints of October 2026 prove it, by Bizeul–Klartag–Lehec (BKL) [@BizeulKlartagLehec2026KLS], by Song–Zhang in the second version of their preprint (SZ v2) [@SongZhang2026ConstantKLS], and by Balasubramanian–Kasiviswanathan (BK) [@BalasubramanianKasiviswanathan2026KLS].
+
+This site adds three things the preprints do not: a reconstruction of each of the three arguments, a comparison of them, and an account of the methods around them, including three alternative mechanisms for the Poincaré bound with exact computations, conditional reductions and counterexamples of their own. *Reconstructed* means that each argument is rewritten so that every step is a complete statement with a complete proof, and that each of these proofs has been checked against its statement by a separate reviewer agent; no person has yet reviewed or accepted them.
 
 :::{note} How the proofs here are checked
-Proofs reconstructed here by agents are checked by separate reviewer agents. This is distinct from journal peer review or human acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
+The proofs written for this project are checked by separate reviewer agents, each run without access to the work that produced the proof. This is distinct from journal peer review and from a person's review or acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
 :::
-
-The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Three preprints answer it. Two were deposited on arXiv on 4 October 2026: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS]; and the second version of Song–Zhang (SZ v2), through repeated refinement with summable losses [@SongZhang2026ConstantKLS]. The third, by Balasubramanian–Kasiviswanathan (BK), was first distributed as a PDF on GitHub and deposited on arXiv on 6 October 2026: it proves the theorem through compatible tensor integration and a direct induction on Appell coefficients, with the explicit bound $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)), Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. All three arguments, BK's numerical constant included, are reconstructed and checked here.
 
 (sec:ai-use)=
 :::{note} The use of AI in the three proofs
@@ -23,52 +25,35 @@ All three sets of authors declare their use of AI.
 - Balasubramanian and Kasiviswanathan write: "We developed this proof with substantial assistance from several frontier AI models." "The AI identified the need for estimates uniform in tensor rank and formulated a weighted Hodge comparison for symmetric tensor fields." "The AI proposed Appell coefficient norms to measure repeated centered integration of constant tensors." "We have carefully verified all arguments developed with the assistance of AI and take full responsibility for the content of this work." (§1.2, p. 5 of [@BalasubramanianKasiviswanathan2026KLS]).
 :::
 
-Besides these proofs, the manuscript develops three alternative mechanisms for the Poincaré bound, which would give KLS by other means or with stronger conclusions. Their exact moment-Hessian calculations, conditional reductions and counterexamples keep their meaning now that KLS is proved.
-
 (sec:reading-paths)=
 ## Where to start
 
 Four ways in, depending on what you came for:
 
 - **Discover.** The overview, Chapter [](#sec:overview); what the theorem gives and the question of its constant, Chapter [](#sec:kls-after-proofs); then the map of alternative mechanisms, Chapter [](#sec:frontier-atlas).
-- **Read the proofs.** The first version of Song–Zhang, whose spectral criterion underlies BKL and SZ v2, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter argument from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); the BK integration argument, Chapter [](#sec:bk-proof); then their comparison, Chapter [](#sec:kls-synthesis).
-- **Read the alternative mechanisms.** The three entry chapters listed below.
+- **Read the proofs.** The first version of Song–Zhang, whose spectral criterion underlies BKL and SZ v2, Chapter [](#sec:polynomial-curvature); Bizeul–Klartag–Lehec, the shorter argument from that criterion, Chapter [](#sec:bkl-proof); the second version of Song–Zhang, Chapter [](#sec:sz-v2-proof), with its technical estimates in Chapter [](#sec:sz-v2-blocks); Balasubramanian–Kasiviswanathan, Chapter [](#sec:bk-proof); then their comparison, Chapter [](#sec:kls-synthesis).
+- **Read the alternative mechanisms.** The moment map, Chapter [](#sec:moment-map-cmh); the fixed eigenfunction, Chapter [](#sec:spectral-approach); conditional fibers, Chapter [](#sec:conditional-fiber-frame). The fixed cut, an earlier localization argument kept for its obstructions and counterexamples, opens the archive, Chapter [](#sec:introduction).
 - **Contribute.** The problems for someone who might take them up, Section [](#sec:overview-open), then how results are checked, below.
-
-After the overview come *the literature*, one chapter for each of six families of methods; *the proof chapters*: the first version of Song–Zhang as preparation, then the three proofs of Bizeul–Klartag–Lehec, Song–Zhang v2 and BK, followed by their comparison; *after KLS*, what the theorem gives and the question of its constant, then the map of alternative mechanisms; the *alternative mechanisms* themselves; *shared technical foundations*, best read where first linked; and an *archive* holding the fixed cut and its technical chapters. The full proofs come last.
-
-## Three alternative mechanisms, and an archive
-
-Each mechanism needs an argument of its own: none of these proofs gives its sufficient condition.
-
-- **Moment map** — a deterministic inequality for the Hessian of the moment map, which implies KLS and is not known to be equivalent to it, and which would give the Poincaré bound with constant $4$ and no stochastic localization: Chapter [](#sec:moment-map-cmh).
-- **Fixed eigenfunction** — a localization mechanism that follows a first eigenfunction and so ignores covariance spikes in directions it does not use: Chapter [](#sec:spectral-approach).
-- **Conditional fibers** — an elementary mechanism, a spectral gap for resampling along lines chosen from the measure, resting only on one-dimensional inequalities: Chapter [](#sec:conditional-fiber-frame).
-
-The **fixed cut**, which follows one would-be bottleneck set through stochastic localization, is kept as an archive for its obstructions, its ceiling and its counterexamples: Chapter [](#sec:introduction).
-
-Chapter [](#sec:frontier-atlas) compares the three mechanisms side by side — what each would add, and what blocks it.
 
 ## What this manuscript contributes
 
-**The proofs, reconstructed, checked and compared.**
+**The three proofs.**
 
-- A reconstruction of the first version of Song–Zhang's polynomial–curvature mechanism, Chapter [](#sec:polynomial-curvature), with its reusable profile transfer [](#thm:sz-curvature-transfer), affine bound [](#cor:sz-affine-poincare), and exponential coefficient characterization of KLS [](#prop:sz-exponential-coefficients-equivalence).
-- A reconstruction of the Bizeul–Klartag–Lehec cumulant and suspension argument, Chapter [](#sec:bkl-proof), including its exact comparison with Appell coefficients.
-- A reconstruction of the universal bound of the second version of Song–Zhang, [](#thm:sz-v2-kls), with the finite-block estimates and summable-cost argument explained in Chapters [](#sec:sz-v2-proof) and [](#sec:sz-v2-blocks).
-- A reconstruction of BK’s compatible-integration proof and its explicit constant, Chapter [](#sec:bk-proof).
-- A comparison of the three proofs, Chapter [](#sec:kls-synthesis), and an account of what the theorem gives and of the question of its constant, Chapter [](#sec:kls-after-proofs).
+- BKL bound cumulants of every order uniformly in the dimension, then encode an arbitrary test function as one extra coordinate (suspension): Chapter [](#sec:bkl-proof).
+- SZ v2 refines one coefficient radius repeatedly, with losses whose product stays bounded: Chapters [](#sec:sz-v2-proof) and [](#sec:sz-v2-blocks).
+- BK control every power of an integration operator on compatible tensor fields with one common factor, and close a direct induction in the polynomial degree, with an explicit constant: Chapter [](#sec:bk-proof).
+- The first version of Song–Zhang, whose spectral criterion the first two proofs use, is reconstructed as preparation (Chapter [](#sec:polynomial-curvature)); the three proofs are compared in Chapter [](#sec:kls-synthesis).
 
-**Results proved here.**
+**Results proved in this manuscript.**
 
-- An inequality for the Hessian of the moment map, the canonical moment-Hessian constant of [](#def:cmh), which by [](#thm:cmh-implies-affine-poincare) bounds the affine Poincaré constant with no loss.
-- Exact values of that constant on the line ([](#thm:cmh-1d)), on products ([](#thm:cmh-product)) and on every log-concave Dirichlet law ([](#thm:cmh-dirichlet)), with the Poincaré consequence [](#cor:cmh-dirichlet-poincare).
-- An identity, [](#lem:linear-sector-third-moment), reducing the linear test of that inequality to a third-moment tensor, and a countermodel, [](#prop:letwin-not-gate-zero), saying that matrix inequalities over fixed matrices cannot supply it.
-- A reduction of KLS to an occupation estimate for one eigenfunction followed through stochastic localization, [](#prop:spectral-sufficiency).
-- A reduction of KLS to a spectral gap for resampling along conditional lines, [](#lem:conditional-fiber-form), and an obstruction for the most natural frame of lines on the simplex, [](#prop:conditional-fiber-root-obstruction).
-- In the fixed-cut archive: a bootstrap, [](#thm:bootstrap), its ceiling, [](#prop:ceiling), and a product counterexample to a natural weighted estimate, [](#prop:weighted-spectator-obstruction).
+- The moment-Hessian inequality [](#def:cmh) bounds the affine Poincaré constant with no loss ([](#thm:cmh-implies-affine-poincare)).
+- Its exact value on the line ([](#thm:cmh-1d)), on products ([](#thm:cmh-product)) and on every log-concave Dirichlet law ([](#thm:cmh-dirichlet), [](#cor:cmh-dirichlet-poincare)).
+- Its linear test reduced to a third-moment tensor ([](#lem:linear-sector-third-moment)), and a countermodel for fixed-matrix arguments ([](#prop:letwin-not-gate-zero)).
+- A reduction of KLS to an occupation estimate for one eigenfunction ([](#prop:spectral-sufficiency)).
+- A reduction of KLS to a gap for resampling along lines ([](#lem:conditional-fiber-form)), and an obstruction on the simplex ([](#prop:conditional-fiber-root-obstruction)).
+- In the fixed-cut archive: a bootstrap ([](#thm:bootstrap)), its ceiling ([](#prop:ceiling)) and a product counterexample ([](#prop:weighted-spectator-obstruction)).
 
-The overview explains each with the idea of its proof (Section [](#sec:overview-results)).
+Each is explained with the idea of its proof in Section [](#sec:overview-results).
 
 (sec:overview-checking)=
 ## How results are checked, and how to contribute
@@ -77,7 +62,7 @@ Every labelled statement is fixed text, and its status, shown next to its title,
 
 - *Not settled here*: this manuscript does not settle the statement; it says nothing about the literature.
 - *Preprint, not yet checked here*: a recent source's announced result, not yet checked by this project.
-- *Proved*, or *Proved (from a preprint)* for a source's result checked here: a written proof, checked against the statement by a reviewer, linked from the status, which names who checked it and when.
+- *Proved*, or *Proved (from a preprint)* for a source's result checked by this project: a written proof, checked against the statement by a reviewer, linked from the status, which names who checked it and when.
 - *Established in the literature*: a result of the field, cited and not reproved.
 - *Refuted by*: the statement that refutes it.
 

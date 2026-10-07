@@ -4,55 +4,21 @@ numbering:
 ---
 
 (sec:bk-proof)=
-# Compatible integration: the BK proof
+# Balasubramanian–Kasiviswanathan: compatible integration
 
-Balasubramanian and Kasiviswanathan (BK) prove a dimension-free Poincaré
-bound through **compatible integration**: undo differentiation on symmetric
-tensor fields, control arbitrarily many integrations from finitely many
-polynomial estimates, and use stochastic localization to recover the next
-polynomial estimate. Their source is the 53-page preprint
-[@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026, read in
-an identical PDF first distributed on GitHub. The argument and its composition into [](#conj:kls) have
-been reconstructed and independently checked here by reviewer agents;
-this is distinct from journal peer review or human acceptance.
+Balasubramanian and Kasiviswanathan (BK) prove a dimension-free Poincaré bound through **compatible integration**: undo differentiation on symmetric tensor fields, control arbitrarily many integrations from finitely many polynomial estimates, and use stochastic localization to recover the next polynomial estimate. Their source is the 53-page preprint [@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026, read in an identical PDF first distributed on GitHub. The argument and its composition into [](#conj:kls) have been reconstructed in this manuscript and checked by separate reviewer agents; this is distinct from journal peer review or a person's acceptance.
 
-The quantitative conclusion is
-$C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The large constant
-comes from an explicit induction proving
-$c_d\le10^{8d}/(d+1)^4$ simultaneously in degree, dimension and measure
-([](#thm:bk-appell-bound)). The qualitative exponential criterion already
-appears in [](#prop:sz-exponential-coefficients-equivalence). BK establish
-its coefficient premise without importing KLS or a coefficient bound from
-the other proofs, then use their integration estimate to obtain the
-Poincaré constant directly. They retain the earlier Appell normalization
-and Letwin's quadratic variance bound as shared inputs.
+The quantitative conclusion is $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The large constant comes from an explicit induction proving $c_d\le10^{8d}/(d+1)^4$ simultaneously in degree, dimension and measure ([](#thm:bk-appell-bound)). The qualitative exponential criterion already appears in [](#prop:sz-exponential-coefficients-equivalence). BK establish its coefficient premise without importing KLS or a coefficient bound from the other proofs, then use their integration estimate to obtain the Poincaré constant directly. They retain the earlier Appell normalization and Letwin's quadratic variance bound as shared inputs.
 
 ## A Gaussian calculation and the proof's design
 
-For the standard Gaussian on the line, the first Appell polynomials are
-$A_1(x)=x$, $A_2(x)=x^2-1$ and $A_3(x)=x^3-3x$.
-Centered integration sends $x$ to $(x^2-1)/2$, then to
-$(x^3-3x)/6$. More generally it sends $A_d/d!$ to
-$A_{d+1}/(d+1)!$. Since $\mathbb E A_d^2=d!$, the coefficients are
-$c_d=1/\sqrt{d!}$. Thus powers of an integration operator really do
-measure the same normalized polynomials as the earlier chapters.
+For the standard Gaussian on the line, the first Appell polynomials are $A_1(x)=x$, $A_2(x)=x^2-1$ and $A_3(x)=x^3-3x$. Centered integration sends $x$ to $(x^2-1)/2$, then to $(x^3-3x)/6$. More generally it sends $A_d/d!$ to $A_{d+1}/(d+1)!$. Since $\mathbb E A_d^2=d!$, the coefficients are $c_d=1/\sqrt{d!}$. Thus powers of an integration operator really do measure the same normalized polynomials as the earlier chapters.
 
-For a general measure there are three separate difficulties. Weighted
-divergence need not preserve the tensor fields that can be integrated;
-the Hodge estimate controls the projection needed to restore this property.
-A bound for one integration repeated naively pays its loss at every step;
-the operator estimate instead retains one common factor for every power.
-Finally, polynomial norms change with the measure; covariance-normalized
-localization transfers the curved integration estimate back to the original
-law. The induction closes only if all three estimates have compatible
-constants. These are the successive parts of this chapter.
+For a general measure there are three separate difficulties. Weighted divergence need not preserve the tensor fields that can be integrated; the Hodge estimate controls the projection needed to restore this property. A bound for one integration repeated naively pays its loss at every step; the operator estimate instead retains one common factor for every power. Finally, polynomial norms change with the measure; covariance-normalized localization transfers the curved integration estimate back to the original law. The induction closes only if all three estimates have compatible constants. These are the successive parts of this chapter.
 
 ## Appell normalization and regular approximation
 
-The coefficient convention agrees exactly with that of Song–Zhang. The
-supremum over covariance at most identity is useful because localization
-and subsequent linear changes of variables need not produce an isotropic
-law at every intermediate step.
+The coefficient convention agrees exactly with that of Song–Zhang. The supremum over covariance at most identity is useful because localization and subsequent linear changes of variables need not produce an isotropic law at every intermediate step.
 
 :::{prf:definition} Uniform Appell coefficient conventions
 :label: def:bk-uniform-appell-coefficients
@@ -64,10 +30,7 @@ $$c_d(\mu)=\frac1{d!}\sup_{\|T\|_{\mathrm{HS}}=1}\|P_d^\mu[T]\|_{L^2(\mu)},\qqua
 where the tensor norm sums squares over ordered indices. Let $c_d^*$ be the supremum of $c_d(\mu)$ over all dimensions and all centered log-concave laws with $\operatorname{Cov}(\mu)\preceq I$, allowing proper affine supports. Positive-degree Appell polynomials have mean zero, so these $c_d$ coincide with the coefficients in [](#thm:sz-polynomial-variance).
 :::
 
-The analytic construction starts with a smooth potential bounded above
-and below in Hessian. Approximation is needed both to enter this class and
-to return to nonsmooth log-concave laws. The following approximation result
-keeps covariance, curvature and fixed-degree polynomial norms together.
+The analytic construction starts with a smooth potential bounded above and below in Hessian. Approximation is needed both to enter this class and to return to nonsmooth log-concave laws. The following approximation result keeps covariance, curvature and fixed-degree polynomial norms together.
 
 :::{prf:lemma} Regular approximation preserving covariance and curvature
 :label: lem:bk-regular-approximation
@@ -79,12 +42,7 @@ Every isotropic log-concave law is also the weak and fixed-moment limit of regul
 
 ## Compatible tensors and the Hodge projection
 
-A vector field can be integrated to a scalar only if it is curl-free.
-At higher rank, the corresponding condition says that differentiating in
-any new slot produces a fully symmetric tensor. Subtracting a constant
-preserves this condition, so a centered primitive can be chosen at each
-stage. The derivative itself is left uncentered: its constant part carries
-the polynomial information that must not be discarded.
+A vector field can be integrated to a scalar only if it is curl-free. At higher rank, the corresponding condition says that differentiating in any new slot produces a fully symmetric tensor. Subtracting a constant preserves this condition, so a centered primitive can be chosen at each stage. The derivative itself is left uncentered: its constant part carries the polynomial information that must not be discarded.
 
 :::{prf:definition} Compatible symmetric tensor calculus
 :label: def:bk-compatible-calculus
@@ -93,34 +51,19 @@ For a centered law $\mu(dx)=Z^{-1}e^{-V(x)}dx$ on $\mathbb R^n$ with $V\in C^\in
 
 ### The smallest matrix example
 
-Take $F=D^2\psi$ on $\mathbb R^2$, with $\psi$ smooth and compactly
-supported, and let $Y_i=\sum_j(-\partial_j+\partial_jV)F_{ij}$ be its
-weighted divergence. At a point where $D^2V$ is diagonal with eigenvalues
-$\kappa_1,\kappa_2$, direct differentiation gives
+Take $F=D^2\psi$ on $\mathbb R^2$, with $\psi$ smooth and compactly supported, and let $Y_i=\sum_j(-\partial_j+\partial_jV)F_{ij}$ be its weighted divergence. At a point where $D^2V$ is diagonal with eigenvalues $\kappa_1,\kappa_2$, direct differentiation gives
 $$\partial_1Y_2-\partial_2Y_1=(\kappa_1-\kappa_2)F_{12}.$$
-Thus even a Hessian can acquire curl under weighted divergence. The Hodge
-projection estimate in the source bounds the squared norm of the discarded
-part by
+Thus even a Hessian can acquire curl under weighted divergence. The Hodge projection estimate in the source bounds the squared norm of the discarded part by
 $$\mathbb E\frac{(\kappa_1-\kappa_2)^2}{\kappa_1+\kappa_2}F_{12}^2.$$
-The mixed entry initially contributes
-$(\kappa_1+\kappa_2)F_{12}^2$ to the curvature energy. After subtracting
-this loss, its remaining contribution is
+The mixed entry initially contributes $(\kappa_1+\kappa_2)F_{12}^2$ to the curvature energy. After subtracting this loss, its remaining contribution is
 $$
 \left(\kappa_1+\kappa_2-
 \frac{(\kappa_1-\kappa_2)^2}{\kappa_1+\kappa_2}\right)F_{12}^2
 =\frac{2\kappa_1\kappa_2}{\kappa_1+\kappa_2}\,(2F_{12}^2).
 $$
-The factor $2F_{12}^2$ is exactly the ordered-index norm of the mixed
-symmetric component. Its remaining weight is the harmonic mean, at least
-$a$ when both curvatures are at least $a$. Equal curvatures produce no
-projection loss. The higher-rank estimate below retains this same lower
-bound without deterioration as more tensor slots are added.
+The factor $2F_{12}^2$ is exactly the ordered-index norm of the mixed symmetric component. Its remaining weight is the harmonic mean, at least $a$ when both curvatures are at least $a$. Equal curvatures produce no projection loss. The higher-rank estimate below retains this same lower bound without deterioration as more tensor slots are added.
 
-This Hodge comparison concerns the potential $V$ of the original measure
-and compatible derivative fields. The moment-Hessian comparison in
-[](#cor:cmh-hodge-comparison) concerns the canonical moment-map Hessian and
-a different energy. The shared word “Hodge” supplies no implication
-between their hypotheses.
+This Hodge comparison concerns the potential $V$ of the original measure and compatible derivative fields. The moment-Hessian comparison in [](#cor:cmh-hodge-comparison) concerns the canonical moment-map Hessian and a different energy. The shared word “Hodge” supplies no implication between their hypotheses.
 
 :::{prf:lemma} Compatible-tensor Hodge estimate and operator domains
 :label: lem:bk-compatible-hodge
@@ -129,21 +72,11 @@ $$\|D_r^*F\|_2^2\ge\|\nabla F\|_2^2+a\|F\|_2^2.$$
 The coefficient $a$ is independent of $r$ and $n$.
 :::
 
-The proof begins with weighted integration by parts, then
-subtracts the energy lost by projecting divergence onto compatible fields.
-The preceding harmonic-mean calculation illustrates the curvature left
-after subtraction. At general rank, symmetry must prevent a loss growing
-with the number of indices. Extending the estimate from compactly supported
-potentials to the adjoint domain is part of the assertion, not a formal
-consequence of the calculation on smooth fields. The inverse derivative
-then provides the integration operators used below.
+The proof begins with weighted integration by parts, then subtracts the energy lost by projecting divergence onto compatible fields. The preceding harmonic-mean calculation illustrates the curvature left after subtraction. At general rank, symmetry must prevent a loss growing with the number of indices. Extending the estimate from compactly supported potentials to the adjoint domain is part of the assertion, not a formal consequence of the calculation on smooth fields. The inverse derivative then provides the integration operators used below.
 
 ## From polynomial tests to every integration power
 
-The decomposition into constant and centered tensors separates the inverse
-derivative into $L$ and $J$. Constants produce linear functions through
-$L$; repeated application of $J$ produces normalized Appell polynomials.
-This is the abstract version of the Gaussian calculation above.
+The decomposition into constant and centered tensors separates the inverse derivative into $L$ and $J$. Constants produce linear functions through $L$; repeated application of $J$ produces normalized Appell polynomials. This is the abstract version of the Gaussian calculation above.
 
 :::{prf:proposition} Compatible integration and Appell coefficients
 :label: prop:bk-integration-calculus
@@ -160,15 +93,9 @@ $$J_r\cdots J_{r+k-1}L_{r+k}T=\frac1{(k+1)!}T\mathbin{\lrcorner}A_{k+1}^\mu,$$
 where the product is $L_r$ if $k=0$ and the contraction leaves $r$ free indices.
 :::
 
-The identity for $H_r^{-1}$ comes from this orthogonal decomposition.
-The Hodge lower bound, followed by inversion of positive operators, gives
-the inequality with $g_a$. The Appell identity follows by differentiating
-their generating series and selecting the mean-zero primitive at every
-step. The remaining issue is operator theoretic: estimates on the special
-inputs $J^{j-1}L$ must control $J^k$ on arbitrary compatible fields.
+The identity for $H_r^{-1}$ comes from this orthogonal decomposition. The Hodge lower bound, followed by inversion of positive operators, gives the inequality with $g_a$. The Appell identity follows by differentiating their generating series and selecting the mean-zero primitive at every step. The remaining issue is operator theoretic: estimates on the special inputs $J^{j-1}L$ must control $J^k$ on arbitrary compatible fields.
 
-The following operator lemma isolates that issue on any Hilbert space.
-Its crucial feature is that $Q_D(B)$ does not depend on the power $k$.
+The following operator lemma isolates that issue on any Hilbert space. Its crucial feature is that $Q_D(B)$ does not depend on the power $k$.
 
 :::{prf:lemma} Uniform bound for powers from finitely many observations
 :label: lem:bk-uniform-power-bound
@@ -180,13 +107,7 @@ $$\|R^k\|^2\le B^kQ_D(B),\qquad Q_D(B)=1+\sum_{j=1}^{D-2}\frac{j\gamma_{j+1}^2}{
 The sum is empty for $D=2$.
 :::
 
-The source uses the concavity and monotonicity of
-$g(u)=u/(1+au)$ to compare successive operator powers. The observed terms
-$R^{j-1}L$ control the boundary contributions, while the strict inequality
-$aB^{D+1}>\gamma_D^2$ absorbs the last one. Retaining the finite sum
-$Q_D(B)$ avoids multiplying a separate prefactor for every integration.
-At $D=2$ the sum is empty and the prefactor is exactly one; this is also
-what makes a degree-two estimate sufficient to start the argument.
+The source uses the concavity and monotonicity of $g(u)=u/(1+au)$ to compare successive operator powers. The observed terms $R^{j-1}L$ control the boundary contributions, while the strict inequality $aB^{D+1}>\gamma_D^2$ absorbs the last one. Retaining the finite sum $Q_D(B)$ avoids multiplying a separate prefactor for every integration. At $D=2$ the sum is empty and the prefactor is exactly one; this is also what makes a degree-two estimate sufficient to start the argument.
 
 :::{prf:corollary} Uniform integration powers
 :label: cor:bk-integration-powers
@@ -196,13 +117,7 @@ $$\|J^q\|^2\le2B^q,\qquad\|J_0\cdots J_{q-1}\|^2\le2B^q.$$
 In particular $C_P(\nu)\le1+2B$.
 :::
 
-Substituting the coefficient majorant in $Q_D$ gives a convergent sum
-bounded by two. This yields all powers with one factor two, rather than a
-factor $2^q$. The seed below uses only Letwin's quadratic variance estimate
-[](#thm:letwin-qcts): it gives $c_2\le\sqrt2$, hence
-$\|JL\|\le\sqrt2$. The $D=2$ operator estimate then gives the stated
-bound by taking $B$ down to $(2/a)^{1/3}$. No higher-degree coefficient
-estimate is needed to start.
+Substituting the coefficient majorant in $Q_D$ gives a convergent sum bounded by two. This yields all powers with one factor two, rather than a factor $2^q$. The seed below uses only Letwin's quadratic variance estimate [](#thm:letwin-qcts): it gives $c_2\le\sqrt2$, hence $\|JL\|\le\sqrt2$. The $D=2$ operator estimate then gives the stated bound by taking $B$ down to $(2/a)^{1/3}$. No higher-degree coefficient estimate is needed to start.
 
 :::{prf:corollary} Quadratic integration seed
 :label: cor:bk-quadratic-seed
@@ -212,12 +127,7 @@ $$\|J\|^2\le(2/a)^{1/3}.$$
 
 ## Returning from curved laws to polynomial norms
 
-Localization introduces curvature, but the polynomial and its law both
-move. BK use noise normalized by the inverse covariance. Letwin's
-quadratic estimate controls the third moments in the covariance equation;
-tensor covariance bounds keep that control when several derivatives are
-contracted together. These estimates hold on the full ordered
-tensor spaces, so their use does not hide a dimension-dependent trace.
+Localization introduces curvature, but the polynomial and its law both move. BK use noise normalized by the inverse covariance. Letwin's quadratic estimate controls the third moments in the covariance equation; tensor covariance bounds keep that control when several derivatives are contracted together. These estimates hold on the full ordered tensor spaces, so their use does not hide a dimension-dependent trace.
 
 :::{prf:lemma} Global covariance-normalized localization
 :label: lem:bk-localization-covariance
@@ -253,17 +163,9 @@ $$
 
 :::
 
-The covariance proof first stops the process where the covariance
-and its inverse are bounded, derives the tensor inequalities there, and
-then removes the stopping. The mixed-time bound is needed because the
-accumulated curvature integrates inverse covariances over earlier times.
-The estimate with $\Lambda_t^{-1}$ is what allows that curvature to enter
-the later change of coordinates. Global existence and true martingales
-are included explicitly to justify the expectation identities.
+The covariance proof first stops the process where the covariance and its inverse are bounded, derives the tensor inequalities there, and then removes the stopping. The mixed-time bound is needed because the accumulated curvature integrates inverse covariances over earlier times. The estimate with $\Lambda_t^{-1}$ is what allows that curvature to enter the later change of coordinates. Global existence and true martingales are included explicitly to justify the expectation identities.
 
-The next assertion follows the polynomial adapted to the current law.
-Its lower-degree errors involve a convolution of previously bounded Appell
-coefficients. This is the induction's error term.
+The next assertion follows the polynomial adapted to the current law. Its lower-degree errors involve a convolution of previously bounded Appell coefficients. This is the induction's error term.
 
 :::{prf:lemma} Moving Appell variance
 :label: lem:bk-moving-appell-variance
@@ -279,12 +181,7 @@ $$
 
 :::
 
-Differentiating the normalized Appell generating function along the
-localization produces the evolution of its variance. Taking a square root
-allows the error terms to be bounded by products of lower-degree norms.
-Integrating the resulting differential inequality compares the original
-polynomial norm with its later norm. The latter is estimated by integrating
-$q$ times from degree $d-q$ under the now curved law.
+Differentiating the normalized Appell generating function along the localization produces the evolution of its variance. Taking a square root allows the error terms to be bounded by products of lower-degree norms. Integrating the resulting differential inequality compares the original polynomial norm with its later norm. The latter is estimated by integrating $q$ times from degree $d-q$ under the now curved law.
 
 :::{prf:proposition} Reverse coefficient transfer
 :label: prop:bk-reverse-transfer
@@ -299,25 +196,11 @@ c_d^*\le e^{3\eta}\left[(1+\eta)^{q/2}M_qC_{d-q}+\frac{\eta}{d^2}\Sigma_d\right]
 $$
 :::
 
-The transfer uses time $t=\eta/d^2$. Its curvature parameter
-$\delta=\eta^2/d^2$ and the covariance tensor bound together account for
-the factor $(1+\eta)^{q/2}$. The principal term contains an actual chain
-of $q$ integration operators; replacing its norm by a product of separate
-one-step estimates would lose the common-factor advantage. The second
-term uses only degrees below $d$, so the estimate can close an induction.
+The transfer uses time $t=\eta/d^2$. Its curvature parameter $\delta=\eta^2/d^2$ and the covariance tensor bound together account for the factor $(1+\eta)^{q/2}$. The principal term contains an actual chain of $q$ integration operators; replacing its norm by a product of separate one-step estimates would lose the common-factor advantage. The second term uses only degrees below $d$, so the estimate can close an induction.
 
 ## Closing the induction and extracting the constant
 
-The source chooses the summable majorant
-$\beta_d=R_*^d/(d+1)^4$. Its convolution has enough decay to absorb the
-moving-polynomial error. A finite initial range is supplied by the
-quadratic seed; for larger degrees the integration length is
-$q=\lfloor d/2\rfloor$, of order $d$, and the observation degree is
-$D=\lfloor\sqrt d\rfloor$, of order $\sqrt d$. Both are below $d$. The strict
-margin in the operator bound leaves room for the transfer factors. The
-explicit choices in Appendix E of the source lead to the following value.
-The numerical induction has been checked separately from the
-qualitative exponential criterion.
+The source chooses the summable majorant $\beta_d=R_*^d/(d+1)^4$. Its convolution has enough decay to absorb the moving-polynomial error. A finite initial range is supplied by the quadratic seed; for larger degrees the integration length is $q=\lfloor d/2\rfloor$, of order $d$, and the observation degree is $D=\lfloor\sqrt d\rfloor$, of order $\sqrt d$. Both are below $d$. The strict margin in the operator bound leaves room for the transfer factors. The explicit choices in Appendix E of the source lead to the following value. The numerical induction has been checked separately from the qualitative exponential criterion.
 
 :::{prf:theorem} Uniform Appell coefficient growth
 :label: thm:bk-appell-bound
@@ -326,13 +209,7 @@ $$c_d^*\le\frac{R_*^d}{(d+1)^4}\qquad\text{for every integer }d\ge1.$$
 Thus the same bound holds in every dimension for every centered log-concave law of covariance at most the identity, including laws supported on a proper affine subspace.
 :::
 
-To extract a spectral gap, fix one regular law and its positive lower
-curvature $a$. Let the observation degree $D$ tend to infinity in
-[](#cor:bk-integration-powers), with $\rho=R_*$. Then
-$a^{-1/(D+1)}\to1$, and the one-step estimate gives
-$C_P\le1+2R_*^2$. Only after this degree limit is taken does approximation
-pass the common scalar inequality to arbitrary log-concave laws.
-This order avoids requiring a common positive curvature for all laws.
+To extract a spectral gap, fix one regular law and its positive lower curvature $a$. Let the observation degree $D$ tend to infinity in [](#cor:bk-integration-powers), with $\rho=R_*$. Then $a^{-1/(D+1)}\to1$, and the one-step estimate gives $C_P\le1+2R_*^2$. Only after this degree limit is taken does approximation pass the common scalar inequality to arbitrary log-concave laws. This order avoids requiring a common positive curvature for all laws.
 
 :::{prf:theorem} Explicit Poincaré bound from compatible integration
 :label: thm:bk-explicit-poincare
@@ -341,12 +218,7 @@ $$\operatorname{Var}_\mu f\le K_P\int|\nabla f|^2\,d\mu$$
 for every real locally Lipschitz function on its affine support with finite Dirichlet energy. Such functions belong to $L^2(\mu)$. Gradients are intrinsic to the affine support; a point mass has Poincaré constant zero.
 :::
 
-The extension to a proper affine support is made within that support.
-For nonsmooth laws, the approximation statement must transfer the
-inequality to finite-energy locally Lipschitz functions as well as smooth
-tests; square integrability is part of the conclusion. The
-Cheeger consequence then uses the normalization already fixed in the
-introduction, with the factor $\pi$ coming from its reverse comparison.
+The extension to a proper affine support is made within that support. For nonsmooth laws, the approximation statement must transfer the inequality to finite-energy locally Lipschitz functions as well as smooth tests; square integrability is part of the conclusion. The Cheeger consequence then uses the normalization already fixed in the introduction, with the factor $\pi$ coming from its reverse comparison.
 
 :::{prf:corollary} Cheeger bound from the explicit Poincaré estimate
 :label: cor:bk-cheeger
@@ -355,12 +227,4 @@ $$h(\mu)^{-1}\le\sqrt{\pi(1+2\cdot10^{16})}.$$
 Here $h$ has the normalization of [](#eq:hstar-def) and the comparison of [](#eq:cheeger-two-sided).
 :::
 
-The BK proof therefore shares the Appell quantities and Letwin's
-quadratic input with the polynomial literature, while its new
-mechanism is the combination of a rank-independent Hodge estimate, a
-common bound for every integration power, and reverse transfer. It uses
-neither the BKL cumulant-and-suspension conclusion nor the SZ v2
-summable-refinement conclusion as an input. This construction
-gives another proof of KLS; it does not establish the moment-Hessian,
-fixed-eigenfunction occupation or conditional-frame hypotheses. Their
-separate questions remain those of Chapter [](#sec:frontier-atlas).
+The BK proof therefore shares the Appell quantities and Letwin's quadratic input with the polynomial literature, while its new mechanism is the combination of a rank-independent Hodge estimate, a common bound for every integration power, and reverse transfer. It uses neither the BKL cumulant-and-suspension conclusion nor the SZ v2 summable-refinement conclusion as an input. This construction gives another proof of KLS; it does not establish the moment-Hessian, fixed-eigenfunction occupation or conditional-frame hypotheses. Their separate questions remain those of Chapter [](#sec:frontier-atlas).

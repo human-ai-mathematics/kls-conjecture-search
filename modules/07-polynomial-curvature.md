@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:polynomial-curvature)=
-# Polynomial estimates and curvature
+# Song–Zhang, first version: polynomial estimates and curvature
 
 **What to retain.** Bounds on the Appell polynomials of a measure — in each degree, the polynomials adapted to its moments — control its spectral gap, through a first eigenfunction followed by repeated centred gradients; stochastic localization turns a spectral gap back into better polynomial bounds. Composing the two conversions gives $\CP\lesssim16^{\log^*(n+2)}$, and its end point, one exponential base for the coefficients of every degree, is equivalent to KLS ([](#prop:sz-exponential-coefficients-equivalence)). The BKL and Song–Zhang v2 proofs start from this spectral criterion; the BK proof shares its Appell normalization but reaches the spectral gap through its own integration calculus (Chapter [](#sec:bk-proof)).
 

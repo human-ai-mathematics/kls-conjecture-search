@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:jacobi)=
-# Reilly, Jacobi, and splitting formulas
+# The fixed cut: Reilly, Jacobi and splitting formulas
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

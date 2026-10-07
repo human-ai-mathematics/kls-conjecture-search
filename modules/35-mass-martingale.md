@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:mass-martingale)=
-# The mass martingale, Itô calculations, and the stopped centroid reduction
+# The fixed cut: the mass martingale
 
 *Appendix to the fixed cut, Section [](#sec:introduction).*
 

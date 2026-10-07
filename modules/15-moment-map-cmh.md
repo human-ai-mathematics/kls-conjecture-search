@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:moment-map-cmh)=
-# The moment map: a deterministic inequality for the moment-map Hessian
+# The moment map: the deterministic inequality
 
 ## Overview of the mechanism
 

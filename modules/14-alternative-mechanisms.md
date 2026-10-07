@@ -6,7 +6,7 @@ numbering:
 (sec:frontier-atlas)=
 # Alternative mechanisms after KLS
 
-The three proofs of KLS (Chapter [](#sec:kls-synthesis)) give a universal constant through estimates on polynomials of every degree; BK also evaluates one such constant explicitly. This chapter maps three further mechanisms for the Poincaré bound, each developed in its own chapter, by what each would *add* to those proofs: a constant, an object, or a kind of argument that they do not provide. Each would prove KLS again, but none is a way to KLS any more; each is a statement of its own, and no implication known here derives it from KLS. A fourth method, the fixed cut, is kept as an archive for what its obstructions teach.
+The three proofs of KLS (Chapter [](#sec:kls-synthesis)) give a universal constant through estimates on polynomials of every degree; BK also evaluates one such constant explicitly. This chapter maps three further mechanisms for the Poincaré bound, each developed in its own chapter. Each rests on a sufficient condition of its own — the moment-Hessian inequality, an occupation estimate for one eigenfunction, a gap for resampling along lines — which implies KLS, while no implication from KLS to any of these conditions is known to us. Each condition, once proved, would give a further proof of KLS together with something the three proofs do not provide: a constant, an object followed, or a kind of argument. The mechanisms are compared below by what each would *add*. A fourth method, the fixed cut, is kept as an archive for what its obstructions teach.
 
 Everything here is a pointer. The obstacles are explained once, in the overview (Section [](#sec:kls-remaining)); the full development of each mechanism is in its entry chapter; and each statement displays its status where it is stated.
 
@@ -106,17 +106,17 @@ Negative results are the most reusable part of a search, and four of them constr
 Two further cautions are advisory rather than established: the two-tail obstruction ([](#rem:two-tail-slice-bounds)) and the circularity warning of Section [](#sec:excess). They are recorded as remarks for exactly that reason: they guide work, but no statement here is excluded on their strength.
 
 (subsec:atlas-assessment)=
-## What the three proofs do not give
+## What the three proofs contribute to each mechanism
 
-A proof of KLS proves none of the sufficient conditions above, by any implication established here; conversely, each of them, once proved, would give a further proof of KLS with the property listed in the first table. For each mechanism, the table records what the three proofs contribute and what is still needed.
+For each mechanism, the table records what the three proofs contribute towards its sufficient condition, and what remains to be proved.
 
-| Mechanism | What the three proofs contribute | What still needs its own argument |
+| Mechanism | What the three proofs contribute | What remains to be proved |
 |---|---|---|
-| Moment map | KLS with a universal constant, explicitly evaluated by BK; no corresponding bound on the moment-map Hessian. The linear test [](#conj:gate-zero) is not a known consequence of KLS | The value $4$: universal $\mathrm{CMH}(4)$, its sharp linear test [](#conj:gate-zero-sharp), and the commutator [](#conj:mm-square-root-commutator) |
+| Moment map | KLS with a universal constant, explicitly evaluated by BK; no corresponding bound on the moment-map Hessian | The value $4$: universal $\mathrm{CMH}(4)$, its sharp linear test [](#conj:gate-zero-sharp), and the commutator [](#conj:mm-square-root-commutator) |
 | Fixed eigenfunction | A first eigenfunction followed through deterministic spectral comparisons, with polynomial control of centering losses instead of a source estimate along localization | [](#conj:mm-spectral-occupation): the polynomial comparisons do not estimate the stochastic source |
 | Conditional fibers | An all-function comparison through polynomial tensors | [](#conj:conditional-fiber-frame): the polynomial comparison constructs no frame, and the root-frame obstruction still applies |
 
-For the archived fixed cut, KLS likewise supplies neither [](#conj:trace-upgrade) nor a spectator-inert replacement for the weighted package; [](#prop:weighted-spectator-obstruction) still applies.
+For the archived fixed cut, what remains is [](#conj:trace-upgrade), or a replacement for the weighted package that independent coordinates leave unchanged; [](#prop:weighted-spectator-obstruction) still applies.
 
 (subsec:synthesis-caution)=
 ## Scope of the quadratic input
@@ -125,11 +125,11 @@ Several mechanisms start from Letwin's quadratic estimate [](#thm:letwin-qcts) a
 
 The covariance consequence [](#cor:letwin-window) concerns fixed-time moments only up to time $c/\log n$. Neither it nor the fixed-matrix estimate supplies a universal-time occupation bound, control of orientation, or an adaptive matrix estimate. Letwin's general bound [](#thm:letwin-kls), whose minimum-time argument is explained in Chapter [](#sec:family-moment-map), is dimension-dependent: it does not extend the covariance window to universal time and does not supply the linear test of the moment-Hessian inequality. The implications [](#thm:carleson-implies-centroid), [](#thm:centroid-implies-kls) and [](#thm:intro-all-cut) keep their Carleson or centroid premises.
 
-Song and Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature). Neither their bounds nor the inverse-operator constructions behind them supply the moment-Hessian inequality, its sharp linear test, or the universal-time occupation estimate [](#conj:mm-spectral-occupation).
+Song and Zhang use the quadratic input in a different conversion, the polynomial–curvature loop of Chapter [](#sec:polynomial-curvature); what it contributes to each mechanism is in the table of Section [](#subsec:atlas-assessment).
 
 % Agent note: source versions describe provenance; badges and proof links carry verification status. Preserve explicit antecedents and dimension-dependent windows when updating this section. Theorem 1.1 has its own proof link; its time-restricted bridge is separate from the matrix, quadratic, and covariance imports.
 
 (subsec:atlas-external-reading)=
 ## Suggested external reading order
 
-For a reader coming to the subject rather than to this manuscript: [@KannanLovaszSimonovits1995] for the conjecture and deterministic localization; [@Eldan2013ThinShell] for stochastic localization and the third-moment parameter; [@LeeVempala2018; @LeeVempala2024] for the cleanest entry to the covariance SDE and the set-transfer argument; [@KLnotes] for the best conceptual exposition of localization, filtering, Bochner, and the operator-norm obstruction; [@KlartagLehec2022Polylog] for heat flow, spectral measures, and $H^{-1}$; [@Klartag2023Logarithmic] for improved Lichnerowicz and the published bound; [@Letwin2026QuadraticKLS] for the quadratic input and its localization consequences; [@SongZhang2026IteratedLogKLS] for Song and Zhang's polynomial–curvature iteration, developed in Chapter [](#sec:polynomial-curvature); [@SongZhang2026ConstantKLS] for its second version, by repeated refinement, in Chapter [](#sec:sz-v2-proof); [@BizeulKlartagLehec2026KLS] for cumulants and suspension in Chapter [](#sec:bkl-proof); and [@KlartagLehec2025ThinShell; @ChenKlartag2026SharpThinShell] for the strongest related tools and the clearest illustration of the quadratic-to-all-functions gap.
+For a reader coming to the subject rather than to this manuscript: [@KannanLovaszSimonovits1995] for the conjecture and deterministic localization; [@Eldan2013ThinShell] for stochastic localization and the third-moment parameter; [@LeeVempala2018; @LeeVempala2024] for the cleanest entry to the covariance SDE and the set-transfer argument; [@KLnotes] for the best conceptual exposition of localization, filtering, Bochner, and the operator-norm obstruction; [@KlartagLehec2022Polylog] for heat flow, spectral measures, and $H^{-1}$; [@Klartag2023Logarithmic] for improved Lichnerowicz and the published bound; [@Letwin2026QuadraticKLS] for the quadratic input and its localization consequences; [@SongZhang2026IteratedLogKLS] for Song and Zhang's polynomial–curvature iteration, developed in Chapter [](#sec:polynomial-curvature); [@SongZhang2026ConstantKLS] for its second version, by repeated refinement, in Chapter [](#sec:sz-v2-proof); [@BizeulKlartagLehec2026KLS] for cumulants and suspension in Chapter [](#sec:bkl-proof); [@BalasubramanianKasiviswanathan2026KLS] for compatible integration in Chapter [](#sec:bk-proof); and [@KlartagLehec2025ThinShell; @ChenKlartag2026SharpThinShell] for the strongest related tools and the clearest illustration of the quadratic-to-all-functions gap.

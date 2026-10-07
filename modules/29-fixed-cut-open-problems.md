@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:open)=
-# The fixed cut: the remaining problems
+# The fixed cut: remaining problems
 
 What remains of the fixed-cut argument is a small set of precise problems, together with the obstructions that shaped them. They belong to the archive: none is needed for KLS, now proved, and they are stated for the difficulty each isolates. The operator-to-trace upgrade below has a counterpart among the alternative mechanisms — the linear test of the moment map asks for an operator bound where only a trace bound is known (Section [](#subsec:gate-zero)) — and the counterexamples of this chapter, [](#prop:weighted-spectator-obstruction) first, constrain any argument that follows a set through localization. We state the problems in decreasing order of strength.
 

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:mm-construction)=
-# The moment map, construction layer: Haar compression and the square-root commutator
+# The moment map: construction
 
 This section is the construction layer of the moment-map approach. Sections [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) fixed the target $\mathrm{CMH}(4)$, showed that it implies the affine Poincaré inequality, computed it in the tractable cases and isolated the two falsification tests; what remains is to prove it, and that is what this section attempts. Its aim is to extend [](#thm:letwin-moment-map) from constant matrices to multiplier fields selected by an arbitrary test function. Its conclusion is not established here: the identities displayed in this section outside labelled statements are formal calculations, not proofs, and the labelled problems below say what closing each gap would deliver. The steps are those of [](#rem:cmh-program): Haar compression, Schur–Piola transport, and the square-root commutator that the program must control.
 

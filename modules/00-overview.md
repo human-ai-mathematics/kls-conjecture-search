@@ -8,28 +8,11 @@ numbering:
 
 +++ {"part": "abstract"}
 
-The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions
-detect, up to a universal constant, the slowest mode of every log-concave
-measure. It is now a theorem, [](#conj:kls). This manuscript reconstructs,
-checks and compares three source proofs: Bizeul–Klartag–Lehec (BKL), through
-all-order cumulants and suspension; Song–Zhang, second version, through
-refinement with summable losses; and Balasubramanian–Kasiviswanathan (BK),
-through compatible integration and a direct Appell coefficient induction.
-The last gives the explicit bound $C_P\le1+2\cdot10^{16}$
-([](#thm:bk-explicit-poincare)). Their shared polynomial quantities connect
-them to earlier work, while their closing estimates are different.
-
-Besides these proofs, the manuscript develops three alternative mechanisms:
-the canonical moment-Hessian inequality, occupation of a fixed eigenfunction,
-and resampling along conditional lines. Their sufficient conditions are not
-known here to follow from KLS, and none is established by the three proofs.
-Localization of a fixed cut is retained as an archive. Every statement
-shows its status and its reviewer-agent check, distinct from journal peer
-review; see the [welcome page](#sec:overview-checking).
+The Kannan–Lovász–Simonovits (KLS) conjecture asked whether linear functions detect, up to a universal constant, the slowest mode of every log-concave measure; it is now a theorem, [](#conj:kls), and this manuscript reconstructs and compares its three proofs. Bizeul–Klartag–Lehec (BKL) bound cumulants of every order uniformly in the dimension and reach an arbitrary test function by suspension. The second version of Song–Zhang (SZ v2) refines a single coefficient radius repeatedly, with losses whose product stays bounded. Balasubramanian–Kasiviswanathan (BK) control every power of an integration operator on compatible tensor fields and close a direct induction in the polynomial degree, with the explicit bound $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The manuscript also develops three alternative mechanisms for the Poincaré bound — a deterministic moment-Hessian inequality, the occupation of a fixed eigenfunction, and resampling along conditional lines — each aiming at something the proofs do not give, and keeps the localization of a fixed cut as an archive. Every statement shows its status and who checked its proof, by a separate reviewer agent, distinct from journal peer review ([welcome page](#sec:overview-checking)).
 
 +++
 
-This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), explains how KLS was proved — the two dimension-dependent conversions that came first, then the idea of each of the three proofs (Section [](#sec:kls-conversions)) — sets out the obstacles that alternative mechanisms meet (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the rest of the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
+This overview is meant to be read on its own. It states the question and works its smallest cases by hand (Sections [](#sec:kls-orientation) and [](#sec:kls-examples)), summarizes the literature (Section [](#sec:kls-known)), explains how KLS was proved — the two dimension-dependent conversions that came first, then the idea of each of the three proofs (Section [](#sec:kls-conversions)) — sets out the obstacles that alternative mechanisms meet (Section [](#sec:kls-remaining)), gives the main results with the idea of each proof (Section [](#sec:overview-results)), and ends with three problems for someone who might take them up (Section [](#sec:overview-open)). How the manuscript is organised, and how its results are checked, is on the [welcome page](#sec:reading-paths).
 
 (sec:kls-orientation)=
 ## The question
@@ -301,29 +284,15 @@ Song and Zhang keep the localization and the quadratic estimate, and replace imp
 **The end.** For a fixed regular measure of curvature $a$, finitely many refinements bring the height profile at $\max\{1,a^{-1}\}$ down to its floor, the profile gives a radius bound independent of the measure, and $\CP\le2^{85}\mathcal A$ converts it once; approximation then gives [](#thm:sz-v2-kls). The reconstruction uses neither the BKL estimates nor their consequences.
 
 (subsec:kls-bk-idea)=
-### Compatible integration: the BK proof
+### Balasubramanian–Kasiviswanathan: compatible integration
 
-BK begins with the same Appell normalization and Letwin's quadratic
-inequality, then controls inverse differentiation on compatible symmetric
-tensor fields (Chapter [](#sec:bk-proof)) [@BalasubramanianKasiviswanathan2026KLS].
-Weighted divergence can destroy compatibility; a Hodge projection retains
-a curvature bound independent of tensor rank ([](#lem:bk-compatible-hodge)).
-An operator estimate converts finitely many polynomial observations into
-bounds for every integration power with one common prefactor
-([](#lem:bk-uniform-power-bound)). Covariance-normalized localization then
-transfers these integration bounds to the next polynomial coefficient
-([](#prop:bk-reverse-transfer)).
+**The calibration on the line.** For the standard Gaussian the Appell polynomials are the Hermite polynomials $x$, $x^2-1$, $x^3-3x$, …, and centered integration — taking the primitive of mean zero — sends $A_d/d!$ to $A_{d+1}/(d+1)!$. The coefficients $c_d=1/\sqrt{d!}$ are therefore the sizes of the successive powers of one integration operator. BK make these powers the object of the proof.
 
-This closes a direct induction giving $c_d\le10^{8d}/(d+1)^4$
-([](#thm:bk-appell-bound)). For a fixed curved law, letting the number of
-available observations tend to infinity gives
-$C_P\le1+2\cdot10^{16}$; regular approximation extends this to every
-log-concave law ([](#thm:bk-explicit-poincare)). No BKL or SZ v2 conclusion
-initializes the induction. The spectral conversion comes from the
-integration calculus itself, not from reusing either proof's final bound.
+**Three estimates.** BK begin with the same Appell normalization and Letwin's quadratic inequality, then control inverse differentiation on compatible symmetric tensor fields — those that can be integrated again (Chapter [](#sec:bk-proof)) [@BalasubramanianKasiviswanathan2026KLS]. Weighted divergence can destroy compatibility; a Hodge projection retains a curvature bound independent of tensor rank ([](#lem:bk-compatible-hodge)). An operator estimate converts finitely many polynomial observations into bounds for every integration power with one common prefactor ([](#lem:bk-uniform-power-bound)). Covariance-normalized localization then transfers these integration bounds to the next polynomial coefficient ([](#prop:bk-reverse-transfer)).
 
-The three proofs are compared step by step, with their shared inputs and
-reusable estimates, in Chapter [](#sec:kls-synthesis).
+**The end.** These estimates close a direct induction giving $c_d\le10^{8d}/(d+1)^4$ ([](#thm:bk-appell-bound)). For a fixed curved law, letting the number of available observations tend to infinity gives $C_P\le1+2\cdot10^{16}$; regular approximation extends this to every log-concave law ([](#thm:bk-explicit-poincare)). No BKL or SZ v2 conclusion initializes the induction. The spectral conversion comes from the integration calculus itself, not from reusing either proof's final bound.
+
+The three proofs are compared step by step, with their shared inputs and reusable estimates, in Chapter [](#sec:kls-synthesis).
 
 (sec:kls-remaining)=
 ## Obstacles for alternative arguments
@@ -337,8 +306,8 @@ Needles control one-dimensional conditional laws; stochastic localization contro
 
 Two directions remain meaningful for a different proof:
 
-- **Improve the polynomial comparison by another mechanism.** The exponential Appell criterion [](#prop:sz-exponential-coefficients-equivalence) identifies the end point. BKL prove it through [](#thm:bkl-tilt-bound); an independent derivation must supply different estimates, including control of centering losses.
-- **Establish an adapted structural estimate.** The moment map uses a Hessian field; the fixed eigenfunction follows the function selected by a small spectral gap; conditional fibers select directions from the measure; the fixed cut, kept as an archive, retains a potential bottleneck. Their sufficient conditions are not known to follow from KLS.
+- **Improve the polynomial comparison by another mechanism.** The exponential Appell criterion [](#prop:sz-exponential-coefficients-equivalence) identifies the end point. BKL reach it through [](#thm:bkl-tilt-bound), and BK through the coefficient bound [](#thm:bk-appell-bound); a further derivation must supply different estimates, including control of centering losses.
+- **Establish an adapted structural estimate.** The moment map uses a Hessian field; the fixed eigenfunction follows the function selected by a small spectral gap; conditional fibers select directions from the measure; the fixed cut, kept as an archive, retains a potential bottleneck. What each would add to the three proofs is set out in Chapter [](#sec:frontier-atlas).
 
 (subsec:kls-reading-map)=
 ### The six families side by side
@@ -450,7 +419,7 @@ The fixed cut, the oldest localization argument developed here and now kept as a
 (sec:overview-open)=
 ## Problems for someone who might take them up
 
-Three problems are presented here for a reader who wants to start. Each is stated precisely in its chapter, and none of the three has an answer in the literature that we are aware of. None is decided by the proofs of KLS, and each asks for something they do not give: a sharp constant, an elementary one-dimensional mechanism, or a localization mechanism that ignores covariance spikes.
+Three problems are presented here for a reader who wants to start. Each is stated precisely in its chapter, and none of the three has an answer in the literature that we are aware of. Each asks for something the proofs of KLS do not give: a sharp constant, an elementary one-dimensional mechanism, or a localization mechanism that ignores covariance spikes.
 
 **The sharp linear test of the moment-Hessian inequality, [](#conj:gate-zero-sharp).** The linear test is the moment-Hessian inequality tested on linear functions only: the cheapest test it must pass, and so the first one that any proof of it, or any counterexample, goes through. The sharp form asks whether $\E H^2\preceq2\,\Id$ for the Stein kernel of the moment map of every isotropic log-concave measure. *Why it matters:* it asks for a sharp constant, $2$, attained by products of exponentials, which none of the three proofs gives. It is the operator form of the Chen–Klartag trace inequality $\Tr\E H^2\le2n$ ([](#thm:chen-klartag-moment-hessian)); by [](#cor:gate-zero-third-moment) it contains the sharp directional third-moment bound $\kappa_n\le2$, where the preprint literature reaches $2\sqrt2$ ([](#prop:letwin-kappa)); and it refines [](#conj:gate-zero), the linear shadow of the moment-Hessian inequality. A counterexample to it would leave KLS untouched. *What there is:* products of centred exponentials attain it in every direction, and every exponential cone with $\beta=n$ attains it in its axis direction, whatever the base ([](#prop:cone-linear-sector)); every product-simplex cone satisfies it, with transverse equality exactly when the base is a single simplex and $\beta=n$ ([](#prop:product-simplex-cone-gate)). An interval counts as a one-dimensional simplex. Any argument must be tight on these, and by [](#prop:letwin-not-gate-zero) no argument through fixed-matrix energies alone can succeed. *Where to start:* Section [](#subsec:gate-zero), and the spectral resolution of the linear sector in [](#lem:cmh-linear-spectral-resolution).
 
