@@ -24,8 +24,12 @@ Statements are named by label; paths are relative to the repository root.
   prose; the localization prelude opens the fixed-eigenfunction part.
 - US spelling and the `\CP` macro throughout the prose. The stale remark on the BK source
   now records its arXiv deposit.
-- No statement changed (`check.py --statements` identical). Statement texts that keep the
-  old vocabulary are listed for the statement-renaming pass.
+- Statement vocabulary renamed in a second pass: `\CP`, US spelling, "Chapter" for
+  references to whole chapters, and "linear test" for "gate" in three titles and five
+  bodies. A fresh reviewer found no mathematical change; one grouped editorial note,
+  `research/reviews/2026-10-07-editorial-statement-pass.md`, carries the 43 affected
+  certifications over. The "… implies KLS" titles of the archive are kept.
+- The site names its maintainer, Nicolas Brosse, and the Numina Collaboration as authors.
 
 ## 2026-10-07: BK on arXiv; the unconditional case cited
 

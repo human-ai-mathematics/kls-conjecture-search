@@ -19,7 +19,7 @@ This chapter compares the three proofs of [](#conj:kls): Bizeul–Klartag–Lehe
 | **Use of dimension uniformity** | The suspension lives in dimension $nN+1$, with $N\to\infty$ | A coefficient cap must hold for every localized law in the next refinement | Tensor rank and dimension must not weaken the Hodge estimate or the coefficient recurrence |
 | **Localization** | Inverse-covariance noise and cumulants in a moving covariance metric | Gaussian localization transfers curvature profiles to coefficient caps | Inverse-covariance noise, covariance tensor bounds from Letwin, and moving Appell variance |
 | **Spectral conversion** | The exponential tilt-average criterion [](#thm:bkl-tilt-criterion) | The single conversion $\CP\le2^{85}\mathcal A$ ([](#prop:sz-v2-common-radius)) | $\CP\le1+\|J\|^2$ and a limit in the number of polynomial observations ([](#thm:bk-explicit-poincare)) |
-| **Constant obtained** | $\CP\le2CK$; universal $C,K$ are not evaluated here | $\CP\le2^{85}\mathcal A$; the universal bound on $\mathcal A$ is not evaluated here | $\CP\le1+2\cdot10^{16}$, fully numerical |
+| **Constant obtained** | $\CP\le2CK$, with $K$ from [](#thm:bkl-cumulant-bound) and $C$ from [](#thm:bkl-tilt-criterion); neither is evaluated here | $\CP\le2^{85}\mathcal A$; the universal bound on $\mathcal A$ from [](#prop:sz-v2-summable-budgets) is not evaluated here | $\CP\le1+2\cdot10^{16}$, fully numerical |
 | **Reusable tools** | Cumulant dynamics, all-order cumulant estimates, suspension | Common-radius conversion, finite inverse-gradient chains, summable refinements | Compatible-tensor Hodge estimate, operator-power bound, reverse coefficient transfer |
 
 (subsec:proofs-compared-shared)=

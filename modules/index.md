@@ -10,10 +10,10 @@ numbering: false
 
 The Kannan–Lovász–Simonovits (KLS) conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant bounded independently of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. It is now a theorem: three preprints of October 2026 prove it, by Bizeul–Klartag–Lehec (BKL) [@BizeulKlartagLehec2026KLS], by Song–Zhang in the second version of their preprint (SZ v2) [@SongZhang2026ConstantKLS], and by Balasubramanian–Kasiviswanathan (BK) [@BalasubramanianKasiviswanathan2026KLS].
 
-This site adds three things the preprints do not: a reconstruction of each of the three arguments, a comparison of them, and an account of the methods around them, including three alternative mechanisms for the Poincaré bound with exact computations, conditional reductions and counterexamples of their own. *Reconstructed* means that each argument is rewritten so that every step is a complete statement with a complete proof, and that each of these proofs has been checked against its statement by a separate reviewer agent; no person has yet reviewed or accepted them.
+This site adds three things the preprints do not: a reconstruction of each of the three arguments, a comparison of them, and an account of the methods around them, including three alternative mechanisms for the Poincaré bound with exact computations, conditional reductions and counterexamples of their own. *Reconstructed* means that each argument is rewritten so that every step is a complete statement with a complete proof, or a citation of an established published result, and that each of these proofs has been checked against its statement by a separate reviewer agent; no person has yet reviewed or accepted them.
 
 :::{note} How the proofs here are checked
-The proofs written for this project are checked by separate reviewer agents, each run without access to the work that produced the proof. This is distinct from journal peer review and from a person's review or acceptance. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
+The proofs written for this project are checked by separate reviewer agents, each run in a fresh context, without the conversation that produced the proof. Each statement shows who checked it; details are in [how results are checked](#sec:overview-checking).
 :::
 
 (sec:ai-use)=
@@ -47,7 +47,7 @@ Four ways in, depending on what you came for:
 **Results proved in this manuscript.**
 
 - The moment-Hessian inequality [](#def:cmh) bounds the affine Poincaré constant with no loss ([](#thm:cmh-implies-affine-poincare)).
-- Its exact value on the line ([](#thm:cmh-1d)), on products ([](#thm:cmh-product)) and on every log-concave Dirichlet law ([](#thm:cmh-dirichlet), [](#cor:cmh-dirichlet-poincare)).
+- Its exact value on the line ([](#thm:cmh-1d)) and on products ([](#thm:cmh-product)), and the bound $4$, sharp over the family, on every log-concave Dirichlet law ([](#thm:cmh-dirichlet), [](#cor:cmh-dirichlet-poincare)).
 - Its linear test reduced to a third-moment tensor ([](#lem:linear-sector-third-moment)), and a countermodel for fixed-matrix arguments ([](#prop:letwin-not-gate-zero)).
 - A reduction of KLS to an occupation estimate for one eigenfunction ([](#prop:spectral-sufficiency)).
 - A reduction of KLS to a gap for resampling along lines ([](#lem:conditional-fiber-form)), and an obstruction on the simplex ([](#prop:conditional-fiber-root-obstruction)).
