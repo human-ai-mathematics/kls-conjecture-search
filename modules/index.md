@@ -68,7 +68,7 @@ Every labelled statement is fixed text, and its status, shown next to its title,
 
 A reviewer agent's check is distinct from journal peer review and from a person's review or acceptance, which are recorded separately; computations never count as proof. What each certification means is explained on the [full proofs](../proofs.md) page.
 
-**How to contribute.** A proof, a counterexample, a partial result, a missed reference or a correction:
+**How to contribute.** The site is maintained by Nicolas Brosse and open to collaboration; contributors are credited in the history of the repository. A proof, a counterexample, a partial result, a missed reference or a correction is welcome:
 
 - **On a statement:** next to its title are its label, for instance `conj:gate-zero-sharp`, and links that open a form on the [project repository](https://github.com/human-ai-mathematics/kls-conjecture-search/issues) with the label filled in — *Idea* or *Counterexample* on a statement not settled here, *Correction* on any other.
 - **In discussion:** ask a question (*Q&A*), think out loud (*Ideas*) or point at a reference (*Literature*) in the project's [GitHub Discussions](https://github.com/human-ai-mathematics/kls-conjecture-search/discussions), naming a statement by its label.

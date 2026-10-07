@@ -14,9 +14,13 @@ project:
   license:
     content: CC-BY-4.0
     code: MIT
+  # The maintainer runs the repository; the work is open to collaboration, and
+  # contributors are credited in its history.
   authors:
+    - name: Nicolas Brosse
+      roles: [Project administration]
     - name:
-        literal: Collaboration Numina
+        literal: Numina Collaboration
   # The shared bibliography. A literature node's `references:` keys must
   # exist here. It ships empty: MyST refuses a .bib holding only comments.
   bibliography:
