@@ -1,10 +1,12 @@
 ---
-title: 'Solution: stopped initial-layer source bound'
+title: 'The stopped source bound'
 label: sec:sol-lem-mm-stopped-window-source
 ledger-node: lem:mm-stopped-window-source
 numbering:
   enumerator: D17.%s
 ---
+
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
 
 **Overview.** This dossier proves [](#lem:mm-stopped-window-source) as [](#thm:sol-lem-mm-stopped-window-source), using the certified quadratic-chaos theorem [](#thm:letwin-qcts). For a regular approximant and a unit-variance fixed test, the source is integrated only up to the covariance exit time $\tau_L$, and the bound is $\E\int_0^{T\wedge\tau_L}\norm{H_t}_{\HS}^2\dd t\le8L^2T$ ([](#eq:sol-sws-main)). The proof has three parts: a pathwise whitened duality bound from the Letwin inequality, unwhitening only where $\norm{A_t}_\op<L$, and integration against the posterior variance budget. No moment of $\norm{A_t}_\op$ is used.
 

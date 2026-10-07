@@ -1,5 +1,5 @@
 ---
-title: 'Solution: profile curvature, exact splitting, and the Gaussian and product models'
+title: 'Profile curvature and the model geometries'
 label: sec:sol-kls-geometry-models
 ledger-node:
 - lem:profile-bound
@@ -11,6 +11,8 @@ ledger-node:
 numbering:
   enumerator: D5.%s
 ---
+
+*Part of the shared technical foundations and the fixed-cut archive, Chapters [](#sec:models) and [](#sec:jacobi); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#lem:profile-bound), [](#cor:generic-degeneracy), [](#prop:exact-splitting), [](#prop:persistent-splitting), [](#prop:gaussian-model) and [](#prop:products). A second variation along a smooth minimizing branch bounds the constant-mode curvature $\mathfrak K$ by the profile's second derivative, and an average of this bound over volumes controls $\mathfrak K$ by $h_\nu^3$. Both statements are conditional on the granted smooth minimizers. The rest of the dossier treats exactly split laws and the Gaussian and product models, whose localization posteriors are computed explicitly.
 

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: conditional-fiber form structure and the simplex root obstruction'
+title: 'The resampling form and the simplex root obstruction'
 label: sec:sol-conditional-fiber-frame-structure
 ledger-node:
 - lem:conditional-fiber-form
@@ -7,6 +7,8 @@ ledger-node:
 numbering:
   enumerator: D1.%s
 ---
+
+*Part of the conditional-fiber mechanism, Chapter [](#sec:conditional-fiber-frame); the reading order is on the [full proofs](#sec:proofs-fibers) page.*
 
 **Overview.** This dossier proves [](#lem:conditional-fiber-form) and [](#prop:conditional-fiber-root-obstruction). For an even tight frame $\rho$ it builds the conditional-fiber quadratic form $\mathcal D_{\mu,\rho}$ from line disintegrations of $\mu$, shows it is a closed Markovian Dirichlet form with an explicit generator on a sufficient domain, compares it with the Dirichlet energy with factor $4$ when $\mu$ is log-concave, and calibrates it on linear, Gaussian and product examples. Separately, it shows that the even root frame on the uniform simplex has form gap at most $12/m^2$, so this particular frame cannot give a dimension-free gap.
 

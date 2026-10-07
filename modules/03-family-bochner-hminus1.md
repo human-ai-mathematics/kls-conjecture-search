@@ -6,9 +6,11 @@ numbering:
 (sec:family-bochner)=
 # Family 3: Bochner, heat flow, and the $H^{-1}$ calculus
 
+KLS is now proved, by three different arguments compared in Chapter [](#sec:kls-synthesis). This chapter describes what the Bochner and heat-flow calculus controls on its own and what it does not give without them.
+
 **Object followed.** The first eigenspace of the diffusion generator, and the energy of derivatives of test functions, measured in the negative Sobolev norm attached to that generator.
 
-**What it buys.** Two things that no other family supplies. First, the conversion device: an inequality that turns “curvature $t$ plus covariance $\norm{\Cov\mu}_\op$” into a spectral gap, sharper than Bakry–Émery. This is the box marked *Improved Lichnerowicz* in Figure [](#fig:kls-architecture) and it is the reason short-time localization is usable at all. Second, a calculus in which coordinate functions and quadratic functions have computable spectral mass, which is what makes the moment-map input of Section [](#sec:family-moment-map) consumable.
+**What it buys.** Two things that no other family supplies. First, the conversion device: an inequality that turns “curvature $t$ plus covariance $\norm{\Cov\mu}_\op$” into a spectral gap, sharper than Bakry–Émery. This is the box marked *Improved Lichnerowicz* in Figure [](#fig:kls-architecture) and it is the reason short-time localization is usable at all. Second, a calculus in which coordinate functions and quadratic functions have computable spectral mass, which is what makes the moment-map input of Chapter [](#sec:family-moment-map) usable.
 
 (subsec:improved-lichnerowicz)=
 ## The improved Lichnerowicz inequality
@@ -46,7 +48,7 @@ Integration by parts bounds the right-hand side by the covariance:
 Strong convexity bounds the left-hand side from below by $t\int|\nabla f|^2\dd\mu=t\lambda$. Chaining the three gives $t\lambda\le\lambda^3\norm{\Cov\mu}_\op$, that is $\lambda^2\ge t/\norm{\Cov\mu}_\op$, which is [](#eq:improved-lichnerowicz).
 :::
 
-Note the two places the argument spends: [](#eq:bochner-step) is where a *gradient* energy is converted into information about $\int\nabla f\dd\mu$, a single vector, and [](#eq:ibp-step) is where that vector is charged to the operator norm of the covariance. Both steps are sharp for the Gaussian; neither knows anything about $f$ beyond its first moments. That is the sense in which this family “averages away” the test function, and it is the source of the limitation recorded at the end of this section.
+Note the two places the argument spends: [](#eq:bochner-step) is where a *gradient* energy is converted into information about $\int\nabla f\dd\mu$, a single vector, and [](#eq:ibp-step) is where that vector is charged to the operator norm of the covariance. Both steps are sharp for the Gaussian; neither knows anything about $f$ beyond its first moments. That is the sense in which this family “averages away” the test function, and it is the source of the limitation recorded at the end of this chapter.
 
 (subsec:hminus1)=
 ## The $H^{-1}$ norm and the Barthe–Klartag inequality
@@ -77,7 +79,7 @@ Applied to $f(x)=|x|^2$, whose derivatives are the coordinate functions up to a 
 \Var(|X|^2)\le4\sum_i\norm{x_i}_{H^{-1}(\mu)}^2 ,
 ```
 
-so the thin-shell problem becomes a statement about the low spectral mass of *coordinate* functions. This is the entry point through which the moment-map estimates of Section [](#sec:family-moment-map) are consumed.
+so the thin-shell problem becomes a statement about the low spectral mass of *coordinate* functions. This is the entry point through which the moment-map estimates of Chapter [](#sec:family-moment-map) are used.
 
 :::{prf:remark} Why quadratics are special
 :label: rem:quadratics-special
@@ -125,8 +127,6 @@ $$
 A suitable strengthening would remove some of the spectral-projection losses in their argument. This is a question from the literature [@KlartagLehec2022Polylog], recorded here for orientation.
 :::
 
-**The precise missing estimate.** Uniform control of $\norm{\partial_if}_{H^{-1}}$ for the derivatives of an *arbitrary* test function, rather than for coordinates and for derivatives of quadratics.
+**What it does not reach alone.** Uniform control of $\norm{\partial_if}_{H^{-1}}$ for the derivatives of an *arbitrary* test function, rather than for coordinates and for derivatives of quadratics. Every step above is an averaging step. Bochner in [](#eq:bochner-step) keeps only $\int\nabla f\dd\mu$; [](#eq:barthe-klartag) keeps only the spectral masses of the $\partial_if$; [](#eq:spectral-monotonicity) is a statement about a single Rayleigh quotient. Trace, coordinate or averaged spectral information does not bound every slow mode, and a near-extremizing eigenfunction of a general log-concave measure is exactly the object about which these averages say least.
 
-**Why it stalls.** Every step above is an averaging step. Bochner in [](#eq:bochner-step) keeps only $\int\nabla f\dd\mu$; [](#eq:barthe-klartag) keeps only the spectral masses of the $\partial_if$; [](#eq:spectral-monotonicity) is a statement about a single Rayleigh quotient. Trace, coordinate, or averaged spectral information does not bound every slow mode, and a near-extremizing eigenfunction of a general log-concave measure is exactly the object about which these averages say least.
-
-**Where this family enters the four approaches.** The fixed-eigenfunction approach (Section [](#sec:spectral-approach)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the approach this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ residual bound audited in Section [](#subsec:spectral-h-minus-one) is where the two meet; it is an *endpoint* in the sense that it is as strong as KLS itself, usable as a final target but not as a first step.
+**Where this family meets the alternative mechanisms.** The fixed eigenfunction (Chapter [](#sec:spectral-approach)) is exactly the attempt to keep the eigenfunction itself in the argument rather than averaging it away, and it is the mechanism this family points at most directly: it carries the first spectral mode through localization instead of replacing it by a spectral mass. The $H^{-1}$ residual bound of Section [](#subsec:spectral-h-minus-one) is where the two meet; it is an *endpoint* in the sense that it is as strong as KLS itself, usable as a final target but not as a first step.

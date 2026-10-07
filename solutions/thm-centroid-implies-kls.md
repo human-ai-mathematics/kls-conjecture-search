@@ -1,11 +1,13 @@
 ---
-title: "Solution: stopped centroid and all-cut implications"
+title: 'Centroid control implies KLS'
 ledger-node:
   - thm:centroid-implies-kls
   - thm:intro-all-cut
 numbering:
   enumerator: "100.%s"
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves two conditional implications. A stopped centroid
 bound controls the quadratic variation of the bounded mass martingale, hence the

@@ -10,28 +10,63 @@
 # conditional fibers, and the fixed cut's two variants as the all-cut variant (formerly
 # E-A) and the near-Cheeger variant (formerly E-B).
 #
-# Entries are ordered by priority, set in the 2026-10-04 strategy checkpoint; the order
-# carries no truth value.
+# Entries are ordered by priority, reassessed in the 2026-10-06 BKL certification
+# checkpoint from the 2026-10-04 strategy. The order carries no truth value.
 
 approaches:
-  # --- Priority 1 -- the Song-Zhang loss after the Wave A contract; no fifth approach yet.
+  - id: ap:bk-reconstruction
+    objective: >-
+      Reconstruct the pinned Balasubramanian–Kasiviswanathan proof, including its
+      explicit constant, and independently review its composition into conj:kls.
+      Exclude KLS, BKL, SZ v2 and their consequences as inputs.
+    state: closed
+    next: >-
+      Accomplished: compatible Hodge and integration, powers, localization,
+      reverse transfer, degree induction, explicit constant and KLS composition
+      are independently reviewed. See the BK certification checkpoint.
+
+  - id: ap:sz-v2-reconstruction
+    objective: >-
+      Reconstruct Song–Zhang arXiv:2610.01447v2, independently review its improved
+      inner iteration, common radius, height reduction and summable repetition
+      costs, then register its composition as a second proof of conj:kls.
+      Exclude BKL, conj:kls and their consequences as inputs.
+    state: closed
+    next: >-
+      Accomplished through twelve certified dossiers and separate reviews of
+      the source chain and its composition into conj:kls. See the 2026-10-06
+      SZ v2 certification checkpoint. Compare the old Wave A interfaces only
+      under the continuing initialization and recovery objectives.
+
+  # Import completed; the research routes below retain their existing states.
+  - id: ap:bkl-reconstruction
+    objective: >-
+      Reconstruct Bizeul–Klartag–Lehec arXiv:2610.05474v1 sections 2–7,
+      independently review each block and their composition into conj:kls,
+      and identify exactly which existing objectives follow.
+    state: closed
+    next: >-
+      Accomplished through seven certified dossiers, including the stronger
+      unconditional initialization corollary. See the 2026-10-06 certification
+      checkpoint. Further independent proofs remain separate active objectives.
+
+  # --- Priority 1 -- an independent Song–Zhang mechanism and its admissibility costs.
   - id: ap:sz-conditional-initialization
     objective: >-
-      Prove or refute cand:sz-uniform-conditional-initialization: low-degree Appell
-      coefficient control conditional on the current curvature profile, over the whole
-      moving range d < ceil(32 r^2) and uniformly in the depth r. Then combine it with a
-      uniform comparison satisfying (R1)-(R2) of the Wave A contract. The construction
-      objective the closed ap:sz-induction-contract left open; not a fifth dimension-free
-      approach.
+      Derive the initialization estimate independently of BKL and KLS, over the
+      whole moving range d < ceil(32 r^2) and uniformly in depth r, then combine
+      it with a uniform comparison satisfying (R1)-(R2) of the Wave A contract.
+      The mathematical candidate is now implied by the certified stronger
+      cor:bkl-uniform-conditional-initialization; the remaining objective is a
+      different proof mechanism, not an unresolved truth value.
     state: active
     next: >-
-      Under H_r(Gamma) and the all-law lower-degree induction hypothesis, estimate the
-      actual averaged derivative energy in condition (T) of the conditional-initialization
-      test checkpoint, beginning with d=r. Seek posterior-uniform top Appell slack
-      satisfying (N), or a direct saving from the cross terms in (A). Do not repeat
-      optimization of eta with saturated coefficients: (E)-(F) exclude that certificate.
-      A time-zero saving for one law is insufficient; success must cover the whole moving
-      degree range. Failure of a particular estimate does not refute the candidate.
+      Compare the checked static coefficient transfer and the SZ v2 common-radius
+      argument with the exact Wave A startup (including its (d+1)^2 denominator)
+      and (R1)-(R2) comparison. Determine which estimates are implied and which
+      are bypassed; do not use BKL, the KLS conclusion, or their coefficient
+      consequences to claim a new independent startup argument. A successful
+      correspondence must cover the entire moving degree range.
 
   - id: ap:sz-recovery-probe
     objective: >-
@@ -41,14 +76,12 @@ approaches:
       identifying the source of the factor four and retaining all admissibility costs.
     state: active
     next: >-
-      For the coupled regular potential W_delta=x1^2+1.5*x2^2+delta*cos(x1+x2),
-      with abs(delta)<1/2, track the leading nonzero first-eigenfunction
-      prefix and compute Q1*u2, its first-two-slot symmetrization and the associated
-      normalization defects. Handle the vanishing Gaussian successor before taking
-      limits. This calibrates generated long-block symmetry only: near-Gaussian
-      prefixes need not satisfy the small-centering-loss condition of the comparison.
-      Admit a KLS route only after a precise recovery estimate addresses that condition
-      and the independent degree/depth thresholds.
+      Compare the SZ v2 joint-frame and actual orbit-window estimates with the
+      old positive lag kernel and its degree-one obstruction. Identify the
+      precise change in normalization or averaging before resuming the coupled
+      regular-potential probe. Retain the Gaussian zero-successor and uniform
+      admissibility checks; a better recovery multiplier alone does not supply
+      the old comparison contract.
 
   # --- Priority 2 -- discriminating tests. The fixed cut's review of its bridge is done
   # (2026-10-04 grouped review synthesis); ap:c-solenoidal-perturbation moved to priority 3.
@@ -287,8 +320,8 @@ approaches:
       depth. The Wave A contract completes this audit, without admitting a fifth approach.
     state: closed
     next: >-
-      Continued by ap:sz-conditional-initialization, which tests
-      cand:sz-uniform-conditional-initialization with its universal curvature-profile
+      Continued by ap:sz-conditional-initialization, which seeks an independent
+      proof of the now-promoted initialization candidate with its curvature-profile
       antecedent and the whole moving degree range, and replaces the actual prefix bounds by
       (R1)-(R2) of the Wave A contract. Improving a recovery multiplier alone does not
       discharge these obligations.

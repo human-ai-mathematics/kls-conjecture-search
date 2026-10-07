@@ -1,10 +1,12 @@
 ---
-title: 'Solution: split-class screened weighted supply (total-budget form)'
+title: 'Split-class screened supply'
 label: sec:sol-split-screened-supply
 ledger-node: prop:split-screened-supply
 numbering:
   enumerator: D25.%s
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:open); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#prop:split-screened-supply) in total-budget form, on the regular split class ([](#thm:sol-split-screened-supply)). For a product of isotropic one-dimensional log-concave laws and a cut depending on $k$ coordinates, the screened weighted excess over $[0,T\wedge\tau_\eta]$ is at most $(2k+64\eta^2(1+k))/\kappa$ ([](#eq:sol-split-screened-supply)), uniformly in $T$, $n$ and the spectators. It is not a $C(k)\,T$ estimate. On the screen the weighted excess is dominated by the Stein source $Q_t$, and $Q_t$ is then paid from the coordinate source and dissipation budgets. The passage to general split laws is left open ([](#rem:sol-general-class)).
 
@@ -16,9 +18,7 @@ numbering:
 
 **Scope.** This dossier proves the screened weighted-excess supply estimate for coordinate cuts on products of isotropic one-dimensional log-concave measures, in *total-budget* form: the bound is a constant depending only on the number $k$ of active coordinates, the window half-width $\eta$, and the screening ratio $\kappa$; it is uniform in the horizon $T$, in the ambient dimension $n$, and in every spectator coordinate. It is **not** an estimate of the form $C(k)\,T$, and no claim of that fixed-time or linear-in-$T$ shape is made here. The dossier asserts nothing about the trace-upgrade cluster ([](#conj:trace-upgrade), the high-rank part of [](#conj:stein-weighted), [](#conj:product-alignment)); in particular it neither proves nor compares any occupation estimate of that cluster, in compliance with repository constraint 6. A separate auxiliary lemma ([](#lem:sol-constant-supply-consumption) below) records the constant-supply extension of [](#cor:tight-window-consumption); it is logically independent of the main proposition and is clearly separated from it.
 
-**Regularity and measurability conventions.** We adopt verbatim the conventions of Section 5 of the probe record
-
-<research/explorations/2026-08-30-kls-route-prober-weighted-screened-interface-w4w01.md>:
+**Regularity and measurability conventions.** We adopt the following conventions:
 
 (M1) We work on the usual $\Prob$-augmented right-continuous filtration of the driving $n$-dimensional Brownian motion of Eldan's stochastic localization.
 

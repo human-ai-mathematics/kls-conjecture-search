@@ -4,28 +4,22 @@ numbering:
 ---
 
 (sec:polynomial-curvature)=
-# The current frontier: polynomial estimates and curvature
+# Song–Zhang, first version: polynomial estimates and curvature
 
-This chapter is not a seventh family. It presents one recent argument, Song and Zhang's [@SongZhang2026IteratedLogKLS], which gives the slowest dimension dependence known for the Poincaré constant, $16^{\log^*(n+2)}$, and does so for every test function. It is set apart from the survey because it differs from the six families in kind: they control restricted objects sharply and lose on the rest (Section [](#subsec:kls-adaptive-residue)), while this argument already reaches every function and loses only a factor that grows with the dimension. Reducing that loss is the first of the two ways forward of Section [](#subsec:kls-adaptive-residue); the four approaches of this manuscript take the second. The argument is reconstructed and checked here, and the chapter follows the same plan as the family chapters, so that the two can be compared.
+**What to retain.** Bounds on the Appell polynomials of a measure control its spectral gap, through a first eigenfunction followed by repeated centered gradients; stochastic localization turns a spectral gap back into better polynomial bounds. Composing the two conversions gives $\CP\lesssim16^{\log^*(n+2)}$, and its end point, one exponential base for the coefficients of every degree, is equivalent to KLS ([](#prop:sz-exponential-coefficients-equivalence)).
 
-**Object followed.** The Appell polynomials of the measure — in each degree, the polynomials adapted to its moments — and a first eigenfunction, followed through repeated centred gradients and inverse square roots of the diffusion operator.
+This chapter works through the first version of Song and Zhang's preprint [@SongZhang2026IteratedLogKLS] (SZ v1), whose polynomial–curvature iteration gives the dimension-dependent bound [](#thm:song-zhang-kls), and locates its losses. Its spectral criterion is the starting point of two of the three proofs: Bizeul–Klartag–Lehec (BKL) prove its exponential end point directly (Chapter [](#sec:bkl-proof)), and the second version of Song–Zhang (SZ v2) makes the losses of the iteration summable (Chapter [](#sec:sz-v2-proof)) [@SongZhang2026ConstantKLS]. Balasubramanian–Kasiviswanathan (BK) share its Appell normalization but reach the spectral gap through their own integration calculus (Chapter [](#sec:bk-proof)). The estimates and limitations below are those of SZ v1.
 
-**What it buys.** A conversion that reaches every test function. Bounds on the Appell polynomials of all degrees give a spectral gap for strongly log-concave measures, and stochastic localization turns a spectral gap back into better polynomial bounds [@SongZhang2026IteratedLogKLS, Sections 3–7]. Unlike the quadratic and third-moment estimates of Families 2–4 (Sections [](#sec:family-sl)–[](#sec:family-moment-map)), the output is a Poincaré inequality for arbitrary functions; what is left to improve is the loss incurred each time the two conversions are composed.
+**Why the iteration stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
 
-**Sharpest result.** The iterated-logarithm bound [](#thm:song-zhang-kls), $\CP(\mu)\lesssim16^{\log^*(n+2)}$ for every isotropic log-concave $\mu$ on $\R^n$, from Song and Zhang's preprint.
-
-**The precise missing estimate.** One exponential base for the whole Appell hierarchy: $c_k(\nu)\le A^k$, with the same $A$ for every degree $k$, every dimension and every regular isotropic measure $\nu$. By [](#prop:sz-exponential-coefficients-equivalence) this is equivalent to KLS.
-
-**Why it stalls.** Each round of the loop multiplies the profile constant by about $4$, and is admissible only above thresholds that grow with its depth; so the constants of the curvature profiles grow like $4^r$ at depth $r$ and cannot be kept bounded (Section [](#sec:sz-profile-iteration)). The depth needed grows, very slowly, with the dimension, and so does the bound.
-
-**Where this argument enters the four approaches.** It is a step of none of them. It shares the first eigenfunction with the fixed-eigenfunction approach and Letwin's quadratic estimate with the moment map, and it changes the standard against which each approach is measured; Section [](#subsec:atlas-assessment) says, approach by approach, what it changes and what still needs its own estimate.
+**Where this argument meets the alternative mechanisms.** It shares the first eigenfunction with the fixed eigenfunction and Letwin's quadratic estimate with the moment map; Section [](#subsec:atlas-assessment) says, mechanism by mechanism, what the proofs built on it give and what still needs an estimate of its own.
 
 (sec:sz-notation)=
 ## Notation and the smallest cases
 
 A probability measure $\nu(dx)=e^{-W(x)}dx$ on $\R^n$ is called *regular* here if $W$ is smooth and $aI\preceq D^2W\preceq bI$ for some $0<a\le b<\infty$; the lower bound $a$ is its *curvature*. The Bakry–Émery bound gives $\CP(\nu)\le1/a$, and every isotropic log-concave measure is a weak limit of regular isotropic ones ([](#lem:sz-analytic-foundations)). The question of this chapter is how much better than $1/a$ one can do when $a$ is small. A *curvature profile* is an answer valid in every dimension: a function $F$ with $\CP(\nu)\le F(a)$ for every regular isotropic $\nu$ of curvature $a$.
 
-For a centred real random variable of variance $\sigma^2$, the first three Appell polynomials are $1$, $x$, and $x^2-\sigma^2$. Their means vanish in positive degree, and differentiation lowers degree: $(x^2-\sigma^2)'=2x$. In several dimensions the quadratic one is $x^TTx-\operatorname{Tr}(T\Sigma)$, where $T$ is symmetric and $\Sigma$ is the covariance. In every degree $d$, the Appell tensor $\mathcal A_d^\nu$ is the coefficient of $z^{\otimes d}/d!$ in the expansion of $e^{\langle z,x\rangle}/\int e^{\langle z,y\rangle}d\nu(y)$ (see [](#thm:sz-polynomial-variance)), and $P_d^\nu[T]=\langle T,\mathcal A_d^\nu\rangle$ for a symmetric $d$-tensor $T$. These polynomials keep the centering and differentiation identities in every degree; they need not be orthogonal in $L^2(\nu)$. The size of degree $k$ is measured by
+For a centered real random variable of variance $\sigma^2$, the first three Appell polynomials are $1$, $x$, and $x^2-\sigma^2$. Their means vanish in positive degree, and differentiation lowers degree: $(x^2-\sigma^2)'=2x$. In several dimensions the quadratic one is $x^TTx-\operatorname{Tr}(T\Sigma)$, where $T$ is symmetric and $\Sigma$ is the covariance. In every degree $d$, the Appell tensor $\mathcal A_d^\nu$ is the coefficient of $z^{\otimes d}/d!$ in the expansion of $e^{\langle z,x\rangle}/\int e^{\langle z,y\rangle}d\nu(y)$ (see [](#thm:sz-polynomial-variance)), and $P_d^\nu[T]=\langle T,\mathcal A_d^\nu\rangle$ for a symmetric $d$-tensor $T$. These polynomials keep the centering and differentiation identities in every degree; they need not be orthogonal in $L^2(\nu)$. The size of degree $k$ is measured by
 
 $$
 K_k(\nu)=\sup_{\substack{T\text{ symmetric}\\\|T\|_{\mathrm{HS}}=1}}\Var_\nu(P_k^\nu[T]),
@@ -116,7 +110,7 @@ $$
 $$
 
 The operator has compact resolvent; its first positive eigenvalue is
-$\lambda=C_P(\mu)^{-1}$. It has a real centered unit eigenfunction for
+$\lambda=\CP(\mu)^{-1}$. It has a real centered unit eigenfunction for
 $\lambda$. On centered functions, if $h\in\operatorname{Dom}H^{1/2}$, then
 $g=H^{-1/2}h\in\operatorname{Dom}H$ and
 $\|Hg\|_2^2=\|H^{1/2}h\|_2^2$, $\|\nabla g\|_2^2=\|h\|_2^2$.
@@ -154,12 +148,12 @@ If $c_k(\nu)\le R^k\ell(k)^k/(k+1)^2$ for every integer $k\ge1$, then
 every dyadic integer $d\ge2$ satisfies
 
 $$
-C_P(\nu)\le16(1+\epsilon)R^2\ell(d)^2
+\CP(\nu)\le16(1+\epsilon)R^2\ell(d)^2
 \max\{1,a^{-1/(d+1)}\}.
 $$
 :::
 
-The proof follows a first eigenfunction of eigenvalue $\lambda=C_P(\nu)^{-1}$ through repeated application of a centered gradient and an inverse square root of the diffusion operator. Normalization preserves the size of each family, while centering removes a nonnegative amount of mass. Bochner's identity charges positive curvature against the energy of every surviving family. Polynomial tests estimate the mass lost to centering; the difficulty is that iterated derivative tensors are only approximately symmetric. A two-block tensor recovery inequality and a dyadic decomposition bound the defects, and a convolution estimate sums their overlapping contributions without a factor depending on the number of iterations. If $\lambda$ were too small, most mass would survive while curvature consumed more energy than was initially available. The resulting contradiction gives the displayed comparison.
+The proof follows a first eigenfunction of eigenvalue $\lambda=\CP(\nu)^{-1}$ through repeated application of a centered gradient and an inverse square root of the diffusion operator. Normalization preserves the size of each family, while centering removes a nonnegative amount of mass. Bochner's identity charges positive curvature against the energy of every surviving family. Polynomial tests estimate the mass lost to centering; the difficulty is that iterated derivative tensors are only approximately symmetric. A two-block tensor recovery inequality and a dyadic decomposition bound the defects, and a convolution estimate sums their overlapping contributions without a factor depending on the number of iterations. If $\lambda$ were too small, most mass would survive while curvature used up more energy than was initially available. The resulting contradiction gives the displayed comparison.
 
 This is a direct argument with an extremal function. Its all-degree polynomial hypothesis controls the centering losses; no density argument with a degree-dependent Poincaré constant is involved. The threshold $R\ge2^{40}\epsilon^{-2}$ pays for the initial small degrees and the absorption of normalization errors.
 
@@ -177,7 +171,7 @@ $aI\preceq D^2W\preceq bI$ for some $0<a\le b<\infty$, and
 $\operatorname{Cov}(\nu)\preceq I$, then for every integer $r\ge1$,
 
 $$
-C_P(\nu)\le\Gamma_r^2\ell_r(a^{-1})^2.
+\CP(\nu)\le\Gamma_r^2\ell_r(a^{-1})^2.
 $$
 :::
 
@@ -191,12 +185,12 @@ above one fixed initial depth. The summability of $r^{-2}$ gives one envelope $C
 
 **Why optimizing the multiplier alone does not give a bounded profile.** With $\epsilon=r^{-2}$ and $R=(1+r^{-2})\Gamma_r$, the comparison requires $R\ge2^{40}r^4$. Initializing the improved coefficient induction also requires $\Gamma_r\ge Kr^2$ for a universal $K$. Exponentially growing constants can meet both thresholds simultaneously; a bounded sequence cannot. Replacing the factor $4$ by a fixed number greater than one still gives an unbounded product, and replacing it by one does not remove these growing admissibility costs. Within this iteration, a bounded profile needs both a smaller multiplier and a replacement for these growing thresholds. These are obstructions to retaining the existing estimates, not lower bounds on every possible comparison argument.
 
-The two thresholds pay different bills. The coefficient induction uses the factorial bound below degree $\lceil32r^2\rceil$; the nearly lossless hierarchy starts above that degree. The comparison must also absorb centering losses along the whole inverse-gradient sequence, including its initial terms. Improving only the final tensor estimate or only the high-degree tail leaves these earlier costs in place. A useful replacement would supply low-degree coefficient control conditional on the current curvature profile, together with a comparison whose multipliers have bounded cumulative product and whose admissibility is uniform in depth. Neither replacement is established here. Identifying their role clarifies the existing proof without improving its KLS bound.
+The two thresholds pay different bills. The coefficient induction uses the factorial bound below degree $\lceil32r^2\rceil$; the nearly lossless hierarchy starts above that degree. The comparison must also absorb centering losses along the whole inverse-gradient sequence, including its initial terms. Improving only the final tensor estimate or only the high-degree tail leaves these earlier costs in place. A useful replacement would supply low-degree coefficient control conditional on the current curvature profile, together with a comparison whose multipliers have bounded cumulative product and whose admissibility is uniform in depth. The initialization bound now follows from BKL ([](#cor:bkl-uniform-conditional-initialization)), though not independently of KLS (Section [](#subsec:proofs-provenance)). SZ v2 avoids the question altogether: it iterates a common coefficient radius instead and pays the fixed spectral conversion only once (Section [](#subsec:proofs-compared-differences)).
 
 (sec:sz-exponential-criterion)=
 ## The exact coefficient growth demanded by KLS
 
-The coefficient hierarchy also gives an exact reformulation of the dimension-free question. The two assertions below have the same strength, so the second says exactly which coefficient growth a proof of KLS must reach.
+The coefficient hierarchy gives an exact reformulation of the dimension-free bound, now obtained by BKL. The two assertions below have the same strength; the second identifies the coefficient growth established by [](#thm:bkl-tilt-bound).
 
 :::{prf:proposition} KLS and exponential Appell coefficient growth
 :label: prop:sz-exponential-coefficients-equivalence
@@ -205,7 +199,7 @@ $K_k(\nu)=\sup_{T\text{ symmetric},\,\|T\|_{\mathrm{HS}}=1}
 \operatorname{Var}_\nu(P_k^\nu[T])$ and $c_k(\nu)=\sqrt{K_k(\nu)}/k!$.
 The following are equivalent:
 
-1. There is a universal $C<\infty$ such that $C_P(\mu)\le C$ for every
+1. There is a universal $C<\infty$ such that $\CP(\mu)\le C$ for every
    isotropic log-concave probability measure in every dimension.
 2. There is a universal $A<\infty$ such that $c_k(\nu)\le A^k$ for every
    integer $k\ge1$ and every isotropic probability measure
@@ -233,18 +227,18 @@ There are universal constants $c,C>0$ with the following property.
 Let $F:(0,\infty)\to(0,\infty)$ be any function such that, in every
 dimension, every isotropic probability measure $\nu(dx)=e^{-W(x)}dx$ with
 $W\in C^\infty$ and $aI\preceq D^2W\preceq bI$ for some
-$0<a\le b<\infty$ satisfies $C_P(\nu)\le F(a)$ for every such lower
+$0<a\le b<\infty$ satisfies $\CP(\nu)\le F(a)$ for every such lower
 curvature bound $a$. Then every isotropic log-concave probability measure
 $\mu$ on $\mathbb R^n$ satisfies
 
 $$
-C_P(\mu)\le C F\!\left(\frac{c}{\log(en)}\right).
+\CP(\mu)\le C F\!\left(\frac{c}{\log(en)}\right).
 $$
 
 No continuity or monotonicity of $F$ is required.
 :::
 
-This statement isolates the interface with ordinary Gaussian stochastic localization. A bounded Lipschitz test detects the original Poincaré constant: after variance normalization, its supremum is universally bounded and its Lipschitz constant is of order $C_P(\mu)^{-1/2}$ [@KLnotes, Theorem 20]. Stop the posterior covariance at its first exit from $(I/2,2I)$. Letwin's quadratic estimate controls the exit probability on a time interval of order $1/\log(en)$, while the stopped variance decays by at most a fixed factor. The boundedness of the test pays for the exceptional paths, leaving one posterior with controlled covariance and substantial variance. Whitening that posterior gives curvature at least half the elapsed time, so evaluating $F$ at this deterministic bound controls the original Poincaré constant. No comparison of nearby values of $F$ is used. Regular approximation passes the same scalar bound to arbitrary measures with its argument unchanged. Any future improvement of the curvature profile can be substituted at this interface.
+This statement is where ordinary Gaussian stochastic localization enters. A bounded Lipschitz test detects the original Poincaré constant: after variance normalization, its supremum is universally bounded and its Lipschitz constant is of order $\CP(\mu)^{-1/2}$ [@KLnotes, Theorem 20]. Stop the posterior covariance at its first exit from $(I/2,2I)$. Letwin's quadratic estimate controls the exit probability on a time interval of order $1/\log(en)$, while the stopped variance decays by at most a fixed factor. The boundedness of the test pays for the exceptional paths, leaving one posterior with controlled covariance and substantial variance. Whitening that posterior gives curvature at least half the elapsed time, so evaluating $F$ at this deterministic bound controls the original Poincaré constant. No comparison of nearby values of $F$ is used. Regular approximation passes the same scalar bound to arbitrary measures with its argument unchanged. Any improved curvature profile can be substituted here.
 
 Feeding the profiles of [](#thm:sz-iterated-curvature) into this transfer gives Song–Zhang's main theorem, stated in their first-version preprint (arXiv:2610.01447v1, 1 October 2026) as Theorem 7.1.
 
@@ -270,10 +264,10 @@ $$
 $$
 
 where $\log^*x$ is the least number of successive natural logarithms needed to
-bring $x$ to at most one. The source is [@SongZhang2026IteratedLogKLS, Theorem 7.1].
+bring $x$ to at most one. This is [@SongZhang2026IteratedLogKLS, Theorem 7.1].
 :::
 
-Insert the profile of [](#thm:sz-iterated-curvature) into [](#thm:sz-curvature-transfer), absorbing the universal rescaling of its argument into the outer constant, and pass to the Cheeger scale by [](#eq:cheeger-two-sided). Uniformity in the depth $r$ is essential, because the depth is chosen depending on $n$: near $\log^*(n+2)$, the iterated logarithm $\ell_r(\log(en))$ is universally bounded and only the factor $16^r$ remains. That factor is all the dimension dependence left, and reducing it is target 5 of Section [](#subsec:synthesis-targets).
+Insert the profile of [](#thm:sz-iterated-curvature) into [](#thm:sz-curvature-transfer), absorbing the universal rescaling of its argument into the outer constant, and pass to the Cheeger scale by [](#eq:cheeger-two-sided). Uniformity in the depth $r$ is essential, because the depth is chosen depending on $n$: near $\log^*(n+2)$, the iterated logarithm $\ell_r(\log(en))$ is universally bounded and only the factor $16^r$ remains. That factor is all the dimension dependence left in this particular iteration. SZ v2 removes it by refinements with summable costs (Chapter [](#sec:sz-v2-proof)).
 
 :::{prf:corollary} Affine iterated-logarithm Poincaré bound
 :label: cor:sz-affine-poincare
@@ -282,13 +276,13 @@ measure $\mu$ on $\mathbb R^n$ with positive definite covariance $\Sigma$
 satisfies, for every integer $r\ge1$,
 
 $$
-C_P(\mu)\le C16^r\ell_r(\log(en))^2\|\Sigma\|_{\mathrm{op}},
+\CP(\mu)\le C16^r\ell_r(\log(en))^2\|\Sigma\|_{\mathrm{op}},
 $$
 
 where $\ell_r$ is defined in [](#thm:sz-iterated-curvature). Consequently
 
 $$
-C_P(\mu)\le C16^{\log^*(n+2)}\|\Sigma\|_{\mathrm{op}}
+\CP(\mu)\le C16^{\log^*(n+2)}\|\Sigma\|_{\mathrm{op}}
 $$
 
 after enlarging the universal constant.

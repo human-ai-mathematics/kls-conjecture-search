@@ -2,13 +2,413 @@
 # read from the manuscript (modules/); see SPECIFICATION.md, Formats → Ledger.
 
 nodes:
+  - id: lem:bk-localization-covariance
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/lem-bk-localization-covariance.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: lem:bk-moving-appell-variance
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, lem:bk-localization-covariance]
+    proofs:
+      - artifact: solutions/lem-bk-localization-covariance.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: prop:bk-reverse-transfer
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-regular-approximation, lem:bk-localization-covariance, lem:bk-moving-appell-variance]
+    proofs:
+      - artifact: solutions/prop-bk-reverse-transfer.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: thm:bk-explicit-poincare
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients, lem:bk-regular-approximation, prop:bk-integration-calculus, cor:bk-integration-powers, thm:bk-appell-bound]
+    proofs:
+      - artifact: solutions/thm-bk-explicit-poincare.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
+
+  - id: cor:bk-cheeger
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS, Milman2009Isoperimetric, Klartag2023Logarithmic]
+    depends_on: [thm:bk-explicit-poincare]
+    proofs:
+      - artifact: solutions/thm-bk-explicit-poincare.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
+
+  # BK: pinned source, reconstructed and independently reviewed.
+  - id: def:bk-uniform-appell-coefficients
+    status: defined
+
+  - id: def:bk-compatible-calculus
+    status: defined
+
+  - id: lem:bk-regular-approximation
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients]
+    proofs:
+      - artifact: solutions/lem-bk-regular-approximation.md
+        review: research/reviews/2026-10-06-bk-localization-review.md
+
+  - id: lem:bk-compatible-hodge
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus]
+    proofs:
+      - artifact: solutions/lem-bk-compatible-hodge.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: prop:bk-integration-calculus
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-compatible-calculus, def:bk-uniform-appell-coefficients, lem:bk-compatible-hodge]
+    proofs:
+      - artifact: solutions/prop-bk-integration-calculus.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: lem:bk-uniform-power-bound
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: cor:bk-integration-powers
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-uniform-power-bound]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: cor:bk-quadratic-seed
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, lem:bk-uniform-power-bound, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/lem-bk-uniform-power-bound.md
+        review: research/reviews/2026-10-06-bk-operators-review.md
+
+  - id: thm:bk-appell-bound
+    status: proved
+    references: [BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [def:bk-uniform-appell-coefficients, def:bk-compatible-calculus, prop:bk-integration-calculus, prop:bk-reverse-transfer, lem:bk-uniform-power-bound, cor:bk-quadratic-seed]
+    proofs:
+      - artifact: solutions/thm-bk-appell-bound.md
+        review: research/reviews/2026-10-06-bk-outer-review.md
+
+  # SZ v2: source assertions remain open until independently checked here.
+  - id: def:sz-v2-common-radius
+    status: defined
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance]
+
+  - id: prop:sz-v2-common-radius
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison]
+    proofs:
+      - artifact: solutions/sz-v2-height-reduction.md
+        review: research/reviews/2026-10-06-sz-v2-radius-review.md
+
+  - id: prop:sz-v2-static-coefficient-transfer
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-analytic-foundations, thm:sz-polynomial-variance]
+    proofs:
+      - artifact: solutions/sz-v2-inner-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-foundations-review.md
+
+
+  - id: lem:sz-v2-joint-frame
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    proofs:
+      - artifact: solutions/sz-v2-inner-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-foundations-review.md
+
+
+  - id: lem:sz-v2-skew-credit
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-analytic-foundations]
+    proofs:
+      - artifact: solutions/sz-v2-inner-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-foundations-review.md
+
+
+  - id: lem:sz-v2-operator-block-primitives
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-analytic-foundations, lem:sz-v2-skew-credit]
+    proofs:
+      - artifact: solutions/sz-v2-inner-refinement.md
+        review: research/reviews/2026-10-06-sz-v2-inner-review.md
+
+
+  - id: lem:sz-v2-normalized-hierarchy
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [lem:sz-v2-operator-block-primitives, lem:sz-analytic-foundations]
+    proofs:
+      - artifact: solutions/sz-v2-inner-refinement.md
+        review: research/reviews/2026-10-06-sz-v2-inner-review.md
+
+
+  - id: thm:sz-v2-iterated-curvature
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [lem:sz-analytic-foundations, thm:sz-polynomial-variance, thm:sz-curvature-comparison, thm:sz-iterated-curvature, prop:sz-v2-static-coefficient-transfer, lem:sz-v2-joint-frame, lem:sz-v2-skew-credit, lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, lem:sz-v2-mesoscopic-powers, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/sz-v2-inner-refinement.md
+        review: research/reviews/2026-10-06-sz-v2-inner-review.md
+
+
+  - id: thm:sz-v2-dimension-bound
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [thm:sz-v2-iterated-curvature, thm:sz-curvature-transfer]
+    proofs:
+      - artifact: solutions/sz-v2-dimension-bound.md
+        review: research/reviews/2026-10-06-sz-v2-inner-review.md
+
+
+  - id: lem:sz-v2-mesoscopic-powers
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, lem:sz-v2-skew-credit, thm:sz-curvature-comparison, thm:sz-polynomial-variance, thm:sz-iterated-curvature, prop:sz-v2-static-coefficient-transfer, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/sz-v2-inner-refinement.md
+        review: research/reviews/2026-10-06-sz-v2-inner-review.md
+
+
+  - id: lem:sz-v2-orbit-green-restart
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [lem:sz-analytic-foundations, lem:sz-v2-normalized-hierarchy, lem:sz-v2-skew-credit]
+    proofs:
+      - artifact: solutions/sz-v2-block-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: lem:sz-v2-block-extension
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy]
+    proofs:
+      - artifact: solutions/sz-v2-block-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: lem:sz-v2-block-propagation
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    proofs:
+      - artifact: solutions/sz-v2-block-foundations.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: lem:sz-v2-raw-joint-frame
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-v2-joint-frame, lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, prop:sz-v2-common-radius]
+    proofs:
+      - artifact: solutions/sz-v2-joint-loss.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: lem:sz-v2-propagated-joint-loss
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, lem:sz-v2-joint-frame, lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, prop:sz-v2-common-radius]
+    proofs:
+      - artifact: solutions/sz-v2-joint-loss.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: prop:sz-v2-finite-chain-blocks
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, prop:sz-v2-common-radius, thm:sz-polynomial-variance, thm:letwin-qcts, lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, lem:sz-v2-mesoscopic-powers, lem:sz-v2-raw-joint-frame, lem:sz-v2-propagated-joint-loss, lem:sz-v2-orbit-green-restart, lem:sz-v2-block-extension, lem:sz-v2-block-propagation]
+    proofs:
+      - artifact: solutions/sz-v2-chain-blocks.md
+        review: research/reviews/2026-10-06-sz-v2-blocks-review.md
+
+
+  - id: def:sz-v2-height-profiles
+    status: defined
+
+  - id: lem:sz-v2-terminal-distortion
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles]
+    proofs:
+      - artifact: solutions/sz-v2-height-blocks.md
+        review: research/reviews/2026-10-06-sz-v2-height-review.md
+
+
+  - id: prop:sz-v2-height-reduction
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-common-radius, def:sz-v2-height-profiles, thm:sz-v2-iterated-curvature, prop:sz-v2-static-coefficient-transfer, prop:sz-v2-common-radius, lem:sz-v2-operator-block-primitives, lem:sz-v2-normalized-hierarchy, lem:sz-v2-mesoscopic-powers, lem:sz-v2-raw-joint-frame, lem:sz-v2-propagated-joint-loss, lem:sz-v2-orbit-green-restart, lem:sz-v2-block-extension, lem:sz-v2-block-propagation, lem:sz-v2-terminal-distortion]
+    proofs:
+      - artifact: solutions/sz-v2-height-blocks.md
+        review: research/reviews/2026-10-06-sz-v2-height-review.md
+
+
+  - id: lem:sz-v2-profile-calculus
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles]
+    proofs:
+      - artifact: solutions/sz-v2-small-loss.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
+
+  - id: lem:sz-v2-profile-threshold
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles, lem:sz-v2-profile-calculus]
+    proofs:
+      - artifact: solutions/sz-v2-summable-budgets.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
+
+  - id: lem:sz-v2-profile-refinement
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles, def:sz-v2-common-radius, prop:sz-v2-common-radius, prop:sz-v2-static-coefficient-transfer, prop:sz-v2-height-reduction, lem:sz-v2-terminal-distortion, prop:sz-v2-finite-chain-blocks, lem:sz-v2-propagated-joint-loss, lem:sz-v2-normalized-hierarchy, lem:sz-v2-profile-calculus]
+    proofs:
+      - artifact: solutions/sz-v2-small-loss.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
+
+  - id: prop:sz-v2-small-loss
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles, def:sz-v2-common-radius, prop:sz-v2-common-radius, prop:sz-v2-static-coefficient-transfer, prop:sz-v2-height-reduction, prop:sz-v2-finite-chain-blocks, lem:sz-v2-profile-refinement, lem:sz-v2-profile-calculus]
+    proofs:
+      - artifact: solutions/sz-v2-small-loss.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
+
+  - id: prop:sz-v2-summable-budgets
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [def:sz-v2-height-profiles, def:sz-v2-common-radius, prop:sz-v2-small-loss, prop:sz-v2-common-radius, prop:sz-v2-static-coefficient-transfer, prop:sz-v2-height-reduction, prop:sz-v2-finite-chain-blocks, lem:sz-v2-profile-refinement, lem:sz-v2-profile-calculus, lem:sz-v2-profile-threshold]
+    proofs:
+      - artifact: solutions/sz-v2-summable-budgets.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
+
+  - id: thm:sz-v2-kls
+    status: proved
+    references: [SongZhang2026ConstantKLS]
+    depends_on: [prop:sz-v2-summable-budgets, prop:sz-v2-common-radius, lem:sz-analytic-foundations, def:sz-v2-height-profiles, lem:sz-v2-profile-calculus, lem:sz-v2-profile-threshold]
+    proofs:
+      - artifact: solutions/sz-v2-kls.md
+        review: research/reviews/2026-10-06-sz-v2-profile-review.md
 
   # ---------------------------------------------------------------------------
   # CORE STOCHASTIC LAYER
   # ---------------------------------------------------------------------------
 
   - id: conj:kls
-    status: open
+    status: proved
+    references: [BizeulKlartagLehec2026KLS, SongZhang2026ConstantKLS, BalasubramanianKasiviswanathan2026KLS]
+    depends_on: [thm:bkl-tilt-bound, thm:bkl-tilt-criterion, lem:bkl-analytic-foundations, thm:sz-v2-kls, thm:bk-explicit-poincare]
+    proofs:
+      - artifact: solutions/bkl-suspension-kls.md
+        review: research/reviews/2026-10-06-kls-proof-dependency-extension-review.md
+      - artifact: solutions/sz-v2-kls-composition.md
+        review: research/reviews/2026-10-06-kls-proof-dependency-extension-review.md
+      - artifact: solutions/bk-kls-composition.md
+        review: research/reviews/2026-10-06-bk-kls-composition-review.md
+
+  # BKL v1 reconstruction: statuses follow independent proof reviews.
+
+  - id: def:bkl-tilt-cumulants
+    status: defined
+
+  - id: lem:bkl-analytic-foundations
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, lem:sz-analytic-foundations]
+    proofs:
+      - artifact: solutions/bkl-analytic-foundations.md
+        review: research/reviews/2026-10-06-bkl-foundations-review.md
+
+  - id: lem:bkl-tensor-symmetrization
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants]
+    proofs:
+      - artifact: solutions/bkl-analytic-foundations.md
+        review: research/reviews/2026-10-06-bkl-foundations-review.md
+
+  - id: thm:bkl-tilt-criterion
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, lem:bkl-analytic-foundations, lem:bkl-tensor-symmetrization]
+    proofs:
+      - artifact: solutions/bkl-tilt-criterion.md
+        review: research/reviews/2026-10-06-bkl-criterion-review.md
+
+  - id: prop:bkl-tilt-appell-duality
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, thm:sz-polynomial-variance]
+    proofs:
+      - artifact: solutions/bkl-tilt-criterion.md
+        review: research/reviews/2026-10-06-bkl-criterion-review.md
+
+  - id: lem:bkl-cumulant-dynamics
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, prop:letwin-kappa, thm:letwin-qcts]
+    proofs:
+      - artifact: solutions/bkl-cumulant-dynamics.md
+        review: research/reviews/2026-10-06-bkl-dynamics-review.md
+
+  - id: lem:bkl-cumulant-energy
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, lem:bkl-cumulant-dynamics]
+    proofs:
+      - artifact: solutions/bkl-cumulant-energy.md
+        review: research/reviews/2026-10-06-bkl-energy-review.md
+
+  - id: thm:bkl-cumulant-bound
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, lem:bkl-cumulant-dynamics, lem:bkl-cumulant-energy]
+    proofs:
+      - artifact: solutions/bkl-cumulant-bound.md
+        review: research/reviews/2026-10-06-bkl-cumulants-review.md
+
+  - id: prop:bkl-suspension
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants]
+    proofs:
+      - artifact: solutions/bkl-suspension-kls.md
+        review: research/reviews/2026-10-06-bkl-suspension-kls-review.md
+
+  - id: thm:bkl-tilt-bound
+    status: proved
+    references: [BizeulKlartagLehec2026KLS]
+    depends_on: [def:bkl-tilt-cumulants, thm:bkl-cumulant-bound, prop:bkl-suspension, lem:bkl-analytic-foundations, prop:bkl-tilt-appell-duality]
+    proofs:
+      - artifact: solutions/bkl-suspension-kls.md
+        review: research/reviews/2026-10-06-bkl-suspension-kls-review.md
+
+  - id: cor:bkl-uniform-conditional-initialization
+    status: proved
+    depends_on: [thm:bkl-tilt-bound, prop:bkl-tilt-appell-duality]
+    proofs:
+      - artifact: solutions/cor-bkl-uniform-conditional-initialization.md
+        review: research/reviews/2026-10-06-bkl-startup-review.md
 
   - id: lem:survival-implies-kls
     status: proved

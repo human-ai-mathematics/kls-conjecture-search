@@ -1,9 +1,11 @@
 ---
-title: 'Solution: balanced posterior survival and exterior boundary'
+title: 'Balanced survival and the exterior boundary'
 ledger-node: lem:survival-implies-kls
 numbering:
   enumerator: '126.%s'
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This standalone proof of [](#lem:survival-implies-kls) uses the
 actual lower outer Minkowski content of a fixed measurable set. Neighborhood

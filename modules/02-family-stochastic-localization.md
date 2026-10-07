@@ -6,11 +6,13 @@ numbering:
 (sec:family-sl)=
 # Family 2: stochastic localization
 
+KLS is now proved, by three different arguments compared in Chapter [](#sec:kls-synthesis), and all three run a stochastic localization at some step. This chapter describes what the process controls on its own and what it does not give without the polynomial estimates of those proofs.
+
 **Object followed.** A measure-valued martingale $t\mapsto\mu_t$, together with its centroid $a_t$ and covariance $A_t$, along a Brownian filtration.
 
-**What it buys.** Every general improvement of the KLS bound since 2012 has come from this construction. It replaces the needle dichotomy of Section [](#sec:family-needles) — “one dimension, no covariance” — by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of controlling it only in law.
+**What it buys.** Every general improvement of the KLS bound since 2012 has used this construction. It replaces the needle dichotomy of Chapter [](#sec:family-needles) — “one dimension, no covariance” — by a process that keeps the ambient dimension and tracks covariance explicitly, at the price of controlling it only in law.
 
-This section fixes the process and the three identities used by the two stochastic-localization approaches of this manuscript, the fixed cut and the fixed eigenfunction. This manuscript's own two-color refinement of them is Section [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
+This chapter fixes the process and the three identities used by the two stochastic-localization approaches of this manuscript, the fixed cut and the fixed eigenfunction. This manuscript's own two-color refinement of them is Chapter [](#sec:notation) onward; what follows is the scalar/matrix backbone as it appears in the literature.
 
 (subsec:sl-process)=
 ## The process
@@ -103,7 +105,7 @@ The mechanism has three steps, and it is worth separating them because the fixed
 
 (3) averaging the boundary measure of $E$ under $p_T$ back to time zero, using the martingale property, transfers that expansion to $p_0$.
 
-So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. The fixed-cut approach replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); the fixed-eigenfunction approach replaces the set $E$ by a first eigenfunction (Section [](#sec:spectral-approach)).
+So KLS becomes a question about the covariance process — and specifically about its largest eigenvalue, which is where [](#eq:lv-criterion) charges its cost. The fixed-cut approach replaces step (1) by a two-color estimate for one fixed $E$ (Section [](#sec:mass-martingale)); the fixed-eigenfunction approach replaces the set $E$ by a first eigenfunction (Chapter [](#sec:spectral-approach)).
 
 (subsec:sl-third-moments)=
 ## Why third moments appear
@@ -133,18 +135,22 @@ Controlling this noise term *while retaining information about $\lmax(A_t)$* is 
 
 | Paper | Main technical device | Result for $\PsiKLS_n$ |
 |---|---|---|
-| Eldan [@Eldan2013ThinShell] | Covariance-normalized localization $C_t=A_t^{-1}$, high Schatten powers, relation to thin shell | $n^{1/3}\sqrt{\log n}$ with then-known thin-shell bounds |
+| Eldan [@Eldan2013ThinShell] | Covariance-normalized localization $C_t=A_t^{-1}$, high Schatten powers, relation to thin shell | $n^{1/3}\sqrt{\log n}$ with the thin-shell bounds of 2012 |
 | Lee–Vempala [@LeeVempala2018; @LeeVempala2024] | Fixed Gaussian tilt and the $\Tr(A_t^2)$ stopping argument | $n^{1/4}$ |
 | Chen [@Chen2021] | Iterated high-Schatten potentials, affine preconditioning, induction on dimension | $\exp(C\sqrt{\log n\log\log n})$ |
 | Klartag–Lehec [@KlartagLehec2022Polylog] | Heat-flow duality, spectral projections, $H^{-1}$, covariance growth | $(\log n)^5$ |
 | Jambulapati–Lee–Vempala [@JambulapatiLeeVempala2022KLS] | Two localization representations and spiked-spectrum estimates | $(\log n)^{3.2226}$ |
-| Klartag [@Klartag2023Logarithmic] | Improved Lichnerowicz plus short-time covariance control | $\sqrt{\log n}$ (published record) |
-| Letwin, v1 [@Letwin2026QuadraticKLS] | Sharp quadratic Poincaré $\Rightarrow\kappa_n=O(1)$, inserted into Klartag's bridge | $(\log n)^{1/4}$ (preprint record) |
+| Klartag [@Klartag2023Logarithmic] | Improved Lichnerowicz plus short-time covariance control | $\sqrt{\log n}$ |
+| Letwin, v1 [@Letwin2026QuadraticKLS] | Sharp quadratic Poincaré $\Rightarrow\kappa_n=O(1)$, inserted into Klartag's bridge | $(\log n)^{1/4}$ (July 2026 preprint) |
+| Song–Zhang, v1 [@SongZhang2026IteratedLogKLS] | Appell coefficient bounds fed into curvature profiles and back through localization | $4^{\log^*(n+2)}$ (1 October 2026 preprint) |
+| Bizeul–Klartag–Lehec (BKL) [@BizeulKlartagLehec2026KLS] | Cumulants of every order along a covariance-normalized localization, and suspension | $O(1)$ (4 October 2026 preprint) |
+| Song–Zhang, v2 [@SongZhang2026ConstantKLS] | Repeated refinement of one coefficient radius with summable losses | $O(1)$ (4 October 2026 preprint) |
+| Balasubramanian–Kasiviswanathan (BK) [@BalasubramanianKasiviswanathan2026KLS] | Compatible integration and a direct Appell induction | $O(1)$, explicit: $\PsiKLS_n\le\sqrt{\pi(1+2\cdot10^{16})}$ (6 October 2026 preprint) |
 
 (subsec:sl-where-the-log-lives)=
 ## Where the surviving logarithm lives
 
-This subsection makes precise the claim of Section [](#subsec:kls-architecture), because it is what target 3 of the synthesis acts on.
+This subsection makes precise the claim of Section [](#subsec:kls-architecture), because it is what an effective-rank potential would have to remove (Section [](#subsec:effective-rank)).
 
 To use [](#eq:lv-criterion) one needs a potential that both dominates $\lmax(A_t)$ and admits an Itô calculus. Klartag–Lehec use log-trace-exp,
 
@@ -172,11 +178,9 @@ which is the bridge [](#eq:kls-bridge).
 
 :::{prf:remark} The logarithm is an entropy cost, not a moment cost
 :label: rem:log-is-entropy
-The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution on $n$ directions: it is what one pays to replace a maximum over $n$ eigenvalues by a smooth surrogate, and it would be present even if $\kappa_n$ were known exactly and equal to $1$. Since $\kappa_n=O(1)$ is now available ([](#prop:letwin-kappa)), this term is the *entire* remaining gap between the preprint record and the conjecture. A potential that depends only on the directions actually relevant to a near-extremizer, or on an effective rank rather than the ambient dimension $n$, would convert $\kappa_n=O(1)$ into $\CP=O(1)$.
+The $\log n$ in [](#eq:logtraceexp) is the entropy of the uniform distribution on $n$ directions: it is what one pays to replace a maximum over $n$ eigenvalues by a smooth surrogate, and it would be present even if $\kappa_n$ were known exactly and equal to $1$. Since $\kappa_n=O(1)$ is now available ([](#prop:letwin-kappa)), this term accounts for the remaining dimension dependence in Letwin’s use of this bridge. The Song–Zhang, BKL and BK arguments use different conversions, described in Chapters [](#sec:polynomial-curvature), [](#sec:bkl-proof), [](#sec:sz-v2-proof) and [](#sec:bk-proof). A potential that depends only on the directions actually relevant to a near-extremizer, or on an effective rank rather than the ambient dimension $n$, would convert $\kappa_n=O(1)$ into $\CP=O(1)$.
 :::
 
-**The precise missing estimate.** Control of $\lmax(A_t)$ along the whole path at a universal time, without paying the $\log n$ of [](#eq:logtraceexp).
+**What it does not reach alone.** Control of $\lmax(A_t)$ along the whole path at a universal time, without paying the $\log n$ of [](#eq:logtraceexp). Sharpening the covariance bound cannot supply it: a uniform pathwise bound on $\norm{A_t}_\op$ is false even for measures that satisfy KLS (Section [](#subsec:kls-spike-obstruction)). A potential that recognizes when a covariance spike is harmless is needed instead, and products of centered exponentials, the canonical harmless spike, are the stress test for any such potential (Chapters [](#sec:models) and [](#sec:product-stress)). The three proofs of KLS do not supply this control either: they replace the conversion through $\lmax(A_t)$ by spectral criteria on polynomials of every degree (Chapter [](#sec:kls-synthesis)).
 
-**Why it stalls.** By [](#prop:covariance-spike), the naive strengthening — a uniform pathwise bound on $\norm{A_t}_\op$ — is false, even for measures that satisfy KLS. So the missing estimate cannot be obtained by sharpening the covariance bound; it has to come from a potential that recognizes when a covariance spike is harmless. Products of centered exponentials are the canonical instance of a harmless spike, which is why they recur as the stress test throughout the fixed-cut and fixed-eigenfunction approaches (Sections [](#sec:models) and [](#sec:product-stress)).
-
-**Where this family enters the four approaches.** It is the engine of both stochastic-localization approaches, which differ only in what they refuse to average away. The fixed-eigenfunction approach (Section [](#sec:spectral-approach)) keeps one fixed eigenfunction and its covariance tensor; the fixed-cut approach (Section [](#sec:introduction)) keeps one fixed cut and its two-colour covariance. The conceptual summary they share is Section [](#sec:localization-prelude), and the apparatus is in the shared technical foundations, Sections [](#sec:notation)–[](#sec:models).
+**Where this family meets the alternative mechanisms.** It is the engine of the two localization arguments, which differ only in what they refuse to average away. The fixed eigenfunction (Chapter [](#sec:spectral-approach)) keeps one fixed eigenfunction and its covariance tensor; the fixed cut, kept as an archive (Chapter [](#sec:introduction)), keeps one fixed cut and its two-color covariance. The conceptual summary they share is Chapter [](#sec:localization-prelude), and the apparatus is in the shared technical foundations, Chapters [](#sec:notation)–[](#sec:models).

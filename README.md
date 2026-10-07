@@ -1,26 +1,40 @@
-# The Kannan–Lovász–Simonovits frontier
+# The KLS theorem and its methods
 
 **[Read the manuscript](https://human-ai-mathematics.github.io/kls-conjecture-search/)**:
 the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md));
 the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
-A MyST manuscript on routes toward the Kannan–Lovász–Simonovits conjecture — the dimension-free
-Poincaré bound $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every isotropic log-concave measure —
-together with the harness of a **sustained conjecture search** on it: what is claimed, what the
-search is doing, and why. KLS itself is open, and nothing here proves it; four routes are developed
-(fixed-cut and fixed-eigenfunction stochastic localization, a deterministic moment-map programme,
-conditional-fiber frames), each with its certified advances and its exact open estimate. The ledger,
-not this file, is the source of truth for what is proved.
+The Kannan–Lovász–Simonovits conjecture — the dimension-free Poincaré bound
+$C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — is now a theorem, with
+three proofs: by Bizeul–Klartag–Lehec ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)),
+by Song–Zhang in the [second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
+[first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound and the
+spectral criterion the first two proofs use, and by Balasubramanian–Kasiviswanathan
+([arXiv:2610.07728v1](https://arxiv.org/abs/2610.07728v1)), with the explicit bound
+$C_P \le 1+2\cdot10^{16}$. This repository is a MyST manuscript that
+
+- surveys the methods that led to KLS;
+- reconstructs and checks the first version of Song–Zhang and the three proofs, and compares them;
+- says what the theorem gives and what remains of the question of its constant;
+- develops three alternative mechanisms for the Poincaré bound, whose key statements are
+  not settled here: a deterministic moment-map inequality, a fixed eigenfunction followed through
+  stochastic localization, and conditional-fiber frames;
+- keeps the fixed-cut localization argument as an archive of its obstructions and
+  counterexamples.
+
+It also holds the record of the **sustained conjecture search** that produced it. Proofs
+here are checked by independent agent reviews, which is distinct from journal refereeing;
+the ledger, not this file, is the source of truth for what has been certified.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
-[conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).
+[conjecture-search-template v0.6.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.6.0).
 Start every session that edits the repository by reading it.
 
 ## Layout
 
 | path | holds |
 |---|---|
-| [`modules/`](modules/) | the manuscript, the text a reader reads: every claim as a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
+| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the first version of Song–Zhang, the three checked proofs and their comparison (`07`–`12`), KLS after its proofs (`13`), the map and the three alternative mechanisms (`14`–`22`), shared technical foundations and glossary (`23`–`27`), the fixed-cut archive (`28`–`34`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
 | [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
 | [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
 | [`research/reviews/`](research/reviews/) | independent proof reviews |
@@ -29,11 +43,8 @@ Start every session that edits the repository by reading it.
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
 | [`.claude/agents/`](.claude/agents/), [`.codex/agents/`](.codex/agents/) | the three roles: `researcher`, `reviewer` and `writer`, for Claude Code and for Codex |
 | [`templates/`](templates/) | an empty copy of each file genre |
-| [`HISTORY.md`](HISTORY.md) | the milestones of the search, newest first |
+| [`HISTORY.md`](HISTORY.md) | the milestones of the search — results certified, refutations, approaches opened or closed, migrations of the harness — newest first |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
-
-The milestones of the search — results certified, refutations, approaches opened or
-closed, migrations of the harness — are in [`HISTORY.md`](HISTORY.md), newest first.
 
 ## Setup and verify
 

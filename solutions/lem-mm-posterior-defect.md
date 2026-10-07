@@ -1,10 +1,12 @@
 ---
-title: 'Solution: posterior eigenfunction-defect calculus'
+title: 'The posterior eigenfunction defect'
 label: sec:sol-lem-mm-posterior-defect
 ledger-node: lem:mm-posterior-defect
 numbering:
   enumerator: D14.%s
 ---
+
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
 
 **Overview.** This dossier proves [](#lem:mm-posterior-defect) as [](#thm:sol-lem-mm-posterior-defect). The setting is a smooth, strongly log-concave, isotropic law, a normalized first eigenfunction $f$, and the planted Gaussian observation channel. The posterior defect $R_t$ obeys three exact integration-by-parts identities [](#eq:sol-mm-defect-identities), two variance budgets [](#eq:sol-mm-defect-budgets) and an averaged gradient bound [](#eq:sol-mm-defect-gradient). The identities come from pairing a posterior generator relation with constant, linear and quadratic tests. The budgets come from filtering martingales and the planted cancellation $R_t(X)=B_t^{\mathrm{obs}}\cdot\nabla f(X)$. The imported node [](#thm:letwin-qcts) is not used.
 

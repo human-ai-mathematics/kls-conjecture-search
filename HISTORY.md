@@ -12,6 +12,163 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: The site is published on GitHub Pages only
+
+- The restricted Cloudflare preview (`preview.yml` and its password middleware) is
+  removed; `pages.yml` is the only deployment of the site.
+
+## 2026-10-07: The harness follows conjecture-search-template v0.6.0
+
+- The template released as v0.6.0 the harness changes made here: routes may stay active
+  after the target is proved (commit `be78db3`), a dossier names the results it uses, and
+  dossier titles drop the "Solution:" prefix. Nothing to migrate; the comment of
+  `templates/solution.md` now matches the template's.
+
+## 2026-10-07: Dossier titles and the last process vocabulary
+
+- The 76 dossier titles, shown in the *Full proofs* sidebar, now match the entries of
+  `proofs.md`, with the argument as prefix ("BKL:", "Song–Zhang v2:", "BK:", …); the
+  "Solution:" prefix of the template is dropped, here and in `templates/solution.md`.
+- Five statements lose their last process words ("consumption", "the source",
+  "premise"), among them the title of `cor:tight-window-consumption`; labels unchanged.
+  An undefined reference to "soft-projector calculations" left Chapter 28.
+- A fresh reviewer found no mathematical change:
+  `research/reviews/2026-10-07-editorial-u-dossier-titles.md` and
+  `research/reviews/2026-10-07-editorial-u-dossier-titles-window-occupation.md`.
+
+## 2026-10-07: Editorial pass on the whole site
+
+- Each proof is told once in detail, in its chapter (8, 9, 11); the overview keeps a
+  calibration and one paragraph of idea per proof (about 20% shorter). Redundant
+  summaries, scope caveats and internal vocabulary ("consume", "premise", "pinned",
+  "badge", "the source") removed from the prose; obstacles explained once and linked.
+- The family chapters (1–6) now say that KLS is proved and what each family does not
+  reach alone; the history table of Chapter 2 runs to the three proofs; Chapter 21
+  follows the template of the other mechanisms; the glossary's QCTS entry is corrected
+  ("quadratic-chaos thin shell").
+- Table of contents: "The proofs of KLS"; the map of mechanisms (Chapter 14) opens the
+  alternative mechanisms; the fixed-cut archive merged from 11 chapters into 7
+  (Chapters 28–34), every former chapter label kept as a section label. The dossiers are
+  grouped under *Full proofs* as in `proofs.md`, which now lists all of them in the
+  order of the manuscript; the versions table of Chapter 9 keeps dates only.
+- Every dossier opens with a line naming its part and chapter; raw `research/` paths
+  removed from five dossiers; seven statements reworded ("KLS" for "the KLS conjecture",
+  two titles without process vocabulary). A fresh reviewer found no mathematical change:
+  `research/reviews/2026-10-07-editorial-site-pass.md`,
+  `research/reviews/2026-10-07-editorial-site-pass-window-occupation.md` and, after a
+  `sync` audit whose corrections were applied,
+  `research/reviews/2026-10-07-editorial-sync-audit.md` carry the certifications over.
+
+## 2026-10-07: Editorial harmonization of the site
+
+- One source per topic: the welcome page says what the site adds and defines
+  *reconstructed* (every step a complete statement with a complete proof, checked by a
+  separate reviewer agent, not yet reviewed by a person); each proof is summarized once
+  (Chapter 0) and compared once (Chapter 12); the standing of the alternative mechanisms
+  with respect to KLS is stated once (Chapter 14).
+- Proof chapters titled "Authors: mechanism"; moment-map and fixed-cut titles shortened;
+  internal vocabulary ("gate matrices", "covariance technology", "layer") removed from the
+  prose; the localization prelude opens the fixed-eigenfunction part.
+- US spelling and the `\CP` macro throughout the prose. The stale remark on the BK source
+  now records its arXiv deposit.
+- Statement vocabulary renamed in a second pass: `\CP`, US spelling, "Chapter" for
+  references to whole chapters, and "linear test" for "gate" in three titles and five
+  bodies. A fresh reviewer found no mathematical change; one grouped editorial note,
+  `research/reviews/2026-10-07-editorial-statement-pass.md`, carries the 43 affected
+  certifications over. The "… implies KLS" titles of the archive are kept.
+- The site names its maintainer, Nicolas Brosse, and the Numina Collaboration as authors.
+
+## 2026-10-07: BK on arXiv; the unconditional case cited
+
+- Balasubramanian–Kasiviswanathan is now arXiv:2610.07728v1 (6 October 2026). Its text
+  is identical to the GitHub PDF reconstructed here, apart from the arXiv stamp, so the
+  BK certifications are unaffected; the bibliography records both versions.
+- Cited Mikulincer–Zadik arXiv:2609.38295v1, a dimension-free bound for unconditional
+  log-concave measures through a Dunkl–Langevin operator, in the chapter on structured
+  classes. No statement changed.
+
+## 2026-10-06: BK compatible integration certified as a third KLS proof
+
+- Added the pinned Balasubramanian–Kasiviswanathan source and reconstructed its
+  compatible-tensor Hodge estimate, uniform integration powers, covariance-normalized
+  localization, reverse transfer and direct degree induction in nine dossiers.
+- Twelve assertions independently reviewed, including `thm:bk-appell-bound` and
+  `thm:bk-explicit-poincare` with constant $1+2\cdot10^{16}$. A separate composition
+  adds a third proof record to `conj:kls`; previous proof records received an
+  independent dependency-extension review without changing their actual premises.
+- The BK chapter sits before the comparison; later chapters shift by one, with stable
+  labels. All 178 preexisting statements are unchanged. Alternative mechanisms retain
+  their objectives; no claim of priority or journal refereeing is made.
+- Source and detail: `research/explorations/2026-10-06-bk-certified.md`.
+
+## 2026-10-06: The manuscript restructured around the two proofs
+
+- The proofs part reads Song–Zhang v1, BKL, Song–Zhang v2 (its technical estimates in a
+  chapter of their own), then a new comparison of the two proofs; the overview now
+  explains both ("How KLS was proved").
+- New prose chapter *KLS after its proofs*: equivalent forms, consequences, the constants
+  of the two proofs and the question of the best constant. No new statement.
+- The synthesis is dissolved into the comparison and the map of alternative mechanisms;
+  three living mechanisms (moment map, fixed eigenfunction, conditional fibers); the fixed
+  cut becomes a final archive part.
+- No statement changed (`check.py --statements` identical). Legacy statement titles are
+  deferred to a separate pass (`TODO-EDITORIAL-POST-KLS.md` §9).
+- Source: `research/explorations/2026-10-06-editorial-restructure.md`.
+
+## 2026-10-06: The manuscript repositioned after the proof of KLS
+
+- The site is retitled *The KLS theorem and its methods* and presents itself as a
+  reader's companion to the two proofs of `conj:kls`, the methods that led to them, and
+  the questions that remain open after KLS.
+- The proofs are presented as Song–Zhang v1, Song–Zhang v2, then BKL, along the
+  development of the polynomial method (BKL was deposited first). The verification
+  caveat is stated once; the four approaches are motivated by what they would add beyond
+  KLS; the entry problems open with `conj:gate-zero-sharp`.
+- One novelty claim on `thm:cmh-dirichlet` is withdrawn. The AI use declared by the
+  authors of both proofs is quoted on the welcome page.
+- No statement changed (`check.py --statements` identical).
+- Source: `research/explorations/2026-10-06-editorial-post-kls.md`.
+
+## 2026-10-06: Song–Zhang v2 reconstructed; a second KLS proof recorded
+
+- Twelve new proof dossiers and independent agent reviews establish the SZ v2
+  chain, including the finite-block estimates, summable losses and final
+  composition. `conj:kls` retains its statement and now has two proof records.
+- The SZ chain uses no BKL conclusion or previously proved KLS theorem. The
+  two closing mechanisms share earlier spectral foundations; their actual
+  inputs are recorded separately from the combined dependency graph.
+- SZ v1 and v2 have distinct bibliography entries. Earlier dossiers and reviews
+  remain unchanged. The BKL composition has a new scoped review covering the
+  enlarged dependency union, without changing its mathematical inputs.
+- The SZ import route is accomplished. Other route states are preserved, with
+  exact comparison tests for the older startup and recovery questions. The
+  methodological assessment claims no priority for either proof mechanism.
+- Source: `research/explorations/2026-10-06-sz-v2-certified.md`.
+
+## 2026-10-06: BKL reconstructed and certified; KLS proved locally
+
+- Seven proof dossiers and independent agent reviews establish the BKL chain,
+  its composition into `conj:kls`, and the unconditional initialization corollary.
+  This is local agent certification of BKL v1, distinct from journal refereeing.
+- `cand:sz-uniform-conditional-initialization` is promoted to the stronger
+  `cor:bkl-uniform-conditional-initialization`. Its research route remains active
+  with an explicit independent-proof objective.
+- The import route is accomplished. All ten pre-existing active routes and six
+  blocked routes retain their states; no open method is closed because KLS is proved.
+- Source: `research/explorations/2026-10-06-bkl-certified.md`.
+
+## 2026-10-06: BKL reconstruction opened; alternative proofs remain research objectives
+
+- Bizeul–Klartag–Lehec arXiv:2610.05474v1 announces a proof of KLS. Its
+  sections 2–7 are being reconstructed, including the tilt criterion,
+  inverse-covariance cumulant dynamics and suspension. The announcement alone
+  changes no mathematical status.
+- The framework now allows active alternative-proof routes after a target is
+  proved. Refuted targets and resolved blockers retain their existing checks.
+  All existing active and blocked routes keep their states at this import stage.
+- Sources: `research/explorations/2026-10-06-bkl-integration.md` and
+  `research/explorations/2026-10-06-post-proof-framework.md`.
+
 ## 2026-10-05: The manuscript reorganised by what it has established
 
 - The survey now has six families of methods. A new chapter on the parallel coupling of

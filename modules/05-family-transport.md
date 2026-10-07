@@ -6,6 +6,8 @@ numbering:
 (sec:family-transport)=
 # Family 5: transport maps and the entropic barrier
 
+KLS is now proved, by three different arguments compared in Chapter [](#sec:kls-synthesis). None of them uses the transport maps of this chapter, although all three start from Letwin's quadratic estimate, which rests on the moment map of Chapter [](#sec:family-moment-map). This chapter describes what transport controls on its own and what it does not give.
+
 **Object followed.** A map pushing a reference measure — usually a Gaussian, or Wiener measure — onto $\mu$, together with the derivative of that map.
 
 **What it buys.** A reformulation in which KLS becomes a regularity statement about a single transport map rather than a spectral statement about a diffusion. The reformulation is exact and appealing; the difficulty is that the three natural instances each fail in an instructive and different way.
@@ -54,16 +56,14 @@ Then
 
 where $p_\theta\propto e^{\inner\theta x}\one_K$, and $D^3\Lambda(\theta)$ is the third-moment tensor of the same exponential tilt [@BubeckEldan2014EntropicBarrier]. The entropic barrier therefore packages exactly the covariance and third-moment geometry that stochastic localization manipulates — [](#eq:entropic-hessian) and [](#eq:sl-covariance-sde) are two descriptions of one object, one indexed by a tilt parameter and one by a time.
 
-The gap is a matter of which contractions are controlled. Ordinary self-concordance controls *scalar* contractions of $D^3\Lambda$, of the form $D^3\Lambda[u,u,u]$. Localization needs *matrix* or Hilbert–Schmidt contractions — precisely the parameter $\kappa_n$ of [](#eq:kappa-def). Letwin's theorem now supplies the latter ([](#prop:letwin-kappa)), which closes this particular mismatch; what it does not supply is the all-functions spectral step, and that remains as it was.
+The gap is a matter of which contractions are controlled. Ordinary self-concordance controls *scalar* contractions of $D^3\Lambda$, of the form $D^3\Lambda[u,u,u]$. Localization needs *matrix* or Hilbert–Schmidt contractions — precisely the parameter $\kappa_n$ of [](#eq:kappa-def). Letwin's theorem now supplies the latter ([](#prop:letwin-kappa)), which closes this particular mismatch; that estimate alone does not supply the all-functions spectral step, which the three proofs obtain through polynomials of every degree (Chapter [](#sec:kls-synthesis)).
 
-**The precise missing estimate.** The dimension-free averaged bound [](#eq:brownian-derivative) on the expected operator norm of the transport derivative.
-
-**Why it stalls.** [](#rem:no-lipschitz-transport) rules out the pathwise approach, so any argument must work in expectation — and an expected operator norm is not accessible by the pathwise convexity techniques that make Caffarelli's theorem work. Available derivative bounds either lose the alignment between the derivative and the test function, or reuse KLS-scale input and so cannot improve it.
+**What it does not reach alone.** The dimension-free averaged bound [](#eq:brownian-derivative) on the expected operator norm of the transport derivative. [](#rem:no-lipschitz-transport) rules out the pathwise approach, so any argument must work in expectation, and an expected operator norm is not accessible by the pathwise convexity techniques that make Caffarelli's theorem work. Available derivative bounds either lose the alignment between the derivative and the test function, or reuse KLS-scale input and so cannot improve it.
 
 :::{prf:remark} Structured cases where KLS is known
 :label: rem:known-cases
-It is worth recording what is not open, since it delimits what a counterexample could look like. KLS holds for products by tensorization; for uniformly log-concave measures via Brascamp–Lieb/Bakry–Émery (Section [](#subsec:transport-caffarelli)); for $\ell_p$-balls; and for broad classes of generalized Orlicz balls [@KolesnikovMilman2016OrliczKLS]. It is *not* known for all unconditional convex bodies. These cases illustrate how additional structure can make the corresponding constant explicit; KLS asks for a universal bound when no such structure is available.
+Before the general proofs, several structured classes already admitted direct arguments. KLS holds for products by tensorization; for uniformly log-concave measures via Brascamp–Lieb/Bakry–Émery (Section [](#subsec:transport-caffarelli)); for $\ell_p$-balls; and for broad classes of generalized Orlicz balls [@KolesnikovMilman2016OrliczKLS]. For unconditional measures, a preprint of Mikulincer and Zadik gives a dimension-free bound a few days before the general proofs, by a different route: a spectral analysis of a Dunkl–Langevin operator attached to a transform of the measure [@MikulincerZadik2026Unconditional]. The general theorem [](#conj:kls), whose three proofs are compared in Chapter [](#sec:kls-synthesis), also covers every unconditional convex body. These earlier cases remain useful for understanding how additional structure can make the constant explicit.
 :::
 
-**Where this family enters the four approaches.** It enters none of them directly. The nearest open question is the coupling one of the next family, Chapter [](#sec:family-coupling), whose extension beyond linear tilts is target 4 of Section [](#sec:kls-synthesis); no labelled statement of this manuscript formulates it. Transport enters the four approaches only through the Brascamp–Lieb cap that stochastic localization uses.
-% Agent note: target 4 has no ledger node and no approach in the portfolio.
+**Where this family meets the alternative mechanisms.** It enters none of them directly. The nearest open question is the coupling one of the next family, Chapter [](#sec:family-coupling), whose extension beyond linear tilts is described in Section [](#subsec:atlas-coupling-beyond-tilts); no labelled statement of this manuscript formulates it. Transport enters the alternative mechanisms only through the Brascamp–Lieb cap that stochastic localization uses.
+% Agent note: the coupling-beyond-tilts direction (subsec:atlas-coupling-beyond-tilts) has no ledger node and no approach in the portfolio.

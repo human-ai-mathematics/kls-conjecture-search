@@ -1,9 +1,11 @@
 ---
-title: "Solution: consumption of the weighted near-Cheeger package"
+title: 'The weighted near-Cheeger implication'
 ledger-node: thm:intro-weighted
 numbering:
   enumerator: "102.%s"
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:introduction); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** The weighted package supplies an integrated Stein-trace estimate
 and bounds its error by a multiple of time for cuts whose initial excess is

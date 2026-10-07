@@ -1,10 +1,12 @@
 ---
-title: 'Solution: the CMH recovery calculus'
+title: 'The recovery calculus for the moment-Hessian constant'
 label: sec:sol-cmh-recovery-calculus
 ledger-node: prop:cmh-recovery-calculus
 numbering:
   enumerator: D20.%s
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-normalization); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** This dossier proves [](#prop:cmh-recovery-calculus) as [](#thm:sol-cmh-recovery-calculus) for the recovery envelope $\mathfrak R_n$ of [](#eq:sol-cmh-recovery-envelope). It proves the lower bounds [](#eq:sol-cmh-recovery-lower-bounds), invariance and monotonicity under linear maps, the product bound, and an affine-support extension. It also computes the envelope for Gaussians, for one-dimensional products and for uniform-simplex blocks. Every estimate is made on selected finite-stage regular laws before a liminf is taken, and no semicontinuity of $\CMH$ is used. The results cover only these closure operations and model blocks and do not discharge [](#ass:cmh-recovery-envelope).
 

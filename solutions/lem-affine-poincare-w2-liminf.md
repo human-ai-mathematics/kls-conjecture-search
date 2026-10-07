@@ -1,5 +1,5 @@
 ---
-title: 'Solution: affine-Poincaré recovery and one-sequence CMH closure'
+title: 'Lower semicontinuity of the affine Poincaré constant'
 label: sec:sol-affine-poincare-w2-liminf
 ledger-node:
 - lem:affine-poincare-w2-liminf
@@ -7,6 +7,8 @@ ledger-node:
 numbering:
   enumerator: D9.%s
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-normalization); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** This dossier proves [](#lem:affine-poincare-w2-liminf) and, conditional on the unresolved [](#ass:cmh-recovery-envelope), [](#cor:cmh-recovery-sequence-suffices). It works with the intrinsic covariance form on the affine support, which makes the affine Poincaré constant $\CPaff$ lower semicontinuous along every centered log-concave $W_2$-convergent sequence. Regular compact-target approximants come from smoothing, tilting and truncation, together with the published moment-map theorem [](#thm:regular-moment-map-compact-target). No bound on $\CMH$ and no semicontinuity of $\CMH$ is claimed.
 

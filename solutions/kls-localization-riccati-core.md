@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the localization, Riccati, and tight-window core'
+title: 'Localization and Riccati identities'
 label: sec:sol-kls-localization-riccati-core
 ledger-node:
 - lem:matrix-riccati
@@ -11,6 +11,8 @@ ledger-node:
 numbering:
   enumerator: D6.%s
 ---
+
+*Part of the shared technical foundations, Chapters [](#sec:riccati) and [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#lem:matrix-riccati), [](#thm:scalar-riccati), [](#cor:per-direction), [](#cor:tight-window-consumption), [](#lem:pathwise-BL) and [](#cor:away-from-zero). Under Eldan localization of a two-color cut, it derives exact Itô equations for the between-color covariance $B_t$, the within-color covariance $R_t$ and the separation $r_t=\Tr B_t$. A tight-window Carleson bound on the source $S_t$ then keeps the cut balanced. The boundary conclusion uses the separate canonical bridge [](#lem:survival-implies-kls).
 

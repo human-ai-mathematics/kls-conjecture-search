@@ -1,10 +1,12 @@
 ---
-title: 'Solution: full matrix Riccati dissipation'
+title: 'Full matrix dissipation'
 label: sec:sol-full-matrix-dissipation
 ledger-node: cor:full-matrix-dissipation
 numbering:
   enumerator: D2.%s
 ---
+
+*Part of the shared technical foundations, Chapter [](#sec:riccati); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves a refined form of [](#cor:full-matrix-dissipation): under Eldan localization of an isotropic log-concave $\mu$ with a nontrivial cut $E$, the full matrix dissipation $\E\int_0^\infty(R_t^2+s_tG_t^2)\dd t$ is bounded by $R_0\preceq I_n$ in Loewner order, with no balance or stopping hypothesis. The proof feeds the certified matrix Riccati identity into a general positive-drift lemma for matrix semimartingales.
 

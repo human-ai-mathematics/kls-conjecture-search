@@ -1,10 +1,12 @@
 ---
-title: 'Solution: small-gap fourth-moment bootstrap from the published frontier'
+title: 'A small-gap fourth-moment bound'
 label: sec:sol-lem-mm-smallgap-fourth-moment
 ledger-node: lem:mm-smallgap-fourth-moment
 numbering:
   enumerator: D16.%s
 ---
+
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
 
 **Overview.** This dossier proves [](#lem:mm-smallgap-fourth-moment) as [](#thm:sol-lem-mm-smallgap-fourth-moment). The result is an implication from a uniform Poincaré constant $K_n$ for isotropic log-concave laws ([](#ass:sol-sfm-frontier)): a normalized first eigenfunction of a regular isotropic approximant with $\lambda\le3/(8K_n)$ satisfies $\E_\mu f^4\le2$. The intended instantiation $K_n=C_K\log n$ is the published import [](#thm:klartag-logn), which is cited, not proved. The dossier notes that ledger acceptance of this import is pending, and it does not use [](#thm:letwin-qcts). The proof bootstraps an eigenvalue–energy identity through the Poincaré inequality applied to $f^2$.
 

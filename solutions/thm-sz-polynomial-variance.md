@@ -1,11 +1,13 @@
 ---
-title: 'Solution: covariance-adapted localization and polynomial variance'
+title: 'Song–Zhang v1: analytic foundations and Appell variance estimates'
 ledger-node:
   - thm:sz-polynomial-variance
   - lem:sz-analytic-foundations
 numbering:
   enumerator: '120.%s'
 ---
+
+*Part of the first version of Song–Zhang, Chapter [](#sec:polynomial-curvature); the reading order is on the [full proofs](#sec:proofs-sz-v1) page.*
 
 **Overview.** This reconstructs the polynomial estimate of Song–Zhang,
 [@SongZhang2026IteratedLogKLS, Sections 3–4], with the quadratic estimate

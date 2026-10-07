@@ -1,5 +1,5 @@
 ---
-title: "Solution: third moments and covariance moment windows"
+title: 'Letwin: third-moment bound and covariance control'
 ledger-node:
   - prop:letwin-kappa
   - cor:letwin-window
@@ -8,6 +8,8 @@ ledger-node:
 numbering:
   enumerator: "107.%s"
 ---
+
+*Part of the results of the literature written out here, Chapter [](#sec:covariance-tech); the reading order is on the [full proofs](#sec:proofs-literature) page.*
 
 **Overview.** A quadratic-variance bound controls the directional third-moment
 tensor by duality. Substitution into the published Klartag--Lehec fixed-time

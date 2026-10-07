@@ -1,10 +1,12 @@
 ---
-title: 'Solution: restart deweighting at a stopping time'
+title: 'Restart deweighting at a stopping time'
 label: sec:sol-lem-mm-restart-deweighting
 ledger-node: lem:mm-restart-deweighting
 numbering:
   enumerator: D15.%s
 ---
+
+*Part of the fixed-eigenfunction mechanism, Chapter [](#sec:spectral-approach); the reading order is on the [full proofs](#sec:proofs-eigenfunction) page.*
 
 **Overview.** This dossier proves [](#lem:mm-restart-deweighting) as [](#thm:sol-lem-mm-restart-deweighting), unconditionally. For a regular approximant, a fixed test $f\in L^2(\mu)$ and a stopping time $\sigma>0$, the conditional unweighted source after $\sigma$ is at most $\Var_{\mu_\sigma}(f)/(\varepsilon+\sigma)\le v_\sigma/\sigma$ ([](#eq:sol-rdw-main)). The proof restarts the planted channel at $\sigma$ with the posterior as new prior and applies [](#lem:mm-time-weighted-fixed-source) with curvature $\kappa=\varepsilon+\sigma$, conditionally on $\mathcal F_\sigma$. No unweighted statement at time zero is made.
 

@@ -1,10 +1,12 @@
 ---
-title: 'Solution: constant-preserving CMH approximation closure'
+title: 'Approximation closure for the moment-Hessian constant'
 label: sec:sol-cmh-approximation
 ledger-node: prop:cmh-approximation-closure
 numbering:
   enumerator: D27.%s
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:moment-map-cmh); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** This dossier answers [](#prop:cmh-approximation-closure) ([](#thm:sol-cmh-approximation)). Every centered log-concave law, including one carried by a proper affine subspace, is a $\Wtwo$-limit of explicit regular compact-target approximants $\mu_k$ with $\CPaff(\mu)\le\liminf_k\CPaff(\mu_k)\le\liminf_k\CMH(\mu_k)$ ([](#eq:sol-cmh-approx-liminf)). A uniform CMH bound on these approximants ([](#eq:sol-cmh-approx-premise)) therefore gives the affine Poincaré inequality for $\mu$ with the same constant. That uniform bound is an explicit hypothesis: no universal $\mathrm{CMH}(4)$, no KLS and no continuity of $\CMH$ is claimed. Only the Poincaré inequality is passed to the limit, never the Stein kernels.
 

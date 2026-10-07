@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the perimeter martingale and the excess-consumption audit'
+title: 'The excess and the perimeter martingale'
 label: sec:sol-kls-excess-audit
 ledger-node:
 - prop:intro-audit
@@ -10,6 +10,8 @@ ledger-node:
 numbering:
   enumerator: D4.%s
 ---
+
+*Part of the fixed-cut archive, Chapters [](#sec:introduction) and [](#sec:stein); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#lem:perimeter-martingale), [](#prop:trivial-excess), [](#lem:excess-identity), [](#lem:inf-martingales) and [](#prop:intro-audit). Under stochastic localization, the lower Minkowski perimeter of a fixed cut is a supermartingale in general and a true martingale in the compact-support smooth class. The resulting excess bounds are then used to audit what an unweighted Stein-trace estimate would consume.
 

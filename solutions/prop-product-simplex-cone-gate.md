@@ -1,9 +1,11 @@
 ---
-title: 'Solution: sharp linear gate on cones over products of simplices'
+title: 'Cones over products of simplices'
 ledger-node: prop:product-simplex-cone-gate
 numbering:
   enumerator: '127.%s'
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-exact-cases); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** We use the certified cone kernel of [](#prop:cone-moment-map),
 compute three moments of an isotropic uniform simplex, and assemble the product

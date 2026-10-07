@@ -1,10 +1,12 @@
 ---
-title: 'Solution: scale-weighted all-cut source budget'
+title: 'The scale-weighted source budget'
 label: sec:sol-time-weighted-source
 ledger-node: lem:time-weighted-source
 numbering:
   enumerator: D19.%s
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:open); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#lem:time-weighted-source) as [](#thm:sol-time-weighted-source): for any nontrivial cut along Eldan localization of an isotropic log-concave law, $\E\int_0^Tt^2(S_t+r_t^2)\dd t\le T^2\E r_T\le T$ ([](#eq:sol-time-weighted-source)). The same bound holds for any stopped integral ([](#eq:sol-time-weighted-stopped)). The proof multiplies the scalar Riccati identity [](#thm:scalar-riccati) by $t^2$ and uses the posterior Brascamp–Lieb cap to absorb the damping. It is unconditional, keeps the quadratic time weight, and makes no unweighted claim at $t=0$.
 

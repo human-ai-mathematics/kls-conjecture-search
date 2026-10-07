@@ -1,5 +1,5 @@
 ---
-title: "Chen–Klartag imports: moment Hessian, thin shell, and third tensor"
+title: 'Chen–Klartag: moment-Hessian, thin-shell and third-tensor bounds'
 ledger-node:
   - thm:chen-klartag-moment-hessian
   - thm:chen-klartag-thin-shell
@@ -7,6 +7,8 @@ ledger-node:
 numbering:
   enumerator: "104.%s"
 ---
+
+*Part of the results of the literature written out here, Chapter [](#sec:family-moment-map); the reading order is on the [full proofs](#sec:proofs-literature) page.*
 
 **Author:** researcher_chen_klartag, gpt-6-astra, 2026-10-01.
 
@@ -28,7 +30,7 @@ exact exponential and simplex calculations check the constants.
 
 ## Statements and normalization
 
-The three manuscript directives in Section [](#sec:family-moment-map) read as follows
+The three manuscript directives in Chapter [](#sec:family-moment-map) read as follows
 (the mathematical content is transcribed; bibliography and cross-reference rendering
 are immaterial):
 

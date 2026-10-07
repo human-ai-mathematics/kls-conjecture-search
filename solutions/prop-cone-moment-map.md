@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the exponential cones — moment map, linear sector, cube cone'
+title: 'The exponential cones'
 label: sec:sol-cone-moment-map
 ledger-node:
 - prop:cone-moment-map
@@ -8,6 +8,8 @@ ledger-node:
 numbering:
   enumerator: D21.%s
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-exact-cases); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** This dossier proves [](#prop:cone-moment-map), [](#prop:cone-linear-sector) and [](#cor:cube-cone-gate-zero) for the exponential cone measures of [](#def:exponential-cone). It lifts the moment potential of the uniform law on the base $K$ to an explicit moment potential of the centered cone measure, reads off the canonical Stein kernel, and then computes the linear sector and the cube-cone gate matrix exactly. The outside inputs are [](#thm:regular-moment-map-compact-target) for the base, the uniqueness-up-to-translation theorem of Cordero-Erausquin–Klartag ([](#thm:sol-cone-cek)), and Gamma moments; [](#prop:cmh-hodge) and [](#lem:linear-sector-third-moment) are not used.
 

@@ -1,10 +1,12 @@
 ---
-title: 'Solution: the spectator obstruction to a superlinear excess remainder'
+title: 'The spectator obstruction to a superlinear excess remainder'
 label: sec:sol-spectator-excess-rate-obstruction
 ledger-node: prop:spectator-excess-rate-obstruction
 numbering:
   enumerator: D23.%s
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:open); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** This dossier proves [](#prop:spectator-excess-rate-obstruction) ([](#thm:sol-spectator-excess-rate-obstruction)). For all $C,T_0,\gamma,\eta,\delta$ there is a product of centered exponentials $\mu=\lambda^{\otimes d}$ and a half-mass cylinder $E$ with arbitrarily small initial excess such that the stopped excess integral violates the superlinear rate [](#eq:sol-spectator-rate-violation). The idea is to fix a nearly optimal base cylinder first and then add many independent spectator coordinates. In each spectator the covariance spike collapses the localized profile, while the tracked perimeter of the base cylinder stays of order one. The witnesses are products, so they satisfy KLS by [](#prop:products), and KLS is not refuted.
 

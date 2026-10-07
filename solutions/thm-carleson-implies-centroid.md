@@ -1,9 +1,11 @@
 ---
-title: "Solution: deterministic Carleson control implies stopped centroid control"
+title: 'Carleson control implies centroid control'
 ledger-node: thm:carleson-implies-centroid
 numbering:
   enumerator: "101.%s"
 ---
+
+*Part of the fixed-cut archive, Chapter [](#sec:carleson); the reading order is on the [full proofs](#sec:proofs-archive) page.*
 
 **Overview.** We first use the certified directional dissipation estimate to
 obtain a finite, dimension-dependent total source budget. Localizing the

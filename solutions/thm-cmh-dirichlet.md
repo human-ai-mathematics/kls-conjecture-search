@@ -1,5 +1,5 @@
 ---
-title: 'Solution: exact CMH constants on the line, on products, and on the log-concave Dirichlet family'
+title: 'Exact constants on the line and on products, and the bound $4$ on Dirichlet laws'
 label: sec:sol-cmh-dirichlet
 ledger-node:
 - thm:cmh-1d
@@ -15,6 +15,8 @@ ledger-node:
 numbering:
   enumerator: D29.%s
 ---
+
+*Part of the moment-map mechanism, Chapter [](#sec:cmh-exact-cases); the reading order is on the [full proofs](#sec:proofs-moment-map) page.*
 
 **Overview.** This dossier proves $\mathrm{CMH}(4)$ in three classes where the constant of [](#def:cmh) can be computed: the line ([](#thm:cmh-1d)), products ([](#thm:cmh-product), [](#cor:cmh-linear-images)) and the log-concave Dirichlet family ([](#thm:cmh-dirichlet), with [](#lem:cmh-gamma-completion), [](#lem:cmh-row-min), [](#lem:cmh-angular-coefficient), [](#cor:cmh-dirichlet-surplus), [](#cor:cmh-dirichlet-poincare)). It also records [](#cor:cmh-product-saturation). The Dirichlet case is proved by lifting to independent Gamma variables, completing a square in the Gamma Bochner identity, and using the Euler constraint of degree-$0$ homogeneity. Universal $\mathrm{CMH}(4)$ remains open. Products of centered one-sided exponentials saturate the constant $4$ exactly.
 
@@ -392,7 +394,7 @@ Qualitative dimension-free KLS bounds for simplices and conservative Gamma model
 
 **Closure.** The argument is written for smooth $g$ with controlled boundary behavior. To close: take polynomials on the simplex, lift them after a radial cutoff $\{S\ge\eps\}$ so that all Gamma integrations by parts in [](#lem:sol-gamma-completion) are justified, and let $\eps\downarrow0$; the inverse moments $\E S^{-1},\E S^{-2}$ used in [](#eq:cmh-radial-relations) are finite because $A\ge3$ throughout the Gamma branch. Polynomials form a core for $L_\alpha$, so the closed forms extend the inequality to $\Dom(L_\alpha)$. Only the residual branch $m=2$, $A<3$ uses the one-dimensional no-flux closure of [](#thm:sol-cmh-1d) instead.
 
-**Obstructions respected.** No `bounded_by` edge applies: the obstruction nodes of `research/program/ledger.yaml` are scoped by their own statements to the fixed-cut Eldan program. The only one with method-level reach, `rem:projection-ceiling`, forbids deriving quadratic-chaos thin shell from radial or projection information alone; the Dirichlet proof uses the full Hessian row through the Euler constraint of [](#lem:sol-row-min), not projection tests, and makes no thin-shell claim. Consistency with the sharp external inputs holds: by [](#thm:cmh-1d), the boundary mechanism forcing the constant $4$ is the one-dimensional exponential, which is also the extremal case of [](#thm:letwin-moment-map).
+**Obstructions respected.** No `bounded_by` edge applies: the obstruction statements of the manuscript are scoped by their own statements to the fixed-cut Eldan program. The only one with method-level reach, `rem:projection-ceiling`, forbids deriving quadratic-chaos thin shell from radial or projection information alone; the Dirichlet proof uses the full Hessian row through the Euler constraint of [](#lem:sol-row-min), not projection tests, and makes no thin-shell claim. Consistency with the sharp external inputs holds: by [](#thm:cmh-1d), the boundary mechanism forcing the constant $4$ is the one-dimensional exponential, which is also the extremal case of [](#thm:letwin-moment-map).
 
 :::{prf:corollary} = [](#cor:cmh-product-saturation)
 :label: rem:sol-cmh-saturation-risk
