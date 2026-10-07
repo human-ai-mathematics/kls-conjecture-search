@@ -12,6 +12,11 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
+## 2026-10-07: The site is published on GitHub Pages only
+
+- The restricted Cloudflare preview (`preview.yml` and its password middleware) is
+  removed; `pages.yml` is the only deployment of the site.
+
 ## 2026-10-07: The harness follows conjecture-search-template v0.6.0
 
 - The template released as v0.6.0 the harness changes made here: routes may stay active
