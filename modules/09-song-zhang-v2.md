@@ -67,7 +67,7 @@ Moreover $C_P(\mu)\le2^{85}\mathcal A(\mu)$, with a constant independent
 of the dimension and curvature bounds.
 :::
 
-The operator $\mathcal T$ differentiates after solving the diffusion Poisson equation and removes the mean. The removed linear component has norm at most one, which explains the comparison of $R$ with $C_P$. Iterating the Appell derivative identity tests finite powers of $\mathcal T$ against every higher degree. Low degrees are covered by $G(m)$; the remaining degrees are covered by the same operator power. The final spectral comparison gives $C_P\le2^{85}\mathcal A$. That fixed factor is paid once, after refining $\mathcal A$, and does not accumulate with the number of refinements.
+The operator $\mathcal T$ differentiates after solving the diffusion Poisson equation and removes the mean. The removed linear component has norm at most one, which explains the comparison of $R$ with $\CP$. Iterating the Appell derivative identity tests finite powers of $\mathcal T$ against every higher degree. Low degrees are covered by $G(m)$; the remaining degrees are covered by the same operator power. The final spectral comparison gives $\CP\le2^{85}\mathcal A$. That fixed factor is paid once, after refining $\mathcal A$, and does not accumulate with the number of refinements.
 
 ## Polynomial cost in the logarithmic depth
 

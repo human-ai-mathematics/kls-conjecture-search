@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:riccati)=
-# The two-colour Riccati identities
+# The two-color Riccati identities
 
 The evolution of $r_t=s_t\abs{\delta_t}^2$ is governed by an exact Riccati identity. The matrix version is the most informative, so it is stated first.
 

@@ -4,7 +4,7 @@ numbering:
 ---
 
 (sec:notation)=
-# Analytic conventions and the two-colour localization setup
+# Analytic conventions and the two-color localization setup
 
 ## Global conventions
 

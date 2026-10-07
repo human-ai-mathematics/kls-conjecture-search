@@ -16,8 +16,8 @@ CMH
 QCTS
 : The quadratic-chaos two-tail statement: the static input isolated in [](#def:qcts), together with the two-tail obstruction ([](#rem:two-tail-slice-bounds)) that limits what it can supply.
 
-Two-colour notation
-: The two-colour covariance and its bookkeeping, which separate the contribution of the cut being followed from that of everything else, so that a source term can be told from a damping term. Fixed in Section [](#subsec:two-color-notation), used throughout the fixed-eigenfunction and fixed-cut arguments.
+Two-color notation
+: The two-color covariance and its bookkeeping, which separate the contribution of the cut being followed from that of everything else, so that a source term can be told from a damping term. Fixed in Section [](#subsec:two-color-notation), used throughout the fixed-eigenfunction and fixed-cut arguments.
 
 Stein source and damping
 : In the scalar Riccati equation $\dd r_t=\dd M_t+(S_t-D_t)\dd t$ of [](#thm:scalar-riccati), $S_t$ is the only positive source and $D_t$ the coercive damping. “Absorbing the source into the damping” is what every fixed-cut argument is trying to do; Chapter [](#sec:stein-dictionary) gives the Stein representation of the source.

@@ -247,7 +247,7 @@ Let $K_n$ be the constant of [](#thm:klartag-logn), so that every isotropic log-
 With $T_0(n)=\min\bigl(t_c,\,1/(\bar C\log^2n)\bigr)$ from [](#thm:KL-window), the occupation hypothesis [](#eq:spectral-occupation) holds on $[0,T_0(n)]$ with $C_0=34$ and $C_1=0$ for every first eigenfunction with $\lambda\le3/(8K_n)$. Combined with the bridge argument of [](#prop:spectral-sufficiency) run at fixed $n$ and the trivial large-gap branch, every isotropic log-concave law on $\R^n$, $n\ge2$, satisfies $\CP\le C\log^2n$.
 :::
 
-The scope of [](#prop:mm-window-occupation) is limited further by its gap hypothesis. Since [](#thm:klartag-logn) gives $C_P(\mu)\le K_n$, every first nonconstant eigenvalue satisfies $\lambda\ge1/K_n>3/(8K_n)$. Its small-gap occupation implication therefore has no admissible measure with this choice of $K_n$. The stopped estimate [](#lem:mm-stopped-window-source) applies without that restriction. The reproduced $C\log^2 n$ bound is weaker than the published input, and supplies no nonempty case of [](#conj:mm-spectral-occupation).
+The scope of [](#prop:mm-window-occupation) is limited further by its gap hypothesis. Since [](#thm:klartag-logn) gives $\CP(\mu)\le K_n$, every first nonconstant eigenvalue satisfies $\lambda\ge1/K_n>3/(8K_n)$. Its small-gap occupation implication therefore has no admissible measure with this choice of $K_n$. The stopped estimate [](#lem:mm-stopped-window-source) applies without that restriction. The reproduced $C\log^2 n$ bound is weaker than the published input, and supplies no nonempty case of [](#conj:mm-spectral-occupation).
 
 % Agent note: the saturation profile was found in the 2026-08-30 initial-layer probe.
 

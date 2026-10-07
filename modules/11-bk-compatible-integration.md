@@ -8,7 +8,7 @@ numbering:
 
 Balasubramanian and Kasiviswanathan (BK) prove a dimension-free Poincaré bound through **compatible integration**: undo differentiation on symmetric tensor fields, control arbitrarily many integrations from finitely many polynomial estimates, and use stochastic localization to recover the next polynomial estimate. Their source is the 53-page preprint [@BalasubramanianKasiviswanathan2026KLS], arXiv v1 of 6 October 2026, read in an identical PDF first distributed on GitHub. The argument and its composition into [](#conj:kls) have been reconstructed in this manuscript and checked by separate reviewer agents; this is distinct from journal peer review or a person's acceptance.
 
-The quantitative conclusion is $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The large constant comes from an explicit induction proving $c_d\le10^{8d}/(d+1)^4$ simultaneously in degree, dimension and measure ([](#thm:bk-appell-bound)). The qualitative exponential criterion already appears in [](#prop:sz-exponential-coefficients-equivalence). BK establish its coefficient premise without importing KLS or a coefficient bound from the other proofs, then use their integration estimate to obtain the Poincaré constant directly. They retain the earlier Appell normalization and Letwin's quadratic variance bound as shared inputs.
+The quantitative conclusion is $\CP\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)). The large constant comes from an explicit induction proving $c_d\le10^{8d}/(d+1)^4$ simultaneously in degree, dimension and measure ([](#thm:bk-appell-bound)). The qualitative exponential criterion already appears in [](#prop:sz-exponential-coefficients-equivalence). BK establish its coefficient premise without importing KLS or a coefficient bound from the other proofs, then use their integration estimate to obtain the Poincaré constant directly. They retain the earlier Appell normalization and Letwin's quadratic variance bound as shared inputs.
 
 ## A Gaussian calculation and the proof's design
 
@@ -209,7 +209,7 @@ $$c_d^*\le\frac{R_*^d}{(d+1)^4}\qquad\text{for every integer }d\ge1.$$
 Thus the same bound holds in every dimension for every centered log-concave law of covariance at most the identity, including laws supported on a proper affine subspace.
 :::
 
-To extract a spectral gap, fix one regular law and its positive lower curvature $a$. Let the observation degree $D$ tend to infinity in [](#cor:bk-integration-powers), with $\rho=R_*$. Then $a^{-1/(D+1)}\to1$, and the one-step estimate gives $C_P\le1+2R_*^2$. Only after this degree limit is taken does approximation pass the common scalar inequality to arbitrary log-concave laws. This order avoids requiring a common positive curvature for all laws.
+To extract a spectral gap, fix one regular law and its positive lower curvature $a$. Let the observation degree $D$ tend to infinity in [](#cor:bk-integration-powers), with $\rho=R_*$. Then $a^{-1/(D+1)}\to1$, and the one-step estimate gives $\CP\le1+2R_*^2$. Only after this degree limit is taken does approximation pass the common scalar inequality to arbitrary log-concave laws. This order avoids requiring a common positive curvature for all laws.
 
 :::{prf:theorem} Explicit Poincaré bound from compatible integration
 :label: thm:bk-explicit-poincare
