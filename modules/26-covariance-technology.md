@@ -13,7 +13,7 @@ Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter 
 \Xi^{(2)}_T(\mu)=\int_0^T\E X_t^2\dd t .
 ```
 
-The bootstrap of Chapter [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Chapter [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance estimates. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
+The bootstrap of Chapter [](#sec:bootstrap) uses $\Xi_T$ and the covariance reduction of Chapter [](#sec:product-stress) uses $\Xi^{(2)}_T$; both rest on small-time operator-norm control of the covariance. We isolate that control as an assumption and derive it from the literature: with exponent $C_2=2$ from the published sup-time estimate below ([](#cor:KI-discharged)), and with $C_2=1$ under Letwin's quadratic estimate [](#thm:letwin-qcts) ([](#cor:KI-letwin)).
 
 :::{prf:assumption} Known small-time operator-norm control; matched to {[@KlartagLehec2022Polylog; @Letwin2026QuadraticKLS]}
 :label: ass:KI
@@ -25,7 +25,7 @@ $$
 $$
 :::
 
-This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's lectures. The older argument through the then-known Cheeger bound supplied $C_2=2$. Letwin's dimension-free quadratic Poincaré inequality ([](#thm:letwin-qcts)) instead bounds the third-moment parameter $\kappa_n$ universally; inserted into the precise Klartag–Lehec moment window, it gives $C_2=1$. The standard two-sided-exponential product example suggests that $1/\log n$ is the natural endpoint for covariance-only control: the largest time scale it can reach, since the top covariance eigenvalue of that product reaches order $\log n$ at times of order $1/\log n$.
+This is the shape of the estimate underlying the Chen bootstrap as presented in Klartag's lectures. The argument through the Cheeger bounds available before 2026 gives $C_2=2$. Letwin's dimension-free quadratic Poincaré inequality ([](#thm:letwin-qcts)) instead bounds the third-moment parameter $\kappa_n$ universally; inserted into the Klartag–Lehec moment bound, which holds for $t\le(C\kappa_n^2\log n)^{-1}$, it gives $C_2=1$. The standard two-sided-exponential product example suggests that $1/\log n$ is the natural endpoint for covariance-only control: the largest time scale it can reach, since the top covariance eigenvalue of that product reaches order $\log n$ at times of order $1/\log n$.
 
 :::{prf:theorem} Klartag–Lehec; the sup-over-time form is [@KLnotes, Thm. 61]
 :label: thm:KL-window
@@ -41,9 +41,9 @@ $$
 There is a universal constant $C$ such that every isotropic log-concave probability on $\R^n$, $n\ge2$, satisfies $\hstar_n\ge C^{-1}(\log n)^{-1/2}$; by Cheeger's inequality, every such law has $\CP\le C\log n$.
 :::
 
-This published bound makes the small-gap branch in Section [](#subsec:spectral-window-chain) empty. The separate argument for [](#thm:letwin-kls) sharpens the dimension dependence without using this bound; no covariance statement below by itself gives a universal time window.
+This bound is what makes the small-gap implications of Section [](#subsec:spectral-window-chain) vacuous. The argument for [](#thm:letwin-kls) sharpens the dimension dependence without using it; no covariance statement below gives control up to a universal time.
 
-The newer parallel-coupling preprint contains rank-sensitive information that is stronger than an operator-norm window but still cut-free. The integrated rank estimate below uses the stopped rank estimate; the subsequent third-moment and covariance-window arguments use separate inputs.
+The parallel-coupling preprint contains rank-sensitive information that is stronger than early-time operator-norm control but still does not see a cut. The integrated rank estimate below uses the stopped rank estimate; the third-moment and covariance-moment arguments after it use separate inputs.
 
 :::{prf:theorem} Stopped rank tails; [@KlartagLehec2025ThinShell]
 :label: thm:kl-stopped-rank-tail
@@ -73,7 +73,7 @@ $$
 $$
 :::
 
-Both statements refer to the pinned version 2 of [@KlartagLehec2025ThinShell]; their badges carry the verification information for each import. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#conj:trace-upgrade), [](#conj:mm-spectral-occupation), or the high-rank part of [](#conj:stein-weighted).
+Both statements follow version 2 of [@KlartagLehec2025ThinShell]. They control how many covariance eigenvalues are large and how long each rank can remain large. They do not control the orientation of a cut tensor $K_t$, a posterior Hessian $H_t$, or an eigenfunction source relative to those eigenspaces. In particular, neither theorem by itself discharges [](#conj:trace-upgrade), [](#conj:mm-spectral-occupation), or the high-rank part of [](#conj:stein-weighted).
 
 :::{prf:proposition} Letwin's third-moment bound
 :label: prop:letwin-kappa

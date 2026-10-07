@@ -8,7 +8,7 @@ numbering:
 
 Chapter [](#sec:moment-map-cmh) said what normalizing the schematic estimate $\norm{\Sigma^{-1/2}H\nabla g}_2^2\le4\norm{-Lg}_2^2$ requires ([](#rem:cmh-normalization)): every object in it fixed, so that the resulting statement implies a universal Poincaré bound. This chapter does so. The estimate is named, its operator data are fixed, the reduction to the affine Poincaré inequality is [](#thm:cmh-implies-affine-poincare), and three structural consequences are recorded that were not visible while the endpoint was a schema:
 
-- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two; this manuscript does not decide whether that channel makes CMH genuinely stronger than KLS ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison));
+- an exact weighted Hodge decomposition showing that CMH dominates the affine Poincaré constant and contains an additional solenoidal channel in dimension at least two ([](#prop:cmh-hodge), [](#cor:cmh-hodge-comparison)); universal $\mathrm{CMH}(4)$ implies KLS, and no converse is known (Chapter [](#sec:moment-map-cmh));
 
 - a necessary condition, the *linear test* — the inequality tested on linear functions only, called *gate zero* in the statements of [](#cor:gate-zero-third-moment) and [](#prop:cone-linear-sector) — which is an operator-to-trace upgrade of exactly the kind catalogued in [](#rem:trace-upgrade-unification), and which [](#thm:letwin-moment-map) does not supply by matrix algebra alone ([](#conj:gate-zero), [](#prop:letwin-not-gate-zero)). Its natural sharp form, the operator version of the Chen–Klartag trace bound, is [](#conj:gate-zero-sharp), and the constant $4$ is not the natural one for this sector;
 
@@ -169,11 +169,7 @@ $$
 In dimension at least two the divergence-free subspace is nontrivial, so the identity displays an additional channel that CMH must control.
 :::
 
-:::{prf:remark} What the Hodge identity does not prove
-The identity does *not* show that this channel is nonzero for a CMH extremizing sequence, nor does it exhibit a measure separating CMH from $\CPaff$. Thus $\mathrm{CMH}(4)$ is sufficient for KLS with constant $4$ ([](#thm:cmh-implies-affine-poincare)), and this manuscript establishes neither equivalence nor strict nonimplication. $\mathrm{CMH}(4)$ is the target of this approach, not an established reformulation of KLS or a strict strengthening of it.
-:::
-
-The product formula below shows that products of one-sided exponentials saturate $\mathrm{CMH}(4)$ with zero slack. [](#cor:cmh-product-saturation) therefore turns the possible solenoidal gap into a concrete perturbative test, but not into a proved separation.
+Whether the solenoidal channel is ever active is not known: no measure separating $\CMH$ from $\CPaff$ is known, and the products of one-sided exponentials, which saturate $\mathrm{CMH}(4)$ with zero slack ([](#cor:cmh-product-saturation)), turn the question into a perturbative test.
 
 (subsec:gate-zero)=
 ## The linear test: the necessary linear-sector condition
@@ -192,7 +188,7 @@ Every centered log-concave moment measure satisfies
 equivalently $\E H^2\preceq4\Id$ in isotropic position.
 :::
 
-This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole mechanism: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$ without disproving [](#conj:kls).
+This is necessary for universal $\mathrm{CMH}(4)$ and is not a known consequence of KLS. It is the cheapest falsifiable consequence of the whole mechanism: a single matrix expectation, with no test function and no operator inverse. A measure with $\lmax(\Sigma^{-1/2}\E[H\Sigma^{-1}H]\Sigma^{-1/2})>4$ would disprove $\mathrm{CMH}(4)$.
 
 :::{prf:remark} The linear test is a trace-upgrade problem
 :label: rem:gate-zero-trace-upgrade

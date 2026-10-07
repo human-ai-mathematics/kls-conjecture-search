@@ -6,7 +6,7 @@ numbering:
 (sec:qcts)=
 # The static quadratic-chaos input and the two-tail obstruction
 
-The time-zero version of two-color covariance control is already a strong statement. The intrinsic estimate used here is [](#thm:letwin-qcts), from Letwin's July 2026 version-1 preprint [@Letwin2026QuadraticKLS]. Its application to a localized posterior separates intrinsic quadratic control from the covariance-alignment problem created by unwhitening. The quantified two-tail configuration at the end of the section is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of the near-Cheeger variant and marks the boundary of what slice-wise verification can establish for the all-cut variant.
+The time-zero version of two-color covariance control is already a strong statement. The intrinsic estimate used here is [](#thm:letwin-qcts), from Letwin's July 2026 version-1 preprint [@Letwin2026QuadraticKLS]. Its application to a localized posterior separates intrinsic quadratic control from the covariance-alignment problem created by unwhitening. The quantified two-tail configuration at the end of the chapter is the static obstruction that both branches of the fixed-cut approach must respect: it fixes the covariance weight of the near-Cheeger variant and marks the boundary of what slice-wise verification can establish for the all-cut variant.
 
 Let $X\sim\nu$ be isotropic and log-concave, and put
 
@@ -64,7 +64,7 @@ Consequently $\calQ(\nu)\le8$ in [](#def:qcts).
 
 :::{prf:remark} Epistemic status
 :label: rem:letwin-status
-The source of [](#thm:letwin-qcts) is [@Letwin2026QuadraticKLS, Thm. 1.2], pinned to arXiv:2607.24164v1. This identifies the preprint version; the statement's badge and proof link separately record its verification here. The proof uses the moment measure of $\nu$, its positive symmetric Stein kernel, congruence, and an $H^{-1}$ inequality (Section [](#subsec:mm-noncommutativity)). The deductions below use this quadratic statement, not source Theorem 1.1 on general KLS.
+[](#thm:letwin-qcts) is Theorem 1.2 of Letwin's preprint [@Letwin2026QuadraticKLS] (arXiv:2607.24164v1); its status records the check made here. The proof uses the moment measure of $\nu$, its positive symmetric Stein kernel, congruence, and an $H^{-1}$ inequality (Section [](#subsec:mm-noncommutativity)). The deductions below use this quadratic statement, not Theorem 1.1 of the preprint on general KLS.
 :::
 
 :::{prf:corollary} Whitened two-color control and its exact alignment loss
@@ -180,7 +180,7 @@ The right-hand side is the Lorentz $\ell_{2,1}$ norm of the eigenvalue sequence 
 \Var(X^TMX)\lesssim \log n\,\norm M_{\HS}^2,
 ```
 
-which matches the former logarithmic scale rather than the dimension-free conclusion of [](#thm:letwin-qcts).
+a factor $\log n$ away from the dimension-free conclusion of [](#thm:letwin-qcts).
 
 ## Projection tests cannot remove the logarithm
 
@@ -216,11 +216,11 @@ Therefore $\inner{P}{TP}\le4r$, whereas $\norm T_{\op}=H_n\simeq\log n$. This is
 
 ## Static lesson
 
-A proof of KLS through this approach still cannot rely only on radial information or on projection tests. [](#thm:letwin-qcts) supplies the full *intrinsic* quadratic-chaos estimate, but [](#cor:qcts-source) shows exactly what whitening loses: the Euclidean Riccati source may still be amplified by $\lmax(A_t)^2$. The remaining task is therefore dynamic or geometric control of the alignment with $A_t$, attached to the fixed cut $E$.
+A fixed-cut argument cannot rely only on radial information or on projection tests. [](#thm:letwin-qcts) supplies the full *intrinsic* quadratic-chaos estimate, but [](#cor:qcts-source) shows exactly what whitening loses: the Euclidean Riccati source may still be amplified by $\lmax(A_t)^2$. The remaining task is therefore dynamic or geometric control of the alignment with $A_t$, attached to the fixed cut $E$.
 
 ## The quantified two-tail obstruction and the weight calibration
 
-The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction consumed in covariance-weighted form by the near-Cheeger variant (Chapter [](#sec:stein)) and the configuration whose dynamical occupation the all-cut variant must control (Chapter [](#sec:carleson)).
+The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction used in covariance-weighted form by the near-Cheeger variant (Chapter [](#sec:stein)) and the configuration whose dynamical occupation the all-cut variant must control (Chapter [](#sec:carleson)).
 
 :::{prf:proposition} Quantified two-tail configuration
 :label: prop:two-tail
@@ -270,9 +270,9 @@ Three consequences.
 :::
 
 (subsec:qcts-barriers)=
-## What this section argues against
+## What this chapter argues against
 
-The two remarks below name the proof shapes the computations of this section argue against. Each records what a proof should not try to do, not a theorem about KLS; later sections cite them as heuristic barriers, never as a step in a proof.
+The two remarks below name the proof shapes the computations of this chapter argue against. Each records what a proof should not try to do, not a theorem; later chapters cite them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} Absolute-scale slice bounds fail
 :label: rem:two-tail-slice-bounds

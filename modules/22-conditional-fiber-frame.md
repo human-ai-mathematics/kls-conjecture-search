@@ -18,7 +18,7 @@ $$
 \text{KLS},
 $$
 
-where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A counterexample to the frame question would leave KLS untouched; it would rule out this mechanism, whose sharpest result so far is negative ([](#prop:conditional-fiber-root-obstruction)).
+where the left-hand side is [](#conj:conditional-fiber-frame) and the arrow is [](#eq:conditional-fiber-gradient-comparison). The normalization is designed so that linear functions carry exactly the Euclidean energy, while the sharp one-dimensional log-concave Poincaré inequality bounds the form above by the usual gradient form. A negative answer to the frame question would rule out this mechanism, whose sharpest result so far is itself negative ([](#prop:conditional-fiber-root-obstruction)).
 
 **What it builds on.** The sharp one-dimensional log-concave Poincaré inequality, from the literature. Set up here: [](#lem:conditional-fiber-form), that the inverse-conditional-variance line-resampling form is densely defined and closable, which is what makes the question well posed at all.
 

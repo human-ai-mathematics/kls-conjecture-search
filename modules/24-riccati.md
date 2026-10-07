@@ -180,5 +180,5 @@ $$
 \E\int_0^\infty S_t\dd t\le\Tr R_0\le n.
 $$
 
-The KLS-strength estimate must upgrade operator occupation to trace occupation on the stopped balanced window. In words, the source $s_tG_t^2$ cannot be allowed to occupy many almost orthogonal directions for a non-negligible set of early balanced times. This is the precise noncommutative Carleson content of the problem.
+What the fixed cut needs is an upgrade from operator occupation to trace occupation up to the balanced stopping time [](#eq:tau-coarse). In words, the source $s_tG_t^2$ cannot be allowed to occupy many almost orthogonal directions for a non-negligible set of early balanced times. This is the precise noncommutative Carleson content of the problem.
 :::

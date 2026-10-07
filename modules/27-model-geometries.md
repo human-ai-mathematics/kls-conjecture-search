@@ -6,7 +6,7 @@ numbering:
 (sec:models)=
 # Model geometries: the Gaussian and product brackets
 
-The architecture should be tested where the answer is known. This section records the exact behavior of the program's quantities on the two canonical models and identifies the genuine stress test.
+A localization argument should be tested where the answer is known. This chapter records the exact behavior of the fixed-cut quantities on the two canonical models and identifies the genuine stress test.
 
 ## Gaussian initial data: deterministic covariance, active damping, zero excess
 
@@ -34,7 +34,7 @@ $$
 :::
 
 :::{prf:remark}
-The Gaussian model validates the consumption machinery — the centroid reduction, the role of $\lmax$, and the sign of the damping — but it does not test [](#ass:all-cut-carleson): the covariance never inflates, so the dangerous regime is never visited. The model in which the dangerous regime is provably visited while the answer is still known is the product model.
+The Gaussian model validates the localization machinery — the centroid reduction, the role of $\lmax$, and the sign of the damping — but it does not test [](#ass:all-cut-carleson): the covariance never inflates, so the dangerous regime is never visited. The model in which the dangerous regime is provably visited while the answer is still known is the product model.
 :::
 
 ## Product measures: the genuine stress test
@@ -61,8 +61,10 @@ It is known that for products of two-sided exponentials a single eigenvalue of $
 
 :::{prf:remark} Product stress test of the all-cut estimate
 :label: rem:product-stress-test
-Decide whether [](#ass:all-cut-carleson) holds for product measures. A proof cannot go through $\lmax(A_t)$ control — the operator norm genuinely reaches $\log n$ — and is therefore forced to exploit the cut-specific quantities $G_t,K_t,D_t$, which is exactly the discipline the general case demands; the available structure is independence, one-dimensional log-concave estimates, and the explicit variance dynamics of [](#prop:products). A counterexample cannot use a fixed cut depending on a single coordinate, even one whose variance later inflates ([](#cor:single-coordinate-cuts)); it needs a fixed cut of unbounded coordinate complexity whose source is aligned with the inflation excursions of many coordinates at once ([](#conj:product-alignment)). The two outcomes do not weigh the same. A proof for products would exhibit, on a model where the dangerous covariance regime is visited, the cut-aware mechanism that [](#ass:tight-prefix-carleson) needs in general. A failure would be a counterexample to the every-interval estimate on measures that satisfy KLS ([](#prop:products)). It would not by itself decide [](#ass:tight-prefix-carleson), the prefix form that [](#cor:tight-window-consumption) consumes: [](#ass:all-cut-carleson) implies it, and no converse is known, so the product cut would have to violate the prefix form on the tight window as well. Nor would a failure select the near-Cheeger variant: the product witnesses of [](#prop:weighted-spectator-obstruction) already violate the propagation clause of its literal package [](#ass:weighted-package), removing the weight does not save the superlinear remainder ([](#prop:spectator-excess-rate-obstruction)), and its trace clause [](#conj:stein-weighted) yields nothing toward KLS until a propagation statement that survives such products is formulated. A witness cut of large excess would only leave untouched the estimates restricted to near-minimizing cuts, where such a statement would live.
+Decide whether [](#ass:all-cut-carleson) holds for product measures. A proof cannot go through $\lmax(A_t)$ control — the operator norm genuinely reaches $\log n$ — and is therefore forced to exploit the cut-specific quantities $G_t,K_t,D_t$, which is exactly the discipline the general case demands; the available structure is independence, one-dimensional log-concave estimates, and the explicit variance dynamics of [](#prop:products). A counterexample cannot use a fixed cut depending on a single coordinate, even one whose variance later inflates ([](#cor:single-coordinate-cuts)); it needs a fixed cut of unbounded coordinate complexity whose source is aligned with the inflation excursions of many coordinates at once ([](#conj:product-alignment)).
 :::
+
+The two outcomes do not weigh the same. A proof for products would exhibit, where the dangerous covariance regime is visited, the cut-aware mechanism that the prefix form [](#ass:tight-prefix-carleson) needs in general. A failure would refute the every-interval estimate [](#ass:all-cut-carleson) on products, where the Poincaré bound holds by tensorization, but not the weaker prefix form unless the same cut violates it too. Nor would a failure favor the near-Cheeger variant, whose package already fails on products ([](#prop:weighted-spectator-obstruction)).
 
 ## The non-model obstruction
 

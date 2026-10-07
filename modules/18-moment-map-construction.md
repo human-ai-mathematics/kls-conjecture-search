@@ -6,9 +6,9 @@ numbering:
 (sec:mm-construction)=
 # The moment map: construction
 
-This section is the construction layer of the moment-map approach. Sections [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) fixed the target $\mathrm{CMH}(4)$, showed that it implies the affine Poincaré inequality, computed it in the tractable cases and isolated the two falsification tests; what remains is to prove it, and that is what this section attempts. Its aim is to extend [](#thm:letwin-moment-map) from constant matrices to multiplier fields selected by an arbitrary test function. Its conclusion is not established here: the identities displayed in this section outside labelled statements are formal calculations, not proofs, and the labelled problems below say what closing each gap would deliver. The steps are those of [](#rem:cmh-program): Haar compression, Schur–Piola transport, and the square-root commutator that the program must control.
+This chapter is the construction layer of the moment-map approach. Chapters [](#sec:cmh-normalization) and [](#sec:cmh-exact-cases) fixed the target $\mathrm{CMH}(4)$, showed that it implies the affine Poincaré inequality, computed it in the tractable cases and isolated the two falsification tests; what remains is to prove it, and that is what this chapter attempts. Its aim is to extend [](#thm:letwin-moment-map) from constant matrices to multiplier fields selected by an arbitrary test function. Its conclusion is not established here: the identities displayed in this chapter outside labelled statements are formal calculations, not proofs, and the labelled problems below say what closing each gap would deliver. The steps are those of [](#rem:cmh-program): Haar compression, Schur–Piola transport, and the square-root commutator that the argument must control.
 
-To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this section are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
+To avoid a collision with the stochastic quantities $H_t,S_t,K_t$ and $A_t$ used earlier, all objects in this chapter are stationary moment-map objects: $H=D^2\phi$ is the Hessian metric, $N$ is a weighted elliptic operator, and $K_M$ is a compressed multiplier.
 
 ## Haar compression and the commutator error
 
@@ -41,7 +41,7 @@ e_S(u)=Q_{M_S}u-K_{M_S}Nu
 =[N^{1/2},K_{M_S}]N^{1/2}u.
 ```
 
-The reported complete-tree Bessel deficit is
+Formally, the complete-tree Bessel deficit is
 
 ```{math}
 :label: eq:mm-bessel-deficit
@@ -50,7 +50,7 @@ The reported complete-tree Bessel deficit is
 =\sum_S\norm{(I-RR^*)M_SRh}^2.
 ```
 
-Numerical experiments produce rotated examples with negative individual sibling deficits, and Laguerre near-extremizers that consume nearly all descendant slack. These are evidence, not proofs, and no such example is recorded here as an exact counterexample; what they suggest is that neither nodewise positivity nor a fixed fractional allocation of slack along the tree can work.
+Numerical experiments produce rotated examples with negative individual sibling deficits, and Laguerre near-extremizers that use nearly all descendant slack. These are evidence, not proofs, and no such example is recorded here as an exact counterexample; what they suggest is that neither nodewise positivity nor a fixed fractional allocation of slack along the tree can work.
 
 % Agent note: the witnesses behind this paragraph are not persisted; see the originating exploration.
 
@@ -119,7 +119,7 @@ $$
 \rho\mathsf D=R_\perp^\top D^2\lambda R_\perp
 $$
 
-is the Airy representation. For a parent datum $h$, the reported canonical flux residual has the form
+is the Airy representation. For a parent datum $h$, the canonical flux residual has, formally, the form
 
 ```{math}
 :label: eq:mm-hodge-residual

@@ -6,7 +6,7 @@ numbering:
 (sec:localization-prelude)=
 # Prelude: what stochastic localization does, and what it costs
 
-The fixed eigenfunction, and the fixed cut kept in the archive, share a language, and this chapter is that language, at the level of detail needed to follow either argument and to see where it stops. It states no identity precisely and proves nothing. The exact process, the SDEs, the Itô calculations, the two-color notation, the Riccati and Stein identities, the covariance estimates and the model geometries are in the shared technical foundations (Chapters [](#sec:notation), [](#sec:riccati), [](#sec:covariance-tech) and [](#sec:models)) and, for the mass martingale and the Stein dictionary, among the fixed-cut chapters (Chapters [](#sec:mass-martingale) and [](#sec:stein-dictionary)); each is linked below at the point where it is first needed. A reader willing to take the mechanism on trust can go directly from here to Chapter [](#sec:spectral-approach) or Chapter [](#sec:introduction).
+This chapter is a short primer on stochastic localization, written for the two mechanisms that follow one object through it: the fixed eigenfunction (Chapter [](#sec:spectral-approach)) and the fixed cut kept in the archive (Chapter [](#sec:introduction)). It states no identity precisely and proves nothing. Each exact statement is linked where it is first needed, and the full apparatus is in the technical foundations, Chapters [](#sec:notation) to [](#sec:models). A reader willing to take the mechanism on trust can go directly to either chapter.
 
 (subsec:prelude-process)=
 ## The process, and why one would want it
@@ -26,7 +26,7 @@ One runs a measure-valued process $p_t$, started at $\mu$, in which the density 
 
 The reason (2) is worth having is that isoperimetry transfers. Fix a would-be bottleneck set $E$ and follow its mass $m_t=p_t(E)$. Because $p_t$ is a measure martingale, $m_t$ is a bounded martingale, so it converges; and its quadratic variation is exactly an integral of the correlation between $\one_E$ and the localization direction. Two readings of the same fact drive the two approaches.
 
-*If the mass stays balanced for a while*, then at that time the localized measure is both $t$-strongly log-concave and still genuinely cut by $E$, and a strongly log-concave measure with a balanced cut has boundary. Integrating that back through the martingale gives a lower bound on $\mu^+(E)$, which is a Cheeger statement about $\mu$ itself. This is [](#lem:survival-implies-kls), and its stopped form, [](#thm:centroid-implies-kls), is the exact bridge the fixed-cut approach consumes.
+*If the mass stays balanced for a while*, then at that time the localized measure is both $t$-strongly log-concave and still genuinely cut by $E$, and a strongly log-concave measure with a balanced cut has boundary. Integrating that back through the martingale gives a lower bound on $\mu^+(E)$, which is a Cheeger statement about $\mu$ itself. This is [](#lem:survival-implies-kls), and its stopped form, [](#thm:centroid-implies-kls), is the exact bridge the fixed-cut approach uses.
 
 *If the mass is identified too quickly* — $m_t$ rushing to $0$ or $1$ — then the quadratic variation was large, which means the cut was strongly correlated with the localization direction, which is information about the geometry rather than a failure. The fixed-cut approach is the attempt to show that the second case cannot happen for *every* balanced cut at once.
 
@@ -43,9 +43,9 @@ $$
 
 a martingale increment plus a drift split into exactly one positive *source* $S_t$ and one coercive *damping* $D_t$. This is [](#thm:scalar-riccati); the matrix identity behind it is [](#lem:matrix-riccati), and both are derived in Chapter [](#sec:riccati).
 
-The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Chapter [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source on the tight window — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every argument in either approach is, in the end, an attempt to absorb the source into the damping for long enough.
+The source is where the argument can lose. It measures how strongly the localization direction is correlated with the object being followed, and Section [](#sec:stein-dictionary) gives it a Stein representation — [](#lem:stein-vs-source) converts between a Stein norm and the source while the mass stays near balance — which is what makes it estimable at all. The damping is coercive, $D_t\gtrsim r_t^2$, so a bounded source is *absorbed*: the process cannot run away. Every argument in either approach is, in the end, an attempt to absorb the source into the damping for long enough.
 
-The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Chapter [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Chapter [](#sec:open) is the fixed cut's version of it.
+The gap between what can be absorbed and what can be estimated has a name, and it is the same gap in both approaches: control is available at *trace* scale and needed at *operator* scale. Section [](#sec:stein-dictionary) states that operator-to-trace gap explicitly, and [](#conj:trace-upgrade) in Chapter [](#sec:open) is the fixed cut's version of it.
 
 (subsec:prelude-warning)=
 ## The warning that constrains both approaches
@@ -61,4 +61,4 @@ Product measures are the standing stress test for exactly this reason, and Chapt
 (subsec:prelude-onward)=
 ## Where to go from here
 
-Chapter [](#sec:qcts) states the static input the fixed-cut approach consumes and the two-tail obstruction that limits what it can supply; it sits among the shared foundations but is worth reading before the fixed-cut chapters, because it is an obstruction, not a tool. Chapter [](#sec:spectral-approach) then opens the fixed eigenfunction, and Chapter [](#sec:introduction) the fixed-cut archive, each with a summary in the same format.
+Chapter [](#sec:qcts) states the static input the fixed-cut approach uses and the two-tail obstruction that limits what it can supply; it sits among the shared foundations but is worth reading before the fixed-cut chapters, because it is an obstruction, not a tool. Chapter [](#sec:spectral-approach) then opens the fixed eigenfunction, and Chapter [](#sec:introduction) the fixed-cut archive.
