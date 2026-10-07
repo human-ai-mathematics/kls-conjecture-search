@@ -14,6 +14,7 @@ Proofs reconstructed here by agents are checked by separate reviewer agents. Thi
 
 The KLS conjecture, [](#conj:kls), asked whether every isotropic log-concave measure has a Poincaré constant independent of the dimension. For a Gaussian that constant is one; the question was whether a universal bound survives without symmetry or product structure. Three preprints answer it. Two were deposited on arXiv on 4 October 2026: Bizeul–Klartag–Lehec (BKL), through all-order cumulant estimates, suspension and the spectral criterion of the first version of Song–Zhang, proved again in exponential form [@BizeulKlartagLehec2026KLS]; and the second version of Song–Zhang (SZ v2), through repeated refinement with summable losses [@SongZhang2026ConstantKLS]. The third, by Balasubramanian–Kasiviswanathan (BK), was first distributed as a PDF on GitHub and deposited on arXiv on 6 October 2026: it proves the theorem through compatible tensor integration and a direct induction on Appell coefficients, with the explicit bound $C_P\le1+2\cdot10^{16}$ ([](#thm:bk-explicit-poincare)), Chapter [](#sec:bk-proof) [@BalasubramanianKasiviswanathan2026KLS]. All three arguments, BK's numerical constant included, are reconstructed and checked here.
 
+(sec:ai-use)=
 :::{note} The use of AI in the three proofs
 All three sets of authors declare their use of AI.
 

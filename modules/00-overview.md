@@ -119,7 +119,7 @@ Applying Poincaré to $f(x)=|x|^2$ in isotropic position gives
 \Var(|X|^2)\le4n\,\CP(\mu),
 ```
 
-the implication “KLS $\Rightarrow$ thin shell” discussed in Section [](#subsec:kls-solved-neighbours). This radial estimate alone did not furnish a dimension-free proof of KLS in the arguments preceding the dimension-free proofs.
+the implication “KLS $\Rightarrow$ thin shell” discussed in Section [](#subsec:kls-solved-neighbours). Thin shell controls one observable, $|x|^2$, and on its own it did not lead to KLS.
 
 (sec:kls-examples)=
 ## Examples by hand
@@ -184,11 +184,11 @@ Exponents are given for $\PsiKLS_n$ and for $C_{\mathrm P,n}$ side by side, prec
 
 Through Buser–Ledoux, BK's Poincaré bound also gives an explicit Cheeger bound, $\Psi\le\sqrt{\pi(1+2\cdot10^{16})}$ ([](#cor:bk-cheeger)). The BK source was read in the PDF first distributed on GitHub, whose text is identical to arXiv v1; the bibliography entry [@BalasubramanianKasiviswanathan2026KLS] records both, with the Git commit and checksum of the version read.
 
-The authors of all three proofs declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:reading-paths).
+The authors of all three proofs declare substantial use of AI tools in finding them; their statements are quoted on the [welcome page](#sec:ai-use).
 
 :::{prf:remark} Reading the table
 :label: rem:history-table-caveats
-Two entries deserve care. The 2016/2024 row is one result: the Lee–Vempala preprint of 2016 appeared in final form in the Annals in 2024, and the bibliography records both. The $O(n^{5/12})$ entry summarizes a sequence of thin-shell improvements rather than a single paper, and is quoted here only to mark the pre-localization ceiling. Separately, the bibliography contains [@vempala2016kls], a 2016 announcement of a proof of the full conjecture; it is not a milestone in this table, and it is listed in the bibliography for completeness of the record only. The BK row refers to a version distributed on GitHub and pinned by its Git commit, not to an arXiv deposit; its date is that of the version consulted.
+Two entries deserve care. The 2016/2024 row is one result: the Lee–Vempala preprint of 2016 appeared in final form in the Annals in 2024, and the bibliography records both. The $O(n^{5/12})$ entry summarizes a sequence of thin-shell improvements rather than a single paper, and is quoted here only to mark the pre-localization ceiling. Separately, the bibliography contains [@vempala2016kls], a 2016 announcement of a proof of the full conjecture; it is not a milestone in this table, and it is listed in the bibliography for completeness of the record only. The BK row refers to the version first distributed on GitHub, pinned by its Git commit and identical in text to arXiv v1, deposited on 6 October 2026.
 :::
 
 (subsec:kls-solved-neighbours)=
