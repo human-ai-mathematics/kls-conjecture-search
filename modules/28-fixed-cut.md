@@ -174,7 +174,7 @@ such that, for the corresponding fixed tight stopping window $\tau_\eta$, the fo
 \qquad 0<T\le T_0 .
 ```
 
-(ii-w) **Weighted stable Stein-trace estimate.** With the Stein-trace norm $\calS_{\mu_t}(E)$ defined in Section [](#sec:stein),
+(ii-w) **Weighted stable Stein-trace estimate.** With the Stein-trace norm $\calS_{\mu_t}(E)$ defined in Chapter [](#sec:stein),
 
 ```{math}
 :label: eq:intro-weighted-stein

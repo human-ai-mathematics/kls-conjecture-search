@@ -6,9 +6,9 @@ numbering:
 (sec:stein-dictionary)=
 # The fixed cut: the Stein dictionary
 
-*Appendix to the fixed cut, Section [](#sec:introduction).*
+*Appendix to the fixed cut, Chapter [](#sec:introduction).*
 
-Both variants of the fixed cut, the all-cut and the near-Cheeger variant, consume the same covariance contrast of a cut, in two normalizations. This short core section records the exact algebraic dictionary relating that contrast to the Riccati source of Section [](#sec:riccati), and isolates — once — the exact gap of the all-cut variant and the covariance contrast that the proposed geometric approach also seeks to control. No argument in this manuscript yet connects Jacobi/Reilly boundary modes to this trace ([](#conj:almost-stability-gap)).
+Both variants of the fixed cut, the all-cut and the near-Cheeger variant, consume the same covariance contrast of a cut, in two normalizations. This short core section records the exact algebraic dictionary relating that contrast to the Riccati source of Chapter [](#sec:riccati), and isolates — once — the exact gap of the all-cut variant and the covariance contrast that the proposed geometric approach also seeks to control. No argument in this manuscript yet connects Jacobi/Reilly boundary modes to this trace ([](#conj:almost-stability-gap)).
 
 (subsec:one-gap)=
 ## The operator-to-trace gap
@@ -25,7 +25,7 @@ estimate [](#eq:loewner-carleson) reads $\calM\preceq R_0\preceq I_n$, a dimensi
 
 :::{prf:proposition} Two-color Stein representation
 :label: prop:stein-rep
-Let $\nu$ be a probability measure on $\R^n$ with finite fourth moment, mean $a$, covariance $A$, $E$ measurable, $p=\nu(E)\in(0,1)$, and let $\delta,G,K=G+(q-p)\delta\delta^T$ be the two-color quantities of Section [](#sec:notation). For a symmetric matrix $M$ set
+Let $\nu$ be a probability measure on $\R^n$ with finite fourth moment, mean $a$, covariance $A$, $E$ measurable, $p=\nu(E)\in(0,1)$, and let $\delta,G,K=G+(q-p)\delta\delta^T$ be the two-color quantities of Chapter [](#sec:notation). For a symmetric matrix $M$ set
 
 $$
 f_M(x)=(x-a)^TM(x-a)-\Tr(MA).

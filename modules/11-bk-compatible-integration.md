@@ -67,7 +67,7 @@ This Hodge comparison concerns the potential $V$ of the original measure and com
 
 :::{prf:lemma} Compatible-tensor Hodge estimate and operator domains
 :label: lem:bk-compatible-hodge
-For every law in [](#def:bk-compatible-calculus) and every integer $r\ge0$, $D_r$ is closed, densely defined and bijective, and $\|D_r^{-1}\|\le\sqrt{C_P(\mu)}$. The fields $\{\nabla^{r+1}\psi:\psi\in C_c^\infty(\mathbb R^n)\}$ form a graph core for $D_r^*$. Every $F\in\operatorname{Dom}(D_r^*)$ belongs to $W^{1,2}(\mu;E_{r+1})$ and satisfies
+For every law in [](#def:bk-compatible-calculus) and every integer $r\ge0$, $D_r$ is closed, densely defined and bijective, and $\|D_r^{-1}\|\le\sqrt{\CP(\mu)}$. The fields $\{\nabla^{r+1}\psi:\psi\in C_c^\infty(\mathbb R^n)\}$ form a graph core for $D_r^*$. Every $F\in\operatorname{Dom}(D_r^*)$ belongs to $W^{1,2}(\mu;E_{r+1})$ and satisfies
 $$\|D_r^*F\|_2^2\ge\|\nabla F\|_2^2+a\|F\|_2^2.$$
 The coefficient $a$ is independent of $r$ and $n$.
 :::
@@ -81,7 +81,7 @@ The decomposition into constant and centered tensors separates the inverse deriv
 :::{prf:proposition} Compatible integration and Appell coefficients
 :label: prop:bk-integration-calculus
 For every law in [](#def:bk-compatible-calculus) with $\operatorname{Cov}(\mu)\preceq I$, the operators $J$ and $L$ are bounded, and
-$$\|J\|^2\le C_P(\mu)\le1+\|J\|^2,\qquad \|L\|\le1.$$
+$$\|J\|^2\le \CP(\mu)\le1+\|J\|^2,\qquad \|L\|\le1.$$
 For every $r\ge0$,
 $$H_r^{-1}=J_rJ_r^*+L_rL_r^*,$$
 and, with $g_a(t)=t/(1+at)$ defined on positive operators by spectral calculus,
@@ -114,7 +114,7 @@ The source uses the concavity and monotonicity of $g(u)=u/(1+au)$ to compare suc
 Let $\nu$ be a centered regular log-concave law with $\operatorname{Cov}(\nu)\preceq I$ and $D^2V\succeq aI$ for $a>0$, with coefficients and integration operators as in [](#def:bk-uniform-appell-coefficients) and [](#def:bk-compatible-calculus).
 If $D\ge2$ is an integer, $\rho\ge1$, and $c_j(\nu)\le\rho^j/(j+1)^4$ for $2\le j\le D$, then with $B=\rho^2\max\{1,a^{-1/(D+1)}\}$ one has, simultaneously for all integers $q\ge1$,
 $$\|J^q\|^2\le2B^q,\qquad\|J_0\cdots J_{q-1}\|^2\le2B^q.$$
-In particular $C_P(\nu)\le1+2B$.
+In particular $\CP(\nu)\le1+2B$.
 :::
 
 Substituting the coefficient majorant in $Q_D$ gives a convergent sum bounded by two. This yields all powers with one factor two, rather than a factor $2^q$. The seed below uses only Letwin's quadratic variance estimate [](#thm:letwin-qcts): it gives $c_2\le\sqrt2$, hence $\|JL\|\le\sqrt2$. The $D=2$ operator estimate then gives the stated bound by taking $B$ down to $(2/a)^{1/3}$. No higher-degree coefficient estimate is needed to start.

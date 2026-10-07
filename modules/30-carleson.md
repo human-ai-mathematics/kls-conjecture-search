@@ -6,7 +6,7 @@ numbering:
 (sec:carleson)=
 # The fixed cut: the Carleson target
 
-*Appendix to the fixed cut, Section [](#sec:introduction).*
+*Appendix to the fixed cut, Chapter [](#sec:introduction).*
 
 ## Consuming the two-color Carleson estimate
 

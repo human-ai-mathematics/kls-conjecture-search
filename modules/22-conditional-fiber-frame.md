@@ -76,7 +76,7 @@ If $\mu$ is log-concave, then for every locally Lipschitz $f$ in the form domain
 \le4\int\abs{\nabla f}^2\dd\mu.
 ```
 
-Consequently, a form gap $\Var_\mu(f)\le C\mathcal D_{\mu,\rho}(f)$ implies $C_P(\mu)\le4C$. For every linear test $f_a(x)=a\cdot x$, one has $\mathcal D_{\mu,\rho}(f_a)=\abs{a}^2$; hence linear tests have quotient one when $\mu$ is isotropic. Every admissible frame has form gap one for the standard Gaussian, and the coordinate frame has form gap one for a standardized product law.
+Consequently, a form gap $\Var_\mu(f)\le C\mathcal D_{\mu,\rho}(f)$ implies $\CP(\mu)\le4C$. For every linear test $f_a(x)=a\cdot x$, one has $\mathcal D_{\mu,\rho}(f_a)=\abs{a}^2$; hence linear tests have quotient one when $\mu$ is isotropic. Every admissible frame has form gap one for the standard Gaussian, and the coordinate frame has form gap one for a standardized product law.
 :::
 
 :::{prf:conjecture} Conditional-fiber frame

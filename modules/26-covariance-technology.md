@@ -13,7 +13,7 @@ Both variants of the fixed cut, the all-cut and the near-Cheeger variant, meter 
 \Xi^{(2)}_T(\mu)=\int_0^T\E X_t^2\dd t .
 ```
 
-The bootstrap of Section [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Section [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance estimates. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
+The bootstrap of Chapter [](#sec:bootstrap) consumes $\Xi_T$ and the covariance reduction of Chapter [](#sec:product-stress) consumes $\Xi^{(2)}_T$; both rest on the small-time operator-norm control imported here. We isolate it as an assumption and discharge it against the cited covariance estimates. The exponent $C_2=2$ comes from the published sup-time estimate below. The $C_2=1$ implication [](#cor:KI-letwin) uses the quadratic input [](#thm:letwin-qcts), pinned to the July 2026 version-1 preprint. This source attribution is separate from the verification displayed beside each statement.
 
 :::{prf:assumption} Known small-time operator-norm control; matched to {[@KlartagLehec2022Polylog; @Letwin2026QuadraticKLS]}
 :label: ass:KI
@@ -132,7 +132,7 @@ The published [](#thm:KL-window), together with the Brascamp–Lieb cap, dischar
 For $t\le c/\log^2n$, split according to $\norm{A_t}_\op<2$ and use [](#thm:KL-window) plus $\norm{A_t}_\op\le t^{-1}$ to obtain $\E\norm{A_t}_\op\le2+t^{-1}e^{-1/(Ct)}\le C_1$.
 :::
 
-:::{prf:corollary} Letwin-v1 sharpening of the covariance window
+:::{prf:corollary} The covariance window under Letwin's quadratic estimate
 :label: cor:KI-letwin
 Conditional on the preprint input of [](#thm:letwin-qcts), [](#ass:KI) holds with $C_2=1$: there is a universal constant $c_0>0$ such that for every isotropic log-concave $\mu$ on $\R^n$, $n\ge3$, and every $0\le t\le c_0(\log n)^{-1}$,
 

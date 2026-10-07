@@ -6,9 +6,9 @@ numbering:
 (sec:excess)=
 # The fixed cut: excess propagation
 
-*Appendix to the fixed cut, Section [](#sec:introduction).*
+*Appendix to the fixed cut, Chapter [](#sec:introduction).*
 
-This section proves [](#prop:intro-audit) — the consumption audit showing the unweighted excess term is inert — and explains why a direct propagation argument can merely restate a localized isoperimetric lower bound, motivating the bootstrap mechanism of Section [](#sec:bootstrap). This is a methodological warning, not a no-go theorem. The static obstruction that forces the covariance weight ([](#prop:two-tail)) is established in Section [](#sec:qcts).
+This section proves [](#prop:intro-audit) — the consumption audit showing the unweighted excess term is inert — and explains why a direct propagation argument can merely restate a localized isoperimetric lower bound, motivating the bootstrap mechanism of Chapter [](#sec:bootstrap). This is a methodological warning, not a no-go theorem. The static obstruction that forces the covariance weight ([](#prop:two-tail)) is established in Chapter [](#sec:qcts).
 
 ## The consumption audit
 
@@ -27,7 +27,7 @@ Since $I_{\mu_t}\ge0$, $e_t\le\mu_t^+(E)$ pathwise. By the perimeter supermartin
 :::
 
 :::{prf:proof} Proof of [](#prop:intro-audit)
-(a) is [](#prop:trivial-excess). (b): run the proof of [](#thm:intro-weighted) in Section [](#subsec:consumption) with the weight replaced by $1$ and the weighted excess propagation input replaced by [](#eq:trivial-excess); every step goes through with the universal constant $C_0'=2C_0+2C_2(1+e_0)\le2C_0+4C_2$ for $e_0\le1$. Thus [](#cor:tight-window-consumption) gives a universal positive boundary lower bound for every balanced near-Cheeger cut to which the estimate applies. If KLS failed, [](#lem:half) would provide isotropic log-concave $\mu_k$ and balanced cuts $E_k$ with $\mu_k^+(E_k)\to0$ and $e_0(E_k)\le1$ for all large $k$, contradicting that lower bound. Hence KLS follows. (c) is [](#prop:two-tail) of Section [](#sec:qcts).
+(a) is [](#prop:trivial-excess). (b): run the proof of [](#thm:intro-weighted) in Section [](#subsec:consumption) with the weight replaced by $1$ and the weighted excess propagation input replaced by [](#eq:trivial-excess); every step goes through with the universal constant $C_0'=2C_0+2C_2(1+e_0)\le2C_0+4C_2$ for $e_0\le1$. Thus [](#cor:tight-window-consumption) gives a universal positive boundary lower bound for every balanced near-Cheeger cut to which the estimate applies. If KLS failed, [](#lem:half) would provide isotropic log-concave $\mu_k$ and balanced cuts $E_k$ with $\mu_k^+(E_k)\to0$ and $e_0(E_k)\le1$ for all large $k$, contradicting that lower bound. Hence KLS follows. (c) is [](#prop:two-tail) of Chapter [](#sec:qcts).
 :::
 
 :::{prf:remark} Interpretation of the audit

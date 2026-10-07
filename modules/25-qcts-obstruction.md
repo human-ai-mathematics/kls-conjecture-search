@@ -220,7 +220,7 @@ A proof of KLS through this approach still cannot rely only on radial informatio
 
 ## The quantified two-tail obstruction and the weight calibration
 
-The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction consumed in covariance-weighted form by the near-Cheeger variant (Section [](#sec:stein)) and the configuration whose dynamical occupation the all-cut variant must control (Section [](#sec:carleson)).
+The following sharpens the qualitative two-tail warning above by tracking the excess of the configuration, not only its covariance contrast. It is the static obstruction consumed in covariance-weighted form by the near-Cheeger variant (Chapter [](#sec:stein)) and the configuration whose dynamical occupation the all-cut variant must control (Chapter [](#sec:carleson)).
 
 :::{prf:proposition} Quantified two-tail configuration
 :label: prop:two-tail

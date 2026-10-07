@@ -77,7 +77,7 @@ $$
 >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
 $$
 
-Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation gate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses satisfy KLS by [](#prop:products).
+Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation estimate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses satisfy KLS by [](#prop:products).
 :::
 
 :::{prf:conjecture} Global-operator-norm weighted excess rate
@@ -101,7 +101,7 @@ A possible replacement interface, screened by the source, charges the weighted e
 
 :::{prf:proposition} Split-class screened supply, total-budget form
 :label: prop:split-screened-supply
-Let $\mu$ be a product of isotropic one-dimensional log-concave laws, each compactly supported with smooth density, and let $E=E_J\times\R^{J^c}$ for a fixed coordinate set $J$ with $\abs J=k$, where $E_J\subset\R^J$ has $C^2$ relative boundary with a tubular neighbourhood over the support, and $0<p_0<1$. Then for every $\eta\in(0,1/4]$, every $\kappa>0$, and every $T>0$,
+Let $\mu$ be a product of isotropic one-dimensional log-concave laws, each compactly supported with smooth density, and let $E=E_J\times\R^{J^c}$ for a fixed coordinate set $J$ with $\abs J=k$, where $E_J\subset\R^J$ has $C^2$ relative boundary with a tubular neighborhood over the support, and $0<p_0<1$. Then for every $\eta\in(0,1/4]$, every $\kappa>0$, and every $T>0$,
 
 $$
 \E\int_0^{T\wedge\tau_\eta}
@@ -140,7 +140,7 @@ Taken alone, this clause neither repairs that package nor implies KLS: it needs 
 
 :::{prf:conjecture} Extremality tames the covariance process
 :label: conj:taming
-For every $\kappa\in(0,1]$ there exist $\eps>0$ and $T_0\in(0,1/8)$ such that every isotropic log-concave $\mu$ on $\R^n$ with $h_\mu\le(1+\eps)\hstar_n$ satisfies $h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)\le\kappa\,T_0$. By [](#thm:bootstrap) this gives the absolute-scale supply $T_0e_0+C\kappa T_0$ for near-worst measures. At a sufficiently small universal time, the stronger, unweighted condition $\Xi_{T_0}\le\kappa T_0$ for every measure is already KLS-sufficient by [](#prop:ceiling); it is not the statement conjectured here. Heuristically, covariance inflation under localization is driven by third-moment anisotropy, while the splitting philosophy of Section [](#sec:jacobi) predicts that near-worst measures are approximately split along their dangerous directions, where the variance processes are one-dimensional and tame ([](#prop:products)(ii)); making this rigorous would couple the splitting analysis to the covariance SDE.
+For every $\kappa\in(0,1]$ there exist $\eps>0$ and $T_0\in(0,1/8)$ such that every isotropic log-concave $\mu$ on $\R^n$ with $h_\mu\le(1+\eps)\hstar_n$ satisfies $h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)\le\kappa\,T_0$. By [](#thm:bootstrap) this gives the absolute-scale supply $T_0e_0+C\kappa T_0$ for near-worst measures. At a sufficiently small universal time, the stronger, unweighted condition $\Xi_{T_0}\le\kappa T_0$ for every measure is already KLS-sufficient by [](#prop:ceiling); it is not the statement conjectured here. Heuristically, covariance inflation under localization is driven by third-moment anisotropy, while the splitting philosophy of Chapter [](#sec:jacobi) predicts that near-worst measures are approximately split along their dangerous directions, where the variance processes are one-dimensional and tame ([](#prop:products)(ii)); making this rigorous would couple the splitting analysis to the covariance SDE.
 :::
 
 :::{prf:remark} The naive splitting–covariance coupling faces a type mismatch

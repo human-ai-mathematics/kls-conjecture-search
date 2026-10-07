@@ -6,7 +6,7 @@ numbering:
 (sec:mass-martingale)=
 # The fixed cut: the mass martingale
 
-*Appendix to the fixed cut, Section [](#sec:introduction).*
+*Appendix to the fixed cut, Chapter [](#sec:introduction).*
 
 ## Quadratic variation and information rate
 
@@ -88,7 +88,7 @@ A useful warning follows from [](#eq:B-le-A): since $B_t$ has rank one and eigen
 \abs{v_t}^2=s_tr_t\le s_t\lmax(A_t)\le\tfrac14\lmax(A_t).
 ```
 
-Hence a constant-time estimate of $\E\int_0^T\lmax(A_t)\dd t$ would already imply KLS by Doob's inequality. Any noncircular proof of the two-color Carleson estimate must exploit the cut-specific quantities $G_t,B_t,r_t,D_t$, not first assume constant-time spectral control of $A_t$. [](#prop:ceiling) sharpens this warning for the scalar-bootstrap mechanism: the estimate $\E\int_0^T\lmax(A_t)\dd t\le(1+\kappa)T$ is already sufficient for KLS, while bounding relative-scale excess through the estimate in Section [](#sec:bootstrap) would demand the same scale of covariance input. Thus it is not an independent intermediate target for that particular argument; no claim about every possible propagation argument is made.
+Hence a constant-time estimate of $\E\int_0^T\lmax(A_t)\dd t$ would already imply KLS by Doob's inequality. Any noncircular proof of the two-color Carleson estimate must exploit the cut-specific quantities $G_t,B_t,r_t,D_t$, not first assume constant-time spectral control of $A_t$. [](#prop:ceiling) sharpens this warning for the scalar-bootstrap mechanism: the estimate $\E\int_0^T\lmax(A_t)\dd t\le(1+\kappa)T$ is already sufficient for KLS, while bounding relative-scale excess through the estimate in Chapter [](#sec:bootstrap) would demand the same scale of covariance input. Thus it is not an independent intermediate target for that particular argument; no claim about every possible propagation argument is made.
 
 ## Stopped centroid estimate
 

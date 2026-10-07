@@ -120,7 +120,7 @@ $$
 $$
 
 The operator has compact resolvent; its first positive eigenvalue is
-$\lambda=C_P(\mu)^{-1}$. It has a real centered unit eigenfunction for
+$\lambda=\CP(\mu)^{-1}$. It has a real centered unit eigenfunction for
 $\lambda$. On centered functions, if $h\in\operatorname{Dom}H^{1/2}$, then
 $g=H^{-1/2}h\in\operatorname{Dom}H$ and
 $\|Hg\|_2^2=\|H^{1/2}h\|_2^2$, $\|\nabla g\|_2^2=\|h\|_2^2$.
@@ -158,7 +158,7 @@ If $c_k(\nu)\le R^k\ell(k)^k/(k+1)^2$ for every integer $k\ge1$, then
 every dyadic integer $d\ge2$ satisfies
 
 $$
-C_P(\nu)\le16(1+\epsilon)R^2\ell(d)^2
+\CP(\nu)\le16(1+\epsilon)R^2\ell(d)^2
 \max\{1,a^{-1/(d+1)}\}.
 $$
 :::
@@ -181,7 +181,7 @@ $aI\preceq D^2W\preceq bI$ for some $0<a\le b<\infty$, and
 $\operatorname{Cov}(\nu)\preceq I$, then for every integer $r\ge1$,
 
 $$
-C_P(\nu)\le\Gamma_r^2\ell_r(a^{-1})^2.
+\CP(\nu)\le\Gamma_r^2\ell_r(a^{-1})^2.
 $$
 :::
 
@@ -209,7 +209,7 @@ $K_k(\nu)=\sup_{T\text{ symmetric},\,\|T\|_{\mathrm{HS}}=1}
 \operatorname{Var}_\nu(P_k^\nu[T])$ and $c_k(\nu)=\sqrt{K_k(\nu)}/k!$.
 The following are equivalent:
 
-1. There is a universal $C<\infty$ such that $C_P(\mu)\le C$ for every
+1. There is a universal $C<\infty$ such that $\CP(\mu)\le C$ for every
    isotropic log-concave probability measure in every dimension.
 2. There is a universal $A<\infty$ such that $c_k(\nu)\le A^k$ for every
    integer $k\ge1$ and every isotropic probability measure
@@ -237,12 +237,12 @@ There are universal constants $c,C>0$ with the following property.
 Let $F:(0,\infty)\to(0,\infty)$ be any function such that, in every
 dimension, every isotropic probability measure $\nu(dx)=e^{-W(x)}dx$ with
 $W\in C^\infty$ and $aI\preceq D^2W\preceq bI$ for some
-$0<a\le b<\infty$ satisfies $C_P(\nu)\le F(a)$ for every such lower
+$0<a\le b<\infty$ satisfies $\CP(\nu)\le F(a)$ for every such lower
 curvature bound $a$. Then every isotropic log-concave probability measure
 $\mu$ on $\mathbb R^n$ satisfies
 
 $$
-C_P(\mu)\le C F\!\left(\frac{c}{\log(en)}\right).
+\CP(\mu)\le C F\!\left(\frac{c}{\log(en)}\right).
 $$
 
 No continuity or monotonicity of $F$ is required.
@@ -286,13 +286,13 @@ measure $\mu$ on $\mathbb R^n$ with positive definite covariance $\Sigma$
 satisfies, for every integer $r\ge1$,
 
 $$
-C_P(\mu)\le C16^r\ell_r(\log(en))^2\|\Sigma\|_{\mathrm{op}},
+\CP(\mu)\le C16^r\ell_r(\log(en))^2\|\Sigma\|_{\mathrm{op}},
 $$
 
 where $\ell_r$ is defined in [](#thm:sz-iterated-curvature). Consequently
 
 $$
-C_P(\mu)\le C16^{\log^*(n+2)}\|\Sigma\|_{\mathrm{op}}
+\CP(\mu)\le C16^{\log^*(n+2)}\|\Sigma\|_{\mathrm{op}}
 $$
 
 after enlarging the universal constant.

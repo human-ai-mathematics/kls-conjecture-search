@@ -24,7 +24,7 @@ A tilted average is the expectation of a test function after reweighting the law
 :::{prf:definition} Tilt averages, cumulants and regular measures
 :label: def:bkl-tilt-cumulants
 For a log-concave probability measure $\mu$ on $\mathbb R^n$, set, in a
-neighbourhood of the origin,
+neighborhood of the origin,
 $$
 \Lambda_\mu(z)=\log\int e^{\langle z,x\rangle}\,d\mu(x),\qquad
 \kappa_m^\mu=\nabla^m\Lambda_\mu(0),\qquad
@@ -60,7 +60,7 @@ $$
 \int(Lu)^2\,d\mu=\int|\nabla^2u|^2\,d\mu+
 \int\langle\nabla^2V\nabla u,\nabla u\rangle\,d\mu
 $$
-for $u,v\in\mathcal A$. Its spectral gap $\lambda=C_P(\mu)^{-1}>0$ is
+for $u,v\in\mathcal A$. Its spectral gap $\lambda=\CP(\mu)^{-1}>0$ is
 attained by a function $f\in\mathcal A_0$ with $\|f\|_2=1$ and $Lf=-\lambda f$.
 For every $g\in\mathcal A_0$ there is a unique $u\in\mathcal A_0$ solving
 $-Lu=g$, and
@@ -98,7 +98,7 @@ $$
 |\mathcal T_d^\mu f|\le R^d\|f\|_{L^2(\mu)}
 \qquad\text{for every }d\ge1\text{ and }f\in L^2(\mu),
 $$
-then $C_P(\mu)\le CR^2$.
+then $\CP(\mu)\le CR^2$.
 :::
 
 The mechanism follows a first eigenfunction through centered gradients and inverse operators. A small spectral gap makes the resulting tensors large; the means removed by centering are expressed through tilted averages. Partial symmetrization compares these tensors with symmetric Taylor tensors. A single exponential bound controls the centering terms at every order. Summing the resulting estimates over finitely many dyadic orders up to an exit index forces a lower spectral gap. The analytic and tensor estimates above are separate inputs to this comparison.

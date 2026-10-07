@@ -6,7 +6,7 @@ numbering:
 (sec:appendix-moment-map)=
 # The moment map: appendix
 
-The calculations the moment-map approach rests on, in the order it needs them: the two operator-core arguments of Chapter [](#sec:cmh-normalization), then the Gamma lift (the simplex rewritten in independent Gamma coordinates, Section [](#subsec:cmh-gamma-lift)) and the angular minimization that produce the exact Dirichlet constant. Every statement whose proof is given here is stated, with a summary of its proof, in Section [](#sec:cmh-normalization) or Section [](#sec:cmh-exact-cases). Nothing is decided here that is not decided there.
+The calculations the moment-map approach rests on, in the order it needs them: the two operator-core arguments of Chapter [](#sec:cmh-normalization), then the Gamma lift (the simplex rewritten in independent Gamma coordinates, Section [](#subsec:cmh-gamma-lift)) and the angular minimization that produce the exact Dirichlet constant. Every statement whose proof is given here is stated, with a summary of its proof, in Chapter [](#sec:cmh-normalization) or Chapter [](#sec:cmh-exact-cases). Nothing is decided here that is not decided there.
 
 :::{prf:proof} Proof of [](#prop:cmh-bochner)
 We calculate in target coordinates, use Einstein summation, and first take $g$ in a smooth compactly supported core. Write $\rho$ for the density of $\mu$. The Stein identity is

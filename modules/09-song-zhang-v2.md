@@ -54,7 +54,7 @@ All tensor norms sum over ordered indices.
 :label: prop:sz-v2-common-radius
 For every measure in [](#def:sz-v2-common-radius),
 $$
-C_P(\mu)-1\le R\le C_P(\mu),\qquad
+\CP(\mu)-1\le R\le \CP(\mu),\qquad
 1\le\mathcal A(\mu)\le\max\{1,R\},\qquad
 c_d(\mu)\le\mathcal A(\mu)^{(d-1)/2}\quad(d\ge1).
 $$
@@ -63,7 +63,7 @@ $c_k(\mu)\le G(k)^{k-1}$ for every $k\ge1$, then, for every integer $m\ge1$,
 $$
 \mathcal A(\mu)\le\max\{G(m)^2,\|\mathcal T^m\|_{\mathrm{op}}^{2/m}\}.
 $$
-Moreover $C_P(\mu)\le2^{85}\mathcal A(\mu)$, with a constant independent
+Moreover $\CP(\mu)\le2^{85}\mathcal A(\mu)$, with a constant independent
 of the dimension and curvature bounds.
 :::
 
@@ -82,7 +82,7 @@ $\nu(dx)=e^{-W(x)}dx$ on $\mathbb R^n$ with $W\in C^\infty$,
 $\operatorname{Cov}(\nu)\preceq I$ and
 $aI\preceq D^2W\preceq bI$ for some $0<a\le b<\infty$,
 $$
-C_P(\nu)\le C(r+1)^{1/3}\ell_r(a^{-1})^2.
+\CP(\nu)\le C(r+1)^{1/3}\ell_r(a^{-1})^2.
 $$
 :::
 
@@ -94,11 +94,11 @@ With $\ell_r$ as in [](#thm:sz-v2-iterated-curvature), there is a universal
 constant $C<\infty$ such that every isotropic log-concave probability measure
 $\mu$ on $\mathbb R^n$, $n\ge1$, satisfies, for every integer $r\ge1$,
 $$
-C_P(\mu)\le C(r+1)^{1/3}\ell_r(\log(en))^2.
+\CP(\mu)\le C(r+1)^{1/3}\ell_r(\log(en))^2.
 $$
 In particular,
 $$
-C_P(\mu)\le C'(1+\log^*(n+2))^{1/3},
+\CP(\mu)\le C'(1+\log^*(n+2))^{1/3},
 $$
 where $C'$ is universal and $\log^*x$ is the least number of successive
 natural logarithms needed to bring $x$ to at most $1$.
@@ -135,7 +135,7 @@ $r_*\ge1$ such that, with $A_j=A_1C_*^{j-1}$ and
 $r_Q=\max\{r_*,\lceil C_b t(Q)\rceil\}$, every measure of
 [](#def:sz-v2-common-radius) with lower curvature bound $a>0$ satisfies
 $$
-C_P(\mu)\le A_j t_j(Q)^{1/3}(r+1)^{1/Q}\ell_r(a^{-1})^2
+\CP(\mu)\le A_j t_j(Q)^{1/3}(r+1)^{1/Q}\ell_r(a^{-1})^2
 $$
 for every integer $j\ge1$, every odd integer $Q\ge3$, and every integer
 $r\ge r_Q$. Moreover every centered log-concave probability measure of

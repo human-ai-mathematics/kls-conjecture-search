@@ -6,7 +6,7 @@ numbering:
 (sec:cmh-exact-cases)=
 # The moment map: exact cases
 
-Section [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables — a function on the simplex is rewritten as a function of independent Gamma variables, homogeneous of degree zero, where the generator is that of a product — followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
+Chapter [](#sec:cmh-normalization) fixed the CMH estimate and showed that it dominates the affine Poincaré constant ([](#thm:cmh-implies-affine-poincare)). This section computes it — or, in the fourth class, its linear sector — exactly, in the four classes where it is tractable. Two of them — the line and products — are the expected calibrations, and they already pin the constant: $\mathrm{CMH}(4)$ holds there and no smaller universal constant is possible. The third is the first genuinely nonproduct family on which the approach has an exact result: every log-concave Dirichlet law satisfies $\mathrm{CMH}(4)$ ([](#thm:cmh-dirichlet)). Its proof is a homogeneous lift to independent Gamma variables — a function on the simplex is rewritten as a function of independent Gamma variables, homogeneous of degree zero, where the generator is that of a product — followed by a sharp Hessian-row minimization; in the Dirichlet argument the log-concavity hypothesis is consumed in the final scalar angular minimization.
 
 The fourth class is solvable in a weaker but more pointed sense. The exponential cones of §[](#subsec:cmh-cones) attach a Gamma radial variable to an arbitrary centered base, and their moment map is explicit in terms of the base's own ([](#prop:cone-moment-map)); unlike the first three classes they are not compactly supported and, for a general base, not affine images of products. What is computed exactly on them is the linear sector rather than the full constant: the axis value of the linear test is $1+n/\beta$, so every cone with $\beta=n$ saturates the sharp linear test ([](#conj:gate-zero-sharp)) in its axis direction ([](#prop:cone-linear-sector)), and over any product of simplices the entire linear-test matrix is a closed form bounded by $2$ ([](#prop:product-simplex-cone-gate)). They are the first non-product equality set the sharp linear sector has, which is what makes them a constraint on any argument for it.
 
@@ -371,7 +371,7 @@ $$
 
 the supremum over $f$ of finite covariance energy being attained at $f=\psi$.
 
-(ii) The gate matrix is exact in the axis direction:
+(ii) The linear-test matrix is exact in the axis direction:
 
 $$
 \frac{e_1^\top\,\E_\mu[\tau\Sigma^{-1}\tau]\,e_1}{e_1^\top\Sigma\,e_1}
@@ -382,14 +382,14 @@ with equality if and only if $\beta=n$; this is also the value of the CMH Raylei
 
 (iii) In isotropic coordinates $Z=\Sigma^{-1/2}\bar x$, with kernel $\tau_Z=\Sigma^{-1/2}\tau\Sigma^{-1/2}$, the axis column is exactly its gap-mode projection: $T_3(e_1)=\E[Z_1\,Z\otimes Z]=2\beta^{-1/2}\,\Id$ and $\tau_Ze_1=e_1+\tfrac12T_3(e_1)Z$. Hence $\norm{T_3(e_1)}_{\HS}^2=4n/\beta$ and the high-mode term of [](#lem:linear-sector-third-moment) vanishes, $v_{e_1}=0$, for every base $K$ and every $\beta\ge n$.
 
-In particular every exponential cone measure with $\beta=n$ saturates the sharp gate-zero inequality [](#eq:gate-zero-sharp) in its axis direction and attains $\norm{T_3(e_1)}_{\HS}=2$.
+In particular every exponential cone measure with $\beta=n$ saturates the sharp linear test [](#eq:gate-zero-sharp) in its axis direction and attains $\norm{T_3(e_1)}_{\HS}=2$.
 :::
 
 At $\beta=n$, part (iii) is the third-moment computation of Lemma 4.2 of [@ChenKlartag2026SharpThinShell], which gives $T(Y)_{ijk}=2\delta_{ij}/\sqrt k$, $T(Y)_{ikk}=0$ and $T(Y)_{kkk}=2/\sqrt k$ with $k=\beta$; parts (i)–(ii) and the general $\beta$ are new here. [](#prop:cone-linear-sector) gives a family of equality cases of [](#conj:gate-zero-sharp) that are not products, and it gives them for every base: the axis direction of a cone sees only the Gamma radial law, which is why the value $1+n/\beta$ does not depend on $K$. The transverse block does depend on $K$, through the base kernel $\tau_K$; when the base is a cube it is explicit.
 
 :::{prf:corollary} The cube cone, exactly
 :label: cor:cube-cone-gate-zero
-For $K=[-1,1]^{n-1}$ the base kernel is $\tau_K(u)=\tfrac12\operatorname{diag}(1-u_j^2)$, and the normalized gate matrix $\Sigma^{-1/2}\,\E[\tau\Sigma^{-1}\tau]\,\Sigma^{-1/2}$ of $\bar\mu_{K,\beta}$ equals
+For $K=[-1,1]^{n-1}$ the base kernel is $\tau_K(u)=\tfrac12\operatorname{diag}(1-u_j^2)$, and the normalized linear-test matrix $\Sigma^{-1/2}\,\E[\tau\Sigma^{-1}\tau]\,\Sigma^{-1/2}$ of $\bar\mu_{K,\beta}$ equals
 
 $$
 \Bigl(1+\frac n\beta\Bigr)\ \oplus\ \frac{6\beta^2+11\beta+5n+4}{5\beta(\beta+1)}\,\Id_{n-1}.
@@ -398,9 +398,9 @@ $$
 Both eigenvalues are at most $2$ for all $n\ge2$ and $\beta\ge n$: every cube cone satisfies [](#eq:gate-zero-sharp). Equality holds in the axis direction exactly when $\beta=n$, and in the transverse directions only for $n=\beta=2$, where the matrix is $2\,\Id_2$ and the measure is a product of two centered exponentials.
 :::
 
-For an interval base, the smallest case is $n=\beta=2$: the gate is $2I_2$, as expected for an affine image of two independent exponentials. A square base behaves differently. At $n=\beta=3$, its axis value is $2$ while each transverse value is $53/30$. The following result explains this distinction for every product of simplices, with intervals counted as one-dimensional simplices.
+For an interval base, the smallest case is $n=\beta=2$: the linear-test matrix is $2I_2$, as expected for an affine image of two independent exponentials. A square base behaves differently. At $n=\beta=3$, its axis value is $2$ while each transverse value is $53/30$. The following result explains this distinction for every product of simplices, with intervals counted as one-dimensional simplices.
 
-:::{prf:proposition} Product-simplex cone gate
+:::{prf:proposition} Product-simplex cones and the sharp linear test
 :label: prop:product-simplex-cone-gate
 Let $q\ge1$, let $k_1,\ldots,k_q\ge1$ be integers, let
 $n=1+\sum_{j=1}^q k_j$, and let $\beta\ge n$ be real. In

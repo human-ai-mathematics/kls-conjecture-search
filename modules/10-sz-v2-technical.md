@@ -81,13 +81,13 @@ Let $\mu$ be a measure in [](#def:sz-v2-common-radius), with
 $D^2W\succeq aI>0$. Let $H$ be its gradient-form operator on centered
 $L^2(\mu)$, $B=H^{-1}$, $Lh=\mathbb E[Xh]$, $P_+h=h-\mathbb Eh$,
 $D=P_+\nabla H^{-1/2}$, $\mathcal T=P_+\nabla B$, and
-$\lambda=C_P(\mu)^{-1}$. Operators extend componentwise to finite families
+$\lambda=\CP(\mu)^{-1}$. Operators extend componentwise to finite families
 and append ordered derivative slots. Define
 $$R=\sup_{\substack{f\in H^1(\mu),\ f\text{ nonconstant}\\\mathbb E\nabla f=0}}
  \operatorname{Var}(f)/\mathbb E|\nabla f|^2.$$
 Then $\mathcal T$ is compact,
 $\mathcal T^*\mathcal T=B-L^*L$, $\|\mathcal T\|^2=R$,
-$R\le C_P\le R+1$, and
+$R\le \CP\le R+1$, and
 $\|H^{1/2}\mathcal Th\|\le\|h\|$.
 
 For a centered unit $f$, $z>0$, $w_j=z^{-j/2}\mathcal T^jf$,
