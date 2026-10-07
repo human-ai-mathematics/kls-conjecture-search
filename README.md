@@ -6,23 +6,25 @@ the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.
 
 The Kannan–Lovász–Simonovits conjecture — the dimension-free Poincaré bound
 $C_P \le K\lambda_{\max}(\mathrm{Cov})$ for every log-concave measure — is now a theorem, with
-three proofs. Two were deposited on arXiv on 4 October 2026: by Bizeul–Klartag–Lehec
-([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)), and by Song–Zhang, in the
-[second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
+three proofs: by Bizeul–Klartag–Lehec ([arXiv:2610.05474v1](https://arxiv.org/abs/2610.05474v1)),
+by Song–Zhang in the [second version](https://arxiv.org/abs/2610.01447v2) of a preprint whose
 [first version](https://arxiv.org/abs/2610.01447v1) gave an iterated-logarithm bound and the
-spectral criterion these two proofs use. The third, by Balasubramanian–Kasiviswanathan
-([arXiv:2610.07728v1](https://arxiv.org/abs/2610.07728v1), 6 October 2026), gives the
-explicit bound $C_P \le 1+2\cdot10^{16}$. This repository is a MyST manuscript that surveys the
-methods that led to KLS; reconstructs and checks the first version of Song–Zhang, then the BKL and SZ v2
-proofs; reconstructs and checks the compatible-integration proof of
-[Balasubramanian–Kasiviswanathan](https://arxiv.org/abs/2610.07728v1), including its explicit constant; compares all three; says what the theorem gives and what remains of the question of its
-constant; and develops three alternative mechanisms for the Poincaré bound whose questions
-remain open after KLS (a deterministic moment-map inequality, a fixed eigenfunction followed
-through stochastic localization, conditional-fiber frames), with the fixed-cut localization
-argument kept as an archive of its obstructions and counterexamples. It also holds the record of the **sustained
-conjecture search** that produced it. Proofs here are checked by independent agent reviews,
-which is distinct from journal refereeing; the ledger, not this file, is the source of truth
-for what has been certified.
+spectral criterion the first two proofs use, and by Balasubramanian–Kasiviswanathan
+([arXiv:2610.07728v1](https://arxiv.org/abs/2610.07728v1)), with the explicit bound
+$C_P \le 1+2\cdot10^{16}$. This repository is a MyST manuscript that
+
+- surveys the methods that led to KLS;
+- reconstructs and checks the first version of Song–Zhang and the three proofs, and compares them;
+- says what the theorem gives and what remains of the question of its constant;
+- develops three alternative mechanisms for the Poincaré bound, whose key statements are
+  not settled here: a deterministic moment-map inequality, a fixed eigenfunction followed through
+  stochastic localization, and conditional-fiber frames;
+- keeps the fixed-cut localization argument as an archive of its obstructions and
+  counterexamples.
+
+It also holds the record of the **sustained conjecture search** that produced it. Proofs
+here are checked by independent agent reviews, which is distinct from journal refereeing;
+the ledger, not this file, is the source of truth for what has been certified.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
 [conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).
@@ -32,7 +34,7 @@ Start every session that edits the repository by reading it.
 
 | path | holds |
 |---|---|
-| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the three checked proofs and their comparison (`07`–`12`), KLS after its proofs and the map of alternative mechanisms (`13`–`14`), the three alternative mechanisms (`15`–`22`), shared technical foundations and glossary (`23`–`27`), the fixed-cut archive (`28`–`38`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
+| [`modules/`](modules/) | the manuscript, the text a reader reads: welcome page and overview (`index`, `00`), six families of methods (`01`–`06`), the first version of Song–Zhang, the three checked proofs and their comparison (`07`–`12`), KLS after its proofs (`13`), the map and the three alternative mechanisms (`14`–`22`), shared technical foundations and glossary (`23`–`27`), the fixed-cut archive (`28`–`34`); every claim a labelled `prf:` directive, in prose written for a mathematician; reading order in [`myst.yml`](myst.yml) |
 | [`research/program/`](research/program/) | the ledger, the problem brief (target `conj:kls`) and the portfolio of routes |
 | [`research/explorations/`](research/explorations/) | dated checkpoints and candidate statements |
 | [`research/reviews/`](research/reviews/) | independent proof reviews |
@@ -41,11 +43,8 @@ Start every session that edits the repository by reading it.
 | [`solutions/`](solutions/) | standalone proof and refutation dossiers |
 | [`.claude/agents/`](.claude/agents/), [`.codex/agents/`](.codex/agents/) | the three roles: `researcher`, `reviewer` and `writer`, for Claude Code and for Codex |
 | [`templates/`](templates/) | an empty copy of each file genre |
-| [`HISTORY.md`](HISTORY.md) | the milestones of the search, newest first |
+| [`HISTORY.md`](HISTORY.md) | the milestones of the search — results certified, refutations, approaches opened or closed, migrations of the harness — newest first |
 | [`example/`](example/README.md) | the template's worked search, kept green as a fixture |
-
-The milestones of the search — results certified, refutations, approaches opened or
-closed, migrations of the harness — are in [`HISTORY.md`](HISTORY.md), newest first.
 
 ## Setup and verify
 
