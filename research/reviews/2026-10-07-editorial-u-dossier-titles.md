@@ -67,8 +67,8 @@ amends:
   - research/reviews/2026-10-06-sz-v2-profile-review.md
   - research/reviews/2026-10-06-sz-v2-radius-review.md
 authors:
-  - orchestrator, claude-opus-5-5, 2026-10-08
-reviewer: reviewer, claude-opus-5-5, 2026-10-08
+  - orchestrator, claude-opus-5-5, 2026-10-07
+reviewer: reviewer, claude-opus-5-5, 2026-10-07
 changes:
   cor:tight-window-consumption: {from: 7d0f9e5dce52482fc3b8f93155bb46e66596d3aac7d92a63f7e508bc25b59946, to: ffcc2f0dbf91165498fe0057cb6f7b4826b21ec768c4dae7ca586bec7b126f20}
   def:cheeger-excess: {from: 11c7b2640e46c21535a33849034c875cbc82d1aef65481500b28589ab7a1fe1d, to: 7eff820602f7cac43bc6966f34e792d59487a3e843b2dba382f56d8f835e6d30}
@@ -154,7 +154,7 @@ changes:
 
 # Editorial note: dossier titles and five manuscript rewordings
 
-Read from the output of `uv run scripts/check.py --diff` against the committed baseline (HEAD `5b8762c`, at which the research state was green). Every changed line is shown below. For each of the 76 dossiers the only changed line is the `title:` front-matter field; for the five manuscript statements the changed line is one word or phrase, or a directive title. The dossier `solutions/prop-mm-window-occupation.md` is carried over in the companion note `2026-10-08-editorial-dossier-titles-window-occupation.md`: `2026-10-01-spectral-window-letwin-discharge-review.md`, amended here, fingerprints that dossier at an older version than `2026-10-01-window-occupation-empty-branch-review.md` certifies, so one note cannot give it a single `from`. No statement, formula, hypothesis, quantifier, constant or step of proof changes. `from` is the fingerprint the checker expects after the earlier notes (computed at HEAD), `to` the current one (`--fingerprint`, `--statements`).
+Read from the output of `uv run scripts/check.py --diff` against the committed baseline (HEAD `5b8762c`, at which the research state was green). Every changed line is shown below. For each of the 76 dossiers the only changed line is the `title:` front-matter field; for the five manuscript statements the changed line is one word or phrase, or a directive title. The dossier `solutions/prop-mm-window-occupation.md` is carried over in the companion note `2026-10-07-editorial-u-dossier-titles-window-occupation.md`: `2026-10-01-spectral-window-letwin-discharge-review.md`, amended here, fingerprints that dossier at an older version than `2026-10-01-window-occupation-empty-branch-review.md` certifies, so one note cannot give it a single `from`. No statement, formula, hypothesis, quantifier, constant or step of proof changes. `from` is the fingerprint the checker expects after the earlier notes (computed at HEAD), `to` the current one (`--fingerprint`, `--statements`).
 
 ## `cor:tight-window-consumption`
 

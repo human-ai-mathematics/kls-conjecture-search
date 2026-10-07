@@ -12,7 +12,7 @@ status. *Certified* means that a passing review independent of the proof's autho
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.
 
-## 2026-10-08: Dossier titles and the last process vocabulary
+## 2026-10-07: Dossier titles and the last process vocabulary
 
 - The 76 dossier titles, shown in the *Full proofs* sidebar, now match the entries of
   `proofs.md`, with the argument as prefix ("BKL:", "Song–Zhang v2:", "BK:", …); the
@@ -21,8 +21,8 @@ Statements are named by label; paths are relative to the repository root.
   "premise"), among them the title of `cor:tight-window-consumption`; labels unchanged.
   An undefined reference to "soft-projector calculations" left Chapter 28.
 - A fresh reviewer found no mathematical change:
-  `research/reviews/2026-10-08-editorial-dossier-titles.md` and
-  `research/reviews/2026-10-08-editorial-dossier-titles-window-occupation.md`.
+  `research/reviews/2026-10-07-editorial-u-dossier-titles.md` and
+  `research/reviews/2026-10-07-editorial-u-dossier-titles-window-occupation.md`.
 
 ## 2026-10-07: Editorial pass on the whole site
 
