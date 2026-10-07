@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: the common coefficient radius and height reduction"
+title: 'Song–Zhang v2: the common coefficient radius'
 ledger-node: prop:sz-v2-common-radius
 numbering:
   enumerator: "139.%s"

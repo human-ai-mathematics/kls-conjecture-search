@@ -1,5 +1,5 @@
 ---
-title: 'Solution: window occupation with $C_0=34$, $C_1=0$, and the Route-S reproduction of the polylog frontier'
+title: 'The occupation implication'
 label: sec:sol-prop-mm-window-occupation
 ledger-node: prop:mm-window-occupation
 numbering:

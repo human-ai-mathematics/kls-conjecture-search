@@ -1,5 +1,5 @@
 ---
-title: "Small-loss refinement: scalar estimates and the analytic interface"
+title: 'Song–Zhang v2: near-unit refinement'
 ledger-node:
   - lem:sz-v2-profile-calculus
   - lem:sz-v2-profile-refinement

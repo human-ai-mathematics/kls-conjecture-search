@@ -1,5 +1,5 @@
 ---
-title: 'Solution: KLS and exponential Appell coefficient growth'
+title: 'Song–Zhang v1: KLS and exponential growth of Appell coefficients'
 ledger-node: prop:sz-exponential-coefficients-equivalence
 numbering:
   enumerator: '124.%s'

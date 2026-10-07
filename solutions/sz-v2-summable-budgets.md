@@ -1,5 +1,5 @@
 ---
-title: "Summable outer budgets and growing depth thresholds"
+title: 'Song–Zhang v2: summable budgets and starting depths'
 ledger-node:
   - lem:sz-v2-profile-threshold
   - prop:sz-v2-summable-budgets

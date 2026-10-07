@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: inner refinement with a polynomial depth cost"
+title: 'Song–Zhang v2: static transfer, joint frames and skew credit'
 ledger-node:
   - prop:sz-v2-static-coefficient-transfer
   - lem:sz-v2-joint-frame

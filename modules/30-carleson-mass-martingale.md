@@ -211,7 +211,7 @@ The same Gronwall mechanism will be reused in Section [](#subsec:consumption) in
 
 The near-Cheeger variant uses its Carleson estimate on the tight window $\tau_\eta$ rather than the coarse window $\tau$. The arguments of [](#thm:carleson-implies-centroid) and [](#lem:survival-implies-kls) go through verbatim on $\tau_\eta$, with constants depending only on the fixed (universal) $\eta$:
 
-:::{prf:corollary} Tight-window consumption
+:::{prf:corollary} Tight-window Carleson estimate gives the boundary bound
 :label: cor:tight-window-consumption
 Fix $\eta\in(0,\tfrac16]$. Suppose that for an isotropic log-concave $\mu$ and a set $E$ with $\abs{p_0-\tfrac12}\le\eta/2$ an absorptive two-color Carleson estimate holds on the *tight* window from time zero: for some constants $C_0,C_1$, some $\alpha<1$, and every $T\le T_0$,
 

@@ -1,5 +1,5 @@
 ---
-title: "Weighted cumulant energy and its integrated inequality"
+title: 'BKL: cumulant energy estimates'
 ledger-node: lem:bkl-cumulant-energy
 numbering:
   enumerator: "133.%s"

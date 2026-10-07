@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the localization, Riccati, and tight-window core'
+title: 'Localization and Riccati identities'
 label: sec:sol-kls-localization-riccati-core
 ledger-node:
 - lem:matrix-riccati

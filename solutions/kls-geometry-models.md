@@ -1,5 +1,5 @@
 ---
-title: 'Solution: profile curvature, exact splitting, and the Gaussian and product models'
+title: 'Profile curvature and the model geometries'
 label: sec:sol-kls-geometry-models
 ledger-node:
 - lem:profile-bound

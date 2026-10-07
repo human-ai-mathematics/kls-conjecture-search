@@ -1,5 +1,5 @@
 ---
-title: "BK: uniform operator powers and integration seeds"
+title: 'BK: uniform operator powers and the quadratic seed'
 ledger-node:
   - lem:bk-uniform-power-bound
   - cor:bk-integration-powers

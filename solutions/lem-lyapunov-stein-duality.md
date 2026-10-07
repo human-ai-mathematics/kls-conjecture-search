@@ -1,5 +1,5 @@
 ---
-title: 'Solution: cut-oriented Lyapunov–Stein duality'
+title: 'Lyapunov–Stein duality'
 label: sec:sol-lyapunov-stein-duality
 ledger-node: lem:lyapunov-stein-duality
 numbering:

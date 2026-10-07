@@ -1,5 +1,5 @@
 ---
-title: 'Solution: conditional-fiber form structure and the simplex root obstruction'
+title: 'The resampling form and the simplex root obstruction'
 label: sec:sol-conditional-fiber-frame-structure
 ledger-node:
 - lem:conditional-fiber-form

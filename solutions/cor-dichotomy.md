@@ -1,5 +1,5 @@
 ---
-title: "Solution: residual dichotomy of the near-worst bootstrap"
+title: 'The residual dichotomy of the bootstrap'
 ledger-node: cor:dichotomy
 numbering:
   enumerator: "109.%s"

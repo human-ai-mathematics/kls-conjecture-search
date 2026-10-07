@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the perimeter martingale and the excess-consumption audit'
+title: 'The excess and the perimeter martingale'
 label: sec:sol-kls-excess-audit
 ledger-node:
 - prop:intro-audit

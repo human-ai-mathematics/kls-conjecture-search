@@ -1,5 +1,5 @@
 ---
-title: "BK compatible-tensor Hodge estimate and domains"
+title: 'BK: compatible-tensor Hodge estimates and domains'
 ledger-node: lem:bk-compatible-hodge
 numbering:
   enumerator: "151.%s"

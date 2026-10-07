@@ -1,5 +1,5 @@
 ---
-title: 'Solution: quadratic-chaos, Stein contrast, and boundary flux'
+title: 'Quadratic chaos, Stein contrast and boundary flux'
 label: sec:sol-kls-qcts-stein-boundary-core
 ledger-node:
 - prop:qcts-equivalence

@@ -264,7 +264,7 @@ $$
 $$
 
 where $\log^*x$ is the least number of successive natural logarithms needed to
-bring $x$ to at most one. The source is [@SongZhang2026IteratedLogKLS, Theorem 7.1].
+bring $x$ to at most one. This is [@SongZhang2026IteratedLogKLS, Theorem 7.1].
 :::
 
 Insert the profile of [](#thm:sz-iterated-curvature) into [](#thm:sz-curvature-transfer), absorbing the universal rescaling of its argument into the outer constant, and pass to the Cheeger scale by [](#eq:cheeger-two-sided). Uniformity in the depth $r$ is essential, because the depth is chosen depending on $n$: near $\log^*(n+2)$, the iterated logarithm $\ell_r(\log(en))$ is universally bounded and only the factor $16^r$ remains. That factor is all the dimension dependence left in this particular iteration. SZ v2 removes it by refinements with summable costs (Chapter [](#sec:sz-v2-proof)).

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the CMH recovery calculus'
+title: 'The recovery calculus for the moment-Hessian constant'
 label: sec:sol-cmh-recovery-calculus
 ledger-node: prop:cmh-recovery-calculus
 numbering:

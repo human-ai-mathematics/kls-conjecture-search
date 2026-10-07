@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: finite blocks and repeated height reduction"
+title: 'Song–Zhang v2: fixed-cost repeated height reduction'
 ledger-node:
   - prop:sz-v2-height-reduction
   - lem:sz-v2-terminal-distortion

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: balanced posterior survival and exterior boundary'
+title: 'Balanced survival and the exterior boundary'
 ledger-node: lem:survival-implies-kls
 numbering:
   enumerator: '126.%s'

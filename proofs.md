@@ -30,7 +30,7 @@ The spectral criterion and the iterated-logarithm bound of Chapter
 [](#sec:polynomial-curvature):
 
 1. [Analytic foundations and Appell variance estimates](solutions/thm-sz-polynomial-variance.md).
-2. [From polynomial coefficients to curvature](solutions/thm-sz-curvature-comparison.md).
+2. [Polynomial coefficients control the spectral gap](solutions/thm-sz-curvature-comparison.md).
 3. [The iteration of curvature profiles](solutions/thm-sz-iterated-curvature.md).
 4. [Gaussian transfer, the all-depth bound and its affine form](solutions/thm-song-zhang-kls.md).
 5. [KLS and exponential growth of Appell coefficients](solutions/prop-sz-exponential-coefficients-equivalence.md),

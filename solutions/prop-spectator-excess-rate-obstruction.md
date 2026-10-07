@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the spectator obstruction to a superlinear excess remainder'
+title: 'The spectator obstruction to a superlinear excess remainder'
 label: sec:sol-spectator-excess-rate-obstruction
 ledger-node: prop:spectator-excess-rate-obstruction
 numbering:

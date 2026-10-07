@@ -149,7 +149,7 @@ There exist universal constants $\eta\in(0,1/6]$, $T_0,C_0,C_1>0$, and $\alpha<1
 ```
 :::
 
-This prefix-only statement is implied by [](#ass:all-cut-carleson): take $I=[0,T]$ and $\eta=1/6$, for which [](#eq:tau-tight) is [](#eq:tau-coarse); no converse is known. [](#cor:tight-window-consumption) derives its boundary-lower-bound consequence for each cut; universal validity would therefore give KLS by the same balanced near-minimizer reduction. No argument is known that derives this assumption from the soft-projector calculations.
+This prefix-only statement is implied by [](#ass:all-cut-carleson): take $I=[0,T]$ and $\eta=1/6$, for which [](#eq:tau-tight) is [](#eq:tau-coarse); no converse is known. [](#cor:tight-window-consumption) derives its boundary-lower-bound consequence for each cut; universal validity would therefore give KLS by the same balanced near-minimizer reduction.
 
 The hypothesis of the conditional theorem [](#thm:intro-weighted) of the near-Cheeger variant is the following package.
 

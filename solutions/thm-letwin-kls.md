@@ -1,5 +1,5 @@
 ---
-title: "Solution: Letwin's general KLS bound"
+title: 'Letwin: the bound $\CP\lesssim\sqrt{\log n}$'
 ledger-node: thm:letwin-kls
 numbering:
   enumerator: "108.%s"

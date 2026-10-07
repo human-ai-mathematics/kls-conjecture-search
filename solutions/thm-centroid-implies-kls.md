@@ -1,5 +1,5 @@
 ---
-title: "Solution: stopped centroid and all-cut implications"
+title: 'Centroid control implies KLS'
 ledger-node:
   - thm:centroid-implies-kls
   - thm:intro-all-cut

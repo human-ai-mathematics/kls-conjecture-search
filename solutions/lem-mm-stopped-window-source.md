@@ -1,5 +1,5 @@
 ---
-title: 'Solution: stopped initial-layer source bound'
+title: 'The stopped source bound'
 label: sec:sol-lem-mm-stopped-window-source
 ledger-node: lem:mm-stopped-window-source
 numbering:

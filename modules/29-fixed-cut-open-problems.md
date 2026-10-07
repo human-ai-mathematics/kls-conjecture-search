@@ -77,7 +77,7 @@ $$
 >C\bigl(Te_0(E)+T^{1+\gamma}\bigr).
 $$
 
-Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation estimate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses satisfy KLS by [](#prop:products).
+Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation estimate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure hypothesis. The product witnesses satisfy KLS by [](#prop:products).
 :::
 
 The propagation clause of the weighted package is the following rate. It is refuted by the product cylinders of [](#prop:weighted-spectator-obstruction) above, and stated here so that the refutation has a precise target.

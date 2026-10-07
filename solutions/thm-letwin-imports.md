@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the Letwin matrix and quadratic imports'
+title: 'Letwin: matrix and quadratic estimates'
 ledger-node:
   - thm:letwin-moment-map
   - thm:letwin-qcts

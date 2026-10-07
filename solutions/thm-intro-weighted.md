@@ -1,5 +1,5 @@
 ---
-title: "Solution: consumption of the weighted near-Cheeger package"
+title: 'The weighted near-Cheeger implication'
 ledger-node: thm:intro-weighted
 numbering:
   enumerator: "102.%s"

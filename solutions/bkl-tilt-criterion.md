@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the tilt criterion and its Appell duality'
+title: 'BKL: the tilt criterion and Appell duality'
 ledger-node:
   - thm:bkl-tilt-criterion
   - prop:bkl-tilt-appell-duality

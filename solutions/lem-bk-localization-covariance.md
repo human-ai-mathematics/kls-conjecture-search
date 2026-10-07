@@ -1,5 +1,5 @@
 ---
-title: "Covariance-normalized localization and moving Appell variance"
+title: 'BK: covariance-normalized localization and moving Appell variance'
 ledger-node: [lem:bk-localization-covariance, lem:bk-moving-appell-variance]
 numbering:
   enumerator: "154.%s"

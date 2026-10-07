@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the linear sector of the canonical Stein kernel and the third-moment tensor'
+title: 'The linear test and the third-moment tensor'
 label: sec:sol-lstm
 ledger-node:
 - lem:linear-sector-third-moment

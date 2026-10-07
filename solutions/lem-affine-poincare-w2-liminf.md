@@ -1,5 +1,5 @@
 ---
-title: 'Solution: affine-Poincaré recovery and one-sequence CMH closure'
+title: 'Lower semicontinuity of the affine Poincaré constant'
 label: sec:sol-affine-poincare-w2-liminf
 ledger-node:
 - lem:affine-poincare-w2-liminf

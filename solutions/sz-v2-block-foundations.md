@@ -1,5 +1,5 @@
 ---
-title: "Actual inverse-gradient blocks: Green estimates, restart, and extension"
+title: 'Song–Zhang v2: block construction and propagation'
 ledger-node:
   - lem:sz-v2-orbit-green-restart
   - lem:sz-v2-block-extension

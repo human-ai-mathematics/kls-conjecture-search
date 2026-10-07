@@ -1,5 +1,5 @@
 ---
-title: "Reverse transfer from integration to Appell coefficients"
+title: 'BK: reverse coefficient transfer'
 ledger-node: prop:bk-reverse-transfer
 numbering:
   enumerator: "155.%s"

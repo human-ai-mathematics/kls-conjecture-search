@@ -1,5 +1,5 @@
 ---
-title: 'Solution: suspension, uniform tilt coefficients, and KLS'
+title: 'BKL: suspension, uniform coefficients and KLS'
 ledger-node: [prop:bkl-suspension, thm:bkl-tilt-bound, conj:kls]
 numbering:
   enumerator: '135.%s'

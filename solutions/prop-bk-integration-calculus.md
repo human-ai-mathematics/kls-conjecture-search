@@ -1,5 +1,5 @@
 ---
-title: "BK compatible integration and the Appell operator calculus"
+title: 'BK: integration and Appell observations'
 ledger-node: prop:bk-integration-calculus
 numbering:
   enumerator: "152.%s"

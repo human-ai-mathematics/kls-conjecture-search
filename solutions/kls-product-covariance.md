@@ -1,5 +1,5 @@
 ---
-title: 'Solution: product coordinate budgets, quadratic chaos, and the published covariance window'
+title: 'Product coordinate budgets'
 label: sec:sol-kls-product-covariance
 ledger-node:
 - lem:block

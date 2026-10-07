@@ -1,5 +1,5 @@
 ---
-title: "Solution: short target name"
+title: "Short target name"
 ledger-node: conj:main
 numbering:
   enumerator: "1.%s"

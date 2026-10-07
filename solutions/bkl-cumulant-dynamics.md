@@ -1,5 +1,5 @@
 ---
-title: "Inverse-covariance localization and cumulant dynamics"
+title: 'BKL: inverse-covariance cumulant dynamics'
 ledger-node: lem:bkl-cumulant-dynamics
 numbering:
   enumerator: "132.%s"

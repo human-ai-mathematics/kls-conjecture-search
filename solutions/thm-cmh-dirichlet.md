@@ -1,5 +1,5 @@
 ---
-title: 'Solution: exact CMH constants on the line, on products, and on the log-concave Dirichlet family'
+title: 'Exact constants on the line and on products, and the bound $4$ on Dirichlet laws'
 label: sec:sol-cmh-dirichlet
 ledger-node:
 - thm:cmh-1d

@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: raw joint frames and delayed hierarchy losses"
+title: 'Song–Zhang v2: joint loss estimates'
 ledger-node:
   - lem:sz-v2-raw-joint-frame
   - lem:sz-v2-propagated-joint-loss

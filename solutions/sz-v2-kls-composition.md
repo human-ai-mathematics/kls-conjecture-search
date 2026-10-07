@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: composition with the canonical KLS statement"
+title: 'Song–Zhang v2: KLS'
 ledger-node: conj:kls
 numbering:
   enumerator: "147.%s"

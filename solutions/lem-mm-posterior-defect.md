@@ -1,5 +1,5 @@
 ---
-title: 'Solution: posterior eigenfunction-defect calculus'
+title: 'The posterior eigenfunction defect'
 label: sec:sol-lem-mm-posterior-defect
 ledger-node: lem:mm-posterior-defect
 numbering:

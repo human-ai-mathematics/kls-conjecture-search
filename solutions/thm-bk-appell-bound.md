@@ -1,5 +1,5 @@
 ---
-title: "BK: uniform Appell coefficient induction"
+title: 'BK: the explicit degree induction'
 ledger-node: thm:bk-appell-bound
 numbering:
   enumerator: "156.%s"

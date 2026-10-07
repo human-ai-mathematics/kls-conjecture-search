@@ -1,5 +1,5 @@
 ---
-title: "Solution: quadratic chaos, two-color source, and covariance reduction"
+title: 'Consequences of Letwin''s quadratic estimate'
 ledger-node:
   - cor:qcts-source
   - thm:covariance-bound

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: time-weighted fixed-function source budget'
+title: 'The time-weighted source budget'
 label: sec:sol-lem-mm-time-weighted-fixed-source
 ledger-node: lem:mm-time-weighted-fixed-source
 numbering:

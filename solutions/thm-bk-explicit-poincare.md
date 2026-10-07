@@ -1,5 +1,5 @@
 ---
-title: "BK: explicit Poincaré and Cheeger bounds"
+title: 'BK: the Poincaré and Cheeger constants'
 ledger-node:
   - thm:bk-explicit-poincare
   - cor:bk-cheeger

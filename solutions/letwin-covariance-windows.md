@@ -1,5 +1,5 @@
 ---
-title: "Solution: third moments and covariance moment windows"
+title: 'Letwin: third-moment bound and covariance control'
 ledger-node:
   - prop:letwin-kappa
   - cor:letwin-window

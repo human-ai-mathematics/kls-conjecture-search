@@ -1,5 +1,5 @@
 ---
-title: "Klartag–Lehec imports: stopped rank tails and integrated covariance"
+title: 'Klartag–Lehec: stopped rank tails and integrated covariance'
 ledger-node:
   - thm:kl-stopped-rank-tail
   - thm:kl-integrated-rank-covariance

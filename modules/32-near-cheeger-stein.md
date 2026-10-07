@@ -54,7 +54,7 @@ Consequently the *Stein-trace norm*
 \;=\;s^2\,\norm{K}_\HS^2 ,
 ```
 
-and the functional consumed by the geometric approach is $\calS_\nu(E)/s=s\norm K_\HS^2$. At balance $K=G$, so this equals the Riccati source $S=s\norm G_\HS^2$; off balance the two quantities are related, rather than identified, by [](#lem:stein-vs-source).
+and the functional used by the fixed-cut argument is $\calS_\nu(E)/s=s\norm K_\HS^2$. At balance $K=G$, so this equals the Riccati source $S=s\norm G_\HS^2$; off balance the two quantities are related, rather than identified, by [](#lem:stein-vs-source).
 :::
 
 :::{prf:proof}

@@ -1,5 +1,5 @@
 ---
-title: "Dimension-free bounds for every cumulant order"
+title: 'BKL: the all-order cumulant bound'
 ledger-node: thm:bkl-cumulant-bound
 numbering:
   enumerator: "134.%s"

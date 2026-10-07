@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the CMH estimate, its endpoint reduction, its Hodge content, and the failure of matrix algebra to supply gate zero'
+title: 'The moment-Hessian inequality, its operator data, and $\CPaff\le\CMH$'
 label: sec:sol-cmh-normalization
 ledger-node:
 - prop:cmh-bochner

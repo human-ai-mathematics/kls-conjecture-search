@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the degree-two root-frame pencil identity on the isotropic uniform simplex'
+title: 'The degree-two value for the root frame'
 label: sec:sol-lem-fiber-root-degree-two
 ledger-node: lem:fiber-root-degree-two
 numbering:

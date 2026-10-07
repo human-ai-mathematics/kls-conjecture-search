@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: constructing the block radius and closing inner refinement"
+title: 'Song–Zhang v2: the improved inner iteration'
 ledger-node:
   - thm:sz-v2-iterated-curvature
   - lem:sz-v2-operator-block-primitives

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: a uniform fixed-degree floor for simplex fiber forms'
+title: 'A uniform floor at every fixed polynomial degree'
 ledger-node: lem:fiber-polynomial-floor
 numbering:
   enumerator: 128.%s

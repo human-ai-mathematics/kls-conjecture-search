@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the stopped covariance interface in the near-worst bootstrap'
+title: 'The stopped covariance quantity of the bootstrap'
 label: sec:sol-bootstrap-stopped-interface
 ledger-node: thm:bootstrap-stopped-interface
 numbering:

@@ -37,7 +37,7 @@ Letting $\delta\downarrow0$ yields $I(p)\ge2pI(1/2)$; symmetry handles $p>1/2$. 
 
 :::{prf:definition} Cheeger excess
 :label: def:cheeger-excess
-$\bar e_t(E)=\mu_t^+(E)-h_{\mu_t}\min(p_t,q_t)\ \ge\ e_t(E)\ \ge0$, the excess over the Cheeger line rather than over the profile. It is the quantity that propagates through the bootstrap; since $\bar e\ge e$, any consumption stated for $e$ is implied.
+$\bar e_t(E)=\mu_t^+(E)-h_{\mu_t}\min(p_t,q_t)\ \ge\ e_t(E)\ \ge0$, the excess over the Cheeger line rather than over the profile. It is the quantity that propagates through the bootstrap; since $\bar e\ge e$, any bound stated for $e$ is implied.
 :::
 
 :::{prf:lemma} Whitening comparison

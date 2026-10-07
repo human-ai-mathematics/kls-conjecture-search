@@ -1,5 +1,5 @@
 ---
-title: "From bounded coefficient profiles to the universal Poincare inequality"
+title: 'Song–Zhang v2: the uniform Poincaré bound'
 ledger-node: thm:sz-v2-kls
 numbering:
   enumerator: "142.%s"

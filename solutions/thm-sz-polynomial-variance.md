@@ -1,5 +1,5 @@
 ---
-title: 'Solution: covariance-adapted localization and polynomial variance'
+title: 'Song–Zhang v1: analytic foundations and Appell variance estimates'
 ledger-node:
   - thm:sz-polynomial-variance
   - lem:sz-analytic-foundations

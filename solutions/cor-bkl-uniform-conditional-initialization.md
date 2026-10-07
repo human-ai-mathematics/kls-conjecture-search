@@ -1,5 +1,5 @@
 ---
-title: 'Solution: uniform conditional initialization from BKL coefficients'
+title: 'BKL: uniform conditional initialization'
 ledger-node: cor:bkl-uniform-conditional-initialization
 numbering:
   enumerator: '136.%s'

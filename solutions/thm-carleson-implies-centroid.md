@@ -1,5 +1,5 @@
 ---
-title: "Solution: deterministic Carleson control implies stopped centroid control"
+title: 'Carleson control implies centroid control'
 ledger-node: thm:carleson-implies-centroid
 numbering:
   enumerator: "101.%s"

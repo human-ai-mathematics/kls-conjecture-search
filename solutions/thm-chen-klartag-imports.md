@@ -1,5 +1,5 @@
 ---
-title: "Chen–Klartag imports: moment Hessian, thin shell, and third tensor"
+title: 'Chen–Klartag: moment-Hessian, thin-shell and third-tensor bounds'
 ledger-node:
   - thm:chen-klartag-moment-hessian
   - thm:chen-klartag-thin-shell

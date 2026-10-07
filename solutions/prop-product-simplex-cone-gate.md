@@ -1,5 +1,5 @@
 ---
-title: 'Solution: sharp linear gate on cones over products of simplices'
+title: 'Cones over products of simplices'
 ledger-node: prop:product-simplex-cone-gate
 numbering:
   enumerator: '127.%s'

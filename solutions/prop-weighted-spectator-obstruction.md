@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the exponential-spectator obstruction'
+title: 'The exponential-spectator obstruction'
 label: sec:sol-weighted-spectator-obstruction
 ledger-node: prop:weighted-spectator-obstruction
 numbering:

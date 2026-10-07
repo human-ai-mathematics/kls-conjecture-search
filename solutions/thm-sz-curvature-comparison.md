@@ -1,5 +1,5 @@
 ---
-title: "Polynomial coefficient profiles control the full spectral gap"
+title: 'Song–Zhang v1: polynomial coefficients control the spectral gap'
 ledger-node: thm:sz-curvature-comparison
 numbering:
   enumerator: "121.%s"

@@ -1,5 +1,5 @@
 ---
-title: "BK: regular approximation and finite-energy limits"
+title: 'BK: approximation with covariance and curvature control'
 ledger-node: lem:bk-regular-approximation
 numbering:
   enumerator: "150.%s"

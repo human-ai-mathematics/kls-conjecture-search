@@ -1,5 +1,5 @@
 ---
-title: "Uniform block realization with a finite chain of coefficient floors"
+title: 'Song–Zhang v2: finite chains with retained bounds'
 ledger-node: prop:sz-v2-finite-chain-blocks
 numbering:
   enumerator: "148.%s"

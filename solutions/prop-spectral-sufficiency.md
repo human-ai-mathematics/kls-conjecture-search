@@ -1,5 +1,5 @@
 ---
-title: 'Solution: full-damping spectral sufficiency'
+title: 'Spectral sufficiency: the occupation estimate implies KLS'
 label: sec:sol-prop-spectral-sufficiency
 ledger-node: prop:spectral-sufficiency
 numbering:

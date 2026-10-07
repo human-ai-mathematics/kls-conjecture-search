@@ -1,5 +1,5 @@
 ---
-title: 'Solution: split-class screened weighted supply (total-budget form)'
+title: 'Split-class screened supply'
 label: sec:sol-split-screened-supply
 ledger-node: prop:split-screened-supply
 numbering:

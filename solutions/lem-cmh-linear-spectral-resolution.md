@@ -1,5 +1,5 @@
 ---
-title: 'Solution: spectral resolution of the linear-sector gate matrices $\mathsf N,\mathsf D,\mathsf R$'
+title: 'Spectral resolution of the linear test'
 label: sec:sol-clsr
 ledger-node: lem:cmh-linear-spectral-resolution
 numbering:

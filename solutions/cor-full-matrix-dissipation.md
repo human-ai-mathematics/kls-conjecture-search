@@ -1,5 +1,5 @@
 ---
-title: 'Solution: full matrix Riccati dissipation'
+title: 'Full matrix dissipation'
 label: sec:sol-full-matrix-dissipation
 ledger-node: cor:full-matrix-dissipation
 numbering:

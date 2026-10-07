@@ -1,5 +1,5 @@
 ---
-title: 'Solution: constant-preserving CMH approximation closure'
+title: 'Approximation closure for the moment-Hessian constant'
 label: sec:sol-cmh-approximation
 ledger-node: prop:cmh-approximation-closure
 numbering:

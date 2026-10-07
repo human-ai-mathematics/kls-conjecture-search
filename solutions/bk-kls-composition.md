@@ -1,5 +1,5 @@
 ---
-title: "BK: composition with the canonical KLS statement"
+title: 'BK: KLS'
 ledger-node: conj:kls
 numbering:
   enumerator: "158.%s"

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: analytic and tensor foundations for the BKL criterion'
+title: 'BKL: analytic foundations and tensor symmetrization'
 ledger-node:
   - lem:bkl-analytic-foundations
   - lem:bkl-tensor-symmetrization

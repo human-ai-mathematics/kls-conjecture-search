@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the near-worst bootstrap and its covariance interface'
+title: 'The near-worst bootstrap'
 label: sec:sol-kls-bootstrap-interface
 ledger-node:
 - lem:half

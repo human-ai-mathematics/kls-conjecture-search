@@ -1,5 +1,5 @@
 ---
-title: "Song–Zhang v2: transferring the polynomial depth cost to dimension"
+title: 'Song–Zhang v2: the dimension bound of the inner iteration'
 ledger-node: thm:sz-v2-dimension-bound
 numbering:
   enumerator: "138.%s"

@@ -1,5 +1,5 @@
 ---
-title: 'Solution: the exponential cones — moment map, linear sector, cube cone'
+title: 'The exponential cones'
 label: sec:sol-cone-moment-map
 ledger-node:
 - prop:cone-moment-map

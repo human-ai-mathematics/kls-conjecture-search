@@ -1,5 +1,5 @@
 ---
-title: "Iterating polynomial and curvature estimates with uniform constants"
+title: 'Song–Zhang v1: the iteration of curvature profiles'
 ledger-node: thm:sz-iterated-curvature
 numbering:
   enumerator: "122.%s"

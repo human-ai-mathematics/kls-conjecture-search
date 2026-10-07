@@ -1,5 +1,5 @@
 ---
-title: "Gaussian transfer and the all-depth Song–Zhang Poincaré bound"
+title: 'Song–Zhang v1: Gaussian transfer, the all-depth bound and its affine form'
 ledger-node:
   - thm:sz-curvature-transfer
   - thm:song-zhang-kls
