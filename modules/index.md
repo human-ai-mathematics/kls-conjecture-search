@@ -51,5 +51,5 @@ The overview explains each with the idea of its proof (Section [](#sec:overview-
 
 **How to contribute.** A proof, a counterexample, a partial result, a missed reference or a correction:
 
-- **On a statement:** next to its title are its label, for instance `conj:gate-zero-sharp`, and links that open a form on the [project repository](https://github.com/numina-functional-inequalities/kls-conjecture-search/issues) with the label filled in — *Idea* or *Counterexample* on a statement not settled here, *Correction* on any other.
-- **In discussion:** ask a question (*Q&A*), think out loud (*Ideas*) or point at a reference (*Literature*) in the project's [GitHub Discussions](https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions), naming a statement by its label.
+- **On a statement:** next to its title are its label, for instance `conj:gate-zero-sharp`, and links that open a form on the [project repository](https://github.com/human-ai-mathematics/kls-conjecture-search/issues) with the label filled in — *Idea* or *Counterexample* on a statement not settled here, *Correction* on any other.
+- **In discussion:** ask a question (*Q&A*), think out loud (*Ideas*) or point at a reference (*Literature*) in the project's [GitHub Discussions](https://github.com/human-ai-mathematics/kls-conjecture-search/discussions), naming a statement by its label.

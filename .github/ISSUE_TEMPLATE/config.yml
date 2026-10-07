@@ -2,7 +2,7 @@
 blank_issues_enabled: true
 contact_links:
   - name: Ask a question, or think out loud
-    url: https://github.com/numina-functional-inequalities/kls-conjecture-search/discussions
+    url: https://github.com/human-ai-mathematics/kls-conjecture-search/discussions
     about: >
       Interpretation, background, why a route was abandoned, whether an idea is worth
       trying. Nothing has to be finished to be worth saying here.

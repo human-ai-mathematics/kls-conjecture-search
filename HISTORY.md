@@ -7,7 +7,7 @@ checkpoints in [`research/explorations/`](research/explorations/) hold the detai
 
 This file only records history. What is proved now is in the
 [ledger](research/program/ledger.yaml), and each statement on the
-[site](https://numina-functional-inequalities.github.io/kls-conjecture-search/) shows its
+[site](https://human-ai-mathematics.github.io/kls-conjecture-search/) shows its
 status. *Certified* means that a passing review independent of the proof's author checked
 the proof. Unless a human is named, the author and the reviewer were AI agents.
 Statements are named by label; paths are relative to the repository root.

@@ -1,6 +1,6 @@
 # The Kannan–Lovász–Simonovits frontier
 
-**[Read the manuscript](https://numina-functional-inequalities.github.io/kls-conjecture-search/)**:
+**[Read the manuscript](https://human-ai-mathematics.github.io/kls-conjecture-search/)**:
 the site opens on a short welcome page with reading paths ([`modules/index.md`](modules/index.md));
 the mathematical introduction is [`modules/00-overview.md`](modules/00-overview.md).
 
@@ -13,7 +13,7 @@ conditional-fiber frames), each with its certified advances and its exact open e
 not this file, is the source of truth for what is proved.
 
 The rules are in [`SPECIFICATION.md`](SPECIFICATION.md), from
-[conjecture-search-template v0.5.0](https://github.com/numina-functional-inequalities/conjecture-search-template/releases/tag/v0.5.0).
+[conjecture-search-template v0.5.0](https://github.com/human-ai-mathematics/conjecture-search-template/releases/tag/v0.5.0).
 Start every session that edits the repository by reading it.
 
 ## Layout
