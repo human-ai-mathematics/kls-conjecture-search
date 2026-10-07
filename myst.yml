@@ -93,26 +93,23 @@ project:
   # issue forms of .github/ISSUE_TEMPLATE: see scripts/status.mjs.
   plugins:
     - scripts/status.mjs
-  # The manuscript comes first, then the full proofs. A pattern that matches nothing is
-  # an error, so the proofs' pattern also matches their introduction page:
-  # '{proofs,solutions/*}.md' reads "proofs.md, then every dossier". Drafts are listed
-  # here for local reading; the pages workflow removes them before it publishes.
-  # A short welcome page, then the introduction; the literature (six families); the three
-  # proofs of KLS: the first version of Song--Zhang (the spectral criterion that BKL and
-  # SZ v2 use), then Bizeul--Klartag--Lehec, the shorter route from that criterion (and the
-  # first deposited, on 4 October), then the second version of Song--Zhang with its
-  # technical estimates in a chapter of their own, then Balasubramanian--Kasiviswanathan
-  # (compatible integration, version consulted on 6 October), and the comparison of the
-  # three proofs.
-  # Then KLS after its proofs (equivalent forms, consequences, the question of the
-  # constant; prose only) and the map of alternative mechanisms; the three living
-  # mechanisms -- the moment map, the fixed eigenfunction, conditional fibers -- in the
+  # The manuscript comes first, then the full proofs. A short welcome page, then the
+  # introduction; the literature (six families); the proofs of KLS: the first version of
+  # Song--Zhang (the spectral criterion that BKL and SZ v2 use), then Bizeul--Klartag--Lehec,
+  # the second version of Song--Zhang with its technical estimates in a chapter of their
+  # own, Balasubramanian--Kasiviswanathan, and the comparison of the three proofs. Then KLS
+  # after its proofs (prose only); the alternative mechanisms, opened by their map
+  # (chapter 14) -- the moment map, the fixed eigenfunction, conditional fibers -- in the
   # order of what each has established, the localization prelude (chapter 20) opening the
-  # fixed eigenfunction, the first living mechanism to use stochastic localization (the
-  # fixed-cut archive links back to it); the shared technical foundations; and, last
-  # before the proofs, the fixed cut as an archive, with its technical chapters.
+  # fixed eigenfunction (the fixed-cut archive links back to it); the shared technical
+  # foundations; and, last before the proofs, the fixed cut as an archive.
   # Proof chapters are titled "Authors: mechanism" (owner's decision, 2026-10-07).
   # Owner's decisions of 2026-10-06: research/explorations/2026-10-06-editorial-restructure.md.
+  #
+  # The full proofs: proofs.md, then the dossiers in the groups of proofs.md. A new dossier
+  # is added to the brace list of its group here and to proofs.md. Drafts are listed for
+  # local reading; the pages workflow removes them before it publishes, so each group's
+  # pattern must keep matching at least one file (a pattern that matches nothing is an error).
   toc:
     - file: modules/index.md
     - file: modules/00-overview.md
@@ -124,7 +121,7 @@ project:
         - file: modules/04-family-moment-map.md
         - file: modules/05-family-transport.md
         - file: modules/06-family-parallel-coupling.md
-    - title: Three proofs of KLS
+    - title: The proofs of KLS
       children:
         - file: modules/07-polynomial-curvature.md
         - file: modules/08-bkl-cumulants-suspension.md
@@ -135,9 +132,9 @@ project:
     - title: After KLS
       children:
         - file: modules/13-kls-after-proofs.md
-        - file: modules/14-alternative-mechanisms.md
     - title: Alternative mechanisms
       children:
+        - file: modules/14-alternative-mechanisms.md
         - title: Moment map
           children:
             - file: modules/15-moment-map-cmh.md
@@ -164,18 +161,41 @@ project:
       children:
         - file: modules/28-fixed-cut.md
         - file: modules/29-fixed-cut-open-problems.md
-        - file: modules/30-carleson.md
+        - file: modules/30-carleson-mass-martingale.md
         - file: modules/31-product-stress.md
-        - file: modules/32-stein-route.md
-        - file: modules/33-excess-propagation.md
-        - file: modules/34-bootstrap.md
-        - file: modules/35-mass-martingale.md
-        - file: modules/36-stein-dictionary.md
-        - file: modules/37-jacobi-splitting.md
-        - file: modules/38-fixed-cut-calculations.md
+        - file: modules/32-near-cheeger-stein.md
+        - file: modules/33-bootstrap.md
+        - file: modules/34-jacobi-splitting.md
     - title: Full proofs
       children:
-        - pattern: '{proofs,solutions/*}.md'
+        - file: proofs.md
+        - title: "Song–Zhang, first version"
+          children:
+            - pattern: 'solutions/{thm-sz-polynomial-variance,thm-sz-curvature-comparison,thm-sz-iterated-curvature,thm-song-zhang-kls,prop-sz-exponential-coefficients-equivalence}.md'
+        - title: "Bizeul–Klartag–Lehec"
+          children:
+            - pattern: 'solutions/{bkl-analytic-foundations,bkl-tilt-criterion,bkl-cumulant-dynamics,bkl-cumulant-energy,bkl-cumulant-bound,bkl-suspension-kls,cor-bkl-uniform-conditional-initialization}.md'
+        - title: "Song–Zhang, second version"
+          children:
+            - pattern: 'solutions/{sz-v2-height-reduction,sz-v2-inner-foundations,sz-v2-inner-refinement,sz-v2-dimension-bound,sz-v2-block-foundations,sz-v2-joint-loss,sz-v2-height-blocks,sz-v2-chain-blocks,sz-v2-small-loss,sz-v2-summable-budgets,sz-v2-kls,sz-v2-kls-composition}.md'
+        - title: "Balasubramanian–Kasiviswanathan"
+          children:
+            - pattern: 'solutions/{lem-bk-regular-approximation,lem-bk-compatible-hodge,prop-bk-integration-calculus,lem-bk-uniform-power-bound,lem-bk-localization-covariance,prop-bk-reverse-transfer,thm-bk-appell-bound,thm-bk-explicit-poincare,bk-kls-composition}.md'
+        - title: "Results of the literature"
+          children:
+            - pattern: 'solutions/{thm-letwin-imports,letwin-covariance-windows,thm-letwin-kls,thm-chen-klartag-imports,thm-kl-rank-imports}.md'
+        - title: "The moment map"
+          children:
+            - pattern: 'solutions/{thm-cmh-normalization,thm-cmh-dirichlet,lem-linear-sector-third-moment,lem-cmh-linear-spectral-resolution,prop-cone-moment-map,prop-product-simplex-cone-gate,prop-cmh-approximation-closure,prop-cmh-recovery-calculus,lem-affine-poincare-w2-liminf}.md'
+        - title: "The fixed eigenfunction"
+          children:
+            - pattern: 'solutions/{prop-spectral-sufficiency,lem-mm-posterior-defect,lem-mm-restart-deweighting,lem-mm-smallgap-fourth-moment,lem-mm-time-weighted-fixed-source,lem-mm-stopped-window-source,prop-mm-window-occupation}.md'
+        - title: "Conditional fibers"
+          children:
+            - pattern: 'solutions/{conditional-fiber-frame-structure,lem-fiber-polynomial-floor,lem-fiber-root-degree-two}.md'
+        - title: "Foundations and the fixed-cut archive"
+          children:
+            - pattern: 'solutions/{kls-localization-riccati-core,cor-full-matrix-dissipation,kls-qcts-stein-boundary-core,letwin-source-consequences,kls-geometry-models,lem-survival-implies-kls,thm-carleson-implies-centroid,thm-centroid-implies-kls,thm-intro-weighted,kls-bootstrap-interface,thm-bootstrap-stopped-interface,cor-dichotomy,lem-time-weighted-source,lem-lyapunov-stein-duality,kls-product-covariance,prop-split-screened-supply,kls-excess-audit,prop-weighted-spectator-obstruction,prop-spectator-excess-rate-obstruction}.md'
 site:
   template: book-theme
   options:

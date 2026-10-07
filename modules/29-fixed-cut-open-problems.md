@@ -6,14 +6,14 @@ numbering:
 (sec:open)=
 # The fixed cut: remaining problems
 
-What remains of the fixed-cut argument is a small set of precise problems, together with the obstructions that shaped them. They belong to the archive: none is needed for KLS, now proved, and they are stated for the difficulty each isolates. The operator-to-trace upgrade below has a counterpart among the alternative mechanisms — the linear test of the moment map asks for an operator bound where only a trace bound is known (Section [](#subsec:gate-zero)) — and the counterexamples of this chapter, [](#prop:weighted-spectator-obstruction) first, constrain any argument that follows a set through localization. We state the problems in decreasing order of strength.
+Part of the fixed-cut archive (Chapter [](#sec:introduction)); this chapter holds the problems the fixed cut leaves, together with the obstructions that shaped them. None is needed for KLS, now proved; each is stated for the difficulty it isolates. The operator-to-trace upgrade below has a counterpart among the alternative mechanisms — the linear test of the moment map asks for an operator bound where only a trace bound is known (Section [](#subsec:gate-zero)) — and the counterexamples of this chapter, [](#prop:weighted-spectator-obstruction) first, constrain any argument that follows a set through localization. We state the problems in decreasing order of strength.
 
 :::{prf:conjecture} Operator-to-trace upgrade; tight-prefix Carleson
 :label: conj:trace-upgrade
 [](#ass:tight-prefix-carleson) holds: the unconditional per-direction Carleson estimate ([](#cor:per-direction)) upgrades to the trace scale, uniformly over fixed initially balanced cuts and prefixes from time zero, with damping coefficient $\alpha<1$.
 :::
 
-By [](#cor:tight-window-consumption), this prefix form on the tight window is exactly what the argument consumes; the stronger every-interval estimate [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Chapter [](#sec:qcts) ([](#rem:projection-ceiling)) bears on the obvious proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. A proof of the dynamic upgrade must therefore use cut-specific structure and covariance occupation. Its restriction to products is examined in [](#rem:product-stress-test); a family of product cuts violating the prefix form for every choice of constants would refute it.
+By [](#cor:tight-window-consumption), this prefix form on the tight window is exactly what the argument uses; the stronger every-interval estimate [](#ass:all-cut-carleson) is not required. The projection-test ceiling of Chapter [](#sec:qcts) ([](#rem:projection-ceiling)) bears on the obvious proof method, although Letwin's moment-map argument bypasses it for the intrinsic static quadratic chaos. A proof of the dynamic upgrade must therefore use cut-specific structure and covariance occupation. Its restriction to products is examined in [](#rem:product-stress-test); a family of product cuts violating the prefix form for every choice of constants would refute it.
 
 :::{prf:lemma} Scale-weighted all-cut source budget
 :label: lem:time-weighted-source
@@ -80,6 +80,8 @@ $$
 Thus replacing the global operator-norm weight by a tensor-stable or cut-local weight is not by itself enough to repair the current propagation estimate: a surviving uniform statement must also allow an $O(T)$ remainder, make the remainder vanish with a source deficit, or impose an explicit near-worst-measure premise. The product witnesses satisfy KLS by [](#prop:products).
 :::
 
+The propagation clause of the weighted package is the following rate. It is refuted by the product cylinders of [](#prop:weighted-spectator-obstruction) above, and stated here so that the refutation has a precise target.
+
 :::{prf:conjecture} Global-operator-norm weighted excess rate
 :label: conj:weighted-excess-rate
 There exist universal $C,T_0,\gamma>0$ and $\eta\in(0,1/4]$ such that, for every isotropic log-concave law and every balanced finite-perimeter cut with $e_0(E)\le1$,
@@ -92,9 +94,9 @@ $$
 This is exactly the weighted-excess component [](#eq:intro-weighted-excess) of [](#ass:weighted-package).
 :::
 
-Against this rate, [](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder witness with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted interface. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure premise.
+Against this rate, [](#prop:weighted-spectator-obstruction) gives, for every proposed choice of constants, a product-cylinder witness with arbitrarily small additive and relative initial excess. Among pure powers of $\lmax(A_t)$ multiplying absolute excess in this slice-wise package, $5/2$ is the weakest exponent statically consistent with the two-tail mode ([](#prop:two-tail)); the time exponent was a deliberately stronger demand, not fixed by that static example. The near-worst bootstrap of [](#thm:bootstrap) supplies a different, externally anchored unweighted bound. It is not a uniform superlinear-remainder statement of the form above. [](#prop:spectator-excess-rate-obstruction) proves that the superlinear remainder already fails after the global covariance weight is removed. Thus changing only the weight cannot repair the uniform package: the replacement must also change the remainder or impose an explicit near-worst-measure hypothesis.
 
-A possible replacement interface, screened by the source, charges the weighted excess only on the aligned set $\mathcal A_{\kappa,t}=\{Q_t\ge\kappa\,e_tW_{\rm cut}\}$, where $Q_t=\calS_{\mu_t}(E)/s_t=s_t\norm{K_t}_{\HS}^2$ and $W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ with the cut-oriented scale of [](#lem:lyapunov-stein-duality). Its first positive result, [](#prop:split-screened-supply) below, concerns the regular split class; general split laws are covered only through their regular approximants, because the interchange of the screened indicator with the approximation limit is not carried out.
+A possible replacement, screened by the source, charges the weighted excess only on the aligned set $\mathcal A_{\kappa,t}=\{Q_t\ge\kappa\,e_tW_{\rm cut}\}$, where $Q_t=\calS_{\mu_t}(E)/s_t=s_t\norm{K_t}_{\HS}^2$ and $W_{\rm cut}=(1+\lambda_{\rm cut}(A_t,K_t))^{5/2}$ with the cut-oriented scale of [](#lem:lyapunov-stein-duality). Its first positive result, [](#prop:split-screened-supply) below, concerns the regular split class; general split laws are covered only through their regular approximants, because the interchange of the screened indicator with the approximation limit is not carried out.
 
 % Agent note: isolated in the 2026-08-30 screened-interface probe; the limit interchange is
 % recorded as open in the dossier of prop:split-screened-supply.
@@ -113,7 +115,7 @@ $$
 uniformly in the ambient dimension and in every spectator coordinate. The bound is a total budget, not of the form $C(k)\,T$, and asserts nothing about the trace-upgrade cluster.
 :::
 
-:::{prf:conjecture} Weighted stable Stein-trace ingredient extracted from the literal package
+:::{prf:conjecture} Weighted stable Stein-trace estimate
 :label: conj:stein-weighted
 There exist universal constants $T_0,C_0,C_1,C_2>0$, $0\le\beta<\tfrac12$, and $\eta\in(0,\tfrac14]$ satisfying $2\beta+64\eta^2<1$ such that, for every isotropic log-concave law, every initial finite-perimeter cut $E$ with $e_0(E)\le1$ and $\abs{p_0-\tfrac12}\le\eta/2$, and every $0<T\le T_0$,
 
@@ -182,7 +184,7 @@ $$
 In particular, $\hstar_n\ge a/(2\log\log n)$ for all sufficiently large $n$.
 :::
 
-The gain in [](#cor:dichotomy) is conditional on the geometric completion: it would replace the inverse-Cheeger bound $\PsiKLS_n\lesssim(\log n)^{1/4}$ of [](#thm:letwin-kls) by $\PsiKLS_n\lesssim1+\log\log n$ in sufficiently large dimensions. Equivalently, the two-sided Cheeger comparison would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. These are asymptotically smaller bounds, but still allow growth with dimension. The completion supplies the geometric step converting a small accumulated excess into a perimeter lower bound.
+The bound of [](#cor:dichotomy) is conditional on the geometric completion. Before KLS was proved, it improved on [](#thm:letwin-kls): it would replace $\PsiKLS_n\lesssim(\log n)^{1/4}$ by $\PsiKLS_n\lesssim1+\log\log n$ in sufficiently large dimensions, and so $C_{\mathrm P,n}\lesssim\sqrt{\log n}$ by $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$, still growing with dimension. KLS, now proved (Chapter [](#sec:kls-synthesis)), gives $\PsiKLS_n=O(1)$ and supersedes both. The corollary is kept for its mechanism: the completion supplies the geometric step converting a small accumulated excess into a perimeter lower bound, and the only covariance input is the published window of [](#cor:KI-discharged), not the longer $c/\log n$ window.
 
 :::{prf:proof}
 Fix the completion constants and use exactly $\eta=T_0^{1/3}$, with
@@ -208,28 +210,9 @@ $$
 h_\mu\bigl(T_0^{4/3}+\Xi_{T_0}(\mu)\bigr)
 \le\frac{\kappa}{C_B}T_0
 $$
-for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)\hstar_n$, then the clean bootstrap supplies the completion's premise. The balanced near-minimizer argument above gives $h_\mu\ge2c_g$ for arbitrarily accurate near-worst measures; taking their near-worst error to zero gives $\hstar_n\ge2c_g$. Monotonicity in [](#lem:whitening) covers dimension one, yielding the Cheeger formulation of [](#conj:kls). In [](#conj:taming), however, the time is chosen after the requested error level. Its existential quantifier does not identify that time with the completion time. The extra estimate displayed here is thus a sufficient condition beyond the implication in [](#cor:dichotomy).
+for every $n\ge2$ and every isotropic log-concave $\mu$ with $h_\mu\le(1+\eps_t)\hstar_n$, then the clean bootstrap supplies the completion's hypothesis. The balanced near-minimizer argument above gives $h_\mu\ge2c_g$ for arbitrarily accurate near-worst measures; taking their near-worst error to zero gives $\hstar_n\ge2c_g$. Monotonicity in [](#lem:whitening) covers dimension one, yielding the Cheeger formulation of [](#conj:kls). In [](#conj:taming), however, the time is chosen after the requested error level. Its existential quantifier does not identify that time with the completion time. The extra estimate displayed here is thus a sufficient condition beyond the implication in [](#cor:dichotomy).
 
 (subsec:effective-rank)=
 ## An effective rank in place of the soft maximum
 
-In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — could convert $\kappa_n=O(1)$ into $\CP=O(1)$, if the entropy cost of the soft maximum were the only loss. The interface functional $\Xi_T(\mu)$ of [](#eq:interface-def), evaluated in Chapter [](#sec:bootstrap), is the fixed cut's version of this question, and [](#conj:taming) is the corresponding statement. Chapter [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).
-
-## Where to start
-
-| Step | Input | Output |
-|---|---|---|
-| [](#rem:product-stress-test) | One-dimensional log-concave analysis; explicit variance dynamics | Decides whether the every-interval estimate [](#ass:all-cut-carleson) can hold on products. A proof models the cut-aware argument that [](#conj:trace-upgrade) needs; a counterexample bears on [](#conj:trace-upgrade) only if it also violates the prefix form, and does not favour the near-Cheeger variant. |
-| Replacement for [](#conj:weighted-excess-rate) | A cut-local or tensor-stable covariance scale, plus a near-worst or source-deficit remainder that survives spectator products | A statement replacing the global-operator-norm rate; not yet formulated. |
-| [](#conj:stein-weighted) | Letwin quadratic chaos; a new almost-stability trace lemma; Reilly boundary terms and zero modes; constant mode via [](#conj:splitting) | An analytic ingredient taken from [](#ass:weighted-package); it yields nothing toward KLS until a matching tensor-stable propagation statement is formulated. |
-| [](#conj:taming) | Coupling of splitting structure to the covariance SDE | Absolute-scale bootstrap supply for near-worst measures; full KLS additionally requires the estimate at the completion time with the quantitative threshold displayed above. |
-
-## Summary
-
-The quantitative comparison is between [](#thm:letwin-kls), giving $C_{\mathrm P,n}\lesssim\sqrt{\log n}$, and [](#cor:dichotomy), whose geometric antecedent would give $C_{\mathrm P,n}\lesssim(1+\log\log n)^2$. The latter uses the published covariance window of [](#cor:KI-discharged); it does not need the longer $c/\log n$ window. Letwin's dimension-free quadratic-chaos estimate and the longer covariance window enter through [](#thm:letwin-qcts) and [](#thm:V2-window), respectively.
-
-The fixed-cut analysis separates the stochastic identities (Chapters [](#sec:carleson) and [](#sec:mass-martingale)), the Stein dictionary and its operator-to-trace gap (Chapter [](#sec:stein-dictionary)), and the excess comparison with its circularity warning (Chapter [](#sec:excess)). The near-worst bootstrap in Chapter [](#sec:bootstrap) connects these quantities to the covariance estimates of Chapter [](#sec:covariance-tech). The geometric mechanisms proposed to complete this comparison are examined in Chapters [](#sec:jacobi) and [](#sec:models).
-
-The all-cut estimate ([](#ass:all-cut-carleson)) and the absolute-scale completion ([](#ass:absolute-geometric-completion)) are hypotheses, and are stated as such. The spectator products of [](#prop:weighted-spectator-obstruction) violate the literal weighted package ([](#ass:weighted-package)) and [](#conj:weighted-excess-rate); the unweighted spectator products of [](#prop:spectator-excess-rate-obstruction) separately rule out the package's uniform superlinear remainder. The conditional implication from that package to KLS ([](#thm:intro-weighted)) is kept so that a reader can see what the package would have given. The problems this approach turns on are [](#conj:trace-upgrade), the trace and bootstrap statements [](#conj:stein-weighted)–[](#conj:splitting), and the formulation of a tensor-stable replacement.
-
-The picture rests on three structural points: the consumption audit [](#prop:intro-audit) identifies an unweighted excess term that can be absorbed into the existing $O(T)$ allowance; static two-tail calibration alone does not produce a tensor-stable weight or a viable uniform remainder; and the available near-worst propagation mechanism is compressed into the single scalar interface $h_\mu\,\Xi_T$, evaluated to within a $\log\log n$ factor of what the approach requires.
+In the localization–Lichnerowicz argument, [](#rem:log-is-entropy) attributes the $\log n$ cost to the fact that the soft maximum [](#eq:logtraceexp) approximates $\lmax$ over $n$ directions. A potential depending only on the directions actually relevant to a near-extremizer — or on an effective rank rather than the ambient dimension — could convert $\kappa_n=O(1)$ into $\CP=O(1)$, if the entropy cost of the soft maximum were the only loss. The quantity $\Xi_T(\mu)$ of [](#eq:interface-def), evaluated in Chapter [](#sec:bootstrap), is the fixed cut's version of this question, and [](#conj:taming) is the corresponding statement. Chapter [](#sec:bootstrap) explains why the crude evaluation cannot suffice ([](#rem:insufficiency), [](#rem:crude-insufficient)) and shows that a relative bound at a sufficiently small universal time would itself give KLS ([](#prop:ceiling)).

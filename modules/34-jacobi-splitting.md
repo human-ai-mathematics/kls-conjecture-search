@@ -1,14 +1,14 @@
 ---
 numbering:
-  enumerator: "37.%s"
+  enumerator: "34.%s"
 ---
 
 (sec:jacobi)=
 # The fixed cut: Reilly, Jacobi and splitting formulas
 
-*Appendix to the fixed cut, Chapter [](#sec:introduction).*
+Part of the fixed-cut archive (Chapter [](#sec:introduction)); this chapter holds the boundary geometry of a near-minimal cut — second variation, the Reilly identity and exact splitting models — on which a proof of the weighted Stein-trace estimate [](#conj:stein-weighted) would rest.
 
-This section assembles the geometric mechanisms intended to prove the weighted Stein-trace estimate for near-minimal cuts. The second-variation and Reilly identities are imported with exact normal conventions from the cited sources; the statements specific to this section are exact model statements, and their quantitative versions are among the problems of Chapter [](#sec:open). Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex support, and $\Sigma=\partial^*E$ with the notation of Chapter [](#sec:notation).
+The second-variation and Reilly identities are imported with exact normal conventions from the cited sources; the statements specific to this chapter are exact model statements, and their quantitative versions are among the problems of Chapter [](#sec:open). Throughout, $\nu=e^{-V}dx$ is smooth log-concave with smooth convex support, and $\Sigma=\partial^*E$ with the notation of Chapter [](#sec:notation).
 
 ## Second variation and stability of near-minimizers
 
@@ -31,7 +31,7 @@ This is Lemma 4.1(ii) and the index form (4.1) of [@Rosales2014], with its inner
 
 :::{prf:remark} The constant mode is the obstruction, again
 :label: rem:constant-mode
-The stability inequality [](#eq:stability) gives nonnegativity, not quantitative coercivity, of the mean-zero modes of an *exact* local minimizer. It may have a nontrivial kernel: for a Gaussian halfspace, tangential linear functions are mean-zero Jacobi zero modes. Any trace estimate must therefore project out and control such geometric modes in addition to the constant mode, which is absent from the volume-preserving test space and whose curvature is measured by $\mathfrak K_\Sigma$. The possible relation of these boundary modes to the dynamic operator-to-trace problem of Chapter [](#sec:carleson) is a guiding heuristic, not an established equivalence. The splitting mechanism below supplies only an exact sufficient model for the flat branch.
+The stability inequality [](#eq:stability) gives nonnegativity, not quantitative coercivity, of the mean-zero modes of an *exact* local minimizer. It may have a nontrivial kernel: for a Gaussian halfspace, tangential linear functions are mean-zero Jacobi zero modes. Any trace estimate must therefore project out and control such geometric modes in addition to the constant mode, which is absent from the volume-preserving test space and whose curvature is measured by $\mathfrak K_\Sigma$. The possible relation of these boundary modes to the dynamic operator-to-trace problem of Section [](#subsec:one-gap) is a guiding heuristic, not an established equivalence. The splitting mechanism below supplies only an exact sufficient model for the flat branch.
 :::
 
 ## Constant-mode trace control and profile curvature
@@ -130,7 +130,7 @@ where $L_\Sigma$ is the induced weighted Laplacian on $\Sigma$. This is [@MaDu20
 When $E$ is compactly contained in the support, apply [](#eq:reilly) on $\Omega=E$ to the Poisson solution $u_M$ of [](#lem:boundary-rep), with centered quadratic data $f_M$. The left side is computable: $\int_E(Lu_M)^2\dd\nu=\int_E f_M^2\dd\nu\le\Var_\nu(f_M)$, hence is controlled by quadratic-chaos information (Chapter [](#sec:qcts)). The interior terms have a sign. The boundary terms involve $u_N^2$ weighted by $H_\nu$, the mixed term $2u_NL_\Sigma u$, and $II_\Sigma(\nabla_\Sigma u,\nabla_\Sigma u)$. The intrinsic quadratic-chaos input is now dimension-free by [](#thm:letwin-qcts), conditional on its version-1 preprint status, but neither [](#eq:stability) nor the Schur energy [](#eq:Jsharp-def) currently controls all of these boundary terms for the localized fixed cut. In particular, the global Poisson solution has no boundary condition on $\Sigma$ that removes the mixed term. Thus Reilly suggests a mechanism rather than furnishing a reduction: a quantitative trace/almost-stability lemma, uniform under localization and modulo all Jacobi zero modes, is still required before the mean-zero and constant-mode branches can be chained. This foundational gap is part of [](#conj:stein-weighted). If $E$ meets $\partial K$, the generalized Reilly formula also has support-boundary and corner/free-boundary terms. The Neumann condition in [](#lem:boundary-rep) removes the first-order flux there but does not by itself control these second-order terms; they belong to the same missing bridge.
 :::
 
-:::{prf:conjecture} Foundational almost-stability target
+:::{prf:conjecture} Almost-stability along localization
 :label: conj:almost-stability-gap
 [](#prop:second-variation) applies to a smooth critical local minimizer. A fixed near-Cheeger set transported through stochastic localization is generally neither critical nor a minimizer for $\mu_t$, and small perimeter excess alone does not imply [](#eq:stability). Smoothing a finite-perimeter set also need not preserve criticality, stability, or uniform Jacobi constants. An almost-stability trace theorem nevertheless holds along the localization: perimeter excess controls the failure of the index-form inequality for $\partial_nu_M$, after projecting out constants and geometric zero modes, with the projected coefficients paid for by the centroid or damping terms. The Reilly–Jacobi mechanism of Chapter [](#sec:jacobi) requires it.
 :::

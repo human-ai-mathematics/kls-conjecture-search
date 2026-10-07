@@ -1,12 +1,12 @@
 ---
 numbering:
-  enumerator: "34.%s"
+  enumerator: "33.%s"
 ---
 
 (sec:bootstrap)=
 # The fixed cut: the bootstrap
 
-*Appendix to the fixed cut, Chapter [](#sec:introduction).*
+Part of the fixed-cut archive (Chapter [](#sec:introduction)); this chapter holds the bootstrap comparison theorem, which reduces excess propagation for near-worst measures to the single quantity $h_\mu\,\Xi_T(\mu)$ of [](#eq:interface-def), and the evaluation of $\Xi_T$ against the known covariance estimates.
 
 ## Two elementary lemmas
 
@@ -92,7 +92,7 @@ and, for $0<T<1/8$, the admissible choice $\eta=T^{1/3}<1/2$ together with $\eps
 ```
 :::
 
-*Proof.* Six steps: the perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event; and the remaining steps collect the error terms into the interface functional. The calculation is carried out in Appendix [](#sec:appendix-fixed-cut).
+*Idea of the proof.* The perimeter supermartingale bounds the stopped perimeter by $\mu^+(E)$; whitening plus the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ converts that into a Cheeger statement on the balanced event, with the loss charged to $X_t$; near-worstness compares $h_{\mu_t}$ with $h_\mu$; and the exit probability of the tight window is bounded through the quadratic variation of $p_t$, again by $X_t$. The five steps are written out in Section [](#subsec:bootstrap-proof).
 
 :::{prf:theorem} Stopped covariance-interface refinement
 :label: thm:bootstrap-stopped-interface
@@ -128,11 +128,11 @@ This is a stopped refinement of [](#thm:bootstrap), not a universal bound on the
 
 :::{prf:remark} Features
 :label: rem:bootstrap-features
-(a) The estimate holds for every balanced cut; near-minimality enters only through the size of $e_0$. The hypothesis is on the measure — near-worstness — which is exactly the hypothesis a proof by contradiction is entitled to. (b) All randomness is compressed into the scalar functional $\Xi_T$, and crucially $\Xi_T$ enters multiplied by $h_\mu$: in the contradiction regime $h_\mu\approx\hstar_n$ is small, so the bootstrap tolerates covariance excursions of size up to $\sim1/\hstar_n$ — a genuine weakening of the operator-norm control warned about at [](#eq:trivial-lambda). (c) A pathwise variant holds with constant probability: on $\{\tau_\eta>T\}\cap\{\sup_{t\le T}\lmax(A_t)\le1+\sigma\}\cap\{\sup_{t\le T}\mu_t^+(E)\le (1+\theta)\mu^+(E)\}$ — the last event of probability $\ge\theta/(1+\theta)$ by Doob's maximal inequality for the nonnegative perimeter martingale — the same algebra gives $\sup_{t\le T}\bar e_t\le(1+\theta)e_0+h_\mu(\theta+\tfrac\eps2+\eta+\tfrac\sigma4)$ pathwise. Since the final consumption only requires events of probability $\ge\tfrac12$, constant probability may suffice for a future stability argument needing pathwise near-minimality.
+(a) The estimate holds for every balanced cut; near-minimality enters only through the size of $e_0$. The hypothesis is on the measure — near-worstness — which is exactly the hypothesis a proof by contradiction is entitled to. (b) All randomness is compressed into the scalar functional $\Xi_T$, and crucially $\Xi_T$ enters multiplied by $h_\mu$: in the contradiction regime $h_\mu\approx\hstar_n$ is small, so the bootstrap tolerates covariance excursions of size up to $\sim1/\hstar_n$ — a genuine weakening of the operator-norm control warned about at [](#eq:trivial-lambda). (c) A pathwise variant holds with constant probability: on $\{\tau_\eta>T\}\cap\{\sup_{t\le T}\lmax(A_t)\le1+\sigma\}\cap\{\sup_{t\le T}\mu_t^+(E)\le (1+\theta)\mu^+(E)\}$ — the last event of probability $\ge\theta/(1+\theta)$ by Doob's maximal inequality for the nonnegative perimeter martingale — the same algebra gives $\sup_{t\le T}\bar e_t\le(1+\theta)e_0+h_\mu(\theta+\tfrac\eps2+\eta+\tfrac\sigma4)$ pathwise. Since the final step only requires events of probability $\ge\tfrac12$, constant probability may suffice for a future stability argument needing pathwise near-minimality.
 :::
 
 (subsec:interface)=
-## Evaluating the interface functional
+## Evaluating $\Xi_T$
 
 :::{prf:lemma} Crude evaluation
 :label: lem:crude
@@ -174,7 +174,7 @@ Fix $\kappa\in(0,1]$ and a universal $T_0>0$ satisfying
 9(1+\kappa)T_0\le\frac12.
 ```
 
-If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every isotropic log-concave $\mu$, the KLS conjecture would follow directly, with no geometric input. Consequently, a propagation estimate at relative scale — $\int_0^T\E\bar e_t\dd t\le\kappa h_\mu T$ with $\kappa$ small — cannot be expected from [](#thm:bootstrap) alone: deriving it through [](#eq:clean-form) would require $\Xi_T\le c\kappa T$ at a sufficiently small universal time, an input already sufficient for the conclusion of the whole program.
+If $\Xi_{T_0}(\mu)\le\kappa T_0$ held for every isotropic log-concave $\mu$, KLS would follow directly, with no geometric input. Consequently, a propagation estimate at relative scale — $\int_0^T\E\bar e_t\dd t\le\kappa h_\mu T$ with $\kappa$ small — cannot be expected from [](#thm:bootstrap) alone: deriving it through [](#eq:clean-form) would require $\Xi_T\le c\kappa T$ at a sufficiently small universal time, an input already sufficient for KLS.
 :::
 
 :::{prf:proof}
@@ -209,9 +209,9 @@ For product $\mu$ (Chapter [](#sec:models)), $A_t$ is diagonal, each entry a non
 :::
 
 (subsec:bootstrap-barriers)=
-## Methodological constraints from this section
+## Methodological constraints from this chapter
 
-Both remarks below are methodological constraints on the bootstrap input, warnings rather than theorems; later sections use them as heuristic barriers, never as a step in a proof.
+Both remarks below are methodological constraints on the bootstrap input, warnings rather than theorems; later chapters use them as heuristic barriers, never as a step in a proof.
 
 :::{prf:remark} The crude covariance integral cannot bootstrap
 :label: rem:crude-insufficient
@@ -221,4 +221,74 @@ The crude bound $\Xi_T\lesssim\log n$ of [](#lem:crude), discussed in [](#rem:in
 :::{prf:remark} An all-measure relative bound would suffice
 :label: rem:relative-ceiling
 By [](#prop:ceiling), a bound $\Xi_{T_0}(\mu)\le\kappa T_0$ for every isotropic log-concave measure at a sufficiently small universal time is sufficient for KLS. The proposition measures how strong that covariance input is; it does not rule out obtaining it, or propagation by another argument. [](#conj:taming) instead asks for a near-worst, $h_\mu$-weighted bound.
+:::
+
+(subsec:bootstrap-proof)=
+## Proof of the bootstrap comparison
+
+The proof of [](#thm:bootstrap), in the five steps outlined after its statement.
+
+:::{prf:proof} Proof of [](#thm:bootstrap)
+*Step 1.* By the perimeter supermartingale [](#eq:perimeter-supermartingale) and [](#lem:half), $\E[\mu_t^+(E)\one_{\{t<\tau_\eta\}}]\le\mu^+(E)=\tfrac{h_\mu}2+e_0$.
+
+*Step 2.* On $\{t<\tau_\eta\}$, $\min(p_t,q_t)\ge\tfrac12-\eta$. By [](#lem:whitening) and the elementary bound $\lambda^{-1/2}\ge1-\tfrac12(\lambda-1)_+$ for $\lambda>0$ (trivial when the right side is negative),
+
+$$
+\E\bigl[h_{\mu_t}\min(p_t,q_t)\one_{\{t<\tau_\eta\}}\bigr]
+\ \ge\
+\hstar_n\Bigl(\frac12-\eta\Bigr)\Bigl(\Prob(\tau_\eta>t)-\frac{\E X_t}2\Bigr).
+$$
+
+*Step 3.* Write
+
+$$
+P=\Prob(\tau_\eta\le t),\qquad Y=\E X_t,\qquad
+a=\frac12-\eta,\qquad \rho=\frac{\hstar_n}{h_\mu}.
+$$
+
+Near-worstness and the definition of $\hstar_n$ give
+
+$$
+\frac1{1+\eps}\le\rho\le1,
+\qquad\text{hence}\qquad \rho\ge1-\eps.
+$$
+
+If $1-P-Y/2\ge0$, Steps 1–2 give
+
+$$
+\begin{split}
+\E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
+&\le h_\mu\left\{\frac12-(1-\eps)a(1-P-Y/2)\right\}\\
+&\le h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
+\end{split}
+$$
+
+Indeed, $\frac12-a(1-P)=\eta+aP\le\eta+P/2$, the $Y$ contribution is at most $Y/4$, and the $\eps$ contribution is at most $\eps/2$.
+
+If $1-P-Y/2<0$, use only the nonnegativity of $h_{\mu_t}\min(p_t,q_t)\one_{\{t<\tau_\eta\}}$ in Step 1. The case assumption gives $P/2+Y/4>1/2$, and therefore
+
+$$
+\E[\bar e_t\one_{\{t<\tau_\eta\}}]-e_0
+\le\frac{h_\mu}{2}
+<h_\mu\left(\eta+\frac P2+\frac Y4+\frac\eps2\right).
+$$
+
+Thus [](#eq:bootstrap-main) holds in both cases.
+
+*Step 4.* The stopped process $M_u=p_{u\wedge\tau_\eta}-\tfrac12$ is a bounded continuous martingale. On $\{\tau_\eta\le t\}$, continuity gives $\sup_{u\le t}|M_u|\ge\eta$. Hence the $L^2$ maximal inequality, martingale isometry, [](#eq:qv-p), and $s_tr_t\le\tfrac14\lmax(A_t)\le\tfrac14(1+X_t)$ give
+
+$$
+\begin{split}
+\Prob(\tau_\eta\le t)
+&\le\eta^{-2}\E M_t^2
+=\eta^{-2}\E[p]_{t\wedge\tau_\eta}\\
+&\le\frac1{4\eta^2}\int_0^t
+\E[\one_{\{s<\tau_\eta\}}(1+X_s)]\dd s\\
+&\le\frac1{4\eta^2}\left(t+\int_0^t\E X_s\dd s\right).
+\end{split}
+$$
+
+This proves [](#eq:bootstrap-exit).
+
+*Step 5.* Integrate [](#eq:bootstrap-main) over $[0,T]$ using $\int_0^T\Prob(\tau_\eta\le t)\dd t\le\tfrac1{4\eta^2}(\tfrac{T^2}2+T\Xi_T)$.
 :::
